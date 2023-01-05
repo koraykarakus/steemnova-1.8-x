@@ -102,3 +102,7 @@
 {/if}
 <script type="text/javascript" src="scripts/login/register.js"></script>
 {/block}
+
+{block name="script" append}
+<script type="text/javascript" src="./scripts/base/avoid_submit_on_refresh.js"></script>
+{/block}
