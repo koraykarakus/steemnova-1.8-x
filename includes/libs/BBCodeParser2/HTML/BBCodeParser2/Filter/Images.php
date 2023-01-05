@@ -23,7 +23,7 @@
 * @package  HTML_BBCodeParser
 * @author   Stijn de Reede  <sjr@gmx.co.uk>
 */
-require_once 'HTML/BBCodeParser2/Filter.php';
+require_once './includes/libs/BBCodeParser2/HTML/BBCodeParser2/Filter.php';
 
 class HTML_BBCodeParser2_Filter_Images extends HTML_BBCodeParser2_Filter
 {

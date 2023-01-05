@@ -25,10 +25,10 @@
 * @author   Stijn de Reede  <sjr@gmx.co.uk>
 */
 
-require_once 'HTML/BBCodeParser2/Filter.php';
+require_once './includes/libs/BBCodeParser2/HTML/BBCodeParser2/Filter.php';
 
 /**
- * 
+ *
  */
 class HTML_BBCodeParser2_Filter_Lists extends HTML_BBCodeParser2_Filter
 {
@@ -83,7 +83,7 @@ class HTML_BBCodeParser2_Filter_Lists extends HTML_BBCodeParser2_Filter
         $c = $options['close'];
         $oe = $options['open_esc'];
         $ce = $options['close_esc'];
-        
+
         $pattern = array(   "!".$oe."\*".$ce."!",
                             "!".$oe."(u?)list=(?-i:A)(\s*[^".$ce."]*)".$ce."!i",
                             "!".$oe."(u?)list=(?-i:a)(\s*[^".$ce."]*)".$ce."!i",
@@ -91,7 +91,7 @@ class HTML_BBCodeParser2_Filter_Lists extends HTML_BBCodeParser2_Filter
                             "!".$oe."(u?)list=(?-i:i)(\s*[^".$ce."]*)".$ce."!i",
                             "!".$oe."(u?)list=(?-i:1)(\s*[^".$ce."]*)".$ce."!i",
                             "!".$oe."(u?)list([^".$ce."]*)".$ce."!i");
-        
+
         $replace = array(   $o."li".$c,
                             $o."\$1list=upper-alpha\$2".$c,
                             $o."\$1list=lower-alpha\$2".$c,
@@ -99,7 +99,7 @@ class HTML_BBCodeParser2_Filter_Lists extends HTML_BBCodeParser2_Filter
                             $o."\$1list=lower-roman\$2".$c,
                             $o."\$1list=decimal\$2".$c,
                             $o."\$1list\$2".$c );
-        
+
         $this->_preparsed = preg_replace($pattern, $replace, $this->_text);
     }
 }

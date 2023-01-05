@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -22,13 +22,18 @@ class BBCode
 		$sText = str_replace("\r\n", "\n", $sText);
 		$sText = str_replace("\r", "\n", $sText);
 		$sText = str_replace("\n", '<br />', $sText);
-		
-	    	$config = parse_ini_file('BBCodeParser2.ini', true);
-	    	$options = $config['HTML_BBCodeParser2'];
 
-	    	$parser = new HTML_BBCodeParser2($options);
+	    	$config = parse_ini_file('BBCodeParser2.ini', true);
+
+				$options = $config['HTML_BBCodeParser2'];
+
+
+				$parser = new HTML_BBCodeParser2($options);
+
 	    	$parser->setText($sText);
-	    	$parser->parse();
+
+				$parser->parse();
+
 	    	return $parser->getParsed();
 	}
 }

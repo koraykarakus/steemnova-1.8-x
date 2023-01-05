@@ -23,7 +23,7 @@
 * @package  HTML_BBCodeParser2
 * @author   Stijn de Reede  <sjr@gmx.co.uk>
 */
-require_once 'HTML/BBCodeParser2/Filter.php';
+require_once './includes/libs/BBCodeParser2/HTML/BBCodeParser2/Filter.php';
 
 /**
  *
@@ -155,7 +155,7 @@ class HTML_BBCodeParser2_Filter_Links extends HTML_BBCodeParser2_Filter
         if (in_array($scheme, $this->_allowedSchemes)) {
             return $matches[1].$o.'url'.$c.$matches[2].$o.'/url'.$c.$trailing;
         }
-        
+
         return $matches[0];
     }
 
@@ -194,7 +194,7 @@ class HTML_BBCodeParser2_Filter_Links extends HTML_BBCodeParser2_Filter
             //If protocol is in the approved list than allow it
             return $o.'url='.$urlServ.$path.$c.$matches[6].$o.'/url'.$c;
         }
-        
+
         //Else remove url tag
         return $matches[6];
     }

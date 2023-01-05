@@ -139,13 +139,13 @@ class HTML_BBCodeParser2
      * @var      array
      */
     var $_filters       = array();
-    
+
     /**
      * Constructor, initialises the options and filters
      *
      * Sets options to properly escape the tag
      * characters in preg_replace() etc.
-     * 
+     *
      * All the filters in the options are initialised and their defined tags
      * are copied into the private variable _definedTags.
      *
@@ -210,10 +210,12 @@ class HTML_BBCodeParser2
         $filter = ucfirst($filter);
         if (!array_key_exists($filter, $this->_filters)) {
             $class = 'HTML_BBCodeParser2_Filter_'.$filter;
-            @include_once 'HTML/BBCodeParser2/Filter/'.$filter.'.php';
+            include_once 'BBCodeParser2/Filter/'.$filter.'.php';
+
             if (!class_exists($class)) {
                 throw new InvalidArgumentException("Failed to load filter $filter");
             }
+
             $this->_filters[$filter] = new $class;
             $this->_definedTags = array_merge(
                 $this->_definedTags,
@@ -494,15 +496,18 @@ class HTML_BBCodeParser2
                 {
                     if (trim($tag['text']) == '') {
                         //just an empty indentation or newline without value?
-                        continue 2;
+                        break;
                     }
                     $newTagArray[] = $child;
                     $openTags[] = $child['tag'];
                 }
-                if (!empty($prevTag['type'])) {
-                    $tag['text'] = $prevTag['text'].$tag['text'];
-                    array_pop($newTagArray);
+                if (is_array($prevTag)) {
+                  if ($prevTag['type'] === 0) {
+                      $tag['text'] = $prevTag['text'].$tag['text'];
+                      array_pop($newTagArray);
+                  }
                 }
+
                 $newTagArray[] = $tag;
                 break;
 

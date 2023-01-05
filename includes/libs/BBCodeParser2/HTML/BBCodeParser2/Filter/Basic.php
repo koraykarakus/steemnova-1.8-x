@@ -25,7 +25,7 @@
 */
 
 
-require_once 'HTML/BBCodeParser2/Filter.php';
+require_once './includes/libs/BBCodeParser2/HTML/BBCodeParser2/Filter.php';
 
 
 
