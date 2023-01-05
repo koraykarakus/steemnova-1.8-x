@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <div id="content">
 	<form action="" method="POST">
-    <table style="width:569px;margin-top:30px;">
+    <table style="width:569px;margin-top:100px;">
 		<tr>
             <th>{$LNG.adm_login}</th>
         </tr>
@@ -13,12 +13,7 @@
 			</td>
         </tr>
 		<tr>
-			<div class="wrapper">
-				<div class="container">
-					<a href="{$steemconnectUrl}" class="login-button button_standard button-steem" title="Log in with SteemConnect"><span class="icon icon-steem"></span>Log in with SteemConnect</a>
-					<p>As a security best practice, it is recommended to use private POSTING key</p>
-				</div>
-			</div>
+
 		</tr>
     </table>
 	</form>
