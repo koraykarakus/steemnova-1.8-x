@@ -3,7 +3,6 @@
 <section>
 	<h1>{sprintf($LNG.loginWelcome, $gameName)}</h1>
 	<p class="desc">{sprintf($LNG.loginServerDesc, $gameName)}</p>
-	<p class="desc"><ul id="desc_list">{foreach $LNG.gameDescription as $info}<li>{$info}</li>{/foreach}</ul></p>
 	</p>
 </section>
 <section>
