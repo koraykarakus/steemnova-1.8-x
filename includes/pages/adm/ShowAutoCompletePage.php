@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -24,12 +24,12 @@ function ShowAutoCompletePage()
 {
 	$searchText	= HTTP::_GP('term', '', UTF8_SUPPORT);
 	$searchList	= array();
-	
+
 	if(empty($searchText) || $searchText === '#') {
 		echo json_encode(array());
 		exit;
 	}
-	
+
 	if(substr($searchText, 0, 1) === '#')
 	{
 		$where = 'id = '.((int) substr($searchText, 1));
@@ -37,19 +37,25 @@ function ShowAutoCompletePage()
 	}
 	else
 	{
-		$where = "username LIKE '%".$GLOBALS['DATABASE']->escape($searchText, true)."%'";
-		$orderBy = " ORDER BY (IF(username = '".$GLOBALS['DATABASE']->sql_escape($searchText, true)."', 1, 0) + IF(username LIKE '".$GLOBALS['DATABASE']->sql_escape($searchText, true)."%', 1, 0)) DESC, username";
+		$where = "username LIKE '%". $searchText ."%'";
+		$orderBy = " ORDER BY (IF(username = '". $searchText ."', 1, 0) + IF(username LIKE '" . $searchText ."%', 1, 0)) DESC, username";
 	}
-	
-	$userRaw		= $GLOBALS['DATABASE']->query("SELECT id, username FROM ".USERS." WHERE universe = ".Universe::getEmulated()." AND ".$where.$orderBy." LIMIT 20");
-	while($userRow = $GLOBALS['DATABASE']->fetch_array($userRaw))
+
+	$sql = "SELECT id, username FROM %%USERS%% WHERE universe = :universe AND " . $where . $orderBy . " LIMIT 20";
+
+	Database::get()->select($sql,array(
+		':universe' => Universe::getEmulated()
+	));
+
+	$userRaw		= $GLOBALS['DATABASE']->query("");
+	foreach($userRaw as $userRow)
 	{
 		$searchList[]	= array(
-			'label' => $userRow['username'].' (ID:'.$userRow['id'].')', 
+			'label' => $userRow['username'].' (ID:'.$userRow['id'].')',
 			'value' => $userRow['username']
 		);
 	}
-	
+
 	echo json_encode($searchList);
 	exit;
 }
