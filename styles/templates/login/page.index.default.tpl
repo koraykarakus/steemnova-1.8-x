@@ -9,7 +9,7 @@
 </section>
 <section>
 	<div class="contentbox">
-		
+
 				<h1>{$LNG.loginHeader}</h1>
 				<form id="login" name="login" action="index.php?page=login" data-action="index.php?page=login" method="post">
 					<div class="row">
@@ -27,10 +27,10 @@
 					</div>
 				</form>
 				{if $facebookEnable}<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>{/if}
-								
-				<a href="/index.php?page=register"><input value="{$LNG.buttonRegister}"></a>
+
+				<a href="index.php?page=register"><input value="{$LNG.buttonRegister}"></a>
 				<!-- <br><span class="small">{$loginInfo}</span> -->
-			
+
 	</div>
 </section>
 <section>
@@ -47,7 +47,7 @@
 	</div>
 	<div class="button-box">
 		<div class="button-box-inner">
-			{if $mailEnable} 
+			{if $mailEnable}
 			<div class="button multi">
 				<a href="index.php?page=lostPassword">
 					<span class="button-left"></span>
