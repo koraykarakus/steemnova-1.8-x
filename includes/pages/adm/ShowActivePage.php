@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,14 +20,30 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 function ShowActivePage()
 {
 	global $LNG, $USER;
-	$id = HTTP::_GP('id', 0);
-	if($_GET['action'] == 'delete' && !empty($id))
-		$GLOBALS['DATABASE']->query("DELETE FROM ".USERS_VALID." WHERE `validationID` = '".$id."' AND `universe` = '".Universe::getEmulated()."';");
 
-	$query = $GLOBALS['DATABASE']->query("SELECT * FROM ".USERS_VALID." WHERE `universe` = '".Universe::getEmulated()."' ORDER BY validationID ASC");
+	$db = Database::get();
+
+	$id = HTTP::_GP('id', 0);
+
+	if($_GET['action'] == 'delete' && !empty($id)){
+
+		$sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";
+
+		$db->delete($sql,array(
+			':validationID' => $id,
+			':universe' => Universe::getEmulated()
+		));
+
+	}
+
+	$sql = "SELECT * FROM %%USERS_VALID%% WHERE `universe` = :universe ORDER BY validationID ASC;";
+
+	$query = $db->select($sql,array(
+		':universe' => Universe::getEmulated(),
+	));
 
 	$Users	= array();
-	while ($User = $GLOBALS['DATABASE']->fetch_array($query)) {
+	foreach ($query as $User) {
 		$Users[]	= array(
 			'id'			=> $User['validationID'],
 			'name'			=> $User['userName'],
@@ -41,10 +57,10 @@ function ShowActivePage()
 
 	$template	= new template();
 
-	$template->assign_vars(array(	
+	$template->assign_vars(array(
 		'Users'				=> $Users,
 		'uni'				=> Universe::getEmulated(),
 	));
-	
+
 	$template->show('ActivePage.tpl');
 }
