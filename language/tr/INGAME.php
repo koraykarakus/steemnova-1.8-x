@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -66,34 +66,34 @@ $LNG['tn_delete_mode']						= 'Hesabiniz Silme Modunda Silinecegi Tarih :';
 
 //----------------------------------------------------------------------------//
 // Menu
-$LNG['lm_changelog']						= 'Degisiklikler';
-$LNG['lm_overview']							= 'Genel Gorunum';
+$LNG['lm_changelog']						= 'Yenilikler';
+$LNG['lm_overview']							= 'Genel Bakış';
 $LNG['lm_galaxy']							= 'Galaksi';
-$LNG['lm_empire']							= 'Imparatorluk';
+$LNG['lm_empire']							= 'İmparatorluk';
 $LNG['lm_fleet']							= 'Filolar';
 $LNG['lm_buildings']						= 'Binalar';
-$LNG['lm_research']							= 'Arastirma';
+$LNG['lm_research']							= 'Araştırma';
 $LNG['lm_shipshard']						= 'Tersane';
 $LNG['lm_defenses']							= 'Savunma';
 $LNG['lm_resources']						= 'Hammadde';
 $LNG['lm_officiers']						= 'Subaylar';
-$LNG['lm_trader']							= 'Tuccar';
-$LNG['lm_fleettrader']						= 'Hurdaci';
+$LNG['lm_trader']							= 'Tüccar';
+$LNG['lm_fleettrader']						= 'Hurdacı';
 $LNG['lm_technology']						= 'Teknolojiler';
 $LNG['lm_messages']							= 'Mesajlar';
-$LNG['lm_alliance']							= 'Ittifak Sayfasi';
-$LNG['lm_buddylist']						= 'Arkadaslik';
-$LNG['lm_notes']							= 'Notlarim';
-$LNG['lm_statistics']						= 'Istatistlikler';
+$LNG['lm_alliance']							= 'İttifak Sayfası';
+$LNG['lm_buddylist']						= 'Arkadaşlık';
+$LNG['lm_notes']							= 'Notlar';
+$LNG['lm_statistics']						= 'İstatistikler';
 $LNG['lm_search']							= 'Arama';
 $LNG['lm_options']							= 'Ayarlar';
 $LNG['lm_banned']							= 'Banlananlar';
 $LNG['lm_forums']							= 'Forum';
-$LNG['lm_logout']							= 'Cikis';
+$LNG['lm_logout']							= 'Çıkış';
 $LNG['lm_administration']					= 'Administration';
 $LNG['lm_queue']							= 'Kuyruk';
 $LNG['lm_topkb']							= 'Top 100 Savas';
-$LNG['lm_faq']								= 'Yeni Baslayanlar';
+$LNG['lm_faq']								= 'Yeni Başlayanlar';
 $LNG['lm_records']							= 'Rekorlar';
 $LNG['lm_chat']								= 'Sohbet';
 $LNG['lm_support']							= 'Destek';
@@ -101,7 +101,7 @@ $LNG['lm_rules']							= 'Kurallar';
 $LNG['lm_battlesim']						= 'Simulasyon';
 $LNG['lm_playercard']                       = 'Oyuncu Profili';
 $LNG['lm_info']                     		= 'Bilgi';
-$LNG['lm_disclamer']						= 'Iletisim';
+$LNG['lm_disclamer']						= 'İletişim';
 
 
 //----------------------------------------------------------------------------//
@@ -1186,4 +1186,3 @@ $LNG['lo_notify']							= '<span id="seconds">5</span> saniye icinde yonlendiril
 $LNG['lo_continue']							= 'Beklemek istemiyorsaniz tiklayiniz';
 
 //----------------------------------------------------------------------------//
-
