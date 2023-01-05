@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -41,7 +41,7 @@ function ShowCreatorPage()
 				$System 	= HTTP::_GP('system', 0);
 				$Planet 	= HTTP::_GP('planet', 0);
 				$Language 	= HTTP::_GP('lang', '');
-					
+
 				$ExistsUser 	= $GLOBALS['DATABASE']->getFirstCell("SELECT (SELECT COUNT(*) FROM ".USERS." WHERE universe = ".Universe::getEmulated()." AND username = '".$GLOBALS['DATABASE']->sql_escape($UserName)."') + (SELECT COUNT(*) FROM ".USERS_VALID." WHERE universe = ".Universe::getEmulated()." AND username = '".$GLOBALS['DATABASE']->sql_escape($UserName)."')");
 				$ExistsMails	= $GLOBALS['DATABASE']->getFirstCell("SELECT (SELECT COUNT(*) FROM ".USERS." WHERE universe = ".Universe::getEmulated()." AND (email = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."' OR email_2 = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."')) + (SELECT COUNT(*) FROM ".USERS_VALID." WHERE universe = ".Universe::getEmulated()." AND email = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."')");
 
@@ -51,32 +51,32 @@ function ShowCreatorPage()
 
 				if (!PlayerUtil::isMailValid($UserMail))
 					$errors .= $LNG['invalid_mail_adress'];
-					
+
 				if (empty($UserName))
 					$errors .= $LNG['empty_user_field'];
-										
+
 				if (strlen($UserPass) < 6)
 					$errors .= $LNG['password_lenght_error'];
-					
+
 				if ($UserPass != $UserPass2)
-					$errors .= $LNG['different_passwords'];				
-					
+					$errors .= $LNG['different_passwords'];
+
 				if ($UserMail != $UserMail2)
 					$errors .= $LNG['different_mails'];
-					
+
 				if (!PlayerUtil::isNameValid($UserName))
-					$errors .= $LNG['user_field_specialchar'];				
-										
+					$errors .= $LNG['user_field_specialchar'];
+
 				if ($ExistsUser != 0)
 					$errors .= $LNG['user_already_exists'];
 
 				if ($ExistsMails != 0)
 					$errors .= $LNG['mail_already_exists'];
-				
+
 				if (!PlayerUtil::isPositionFree(Universe::getEmulated(), $Galaxy, $System, $Planet)) {
 					$errors .= $LNG['planet_already_exists'];
-				}	
-				
+				}
+
 				if ($Galaxy > $config->max_galaxy || $System > $config->max_system || $Planet > $config->max_planets) {
 					$errors .= $LNG['po_complete_all2'];
 				}
@@ -91,25 +91,25 @@ function ShowCreatorPage()
 				PlayerUtil::createPlayer(Universe::getEmulated(), $UserName,
 					PlayerUtil::cryptPassword($UserPass), $UserMail, $Language, $Galaxy, $System, $Planet,
 					$LNG['fcm_planet'], $UserAuth);
-				
+
 				$template->message($LNG['new_user_success'], '?page=create&mode=user', 5, true);
 				exit;
 			}
 
 			$AUTH			= array();
 			$AUTH[AUTH_USR]	= $LNG['user_level_'.AUTH_USR];
-			
+
 			if($USER['authlevel'] >= AUTH_OPS)
 				$AUTH[AUTH_OPS]	= $LNG['user_level_'.AUTH_OPS];
-				
+
 			if($USER['authlevel'] >= AUTH_MOD)
 				$AUTH[AUTH_MOD]	= $LNG['user_level_'.AUTH_MOD];
-				
+
 			if($USER['authlevel'] >= AUTH_ADM)
 				$AUTH[AUTH_ADM]	= $LNG['user_level_'.AUTH_ADM];
-				
-			
-			$template->assign_vars(array(	
+
+
+			$template->assign_vars(array(
 				'admin_auth'			=> $USER['authlevel'],
 				'new_add_user'			=> $LNG['new_add_user'],
 				'new_creator_refresh'	=> $LNG['new_creator_refresh'],
@@ -122,9 +122,9 @@ function ShowCreatorPage()
 				'email2_reg'			=> $LNG['email2_reg'],
 				'new_coord'				=> $LNG['new_coord'],
 				'new_range'				=> $LNG['new_range'],
-				'lang_reg'				=> $LNG['lang_reg'],		
+				'lang_reg'				=> $LNG['lang_reg'],
 				'new_title'				=> $LNG['new_title'],
-				'Selector'				=> array('auth' => $AUTH, 'lang' => $LNG->getAllowedLangs(false)),  
+				'Selector'				=> array('auth' => $AUTH, 'lang' => $LNG->getAllowedLangs(false)),
 			));
 			$template->show('CreatePageUser.tpl');
 		break;
@@ -134,8 +134,13 @@ function ShowCreatorPage()
 				$PlanetID  	= HTTP::_GP('add_moon', 0);
 				$MoonName  	= HTTP::_GP('name', '', UTF8_SUPPORT);
 				$Diameter	= HTTP::_GP('diameter', 0);
-			
-				$MoonPlanet	= $GLOBALS['DATABASE']->getFirstRow("SELECT temp_max, temp_min, id_luna, galaxy, system, planet, planet_type, destruyed, id_owner FROM ".PLANETS." WHERE id = '".$PlanetID."' AND universe = '".Universe::getEmulated()."' AND planet_type = '1' AND destruyed = '0';");
+
+				$sql = "SELECT temp_max, temp_min, id_luna, galaxy, system, planet, planet_type, destruyed, id_owner FROM %%PLANETS%% WHERE id = :PlanetID AND universe = :universe AND planet_type = '1' AND destruyed = '0';";
+
+				$MoonPlanet = Database::get()->selectSingle($sql,array(
+					':PlanetID' => $PlanetID,
+					':universe' => Universe::getEmulated()
+				));
 
 				if (!isset($MoonPlanet)) {
 					$template->message($LNG['mo_planet_doesnt_exist'], '?page=create&mode=moon', 3, true);
@@ -158,9 +163,9 @@ function ShowCreatorPage()
 				}
 				exit;
 			}
-			
+
 			$template->assign_vars(array(
-				'admin_auth'			=> $USER['authlevel'],	
+				'admin_auth'			=> $USER['authlevel'],
 				'universum'				=> $LNG['mu_universe'],
 				'po_add_moon'			=> $LNG['po_add_moon'],
 				'input_id_planet'		=> $LNG['input_id_planet'],
@@ -177,7 +182,7 @@ function ShowCreatorPage()
 			$template->show('CreatePageMoon.tpl');
 		break;
 		case 'planet':
-			if ($_POST) 
+			if ($_POST)
 			{
 				$id          = HTTP::_GP('id', 0);
 				$Galaxy      = HTTP::_GP('galaxy', 0);
@@ -190,28 +195,44 @@ function ShowCreatorPage()
 
 				if ($Galaxy > $config->max_galaxy || $System > $config->max_system || $Planet > $config->max_planets) {
 					$template->message($LNG['po_complete_all2'], '?page=create&mode=planet', 3, true);
-					exit;					
+					exit;
 				}
-				
-				$ISUser		= $GLOBALS['DATABASE']->getFirstRow("SELECT id, authlevel FROM ".USERS." WHERE id = '".$id."' AND universe = '".Universe::getEmulated()."';");
+
+				$sql = "SELECT id, authlevel FROM %%USERS%% WHERE id = :id AND universe = :universe;";
+
+				$ISUser = Database::get()->selectSingle($sql,array(
+					':id' => $id,
+					':universe' => Universe::getEmulated()
+				));
+
 				if(!PlayerUtil::checkPosition(Universe::getEmulated(), $Galaxy, $System, $Planet) || !isset($ISUser)) {
 					$template->message($LNG['po_complete_all'], '?page=create&mode=planet', 3, true);
 					exit;
 				}
 
 				$planetId	= PlayerUtil::createPlanet($Galaxy, $System, $Planet, Universe::getEmulated(), $id, NULL, false, $ISUser['authlevel']);
-						
-				$SQL  = "UPDATE ".PLANETS." SET ";
-				
-				if ($_POST['diameter_check'] != 'on' || $field_max > 0)
-					$SQL .= "field_max = '".$field_max."' ";
-			
-				if (!empty($name))
-					$SQL .= ", name = '".$GLOBALS['DATABASE']->sql_escape($name)."' ";
 
-				$SQL .= "WHERE ";
-				$SQL .= "id = '".$planetId."'";
-				$GLOBALS['DATABASE']->query($SQL);
+
+				if ($_POST['diameter_check'] != 'on' || $field_max > 0){
+					$sql = "UPDATE %%PLANETS%% SET field_max = :field_max WHERE id = :planetId;";
+
+					Database::get()->update($sql,array(
+						':field_max' => $field_max,
+						':planetId' => $planetId
+					));
+
+				}
+
+				if (!empty($name)){
+					$sql = "UPDATE %%PLANETS%% SET name = :name WHERE id = :planetId;";
+
+					Database::get()->update($sql,array(
+						':name' => $name,
+						':planetId' => $planetId
+					));
+
+				}
+
 
 				$template->message($LNG['po_complete_succes'], '?page=create&mode=planet', 3, true);
 				exit;
@@ -232,18 +253,18 @@ function ShowCreatorPage()
 				'new_creator_refresh'	=> $LNG['new_creator_refresh'],
 				'new_creator_go_back'	=> $LNG['new_creator_go_back'],
 			));
-			
+
 			$template->show('CreatePagePlanet.tpl');
 		break;
 		default:
-			$template->assign_vars(array(	
+			$template->assign_vars(array(
 				'new_creator_title_u'	=> $LNG['new_creator_title_u'],
 				'new_creator_title_p'	=> $LNG['new_creator_title_p'],
 				'new_creator_title_l'	=> $LNG['new_creator_title_l'],
 				'new_creator_title'		=> $LNG['new_creator_title'],
 			));
-			
+
 			$template->show('CreatePage.tpl');
-		break;	
+		break;
 	}
 }
