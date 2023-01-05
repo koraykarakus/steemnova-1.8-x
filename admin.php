@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,7 +20,7 @@ define('DATABASE_VERSION', 'OLD');
 
 define('ROOT_PATH', str_replace('\\', '/',dirname(__FILE__)).'/');
 set_include_path(ROOT_PATH.'includes/libs/BBCodeParser2/'.':'.ROOT_PATH.':'.get_include_path());
-require_once('HTML/BBCodeParser2.php');
+require_once('includes/libs/BBCodeParser2/HTML/BBCodeParser2.php');
 
 require 'includes/pages/game/AbstractGamePage.class.php';
 require 'includes/pages/game/ShowErrorPage.class.php';
