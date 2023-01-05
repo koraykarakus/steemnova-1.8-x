@@ -1,34 +1,60 @@
 {block name="title" prepend}{$LNG.siteTitleIndex}{/block}
 {block name="content"}
 <section>
-	<h1>{$descHeader}</h1>
-	<p class="desc">{$descText}</p>
-	<p class="desc"><ul id="desc_list">{foreach $gameInformations as $info}<li>{$info}</li>{/foreach}</ul></p>
+	<h1>{sprintf($LNG.loginWelcome, $gameName)}</h1>
+	<p class="desc">{sprintf($LNG.loginServerDesc, $gameName)}</p>
+	<p class="desc"><ul id="desc_list">{foreach $LNG.gameDescription as $info}<li>{$info}</li>{/foreach}</ul></p>
 	</p>
 </section>
 <section>
 	<div class="contentbox">
 
 				<h1>{$LNG.loginHeader}</h1>
-				<form id="login" name="login" action="index.php?page=login" data-action="index.php?page=login" method="post">
+				<form id="login" name="login" action="index.php?page=login&mode=validate" data-action="index.php?page=login" method="post">
 					<div class="row">
 						<select name="uni" id="universe" class="changeAction">{html_options options=$universeSelect selected=$UNI}</select>
-						<input name="username" id="username" type="text" placeholder="{$LNG.loginUsername}">
-						<input name="password" id="password" type="password" placeholder="{$LNG.loginPassword}">
-						{if $verkey["capaktiv"]==1}
-							<script src='https://www.google.com/recaptcha/api.js'></script>
-							<script>function onSubmit() { document.getElementById("login").submit(); } </script>
-							<input class="g-recaptcha" data-sitekey="{$verkey["cappublic"]}" data-callback="onSubmit" type="submit" value="{$LNG.loginButton}">
-						{else}
-							<input type="submit" value="{$LNG.loginButton}">
+						<input name="userEmail" id="userEmail" type="text" placeholder="{$LNG.login_email}">
+
+						{if isset($error)}
+							{if isset($error['email'])}
+								{foreach $error['email'] as $emailError}
+									<br>
+									<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$emailError}</span>
+								{/foreach}
+							{/if}
 						{/if}
 
+						<input name="password" id="password" type="password" placeholder="{$LNG.loginPassword}">
+
+						{if isset($error)}
+							{if isset($error['password'])}
+								{foreach $error['password'] as $passwordError}
+									<br>
+									<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$passwordError}</span>
+								{/foreach}
+							{/if}
+						{/if}
+
+						{if $recaptchaEnable}
+								<div style="margin:0 auto;" class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
+								{if isset($error)}
+									{if isset($error['recaptcha'])}
+										{foreach $error['recaptcha'] as $recaptchaError}
+											<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$recaptchaError}</span>
+										{/foreach}
+									{/if}
+								{/if}
+						{/if}
+
+						<input type="submit" value="{$LNG.loginButton}">
+
 					</div>
+
 				</form>
 				{if $facebookEnable}<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>{/if}
 
 				<a href="index.php?page=register"><input value="{$LNG.buttonRegister}"></a>
-				<br><span class="small">{$loginInfo}</span> 
+				<br><span class="small">{$loginInfo}</span>
 
 	</div>
 </section>
@@ -68,6 +94,9 @@
 	</div>
 </section>
 {/block}
+
+{if $recaptchaEnable}
 {block name="script" append}
-<script>{if $code}alert({$code|json});{/if}</script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
 {/block}
+{/if}

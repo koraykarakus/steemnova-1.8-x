@@ -1,33 +1,37 @@
 .rowForm {
-	display:block;
-	text-align:left;
+	display:flex;
+	width: 100%;
 	padding:5px 30px;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	margin: 5px 0;
 }
 
 .rowForm:first-child {
 	padding-top:15px;
 }
 
-.rowForm select {
+.rowForm select ,.rowForm input{
 	width:262px;
+	box-sizing: border-box;
+	height: 32px;
+	padding: 0 10px;
 }
 
 .rowForm #rules {
-	margin:7px 0 2px 0;
+	margin:0 5px;
 	padding:0;
+	height: 15px;
+	width: 15px;
+}
+.rowFormRules{
+	justify-content: flex-start;
 }
 
-.rowForm input[type="text"],
-.rowForm input[type="password"],
-.rowForm input[type="email"] {
-	width:250px;
-}
-
-.rowForm label {
-	display:block;
-	float:left;
+.rowForm label{
+	font-weight: bold;
 	width:140px;
-	margin:6px 0 7px;
 	text-align:left;
 }
 

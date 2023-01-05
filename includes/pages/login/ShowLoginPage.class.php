@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,57 +20,75 @@ class ShowLoginPage extends AbstractLoginPage
 {
 	public static $requireModule = 0;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
-	function show() 
+
+	function show($error = NULL)
 	{
-		if (empty($_POST)) {
-			HTTP::redirectTo('index.php');	
-		}
+		$this->setWindow('light');
+
+		$this->assign(array(
+			'error' => $error
+		));
+
+		$this->display('page.index.default.tpl');
+	}
+
+	function validate(){
+		global $config, $LNG;
 
 		$db = Database::get();
 
-		$username = HTTP::_GP('username', '', UTF8_SUPPORT);
+		$userEmail = HTTP::_GP('userEmail', '', true);
 		$password = HTTP::_GP('password', '', true);
 
-		$sql = "SELECT id, password FROM %%USERS%% WHERE universe = :universe AND username = :username;";
-		$loginData = $db->selectSingle($sql, array(
-			':universe'	=> Universe::current(),
-			':username'	=> $username
-		));
+		$error = array();
 
-		$sql = "SELECT capaktiv, cappublic, capprivate FROM uni1_config";
-		$verkey = $db->selectSingle($sql);
-
-		if (!empty($verkey["capaktiv"]) && !empty($verkey["cappublic"]) && !empty($verkey["capprivate"])) {
-			require 'includes/libs/reCAPTCHA/invisible/Recaptcha.php';
-			$recaptcha = $_POST['g-recaptcha-response'];
-			$object = new Recaptcha(['client-key' => $verkey["cappublic"], 'secret-key' => $verkey["capprivate"]]);
-			$response = $object->verifyResponse($recaptcha);
-
-			if(isset($response['success']) and $response['success'] != true) {
-				echo "An Error Occured and Error code is :".$response['error-codes'][0].'<br>';
-				echo 'You will be redirected to the home page in 5 seconds.';
-				die('<meta http-equiv="refresh" content="5; url=index.php" />');
-				}
+		if (empty($userEmail)) {
+			$error['email'][] = $LNG['login_error_1'];
 		}
 
-		if (!empty($loginData))
+		if (empty($password)) {
+			$error['password'][] = $LNG['login_error_2'];
+		}
+
+		if (!empty($password) && !empty($userEmail)) {
+			$sql = "SELECT id, password FROM %%USERS%% WHERE email = :email AND universe = :universe;";
+
+			$loginData = $db->selectSingle($sql, array(
+				':email'	=> $userEmail,
+				':universe'	=> Universe::current(),
+			));
+
+			if (!$loginData) {
+				$error['email'][] = $LNG['login_error_3'];
+			}
+
+		}
+
+
+		if ($config->capaktiv === '1')
 		{
+      require('includes/libs/reCAPTCHA/src/autoload.php');
 
-			$verify = "false";
+      $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+      $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
+      if (!$resp->isSuccess())
+      {
+          $error['recaptcha'][]	= $LNG['login_error_4'];
+      }
+		}
 
-			if (password_verify($password, $loginData['password'])) {
-				$verify = "true";
+		if (isset($loginData['password'])) {
+			if (!password_verify($password,$loginData['password'])) {
+				$error['password'][] = $LNG['login_error_5'];
 			}
+		}
 
-			if($verify == "false") {
-				HTTP::redirectTo('index.php?code=1');
-			}
-
+		if (empty($error))
+		{
 			$session	= Session::create();
 			$session->userId		= (int) $loginData['id'];
 			$session->adminAccess	= 0;
@@ -80,7 +98,10 @@ class ShowLoginPage extends AbstractLoginPage
 		}
 		else
 		{
-			HTTP::redirectTo('index.php?code=1');
+			$this->show($error);
 		}
+
 	}
+
+
 }

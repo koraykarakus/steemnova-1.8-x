@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -17,27 +17,22 @@
 
 class ShowRegisterPage extends AbstractLoginPage
 {
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function show()
 	{
 		global $LNG;
-		$universeSelect	= array();	
 		$referralData	= array('id' => 0, 'name' => '');
 		$accountName	= "";
-		
+
 		$externalAuth	= HTTP::_GP('externalAuth', array());
 		$referralID 	= HTTP::_GP('referralID', 0);
 
-		foreach(Universe::availableUniverses() as $uniId)
-		{
-			$config = Config::get($uniId);
-			$universeSelect[$uniId]	= $config->uni_name.($config->game_disable == 0 || $config->reg_closed == 1 ? $LNG['uni_closed'] : '');
-		}
-		
+
+
 		if(!isset($externalAuth['account'], $externalAuth['method']))
 		{
 			$externalAuth['account']	= 0;
@@ -47,7 +42,7 @@ class ShowRegisterPage extends AbstractLoginPage
 		{
 			$externalAuth['method']		= strtolower(str_replace(array('_', '\\', '/', '.', "\0"), '', $externalAuth['method']));
 		}
-		
+
 		if(!empty($externalAuth['account']) && file_exists('includes/extauth/'.$externalAuth['method'].'.class.php'))
 		{
 			$path	= 'includes/extauth/'.$externalAuth['method'].'.class.php';
@@ -55,17 +50,17 @@ class ShowRegisterPage extends AbstractLoginPage
 			$methodClass	= ucwords($externalAuth['method']).'Auth';
 			/** @var $authObj externalAuth */
 			$authObj		= new $methodClass;
-			
+
 			if(!$authObj->isActiveMode())
 			{
 				$this->redirectTo('index.php?code=5');
 			}
-			
+
 			if(!$authObj->isValid())
 			{
 				$this->redirectTo('index.php?code=4');
 			}
-			
+
 			$accountData	= $authObj->getAccountData();
 			$accountName	= $accountData['name'];
 		}
@@ -86,23 +81,21 @@ class ShowRegisterPage extends AbstractLoginPage
 				$referralData	= array('id' => $referralID, 'name' => $referralAccountName);
 			}
 		}
-		
+
 		$this->assign(array(
 			'referralData'		=> $referralData,
 			'accountName'		=> $accountName,
 			'externalAuth'		=> $externalAuth,
-			'universeSelect'	=> $universeSelect,
 			'registerPasswordDesc'	=> sprintf($LNG['registerPasswordDesc'], 6),
 			'registerRulesDesc'	=> sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>')
 		));
-		
+
 		$this->display('page.register.default.tpl');
 	}
-	
-	function send() 
+
+	function send()
 	{
-		global $LNG;
-		$config		= Config::get();
+		global $LNG, $config;
 
 		if($config->game_disable == 0 || $config->reg_closed == 1)
 		{
@@ -114,12 +107,11 @@ class ShowRegisterPage extends AbstractLoginPage
 
 		$userName 		= HTTP::_GP('username', '', UTF8_SUPPORT);
 		$password 		= HTTP::_GP('password', '', true);
-		$password2 		= HTTP::_GP('passwordReplay', '', true);
 		$mailAddress 	= HTTP::_GP('email', '');
 		$mailAddress2	= HTTP::_GP('emailReplay', '');
 		$rulesChecked	= HTTP::_GP('rules', 0);
 		$language 		= HTTP::_GP('lang', '');
-		
+
 		$referralID 	= HTTP::_GP('referralID', 0);
 
 		$externalAuth	= HTTP::_GP('externalAuth', array());
@@ -133,41 +125,34 @@ class ShowRegisterPage extends AbstractLoginPage
 			$externalAuthUID	= $externalAuth['account'];
 			$externalAuthMethod	= strtolower(str_replace(array('_', '\\', '/', '.', "\0"), '', $externalAuth['method']));
 		}
-		
+
 		$errors 	= array();
-		
+
 		if(empty($userName)) {
 			$errors[]	= $LNG['registerErrorUsernameEmpty'];
 		}
-		
+
 		if(!PlayerUtil::isNameValid($userName)) {
 			$errors[]	= $LNG['registerErrorUsernameChar'];
 		}
-		
+
 		if(strlen($password) < 6) {
 			$errors[]	= sprintf($LNG['registerErrorPasswordLength'], 6);
 		}
-			
-		if($password != $password2) {
-			$errors[]	= $LNG['registerErrorPasswordSame'];
-		}
-			
+
+
 		if(!PlayerUtil::isMailValid($mailAddress)) {
 			$errors[]	= $LNG['registerErrorMailInvalid'];
 		}
-			
+
 		if(empty($mailAddress)) {
 			$errors[]	= $LNG['registerErrorMailEmpty'];
 		}
-		
-		if($mailAddress != $mailAddress2) {
-			$errors[]	= $LNG['registerErrorMailSame'];
-		}
-		
+
 		if($rulesChecked != 1) {
 			$errors[]	= $LNG['registerErrorRules'];
 		}
-		
+
 		$db = Database::get();
 
 		$sql = "SELECT (
@@ -206,18 +191,18 @@ class ShowRegisterPage extends AbstractLoginPage
 			':universe'		=> Universe::current(),
 			':mailAddress'	=> $mailAddress,
 		), 'count');
-		
+
 		if($countUsername!= 0) {
 			$errors[]	= $LNG['registerErrorUsernameExist'];
 		}
-			
+
 		if($countMail != 0) {
 			$errors[]	= $LNG['registerErrorMailExist'];
 		}
-		
+
 		if ($config->capaktiv === '1')
 		{
-            require('includes/libs/reCAPTCHA/autoload.php');
+			require('includes/libs/reCAPTCHA/src/autoload.php');
 
             $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
             $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
@@ -226,7 +211,7 @@ class ShowRegisterPage extends AbstractLoginPage
                 $errors[]	= $LNG['registerErrorCaptcha'];
             }
 		}
-						
+
 		if (!empty($errors)) {
 			$this->printMessage(implode("<br>\r\n", $errors), array(array(
 				'label'	=> $LNG['registerBack'],
@@ -248,7 +233,7 @@ class ShowRegisterPage extends AbstractLoginPage
 				$externalAuthUID	= $authObj->getAccount();
 			}
 		}
-		
+
 		if($config->ref_active == 1 && !empty($referralID))
 		{
 			$sql = "SELECT COUNT(*) as state FROM %%USERS%% WHERE id = :referralID AND universe = :universe;";
@@ -266,7 +251,7 @@ class ShowRegisterPage extends AbstractLoginPage
 		{
 			$referralID	= 0;
 		}
-		
+
 		$validationKey	= md5(uniqid('2m'));
 
 		$sql = "INSERT INTO %%USERS_VALID%% SET
@@ -299,7 +284,7 @@ class ShowRegisterPage extends AbstractLoginPage
 
 		$validationID	= $db->lastInsertId();
 		$verifyURL	= 'index.php?page=vertify&i='.$validationID.'&k='.$validationKey;
-		
+
 		if($config->user_valid == 0 || !empty($externalAuthUID))
 		{
 			$this->redirectTo($verifyURL);
@@ -324,7 +309,7 @@ class ShowRegisterPage extends AbstractLoginPage
 
 			$subject	= sprintf($LNG['registerMailVertifyTitle'], $config->game_name);
 			Mail::send($mailAddress, $userName, $subject, $MailContent);
-			
+
 			$this->printMessage($LNG['registerSendComplete']);
 		}
 	}

@@ -6,6 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="{$lang}" class="no-js"> <!--<![endif]-->
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{assign var="REV" value="1.0.0.3" nocache}
 	<link rel="stylesheet" type="text/css" href="styles/theme/nova/formate.css?v={$REV}">
 	<link rel="stylesheet" type="text/css" href="styles/resource/css/login/main.css?v={$REV}">
 	<link rel="stylesheet" type="text/css" href="styles/resource/css/base/jquery.fancybox.css?v={$REV}">
@@ -29,7 +30,7 @@
 	<script src="scripts/base/jquery.fancybox.js?v={$REV}"></script>
 	<script src="scripts/login/main.js"></script>
 	<script>{if isset($code)}var loginError = {$code|json};{/if}</script>
-	{block name="script"}{/block}	
+	{block name="script"}{/block}
 </head>
 <body id="{$smarty.get.page|htmlspecialchars|default:'overview'}" class="{$bodyclass}">
 	<div id="page">

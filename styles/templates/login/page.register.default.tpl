@@ -9,8 +9,9 @@
 	<div class="rowForm">
 		<label for="universe">{$LNG.universe}</label>
 		<select name="uni" id="universe" class="changeAction">{html_options options=$universeSelect selected=$UNI}</select>
-		{if !empty($error.uni)}<span class="error errorUni"></span>{/if}
 	</div>
+	{if !empty($error.uni)}<span class="error errorUni"></span>{/if}
+
 	{if !empty($externalAuth.account)}
 	{if $facebookEnable}
 	<div class="rowForm">
@@ -29,37 +30,35 @@
 	<div class="rowForm">
 		<label for="username">{$LNG.registerUsername}</label>
 		<input type="text" class="input" name="username" id="username" maxlenght="32">
+	</div>
+	<div class="rowForm">
 		{if !empty($error.username)}<span class="error errorUsername"></span>{/if}
 		<span class="inputDesc">{$LNG.registerUsernameDesc}</span>
 	</div>
+
 	<div class="rowForm">
 		<label for="password">{$LNG.registerPassword}</label>
 		<input type="password" class="input" name="password" id="password">
+	</div>
+	<div class="rowForm">
 		{if !empty($error.password)}<span class="error errorPassword"></span>{/if}
 		<span class="inputDesc">{$registerPasswordDesc}</span>
 	</div>
 	<div class="rowForm">
-		<label for="passwordReplay">{$LNG.registerPasswordReplay}</label>
-		<input type="password" class="input" name="passwordReplay" id="passwordReplay">
-		{if !empty($error.passwordReplay)}<span class="error errorPasswordReplay"></span>{/if}
-		<span class="inputDesc">{$LNG.registerPasswordReplayDesc}</span>
-	</div>
-	<div class="rowForm">
 		<label for="email">{$LNG.registerEmail}</label>
 		<input type="email" class="input" name="email" id="email">
+	</div>
+	<div class="rowForm">
 		{if !empty($error.email)}<span class="error errorEmail"></span>{/if}
 		<span class="inputDesc">{$LNG.registerEmailDesc}</span>
 	</div>
-	<div class="rowForm">
-		<label for="emailReplay">{$LNG.registerEmailReplay}</label>
-		<input type="email" class="input" name="emailReplay" id="emailReplay">
-		{if !empty($error.emailReplay)}<span class="error errorEmailReplay"></span>{/if}
-		<span class="inputDesc">{$LNG.registerEmailReplayDesc}</span>
-	</div>
+
 	{if count($languages) > 1}
 	<div class="rowForm">
 		<label for="language">{$LNG.registerLanguage}</label>
 		<select name="lang" id="language">{html_options options=$languages selected=$lang}</select>
+	</div>
+	<div class="rowForm">
 		{if !empty($error.language)}<span class="error errorLanguage"></span>{/if}
 		<div class="clear"></div>
 	</div>
@@ -68,22 +67,25 @@
 	<div class="rowForm">
 		<label for="language">{$LNG.registerReferral}</label>
 		<span class="text">{$referralData.name}</span>
+	</div>
+	<div class="rowForm">
 		{if !empty($error.language)}<span class="error errorLanguage"></span>{/if}
 		<div class="clear"></div>
 	</div>
 	{/if}
 	{if $recaptchaEnable}
+	<div class="rowForm">
+		<label>{$LNG.registerCaptcha}</label>
+	</div>
 	<div class="rowForm" id="captchaRow">
-		<div>
-			<label>{$LNG.registerCaptcha}</label>
-			<!--<span class="inputDesc">{$LNG.registerCaptchaDesc}</span>-->
 			<div class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
-		</div>
-		<div class="clear"></div>
+			<div class="clear"></div>
 	</div>
 	{/if}
 	<div class="rowForm">
 		<label for="rules">{$LNG.registerRules}</label>
+	</div>
+	<div class="rowForm rowFormRules">
 		<input type="checkbox" name="rules" id="rules" value="1">
 		{if !empty($error.rules)}<span class="error errorRules"></span>{/if}
 		<span class="inputDesc">{$registerRulesDesc}</span>

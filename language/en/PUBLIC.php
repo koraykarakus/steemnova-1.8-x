@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -52,6 +52,13 @@ $LNG['buttonLostPassword']			= 'Lost Password?';
 $LNG['gameInformations']    		= "A space strategy game in real time.\nGame with hundreds of users.\nNo download, it only requires a standard browser.\nFree registration";
 
 // Login
+$LNG['login_error_1'] = "E-mail is not entered !";
+$LNG['login_error_2'] = "Password is not entered !";
+$LNG['login_error_3'] = "User is not found !";
+$LNG['login_error_4'] = "ReCaptcha is not correct !";
+$LNG['login_error_5'] = "Entered password is wrong !";
+
+$LNG['login_email'] = "E-mail address";
 $LNG['loginHeader']					= 'Login';
 $LNG['loginUsername']				= 'Username';
 $LNG['loginPassword']				= 'Password';
@@ -133,13 +140,6 @@ $LNG['passwordChangedMailTitle']	= 'New password on the game: %s';
 
 $LNG['passwordBack']				= 'Back';
 $LNG['passwordNext']				= 'Next';
-
-//case default
-
-$LNG['login_error_1']				= 'Wrong username/password!';
-$LNG['login_error_2']				= 'Someone has logged in from a different PC in your account, or your IP is different!';
-$LNG['login_error_3']				= 'Your session has expired!';
-$LNG['login_error_4']				= 'There was an error in external authorization, please try again!';
 
 //Rules
 $LNG['rulesHeader']					= 'Rules';

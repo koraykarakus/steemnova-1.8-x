@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -17,30 +17,26 @@
 
 class ShowIndexPage extends AbstractLoginPage
 {
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 		$this->setWindow('light');
 	}
-	
-	function show() 
+
+	function show()
 	{
-		global $LNG;
-		
+		global $LNG, $config;
+
 		$referralID		= HTTP::_GP('ref', 0);
 		if(!empty($referralID))
 		{
 			$this->redirectTo('index.php?page=register&referralID='.$referralID);
 		}
-	
+
 		$universeSelect	= array();
-		
-		foreach(Universe::availableUniverses() as $uniId)
-		{
-			$config = Config::get($uniId);
-			$universeSelect[$uniId]	= $config->uni_name.($config->game_disable == 0 ? $LNG['uni_closed'] : '');
-		}
-		
+
+
+
 		$Code	= HTTP::_GP('code', 0);
 		$loginCode	= false;
 		if(isset($LNG['login_error_'.$Code]))
@@ -48,27 +44,12 @@ class ShowIndexPage extends AbstractLoginPage
 			$loginCode	= $LNG['login_error_'.$Code];
 		}
 
-		$db = Database::get();
-		$sql = "SELECT capaktiv, cappublic, capprivate FROM uni1_config";
-		$verkey = $db->selectSingle($sql);
-
-		require 'includes/libs/steemconnect/steemconnect.php';
-		$steemconnectUrl = Steemconnect::getLoginUrl();
-
-		$config				= Config::get();
 		$this->assign(array(
-			'universeSelect'		=> $universeSelect,
 			'code'					=> $loginCode,
-			'steemconnectUrl'		=> $steemconnectUrl,
-			'verkey'			=> $verkey,
-			'descHeader'			=> sprintf($LNG['loginWelcome'], $config->game_name),
-			'descText'				=> sprintf($LNG['loginServerDesc'], $config->game_name),
-            'gameInformations'      => explode("\n", $LNG['gameInformations']),
-			'loginInfo'				=> sprintf($LNG['loginInfo'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>')
 		));
 
 
-		
+
 		$this->display('page.index.default.tpl');
 	}
 }

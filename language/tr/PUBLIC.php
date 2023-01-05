@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -54,11 +54,18 @@ $LNG['buttonLostPassword']			= 'Sifremi Unuttum?';
 $LNG['gameInformations']			= "Gercek zamanli uzay strateji oyunu.\nBuyuk bir rekabet seni bekliyor.\nTek ihtiyacin internet.Herhan gibi bir browser ile oynayabilirsin. Internet Explorer, Mozilla, Chrome\nUcretsiz Kayit";
 
 // Login
-$LNG['loginHeader']					= 'Giris';
-$LNG['loginUsername']				= 'Kullanici Adi';
-$LNG['loginPassword']				= 'Sifre';
-$LNG['loginButton']					= 'Giris';
-$LNG['loginInfo']					= 'Giris yaparak tum %si kabul etmis oluyorsunuz.';
+$LNG['login_error_1'] = "E-posta adresi girilmedi !";
+$LNG['login_error_2'] = "Şifre girmediniz !";
+$LNG['login_error_3'] = "Böyle bir kullanıcı yok !";
+$LNG['login_error_4'] = "ReCaptcha doğru değil !";
+$LNG['login_error_5'] = "Girilen şifre yanlış !";
+
+$LNG['login_email'] = "E-posta adresiniz";
+$LNG['loginHeader']					= 'Giriş';
+$LNG['loginUsername']				= 'Kullanıcı Adı';
+$LNG['loginPassword']				= 'Şifre';
+$LNG['loginButton']					= 'Giriş';
+$LNG['loginInfo']					= 'Giriş yaparak tüm %si kabul etmis oluyorsunuz.';
 $LNG['loginWelcome']				= ' %s hosgeldiniz ';
 $LNG['loginServerDesc']				= '%s tam zamanli bir uzay strateji oyunu. Yuzlerce oyuncunun <strong>ayni anda beraber oynayabildigi</strong> ve ellerinden geleni yaptigi bir oyun. Tek ihtiyacin olan herhangi bir web tarayicisi.';
 
@@ -138,10 +145,6 @@ $LNG['passwordNext']				= 'Ileri';
 
 //case default
 
-$LNG['login_error_1']				= 'Kullanici adi yada sifre yanlis!';
-$LNG['login_error_2']				= 'Baskasi farki bir bilgisayardan bu hesaba girdi, yada IP adresiniz degisti!';
-$LNG['login_error_3']				= 'Oturumunuz sonlandi!';
-$LNG['login_error_4']				= 'Sorun olustu. Lutfen tekrar deneyiniz!';
 
 //Rules
 $LNG['rulesHeader']					= 'Kurallar';
