@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -1054,12 +1054,12 @@ $LNG['ow_developers'] = 'Kod Gelistiricileri';
 //###########################################################//
 
 //---------------	Veritabani Dogrulama	------------------------//
-$LNG['sb_top_memory']					= 'Peak memory: %p KB / max. %m KB <br>';
-$LNG['sb_final_memory']					= 'Memory consumed by the end: %e KB / max. %m KB<br>';
-$LNG['sb_start_memory']					= 'Memory consumed at the beginning: %i KB / max. %m KB<br>';
-$LNG['sb_stats_update']					= 'Stats updated in: %t segundos<br>';
-$LNG['sb_stats_updated']				= 'Updated stats. <br>Resuming:<br>';
-$LNG['sb_sql_counts']			        = 'SQL Querys: %d';
+$LNG['sb_top_memory']					= 'Maksimum kullanılan hafıza: %p KB / max. %m KB <br>';
+$LNG['sb_final_memory']					= 'Script sonu kullanılan hafıza: %e KB / max. %m KB<br>';
+$LNG['sb_start_memory']					= 'Script başlangıcı kullanılan hafıza: %i KB / max. %m KB<br>';
+$LNG['sb_stats_update']					= 'İstatistikler %s saniyede güncellendi<br>';
+$LNG['sb_stats_updated']				= 'istatistikler güncellendi.<br><br>';
+$LNG['sb_sql_counts']			        = 'SQL sorgu sayısı: %d';
 
 //###########################################################//
 
@@ -1282,12 +1282,3 @@ $LNG['up_chmod_error']					= "Dosyayi degistirme yetkisi yok : \n\n";
 $LNG['up_need_curl']					= 'Hata: CURL girilmemis.<br> Augame guncellemeleri icin cURL girmelisiniz';
 $LNG['up_no_xml_ext']					= 'Hata: XML Parser girilmemis.<br>Augame server otomatik bakim icin XML Parser girmelisiniz.';
 $LNG['up_offline']						= 'Sunucuyla baglanti kurulamadi';
-
-
-
-
-
-
-
-
-
