@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -22,7 +22,7 @@ function ShowConfigUniPage()
 	global $LNG;
 
 	$config = Config::get(Universe::getEmulated());
-	
+
 	if (!empty($_POST))
 	{
 		$config_before = array(
@@ -93,17 +93,17 @@ function ShowConfigUniPage()
 			'alliance_create_min_points' => $config->alliance_create_min_points,
 			'max_fleet_per_build'   => $config->max_fleet_per_build,
 		);
-		
+
 		$game_disable			= isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
 		$noobprotection 		= isset($_POST['noobprotection']) && $_POST['noobprotection'] == 'on' ? 1 : 0;
 		$debug 					= isset($_POST['debug']) && $_POST['debug'] == 'on' ? 1 : 0;
-		$adm_attack 			= isset($_POST['adm_attack']) && $_POST['adm_attack'] == 'on' ? 1 : 0;		
+		$adm_attack 			= isset($_POST['adm_attack']) && $_POST['adm_attack'] == 'on' ? 1 : 0;
 		$OverviewNewsFrame  	= isset($_POST['newsframe']) && $_POST['newsframe'] == 'on' ? 1 : 0;
 		$reg_closed 			= isset($_POST['reg_closed']) && $_POST['reg_closed'] == 'on' ? 1 : 0;
 		$user_valid				= isset($_POST['user_valid']) && $_POST['user_valid'] == 'on' ? 1 : 0;
 		$debris_moon			= isset($_POST['debris_moon']) && $_POST['debris_moon'] == 'on' ? 1 : 0;
 		$ref_active				= isset($_POST['ref_active']) && $_POST['ref_active'] == 'on' ? 1 : 0;
-		
+
 		$OverviewNewsText		= $_POST['NewsText'];
 		$close_reason			= HTTP::_GP('close_reason', '', true);
 		$uni_name				= HTTP::_GP('uni_name', '', true);
@@ -157,7 +157,7 @@ function ShowConfigUniPage()
 		$ref_max_referals		= HTTP::_GP('ref_max_referals', 0);
 		$max_dm_missions		= HTTP::_GP('max_dm_missions', 1);
 		$alliance_create_min_points = HTTP::_GP('alliance_create_min_points', 0);
-			
+
 		$config_after = array(
 			'noobprotectiontime'	=> $noobprotectiontime,
 			'noobprotectionmulti'	=> $noobprotectionmulti,
@@ -229,17 +229,24 @@ function ShowConfigUniPage()
 			$config->$key	= $value;
 		}
 		$config->save();
-		
+
 		$LOG = new Log(3);
 		$LOG->target = 1;
 		$LOG->old = $config_before;
 		$LOG->new = $config_after;
 		$LOG->save();
 
-		if($config->adm_attack == 0)
-			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `authattack` = '0' WHERE `universe` = '".Universe::getEmulated()."';");
+		if($config->adm_attack == 0){
+
+			$sql = "UPDATE %%USERS%% SET `authattack` = '0' WHERE `universe` = :universe ;";
+
+			Database::get()->update($sql,array(
+				':universe' => Universe::getEmulated()
+			));
+
+		}
 	}
-	
+
 	$template	= new template();
 	$template->loadscript('../base/jquery.autosize-min.js');
 	$template->execscript('$(\'textarea\').autosize();');
@@ -421,7 +428,7 @@ function ShowConfigUniPage()
 		'user_valid'           	 		=> $config->user_valid,
 	    'newsframe'                 	=> $config->OverviewNewsFrame,
         'reg_closed'                	=> $config->reg_closed,
-        'NewsTextVal'               	=> $config->OverviewNewsText,  
+        'NewsTextVal'               	=> $config->OverviewNewsText,
 		'capprivate' 					=> $config->capprivate,
 		'cappublic' 	   				=> $config->cappublic,
 		'capaktiv'      	           	=> $config->capaktiv,
@@ -429,7 +436,7 @@ function ShowConfigUniPage()
 		'trade_allowed_ships'        	=> $config->trade_allowed_ships,
 		'trade_charge'		        	=> $config->trade_charge,
 		'Selector'						=> array(
-			'langs' => $LNG->getAllowedLangs(false), 
+			'langs' => $LNG->getAllowedLangs(false),
 			'mail'  => array(0 => $LNG['se_mail_sel_0'], 1 => $LNG['se_mail_sel_1'], 2 => $LNG['se_mail_sel_2']),
 			'encry' => array('' => $LNG['se_smtp_ssl_1'], 'ssl' => $LNG['se_smtp_ssl_2'], 'tls' => $LNG['se_smtp_ssl_3'])
 		),
@@ -468,6 +475,6 @@ function ShowConfigUniPage()
 		'max_dm_missions'				=> $config->max_dm_missions,
 		'alliance_create_min_points' 	=> $config->alliance_create_min_points
 	));
-	
+
 	$template->show('ConfigBodyUni.tpl');
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -19,41 +19,39 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 
 function ShowInformationPage()
 {
-	global $LNG, $USER;
-
-	$config = Config::get();
+	global $LNG, $USER, $config;
 
 	// @ for open_basedir
 	if(@file_exists(ini_get('error_log')))
 		$Lines	= count(file(ini_get('error_log')));
 	else
 		$Lines	= 0;
-	
+
 	try {
 		$dateTimeZoneServer = new DateTimeZone($config->timezone);
 	} catch (Exception $e) {
 		$dateTimeZoneServer	= new DateTimeZone(date_default_timezone_get());
 	}
-	
+
 	try {
 		$dateTimeZoneUser	= new DateTimeZone($USER['timezone']);
 	} catch (Exception $e) {
 		$dateTimeZoneUser	= new DateTimeZone(date_default_timezone_get());
 	}
-	
+
 	try {
 		$dateTimeZonePHP	= new DateTimeZone(ini_get('date.timezone'));
 	} catch (Exception $e) {
 		$dateTimeZonePHP	= new DateTimeZone(date_default_timezone_get());
 	}
-	
+
 	$dateTimeServer		= new DateTime("now", $dateTimeZoneServer);
 	$dateTimeUser		= new DateTime("now", $dateTimeZoneUser);
 	$dateTimePHP		= new DateTime("now", $dateTimeZonePHP);
 
-    $sql	= "SELECT dbVersion FROM %%SYSTEM%%;";
+  $sql	= "SELECT dbVersion FROM %%SYSTEM%%;";
 
-    $dbVersion	= Database::get()->selectSingle($sql, array(), 'dbVersion');
+  $dbVersion	= Database::get()->selectSingle($sql, array(), 'dbVersion');
 
 	$template	= new template();
 	$template->assign_vars(array(
