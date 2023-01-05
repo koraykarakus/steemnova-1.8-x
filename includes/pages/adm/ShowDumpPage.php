@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -33,15 +33,15 @@ function ShowDumpPage()
 				$template->message($LNG['du_not_tables_selected']);
 				exit;
 			}
-			
+
 			$fileName	= '2MoonsBackup_'.date('d_m_Y_H_i_s', TIMESTAMP).'.sql';
 			$filePath	= 'includes/backups/'.$fileName;
-		
+
 			require 'includes/classes/SQLDumper.class.php';
-		
+
 			$dump	= new SQLDumper;
 			$dump->dumpTablesToFile($dbTables, $filePath);
-			
+
 			$template	= new template();
 			$template->message(sprintf($LNG['du_success'], 'includes/backups/'.$fileName));
 		break;
@@ -65,10 +65,10 @@ function ShowDumpPage()
 
 			$template	= new template();
 
-			$template->assign_vars(array(	
+			$template->assign_vars(array(
 				'dumpData'	=> $dumpData,
 			));
-			
+
 			$template->show('DumpPage.tpl');
 		break;
 	}
