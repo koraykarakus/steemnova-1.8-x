@@ -4,7 +4,6 @@
 	<h1>{$descHeader}</h1>
 	<p class="desc">{$descText}</p>
 	<p class="desc"><ul id="desc_list">{foreach $gameInformations as $info}<li>{$info}</li>{/foreach}</ul></p>
-	<p><a href="https://busy.org/@steemnova/steemnova-ogame-based-browsergame-for-steemians" target="copy">SteemNova - OGame-based browsergame for Steemians by @steemnova [busy.org]</a>
 	</p>
 </section>
 <section>
@@ -29,12 +28,12 @@
 				{if $facebookEnable}<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>{/if}
 
 				<a href="index.php?page=register"><input value="{$LNG.buttonRegister}"></a>
-				<!-- <br><span class="small">{$loginInfo}</span> -->
+				<br><span class="small">{$loginInfo}</span> 
 
 	</div>
 </section>
 <section>
-<!-- 	<div class="button-box">
+<div class="button-box">
 		<div class="button-box-inner">
 			<div class="button-important">
 				<a href="index.php?page=register">
@@ -66,7 +65,7 @@
 				</a>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </section>
 {/block}
 {block name="script" append}
