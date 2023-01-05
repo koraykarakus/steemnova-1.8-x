@@ -3,12 +3,12 @@
 // Web : http://www.big-two.tk
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
- 
+
 //---------------	GENERAL	------------------------//
 $LNG['adm_login']						= 'Connectez-vous';
 $LNG['adm_username']					= 'Login';
 $LNG['adm_password']					= 'Mot de passe';
-$LNG['adm_absenden']					= 'Envoyer'; 
+$LNG['adm_absenden']					= 'Envoyer';
 $LNG['adm_password_info']				= 'S\'il vous plaît entrer votre mot de passe pour la vérification du compte !';
 $LNG['adm_bad_password']				= 'Mot de passe incorrect !';
 $LNG['404_page']						= 'Vous n\'avez pas d\'autorisations suffisantes pour accéder à cette page';
@@ -581,7 +581,7 @@ $LNG['ff_goback_succes']        			= 'La Flotte retourne maintenant à son point
 $LNG['sb_top_memory']					= 'Crête Mémoire: %p KB / max. %m KB <br>';
 $LNG['sb_final_memory']					= 'Mémoire utilisée à la fin : %e KB / max. %m KB<br>';
 $LNG['sb_start_memory']					= 'Mémoire utilisée au début : %i KB / max. %m KB<br>';
-$LNG['sb_stats_update']					= 'Stats mises à jour : %t secondes<<br>';
+$LNG['sb_stats_update']					= 'Stats mises à jour : %s secondes<<br>';
 $LNG['sb_stats_updated']				= 'Statistiques mises à jour! <br>Détails :<br>';
 $LNG['sb_sql_counts']					= 'Requêtes SQL : %d';
 
@@ -631,10 +631,10 @@ $LNG['mu_ts_options'] 				= 'Options Teamspeak';
 $LNG['mu_game_info'] 				= 'Information';
 $LNG['mu_vaild_users']				= 'Activité Utilisateur';
 $LNG['mu_news']						= 'Actualités';
-$LNG['mu_multiip_page']				= 'MultiIP'; 
+$LNG['mu_multiip_page']				= 'MultiIP';
 $LNG['mu_clear_cache']				= 'Vider le Cache';
-$LNG['mu_vertify']					= 'Vérifiez le contenu du jeu'; 
-$LNG['mu_cronjob']					= 'Cronjobs'; 
+$LNG['mu_vertify']					= 'Vérifiez le contenu du jeu';
+$LNG['mu_cronjob']					= 'Cronjobs';
 $LNG['mu_logs']						= 'Admin-Log';
 $LNG['mu_giveaway']					= 'Giveaways';
 $LNG['mu_disclaimer']				= 'Paramétres de contact';
@@ -1040,8 +1040,8 @@ $LNG['ts_tcpport']					= 'UDP Port';
 $LNG['ts_serverip']					= 'Serveur IP';
 $LNG['ts_timeout']					= 'Timeout';
 $LNG['ts_server_query']					= 'Serveur Query Port';
-$LNG['ts_login']						= 'Server Query Connectez-vous'; 
-$LNG['ts_pass']							= 'Server Query Mot de passe'; 
+$LNG['ts_login']						= 'Server Query Connectez-vous';
+$LNG['ts_pass']							= 'Server Query Mot de passe';
 $LNG['ts_cron']							= 'Taux d\'actualisation';
 
 //----------------------------------------------------------------------------//
