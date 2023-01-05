@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -19,10 +19,16 @@ function ShowMenuPage()
 {
 	global $USER;
 	$template	= new template();
-	
-	$template->assign_vars(array(	
-		'supportticks'	=> $GLOBALS['DATABASE']->getFirstCell("SELECT COUNT(*) FROM ".TICKETS." WHERE universe = ".Universe::getEmulated()." AND status = 0;"),
+
+	$sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
+
+	$numberTickets = Database::get()->selectSingle($sql,array(
+		':universe' => Universe::getEmulated()
+	),'count');
+
+	$template->assign_vars(array(
+		'supportticks'	=> $numberTickets,
 	));
-	
+
 	$template->show('ShowMenuPage.tpl');
 }
