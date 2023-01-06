@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -22,20 +22,40 @@ require 'includes/classes/class.FlyingFleetsTable.php';
 function ShowFlyingFleetPage()
 {
 	global $LNG;
-	
+	$db = Database::get();
 	$id	= HTTP::_GP('id', 0);
 	if(!empty($id)){
 		$lock	= HTTP::_GP('lock', 0);
-		$GLOBALS['DATABASE']->query("UPDATE ".FLEETS." SET `fleet_busy` = '".$lock."' WHERE `fleet_id` = '".$id."' AND `fleet_universe` = '".Universe::getEmulated()."';");
-		
-		$SQL	= ($lock == 0) ? "NULL" : "'ADM_LOCK'";
-		
-		$GLOBALS['DATABASE']->query("UPDATE ".FLEETS_EVENT." SET `lock` = ".$SQL." WHERE `fleetID` = ".$id.";");
-	} 
-	
-	$orderBy		= "fleet_id";
 
-	$fleetResult	= $GLOBALS['DATABASE']->query("SELECT 
+		$sql = "UPDATE %%FLEETS%% SET `fleet_busy` = :lock WHERE `fleet_id` = :id AND `fleet_universe` = :universe;";
+
+		$db->update($sql,array(
+			':lock' => $lock,
+			':id' => $id,
+			':universe' => Universe::getEmulated()
+		));
+
+		$SQL	= ($lock == 0) ? "NULL" : "'ADM_LOCK'";
+
+		if ($lock == 0) {
+			$sql = "UPDATE %%FLEETS_EVENT%% SET `lock` = NULL WHERE `fleetID` = :id;";
+		}else {
+			$sql = "UPDATE %%FLEETS_EVENT%% SET `lock` = 'ADM_LOCK' WHERE `fleetID` = :id;";
+		}
+
+
+
+		$db->update($sql,array(
+			':id' => $id
+		));
+
+
+	}
+
+
+
+
+	$sql = "SELECT
 	fleet.*,
 	event.`lock`,
 	COUNT(event.fleetID) as error,
@@ -44,27 +64,32 @@ function ShowFlyingFleetPage()
 	ustart.username as startUserName,
 	utarget.username as targetUserName,
 	acs.name as acsName
-	FROM ".FLEETS." fleet
-	LEFT JOIN ".FLEETS_EVENT." event ON fleetID = fleet_id
-	LEFT JOIN ".PLANETS." pstart ON pstart.id = fleet_start_id
-	LEFT JOIN ".PLANETS." ptarget ON ptarget.id = fleet_end_id
-	LEFT JOIN ".USERS." ustart ON ustart.id = fleet_owner
-	LEFT JOIN ".USERS." utarget ON utarget.id = fleet_target_owner
-	LEFT JOIN ".AKS." acs ON acs.id = fleet_group
-	WHERE fleet_universe = ".Universe::getEmulated()."
+	FROM %%FLEETS%% fleet
+	LEFT JOIN %%FLEETS_EVENT%% event ON fleetID = fleet_id
+	LEFT JOIN %%PLANETS%% pstart ON pstart.id = fleet_start_id
+	LEFT JOIN %%PLANETS%% ptarget ON ptarget.id = fleet_end_id
+	LEFT JOIN %%USERS%% ustart ON ustart.id = fleet_owner
+	LEFT JOIN %%USERS%% utarget ON utarget.id = fleet_target_owner
+	LEFT JOIN %%AKS%% acs ON acs.id = fleet_group
+	WHERE fleet_universe = :universe
 	GROUP BY event.fleetID
-	ORDER BY ".$orderBy.";");
-	
+	ORDER BY fleet_id;";
+
+	$fleetResult	= $db->select($sql,array(
+		':universe' => Universe::getEmulated(),
+	));
+
+
 	$FleetList	= array();
-	
-	while($fleetRow = $GLOBALS['DATABASE']->fetch_array($fleetResult)) {
+
+	foreach($fleetResult as $fleetRow) {
 		$shipList		= array();
 		$shipArray		= array_filter(explode(';', $fleetRow['fleet_array']));
 		foreach($shipArray as $ship) {
 			$shipDetail		= explode(',', $ship);
 			$shipList[$shipDetail[0]]	= $shipDetail[1];
 		}
-		
+
 		global $USER;
 		$FleetList[]	= array(
 			'fleetID'				=> $fleetRow['fleet_id'],
@@ -105,10 +130,9 @@ function ShowFlyingFleetPage()
 			),
 		);
 	}
-	
-	
-	$GLOBALS['DATABASE']->free_result($fleetResult);
-	
+
+
+
 	$template			= new template();
 	$template->assign_vars(array(
 		'FleetList'			=> $FleetList,
