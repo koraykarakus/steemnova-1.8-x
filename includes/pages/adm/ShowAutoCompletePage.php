@@ -43,11 +43,10 @@ function ShowAutoCompletePage()
 
 	$sql = "SELECT id, username FROM %%USERS%% WHERE universe = :universe AND " . $where . $orderBy . " LIMIT 20";
 
-	Database::get()->select($sql,array(
+	$userRaw = Database::get()->select($sql,array(
 		':universe' => Universe::getEmulated()
 	));
 
-	$userRaw		= $GLOBALS['DATABASE']->query("");
 	foreach($userRaw as $userRow)
 	{
 		$searchList[]	= array(
