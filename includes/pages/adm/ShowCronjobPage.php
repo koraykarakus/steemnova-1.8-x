@@ -209,11 +209,12 @@ function ShowCronjobEnable($cronjobId) {
 
 function ShowCronjobOverview()
 {
-	$data    = $GLOBALS['DATABASE']->query("SELECT * FROM ".CRONJOBS.";");
+	$db = Database::get();
+
 
 	$sql = "SELECT * FROM %%CRONJOBS%%;";
 
-	$data = Database::get()->select($sql);
+	$data = $db->select($sql);
 
 	$template	= new template();
 	if(!$data)
@@ -247,6 +248,7 @@ function ShowCronjobDetail($detail,$error_msg=NULL)
 {
 	$template	= new template();
 
+	$db = Database::get();
 
 	$avalibleCrons	= array();
 
@@ -263,27 +265,30 @@ function ShowCronjobDetail($detail,$error_msg=NULL)
 
 	if ($detail != 0)
 	{
-		$CronjobRow   	= $GLOBALS['DATABASE']->uniquequery("SELECT * FROM ".CRONJOBS." WHERE cronjobID = ".$detail."");
+		$sql = "SELECT * FROM %%CRONJOBS%% WHERE cronjobID = :detail";
+		$CronjobRow = $db->selectSingle($sql,array(
+			':detail' => $detail
+		));
 		$template->assign_vars(array(
 			'id'			=> $CronjobRow['cronjobID'],
-			'name'			=> isset($_POST['name'])?HTTP::_GP('name', ''):$CronjobRow['name'],
-			'min'			=> isset($_POST['min_all'])?array(0 => '*'):(isset($_POST['min'])?HTTP::_GP('min', array()):getCronjobTimes($CronjobRow['min'],59)),
-			'hours'			=> isset($_POST['hours_all'])?array(0 => '*'):(isset($_POST['hours'])?HTTP::_GP('hours', array()):getCronjobTimes($CronjobRow['hours'],23)),
-			'dom'			=> isset($_POST['dom_all'])?array(0 => '*'):(isset($_POST['dom'])?HTTP::_GP('dom', array()):getCronjobTimes($CronjobRow['dom'],31)),
-			'month'			=> isset($_POST['month_all'])?array(0 => '*'):(isset($_POST['month'])?HTTP::_GP('month', array()):getCronjobTimes($CronjobRow['month'],12)),
-			'dow'			=> isset($_POST['dow_all'])?array(0 => '*'):(isset($_POST['dow'])?HTTP::_GP('dow', array()):getCronjobTimes($CronjobRow['dow'],6)),
-			'class'			=> isset($_POST['class'])?HTTP::_GP('class', ''):$CronjobRow['class'],
+			'name'			=> isset($_POST['name']) ? HTTP::_GP('name', '') : $CronjobRow['name'],
+			'min'			=> isset($_POST['min_all']) ? array(0 => '*') : (isset($_POST['min']) ? HTTP::_GP('min', array()):getCronjobTimes($CronjobRow['min'],59)),
+			'hours'			=> isset($_POST['hours_all'])?array(0 => '*') : (isset($_POST['hours']) ? HTTP::_GP('hours', array()) : getCronjobTimes($CronjobRow['hours'],23)),
+			'dom'			=> isset($_POST['dom_all']) ? array(0 => '*') : (isset($_POST['dom']) ? HTTP::_GP('dom', array()):getCronjobTimes($CronjobRow['dom'],31)),
+			'month'			=> isset($_POST['month_all'])?array(0 => '*') : (isset($_POST['month']) ? HTTP::_GP('month', array()):getCronjobTimes($CronjobRow['month'],12)),
+			'dow'			=> isset($_POST['dow_all']) ? array(0 => '*') : (isset($_POST['dow'])?HTTP::_GP('dow', array()):getCronjobTimes($CronjobRow['dow'],6)),
+			'class'			=> isset($_POST['class']) ? HTTP::_GP('class', '') : $CronjobRow['class'],
 			'error_msg'		=> $error_msg,
 		));
 	} else {
 		$template->assign_vars(array(
 			'id'			=> 'add',
 			'name'			=> HTTP::_GP('name', ''),
-			'min'			=> isset($_POST['min_all'])?array(0 => '*'):HTTP::_GP('min', array()),
-			'hours'			=> isset($_POST['hours_all'])?array(0 => '*'):HTTP::_GP('hours', array()),
-			'dom'			=> isset($_POST['dom_all'])?array(0 => '*'):HTTP::_GP('dom', array()),
-			'month'			=> isset($_POST['month_all'])?array(0 => '*'):HTTP::_GP('month', array()),
-			'dow'			=> isset($_POST['dow_all'])?array(0 => '*'):HTTP::_GP('dow', array()),
+			'min'			=> isset($_POST['min_all']) ? array(0 => '*') : HTTP::_GP('min', array()),
+			'hours'			=> isset($_POST['hours_all']) ? array(0 => '*') : HTTP::_GP('hours', array()),
+			'dom'			=> isset($_POST['dom_all']) ? array(0 => '*') : HTTP::_GP('dom', array()),
+			'month'			=> isset($_POST['month_all']) ? array(0 => '*') : HTTP::_GP('month', array()),
+			'dow'			=> isset($_POST['dow_all']) ? array(0 => '*') : HTTP::_GP('dow', array()),
 			'class'			=> HTTP::_GP('class', ''),
 			'error_msg'		=> $error_msg,
 		));
