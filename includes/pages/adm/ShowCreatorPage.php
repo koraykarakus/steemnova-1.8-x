@@ -23,6 +23,7 @@ function ShowCreatorPage()
 	global $LNG, $USER;
 
 	$template	= new template();
+	$db = Database::get();
 
 	if(empty($_GET['mode'])) { $_GET['mode'] = $_GET['page']; }
 	switch ($_GET['mode'])
@@ -42,8 +43,22 @@ function ShowCreatorPage()
 				$Planet 	= HTTP::_GP('planet', 0);
 				$Language 	= HTTP::_GP('lang', '');
 
-				$ExistsUser 	= $GLOBALS['DATABASE']->getFirstCell("SELECT (SELECT COUNT(*) FROM ".USERS." WHERE universe = ".Universe::getEmulated()." AND username = '".$GLOBALS['DATABASE']->sql_escape($UserName)."') + (SELECT COUNT(*) FROM ".USERS_VALID." WHERE universe = ".Universe::getEmulated()." AND username = '".$GLOBALS['DATABASE']->sql_escape($UserName)."')");
-				$ExistsMails	= $GLOBALS['DATABASE']->getFirstCell("SELECT (SELECT COUNT(*) FROM ".USERS." WHERE universe = ".Universe::getEmulated()." AND (email = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."' OR email_2 = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."')) + (SELECT COUNT(*) FROM ".USERS_VALID." WHERE universe = ".Universe::getEmulated()." AND email = '".$GLOBALS['DATABASE']->sql_escape($UserMail)."')");
+				$sql = "SELECT (SELECT COUNT(*) FROM %%USERS%% WHERE universe = :universe AND username = :UserName) +
+				(SELECT COUNT(*) FROM %%USERS_VALID%% WHERE universe = :universe AND username = :UserName) as count;";
+
+				$ExistsUser 	= $db->selectSingle($sql,array(
+					':universe' => Universe::getEmulated(),
+					':UserName' => $UserName
+				),'count');
+
+		
+				$sql = "SELECT (SELECT COUNT(*) FROM %%USERS%% WHERE universe = :universe AND (email = :UserMail OR email_2 = :UserMail)) +
+				(SELECT COUNT(*) FROM %%USERS_VALID%% WHERE universe = :universe AND email = :UserMail) as count;";
+
+				$ExistsMails	= $db->selectSingle($sql,array(
+					':universe' => Universe::getEmulated(),
+					':UserMail' => $UserMail,
+				),'count');
 
 				$errors	= "";
 
