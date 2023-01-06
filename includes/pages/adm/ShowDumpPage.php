@@ -23,6 +23,9 @@ if ($USER['authlevel'] == AUTH_USR)
 function ShowDumpPage()
 {
 	global $LNG;
+
+	$db = Database::get();
+
 	if(!isset($_POST['action'])) { $_POST['action'] = ''; }
 	switch($_POST['action'])
 	{
@@ -53,9 +56,12 @@ function ShowDumpPage()
 			$prefixCounts	= strlen(DB_PREFIX);
 
 			$dumpData['sqlTables']	= array();
-			$sqlTableRaw			= $GLOBALS['DATABASE']->query("SHOW TABLE STATUS FROM `".DB_NAME."`;");
 
-			while($table = $GLOBALS['DATABASE']->fetchArray($sqlTableRaw))
+			$sql = "SHOW TABLE STATUS FROM `" . DB_NAME ."`;";
+
+			$sqlTableRaw			= $db->nativequery($sql);
+
+			foreach($sqlTableRaw as $table)
 			{
 				if(DB_PREFIX == substr($table['Name'], 0, $prefixCounts))
 				{
