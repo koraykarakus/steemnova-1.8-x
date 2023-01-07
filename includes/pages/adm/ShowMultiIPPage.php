@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,35 +20,57 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 function ShowMultiIPPage()
 {
 	global $LNG;
-	
+
+	$db = Database::get();
+
 	if(!isset($_GET['action'])) { $_GET['action'] = ''; }
 	switch($_GET['action'])
 	{
 		case 'known':
-			$GLOBALS['DATABASE']->query("INSERT INTO ".MULTI." SET userID = ".((int) $_GET['id']).";");
+
+		$sql = "INSERT INTO %%MULTI%% SET userID = :userID;";
+
+
+			$db->insert($sql,array(
+				':userID' => HTTP::_GP('id',0)
+			));
+
 			HTTP::redirectTo("admin.php?page=multiips");
 		break;
 		case 'unknown':
-			$GLOBALS['DATABASE']->query("DELETE FROM ".MULTI." WHERE userID = ".((int) $_GET['id']).";");
+
+		$sql = "DELETE FROM %%MULTI%% WHERE userID = :userID;";
+
+			$db->delete($sql,array(
+				':userID' => HTTP::_GP('id',0)
+			));
+
 			HTTP::redirectTo("admin.php?page=multiips");
 		break;
 	}
-	$Query	= $GLOBALS['DATABASE']->query("SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown FROM ".USERS." LEFT JOIN ".MULTI." ON userID = id WHERE `universe` = '".Universe::getEmulated()."' AND user_lastip IN (SELECT user_lastip FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."' GROUP BY user_lastip HAVING COUNT(*)>1) ORDER BY user_lastip, id ASC;");
+
+	$sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown
+	FROM %%USERS%% LEFT JOIN %%MULTI%% ON userID = id
+	WHERE `universe` = :universe AND user_lastip IN (SELECT user_lastip FROM %%USERS%% WHERE `universe` = :universe GROUP BY user_lastip HAVING COUNT(*)>1) ORDER BY user_lastip, id ASC;";
+
+	$Query	= $db->select($sql,array(
+		':universe' => Universe::getEmulated()
+	));
+	
 	$IPs	= array();
-	while($Data = $GLOBALS['DATABASE']->fetch_array($Query)) {
+	foreach($Query as $Data) {
 		if(!isset($IPs[$Data['user_lastip']]))
 			$IPs[$Data['user_lastip']]	= array();
-		
+
 		$Data['register_time']	= _date($LNG['php_tdformat'], $Data['register_time']);
 		$Data['onlinetime']		= _date($LNG['php_tdformat'], $Data['onlinetime']);
-		
+
 		$IPs[$Data['user_lastip']][$Data['id']]	= $Data;
 	}
-	
+
 	$template	= new template();
 	$template->assign_vars(array(
 		'multiGroups'	=> $IPs,
 	));
 	$template->show('MultiIPs.tpl');
 }
-
