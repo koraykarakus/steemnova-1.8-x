@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -20,7 +20,9 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 
 function ShowSendMessagesPage() {
 	global $USER, $LNG;
-	
+
+	$db = Database::get();
+
 	$ACTION	= HTTP::_GP('action', '');
 	if ($ACTION == 'send')
 	{
@@ -47,13 +49,35 @@ function ShowSendMessagesPage() {
 
 		if (!empty($Message) && !empty($Subject))
 		{
-			require 'includes/classes/BBCode.class.php';
 			if($Mode == 0 || $Mode == 2) {
 				$From    	= '<span class="'.$class.'">'.$LNG['user_level_'.$USER['authlevel']].' '.$USER['username'].'</span>';
 				$pmSubject 	= '<span class="'.$class.'">'.$Subject.'</span>';
 				$pmMessage 	= '<span class="'.$class.'">'.BBCode::parse($Message).'</span>';
-				$USERS		= $GLOBALS['DATABASE']->query("SELECT `id`, `username` FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."'".(!empty($Lang) ? " AND `lang` = '".$GLOBALS['DATABASE']->sql_escape($Lang)."'": "").";");
-				while($UserData = $GLOBALS['DATABASE']->fetch_array($USERS))
+
+
+
+				if (!empty($Lang)) {
+					$sql = "SELECT `id`, `username` FROM %%USERS%%
+					WHERE `universe` = :universe ";
+					$sql .= " AND `lang` = :lang;";
+
+					$USERS = $db->select($sql,array(
+						':universe' => Universe::getEmulated(),
+						':lang' => $Lang
+					));
+
+				}else {
+
+					$sql = "SELECT `id`, `username` FROM %%USERS%%
+					WHERE `universe` = :universe ";
+
+					$USERS = $db->select($sql,array(
+						':universe' => Universe::getEmulated(),
+					));
+
+				}
+
+				foreach($USERS as $UserData)
 				{
 					$sendMessage = str_replace('{USERNAME}', $UserData['username'], $pmMessage);
 					PlayerUtil::sendMessage($UserData['id'], $USER['id'], $From, 50, $pmSubject, $sendMessage, TIMESTAMP, NULL, 1, Universe::getEmulated());
@@ -63,16 +87,36 @@ function ShowSendMessagesPage() {
 			if($Mode == 1 || $Mode == 2) {
 				require 'includes/classes/Mail.class.php';
 				$userList	= array();
-				
-				$USERS		= $GLOBALS['DATABASE']->query("SELECT `email`, `username` FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."'".(!empty($Lang) ? " AND `lang` = '".$GLOBALS['DATABASE']->sql_escape($Lang)."'": "").";");
-				while($UserData = $GLOBALS['DATABASE']->fetch_array($USERS))
-				{				
+
+				if (!empty($Lang)) {
+					$sql = "SELECT `email`, `username` FROM %%USERS%%
+					WHERE `universe` = :universe ";
+					$sql .= " AND `lang` = :lang;";
+
+					$USERS = $db->select($sql,array(
+						':universe' => Universe::getEmulated(),
+						':lang' => $Lang
+					));
+
+				}else {
+
+					$sql = "SELECT `email`, `username` FROM %%USERS%%
+					WHERE `universe` = :universe ";
+
+					$USERS = $db->select($sql,array(
+						':universe' => Universe::getEmulated(),
+					));
+
+				}
+
+				foreach($USERS as $UserData)
+				{
 					$userList[$UserData['email']]	= array(
 						'username'	=> $UserData['username'],
 						'body'		=> BBCode::parse(str_replace('{USERNAME}', $UserData['username'], $Message))
 					);
 				}
-				
+
 				Mail::multiSend($userList, strip_tags($Subject));
 			}
 			exit($LNG['ma_message_sended']);
@@ -80,15 +124,15 @@ function ShowSendMessagesPage() {
 			exit($LNG['ma_subject_needed']);
 		}
 	}
-	
+
 	$sendModes	= $LNG['ma_modes'];
-	
+
 	if(Config::get()->mail_active == 0)
 	{
 		unset($sendModes[1]);
 		unset($sendModes[2]);
 	}
-	
+
 	$template	= new template();
 	$template->assign_vars(array(
 		'langSelector' => array_merge(array('' => $LNG['ma_all']), $LNG->getAllowedLangs(false)),
