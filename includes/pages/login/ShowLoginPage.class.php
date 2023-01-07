@@ -69,7 +69,7 @@ class ShowLoginPage extends AbstractLoginPage
 		}
 
 
-		if ($config->capaktiv === '1')
+		if ($config->capaktiv === '1' && $config->use_recaptcha_on_login)
 		{
       require('includes/libs/reCAPTCHA/src/autoload.php');
 

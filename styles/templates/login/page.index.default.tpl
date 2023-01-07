@@ -34,7 +34,7 @@
 							{/if}
 						{/if}
 
-						{if $recaptchaEnable}
+						{if $recaptchaEnable && $use_recaptcha_on_login}
 								<div style="margin:0 auto;" class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
 								{if isset($error)}
 									{if isset($error['recaptcha'])}
@@ -94,7 +94,7 @@
 </section>
 {/block}
 
-{if $recaptchaEnable}
+{if $recaptchaEnable && $use_recaptcha_on_login}
 {block name="script" append}
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
 {/block}

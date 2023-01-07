@@ -73,7 +73,7 @@
 		<div class="clear"></div>
 	</div>
 	{/if}
-	{if $recaptchaEnable}
+	{if $recaptchaEnable && $use_recaptcha_on_register}
 	<div class="rowForm">
 		<label>{$LNG.registerCaptcha}</label>
 	</div>
@@ -97,7 +97,7 @@
 {/block}
 {block name="script" append}
 <link rel="stylesheet" type="text/css" href="styles/resource/css/login/register.css?v={$REV}">
-{if $recaptchaEnable}
+{if $recaptchaEnable && $use_recaptcha_on_register}
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={$lang}"></script>
 {/if}
 <script type="text/javascript" src="scripts/login/register.js"></script>

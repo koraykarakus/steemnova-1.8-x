@@ -209,6 +209,8 @@ CREATE TABLE `%PREFIX%config` (
   `capaktiv` tinyint(1) NOT NULL DEFAULT '0',
   `cappublic` varchar(42) NOT NULL DEFAULT '',
   `capprivate` varchar(42) NOT NULL DEFAULT '',
+  `use_recaptcha_on_login` BOOLEAN NOT NULL DEFAULT 0,
+  `use_recaptcha_on_register` BOOLEAN NOT NULL DEFAULT 0,
   `min_build_time` tinyint(2) NOT NULL DEFAULT '1',
   `mail_active` tinyint(1) NOT NULL DEFAULT '0',
   `mail_use` tinyint(1) NOT NULL DEFAULT '0',

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -41,6 +41,8 @@ function ShowConfigBasicPage()
 			'capaktiv'				=> $config->capaktiv,
 			'cappublic'				=> $config->cappublic,
 			'capprivate'			=> $config->capprivate,
+			'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
+			'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
 			'del_oldstuff'			=> $config->del_oldstuff,
 			'del_user_manually'		=> $config->del_user_manually,
 			'del_user_automatic'	=> $config->del_user_automatic,
@@ -52,7 +54,7 @@ function ShowConfigBasicPage()
 			'message_delete_behavior' => $config->message_delete_behavior,
 			'message_delete_days'	=> $config->message_delete_days,
 		);
-		
+
 		$capaktiv 				= isset($_POST['capaktiv']) && $_POST['capaktiv'] == 'on' ? 1 : 0;
 		$ga_active 				= isset($_POST['ga_active']) && $_POST['ga_active'] == 'on' ? 1 : 0;
 		$sendmail_inactive 		= isset($_POST['sendmail_inactive']) && $_POST['sendmail_inactive'] == 'on' ? 1 : 0;
@@ -63,6 +65,8 @@ function ShowConfigBasicPage()
 		$game_name				= HTTP::_GP('game_name', '', true);
 		$capprivate				= HTTP::_GP('capprivate', '');
 		$cappublic				= HTTP::_GP('cappublic', '');
+		$use_recaptcha_on_login = (HTTP::_GP('use_recaptcha_on_login', 'off') == 'on') ? 1 : 0;
+		$use_recaptcha_on_register = (HTTP::_GP('use_recaptcha_on_register', 'off') == 'on') ? 1 : 0;
 		$ga_key					= HTTP::_GP('ga_key', '', true);
 		$mail_use				= HTTP::_GP('mail_use', 0);
 		$smail_path				= HTTP::_GP('smail_path', '');
@@ -108,6 +112,8 @@ function ShowConfigBasicPage()
 			'close_reason'			=> $close_reason,
 			'message_delete_behavior' => $message_delete_behavior,
 			'message_delete_days'	=> $message_delete_days,
+			'use_recaptcha_on_login' => $use_recaptcha_on_login,
+			'use_recaptcha_on_register' => $use_recaptcha_on_register
 		);
 
 		foreach($config_after as $key => $value)
@@ -122,11 +128,11 @@ function ShowConfigBasicPage()
 		$LOG->new = $config_after;
 		$LOG->save();
 	}
-	
+
 	$TimeZones		= get_timezone_selector();
-	
+
 	$template	= new template();
-	
+
 	$template->assign_vars(array(
 		'del_oldstuff'					=> $config->del_oldstuff,
 		'del_user_manually'				=> $config->del_user_manually,
@@ -153,6 +159,8 @@ function ShowConfigBasicPage()
 		'dst'           				=> $config->dst,
 		'message_delete_behavior'  		=> $config->message_delete_behavior,
 		'message_delete_days'         	=> $config->message_delete_days,
+		'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
+		'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
 		'Selector'						=> array(
 		    'timezone' => $TimeZones,
             'mail' => $LNG['se_mail_sel'],
@@ -160,6 +168,6 @@ function ShowConfigBasicPage()
             'message_delete_behavior' => array(0 => $LNG['se_message_delete_behavior_0'], 1 => $LNG['se_message_delete_behavior_1']),
         ),
 	));
-	
+
 	$template->show('ConfigBasicBody.tpl');
 }

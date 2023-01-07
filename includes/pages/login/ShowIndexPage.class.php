@@ -46,6 +46,7 @@ class ShowIndexPage extends AbstractLoginPage
 
 		$this->assign(array(
 			'code'					=> $loginCode,
+			'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
 		));
 
 

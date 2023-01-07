@@ -24,7 +24,7 @@ class ShowRegisterPage extends AbstractLoginPage
 
 	function show()
 	{
-		global $LNG;
+		global $LNG, $config;
 		$referralData	= array('id' => 0, 'name' => '');
 		$accountName	= "";
 
@@ -65,7 +65,6 @@ class ShowRegisterPage extends AbstractLoginPage
 			$accountName	= $accountData['name'];
 		}
 
-		$config			= Config::get();
 		if($config->ref_active == 1 && !empty($referralID))
 		{
 			$db = Database::get();
@@ -83,6 +82,7 @@ class ShowRegisterPage extends AbstractLoginPage
 		}
 
 		$this->assign(array(
+			'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
 			'referralData'		=> $referralData,
 			'accountName'		=> $accountName,
 			'externalAuth'		=> $externalAuth,
@@ -200,7 +200,7 @@ class ShowRegisterPage extends AbstractLoginPage
 			$errors[]	= $LNG['registerErrorMailExist'];
 		}
 
-		if ($config->capaktiv === '1')
+		if ($config->capaktiv === '1' && $config->use_recaptcha_on_register)
 		{
 			require('includes/libs/reCAPTCHA/src/autoload.php');
 
