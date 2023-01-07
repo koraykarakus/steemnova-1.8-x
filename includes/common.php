@@ -69,23 +69,22 @@ HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HI
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 
-
-
 if (MODE === 'INSTALL')
 {
+
 	$THEME	= new Theme($install = true);
 
 	return;
 }
 
 
-$THEME	= new Theme($install = false);
-
-
 
 if(!file_exists('includes/config.php') || filesize('includes/config.php') === 0) {
 	HTTP::redirectTo('install/index.php');
 }
+
+$THEME	= new Theme($install = false);
+
 
 try {
     $sql	= "SELECT dbVersion FROM %%SYSTEM%%;";
