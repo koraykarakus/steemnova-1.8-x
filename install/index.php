@@ -21,7 +21,7 @@ set_include_path(ROOT_PATH);
 chdir(ROOT_PATH);
 
 require 'includes/common.php';
-$THEME->setUserTheme('gow');
+//$THEME->setUserTheme('gow');
 $LNG = new Language;
 $LNG->getUserAgentLanguage();
 $LNG->includeData(array('L18N', 'INGAME', 'INSTALL', 'CUSTOM'));
