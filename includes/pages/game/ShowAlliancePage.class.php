@@ -109,7 +109,6 @@ class ShowAlliancePage extends AbstractGamePage
 			$this->printMessage($LNG['al_not_exists']);
 		}
 
-		require 'includes/classes/BBCode.class.php';
 
 		if ($this->allianceData['ally_diplo'] == 1) {
 			$diplomaticmaticData	= $this->getDiplomatic();
@@ -511,7 +510,6 @@ class ShowAlliancePage extends AbstractGamePage
 	{
 		global $USER, $LNG;
 
-		require 'includes/classes/BBCode.class.php';
 
 		$db	= Database::get();
 
@@ -1056,7 +1054,7 @@ class ShowAlliancePage extends AbstractGamePage
 
 		$db = Database::get();
 
-		$sql = 'SELECT
+		$sql = "SELECT
 			r.`applyID`,
 			r.`time`,
 			r.`text`,
@@ -1091,16 +1089,11 @@ class ShowAlliancePage extends AbstractGamePage
 			stat.`total_rank`,
 			stat.`total_points`,
 			p.`name`
-		FROM
-			%%ALLIANCE_REQUEST%% AS r
-		LEFT JOIN
-			%%USERS%% AS u ON r.userId = u.id
-		INNER JOIN
-			%%STATPOINTS%% AS stat ON r.userId = stat.id_owner
-		LEFT JOIN
-			%%PLANETS%% AS p ON p.id = u.id_planet
-		WHERE
-			applyID = :applyID;';
+		FROM %%ALLIANCE_REQUEST%% AS r
+		LEFT JOIN %%USERS%% AS u ON r.userId = u.id
+		INNER JOIN %%STATPOINTS%% AS stat ON r.userId = stat.id_owner
+		LEFT JOIN %%PLANETS%% AS p ON p.id = u.id_planet
+		WHERE applyID = :applyID;";
 
 		$applyDetail = $db->selectSingle($sql, array(
 			':applyID'	=> $id
@@ -1113,7 +1106,6 @@ class ShowAlliancePage extends AbstractGamePage
 			)));
 		}
 
-		require 'includes/classes/BBCode.class.php';
 
 		$applyDetail['text']    	= BBCode::parse($applyDetail['text']);
 		$applyDetail['kbmetal']    	= pretty_number($applyDetail['kbmetal']);
