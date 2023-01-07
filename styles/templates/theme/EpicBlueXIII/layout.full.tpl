@@ -12,7 +12,7 @@
 			<a href="game.php?page=overview"><img src="styles/resource/images/meta.png" /></a>
 		</div>
 	</logo>
-	
+
 	<header>
 		<div class="fixed">
 			{include file="main.topnav.tpl"}
@@ -25,7 +25,7 @@
 			{include file="main.navigation.tpl"}
 		</div>
 	</menu>
-	
+
 	<content>
 		{if $hasAdminAccess}
 		<div class="globalWarning">
@@ -39,14 +39,35 @@
 		{elseif $vacation}
 		<div class="infobox">{$LNG.tn_vacation_mode} {$vacation}</div>
 		{/if}
-		
+
 		{block name="content"}{/block}
 		<table class="hack"></table>
 	</content>
 
 	<footer>
 		{foreach $cronjobs as $cronjob}<img src="cronjob.php?cronjobID={$cronjob}" alt="">{/foreach}
-		
+
+		<div class="footer">
+			{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
+			<a class="red" href="game.php?page=banList">{$LNG.lm_banned}</a>
+			{/if}
+			{if isModuleAvailable($smarty.const.MODULE_RECORDS)}
+			<a class="yellow" href="game.php?page=records">{$LNG.lm_records}</a>
+			{/if}
+	    {if isModuleAvailable($smarty.const.MODULE_BATTLEHALL)}
+			<a class="blue" href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
+			{/if}
+			{if isModuleAvailable($smarty.const.MODULE_SIMULATOR)}
+			<a href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
+			{/if}
+			{if false}
+			<a href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
+			{/if}
+
+			<a href="game.php?page=questions">{$LNG.lm_faq}</a>
+
+		</div>
+
 		{include file="main.footer.tpl" nocache}
 	</footer>
 </div>
