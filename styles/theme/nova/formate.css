@@ -1,12 +1,13 @@
-/* 
+/*
 $background: #040E1E url('/images/background.jpg');
 $foreground: #E6EBFB;
-$ui-background: #344566; 
+$ui-background: #344566;
 */
 
 html {
 	background:url("img/bkd_page.jpg") no-repeat fixed center center #0d0d0d;
 	background-size: cover;
+	height: 100%;
 }
 
 body {
@@ -15,6 +16,7 @@ body {
 
 	font-size: 12px;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	min-height: 100%;
 	/* font-family: Whitney,Source Sans Pro,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif; */
 }
 
@@ -32,6 +34,9 @@ input[type="radio"] {
 	border:0 none;
 }
 
+.wrapper{
+	min-height: 100%!important;
+}
 
 /* #menu li:first-child, #menu li:last-child{
 	background-color:transparent;
@@ -305,6 +310,7 @@ header .fixed {
 	border-bottom: 1px solid black;
 }
 
+
 #resourcesdiv{
 	text-align:center;
 }
@@ -320,7 +326,7 @@ header .fixed {
 menu a {
 	text-align: center;
 	background: #1d5888cf;
-    
+
 }
 
 menu a:hover {
@@ -487,7 +493,7 @@ margin:0 10px 0 10px;
 	float:left;
 	width: 30%;
         padding:10px;
-	
+
 }
 
 .planetl {
@@ -507,7 +513,7 @@ margin:0 10px 0 10px;
     margin: 5px auto;
     width: 50%;
     font-variant-caps: petite-caps;
-    
+
 }
 
 .gal1 {
@@ -532,7 +538,7 @@ font-size: medium;
     margin: 0 5px;}
 
 .g3 {
-    
+
     width: 115px;
     float: left;
     height: 105px;

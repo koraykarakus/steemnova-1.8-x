@@ -8,10 +8,9 @@
 
 .wrapper {
 	display: grid;
-	/* width: 100vw;
-	height: 100vh; */
 	grid-template-columns: 1fr 180px 2fr 350px 0.5fr;
 	grid-template-rows: 100px 1fr auto;
+	height: 100%;
 }
 
 top {

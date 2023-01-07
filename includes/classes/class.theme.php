@@ -20,21 +20,28 @@ class Theme
 	static public $Themes;
 	private $THEMESETTINGS;
 
-	function __construct()
+	function __construct($install = false)
 	{
 		$this->skininfo = array();
 
-    $config = Config::get();
 
-    if ($config->server_default_theme == 1) {
-      $this->skin = "nova";
-    }elseif ($config->server_default_theme == 2) {
-      $this->skin = "gow";
-    }elseif ($config->server_default_theme == 3) {
-      $this->skin = "EpicBlueXIII";
-    }else { //default skin is nova
-      $this->skin = "nova";
-    }
+		if (!$install) {
+			$config = Config::get();
+
+			if ($config->server_default_theme == 1) {
+				$this->skin = "nova";
+			}elseif ($config->server_default_theme == 2) {
+				$this->skin = "gow";
+			}elseif ($config->server_default_theme == 3) {
+				$this->skin = "EpicBlueXIII";
+			}else { //default skin is nova
+				$this->skin = "nova";
+			}
+		}else {
+			$this->skin = "nova";
+		}
+
+
 
 		$this->setUserTheme($this->skin);
 	}

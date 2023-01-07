@@ -69,12 +69,18 @@ HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HI
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 
+
+
 if (MODE === 'INSTALL')
 {
+	$THEME	= new Theme($install = true);
+
 	return;
 }
 
-//$THEME	= new Theme();
+
+$THEME	= new Theme($install = false);
+
 
 
 if(!file_exists('includes/config.php') || filesize('includes/config.php') === 0) {
