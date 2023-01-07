@@ -68,12 +68,14 @@ require 'includes/classes/BBCode.class.php';
 HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
-$THEME	= new Theme();
 
 if (MODE === 'INSTALL')
 {
 	return;
 }
+
+//$THEME	= new Theme();
+
 
 if(!file_exists('includes/config.php') || filesize('includes/config.php') === 0) {
 	HTTP::redirectTo('install/index.php');
