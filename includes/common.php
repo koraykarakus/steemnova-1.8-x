@@ -68,7 +68,7 @@ require 'includes/classes/BBCode.class.php';
 HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
-$THEME		= new Theme();
+$THEME	= new Theme();
 
 if (MODE === 'INSTALL')
 {
@@ -166,7 +166,7 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON')
 
 	$LNG	= new Language($USER['lang']);
 	$LNG->includeData(array('L18N', 'INGAME', 'TECH', 'CUSTOM'));
-	if(!empty($USER['dpath'])) { $THEME->setUserTheme($USER['dpath']); }
+	//if(!empty($USER['dpath'])) { $THEME->setUserTheme($USER['dpath']); }
 
 	if($config->game_disable == 0 && $USER['authlevel'] == AUTH_USR) {
 		ShowErrorPage::printError($LNG['sys_closed_game'].'<br><br>'.$config->close_reason, false);

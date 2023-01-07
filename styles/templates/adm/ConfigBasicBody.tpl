@@ -14,9 +14,21 @@
     <td>{$LNG.se_ttf_file}</td>
     <td><input name="ttf_file" size="40" value="{$ttf_file}" type="text"></td>
 	<td><img src="./styles/resource/images/admin/i.gif" width="16" height="16" alt="" class="tooltip" data-tooltip-content="{$LNG.se_ttf_file_info}"></td>
-</tr><tr>
+</tr>
+<tr>
     <td>{$LNG.se_timzone}</td>
 	<td>{html_options name=timezone options=$Selector.timezone selected=$timezone}</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+  <td>Default Theme</td>
+	<td>
+		<select name="server_default_theme">
+			<option {if $server_default_theme == 1}selected{/if} value="1">Nova</option>
+			<option {if $server_default_theme == 2}selected{/if} value="2">Gow</option>
+			<option {if $server_default_theme == 3}selected{/if} value="3">EpicBlueXIII</option>
+		</select>
+	</td>
 	<td>&nbsp;</td>
 </tr>
 <tr>

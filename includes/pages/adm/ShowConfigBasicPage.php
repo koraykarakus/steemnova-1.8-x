@@ -53,6 +53,7 @@ function ShowConfigBasicPage()
 			'close_reason'			=> $config->close_reason,
 			'message_delete_behavior' => $config->message_delete_behavior,
 			'message_delete_days'	=> $config->message_delete_days,
+			'server_default_theme' => $config->server_default_theme
 		);
 
 		$capaktiv 				= isset($_POST['capaktiv']) && $_POST['capaktiv'] == 'on' ? 1 : 0;
@@ -84,6 +85,7 @@ function ShowConfigBasicPage()
 		$dst					= HTTP::_GP('dst', 0);
 		$message_delete_behavior = HTTP::_GP('message_delete_behavior', 0);
 		$message_delete_days	= HTTP::_GP('message_delete_days', 0);
+		$server_default_theme = HTTP::_GP('server_default_theme', 1);
 
 		$config_after = array(
 			'ttf_file'				=> $ttf_file,
@@ -113,7 +115,8 @@ function ShowConfigBasicPage()
 			'message_delete_behavior' => $message_delete_behavior,
 			'message_delete_days'	=> $message_delete_days,
 			'use_recaptcha_on_login' => $use_recaptcha_on_login,
-			'use_recaptcha_on_register' => $use_recaptcha_on_register
+			'use_recaptcha_on_register' => $use_recaptcha_on_register,
+			'server_default_theme' => $server_default_theme
 		);
 
 		foreach($config_after as $key => $value)
@@ -161,6 +164,7 @@ function ShowConfigBasicPage()
 		'message_delete_days'         	=> $config->message_delete_days,
 		'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
 		'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
+		'server_default_theme' => $config->server_default_theme,
 		'Selector'						=> array(
 		    'timezone' => $TimeZones,
             'mail' => $LNG['se_mail_sel'],
