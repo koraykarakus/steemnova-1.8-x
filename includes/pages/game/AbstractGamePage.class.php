@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -48,12 +48,31 @@ abstract class AbstractGamePage
 	}
 
 	protected function initTemplate() {
+		global $config;
+
 		if(isset($this->tplObj))
 			return true;
 
 		$this->tplObj	= new template;
 		list($tplDir)	= $this->tplObj->getTemplateDir();
-		$this->tplObj->setTemplateDir($tplDir.'game/');
+
+		$path = "";
+		switch ($config->server_default_theme) {
+			case 1:
+				$path = "theme/nova";
+				break;
+			case 2:
+			$path = "theme/gow";
+				break;
+			case 3:
+			$path = "theme/EpicBlueXIII";
+				break;
+			default:
+			$path = "theme/nova";
+				break;
+		}
+
+		$this->tplObj->setTemplateDir($tplDir. $path);
 		return true;
 	}
 

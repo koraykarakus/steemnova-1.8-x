@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -16,7 +16,7 @@
  */
 
 class SQLDumper
-{	
+{
 	public function dumpTablesToFile($dbTables, $filePath)
 	{
 		if($this->canNative('mysqldump'))
@@ -28,17 +28,17 @@ class SQLDumper
 			return $this->softwareDumpToFile($dbTables, $filePath);
 		}
 	}
-	
+
 	private function setTimelimit()
 	{
 		@set_time_limit(600); // 10 Minutes
 	}
-		
+
 	private function canNative($command)
 	{
 		return function_exists('shell_exec') && function_exists('escapeshellarg') && shell_exec("which " . $command) !== "";
 	}
-	
+
 	private function nativeDumpToFile($dbTables, $filePath)
 	{
 		$database	= array();
@@ -60,7 +60,7 @@ class SQLDumper
 		}
 		return $sqlDump;
 	}
-	
+
 	private function softwareDumpToFile($dbTables, $filePath)
 	{
 		$this->setTimelimit();
@@ -124,7 +124,7 @@ class SQLDumper
 			}
 
 			fwrite($fp, "
-			
+
 --
 -- Dumping data for table `{$dbTable}`
 --
@@ -147,9 +147,9 @@ LOCK TABLES `{$dbTable}` WRITE;
 					}
 				}
 			}
-			
+
 			$insertInto	= "INSERT INTO `{$dbTable}` (`".implode("`, `", $columnNames)."`) VALUES\r\n";
-			
+
 			fwrite($fp, $insertInto);
 			$i = 0;
 			$tableData	= $db->select("SELECT * FROM ".$dbTable);
@@ -163,7 +163,7 @@ LOCK TABLES `{$dbTable}` WRITE;
 					fwrite($fp, ";\r\n");
 					fwrite($fp, $insertInto);
 				}
-				
+
 				if(!$firstRow)
 				{
 					fwrite($fp, ",\r\n");
@@ -172,7 +172,7 @@ LOCK TABLES `{$dbTable}` WRITE;
 				{
 					$firstRow = false;
 				}
-				
+
 				foreach($tableRow as $colum => $value)
 				{
 					if(in_array($colum, $numColumns))
@@ -187,7 +187,7 @@ LOCK TABLES `{$dbTable}` WRITE;
 				fwrite($fp, "(".implode(", ",$rowData).")");
 			}
 			fwrite($fp, ";
-			
+
 /*!40000 ALTER TABLE `{$dbTable}` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,12 +208,12 @@ UNLOCK TABLES;
 
 		return filesize($filePath) !== 0;
 	}
-	
+
 	public function restoreDatabase($filePath)
 	{
 		// Ugly.
 		$this->setTimelimit();
-		
+
 		if($this->canNative('mysql'))
 		{
 			$database	= array();
