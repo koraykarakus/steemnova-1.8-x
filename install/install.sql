@@ -290,6 +290,7 @@ CREATE TABLE `%PREFIX%config` (
   `disclamerNotice` text NOT NULL,
   `alliance_create_min_points` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `server_default_theme` tinyint NOT NULL DEFAULT 1,
+  `let_users_change_theme` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -808,6 +809,7 @@ CREATE TABLE `%PREFIX%users` (
   `ref_id` int(11) NOT NULL DEFAULT '0',
   `ref_bonus` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `inactive_mail` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `user_theme` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `authlevel` (`authlevel`),
   KEY `ref_bonus` (`ref_bonus`),

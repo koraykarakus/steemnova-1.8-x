@@ -63,10 +63,16 @@
 				{html_options name=planetOrder options=$Selectors.SortUpDown selected=$planetOrder}
 			</td>
 		</tr>
-		{if count($Selectors.Skins) > 1}
+		{if $let_users_change_theme}
 		<tr>
 			<td>{$LNG.op_skin_example}</td>
-			<td>{html_options options=$Selectors.Skins selected=$theme name="theme" id="theme"}</td>
+			<td>
+				<select name="user_theme">
+					<option {if $user_theme == 1}selected{/if} value="1">Nova</option>
+					<option {if $user_theme == 2}selected{/if} value="2">Galaxy of Wars</option>
+					<option {if $user_theme == 3}selected{/if} value="3">Epic Blue</option>
+				</select>
+			</td>
 		</tr>
 		{/if}
 		<tr>

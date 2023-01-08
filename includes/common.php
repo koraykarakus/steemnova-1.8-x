@@ -119,6 +119,8 @@ $config = Config::get();
 date_default_timezone_set($config->timezone);
 
 
+
+
 if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON')
 {
 	$session	= Session::load();
@@ -154,6 +156,8 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON')
 		':unread'	=> 1,
 		':userId'	=> $session->userId
 	));
+
+	$THEME	= new Theme($install = false);
 
 	if(!$session->isValidSession() && isset($_GET['page']) && $_GET['page']=="raport" && isset($_GET['raport']) && count($_GET)==2 && MODE === 'INGAME') {
 	$USER['lang']='en';

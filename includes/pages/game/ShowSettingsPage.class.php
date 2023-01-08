@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -19,14 +19,14 @@ class ShowSettingsPage extends AbstractGamePage
 {
 	public static $requireModule = 0;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	public function show()
 	{
-		global $USER, $LNG;
+		global $USER, $LNG, $config;
 		if($USER['urlaubs_modus'] == 1)
 		{
 			$this->assign(array(
@@ -34,26 +34,25 @@ class ShowSettingsPage extends AbstractGamePage
 				'delete'				=> $USER['db_deaktjava'],
 				'canVacationDisbaled'	=> $USER['urlaubs_until'] < TIMESTAMP,
 			));
-			
+
 			$this->display('page.settings.vacation.tpl');
 		}
 		else
 		{
 			$this->assign(array(
 				'Selectors'			=> array(
-					'timezones' => get_timezone_selector(), 
+					'timezones' => get_timezone_selector(),
 					'Sort' => array(
-						0 => $LNG['op_sort_normal'], 
+						0 => $LNG['op_sort_normal'],
 						1 => $LNG['op_sort_koords'],
-						2 => $LNG['op_sort_abc']), 
+						2 => $LNG['op_sort_abc']),
 					'SortUpDown' => array(
-						0 => $LNG['op_sort_up'], 
+						0 => $LNG['op_sort_up'],
 						1 => $LNG['op_sort_down']
-					), 
-					'Skins' => Theme::getAvalibleSkins(), 
+					),
 					'lang' => $LNG->getAllowedLangs(false)
 					),
-				'adminProtection'	=> $USER['authattack'],	
+				'adminProtection'	=> $USER['authattack'],
 				'userAuthlevel'		=> $USER['authlevel'],
 				'changeNickTime'	=> ($USER['uctime'] + USERNAME_CHANGETIME) - TIMESTAMP,
 				'username'			=> $USER['username'],
@@ -75,14 +74,16 @@ class ShowSettingsPage extends AbstractGamePage
 				'galaxyMessage' 	=> $USER['settings_wri'],
 				'blockPM' 			=> $USER['settings_blockPM'],
 				'userid'		 	=> $USER['id'],
-				'ref_active'		=> Config::get()->ref_active,
-				'SELF_URL'          => PROTOCOL.HTTP_HOST.HTTP_ROOT
+				'ref_active'		=> $config->ref_active,
+				'SELF_URL'          => PROTOCOL.HTTP_HOST.HTTP_ROOT,
+				'let_users_change_theme' => $config->let_users_change_theme,
+				'user_theme' => $USER['user_theme']
 			));
-			
+
 			$this->display('page.settings.default.tpl');
 		}
 	}
-	
+
 	private function CheckVMode()
 	{
 		global $USER, $PLANET;
@@ -109,16 +110,16 @@ class ShowSettingsPage extends AbstractGamePage
 		foreach($query as $CPLANET)
 		{
 			list($USER, $CPLANET)	= $this->ecoObj->CalcResource($USER, $CPLANET, true);
-		
+
 			if(!empty($CPLANET['b_building']) || !empty($CPLANET['b_hangar']))
 				return false;
-			
+
 			unset($CPLANET);
 		}
 
 		return true;
 	}
-	
+
 	public function send()
 	{
 		global $USER;
@@ -128,16 +129,16 @@ class ShowSettingsPage extends AbstractGamePage
 			$this->sendDefault();
 		}
 	}
-	
-	private function sendVacation() 
+
+	private function sendVacation()
 	{
 		global $USER, $LNG; $PLANET;
-		
+
 		$delete		= HTTP::_GP('delete', 0);
 		$vacation	= HTTP::_GP('vacation', 0);
-		
+
 		$db = Database::get();
-		
+
 		if($vacation == 1 && $USER['urlaubs_until'] <= TIMESTAMP) {
 			$sql = "UPDATE %%USERS%% SET
 						urlaubs_modus = '0',
@@ -162,10 +163,10 @@ class ShowSettingsPage extends AbstractGamePage
 				':userID'		=> $USER['id'],
 				':timestamp'	=> TIMESTAMP
 			));
-			
+
 			$PLANET['last_update'] = TIMESTAMP;
 		}
-		
+
 		if($delete == 1) {
 			$sql	= "UPDATE %%USERS%% SET db_deaktjava = :timestamp WHERE id = :userID;";
 			$db->update($sql, array(
@@ -178,62 +179,76 @@ class ShowSettingsPage extends AbstractGamePage
 				':userID'	=> $USER['id'],
 			));
 		}
-		
+
 		$this->printMessage($LNG['op_options_changed'], array(array(
 			'label'	=> $LNG['sys_forward'],
 			'url'	=> 'game.php?page=settings'
 		)));
 	}
-	
+
 	private function sendDefault()
 	{
-		global $USER, $LNG, $THEME;
-		
+		global $USER, $LNG, $THEME, $config;
+
 		$adminprotection	= HTTP::_GP('adminprotection', 0);
-		
+
 		$username			= HTTP::_GP('username', $USER['username'], UTF8_SUPPORT);
 		$password			= HTTP::_GP('password', '');
-		
+
 		$newpassword		= HTTP::_GP('newpassword', '');
 		$newpassword2		= HTTP::_GP('newpassword2', '');
-		
+
 		$email				= HTTP::_GP('email', $USER['email']);
-		
-		$timezone			= HTTP::_GP('timezone', '');	
-		$language			= HTTP::_GP('language', '');	
-		
-		$planetSort			= HTTP::_GP('planetSort', 0);	
+
+		$timezone			= HTTP::_GP('timezone', '');
+		$language			= HTTP::_GP('language', '');
+
+		$planetSort			= HTTP::_GP('planetSort', 0);
 		$planetOrder		= HTTP::_GP('planetOrder', 0);
-				
-		$theme				= HTTP::_GP('theme', $THEME->getThemeName());	
-	
-		$queueMessages		= HTTP::_GP('queueMessages', 0);	
+
+		$queueMessages		= HTTP::_GP('queueMessages', 0);
 		$spyMessagesMode	= HTTP::_GP('spyMessagesMode', 0);
 
-		$spycount			= HTTP::_GP('spycount', 1.0);	
-		$fleetactions		= HTTP::_GP('fleetactions', 5);	
-		
-		$galaxySpy			= HTTP::_GP('galaxySpy', 0);	
-		$galaxyMessage		= HTTP::_GP('galaxyMessage', 0);	
-		$galaxyBuddyList	= HTTP::_GP('galaxyBuddyList', 0);	
+		$spycount			= HTTP::_GP('spycount', 1.0);
+		$fleetactions		= HTTP::_GP('fleetactions', 5);
+
+		$galaxySpy			= HTTP::_GP('galaxySpy', 0);
+		$galaxyMessage		= HTTP::_GP('galaxyMessage', 0);
+		$galaxyBuddyList	= HTTP::_GP('galaxyBuddyList', 0);
 		$galaxyMissle		= HTTP::_GP('galaxyMissle', 0);
 		$blockPM			= HTTP::_GP('blockPM', 0);
-		
-		$vacation			= HTTP::_GP('vacation', 0);	
+
+		$vacation			= HTTP::_GP('vacation', 0);
 		$delete				= HTTP::_GP('delete', 0);
-		
+
 		// Vertify
-		
+
 		$adminprotection	= ($adminprotection == 1 && $USER['authlevel'] != AUTH_USR) ? $USER['authlevel'] : 0;
-		
+
 		$spycount			= min(max(round($spycount), 1), 4294967295);
 		$fleetactions		= min(max($fleetactions, 1), 99);
-		
-		$language			= array_key_exists($language, $LNG->getAllowedLangs(false)) ? $language : $LNG->getLanguage();		
-		$theme				= array_key_exists($theme, Theme::getAvalibleSkins()) ? $theme : $THEME->getThemeName();
-		
+
+		$language			= array_key_exists($language, $LNG->getAllowedLangs(false)) ? $language : $LNG->getLanguage();
+
+		$theme = HTTP::_GP('user_theme',1);
+
+		switch ($theme) {
+			case 1:
+				$themeName = "nova";
+				break;
+			case 2:
+			$themeName = "gow";
+				break;
+			case 3:
+			$themeName = "EpicBlueXIII";
+				break;
+			default:
+			$themeName = "nova";
+				break;
+		}
+
 		$db = Database::get();
-		
+
 		if (!empty($username) && $USER['username'] != $username)
 		{
 			if (!PlayerUtil::isNameValid($username))
@@ -278,7 +293,7 @@ class ShowSettingsPage extends AbstractGamePage
 				}
 			}
 		}
-		
+
 		if (!empty($newpassword) && !empty($password) && password_verify($password, $USER['password']) && $newpassword == $newpassword2)
 		{
 			$newpass 	 = PlayerUtil::cryptPassword($newpassword);
@@ -331,9 +346,9 @@ class ShowSettingsPage extends AbstractGamePage
 					));
 				}
 			}
-		}		
-			
-		
+		}
+
+
 		if ($vacation == 1)
 		{
 			if(!$this->CheckVMode())
@@ -372,7 +387,7 @@ class ShowSettingsPage extends AbstractGamePage
 		}
 
 		$sql =  "UPDATE %%USERS%% SET
-		dpath					= :theme,
+		dpath = :dpath,
 		timezone				= :timezone,
 		planet_sort				= :planetSort,
 		planet_sort_order		= :planetOrder,
@@ -386,10 +401,12 @@ class ShowSettingsPage extends AbstractGamePage
 		authattack				= :adminProtection,
 		lang					= :language,
 		hof						= :queueMessages,
-		spyMessagesMode			= :spyMessagesMode
+		spyMessagesMode			= :spyMessagesMode,
+		user_theme = :user_theme
 		WHERE id = :userID;";
+
 		$db->update($sql, array(
-			':theme'			=> $theme,
+			':dpath' => $themeName,
 			':timezone'			=> $timezone,
 			':planetSort'		=> $planetSort,
 			':planetOrder'		=> $planetOrder,
@@ -404,9 +421,10 @@ class ShowSettingsPage extends AbstractGamePage
 			':language'			=> $language,
 			':queueMessages'	=> $queueMessages,
 			':spyMessagesMode'	=> $spyMessagesMode,
-			':userID'			=> $USER['id']
+			':userID'			=> $USER['id'],
+			':user_theme' => $theme
 		));
-		
+
 		$this->printMessage($LNG['op_options_changed'], array(array(
 			'label'	=> $LNG['sys_forward'],
 			'url'	=> 'game.php?page=settings'

@@ -22,25 +22,42 @@ class Theme
 
 	function __construct($install = false)
 	{
+		global $USER;
 		$this->skininfo = array();
 
 
 		if (!$install) {
 			$config = Config::get();
+			if ($config->let_users_change_theme && isset($USER)) {
 
-			if ($config->server_default_theme == 1) {
-				$this->skin = "nova";
-			}elseif ($config->server_default_theme == 2) {
-				$this->skin = "gow";
-			}elseif ($config->server_default_theme == 3) {
-				$this->skin = "EpicBlueXIII";
-			}else { //default skin is nova
-				$this->skin = "nova";
+				if ($USER['user_theme'] == 1) {
+					$this->skin = "nova";
+				}elseif ($USER['user_theme'] == 2) {
+					$this->skin = "gow";
+				}elseif ($USER['user_theme'] == 3) {
+					$this->skin = "EpicBlueXIII";
+				}else { //default skin is nova
+					$this->skin = "nova";
+				}
+
+			}else {
+
+				if ($config->server_default_theme == 1) {
+					$this->skin = "nova";
+				}elseif ($config->server_default_theme == 2) {
+					$this->skin = "gow";
+				}elseif ($config->server_default_theme == 3) {
+					$this->skin = "EpicBlueXIII";
+				}else { //default skin is nova
+					$this->skin = "nova";
+				}
+
 			}
+
+
 		}else {
 			$this->skin = "nova";
 		}
-
 
 
 		$this->setUserTheme($this->skin);
@@ -123,6 +140,8 @@ class Theme
 				self::$Themes	= $Themes;
 			}
 		}
+
+
 		return self::$Themes;
 	}
 }

@@ -48,7 +48,7 @@ abstract class AbstractGamePage
 	}
 
 	protected function initTemplate() {
-		global $config;
+		global $config, $USER;
 
 		if(isset($this->tplObj))
 			return true;
@@ -56,21 +56,26 @@ abstract class AbstractGamePage
 		$this->tplObj	= new template;
 		list($tplDir)	= $this->tplObj->getTemplateDir();
 
-		$path = "";
-		switch ($config->server_default_theme) {
+		$path = $theme = "";
+
+		$theme = ($config->let_users_change_theme) ? $USER['user_theme'] : $config->server_default_theme;
+
+		switch ($theme) {
 			case 1:
 				$path = "theme/nova";
 				break;
 			case 2:
-			$path = "theme/gow";
+				$path = "theme/gow";
 				break;
 			case 3:
-			$path = "theme/EpicBlueXIII";
+				$path = "theme/EpicBlueXIII";
 				break;
 			default:
-			$path = "theme/nova";
+				$path = "theme/nova";
 				break;
 		}
+
+
 
 		$this->tplObj->setTemplateDir($tplDir. $path);
 		return true;
