@@ -32,6 +32,11 @@
 	<td>&nbsp;</td>
 </tr>
 <tr>
+	<td>Let users change their theme<br></td>
+    <td><input name="let_users_change_theme"{if $let_users_change_theme} checked="checked"{/if}  type="checkbox"></td>
+	<td><img src="./styles/resource/images/admin/i.gif" width="16" height="16" alt="" class="tooltip" data-tooltip-content="{$LNG.se_recaptcha_desc}"></td>
+</tr>
+<tr>
 	<th colspan="2">{$LNG.se_player_settings}</th><th>&nbsp;</th>
 </tr><tr>
 	<td>{$LNG.se_del_oldstuff}</td>
