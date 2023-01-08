@@ -69,7 +69,7 @@
 		<div class="infos_right_top">
 			<a href="#" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
 			{if $Element.level != 0}
-				({$LNG.bd_lvl} {$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if})
+			<span class="yellow">({$LNG.bd_lvl} {$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if})</span>
 			{/if}
 		</div>
 		<div class="infos_right_bottom">
