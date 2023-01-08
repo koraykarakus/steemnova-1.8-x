@@ -1405,3 +1405,58 @@ General Color Classes
 .blue{
   color: #6f9fc8!important;
 }
+
+.infos {
+  text-align: center;
+  background: #2d3955d1;
+  margin-top: 10px;
+	display: flex;
+}
+.infos .infos_left{
+	width: 128px;
+}
+.infos .infos_left img{
+	margin: 4px;
+	border: 1px solid #111;
+}
+.infos .infos_right{
+	width: calc(100% - 128px);
+}
+
+.infos .infos_right,.infos .infos_left{
+	display: flex;
+	flex-direction: column;
+}
+
+.infos_right_top{
+	height: 24px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background: #0D263D;
+	padding: 0 5px;
+}
+.infos_right_top span{
+	padding: 0 3px;
+}
+
+.infos_right_bottom{
+	display: flex;
+	padding: 5px 0;
+}
+.infos_right_bottom .infos_inner_left, .infos_right_bottom .infos_inner_right{
+	display: flex;
+	flex-direction: column;
+}
+.infos_right_bottom .infos_inner_left span,.infos_right_bottom .infos_inner_left a{
+	padding: 3px 0;
+	text-align: left;
+}
+.infos_right_bottom .infos_inner_left{
+	width: 70%;
+	align-items: flex-start;
+	padding: 0 5px;
+}
+.infos_right_bottom .infos_inner_right{
+	width: 30%;
+}
