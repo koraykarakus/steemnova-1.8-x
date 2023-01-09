@@ -1458,3 +1458,19 @@ General Color Classes
 .infos_right_bottom .infos_inner_right{
 	width: 30%;
 }
+
+.techWrapper{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background: #2d3955d1;
+}
+.techWrapper .techi{
+	width: 100%;
+	height: auto;
+	padding: 10px 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
