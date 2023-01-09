@@ -56,5 +56,9 @@ What is done so far ?
 
 * Theme update: Epic Blue XIII shipyard page is updated and visual problems solved
 
+* Theme update:Epic Blue XIII technologies page is updated and visual problems solved
+
+* forum and discord pages now can be removed from admin panel / modules page
+
 
 **Code copyright 07.05.2020-2020 @IntinteDAO released under the AGPLv3 License.**
