@@ -1,7 +1,3 @@
-# SteemNova 1.8x - 2 Moons engine based browser game for steemnova community
-
-Main Objective of the project is to fix bugs related to steemnova v1.8
-
 What is done so far ?
 
 * BBCodeParser2 was causing problems at the stage of install, wrong url links of BBCodeParser2 is corrected
@@ -60,5 +56,12 @@ What is done so far ?
 
 * forum and discord pages now can be removed from admin panel / modules page
 
+* Theme update: Galaxy of Wars overview page is updated and visual problems solved
 
-**Code copyright 07.05.2020-2020 @IntinteDAO released under the AGPLv3 License.**
+* Theme update: Galaxy of Wars buildings page is updated and visual problems solved
+
+* Theme update: Galaxy of Wars research page is updated and visual problems solved
+
+* Theme update: Galaxy of Wars shipyard page is updated and visual problems solved
+
+* Theme update:Galaxy of Wars technologies page is updated and visual problems solved
