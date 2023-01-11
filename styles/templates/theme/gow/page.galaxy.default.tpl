@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<td style="background-color:transparent;border:0px;" colspan="2">
-				<input type="submit" value="{$LNG.gl_show}">
+				<input id="galaxySubmit" type="submit" value="{$LNG.gl_show}">
 			</td>
 		</tr>
 	</table>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -21,11 +21,11 @@ class ShowGalaxyPage extends AbstractGamePage
 {
     public static $requireModule = MODULE_RESEARCH;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	public function show()
 	{
 		global $USER, $PLANET, $resource, $LNG, $reslist;
@@ -42,7 +42,7 @@ class ShowGalaxyPage extends AbstractGamePage
 		$planet			= min(max(HTTP::_GP('planet', (int) $PLANET['planet']), 1), $config->max_planets);
 		$type			= HTTP::_GP('type', 1);
 		$current		= HTTP::_GP('current', 0);
-		
+
         if (!empty($galaxyLeft))
             $galaxy	= max($galaxy - 1, 1);
         elseif (!empty($galaxyRight))
@@ -56,7 +56,7 @@ class ShowGalaxyPage extends AbstractGamePage
 		if ($galaxy != $PLANET['galaxy'] || $system != $PLANET['system'])
 		{
 			if($PLANET['deuterium'] < $config->deuterium_cost_galaxy)
-			{	
+			{
 				$this->printMessage($LNG['gl_no_deuterium_to_view_galaxy'], array(array(
 					'label'	=> $LNG['sys_back'],
 					'url'	=> 'game.php?page=galaxy'
@@ -69,9 +69,9 @@ class ShowGalaxyPage extends AbstractGamePage
         $targetDefensive    = $reslist['defense'];
         $targetDefensive[]	= 502;
 		$missileSelector[0]	= $LNG['gl_all_defenses'];
-		
+
 		foreach($targetDefensive as $Element)
-		{	
+		{
 			$missileSelector[$Element] = $LNG['tech'][$Element];
 		}
 		$sql	= 'SELECT total_points
@@ -128,7 +128,7 @@ class ShowGalaxyPage extends AbstractGamePage
 				'member'					=> $LNG['gl_short_member'],
 			),
 		));
-		
+
 		$this->display('page.galaxy.default.tpl');
 	}
 }

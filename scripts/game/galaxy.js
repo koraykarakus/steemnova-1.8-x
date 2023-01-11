@@ -8,7 +8,7 @@ function doit(missionID, planetID) {
 				$('#elementID'+elementID).text(number_format(value));
 			});
 		}
-		
+
 		var statustable	= $('#fleetstatusrow');
 		var messages	= statustable.find("~tr");
 		if(messages.length == MaxFleetSetting) {
@@ -23,3 +23,24 @@ function galaxy_submit(value) {
 	$('#auto').attr('name', value);
 	$('#galaxy_form').submit();
 }
+
+
+// on keyboard click <> change page
+$(document).on('keydown', function(event){
+
+if  (event.keyCode === 39) {
+      $("input[name=systemRight]").trigger('click');
+   } else if (event.keyCode === 37) {
+       $('input[name=systemLeft]').trigger('click');
+   }
+
+});
+
+//on F5 refresh the current page
+$(document).on('keydown', function(event){
+
+if  (event.keyCode === 116) {
+
+		$('#galaxySubmit').trigger('click');
+ }
+});
