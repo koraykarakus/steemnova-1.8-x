@@ -291,6 +291,9 @@ CREATE TABLE `%PREFIX%config` (
   `alliance_create_min_points` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `server_default_theme` tinyint NOT NULL DEFAULT 1,
   `let_users_change_theme` BOOLEAN NOT NULL DEFAULT 0,
+  `show_unlearned_ships` BOOLEAN NOT NULL DEFAULT 1,
+  `show_unlearned_buildings` BOOLEAN NOT NULL DEFAULT 1,
+  `show_unlearned_technology` BOOLEAN NOT NULL DEFAULT 1,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

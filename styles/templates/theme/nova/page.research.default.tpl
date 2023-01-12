@@ -2,18 +2,18 @@
 {block name="content"}
 	{if $messages}
 	<div class="message"><a href="?page=messages">{$messages}</a></div>
-	
+
 	{/if}
 {if !empty($Queue)}
 <div id="buildlist" class="infos1">
 		{foreach $Queue as $List}
 		{$ID = $List.element}
 		<div class="buildb">
-			
+
 				{if isset($ResearchList[$List.element])}
 				{$CQueue = $ResearchList[$List.element]}
 				{/if}
-				{$List@iteration}.: 
+				{$List@iteration}.:
 				{if isset($CQueue) && $CQueue.maxLevel != $CQueue.level && !$IsFullQueue && $CQueue.buyable}
 				<form action="game.php?page=research" method="post" class="build_form">
 					<input type="hidden" name="cmd" value="insert">
@@ -48,7 +48,13 @@
 
 {if $IsLabinBuild}<div class="hidden-div">{$LNG.bd_building_lab}</div>{/if}
 <div>
-<div class="planeto"> <button id="lab1">Imperial</button> | <button id="lab2">Military</button> | <button id="lab3">Engins</button> | <button id="lab4">Mining</button> | <button id="lab5">All</button></div>		
+<div class="planeto">
+	<button id="lab1">Imperial</button> |
+	<button id="lab2">Military</button> |
+	<button id="lab3">Engins</button> |
+	<button id="lab4">Mining</button> |
+	<button id="lab5">All</button>
+</div>
 
 	{foreach $ResearchList as $ID => $Element}
 	<div class="infos" id="t{$ID}">
@@ -62,9 +68,9 @@
 						{foreach $Element.costOverflow as $ResType => $ResCount}
                         <a href='#' onclick='return Dialog.info({$ResType})' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.{$ResType}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$ResType}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$ResType}</td></tr></table></tr></table>">{$LNG.tech.{$ResType}}</a>: <span style="font-weight:700">{$ResCount|number}</span><br>
 						{/foreach}
-			
-					
-				
+
+
+
 					</div>
 
 	<div class="buildl">
@@ -74,7 +80,7 @@
 <br>
 	{if $Element.maxLevel == $Element.levelToBuild}
 						<span style="color:#ffd600">{$LNG.bd_maxlevel}</span>
-					{elseif $IsLabinBuild || $IsFullQueue || !$Element.buyable}
+					{elseif $IsLabinBuild || $IsFullQueue || !$Element.buyable || !$Element.technologySatisfied}
 						<span style="color:#ffd600">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_tech}{else}{$LNG.bd_tech_next_level}{$Element.levelToBuild + 1}{/if}</span>
 					{else}
 						<form action="game.php?page=research" method="post" class="build_form">

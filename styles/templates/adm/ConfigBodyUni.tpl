@@ -34,11 +34,28 @@
 	<td>{$se_halt_speed}</td>
 	<td><input name="halt_speed" value="{$halt_speed}" type="text"></td>
 	<td><img src="./styles/resource/images/admin/i.gif" width="16" height="16" alt="" class="tooltip" data-tooltip-content="{$se_normal_speed_halt}"></td>
-</tr><tr>
+</tr>
+<tr>
 	<td>{$se_energy_speed}</td>
 	<td><input name="energySpeed" value="{$energySpeed}" type="text"></td>
 	<td>&nbsp;</td>
-</tr><tr>
+</tr>
+<tr>
+	<td>Show unlearned ships<br></td>
+	<td><input name="show_unlearned_ships" {if $show_unlearned_ships} checked="checked"{/if} type="checkbox"></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>Show unlearned buildings<br></td>
+	<td><input name="show_unlearned_buildings" {if $show_unlearned_buildings} checked="checked"{/if} type="checkbox"></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>Show unlearned technology<br></td>
+	<td><input name="show_unlearned_technology" {if $show_unlearned_technology} checked="checked"{/if} type="checkbox"></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
 	<td>{$se_forum_link}</td>
 	<td><input name="forum_url" size="60" maxlength="254" value="{$forum_url}" type="text"></td>
 	<td>&nbsp;</td>

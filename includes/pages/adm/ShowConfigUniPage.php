@@ -92,6 +92,9 @@ function ShowConfigUniPage()
 			'max_dm_missions'		=> $config->max_dm_missions,
 			'alliance_create_min_points' => $config->alliance_create_min_points,
 			'max_fleet_per_build'   => $config->max_fleet_per_build,
+			'show_unlearned_ships' => $config->show_unlearned_ships,
+			'show_unlearned_buildings' => $config->show_unlearned_buildings,
+			'show_unlearned_technology' => $config->show_unlearned_technology
 		);
 
 		$game_disable			= isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
@@ -157,6 +160,10 @@ function ShowConfigUniPage()
 		$ref_max_referals		= HTTP::_GP('ref_max_referals', 0);
 		$max_dm_missions		= HTTP::_GP('max_dm_missions', 1);
 		$alliance_create_min_points = HTTP::_GP('alliance_create_min_points', 0);
+		$show_unlearned_ships = (HTTP::_GP('show_unlearned_ships', 'off') == 'on') ? 1 : 0;
+		$show_unlearned_buildings = (HTTP::_GP('show_unlearned_buildings', 'off') == 'on') ? 1 : 0;
+		$show_unlearned_technology = (HTTP::_GP('show_unlearned_technology', 'off') == 'on') ? 1 : 0;
+
 
 		$config_after = array(
 			'noobprotectiontime'	=> $noobprotectiontime,
@@ -220,7 +227,10 @@ function ShowConfigUniPage()
 			'silo_factor'			=> $silo_factor,
 			'max_dm_missions'		=> $max_dm_missions,
 			'alliance_create_min_points' => $alliance_create_min_points,
-			'max_fleet_per_build'	=> $max_fleet_per_build
+			'max_fleet_per_build'	=> $max_fleet_per_build,
+			'show_unlearned_ships' => $show_unlearned_ships,
+			'show_unlearned_buildings' => $show_unlearned_buildings,
+			'show_unlearned_technology' => $show_unlearned_technology
         );
 
 
@@ -473,7 +483,10 @@ function ShowConfigUniPage()
 		'ref_max_referals'				=> $config->ref_max_referals,
 		'silo_factor'					=> $config->silo_factor,
 		'max_dm_missions'				=> $config->max_dm_missions,
-		'alliance_create_min_points' 	=> $config->alliance_create_min_points
+		'alliance_create_min_points' 	=> $config->alliance_create_min_points,
+		'show_unlearned_ships' => $config->show_unlearned_ships,
+		'show_unlearned_buildings' => $config->show_unlearned_buildings,
+		'show_unlearned_technology' => $config->show_unlearned_technology
 	));
 
 	$template->show('ConfigBodyUni.tpl');

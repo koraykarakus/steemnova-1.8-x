@@ -330,7 +330,7 @@ class ShowResearchPage extends AbstractGamePage
 
 	public function show()
 	{
-		global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist;
+		global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config;
 
 		if ($PLANET[$resource[31]] == 0)
 		{
@@ -375,7 +375,7 @@ class ShowResearchPage extends AbstractGamePage
 
 		foreach($reslist['tech'] as $elementId)
 		{
-			if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId))
+			if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId) && !$config->show_unlearned_ships)
 				continue;
 
 			if(isset($queueData['quickinfo'][$elementId]))
@@ -401,13 +401,14 @@ class ShowResearchPage extends AbstractGamePage
 				'elementTime'    	=> $elementTime,
 				'buyable'			=> $buyable,
 				'levelToBuild'		=> $levelToBuild,
+				'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId)
 			);
 		}
 
 		$this->assign(array(
 			'ResearchList'	=> $ResearchList,
 			'IsLabinBuild'	=> !$bContinue,
-			'IsFullQueue'	=> Config::get()->max_elements_tech == 0 || Config::get()->max_elements_tech == count($TechQueue),
+			'IsFullQueue'	=> $config->max_elements_tech == 0 || $config->max_elements_tech == count($TechQueue),
 			'Queue'			=> $TechQueue,
 			'messages'		=> ($Messages > 0) ? (($Messages == 1) ? $LNG['ov_have_new_message'] : sprintf($LNG['ov_have_new_messages'], pretty_number($Messages))): false,
 		));
