@@ -84,3 +84,5 @@ INGAME
 * Bug fix : MissionCaseSpy can be used in all themes
 
 * visual bug fixed related to body length for Epic Blue XIII Theme
+
+* StatBanner problems solved
