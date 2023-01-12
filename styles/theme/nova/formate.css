@@ -4,6 +4,12 @@ $foreground: #E6EBFB;
 $ui-background: #344566;
 */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
 	background:url("img/bkd_page.jpg") no-repeat fixed center center #0d0d0d;
 	background-size: cover;
@@ -11,13 +17,9 @@ html {
 }
 
 body {
-	/* background: rgba(13, 16, 20, 0.50); */
-	/* color: #E6EBFB; */
-
 	font-size: 12px;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	min-height: 100%;
-	/* font-family: Whitney,Source Sans Pro,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif; */
 }
 
 body,input,select,button,textarea,a,td,th,tr,table,a:visited{
