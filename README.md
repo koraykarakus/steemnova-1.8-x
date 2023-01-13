@@ -86,3 +86,5 @@ INGAME
 * visual bug fixed related to body length for Epic Blue XIII Theme
 
 * StatBanner problems solved
+
+* A limit is set for number of notes of a user, this limit can be changed from admin panel 
