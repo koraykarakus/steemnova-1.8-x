@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -100,7 +100,7 @@ $LNG['lm_battlesim']						= 'Symulator walki';
 $LNG['lm_playercard']                       = 'Informacje o graczu';
 $LNG['lm_info']                     		= 'Informacje';
 $LNG['lm_disclamer']						= 'Kontakt';
-	
+
 //----------------------------------------------------------------------------//
 //OVERVIEW
 
@@ -593,7 +593,7 @@ $LNG['al_close_ally'] 						= 'Czy napewno chcesz zrezygnować z sojuszu?';
 $LNG['al_kick_player']						= 'Czy napewno chcesz usunąć gracza %s z sojuszu?';
 $LNG['al_circular_sended'] 					= "Wiadomość sojusznicza wysłana, otrzymali ja następujący gracze:";
 $LNG['al_all_players'] 						= 'Do wszystkich';
-$LNG['al_no_ranks_defined'] 				= 'Brak zdefiniowanych rang.'; 
+$LNG['al_no_ranks_defined'] 				= 'Brak zdefiniowanych rang.';
 $LNG['al_request_text']						= 'Tekst podania';
 $LNG['al_inside_text']						= 'opis dostępny tylko dla członków sojuszu';
 $LNG['al_outside_text']						= 'opis widoczny dla wszystkich';
@@ -771,7 +771,7 @@ $LNG['al_rank_name']						= 'Nazwa';
 $LNG['al_rank_desc']['MEMBERLIST']			= 'Zobacz listę członków';
 $LNG['al_rank_desc']['ONLINESTATE']			= 'Kto jest online';
 $LNG['al_rank_desc']['TRANSFER']			= 'Może zostać przywódcą';
-$LNG['al_rank_desc']['SEEAPPLY']			= 'Zobacz zgłoszenia do sojuszu'; 
+$LNG['al_rank_desc']['SEEAPPLY']			= 'Zobacz zgłoszenia do sojuszu';
 $LNG['al_rank_desc']['MANAGEAPPLY']			= 'Może decydować o zgłoszeniach';
 $LNG['al_rank_desc']['ROUNDMAIL']			= 'Wiadomość została wysłana';
 $LNG['al_rank_desc']['ADMIN']				= 'Może edytować sojusz';
@@ -839,7 +839,7 @@ $LNG['nt_reset']							= 'Reset';
 $LNG['nt_save']								= 'Zapisz';
 $LNG['nt_no_title']							= 'Brak tytułu';
 $LNG['nt_no_text']							= 'Brak tekstu';
-
+$LNG['nt_error_add_1'] = "Nie możesz mieć więcej niż %s notatek";
 //----------------------------------------------------------------------------//
 //STATISTICS
 $LNG['st_player']							= 'Gracz';
@@ -1143,7 +1143,7 @@ $LNG['ti_error_no_subject']					= 'Musisz wpisać temat!';
 $LNG['ti_msgtime']							= 'Wiadomość napisana';
 
 //----------------------------------------------------------------------------//
-// Rekorde 
+// Rekorde
 
 $LNG['rec_players']  						= 'Gracz';
 $LNG['rec_level']  							= 'Poziom';

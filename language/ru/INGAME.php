@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -800,6 +800,7 @@ $LNG['nt_reset']                          = 'Отменить';
 $LNG['nt_save']                           = 'Сохранить';
 $LNG['nt_no_title']                       = 'Без названия';
 $LNG['nt_no_text']                        = 'Без текста';
+$LNG['nt_error_add_1'] = "У вас не может быть более %s заметок";
 
 // Статистика
 $LNG['st_player']                         = 'Игрок';

@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -749,7 +749,7 @@ $LNG['al_rank_name']						= 'Nombre';
 $LNG['al_rank_desc']['MEMBERLIST']			= 'Ver lista de miembros';
 $LNG['al_rank_desc']['ONLINESTATE']			= 'Ver el Estatus-Online';
 $LNG['al_rank_desc']['TRANSFER']			= 'Puede ser Lider';
-$LNG['al_rank_desc']['SEEAPPLY']			= 'Ver Aplicaciones'; 
+$LNG['al_rank_desc']['SEEAPPLY']			= 'Ver Aplicaciones';
 $LNG['al_rank_desc']['MANAGEAPPLY']			= 'Utilizar Aplicaciones';
 $LNG['al_rank_desc']['ROUNDMAIL']			= 'Correo Circular';
 $LNG['al_rank_desc']['ADMIN']				= 'Puede editar la Alianza';
@@ -818,7 +818,7 @@ $LNG['nt_reset']							= 'Reestablecer';
 $LNG['nt_save']								= 'Guardar';
 $LNG['nt_no_title']							= 'Sin titulo';
 $LNG['nt_no_text']							= 'Sin texto';
-
+$LNG['nt_error_add_1'] = "No puede tener más de %s notas";
 //----------------------------------------------------------------------------//
 //STATISTICS
 $LNG['st_player']							= 'Jugador';
@@ -1120,7 +1120,7 @@ $LNG['ti_from']								= 'desde';
 $LNG['ti_re']								= 'RE:';
 
 //----------------------------------------------------------------------------//
-// Rekorde 
+// Rekorde
 
 $LNG['rec_players']  						= 'Jugador';
 $LNG['rec_level']  							= 'Nivel';
@@ -1166,4 +1166,3 @@ $LNG['lo_continue']							= 'Pulsa aquí si no redirecciona tu navegador.';
 
 
 // Translated into Spanish by Angelus_ira . All rights reversed (C) 2011
-

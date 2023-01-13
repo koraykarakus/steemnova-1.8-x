@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,7 +15,7 @@
  */
 
 // Traduzido por QwataKayean. Todos os Direitos Reservados © 2010-2012
-// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.         
+// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
@@ -101,7 +101,7 @@ $LNG['lm_battlesim']						= 'Simulador';
 $LNG['lm_playercard']                       = 'Página de Jogador';
 $LNG['lm_info']                     		= 'Informação';
 $LNG['lm_disclamer']						= 'Creditos';
-	
+
 //----------------------------------------------------------------------------//
 // Vista Geral
 
@@ -727,8 +727,8 @@ $LNG['al_diplo_accept_yes']                 = 'Pacto assinado.';
 $LNG['al_diplo_accept_yes_mes']             = 'O pacto de (%s) entre as alianças %s e %s foi assinado!';
 $LNG['al_diplo_accept_yes_confirm']		    = 'Queres realmente aceitar o pacto?';
 $LNG['al_diplo_accept_no']                  = 'Pacto Rejeitado.';
-$LNG['al_diplo_accept_no_mes']				= 'O pacto de (%s) entre as alianças %s e %s foi rejeitado!'; 
-$LNG['al_diplo_accept_no_confirm']			= 'Queres realmente rejeitar o pacto?';                                                             
+$LNG['al_diplo_accept_no_mes']				= 'O pacto de (%s) entre as alianças %s e %s foi rejeitado!';
+$LNG['al_diplo_accept_no_confirm']			= 'Queres realmente rejeitar o pacto?';
 $LNG['al_diplo_delete']                     = 'Pacto apagado.';
 $LNG['al_diplo_delete_mes']                 = 'O pacto de (%s) entre as alianças %s e %s foi apagado!';
 $LNG['al_diplo_confirm_delete']             = 'Será que queres realmente apagar o pacto?';
@@ -756,7 +756,7 @@ $LNG['al_rank_name']						= 'Nome';
 $LNG['al_rank_desc']['MEMBERLIST']			= 'Pode ver os membros';
 $LNG['al_rank_desc']['ONLINESTATE']			= 'Pode ver quem está online';
 $LNG['al_rank_desc']['TRANSFER']			= 'Pode ser Lider';
-$LNG['al_rank_desc']['SEEAPPLY']			= 'Pode ver as aplicações'; 
+$LNG['al_rank_desc']['SEEAPPLY']			= 'Pode ver as aplicações';
 $LNG['al_rank_desc']['MANAGEAPPLY']			= 'Pode controlar as aplicações';
 $LNG['al_rank_desc']['ROUNDMAIL']			= 'Pode enviar mensagem global';
 $LNG['al_rank_desc']['ADMIN']				= 'Pode editar a Aliança';
@@ -827,7 +827,7 @@ $LNG['nt_reset']							= 'Limpar';
 $LNG['nt_save']								= 'Guardar';
 $LNG['nt_no_title']                         = 'Sem título';
 $LNG['nt_no_text']                          = 'Sem Texto';
-
+$LNG['nt_error_add_1'] = "Você não pode ter mais de %s notas";
 //----------------------------------------------------------------------------//
 // Estatísticas
 $LNG['st_player']					        = 'Jogadores';
@@ -1133,7 +1133,7 @@ $LNG['ti_error_no_subject']					= 'Precisas de por um título!!';
 $LNG['ti_msgtime']							= 'Mensagem enviada em';
 
 //----------------------------------------------------------------------------//
-// Recordes 
+// Recordes
 
 $LNG['rec_players']  						= 'Jogador';
 $LNG['rec_level']  							= 'Nivel';
@@ -1164,8 +1164,8 @@ $LNG['ft_count']							= 'Número';
 $LNG['ft_max']								= 'max';
 $LNG['ft_total']							= 'TOTAL';
 $LNG['ft_charge']							= 'Taxa do Mercador';
-$LNG['ft_absenden']							= 'Enviar';	
-$LNG['ft_empty']							= 'Vazio';	
+$LNG['ft_absenden']							= 'Enviar';
+$LNG['ft_empty']							= 'Vazio';
 
 //----------------------------------------------------------------------------//
 // Logout

@@ -740,7 +740,7 @@ $LNG['al_rank_name']						= 'Nom';
 $LNG['al_rank_desc']['MEMBERLIST']			= 'Peut voir les membres';
 $LNG['al_rank_desc']['ONLINESTATE']			= 'Pouvez voir qui est en ligne';
 $LNG['al_rank_desc']['TRANSFER']			= 'Peut être un leader';
-$LNG['al_rank_desc']['SEEAPPLY']			= 'Peut afficher les applications'; 
+$LNG['al_rank_desc']['SEEAPPLY']			= 'Peut afficher les applications';
 $LNG['al_rank_desc']['MANAGEAPPLY']			= 'Peut contrôler les applications';
 $LNG['al_rank_desc']['ROUNDMAIL']			= 'Peut envoyer message global';
 $LNG['al_rank_desc']['ADMIN']				= 'Peut modifier l\'Alliance';
@@ -811,7 +811,7 @@ $LNG['nt_reset']							= 'Reset';
 $LNG['nt_save']								= 'Sauvegarder';
 $LNG['nt_no_title']							= 'Sans titre';
 $LNG['nt_no_text']							= 'Pas de texte';
-
+$LNG['nt_error_add_1'] = "Vous ne pouvez pas avoir plus de %s notes" ;
 //----------------------------------------------------------------------------//
 //STATISTICS
 $LNG['st_player']							= 'Joueur';

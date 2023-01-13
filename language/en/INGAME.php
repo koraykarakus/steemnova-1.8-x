@@ -848,7 +848,7 @@ $LNG['nt_reset']							= 'Reset';
 $LNG['nt_save']								= 'Save';
 $LNG['nt_no_title']							= 'No title';
 $LNG['nt_no_text']							= 'No Text';
-
+$LNG['nt_error_add_1'] = "You cannot have more than %s notes";
 //----------------------------------------------------------------------------//
 // Estatísticas
 $LNG['st_player']							= 'Player';

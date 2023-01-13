@@ -839,6 +839,7 @@ $LNG['nt_reset']							= 'Sifirla';
 $LNG['nt_save']								= 'Kaydet';
 $LNG['nt_no_title']							= 'Baslik Yok';
 $LNG['nt_no_text']							= 'Metin Yok';
+$LNG['nt_error_add_1'] = "En fazla %s adet not ekleyebilirsiniz.";
 
 //----------------------------------------------------------------------------//
 // Istatistikler

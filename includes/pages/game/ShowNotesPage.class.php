@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,18 +15,18 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
- 
+
 class ShowNotesPage extends AbstractGamePage
 {
 	public static $requireModule = MODULE_NOTICE;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 		$this->setWindow('popup');
 		$this->initTemplate();
 	}
-	
+
 	function show()
 	{
 		global $LNG, $USER;
@@ -39,7 +39,7 @@ class ShowNotesPage extends AbstractGamePage
         ));
 
         $notesList		= array();
-		
+
 		foreach($notesResult as $notesRow)
 		{
 			$notesList[$notesRow['id']]	= array(
@@ -49,28 +49,30 @@ class ShowNotesPage extends AbstractGamePage
 				'priority'	=> $notesRow['priority'],
 			);
 		}
-		
+
 		$this->assign(array(
 			'notesList'	=> $notesList,
 		));
-		
+
 		$this->display('page.notes.default.tpl');
 	}
-	
+
 	function detail()
 	{
 		global $LNG, $USER;
 
 		$noteID		= HTTP::_GP('id', 0);
-		
-		if(!empty($noteID)) {
-            $db = Database::get();
 
-            $sql = "SELECT * FROM %%NOTES%% WHERE id = :noteID AND owner = :userID;";
-            $noteDetail = $db->selectSingle($sql, array(
-                ':userID'   => $USER['id'],
-                ':noteID'   => $noteID
-            ));
+		if(!empty($noteID)) {
+        $db = Database::get();
+
+        $sql = "SELECT * FROM %%NOTES%% WHERE id = :noteID AND owner = :userID;";
+
+        $noteDetail = $db->selectSingle($sql, array(
+            ':userID'   => $USER['id'],
+            ':noteID'   => $noteID
+        ));
+
 		} else {
 			$noteDetail	= array(
 				'id'		=> 0,
@@ -79,39 +81,58 @@ class ShowNotesPage extends AbstractGamePage
 				'title'		=> ''
 			);
 		}
-		
+
 		$this->tplObj->execscript("$('#cntChars').text($('#text').val().length);");
 		$this->assign(array(
 			'PriorityList'	=> array(2 => $LNG['nt_important'], 1 => $LNG['nt_normal'], 0 => $LNG['nt_unimportant']),
 			'noteDetail'	=> $noteDetail,
 		));
-		
+
 		$this->display('page.notes.detail.tpl');
 	}
-	
+
 	public function insert()
 	{
-		global $LNG, $USER;
+		global $LNG, $USER, $config;
 		$priority 	= HTTP::_GP('priority', 1);
 		$title 		= HTTP::_GP('title', '', true);
 		$text 		= HTTP::_GP('text', '', true);
-		$id			= HTTP::_GP('id', 0);	
+		$id			= HTTP::_GP('id', 0);
 		$title 		= !empty($title) ? $title : $LNG['nt_no_title'];
 		$text 		= !empty($text) ? $text : $LNG['nt_no_text'];
 
-        $db = Database::get();
+    $db = Database::get();
 
-		if($id == 0) {
-			$sql = "INSERT INTO %%NOTES%% SET owner = :userID, time = :time, priority = :priority, title = :title, text = :text, universe = :universe;";
-            $db->insert($sql, array(
-                ':userID'   => $USER['id'],
-                ':time'     => TIMESTAMP,
-                ':priority' => $priority,
-                ':title'    => $title,
-                ':text'     => $text,
-                ':universe' => Universe::current()
-            ));
-        } else {
+		if($id == 0)
+    {
+
+      $sql = "SELECT COUNT(*) as count FROM %%NOTES%% WHERE owner = :userID;";
+
+      $userNotesCount = $db->selectSingle($sql,array(
+        ':userID' => $USER['id']
+      ),'count');
+
+      if ($userNotesCount >= $config->user_max_notes) {
+        $this->printMessage(sprintf(
+          $LNG['nt_error_add_1'],
+          $config->user_max_notes,
+        ));
+      }
+
+      $sql = "INSERT INTO %%NOTES%% SET owner = :userID, time = :time, priority = :priority, title = :title, text = :text, universe = :universe;";
+
+      $db->insert($sql, array(
+          ':userID'   => $USER['id'],
+          ':time'     => TIMESTAMP,
+          ':priority' => $priority,
+          ':title'    => $title,
+          ':text'     => $text,
+          ':universe' => Universe::current()
+      ));
+
+    }
+    else
+    {
 			$sql	= "UPDATE %%NOTES%% SET time = :time, priority = :priority, title = :title, text = :text WHERE id = :noteID;";
             $db->update($sql, array(
                 ':noteID'   => $id,
@@ -120,11 +141,11 @@ class ShowNotesPage extends AbstractGamePage
                 ':title'    => $title,
                 ':text'     => $text,
             ));
-        }
-		
+    }
+
 		$this->redirectTo('game.php?page=notes');
 	}
-	
+
 	function delete()
 	{
 		global $USER;

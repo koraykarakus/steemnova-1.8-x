@@ -94,7 +94,8 @@ function ShowConfigUniPage()
 			'max_fleet_per_build'   => $config->max_fleet_per_build,
 			'show_unlearned_ships' => $config->show_unlearned_ships,
 			'show_unlearned_buildings' => $config->show_unlearned_buildings,
-			'show_unlearned_technology' => $config->show_unlearned_technology
+			'show_unlearned_technology' => $config->show_unlearned_technology,
+			'user_max_notes' => $config->user_max_notes,
 		);
 
 		$game_disable			= isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
@@ -163,7 +164,7 @@ function ShowConfigUniPage()
 		$show_unlearned_ships = (HTTP::_GP('show_unlearned_ships', 'off') == 'on') ? 1 : 0;
 		$show_unlearned_buildings = (HTTP::_GP('show_unlearned_buildings', 'off') == 'on') ? 1 : 0;
 		$show_unlearned_technology = (HTTP::_GP('show_unlearned_technology', 'off') == 'on') ? 1 : 0;
-
+		$user_max_notes = HTTP::_GP('user_max_notes',20);
 
 		$config_after = array(
 			'noobprotectiontime'	=> $noobprotectiontime,
@@ -230,7 +231,8 @@ function ShowConfigUniPage()
 			'max_fleet_per_build'	=> $max_fleet_per_build,
 			'show_unlearned_ships' => $show_unlearned_ships,
 			'show_unlearned_buildings' => $show_unlearned_buildings,
-			'show_unlearned_technology' => $show_unlearned_technology
+			'show_unlearned_technology' => $show_unlearned_technology,
+			'user_max_notes' => $user_max_notes
         );
 
 
@@ -486,7 +488,8 @@ function ShowConfigUniPage()
 		'alliance_create_min_points' 	=> $config->alliance_create_min_points,
 		'show_unlearned_ships' => $config->show_unlearned_ships,
 		'show_unlearned_buildings' => $config->show_unlearned_buildings,
-		'show_unlearned_technology' => $config->show_unlearned_technology
+		'show_unlearned_technology' => $config->show_unlearned_technology,
+		'user_max_notes' => $config->user_max_notes
 	));
 
 	$template->show('ConfigBodyUni.tpl');

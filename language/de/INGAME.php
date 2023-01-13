@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -98,7 +98,7 @@ $LNG['lm_battlesim']						= 'Kampfsimulator';
 $LNG['lm_playercard']                       			= 'Spielerinformationen';
 $LNG['lm_info']                     				= 'Informationen';
 $LNG['lm_disclamer']						= 'Impressum';
-	
+
 //----------------------------------------------------------------------------//
 //OVERVIEW
 
@@ -588,7 +588,7 @@ $LNG['al_close_ally'] 						= 'Möchten sie wirklich die Allianz aufgeben?';
 $LNG['al_kick_player']						= 'Möchten sie wirklich den Spieler %s aus der Allianz entfernen?';
 $LNG['al_circular_sended'] 					= "Nachricht gesendet.\nFolgenden Spielern wurde die Mail gesendet:";
 $LNG['al_all_players'] 						= 'Alle Spieler';
-$LNG['al_no_ranks_defined'] 					= 'Keine definierten Ränge.'; 
+$LNG['al_no_ranks_defined'] 					= 'Keine definierten Ränge.';
 $LNG['al_request_text']						= 'Bewerbungstext';
 $LNG['al_inside_text']						= 'Interner Text';
 $LNG['al_outside_text']						= 'Externer Text';
@@ -760,7 +760,7 @@ $LNG['al_rank_name']						= 'Name';
 $LNG['al_rank_desc']['MEMBERLIST']				= 'Mitgliederliste sehen';
 $LNG['al_rank_desc']['ONLINESTATE']				= 'Online-Status sehen';
 $LNG['al_rank_desc']['TRANSFER']				= 'Kann Leader werden';
-$LNG['al_rank_desc']['SEEAPPLY']				= 'Bewerbungen sehen'; 
+$LNG['al_rank_desc']['SEEAPPLY']				= 'Bewerbungen sehen';
 $LNG['al_rank_desc']['MANAGEAPPLY']				= 'Bewerbungen bearbeiten';
 $LNG['al_rank_desc']['ROUNDMAIL']				= 'Rundnachricht versicken';
 $LNG['al_rank_desc']['ADMIN']					= 'Kann Allianz editieren';
@@ -830,7 +830,7 @@ $LNG['nt_reset']						= 'Reset';
 $LNG['nt_save']							= 'Speichern';
 $LNG['nt_no_title']						= 'Kein Titel';
 $LNG['nt_no_text']						= 'Kein Text';
-
+$LNG['nt_error_add_1'] = "Sie können nicht mehr als %s Notizen haben";
 //----------------------------------------------------------------------------//
 //STATISTICS
 $LNG['st_player']						= 'Spieler';
@@ -1164,7 +1164,7 @@ $LNG['ti_re']							= 'RE:';
 $LNG['ti_error_no_subject']					= 'Du musst einen Betreff eingeben!';
 
 //----------------------------------------------------------------------------//
-// Rekorde 
+// Rekorde
 
 $LNG['rec_players']  						= 'Spieler';
 $LNG['rec_level']  						= 'Level';
@@ -1210,4 +1210,3 @@ $LNG['lo_continue']						= 'Klicken Sie hier, um nicht zu warten';
 
 
 // Translated into German by Jan . All rights reversed (C) 2011
-
