@@ -1064,7 +1064,7 @@ class ShowAlliancePage extends AbstractGamePage
 			u.`galaxy`,
 			u.`system`,
 			u.`planet`,
-			CONCAT_WS(\':\', u.`galaxy`, u.`system`, u.`planet`) AS `coordinates`,
+			CONCAT_WS(':', u.`galaxy`, u.`system`, u.`planet`) AS `coordinates`,
 			@total_fights := u.`wons` + u.`loos` + u.`draws`,
 			@total_fights_percentage := @total_fights / 100,
 			@total_fights AS `total_fights`,
