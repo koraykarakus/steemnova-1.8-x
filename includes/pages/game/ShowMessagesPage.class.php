@@ -452,7 +452,7 @@ class ShowMessagesPage extends AbstractGamePage
             ), 'state');
 
             $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-            $page		= max(1, min($page, $maxPage));
+            $messagePage		= max(1, min($messagePage, $maxPage));
 
             $sql = "SELECT message_id, message_time, CONCAT(username, ' [',galaxy, ':', system, ':', planet,']') as message_from, message_subject, message_sender, message_type, message_unread, message_text
 			FROM %%MESSAGES%% INNER JOIN %%USERS%% ON id = message_owner
@@ -462,7 +462,7 @@ class ShowMessagesPage extends AbstractGamePage
 
             $MessageResult = $db->select($sql, array(
                 ':userId'   => $USER['id'],
-                ':offset'   => (($page - 1) * MESSAGES_PER_PAGE),
+                ':offset'   => (($messagePage - 1) * MESSAGES_PER_PAGE),
                 ':limit'    => MESSAGES_PER_PAGE
             ));
         }
@@ -476,7 +476,7 @@ class ShowMessagesPage extends AbstractGamePage
                 ), 'state');
 
                 $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-                $page		= max(1, min($page, $maxPage));
+                $messagePage		= max(1, min($messagePage, $maxPage));
 
                 $sql = "SELECT message_id, message_time, message_from, message_subject, message_sender, message_type, message_unread, message_text
                            FROM %%MESSAGES%%
@@ -486,7 +486,7 @@ class ShowMessagesPage extends AbstractGamePage
 
                 $MessageResult = $db->select($sql, array(
                     ':userId'       => $USER['id'],
-                    ':offset'       => (($page - 1) * MESSAGES_PER_PAGE),
+                    ':offset'       => (($messagePage - 1) * MESSAGES_PER_PAGE),
                     ':limit'        => MESSAGES_PER_PAGE
                 ));
             }
@@ -540,7 +540,6 @@ class ShowMessagesPage extends AbstractGamePage
             ));
         }
 
-		////
 
         $this->tplObj->loadscript('message.js');
         $this->assign(array(
