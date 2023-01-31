@@ -462,8 +462,12 @@ th a,.res_current{
 	align-items: center;
 	justify-content: center;
 }
+/* main.navigation.tpl */
+#menu .menuActive{
+	color: #ffd600;
+}
 
-/* TOPNAV */
+/* main.topnav.tpl */
 .resource_name,.res_current,.res_current_max,.res_max{
   padding: 2px 0;
   font-size: 12px;

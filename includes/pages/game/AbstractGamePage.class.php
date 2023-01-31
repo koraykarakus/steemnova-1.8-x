@@ -240,6 +240,8 @@ abstract class AbstractGamePage
 			'Offset'			=> $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
 			'queryString'		=> $this->getQueryString(),
 			'themeSettings'		=> $THEME->getStyleSettings(),
+			'page' => HTTP::_GP('page',''),
+			'mode' => HTTP::_GP('mode','')
 		));
 	}
 	protected function printMessage($message, $redirectButtons = NULL, $redirect = NULL, $fullSide = true)
