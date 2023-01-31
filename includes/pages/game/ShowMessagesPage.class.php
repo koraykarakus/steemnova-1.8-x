@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -159,22 +159,22 @@ class ShowMessagesPage extends AbstractGamePage
 
         $this->initTemplate();
         $this->setWindow('ajax');
-	    
+
 	$delMessID		= HTTP::_GP('delMessID', 0);
-	    
+
         if(empty($delMessID))
         {
 	    $this->sendData(0, $LNG['error']);
         }
 
-               
+
         $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id = :messID AND message_owner = :userId;';
-		
+
 	$db->delete($sql, array(
 	    ':userId' => $USER['id'],
 	    ':messID' => $delMessID,
 	));
-		
+
 	$this->sendData($delMessID, $LNG['mg_deleted']);
     }
 
@@ -185,7 +185,7 @@ class ShowMessagesPage extends AbstractGamePage
         $db = Database::get();
 
         $MessCategory  	= HTTP::_GP('messcat', 100);
-        $page		 	= HTTP::_GP('page', 1);
+        $messagePage	= HTTP::_GP('page', 1);
         $messageIDs		= HTTP::_GP('messageID', array());
 
         $redirectUrl	= 'game.php?page=messages&category='.$MessCategory.'&side='.$page;
@@ -400,7 +400,7 @@ class ShowMessagesPage extends AbstractGamePage
         global $LNG, $USER;
 
         $MessCategory      	= HTTP::_GP('category', -1);
-        $page			= HTTP::_GP('side', 1);
+        $messagePage			= HTTP::_GP('side', 1);
 
         $db = Database::get();
 
@@ -408,7 +408,7 @@ class ShowMessagesPage extends AbstractGamePage
         $MessagesID		= array();
 
         $TitleColor    	= array ( 0 => '#FFFF00', 1 => '#FF6699', 2 => '#FF3300', 3 => '#FF9900', 4 => '#773399', 5 => '#009933', 15 => '#6495ed', 50 => '#666600', 99 => '#007070', 100 => '#ABABAB', 999 => '#CCCCCC');
-		
+
         $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%% WHERE message_sender = :userID AND message_type != 50;";
         $MessOut = $db->selectSingle($sql, array(
             ':userID'   => $USER['id']
@@ -441,9 +441,9 @@ class ShowMessagesPage extends AbstractGamePage
                 'total'		=> $Total[$CategoryID],
             );
         }
-		
+
 		//// view()
-		
+
 		if($MessCategory == 999)  {
 
             $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%% WHERE message_sender = :userId AND message_type != 50 AND message_deleted IS NULL;";
@@ -506,12 +506,12 @@ class ShowMessagesPage extends AbstractGamePage
                            LIMIT :offset, :limit";
 
                 $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-                $page		= max(1, min($page, $maxPage));
+                $messagePage		= max(1, min($messagePage, $maxPage));
 
                 $MessageResult = $db->select($sql, array(
                     ':userId'       => $USER['id'],
                     ':messCategory' => $MessCategory,
-                    ':offset'       => (($page - 1) * MESSAGES_PER_PAGE),
+                    ':offset'       => (($messagePage - 1) * MESSAGES_PER_PAGE),
                     ':limit'        => MESSAGES_PER_PAGE
                 ));
             }
@@ -539,7 +539,7 @@ class ShowMessagesPage extends AbstractGamePage
                 ':userID'       => $USER['id'],
             ));
         }
-		
+
 		////
 
         $this->tplObj->loadscript('message.js');
@@ -548,7 +548,7 @@ class ShowMessagesPage extends AbstractGamePage
 			'MessageCount'	=> $MessageCount,
             'MessageList'	=> $MessageList,
             'CategoryList'	=> $CategoryList,
-            'page'			=> $page,
+            'messagePage'			=> $messagePage,
             'maxPage'		=> $maxPage,
         ));
 

@@ -17,7 +17,7 @@
 <input type="hidden" name="mode" value="action">
 <input type="hidden" name="ajax" value="1">
 <input type="hidden" name="messcat" value="{$MessID}">
-<input type="hidden" name="side" value="{$page}">
+<input type="hidden" name="side" value="{$messagePage}">
 <table id="messagestable" style="table-layout:fixed;">
 	<tr>
 		<th>{$LNG.mg_message_title}</th>
@@ -39,7 +39,7 @@
 	</tr>
 	{/if}
 	<tr style="height: 20px;">
-		<td class="right">{$LNG.mg_page}: {if $page != 1}<a href="game.php?page=messages&category={$MessID}&side=1">&laquo;</a>&nbsp;{/if}{if $page > 5}..&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=messages&category={$MessID}&side={$site}">{if $site == $page}<b>[{$site}]&nbsp;</b>{elseif ($site > $page-5 && $site < $page+5)}[{$site}]&nbsp;{/if}</a>{/for}{if $page < $maxPage-4}..&nbsp;{/if}{if $page != $maxPage}&nbsp;<a href="game.php?page=messages&category={$MessID}&side={$maxPage}">&raquo;</a>{/if}</td>
+		<td class="right">{$LNG.mg_page}: {if $messagePage != 1}<a href="game.php?page=messages&category={$MessID}&side=1">&laquo;</a>&nbsp;{/if}{if $messagePage > 5}..&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=messages&category={$MessID}&side={$site}">{if $site == $messagePage}<b>[{$site}]&nbsp;</b>{elseif ($site > $messagePage-5 && $site < $messagePage+5)}[{$site}]&nbsp;{/if}</a>{/for}{if $messagePage < $maxPage-4}..&nbsp;{/if}{if $messagePage != $maxPage}&nbsp;<a href="game.php?page=messages&category={$MessID}&side={$maxPage}">&raquo;</a>{/if}</td>
 	</tr>
 </table>
 <table id="messagestable" style="table-layout:fixed;">
@@ -70,7 +70,7 @@
 	</tr>
 	{/foreach}
 	<tr style="height: 20px;">
-		<td class="right" colspan="4">{$LNG.mg_page}: {if $page != 1}<a href="game.php?page=messages&category={$MessID}&side=1">&laquo;</a>&nbsp;{/if}{if $page > 5}..&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=messages&category={$MessID}&side={$site}">{if $site == $page}<b>[{$site}]&nbsp;</b>{elseif ($site > $page-5 && $site < $page+5)}[{$site}]&nbsp;{/if}</a>{/for}{if $page < $maxPage-4}..&nbsp;{/if}{if $page != $maxPage}&nbsp;<a href="game.php?page=messages&category={$MessID}&side={$maxPage}">&raquo;</a>{/if}</td>
+		<td class="right" colspan="4">{$LNG.mg_page}: {if $messagePage != 1}<a href="game.php?page=messages&category={$MessID}&side=1">&laquo;</a>&nbsp;{/if}{if $messagePage > 5}..&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=messages&category={$MessID}&side={$site}">{if $site == $messagePage}<b>[{$site}]&nbsp;</b>{elseif ($site > $messagePage-5 && $site < $messagePage+5)}[{$site}]&nbsp;{/if}</a>{/for}{if $messagePage < $maxPage-4}..&nbsp;{/if}{if $messagePage != $maxPage}&nbsp;<a href="game.php?page=messages&category={$MessID}&side={$maxPage}">&raquo;</a>{/if}</td>
 	</tr>
 	{if $MessID != 999}
 	<tr>
