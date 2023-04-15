@@ -37,6 +37,18 @@ abstract class AbstractLoginPage
 		}
 	}
 
+	protected function generateCSRFToken(){
+
+		//generate token
+		$csrfToken = md5(uniqid(mt_rand(), true));
+
+		//write in to session
+
+		HTTP::sendCookie('csrfToken', $csrfToken, TIMESTAMP + 3600);
+
+		return  $csrfToken;
+	}
+
 	protected function getUniverseSelector()
 	{
 		$universeSelect	= array();
@@ -111,7 +123,7 @@ abstract class AbstractLoginPage
 			'languages'				=> Language::getAllowedLangs(false),
 			'loginInfo'				=> sprintf($LNG['loginInfo'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
 			'universeSelect'		=> $universeSelect,
-
+			'page' => HTTP::_GP('page',''),
 		));
 	}
 

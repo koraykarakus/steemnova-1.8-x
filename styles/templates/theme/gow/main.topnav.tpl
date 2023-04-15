@@ -23,11 +23,10 @@
 
 <div id="resources_mobile">
 	{foreach $resourceTable as $resourceID => $resourceData}
-	<div id="resource_mobile">
+	<div class="tooltipHandler"  id="resource_mobile">
 		<a href="#" onclick="return Dialog.info({$resourceID});">
 			<img src="{$dpath}images/{$resourceData.name}.gif">
 			<div class="resource_name no-mobile">{$LNG.tech.$resourceID}</div>
-
 			<div class="no-mobile">
 				{if !isset($resourceData.current)}
 					{$resourceData.currentt = $resourceData.max + $resourceData.used}
@@ -50,17 +49,19 @@
 						<td class="res_current tooltip" data-tooltip-content="{$resourceData.currentt|number}">
 							<span{if $resourceData.currentt < 0} style="color:red"{/if}>{shortly_number($resourceData.currentt)}</span>
 						</td>
-{/if}
-  {if !isset($resourceData.max)}
-  	<td class="res_current" id="current_{$resourceData.name}" data-real="{$resourceData.current}">
-      {shortly_number($resourceData.current)}
-    </td>
-  {/if}
+        {/if}
+        {if !isset($resourceData.max)}
+        	<td class="res_current" id="current_{$resourceData.name}" data-real="{$resourceData.current}">
+            {shortly_number($resourceData.current)}
+          </td>
+        {/if}
 				{if !isset($resourceData.current) || !isset($resourceData.max)}
 				{else}
 					<td class="res_current" id="current_{$resourceData.name}" data-real="{$resourceData.current}"><span{if $resourceData.current >= {$resourceData.max}} style="color:red"{/if}>{shortly_number($resourceData.current)}</span></td>
 				{/if}
 			</div>
+
+
 
 			<!--
 			<div class="mobile">
@@ -110,6 +111,26 @@
 			</div>
 				-->
 		</a>
+    <div class="tooltipBottom">
+      <table class="resourceInfo">
+        {if isset($resourceData.current)}
+        <tr>
+          <td class="left">Available:</td>
+          <td class="right">{$resourceData.current|pretty_number}</td>
+        </tr>
+        {/if}
+        {if isset($resourceData.max)}
+        <tr>
+          <td class="left">Capacity</td>
+          <td class="right">{$resourceData.max|pretty_number}</td>
+        </tr>
+        {/if}
+        <tr>
+          <td class="left">Production</td>
+          <td class="right">xxx</td>
+        </tr>
+      </table>
+    </div>
 	</div>
 	{/foreach}
 

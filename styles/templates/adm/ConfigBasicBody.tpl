@@ -37,6 +37,16 @@
 	<td><img src="./styles/resource/images/admin/i.gif" width="16" height="16" alt="" class="tooltip" data-tooltip-content="{$LNG.se_recaptcha_desc}"></td>
 </tr>
 <tr>
+	<td>Password recovery type<br></td>
+    <td>
+			<select name="password_recover_type">
+				<option {if $password_recover_type == '1'}selected{/if} value="1">With Mail</option>
+				<option {if $password_recover_type == '2'}selected{/if} value="2">With Secret Question</option>
+			</select>
+		</td>
+	<td><img src="./styles/resource/images/admin/i.gif" width="16" height="16" alt="" class="tooltip" data-tooltip-content="{$LNG.se_recaptcha_desc}"></td>
+</tr>
+<tr>
 	<th colspan="2">{$LNG.se_player_settings}</th><th>&nbsp;</th>
 </tr><tr>
 	<td>{$LNG.se_del_oldstuff}</td>

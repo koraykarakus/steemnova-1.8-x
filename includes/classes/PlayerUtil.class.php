@@ -74,7 +74,7 @@ class PlayerUtil
 			|| $config->max_planets < $position);
 	}
 
-	static public function createPlayer($universe, $userName, $userPassword, $userMail, $userLanguage = NULL, $galaxy = NULL, $system = NULL, $position = NULL, $name = NULL, $authlevel = 0, $userIpAddress = NULL)
+	static public function createPlayer($universe, $userName, $userPassword, $userMail, $userLanguage = NULL, $galaxy = NULL, $system = NULL, $position = NULL, $name = NULL, $authlevel = 0, $userIpAddress = NULL, $user_secret_question_id = 0, $user_secret_question_answer = '')
 	{
 		$config	= Config::get($universe);
 
@@ -130,6 +130,8 @@ class PlayerUtil
 			':username'				=> $userName,
 			':email'				=> $userMail,
 			':email2'				=> $userMail,
+			':user_secret_question_id' => $user_secret_question_id,
+			':user_secret_question_answer' => $user_secret_question_answer,
 			':authlevel'			=> $authlevel,
 			':universe'				=> $universe,
 			':language'				=> $userLanguage,
@@ -147,6 +149,8 @@ class PlayerUtil
 		username		= :username,
 		email			= :email,
 		email_2			= :email2,
+		user_secret_question_id = :user_secret_question_id,
+		user_secret_question_answer = :user_secret_question_answer,
 		authlevel		= :authlevel,
 		universe		= :universe,
 		lang			= :language,

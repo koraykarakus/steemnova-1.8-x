@@ -25,12 +25,15 @@ class ShowLoginPage extends AbstractLoginPage
 		parent::__construct();
 	}
 
-	function show($error = NULL)
+	function show()
 	{
 		$this->setWindow('light');
 
+
+
 		$this->assign(array(
-			'error' => $error
+			//'error' => $error,
+			//'enteredData' => $enteredData
 		));
 
 		$this->display('page.index.default.tpl');
@@ -39,12 +42,18 @@ class ShowLoginPage extends AbstractLoginPage
 	function validate(){
 		global $config, $LNG;
 
+
 		$db = Database::get();
 
 		$userEmail = HTTP::_GP('userEmail', '', true);
 		$password = HTTP::_GP('password', '', true);
+		$csrfToken = HTTP::_GP('csrfToken','',true);
 
 		$error = array();
+
+		if ($_COOKIE['csrfToken'] != $csrfToken) {
+			$error['csrf'][] = "csrf attack";
+		}
 
 		if (empty($userEmail)) {
 			$error['email'][] = $LNG['login_error_1'];
@@ -74,7 +83,7 @@ class ShowLoginPage extends AbstractLoginPage
       require('includes/libs/reCAPTCHA/src/autoload.php');
 
       $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
-      $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
+      $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
       if (!$resp->isSuccess())
       {
           $error['recaptcha'][]	= $LNG['login_error_4'];
@@ -94,11 +103,14 @@ class ShowLoginPage extends AbstractLoginPage
 			$session->adminAccess	= 0;
 			$session->save();
 
-			HTTP::redirectTo('game.php');
+			$data = array();
+			$data['status'] = "success";
+			$this->sendJSON($data);
 		}
 		else
 		{
-			$this->show($error);
+			$error['status'] = "fail";
+			$this->sendJSON($error);
 		}
 
 	}

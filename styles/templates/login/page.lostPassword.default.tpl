@@ -21,7 +21,6 @@
 		<label>{$LNG.registerCaptcha}<p class="captchaButtons"></p></label>
 		<div class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
 	</div>
-	<div class="clear"></div>
 </div>
 {/if}
 <div class="formRow">

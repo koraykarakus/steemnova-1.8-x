@@ -295,6 +295,8 @@ CREATE TABLE `%PREFIX%config` (
   `show_unlearned_buildings` BOOLEAN NOT NULL DEFAULT 1,
   `show_unlearned_technology` BOOLEAN NOT NULL DEFAULT 1,
   `user_max_notes` SMALLINT(5) unsigned NOT NULL DEFAULT 40,
+  `recover_password_with_secret_question` BOOLEAN NOT NULL DEFAULT 1,
+  `password_recover_type` ENUM('1','2') NOT NULL DEFAULT '2'
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -814,6 +816,8 @@ CREATE TABLE `%PREFIX%users` (
   `ref_bonus` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `inactive_mail` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `user_theme` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `user_secret_question_id` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `authlevel` (`authlevel`),
   KEY `ref_bonus` (`ref_bonus`),
@@ -858,6 +862,8 @@ CREATE TABLE `%PREFIX%users_valid` (
  `referralID` int(11) DEFAULT NULL,
  `externalAuthUID` varchar(128) DEFAULT NULL,
  `externalAuthMethod` varchar(32) DEFAULT NULL,
+ `user_secret_question_id` tinyint(3) unsigned NOT NULL DEFAULT 0,
+ `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
  PRIMARY KEY (`validationID`,`validationKey`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

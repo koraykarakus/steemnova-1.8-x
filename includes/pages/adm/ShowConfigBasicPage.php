@@ -54,7 +54,8 @@ function ShowConfigBasicPage()
 			'message_delete_behavior' => $config->message_delete_behavior,
 			'message_delete_days'	=> $config->message_delete_days,
 			'server_default_theme' => $config->server_default_theme,
-			'let_users_change_theme' => $config->let_users_change_theme
+			'let_users_change_theme' => $config->let_users_change_theme,
+			'password_recover_type' => $config->password_recover_type,
 		);
 
 		$capaktiv 				= isset($_POST['capaktiv']) && $_POST['capaktiv'] == 'on' ? 1 : 0;
@@ -88,6 +89,7 @@ function ShowConfigBasicPage()
 		$message_delete_days	= HTTP::_GP('message_delete_days', 0);
 		$server_default_theme = HTTP::_GP('server_default_theme', 1);
 		$let_users_change_theme = (HTTP::_GP('let_users_change_theme', 'off') == 'on') ? 1 : 0;
+		$password_recover_type = HTTP::_GP('password_recover_type','2');
 
 		$config_after = array(
 			'ttf_file'				=> $ttf_file,
@@ -120,6 +122,7 @@ function ShowConfigBasicPage()
 			'use_recaptcha_on_register' => $use_recaptcha_on_register,
 			'server_default_theme' => $server_default_theme,
 			'let_users_change_theme' => $let_users_change_theme,
+			'password_recover_type' => $password_recover_type
 		);
 
 		foreach($config_after as $key => $value)
@@ -169,6 +172,7 @@ function ShowConfigBasicPage()
 		'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
 		'server_default_theme' => $config->server_default_theme,
 		'let_users_change_theme' => $config->let_users_change_theme,
+		'password_recover_type' => $config->password_recover_type,
 		'Selector'						=> array(
 		    'timezone' => $TimeZones,
             'mail' => $LNG['se_mail_sel'],

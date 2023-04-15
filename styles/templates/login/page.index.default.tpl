@@ -1,105 +1,104 @@
 {block name="title" prepend}{$LNG.siteTitleIndex}{/block}
 {block name="content"}
-<section>
-	<h1>{sprintf($LNG.loginWelcome, $gameName)}</h1>
-	<p class="desc">{sprintf($LNG.loginServerDesc, $gameName)}</p>
-	</p>
-</section>
-<section>
-	<div class="contentbox">
 
-				<h1>{$LNG.loginHeader}</h1>
-				<form id="login" name="login" action="index.php?page=login&mode=validate" data-action="index.php?page=login" method="post">
-					<div class="row">
-						<select name="uni" id="universe" class="changeAction">{html_options options=$universeSelect selected=$UNI}</select>
-						<input name="userEmail" id="userEmail" type="text" placeholder="{$LNG.login_email}">
+<script type="text/javascript">
+// this is the id of the form
+function loginSubmit(){
 
-						{if isset($error)}
-							{if isset($error['email'])}
-								{foreach $error['email'] as $emailError}
-									<br>
-									<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$emailError}</span>
-								{/foreach}
-							{/if}
-						{/if}
+	    $.ajax({
+	        type: "POST",
+	        url: 'index.php?page=login&mode=validate&ajax=1',
+	        data: {
+						userEmail: $("#userEmail").val(),
+						password: $("#password").val(),
+						g_recaptcha_response: grecaptcha.getResponse(),
+						csrfToken: $('#csrfToken').val(),
+					},
+	        success: function(data)
+	        {
+						var dataParsed = jQuery.parseJSON(data);
 
-						<input name="password" id="password" type="password" placeholder="{$LNG.loginPassword}">
+						$('.alert').remove();
 
-						{if isset($error)}
-							{if isset($error['password'])}
-								{foreach $error['password'] as $passwordError}
-									<br>
-									<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$passwordError}</span>
-								{/foreach}
-							{/if}
-						{/if}
+						if (dataParsed.status == 'fail') {
+							grecaptcha.reset();
 
+							$.each( dataParsed, function( typeError, errorTextArray ) {
+
+								if (typeError == 'status') {
+									return;
+								}
+
+								$.each(errorTextArray, function(i,errorText){
+									$('#loginButton').before("<span class='alert alert-danger fs-6 py-1 my-1'>"+ errorText +"</span>")
+									});
+							});
+
+		        }else if (dataParsed.status == 'success') {
+							location.href = "game.php";
+		        }
+
+					}
+
+	    });
+
+
+}
+
+
+
+
+</script>
+
+	<h1 class="fs-3 my-4 w-100">{sprintf($LNG.loginWelcome, $gameName)}</h1>
+	<p style="max-width:600px;" class="fs-6 my-2 w-100 mx-auto">{sprintf($LNG.loginServerDesc, $gameName)}</p>
+	<div style="max-width:300px;" class="form-group contentbox container rounded mx-auto">
+
+				<h1 class="fs-6">{$LNG.loginHeader}</h1>
+				<form id="login" action="" method="post">
+					<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrfToken}">
+					<div class="d-flex flex-column form-group">
+						<select class="form-select my-2 w-100" name="uni" id="universe" >
+							{foreach $universeSelect as $universeID => $currentUniverse}
+								<option class="fs-6" {if $currentUniverse == $UNI}selected{/if} value="{$universeID}">{$currentUniverse}</option>
+							{/foreach}
+						</select>
+						<input class="form-control fs-6 my-2 w-100" id="userEmail" type="text" name="userEmail" placeholder="{$LNG.login_email}" value="{if isset($enteredData.email)}{$enteredData.email}{/if}">
+						<input class="form-control fs-6 my-2 w-100" id="password" type="password" name="password" placeholder="{$LNG.loginPassword}" value="{if isset($enteredData.password)}{$enteredData.password}{/if}">
 						{if $recaptchaEnable && $use_recaptcha_on_login}
-								<div style="margin:0 auto;" class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
-								{if isset($error)}
-									{if isset($error['recaptcha'])}
-										{foreach $error['recaptcha'] as $recaptchaError}
-											<span class="errorText colorError specialFont" style="margin:5px auto;color:red;">{$recaptchaError}</span>
-										{/foreach}
-									{/if}
-								{/if}
+								<div style="overflow:hidden;" class="g-recaptcha form-group w-100 fs-6 my-2 mx-auto d-flex justify-content-start" data-sitekey="{$recaptchaPublicKey}"></div>
 						{/if}
 
-						<input type="submit" value="{$LNG.loginButton}">
+						<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button" onclick="loginSubmit();">{$LNG.loginButton}</button>
 
 					</div>
 
 				</form>
-				{if $facebookEnable}<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>{/if}
+				{if $facebookEnable}
+					<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login">
+						<img src="styles/resource/images/facebook/fb-connect-large.png" alt="">
+					</a>
+				{/if}
 
-				<a href="index.php?page=register"><input value="{$LNG.buttonRegister}"></a>
-				<br><span class="small">{$loginInfo}</span>
+				<a class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white my-2 fs-6" href="index.php?page=register">{$LNG.buttonRegister}</a>
+
+				<span class="fs-6">{$loginInfo}</span>
+
+				{if $mailEnable}
+					<a class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white my-2 fs-6" href="index.php?page=lostPassword">{$LNG.buttonLostPassword}</a>
+				{/if}
 
 	</div>
-</section>
-<section>
-<div class="button-box">
-		<div class="button-box-inner">
-			<div class="button-important">
-				<a href="index.php?page=register">
-					<span class="button-left"></span>
-					<span class="button-center">{$LNG.buttonRegister}</span>
-					<span class="button-right"></span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="button-box">
-		<div class="button-box-inner">
-			{if $mailEnable}
-			<div class="button multi">
-				<a href="index.php?page=lostPassword">
-					<span class="button-left"></span>
-					<span class="button-center">{$LNG.buttonLostPassword}</span>
-					<span class="button-right"></span>
-				</a>
-			</div>
-			<div class="button multi">
-			{else}
-			<div class="button">
-			{/if}
-				<a href="index.php?page=screens">
-					<span class="button-left"></span>
-					<span class="button-center">{$LNG.buttonScreenshot}</span>
-					<span class="button-right"></span>
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
+
 {/block}
 
 {if $recaptchaEnable && $use_recaptcha_on_login}
-{block name="script" append}
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
-{/block}
-{block name="script" append}
-<script type="text/javascript" src="./scripts/base/avoid_submit_on_refresh.js"></script>
-{/block}
+	{block name="script" append}
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
+	{/block}
+
+	{block name="script" append}
+		<script type="text/javascript" src="./scripts/base/avoid_submit_on_refresh.js"></script>
+	{/block}
 
 {/if}

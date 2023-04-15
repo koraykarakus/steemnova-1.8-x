@@ -121,7 +121,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
 	private function AddBuildingToQueue($Element, $AddMode = true)
 	{
-		global $PLANET, $USER, $resource, $reslist, $pricelist;
+		global $PLANET, $USER, $resource, $reslist, $pricelist, $config;
 
 		if(!in_array($Element, $reslist['allow'][$PLANET['planet_type']])
 			|| !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
@@ -150,7 +150,6 @@ class ShowBuildingsPage extends AbstractGamePage
 
 		$CurrentMaxFields  	= CalculateMaxPlanetFields($PLANET);
 
-		$config	= Config::get();
 
 		if (($config->max_elements_build != 0 && $ActualCount == $config->max_elements_build)
 			|| ($AddMode && $PLANET["field_current"] >= ($CurrentMaxFields - $DemolishedQueue)))
@@ -295,8 +294,8 @@ class ShowBuildingsPage extends AbstractGamePage
 		$BuildLevelFactor   = 10;
 		$BuildTemp          = $PLANET['temp_max'];
 
-        $BuildInfoList      = array();
-$Messages		= $USER['messages'];
+    $BuildInfoList      = array();
+		$Messages		= $USER['messages'];
 		$Elements			= $reslist['allow'][$PLANET['planet_type']];
 
 		foreach($Elements as $Element)

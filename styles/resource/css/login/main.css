@@ -1,45 +1,17 @@
 html, body {
 	height:100%;
 	width:100%;
-    margin: 0;
-    padding: 0;
-}
-
-@media screen and (max-width:1200px) {
-html, body {
-  height:100%;
-	width:800px;
-    margin: auto;
-    padding: 0;
-  }
-}
-
-@media screen and (max-width:800px) {
-html, body {
-  height:100%;
-	width:600px;
-    margin: auto;
-    padding: 0;
-  }
-}
-
-@media screen and (max-width:600px) {
-html, body {
-  height:100%;
-	width:320px;
-    margin: auto;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: url(../../images/login/background.jpg) no-repeat fixed center center #0d0d0d;
-    background-size: cover;
-    color: #FFFFFF;
-    font-family: verdana;
-    font-size: 12px;
-    text-align: center;
-	line-height:14px;
+  background: url(../../images/login/background.jpg) no-repeat fixed center center #0d0d0d;
+  background-size: cover;
+  color: #FFFFFF;
+  font-family: verdana;
+  font-size: 12px;
+  text-align: center;
 }
 
 input, textarea, select, option, button{
@@ -106,6 +78,31 @@ a:hover{
     /* text-decoration: underline; */
 }
 
+
+/*General purpose classes*/
+
+.hover-color-yellow:hover{
+	color: #ffe493;
+}
+
+.hover-bg-color-grey:hover{
+	background-color: #6c6c6c!important;
+}
+
+/*--*/
+
+/*main.navigation.tpl*/
+
+#navbar{
+	font-size: 14px;
+}
+
+#navbar .active{
+	color: #ffe493;
+}
+
+/*--*/
+
 .error {
 	border: 1px solid red !important;
 }
@@ -161,7 +158,7 @@ ul#rules {
 	float:left;
     padding-right: 0;
     padding-top: 5px;
-	
+
 }
 
 #menu a {
@@ -216,48 +213,7 @@ ul#rules {
 
 
 .contentbox {
-	
-	width: 300px; 
-	margin: 15px auto;
 	background: #1b4c6ec4;
-	padding: 10px;
- border-radius: 8px
-}
-
-
-
-.contentbox h1 {
-	font-size:11px;
-	margin:0 0 10px 0;
-	font-weight:700;
-	color:white;
-	text-transform: uppercase;
-}
-
-.contentbox label {
-    display: block;
-    width: 150px;
-	font-weight: 700;
-	float: left;
-	margin: 4px 0 2px;
-	height: 16px;
-	vertical-align: middle;
-	text-align: left;
-}
-
-.contentbox input, .contentbox select {
-	margin-bottom: 5px;
-	border-radius: 8px
-}
-
-.contentbox input[type="text"], .contentbox input[type="password"] {
-	width: 254px;
-    padding: 10px;
-}
-
-.contentbox select{
-    width: 276px;
-    padding: 10px;
 }
 
 /** BUTTONS **/

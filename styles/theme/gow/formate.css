@@ -467,6 +467,55 @@ th a,.res_current{
 	color: #ffd600;
 }
 
+.tooltipHandler{
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.tooltipBottom{
+	position: absolute;
+	background: #0C2A31;
+	visibility: hidden;
+	border-radius: 5px;
+	padding: 5px;
+	transition:0.2s ease;
+	opacity: 0;
+	border: 1px solid #154854;
+	box-sizing: border-box;
+}
+
+.tooltipBottom::before{
+	content: " ";
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color:  transparent transparent #154854 transparent;
+}
+
+.tooltipHandler:hover .tooltipBottom{
+	visibility: visible;
+	opacity: 1;
+}
+
+.tooltipBottom{
+	top: calc(100% + 5px);
+}
+
+.resourceInfo .left{
+	text-align: left;
+}
+.resourceInfo .right{
+	text-align: right;
+}
+.resourceInfo td{
+	font-size: 11px;
+	font-family: Verdana,Helvetica,Arial;
+}
+
 /* main.topnav.tpl */
 .resource_name,.res_current,.res_current_max,.res_max{
   padding: 2px 0;

@@ -111,6 +111,8 @@ class ShowRegisterPage extends AbstractLoginPage
 		$mailAddress2	= HTTP::_GP('emailReplay', '');
 		$rulesChecked	= HTTP::_GP('rules', 0);
 		$language 		= HTTP::_GP('lang', '');
+		$user_secret_question_id = HTTP::_GP('secretQuestion', 0);
+		$user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
 
 		$referralID 	= HTTP::_GP('referralID', 0);
 
@@ -127,6 +129,18 @@ class ShowRegisterPage extends AbstractLoginPage
 		}
 
 		$errors 	= array();
+
+		if (!in_array($user_secret_question_id, $LNG['registerSecretQuestionArray'])) {
+			$errors[] = $LNG['registerSecretQuestionError_1'];
+		}
+
+		if (empty($user_secret_question_answer)) {
+			$errors[] = $LNG['registerSecretQuestionError_2'];
+		}
+
+		if (strlen($user_secret_question_answer) > 64) {
+			$errors[] = $LNG['registerSecretQuestionError_3'];
+		}
 
 		if(empty($userName)) {
 			$errors[]	= $LNG['registerErrorUsernameEmpty'];
@@ -265,7 +279,9 @@ class ShowRegisterPage extends AbstractLoginPage
 				`universe` = :universe,
 				`referralID` = :referralID,
 				`externalAuthUID` = :externalAuthUID,
-				`externalAuthMethod` = :externalAuthMethod;";
+				`externalAuthMethod` = :externalAuthMethod,
+				`user_secret_question_id` = :user_secret_question_id,
+				`user_secret_question_answer` = :user_secret_question_answer;";
 
 
 		$db->insert($sql, array(
@@ -279,7 +295,9 @@ class ShowRegisterPage extends AbstractLoginPage
 			':universe'				=> Universe::current(),
 			':referralID'			=> $referralID,
 			':externalAuthUID'		=> $externalAuthUID,
-			':externalAuthMethod'	=> $externalAuthMethod
+			':externalAuthMethod'	=> $externalAuthMethod,
+			':user_secret_question_id' => $user_secret_question_id,
+			':user_secret_question_answer' => $user_secret_question_answer,
 		));
 
 		$validationID	= $db->lastInsertId();

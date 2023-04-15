@@ -53,6 +53,22 @@
 		<span class="inputDesc">{$LNG.registerEmailDesc}</span>
 	</div>
 
+	<div class="rowForm">
+		<label for="secretQuestion">{$LNG.registerSecretQuestionText}</label>
+		<select name="secretQuestion">
+			{foreach $LNG.registerSecretQuestionArray as $id => $currentQuestion}
+			<option value="{$id}">{$currentQuestion}</option>
+			{/foreach}
+		</select>
+	</div>
+
+
+	<div class="rowForm">
+		<label for="secretQuestionAnswer">{$LNG.registerSecretQuestionAnswerText}</label>
+		<input type="text" class="input" name="secretQuestionAnswer">
+	</div>
+
+
 	{if count($languages) > 1}
 	<div class="rowForm">
 		<label for="language">{$LNG.registerLanguage}</label>

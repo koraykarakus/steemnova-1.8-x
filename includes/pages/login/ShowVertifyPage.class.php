@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -56,7 +56,7 @@ class ShowVertifyPage extends AbstractLoginPage
 			':validationID'	=> $validationID
 		));
 
-		list($userID, $planetID) = PlayerUtil::createPlayer($userData['universe'], $userData['userName'], $userData['password'], $userData['email'], $userData['language']);
+		list($userID, $planetID) = PlayerUtil::createPlayer($userData['universe'], $userData['userName'], $userData['password'], $userData['email'], $userData['language'], NULL, NULL, NULL, NULL, 0, NULL, $userData['user_secret_question_id'], $userData['user_secret_question_answer']);
 
 		if($config->mail_active == 1)
 		{
@@ -114,7 +114,7 @@ class ShowVertifyPage extends AbstractLoginPage
 		$message 	= sprintf($LNG['registerWelcomePMText'], $config->game_name, $userData['universe']);
 
 		PlayerUtil::sendMessage($userID, 1, $senderName, 1, $subject, $message, TIMESTAMP);
-		
+
 		return array(
 			'userID'	=> $userID,
 			'userName'	=> $userData['userName'],

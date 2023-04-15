@@ -114,6 +114,32 @@ $LNG['registerWelcomePMSenderName']	= 'Administrator';
 $LNG['registerWelcomePMSubject']	= 'Welcome';
 $LNG['registerWelcomePMText']		= 'Welcome to %s! First build a solar power plant, because energy is needed for the production of raw materials. To build one, left click in the menu on "buildings". Then build the 4th Building from the top. </br> When you have energy, you can begin to build mines. Go to buildings on the menu and build a metal mine, followed by a crystal mine. </br></br>In order to be able to build ships you need to have a shipyard. To see what is needed to unlock that building you can take a look at "Technologies" at the left menu.</br>If you more questions you can look at the beginnersguide, our forum or open a support ticket. </br></br> The team wishes you much fun exploring the universe!';
 
+$LNG['registerSecretQuestionText'] = "Please select a secret question";
+$LNG['registerSecretQuestionAnswerText'] = "Answer to your secret question";
+$LNG['registerSecretQuestionArray'] = array(
+  0 => 'Which city were you born in ?',
+  1 => 'What is the name of your favorite pet ?',
+  2 => "What is your mother's maiden name ?",
+  3 => "What high school did you attend ?",
+  4 => "What was the name of your elementary school ?",
+  5 => "What was the make of your first car ?",
+  6 => "What was your favorite food as a child ?"
+);
+$LNG['registerSecretQuestionError_1'] = "You selected a wrong secret question !";
+$LNG['registerSecretQuestionError_2'] = "Answer of secret question cannot be empty !";
+$LNG['registerSecretQuestionError_3'] = "Answer of secret question cannot be longer than 64 characters !";
+
+/*
+
+In what city were you born?
+What is the name of your favorite pet?
+What is your mother's maiden name?
+What high school did you attend?
+What was the name of your elementary school?
+What was the make of your first car?
+What was your favorite food as a child?
+*/
+
 //Vertify
 
 $LNG['vertifyNoUserFound']			= 'Invalid Request!';
