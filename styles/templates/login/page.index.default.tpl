@@ -3,7 +3,14 @@
 
 <script type="text/javascript">
 // this is the id of the form
-function loginSubmit(){
+function loginSubmit(activeRecaptcha){
+			var recaptchaResponse = false;
+
+
+			if (activeRecaptcha) {
+				recaptchaResponse = grecaptcha.getResponse();
+			}
+			console.log(recaptchaResponse);
 
 	    $.ajax({
 	        type: "POST",
@@ -11,7 +18,7 @@ function loginSubmit(){
 	        data: {
 						userEmail: $("#userEmail").val(),
 						password: $("#password").val(),
-						g_recaptcha_response: grecaptcha.getResponse(),
+						g_recaptcha_response: recaptchaResponse,
 						csrfToken: $('#csrfToken').val(),
 					},
 	        success: function(data)
@@ -21,7 +28,9 @@ function loginSubmit(){
 						$('.alert').remove();
 
 						if (dataParsed.status == 'fail') {
-							grecaptcha.reset();
+							if (activeRecaptcha) {
+								grecaptcha.reset();
+							}
 
 							$.each( dataParsed, function( typeError, errorTextArray ) {
 
@@ -69,7 +78,7 @@ function loginSubmit(){
 								<div style="overflow:hidden;" class="g-recaptcha form-group w-100 fs-6 my-2 mx-auto d-flex justify-content-start" data-sitekey="{$recaptchaPublicKey}"></div>
 						{/if}
 
-						<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button" onclick="loginSubmit();">{$LNG.loginButton}</button>
+						<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button" onclick="loginSubmit(activeRecaptcha = {$recaptchaEnable});">{$LNG.loginButton}</button>
 
 					</div>
 
