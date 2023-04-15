@@ -20,6 +20,7 @@ class ShowRegisterPage extends AbstractLoginPage
 	function __construct()
 	{
 		parent::__construct();
+		$this->setWindow('light');
 	}
 
 	function show()
@@ -130,7 +131,8 @@ class ShowRegisterPage extends AbstractLoginPage
 
 		$errors 	= array();
 
-		if (!in_array($user_secret_question_id, $LNG['registerSecretQuestionArray'])) {
+		
+		if (!array_key_exists($user_secret_question_id, $LNG['registerSecretQuestionArray'])) {
 			$errors[] = $LNG['registerSecretQuestionError_1'];
 		}
 
