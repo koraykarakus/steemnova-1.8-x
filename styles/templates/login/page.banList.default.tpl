@@ -9,7 +9,7 @@
 	</tr>
 {if $banCount}
 	<tr>
-		<td style="text-align:right;" colspan="5">{$LNG.mg_page}: {if $page != 1}<a href="index.php?page=banList&amp;side={$page - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="index.php?page=banList&amp;side={$site}">{if $site == $page}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $page != $maxPage}&nbsp;<a href="index.php?page=banList&amp;side={$page + 1}">&raquo;</a>{/if}</td>
+		<td style="text-align:right;" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a href="index.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="index.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a href="index.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
 	</tr>
 {/if}
 	<tr>
@@ -30,7 +30,7 @@
 	</tr>
 	{/foreach}
 	<tr>
-		<td style="text-align:right;" colspan="5">{$LNG.mg_page}: {if $page != 1}<a href="index.php?page=banList&amp;side={$page - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="index.php?page=banList&amp;side={$site}">{if $site == $page}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $page != $maxPage}&nbsp;<a href="index.php?page=banList&amp;side={$page + 1}">&raquo;</a>{/if}</td>
+		<td style="text-align:right;" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a href="index.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="index.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a href="index.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
 	</tr>
 	<tr>
 		<td colspan="5">{$LNG.bn_exists}{$banCount|number}{$LNG.bn_players_banned}</td>
@@ -38,7 +38,7 @@
 {else}
 	<tr>
 		<td colspan="5">{$LNG.bn_no_players_banned}</td>
-	</tr>	
+	</tr>
 {/if}
 </table>
 {/block}

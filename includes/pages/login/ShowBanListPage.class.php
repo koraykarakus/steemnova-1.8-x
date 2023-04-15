@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -19,13 +19,13 @@ class ShowBanListPage extends AbstractLoginPage
 {
 	public static $requireModule = MODULE_BANLIST;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
 
 	function show()
-	{		
+	{
 		global $LNG;
 
 		$db = Database::get();
@@ -33,13 +33,14 @@ class ShowBanListPage extends AbstractLoginPage
 		$page  		= HTTP::_GP('side', 1);
 
 		$sql = "SELECT COUNT(*) as count FROM %%BANNED%% WHERE universe = :universe ORDER BY time DESC;";
+
 		$banCount = $db->selectSingle($sql, array(
 			':universe'	=> Universe::current(),
 		), 'count');
 
 		$maxPage	= ceil($banCount / BANNED_USERS_PER_PAGE);
 		$page		= max(1, min($page, $maxPage));
-		
+
 		$sql = "SELECT * FROM %%BANNED%% WHERE universe = :universe ORDER BY time DESC LIMIT :offset, :limit;";
 		$banResult = $db->select($sql, array(
 			':universe'	=> Universe::current(),
@@ -48,7 +49,7 @@ class ShowBanListPage extends AbstractLoginPage
 		));
 
 		$banList	= array();
-		
+
 		foreach($banResult as $banRow)
 		{
 			$banList[]	= array(
@@ -63,15 +64,14 @@ class ShowBanListPage extends AbstractLoginPage
 		}
 
 		$universeSelect	= $this->getUniverseSelector();
-		
 		$this->assign(array(
 			'universeSelect'	=> $universeSelect,
 			'banList'			=> $banList,
 			'banCount'			=> $banCount,
-			'page'				=> $page,
+			'pageNumber'				=> $page,
 			'maxPage'			=> $maxPage,
 		));
-		
+
 		$this->display('page.banList.default.tpl');
 	}
 }
