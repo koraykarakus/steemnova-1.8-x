@@ -22,6 +22,12 @@ LOGIN
 
 * new javascript added for login and register pages to avoid form submit on page refresh
 
+* login system is changed to support AJAX submit
+
+* Bootstrap 5 - responsive login page is generated
+
+* csrf token is added for login form 
+
 
 ADMIN
 
@@ -87,4 +93,8 @@ INGAME
 
 * StatBanner problems solved
 
-* A limit is set for number of notes of a user, this limit can be changed from admin panel 
+* A limit is set for number of notes of a user, this limit can be changed from admin panel
+
+* Fixed a bug which prevents displaying alliance applications
+
+* active color for current page on menu, GOW theme
