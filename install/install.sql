@@ -825,6 +825,16 @@ CREATE TABLE `%PREFIX%users` (
   KEY `ally_id` (`ally_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
+CREATE TABLE `%PREFIX%remember_me`(
+    `id`               INT(11) AUTO_INCREMENT,
+    `selector`         VARCHAR(255) NOT NULL,
+    `hashed_validator` VARCHAR(255) NOT NULL,
+    `expiration_date`  INT(11) NOT NULL,
+    `user_id`          INT(11) NOT NULL,
+    `universe`         INT(11) NOT NULL,
+     PRIMARY KEY(`id`)
+) ENGINE = MyISAM DEFAULT CHARSET = UTF8;
+
 CREATE TABLE `%PREFIX%users_to_acs` (
   `userID` int(10) unsigned NOT NULL,
   `acsID` int(10) unsigned NOT NULL,

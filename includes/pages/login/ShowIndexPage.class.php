@@ -23,6 +23,15 @@ class ShowIndexPage extends AbstractLoginPage
 		$this->setWindow('light');
 	}
 
+	function parseRememberMeToken($token) {
+    $parts = explode(':', $token);
+
+    if ($parts && count($parts) == 3) {
+        return [$parts[0], $parts[1], $parts[2]];
+    }
+    return false;
+	}
+
 	function show()
 	{
 		global $LNG, $config;
@@ -44,10 +53,66 @@ class ShowIndexPage extends AbstractLoginPage
 			$loginCode	= $LNG['login_error_'.$Code];
 		}
 
+
+
+		$rememberedEmail = $rememberedPassword = $rememberedTokenValidator = $rememberedTokenSelector = "";
+
+		$rememberedUniverseID = Universe::current();
+
+		if (isset($_COOKIE['remember_me'])) {
+
+			$rememberMeInfo = $this->parseRememberMeToken($_COOKIE['remember_me']);
+
+			if ($rememberMeInfo) {
+
+				$sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
+
+				$tokenInfo = Database::get()->selectSingle($sql,array(
+					':selector' => $rememberMeInfo[1]
+				));
+
+				if (
+					isset($tokenInfo['hashed_validator']) &&
+					isset($tokenInfo['user_id']) &&
+					isset($rememberMeInfo[0]) &&
+					isset($rememberMeInfo[1]) &&
+					isset($rememberMeInfo[2])
+					) {
+
+
+					if (password_verify($rememberMeInfo[2], $tokenInfo['hashed_validator'])) {
+
+						$sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
+
+						$rememberedEmail = Database::get()->selectSingle($sql,array(
+							':userId' => $tokenInfo['user_id']
+						),'email');
+
+						$rememberedPassword = true;
+
+						$rememberedUniverseID = $rememberMeInfo[0];
+						$rememberedTokenSelector = $rememberMeInfo[1];
+						$rememberedTokenValidator = $rememberMeInfo[2];
+					}
+				}
+
+			}
+
+
+
+
+		}
+
+
 		$this->assign(array(
 			'code'					=> $loginCode,
 			'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
 			'csrfToken' => $this->generateCSRFToken(),
+			'rememberedEmail' => $rememberedEmail,
+			'rememberedPassword' => $rememberedPassword,
+			'rememberedTokenValidator' => $rememberedTokenValidator,
+			'rememberedTokenSelector' => $rememberedTokenSelector,
+			'rememberedUniverseID' => $rememberedUniverseID,
 		));
 
 
