@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <center>
-	<h1>{$LNG.ow_title}</h1>
+	<h1 class="fs-4 text-white">{$LNG.ow_title}</h1>
 	<table width="90%" style="border:2px {if empty($Messages)}lime{else}red{/if} solid;text-align:center;font-weight:bold;">
 		<tr>
 			<td class="transparent">{foreach item=Message from=$Messages}

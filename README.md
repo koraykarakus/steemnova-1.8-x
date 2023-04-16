@@ -6,7 +6,7 @@ INSTALL ISSUES
 
 * BBCodeParser2 problems on Tickets page corrected, tickets working efficiently
 
-LOGIN
+LOGIN & REGISTER
 
 * Login system changed, now users login with email instead of username
 
@@ -22,11 +22,12 @@ LOGIN
 
 * new javascript added for login and register pages to avoid form submit on page refresh
 
-* login system is changed to support AJAX submit
+* login and systems are changed to support AJAX submit
 
-* Bootstrap 5 - responsive login page is generated
+* Bootstrap 5 - responsive login & register pages are generated
 
-* csrf token is added for login form 
+* csrf token is added for login & register forms
+
 
 
 ADMIN
