@@ -88,7 +88,8 @@ class ShowRegisterPage extends AbstractLoginPage
 			'accountName'		=> $accountName,
 			'externalAuth'		=> $externalAuth,
 			'registerPasswordDesc'	=> sprintf($LNG['registerPasswordDesc'], 6),
-			'registerRulesDesc'	=> sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>')
+			'registerRulesDesc'	=> sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
+			'csrfToken' => $this->generateCSRFToken(),
 		));
 
 		$this->display('page.register.default.tpl');
@@ -98,25 +99,27 @@ class ShowRegisterPage extends AbstractLoginPage
 	{
 		global $LNG, $config;
 
+		$data = array();
+
 		if($config->game_disable == 0 || $config->reg_closed == 1)
 		{
-			$this->printMessage($LNG['registerErrorUniClosed'], array(array(
-				'label'	=> $LNG['registerBack'],
-				'url'	=> 'javascript:window.history.back()',
-			)));
+			$data['status'] = "fail";
+			$data[] = $LNG['registerErrorUniClosed'];
+			$this->sendJSON($data);
 		}
 
-		$userName 		= HTTP::_GP('username', '', UTF8_SUPPORT);
+		$userName 		= HTTP::_GP('userName', '', UTF8_SUPPORT);
 		$password 		= HTTP::_GP('password', '', true);
-		$mailAddress 	= HTTP::_GP('email', '');
-		$mailAddress2	= HTTP::_GP('emailReplay', '');
-		$rulesChecked	= HTTP::_GP('rules', 0);
-		$language 		= HTTP::_GP('lang', '');
+		$mailAddress 	= HTTP::_GP('email', '', true);
+		$language 		= HTTP::_GP('language', '');
+		$rulesChecked	= HTTP::_GP('rules', 'false');
+		$csrfToken = HTTP::_GP('csrfToken','',true);
+
 		$user_secret_question_id = HTTP::_GP('secretQuestion', 0);
 		$user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
-
 		$referralID 	= HTTP::_GP('referralID', 0);
 
+		// NOTE: This should be corrected and tested (externalAuth)
 		$externalAuth	= HTTP::_GP('externalAuth', array());
 		if(!isset($externalAuth['account'], $externalAuth['method']))
 		{
@@ -129,44 +132,48 @@ class ShowRegisterPage extends AbstractLoginPage
 			$externalAuthMethod	= strtolower(str_replace(array('_', '\\', '/', '.', "\0"), '', $externalAuth['method']));
 		}
 
-		$errors 	= array();
+		$error 	= array();
 
-		
+
 		if (!array_key_exists($user_secret_question_id, $LNG['registerSecretQuestionArray'])) {
-			$errors[] = $LNG['registerSecretQuestionError_1'];
+			$error[] = $LNG['registerSecretQuestionError_1'];
 		}
 
 		if (empty($user_secret_question_answer)) {
-			$errors[] = $LNG['registerSecretQuestionError_2'];
+			$error[] = $LNG['registerSecretQuestionError_2'];
 		}
 
 		if (strlen($user_secret_question_answer) > 64) {
-			$errors[] = $LNG['registerSecretQuestionError_3'];
+			$error[] = $LNG['registerSecretQuestionError_3'];
 		}
 
 		if(empty($userName)) {
-			$errors[]	= $LNG['registerErrorUsernameEmpty'];
+			$error[]	= $LNG['registerErrorUsernameEmpty'];
 		}
 
 		if(!PlayerUtil::isNameValid($userName)) {
-			$errors[]	= $LNG['registerErrorUsernameChar'];
+			$error[]	= $LNG['registerErrorUsernameChar'];
 		}
 
 		if(strlen($password) < 6) {
-			$errors[]	= sprintf($LNG['registerErrorPasswordLength'], 6);
+			$error[]	= sprintf($LNG['registerErrorPasswordLength'], 6);
 		}
 
 
 		if(!PlayerUtil::isMailValid($mailAddress)) {
-			$errors[]	= $LNG['registerErrorMailInvalid'];
+			$error[]	= $LNG['registerErrorMailInvalid'];
 		}
 
 		if(empty($mailAddress)) {
-			$errors[]	= $LNG['registerErrorMailEmpty'];
+			$error[]	= $LNG['registerErrorMailEmpty'];
 		}
 
-		if($rulesChecked != 1) {
-			$errors[]	= $LNG['registerErrorRules'];
+		if($rulesChecked == 'false') {
+			$error[]	= $LNG['registerErrorRules'];
+		}
+
+		if ($_COOKIE['csrfToken'] != $csrfToken) {
+			$error[] = "csrf attack";
 		}
 
 		$db = Database::get();
@@ -208,12 +215,12 @@ class ShowRegisterPage extends AbstractLoginPage
 			':mailAddress'	=> $mailAddress,
 		), 'count');
 
-		if($countUsername!= 0) {
-			$errors[]	= $LNG['registerErrorUsernameExist'];
+		if($countUsername != 0) {
+			$error[]	= $LNG['registerErrorUsernameExist'];
 		}
 
 		if($countMail != 0) {
-			$errors[]	= $LNG['registerErrorMailExist'];
+			$error[]	= $LNG['registerErrorMailExist'];
 		}
 
 		if ($config->capaktiv === '1' && $config->use_recaptcha_on_register)
@@ -228,11 +235,9 @@ class ShowRegisterPage extends AbstractLoginPage
             }
 		}
 
-		if (!empty($errors)) {
-			$this->printMessage(implode("<br>\r\n", $errors), array(array(
-				'label'	=> $LNG['registerBack'],
-				'url'	=> 'javascript:window.history.back()',
-			)));
+		if (!empty($error)) {
+			$error['status'] = "fail";
+			$this->sendJSON($error);
 		}
 
 		$path	= 'includes/extauth/'.$externalAuthMethod.'.class.php';
@@ -307,7 +312,9 @@ class ShowRegisterPage extends AbstractLoginPage
 
 		if($config->user_valid == 0 || !empty($externalAuthUID))
 		{
-			$this->redirectTo($verifyURL);
+			$data['status'] = "redirect";
+			$data['url'] = $verifyURL;
+			$this->sendJSON($data);
 		}
 		else
 		{
@@ -330,7 +337,9 @@ class ShowRegisterPage extends AbstractLoginPage
 			$subject	= sprintf($LNG['registerMailVertifyTitle'], $config->game_name);
 			Mail::send($mailAddress, $userName, $subject, $MailContent);
 
-			$this->printMessage($LNG['registerSendComplete']);
+			$data['status'] = "success";
+			$data['successMessage'] = $LNG['registerSendComplete'];
+			$this->sendJSON($data);
 		}
 	}
 }

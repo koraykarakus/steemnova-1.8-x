@@ -25,19 +25,7 @@ class ShowLoginPage extends AbstractLoginPage
 		parent::__construct();
 	}
 
-	function show()
-	{
-		$this->setWindow('light');
-
-
-
-		$this->assign(array(
-			//'error' => $error,
-			//'enteredData' => $enteredData
-		));
-
-		$this->display('page.index.default.tpl');
-	}
+	
 
 	function validate(){
 		global $config, $LNG;
@@ -52,15 +40,15 @@ class ShowLoginPage extends AbstractLoginPage
 		$error = array();
 
 		if ($_COOKIE['csrfToken'] != $csrfToken) {
-			$error['csrf'][] = "csrf attack";
+			$error[] = "csrf attack";
 		}
 
 		if (empty($userEmail)) {
-			$error['email'][] = $LNG['login_error_1'];
+			$error[] = $LNG['login_error_1'];
 		}
 
 		if (empty($password)) {
-			$error['password'][] = $LNG['login_error_2'];
+			$error[] = $LNG['login_error_2'];
 		}
 
 		if (!empty($password) && !empty($userEmail)) {
@@ -72,7 +60,7 @@ class ShowLoginPage extends AbstractLoginPage
 			));
 
 			if (!$loginData) {
-				$error['email'][] = $LNG['login_error_3'];
+				$error[] = $LNG['login_error_3'];
 			}
 
 		}
@@ -86,13 +74,13 @@ class ShowLoginPage extends AbstractLoginPage
       $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
       if (!$resp->isSuccess())
       {
-          $error['recaptcha'][]	= $LNG['login_error_4'];
+          $error[]	= $LNG['login_error_4'];
       }
 		}
 
 		if (isset($loginData['password'])) {
 			if (!password_verify($password,$loginData['password'])) {
-				$error['password'][] = $LNG['login_error_5'];
+				$error[] = $LNG['login_error_5'];
 			}
 		}
 
@@ -104,7 +92,7 @@ class ShowLoginPage extends AbstractLoginPage
 			$session->save();
 
 			$data = array();
-			$data['status'] = "success";
+			$data['status'] = "redirect";
 			$this->sendJSON($data);
 		}
 		else

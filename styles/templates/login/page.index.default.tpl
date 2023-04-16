@@ -3,14 +3,13 @@
 
 <script type="text/javascript">
 // this is the id of the form
-function loginSubmit(activeRecaptcha){
+function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 			var recaptchaResponse = false;
 
 
-			if (activeRecaptcha) {
+			if (activeRecaptcha == 1 && use_recaptcha_on_login == 1) {
 				recaptchaResponse = grecaptcha.getResponse();
 			}
-			console.log(recaptchaResponse);
 
 	    $.ajax({
 	        type: "POST",
@@ -28,22 +27,20 @@ function loginSubmit(activeRecaptcha){
 						$('.alert').remove();
 
 						if (dataParsed.status == 'fail') {
-							if (activeRecaptcha) {
+							if (activeRecaptcha == 1 && use_recaptcha_on_login == 1) {
 								grecaptcha.reset();
 							}
 
-							$.each( dataParsed, function( typeError, errorTextArray ) {
+							$.each( dataParsed, function( typeError, errorText ) {
 
 								if (typeError == 'status') {
 									return;
 								}
+								$('#loginButton').before("<span class='alert alert-danger fs-6 py-1 my-1'>"+ errorText +"</span>")
 
-								$.each(errorTextArray, function(i,errorText){
-									$('#loginButton').before("<span class='alert alert-danger fs-6 py-1 my-1'>"+ errorText +"</span>")
-									});
 							});
 
-		        }else if (dataParsed.status == 'success') {
+		        }else if (dataParsed.status == 'redirect') {
 							location.href = "game.php";
 		        }
 
@@ -78,7 +75,7 @@ function loginSubmit(activeRecaptcha){
 								<div style="overflow:hidden;" class="g-recaptcha form-group w-100 fs-6 my-2 mx-auto d-flex justify-content-start" data-sitekey="{$recaptchaPublicKey}"></div>
 						{/if}
 
-						<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button" onclick="loginSubmit(activeRecaptcha = {$recaptchaEnable});">{$LNG.loginButton}</button>
+						<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button" onclick="loginSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_login = '{$use_recaptcha_on_login}');">{$LNG.loginButton}</button>
 
 					</div>
 

@@ -1,10 +1,69 @@
 {block name="title" prepend}{$LNG.siteTitleRegister}{/block}
 {block name="content"}
+
+<script>
+	function registerSubmit(activeRecaptcha, use_recaptcha_on_register,referralID){
+		var recaptchaResponse = false;
+
+		if (activeRecaptcha == 1 && use_recaptcha_on_register == 1) {
+			recaptchaResponse = grecaptcha.getResponse();
+		}
+
+
+		$.ajax({
+				type: "POST",
+				url: 'index.php?page=register&mode=send&ajax=1',
+				data: {
+					userName: $("#username").val(),
+					password: $("#password").val(),
+					email: $("#email").val(),
+					secretQuestion: $("#secretQuestion").val(),
+					secretQuestionAnswer: $('#secretQuestionAnswer').val(),
+					language: $('#language option:selected').val(),
+					rules: $('#rules').is(':checked'),
+					referralID : $('#referralID').val(),
+					g_recaptcha_response: recaptchaResponse,
+					csrfToken: $('#csrfToken').val(),
+				},
+				success: function(data)
+				{
+					var dataParsed = jQuery.parseJSON(data);
+
+					$('.alert').remove();
+
+					if (dataParsed.status == 'fail') {
+						if (activeRecaptcha == 1 && use_recaptcha_on_register == 1) {
+							grecaptcha.reset();
+						}
+
+						$.each( dataParsed, function( typeError, errorText ) {
+
+							if (typeError == 'status') {
+								return;
+							}
+
+							$('#registerButton').before("<span class='alert alert-danger fs-6 py-1 my-1'>"+ errorText +"</span>")
+						});
+
+					}else if (dataParsed.status == 'success') {
+						$('#registerButton').before("<span class='alert alert-success fs-6 py-1 my-1'>"+ dataParsed.successMessage +"</span>")
+					}else if (dataParsed.status == 'redirect') {
+						location.href = dataParsed.url;
+					}
+
+				}
+
+		});
+
+	}
+</script>
+
 <form style="max-width:500px;" class="form-group mx-auto my-sm-5 d-flex flex-column px-3 rounded bg-transparent-blue" id="registerForm" method="post" action="index.php?page=register" data-action="index.php?page=register">
+<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrfToken}">
 <input type="hidden" value="send" name="mode">
 <input type="hidden" value="{$externalAuth.account}" name="externalAuth[account]">
 <input type="hidden" value="{$externalAuth.method}" name="externalAuth[method]">
-<input type="hidden" value="{$referralData.id}" name="referralID">
+<input id="referralID" type="hidden" value="{$referralData.id}" name="referralID">
 	<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 		<label class="fs-6 my-2 text-start w-100" for="universe">{$LNG.universe}</label>
 		<select style="text-indent:5px;" class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="uni" id="universe" class="changeAction">{html_options options=$universeSelect selected=$UNI}</select>
@@ -58,7 +117,7 @@
 
 	<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 		<label class="fs-6 my-2 text-start w-100" for="secretQuestion">{$LNG.registerSecretQuestionText}</label>
-		<select style="text-indent:5px;" class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="secretQuestion">
+		<select id="secretQuestion" style="text-indent:5px;" class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="secretQuestion">
 			{foreach $LNG.registerSecretQuestionArray as $id => $currentQuestion}
 			<option value="{$id}">{$currentQuestion}</option>
 			{/foreach}
@@ -68,7 +127,7 @@
 
 	<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 		<label class="fs-6 my-2 text-start w-100" for="secretQuestionAnswer">{$LNG.registerSecretQuestionAnswerText}</label>
-		<input type="text" class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100" name="secretQuestionAnswer">
+		<input id="secretQuestionAnswer" type="text" class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100" name="secretQuestionAnswer">
 	</div>
 
 
@@ -107,14 +166,14 @@
 	{/if}
 
 	<div class="form-group d-flex flex-row justify-content-md-start align-items-center my-2">
-		<input type="checkbox" name="rules" id="rules" value="1">
+		<input type="checkbox" name="rules" id="rules" value="">
 		{if !empty($error.rules)}
 			<span class="error errorRules"></span>
 		{/if}
 		<span class="fs-6 px-2">{$registerRulesDesc}</span>
 	</div>
-	<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
-		<button type="submit" class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white">{$LNG.buttonRegister}</button>
+	<div class="form-group d-flex flex-column justify-content-md-between align-items-center my-2">
+		<button id="registerButton" type="button" onclick="registerSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_register = '{$use_recaptcha_on_register}', referralID = '{$referralData.id}');" class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white">{$LNG.buttonRegister}</button>
 	</div>
 </form>
 {/block}
