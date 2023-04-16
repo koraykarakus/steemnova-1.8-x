@@ -13,7 +13,7 @@
 	</tr>
 	{if $banCount}
 	<tr>
-		<td class="right" colspan="5">{$LNG.mg_page}: {if $page != 1}<a href="game.php?page=banList&amp;side={$page - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=banList&amp;side={$site}">{if $site == $page}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $page != $maxPage}&nbsp;<a href="game.php?page=banList&amp;side={$page + 1}">&raquo;</a>{/if}</td>
+		<td class="right" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a href="game.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a href="game.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
 	</tr>
 	{foreach $banList as $banRow}
 	<tr>
@@ -25,7 +25,7 @@
 	</tr>
 	{/foreach}
 	<tr>
-		<td class="right" colspan="5">{$LNG.mg_page}: {if $page != 1}<a href="game.php?page=banList&amp;side={$page - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=banList&amp;side={$site}">{if $site == $page}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $page != $maxPage}&nbsp;<a href="game.php?page=banList&amp;side={$page + 1}">&raquo;</a>{/if}</td>
+		<td class="right" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a href="game.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a href="game.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
 	</tr>
 	<tr>
 		<td colspan="5">{$LNG.bn_exists}{$banCount|number}{$LNG.bn_players_banned}</td>
@@ -33,7 +33,7 @@
 	{else}
 	<tr>
 		<td colspan="5">{$LNG.bn_no_players_banned}</td>
-	</tr>	
+	</tr>
 	{/if}
 </table>
 {/block}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -64,7 +64,7 @@ class ShowBanListPage extends AbstractGamePage
 		$this->assign(array(
 			'banList'	=> $banList,
 			'banCount'	=> $banCount,
-			'page'		=> $page,
+			'pageNumber'		=> $page,
 			'maxPage'	=> $maxPage,
 		));
 
