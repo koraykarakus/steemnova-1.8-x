@@ -43,10 +43,10 @@
 		  <button style="width:120px;height:24px;" class="btn btn-secondary dropdown-toggle p-1 d-flex align-items-center justify-content-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
 		    {$LNG.registerLanguage}
 		  </button>
-		  <ul class="dropdown-menu flex-column bg-dark" aria-labelledby="dropdownMenuButton1">
+		  <ul style="width:auto;" class="dropdown-menu flex-column bg-dark p-0" aria-labelledby="dropdownMenuButton1">
 				{foreach $languages as $langKey => $langName}
 			    <li class="d-flex w-100">
-						<a class="text-decoration-none d-flex align-items-center border-bottom border-light w-100 px-2" href="?lang={$langKey}" rel="alternate" hreflang="{$langKey}" title="{$langName}">
+						<a class="text-decoration-none hover-bg-color-grey d-flex align-items-center w-100 px-2" href="?lang={$langKey}" rel="alternate" hreflang="{$langKey}" title="{$langName}">
 							<span class="flags {$langKey}">{$langName}</span>
 							<span class="">{$langName}</span>
 						</a>

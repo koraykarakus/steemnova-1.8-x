@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -52,7 +52,7 @@ if(isset($pageProps['requireModule']) && $pageProps['requireModule'] !== 0 && !i
 	ShowErrorPage::printError($LNG['sys_module_inactive']);
 }
 
-if(!is_callable(array($pageObj, $mode))) {	
+if(!is_callable(array($pageObj, $mode))) {
 	if(!isset($pageProps['defaultController']) || !is_callable(array($pageObj, $pageProps['defaultController']))) {
 		ShowErrorPage::printError($LNG['page_doesnt_exist']);
 	}

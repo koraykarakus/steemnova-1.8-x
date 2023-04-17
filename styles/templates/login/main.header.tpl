@@ -6,7 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="{$lang}" class="no-js"> <!--<![endif]-->
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	{assign var="REV" value="1.0.0.7" nocache}
+	{assign var="REV" value="1.0.0.8" nocache}
 
 	<!-- Bootstrap 5 - No IE support -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">

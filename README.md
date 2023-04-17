@@ -28,6 +28,8 @@ LOGIN & REGISTER
 
 * csrf token is added for login & register forms
 
+* added remember me option for login 
+
 
 
 ADMIN
