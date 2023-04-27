@@ -1,84 +1,133 @@
 {block name="title" prepend}{if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipshard}{/if}{/block}
 {block name="content"}
+<script src="./scripts/base/avoid_submit_on_refresh.js" type="text/javascript"></script>
 
 {if $messages}
 	<div class="message"><a href="?page=messages">{$messages}</a></div>
 {/if}
 {if !$NotBuilding}
-<table width="70%" id="infobox" style="border: 2px solid red; text-align:center;background:transparent"><tr><td>{$LNG.bd_building_shipyard}</td></tr></table>
-<br><br>
+<span class="d-flex justify-content-center rounded p-2 text-danger fw-bold bg-dark border border-2 border-danger mx-auto my-2 w-100" id="infobox">
+	{$LNG.bd_building_shipyard}
+</span>
 {/if}
 {if !empty($BuildList)}
-<div style="text-align: center;">
-		<div id="bx" class="z"></div>
-		<div class="ship">
-		<form action="game.php?page=shipyard&amp;mode={$mode}" method="post" >
+<div style="width:auto;" class="d-flex flex-column mx-auto w-50 bg-black align-items-center my-2 rounded">
+		<div id="bx" class="z my-2 text-center w-100"></div>
+		<form class="d-flex flex-column" action="game.php?page=shipyard&amp;mode={$mode}" method="post" >
 			<input type="hidden" name="action" value="delete">
-			<div >
-
-			<select name="auftr[]" id="auftr" onchange="this.form.myText.setAttribute('size', this.value);" multiple class="shipl"><option>&nbsp;</option></select><br><br>{$LNG.bd_cancel_warning}<br><input class="z" type="submit" value="{$LNG.bd_cancel_send}" />
-
-			</div>
-			</form>
-			<br><span id="timeleft"></span><br><br>
-
-	</div>
+			<select class="mx-2 p-2 rounded" name="auftr[]" id="auftr" onchange="this.form.myText.setAttribute('size', this.value);" multiple class="shipl">
+				<option>&nbsp;</option>
+			</select>
+			<span class="text-center text-danger fw-bold my-2">{$LNG.bd_cancel_warning}</span>
+			<button style="width:auto;" class="btn btn-secondary text-white fw-bold" type="submit"/>{$LNG.bd_cancel_send}</button>
+		</form>
+		<span class="text-center my-2" id="timeleft"></span>
 </div>
-<br>
 {/if}
 
 {if $mode != "defense"}
-<div class="planeto">
-	<button id="ship1">Civil</button> |
-	<button id="ship2">Military</button> |
-	<button id="ship3">All</button>
+<div class="d-flex align-items-start">
+	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship1">Civil</button>
+	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship2">Military</button>
+	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship3">All</button>
 </div>
 {/if}
 
 {foreach $elementList as $ID => $Element}
-<div class="infos" id="s{$ID}">
-	<div class="infos_left">
-		<a href="#" onclick="return Dialog.info({$ID})">
-			<img style="float: left;" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
-		</a>
+<div class="infos d-flex my-1 rounded bg-black border border-1 border-dark py-2" id="s{$ID}">
+	<div class="d-flex align-items-center justify-content-center">
+			<img onclick="return Dialog.info({$ID})" class="mx-2 hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
 	</div>
-	<div class="infos_right">
-		<div class="infos_right_top">
-			<a href="#" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
-			<span class="yellow" id="val_{$ID}">
+	<div class="d-flex flex-column w-100">
+		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
+			<a href="#" class="fs-6 text-white" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
+			<span class="fs-6 text-white px-2" id="val_{$ID}">
 				{if $Element.available != 0}
-					({$LNG.bd_available} {$Element.available|number})
+					( {$LNG.bd_available} {$Element.available|number} )
 				{/if}
 			</span>
 		</div>
-		<div class="infos_right_bottom">
-			<div class="infos_inner_left">
-				<span>{$LNG.bd_remaining}</span>
+		<div class="d-flex mx-2 justify-content-between">
+			<div class="m-0 p-0">
+				<span class="d-flex my-1">{$LNG.bd_remaining}</span>
 				{foreach $Element.costOverflow as $ResType => $ResCount}
-				<span>
-					<a href='#' onclick='return Dialog.info({$ResType})' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.{$ResType}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$ResType}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$ResType}</td></tr></table></tr></table>">{$LNG.tech.{$ResType}}</a><span style="font-weight:700">&nbsp;:&nbsp;{$ResCount|number}</span>
+				<span class="d-flex justify-content-start align-items-center my-1">
+					<a class="d-flex align-items-center" onclick="return Dialog.info({$ResType});"
+					data-bs-toggle="tooltip"
+					data-bs-placement="left"
+					data-bs-html="true"
+					title = '<table class="table table-dark table-striped p-0 m-0">
+						<thead>
+							<tr>
+								<th>{$LNG.tech.{$ResType}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+								 <img src="{$dpath}gebaeude/{$ResType}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}">
+							  </td>
+							</tr>
+							<tr>
+								<td>
+									<span class="d-flex text-start">{$LNG.shortDescription.$ResType}</span>
+							  </td>
+							</tr>
+						</tbody>
+					</table>'
+					>
+						{$LNG.tech.{$ResType}}
+						<span class="fw-bold">:&nbsp;{$ResCount|number}</span>
+					</a>
+
 				</span>
 				{/foreach}
-					<p>{$LNG.bd_max_ships_long}:<span style="font-weight:700">{$Element.maxBuildable|number}</p>
-
+				<span class="d-flex my-1">{$LNG.bd_max_ships_long}:<span class="fw-bold">&nbsp;{$Element.maxBuildable|number}</span></span>
 			</div>
-			<div class="infos_inner_right">
-				<form action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
-						<div class="buildl">
-						<span>{foreach $Element.costResources as $RessID => $RessAmount}
-						<a href='#' onclick='return Dialog.info({$RessID})' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>
-						{/foreach}</span></br>
-						{if $ID==212} +{$SolarEnergy} {$LNG.tech.911}<br>{/if}
-						<span>{if $Element.AlreadyBuild}<span style="color:red">{$LNG.bd_protection_shield_only_one}</span>{elseif $NotBuilding && $Element.buyable}<input type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
-						<input type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')"> <input class="b" type="submit" value="{$LNG.bd_build_ships}">
+				<form class="d-flex flex-column align-items-end" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
+						<span>
+							{foreach $Element.costResources as $RessID => $RessAmount}
+						<a class="my-1" href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
+						data-bs-placement="top"
+						data-bs-html="true"
+						title = '<table class="table table-dark table-striped p-0 m-0">
+							<thead>
+								<tr>
+									<th>{$LNG.tech.{$RessID}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+									 <img src="{$dpath}gebaeude/{$RessID}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}">
+								  </td>
+								</tr>
+								<tr>
+									<td>
+										<span class="d-flex text-start">{$LNG.shortDescription.$RessID}</span>
+								  </td>
+								</tr>
+							</tbody>
+						</table>'>
+						{$LNG.tech.{$RessID}}
+					</a>:
+						<span class="my-1" style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">
+							{$RessAmount|number}
+						</span>
+					{/foreach}
+					</span>
+						{if $ID==212} +{$SolarEnergy} {$LNG.tech.911}{/if}
+						<div class="my-1">
+						{if $Element.AlreadyBuild}
+							<span style="color:red">{$LNG.bd_protection_shield_only_one}</span>
+						{elseif $NotBuilding && $Element.buyable}
+							<input class="p-1" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
+							<input class="p-1" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
+							<input class="b p-1" type="submit" value="{$LNG.bd_build_ships}">
 						{/if}
-
-						</p>
-
-						<span>{$LNG.fgf_time}:{$Element.elementTime|time}</span>
 						</div>
+						<span class="my-1">{$LNG.fgf_time}{$Element.elementTime|time}</span>
 				</form>
-			</div>
 
 		</div>
 
@@ -109,6 +158,7 @@ $(function() {
 
 </script>
 {/if}
+
 
 
 {/block}

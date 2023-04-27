@@ -88,6 +88,14 @@ select {
 	background: linear-gradient(0deg, rgba(1,1,9,1) 0%, rgba(18,18,22,1) 35%);
 }
 
+.bg-blue{
+	background-color: #0D263D;
+}
+
+.hover-pointer:hover{
+	cursor: pointer;
+}
+
 /*--*/
 
 /*general fonts for font sizes*/
