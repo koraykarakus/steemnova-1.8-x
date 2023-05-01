@@ -413,7 +413,7 @@ $LNG['bd_maxlevel']                         = 'Maksimum kademeye ulasildi';
 $LNG['bd_on']                               = 'baglandi';
 $LNG['bd_max_builds']                       = 'Maksimum  %d binayi insaa listesine ekleyebilirsin!';
 $LNG['bd_next_level']                       = 'Sonraki kademe icin :';
-$LNG['bd_need_engine']                      = 'Ihtiyacin olan <font color="#FF0000">%s</font>  %s';
+$LNG['bd_need_engine']                      = 'Ihtiyacin olan&nbsp;<font color="#FF0000">%s</font>&nbsp;%s';
 $LNG['bd_more_engine']                      = 'Uretildi  <font color="#00FF00">%s</font> %s more';
 $LNG['bd_jump_gate_action']                 = 'Sicra';
 $LNG['bd_cancel_warning']                   = 'DIKKAT! <br> İptal edilen üretimin %60 ı geri iade edilir!.';

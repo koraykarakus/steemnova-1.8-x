@@ -7017,3 +7017,82 @@ Stack trace:
 #2 /includes/common.php(126): Session::load()
 #3 /game.php(25): require(&#039;C://xampp//htdocs...&#039;)
 #4 {main}
+[01-May-2023 17:16:46 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php:50
+Stack trace:
+#0 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php(50): PDO->__construct('mysql:host=loca...', '', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php(30): Database->__construct()
+#2 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Config.class.php(78): Database::get()
+#3 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Config.class.php(55): Config::generateInstances()
+#4 C:\xampp\htdocs\steemnova-1.8-x\includes\GeneralFunctions.php(527): Config::get()
+#5 [internal function]: exceptionHandler(Object(PDOException))
+#6 {main}
+  thrown in C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php on line 50
+[01-May-2023 17:16:47 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO) in C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php:50
+Stack trace:
+#0 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php(50): PDO->__construct('mysql:host=loca...', '', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php(30): Database->__construct()
+#2 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Config.class.php(78): Database::get()
+#3 C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Config.class.php(55): Config::generateInstances()
+#4 C:\xampp\htdocs\steemnova-1.8-x\includes\GeneralFunctions.php(527): Config::get()
+#5 [internal function]: exceptionHandler(Object(PDOException))
+#6 {main}
+  thrown in C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Database.class.php on line 50
+[01-May-2023 17:17:05] WARNING: "session_start(): open(C:/xampp/htdocs/steemnova-1.8-x/cache/sessions\sess_c05ehbr4pr3m7er3vu91hfd5mr, O_RDWR) failed: No such file or directory (2)"
+File: C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Session.class.php | Line: 137
+URL: http://localhost/steemnova-1.8-x/game.php | Version: 1.8.git
+Stack trace:
+#0 [internal function]: errorHandler(2, &#039;session_start()...&#039;, &#039;C://xampp//htdocs...&#039;, 137)
+#1 /includes/classes/Session.class.php(137): session_start()
+#2 /includes/common.php(126): Session::load()
+#3 /game.php(25): require(&#039;C://xampp//htdocs...&#039;)
+#4 {main}
+[01-May-2023 17:17:23] WARNING: "session_start(): open(C:/xampp/htdocs/steemnova-1.8-x/cache/sessions\sess_c05ehbr4pr3m7er3vu91hfd5mr, O_RDWR) failed: No such file or directory (2)"
+File: C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Session.class.php | Line: 137
+URL: http://localhost/steemnova-1.8-x/game.php | Version: 1.8.git
+Stack trace:
+#0 [internal function]: errorHandler(2, &#039;session_start()...&#039;, &#039;C://xampp//htdocs...&#039;, 137)
+#1 /includes/classes/Session.class.php(137): session_start()
+#2 /includes/common.php(126): Session::load()
+#3 /game.php(25): require(&#039;C://xampp//htdocs...&#039;)
+#4 {main}
+[01-May-2023 17:19:15] WARNING: "session_start(): open(C:/xampp/htdocs/steemnova-1.8-x/cache/sessions\sess_c05ehbr4pr3m7er3vu91hfd5mr, O_RDWR) failed: No such file or directory (2)"
+File: C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Session.class.php | Line: 138
+URL: http://localhost/steemnova-1.8-x/game.php | Version: 1.8.git
+Stack trace:
+#0 [internal function]: errorHandler(2, &#039;session_start()...&#039;, &#039;C://xampp//htdocs...&#039;, 138)
+#1 /includes/classes/Session.class.php(138): session_start()
+#2 /includes/common.php(126): Session::load()
+#3 /game.php(25): require(&#039;C://xampp//htdocs...&#039;)
+#4 {main}
+[01-May-2023 17:20:22] WARNING: "session_start(): open(C:/xampp/htdocs/steemnova-1.8-x/cache/sessions\sess_c05ehbr4pr3m7er3vu91hfd5mr, O_RDWR) failed: No such file or directory (2)"
+File: C:\xampp\htdocs\steemnova-1.8-x\includes\classes\Session.class.php | Line: 137
+URL: http://localhost/steemnova-1.8-x/game.php | Version: 1.8.git
+Stack trace:
+#0 [internal function]: errorHandler(2, &#039;session_start()...&#039;, &#039;C://xampp//htdocs...&#039;, 137)
+#1 /includes/classes/Session.class.php(137): session_start()
+#2 /includes/common.php(126): Session::load()
+#3 /game.php(25): require(&#039;C://xampp//htdocs...&#039;)
+#4 {main}
+[01-May-2023 17:23:21] WARNING: "Undefined array key "page""
+File: C:\xampp\htdocs\steemnova-1.8-x\cache\tr^a438e60cce1362a1929b002508ac34886eea67f7_5.extends.page.overview.default.tpl.cache.php | Line: 807
+URL: http://localhost/steemnova-1.8-x/game.php | Version: 1.8.git
+Stack trace:
+#0 /cache/tr^a438e60cce1362a1929b002508ac34886eea67f7_5.extends.page.overview.default.tpl.cache.php(807): errorHandler(2, &#039;Undefined array...&#039;, &#039;C://xampp//htdocs...&#039;, 807)
+#1 /includes/libs/Smarty/libs/sysplugins/smarty_template_resource_base.php(123): content_644fd96970c1d6_97978602(Object(Smarty_Internal_Template))
+#2 /includes/libs/Smarty/libs/sysplugins/smarty_internal_template.php(377): Smarty_Template_Resource_Base-&gt;getRenderedTemplateCode(Object(Smarty_Internal_Template), &#039;content_644fd96...&#039;)
+#3 /cache/tr^a438e60cce1362a1929b002508ac34886eea67f7_5.extends.page.overview.default.tpl.cache.php(1947): Smarty_Internal_Template-&gt;_subTemplateRender(&#039;file:main.heade...&#039;, NULL, &#039;tr&#039;, 9999, 604800, Array, 0, false, &#039;7a3ded7895b0fc1...&#039;, &#039;content_644fd96...&#039;)
+#4 /includes/libs/Smarty/libs/sysplugins/smarty_template_resource_base.php(123): content_644fd96970a017_16854815(Object(Smarty_Internal_Template))
+#5 /includes/libs/Smarty/libs/sysplugins/smarty_internal_template.php(377): Smarty_Template_Resource_Base-&gt;getRenderedTemplateCode(Object(Smarty_Internal_Template), &#039;content_644fd96...&#039;)
+#6 /cache/tr^a438e60cce1362a1929b002508ac34886eea67f7_5.extends.page.overview.default.tpl.cache.php(65): Smarty_Internal_Template-&gt;_subTemplateRender(&#039;file:layout.ful...&#039;, NULL, &#039;tr&#039;, 9999, 604800, Array, 2, false, &#039;a2b1a46ef150306...&#039;, &#039;content_644fd96...&#039;)
+#7 /includes/libs/Smarty/libs/sysplugins/smarty_template_resource_base.php(123): content_644fd969805240_69446054(Object(Smarty_Internal_Template))
+#8 /includes/libs/Smarty/libs/sysplugins/smarty_template_compiled.php(114): Smarty_Template_Resource_Base-&gt;getRenderedTemplateCode(Object(Smarty_Internal_Template))
+#9 /includes/libs/Smarty/libs/sysplugins/smarty_internal_runtime_updatecache.php(38): Smarty_Template_Compiled-&gt;render(Object(Smarty_Internal_Template))
+#10 /includes/libs/Smarty/libs/sysplugins/smarty_template_cached.php(143): Smarty_Internal_Runtime_UpdateCache-&gt;updateCache(Object(Smarty_Template_Cached), Object(Smarty_Internal_Template), false)
+#11 /includes/libs/Smarty/libs/sysplugins/smarty_internal_template.php(212): Smarty_Template_Cached-&gt;render(Object(Smarty_Internal_Template), false)
+#12 /includes/libs/Smarty/libs/sysplugins/smarty_internal_templatebase.php(238): Smarty_Internal_Template-&gt;render(false, 1)
+#13 /includes/libs/Smarty/libs/sysplugins/smarty_internal_templatebase.php(134): Smarty_Internal_TemplateBase-&gt;_execute(Object(Smarty_Internal_Template), NULL, NULL, NULL, 1)
+#14 /includes/classes/class.template.php(146): Smarty_Internal_TemplateBase-&gt;display(&#039;extends:layout....&#039;)
+#15 /includes/pages/game/AbstractGamePage.class.php(296): template-&gt;display(&#039;extends:layout....&#039;)
+#16 /includes/pages/game/ShowOverviewPage.class.php(331): AbstractGamePage-&gt;display(&#039;page.overview.d...&#039;)
+#17 /game.php(58): ShowOverviewPage-&gt;show()
+#18 {main}

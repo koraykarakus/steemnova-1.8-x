@@ -80,8 +80,11 @@ select {
 
 
 /*general classes for color and background color*/
-.color-red{
-	color:#e54438;
+.color-red,.text-red{
+	color:#e54438!important;
+}
+.text-yellow{
+	color:#ffd600!important;
 }
 .bg-black{
 	background: rgb(1,1,9);
@@ -94,6 +97,21 @@ select {
 
 .hover-pointer:hover{
 	cursor: pointer;
+}
+.hover-underline:hover{
+	text-decoration: underline;
+}
+.fs-12{
+	font-size: 12px!important;
+}
+.fs-10{
+	font-size: 10px!important;
+}
+.fs-9{
+	font-size: 9px!important;
+}
+.fs-14{
+	font-size: 14px!important;
 }
 
 /*--*/

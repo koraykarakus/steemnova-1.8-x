@@ -346,6 +346,7 @@ class ShowBuildingsPage extends AbstractGamePage
 				'infoEnergy'		=> $infoEnergy,
 				'costResources'		=> $costResources,
 				'costOverflow'		=> $costOverflow,
+				'costOverflowTotal' => array_sum($costOverflow),
 				'elementTime'    	=> $elementTime,
 				'destroyResources'	=> $destroyResources,
 				'destroyTime'		=> $destroyTime,
