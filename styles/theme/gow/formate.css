@@ -1,4 +1,8 @@
 /** Edit Color here **/
+*{
+	font-family: Verdana,Helvetica,Arial;
+}
+
 .ui-widget-header{
 	background-color:#D20000;
 }
@@ -80,6 +84,9 @@ select {
 
 
 /*general classes for color and background color*/
+.color-green{
+	color: #5faa3d!important;
+}
 .color-red,.text-red{
 	color:#e54438!important;
 }
@@ -565,32 +572,3 @@ th a,.res_current{
 }
 
 /* main.topnav.tpl */
-.resource_name,.res_current,.res_current_max,.res_max{
-  padding: 2px 0;
-  font-size: 12px;
-  font-family: Verdana,Helvetica,Arial;
-}
-
-.planetSelectorWrapper{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 3px;
-  min-width: 150px;
-  height: 90%;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
-.planetSelectorWrapper *{
-  margin: 2px 0;
-}
-.planetSelectorWrapper #planetSelector{
-  width: 140px;
-  height: 18px;
-  margin: 3px 0;
-}
-.planetSelectorWrapper #planetSelector option{
-  height: 18px;
-}

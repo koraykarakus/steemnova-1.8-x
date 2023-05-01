@@ -116,12 +116,15 @@ abstract class AbstractGamePage
 
 	protected function getNavigationData()
 	{
-		global $PLANET, $LNG, $USER, $THEME, $resource, $reslist;
+		global $PLANET, $LNG, $USER, $THEME, $resource, $reslist, $config;
 
-		$config			= Config::get();
 
 		$PlanetSelect	= array();
-		if($USER['bana']==1) { echo 'You received a Ban. If you think this is a mistake, write on our Discord: <a href="https://discord.gg/g6UHwXE">https://discord.gg/g6UHwXE</a>'; die(); }
+
+		if($USER['bana'] == 1) {
+			echo 'You received a Ban. If you think this is a mistake, write on our Discord: <a href="https://discord.gg/g6UHwXE">https://discord.gg/g6UHwXE</a>'; die();
+		}
+
 		if(isset($USER['PLANETS'])) {
 			$USER['PLANETS']	= getPlanets($USER);
 		}
@@ -135,9 +138,10 @@ abstract class AbstractGamePage
 		$resourceSpeed	= $config->resource_multiplier;
 		foreach($reslist['resstype'][1] as $resourceID)
 		{
-			$resourceTable[$resourceID]['name']			= $resource[$resourceID];
-			$resourceTable[$resourceID]['current']		= $PLANET[$resource[$resourceID]];
-			$resourceTable[$resourceID]['max']			= $PLANET[$resource[$resourceID].'_max'];
+			$resourceTable[$resourceID]['name']	= $resource[$resourceID];
+			$resourceTable[$resourceID]['current'] = $PLANET[$resource[$resourceID]];
+			$resourceTable[$resourceID]['max']	= $PLANET[$resource[$resourceID].'_max'];
+
 			if($USER['urlaubs_modus'] == 1 || $PLANET['planet_type'] != 1)
 			{
 				$resourceTable[$resourceID]['production']	= $PLANET[$resource[$resourceID].'_perhour'];
@@ -179,6 +183,7 @@ abstract class AbstractGamePage
 			}catch(Exception $e){}
 		}
 
+
 		$this->assign(array(
 			'PlanetSelect'		=> $PlanetSelect,
 			'new_message' 		=> $USER['messages'],
@@ -198,6 +203,8 @@ abstract class AbstractGamePage
 			'hasAdminAccess'	=> !empty(Session::load()->adminAccess),
 			'hasGate'			=> $PLANET[$resource[43]] > 0,
 			'discordUrl'		=> DISCORD_URL,
+			//overwrite messages, to do : delete from other pages
+			'messages'					=> ($USER['messages'] > 0) ? (($USER['messages'] == 1) ? $LNG['ov_have_new_message'] : "(" . $USER['messages'] . ")"): false,
 		));
 	}
 

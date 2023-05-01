@@ -315,15 +315,7 @@ font-weight:bold;
 	width:100%;
 }
 
-#planetSelectorWrapper {
-	flex-grow: 1;
-}
 
-#planetSelector {
-	position: absolute;
-	top: 70px;
-	/*width: 150px;*/
-}
 
 .planetImage{
 	text-align: center;
@@ -353,16 +345,8 @@ font-weight:bold;
 	font-weight: bold;
 }
 
-.planetSelectorWrapper { /* new */
-	/* height: 48px; */
-	/* width: 48px; */
-	/* margin: 0px 6px; */
-	width: 120px;
-}
 
-.planetSelectorName { /* new */
-	text-align: center;
-}
+
 
 #resourceWrapper{
 	height:90px;
@@ -647,9 +631,7 @@ table.tablesorter thead tr .headerSortDown {
 	.planetImage{
 		display: none;
 	}
-	#planetSelector{
-		max-width: 120px;
-	}
+
 
 }
 
@@ -684,9 +666,7 @@ table.tablesorter thead tr .headerSortDown {
 	aside {
 		display: none;
 	}
-	#planetSelector {
-		top: 44px;
-	}
+
 	menu {
 		grid-column: 1;
 		grid-row: 2;
@@ -702,13 +682,8 @@ table.tablesorter thead tr .headerSortDown {
 	#menu a {
 		padding: 16px;
 	}
-	.planetSelectorWrapper{
-		width: initial;
-	}
-	.planetSelectorWrapper > img{
-		width: 42px;
-		height: 42px;
-	}
+
+	
 	.no-mobile{
 		display: none;
 	}

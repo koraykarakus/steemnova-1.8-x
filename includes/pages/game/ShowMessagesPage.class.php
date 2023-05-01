@@ -188,7 +188,7 @@ class ShowMessagesPage extends AbstractGamePage
         $messagePage	= HTTP::_GP('page', 1);
         $messageIDs		= HTTP::_GP('messageID', array());
 
-        $redirectUrl	= 'game.php?page=messages&category='.$MessCategory.'&side='.$page;
+        $redirectUrl	= 'game.php?page=messages&category='.$MessCategory.'&side='.$messagePage;
 
 		$action			= false;
 

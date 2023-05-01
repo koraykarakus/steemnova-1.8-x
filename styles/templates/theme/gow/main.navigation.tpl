@@ -83,10 +83,6 @@
     {if isModuleAvailable($smarty.const.MODULE_SUPPORT)}<li><a href="game.php?page=ticket">{$LNG.lm_support}</a></li>{/if}
 
     <li class="menu-separator"></li>
-    {if isModuleAvailable($smarty.const.MODULE_NOTICE)}<li><a href="javascript:OpenPopup('?page=notes', 'notes', 720, 300);">{$LNG.lm_notes}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_BUDDYLIST)}<li><a href="game.php?page=buddyList">{$LNG.lm_buddylist}</a></li>{/if}
-    <li><a href="game.php?page=settings">{$LNG.lm_options}</a></li>
-    <li><a href="game.php?page=logout">{$LNG.lm_logout}</a></li>
     {if $authlevel > 0}<li><a href="./admin.php" style="color:lime">{$LNG.lm_administration} ({$VERSION})</a></li>{/if}
 </ul>
 <div id="disclamer" class="no-mobile">
