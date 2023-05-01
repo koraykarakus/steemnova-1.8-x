@@ -366,5 +366,5 @@ myDefaultWhiteList.img = ['src','alt','width','height'];
 
 	</script>
 </head>
-<body id="{$smarty.get.page|htmlspecialchars|default:'overview'}" class="{$bodyclass}">
+<body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
 	<div id="tooltip" class="tip"></div>
