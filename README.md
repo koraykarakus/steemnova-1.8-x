@@ -1,5 +1,11 @@
 What is done so far ?
 
+GENERAL
+
+* Updated for PHP 8.2
+
+* Smarty 4.3.0 version update
+
 INSTALL ISSUES
 
 * BBCodeParser2 was causing problems at the stage of install, wrong url links of BBCodeParser2 is corrected
@@ -28,7 +34,7 @@ LOGIN & REGISTER
 
 * csrf token is added for login & register forms
 
-* added remember me option for login 
+* added remember me option for login
 
 
 
