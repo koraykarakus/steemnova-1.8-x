@@ -250,6 +250,7 @@ class ShowShipyardPage extends AbstractGamePage
 				'available'			=> $PLANET[$resource[$Element]],
 				'costResources'		=> $costResources,
 				'costOverflow'		=> $costOverflow,
+				'costOverflowTotal' => array_sum($costOverflow),
 				'elementTime'    	=> $elementTime,
 				'buyable'			=> $buyable,
 				'maxBuildable'		=> floatToString($maxBuildable),

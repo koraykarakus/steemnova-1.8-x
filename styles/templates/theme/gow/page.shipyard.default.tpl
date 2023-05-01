@@ -2,9 +2,6 @@
 {block name="content"}
 <script src="./scripts/base/avoid_submit_on_refresh.js" type="text/javascript"></script>
 
-{if $messages}
-	<div class="message"><a href="?page=messages">{$messages}</a></div>
-{/if}
 {if !$NotBuilding}
 <span class="d-flex justify-content-center rounded p-2 text-danger fw-bold bg-dark border border-2 border-danger mx-auto my-2 w-100" id="infobox">
 	{$LNG.bd_building_shipyard}
@@ -40,18 +37,19 @@
 	</div>
 	<div class="d-flex flex-column w-100">
 		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
-			<a href="#" class="fs-6 text-white" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
-			<span class="fs-6 text-white px-2" id="val_{$ID}">
-				{if $Element.available != 0}
+			<a href="#" class="fs-12 text-yellow" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
+			{if $Element.available != 0}
+			<span class="fs-12 text-white px-2" id="val_{$ID}">
 					( {$LNG.bd_available} {$Element.available|number} )
-				{/if}
 			</span>
+			{/if}
 		</div>
 		<div class="d-flex mx-2 justify-content-between">
 			<div class="m-0 p-0">
-				<span class="d-flex my-1">{$LNG.bd_remaining}</span>
+				{if $Element.costOverflowTotal > 0}
+				<span class="d-flex my-1 fs-12">{$LNG.bd_remaining}</span>
 				{foreach $Element.costOverflow as $ResType => $ResCount}
-				<span class="d-flex justify-content-start align-items-center my-1">
+				<span class="d-flex justify-content-start align-items-center my-1 fs-12">
 					<a class="d-flex align-items-center" onclick="return Dialog.info({$ResType});"
 					data-bs-toggle="tooltip"
 					data-bs-placement="left"
@@ -77,17 +75,22 @@
 					</table>'
 					>
 						{$LNG.tech.{$ResType}}
-						<span class="fw-bold">:&nbsp;{$ResCount|number}</span>
+						<span class="fw-bold fs-12">:&nbsp;{$ResCount|number}</span>
 					</a>
 
 				</span>
 				{/foreach}
-				<span class="d-flex my-1">{$LNG.bd_max_ships_long}:<span class="fw-bold">&nbsp;{$Element.maxBuildable|number}</span></span>
+				{/if}
+
+				<span class="d-flex flex-column my-1 fs-12 justify-content-start">
+					<span class="fs-12 text-yellow my-1">{$LNG.bd_max_ships_long}:</span>
+					<span class="fw-bold fs-12 my-1">({$Element.maxBuildable|number})</span>
+				</span>
 			</div>
 				<form class="d-flex flex-column align-items-end" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
 						<span>
 							{foreach $Element.costResources as $RessID => $RessAmount}
-						<a class="my-1" href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
+						<a class="my-1 fs-12" href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
 						data-bs-placement="top"
 						data-bs-html="true"
 						title = '<table class="table table-dark table-striped p-0 m-0">
@@ -99,7 +102,7 @@
 							<tbody>
 								<tr>
 									<td>
-									 <img src="{$dpath}gebaeude/{$RessID}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}">
+									 <img src="{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}">
 								  </td>
 								</tr>
 								<tr>
@@ -111,22 +114,24 @@
 						</table>'>
 						{$LNG.tech.{$RessID}}
 					</a>:
-						<span class="my-1" style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">
+						<span class="my-1 fs-12 {if $Element.costOverflow.$RessID == 0}color-green{else}color-red{/if}">
 							{$RessAmount|number}
 						</span>
 					{/foreach}
 					</span>
-						{if $ID==212} +{$SolarEnergy} {$LNG.tech.911}{/if}
+					{if $ID==212}
+						<span class="fs-12"> +{$SolarEnergy} {$LNG.tech.911}</span>
+					{/if}
 						<div class="my-1">
 						{if $Element.AlreadyBuild}
-							<span style="color:red">{$LNG.bd_protection_shield_only_one}</span>
+							<span class="fs-12 color-red">{$LNG.bd_protection_shield_only_one}</span>
 						{elseif $NotBuilding && $Element.buyable}
-							<input class="p-1" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
-							<input class="p-1" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
-							<input class="b p-1" type="submit" value="{$LNG.bd_build_ships}">
+							<input class="p-1 fs-12" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
+							<input class="p-1 fs-12" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
+							<input class="b p-1 fs-12" type="submit" value="{$LNG.bd_build_ships}">
 						{/if}
 						</div>
-						<span class="my-1">{$LNG.fgf_time}{$Element.elementTime|time}</span>
+						<span class="my-1 fs-12 text-right">{$LNG.fgf_time}&nbsp;:&nbsp;{$Element.elementTime|time}</span>
 				</form>
 
 		</div>
