@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -19,11 +19,11 @@ class ShowResourcesPage extends AbstractGamePage
 {
 	public static $requireModule = MODULE_RESSOURCE_LIST;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function send()
 	{
 		global $resource, $USER, $PLANET;
@@ -35,13 +35,13 @@ class ShowResourcesPage extends AbstractGamePage
 
 
 			$param	= array(':planetId' => $PLANET['id']);
-			
+
 			foreach($_POST['prod'] as $resourceId => $Value)
 			{
 				$FieldName = $resource[$resourceId].'_porcent';
 				if (!isset($PLANET[$FieldName]) || !in_array($Value, range(0, 10)))
 					continue;
-				
+
 				$updateSQL[]	= $FieldName." = :".$FieldName;
 				$param[':'.$FieldName]		= (int) $Value;
 				$PLANET[$FieldName]			= $Value;
@@ -77,13 +77,13 @@ class ShowResourcesPage extends AbstractGamePage
 			$basicIncome[911]	= 0;
 		}
 		else
-		{		
+		{
 			$basicIncome[901]	= $config->{$resource[901].'_basic_income'};
 			$basicIncome[902]	= $config->{$resource[902].'_basic_income'};
 			$basicIncome[903]	= $config->{$resource[903].'_basic_income'};
 			$basicIncome[911]	= $config->{$resource[911].'_basic_income'};
 		}
-		
+
 		$temp	= array(
 			901	=> array(
 				'plus'	=> 0,
@@ -102,7 +102,7 @@ class ShowResourcesPage extends AbstractGamePage
 				'minus'	=> 0,
 			)
 		);
-		
+
 		$ressIDs		= array_merge(array(), $reslist['resstype'][1], $reslist['resstype'][2]);
 
 		$productionList	= array();
@@ -135,7 +135,7 @@ class ShowResourcesPage extends AbstractGamePage
 			$BuildLevel			= $PLANET[$resource[$ProdID]];
 			$BuildLevelFactor	= $PLANET[$resource[$ProdID].'_porcent'];
 
-			foreach($ressIDs as $ID) 
+			foreach($ressIDs as $ID)
 			{
 				if(!isset($ProdGrid[$ProdID]['production'][$ID]))
 					continue;
@@ -150,66 +150,66 @@ class ShowResourcesPage extends AbstractGamePage
 				{
 					$Production	*= $prodLevel * $config->resource_multiplier;
 				}
-				
+
 				$productionList[$ProdID]['production'][$ID]	= $Production;
-				
+
 				if($Production > 0) {
 					if($PLANET[$resource[$ID]] == 0) continue;
-					
+
 					$temp[$ID]['plus']	+= $Production;
 				} else {
 					$temp[$ID]['minus']	+= $Production;
 				}
 			}
 		}
-				
+
 		$storage	= array(
 			901 => shortly_number($PLANET[$resource[901].'_max']),
 			902 => shortly_number($PLANET[$resource[902].'_max']),
 			903 => shortly_number($PLANET[$resource[903].'_max']),
 		);
-		
+
 		$basicProduction	= array(
 			901 => $basicIncome[901] * $config->resource_multiplier,
 			902 => $basicIncome[902] * $config->resource_multiplier,
 			903	=> $basicIncome[903] * $config->resource_multiplier,
 			911	=> $basicIncome[911] * $config->energySpeed,
 		);
-		
+
 		$totalProduction	= array(
 			901 => $PLANET[$resource[901].'_perhour'] + $basicProduction[901],
 			902 => $PLANET[$resource[902].'_perhour'] + $basicProduction[902],
 			903	=> $PLANET[$resource[903].'_perhour'] + $basicProduction[903],
 			911	=> $PLANET[$resource[911]] + $basicProduction[911] + $PLANET[$resource[911].'_used'],
 		);
-		
+
 		$bonusProduction	= array(
 			901 => $temp[901]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[131]]),
 			902 => $temp[902]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[132]]),
 			903	=> $temp[903]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[133]]),
 			911	=> $temp[911]['plus'] * $USER['factor']['Energy'],
 		);
-		
+
 		$dailyProduction	= array(
 			901 => $totalProduction[901] * 24,
 			902 => $totalProduction[902] * 24,
 			903	=> $totalProduction[903] * 24,
 			911	=> $totalProduction[911],
 		);
-		
+
 		$weeklyProduction	= array(
 			901 => $totalProduction[901] * 168,
 			902 => $totalProduction[902] * 168,
 			903	=> $totalProduction[903] * 168,
 			911	=> $totalProduction[911],
 		);
-			
+
 		$prodSelector	= array();
-		
+
 		foreach(range(10, 0) as $percent) {
 			$prodSelector[$percent]	= ($percent * 10).'%';
 		}
-		
+
 		$this->assign(array(
 			'header'			=> sprintf($LNG['rs_production_on_planet'], $PLANET['name']),
 			'prodSelector'		=> $prodSelector,
@@ -221,7 +221,7 @@ class ShowResourcesPage extends AbstractGamePage
 			'weeklyProduction'	=> $weeklyProduction,
 			'storage'			=> $storage,
 		));
-		
+
 		$this->display('page.resources.default.tpl');
 	}
 }

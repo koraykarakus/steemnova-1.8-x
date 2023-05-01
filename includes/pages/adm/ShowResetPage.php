@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -22,34 +22,34 @@ function ShowResetPage()
 	global $LNG, $reslist, $resource;
 	$template	= new template();
 	$config	= Config::get(ROOT_UNI);
-	
+
 	if ($_POST)
-	{		
+	{
 		foreach($reslist['build'] as $ID)
 		{
 			$dbcol['build'][$ID]	= "`".$resource[$ID]."` = '0'";
 		}
-		
+
 		foreach($reslist['tech'] as $ID)
 		{
 			$dbcol['tech'][$ID]		= "`".$resource[$ID]."` = '0'";
 		}
-		
+
 		foreach($reslist['fleet'] as $ID)
 		{
 			$dbcol['fleet'][$ID]	= "`".$resource[$ID]."` = '0'";
 		}
-		
+
 		foreach($reslist['defense'] as $ID)
 		{
 			$dbcol['defense'][$ID]	= "`".$resource[$ID]."` = '0'";
 		}
-		
+
 		foreach($reslist['officier'] as $ID)
 		{
 			$dbcol['officier'][$ID]	= "`".$resource[$ID]."` = '0'";
 		}
-		
+
 		foreach($reslist['resstype'][1] as $ID)
 		{
 			if(isset($config->{$resource[$ID].'_start'}))
@@ -57,7 +57,7 @@ function ShowResetPage()
 				$dbcol['resource_planet_start'][$ID]	= "`".$resource[$ID]."` = ".$config->{$resource[$ID].'_start'};
 			}
 		}
-		
+
 		foreach($reslist['resstype'][3] as $ID)
 		{
 			if(isset($config->{$resource[$ID].'_start'}))
@@ -65,60 +65,60 @@ function ShowResetPage()
 				$dbcol['resource_user_start'][$ID]	= "`".$resource[$ID]."` = ".$config->{$resource[$ID].'_start'};
 			}
 		}
-		
+
 		// Players and Planets
-		
+
 		if ($_POST['players'] == 'on'){
 			$ID	= $GLOBALS['DATABASE']->getFirstCell("SELECT `id_owner` FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `galaxy` = '1' AND `system` = '1' AND `planet` = '1';");
 			$GLOBALS['DATABASE']->multi_query("DELETE FROM ".USERS." WHERE `universe` = ".Universe::getEmulated()." AND `id` != '".$ID."';DELETE FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `id_owner` != '".$ID."';");
 		}
-		
+
 		if ($_POST['planets'] == 'on')
 			$GLOBALS['DATABASE']->multi_query("DELETE FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `id` NOT IN (SELECT id_planet FROM ".USERS." WHERE `universe` = ".Universe::getEmulated().");UPDATE ".PLANETS." SET `id_luna` = '0' WHERE `universe` = ".Universe::getEmulated().";");
-			
+
 		if ($_POST['moons']	== 'on'){
 			$GLOBALS['DATABASE']->multi_query("DELETE FROM ".PLANETS." WHERE `planet_type` = '3' AND `universe` = ".Universe::getEmulated().";UPDATE ".PLANETS." SET `id_luna` = '0' WHERE `universe` = ".Universe::getEmulated().";");}
 
 		// HANGARES Y DEFENSAS
 		if ($_POST['defenses']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ",$dbcol['defense'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['ships']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ",$dbcol['fleet'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['h_d']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET `b_hangar` = '0', `b_hangar_id` = '' WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 
 		// EDIFICIOS
 		if ($_POST['edif_p']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ",$dbcol['build']).", `field_current` = '0' WHERE `planet_type` = '1' AND `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['edif_l']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ",$dbcol['build']).", `field_current` = '0' WHERE `planet_type` = '3' AND `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['edif']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET `b_building` = '0', `b_building_id` = '' WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 
 		// INVESTIGACIONES Y OFICIALES
 		if ($_POST['inves']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ",$dbcol['tech'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['ofis']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ",$dbcol['officier'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['inves_c']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `b_tech_planet` = '0', `b_tech` = '0', `b_tech_id` = '0', `b_tech_queue` = '' WHERE `universe` = ".Universe::getEmulated().";");
-	
-	
+
+
 		// RECURSOS
 		if ($_POST['dark']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ",$dbcol['resource_user_start'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		if ($_POST['resources']	==	'on')
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ",$dbcol['resource_planet_start'])." WHERE `universe` = ".Universe::getEmulated().";");
-	
+
 		// GENERAL
 		if ($_POST['notes']	==	'on')
 			$GLOBALS['DATABASE']->query("DELETE FROM ".NOTES." WHERE `universe` = ".Universe::getEmulated().";");
@@ -148,7 +148,7 @@ function ShowResetPage()
 		exit;
 	}
 
-	$template->assign_vars(array(	
+	$template->assign_vars(array(
 		'button_submit'						=> $LNG['button_submit'],
 		're_reset_universe_confirmation'	=> $LNG['re_reset_universe_confirmation'],
 		're_reset_all'						=> $LNG['re_reset_all'],
@@ -183,6 +183,6 @@ function ShowResetPage()
 		're_player_and_planets'				=> $LNG['re_player_and_planets'],
 		're_general'						=> $LNG['re_general'],
 	));
-	
+
 	$template->show('ResetPage.tpl');
 }

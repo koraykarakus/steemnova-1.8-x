@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -40,7 +40,7 @@ class ShowResearchPage extends AbstractGamePage
 			if ($planet['b_building'] == 0)
 				continue;
 
-			$CurrentQueue		= unserialize($planet['b_building_id']);
+			$CurrentQueue		= unserialize($planet['b_building_id'] ?? '');
 			foreach($CurrentQueue as $ListIDArray) {
 				if($ListIDArray[0] == 6 || $ListIDArray[0] == 31)
 					return false;
@@ -223,7 +223,7 @@ class ShowResearchPage extends AbstractGamePage
 			return false;
 		}
 
-		$CurrentQueue  		= unserialize($USER['b_tech_queue']);
+		$CurrentQueue  		= unserialize($USER['b_tech_queue'] ?? '');
 
 		if (!empty($CurrentQueue)) {
 			$ActualCount   	= count($CurrentQueue);

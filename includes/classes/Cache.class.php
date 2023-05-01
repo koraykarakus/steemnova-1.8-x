@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -39,7 +39,7 @@ class Cache
 	private function __construct() {
 		$this->cacheResource = new CacheFile();
 	}
-	
+
 	public function add($Key, $ClassName) {
 		$this->cacheBuilder[$Key]	= $ClassName;
 	}
@@ -62,21 +62,21 @@ class Cache
 	public function flush($Key) {
 		if(!isset($this->cacheObj[$Key]) && !$this->load($Key))
 			$this->buildCache($Key);
-		
+
 		$this->cacheResource->flush($Key);
 		return $this->buildCache($Key);
 	}
 
 	public function load($Key) {
 		$cacheData	= $this->cacheResource->open($Key);
-		
+
 		if($cacheData === false)
 			return false;
-			
+
 		$cacheData	= unserialize($cacheData);
 		if($cacheData === false)
 			return false;
-		
+
 		$this->cacheObj[$Key] = $cacheData;
 		return true;
 	}

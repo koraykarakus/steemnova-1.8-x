@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,11 +11,11 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
-//---------------	GENERAL	------------------------// 
+//---------------	GENERAL	------------------------//
 $LNG['adm_login']			= 'Ingresar';
 $LNG['adm_username']		= 'Nombre Usuario';
 $LNG['adm_password']		= 'Contraseña';
@@ -51,7 +51,7 @@ $LNG['time_seconds']	= 'Segundos';
 
 $LNG['info_information']	= 'Para información y reporte de errores ir a <a href="%s" target="tracker">2Moons Board</a><br>¡No hay soporte de otra forma!';
 
-//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	------------------------// 
+//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	------------------------//
 $LNG['one_is_yes_1']	= 'Sí';
 $LNG['one_is_yes_0']	= 'No';
 
@@ -60,7 +60,7 @@ $LNG['one_is_no_0']	= 'No';
 //###########################################################//
 
 
-//---------------	BOTONES - BUTTONS - BUTTONS	------------------------// 
+//---------------	BOTONES - BUTTONS - BUTTONS	------------------------//
 $LNG['button_submit']		= 'Enviar';
 $LNG['button_add']			= 'Añadir';
 $LNG['button_delete']		= 'Eliminar';
@@ -81,13 +81,13 @@ $LNG['input_id_ally']		= 'ID Alianza';
 //###########################################################//
 
 
-//---------------	RECURSOS - RESOURCES - ROHSTOFFE	------------------------// 
+//---------------	RECURSOS - RESOURCES - ROHSTOFFE	------------------------//
 $LNG['resources_title']	        = 'Recursos';
 $LNG['count_res']			= 'Cantidad de Recursos';
 //###########################################################//
 
 
-//---------------	OFICIALES - OFFICIERS - OFFIZIERE	------------------------// 
+//---------------	OFICIALES - OFFICIERS - OFFIZIERE	------------------------//
 $LNG['buildings_title']	= 'Edificios';
 $LNG['ships_title']		= 'Naves';
 $LNG['defenses_title']		= 'Defensas';
@@ -304,7 +304,7 @@ $LNG['ma_none']				= 'Mensaje global';
 $LNG['ma_message']				= 'Mensaje';
 $LNG['ma_mode']					= 'Enviar como';
 $LNG['ma_all']					= 'Todos';
-$LNG['ma_modes']				= array('Mensaje Interno', 'Correo Electrónico', 'Mensaje interno e email'); 
+$LNG['ma_modes']				= array('Mensaje Interno', 'Correo Electrónico', 'Mensaje interno e email');
 //###########################################################//
 
 //---------------	PÁGINA DE INICIO - OVERVIEW	------------------------//
@@ -516,7 +516,7 @@ $LNG['se_disclamerAddress']				= 'Dirección';
 $LNG['se_disclamerPhone']				= 'Número de Teléfono';
 $LNG['se_disclamerMail']				= 'Dirección de E-Mail';
 $LNG['se_disclamerNotice']				= 'Para obtener más información';
-	
+
 //###########################################################//
 
 
@@ -621,11 +621,11 @@ $LNG['mu_fb_options'] 				= 'Facebook Connect';
 $LNG['mu_ts_options']                                   = 'Opciones de TeamSpeak';
 $LNG['mu_game_info']                                    = 'Información';
 $LNG['mu_vaild_users']                                  = 'Actividad de Usuarios';
-$LNG['mu_news']						= 'Noticias'; 
-$LNG['mu_multiip_page']					= 'Multi IP'; 
+$LNG['mu_news']						= 'Noticias';
+$LNG['mu_multiip_page']					= 'Multi IP';
 $LNG['mu_clear_cache']                                  = 'Limpiar Cache';
 $LNG['mu_vertify'] 					= 'Verificar el contenido del juego';
-$LNG['mu_cronjob']					= 'Trabajos Cron'; 
+$LNG['mu_cronjob']					= 'Trabajos Cron';
 $LNG['mu_logs'] 					= 'Registro de Acciones';
 $LNG['mu_giveaway']					= 'Regalos';
 $LNG['mu_disclamer']				= 'Impreso-Ajustes Legales';
@@ -651,7 +651,7 @@ $LNG['vt_loadfile']					= 'Cargar Lista de Archivos';
 
 //###########################################################//
 
-$LNG['cc_cache_clear']				= 'Cache limpiado correctamente'; 
+$LNG['cc_cache_clear']				= 'Cache limpiado correctamente';
 
 //---------------	REINICIO DE UNIVERSO - RESET UNIVERSE	------------------------//
 $LNG['re_reset_universe']                               = 'Reiniciar Universo';
@@ -1002,7 +1002,7 @@ $LNG['ts_version']					= 'Versión de Servidor:';
 $LNG['ts_udpport']					= 'Puerto TCP';
 $LNG['ts_tcpport']					= 'Puerto UDP';
 $LNG['ts_serverip']					= 'Server-IP';
-$LNG['ts_timeout']					= 'Tiempo de Espera'; 
+$LNG['ts_timeout']					= 'Tiempo de Espera';
 $LNG['ts_server_query']                                 = 'Puerto';
 $LNG['ts_login']					= 'Usuario';
 $LNG['ts_pass']						= 'Contraseña';

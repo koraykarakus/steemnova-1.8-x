@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -25,7 +25,9 @@ function ShowAccountEditorPage()
 	$template 	= new template();
 	$db = Database::get();
 
-	switch($_GET['edit'])
+	$editType = HTTP::_GP('edit','');
+
+	switch($editType)
 	{
 		case 'resources':
 			$id         = HTTP::_GP('id', 0);

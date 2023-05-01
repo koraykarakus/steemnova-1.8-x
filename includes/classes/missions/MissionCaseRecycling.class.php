@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -21,16 +21,16 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 	{
 		$this->_fleet	= $Fleet;
 	}
-	
+
 	function TargetEvent()
-	{	
+	{
 		global $pricelist, $resource;
-		
+
 		$resourceIDs	= array(901, 902, 903, 921);
 		$debrisIDs		= array(901, 902);
 		$resQuery		= array();
 		$collectQuery	= array();
-		
+
 		$collectedGoods = array();
 		foreach($debrisIDs as $debrisID)
 		{
@@ -54,7 +54,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 
 			$targetUserFactors	= getFactors($targetUser);
 			$shipStorageFactor	= 1 + $targetUserFactors['ShipStorage'];
-		
+
 			// Get fleet capacity
 			$fleetData			= FleetFunctions::unserialize($this->_fleet['fleet_array']);
 
@@ -72,7 +72,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 					$otherFleetStorage += $pricelist[$shipId]['capacity'] * $shipAmount;
 				}
 			}
-			
+
 			$recyclerStorage	*= $shipStorageFactor;
 			$otherFleetStorage	*= $shipStorageFactor;
 
@@ -106,10 +106,10 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 
 			Database::get()->update($sql, $param);
 		}
-		
+
 		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
-		
-		$Message 	= sprintf($LNG['sys_recy_gotten'], 
+
+		$Message 	= sprintf($LNG['sys_recy_gotten'],
 			pretty_number($collectedGoods[901]), $LNG['tech'][901],
 			pretty_number($collectedGoods[902]), $LNG['tech'][902]
 		);
@@ -120,12 +120,12 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 		$this->setState(FLEET_RETURN);
 		$this->SaveFleet();
 	}
-	
+
 	function EndStayEvent()
 	{
 		return;
 	}
-	
+
 	function ReturnEvent()
 	{
 		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
@@ -134,7 +134,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 		$planetName	= Database::get()->selectSingle($sql, array(
 			':planetId'	=> $this->_fleet['fleet_start_id'],
 		), 'name');
-	
+
 		$Message	= sprintf($LNG['sys_tran_mess_owner'],
 			$planetName, GetStartAddressLink($this->_fleet, ''),
 			pretty_number($this->_fleet['fleet_resource_metal']), $LNG['tech'][901],

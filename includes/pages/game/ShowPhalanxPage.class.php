@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -19,7 +19,7 @@
 class ShowPhalanxPage extends AbstractGamePage
 {
 	public static $requireModule = MODULE_PHALANX;
-	
+
 	static function allowPhalanx($toGalaxy, $toSystem)
 	{
 		global $PLANET, $resource;
@@ -27,11 +27,11 @@ class ShowPhalanxPage extends AbstractGamePage
 		if ($PLANET['galaxy'] != $toGalaxy || $PLANET[$resource[42]] == 0 || !isModuleAvailable(MODULE_PHALANX) || $PLANET[$resource[903]] < PHALANX_DEUTERIUM) {
 			return false;
 		}
-		
+
 		$PhRange	= self::GetPhalanxRange($PLANET[$resource[42]]);
 		$systemMin  = max(1, $PLANET['system'] - $PhRange);
 		$systemMax  = $PLANET['system'] + $PhRange;
-		
+
 		return $toSystem >= $systemMin && $toSystem <= $systemMax;
 	}
 
@@ -43,7 +43,7 @@ class ShowPhalanxPage extends AbstractGamePage
 	function __construct() {
 
 	}
-	
+
 	function show()
 	{
 		global $PLANET, $LNG, $resource;
@@ -51,16 +51,16 @@ class ShowPhalanxPage extends AbstractGamePage
 		$this->initTemplate();
 		$this->setWindow('popup');
 		$this->tplObj->loadscript('phalanx.js');
-		
+
 		$Galaxy 			= HTTP::_GP('galaxy', 0);
 		$System 			= HTTP::_GP('system', 0);
 		$Planet 			= HTTP::_GP('planet', 0);
-		
+
 		if(!$this->allowPhalanx($Galaxy, $System))
 		{
 			$this->printMessage($LNG['px_out_of_range']);
 		}
-		
+
 		if ($PLANET[$resource[903]] < PHALANX_DEUTERIUM)
 		{
 			$this->printMessage($LNG['px_no_deuterium']);
@@ -75,7 +75,7 @@ class ShowPhalanxPage extends AbstractGamePage
 
 		$sql = "SELECT id, name, id_owner FROM %%PLANETS%% WHERE universe = :universe
 		AND galaxy = :galaxy AND system = :system AND planet = :planet AND :type;";
-		
+
 		$TargetInfo = $db->selectSingle($sql, array(
 			':universe'	=> Universe::current(),
 			':galaxy'	=> $Galaxy,
@@ -88,7 +88,7 @@ class ShowPhalanxPage extends AbstractGamePage
 		{
 			$this->printMessage($LNG['px_out_of_range']);
 		}
-		
+
 		require 'includes/classes/class.FlyingFleetsTable.php';
 
 		$fleetTableObj = new FlyingFleetsTable;
@@ -96,7 +96,7 @@ class ShowPhalanxPage extends AbstractGamePage
 		$fleetTableObj->setUser($TargetInfo['id_owner']);
 		$fleetTableObj->setPlanet($TargetInfo['id']);
 		$fleetTable	=  $fleetTableObj->renderTable();
-		
+
 		$this->assign(array(
 			'galaxy'  		=> $Galaxy,
 			'system'  		=> $System,
@@ -104,7 +104,7 @@ class ShowPhalanxPage extends AbstractGamePage
 			'name'    		=> $TargetInfo['name'],
 			'fleetTable'	=> $fleetTable,
 		));
-		
-		$this->display('page.phalanx.default.tpl');			
+
+		$this->display('page.phalanx.default.tpl');
 	}
 }

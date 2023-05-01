@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -30,7 +30,7 @@ function ShowModulePage()
 		$config->save();
 		ClearCache();
 	}
-	
+
 	$IDs	= range(0, MODULE_AMOUNT - 1);
 	foreach($IDs as $ID => $Name) {
 		$Modules[$ID]	= array(
@@ -38,7 +38,7 @@ function ShowModulePage()
 			'state'	=> isset($module[$ID]) ? $module[$ID] : 1,
 		);
 	}
-	
+
 	asort($Modules);
 	$template	= new template();
 
@@ -51,6 +51,6 @@ function ShowModulePage()
 		'mod_change_active'		=> $LNG['mod_change_active'],
 		'mod_change_deactive'	=> $LNG['mod_change_deactive'],
 	));
-	
+
 	$template->show('ModulePage.tpl');
 }

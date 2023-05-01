@@ -1,17 +1,17 @@
 {include file="overall_header.tpl"}
 {nocache}{if isset($mode)}
 <form method="POST" action="?page=news&amp;action=send&amp;mode={$mode}">
-{if $news_id}<input name="id" type="hidden" value="{$news_id}">{/if}
+{if isset($news_id)}<input name="id" type="hidden" value="{$news_id}">{/if}
 <table>
 <tr>
 	<th colspan="2">{$nws_head}</th>
 </tr>
 <tr>
 <tr>
-	<td width="25%">{$nws_title}</td><td><input type="text" name="title" value="{$news_title}"></td>
+	<td width="25%">{if isset($nws_title)}{$nws_title}{/if}</td><td><input type="text" name="title" value="{if isset($news_title)}{$news_title}{/if}"></td>
 </tr>
 <tr>
-	<td>{$nws_content}</td><td><textarea cols="70" rows="10" name="text">{$news_text}</textarea></td>
+	<td>{$nws_content}</td><td><textarea cols="70" rows="10" name="text">{if isset($news_text)}{$news_text}{/if}</textarea></td>
 </tr>
 <tr>
 	<td colspan="2"><input type="submit" name="Submit" value="{$button_submit}"></td>

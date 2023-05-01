@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -19,6 +19,9 @@ class BBCode
 {
 	static public function parse($sText)
 	{
+		if (!isset($sText)) {
+			$sText = '';
+		}
 		$sText = str_replace("\r\n", "\n", $sText);
 		$sText = str_replace("\r", "\n", $sText);
 		$sText = str_replace("\n", '<br />', $sText);

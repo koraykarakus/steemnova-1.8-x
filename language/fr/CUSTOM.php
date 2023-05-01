@@ -22,12 +22,12 @@
  * @copyright 2009 Lucky <lucky@xgproyect.net> (XGProyecto)
  * @copyright 2011 Slaver <slaver7@gmail.com> (Fork/2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.5 (2011-07-31)
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @info $Id: CUSTOM.php 2095 2011-12-21 19:39:40Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
- 
+
 // If you have custom lang vars, you can include them here. The file ll be not overwrite by updatemanager
 // Also you can overwrite exists var, too. You use the same key.
- 
+
 ?>

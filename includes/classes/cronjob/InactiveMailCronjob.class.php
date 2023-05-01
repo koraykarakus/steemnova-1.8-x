@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -24,11 +24,11 @@ class InactiveMailCronjob
 		global $LNG;
 
 		$config	= Config::get(ROOT_UNI);
-		
+
 		if($config->mail_active == 1) {
 			/** @var $langObjects Language[] */
 			$langObjects	= array();
-		
+
 			require 'includes/classes/Mail.class.php';
 
 			$sql	= 'SELECT `id`, `username`, `lang`, `email`, `onlinetime`, `timezone`, `universe`
@@ -47,12 +47,12 @@ class InactiveMailCronjob
 				}
 
 				$userConfig	= Config::get($user['universe']);
-				
+
 				$LNG			= $langObjects[$user['lang']];
-				
+
 				$MailSubject	= sprintf($LNG['spec_mail_inactive_title'], $userConfig->game_name.' - '.$userConfig->uni_name);
 				$MailRAW		= $LNG->getTemplate('email_inactive');
-				
+
 				$MailContent	= str_replace(array(
 					'{USERNAME}',
 					'{GAMENAME}',
@@ -64,7 +64,7 @@ class InactiveMailCronjob
 					_date($LNG['php_tdformat'], $user['onlinetime'], $user['timezone']),
 					HTTP_PATH,
 				), $MailRAW);
-						
+
 				Mail::send($user['email'], $user['username'], $MailSubject, $MailContent);
 
 				$sql	= 'UPDATE %%USERS%% SET `inactive_mail` = 1 WHERE `id` = :userId;';

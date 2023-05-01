@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,17 +11,17 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 class MissionFunctions
-{	
+{
 	public $kill	= 0;
 	public $_fleet	= array();
 	public $_upd	= array();
 	public $eventTime	= 0;
-	
+
 	function UpdateFleet($Option, $Value)
 	{
 		$this->_fleet[$Option] = $Value;
@@ -32,7 +32,7 @@ class MissionFunctions
 	{
 		$this->_fleet['fleet_mess'] = $Value;
 		$this->_upd['fleet_mess']	= $Value;
-		
+
 		switch($Value)
 		{
 			case FLEET_OUTWARD:
@@ -46,12 +46,12 @@ class MissionFunctions
 			break;
 		}
 	}
-	
+
 	function SaveFleet()
 	{
 		if($this->kill == 1)
 			return;
-			
+
 		$param	= array();
 
 		$updateQuery	= array();
@@ -61,7 +61,7 @@ class MissionFunctions
 			$updateQuery[]	= "`".$Opt."` = :".$Opt;
 			$param[':'.$Opt]	= $Val;
 		}
-		
+
 		if(!empty($updateQuery))
 		{
 			$sql	= 'UPDATE %%FLEETS%% SET '.implode(', ', $updateQuery).' WHERE `fleet_id` = :fleetId;';
@@ -75,7 +75,7 @@ class MissionFunctions
 			));
 		}
 	}
-		
+
 	function RestoreFleet($onStart = true)
 	{
 		global $resource;
@@ -110,7 +110,7 @@ class MissionFunctions
 
 		$this->KillFleet();
 	}
-	
+
 	function StoreGoodsToPlanet($onStart = false)
 	{
 		$sql  = 'UPDATE %%PLANETS%% as p, %%USERS%% as u SET
@@ -132,7 +132,7 @@ class MissionFunctions
 		$this->UpdateFleet('fleet_resource_crystal', '0');
 		$this->UpdateFleet('fleet_resource_deuterium', '0');
 	}
-	
+
 	function KillFleet()
 	{
 		$this->kill	= 1;
@@ -144,7 +144,7 @@ class MissionFunctions
 			':fleetId'	=> $this->_fleet['fleet_id']
 		));
 	}
-	
+
 	function getLanguage($language = NULL, $userID = NULL)
 	{
 		if(is_null($language) && !is_null($userID))
@@ -154,7 +154,7 @@ class MissionFunctions
 				':userId' => $userID
 			), 'lang');
 		}
-		
+
 		$LNG		= new Language($language);
 		$LNG->includeData(array('L18N', 'FLEET', 'TECH', 'CUSTOM'));
 		return $LNG;

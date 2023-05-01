@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -53,32 +53,32 @@ class OpenIDAuth implements externalAuth
 	public function getAccount()
 	{
 		$user	= $this->oidObj->getAttributes();
-		
+
 		if(!empty($user['contact/email']))
 		{
 			return $user['contact/email'];
 		}
-		
+
 		if(!empty($user['namePerson/friendly']))
 		{
 			return $user['namePerson/friendly'];
 		}
-		
+
 		if(!empty($user['namePerson']))
 		{
 			return $user['namePerson'];
-		}		
-		
+		}
+
 		HTTP::redirectTo('index.php?code=4');
 
 		return false;
 	}
-	
+
 	public function register()
 	{
 		$uid	= $this->getAccount();
 		$user	= $this->oidObj->getAttributes();
-		
+
 		if(empty($user['contact/email']))
 		{
 			HTTP::redirectTo('index.php?code=4');
@@ -121,7 +121,7 @@ class OpenIDAuth implements externalAuth
 		FROM %%USERS_AUTH%%
 		INNER JOIN %%USERS%% user ON auth.id = user.id AND user.universe = :universe
 		WHERE auth.account = :email AND mode = :mode;';
-		
+
 		return Database::get()->select($sql, array(
 			':universe'	=> Universe::current(),
 			':email'	=> $user['contact/email'],

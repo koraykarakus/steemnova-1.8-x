@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,29 +11,29 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 class MissionCaseFoundDM extends MissionFunctions implements Mission
 {
-	const CHANCE = 30; 
-	const CHANCE_SHIP = 0.25; 
-	const MIN_FOUND = 423; 
-	const MAX_FOUND = 1278; 
-	const MAX_CHANCE = 50; 
-		
+	const CHANCE = 30;
+	const CHANCE_SHIP = 0.25;
+	const MIN_FOUND = 423;
+	const MAX_FOUND = 1278;
+	const MAX_CHANCE = 50;
+
 	function __construct($Fleet)
 	{
 		$this->_fleet	= $Fleet;
 	}
-	
+
 	function TargetEvent()
 	{
 		$this->setState(FLEET_HOLD);
 		$this->SaveFleet();
 	}
-	
+
 	function EndStayEvent()
 	{
 		$LNG	= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
@@ -51,7 +51,7 @@ class MissionCaseFoundDM extends MissionFunctions implements Mission
 		PlayerUtil::sendMessage($this->_fleet['fleet_owner'], 0, $LNG['sys_mess_tower'], 15,
 			$LNG['sys_expe_report'], $Message, $this->_fleet['fleet_end_stay'], NULL, 1, $this->_fleet['fleet_universe']);
 	}
-	
+
 	function ReturnEvent()
 	{
 		$LNG	= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,14 +11,14 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 class ShowSearchPage extends AbstractGamePage
 {
 	public static $requireModule = MODULE_SEARCH;
-	
+
 	function __construct() {
 		parent::__construct();
 	}
@@ -26,9 +26,9 @@ class ShowSearchPage extends AbstractGamePage
 	static function _getSearchList($searchMode, $searchText, $maxResult)
 	{
 		$db = Database::get();
-				
+
 		$limit		= $maxResult === -1 ? '' : 'LIMIT '.((int) $maxResult);
-		
+
 		$searchList	= array();
 
 		switch($searchMode) {
@@ -62,7 +62,7 @@ class ShowSearchPage extends AbstractGamePage
 						'system'		=> $searchRow['system'],
 						'planet'		=> $searchRow['planet'],
 						'rank'			=> $searchRow['total_rank'],
-					);	
+					);
 				}
 			break;
 			case 'planetname':
@@ -100,7 +100,7 @@ class ShowSearchPage extends AbstractGamePage
 						'system'		=> $searchRow['system'],
 						'planet'		=> $searchRow['planet'],
 						'rank'			=> $searchRow['total_rank'],
-					);	
+					);
 				}
 			break;
 			case "allytag":
@@ -158,27 +158,27 @@ class ShowSearchPage extends AbstractGamePage
 				}
 			break;
 		}
-		
+
 		return $searchList;
 	}
-	
+
 	function autocomplete()
 	{
 		global $LNG;
-		
+
 		$this->setWindow('ajax');
-		
+
 		$seachMode 	= HTTP::_GP('type', 'playername');
 		$searchText	= HTTP::_GP('term', '', UTF8_SUPPORT);
-		
+
 		$searchList	= array();
-		
+
 		$seachModes	= explode('|', $seachMode);
-		
+
 		if(empty($searchText)) {
 			$this->sendJSON(array());
 		}
-		
+
 		foreach($seachModes as $search)
 		{
 			$searchData	= self::_getSearchList($search, $searchText, 5);
@@ -199,50 +199,50 @@ class ShowSearchPage extends AbstractGamePage
 				}
 			}
 		}
-		
+
 		$this->sendJSON($searchList);
 	}
-	
+
 	function result()
 	{
 		global $THEME;
-		
+
 		$this->initTemplate();
 		$this->setWindow('ajax');
-		
+
 		$seachMode 	= HTTP::_GP('type', 'playername');
 		$searchText	= HTTP::_GP('search', '', UTF8_SUPPORT);
-		
+
 		$searchList	= array();
-		
+
 		if(!empty($searchText))
 		{
 			$searchList	= self::_getSearchList($seachMode, $searchText, SEARCH_LIMIT);
 		}
-		
+
 		$this->assign(array(
 			'searchList'	=> $searchList,
             'dpath'			=> $THEME->getTheme(),
 		));
-		
+
 		$templateSuffix	= ($seachMode === "allyname" || $seachMode === "allytag") ? "ally" : "default";
-		
+
 		$this->display('page.search.result.'.$templateSuffix.'.tpl');
 	}
-	
+
 	function show()
 	{
 		global $LNG, $THEME;
-		
+
 		$seachMode 		= HTTP::_GP('type', 'playername');
-		
+
 		$modeSelector	= array('playername' => $LNG['sh_player_name'], 'planetname' => $LNG['sh_planet_name'], 'allytag' => $LNG['sh_alliance_tag'], 'allyname' => $LNG['sh_alliance_name']);
 		$this->tplObj->loadscript('search.js');
 		$this->assign(array(
 			'modeSelector'	=> $modeSelector,
 			'seachMode'		=> $seachMode,
 		));
-		
+
 		$this->display('page.search.default.tpl');
 	}
 }

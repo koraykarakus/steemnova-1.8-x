@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,13 +11,13 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 
 $LNG['faq_overview']	= "FAQ";
- 
+
 $LNG['questions']					= array();
 $LNG['questions'][1]['category']	= 'Wskazówki dla początkujących';
 $LNG['questions'][1][1]['title']	= 'Część 1';
@@ -79,7 +79,7 @@ Pola zniszczeń z floty nie należą do nikogo, więc każdy może je zebrać, d
 	<li><p>Jeśli masz księżyc, a na nim falangę, to przechwycenie obcej floty robi się dużo łatwiejsze. Wtedy wybierasz planetę i ją skanujesz. Jeśli dostrzeżesz aktywne floty na tej planecie, to musisz zdecydować, czy opłaca Ci się atak. Jeśli tak to czas, by zdobyć kilka potrzebnych ci danych. Musisz zwrócić uwagę, jak długo flota leci, kiedy doleci do celu i czy będzie wracać. A to znaczy, że musisz również znać szczegóły technologiczne przeciwnika (poziom rozwoju silników najwolniejszej jednostki - zdobędziesz je wysyłając sondy szpiegowskie z misja szpieguj), wtedy możesz za pomocą kalkulatora wyliczyć dokładny czas nie tylko przybycia do celu, ale również powrotu. Bardzo przydatny może się okazać zegarek z budzikiem, nie tylko do ocenienia, o której godzinie flota dotrze.</p>
 	<p>Gdy już wiesz o której flota się zjawi na planecie czy też księżycu, musisz wysłać swoją flotę tak, by dotarła do celu 2-5 sekund po flocie przeciwnika (jeśli przeciwnik jest dobry, to 5 sekund może się okazać zbyt dużą różnicą i zdąży uciec). Kolejne co musisz zrobić to wysłać odpowiednią ilość recyklerów, by zebrać złom. Powinny się zjawić maksymalnie kilka sekund po ataku, w przeciwnym wypadku ktoś może Ci skraść pole zniszczeń!</p></li>
 	<li>Jedną z form polowania może być również zastawianie pułapek. Zostawiając flotę słabszą niż mamy w rzeczywistości (flotę dosyłamy z innej planety tak, by była 10 sekund przed atakiem) lub też korzystanie z aks i łączenia flot tuż przed atakiem (misja zostań). Zawsze warto pilnować swojego ataku, by móc zawrócić, jeśli sytuacja ulegnie zmianie.</li>
-	<li><p>Jeśli przeciwnik wykonuje trik z flotą, którą wysyła z misją stacjonuj, a potem ją zawraca, to takiej floty nie widać na falandze, ale i tak można ją przechwycić. Kluczem zawsze jest dokładne studiowanie przeciwnika - musisz poznać jego przyzwyczajenia, np. jeśli flotę zawrócił kilka minut przed dotarciem do celu, a ty wiesz dokładnie, ile leciała flota w tę stronę, to możesz łatwo, policzyć o której będzie u celu i ją przechwycić. Jeśli przeciwnik korzysta z księżyców, zawsze możesz księżyc zniszczyć, wtedy flota będzie skierowana automatycznie na planetę i będzie widoczna w falandze. Do niszczenia księżyców służy misja niszcz. 
+	<li><p>Jeśli przeciwnik wykonuje trik z flotą, którą wysyła z misją stacjonuj, a potem ją zawraca, to takiej floty nie widać na falandze, ale i tak można ją przechwycić. Kluczem zawsze jest dokładne studiowanie przeciwnika - musisz poznać jego przyzwyczajenia, np. jeśli flotę zawrócił kilka minut przed dotarciem do celu, a ty wiesz dokładnie, ile leciała flota w tę stronę, to możesz łatwo, policzyć o której będzie u celu i ją przechwycić. Jeśli przeciwnik korzysta z księżyców, zawsze możesz księżyc zniszczyć, wtedy flota będzie skierowana automatycznie na planetę i będzie widoczna w falandze. Do niszczenia księżyców służy misja niszcz.
 
 Jak widać sposobów na przechwycenie floty przeciwnika jest wiele - wymienione tutaj to tylko kawałek góry lodowej. Więcej dowiesz się rozmawiając z innymi graczami czy też przeglądając forum.</li></ul>
 BODY;

@@ -296,7 +296,7 @@ CREATE TABLE `%PREFIX%config` (
   `show_unlearned_technology` BOOLEAN NOT NULL DEFAULT 1,
   `user_max_notes` SMALLINT(5) unsigned NOT NULL DEFAULT 40,
   `recover_password_with_secret_question` BOOLEAN NOT NULL DEFAULT 1,
-  `password_recover_type` ENUM('1','2') NOT NULL DEFAULT '2'
+  `password_recover_type` ENUM('1','2') NOT NULL DEFAULT '2',
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

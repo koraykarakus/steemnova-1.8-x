@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -28,7 +28,7 @@ function ShowTopnavPage()
 	}
 
 	ksort($universeSelect);
-	$template->assign_vars(array(	
+	$template->assign_vars(array(
 		'ad_authlevel_title'	=> $LNG['ad_authlevel_title'],
 		're_reset_universe'		=> $LNG['re_reset_universe'],
 		'mu_universe'			=> $LNG['mu_universe'],
@@ -42,6 +42,6 @@ function ShowTopnavPage()
 		'AvailableUnis'			=> $universeSelect,
 		'UNI'					=> Universe::getEmulated(),
 	));
-	
+
 	$template->show('ShowTopnavPage.tpl');
 }

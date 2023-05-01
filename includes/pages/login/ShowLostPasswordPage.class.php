@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -20,23 +20,23 @@ class ShowLostPasswordPage extends AbstractLoginPage
 {
 	public static $requireModule = 0;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
-	function show() 
+
+	function show()
 	{
 		$universeSelect	= $this->getUniverseSelector();
-		
+
 		$this->assign(array(
 			'universeSelect'	=> $universeSelect
 		));
-		
+
 		$this->display('page.lostPassword.default.tpl');
 	}
-	
-	function newPassword() 
+
+	function newPassword()
 	{
 		global $LNG;
 		$userID			= HTTP::_GP('u', 0);
@@ -58,7 +58,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 				'url'	=> 'index.php',
 			)));
 		}
-		
+
 		$newPassword	= uniqid();
 
 		$sql = "SELECT username, email_2 as mail, universe FROM %%USERS%% WHERE id = :userID;";
@@ -80,7 +80,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 			$config->smtp_sendmail,
 			$newPassword,
 		), $MailRAW);
-		
+
 		$sql = "UPDATE %%USERS%% SET password = :newPassword WHERE id = :userID;";
 		$db->update($sql, array(
 			':userID'		=> $userID,
@@ -109,20 +109,20 @@ class ShowLostPasswordPage extends AbstractLoginPage
 			'url'	=> 'index.php',
 		)));
 	}
-	
+
 	function send()
 	{
 		global $LNG;
 		$username	= HTTP::_GP('username', '', UTF8_SUPPORT);
 		$mail		= HTTP::_GP('mail', '', true);
-		
+
 		$errorMessages	= array();
-		
+
 		if(empty($username))
 		{
 			$errorMessages[]	= $LNG['passwordUsernameEmpty'];
 		}
-		
+
 		if(empty($mail))
 		{
 			$errorMessages[]	= $LNG['passwordErrorMailEmpty'];
@@ -141,7 +141,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
                 $errorMessages[]	=  $LNG['registerErrorCaptcha'];
 			}
 		}
-		
+
 		if(!empty($errorMessages))
 		{
 			$message	= implode("<br>\r\n", $errorMessages);
@@ -150,7 +150,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 				'url'	=> 'index.php?page=lostPassword',
 			)));
 		}
-		
+
 		$db = Database::get();
 
 		$sql = "SELECT id FROM %%USERS%% WHERE universe = :universe AND username = :username AND email_2 = :mail;";
@@ -183,9 +183,9 @@ class ShowLostPasswordPage extends AbstractLoginPage
 		}
 
 		$validationKey	= md5(uniqid());
-						
+
 		$MailRAW		= $LNG->getTemplate('email_lost_password_validation');
-		
+
 		$MailContent	= str_replace(array(
 			'{USERNAME}',
 			'{GAMENAME}',
@@ -195,7 +195,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 			$config->game_name.' - '.$config->uni_name,
 			HTTP_PATH.'index.php?page=lostPassword&mode=newPassword&u='.$userID.'&k='.$validationKey,
 		), $MailRAW);
-		
+
 		if(!empty($config->smtp_host)) {
 			require 'includes/classes/Mail.class.php';
 			$subject	= sprintf($LNG['passwordValidMailTitle'], $config->game_name);

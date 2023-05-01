@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,10 +11,10 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
- 
+
 class Log
 {
 	private $data	= array();
@@ -35,10 +35,10 @@ class Log
     }
 
     function saveTr(){
-	
+
 	$db = Database::get();
 	$uni = (empty($this->data['universe']) ? $this->data['uni'] : $this->data['universe']);
-	
+
 	$sql = "INSERT INTO %%LOG%% SET
 	target		= :id,
 	mode		= :mode,
@@ -60,7 +60,7 @@ class Log
 	function save() {
 		$data = serialize(array($this->data['old'], $this->data['new']));
 		$uni = (empty($this->data['universe']) ? $this->data['uni'] : $this->data['universe']);
-		$GLOBALS['DATABASE']->query("INSERT INTO ".LOG." (`id`,`mode`,`admin`,`target`,`time`,`data`,`universe`) VALUES 
+		$GLOBALS['DATABASE']->query("INSERT INTO ".LOG." (`id`,`mode`,`admin`,`target`,`time`,`data`,`universe`) VALUES
 		(NULL , ".$GLOBALS['DATABASE']->sql_escape($this->data['mode']).", ".$GLOBALS['DATABASE']->sql_escape($this->data['admin']).", '".$GLOBALS['DATABASE']->sql_escape($this->data['target'])."', ".TIMESTAMP." , '".$GLOBALS['DATABASE']->sql_escape($data)."', '".$uni."');");
 	}
 }

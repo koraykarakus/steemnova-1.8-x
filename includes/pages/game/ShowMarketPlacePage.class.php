@@ -5,7 +5,8 @@
  *   by Adam "dotevo" Jordanek 2018
  *
  * For the full copyright and license information, please view the LICENSE
- *
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
+
  */
 
 class ShowMarketPlacePage extends AbstractGamePage

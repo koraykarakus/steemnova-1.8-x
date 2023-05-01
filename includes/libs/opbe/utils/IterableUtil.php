@@ -5,7 +5,7 @@
  *  Copyright (C) 2013  Jstar
  *
  * This file is part of OPBE.
- * 
+ *
  * OPBE is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -31,27 +31,28 @@ class IterableUtil implements Iterator
 
     /* Iterator functions */
 
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->array);
     }
 
-    public function current()
+    public function current(): mixed
     {
         return current($this->array);
     }
 
-    public function key()
+    public function key(): mixed
     {
         return key($this->array);
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->array);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->current() !== false;
     }

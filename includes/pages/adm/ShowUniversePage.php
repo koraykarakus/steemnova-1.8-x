@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,10 +11,10 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
- 
+
 if ($USER['authlevel'] != AUTH_ADM || $_GET['sid'] != session_id())
 {
 	throw new Exception("Permission error!");
@@ -23,10 +23,10 @@ if ($USER['authlevel'] != AUTH_ADM || $_GET['sid'] != session_id())
 function ShowUniversePage() {
 	global $LNG, $USER;
 	$template	= new template();
-	
+
 	$action		= HTTP::_GP('action', '');
 	$universe	= HTTP::_GP('uniID', 0);
-	
+
 	switch($action)
 	{
 		case 'open':
@@ -42,8 +42,8 @@ function ShowUniversePage() {
 		case 'delete':
 			if(!empty($universe) && $universe != ROOT_UNI && $universe != Universe::current())
 			{
-				$GLOBALS['DATABASE']->query("DELETE FROM ".ALLIANCE.", ".ALLIANCE_RANK.", ".ALLIANCE_REQUEST." 
-				USING ".ALLIANCE." 
+				$GLOBALS['DATABASE']->query("DELETE FROM ".ALLIANCE.", ".ALLIANCE_RANK.", ".ALLIANCE_REQUEST."
+				USING ".ALLIANCE."
 				LEFT JOIN ".ALLIANCE_RANK." ON ".ALLIANCE.".id = ".ALLIANCE_RANK.".allianceID
 				LEFT JOIN ".ALLIANCE_REQUEST." ON ".ALLIANCE.".id = ".ALLIANCE_REQUEST." .allianceID
 				WHERE ally_universe = ".$universe.";");
@@ -84,7 +84,7 @@ function ShowUniversePage() {
 				{
 					Universe::setEmulated(Universe::current());
 				}
-				
+
 				if(count(Universe::availableUniverses()) == 2)
 				{
 					// Hack The Session
@@ -117,7 +117,7 @@ function ShowUniversePage() {
 			));
 			curl_exec($ch);
 			$httpCode	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			
+
 			curl_close($ch);
 			if($httpCode != 302)
 			{
@@ -125,7 +125,7 @@ function ShowUniversePage() {
 				$template->message(str_replace(
 					array(
 						'{NGINX-CODE}'
-					), 
+					),
 					array(
 						#'rewrite '.HTTP_ROOT.'uni[0-9]+/?(.*)?$ '.HTTP_ROOT.'$2 break;'
 						'rewrite /(.*)/?uni[0-9]+/?(.*) /$1/$2 break;'
@@ -138,17 +138,17 @@ function ShowUniversePage() {
 			}
 
 			$config	= Config::get();
-			
+
 			$configSQL	= array();
 			foreach(Config::getGlobalConfigKeys() as $basicConfigKey)
 			{
 				$configSQL[]	= '`'.$basicConfigKey.'` = "'.$config->$basicConfigKey.'"';
 			}
-			
+
 			$configSQL[]	= '`uni_name` = "'.$LNG['fcm_universe'].' '.($universeCount + 1).'"';
 			$configSQL[]	= '`close_reason` = ""';
 			$configSQL[]	= '`OverviewNewsText` = "'.$GLOBALS['DATABASE']->escape($config->OverviewNewsText).'"';
-		
+
 			$GLOBALS['DATABASE']->query("INSERT INTO ".CONFIG." SET ".implode(', ', $configSQL).";");
 			$newUniverse	= $GLOBALS['DATABASE']->GetInsertID();
 
@@ -165,24 +165,24 @@ function ShowUniversePage() {
 			}
 		break;
 	}
-	
+
 	$uniList	= array();
-	
+
 	$uniResult	= $GLOBALS['DATABASE']->query("SELECT uni, users_amount, game_disable, energySpeed, halt_speed, resource_multiplier, fleet_speed, game_speed, uni_name, COUNT(DISTINCT inac.id) as inactive, COUNT(planet.id) as planet
 	FROM ".CONFIG." conf
 	LEFT JOIN ".USERS." as inac ON uni = inac.universe AND inac.onlinetime < ".(TIMESTAMP - INACTIVE)."
 	LEFT JOIN ".PLANETS." as planet ON uni = planet.universe
 	GROUP BY conf.uni, inac.universe, planet.universe
 	ORDER BY uni ASC;");
-	
+
 	while($uniRow = $GLOBALS['DATABASE']->fetch_array($uniResult)) {
 		$uniList[$uniRow['uni']]	= $uniRow;
 	}
-	
+
 	$template->assign_vars(array(
 		'uniList'	=> $uniList,
 		'SID'		=> session_id(),
 	));
-	
+
 	$template->show('UniversePage.tpl');
 }

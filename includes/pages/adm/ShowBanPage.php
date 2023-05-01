@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -23,8 +23,9 @@ function ShowBanPage()
 
 	$db = Database::get();
 
-	$ORDER = ($_GET['order'] == 'id') ? "id" : "username";
-  $WHEREBANA = ($_GET['view'] == "bana") ? " AND `bana` = '1' " : " ";
+
+	$ORDER = (HTTP::_GP('order','') == 'id') ? "id" : "username";
+  $WHEREBANA = (HTTP::_GP('view','') == "bana") ? " AND `bana` = '1' " : " ";
 
 
 	$sql = "SELECT `username`, `id`, `bana` FROM %%USERS%%
@@ -45,7 +46,7 @@ function ShowBanPage()
 	}
 
 
-	$ORDER2 = ($_GET['order2'] == 'id') ? "id" : "username";
+	$ORDER2 = (HTTP::_GP('order2','') == 'id') ? "id" : "username";
 
 	$Banneds = 0;
 

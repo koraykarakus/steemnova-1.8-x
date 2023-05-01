@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -35,22 +35,22 @@ function ShowQuickEditorPage()
 				$SpecifyItemsPQ	.= "`".$resource[$ID]."`,";
 			}
 			$PlanetData	= $GLOBALS['DATABASE']->getFirstRow("SELECT ".$SpecifyItemsPQ." `name`, `id_owner`, `planet_type`, `galaxy`, `system`, `planet`, `destruyed`, `diameter`, `field_current`, `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, `deuterium` FROM ".PLANETS." WHERE `id` = '".$id."';");
-						
+
 			if($action == 'send'){
 				$SQL	= "UPDATE ".PLANETS." SET ";
 				$Fields	= $PlanetData['field_current'];
 				foreach($DataIDs as $ID)
 				{
 					$level	= min(max(0, round(HTTP::_GP($resource[$ID], 0.0))), (in_array($ID, $reslist['build']) ? 255: 18446744073709551615));
-				
+
 					if(in_array($ID, $reslist['allow'][$PlanetData['planet_type']]))
 					{
 						$Fields	+= $level - $PlanetData[$resource[$ID]];
 					}
-					
+
 					$SQL	.= "`".$resource[$ID]."` = ".$level.", ";
 				}
-				
+
 				$SQL	.= "`metal` = ".max(0, round(HTTP::_GP('metal', 0.0))).", ";
 				$SQL	.= "`crystal` = ".max(0, round(HTTP::_GP('crystal', 0.0))).", ";
 				$SQL	.= "`deuterium` = ".max(0, round(HTTP::_GP('deuterium', 0.0))).", ";
@@ -59,9 +59,9 @@ function ShowQuickEditorPage()
 				$SQL	.= "`name` = '".$GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT))."', ";
 				$SQL	.= "`eco_hash` = '' ";
 				$SQL	.= "WHERE `id` = '".$id."' AND `universe` = '".Universe::getEmulated()."';";
-					
+
 				$GLOBALS['DATABASE']->query($SQL);
-				
+
 				$old = array();
 				$new = array();
                 foreach(array_merge($DataIDs,$reslist['resstype'][1]) as $IDs)
@@ -76,13 +76,13 @@ function ShowQuickEditorPage()
 				$LOG->old = $old;
 				$LOG->new = $new;
 				$LOG->save();
-		
+
 				exit(sprintf($LNG['qe_edit_planet_sucess'], $PlanetData['name'], $PlanetData['galaxy'], $PlanetData['system'], $PlanetData['planet']));
 			}
 			$UserInfo				= $GLOBALS['DATABASE']->getFirstRow("SELECT `username` FROM ".USERS." WHERE `id` = '".$PlanetData['id_owner']."' AND `universe` = '".Universe::getEmulated()."';");
 
 			$build = $defense = $fleet	= array();
-			
+
 			foreach($reslist['allow'][$PlanetData['planet_type']] as $ID)
 			{
 				$build[]	= array(
@@ -92,7 +92,7 @@ function ShowQuickEditorPage()
 					'input'	=> $PlanetData[$resource[$ID]]
 				);
 			}
-			
+
 			foreach($reslist['fleet'] as $ID)
 			{
 				$fleet[]	= array(
@@ -102,7 +102,7 @@ function ShowQuickEditorPage()
 					'input'	=> $PlanetData[$resource[$ID]]
 				);
 			}
-			
+
 			foreach($reslist['defense'] as $ID)
 			{
 				$defense[]	= array(
@@ -114,7 +114,7 @@ function ShowQuickEditorPage()
 			}
 
 			$template	= new template();
-			$template->assign_vars(array(	
+			$template->assign_vars(array(
 				'build'			=> $build,
 				'fleet'			=> $fleet,
 				'defense'		=> $defense,
@@ -148,7 +148,7 @@ function ShowQuickEditorPage()
 			}
 			$UserData	= $GLOBALS['DATABASE']->getFirstRow("SELECT ".$SpecifyItemsPQ." `username`, `authlevel`, `galaxy`, `system`, `planet`, `id_planet`, `darkmatter`, `authattack`, `authlevel` FROM ".USERS." WHERE `id` = '".$id."';");
 			$ChangePW	= $USER['id'] == ROOT_USER || ($id != ROOT_USER && $USER['authlevel'] > $UserData['authlevel']);
-		
+
 			if($action == 'send'){
 				$SQL	= "UPDATE ".USERS." SET ";
 				foreach($DataIDs as $ID)
@@ -163,7 +163,7 @@ function ShowQuickEditorPage()
 				$SQL	.= "`authattack` = '".($UserData['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $UserData['authlevel'] : 0)."' ";
 				$SQL	.= "WHERE `id` = '".$id."' AND `universe` = '".Universe::getEmulated()."';";
 				$GLOBALS['DATABASE']->query($SQL);
-				
+
 				$old = array();
 				$new = array();
 				$multi	=  HTTP::_GP('multi', 0);
@@ -180,7 +180,7 @@ function ShowQuickEditorPage()
 				$new['authattack']	= ($UserData['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $UserData['authlevel'] : 0);
 				$old['multi']		= $GLOBALS['DATABASE']->getFirstCell("SELECT COUNT(*) FROM ".MULTI." WHERE userID = ".$id.";");
 				$new['authattack']	= $multi;
-			
+
 				if($old['multi'] != $multi)
 				{
 					if($multi == 0)
@@ -192,20 +192,20 @@ function ShowQuickEditorPage()
 						$GLOBALS['DATABASE']->query("INSERT INTO ".MULTI." SET userID = ".((int) $id).";");
 					}
 				}
-				
+
 				$LOG = new Log(1);
 				$LOG->target = $id;
 				$LOG->old = $old;
 				$LOG->new = $new;
 				$LOG->save();
-				
+
 				exit(sprintf($LNG['qe_edit_player_sucess'], $UserData['username'], $id));
 			}
 			$PlanetInfo				= $GLOBALS['DATABASE']->getFirstRow("SELECT `name` FROM ".PLANETS." WHERE `id` = '".$UserData['id_planet']."' AND `universe` = '".Universe::getEmulated()."';");
 
 			$tech		= array();
 			$officier	= array();
-			
+
 			foreach($reslist['tech'] as $ID)
 			{
 				$tech[]	= array(
@@ -226,7 +226,7 @@ function ShowQuickEditorPage()
 			}
 
 			$template	= new template();
-			$template->assign_vars(array(	
+			$template->assign_vars(array(
 				'tech'			=> $tech,
 				'officier'		=> $officier,
 				'id'			=> $id,

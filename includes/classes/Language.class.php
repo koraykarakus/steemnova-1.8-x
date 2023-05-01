@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -145,7 +145,7 @@ class Language implements ArrayAccess {
 				require $filePath;
 			}
 		}
-		
+
 		$DEFAULT = $LNG;
 
 		// Get current client language
@@ -156,7 +156,7 @@ class Language implements ArrayAccess {
 				require $filePath;
 			}
 		}
-		
+
 		// Build missing language data from English to client language
 		foreach ($DEFAULT as $TextKey => $TextData) {
 			if (is_array($TextData)) {
@@ -174,7 +174,7 @@ class Language implements ArrayAccess {
 
 	/** ArrayAccess Functions **/
 
-    public function offsetSet($offset, $value) {
+    public function offsetSet(mixed $offset,mixed $value) : void {
         if (is_null($offset)) {
             $this->container[] = $value;
         } else {
@@ -182,15 +182,15 @@ class Language implements ArrayAccess {
         }
     }
 
-    public function offsetExists($offset) {
+    public function offsetExists(mixed $offset) : bool {
         return isset($this->container[$offset]);
     }
 
-    public function offsetUnset($offset) {
+    public function offsetUnset(mixed $offset) : void {
         unset($this->container[$offset]);
     }
 
-    public function offsetGet($offset) {
+    public function offsetGet(mixed $offset) : mixed {
         return isset($this->container[$offset]) ? $this->container[$offset] : $offset;
     }
 }

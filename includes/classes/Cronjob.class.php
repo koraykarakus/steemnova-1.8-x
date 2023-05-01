@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -19,9 +19,9 @@ class Cronjob
 {
 	function __construct()
 	{
-		
+
 	}
-	
+
 	static function execute($cronjobID)
 	{
 		$lockToken	= md5(TIMESTAMP);
@@ -39,16 +39,16 @@ class Cronjob
 		{
 			throw new Exception(sprintf("Unknown cronjob %s or cronjob is deactive!", $cronjobID));
 		}
-		
+
 		$sql = 'UPDATE %%CRONJOBS%% SET `lock` = :lock WHERE cronjobID = :cronjobId;';
 
 		$db->update($sql, array(
 			':lock'			=> $lockToken,
 			':cronjobId'	=> $cronjobID
 		));
-		
+
 		$cronjobPath		= 'includes/classes/cronjob/'.$cronjobClassName.'.class.php';
-		
+
 		// die hard, if file not exists.
 		require_once($cronjobPath);
 
@@ -72,7 +72,7 @@ class Cronjob
 			':lockToken'		=> $lockToken
 		));
 	}
-	
+
 	static function getNeedTodoExecutedJobs()
 	{
 		$sql			= 'SELECT cronjobID
@@ -90,7 +90,7 @@ class Cronjob
 		{
 			$cronjobList[]	= $cronjobRow['cronjobID'];
 		}
-		
+
 		return $cronjobList;
 	}
 
@@ -111,7 +111,7 @@ class Cronjob
 
 		return strtotime($lastTime);
 	}
-	
+
 	static function reCalculateCronjobs($cronjobID = NULL)
 	{
 		require_once 'includes/libs/tdcron/class.tdcron.php';

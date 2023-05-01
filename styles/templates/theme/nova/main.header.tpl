@@ -35,8 +35,8 @@
 	var Lang		= "{$lang}";
 	var head_info	= "{$LNG.fcm_info}";
 	var auth		= {$authlevel|default:'0'};
-	var days 		= {$LNG.week_day|json|default:'[]'}
-	var months 		= {$LNG.months|json|default:'[]'} ;
+	var days 		= {$LNG.week_day|json}
+	var months 		= {$LNG.months|json} ;
 	var tdformat	= "{$LNG.js_tdformat}";
 	var queryString	= "{$queryString|escape:'javascript'}";
 	var isPlayerCardActive	= "{$isPlayerCardActive|json}";
@@ -339,5 +339,5 @@ $("#600h").show();
 	});
 	</script>
 </head>
-<body id="{$smarty.get.page|htmlspecialchars|default:'overview'}" class="{$bodyclass}">
+<body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
 	<div id="tooltip" class="tip"></div>

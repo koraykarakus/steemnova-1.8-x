@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -51,7 +51,7 @@ function ShowCreatorPage()
 					':UserName' => $UserName
 				),'count');
 
-		
+
 				$sql = "SELECT (SELECT COUNT(*) FROM %%USERS%% WHERE universe = :universe AND (email = :UserMail OR email_2 = :UserMail)) +
 				(SELECT COUNT(*) FROM %%USERS_VALID%% WHERE universe = :universe AND email = :UserMail) as count;";
 

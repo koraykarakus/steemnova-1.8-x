@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -22,7 +22,7 @@ function ShowNewsPage(){
 
 	$db = Database::get();
 
-	if($_GET['action'] == 'send') {
+	if(HTTP::_GP('action','') == 'send') {
 		$edit_id 	= HTTP::_GP('id', 0);
 		$title 		= HTTP::_GP('title', '', true);
 		$text 		= HTTP::_GP('text', '', true);
@@ -44,14 +44,14 @@ function ShowNewsPage(){
 
 			$db->update($sql,array(
 				':title' => $title,
-				':newsText' => $newsText,
+				':newsText' => $text,
 				':actionTime' => TIMESTAMP,
 				':edit_id' => $edit_id
 			));
 
 		}
 
-	} elseif($_GET['action'] == 'delete' && isset($_GET['id'])) {
+	} elseif(HTTP::_GP('action','') == 'delete' && isset($_GET['id'])) {
 
 		$sql = "DELETE FROM %%NEWS%% WHERE `id` = :news_id;";
 
@@ -64,6 +64,8 @@ function ShowNewsPage(){
 	$sql = "SELECT * FROM %%NEWS%% ORDER BY id ASC;";
 
 	$news = $db->select($sql);
+
+	$NewsList = array();
 
 	foreach ($news as $u) {
 		$NewsList[]	= array(
@@ -78,11 +80,11 @@ function ShowNewsPage(){
 	$template	= new template();
 
 
-	if($_GET['action'] == 'edit' && isset($_GET['id'])) {
+	if(HTTP::_GP('action','') == 'edit' && isset($_GET['id'])) {
 
 		$sql = "SELECT id, title, text FROM %%NEWS%% WHERE id = :id;";
 
-		$db->select($sql,array(
+		$News = $db->selectSingle($sql,array(
 			':id' => HTTP::_GP('id',0)
 		));
 
@@ -93,7 +95,7 @@ function ShowNewsPage(){
 			'news_title'	=> $News['title'],
 			'news_text'		=> $News['text'],
 		));
-	} elseif($_GET['action'] == 'create') {
+	} elseif(HTTP::_GP('action','') == 'create') {
 		$template->assign_vars(array(
 			'mode'			=> 2,
 			'nws_head'		=> $LNG['nws_head_create'],

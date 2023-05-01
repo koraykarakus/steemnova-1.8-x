@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -10,12 +10,12 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 // Traduzido por QwataKayean. Todos os Direitos Reservados © 2010-2012
-// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.         
+// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
@@ -91,7 +91,7 @@ $LNG['sys_recy_report'] 				= "Relatório de reciclagem";
 $LNG['sys_expe_blackholl_1'] 			= "A frota foi sugada por um buraco negro, e foi praticamente toda destruída.";
 $LNG['sys_expe_blackholl_2'] 			= "A frota foi sugada por um buraco negro, e foi completamente destruída!";
 $LNG['sys_expe_found_goods'] 			= "A tua frota descobriu naves abandonadas! <br> e conseguiram recuperar %s de %s, %s de %s, %s de %s e %s de %s.";
-$LNG['sys_expe_found_ships'] 			= "A tua frota descobriu um esquadrão de frota abandonado, recuperaram as naves e voltaram para casa.<br> Squadron:"; 
+$LNG['sys_expe_found_ships'] 			= "A tua frota descobriu um esquadrão de frota abandonado, recuperaram as naves e voltaram para casa.<br> Squadron:";
 $LNG['sys_expe_back_home'] 				= "A tua frota de expedição regressou ao planeta.";
 $LNG['sys_expe_found_ress_1_1']			= 'A tua exploração espacial descobriu um enxame de pequenos asterôides, do qual alguns recursos puderam ser obtidos.';
 $LNG['sys_expe_found_ress_1_2']			= 'Num remoto planetoide, foram encontrados alguns campos com recursos facilmente acessíveis e foram obtidos com êxito.';
@@ -117,7 +117,7 @@ $LNG['sys_expe_found_ships_1_2']		= 'Encontramos uma base pirata abandonada. No 
 $LNG['sys_expe_found_ships_1_3']		= 'A tua frota de exploração encontrou um planeta que provavelmente foi quase todo destruído por guerras. Em órbita estão diversas naves. Os engenheiros estão a tentar reparar algumas delas. Talvez, então, possamos também obter informações sobre o que realmente aconteceu aqui.';
 $LNG['sys_expe_found_ships_1_4']		= 'A tua exploração encontrou um forte de uma raça pouco conhecida, que provavelmente teve de sair de urgência devido ao seu estado de destruição. Mas no hangar do forte ainda se encontram algumas naves, os engenheiros tão a tentar recuperar algumas delas, para fazerem parte da tua frota de exploração. ';
 $LNG['sys_expe_found_ships_2_1']		= 'Encontramos os restos de uma Armada de guerra. Os teus engenheiros da frota de exploração estão a tentar repará-la novamente para que possam executar a sua função novamente e pertencer à tua Armada.';
-$LNG['sys_expe_found_ships_2_2']		= 'A nossa exploração deparou com um estaleiro de produção automática. Algumas naves ainda estão em fase de produção e os nossos engenheiros estão a tentar restaurar a energia ao estaleiro de produção, para que essas naves possam ser acabadas.'; 
+$LNG['sys_expe_found_ships_2_2']		= 'A nossa exploração deparou com um estaleiro de produção automática. Algumas naves ainda estão em fase de produção e os nossos engenheiros estão a tentar restaurar a energia ao estaleiro de produção, para que essas naves possam ser acabadas.';
 $LNG['sys_expe_found_ships_3_1']		= 'A frota de exploração encontrou um cemitério de naves gigantes. Alguns engenheiros da frota de exploração foram tentar reparar algumas dessas naves para as poderem levar de volta.';
 $LNG['sys_expe_found_ships_3_2']		= 'Descobrimos um planeta com os restos de uma civilização muito evoluída. Na órbita desse planeta encontra-se uma enorme estação espacial, é o único edifício intacto. Alguns dos nossos engenheiros e pilotos foram para a superfície para ver se algumas das naves que estão estacionadas ali podem ainda ser usadas.';
 $LNG['sys_expe_lost_fleet_1']			= 'Da exploração, apenas a mensagem de rádio restou: Zzzrrt Oh Deus! Krrrzzzzt o zrrrtrzt sim krgzzzz parece Krzzzzzzzztzzzz ...';
@@ -141,7 +141,7 @@ $LNG['sys_expe_nothing_5'] 				= 'Bem, pelo menos sabemos, agora que tem anomali
 $LNG['sys_expe_nothing_6'] 				= 'Apesar de as primeiras varreduras promissoras deste setor, infelizmente, voltamos de mãos vazias.';
 $LNG['sys_expe_nothing_7'] 				= 'Talvez não devamos comemorar o aniversário do Comandante neste planeta remoto. A febre da galáxia acompanhou grande parte da tripulação e obrigou a que estivessem na enfermaria. Como tal aconteceu, isso significava que a exploração tinha falhado.';
 $LNG['sys_expe_nothing_8'] 				= 'A tua exploração foi literalmente fazer amizade com o vazio do universo. Não havia sequer um pequeno asteroide, ou radiação, ou partículas, ou qualquer coisa que esta exploração tivesse sido designada excitante.';
-$LNG['sys_expe_nothing_9'] 				= 'Uma falha do reator de hiperespaço teria destruído quase toda a exploração se não fosse os teus engenheiros. Felizmente, os engenheiros foram capazes de evitar o pior. No entanto, o reparo demorou muito tempo, e a exploração voltou de mãos vazias.'; 	
+$LNG['sys_expe_nothing_9'] 				= 'Uma falha do reator de hiperespaço teria destruído quase toda a exploração se não fosse os teus engenheiros. Felizmente, os engenheiros foram capazes de evitar o pior. No entanto, o reparo demorou muito tempo, e a exploração voltou de mãos vazias.';
 $LNG['sys_expe_attack_1_1_1'] 			= 'Alguns piratas espaciais aparentemente muito desesperado tentaram saquear a nossa frota de exploração.';
 $LNG['sys_expe_attack_1_1_2'] 			= 'Alguns bárbaros primitivos estão a atacar-nos com naves espaciais que ainda nem sequer ganharam a designação do nome nave. Se o fogo assumir proporções graves, seremos forçados a retornar o fogo contra eles.';
 $LNG['sys_expe_attack_1_1_3'] 			= 'Temos intercetadas mensagens de rádio para uns piratas, alguns muito bêbados. Aparentemente, vamos ser atacados.';
@@ -163,8 +163,8 @@ $LNG['sys_expe_attack_2_2_3'] 			= 'O link para a nossa frota expedicionária fo
 $LNG['sys_expe_attack_2_3_1'] 			= 'A tua frota exploração foi intercetada por uma frota de invasão alienígena, e temos relatórios de combate pesados!';
 $LNG['sys_expe_attack_2_3_2'] 			= 'Um grande vestir cristalinos de origem desconhecida tem uma rota de colisão com a nossa frota de exploração. Temos agora que assumir o pior.';
 $LNG['sys_expe_attack_2_3_3'] 			= 'Nós tivemos um pouco de dificuldade pronunciando o dialeto alienígena corretamente. Nosso diplomata acabou dizendo "Fogo!" ao invés de "Paz!"';
-$LNG['sys_expe_attackname_1']			= 'Piratas'; 	
-$LNG['sys_expe_attackname_2'] 			= 'Aliens';   
+$LNG['sys_expe_attackname_1']			= 'Piratas';
+$LNG['sys_expe_attackname_2'] 			= 'Aliens';
 $LNG['sys_expe_back_home']              = 'A tua frota de exploração voltou ao hangar.<br>Consegiram recuperar %s %s, %s %s, %s %s e %s %s.';
 $LNG['sys_expe_back_home_without_dm']   = 'A tua frota de exploração voltou ao hangar.';
 $LNG['sys_expe_back_home_with_dm']      = 'A tua frota de exploração voltou ao hangar.<br>Econtraram %s(%s) as naves estavam muito danificadas.<br>a %s pode ser salva.';

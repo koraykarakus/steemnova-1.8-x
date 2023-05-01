@@ -3,12 +3,12 @@
 <table width="90%">
 <tr>
 <td class="transparent left">
-<input type="checkbox" {$minimize} name="minimize"><input type="submit" value="{$se_contrac}" class="button">
+<input type="checkbox" {if isset($minimize)}{$minimize}{/if} name="minimize"><input type="submit" value="{$se_contrac}" class="button">
 <img src="./styles/resource/images/admin/GO.png" onClick="javascript:$('#seeker').slideToggle();" style="cursor:pointer;padding-right:60px;" class="tooltip" data-tooltip-content="{$ac_minimize_maximize}">
 </td>
 </tr>
 </table>
-<div id="seeker"{$diisplaay}>
+<div id="seeker"{if isset($diisplaay)}{$diisplaay}{/if}>
 <table width="90%">
 	<tr>
 		<th colspan="8">
@@ -34,7 +34,7 @@
 		<td>
 			{$se_asc_desc}
 		</td>
-		{if $OrderBYParse}
+		{if isset($OrderBYParse)}
 		<td>
 			{$se_search_order}
 		</td>
@@ -62,7 +62,7 @@
 	<td>
 		{html_options name=key_acc options=$Selector.order selected=$OrderBY}
 	</td>
-	{if $OrderBYParse}
+	{if isset($OrderBYParse)}
 	<td>
 		{html_options name=key_order options=$OrderBYParse selected=$Order}
 	</td>

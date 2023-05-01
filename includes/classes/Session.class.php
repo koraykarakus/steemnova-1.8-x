@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -39,7 +39,7 @@ class Session
 		ini_set('session.use_only_cookies', '1');
 		ini_set('session.use_trans_sid', 0);
 		ini_set('session.auto_start', '0');
-		ini_set('session.serialize_handler', 'php');  
+		ini_set('session.serialize_handler', 'php');
 		ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
 		ini_set('session.gc_probability', '1');
 		ini_set('session.gc_divisor', '1000');
@@ -48,9 +48,9 @@ class Session
 		ini_set('session.cookie_httponly', true);
 		ini_set('session.save_path', CACHE_PATH.'sessions');
 		ini_set('upload_tmp_dir', CACHE_PATH.'sessions');
-		
+
 		$HTTP_ROOT = MODE === 'INSTALL' ? dirname(HTTP_ROOT) : HTTP_ROOT;
-		
+
 		session_set_cookie_params(SESSION_LIFETIME, $HTTP_ROOT, NULL, HTTPS, true);
 		session_cache_limiter('nocache');
 		session_name('2Moons');
@@ -301,7 +301,7 @@ class Session
 		if(isset($_GET['page']) && $_GET['page']=="raport" && isset($_GET['raport']) && count($_GET)==2 && MODE === 'INGAME') {
 		$this->data['lastActivity']=time(); } else { if(!isset($_SESSION["obj"])) { return false; } }
 
-		
+
 		if($this->data['lastActivity'] < TIMESTAMP - SESSION_LIFETIME)
 		{
 			return false;
@@ -347,7 +347,7 @@ class Session
 	{
 		return HTTP_ROOT.(!empty($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : '');
 	}
-	
+
 	private function compareIpAddress($ip1, $ip2, $blockCount)
 	{
 		if (strpos($ip2, ':') !== false && strpos($ip1, ':') !== false)
@@ -360,7 +360,7 @@ class Session
 			$s_ip = implode('.', array_slice(explode('.', $ip1), 0, $blockCount));
 			$u_ip = implode('.', array_slice(explode('.', $ip2), 0, $blockCount));
 		}
-		
+
 		return ($s_ip == $u_ip);
 	}
 

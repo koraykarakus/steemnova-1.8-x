@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,10 +11,10 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
- 
+
 class Database_BC extends mysqli
 {
 	protected $exception;
@@ -58,7 +58,7 @@ class Database_BC extends mysqli
 	 *
 	 * @return resource	Results of the query
 	 */
-	public function query($resource, $resultmode = NULL)
+	public function query(string $resource, int $resultmode = MYSQLI_STORE_RESULT) : mysqli_result|bool
 	{
 		if($result = parent::query($resource))
 		{
@@ -72,17 +72,17 @@ class Database_BC extends mysqli
 	}
 
 	public function getFirstRow($resource)
-	{		
+	{
 		return $this->uniquequery($resource);
 	}
 
 	public function uniquequery($resource)
-	{		
+	{
 		$result = $this->query($resource);
 		$Return = $result->fetch_array(MYSQLI_ASSOC);
 		$result->close();
 		return $Return;
-		
+
 	}
 	/**
 	 * Purpose a query on selected database.
@@ -93,16 +93,16 @@ class Database_BC extends mysqli
 	 */
 
 	public function getFirstCell($resource)
-	{		
+	{
 		return $this->countquery($resource);
 	}
 	public function countquery($resource)
-	{		
+	{
 		$result = $this->query($resource);
 		list($Return) = $result->fetch_array(MYSQLI_NUM);
 		$result->close();
 		return $Return;
-	}	
+	}
 	/**
 	 * Purpose a query on selected database.
 	 *
@@ -112,7 +112,7 @@ class Database_BC extends mysqli
 	 */
 
 	public function fetchquery($resource, $encode = array())
-	{		
+	{
 		$result = $this->query($resource);
 		$Return	= array();
 
@@ -138,7 +138,7 @@ class Database_BC extends mysqli
 	{
 		return $result->fetch_array(MYSQLI_ASSOC);
 	}
-	
+
 	public function fetch_array($result)
 	{
 		return $this->fetchArray($result);
@@ -167,7 +167,7 @@ class Database_BC extends mysqli
 	{
 		return $query->num_rows;
 	}
-	
+
 	public function affectedRows()
 	{
 		return $this->affected_rows;
@@ -192,17 +192,17 @@ class Database_BC extends mysqli
 	 *
 	 * @return string Returns the escaped string, or false on error.
 	 */
-	
+
     public function escape($string, $flag = false)
     {
 		return $this->sql_escape($string, $flag);
     }
-	
+
     public function sql_escape($string, $flag = false)
     {
 		return ($flag === false) ? parent::escape_string($string): addcslashes(parent::escape_string($string), '%_');
     }
-	
+
 	public function str_correction($str)
 	{
 		return stripcslashes($str);
@@ -217,7 +217,7 @@ class Database_BC extends mysqli
 	{
 		return parent::get_client_info();
 	}
-	
+
 	/**
 	 * Returns used mysqli-Verions.
 	 *
@@ -240,28 +240,28 @@ class Database_BC extends mysqli
         $resource->close();
         return;
 	}
-	
-	public function multi_query($resource)
+
+	public function multi_query(string $resource) : bool
 	{
 		if(parent::multi_query($resource))
 		{
 			do {
 			    if ($result = parent::store_result())
 					$result->free();
-				
+
 				$this->queryCount++;
-					
+
 				if(!parent::more_results()){break;}
-					
-			} while (parent::next_result());		
+
+			} while (parent::next_result());
 		}
-	
+
 		if ($this->errno)
 		{
 			throw new Exception("SQL Error: ".$this->error."<br><br>Query Code: ".$resource);
 		}
 	}
-	
+
 	public function get_sql()
 	{
 		return $this->queryCount;

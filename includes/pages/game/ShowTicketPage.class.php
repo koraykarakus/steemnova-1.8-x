@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -20,14 +20,14 @@ class ShowTicketPage extends AbstractGamePage
 	public static $requireModule = MODULE_SUPPORT;
 
 	private $ticketObj;
-	
-	function __construct() 
+
+	function __construct()
 	{
 		parent::__construct();
 		require('includes/classes/class.SupportTickets.php');
 		$this->ticketObj	= new SupportTickets;
 	}
-	
+
 	public function show()
 	{
 		global $USER, $LNG;
@@ -44,40 +44,40 @@ class ShowTicketPage extends AbstractGamePage
 		));
 
 		$ticketList		= array();
-		
+
 		foreach($ticketResult as $ticketRow) {
 			$ticketRow['time']	= _date($LNG['php_tdformat'], $ticketRow['time'], $USER['timezone']);
 
 			$ticketList[$ticketRow['ticketID']]	= $ticketRow;
 		}
-		
+
 		$this->assign(array(
 			'ticketList'	=> $ticketList
 		));
-			
+
 		$this->display('page.ticket.default.tpl');
 	}
-	
-	function create() 
+
+	function create()
 	{
 		$categoryList	= $this->ticketObj->getCategoryList();
-		
+
 		$this->assign(array(
 			'categoryList'	=> $categoryList,
 		));
-			
-		$this->display('page.ticket.create.tpl');		
+
+		$this->display('page.ticket.create.tpl');
 	}
-	
-	function send() 
+
+	function send()
 	{
 		global $USER, $LNG;
-				
+
 		$ticketID	= HTTP::_GP('id', 0);
 		$categoryID	= HTTP::_GP('category', 0);
 		$message	= HTTP::_GP('message', '', true);
 		$subject	= HTTP::_GP('subject', '', true);
-		
+
 		if(empty($message)) {
 			if(empty($ticketID)) {
 				$this->redirectTo('game.php?page=ticket&mode=create');
@@ -110,16 +110,16 @@ class ShowTicketPage extends AbstractGamePage
 				$this->printMessage($LNG['ti_error_closed']);
 			}
 		}
-			
+
 		$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, 0);
 		$this->redirectTo('game.php?page=ticket&mode=view&id='.$ticketID);
 	}
-	
-	function view() 
+
+	function view()
 	{
 		global $USER, $LNG;
-		
-		require 'includes/classes/BBCode.class.php';
+
+		require_once 'includes/classes/BBCode.class.php';
 
 		$db = Database::get();
 
@@ -153,14 +153,14 @@ class ShowTicketPage extends AbstractGamePage
 		}
 
 		$categoryList	= $this->ticketObj->getCategoryList();
-		
+
 		$this->assign(array(
 			'ticketID'		=> $ticketID,
 			'categoryList'	=> $categoryList,
 			'answerList'	=> $answerList,
 			'status'		=> $ticket_status,
 		));
-			
-		$this->display('page.ticket.view.tpl');		
+
+		$this->display('page.ticket.view.tpl');
 	}
 }

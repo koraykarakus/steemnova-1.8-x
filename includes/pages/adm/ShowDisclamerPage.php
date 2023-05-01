@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -26,19 +26,19 @@ function ShowDisclamerPage()
 
 	if (!empty($_POST))
 	{
-		$config_before = array(	
+		$config_before = array(
 			'disclamerAddress'	=> $config->disclamerAddress,
 			'disclamerPhone'	=> $config->disclamerPhone,
 			'disclamerMail'	=> $config->disclamerMail,
 			'disclamerNotice'	=> $config->disclamerNotice,
 		);
-		
+
 		$disclaimerAddress	= HTTP::_GP('disclaimerAddress', '', true);
 		$disclaimerPhone	= HTTP::_GP('disclaimerPhone', '', true);
 		$disclaimerMail		= HTTP::_GP('disclaimerMail', '', true);
 		$disclaimerNotice	= HTTP::_GP('disclaimerNotice', '', true);
-		
-		$config_after = array(	
+
+		$config_after = array(
 			'disclamerAddress'	=> $disclaimerAddress,
 			'disclamerPhone'	=> $disclaimerPhone,
 			'disclamerMail'		=> $disclaimerMail,
@@ -50,7 +50,7 @@ function ShowDisclamerPage()
 			$config->$key	= $value;
 		}
 		$config->save();
-		
+
 		$LOG = new Log(3);
 		$LOG->target = 5;
 		$LOG->old = $config_before;
@@ -74,6 +74,6 @@ function ShowDisclamerPage()
 		'se_disclaimerMail'		=> $LNG['se_disclaimerMail'],
 		'se_disclaimerNotice'	=> $LNG['se_disclaimerNotice'],
 	));
-	
+
 	$template->show('DisclamerConfigBody.tpl');
 }

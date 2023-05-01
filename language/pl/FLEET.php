@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -108,7 +108,7 @@ $LNG['sys_expe_found_ships_1_2']			= 'Trafiliśmy na opuszczoną bazę piratów.
 $LNG['sys_expe_found_ships_1_3']			= 'Nasza wyprawa trafiła na prawie kompletnie zniszczoną wojną planetę. Z wraków na orbicie technicy próbują coś odzyskać, a pokładowy historyk stara się dociec co tu się włąściwie wydarzyło.';
 $LNG['sys_expe_found_ships_1_4']			= 'Napotkaliśmy dryfującą i opuszczoną od wielu lat bojową stację kosmiczną. Jak się okazało, hangary nie są całkiem puste. Nasi technicy spróbują uruchomić pozostawione statki.';
 $LNG['sys_expe_found_ships_2_1']			= 'Trafiliśmy na szczątki zniszczonej armady. Natychmiast wysłaliśmy techników do statków które wyglądały na najmniej uszkodzone, może uda nam się niektóre z nich ponownie uruchomić.';
-$LNG['sys_expe_found_ships_2_2']			= 'Ekspedycja trafiła na dryfującą, automatyczną stocznię. Po dostarczeniu jej energii udało się ją ponownie uruchomić, czekamy teraz co uda się jej wyprodukować.'; 
+$LNG['sys_expe_found_ships_2_2']			= 'Ekspedycja trafiła na dryfującą, automatyczną stocznię. Po dostarczeniu jej energii udało się ją ponownie uruchomić, czekamy teraz co uda się jej wyprodukować.';
 $LNG['sys_expe_found_ships_3_1']			= 'Znaleźliśmy gigantyczne cmentarzystko statków. Technicy sprawdzają, czy da się coś uratować.';
 $LNG['sys_expe_found_ships_3_2']			= 'Odkryliśmy planetę z pozostałością cywilizacji, a na orbicie ogromną stocznię. Część techników i pilotów sprawdza, czy nie da się czegoś uratować.';
 $LNG['sys_expe_lost_fleet_1']				= 'Trafiliśmy na sygnał SOS, zgodnie z protokołem lecimy na pomoc... To ZZZrt! Boże ... zzrrrttt.. co ...byyyyooo.... kurrr....';
@@ -132,7 +132,7 @@ $LNG['sys_expe_nothing_5'] 					= 'Teraz już wiadomo, że czerowna anomalia kla
 $LNG['sys_expe_nothing_6'] 					= 'Skan sektora przyniósł obiecujące odczyty, natychmiast przystąpiliśmy do dalszych skan i poszukiwań. Niestety jednak okazało się że to tylko anomalia która zakłócała działanie naszych sensorów, więc wracamy z niczym. Technicy obiecują że następnym razem się poprawią i proszą o nieskracenie ich o głowe. Pozostawią decyzję Waszej Imperatorskiej Wszechjasności.';
 $LNG['sys_expe_nothing_7'] 					= 'Wstyd przyznać, ale akurat wczasie długiego lotu do regionu który mieliśmy zbadać wypadły urodziny Admirała floty. Cała załoga postanowiła wspólnymi siłami zorganizować wspaniałe przyjęcie! Na nasze nieszczęście, ktoś wpadł na pomysł żeby jako główny składnik dań wybrać te kurczakowate borgi, co je kiedyś złapaliśmy. Okazało się, że w dużych ilościach powodują okropne choroby żołądka... Załoga nie miała wyjścia i podjęła decyzję o powrocie do domu, bez dalszej eksploracji kosmosu.';
 $LNG['sys_expe_nothing_8'] 					= 'Nasza Ekspedycja zawarła znajomość z kompletną pustką w przestrzeni... Coś niespotykanego...';
-$LNG['sys_expe_nothing_9'] 					= 'Awaria reaktora statku dowództwa prawie zniszczyła wyprawę, na szczęście kilku zdolnych techników opanowało kryzys. Straty paliwa i materiałów były tak duże, że trzeba było wracać, zanim udało się coś ciekawego znaleźć.'; 	
+$LNG['sys_expe_nothing_9'] 					= 'Awaria reaktora statku dowództwa prawie zniszczyła wyprawę, na szczęście kilku zdolnych techników opanowało kryzys. Straty paliwa i materiałów były tak duże, że trzeba było wracać, zanim udało się coś ciekawego znaleźć.';
 $LNG['sys_expe_attack_1_1_1'] 				= 'Jeden z kosmicznych piratów desperacko starał się przejąć naszą ekspedycję.';
 $LNG['sys_expe_attack_1_1_2'] 				= 'Jacyś prymitiwni barbarzyńcy, poruszający się czymś, co nie powinno się nazywać statkiem kosmicznym. Na ogień czujemy się odpowiedzieć ogniem.';
 $LNG['sys_expe_attack_1_1_3'] 				= 'Przechwyciliśmy kilka komunikatów piratów... najwyraźniej zostaniemy zaatakowani.';
@@ -143,7 +143,7 @@ $LNG['sys_expe_attack_1_2_2'] 				= 'Podążając za obiecującymi odczytami tra
 $LNG['sys_expe_attack_1_2_3'] 				= 'Dostaliśmy sygnął SOS, więc zgodnie z procedurami, przerwaliśmy ekspedycję by pomóc potrzebującym. Na miejscu okazało się, że wezwanie było zasadzką zastawioną przez piratów. Stawimy i czoło i oby nikt więcej nie wpadł w ich zasadzki.';
 $LNG['sys_expe_attack_1_3_1'] 				= 'Przechwyciliśmy transmisję obcych, niezidentyfikowanych obiektów latających, dowództwo floty postanowiło to sprawdzić. Okazało się, że za transmisję odpowiada baza renegatów. Nie było negocjacji, od razu przystąpiliśmy do ostrzału z wojennym okrzykiem: na phybel pirackim ścierwom!';
 $LNG['sys_expe_attack_1_3_2'] 				= 'Podążaliśmy właśnie za obiecującymi odczytami z pobliskiego pasa asteroid, gdy nagle z nadprzestrzeni wypadły na nas pirackie okręty, jeśli szczęście nam dopisze szybko ich rozgonimy i może jeszcze uda nam się zebrać jakieś surowce.';
-$LNG['sys_expe_attack_1_3_3']				= 'Otrzymaliśmy właśnie pilną wiadomość od dowódcy ekspedycji: "Lecą na nas! Wyskoczyli z nadprzestrzeni, na szczęście to tylko piraci, więc mamy szansę, będziemy walczyć!"'; 
+$LNG['sys_expe_attack_1_3_3']				= 'Otrzymaliśmy właśnie pilną wiadomość od dowódcy ekspedycji: "Lecą na nas! Wyskoczyli z nadprzestrzeni, na szczęście to tylko piraci, więc mamy szansę, będziemy walczyć!"';
 $LNG['sys_expe_attack_2_1_1'] 				= 'Nasza flota napotkała nieznane jednostki latające. Doszło do pierwszego kontaktu, niestety za pośrednictwem wystrzelonych w nasze okręty pocisków...';
 $LNG['sys_expe_attack_2_1_2'] 				= 'Sir! Właśnie badaliśmy niezwykle interesującą anomalię powiązaną z Czarną Materią, gdy nagle z nadprzestrzeni wyłoniły się okręty, jakich jeszcze dotąd nie widzieliśmy. Bez ostrzeżenia otworzyli do nas ogień. Będziemy mieli szczęście jeśli ktokolwiek przeżyje tę niczym nieuzasadnioną agresję...';
 $LNG['sys_expe_attack_2_1_3'] 				= 'Nasza ekspedycja napotkała niewielką grupę nieznanych okrętów. Próbowaliśmy nawiązać z nimi łączność radiową, próbowaliśmy dawać znaki świetle, bez żadnej reakcji. Gdy postanowiliśmy odlecieć badać dalsze obszary galaktyki, obca flota zaatakowała. Ta niewielka grupa okrętów okazała się niestety zabójczo silna...';
@@ -155,8 +155,8 @@ $LNG['sys_expe_attack_2_3_1'] 				= 'Imperatorze! Flota która wyruszyła na eks
 $LNG['sys_expe_attack_2_3_2'] 				= 'Duża flota krystalicznych statków nieznanego pochodzenia jest na kursie kolizyjnym. Kapitanowie okrętów zrobią co w ich mocy, ale obawiam się najgorszego.';
 $LNG['sys_expe_attack_2_3_3'] 				= 'Mamy drobne problemy z wymawianiem słów w języku obcych. Nasz dyplomata przypadkowo powiedział \'Ognia!\' zamiast \'Pokój!\' ';
 $LNG['sys_expe_found_ships_nothing']		= '- Nie odnaleziono żadnych statków, które nadawałaby się do naprawy i ponownego uruchomienia.';
-$LNG['sys_expe_attackname_1']				= 'Piraci'; 	
-$LNG['sys_expe_attackname_2'] 				= 'Obcy'; 	
+$LNG['sys_expe_attackname_1']				= 'Piraci';
+$LNG['sys_expe_attackname_2'] 				= 'Obcy';
 $LNG['sys_expe_back_home'] 					= 'Twoja flota wróciła z ekspedycji.<br>Flota dostarczyła %s %s, %s %s, %s %s i %s %s.';
 $LNG['sys_expe_back_home_without_dm']		= 'Twoja flota wróciła z ekspedycji.';
 $LNG['sys_expe_back_home_with_dm']			= 'Twoja flota wróciła z ekspedycji.<br>Flota znalazła (%s)%s Częściowo zniszczone zostały zezłomowane. <br> %s zostały uratowane.';

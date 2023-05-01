@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,21 +11,21 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 class Mail
-{	
+{
 	static public function send($mailTarget, $mailTargetName, $mailSubject, $mailContent)
-	{		
+	{
 		$mail	= self::getMailObject();
-			 
+
         $mail->CharSet	= 'UTF-8';
         $mail->Subject	= $mailSubject;
         $mail->Body		= $mailContent;
         $mail->AddAddress($mailTarget, $mailTargetName);
-        $mail->Send(); 
+        $mail->Send();
 	}
 
 	static public function multiSend($mailTargets, $mailSubject, $mailContent = NULL)
@@ -37,10 +37,10 @@ class Mail
 		foreach($mailTargets as $address => $data)
 		{
 			$content = isset($data['body']) ? $data['body'] : $mailContent;
-			
+
 			$mail->AddAddress($address, $data['username']);
 			$mail->MsgHTML($content);
-			$mail->Send(); 
+			$mail->Send();
 			$mail->ClearAddresses();
 		}
 	}
@@ -55,14 +55,14 @@ class Mail
 		$config				= Config::get();
 
         if($config->mail_use == 2) {
-			$mail->IsSMTP();  
-			$mail->SMTPSecure       = $config->smtp_ssl;                                            
+			$mail->IsSMTP();
+			$mail->SMTPSecure       = $config->smtp_ssl;
 			$mail->Host             = $config->smtp_host;
 			$mail->Port             = $config->smtp_port;
-			
+
 			if($config->smtp_user != '')
 			{
-				$mail->SMTPAuth         = true; 
+				$mail->SMTPAuth         = true;
 				$mail->Username         = $config->smtp_user;
 				$mail->Password         = $config->smtp_pass;
 			}
@@ -77,7 +77,7 @@ class Mail
 
 		$mail->CharSet	= 'UTF-8';
 		$mail->SetFrom($mailFromAddress, $mailFromName);
-		
+
 		return $mail;
 	}
 }

@@ -22,7 +22,7 @@
 		<a href="#" onclick="return Dialog.info({$resourceID});">
 			<img src="{$dpath}images/{$resourceData.name}.gif">
 			<div class="resource_name no-mobile">{$LNG.tech.$resourceID}</div>
-			
+
 			<div class="no-mobile">
 				{if !isset($resourceData.current)}
 					{$resourceData.currentt = $resourceData.max + $resourceData.used}
@@ -38,7 +38,7 @@
 					<div class="res_max" id="max_{$resourceData.name}" data-real="{$resourceData.current}">{$resourceData.max|number}</div>
 				{/if}
 			</div>
-			
+
 			<div class="mobile">
 				{if !isset($resourceData.current)}
 					{$resourceData.currentt = $resourceData.max + $resourceData.used}
@@ -51,12 +51,12 @@
 						<td class="res_current" id="current_{$resourceData.name}" data-real="{$resourceData.current}">{shortly_number($resourceData.current)}</td>
 				{/if}
 				{if !isset($resourceData.current) || !isset($resourceData.max)}
-					
+
 				{else}
 					<td class="res_current" id="current_{$resourceData.name}" data-real="{$resourceData.current}"><span{if $resourceData.current >= {$resourceData.max}} style="color:red"{/if}>{shortly_number($resourceData.current)}</span></td>
 				{/if}
 			</div>
-		
+
 			<!--
 			<div class="mobile">
 				{if !isset($resourceData.current)}
@@ -79,7 +79,7 @@
 				{/if}
 			</div>
 			-->
-			
+
 			<!--
 			<div>
 			{if true or $shortlyNumber}
@@ -107,7 +107,7 @@
 		</a>
 	</div>
 	{/foreach}
-	
+
 </div>
 
 <!--

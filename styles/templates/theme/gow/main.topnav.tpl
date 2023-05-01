@@ -116,13 +116,13 @@
         {if isset($resourceData.current)}
         <tr>
           <td class="left">Available:</td>
-          <td class="right">{$resourceData.current|pretty_number}</td>
+          <td class="right">{$resourceData.current|number}</td>
         </tr>
         {/if}
         {if isset($resourceData.max)}
         <tr>
           <td class="left">Capacity</td>
-          <td class="right">{$resourceData.max|pretty_number}</td>
+          <td class="right">{$resourceData.max|number}</td>
         </tr>
         {/if}
         <tr>

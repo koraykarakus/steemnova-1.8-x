@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -10,13 +10,13 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 $LNG['faq_overview']	= "FAQ";
- 
+
 $LNG['questions']					= array();
 $LNG['questions'][1]['category']	= 'Tips for beginners';
 $LNG['questions'][1][1]['title']	= 'Step 1';
@@ -61,16 +61,16 @@ $LNG['questions'][2][1]['body']		= <<<BODY
 <li>Intercepting a fleet</li>
 </ul>
 <h3>Inactive Raids:</h3>
-<p>As a fleeter you basically want to make resources as fast and easy as possible. Sometimes won't be able to attack any active players around you as most of them 
+<p>As a fleeter you basically want to make resources as fast and easy as possible. Sometimes won't be able to attack any active players around you as most of them
 will be online or already fleet saving. However, you can raid inactive players as they are not likely to come online. Farming inactives is not as suspenseful as
 attacking active players however it is a good way of working around time consuming attacks</p>
 <h3>ACS:</h3>
 <p>The Alliance Combat System (or ACS) allows for friends and alliance members to temporarily combine their fleets to attack or defend a target that either might not have been able to attack or defend alone. An Alliance Depot is not a prerequisite to attack or defend a planet with ACS</p>
 <h3>Intercepting a fleet:</h3>
 <p>This is where it gets tricky. How do I find possible targets? You basically try to find them like idling fleets, however every time you see that fleet you
-notice that the player is online. Before you can crash someone who is saving and watching his fleet you have to find out how, when and where the player is 
-saving his fleet. To do that you have to observe the player. If the player is saving without moons its easier to intercept him as you can basically rely on 
-your phalanx alone. But when it comes to intercepting fleets saved from a moon it gets time consuming. Depending on how the player saves you have to destroy 
+notice that the player is online. Before you can crash someone who is saving and watching his fleet you have to find out how, when and where the player is
+saving his fleet. To do that you have to observe the player. If the player is saving without moons its easier to intercept him as you can basically rely on
+your phalanx alone. But when it comes to intercepting fleets saved from a moon it gets time consuming. Depending on how the player saves you have to destroy
 his moon(s) to be able to phalanx his fleet.</p>
 BODY;
 $LNG['questions'][2][2]['title']	= 'Fleetsave';

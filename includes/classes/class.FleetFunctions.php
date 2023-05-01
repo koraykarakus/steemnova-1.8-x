@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -491,16 +491,16 @@ class FleetFunctions
 	public static function CheckBash($Target)
 	{
 		global $USER;
-		
-		
+
+
 		$PlanetOwner = Database::get()->selectSingle('SELECT id_owner FROM %%PLANETS%% where id = :id', array(
 			':id'		=> $Target,
 		), 'id_owner');
-				
+
 		$Inactivity = Database::get()->selectSingle('SELECT onlinetime FROM %%USERS%% where id = :id', array(
 			':id'		=> $PlanetOwner,
 		), 'onlinetime');
-				
+
 		if($Inactivity < TIMESTAMP - INACTIVE)
 		{
 			return false;

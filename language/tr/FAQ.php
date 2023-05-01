@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -10,7 +10,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -139,4 +139,3 @@ $LNG['questions'][2][4]['body']		= <<<BODY
 <p>Bu menuden ittifakla ilgili bilgileri duzenleyebilirsiniz. Ittifagin tanimi,  metinler ve sayfasi gibi. Ayni zamanda uyeleri yonet menusuyle rutbeler belirleyip, uyelerin yekilerini atayabilirsiniz. Eger ilerde ittifagi devretmek isterseniz uyelerden birine Sag Kol ozelligi vermeniz gerkmektedir.
 <br> Ayni zamanda ittifagi dagit menusuyle de ittifagi dagitabilirsiniz Ama ittifaktan ayril dediginizde Ittifak belirlediginiz Sag Kol’a devredilir. Ayni zamanda kurucu yada kurucunun yetki verdigi uyeler bu sayfadan uye basvurularini degerlendirebilir. </p>
 BODY;
-

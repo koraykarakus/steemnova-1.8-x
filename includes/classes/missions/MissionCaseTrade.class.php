@@ -9,6 +9,7 @@
  * @package Steemnova
  * @author Adam Jordanek <dotevo@gmail.com>
  * @licence MIT
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  */
 
 class MissionCaseTrade extends MissionFunctions implements Mission

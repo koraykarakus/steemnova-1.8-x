@@ -1,5 +1,17 @@
 <?php
 
+/**
+ *  2Moons / Steemnova
+ *   by Jan-Otto Kröpke 2009-2016
+ *
+ * For the full copyright and license information, please view the LICENSE
+ *
+ * @package Steemnova
+ * @author Adam Jordanek <dotevo@gmail.com>
+ * @licence MIT
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
+ */
+
 class MissionCaseTransfer extends MissionFunctions implements Mission
 {
 	function __construct($Fleet)

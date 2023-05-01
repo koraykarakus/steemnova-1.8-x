@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,32 +11,40 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
-require('includes/libs/Smarty/Smarty.class.php');
-		
+require('includes/libs/Smarty/libs/Smarty.class.php');
+
 class template extends Smarty
 {
 	protected $window	= 'full';
 	public $jsscript	= array();
 	public $script		= array();
-	
+
 	function __construct()
-	{	
+	{
 		parent::__construct();
 		$this->smartySettings();
 	}
 
 	private function smartySettings()
 	{
-		$this->php_handling = Smarty::PHP_REMOVE;
+		require_once './includes/libs/Smarty/libs/plugins/modifier.number_format.php';
+		require_once './includes/libs/Smarty/libs/plugins/modifier.json.php';
+		require_once './includes/libs/Smarty/libs/plugins/modifier.time.php';
+
+		//$this->registerPlugin("modifier","htmlspecialchars", "smarty_modifier_htmlspecialchars");
+		$this->registerPlugin("modifier","number", "smarty_modifier_number_format");
+		$this->registerPlugin("modifier","json", "smarty_modifier_json");
+		$this->registerPlugin("modifier","time", "smarty_modifier_time");
 
 		$this->setForceCompile(false);
 		$this->setMergeCompiledIncludes(true);
 		$this->setCompileCheck(true);#Set false for production!
-		$this->setCacheLifetime(604800);
+		//$this->setCacheLifetime(604800);
+		$this->cache_lifetime = 604800;
 		$this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 		$this->setCompileDir(is_writable(CACHE_PATH) ? CACHE_PATH : $this->getTempPath());
 		$this->setCacheDir($this->getCompileDir().'templates');
@@ -51,9 +59,9 @@ class template extends Smarty
 		require_once 'includes/libs/wcf/BasicFileUtil.class.php';
 		return BasicFileUtil::getTempFolder();
 	}
-		
-	public function assign_vars($var, $nocache = true) 
-	{		
+
+	public function assign_vars($var, $nocache = true)
+	{
 		parent::assign($var, NULL, $nocache);
 	}
 
@@ -66,11 +74,11 @@ class template extends Smarty
 	{
 		$this->script[]				= $script;
 	}
-	
+
 	private function adm_main()
 	{
 		global $LNG, $USER;
-		
+
 		$dateTimeServer		= new DateTime("now");
 		if(isset($USER['timezone'])) {
 			try {
@@ -97,9 +105,9 @@ class template extends Smarty
 			'bodyclass'			=> 'full'
 		));
 	}
-	
+
 	public function show($file)
-	{		
+	{
 		global $LNG, $THEME;
 
 		if($THEME->isCustomTPL($file))
@@ -108,7 +116,7 @@ class template extends Smarty
 		}
 
 		$tplDir	= $this->getTemplateDir();
-			
+
 		if(MODE === 'INSTALL') {
 			$this->setTemplateDir($tplDir[0].'install/');
 		} elseif(MODE === 'ADMIN') {
@@ -124,19 +132,20 @@ class template extends Smarty
 		$this->assign_vars(array(
 			'LNG'			=> $LNG,
 		), false);
-		
+
 		$this->compile_id	= $LNG->getLanguage();
-		
+
 		parent::display($file);
 	}
-	
+
 	public function display($file = NULL, $cache_id = NULL, $compile_id = NULL, $parent = NULL)
 	{
 		global $LNG;
+
 		$this->compile_id	= $LNG->getLanguage();
 		parent::display($file);
 	}
-	
+
 	public function gotoside($dest, $time = 3)
 	{
 		$this->assign_vars(array(
@@ -144,32 +153,32 @@ class template extends Smarty
 			'goto'		=> $dest,
 		));
 	}
-	
+
 	public function message($mes, $dest = false, $time = 3, $Fatal = false)
 	{
 		global $LNG, $THEME;
-	
+
 		$this->assign_vars(array(
 			'mes'		=> $mes,
 			'fcm_info'	=> $LNG['fcm_info'],
 			'Fatal'		=> $Fatal,
             'dpath'		=> $THEME->getTheme(),
 		));
-		
+
 		$this->gotoside($dest, $time);
 		$this->show('error_message_body.tpl');
 	}
-	
+
 	public static function printMessage($Message, $fullSide = true, $redirect = NULL) {
 		$template	= new self;
 		if(!isset($redirect)) {
 			$redirect	= array(false, 0);
 		}
-		
+
 		$template->message($Message, $redirect[0], $redirect[1], !$fullSide);
 		exit;
 	}
-	
+
     /**
     * Workaround  for new Smarty Method to add custom props...
     */
@@ -190,7 +199,7 @@ class template extends Smarty
             return $this->{$name};
         }
     }
-	
+
     public function __set($name, $value)
     {
         $allowed = array(

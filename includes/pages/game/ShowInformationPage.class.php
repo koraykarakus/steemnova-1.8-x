@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -78,7 +78,7 @@ class ShowInformationPage extends AbstractGamePage
 		$SubQueryOri	= "";
 		$SubQueryDes	= "";
 		$Ships			= HTTP::_GP('ship', array());
-		
+
 		foreach($reslist['fleet'] as $Ship)
 		{
 			if(!isset($Ships[$Ship]) || $Ship == 212)
@@ -165,7 +165,7 @@ class ShowInformationPage extends AbstractGamePage
 
 		$order = $USER['planet_sort_order'] == 1 ? "DESC" : "ASC" ;
 		$sort  = $USER['planet_sort'];
-		
+
 		$sql = "SELECT id, name, galaxy, system, planet, last_jump_time, ".$resource[43]." FROM %%PLANETS%% WHERE id != :planetID AND id_owner = :userID AND planet_type = '3' AND ".$resource[43]." > 0 ORDER BY ";
 
 		switch($sort) {
@@ -180,7 +180,7 @@ class ShowInformationPage extends AbstractGamePage
 				break;
 		}
 
-		
+
 		$moonResult = $db->select($sql, array(
 			':planetID'         => $PLANET['id'],
 			':userID'           => $USER['id']
@@ -355,7 +355,7 @@ class ShowInformationPage extends AbstractGamePage
 			'FleetInfo'			=> $FleetInfo,
 			'gateData'			=> $gateData,
 		));
-		
+
         	if($elementID <= 900 || $elementID >=930)
         	{
             	$this->assign(array(

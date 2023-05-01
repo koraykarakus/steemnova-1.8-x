@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,12 +11,12 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 class HTTP {
-	
+
 	static public function redirectTo($URL, $external = false)
 	{
 		if($external)
@@ -44,7 +44,7 @@ class HTTP {
 	{
 		setcookie($name, $value, $toTime);
 	}
-	
+
 	static public function _GP($name, $default, $multibyte = false, $highnum = false)
 	{
 		if(!isset($_REQUEST[$name]))
@@ -56,22 +56,22 @@ class HTTP {
 		{
 			return (float) $_REQUEST[$name];
 		}
-		
+
 		if(is_int($default))
 		{
-			return (int) $_REQUEST[$name];			
+			return (int) $_REQUEST[$name];
 		}
 
 		if(is_string($default))
 		{
 			return self::_quote($_REQUEST[$name], $multibyte);
 		}
-		
+
 		if(is_array($default) && is_array($_REQUEST[$name]))
 		{
 			return self::_quoteArray($_REQUEST[$name], $multibyte, !empty($default) && $default[0] === 0);
 		}
-		
+
 		return $default;
 	}
 

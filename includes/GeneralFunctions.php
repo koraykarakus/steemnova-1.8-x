@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -159,8 +159,8 @@ function locale_date_format($format, $time, $LNG = NULL)
 		global $LNG;
 	}
 
-	$weekDay	= date('w', $time);
-	$months		= date('n', $time) - 1;
+	$weekDay	= date('w', (int) $time);
+	$months		= date('n', (int) $time) - 1;
 
 	$format     = str_replace(array('D', 'M'), array('$D$', '$M$'), $format);
 	$format		= str_replace('$D$', addcslashes($LNG['week_day'][$weekDay], 'A..z'), $format);
@@ -177,8 +177,8 @@ function _date($format, $time = null, $toTimeZone = null, $LNG = NULL)
 
 	if (isset($toTimeZone)) {
 		$date = new DateTime();
-		if (method_exists($date, 'setTimestamp')) {	// PHP > 5.3			
-			$date->setTimestamp($time);
+		if (method_exists($date, 'setTimestamp')) {	// PHP > 5.3
+			$date->setTimestamp((int)$time);
 		} else {
 			// PHP < 5.3
 			$tempDate = getdate((int) $time);
@@ -195,7 +195,7 @@ function _date($format, $time = null, $toTimeZone = null, $LNG = NULL)
 	}
 
 	$format	= locale_date_format($format, $time, $LNG);
-	return date($format, $time);
+	return date($format, (int) $time);
 }
 
 function ValidateAddress($address)
@@ -231,9 +231,10 @@ function pretty_time($seconds)
 	global $LNG;
 
 	$day	= floor($seconds / 86400);
-	$hour	= floor($seconds / 3600 % 24);
-	$minute	= floor($seconds / 60 % 60);
-	$second	= floor($seconds % 60);
+
+	$hour	= floor((int)($seconds / 3600) % 24);
+	$minute	= floor((int)($seconds / 60) % 60);
+	$second	= floor((int) $seconds % 60);
 
 	$time  = '';
 
@@ -254,9 +255,12 @@ function pretty_time($seconds)
 
 function pretty_fly_time($seconds)
 {
-	$hour	= floor($seconds / 3600);
-	$minute	= floor($seconds / 60 % 60);
-	$second	= floor($seconds % 60);
+
+	$hour	= $seconds / 3600;
+	$hour = floor($hour);
+
+	$minute = floor($seconds / 60) % 60;
+	$second	= (int) $seconds % 60;
 
 	return sprintf('%02d:%02d:%02d', $hour, $minute, $second);
 }
@@ -322,7 +326,7 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
 
 	return array(
 		'NoobPlayer' => (
-			/* WAHR: 
+			/* WAHR:
 				Wenn Spieler mehr als 25000 Punkte hat UND
 				Wenn ZielSpieler weniger als 80% der Punkte des Spieler hat.
 				ODER weniger als 5.000 hat.
@@ -331,7 +335,7 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
 			($TargetPlayer['total_points'] <= $config->noobprotectiontime) && // Default: 25.000
 			($OwnerPlayer['total_points'] > $TargetPlayer['total_points'] * $config->noobprotectionmulti)),
 		'StrongPlayer' => (
-			/* WAHR: 
+			/* WAHR:
 				Wenn Spieler weniger als 5000 Punkte hat UND
 				Mehr als das funfache der eigende Punkte hat
 			*/
@@ -416,16 +420,16 @@ function ClearCache()
 	foreach(new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::CHILD_FIRST) as $file) {
 		if (false == $file->isDir()) {
 			$CONTENT	= file_get_contents($file->getPathname());
-			
+
 			preg_match('!\$'.'Id: [^ ]+ ([0-9]+)!', $CONTENT, $match);
-			
+
 			if(isset($match[1]) && is_numeric($match[1]))
 			{
 				$REV	= max($REV, $match[1]);
 			}
 		}
 	}
-	
+
 	$config->VERSION	= $version[0].'.'.$version[1].'.'.$REV;
 	*/
 
@@ -556,7 +560,7 @@ function exceptionHandler($exception)
 	var Lang		= "de";
 	var head_info	= "Information";
 	var auth		= 3;
-	var days 		= ["So","Mo","Di","Mi","Do","Fr","Sa"] 
+	var days 		= ["So","Mo","Di","Mi","Do","Fr","Sa"]
 	var months 		= ["Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"] ;
 	var tdformat	= "[M] [D] [d] [H]:[i]:[s]";
 	var queryString	= "";

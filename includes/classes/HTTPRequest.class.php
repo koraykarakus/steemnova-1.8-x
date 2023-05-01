@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -40,12 +40,12 @@ class HTTPRequest
 				"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3",
 				"Accept-Language: de-DE,de;q=0.8,en-US;q=0.6,en;q=0.4",
 			));
-			
+
 			$this->content	= curl_exec($this->ch);
 			curl_close($this->ch);
 		}
 	}
-	
+
 	public function getResponse()
 	{
 		$this->send();

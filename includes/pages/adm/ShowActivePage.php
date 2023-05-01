@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -25,7 +25,9 @@ function ShowActivePage()
 
 	$id = HTTP::_GP('id', 0);
 
-	if($_GET['action'] == 'delete' && !empty($id)){
+	$actionType = HTTP::_GP('action','');
+
+	if($actionType == 'delete' && !empty($id)){
 
 		$sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";
 

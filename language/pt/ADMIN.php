@@ -1,6 +1,6 @@
 <?php
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -10,19 +10,19 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 // Traduzido por QwataKayean. Todos os Direitos Reservados © 2010-2012
-// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.         
+// Texto escrito conforme o Acordo Ortográfico a ser inserido em 2011 pelo Ministério da Educação de Portugal - convertido pelo Lince.
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
 
 
 
-//---------------	Geral	------------------------// 
+//---------------	Geral	------------------------//
 $LNG['adm_login']			= 'Login';
 $LNG['adm_username']		= 'Username';
 $LNG['adm_password']		= 'Password';
@@ -68,7 +68,7 @@ $LNG['uvs_reload']						= 'Recarregar';
 $LNG['uvs_back']						= 'Voltar';
 $LNG['log_disclamersettings']			= 'Contatos';
 
-//---------------	Sim ou não	------------------------// 
+//---------------	Sim ou não	------------------------//
 $LNG['one_is_yes_1']	= 'Sim';
 $LNG['one_is_yes_0']	= 'Não';
 
@@ -77,7 +77,7 @@ $LNG['one_is_no_0']	= 'Não';
 //###########################################################//
 
 
-//---------------	Botões	------------------------// 
+//---------------	Botões	------------------------//
 $LNG['button_submit']		= 'Enviar';
 $LNG['button_add']			= 'Perfil';
 $LNG['button_delete']		= 'Apagar';
@@ -98,13 +98,13 @@ $LNG['input_id_ally']		= 'ID da Aliança';
 //###########################################################//
 
 
-//---------------	Recursos	------------------------// 
+//---------------	Recursos	------------------------//
 $LNG['resources_title']	        = 'Recursos';
 $LNG['count_res']			= 'Número de recursos';
 //###########################################################//
 
 
-//---------------	Modulos   ------------------------// 
+//---------------	Modulos   ------------------------//
 $LNG['buildings_title']	= 'Edificios';
 $LNG['ships_title']		= 'Naves';
 $LNG['defenses_title']		= 'Defesas';
@@ -459,7 +459,7 @@ $LNG['se_smtp_port_info']               = 'Inserir aqui a porta do seu servidor 
 $LNG['se_smtp_user']                    = 'SMTP Username:';
 $LNG['se_smtp_pass']                    = 'SMTP Password:';
 $LNG['se_smtp_sendmail']				= 'SMTP Remetente:';
-$LNG['se_smtp_sendmail_info']          	= 'Ponha aqui o endereço de email de retorno. Não necessita de ser o mesmo de envio.';                                  
+$LNG['se_smtp_sendmail_info']          	= 'Ponha aqui o endereço de email de retorno. Não necessita de ser o mesmo de envio.';
 $LNG['se_ftp']							= 'Configurações de FTP';
 $LNG['se_ftp_info']                     = 'Sistema de updates automaticos via FTP! Este sistema actuliza os ficheiros consuante o que ouver de novo, mas atenção se tiveres modificações essas iram ser removidas.';
 $LNG['se_ftp_host']                     = 'FTP Servidor (Exemplo: ftp://o jogo ou http://o jogo):';
@@ -636,12 +636,12 @@ $LNG['mu_ts_options']                   = 'Opções Teamspeak';
 $LNG['mu_game_info']                    = 'Informação';
 $LNG['mu_vaild_users']				    = 'Atividade de Usuário';
 $LNG['mu_news']					        = 'Noticias';
-$LNG['mu_multiip_page']					= 'Múltiplos IPs'; 
-$LNG['mu_clear_cache']					= 'Limpar Cache'; 
-$LNG['mu_vertify']				     	= 'Verificar Conteúdo do Jogo'; 
-$LNG['mu_logs']				     		= 'Atividade de Administrador'; 
-$LNG['mu_giveaway']				     	= 'Sistema Giveaway'; 
-$LNG['mu_cronjob']					= 'Cronjobs'; 
+$LNG['mu_multiip_page']					= 'Múltiplos IPs';
+$LNG['mu_clear_cache']					= 'Limpar Cache';
+$LNG['mu_vertify']				     	= 'Verificar Conteúdo do Jogo';
+$LNG['mu_logs']				     		= 'Atividade de Administrador';
+$LNG['mu_giveaway']				     	= 'Sistema Giveaway';
+$LNG['mu_cronjob']					= 'Cronjobs';
 $LNG['mu_disclaimer']				= 'Configurações de contato';
 $LNG['mu_dump']						= 'Backup da Base de Dados';
 
@@ -665,7 +665,7 @@ $LNG['vt_loadfile']					= 'Carregar lista de ficheiros';
 
 //###########################################################//
 
-$LNG['cc_cache_clear']				= 'Cache Limpo'; 
+$LNG['cc_cache_clear']				= 'Cache Limpo';
 
 //---------------	Reinicio de Universo	------------------------//
 $LNG['re_reset_universe'] 				= 'Reiniciar o Universo';
@@ -1002,7 +1002,7 @@ $LNG['qe_submit']						= 'Enviar';
 $LNG['qe_resetr']						= 'Redefinir';
 $LNG['qe_allowmulti']					= 'Permitir Multi IPs';
 
-	
+
 //----------------------------------------------------------------------------//
 // Configuração do TeamSpeak
 $LNG['ts_settings']                     = 'Teamspeak';
@@ -1011,8 +1011,8 @@ $LNG['ts_version']                      = 'Versão do Servidor:';
 $LNG['ts_udpport']                      = 'Porta TCP';
 $LNG['ts_tcpport']                      = 'Porta UDP';
 $LNG['ts_serverip']                     = 'IP do Servidor';
-$LNG['ts_timeout']                      = 'Timeout'; 
-$LNG['ts_server_query']                 = 'Porta do Servidor de Querys'; 
+$LNG['ts_timeout']                      = 'Timeout';
+$LNG['ts_server_query']                 = 'Porta do Servidor de Querys';
 $LNG['ts_login']						= 'Usuario ServerQuery';
 $LNG['ts_pass']							= 'Senha ServerQuery';
 $LNG['ts_cron']							= 'Atualizar taxa';

@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 //SHORT NAMES FOR COMBAT REPORTS
@@ -36,8 +36,8 @@ $LNG['shortNames'] = array (
 	218 => 'Avatar',
 	219 => 'Gigarecykler',
 	220 => 'Inter. DM-Collector',
-	
-	
+
+
 
 	401 => 'Wyrzutnia Rakiet',
 	402 => 'L. Laser',
@@ -72,7 +72,7 @@ $LNG['bonus'] = array(
 	'GateCoolTime'		=> 'Czas ładowania teleportera',
 	'MoreFound'			=> 'Zasoby znajdowane podczas ekspedycji',
 );
-					
+
 $LNG['tech'] = array(
 	0 => 'Budynki',
   	1 => 'Kopalnia Metalu',
@@ -116,7 +116,7 @@ $LNG['tech'] = array(
 	132 => 'Technologia Produkcji Kryształu',
 	133 => 'Technologia Produkcji Deuterium',
 	199 => 'Rozwój Grawitonów',
-  
+
 		200 => 'Statki',
 202 => 'Mały Tranporter',
 203 => 'Duży Tranporter',
@@ -180,7 +180,7 @@ $LNG['tech'] = array(
 	705 => 'Optymalizacja Energii',
 	706 => 'Optymalizacja Badań',
 	707 => 'Koordynacja Floty',
-	
+
 	900 => 'Zasoby',
 	901 => 'Metal',
 	902 => 'Kryształ',
@@ -229,7 +229,7 @@ $LNG['shortDescription'] = array(
 132 => 'Zwiększa produkcję kryształu o 2%.',
 133 => 'Zwiększa produkcję deuterium o 2%.',
 	199 => 'Skoncentrowane cząstki grawitonowe tworzą sztuczne pole grawitacji, które wciąga wszystko w siebie jak czarna dziura. Pole jest tak potężne, że może zniszczyć księżyc.',
-	
+
 	202 => 'Mały transportowiec służy do szybkiego transportu surowców na pobliskie planety.',
 203 => 'Duży transportowiec może zabrać nie tylko więcej surowców, ale również - dzięki lepszemu napędowi - jest znacznie szybszy.',
 204 => 'Jest to pierwsza jednostka wojskowa, którą możesz zbudować. W początkowej fazie gry przydają się, by napadać pobliskie planety posiadające niewielką obronę. Mimo tego, że są stosunkowo słabe, są tanie, a icg duża ilość potrafi być groźna.',
@@ -317,7 +317,7 @@ $LNG['longDescription'] = array(
 	42 => 'Falanga czujników analizuje spektrum światła i gazów w swoim zasięgu, a potem superkomputer dostarcza danych na temat aktywnie przemieszczających się flot. Jednorazowe skanowanie przestrzeni w zasięgu falangi kosztuje 5k Deuterium. Zasięg falangi liczymy tym wzorem =(level falangi) ^ 2 - 1.',
 	43 => 'Olbrzymie wrota zwane teleporterem pozwalają na transport ogromych flot natychmiast i to nie tracąc deuterium. Po każdym użyciu teleporter musi się zregenerować, by można go było użyć ponownie. Niestety nie da się tą drogą przesyłać surowców.',
 	44 => 'Służy do budowy rakiet i antyrakiet. Każdy level pozwala przechowywać 5 antyrakiet lub 2 rakiety i 1 antyrakietę. Np. na poziomie 10 możesz mieć maksymalnie 50 antyrakiet lub 25 rakiet.',
-	
+
 	106 => 'Od poziomu tej technologii zależy, jakie dane uda Ci się zebrać o twoim celu. Jeśli przeciwnik ma większy level technologii szpiegowskiej, wtedy musisz wysłać więcej sond, by uzyskać maksymalną ilość danych na temat twojego przeciwnika. Większa ilość sond zwiększa szansę ich wykrycia i zniszczenia. Od poziomu 2 dostaniesz informacje ile jednostek cię atakuje, od levelu 4 dowiesz się również jakie typy statków, a od levelu 8 informacje będą pełne, czyli ile i jakie typy statków są agresorami.',
 	108 => 'Ta technologia kontroluje dokładne czasy przylotu, trajektorię lotu itp. Każda flota, którą wyślesz, zajmuje część zasobów(slot). Powinieneś stale rozwijać tą technologię, by móc wysyłać więcej flot jednocześnie.',
 	109 => 'Kluczowa technologia bojowa. Każdy level zwiększa skuteczoność stystemów bojowych o 10% wartości bazowej!',
@@ -337,7 +337,7 @@ $LNG['longDescription'] = array(
 	132 => 'Zwiększa produkcję kryształu o 2%.',
 	133 => 'Zwiększa produkcję deuterium o 2%.',
 	199 => 'Grawiton to cząstka elementarna, która pośredniczy w tworzeniu grawitacji w ramach kwantowej teorii pola. Grawitony są cząstkami, które same w sobie nie mają masy. Rozwój grawitonów jest potrzebny tylko dla jednej technologii - pozwala budować Gwiazdę śmierci!',
-	
+
 	202 => 'Pierwszy statek zbudowany przez cesarza, który ma ładowność 5000 jednostek. Służy na początku do tranportu zasobów między koloniami, a z czasem bierze udział w napadach na wrogie planety. Od piątego poziomu napędu impulsowego korzysta z niego również mały transportowiec, dzięki czemu porusza się 2x szybciej.',
 	203 => 'To nastepca małego transportowca. Wyposażony w lepszy typ napędu, dużo bardziej pojemny, lepiej opancerzony. Bierze udział w wiekszości napadów na wrogie planety.',
 	204 => 'Pierwsze jednostki wojskowe. Są małe i zwinne, ale bardzo słabe, dopiero spora ich ilość potrafi być zagrożeniem. Wykorzystywane do ataku na słabo bronione pobliskie planety.',
@@ -357,7 +357,7 @@ $LNG['longDescription'] = array(
 	218 => 'Można powiedzieć, iż to przedstawiciel koszmaru na tym świecie, niestety strasznie powolny.',
 	219 => 'Ogromna ładowność, a dzięki nowym technologiom porusza się znacznie szybciej od standardowego recyklera.',
 	220 => 'Dzięki temu statkowi jesteś w stanie zbierać Czarną materię z księżyca.',
-	
+
 	401 => 'Twoja pierwsza linia obrony. Po walce i zniszczeniu jest 70% szans, że zostanie naprawiona.',
 	402 => 'Wiązki laserowe dzięki specjalnym systemom namierzania i podążania za celem są kierowane tak, by przebijać kadłub. Po walce i zniszczeniu jest 70% szans, że zostanie naprawiona.',
 	403 => 'Ciężki laser to ulepszona wersja lekkiego. Po walce i zniszczeniu jest 70% szans, że zostanie naprawiona.',
@@ -394,7 +394,7 @@ $LNG['longDescription'] = array(
 	704 => 'Bonus jest tymczasowy!',
 	705 => 'Bonus jest tymczasowy!',
 	706 => 'Bonus jest tymczasowy!',
-	707 => 'Bonus jest tymczasowy!',	
+	707 => 'Bonus jest tymczasowy!',
 
 901 => 'Główny surowiec do budowy konstrukcji nośnych budynków i statków kosmicznych. Metal jest najtańszym surowcem mineralnym, dlatego jest częściej wykorzystywany niż inne.',
 902 => 'Główny surowiec do budowy elementów elektronicznych i stopów metali. Kryształy wykorzystywane są we wszystkich statkach kosmicznych i budynkach. Najczęściej używane w przemyśle stoczniowym kryształy są jednak bardzo rzadkie i podobnie jak metale znajdują się w większych ilościach w głębokich warstwach.',

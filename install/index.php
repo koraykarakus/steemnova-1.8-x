@@ -275,8 +275,8 @@ switch ($mode) {
 					}
 					else {
 						$template->assign(array(
-							'accept' => false
-                        ));
+							'accept' => false,
+						));
 					}
 				}
 				$template->show('ins_license.tpl');
@@ -592,7 +592,8 @@ switch ($mode) {
 		$template->assign(array(
 			'intro_text'    => $LNG['intro_text'],
 			'intro_welcome' => $LNG['intro_welcome'],
-			'intro_install' => $LNG['intro_install'],));
+			'intro_install' => $LNG['intro_install'],
+		));
 		$template->show('ins_intro.tpl');
 		break;
 }

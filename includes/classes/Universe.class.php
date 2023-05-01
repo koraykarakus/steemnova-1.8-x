@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -40,7 +40,7 @@ class Universe {
 	{
 		self::$availableUniverses[]	= $universe;
 	}
-	
+
 	static public function getEmulated()
 	{
 		if(is_null(self::$emulatedUniverse))
@@ -55,10 +55,10 @@ class Universe {
 				self::setEmulated(self::current());
 			}
 		}
-		
+
 		return self::$emulatedUniverse;
 	}
-	
+
 	static public function setEmulated($universeId)
 	{
 		if(!self::exists($universeId))
@@ -71,7 +71,7 @@ class Universe {
 		$session->save();
 
 		self::$emulatedUniverse	= $universeId;
-		
+
 		return true;
 	}
 
@@ -89,7 +89,7 @@ class Universe {
 			// Installer are always in the first universe.
 			return ROOT_UNI;
 		}
-		
+
 		if(count(self::availableUniverses()) != 1)
 		{
 			if(MODE == 'LOGIN')

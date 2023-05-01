@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -36,8 +36,8 @@ function ShowTeamspeakPage() {
 			'ts_password'		=> $config->ts_password,
 			'ts_cron_interval'	=> $config->ts_cron_interval
 		);
-		
-		$ts_modon 			= isset($_POST['ts_on']) && $_POST['ts_on'] == 'on' ? 1 : 0;		
+
+		$ts_modon 			= isset($_POST['ts_on']) && $_POST['ts_on'] == 'on' ? 1 : 0;
 		$ts_server			= HTTP::_GP('ts_ip', '');
 		$ts_tcpport			= HTTP::_GP('ts_tcp', 0);
 		$ts_udpport			= HTTP::_GP('ts_udp', 0);
@@ -46,7 +46,7 @@ function ShowTeamspeakPage() {
 		$ts_login			= HTTP::_GP('ts_login', '');
 		$ts_password		= HTTP::_GP('ts_password', '', true);
 		$ts_cron_interval	= HTTP::_GP('ts_cron', 0);
-		
+
 		$config_after = array(
 			'ts_timeout'		=> $ts_timeout,
 			'ts_modon'			=> $ts_modon,
@@ -74,16 +74,16 @@ function ShowTeamspeakPage() {
 		Database::get()->update($sql, array(
 			':isActive'	=> $ts_modon,
 		));
-		
+
 		$LOG = new Log(3);
 		$LOG->target = 4;
 		$LOG->old = $config_before;
 		$LOG->new = $config_after;
 		$LOG->save();
-		
+
 	}
 	$template	= new template();
-	
+
 
 	$template->assign_vars(array(
 		'se_save_parameters'	=> $LNG['se_save_parameters'],

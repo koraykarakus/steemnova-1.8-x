@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -19,11 +19,11 @@ class ShowOverviewPage extends AbstractGamePage
 {
 	public static $requireModule = 0;
 
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	private function GetTeamspeakData()
 	{
 		global $USER, $LNG;
@@ -34,10 +34,10 @@ class ShowOverviewPage extends AbstractGamePage
 		{
 			return false;
 		}
-		
+
 		Cache::get()->add('teamspeak', 'TeamspeakBuildCache');
 		$tsInfo	= Cache::get()->getData('teamspeak', false);
-		
+
 		if(empty($tsInfo))
 		{
 			return array(
@@ -56,7 +56,7 @@ class ShowOverviewPage extends AbstractGamePage
 				$url = 'ts3server://%s?port=%d&amp;nickname=%s&amp;password=%s';
 			break;
 		}
-		
+
 		return array(
 			'url'		=> sprintf($url, $config->ts_server, $config->ts_tcpport, $USER['username'], $tsInfo['password']),
 			'current'	=> $tsInfo['current'],
@@ -73,7 +73,7 @@ class ShowOverviewPage extends AbstractGamePage
 		$fleetTableObj->setPlanet($PLANET['id']);
 		return $fleetTableObj->renderTable();
 	}
-	
+
 	// unused?
 	function savePlanetAction()
 	{
@@ -119,37 +119,34 @@ class ShowOverviewPage extends AbstractGamePage
                         ':planetID' => $PLANET['id'],
                     ));
                 }
-				
+
 				$PLANET['id']	= $USER['id_planet'];
 				exit(json_encode(array('ok' => true, 'message' => $LNG['ov_planet_abandoned'])));
 			}
 		}
 	}
-		
+
 	function show()
 	{
 		global $LNG, $PLANET, $USER;
-		
-		$AdminsOnline 	= array();
-		$chatOnline 	= array();
-		$AllPlanets		= array();
-		$Moon 			= array();
-		$RefLinks		= array();
 
-        $db = Database::get();
-		
+		$AdminsOnline = $chatOnline = $AllPlanets = $Moon = $RefLinks = array();
+
+
+    $db = Database::get();
+
 		foreach($USER['PLANETS'] as $ID => $CPLANET)
-		{		
+		{
 			if ($ID == $PLANET['id'] || $CPLANET['planet_type'] == 3)
 				continue;
 
 			if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP) {
-				$Queue				= unserialize($CPLANET['b_building_id']);
-				$BuildPlanet		= $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
+				$Queue = unserialize($CPLANET['b_building_id']);
+				$BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
 			} else {
-				$BuildPlanet     = $LNG['ov_free'];
+				$BuildPlanet = $LNG['ov_free'];
 			}
-			
+
 			$AllPlanets[] = array(
 				'id'	=> $CPLANET['id'],
 				'name'	=> $CPLANET['name'],
@@ -157,15 +154,18 @@ class ShowOverviewPage extends AbstractGamePage
 				'build'	=> $BuildPlanet,
 			);
 		}
-		
+
 		if ($PLANET['id_luna'] != 0) {
-			$sql = "SELECT id, name FROM %%PLANETS%% WHERE id = :lunaID;";
-            $Moon = $db->selectSingle($sql, array(
-                ':lunaID'   => $PLANET['id_luna']
-            ));
-        }
-			
+
+				$sql = "SELECT id, name FROM %%PLANETS%% WHERE id = :lunaID;";
+
+				$Moon = $db->selectSingle($sql, array(
+            ':lunaID'   => $PLANET['id_luna']
+        ));
+    }
+
 		if ($PLANET['b_building'] - TIMESTAMP > 0) {
+
 			$Queue			= unserialize($PLANET['b_building_id']);
 			$buildInfo['buildings']	= array(
 				'id'		=> $Queue[0][0],
@@ -174,14 +174,19 @@ class ShowOverviewPage extends AbstractGamePage
 				'time'		=> $PLANET['b_building'],
 				'starttime'	=> pretty_time($PLANET['b_building'] - TIMESTAMP),
 			);
-		}
-		else {
+
+		}else {
+
 			$buildInfo['buildings']	= false;
+
 		}
-		
+
 		if (!empty($PLANET['b_hangar_id'])) {
+
 			$Queue	= unserialize($PLANET['b_hangar_id']);
+
 			$time	= BuildFunctions::getBuildingTime($USER, $PLANET, $Queue[0][0]) * $Queue[0][1];
+
 			$buildInfo['fleet']	= array(
 				'id'		=> $Queue[0][0],
 				'level'		=> $Queue[0][1],
@@ -189,13 +194,17 @@ class ShowOverviewPage extends AbstractGamePage
 				'time'		=> $time,
 				'starttime'	=> pretty_time($time - $PLANET['b_hangar']),
 			);
-		}
-		else {
+
+		}else {
+
 			$buildInfo['fleet']	= false;
+
 		}
-		
+
 		if ($USER['b_tech'] - TIMESTAMP > 0) {
+
 			$Queue			= unserialize($USER['b_tech_queue']);
+
 			$buildInfo['tech']	= array(
 				'id'		=> $Queue[0][0],
 				'level'		=> $Queue[0][1],
@@ -203,32 +212,36 @@ class ShowOverviewPage extends AbstractGamePage
 				'time'		=> $USER['b_tech'],
 				'starttime'	=> pretty_time($USER['b_tech'] - TIMESTAMP),
 			);
-		}
-		else {
-			$buildInfo['tech']	= false;
-		}
-		
-		
-		$sql = "SELECT id,username FROM %%USERS%% WHERE universe = :universe AND onlinetime >= :onlinetime AND authlevel > :authlevel;";
-        $onlineAdmins = $db->select($sql, array(
-            ':universe'     => Universe::current(),
-            ':onlinetime'   => TIMESTAMP-10*60,
-            ':authlevel'    => AUTH_USR
-        ));
 
-        foreach ($onlineAdmins as $AdminRow) {
+		}else {
+
+			$buildInfo['tech']	= false;
+
+		}
+
+
+		$sql = "SELECT id,username FROM %%USERS%% WHERE universe = :universe AND onlinetime >= :onlinetime AND authlevel > :authlevel;";
+
+		$onlineAdmins = $db->select($sql, array(
+        ':universe'     => Universe::current(),
+        ':onlinetime'   => TIMESTAMP - 10 * 60,
+        ':authlevel'    => AUTH_USR
+    ));
+
+    foreach ($onlineAdmins as $AdminRow) {
 			$AdminsOnline[$AdminRow['id']]	= $AdminRow['username'];
 		}
 
-        $sql = "SELECT userName FROM %%CHAT_ON%% WHERE dateTime > DATE_SUB(NOW(), interval 2 MINUTE) AND channel = 0";
-        $chatUsers = $db->select($sql);
+    $sql = "SELECT userName FROM %%CHAT_ON%% WHERE dateTime > DATE_SUB(NOW(), interval 2 MINUTE) AND channel = 0";
 
-        foreach ($chatUsers as $chatRow) {
+		$chatUsers = $db->select($sql);
+
+    foreach ($chatUsers as $chatRow) {
 			$chatOnline[]	= $chatRow['userName'];
 		}
 
 		$Messages		= $USER['messages'];
-		
+
 		// Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
 		$sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
 		LEFT JOIN %%STATPOINTS%% as s ON s.id_owner = u.id AND s.stat_type = '1' WHERE ref_id = :userID;";
@@ -238,41 +251,48 @@ class ShowOverviewPage extends AbstractGamePage
 
 		$config	= Config::get();
 
-        if($config->ref_active)
-		{
+    if($config->ref_active){
+
 			foreach ($RefLinksRAW as $RefRow) {
 				$RefLinks[$RefRow['id']]	= array(
 					'username'	=> $RefRow['username'],
 					'points'	=> min($RefRow['total_points'], $config->ref_minpoints)
 				);
 			}
+
 		}
 
 		$sql	= 'SELECT total_points, total_rank
 		FROM %%STATPOINTS%%
 		WHERE id_owner = :userId AND stat_type = :statType';
 
-		$statData	= Database::get()->selectSingle($sql, array(
+		$statData	= $db->selectSingle($sql, array(
 			':userId'	=> $USER['id'],
 			':statType'	=> 1
 		));
 
-		if($statData['total_rank'] == 0) {
+		if($statData['total_rank'] == 0)
+		{
 			$rankInfo	= "-";
-		} else {
-			$rankInfo	= sprintf($LNG['ov_userrank_info'], pretty_number($statData['total_points']), $LNG['ov_place'],
-				$statData['total_rank'], $statData['total_rank'], $LNG['ov_of'], $config->users_amount);
 		}
-		
-		$usersOnline = Database::get()->selectSingle(
-			'SELECT COUNT(*)
-			FROM %%USERS%% WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE)'
-		)['COUNT(*)'];
+		else
+		{
+			$rankInfo	= sprintf(
+			$LNG['ov_userrank_info'],
+			pretty_number($statData['total_points']),
+			$LNG['ov_place'],
+			$statData['total_rank'],
+			$statData['total_rank'],
+			$LNG['ov_of'],
+			$config->users_amount
+			);
+		}
 
-		$fleetsOnline = Database::get()->selectSingle(
-			'SELECT COUNT(*)
-			FROM %%FLEETS%%'
-		)['COUNT(*)'];
+		$sql = "SELECT COUNT(*) as count FROM %%USERS%% WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
+		$usersOnline = $db->selectSingle($sql,array(),'count');
+
+		$sql = "SELECT COUNT(*) as count FROM %%FLEETS%%;";
+		$fleetsOnline = $db->selectSingle($sql,array(),'count');
 
 		$this->assign(array(
 			'rankInfo'					=> $rankInfo,
@@ -307,62 +327,73 @@ class ShowOverviewPage extends AbstractGamePage
 			'servertime'				=> _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
 			'path'						=> HTTP_PATH,
 		));
-		
+
 		$this->display('page.overview.default.tpl');
 	}
-	
-	function actions() 
+
+	function actions()
 	{
 		global $LNG, $PLANET;
 
 		$this->initTemplate();
+
 		$this->setWindow('popup');
 
 		$this->assign(array(
 			'ov_security_confirm'		=> sprintf($LNG['ov_security_confirm'], $PLANET['name'].' ['.$PLANET['galaxy'].':'.$PLANET['system'].':'.$PLANET['planet'].']'),
 		));
+
 		$this->display('page.overview.actions.tpl');
 	}
-	
-	function rename() 
+
+	function rename()
 	{
 		global $LNG, $PLANET;
 
-		$newname        = HTTP::_GP('name', '', UTF8_SUPPORT);
+		$newname  = HTTP::_GP('name', '', UTF8_SUPPORT);
+
 		if (!empty($newname))
 		{
-			if (!PlayerUtil::isNameValid($newname)) {
+			if (!PlayerUtil::isNameValid($newname))
+			{
 				$this->sendJSON(array('message' => $LNG['ov_newname_specialchar'], 'error' => true));
-			} else {
+			}
+			else
+			{
 				$db = Database::get();
-                $sql = "UPDATE %%PLANETS%% SET name = :newName WHERE id = :planetID;";
-                $db->update($sql, array(
-                    ':newName'  => $newname,
-                    ':planetID' => $PLANET['id']
-                ));
 
-                $this->sendJSON(array('message' => $LNG['ov_newname_done'], 'error' => false));
+				$sql = "UPDATE %%PLANETS%% SET name = :newName WHERE id = :planetID;";
+        $db->update($sql, array(
+            ':newName'  => $newname,
+            ':planetID' => $PLANET['id']
+        ));
+
+        $this->sendJSON(array('message' => $LNG['ov_newname_done'], 'error' => false));
 			}
 		}
 	}
-	
-	function delete() 
+
+	function delete()
 	{
 		global $LNG, $PLANET, $USER;
+
 		$password	= HTTP::_GP('password', '', true);
-		
+
 		if (!empty($password))
 		{
-            $db = Database::get();
-            $sql = "SELECT COUNT(*) as state FROM %%FLEETS%% WHERE
-                      (fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
-                      (fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
-            $IfFleets = $db->selectSingle($sql, array(
-                ':userID'   => $USER['id'],
-                ':planetID' => $PLANET['id'],
-                ':lunaID'   => $PLANET['id_luna']
-            ), 'state');
-			
+
+		$db = Database::get();
+
+		$sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
+            (fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
+            (fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
+
+		$IfFleets = $db->selectSingle($sql, array(
+        ':userID'   => $USER['id'],
+        ':planetID' => $PLANET['id'],
+        ':lunaID'   => $PLANET['id_luna']
+    ), 'count');
+
 		if ($USER['b_tech_planet'] == $PLANET['id'] && !empty($USER['b_tech_queue'])) {
 			$TechQueue = unserialize($USER['b_tech_queue']);
 			$NewCurrentQueue = array();
@@ -372,7 +403,7 @@ class ShowOverviewPage extends AbstractGamePage
 					$NewCurrentQueue[] = $ListIDArray;
 				}
 			}
-			
+
 			$USER['b_tech_planet'] = $USER['id_planet'];
 			$USER['b_tech_queue'] = serialize($NewCurrentQueue);
 		}
@@ -406,7 +437,7 @@ class ShowOverviewPage extends AbstractGamePage
                     ));
                 }
 
-                Session::load()->planetId     = $USER['id_planet'];
+        Session::load()->planetId = $USER['id_planet'];
 				$this->sendJSON(array('ok' => true, 'message' => $LNG['ov_planet_abandoned']));
 			}
 		}

@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -137,6 +137,8 @@ function ShowLogDetail() {
 		'field_max'		=> $LNG['qe_fields'],
 	);
 
+	$LogArray = array();
+
 	foreach ($conf_before as $key => $val) {
 		if ($key != 'universe') {
 			if(isset($LNG['tech'][$key]))
@@ -179,7 +181,7 @@ function ShowLogDetail() {
 }
 
 function ShowLogSettingsList() {
-	global $LNG;
+	global $LNG, $USER;
 
 	$db = Database::get();
 
@@ -241,9 +243,10 @@ function ShowLogPlanetsList() {
 
 	$result    = $db->select($sql);
 
-	$template	= new template();
-	if(!$result)
+	if(!$result){
+		$template	= new template();
 		$template->message($LNG['log_no_data']);
+	}
 
 	foreach ($result as $LogRow)
 	{
@@ -285,10 +288,12 @@ function ShowLogPlayersList() {
 
 	$result    = $db->select($sql);
 
-	$template	= new template();
-	if(!$result)
+	if(!$result){
+		$template	= new template();
 		$template->message($LNG['log_no_data']);
+	}
 
+	$LogArray = array();
 	foreach ($result as $LogRow)
 	{
 		$LogArray[]	= array(
@@ -329,6 +334,7 @@ function ShowLogPresent() {
 	if(!$result)
 		$template->message($LNG['log_no_data']);
 
+	$LogArray = array();
 	foreach ($result as $LogRow)
 	{
 		$LogArray[]	= array(
@@ -350,6 +356,6 @@ function ShowLogPresent() {
 		'log_id'		=> $LNG['log_id'],
 		'log_view'		=> $LNG['log_view'],
 	));
-	
+
 	$template->show("LogList.tpl");
 }

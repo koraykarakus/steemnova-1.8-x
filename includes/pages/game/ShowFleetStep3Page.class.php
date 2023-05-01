@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -68,7 +68,7 @@ class ShowFleetStep3Page extends AbstractGamePage
 		$fleetStorage	= $formData['fleetRoom'];
 		$fleetSpeed		= $formData['fleetSpeed'];
 		$ownPlanet		= $formData['ownPlanet'];
-	
+
 		if($ownPlanet != $PLANET['id']){
 			$this->printMessage($LNG['fl_own_planet_error'], array(array(
 			'label'	=> $LNG['sys_back'],

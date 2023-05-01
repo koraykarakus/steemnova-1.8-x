@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,11 +11,11 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
-//---------------	GENERAL	------------------------// 
+//---------------	GENERAL	------------------------//
 $LNG['adm_login']			= 'Login';
 $LNG['adm_username']		= 'Nazwa użytkownika';
 $LNG['adm_password']		= 'Hasło';
@@ -51,7 +51,7 @@ $LNG['time_seconds']	= 'Sekunda';
 
 $LNG['info_information']	= 'Informacje o błędach i nowościach <a href="%s" target="tracker">2Moons Board</a><br>Jeśli usuniesz ten link, nie będziesz miał prawa do supportu!!!!';
 
-//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	- TAK ALBO NIE------------------------// 
+//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	- TAK ALBO NIE------------------------//
 $LNG['one_is_yes_1']	= 'Tak';
 $LNG['one_is_yes_0']	= 'Nie';
 
@@ -60,7 +60,7 @@ $LNG['one_is_no_0']	= 'Tak';
 //###########################################################//
 
 
-//---------------	BOTONES - BUTTONS - BUTTONS	- PRZYCISKI------------------------// 
+//---------------	BOTONES - BUTTONS - BUTTONS	- PRZYCISKI------------------------//
 $LNG['button_submit']		= 'Wyślij';
 $LNG['button_add']		= 'Dodaj';
 $LNG['button_delete']		= 'Usuń';
@@ -81,13 +81,13 @@ $LNG['input_id_ally']		= 'Sojusz ID';
 //###########################################################//
 
 
-//---------------	RECURSOS - RESOURCES - ROHSTOFFE - ZASOBY	------------------------// 
+//---------------	RECURSOS - RESOURCES - ROHSTOFFE - ZASOBY	------------------------//
 $LNG['resources_title']	        = 'Zasoby';
 $LNG['count_res']		= 'Ilość zaobów';
 //###########################################################//
 
 
-//---------------	OFICIALES - OFFICIERS - OFFIZIERE - OFICEROWIE	------------------------// 
+//---------------	OFICIALES - OFFICIERS - OFFIZIERE - OFICEROWIE	------------------------//
 $LNG['buildings_title']	= 'Budynki';
 $LNG['ships_title']	= 'Statki';
 $LNG['defenses_title']	= 'Obrona';
@@ -620,12 +620,12 @@ $LNG['mu_fb_options'] 				= 'Przyłącz do Facebooka';
 
 $LNG['mu_ts_options'] 				= 'Teamspeak Optionen';
 $LNG['mu_game_info'] 				= 'Informacje';
-$LNG['mu_vaild_users']				= 'Aktywni użytkownicy'; 
-$LNG['mu_news']						= 'Nowości'; 
-$LNG['mu_multiip_page']				= 'MultiIP'; 
-$LNG['mu_clear_cache']				= 'Usuń cache'; 
+$LNG['mu_vaild_users']				= 'Aktywni użytkownicy';
+$LNG['mu_news']						= 'Nowości';
+$LNG['mu_multiip_page']				= 'MultiIP';
+$LNG['mu_clear_cache']				= 'Usuń cache';
 $LNG['mu_vertify']					= 'Sprawdź pliki gry!';
-$LNG['mu_cronjob']					= 'Cronjobs'; 
+$LNG['mu_cronjob']					= 'Cronjobs';
 $LNG['mu_logs']						= 'Admin-Log';
 $LNG['mu_giveaway']					= 'Bonusy';
 $LNG['mu_disclaimer']				= 'Ustawienia prawne';
@@ -650,7 +650,7 @@ $LNG['vt_fileerror']				= 'Błąd';
 $LNG['vt_loadfile']					= 'Szczegóły';
 //###########################################################//
 
-$LNG['cc_cache_clear']				= 'Cache Usunięto'; 
+$LNG['cc_cache_clear']				= 'Cache Usunięto';
 
 //---------------	REINICIO DE UNIVERSO - RESET UNIVERSE - RESET UNIVERSUM	------------------------//
 $LNG['re_reset_universe']				= 'Reset Universum';
@@ -1000,11 +1000,11 @@ $LNG['ts_version']						= 'Wersja serwera:';
 $LNG['ts_udpport']						= 'TCP Port';
 $LNG['ts_tcpport']						= 'UDP Port';
 $LNG['ts_serverip']						= 'Server-IP';
-$LNG['ts_timeout']						= 'Timeout'; 
-$LNG['ts_server_query']					= 'ServerQuery Port'; 
-$LNG['ts_login']						= 'ServerQuery Login'; 
-$LNG['ts_pass']							= 'ServerQuery Password'; 
-$LNG['ts_cron']							= 'Update Rate'; 
+$LNG['ts_timeout']						= 'Timeout';
+$LNG['ts_server_query']					= 'ServerQuery Port';
+$LNG['ts_login']						= 'ServerQuery Login';
+$LNG['ts_pass']							= 'ServerQuery Password';
+$LNG['ts_cron']							= 'Update Rate';
 
 //----------------------------------------------------------------------------//
 //FacebookSettingPage.php

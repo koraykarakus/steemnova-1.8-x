@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -35,7 +35,7 @@ function GenerateReport($combatResult, $reportInfo)
 		'fleetDestroyChance'	=> (int) $reportInfo['fleetDestroyChance'],
 		'fleetDestroySuccess'	=> (int) $reportInfo['fleetDestroySuccess']
 	);
-	
+
 	if(isset($reportInfo['additionalInfo']))
 	{
 		$DATA['additionalInfo'] = $reportInfo['additionalInfo'];
@@ -44,7 +44,7 @@ function GenerateReport($combatResult, $reportInfo)
 	{
 		$DATA['additionalInfo']	= "";
 	}
-	
+
 	foreach($combatResult['rw'][0]['attackers'] as $player)
 	{
 		$DATA['players'][$player['player']['id']]	= array(
@@ -61,49 +61,49 @@ function GenerateReport($combatResult, $reportInfo)
 			'tech'		=> array($player['techs'][0] * 100, $player['techs'][1] * 100, $player['techs'][2] * 100),
 		);
 	}
-	
+
 	foreach($combatResult['rw'] as $Round => $RoundInfo)
 	{
 		foreach($RoundInfo['attackers'] as $FleetID => $player)
-		{	
+		{
 			$playerData	= array('userID' => $player['player']['id'], 'ships' => array());
-			
+
 			if(array_sum($player['unit']) == 0) {
 				$DATA['rounds'][$Round]['attacker'][] = $playerData;
 				$Destroy['att']++;
 				continue;
 			}
-			
+
 			foreach($player['unit'] as $ShipID => $Amount)
 			{
 				if ($Amount <= 0)
 					continue;
-					
+
 				$ShipInfo	= $RoundInfo['infoA'][$FleetID][$ShipID];
 				$playerData['ships'][$ShipID]	= array(
 					$Amount, $ShipInfo['att'], $ShipInfo['def'], $ShipInfo['shield']
 				);
 			}
-			
+
 			$DATA['rounds'][$Round]['attacker'][] = $playerData;
 		}
-		
+
 		foreach($RoundInfo['defenders'] as $FleetID => $player)
-		{	
+		{
 			$playerData	= array('userID' => $player['player']['id'], 'ships' => array());
 			if(array_sum($player['unit']) == 0) {
 				$DATA['rounds'][$Round]['defender'][] = $playerData;
 				$Destroy['def']++;
 				continue;
 			}
-				
+
 			foreach($player['unit'] as $ShipID => $Amount)
 			{
 				if ($Amount <= 0) {
 					// $Destroy['def']++;
 					continue;
 				}
-					
+
 				$ShipInfo	= $RoundInfo['infoD'][$FleetID][$ShipID];
 				$playerData['ships'][$ShipID]	= array(
 					$Amount, $ShipInfo['att'], $ShipInfo['def'], $ShipInfo['shield']
@@ -111,10 +111,10 @@ function GenerateReport($combatResult, $reportInfo)
 			}
 			$DATA['rounds'][$Round]['defender'][] = $playerData;
 		}
-		
+
 		if ($Round >= MAX_ATTACK_ROUNDS || $Destroy['att'] == count($RoundInfo['attackers']) || $Destroy['def'] == count($RoundInfo['defenders']))
 			break;
-		
+
 		if(isset($RoundInfo['attack'], $RoundInfo['attackShield'], $RoundInfo['defense'], $RoundInfo['defShield']))
 			$DATA['rounds'][$Round]['info']	= array($RoundInfo['attack'], $RoundInfo['attackShield'], $RoundInfo['defense'], $RoundInfo['defShield']);
 		else
@@ -122,4 +122,3 @@ function GenerateReport($combatResult, $reportInfo)
 	}
 	return $DATA;
 }
-	

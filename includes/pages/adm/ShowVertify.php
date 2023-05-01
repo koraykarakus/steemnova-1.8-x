@@ -11,19 +11,19 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.7.0 (2011-12-10)
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
 if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FILE__))) throw new Exception("Permission error!");
 
-function ShowVertify() 
+function ShowVertify()
 {
 	$EXT		= explode("|", HTTP::_GP("ext", ""));
 	$action 	= HTTP::_GP("action", "");
 	$file	 	= HTTP::_GP("file", "");
 	$template	= new template();
-	
+
 	switch($action) {
 		case 'check':
 			$REV	= explode(".", Config::get("VERSION"));
@@ -37,17 +37,17 @@ function ShowVertify()
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$FILE		= curl_exec($ch);
 			$SVNHASH	= crc32(preg_replace(array("/(\r\n)|(\r)/", '/(\\/\\*[\\d\\D]*?\\*\\/)/', '/\$I'.'d[^\$]+\$/'), array("\n", '', ''), $FILE));
-			
+
 			if(curl_getinfo($ch, CURLINFO_HTTP_CODE) == 404) {
 				echo 4;
 				exit;
 			}
-			
+
 			if(curl_errno($ch)) {
 				echo 3;
 				exit;
 			}
-			
+
 			curl_close($ch);
 			$FILE2	= file_get_contents(ROOT_PATH.$file);
 			$LOCALHASH	= crc32(preg_replace(array("/(\r\n)|(\r)/", '/(\\/\\*[\\d\\D]*?\\*\\/)/', '/\$I'.'d[^\$]+\$/'), array("\n", '', ''), $FILE2));
@@ -66,7 +66,7 @@ function ShowVertify()
 		break;
 		case 'getFileList':
 			echo json_encode(array_merge(
-				dir_tree('./', $EXT, false), 
+				dir_tree('./', $EXT, false),
 				dir_tree('chat/', $EXT),
 				dir_tree('includes/', $EXT),
 				dir_tree('includes/', $EXT),
@@ -77,7 +77,7 @@ function ShowVertify()
 			exit;
 		break;
 	}
-	
+
 	$template->show("VertifyPage.tpl");
 }
 

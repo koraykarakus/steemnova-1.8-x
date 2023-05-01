@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -111,7 +111,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
 			$classIDs[100]	= $reslist['tech'];
 		}
 
-		$targetChance 	= mt_rand(0, min(($fleetAmount/4) * ($targetSpyTech / $senderSpyTech), 100));
+		$targetChance 	= mt_rand(0, ceil(min(($fleetAmount/4) * ($targetSpyTech / $senderSpyTech), 100)) );
 		$spyChance  	= mt_rand(0, 100);
 		$spyData		= array();
 

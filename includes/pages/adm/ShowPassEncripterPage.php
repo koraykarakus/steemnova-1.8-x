@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -21,7 +21,7 @@ function ShowPassEncripterPage()
 {
 	global $LNG;
 	$Password	= HTTP::_GP('md5q', '', true);
-	
+
 	$template	= new template();
 
 	$template->assign_vars(array(
@@ -32,6 +32,6 @@ function ShowPassEncripterPage()
 		'et_result' 		=> $LNG['et_result'],
 		'et_pass' 			=> $LNG['et_pass'],
 	));
-	
+
 	$template->show('PassEncripterPage.tpl');
 }

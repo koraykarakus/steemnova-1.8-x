@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,10 +11,10 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
- 
+
 $LNG['Version']     = 'Version';
 $LNG['Description'] = 'Beschreibung';
 
@@ -142,7 +142,7 @@ TMOONS-190 - Die Aufgerufene Seite existiert nicht
 TMOONS-191 - System 500 error
 TMOONS-196 - Reports of failed construction
 TMOONS-198 - Rohstoffe Produktion einstellen
-TMOONS-199 - Händler 
+TMOONS-199 - Händler
 TMOONS-205 - Die Aufgerufene Seite existiert nicht
 TMOONS-206 - Technologie
 TMOONS-207 - User über Admin erstellen
@@ -156,9 +156,9 @@ TMOONS-223 - Fleet vanished
 TMOONS-228 - Error log #2
 TMOONS-235 - Date of block
 TMOONS-236 - Vacation and flying fleet
-TMOONS-238 - Error beim Aufruf der Galaxie über Koordinaten in Playercard / Siehe sceenshot 
+TMOONS-238 - Error beim Aufruf der Galaxie über Koordinaten in Playercard / Siehe sceenshot
 TMOONS-239 - Keine Flottendaten beim Versand / NUR IE8 !
-TMOONS-240 - Error in Flotten bei Mission Angriff 
+TMOONS-240 - Error in Flotten bei Mission Angriff
 TMOONS-245 - Händler kann nicht gerufen werden
 TMOONS-246 - Support-Ticket kann weder gelöscht noch geschlossen werden.
 TMOONS-247 - Error in Flotten bei Mission Transport und maximalen Rohstoffen
@@ -170,7 +170,7 @@ TMOONS-254 - anflug auf Mond nicht möglich
 TMOONS-256 - User erstellen im Admin
 TMOONS-257 - Planetmenu (PlanetAction)
 TMOONS-258 - Error Allianz Rundmail
-TMOONS-259 - Errormeldung Login Versuch wenn Game gesperrt 
+TMOONS-259 - Errormeldung Login Versuch wenn Game gesperrt
 TMOONS-260 - Schrotthändler, Schiffe werden nicht abgezogen, Ressourcenanzeige beim Schrotthändler falsch
 TMOONS-261 - Error bei Abbruch einer Bauschleife im Baumenü bei mehr als einen Eintrag
 TMOONS-263 - Error nach Sprachumstellung auf Russisch
@@ -182,7 +182,7 @@ TMOONS-268 - Aktuelle 1.7. Version - Fehler bei der Installation
 TMOONS-269 - Technologie trotz Erfüllung der Voraussetzungen, Farbanzeige rot
 TMOONS-271 - Gamespeed wirkt sich nicht auf Enegie-Produktion aus
 TMOONS-272 - Gebäude Produzieren nichts und lassen sich nicht ausbauen.
-TMOONS-273 - Spionageberichte unformatiert 
+TMOONS-273 - Spionageberichte unformatiert
 TMOONS-274 - Ban-Panel Einträge werden nicht mehr gelöscht und Spielername und Adminname sind vertauscht
 TMOONS-275 - Error bei Changelog-Anzeige !
 TMOONS-276 - Doppelte Texte in Forschung
@@ -210,7 +210,7 @@ TMOONS-307 - ExtraDM description
 TMOONS-309 - Error.log in alpha 3
 TMOONS-310 - Page does not exist
 TMOONS-313 - Benötigte Ressourcen für Solarkraftwerk viel zu hoch.
-TMOONS-314 - Error Undefined variable: RPLANET 
+TMOONS-314 - Error Undefined variable: RPLANET
 TMOONS-315 - Error.log gesammelte Einträge
 TMOONS-316 - Im ACP bei &quot;Fliegende Flotten&quot; fehlerhafte Stationszeit
 TMOONS-318 - topkb error
@@ -320,18 +320,18 @@ TMOONS-346 - The doubling of the fleet',
 - FIX: delete messages in IE
 - FIX: planetmenu cookie
 - FIX: PHP errors in chatsystem
-- FIX: Iusses with Special Char on alliance request 
+- FIX: Iusses with Special Char on alliance request
 - FIX: Fleettime, if acs mission was cancel
 - FIX: clear planets after spy
 - FIX: little template iusses
 - FIX: SQL Error on FleetBack, if fleet is on a acs
 - FIX: JS Error on Combat Raports
 - FIX: Cron on statbuilder, who deletes raports
-- FIX: Cross universe glitch on acs invations (StoNelHa) 
-. FIX: Case 6 on Expedition 
+- FIX: Cross universe glitch on acs invations (StoNelHa)
+. FIX: Case 6 on Expedition
 - DIV: Sicherheit im Game erhöht
 - DIV: rootID now in constants
-- DIV: Added Suhosin detection 
+- DIV: Added Suhosin detection
 - DIV: Updated Smarty & TS Libs
 - DIV: Diverse Anpassungen am Game
 - 0000024: [Login] On email activation users cann´t register (Slaver) - resolved.
@@ -720,7 +720,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Set DB Connection to UTF-8
 - DIV: Userbanner wird nurnoch einmal ein Tag aktualisiert.
 - DIV: Webseitenoptimierung(YSlow Grande: A/Score: 91)
-- DIV: Add Headers für Browsercaching 
+- DIV: Add Headers für Browsercaching
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 - DIV: Update jQuery to 1.4.2
@@ -737,7 +737,7 @@ TMOONS-346 - The doubling of the fleet',
 - FIX: AKS-Hack
 - FIX: AKS-Ressisverteilung
 - FIX: Deuteriumberechung Planetentemperaturabhb&auml;nig
-- FIX: Fusionkrafwerk: Bonus durch Energietechnik 
+- FIX: Fusionkrafwerk: Bonus durch Energietechnik
 - FIX: Zeilenumbruch in Globalen Nachrichten fixed
 - DIV: Update Smarty to 3.0b7
 - DIV: UserStats Mod an AKS angepasst.

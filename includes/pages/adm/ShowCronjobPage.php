@@ -11,10 +11,9 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
-
 if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FILE__))) exit;
 
 function getCronjobTimes($row,$max)
@@ -57,7 +56,6 @@ function checkPostData($column,$max)
 function ShowCronjob()
 {
     $cronId = HTTP::_GP('id', 0);
-
     switch (HTTP::_GP('action', 'overview')) {
         case 'edit':
 		    ShowCronjobEdit($cronId);
@@ -78,8 +76,9 @@ function ShowCronjob()
 		    ShowCronjobEnable($cronId);
         break;
         case 'overview':
+				ShowCronjobOverview($cronId);
         default:
-		    ShowCronjobOverview();
+		    ShowCronjobOverview($cronId);
         break;
     }
 }
@@ -211,14 +210,15 @@ function ShowCronjobOverview()
 {
 	$db = Database::get();
 
-
 	$sql = "SELECT * FROM %%CRONJOBS%%;";
 
 	$data = $db->select($sql);
 
-	$template	= new template();
-	if(!$data)
+
+	if(!$data){
+		$template	= new template();
 		$template->message($LNG['cronjob_no_data']);
+	}
 
 	$CronjobArray = array();
 	foreach ($data as $CronjobRow)
@@ -237,10 +237,13 @@ function ShowCronjobOverview()
 			'lock'			=> !empty($CronjobRow['lock']),
 		);
 	}
+
 	$template	= new template();
+
 	$template->assign_vars(array(
 		'CronjobArray'	=> $CronjobArray,
 	));
+
 	$template->show("CronjobOverview.tpl");
 }
 

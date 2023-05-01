@@ -11,7 +11,7 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
@@ -44,7 +44,6 @@ function ShowMessageListPage()
 
 	$useDateStart	= count($dateStart) == 3;
 	$useDateEnd		= count($dateEnd) == 3;
-
 
 
 
@@ -126,9 +125,7 @@ function ShowMessageListPage()
 				':universe' => Universe::getEmulated()
 			),'count');
 
-		}
-
-		if (!empty($receiver)) {
+		}elseif (!empty($receiver)) {
 			$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 			LEFT JOIN %%USERS%% as u ON message_owner = u.id
 			WHERE message_universe = :universe ";
@@ -150,6 +147,26 @@ function ShowMessageListPage()
 				':universe' => Universe::getEmulated()
 			),'count');
 
+		}else {
+			$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+			WHERE message_universe = :universe ";
+
+			if($useDateStart && $useDateEnd)
+			{
+				$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+			}
+			elseif($useDateStart)
+			{
+				$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+			}
+			elseif($useDateStart)
+			{
+				$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+			}
+
+			$MessageCount	= $db->selectSingle($sql,array(
+				':universe' => Universe::getEmulated()
+			),'count');
 		}
 
 

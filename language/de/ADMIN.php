@@ -11,11 +11,11 @@
  * @copyright 2009 Lucky
  * @copyright 2016 Jan-Otto Kröpke <slaver7@gmail.com>
  * @licence MIT
- * @version 1.8.0
+ * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
 
-//---------------	GENERAL	------------------------// 
+//---------------	GENERAL	------------------------//
 $LNG['adm_login'] = 'Login';
 $LNG['adm_username'] = 'Username';
 $LNG['adm_password'] = 'Passwort';
@@ -51,7 +51,7 @@ $LNG['time_seconds'] = 'Sekunden';
 
 $LNG['info_information'] = 'Informations-Vorlage zum Posten eines Bugs im <a href="%s" target="tracker">2Moons Board</a><br>Ohne diese Vorlage gibt es keinen Support!';
 
-//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	------------------------// 
+//---------------	¿SI O NO? - YES OR NO? - JA ODER NEIN?	------------------------//
 $LNG['one_is_yes_1'] = 'Ja';
 $LNG['one_is_yes_0'] = 'Nein';
 
@@ -60,7 +60,7 @@ $LNG['one_is_no_0'] = 'Ja';
 //###########################################################//
 
 
-//---------------	BOTONES - BUTTONS - BUTTONS	------------------------// 
+//---------------	BOTONES - BUTTONS - BUTTONS	------------------------//
 $LNG['button_submit'] = 'Senden';
 $LNG['button_add'] = 'Hinzufügen';
 $LNG['button_delete'] = 'Löschen';
@@ -81,13 +81,13 @@ $LNG['input_id_ally'] = 'Allianz ID';
 //###########################################################//
 
 
-//---------------	RECURSOS - RESOURCES - ROHSTOFFE	------------------------// 
+//---------------	RECURSOS - RESOURCES - ROHSTOFFE	------------------------//
 $LNG['resources_title'] = 'Rohstoffe';
 $LNG['count_res'] = 'Anzahl Rohstoffe';
 //###########################################################//
 
 
-//---------------	OFICIALES - OFFICIERS - OFFIZIERE	------------------------// 
+//---------------	OFICIALES - OFFICIERS - OFFIZIERE	------------------------//
 $LNG['buildings_title'] = 'Gebäude';
 $LNG['ships_title'] = 'Schiffe';
 $LNG['defenses_title'] = 'Verteidigung';
