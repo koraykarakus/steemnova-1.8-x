@@ -31,12 +31,23 @@ $("#tn3").hide();
 
             });
         });
-    </script>
+</script>
+<script>
+  function showHideFleets(){
+
+    if ($('.fleetRow').hasClass('d-none')) {
+      $('.fleetRow').removeClass('d-none')
+    }else {
+      $('.fleetRow').addClass('d-none')
+    }
+
+  }
+</script>
 
 {/block}
 {block name="content"}
 
-<table class="table table-dark" style="width:560px;border-collapse:collapse;">
+<table class="table table-dark my-4" style="width:560px;border-collapse:collapse;">
   <thead></thead>
   <tbody>
     {if $messages}
@@ -45,17 +56,17 @@ $("#tn3").hide();
       <td colspan="2"><a href="?page=messages">{$messages}</a></td>
     </tr>
     {/if}
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 w-50 bg-black border border-dark">{$LNG["type_planet_{$planet_type}"]}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark">
         <a href="#" onclick="return Dialog.PlanetAction();" title="{$LNG.ov_planetmenu}"> {$planetname} ({$username})</a>
       </td>
     </tr>
-  	<tr>
+  	<tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_server_time}</td>
       <td class="servertime text-center px-3 w-50 bg-black border border-dark">{$servertime}</td>
     </tr>
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_admins_online}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark">
         {foreach $AdminsOnline as $ID => $Name}
@@ -64,22 +75,21 @@ $("#tn3").hide();
         {foreachelse}
         {/foreach}
       </td>
-      {$LNG.ov_online}
     </tr>
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_players}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark"><a style="color:lime">{$usersOnline}</a></td>
     </tr>
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_moving_fleets}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark"><a style="color:lime">{$fleetsOnline}</a></td>
     </tr>
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_points}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark">{$rankInfo}</td>
     </tr>
   {if $is_news}
-    <tr>
+    <tr class="fs-14">
       <td class="text-start px-3 bg-black border border-dark">{$LNG.ov_news}</td>
       <td class="text-center px-3 w-50 bg-black border border-dark">{$news}</td>
     </tr>
@@ -88,26 +98,26 @@ $("#tn3").hide();
     </tr>
   {/if}
 
-
-  <tr>
-  	{$LNG.ov_events} <button id="chkbtn1">Hide fleets</button>
-
-  	<ul style="list-style-type:none;" id="hidden-div2">
-  	{foreach $fleets as $index => $fleet}
-
-
-  		<li style=" padding: 3px; "><span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">{pretty_fly_time({$fleet.resttime})}
-  		</span> <td id="fleettime_{$index}">{$fleet.text}</td></li>
-
-  	{/foreach}
-  </ul>
-   &nbsp;<span style="display:none" id="tn3"><button id="chkbtn3">Show fleets</button></span>
+  <tr class="fs-14">
+    <td>{$LNG.ov_events}</td>
+    <td> <button onclick="showHideFleets();">Hide fleets</button></td>
   </tr>
+
+  	{foreach $fleets as $index => $fleet}
+    <tr class="fs-12 fleetRow">
+      <td>
+        <span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">
+        {pretty_fly_time({$fleet.resttime})}
+       </span>
+     </td>
+      <td id="fleettime_{$index}">{$fleet.text}</td>
+    </tr>
+  	{/foreach}
   <tr>
     <td>
       <table class="table table-dark">
         <thead></thead>
-        <tbody>
+        <tbody class="fs-12">
           <tr>
             <td class="bg-black"><span style="color:skyblue">{$LNG.ov_diameter}:</span> </td>
             <td class="bg-black">{$LNG.ov_distance_unit} (<a title="{$LNG.ov_developed_fields}">{$planet_field_current}</a> / <a title="{$LNG.ov_max_developed_fields}">{$planet_field_max}</a> {$LNG.ov_fields})</td>
@@ -122,7 +132,7 @@ $("#tn3").hide();
           </tr>
         </tbody>
       </table>
-      <div class="d-flex flex-row align-items-center justify-content-center bg-black">
+      <div class="d-flex flex-row align-items-center justify-content-center bg-black fs-12">
         <div class="d-flex flex-column align-items-center justify-content-center w-100">
           <span>{$planetname}</span>
           <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">

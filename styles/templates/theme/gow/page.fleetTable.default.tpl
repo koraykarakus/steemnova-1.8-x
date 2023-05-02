@@ -96,7 +96,27 @@
 	</tr>
 	{foreach $FleetsOnPlanet as $FleetRow}
 	<tr style="height:20px;">
-		<td>{if $FleetRow.speed != 0} <a class='tooltip' data-tooltip-content='<table><tr><td>{$LNG.fl_speed_title}</td><td>{$FleetRow.speed}</td></tr></table>'>{$LNG.tech.{$FleetRow.id}}</a>{else}{$LNG.tech.{$FleetRow.id}}{/if}</td>
+		<td>
+			{if $FleetRow.speed != 0}
+			 <a class="" data-bs-toggle="tooltip"
+			 data-bs-placement="left"
+			 data-bs-html="true" title='
+			 <table>
+				 <thead>
+					 <tr>
+						 <td>{$LNG.fl_speed_title}</td>
+					 </tr>
+				 </thead>
+				 <tbody>
+					 <tr>
+						 <td>{$FleetRow.speed}</td>
+					 </tr>
+				 </tbody>
+			 </table>'>{$LNG.tech.{$FleetRow.id}}</a>
+			 {else}
+			 {$LNG.tech.{$FleetRow.id}}
+			 {/if}
+		 </td>
 		<td id="ship{$FleetRow.id}_value">{$FleetRow.count|number}</td>
 		{if $FleetRow.speed != 0}
 		<td><a href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a></td>

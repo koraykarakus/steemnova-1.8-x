@@ -1,9 +1,6 @@
 {block name="title" prepend}{$LNG.lm_buildings}{/block}
 {block name="content"}
 
-{if $messages}
-	<a class="d-flex bg-black fs-14 py-1 justify-content-center text-yellow hover-underline" href="?page=messages">{$messages}</a>
-{/if}
 
 {if !empty($Queue)}
  <div id="buildlist" class="d-flex flex-column align-items-center justify-content-center w-100 mx-auto my-2 py-2 bg-black">
