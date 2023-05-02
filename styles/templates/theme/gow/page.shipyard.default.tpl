@@ -2,6 +2,22 @@
 {block name="content"}
 <script src="./scripts/base/avoid_submit_on_refresh.js" type="text/javascript"></script>
 
+<script>
+$(document).ready(function(){
+  $("#searchInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".filter").filter(function() {
+			var result = $(this).text().toLowerCase().indexOf(value) > -1;
+			if (result == false) {
+				$($(this).parents().eq(2)).removeClass('d-flex').addClass('d-none');
+			}else {
+				$($(this).parents().eq(2)).addClass('d-flex').removeClass('d-none');
+			}
+    });
+  });
+});
+</script>
+
 {if !$NotBuilding}
 <span class="d-flex justify-content-center rounded p-2 text-danger fw-bold bg-dark border border-2 border-danger mx-auto my-2 w-100" id="infobox">
 	{$LNG.bd_building_shipyard}
@@ -27,6 +43,7 @@
 	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship1">Civil</button>
 	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship2">Military</button>
 	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship3">All</button>
+	<input style="width:150px;" id="searchInput" type="text" class="form-control bg-dark text-white h-100 p-1 m-1 my-auto fs-14" name="" value="" placeholder="search..">
 </div>
 {/if}
 
@@ -37,7 +54,7 @@
 	</div>
 	<div class="d-flex flex-column w-100">
 		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
-			<a href="#" class="fs-12 text-yellow" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
+			<a href="#" class="fs-12 text-yellow filter" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
 			{if $Element.available != 0}
 			<span class="fs-12 text-white px-2" id="val_{$ID}">
 					( {$LNG.bd_available} {$Element.available|number} )
