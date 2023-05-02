@@ -19,7 +19,7 @@
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.21" nocache}
+	{assign var="REV" value="1.0.0.23" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
@@ -223,6 +223,21 @@ $(this).addClass("selected");
 	});
 	</script>
 	<script>
+
+	var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
+myDefaultWhiteList.table = ['class'];
+myDefaultWhiteList.tbody = [];
+myDefaultWhiteList.thead = [];
+myDefaultWhiteList.th = ['colspan'];
+myDefaultWhiteList.tr = [];
+myDefaultWhiteList.td = ['colspan'];
+myDefaultWhiteList.span = ['class'];
+myDefaultWhiteList.img = ['src','alt','width','height'];
+myDefaultWhiteList.form = ['class','action','method'];
+myDefaultWhiteList.input = ['type','name','value'];
+myDefaultWhiteList.button = ['type','class'];
+
+
 	//initialize bootstrap tooltips
 	$(document).ready(function(){
 	  $('[data-bs-toggle="tooltip"]').tooltip({
@@ -233,16 +248,16 @@ $(this).addClass("selected");
 	});
 
 	// To allow elements
-	var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
-myDefaultWhiteList.table = ['class'];
-myDefaultWhiteList.tbody = [];
-myDefaultWhiteList.thead = [];
-myDefaultWhiteList.th = [];
-myDefaultWhiteList.tr = [];
-myDefaultWhiteList.td = [];
-myDefaultWhiteList.span = ['class'];
-myDefaultWhiteList.img = ['src','alt','width','height'];
+	//popovers
 
+	$(document).ready(function(){
+		$('[data-bs-toggle="popover"]').popover({
+			container: 'body',
+		  html: true,
+			whiteList: myDefaultWhiteList
+		});
+
+	});
 
 	</script>
 </head>

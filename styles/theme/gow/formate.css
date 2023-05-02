@@ -84,6 +84,37 @@ select {
 
 
 /*general classes for color and background color*/
+.popover {
+    background-color: rgba(191,38,21,0.5)!important;
+}
+
+.button-upgrade{
+	width: 80px;
+	height: 28px;
+	font-weight: 700;
+	font-size: 11px;
+	color: #fff;
+	background-color: #5f9946;
+	transition: 0.3s ease;
+	border: 1px solid #747c70;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.button-downgrade{
+	width: 80px;
+	height: 28px;
+	font-weight: 700;
+	font-size: 11px;
+	background-color: #c22216;
+	color: #000;
+	transition: 0.3s ease;
+	border: 1px solid #747c70;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.button-upgrade:hover{
+	background-color: #6ac144;
+}
 .color-green{
 	color: #5faa3d!important;
 }

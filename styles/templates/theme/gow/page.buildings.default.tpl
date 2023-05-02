@@ -1,6 +1,20 @@
 {block name="title" prepend}{$LNG.lm_buildings}{/block}
 {block name="content"}
-
+<script>
+$(document).ready(function(){
+  $("#searchInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".filter").filter(function() {
+      var result = $(this).text().toLowerCase().indexOf(value) > -1;
+      if (result == false) {
+        $($(this).parents().eq(2)).removeClass('d-flex').addClass('d-none');
+      }else {
+        $($(this).parents().eq(2)).addClass('d-flex').removeClass('d-none');
+      }
+    });
+  });
+});
+</script>
 
 {if !empty($Queue)}
  <div id="buildlist" class="d-flex flex-column align-items-center justify-content-center w-100 mx-auto my-2 py-2 bg-black">
@@ -44,10 +58,11 @@
 </div>
 {/if}
 
-<div class="planeto">
+<div class="d-flex align-items-start">
 	<button style="min-width:60px;" id="btn1" class="btn bg-black border border-dark px-1 py-0 text-white fs-6">Mining</button>
 	<button style="min-width:60px;" id="btn2" class="btn bg-black border border-dark px-1 py-0 text-white fs-6">Other</button>
 	<button style="min-width:60px;" id="btn3" class="btn bg-black border border-dark px-1 py-0 text-white fs-6">All</button>
+  <input style="width:150px;" id="searchInput" type="text" class="form-control bg-dark text-white h-100 p-1 m-1 my-auto fs-14" name="" value="" placeholder="search..">
 </div>
 
 {foreach $BuildInfoList as $ID => $Element}
@@ -58,7 +73,7 @@
 	</div>
 	<div class="d-flex flex-column w-100">
 		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
-				<a href="#" class="fs-12 text-yellow hover-underline" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
+				<a href="#" class="fs-12 text-yellow hover-underline filter" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
 				{if $Element.level > 0}
 				<span class="fs-12 text-white px-2" id="val_{$ID}">
 				({$LNG.bd_lvl} {$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if})
@@ -137,7 +152,7 @@
 						<form action="game.php?page=buildings" method="post" class="build_form">
 							<input type="hidden" name="cmd" value="insert">
 							<input type="hidden" name="building" value="{$ID}">
-							<button type="submit" class="build_submit fs-12">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</button>
+							<button type="submit" class="button-upgrade">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</button>
 						</form>
 						{else}
 						<span class="fs-12" style="color:#ffd600">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</span>
@@ -147,37 +162,40 @@
 					{/if}
 				{/if}
 				<br>
-					{$LNG.fgf_time}:{$Element.elementTime|time}
+        <span class="fs-12 my-1">{$LNG.fgf_time}:{$Element.elementTime|time}</span>
+
 					 {if $Element.level > 0}
 								{if $ID == 43}<a href="#" onclick="return Dialog.info({$ID})">{$LNG.bd_jump_gate_action}</a>{/if}
-								{if ($ID == 44 && !$HaveMissiles) ||  $ID != 44}<br><a class="tooltip_sticky" data-tooltip-content="
-									{* Start Destruction Popup *}
-									<table style='width:300px'>
-										<tr>
-											<th colspan='2'>{$LNG.bd_price_for_destroy} {$LNG.tech.{$ID}} {$Element.level}</th>
-										</tr>
-										{foreach $Element.destroyResources as $ResType => $ResCount}
-										<tr>
-											<td>{$LNG.tech.{$ResType}}</td>
-											<td><span style='color:{if empty($Element.destroyOverflow[$RessID])}lime{else}#ffd600{/if}'>{$ResCount|number}</span></td>
-										</tr>
-										{/foreach}
-										<tr>
-											<td>{$LNG.bd_destroy_time}</td>
-											<td>{$Element.destroyTime|time}</td>
-										</tr>
-										<tr>
-											<td colspan='2'>
-												<form action='game.php?page=buildings' method='post' class='build_form'>
-													<input type='hidden' name='cmd' value='destroy'>
-													<input type='hidden' name='building' value='{$ID}'>
-													<button type='submit' class='build_submit onlist'>{$LNG.bd_dismantle}</button>
-												</form>
-											</td>
-										</tr>
-									</table>
-									{* End Destruction Popup *}
-									">{$LNG.bd_dismantle}</a>{/if}
+								{if ($ID == 44 && !$HaveMissiles) ||  $ID != 44}<br><button class="button-downgrade" data-bs-toggle="popover" data-bs-placement="top"  data-bs-content="
+                <table>
+                  <thead>
+                    <tr>
+                      <th colspan='2'>{$LNG.bd_price_for_destroy} {$LNG.tech.{$ID}} {$Element.level}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {foreach $Element.destroyResources as $ResType => $ResCount}
+                    <tr>
+                      <td>{$LNG.tech.{$ResType}}</td>
+                      <td><span style='color:{if empty($Element.destroyOverflow[$RessID])}lime{else}#ffd600{/if}'>{$ResCount|number}</span></td>
+                    </tr>
+                    {/foreach}
+                    <tr>
+                      <td>{$LNG.bd_destroy_time}</td>
+                      <td>{$Element.destroyTime|time}</td>
+                    </tr>
+                    <tr>
+                      <td colspan='2'>
+                        <form action='game.php?page=buildings' method='post' class='build_form'>
+                          <input type='hidden' name='cmd' value='destroy'>
+                          <input type='hidden' name='building' value='{$ID}'>
+                          <button type='submit' class='build_submit onlist'>{$LNG.bd_dismantle}</button>
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                ">{$LNG.bd_dismantle}</button>{/if}
 							{else}
 								&nbsp;
 							{/if}
@@ -192,7 +210,7 @@
 	</div>
 	<div class="d-flex flex-column w-100">
 		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
-			<a href="#" class="fs-12 text-yellow hover-underline" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
+			<a href="#" class="fs-12 text-yellow hover-underline filter" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
 				{if $Element.level > 0}
 				<span class="fs-12 text-white px-2">
 				 	({$LNG.bd_lvl} {$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if})
@@ -260,7 +278,7 @@
 						<form action="game.php?page=buildings" method="post" class="build_form">
 							<input type="hidden" name="cmd" value="insert">
 							<input type="hidden" name="building" value="{$ID}">
-							<button type="submit" class="build_submit fs-12">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</button>
+							<button type="submit" class="button-upgrade">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</button>
 						</form>
 						{else}
 						<span style="color:#ffd600">{if $Element.level == 0 && $Element.levelToBuild == 0}{$LNG.bd_build}{else}{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}{/if}</span>
@@ -270,40 +288,42 @@
 					{/if}
 				{/if}
 				<br>
-					{$LNG.fgf_time}:{$Element.elementTime|time}
+        <span class="fs-12 my-1">{$LNG.fgf_time}:{$Element.elementTime|time}</span>
 					{if $Element.level > 0}
 										{if $ID == 43}
 										<a href="#" onclick="return Dialog.info({$ID})">{$LNG.bd_jump_gate_action}</a>
 										{/if}
 										{if ($ID == 44 && !$HaveMissiles) ||  $ID != 44}
-										<br><a class="tooltip_sticky" data-tooltip-content="
-											{* Start Destruction Popup *}
-											<table style='width:300px'>
-												<tr>
-													<th colspan='2'>{$LNG.bd_price_for_destroy} {$LNG.tech.{$ID}} {$Element.level}</th>
-												</tr>
-												{foreach $Element.destroyResources as $ResType => $ResCount}
-												<tr>
-													<td>{$LNG.tech.{$ResType}}</td>
-													<td><span style='color:{if empty($Element.destroyOverflow[$RessID])}lime{else}#ffd600{/if}'>{$ResCount|number}</span></td>
-												</tr>
-												{/foreach}
-												<tr>
-													<td>{$LNG.bd_destroy_time}</td>
-													<td>{$Element.destroyTime|time}</td>
-												</tr>
-												<tr>
-													<td colspan='2'>
-														<form action='game.php?page=buildings' method='post' class='build_form'>
-															<input type='hidden' name='cmd' value='destroy'>
-															<input type='hidden' name='building' value='{$ID}'>
-															<button type='submit' class='build_submit onlist'>{$LNG.bd_dismantle}</button>
-														</form>
-													</td>
-												</tr>
-											</table>
-											{* End Destruction Popup *}
-											">{$LNG.bd_dismantle}</a>
+										<br><button class="button-downgrade my-1" data-bs-toggle="popover" data-bs-placement="top"  data-bs-content="
+                    <table>
+                      <thead>
+                        <tr>
+                          <th colspan='2'>{$LNG.bd_price_for_destroy} {$LNG.tech.{$ID}} {$Element.level}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {foreach $Element.destroyResources as $ResType => $ResCount}
+                        <tr>
+                          <td>{$LNG.tech.{$ResType}}</td>
+                          <td><span style='color:{if empty($Element.destroyOverflow[$RessID])}lime{else}#ffd600{/if}'>{$ResCount|number}</span></td>
+                        </tr>
+                        {/foreach}
+                        <tr>
+                          <td>{$LNG.bd_destroy_time}</td>
+                          <td>{$Element.destroyTime|time}</td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            <form action='game.php?page=buildings' method='post' class='build_form'>
+                              <input type='hidden' name='cmd' value='destroy'>
+                              <input type='hidden' name='building' value='{$ID}'>
+                              <button type='submit' class='build_submit onlist'>{$LNG.bd_dismantle}</button>
+                            </form>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    ">{$LNG.bd_dismantle}</button>
 							{/if}
 							{else}
 								&nbsp;
