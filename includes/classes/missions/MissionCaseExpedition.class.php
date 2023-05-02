@@ -66,7 +66,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 
 
 		// Get a seed into the number generator (to make the results unpredictable).
-		mt_srand(microtime(TRUE)*10000);
+		mt_srand((int) (microtime(TRUE) * 10000));
 		usleep(50);
 
 		// Hold time bonus
