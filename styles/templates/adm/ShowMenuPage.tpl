@@ -1,29 +1,20 @@
 {include file="overall_header.tpl"}
 
-<script type="text/javascript">
-	function searchPages(){
-		var inputText = $('#searchInput').val().toLowerCase().replace(/\s/g, '');
-
-		var pageNames = $('.pageName');
-
-		for (var i = 0; i < pageNames.length; i++) {
-
-			if ($(pageNames[i]).html().toLowerCase().replace(/\s/g, '').indexOf(inputText) >= 0) {
-				$(pageNames[i]).css('display','flex');
-			}else {
-				$(pageNames[i]).css('display','none');
-			}
-
-
-		}
-
-	}
+<script>
+$(document).ready(function(){
+  $("#searchInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#menu li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
 </script>
 
 <div id="leftmenu">
+	<div style="background-image: url('./styles/theme/gow/img/menu-top.png');height:100px;"></div>
+	<input style="height:38px;width:100%;" id="searchInput" type="text"  placeholder="search...">
 	<ul id="menu">
-		<li style="background-image: url('./styles/theme/gow/img/menu-top.png');height:100px;"></li>
-		<li style="height:40px;display:flex;align-items:center;width:100%;"> <input style="height:38px;width:100%;" id="searchInput" type="text" onkeyup="searchPages();" placeholder="search..."> </li>
 		{if allowedTo('ShowInformationPage')}
 			<li>
 				<a class="d-flex w-100 text-decoration-none text-white fs-6" href="?page=infos" target="Hauptframe">{$LNG.mu_game_info}</a>
