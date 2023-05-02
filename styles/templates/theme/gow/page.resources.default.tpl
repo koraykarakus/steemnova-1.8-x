@@ -9,10 +9,82 @@
 </tr>
 <tr style="height:22px">
 	<td style="width:40%">&nbsp;</td>
-    <td style="width:10%"><a href='#' onclick='return Dialog.info(901)' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.901}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/901.gif'></td><td>{$LNG.shortDescription.901}</td></tr></table></tr></table>">{$LNG.tech.901}</a></td>
-    <td style="width:10%"><a href='#' onclick='return Dialog.info(902)' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.902}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/902.gif'></td><td>{$LNG.shortDescription.902}</td></tr></table></tr></table>">{$LNG.tech.902}</a></td>
-    <td style="width:10%"><a href='#' onclick='return Dialog.info(903)' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.903}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/903.gif'></td><td>{$LNG.shortDescription.903}</td></tr></table></tr></table>">{$LNG.tech.903}</a></td>
-    <td style="width:10%"><a href='#' onclick='return Dialog.info(911)' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.911}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/911.gif'></td><td>{$LNG.shortDescription.911}</td></tr></table></tr></table>">{$LNG.tech.911}</a></td>
+    <td style="width:10%"><a href='#' onclick='return Dialog.info(901);' data-bs-toggle="tooltip"
+		data-bs-placement="left"
+		data-bs-html="true" title="
+		<table>
+			<thead>
+				<tr>
+					<th colspan='2'>{$LNG.tech.901}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src='{$dpath}gebaeude/901.gif'></td>
+				</tr>
+				<tr>
+					<td>{$LNG.shortDescription.901}</td>
+				</tr>
+			</tbody>
+		</table>
+		">{$LNG.tech.901}</a></td>
+    <td style="width:10%"><a href='#' onclick='return Dialog.info(902);' data-bs-toggle="tooltip"
+		data-bs-placement="left"
+		data-bs-html="true" title="
+		<table>
+			<thead>
+				<tr>
+					<th colspan='2'>{$LNG.tech.902}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src='{$dpath}gebaeude/902.gif'></td>
+				</tr>
+				<tr>
+					<td>{$LNG.shortDescription.902}</td>
+				</tr>
+			</tbody>
+		</table>
+		">{$LNG.tech.902}</a></td>
+    <td style="width:10%"><a href='#' onclick='return Dialog.info(903);' data-bs-toggle="tooltip"
+		data-bs-placement="left"
+		data-bs-html="true" title="
+		<table>
+			<thead>
+				<tr>
+					<th colspan='2'>{$LNG.tech.903}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src='{$dpath}gebaeude/903.gif'></td>
+				</tr>
+				<tr>
+					<td>{$LNG.shortDescription.903}</td>
+				</tr>
+			</tbody>
+		</table>
+		">{$LNG.tech.903}</a></td>
+    <td style="width:10%"><a href='#' onclick='return Dialog.info(911);' data-bs-toggle="tooltip"
+		data-bs-placement="left"
+		data-bs-html="true" title="
+		<table>
+			<thead>
+				<tr>
+					<th colspan='2'>{$LNG.tech.911}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src='{$dpath}gebaeude/911.gif'></td>
+				</tr>
+				<tr>
+					<td>{$LNG.shortDescription.911}</td>
+				</tr>
+			</tbody>
+		</table>
+		">{$LNG.tech.911}</a></td>
 </tr>
 <tr style="height:22px">
 	<td>{$LNG.rs_basic_income}</td>
@@ -22,8 +94,26 @@
 	<td>{$basicProduction.911|number}</td>
 </tr>
 {foreach $productionList as $productionID => $productionRow}
-<tr style="height:22px">
-	<td><a href='#' onclick='return Dialog.info({$productionID});' class='tooltip' data-tooltip-content="<table><tr><th>{$LNG.tech.{$productionID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$productionID}.{if $productionID >=600 && $productionID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.{$productionID}}</td></tr></table></tr></table>">{$LNG.tech.$productionID }</a> ({if $productionID  > 200}{$LNG.rs_amount}{else}{$LNG.rs_lvl}{/if} {$productionRow.elementLevel})</td>
+<tr class="fs-12" style="height:22px">
+	<td><a href='#' onclick='return Dialog.info({$productionID});' data-bs-toggle="tooltip"
+	data-bs-placement="left"
+	data-bs-html="true" title="
+	<table>
+		<thead>
+			<tr>
+				<th colspan='2'>{$LNG.tech.{$productionID}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><img src='{$dpath}gebaeude/{$productionID}.{if $productionID >=600 && $productionID <= 699}jpg{else}gif{/if}'></td>
+			</tr>
+			<tr>
+				<td>{$LNG.shortDescription.$productionID}</td>
+			</tr>
+		</tbody>
+	</table>
+	">{$LNG.tech.$productionID }</a> ({if $productionID  > 200}{$LNG.rs_amount}{else}{$LNG.rs_lvl}{/if} {$productionRow.elementLevel})</td>
 	<td><span style="color:{if $productionRow.production.901 > 0}lime{elseif $productionRow.production.901 < 0}red{else}white{/if}">{$productionRow.production.901|number}</span></td>
 	<td><span style="color:{if $productionRow.production.902 > 0}lime{elseif $productionRow.production.902 < 0}red{else}white{/if}">{$productionRow.production.902|number}</span></td>
 	<td><span style="color:{if $productionRow.production.903 > 0}lime{elseif $productionRow.production.903 < 0}red{else}white{/if}">{$productionRow.production.903|number}</span></td>
