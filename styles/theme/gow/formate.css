@@ -90,7 +90,7 @@ select {
 .color-red,.text-red{
 	color:#e54438!important;
 }
-.text-yellow{
+.text-yellow,.color-yellow{
 	color:#ffd600!important;
 }
 .bg-black{

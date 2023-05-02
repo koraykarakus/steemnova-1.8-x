@@ -19,7 +19,7 @@
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.20" nocache}
+	{assign var="REV" value="1.0.0.21" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
@@ -199,126 +199,6 @@ $(this).addClass("selected");
             });
         });
 
-$(function(){
-            $("#0h").on('click',function() {
-                for(i=1;i<=99;i++)
-                $("#h"+i).hide();
-$("#0s").show();
-$("#0h").hide();
-
-            });
-        });
-
-      $(function(){
-            $("#0s").on('click',function() {
-                for(i=1;i<=99;i++)
-                $("#h"+i).show();
-$("#0h").show();
-$("#0s").hide();
-
-            });
-        });
-
-  $(function(){
-            $("#100h").on('click',function() {
-for(i=101;i<=199;i++)
-                $("#h"+i).hide();
-$("#100s").show();
-$("#100h").hide();
-
-            });
-        });
-
-  $(function(){
-            $("#100s").on('click',function() {
-for(i=101;i<=199;i++)
-                $("#h"+i).show();
-$("#100h").show();
-$("#100s").hide();
-
-            });
-        });
-
-  $(function(){
-
-            $("#200h").on('click',function() {
-for(i=201;i<=299;i++)
-                $("#h"+i).hide();
-$("#200s").show();
-$("#200h").hide();
-
-            });
-        });
- $(function(){
-
-            $("#200s").on('click',function() {
-for(i=201;i<=299;i++)
-                $("#h"+i).show();
-$("#200s").hide();
-$("#200h").show();
-
-            });
-        });
-  $(function(){
-
-            $("#400h").on('click',function() {
-for(i=401;i<=499;i++)
-                $("#h"+i).hide();
-$("#400s").show();
-$("#400h").hide();
-
-            });
-        });
- $(function(){
-
-            $("#400s").on('click',function() {
-for(i=401;i<=499;i++)
-                $("#h"+i).show();
-$("#400s").hide();
-$("#400h").show();
-
-            });
-        });
-  $(function(){
-
-            $("#500h").on('click',function() {
-for(i=501;i<=599;i++)
-                $("#h"+i).hide();
-$("#500s").show();
-$("#500h").hide();
-
-            });
-        });
- $(function(){
-
-            $("#500s").on('click',function() {
-for(i=501;i<=599;i++)
-                $("#h"+i).show();
-$("#500s").hide();
-$("#500h").show();
-
-            });
-        });
-  $(function(){
-
-            $("#600h").on('click',function() {
-for(i=601;i<=699;i++)
-                $("#h"+i).hide();
-$("#600s").show();
-$("#600h").hide();
-
-            });
-        });
- $(function(){
-
-            $("#600s").on('click',function() {
-for(i=601;i<=699;i++)
-                $("#h"+i).show();
-$("#600s").hide();
-$("#600h").show();
-
-            });
-        });
 
     </script>
 {/block}
