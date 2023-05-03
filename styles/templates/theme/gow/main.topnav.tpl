@@ -9,12 +9,28 @@
     <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=buddyList"><i class="bi bi-people fs-6"></i></a></li>
     {/if}
     <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=settings"><i class="bi bi-gear fs-6"></i></a></li>
-    <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=logout"><i class="bi bi-box-arrow-right fs-6"></i></a></li>
-    {if $messages}
+    {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
+
     <li class="px-2 f-12 hover-underline d-flex align-items-center h-100">
-    	<a class="d-flex align-items-center text-decoration-none fs-12 m-0" href="?page=messages"><i class="bi bi-envelope-exclamation fs-6"></i>&nbsp;{$messages}</a>
+    	<a class="d-flex align-items-center text-decoration-none fs-12 m-0" href="?page=messages"><i class="bi bi-envelope-exclamation fs-6"></i>
+        {nocache}
+        {if $new_message > 0}
+        <span id="newmes">&nbsp;(<span id="newmesnum">{$new_message}</span>)</span>
+        {/if}
+        {/nocache}
+      </a>
     </li>
     {/if}
+    {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}
+    <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=statistics"><i class="bi bi-graph-up-arrow"></i></a></li>
+    {/if}
+    {if isModuleAvailable($smarty.const.MODULE_SEARCH)}
+    <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=search"><i class="bi bi-search fs-6"></i></a></li>
+    {/if}
+    {if isModuleAvailable($smarty.const.MODULE_SUPPORT)}
+    <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=ticket"><i class="bi bi-info-circle fs-6"></i></a></li>
+    {/if}
+    <li class="px-2 f-12 hover-underline d-flex align-items-center h-100"><a href="game.php?page=logout"><i class="bi bi-box-arrow-right fs-6"></i></a></li>
   </ul>
   <label class="hamburger" for="toggle-menu" class="toggle-menu">
     <i class="fas fa-bars"></i>
@@ -25,7 +41,7 @@
        <span class="fs-12">{$LNG.tech.615}</span>
        <a class="fs-12" href="game.php?page=settings">{$username}</a>
     </div>
-    <div class="d-flex flex-column align-items-center justify-content-start h-100 overflow-auto">
+    <div style="width:100px;" class="d-flex flex-column align-items-center justify-content-start h-100 overflow-auto">
     	<a href="game.php?page=overview">
         <img src="{$dpath}planeten/{$image}.jpg" width="25" height="25" alt="{$LNG.lm_overview}">
       </a>
@@ -35,7 +51,7 @@
         {/foreach}
     	</select>
     </div>
-    <div id="resources_mobile">
+    <div class="d-flex">
     	{foreach $resourceTable as $resourceID => $resourceData}
     	<div data-bs-toggle="tooltip"
       data-bs-placement="bottom"

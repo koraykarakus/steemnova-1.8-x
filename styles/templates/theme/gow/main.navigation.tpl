@@ -1,4 +1,4 @@
-<ul id="menu">
+<ul class="mt-4" id="menu">
     <li class="menu-separator"></li>
     <li>
       <a class="{if $page == 'overview'}menuActive{/if}" href="game.php?page=overview">{$LNG.lm_overview}</a>
@@ -38,15 +38,7 @@
       <a class="{if $page == 'imperium'}menuActive{/if}" href="game.php?page=imperium">{$LNG.lm_empire}</a>
     </li>
     {/if}
-    {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
-    <li>
-      <a class="{if $page == 'messages'}menuActive{/if}" href="game.php?page=messages">{$LNG.lm_messages}
-        {nocache}
-        {if $new_message > 0}<span id="newmes"> (<span id="newmesnum">{$new_message}</span>)</span>{/if}
-        {/nocache}
-      </a>
-    </li>
-    {/if}
+
     {if isModuleAvailable($smarty.const.MODULE_TECHTREE)}
     <li>
       <a class="{if $page == 'techtree'}menuActive{/if}" href="game.php?page=techtree">{$LNG.lm_technology}</a>
@@ -73,14 +65,8 @@
     </li>
     {/if}
 
-    <li class="menu-separator"></li>
     {if isModuleAvailable($smarty.const.MODULE_ALLIANCE)}<li><a href="game.php?page=alliance">{$LNG.lm_alliance}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_FORUM)}{if !empty($hasBoard)}<li><a href="game.php?page=board" target="forum">{$LNG.lm_forums}</a></li>{/if}{/if}
-    {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}<li><a href="game.php?page=statistics">{$LNG.lm_statistics}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_SEARCH)}<li><a href="game.php?page=search">{$LNG.lm_search}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_CHAT)}<li><a href="game.php?page=chat">{$LNG.lm_chat}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_DISCORD)}<li><a href="{$discordUrl}" target="copy">Discord</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_SUPPORT)}<li><a href="game.php?page=ticket">{$LNG.lm_support}</a></li>{/if}
+
 
     <li class="menu-separator"></li>
     {if $authlevel > 0}<li><a href="./admin.php" style="color:lime">{$LNG.lm_administration} ({$VERSION})</a></li>{/if}

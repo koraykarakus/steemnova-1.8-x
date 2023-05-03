@@ -9,10 +9,17 @@
 	<title>{block name="title"} - {$uni_name} - {$game_name}{/block}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<!-- Bootstrap 5 - No IE support -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.21" nocache}
+	{assign var="REV" value="1.0.0.23" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
@@ -337,6 +344,46 @@ $("#600h").show();
 		{$execscript}
 	});
 	</script>
+
+	<script>
+
+	var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
+	myDefaultWhiteList.table = ['class'];
+	myDefaultWhiteList.tbody = [];
+	myDefaultWhiteList.thead = [];
+	myDefaultWhiteList.th = ['colspan'];
+	myDefaultWhiteList.tr = [];
+	myDefaultWhiteList.td = ['colspan'];
+	myDefaultWhiteList.span = ['class'];
+	myDefaultWhiteList.img = ['src','alt','width','height'];
+	myDefaultWhiteList.form = ['class','action','method'];
+	myDefaultWhiteList.input = ['type','name','value'];
+	myDefaultWhiteList.button = ['type','class'];
+
+
+	//initialize bootstrap tooltips
+	$(document).ready(function(){
+		$('[data-bs-toggle="tooltip"]').tooltip({
+			container: 'body',
+			html: true,
+			whiteList: myDefaultWhiteList
+		});
+	});
+
+	// To allow elements
+	//popovers
+
+	$(document).ready(function(){
+		$('[data-bs-toggle="popover"]').popover({
+			container: 'body',
+			html: true,
+			whiteList: myDefaultWhiteList
+		});
+
+	});
+
+	</script>
+
 </head>
 <body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
 	<div id="tooltip" class="tip"></div>
