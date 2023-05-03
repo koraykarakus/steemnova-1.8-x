@@ -397,6 +397,7 @@ class ShowResearchPage extends AbstractGamePage
 				'maxLevel'			=> $pricelist[$elementId]['max'],
 				'costResources'		=> $costResources,
 				'costOverflow'		=> $costOverflow,
+				'costOverflowTotal' => array_sum($costOverflow),
 				'elementTime'    	=> $elementTime,
 				'buyable'			=> $buyable,
 				'levelToBuild'		=> $levelToBuild,
