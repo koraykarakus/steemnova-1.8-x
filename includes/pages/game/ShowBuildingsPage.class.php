@@ -303,7 +303,8 @@ class ShowBuildingsPage extends AbstractGamePage
 				continue;
 
 			$infoEnergy	= "";
-
+			$requireEnergy = 0;
+			
 			if(isset($queueData['quickinfo'][$Element]))
 			{
 				$levelToBuild	= $queueData['quickinfo'][$Element];
@@ -349,7 +350,7 @@ class ShowBuildingsPage extends AbstractGamePage
 						'requireID' => $requireID
 					);
 				}
-				
+
 			}
 
 
