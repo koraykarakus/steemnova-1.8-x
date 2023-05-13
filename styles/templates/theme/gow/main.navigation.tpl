@@ -69,10 +69,14 @@
       <a class="w-100 d-flex align-items-center fs-12 fw-bold justify-content-center p-0 text-decoration-none" href="game.php?page=alliance">{$LNG.lm_alliance}</a>
     </li>
     {/if}
-    {if $authlevel > 0}<li  class="d-flex w-50  menu-button">
+    {if $authlevel > 0}
+    <li  class="d-flex w-50  menu-button">
       <a class="w-100 d-flex align-items-center fs-10 fw-bold justify-content-center p-0 text-decoration-none" href="./admin.php" style="color:lime">{$LNG.lm_administration} ({$VERSION})</a>
-    </li>{/if}
+    </li>
+    {/if}
+    {if $commit != ''}
+    <li class="d-flex w-50  menu-button">
+      <a href="https://github.com/koraykarakus/steemnova-1.8-x/tree/{$commit}"  class="w-100 d-flex align-items-center fs-10 fw-bold justify-content-center p-0 text-decoration-none" target="copy">SteemNova engine {$commitShort}</a>
+    </li>
+    {/if}
 </ul>
-<div id="disclamer" class="no-mobile">
-    {if $commit != ''}<a href="https://github.com/steemnova/steemnova/tree/{$commit}" target="copy">SteemNova engine {$commitShort}</a>{/if}
-</div>
