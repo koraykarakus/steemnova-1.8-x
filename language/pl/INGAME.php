@@ -160,6 +160,12 @@ $LNG['ov_reflink']							= 'Reflink';
 $LNG['ov_noreflink']						= 'Nikogo nie zwerbowałeś do gry';
 $LNG['ov_chat_online']						= 'Użytkownicy na czacie:';
 
+//przegląd działań
+
+$LNG['ov_ac_error_1'] = "Nazwa nie może być pusta!";
+$LNG['ov_ac_error_2'] = "Nazwa planety jest za długa!";
+$LNG['ov_ac_error_3'] = "nie wprowadzono nazwy planety!";
+
 
 //----------------------------------------------------------------------------//
 //GALAXY

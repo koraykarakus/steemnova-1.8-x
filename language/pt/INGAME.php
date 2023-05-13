@@ -161,6 +161,12 @@ $LNG['ov_reflink']							= 'Recrutas';
 $LNG['ov_noreflink']						= 'De momento, não recrutaste algum jogador.';
 $LNG['ov_chat_online']						= 'Jogadores no chat:';
 
+// visão geral das ações
+
+$LNG['ov_ac_error_1'] = "O nome não pode estar vazio!";
+$LNG['ov_ac_error_2'] = "O nome do planeta é muito longo!";
+$LNG['ov_ac_error_3'] = "o nome do planeta não foi inserido!";
+
 //----------------------------------------------------------------------------//
 // Galáxia
 

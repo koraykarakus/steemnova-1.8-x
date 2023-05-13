@@ -168,6 +168,12 @@ $LNG['Crystal']                      		= 'Kristal';
 $LNG['Deuterium']                      		= 'Deuterium';
 $LNG['Darkmatter']                      	= 'Karanlık Madde';
 
+//genel aksiyonlar
+
+$LNG['ov_ac_error_1'] = "İsim boş bırakılamaz !";
+$LNG['ov_ac_error_2'] = "Gezegen ismi çok uzun !";
+$LNG['ov_ac_error_3'] = "Gezegen ismi yazılmadı !";
+
 //----------------------------------------------------------------------------//
 // Galaksi
 

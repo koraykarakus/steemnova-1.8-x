@@ -147,6 +147,12 @@ $LNG['ov_reflink']							= 'Lien référence';
 $LNG['ov_noreflink']						= 'À l\'heure actuelle, vous n\'avez recruté aucun joueur.';
 $LNG['ov_chat_online']						= 'Joueur dans le Chat:';
 
+// aperçu des actions
+
+$LNG['ov_ac_error_1'] = "Le nom ne peut pas être vide !";
+$LNG['ov_ac_error_2'] = "Le nom de la planète est trop long !";
+$LNG['ov_ac_error_3'] = "le nom de la planète n'est pas saisi !";
+
 //----------------------------------------------------------------------------//
 //GALAXY
 

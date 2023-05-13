@@ -158,6 +158,12 @@ $LNG['ov_reflink']							= 'Enlace Ref.';
 $LNG['ov_noreflink']						= 'No tiene Usuarios Referidos.';
 $LNG['ov_chat_online']						= 'Usuarios en el Chat:';
 
+//vista general de acciones
+
+$LNG['ov_ac_error_1'] = "¡El nombre no puede estar vacío!";
+$LNG['ov_ac_error_2'] = "¡El nombre del planeta es demasiado largo!";
+$LNG['ov_ac_error_3'] = "¡No se ha introducido el nombre del planeta!";
+
 //----------------------------------------------------------------------------//
 //GALAXY
 

@@ -325,11 +325,11 @@ class ShowOverviewPage extends AbstractGamePage
 		$error = array();
 
 		if (empty($newname)) {
-			$error[] = "Name cannot be empty !";
+			$error[] = $LNG['ov_ac_error_1'];
 		}
 
 		if (strlen($newname) > 20) {
-			$error[] = "Planet name is too long !";
+			$error[] = $LNG['ov_ac_error_2'];
 		}
 
 		if (!PlayerUtil::isNameValid($newname)) {
@@ -362,7 +362,7 @@ class ShowOverviewPage extends AbstractGamePage
 		$planetName	= HTTP::_GP('planetName', '', true);
 
 		if (empty($planetName)) {
-			$error[] = "planet name is not entered !";
+			$error[] = $LNG['ov_ac_error_3'];
 		}
 
 		$db = Database::get();
@@ -430,7 +430,7 @@ class ShowOverviewPage extends AbstractGamePage
 		}
 
 		Session::load()->planetId = $USER['id_planet'];
-		$this->sendJSON(array('ok' => true, 'message' => $LNG['ov_planet_abandoned']));
+		$this->sendJSON($LNG['ov_planet_abandoned']);
 
 
 	}

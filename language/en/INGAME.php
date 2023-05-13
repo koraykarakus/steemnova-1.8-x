@@ -171,6 +171,12 @@ $LNG['ov_chat_online']						= 'Players in chat:';
 $LNG['ov_players']							= 'Players';
 $LNG['ov_moving_fleets']					= 'Moving fleets';
 
+//overview actions
+
+$LNG['ov_ac_error_1'] = "Name cannot be empty !";
+$LNG['ov_ac_error_2'] = "Planet name is too long !";
+$LNG['ov_ac_error_3'] = "planet name is not entered !";
+
 //----------------------------------------------------------------------------//
 // Galaxy
 
