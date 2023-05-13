@@ -179,6 +179,8 @@ function ShowUniversePage() {
 		$uniList[$uniRow['uni']]	= $uniRow;
 	}
 
+	
+
 	$template->assign_vars(array(
 		'uniList'	=> $uniList,
 		'SID'		=> session_id(),

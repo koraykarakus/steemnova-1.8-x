@@ -2,7 +2,7 @@
 {block name="content"}
 <form id="form" name="battlesim">
 	<input type="hidden" name="slots" id="slots" value="{$Slots + 1}">
-	<table style="width:80%">
+	<table class="table table-gow table-sm fs-12 w-100">
 		<tr>
 			<th>{$LNG.lm_battlesim}</th>
 		</tr>
@@ -20,7 +20,7 @@
 					</ul>
 					{section name=content start=0 loop=$Slots}
 					<div id="tabs-{$smarty.section.content.index}">
-						<table>
+						<table class="table table-gow table-sm fs-12">
 							<tr>
 								<th>{$LNG.bs_techno}</th>
 								<th>{$LNG.bs_atter}</th>
@@ -48,7 +48,7 @@
 							</tr>
 						</table>
 						<br>
-						<table>
+						<table class="table table-gow table-sm fs-12">
 							<tr>
 								<td class="transparent">
 									<table>

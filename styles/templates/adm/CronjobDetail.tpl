@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table width=512>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 {if !empty($error_msg)}
 {foreach from=$error_msg item=error}<tr><td colspan=2>{$error}</td></tr>{/foreach}
 {/if}

@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <form action="admin.php?page=messagelist" method="post" id="form">
 <input type="hidden" name="side" value="{$page}" id="side">
-<table width="90%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="5">{$LNG.ml_message_list}</th>
 	</tr>

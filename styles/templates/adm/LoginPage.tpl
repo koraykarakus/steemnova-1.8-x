@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <div id="content">
 	<form action="" method="POST">
-    <table style="width:569px;margin-top:100px;">
+    <table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 		<tr>
             <th>{$LNG.adm_login}</th>
         </tr>

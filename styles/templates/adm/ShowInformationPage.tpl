@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 
-<table class="w-100 mx-2 table-dark table-striped table-hover">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
   <thead>
     <tr >
         <td class="text-center">{$info_information}</td>

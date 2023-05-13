@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 {nocache}{if isset($name)}
 <form action="" method="post" name="countt">
-<table width="50%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="3">{$bantitle}</th>
 </tr><tr>
@@ -48,9 +48,9 @@
 </form>
 {/if}{/nocache}
 <form action="" method="POST" name="users">
-<table width="100%" border="0px">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <td style="border:0px;width:50%" class="transparent">
-<table align="center" width="90%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th>{$LNG.bo_ban_player}</th>
 </tr>
@@ -60,7 +60,7 @@
 	{$UserSelect.List}
 	</select>
 	<br>
-	<a href="?page=bans">{$LNG.bo_order_username}</a> &nbsp; <a href="?page=bans&amp;order=id">{if isset($bo_order_id)}{$bo_order_id}{/if}</a> &nbsp; 
+	<a href="?page=bans">{$LNG.bo_order_username}</a> &nbsp; <a href="?page=bans&amp;order=id">{if isset($bo_order_id)}{$bo_order_id}{/if}</a> &nbsp;
 	<a href="?page=bans&amp;view=bana">{$LNG.bo_order_banned}</a>
 	<script TYPE="text/javascript">
 		var UserList = new filterlist(document.getElementsByName('ban_name')[0]);
@@ -117,7 +117,7 @@
 <td style="border:0px;width:50%;" class="transparent">
 <br>
 <form action="" method="POST" name="userban">
-<table align="center" width="90%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th>{$LNG.bo_unban_player}</th>
 </tr>

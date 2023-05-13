@@ -1,17 +1,17 @@
 {include file="overall_header.tpl"}
 <form action="" method="POST" name="users">
-<table width="50%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <th colspan="3">{$ac_enter_user_id}</th>
 <tr>
 <td>
 	<select name="id_u" size="20" style="width:80%;">
 		{$Userlist}
 	</select>
-	
+
 	<SCRIPT type="text/javascript">
 		var UserList = new filterlist(document.users.id_u);
 	</SCRIPT>
-	
+
 	<br><br>
 	<a href="javascript:UserList.set('^A')" title="{$bo_select_title} A">A</A>
 	<a href="javascript:UserList.set('^B')" title="{$bo_select_title} B">B</A>

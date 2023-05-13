@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form action="" method="post" onsubmit="return confirm('{$re_reset_universe_confirmation}');">
-<table width="40%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr><th colspan="2">{$re_player_and_planets}</th></tr>
 <tr><td style="text-align:left">{$re_reset_player}</td><td style="text-align:right"><input type="checkbox" name="players"></td></tr>
 <tr><td style="text-align:left">{$re_reset_planets}</td><td style="text-align:right"><input type="checkbox" name="planets"></td></tr>

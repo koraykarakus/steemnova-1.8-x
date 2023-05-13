@@ -27,7 +27,6 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 	        success: function(data)
 	        {
 						var dataParsed = jQuery.parseJSON(data);
-
 						$('.alert').remove();
 
 						if (dataParsed.status == 'fail') {

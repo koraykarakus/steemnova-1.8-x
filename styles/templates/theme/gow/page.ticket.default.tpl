@@ -1,11 +1,11 @@
 {block name="title" prepend}{$LNG.lm_support}{/block}
 {block name="content"}
-<table>
+<table class="table table-gow">
 	<tr>
-		<th colspan="5">{$LNG.ti_header}</th>
+		<th class="text-center" colspan="5">{$LNG.ti_header}</th>
 	</tr>
 	<tr style="height:20px;">
-		<td colspan="5"><a href="game.php?page=ticket&amp;mode=create">{$LNG.ti_new}</a></td>
+		<td class="text-center" colspan="5"><a href="game.php?page=ticket&amp;mode=create">{$LNG.ti_new}</a></td>
 	</tr>
 	<tr>
 		<th style="width:10%">{$LNG.ti_id}</td>
@@ -14,7 +14,7 @@
 		<th style="width:15%">{$LNG.ti_date}</td>
 		<th style="width:15%">{$LNG.ti_status}</td>
 	</tr>
-	{foreach $ticketList as $TicketID => $TicketInfo}	
+	{foreach $ticketList as $TicketID => $TicketInfo}
 	<tr>
 		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a></td>
 		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.subject}</a></td>

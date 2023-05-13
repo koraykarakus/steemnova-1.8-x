@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-<table>
+<table class="table table-gow">
 	<tr>
 		<th>{$LNG.al_manage_alliance}</th>
 	</tr>
@@ -19,7 +19,7 @@
 <form action="game.php?page=alliance&mode=admin" method="post">
 <input type="hidden" name="textMode" value="{$textMode}">
 <input type="hidden" name="send" value="1">
-<table>
+<table class="table table-gow">
 	<tr>
 		<th colspan="3">{$LNG.al_texts}</th>
 	</tr>
@@ -35,7 +35,7 @@
 	</tr>
 	<tr>
 		<td colspan="3">
-			<input type="reset" value="{$LNG.al_circular_reset}"> 
+			<input type="reset" value="{$LNG.al_circular_reset}">
 			<input type="submit" value="{$LNG.al_save}">
 		</td>
 	</tr>
@@ -114,21 +114,21 @@
 </table>
 </form>
 {if $AllianceOwner}
-<table>
+<table class="table-gow table">
 	<tr>
 		<th>{$LNG.al_disolve_alliance}</th>
 	</tr>
 	<tr>
 		<td><form action="game.php?page=alliance&amp;mode=admin&amp;action=close" method="post"><input type="submit" value="{$LNG.al_continue}" onclick="return confirm('{$LNG.al_close_ally}');"></form></td>
-	</tr>  
+	</tr>
 </table>
-<table>
+<table class="table table-gow">
 	<tr>
 		<th>{$LNG.al_transfer_alliance}</th>
 	</tr>
 	<tr>
 		<td><form action="game.php?page=alliance&amp;mode=admin&amp;action=transfer" method="post"><input type="submit" value="{$LNG.al_continue}"></form></td>
-	</tr>  
+	</tr>
 </table>
 {/if}
 {/block}

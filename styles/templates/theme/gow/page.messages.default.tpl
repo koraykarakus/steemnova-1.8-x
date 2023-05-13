@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_messages}{/block}
 {block name="content"}
-<table>
+<table class="table table-sm table-gow">
 	<tr>
 		<th colspan="6">{$LNG.mg_overview}<span id="loading" style="display:none;"> ({$LNG.loading})</span></th>
 	</tr>
@@ -18,7 +18,7 @@
 <input type="hidden" name="ajax" value="1">
 <input type="hidden" name="messcat" value="{$MessID}">
 <input type="hidden" name="side" value="{$messagePage}">
-<table id="messagestable" style="table-layout:fixed;">
+<table id="messagestable" class="table table-sm table-gow">
 	<tr>
 		<th>{$LNG.mg_message_title}</th>
 	</tr>
@@ -42,7 +42,7 @@
 		<td class="right">{$LNG.mg_page}: {if $messagePage != 1}<a href="game.php?page=messages&category={$MessID}&side=1">&laquo;</a>&nbsp;{/if}{if $messagePage > 5}..&nbsp;{/if}{for $site=1 to $maxPage}<a href="game.php?page=messages&category={$MessID}&side={$site}">{if $site == $messagePage}<b>[{$site}]&nbsp;</b>{elseif ($site > $messagePage - 5 && $site < $messagePage+5)}[{$site}]&nbsp;{/if}</a>{/for}{if $messagePage < $maxPage-4}..&nbsp;{/if}{if $messagePage != $maxPage}&nbsp;<a href="game.php?page=messages&category={$MessID}&side={$maxPage}">&raquo;</a>{/if}</td>
 	</tr>
 </table>
-<table id="messagestable" style="table-layout:fixed;">
+<table id="messagestable" class="table table-sm table-gow">
 	<tr style="height: 20px;">
 		<td style="width:40px;">{$LNG.mg_action}</td>
 		<td>{$LNG.mg_date}</td>

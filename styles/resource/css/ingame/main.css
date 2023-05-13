@@ -162,11 +162,6 @@ table.hack {
 	table-layout: fixed;
 }
 
-table table,img {
-
-    border-radius: 25%;
-}
-
 td {
 	padding: 2px 3px;
 	vertical-align: middle;
@@ -683,7 +678,7 @@ table.tablesorter thead tr .headerSortDown {
 		padding: 16px;
 	}
 
-	
+
 	.no-mobile{
 		display: none;
 	}

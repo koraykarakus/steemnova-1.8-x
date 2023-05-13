@@ -5,9 +5,9 @@ $ui-background: #344566;
 */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -28,7 +28,7 @@ body,input,select,button,textarea,a,td,th,tr,table,a:visited{
 
 body.mceContentBody,input,button,select,option,textarea, .ui-widget-content{
 	background: #1b4c6e;
-    padding: 2px;
+  padding: 2px;
 }
 
 input[type="radio"] {
@@ -43,6 +43,15 @@ input[type="radio"] {
 /* #menu li:first-child, #menu li:last-child{
 	background-color:transparent;
 } */
+
+
+.with-fancybox{
+	overflow-y: scroll!important;
+}
+
+.fancybox__content{
+	padding: 0!important;
+}
 
 .card .title {
 	background-image: url("img/bkd_title.png");

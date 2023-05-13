@@ -1,8 +1,8 @@
 {include file="overall_header.tpl"}
 <form action="admin.php?page=support&mode=send" method="post" id="form">
 <input type="hidden" name="id" value="{$ticketID}">
-<table width="70%" cellpadding="2" cellspacing="2">
-	{foreach $answerList as $answerID => $answerRow}	
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
+	{foreach $answerList as $answerID => $answerRow}
 	{if $answerRow@first}
 	<tr>
 		<th colspan="2"><a href="admin.php?page=support">{$LNG.ti_overview}</a></th>
@@ -39,7 +39,7 @@
 	<tr>
 		<td style="width:30%">{if $ticket_status < 2}{$LNG.ti_close}{else}{$LNG.ti_open}{/if}</td>
 		<td style="width:70%"><input type="checkbox" name="change_status" value="1"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td colspan="2"><input type="submit" value="{$LNG.ti_submit}" onclick="parent.rightFrame.document.location.reload();"></td>
 	</tr>

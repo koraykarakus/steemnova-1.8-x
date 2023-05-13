@@ -2,7 +2,7 @@
 <input name="action" type="hidden" value="send">
 <input name="id_1" type="hidden" value="{$id}">
 {include file="overall_header.tpl"}
-<table width="55%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$ad_authlevel_title}</th>
 </tr>

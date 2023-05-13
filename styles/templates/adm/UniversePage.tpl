@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table width="760px">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th>{$LNG.uvs_id}</th>
 		<th>{$LNG.uvs_name}</th>
@@ -13,7 +13,7 @@
 	{foreach $uniList as $uniID => $uniRow}
 	<tr style="height:23px;">
 		<td>{$uniID}</td>
-		<td>{$uniRow.uni_name|number}</td>
+		<td>{$uniRow.uni_name}</td>
 		<td>{($uniRow.game_speed / 2500)|number}</td>
 		<td>{($uniRow.fleet_speed / 2500)|number}</td>
 		<td>{$uniRow.resource_multiplier|number}</td>

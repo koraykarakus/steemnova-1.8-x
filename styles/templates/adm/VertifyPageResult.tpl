@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="4">{$LNG.vt_fail}</th>
 	</tr>

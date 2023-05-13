@@ -14,7 +14,7 @@ function change3(){
 
 <form action="" method="post">
 <input type="hidden" name="opt_save" value="1">
-<table width="519" cellpadding="2" cellspacing="2">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$ts_settings}</th>
 </tr><tr>
@@ -22,7 +22,7 @@ function change3(){
 	<td><input name="ts_on"{if $ts_on == 1} checked="checked"{/if} type="checkbox"></td>
 </tr><tr>
 	<td>{$ts_version}</td>
-	<td><input type="radio" name="ts_v" value="2" onclick="change2();"> 2 
+	<td><input type="radio" name="ts_v" value="2" onclick="change2();"> 2
     <input type="radio" name="ts_v" value="3" onclick="change3();"> 3</td>
 </tr><tr>
 	<td>{$ts_serverip}:</td>

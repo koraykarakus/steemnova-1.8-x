@@ -33,7 +33,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 </style>
 
 
-<table class="tableunique">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<td class="blank"><a class="tooltip" data-tooltip-content="{$ac_note_k}">{$ac_leyend}&nbsp; <img src="./styles/resource/images/admin/i.gif" height="12" width="12"></a></td>
 	</tr>
@@ -64,10 +64,10 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			<tr><td height="22px">{$ac_ranking}</td><td><a href="#" onclick="$('#puntaje').slideToggle();return false">{$ac_see_ranking}</a></td></tr>
 			</table>
 			<br>
-			
+
 			<!-- PUNTAJE DEL USUARIO -->
 			<div id="puntaje" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th colspan="3" class="centrado2">{$ac_user_ranking}</th></tr>
 			<td width="15%"></td><td width="40%" class="centrado">{$ac_points_count}</td><td width="5%" class="centrado">{$ac_ranking}</td>
 			<tr><td width="15%" class="centrado">{$researchs_title}</td><td width="40%">{$point_tecno} ({$count_tecno} {$researchs_title})</td><td width="5%" class="ranking"># {$ranking_tecno}</td></tr>
@@ -78,10 +78,10 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			</table>
 			<br>
 			</div>
-			
-			
+
+
 			<div id="banned" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th colspan="4">{$ac_suspended_title}</th></tr>
 			<tr><td>{$ac_suspended_time}</td><td>{$sus_time}</td></tr>
 			<tr><td>{$ac_suspended_longer}</td><td>{$sus_longer}</td></tr>
@@ -97,7 +97,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="alianza" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th colspan="2">{$ac_info_ally}</th></tr>
 			<tr><td width="25%" align="center" >{$input_id}</td><td>{$id_aliz}</td></tr>
 			<tr><td>{$ac_leader}</td><td>{$ali_lider}</td></tr>
@@ -115,7 +115,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			<br>
 
 			<div id="imagen" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th>{$ac_ali_logo_11}</th></tr>
 			<tr><td width="60%"><img src="{$ali_logo2}" class="image"></td></tr>
 			<tr><td><a href="{$ali_logo2}" target="_blank">{$ac_view_image}</a></td></tr>
@@ -125,7 +125,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			</div>
 
 			<div id="externo" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th>{$ac_ali_text_11}</th></tr>
 			<tr><td width="60%">{$ali_ext2}</td></tr>
 			</table>
@@ -133,7 +133,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			</div>
 
 			<div id="interno" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><td class="c">{$ac_ali_text_22}</td></tr>
 			<tr><td width="60%">{$ali_int2}</td></tr>
 			</table>
@@ -141,7 +141,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			</div>
 
 			<div id="solicitud" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><th>{$ac_ali_text_33}</th></tr>
 			<tr><td width="60%">{$ali_sol2}</td></tr>
 			</table>
@@ -150,7 +150,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 
 			<!-- PUNTAJE DE LA ALIANZA DEL USUARIO -->
 			<div id="puntaje_ali" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr><td class="c" colspan="3">{$ac_ally_ranking}</td></tr>
 			<td width="15%"></td><td width="40%">{$ac_points_count}</td><td width="5%" class="centrado">{$ac_ranking}</td>
 			<tr><td width="15%">{$researchs_title}</td><td width="40%">{$point_tecno_ali} ({$count_tecno_ali} {$researchs_title})</td><td width="5%"># {$ranking_tecno_ali}</td></tr>
@@ -169,7 +169,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="pla" style="display:none">
-			<table width="70%" align="center">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr>
 				<th>{$ac_name}</th>
 				<th>{$input_id}</th>
@@ -189,7 +189,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="recursos" style="display:none">
-			<table width="70%" align="center">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr>
 				<th>{$ac_name}</th>
 				<th>{$Metal}</th>
@@ -203,7 +203,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 			</tr>
 			</table>
 			<br >
-			</div>	
+			</div>
 		</td>
 	</tr><tr>
 		<td class="unico transparent"><a href="#" onclick="$('#edificios').slideToggle();return false" class="link">
@@ -211,7 +211,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="edificios" style="display:none">
-			<table width="100%" align="center">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 				{$names}
 				{$build}
 			</table>
@@ -224,7 +224,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="naves" style="display:none">
-			<table align="center" width="100%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 				{$names}
 				{$fleet}
 			</table>
@@ -237,7 +237,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="defensa" style="display:none">
-			<table align="center" width="100%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 				{$names}
 				{$defense}
 			</table>
@@ -250,7 +250,7 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="inves" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr>
 			<th width="50%">{$researchs_title}</th>
 			<th width="50%">{$officiers_title}</th>
@@ -264,13 +264,13 @@ border:0px;background:url(./styles/resource/images/admin/blank.gif);text-align:r
 		<td class="unico transparent">
 			{if $DestruyeD != 0}<a href="#" onclick="$('#destr').slideToggle();return false" class="link">
 			<img src="./styles/resource/images/admin/arrowright.png" width="16" height="10"> {$ac_recent_destroyed_planets}</a>
-			{else}<span class="no_moon"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10"> 
+			{else}<span class="no_moon"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10">
 			{$ac_recent_destroyed_planets}&nbsp;{$ac_isnodestruyed}</span>{/if}
 		</td>
 	</tr><tr>
 		<td class="unico transparent">
 			<div id="destr" style="display:none">
-			<table align="center" width="60%">
+			<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr>
 				<th>{$ac_name}</th>
 				<th>{$input_id}</th>

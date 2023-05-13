@@ -1,9 +1,9 @@
 {block name="title" prepend}{$LNG.lm_topkb}{/block}
 {block name="content"}
-<table class="table569">
+<table class="table table-gow fs-12 table-sm">
 <tbody>
 <tr>
-    <th colspan="4">{$LNG.tkb_top}</th>
+    <th class="text-center" colspan="4">{$LNG.tkb_top}</th>
 </tr>
 <tr>
     <td colspan="4">{$LNG.tkb_gratz}</td>

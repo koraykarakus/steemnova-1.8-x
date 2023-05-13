@@ -19,7 +19,29 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 function ShowRightsPage()
 {
 	global $LNG, $USER;
+
 	$mode	= HTTP::_GP('mode', '');
+
+	$getType = HTTP::_GP('get','');
+
+	switch ($getType) {
+		case 'adm':
+		$WHEREUSERS	=	"AND `authlevel` = '".AUTH_ADM."'";
+			break;
+		case 'ope':
+		$WHEREUSERS	=	"AND `authlevel` = '".AUTH_OPS."'";
+			break;
+		case 'mod':
+		$WHEREUSERS	=	"AND `authlevel` = '".AUTH_MOD."'";
+			break;
+		case 'pla':
+		$WHEREUSERS	=	"AND `authlevel` = '".AUTH_USR."'";
+			break;
+		default:
+		$WHEREUSERS	=	"AND `authlevel` = '".AUTH_USR."'";
+			break;
+	}
+
 	switch($mode)
 	{
 		case 'rights':
@@ -65,14 +87,7 @@ function ShowRightsPage()
 				exit;
 			}
 
-			if ($_GET['get'] == 'adm')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_ADM."'";
-			elseif ($_GET['get'] == 'ope')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_OPS."'";
-			elseif ($_GET['get'] == 'mod')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_MOD."'";
-			elseif ($_GET['get'] == 'pla')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_USR."'";
+
 
 
 			$QueryUsers	=	$GLOBALS['DATABASE']->query("SELECT `id`, `username`, `authlevel` FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."'".$WHEREUSERS.";");
@@ -124,14 +139,9 @@ function ShowRightsPage()
 				exit;
 			}
 
-			if ($_GET['get'] == 'adm')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_ADM."'";
-			elseif ($_GET['get'] == 'ope')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_OPS."'";
-			elseif ($_GET['get'] == 'mod')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_MOD."'";
-			elseif ($_GET['get'] == 'pla')
-				$WHEREUSERS	=	"AND `authlevel` = '".AUTH_USR."'";
+
+
+
 
 			$QueryUsers	=	$GLOBALS['DATABASE']->query("SELECT `id`, `username`, `authlevel` FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."'".$WHEREUSERS.";");
 

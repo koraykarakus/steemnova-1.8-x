@@ -1,20 +1,19 @@
 {block name="title" prepend}{$LNG.lm_trader}{/block}
 {block name="content"}
 {if $requiredDarkMatter}
-<table style="width:519px;">
+<table class="table table-gow fs-12 table-sm">
 <tr>
-	<th>{$LNG.fcm_info}</th>
+	<th class="text-center">{$LNG.fcm_info}</th>
 </tr>
 <tr>
 	<td><span style="color:red;">{$requiredDarkMatter}</span></td>
 </tr>
 </table>
-<br>
-<br>
+
 {/if}
-<table style="width:519px;">
+<table class="table table-gow fs-12 table-sm">
 <tr>
-	<th>{$LNG.tr_call_trader}</th>
+	<th class="text-center">{$LNG.tr_call_trader}</th>
 </tr>
 <tr>
 	<td>

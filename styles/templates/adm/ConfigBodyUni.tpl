@@ -2,7 +2,7 @@
 <center>
 <form action="" method="post">
 <input type="hidden" name="opt_save" value="1">
-<table width="70%" cellpadding="2" cellspacing="2">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$se_server_parameters}</th>
 	<th colspan="1" width="5%">(?)</th>

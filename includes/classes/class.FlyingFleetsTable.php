@@ -283,7 +283,10 @@ class FlyingFleetsTable
 				$FRessource  .= '<tr><td style=\'width:50%;color:white\'>'.$LNG['tech'][921].'</td><td style=\'width:50%;color:white\'>'. pretty_number($fleetRow['fleet_resource_darkmatter']).'</td></tr>';
 			$FRessource  .= '</table>';
 
-			$MissionPopup  = '<a data-tooltip-content="'.$FRessource.'" class="tooltip '.$FleetType.'">'.$Texte.'</a><span class="textForBlind"> ('.$textForBlind.')</span>';
+			$MissionPopup  = '<a data-bs-toggle="tooltip"
+			data-bs-placement="bottom"
+			data-bs-html="true"
+			title="'.$FRessource.'" class="'.$FleetType.'">'.$Texte.'</a><span class="textForBlind"> ('.$textForBlind.')</span>';
 		}
 		else
 			$MissionPopup  = $Texte;
@@ -297,7 +300,10 @@ class FlyingFleetsTable
 		$SpyTech		= $USER[$resource[106]];
 		$Owner			= $fleetRow['fleet_owner'] == $this->userId;
 		$FleetRec		= explode(';', $fleetRow['fleet_array']);
-		$FleetPopup		= '<a href="#" data-tooltip-content="<table style=\'width:200px\'>';
+		$FleetPopup		= '<a href="#" data-bs-toggle="tooltip"
+		data-bs-placement="bottom"
+		data-bs-html="true"
+		title="<table class=\'table-tooltip fs-11\' >';
 		$textForBlind	= '';
 		if ($this->IsPhalanx || $SpyTech >= 4 || $Owner)
 		{
@@ -316,7 +322,7 @@ class FlyingFleetsTable
 				$Ship    = explode(',', $Group);
 				if($Owner)
                 {
-					$FleetPopup 	.= '<tr><td style=\'width:50%;color:white\'>'.$LNG['tech'][$Ship[0]].':</td><td style=\'width:50%;color:white\'>'.pretty_number($Ship[1]).'</td></tr>';
+					$FleetPopup 	.= '<tr><td class=\'text-start w-50\'>'.$LNG['tech'][$Ship[0]].':</td><td class=\'text-end w-50\'>'.pretty_number($Ship[1]).'</td></tr>';
                     $shipsData[]	= floatToString($Ship[1]).' '.$LNG['tech'][$Ship[0]];
 				}
                 else
@@ -341,7 +347,7 @@ class FlyingFleetsTable
 			$textForBlind	= $LNG['cff_no_fleet_data'];
 		}
 
-		$FleetPopup  .= '</table>" class="tooltip '. $FleetType .'">'. $Text .'</a><span class="textForBlind"> ('.$textForBlind.')</span>';
+		$FleetPopup  .= '</table>" class="'. $FleetType .'">'. $Text .'</a><span class="textForBlind"> ('.$textForBlind.')</span>';
 
 		return $FleetPopup;
 	}

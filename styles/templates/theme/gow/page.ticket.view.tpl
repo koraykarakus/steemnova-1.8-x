@@ -2,8 +2,8 @@
 {block name="content"}
 <form action="game.php?page=ticket&mode=send" method="post" id="form">
 <input type="hidden" name="id" value="{$ticketID}">
-<table class="table519">
-	{foreach $answerList as $answerID => $answerRow}	
+<table class="table table-gow">
+	{foreach $answerList as $answerID => $answerRow}
 	{if $answerRow@first}
 	<tr>
 		<th colspan="2">{$LNG.ti_read} :: {$answerRow.subject}</th>

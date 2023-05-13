@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <center>
 <form method="post" action="">
-<table width="768">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$et_md5_encripter}</th>
 </tr>

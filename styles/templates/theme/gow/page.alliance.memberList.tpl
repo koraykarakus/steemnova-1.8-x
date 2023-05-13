@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-<table id="memberList" style="width:50%" class="tablesorter">
+<table id="memberList" style="width:50%" class="table table-sm table-gow fs-12">
 	<thead>
 		<tr>
 			<th colspan="8">{$al_users_list}</th>
@@ -38,13 +38,13 @@
 {block name="script" append}
 <script src="scripts/base/jquery.tablesorter.js"></script>
 <script>$(function() {
-	$.tablesorter.addParser({ 
-		id: 'status', 
-		is: function(s) { 
-		    // return false so this parser is not auto detected 
-		    return false; 
-                }, 
-	    	format: function(s) { 
+	$.tablesorter.addParser({
+		id: 'status',
+		is: function(s) {
+		    // return false so this parser is not auto detected
+		    return false;
+                },
+	    	format: function(s) {
 		    if(s=="{$LNG.al_memberlist_on}")
 		       return 0;
 	            if(s=="{$LNG.al_memberlist_off}")
@@ -52,12 +52,12 @@
 		    // format your data for normalization
 		    var lNumber = parseFloat(s.replace(/[^0-9]/,''));
 		    return lNumber;
-	    	}, 
-	    	// set type, either numeric or text 
-	    	type: 'numeric' 
+	    	},
+	    	// set type, either numeric or text
+	    	type: 'numeric'
 	    });
     $("#memberList").tablesorter({
-		headers: { 
+		headers: {
 			0: { sorter: false } ,
 			3: { sorter: false },
 		        7: { sorter: "status"}

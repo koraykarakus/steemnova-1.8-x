@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form action="" method="post" name="users">
-<table width="55%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="7">{$ad_authlevel_title}</th>
 </tr><tr>
@@ -8,7 +8,7 @@
 	<select name="id_1" size="20" style="width:80%;">
 		{$UserList}
 	</select>
-	
+
 	<script type="text/javascript">
 		var UserList = new filterlist(document.getElementsByName('id_1')[0]);
 	</script>

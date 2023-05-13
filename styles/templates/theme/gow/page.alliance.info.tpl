@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-<table class="table519">
+<table class="table table-gow table-sm fs-12">
 <tr>
 	<th colspan="2">{$LNG.al_ally_information}</th>
 </tr>
@@ -70,10 +70,10 @@
 <tr>
 	<td>{$LNG.pl_fightwon}</td><td>{$statisticData.fightwon|number}{if $statisticData.totalfight} ({round($statisticData.fightwon / $statisticData.totalfight * 100, 2)}%){/if}</td>
 </tr>
-<tr>	
+<tr>
 	<td>{$LNG.pl_fightlose}</td><td>{$statisticData.fightlose|number}{if $statisticData.totalfight} ({round($statisticData.fightlose / $statisticData.totalfight * 100, 2)}%){/if}</td>
 </tr>
-<tr>	
+<tr>
 	<td>{$LNG.pl_fightdraw}</td><td>{$statisticData.fightdraw|number}{if $statisticData.totalfight} ({round($statisticData.fightdraw / $statisticData.totalfight * 100, 2)}%){/if}</td>
 </tr>
 <tr>

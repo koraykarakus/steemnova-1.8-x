@@ -1,4 +1,4 @@
-<table>
+<table class="table table-gow fs-12">
 	<tbody>
 		{if !empty($FleetInfo.tech)}
 		<tr>

@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_buddylist}{/block}
 {block name="content"}
-<table class="table569">
-<tr><th colspan="5">{$LNG.bu_buddy_list}</th></tr>
+<table class="table table-gow table-sm fs-12">
+<tr><th class="text-center" colspan="5">{$LNG.bu_buddy_list}</th></tr>
 {if !empty($otherRequestList)}
 <tr><th colspan="5" style="text-align:center">{$LNG.bu_requests}</th></tr>
 <tr>

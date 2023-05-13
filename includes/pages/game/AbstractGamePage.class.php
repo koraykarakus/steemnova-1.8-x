@@ -47,6 +47,15 @@ abstract class AbstractGamePage
 		}
 	}
 
+	protected function GetFleets() {
+		global $USER, $PLANET;
+		require_once 'includes/classes/class.FlyingFleetsTable.php';
+		$fleetTableObj = new FlyingFleetsTable;
+		$fleetTableObj->setUser($USER['id']);
+		$fleetTableObj->setPlanet($PLANET['id']);
+		return $fleetTableObj->renderTable();
+	}
+
 	protected function initTemplate() {
 		global $config, $USER;
 
@@ -210,7 +219,7 @@ abstract class AbstractGamePage
 
 	protected function getPageData()
 	{
-		global $USER, $THEME;
+		global $USER, $THEME, $config, $PLANET, $LNG;
 
 		if($this->getWindow() === 'full') {
 			$this->getNavigationData();
@@ -228,7 +237,35 @@ abstract class AbstractGamePage
 			$dateTimeUser	= $dateTimeServer;
 		}
 
-		$config	= Config::get();
+		foreach($USER['PLANETS'] as $ID => $CPLANET)
+		{
+			if ($CPLANET['planet_type'] == 3)
+				continue;
+
+			if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP) {
+				$Queue = unserialize($CPLANET['b_building_id']);
+				$BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
+			} else {
+				$BuildPlanet = $LNG['ov_free'];
+			}
+
+			$AllPlanets[] = array(
+				'id'	=> $CPLANET['id'],
+				'name'	=> (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'],0,12) . ".." : $CPLANET['name'],
+				'image'	=> $CPLANET['image'],
+				'build'	=> $BuildPlanet,
+				'galaxy' => $CPLANET['galaxy'],
+				'system' => $CPLANET['system'],
+				'planet' => $CPLANET['planet'],
+				'selected' => ($CPLANET['id'] == $PLANET['id']) ? true : false,
+				'field_current' => $CPLANET['field_current'],
+				'field_max' => $CPLANET['field_max'],
+				'diameter' => $CPLANET['diameter'],
+				'temp_min' => $CPLANET['temp_min'],
+				'temp_max' => $CPLANET['temp_max']
+			);
+		}
+
 
 		$this->assign(array(
 			'vmode'				=> $USER['urlaubs_modus'],
@@ -248,7 +285,10 @@ abstract class AbstractGamePage
 			'queryString'		=> $this->getQueryString(),
 			'themeSettings'		=> $THEME->getStyleSettings(),
 			'page' => HTTP::_GP('page',''),
-			'mode' => HTTP::_GP('mode','')
+			'mode' => HTTP::_GP('mode',''),
+			'servertime' => _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
+			'AllPlanets'				=> $AllPlanets,
+			'fleets'					=> $this->GetFleets(),
 		));
 	}
 	protected function printMessage($message, $redirectButtons = NULL, $redirect = NULL, $fullSide = true)

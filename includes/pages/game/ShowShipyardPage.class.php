@@ -134,7 +134,7 @@ class ShowShipyardPage extends AbstractGamePage
 
 	public function show()
 	{
-		global $USER, $PLANET, $LNG, $resource, $reslist, $config;
+		global $USER, $PLANET, $LNG, $resource, $reslist, $config, $requeriments;
 
 		if ($PLANET[$resource[21]] == 0)
 		{
@@ -245,6 +245,19 @@ class ShowShipyardPage extends AbstractGamePage
 
 			$AlreadyBuild		= in_array($Element, $reslist['one']) && (isset($elementInQueue[$Element]) || $PLANET[$resource[$Element]] != 0);
 
+			$requireArray = array();
+
+			if (isset($requeriments[$Element])) {
+				foreach ($requeriments[$Element] as $requireID => $requireLevel) {
+					$requireArray[] = array(
+						'currentLevel' => ($requireID < 100) ? $PLANET[$resource[$requireID]] : $USER[$resource[$requireID]],
+						'neededLevel' => $requireLevel,
+						'requireID' => $requireID
+					);
+				}
+
+			}
+
 			$elementList[$Element]	= array(
 				'id'				=> $Element,
 				'available'			=> $PLANET[$resource[$Element]],
@@ -255,8 +268,8 @@ class ShowShipyardPage extends AbstractGamePage
 				'buyable'			=> $buyable,
 				'maxBuildable'		=> floatToString($maxBuildable),
 				'AlreadyBuild'		=> $AlreadyBuild,
-        'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
-
+        'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element),
+				'requeriments' => $requireArray,
 			);
 		}
 

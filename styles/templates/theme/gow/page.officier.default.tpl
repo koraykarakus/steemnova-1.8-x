@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_officiers}{/block}
 {block name="content"}
 {if !empty($darkmatterList)}
-	<table>
+	<table class="table table-sm table-gow fs-12">
 	<tr>
 		<th colspan="2">{$of_dm_trade}</th>
 	</tr>
@@ -56,7 +56,7 @@
 <br><br>
 {/if}
 {if $officierList}
-<table>
+<table class="table table-sm table-gow fs-12">
 	<tr>
 		<th colspan="2">{$LNG.of_offi}</th>
 	</tr>

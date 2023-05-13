@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <center>
 	<h1 class="fs-4 text-white">{$LNG.ow_title}</h1>
-	<table width="90%" style="border:2px {if empty($Messages)}lime{else}red{/if} solid;text-align:center;font-weight:bold;">
+	<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto" style="border:2px {if empty($Messages)}lime{else}red{/if} solid;text-align:center;font-weight:bold;">
 		<tr>
 			<td class="transparent">{foreach item=Message from=$Messages}
 					<span style="color:red">{$Message}</span><br>
@@ -10,7 +10,7 @@
 		</tr>
 	</table>
 	<br>
-	<table width="80%">
+	<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 		<tr>
 			<th colspan="2">{$LNG.ow_overview}</th>
 		</tr>

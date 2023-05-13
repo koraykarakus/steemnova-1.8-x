@@ -2,7 +2,7 @@
 {nocache}{if isset($mode)}
 <form method="POST" action="?page=news&amp;action=send&amp;mode={$mode}">
 {if isset($news_id)}<input name="id" type="hidden" value="{$news_id}">{/if}
-<table>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$nws_head}</th>
 </tr>

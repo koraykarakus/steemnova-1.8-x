@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form action="" method="post">
-<table width="45%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr><th colspan="2">{$new_title}</th></tr>
 <tr><td>{$user_reg}</td><td><input type="text" name="name"></td></tr>
 <tr><td>{$pass_reg}</td><td><input type="password" name="password"></td></tr>

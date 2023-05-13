@@ -4,17 +4,17 @@
 	<input type="hidden" name="token" value="{$token}">
 	<input type="hidden" name="fleet_group" value="0">
 	<input type="hidden" name="target_mission" value="{$mission}">
-	<table class="table519" style="table-layout: fixed;">
+	<table class="table table-gow table-sm fs-12" style="table-layout: fixed;">
 		<tr style="height:20px;">
 			<th colspan="2">{$LNG.fl_send_fleet}</th>
 		</tr>
 		<tr style="height:20px;">
 			<td style="width:50%">{$LNG.fl_destiny}</td>
 			<td>
-				<input type="text" id="galaxy" name="galaxy" size="3" maxlength="2" onkeyup="updateVars()" value="{$galaxy}">
-				<input type="text" id="system" name="system" size="3" maxlength="3" onkeyup="updateVars()" value="{$system}">
-				<input type="text" id="planet" name="planet" size="3" maxlength="2" onkeyup="updateVars()" value="{$planet}">
-				<select id="type" name="type" onchange="updateVars()">
+				<input class="text-yellow text-center" type="text" id="galaxy" name="galaxy" size="3" maxlength="2" onkeyup="updateVars()" value="{$galaxy}">
+				<input class="text-yellow text-center" type="text" id="system" name="system" size="3" maxlength="3" onkeyup="updateVars()" value="{$system}">
+				<input class="text-yellow text-center" type="text" id="planet" name="planet" size="3" maxlength="2" onkeyup="updateVars()" value="{$planet}">
+				<select class="text-yellow text-center" id="type" name="type" onchange="updateVars()">
 					{html_options options=$typeSelect selected=$type}
 				</select>
 			</td>
@@ -22,7 +22,7 @@
 		<tr style="height:20px;">
 			<td>{$LNG.fl_fleet_speed}</td>
 			<td>
-				<select id="speed" name="speed" onChange="updateVars(false)">
+				<select class="text-yellow text-center" id="speed" name="speed" onChange="updateVars(false)">
 					{html_options options=$speedSelect}
 				</select> %
 			</td>
@@ -57,9 +57,9 @@
 		</tr>
 	</table>
 
-<table class="table519" style="table-layout: fixed;">
+<table class="table table-gow table-sm fs-12">
 	<tr style="height:20px;">
-		<th colspan="2">{$LNG.fl_system_places}</th>
+		<th class="text-center" colspan="2">{$LNG.fl_system_places}</th>
 	</tr>
 	<tr style="height:20px;">
 		<td>
@@ -72,9 +72,9 @@
 </table>
 
 	{if isModuleAvailable($smarty.const.MODULE_SHORTCUTS)}
-	<table class="table519 shortcut" style="table-layout: fixed;">
+	<table class="table table-gow table-sm fs-12">
 		<tr style="height:20px;">
-			<th colspan="{$themeSettings.SHORTCUT_ROWS_ON_FLEET1}">{$LNG.fl_shortcut} (<a href="#" onclick="EditShortcuts();return false" class="shortcut-link-edit shortcut-link">{$LNG.fl_shortcut_edition}</a><a href="#" onclick="SaveShortcuts();return false" class="shortcut-edit">{$LNG.fl_shortcut_save}</a>)</th>
+			<th class="text-center" colspan="{$themeSettings.SHORTCUT_ROWS_ON_FLEET1}">{$LNG.fl_shortcut} (<a href="#" onclick="EditShortcuts();return false" class="shortcut-link-edit shortcut-link">{$LNG.fl_shortcut_edition}</a><a href="#" onclick="SaveShortcuts();return false" class="shortcut-edit">{$LNG.fl_shortcut_save}</a>)</th>
 		</tr>
 
 		{foreach $shortcutList as $shortcutID => $shortcutRow}
@@ -130,9 +130,9 @@
 		</tr>
 	</table>
 	{/if}
-	<table class="table519" style="table-layout: fixed;">
+	<table class="table table-gow table-sm table-striped fs-12" style="table-layout: fixed;">
 		<tr style="height:20px;">
-			<th colspan="{$themeSettings.COLONY_ROWS_ON_FLEET1}">{$LNG.fl_my_planets}</th>
+			<th class="text-center" colspan="{$themeSettings.COLONY_ROWS_ON_FLEET1}">{$LNG.fl_my_planets}</th>
 		</tr>
 		{foreach $colonyList as $ColonyRow}
 		{if ($ColonyRow@iteration % $themeSettings.COLONY_ROWS_ON_FLEET1) === 1}<tr style="height:20px;">{/if}
@@ -151,7 +151,7 @@
 		{/foreach}
 	</table>
 	{if $ACSList}
-	<table class="table519" style="table-layout: fixed;">
+	<table class="table table-gow" style="table-layout: fixed;">
 		<tr style="height:20px;">
 			<th colspan="{$themeSettings.COLONY_ROWS_ON_FLEET1}">{$LNG.fl_acs_title}</th>
 		</tr>
@@ -168,9 +168,9 @@
 		{/foreach}
 	</table>
 	{/if}
-	<table class="table519" style="table-layout: fixed;">
+	<table class="table table-gow table-sm fs-12" style="table-layout: fixed;">
 		<tr style="height:20px;">
-			<td><input type="submit" value="{$LNG.fl_continue}"></td>
+			<td class="text-center"><input class="button-upgrade" type="submit" value="{$LNG.fl_continue}"></td>
 		</tr>
 	</table>
 </form>

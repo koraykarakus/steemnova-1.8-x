@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <form action="" method="post">
 <input type="hidden" name="mode" value="agregar">
-<table width="40%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="3">{$po_add_planet}</th>
 </tr>

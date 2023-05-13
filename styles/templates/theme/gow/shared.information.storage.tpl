@@ -1,6 +1,6 @@
 {$count = $productionTable.usedResource}
 
-<table>
+<table class="table table-gow table-sm fs-12 w-100 mx-auto">
 	<tbody>
 		<tr>
 			<td colspan="2">

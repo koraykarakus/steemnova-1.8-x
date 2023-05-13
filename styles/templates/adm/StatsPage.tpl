@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form method="post" action="">
-	<table width="80%" border="0" cellpadding="1">
+	<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
     <tr>
       <th colspan="2">{$cs_title}</th>
     </tr>

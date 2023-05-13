@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <form action="admin.php?page=support&amp;mode=send" method="post" id="form">
 <input type="hidden" name="id" value="0">
-<table>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="2">{$LNG.ti_create_head}</th>
 	</tr>

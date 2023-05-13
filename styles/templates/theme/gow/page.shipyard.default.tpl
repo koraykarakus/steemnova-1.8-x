@@ -3,19 +3,20 @@
 <script src="./scripts/base/avoid_submit_on_refresh.js" type="text/javascript"></script>
 
 <script>
-$(document).ready(function(){
-  $("#searchInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $(".filter").filter(function() {
-			var result = $(this).text().toLowerCase().indexOf(value) > -1;
-			if (result == false) {
-				$($(this).parents().eq(2)).removeClass('d-flex').addClass('d-none');
-			}else {
-				$($(this).parents().eq(2)).addClass('d-flex').removeClass('d-none');
-			}
-    });
-  });
-});
+  function showItem(id){
+
+    if ($('#item_big_' + id).hasClass('d-none')) {
+      $('.buildItemBig').addClass('d-none');
+      $('.buildItemSmall').removeClass('border-color-active').removeClass('border-color-passive');
+      $('#item_big_' + id).removeClass('d-none');
+      $('#item_small_' + id).addClass('border-color-active');
+    }else {
+      $('#item_big_' + id).addClass('d-none');
+      $('#item_small_' + id).addClass('border-color-passive').removeClass('border-color-active');
+    }
+
+  }
+
 </script>
 
 {if !$NotBuilding}
@@ -23,144 +24,134 @@ $(document).ready(function(){
 	{$LNG.bd_building_shipyard}
 </span>
 {/if}
-{if !empty($BuildList)}
-<div style="width:auto;" class="d-flex flex-column mx-auto w-50 bg-black align-items-center my-2 rounded">
-		<div id="bx" class="z my-2 text-center w-100"></div>
-		<form class="d-flex flex-column" action="game.php?page=shipyard&amp;mode={$mode}" method="post" >
-			<input type="hidden" name="action" value="delete">
-			<select class="mx-2 p-2 rounded" name="auftr[]" id="auftr" onchange="this.form.myText.setAttribute('size', this.value);" multiple class="shipl">
-				<option>&nbsp;</option>
-			</select>
-			<span class="text-center text-danger fw-bold my-2">{$LNG.bd_cancel_warning}</span>
-			<button style="width:auto;" class="btn btn-secondary text-white fw-bold" type="submit"/>{$LNG.bd_cancel_send}</button>
-		</form>
-		<span class="text-center my-2" id="timeleft"></span>
-</div>
-{/if}
 
-{if $mode != "defense"}
-<div class="d-flex align-items-start">
-	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship1">Civil</button>
-	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship2">Military</button>
-	<button style="min-width:60px;" class="btn bg-black border border-dark px-1 py-0 text-white fs-6" id="ship3">All</button>
-	<input style="width:150px;" id="searchInput" type="text" class="form-control bg-dark text-white h-100 p-1 m-1 my-auto fs-14" name="" value="" placeholder="search..">
-</div>
-{/if}
 
+<div class="ItemsWrapper">
+
+<div {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative">
 {foreach $elementList as $ID => $Element}
-<div class="infos d-flex my-1 rounded bg-black border border-1 border-dark py-2" id="s{$ID}">
-	<div class="d-flex align-items-center justify-content-center">
-			<img onclick="return Dialog.info({$ID})" class="mx-2 hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
-	</div>
-	<div class="d-flex flex-column w-100">
-		<div class="bg-blue d-flex justify-content-start m-2 p-2 text-white fw-bold">
-			<a href="#" class="fs-12 text-yellow filter" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a>
-			{if $Element.available != 0}
-			<span class="fs-12 text-white px-2" id="val_{$ID}">
-					( {$LNG.bd_available} {$Element.available|number} )
-			</span>
-			{/if}
-		</div>
-		<div class="d-flex mx-2 justify-content-between">
-			<div class="m-0 p-0">
-				{if $Element.costOverflowTotal > 0}
-				<span class="d-flex my-1 fs-12">{$LNG.bd_remaining}</span>
-				{foreach $Element.costOverflow as $ResType => $ResCount}
-				<span class="d-flex justify-content-start align-items-center my-1 fs-12">
-					<a class="d-flex align-items-center" onclick="return Dialog.info({$ResType});"
-					data-bs-toggle="tooltip"
-					data-bs-placement="left"
-					data-bs-html="true"
-					title = '<table class="table table-dark table-striped p-0 m-0">
-						<thead>
-							<tr>
-								<th>{$LNG.tech.{$ResType}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-								 <img src="{$dpath}gebaeude/{$ResType}.{if $ResType >=600 && $ResType <= 699}jpg{else}gif{/if}">
-							  </td>
-							</tr>
-							<tr>
-								<td>
-									<span class="d-flex text-start">{$LNG.shortDescription.$ResType}</span>
-							  </td>
-							</tr>
-						</tbody>
-					</table>'
-					>
-						{$LNG.tech.{$ResType}}
-						<span class="fw-bold fs-12">:&nbsp;{$ResCount|number}</span>
-					</a>
-
-				</span>
-				{/foreach}
-				{/if}
-
-				<span class="d-flex flex-column my-1 fs-12 justify-content-start">
-					<span class="fs-12 text-yellow my-1">{$LNG.bd_max_ships_long}:</span>
-					<span class="fw-bold fs-12 my-1">({$Element.maxBuildable|number})</span>
-				</span>
-			</div>
-				<form class="d-flex flex-column align-items-end" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
-						<span>
-							{foreach $Element.costResources as $RessID => $RessAmount}
-						<a class="my-1 fs-12" href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
-						data-bs-placement="top"
-						data-bs-html="true"
-						title = '<table class="table table-dark table-striped p-0 m-0">
-							<thead>
-								<tr>
-									<th>{$LNG.tech.{$RessID}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-									 <img src="{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}">
-								  </td>
-								</tr>
-								<tr>
-									<td>
-										<span class="d-flex text-start">{$LNG.shortDescription.$RessID}</span>
-								  </td>
-								</tr>
-							</tbody>
-						</table>'>
-						{$LNG.tech.{$RessID}}
-					</a>:
-						<span class="my-1 fs-12 {if $Element.costOverflow.$RessID == 0}color-green{else}color-red{/if}">
-							{$RessAmount|number}
-						</span>
-					{/foreach}
-					</span>
-					{if $ID==212}
-						<span class="fs-12"> +{$SolarEnergy} {$LNG.tech.911}</span>
+<div id="item_big_{$ID}" class="buildItemBig position-absolute top-0 left-0 d-none flex-column d-flex rounded border border-1 border-dark p-0 m-0 w-100">
+  <div class="d-flex w-100 itemTop">
+    <div class="d-flex align-items-start justify-content-center bg-black">
+        <img class="mx-2 hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
+    </div>
+    <div class="d-flex flex-column w-100 bg-light-black">
+      <div class="bg-blue d-flex justify-content-start mb-2 text-white fw-bold">
+        <div class="d-flex px-2">
+          <span class="fs-12 {if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="
+            <table class='table fs-12'>
+              <thead>
+                <tr><th colspan='2' class='text-center'>{$LNG.bd_remaining}</th></tr>
+              </thead>
+              <tbody>
+                {foreach $Element.costOverflow as $ResType => $ResCount}
+                <tr>
+                  <td>{$LNG.tech.$ResType}</td>
+                  <td>{$ResCount|number}</td>
+                </tr>
+                {/foreach}
+              </tbody>
+            </table>"
+            {/if}
+            >
+            {$LNG.tech.{$ID}}
+          </span>
+          <span class="fs-12 text-white" id="val_{$ID} p-0">
+            &nbsp;( {$LNG.bd_available} {$Element.available|number} )
+          </span>
+        </div>
+      </div>
+      <div class="d-flex mx-2 justify-content-between">
+        <div class="m-0 p-0">
+          <span class="d-flex flex-column">
+            {foreach $Element.costResources as $RessID => $RessAmount}
+            <div class="d-flex align-items-center my-1">
+              <img data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              data-bs-html="true"
+              title="{$LNG.tech.$RessID}" src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+              <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
+            </div>
+            {/foreach}
+          </span>
+        </div>
+        <div class="d-flex flex-column justify-content-start align-items-end">
+          {if $ID == 212}
+						<span class="fs-12 text-white">&nbsp;<span class="color-green">+{$SolarEnergy}</span>&nbsp;{$LNG.tech.911}</span>
 					{/if}
 						<div class="my-1">
 						{if $Element.AlreadyBuild}
 							<span class="fs-12 color-red">{$LNG.bd_protection_shield_only_one}</span>
 						{elseif $NotBuilding && $Element.buyable}
-							<input class="p-1 fs-12" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
-							<input class="p-1 fs-12" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
-							<input class="b p-1 fs-12" type="submit" value="{$LNG.bd_build_ships}">
+            <form class="" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
+							<input class="p-1 fs-11 text-white" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
+							<input class="p-1 fs-11 text-white" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
+							<input class="b p-1 fs-11 text-white button-upgrade" type="submit" value="{$LNG.bd_build_ships}">
+            </form>
 						{/if}
 						</div>
 						<span class="my-1 fs-12 text-right">{$LNG.fgf_time}&nbsp;:&nbsp;{$Element.elementTime|time}</span>
-				</form>
-
-		</div>
-
-	</div>
-
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex w-100 bg-light-black itemInfo">
+    <p class="text-white fs-11 p-2">{$LNG.shortDescription[$ID]}</p>
+  </div>
 </div>
 {/foreach}
+</div>
 
-{if $NotBuilding}
-<div class="planeto"></div>
+<div class="d-flex flex-wrap justify-content-start bg-black py-2">
+  {foreach $elementList as $ID => $Element}
+    <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    data-bs-html="true"
+    title="{$LNG.tech.{$ID}}
+    {if !$Element.technologySatisfied && !empty($Element.requeriments)}
+    <table class='table-tooltip'>
+      <thead>
+        <tr><th colspan='2' class='color-red'>Technology is not satisfied !</th></tr>
+      </thead>
+      <tbody>
+        {foreach $Element.requeriments as $currentRequire}
+        <tr>
+          <td class='color-red'>
+            <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
+          </td>
+          <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
+        </tr>
+        {/foreach}
+      </tbody>
+    </table>
+    {/if}" >
+    <div class="d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 color-yellow bg-dark fs-11 text-center ps-1">{shortly_number($Element.available)}</div>
+    {if  !$Element.buyable || !$Element.technologySatisfied }
+       <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
+       {/if}
+      <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
+    </div>
+  {/foreach}
+</div>
+</div>
+
+{if !empty($BuildList)}
+<div class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black">
+		<div id="bx" class="z my-2 text-center w-100 color-yellow"></div>
+		<form class="d-flex flex-column" action="game.php?page=shipyard&amp;mode={$mode}" method="post" >
+			<input type="hidden" name="action" value="delete">
+			<select class="mx-2 p-2 rounded color-yellow fs-11" name="auftr[]" id="auftr" onchange="this.form.myText.setAttribute('size', this.value);" multiple class="shipl">
+				<option class="color-yellow">&nbsp;</option>
+			</select>
+			<span class="text-center text-danger fw-bold my-2">{$LNG.bd_cancel_warning}</span>
+			<button style="width:auto;" class="btn btn-secondary text-white fw-bold" type="submit"/>{$LNG.bd_cancel_send}</button>
+		</form>
+		<span class="text-center my-2 color-red" id="timeleft"></span>
+</div>
 {/if}
+
+
 
 {/block}
 {block name="script" append}

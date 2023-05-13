@@ -16,16 +16,16 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 
+
+
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.23" nocache}
+	{assign var="REV" value="1.0.0.107" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
-	<link rel="stylesheet" type="text/css" href="./styles/resource/css/ingame/main.css?v={$REV}">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.css?v={$REV}">
-	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.fancybox.css?v={$REV}">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/validationEngine.jquery.css?v={$REV}">
 	<link rel="stylesheet" type="text/css" href="{$dpath}formate.css?v={$REV}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
@@ -59,17 +59,17 @@
 	<script type="text/javascript" src="./scripts/base/jquery.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/base/jquery.ui.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/base/jquery.cookie.js?v={$REV}"></script>
-	<script type="text/javascript" src="./scripts/base/jquery.fancybox.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/base/jquery.validationEngine.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/l18n/validationEngine/jquery.validationEngine-{$lang}.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/base/tooltip.js?v={$REV}"></script>
 	<script type="text/javascript" src="./scripts/game/base.js?v={$REV}"></script>
-	<script type="text/javascript" src="./scripts/base/steem.min.js"></script>
 	{foreach item=scriptname from=$scripts}
 	<script type="text/javascript" src="./scripts/game/{$scriptname}.js?v={$REV}"></script>
 	{/foreach}
 	{block name="script"}
-
+	<!-- fancybox 5.0 -->
+	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
   <script>
    $(function(){
             		$("#btn1").on('click',function() {
@@ -202,41 +202,24 @@ $(this).addClass("selected");
 
     </script>
 {/block}
-	<script type="text/javascript">
-	$(window).scroll(function(){
-		// affix
-		windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-		lastScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
-		// menu
-		elementHeight = document.getElementsByTagName("menu")[0].getElementsByClassName("fixed")[0].clientHeight;
-		element = document.getElementsByTagName("menu")[0].getElementsByClassName("fixed")[0];
-		if (elementHeight > windowHeight - 100){
-			a = 100 - lastScroll;
-			b = windowHeight - elementHeight;
-			scrollTo = Math.max(a, b);
-			element.style.top = scrollTo + 'px';
-		}
-	});
-	$(function() {
-		{$execscript}
-	});
-	</script>
 	<script>
 
 	var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
-myDefaultWhiteList.table = ['class'];
+myDefaultWhiteList.table = ['class','style'];
 myDefaultWhiteList.tbody = [];
 myDefaultWhiteList.thead = [];
 myDefaultWhiteList.th = ['colspan'];
 myDefaultWhiteList.tr = [];
-myDefaultWhiteList.td = ['colspan'];
+myDefaultWhiteList.td = ['colspan','style'];
 myDefaultWhiteList.span = ['class'];
 myDefaultWhiteList.img = ['src','alt','width','height'];
 myDefaultWhiteList.form = ['class','action','method'];
 myDefaultWhiteList.input = ['type','name','value'];
 myDefaultWhiteList.button = ['type','class'];
-
+myDefaultWhiteList.font = ['color'];
+myDefaultWhiteList.a = ['href','class'];
+myDefaultWhiteList.br = [];
 
 	//initialize bootstrap tooltips
 	$(document).ready(function(){
@@ -260,6 +243,7 @@ myDefaultWhiteList.button = ['type','class'];
 	});
 
 	</script>
+
 </head>
 <body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
 	<div id="tooltip" class="tip"></div>

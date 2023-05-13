@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_fleet}{/block}
 {block name="content"}
 
-<table class="table table-dark table-striped table-sm fs-12">
+<table class="table table-sm fs-12 table-gow">
 	<thead>
 		<tr>
 			<th colspan="9">
@@ -113,7 +113,7 @@
 <input type="hidden" name="planet" value="{$targetPlanet}">
 <input type="hidden" name="type" value="{$targetType}">
 <input type="hidden" name="target_mission" value="{$targetMission}">
-<table class="table table-dark table-striped table-sm bg-black fs-12">
+<table class="table table-sm bg-black fs-12 table-gow">
 	<thead>
 		<tr>
 			<th class="text-center" colspan="4">{$LNG.fl_new_mission_title}</th>
@@ -152,7 +152,7 @@
 			<td id="ship{$FleetRow.id}_value">{$FleetRow.count|number}</td>
 			{if $FleetRow.speed != 0}
 			<td><a href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a></td>
-			<td><input class="form-control bg-dark text-white p-0 my-0 mx-auto w-50" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0"></td>
+			<td><input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0"></td>
 			{else}
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -163,18 +163,21 @@
 		{if count($FleetsOnPlanet) == 0}
 		<td colspan="4">{$LNG.fl_no_ships}</td>
 		{else}
-		<td colspan="2"><a href="javascript:noShips();">{$LNG.fl_remove_all_ships}</a></td>
-		<td colspan="2"><a href="javascript:maxShips();">{$LNG.fl_select_all_ships}</a></td>
+		<td class="text-center" colspan="2"><a href="javascript:noShips();">{$LNG.fl_remove_all_ships}</a></td>
+		<td class="text-center" colspan="2"><a  href="javascript:maxShips();">{$LNG.fl_select_all_ships}</a></td>
 		{/if}
 		</tr>
 		{if $maxFleetSlots != $activeFleetSlots}
-		<tr style="height:20px;"><td colspan="4"><input class="button-upgrade" type="submit" value="{$LNG.fl_continue}"></td>
+		<tr style="height:20px;">
+		<td class="text-center" colspan="4">
+			<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
+		</td>
 		{/if}
 	</tbody>
 </table>
 </form>
 <br>
-<table class="table table-dark table-sm bg-black fs-12">
+<table class="table table-sm bg-black fs-12 table-gow">
 	<thead>
 		<tr>
 			<th class="text-center" colspan="3">{$LNG.fl_bonus}</th>

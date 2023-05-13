@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table width="70%" cellpadding="2" cellspacing="2">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="6">{$LNG.ti_header}</th>
 	</tr>
@@ -11,7 +11,7 @@
 		<th style="width:15%">{$LNG.ti_date}</td>
 		<th style="width:15%">{$LNG.ti_status}</td>
 	</tr>
-	{foreach $ticketList as $TicketID => $TicketInfo}	
+	{foreach $ticketList as $TicketID => $TicketInfo}
 	{if $TicketInfo.status < 2}
 	<tr>
 		<td><a href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a></td>
@@ -34,7 +34,7 @@
 		<th style="width:15%">{$LNG.ti_date}</td>
 		<th style="width:15%">{$LNG.ti_status}</td>
 	</tr>
-	{foreach $ticketList as $TicketID => $TicketInfo}	
+	{foreach $ticketList as $TicketID => $TicketInfo}
 	{if $TicketInfo.status == 2}
 	<tr>
 		<td><a href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a></td>

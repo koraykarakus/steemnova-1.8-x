@@ -36,7 +36,7 @@ function shortly_number(number)
 	var negate	= number < 0 ? -1 : 1;
 	var key		= 0;
 	number		= Math.abs(number);
-	
+
 	if(number >= 1000000) {
 		++key;
 		while(number >= 1000000)
@@ -48,21 +48,21 @@ function shortly_number(number)
 		++key;
 		number = number / 1000;
 	}
-	
+
 	decial	= key != 0 && number != 0 && number < 100;
 	return NumberGetHumanReadable(negate * number, decial)+(key !== 0 ? '&nbsp;'+unit[key] : '');
 }
 
 function removeE(Number) {
 	Number = String(Number);
-	if (Number.search(/e\+/) == -1) 
+	if (Number.search(/e\+/) == -1)
 		return Number;
 	var e = parseInt(Number.replace(/\S+.?e\+/g, ''));
-	if (isNaN(e) || e == 0) 
+	if (isNaN(e) || e == 0)
 		return Number;
-	else if ($.browser.webkit || $.browser.msie) 
+	else if ($.browser.webkit || $.browser.msie)
 		return parseFloat(Number).toPrecision(Math.min(e + 1, 21));
-	else 
+	else
 		return parseFloat(Number).toPrecision(e + 1);
 }
 
@@ -85,7 +85,7 @@ function getFormatedDate(timestamp, format) {
 }
 function dezInt(num, size, prefix) {
 	prefix = (prefix) ? prefix : "0";
-	var minus = (num < 0) ? "-" : "", 
+	var minus = (num < 0) ? "-" : "",
 	result = (prefix == "0") ? minus : "";
 	num = Math.abs(parseInt(num, 10));
 	size -= ("" + num).length;
@@ -133,8 +133,8 @@ function DestroyMissiles() {
 	});
 }
 
-function handleErr(errMessage, url, line) 
-{ 
+function handleErr(errMessage, url, line)
+{
 	error = "There is an error at this page.\n";
 	error += "Error: " + errMessage+ "\n";
 	error += "URL: " + url + "\n";
@@ -143,54 +143,56 @@ function handleErr(errMessage, url, line)
 	alert(error);
 	if(typeof console == "object")
 		console.log(error);
- 
-	return true; 
+
+	return true;
 }
 
-var Dialog	= {	
+var Dialog	= {
 	info: function(ID){
 		return Dialog.open('game.php?page=information&id='+ID, 590, (ID > 600 && ID < 800 || ID > 900 && ID < 930) ? 210 : ((ID > 100 && ID < 200) ? 300 : 620));
 	},
-	
+
 	alert: function(msg, callback){
 		alert(msg);
 		if(typeof callback === "function") {
 			callback();
 		}
 	},
-	
+
 	PM: function(ID, Subject, Message) {
 		if(typeof Subject !== 'string')
 			Subject	= '';
 
 		return Dialog.open('game.php?page=messages&mode=write&id='+ID+'&subject='+encodeURIComponent(Subject)+'&message='+encodeURIComponent(Subject), 650, 350);
 	},
-	
+
 	Playercard: function(ID) {
 		return isPlayerCardActive && Dialog.open('game.php?page=playerCard&id='+ID, 650, 600);
 	},
-	
+
 	Buddy: function(ID) {
 		return Dialog.open('game.php?page=buddyList&mode=request&id='+ID, 650, 300);
 	},
-	
+
 	PlanetAction: function() {
-		return Dialog.open('game.php?page=overview&mode=actions', 400, 210);
+		return Dialog.open('game.php?page=overview&mode=actions', 400, 400);
 	},
-	
+
 	AllianceChat: function() {
 	    return OpenPopup('game.php?page=chat&action=alliance', "alliance_chat", 960, 900);
 	},
-	
+
 	open: function(url, width, height) {
-		$.fancybox({
-			width: width,
-			padding: 0,
-			height: height,
-			type: 'iframe',
-			href: url
-		});
-		
+    new Fancybox([{
+    hideScrollbar: true,
+    src: url,
+    type: "iframe",
+    width: width,
+    height: height,
+  },
+]);
+
+
 		return false;
 	}
 }
@@ -235,8 +237,8 @@ $(function() {
 			});
 		});
 	});
-	
-	
+
+
 	window.setInterval(function() {
 		$('.countdown').each(function() {
 			var s		= $(this).data('time') - (serverTime.getTime() - startTime) / 1000;
@@ -247,14 +249,14 @@ $(function() {
 			}
 		});
 	}, 1000);
-	
+
 	$('#planetSelector').on('change', function() {
 		document.location = '?'+queryString+'&cp='+$(this).val();
 	});
 
 	UhrzeitAnzeigen();
 	setInterval(UhrzeitAnzeigen, 1000);
-	
+
 	$("button#create_new_alliance_rank").click(function() {
 		$("div#new_alliance_rank").dialog(		{
 			draggable: false,

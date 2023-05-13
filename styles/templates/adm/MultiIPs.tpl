@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table style="width:760px">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th>IP:</th>
 		<th>{$LNG.se_id_owner}</th>

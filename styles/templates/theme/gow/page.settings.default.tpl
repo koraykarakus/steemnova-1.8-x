@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="game.php?page=settings" method="post">
 <input type="hidden" name="mode" value="send">
-	<table>
+	<table class="table table-gow table-sm">
 	<tbody>
 		{if $userAuthlevel > 0}
 		<tr>

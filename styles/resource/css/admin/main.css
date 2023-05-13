@@ -1,9 +1,10 @@
 body {
-	background-position:-217px -84px !important;
+	background: url('../../../theme/gow/img/bkd_page.jpg') 0 0;
+	background-size: cover;
 }
 
 body#topnav {
-	background-position:-217px 0 !important;
+	background: url('../../../theme/gow/img/bkd_page.jpg') 0 0;
 }
 
 body#menu{
@@ -17,6 +18,106 @@ body.standalone {
 table{
 	margin: auto;
 }
+
+
+table,td,th {
+	font-weight:400
+}
+
+table table,img {
+	border:0
+}
+
+table a{
+	color: #fff;
+}
+
+input, select, textarea, #userpic, input, button{
+	border:1px solid #1C1F23;
+}
+
+td, th input, .tip {
+	border:1px solid #000;
+}
+
+td, .tip {
+	text-align:center;
+	background: #0D1014;
+	background: rgba(13, 16, 20, 0.95);
+}
+
+input,button {
+	text-align:center
+}
+
+th, .ui-widget-header {
+	background-image:url("img/bkd_title.png");
+	color:#FFF;
+	font-weight:700;
+	text-align:left
+}
+
+th a:hover, .ui-widget-header a:hover, #menu a:hover  {
+	color:#FFF;
+}
+
+th a:hover, .ui-widget-header a:hover {
+	text-decoration:underline;
+}
+
+textarea {
+	background:transparent;
+}
+
+select {
+	border:1px solid #212121
+}
+
+table {
+	width: 100%;
+	/* display: block; */
+	overflow: auto;
+	border-collapse: separate;
+	border-spacing: 2px;
+	empty-cells:show;
+	margin:0 auto;
+	align-self: center;
+}
+table,td,tr,th,button,a{
+	color: #fff;
+}
+
+table.auto {
+	width: unset;
+}
+
+/* hack to expand full width */
+table.hack {
+	table-layout: fixed;
+}
+
+table table,img {
+    border-radius: 25%;
+}
+
+td {
+	padding: 2px 3px;
+	vertical-align: middle;
+}
+
+input,button {
+	margin:2px;
+}
+
+th input {
+	margin:0
+}
+
+th {
+	height: 14px;
+	padding:4px 6px;
+}
+
 
 .yes{
 	color:lime;
@@ -155,7 +256,7 @@ select[name="timezone"] {
     color: #CC0000;
 	padding:7px 10px 7px 45px
 }
-.noerror { 
+.noerror {
 	background-color: #EEFFEE;
 	border: 1px solid #009900;
 	color: #009900;

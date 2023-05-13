@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_info}{/block}
 {block name="content"}
-<table>
+<table class="table table-gow table-sm table-striped">
 	<tbody>
 	<tr>
 		<th>{$LNG.tech.$elementID}</th>
@@ -9,12 +9,12 @@
 		<td>
 			<table>
 				<tr>
-					
+
 					<td class="transparent left"><p>{$LNG.longDescription.$elementID}</p>
 					{if !empty($Bonus)}<p>
 					<b>{$LNG.in_bonus}</b><br>
 					{foreach $Bonus as $BonusName => $elementBouns}{if $elementBouns[0] < 0}-{else}+{/if}{if $elementBouns[1] == 0}{abs($elementBouns[0] * 100)}%{else}{floatval($elementBouns[0])}{/if} {$LNG.bonus.$BonusName}<br>{/foreach}
-					</p>{/if}	
+					</p>{/if}
 					{if !empty($FleetInfo)}
 					{if !empty($FleetInfo.rapidfire.to)}<p>
 					{foreach $FleetInfo.rapidfire.to as $rapidfireID => $shoots}
@@ -26,7 +26,7 @@
 					{$LNG.in_rf_from} {$LNG.tech.$rapidfireID}: <span style="color:#ff0000">{$shoots|number}</span><br>
 					{/foreach}
 					</p>{/if}
-					{/if}				
+					{/if}
 					</td>
 				</tr>
 			</table>

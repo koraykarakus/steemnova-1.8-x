@@ -65,14 +65,7 @@ class ShowOverviewPage extends AbstractGamePage
 		);
 	}
 
-	private function GetFleets() {
-		global $USER, $PLANET;
-		require 'includes/classes/class.FlyingFleetsTable.php';
-		$fleetTableObj = new FlyingFleetsTable;
-		$fleetTableObj->setUser($USER['id']);
-		$fleetTableObj->setPlanet($PLANET['id']);
-		return $fleetTableObj->renderTable();
-	}
+
 
 	// unused?
 	function savePlanetAction()
@@ -130,30 +123,12 @@ class ShowOverviewPage extends AbstractGamePage
 	{
 		global $LNG, $PLANET, $USER;
 
-		$AdminsOnline = $chatOnline = $AllPlanets = $Moon = $RefLinks = array();
+		$AdminsOnline = $chatOnline  = $Moon = $RefLinks = array();
 
 
     $db = Database::get();
 
-		foreach($USER['PLANETS'] as $ID => $CPLANET)
-		{
-			if ($ID == $PLANET['id'] || $CPLANET['planet_type'] == 3)
-				continue;
 
-			if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP) {
-				$Queue = unserialize($CPLANET['b_building_id']);
-				$BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
-			} else {
-				$BuildPlanet = $LNG['ov_free'];
-			}
-
-			$AllPlanets[] = array(
-				'id'	=> $CPLANET['id'],
-				'name'	=> $CPLANET['name'],
-				'image'	=> $CPLANET['image'],
-				'build'	=> $BuildPlanet,
-			);
-		}
 
 		if ($PLANET['id_luna'] != 0) {
 
@@ -309,8 +284,6 @@ class ShowOverviewPage extends AbstractGamePage
 			'userid'					=> $USER['id'],
 			'buildInfo'					=> $buildInfo,
 			'Moon'						=> $Moon,
-			'fleets'					=> $this->GetFleets(),
-			'AllPlanets'				=> $AllPlanets,
 			'AdminsOnline'				=> $AdminsOnline,
 			'teamspeakData'				=> $this->GetTeamspeakData(),
 			'planet_diameter'			=> pretty_number($PLANET['diameter']),
@@ -322,7 +295,6 @@ class ShowOverviewPage extends AbstractGamePage
 			'ref_minpoints'				=> $config->ref_minpoints,
 			'RefLinks'					=> $RefLinks,
 			'chatOnline'				=> $chatOnline,
-			'servertime'				=> _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
 			'path'						=> HTTP_PATH,
 		));
 

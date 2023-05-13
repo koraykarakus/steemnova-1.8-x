@@ -244,7 +244,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
 	public function show()
 	{
-		global $ProdGrid, $LNG, $resource, $reslist, $PLANET, $USER, $pricelist, $config;
+		global $ProdGrid, $LNG, $resource, $reslist, $PLANET, $USER, $pricelist, $config, $requeriments;
 
 		$TheCommand		= HTTP::_GP('cmd', '');
 
@@ -339,10 +339,25 @@ class ShowBuildingsPage extends AbstractGamePage
 			$destroyOverflow	= BuildFunctions::getRestPrice($USER, $PLANET, $Element, $destroyResources);
 			$buyable			= $QueueCount != 0 || BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources);
 
+			$requireArray = array();
+
+			if (isset($requeriments[$Element])) {
+				foreach ($requeriments[$Element] as $requireID => $requireLevel) {
+					$requireArray[] = array(
+						'currentLevel' => ($requireID < 100) ? $PLANET[$resource[$requireID]] : $USER[$resource[$requireID]],
+						'neededLevel' => $requireLevel,
+						'requireID' => $requireID
+					);
+				}
+				
+			}
+
+
 			$BuildInfoList[$Element]	= array(
 				'level'				=> $PLANET[$resource[$Element]],
 				'maxLevel'			=> $pricelist[$Element]['max'],
-				'infoEnergy'		=> $infoEnergy,
+				'infoEnergyShort' => pretty_number($requireEnergy),
+				'infoEnergyLong'		=> $infoEnergy,
 				'costResources'		=> $costResources,
 				'costOverflow'		=> $costOverflow,
 				'costOverflowTotal' => array_sum($costOverflow),
@@ -352,8 +367,8 @@ class ShowBuildingsPage extends AbstractGamePage
 				'destroyOverflow'	=> $destroyOverflow,
 				'buyable'			=> $buyable,
 				'levelToBuild'		=> $levelToBuild,
-				'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
-
+				'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element),
+				'requeriments' => $requireArray,
 			);
 		}
 

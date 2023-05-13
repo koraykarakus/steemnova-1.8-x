@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_statistics}{/block}
 {block name="content"}
 <form name="stats" id="stats" method="post" action="">
-	<table class="table519">
+	<table class="table table-gow table-sm fs-12">
 		<tr>
 			<th>{$LNG.st_statistics} ({$LNG.st_updated}: {$stat_date})</th>
 		</tr>
@@ -14,7 +14,7 @@
 		</tr>
 	</table>
 </form>
-<table class="table519">
+<table class="table table-gow table-sm fs-12">
 {if $who == 1}
 	{include file="shared.statistics.playerTable.tpl"}
 {elseif $who == 2}

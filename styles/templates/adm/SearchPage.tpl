@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form action="" method="POST">
-<table width="90%">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 <td class="transparent left">
 <input type="checkbox" {if isset($minimize)}{$minimize}{/if} name="minimize"><input type="submit" value="{$se_contrac}" class="button">

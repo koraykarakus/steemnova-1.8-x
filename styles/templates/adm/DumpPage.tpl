@@ -1,7 +1,7 @@
 {include file="overall_header.tpl"}
 <form action="admin.php?page=dump" method="post">
 <input type="hidden" name="action" value="dump">
-<table class="table569">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="2">{$LNG.du_header}</th>
 	</tr>
@@ -23,7 +23,7 @@ $(function() {
 		if($('#selectAll').prop('checked') === true)
 		{
 			$('#dbtables').val(function() {
-				return $(this).children().map(function() { 
+				return $(this).children().map(function() {
 					return $(this).attr('value');
 				}).toArray();
 			});

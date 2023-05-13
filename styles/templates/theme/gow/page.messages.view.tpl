@@ -5,7 +5,7 @@
 <input type="hidden" name="ajax" value="1">
 <input type="hidden" name="messcat" value="{$MessID}">
 <input type="hidden" name="side" value="{$page}">
-<table id="messagestable">
+<table id="messagestable" class="table table-sm table-gow">
 	<tr>
 		<th colspan="4">{$LNG.mg_message_title}</th>
 	</tr>

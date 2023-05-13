@@ -42,6 +42,6 @@ function ShowTopnavPage()
 		'AvailableUnis'			=> $universeSelect,
 		'UNI'					=> Universe::getEmulated(),
 	));
-
+	
 	$template->show('ShowTopnavPage.tpl');
 }

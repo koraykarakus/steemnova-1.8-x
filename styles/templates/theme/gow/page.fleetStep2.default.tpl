@@ -2,17 +2,17 @@
 {block name="content"}
 <form action="game.php?page=fleetStep3" method="post">
 <input type="hidden" name="token" value="{$token}">
-   	<table class="table519">
+   	<table class="table table-gow table-sm fs-12">
         <tr>
         	<th colspan="2">{$galaxy}:{$system}:{$planet} - {$LNG["type_planet_{$type}"]}</th>
         </tr>
 		<tr>
-			<th>{$LNG.fl_mission}</th>
-        	<th>{$LNG.fl_resources}</th>
-        </tr>
+			<th class="text-center">{$LNG.fl_mission}</th>
+      <th class="text-center">{$LNG.fl_resources}</th>
+    </tr>
 		<tr>
 			<td class="left top" style="width:50%;margin:0;padding:0;"{if $StaySelector} rowspan="5"{/if}>
-        		<table border="0" cellpadding="0" cellspacing="0" style="margin:0;padding:0;">
+        		<table class="table table-gow table-sm" border="0" cellpadding="0" cellspacing="0" style="margin:0;padding:0;">
         			{foreach $MissionSelector as $MissionID}
 					<tr style="height:20px;">
 						<td class="transparent left">
@@ -26,7 +26,7 @@
         		</table>
         	</td>
         	<td class="top">
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="table table-gow table-sm fs-12">
                     <tr style="height:20px;">
         				<td class="transparent">{$LNG.tech.901}</td>
         				<td class="transparent"><a href="javascript:maxResource('metal');">{$LNG.fl_max}</a></th>
@@ -61,7 +61,7 @@
 		</tr>
 		<tr style="height:20px;">
 			<td>
-				<table>
+				<table class="table table-gow table-sm">
 				<tr class="no-border">
 					<td >
 						<select name="resEx">
@@ -108,7 +108,7 @@
 
 		{if $StaySelector}
 		<tr style="height:20px;">
-			<th>{$LNG.fl_hold_time}</th>
+			<th class="text-center">{$LNG.fl_hold_time}</th>
 		</tr>
 		<tr style="height:20px;">
 			<td>
@@ -117,7 +117,7 @@
 		</tr>
 		{/if}
         <tr style="height:20px;">
-        	<td colspan="2"><input value="{$LNG.fl_continue}" type="submit" /></td>
+        	<td colspan="2"><input class="button-upgrade" value="{$LNG.fl_continue}" type="submit" /></td>
         </tr>
     </table>
 </form>

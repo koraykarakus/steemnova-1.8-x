@@ -104,7 +104,7 @@ function getPlanets($USER)
 
 	$order = $USER['planet_sort_order'] == 1 ? "DESC" : "ASC";
 
-	$sql = "SELECT id, name, galaxy, system, planet, planet_type, image, b_building, b_building_id
+	$sql = "SELECT id, name, galaxy, system, planet, planet_type, image, b_building, b_building_id, field_current, field_max, temp_max, temp_min, diameter
 			FROM %%PLANETS%% WHERE id_owner = :userId AND destruyed = :destruyed ORDER BY ";
 
 	switch ($USER['planet_sort']) {
@@ -442,6 +442,7 @@ function ClearCache()
 function allowedTo($side)
 {
 	global $USER;
+	
 	return ($USER['authlevel'] == AUTH_ADM || (isset($USER['rights']) && $USER['rights'][$side] == 1));
 }
 
@@ -582,7 +583,7 @@ function exceptionHandler($exception)
 	<script type="text/javascript" src="' . $DIR . '/scripts/game/base.js?v=2123"></script>
 </head>
 <body id="overview" class="full">
-<table width="960">
+<table class="table table-striped text-white fs-12">
 	<tr>
 		<th>Unknown error</th>
 	</tr>

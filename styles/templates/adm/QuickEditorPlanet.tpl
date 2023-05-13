@@ -11,7 +11,7 @@ function check(){
 }
 </script>
 <form method="post" id="userform" action="" onsubmit="return check();">
-<table width="100%" style="color:#FFFFFF"><tr>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto"><tr>
         <th colspan="3">{$LNG.qe_info}</th>
 </tr>
 <tr style="height:26px;"><td width="50%">{$LNG.qe_id}:</td><td width="50%">{$id}</td></tr>

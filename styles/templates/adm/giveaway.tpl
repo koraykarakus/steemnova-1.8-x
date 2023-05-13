@@ -2,7 +2,7 @@
 <form method="post">
 <input type="hidden" name="action" value="send">
 <!-- Zielplaneten definieren -->
-<table width="760px" style="color:#FFFFFF"><tr>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto"><tr>
         <th colspan="3">{$LNG.ga_definetarget}</th>
 </tr>
 <tr style="height:26px;">
@@ -26,7 +26,7 @@
 
 
 <!-- Rohstoffe -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.900}</th>
 </tr>
@@ -39,7 +39,7 @@
 </table>
 
 <!-- Gebäude -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.0}</th>
 </tr>
@@ -49,7 +49,7 @@
 </table>
 
 <!-- Technologie -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.100}</th>
 </tr>
@@ -59,7 +59,7 @@
 </table>
 
 <!-- Schiffe -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.200}</th>
 </tr>
@@ -69,7 +69,7 @@
 </table>
 
 <!-- Verteidigung -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.400}</th>
 </tr>
@@ -79,7 +79,7 @@
 </table>
 
 <!-- Offiziere -->
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <th colspan="2">{$LNG.tech.600}</th>
 </tr>
@@ -89,7 +89,7 @@
 </table>
 
 
-<table width="760px" style="color:#FFFFFF">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
         <td><input type="submit" value="{$LNG.qe_send}"></td>
 </tr>

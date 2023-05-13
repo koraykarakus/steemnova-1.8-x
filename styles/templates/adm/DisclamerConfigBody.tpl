@@ -1,6 +1,6 @@
 {include file="overall_header.tpl"}
 <form action="" method="post">
-<table width="70%" cellpadding="2" cellspacing="2">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th colspan="2">{$se_server_parameters}</th>
 	<th>(?)</th>

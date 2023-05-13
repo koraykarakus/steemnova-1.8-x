@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.fcm_info}{/block}
 {block name="content"}
-<table class="table519">
+<table class="table table-gow fs-12 w-100">
 	<tr>
 		<th>{$LNG.fcm_info}</th>
 	</tr>
@@ -12,7 +12,7 @@
 				{foreach $redirectButtons as $button}
 				{if isset($button.url) && $button.label}
 					<a href="{$button.url}">
-						<button>{$button.label}</button>
+						<button class="text-yellow fs-12">{$button.label}</button>
 					</a>
 				{/if}
 				{/foreach}

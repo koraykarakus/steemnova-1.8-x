@@ -17,7 +17,7 @@ function Buildlist() {
 		return;
 	}
 	document.title = GetRestTimeFormat(rest) + ' - ' + buildname + ' - ' + Gamename;
-	
+
 	$('#time').text(GetRestTimeFormat(rest));
 }
 

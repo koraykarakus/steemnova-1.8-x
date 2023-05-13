@@ -73,10 +73,13 @@ class ShowLoginPage extends AbstractLoginPage
 		if (!empty($password) && !empty($userEmail)) {
 			$sql = "SELECT id, password FROM %%USERS%% WHERE email = :email AND universe = :universe;";
 
+
+
 			$loginData = $db->selectSingle($sql, array(
 				':email'	=> $userEmail,
 				':universe'	=> $universe,
 			));
+
 
 			if (!$loginData) {
 				$error[] = $LNG['login_error_3'];
@@ -92,6 +95,9 @@ class ShowLoginPage extends AbstractLoginPage
 				}
 			}
 
+
+
+
 		}else { //verify with token
 
 			$sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
@@ -99,6 +105,8 @@ class ShowLoginPage extends AbstractLoginPage
 			$rememberedTokenInfo = $db->selectSingle($sql,array(
 				':selector' => $rememberedTokenSelector,
 			));
+
+
 
 			if (!$rememberedTokenInfo) {
 				$error[] = $LNG['login_error_3'];
@@ -109,11 +117,15 @@ class ShowLoginPage extends AbstractLoginPage
 					$error[] = $LNG['login_error_3'];
 				}
 
+
+
 				$sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
 
 				$userEmailCheck = $db->selectSingle($sql,array(
 					':userId' => $rememberedTokenInfo['user_id'],
 				),'email');
+
+				
 
 				if (empty($userEmailCheck)) {
 					$error[] = $LNG['login_error_1'];

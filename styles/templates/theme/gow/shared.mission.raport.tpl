@@ -1,7 +1,7 @@
 {block name="title" prepend}{$pageTitle}{/block}
 {block name="content"}
 {if isset($Info)}
-<table>
+<table class="table table-gow fs-12 table-sm">
 	<tr>
 		<td class="transparent" style="width:40%;font-size:22px;font-weight:bold;padding:10px 0 30px;color:{if $Raport.result == "a"}lime{elseif $Raport.result == "r"}red{else}white{/if}">{$Info.0}</td>
 		<td class="transparent" style="font-size:22px;font-weight:bold;padding:10px 0 30px;">VS</td>
@@ -10,7 +10,7 @@
 </table>
 {/if}
 <div style="width:100%;text-align:center">
-{if $Raport.mode == 1}{$LNG.sys_destruc_title}{else}{$LNG.sys_attack_title}{/if} 
+{if $Raport.mode == 1}{$LNG.sys_destruc_title}{else}{$LNG.sys_attack_title}{/if}
 {$Raport.time}:<br><br>
 {foreach $Raport.rounds as $Round => $RoundInfo}
 <table class="auto">
@@ -158,14 +158,14 @@
 			{$LNG.sys_destruc_reussi}
 		{elseif $Raport.moon.moonDestroySuccess == 0}
 			{* Destroy failed *}
-			{$LNG.sys_destruc_null}			
+			{$LNG.sys_destruc_null}
 		{/if}
 		<br>
 		{sprintf($LNG.sys_destruc_rip, "{$Raport.moon.fleetDestroyChance}")}
 		{if $Raport.moon.fleetDestroySuccess == 1}
 			{* Fleet destroyed *}
 			<br>{$LNG.sys_destruc_echec}
-		{/if}			
+		{/if}
 	{/if}
 {else}
 	{* Normal Attack *}
@@ -183,4 +183,4 @@
 
 {$Raport.additionalInfo}
 </div>
-{/block} 
+{/block}

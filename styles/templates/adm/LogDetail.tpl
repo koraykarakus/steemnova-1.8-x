@@ -1,5 +1,5 @@
 {include file="overall_header.tpl"}
-<table width=512>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan=2>{$log_info}</th>
 	</tr>
@@ -16,7 +16,7 @@
 		<td>{$time}</td>
 	</tr>
 </table>
-<table width=512>
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 <tr>
 	<th>{$log_element}</th>
 	<th>{$log_old}</th>

@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-<table class="table519">
+<table class="table table-gow table-sm fs-12">
 	<tr>
 		<th colspan="2">{$LNG.al_your_ally}</th>
 	</tr>
@@ -30,7 +30,7 @@
 		<td colspan="2"><a href="#" onclick="return Dialog.AllianceChat();">{$LNG.al_goto_chat}</a></td>
 	</tr>
     {/if}
-	{if $rights.SEEAPPLY && $applyCount > 0}		
+	{if $rights.SEEAPPLY && $applyCount > 0}
 	<tr>
 		<td>{$LNG.al_requests}</td><td><a href="?page=alliance&amp;mode=admin&amp;action=mangeApply">{$requests}</a></td>
 	</tr>
@@ -102,10 +102,10 @@
 	<tr>
 		<td>{$LNG.pl_fightwon}</td><td>{$fightwon|number} {if $totalfight}({round($fightwon / $totalfight * 100, 2)}%){/if}</td>
 	</tr>
-	<tr>	
+	<tr>
 		<td>{$LNG.pl_fightlose}</td><td>{$fightlose|number} {if $totalfight}({round($fightlose / $totalfight * 100, 2)}%){/if}</td>
 	</tr>
-	<tr>	
+	<tr>
 		<td>{$LNG.pl_fightdraw}</td><td>{$fightdraw|number} {if $totalfight}({round($fightdraw / $totalfight * 100, 2)}%){/if}</td>
 	</tr>
 	<tr>

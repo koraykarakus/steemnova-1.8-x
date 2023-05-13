@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_fleet}{/block}
 {block name="content"}
-<table class="table519">
+<table class="table table-dark table-sm fs-12">
 	<tr style="height:20px">
 		<th colspan="2" class="success">{$LNG.fl_fleet_sended}</span></th>
 	</tr>

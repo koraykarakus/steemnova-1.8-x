@@ -16,7 +16,7 @@ function check(){
 }
 </script>
 <form name="message" id="message" action="admin.php?page=globalmessage&action=send&ajax=1">
-<table class="table569">
+<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 		<tr>
             <th colspan="2">{$LNG.ma_send_global_message}</th>
         </tr>

@@ -330,7 +330,7 @@ class ShowResearchPage extends AbstractGamePage
 
 	public function show()
 	{
-		global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config;
+		global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config,$requeriments;
 
 		if ($PLANET[$resource[31]] == 0)
 		{
@@ -391,6 +391,19 @@ class ShowResearchPage extends AbstractGamePage
 			$elementTime    	= BuildFunctions::getBuildingTime($USER, $PLANET, $elementId, $costResources);
 			$buyable			= $QueueCount != 0 || BuildFunctions::isElementBuyable($USER, $PLANET, $elementId, $costResources);
 
+			$requireArray = array();
+
+			if (isset($requeriments[$elementId])) {
+				foreach ($requeriments[$elementId] as $requireID => $requireLevel) {
+					$requireArray[] = array(
+						'currentLevel' => ($requireID < 100) ? $PLANET[$resource[$requireID]] : $USER[$resource[$requireID]],
+						'neededLevel' => $requireLevel,
+						'requireID' => $requireID
+					);
+				}
+
+			}
+
 			$ResearchList[$elementId]	= array(
 				'id'				=> $elementId,
 				'level'				=> $USER[$resource[$elementId]],
@@ -401,7 +414,8 @@ class ShowResearchPage extends AbstractGamePage
 				'elementTime'    	=> $elementTime,
 				'buyable'			=> $buyable,
 				'levelToBuild'		=> $levelToBuild,
-				'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId)
+				'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId),
+				'requeriments' => $requireArray,
 			);
 		}
 
