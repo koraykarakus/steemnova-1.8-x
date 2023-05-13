@@ -107,7 +107,7 @@ $LNG['lm_disclamer']						= 'İletişim';
 //----------------------------------------------------------------------------//
 // Genel
 
-$LNG['ov_newname_specialchar']				= 'Yanlış Karakter Girdiniz - Sadece Alfabetik Karakterler.,.';
+$LNG['ov_newname_specialchar'] = 'Yanlış Karakter Girdiniz - Sadece Alfabetik Karakterler.,.';
 $LNG['ov_newname_done']						= 'Gezegenin ismi başarıyla değiştirildi';
 $LNG['ov_planet_abandoned']					= 'Gezegen başarıyla terkedildi!';
 $LNG['ov_principal_planet_cant_abanone']	= 'Ana gezegen terkedilemez!';

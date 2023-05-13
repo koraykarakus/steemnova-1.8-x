@@ -322,47 +322,77 @@ class ShowOverviewPage extends AbstractGamePage
 
 		$newname  = HTTP::_GP('name', '', UTF8_SUPPORT);
 
-		if (!empty($newname))
-		{
-			if (!PlayerUtil::isNameValid($newname))
-			{
-				$this->sendJSON(array('message' => $LNG['ov_newname_specialchar'], 'error' => true));
-			}
-			else
-			{
-				$db = Database::get();
+		$error = array();
 
-				$sql = "UPDATE %%PLANETS%% SET name = :newName WHERE id = :planetID;";
-        $db->update($sql, array(
-            ':newName'  => $newname,
-            ':planetID' => $PLANET['id']
-        ));
-
-        $this->sendJSON(array('message' => $LNG['ov_newname_done'], 'error' => false));
-			}
+		if (empty($newname)) {
+			$error[] = "Name cannot be empty !";
 		}
+
+		if (strlen($newname) > 20) {
+			$error[] = "Planet name is too long !";
+		}
+
+		if (!PlayerUtil::isNameValid($newname)) {
+			$error[] = $LNG['ov_newname_specialchar'];
+		}
+
+		if (!empty($error)) {
+			$this->sendJSON($error);
+		}
+
+		$db = Database::get();
+
+		$sql = "UPDATE %%PLANETS%% SET name = :newName WHERE id = :planetID;";
+
+		$db->update($sql, array(
+				':newName'  => $newname,
+				':planetID' => $PLANET['id']
+		));
+
+		$this->sendJSON($LNG['ov_newname_done']);
+
 	}
 
 	function delete()
 	{
 		global $LNG, $PLANET, $USER;
 
-		$password	= HTTP::_GP('password', '', true);
+		$error = array();
 
-		if (!empty($password))
-		{
+		$planetName	= HTTP::_GP('planetName', '', true);
+
+		if (empty($planetName)) {
+			$error[] = "planet name is not entered !";
+		}
 
 		$db = Database::get();
 
 		$sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
-            (fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
-            (fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
+						(fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
+						(fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
 
 		$IfFleets = $db->selectSingle($sql, array(
-        ':userID'   => $USER['id'],
-        ':planetID' => $PLANET['id'],
-        ':lunaID'   => $PLANET['id_luna']
-    ), 'count');
+				':userID'   => $USER['id'],
+				':planetID' => $PLANET['id'],
+				':lunaID'   => $PLANET['id_luna']
+		), 'count');
+
+		if ($IfFleets > 0) {
+			$error[] = $LNG['ov_abandon_planet_not_possible'];
+		}
+
+		if ($USER['id_planet'] == $PLANET['id']) {
+			$error[] =  $LNG['ov_principal_planet_cant_abanone'];
+		}
+
+		if ($planetName != $PLANET['name']) {
+			$error[] = $LNG['ov_wrong_name'];
+		}
+
+		if (!empty($error)) {
+			$this->sendJSON($error);
+		}
+
 
 		if ($USER['b_tech_planet'] == $PLANET['id'] && !empty($USER['b_tech_queue'])) {
 			$TechQueue = unserialize($USER['b_tech_queue']);
@@ -378,38 +408,30 @@ class ShowOverviewPage extends AbstractGamePage
 			$USER['b_tech_queue'] = serialize($NewCurrentQueue);
 		}
 
-			if ($IfFleets > 0) {
-				$this->sendJSON(array('message' => $LNG['ov_abandon_planet_not_possible']));
-			} elseif ($USER['id_planet'] == $PLANET['id']) {
-				$this->sendJSON(array('message' => $LNG['ov_principal_planet_cant_abanone']));
-			// } elseif (PlayerUtil::cryptPassword($password) != $USER['password']) {
-			} elseif ($password != $PLANET['name']) {
-				$this->sendJSON(array('message' => $LNG['ov_wrong_name']));
-			} else {
-                if($PLANET['planet_type'] == 1) {
-                    $sql = "UPDATE %%PLANETS%% SET destruyed = :time WHERE id = :planetID;";
-                    $db->update($sql, array(
-                        ':time'   => TIMESTAMP+ 86400,
-                        ':planetID' => $PLANET['id'],
-                    ));
-                    $sql = "DELETE FROM %%PLANETS%% WHERE id = :lunaID;";
-                    $db->delete($sql, array(
-                        ':lunaID' => $PLANET['id_luna']
-                    ));
-                } else {
-                    $sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planetID;";
-                    $db->update($sql, array(
-                        ':planetID' => $PLANET['id'],
-                    ));
-                    $sql = "DELETE FROM %%PLANETS%% WHERE id = :planetID;";
-                    $db->delete($sql, array(
-                        ':planetID' => $PLANET['id'],
-                    ));
-                }
-
-        Session::load()->planetId = $USER['id_planet'];
-				$this->sendJSON(array('ok' => true, 'message' => $LNG['ov_planet_abandoned']));
-			}
+		if($PLANET['planet_type'] == 1) {
+				$sql = "UPDATE %%PLANETS%% SET destruyed = :time WHERE id = :planetID;";
+				$db->update($sql, array(
+						':time'   => TIMESTAMP+ 86400,
+						':planetID' => $PLANET['id'],
+				));
+				$sql = "DELETE FROM %%PLANETS%% WHERE id = :lunaID;";
+				$db->delete($sql, array(
+						':lunaID' => $PLANET['id_luna']
+				));
+		} else {
+				$sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planetID;";
+				$db->update($sql, array(
+						':planetID' => $PLANET['id'],
+				));
+				$sql = "DELETE FROM %%PLANETS%% WHERE id = :planetID;";
+				$db->delete($sql, array(
+						':planetID' => $PLANET['id'],
+				));
 		}
+
+		Session::load()->planetId = $USER['id_planet'];
+		$this->sendJSON(array('ok' => true, 'message' => $LNG['ov_planet_abandoned']));
+
+
 	}
 }
