@@ -12,19 +12,19 @@
       </thead>
       <tbody>
         <tr>
-          <td class='text-start color-blue fw-bold'>Fields:</td>
+          <td class='text-start color-blue fw-bold'>{$LNG.pm_fields}:</td>
           <td class='text-end'>({$PlanetRow.field_current}&nbsp;/&nbsp;{$PlanetRow.field_max})</td>
         </tr>
         <tr>
-          <td class='text-start color-blue fw-bold'>Diameter:</td>
+          <td class='text-start color-blue fw-bold'>{$LNG.pm_diameter}:</td>
           <td class='text-end'>{$PlanetRow.diameter}</td>
         </tr>
         <tr>
-          <td class='text-start color-blue fw-bold'>Minimum Temperature:</td>
+          <td class='text-start color-blue fw-bold'>{$LNG.pm_min_temperature}:</td>
           <td class='text-end'>{$PlanetRow.temp_min}</td>
         </tr>
         <tr>
-          <td class='text-start color-blue fw-bold'>Maximum Temperature:</td>
+          <td class='text-start color-blue fw-bold'>{$LNG.pm_max_temperature}:</td>
           <td class='text-end'>{$PlanetRow.temp_max}</td>
         </tr>
       </tbody>

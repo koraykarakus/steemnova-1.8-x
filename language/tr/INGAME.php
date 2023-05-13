@@ -105,6 +105,15 @@ $LNG['lm_disclamer']						= 'İletişim';
 
 
 //----------------------------------------------------------------------------//
+// Planet Menu
+
+$LNG['pm_diameter'] = "Çap";
+$LNG['pm_min_temperature'] = "Minimum Sıcaklık";
+$LNG['pm_max_temperature'] = "Maximum Sıcaklık";
+$LNG['pm_fields'] = "Alanlar";
+
+
+//----------------------------------------------------------------------------//
 // Genel
 
 $LNG['ov_newname_specialchar'] = 'Yanlış Karakter Girdiniz - Sadece Alfabetik Karakterler.,.';

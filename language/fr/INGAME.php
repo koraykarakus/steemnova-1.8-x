@@ -88,6 +88,14 @@ $LNG['lm_playercard']                       = 'Profil du joueur';
 $LNG['lm_info']                     		= 'Info';
 $LNG['lm_disclamer']						= 'Crédits';
 
+//------------------------------------------------------------- ----------------------------//
+// Menu Planète
+
+$LNG['pm_diameter'] = "Diamètre" ;
+$LNG['pm_min_temperature'] = "Température minimale" ;
+$LNG['pm_max_temperature'] = "Température maximale" ;
+$LNG['pm_fields'] = "Champs" ;
+
 //----------------------------------------------------------------------------//
 //OVERVIEW
 

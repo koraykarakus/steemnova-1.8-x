@@ -98,6 +98,15 @@ $LNG['lm_playercard']                       = 'Información del Jugador';
 $LNG['lm_info']                     		= 'Información';
 $LNG['lm_disclamer']						= 'Contacto';
 
+//------------------------------------------------ ----------------------------//
+// Menú Planeta
+
+$LNG['pm_diameter'] = "Diámetro";
+$LNG['pm_min_temperature'] = "Temperatura mínima";
+$LNG['pm_max_temperature'] = "Temperatura máxima";
+$LNG['pm_fields'] = "Campos";
+
+
 //----------------------------------------------------------------------------//
 //OVERVIEW
 
