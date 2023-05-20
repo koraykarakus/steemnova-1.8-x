@@ -1,264 +1,33 @@
+*{
+	font-size: 12px;
+	font-family: Verdana, Helvetica, Arial;
+	font-weight: 500;
+}
 body {
 	background: url('../../../theme/gow/img/bkd_page.jpg') 0 0;
-	background-size: cover;
 }
 
-body#topnav {
-	background: url('../../../theme/gow/img/bkd_page.jpg') 0 0;
+#leftmenu .menu-active{
+	background-color: #4c4949!important;
 }
-
-body#menu{
-	background-position:0 0 !important;
-}
-body.standalone {
-	background-position:center center !important;
+#leftmenu li:hover{
+	background-color: #3b3737!important;
 }
 
 
-table{
-	margin: auto;
+/*font sizes*/
+.fs-9{
+	font-size: 9px;
 }
-
-
-table,td,th {
-	font-weight:400
+.fs-10{
+	font-size: 10px;
 }
-
-table table,img {
-	border:0
+.fs-11{
+	font-size: 11px;
 }
-
-table a{
-	color: #fff;
+.fs-12{
+	font-size: 12px;
 }
-
-input, select, textarea, #userpic, input, button{
-	border:1px solid #1C1F23;
-}
-
-td, th input, .tip {
-	border:1px solid #000;
-}
-
-td, .tip {
-	text-align:center;
-	background: #0D1014;
-	background: rgba(13, 16, 20, 0.95);
-}
-
-input,button {
-	text-align:center
-}
-
-th, .ui-widget-header {
-	background-image:url("img/bkd_title.png");
-	color:#FFF;
-	font-weight:700;
-	text-align:left
-}
-
-th a:hover, .ui-widget-header a:hover, #menu a:hover  {
-	color:#FFF;
-}
-
-th a:hover, .ui-widget-header a:hover {
-	text-decoration:underline;
-}
-
-textarea {
-	background:transparent;
-}
-
-select {
-	border:1px solid #212121
-}
-
-table {
-	width: 100%;
-	/* display: block; */
-	overflow: auto;
-	border-collapse: separate;
-	border-spacing: 2px;
-	empty-cells:show;
-	margin:0 auto;
-	align-self: center;
-}
-table,td,tr,th,button,a{
-	color: #fff;
-}
-
-table.auto {
-	width: unset;
-}
-
-/* hack to expand full width */
-table.hack {
-	table-layout: fixed;
-}
-
-table table,img {
-    border-radius: 25%;
-}
-
-td {
-	padding: 2px 3px;
-	vertical-align: middle;
-}
-
-input,button {
-	margin:2px;
-}
-
-th input {
-	margin:0
-}
-
-th {
-	height: 14px;
-	padding:4px 6px;
-}
-
-
-.yes{
-	color:lime;
-}
-.ok{
-	color:yellow;
-}
-.no{
-	color:red;
-}
-
-#menu{
-	padding: 0 !important;
-}
-
-#content{
-	margin:0 auto;
-	width:80%;
-	padding:0;
-}
-
-select#universe {
-	border: 1px #FFF solid;
-	padding:1px 2px;
-	color: #FFF;
-	position:relative;
-	top:-1px;
-}
-
-pre {
-	font-size:13px;
-}
-
-a.out, a.topn {
-	cursor: pointer;
-	background: #000;
-	font-size: 13px;
-	font-stretch:expanded;
-	cursor: pointer;
-	text-align:center;
-	border: 1px #FFF solid;
-	color: #FFF;
-}
-
-a.topn:hover {
-	background: #FFF;
-	color: #000;
-}
-
-a.out {
-	border: 1px #FF0000 solid;
-	color: #FF0000;
-}
-
-a.out:hover {
-	background: #FF0000;
-	color: #FFF;
-}
-
-#progressbar{border: 1px solid}
-.ui-progressbar-value { background-image: url("../images/jquery/pbar-ani.gif")};
-.button{background:url("../images/Adm/blank.gif");border:1px lime solid;color:#FFFFFF;}
-.button:hover{background:url("../images/Adm/blank.gif");border:1px aqua solid;cursor:pointer;color:#FFFFFF;}
-.span{ vertical-align:baseline}
-.gf-snippet, .gfc-resultsHeader{display:none}
-
-select[name="timezone"] {
-	max-width:300px;
-}
-#install > tbody > tr > td{
-	padding:5px 10px;
-}
-
-.desc{
-	font-style:italic;
-	margin-top: -10px;
-    max-width: 400px;
-}
-.desc > a{
-	text-decoration:underline;
-}
-.desc > a:hover{
-	text-decoration:none;
-}
-
-#lang {
-	float:right;
-}
-
-.req{
-	width:100%;
-	border-collapse: collapse;
-	max-width:100%;
-}
-
-.req > tbody > tr > td{
-	width:50%;
-}
-
-.req > tbody > tr > td{
-	padding:0px;
-}
-
-.border > tbody > tr > td{
-	padding:3px 0px;
-}
-
-.border > tbody > tr{
-	border-bottom:1px solid #CCC;
-	height:24px;
-}
-
-#licence {
-    background-color: #FFFFFF;
-    color: #000000;
-    height: 400px;
-    overflow: auto;
-    padding: 0 10px;
-}
-
-#licence a{
-    color: #000000;
-	text-decoration:underline;
-}
-#licence a:hover{
-	text-decoration:none;
-}
-
-.noborder {
-	border:0 none !important;
-}
-
-.fatalerror {
-	background-color:#FFEEEE;
-	border: 1px solid #CC0000;
-    color: #CC0000;
-	padding:7px 10px 7px 45px
-}
-.noerror {
-	background-color: #EEFFEE;
-	border: 1px solid #009900;
-	color: #009900;
-	padding:7px 10px 7px 45px
+.fs-14{
+	font-size: 14px;
 }

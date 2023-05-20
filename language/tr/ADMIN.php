@@ -35,7 +35,7 @@ $LNG['mu_moderation_page']	= 'Izinler';
 $LNG['mu_universe']			= 'Evren';
 $LNG['adm_cp_logout']		= 'Oyuna Geri Don';
 $LNG['mu_disclaimer']		= 'Iletisim';
-
+$LNG['settings_successful'] = "Ayarlar başarıyla değiştirildi!";
 
 
 //	Cesitli
@@ -158,8 +158,8 @@ $LNG['vt_info']						= 'Bu listedeki dosyalar guncellenmis ve orijinalinden fark
 
 //###########################################################//
 //---------------  Evren ve Server Parametreleri	------------------------//
-$LNG['se_server_parameters'] = '<font color="yellow">Server Ayarlari</font>';
-$LNG['se_evren_parameters'] = '<font color="yellow">Evren Ayarlari</font>';
+$LNG['se_server_parameters'] = 'Server Ayarlari';
+$LNG['se_evren_parameters'] = 'Evren Ayarlari';
 $LNG['se_game_name'] = 'Oyun ismi';
 $LNG['se_uni_name'] = 'Evren Ismi';
 $LNG['se_lang'] = 'Dil';
@@ -175,14 +175,14 @@ $LNG['se_halt_speed'] = 'Kesif Hizi';
 $LNG['se_forum_link'] = 'Forum Linki';
 $LNG['se_server_op_close'] = 'Server Online?';
 $LNG['se_server_status_message'] = 'Server offline mesaji';
-$LNG['se_server_planet_parameters'] = '<font color=yellow>Gezegen Ayarlari</font>';
+$LNG['se_server_planet_parameters'] = 'Gezegen Ayarlari';
 $LNG['se_initial_fields'] = 'Baslangic Alani:';
 $LNG['se_fields'] = 'Unitelik Alan';
 $LNG['se_per_hour'] = 'per hour';
 $LNG['se_metal_production'] = 'Metal Ana Gelir';
 $LNG['se_crystal_production'] = 'Kristal Ana Gelir';
 $LNG['se_deuterium_production'] = 'Deuterium Ana Gelir';
-$LNG['se_several_parameters'] = '<font color="yellow">Diger Parametreler</font>';
+$LNG['se_several_parameters'] = 'Diger Parametreler';
 $LNG['se_title_admins_protection'] = 'Bu mod aktif edildiginde admin ve moderatorlere saldiri yapilamaz.';
 $LNG['se_admin_protection'] = 'Admin Oyun Korumasi';
 $LNG['se_debug_mode'] = 'Hata Ayiklama(Debug) modu';
@@ -209,10 +209,10 @@ $LNG['se_recaptcha_private']            = 'Private Key:';
 $LNG['se_recaptcha_active']             = 'Guvenlik kodunu(RECAPTCHA) aktif et';
 $LNG['se_reg_closed']					= 'Yeni uye kaydi kapali';
 $LNG['se_min_build_time']               = 'Min. Yapi/uretim suresi';
-$LNG['se_trader_head']					= '<font color="yellow">Uzay hurdacisi ayarlari</font>';
+$LNG['se_trader_head']					= 'Uzay hurdacisi ayarlari';
 $LNG['se_trader_ships']					= 'Hurdaciya verilebilecek gemiler:';
 $LNG['se_trader_charge']				= 'Takas Orani:';
-$LNG['se_player_settings']				= '<font color="yellow"> Oyuncu Ayarlari</font>';
+$LNG['se_player_settings']				= 'Oyuncu Ayarlari';
 $LNG['se_days']							= 'Gun';
 $LNG['se_del_oldstuff']					= 'Mesajlari su kadar gun sonra silinecek';
 $LNG['se_del_oldstuff_info']			= 'Mesaj ve raporlarin kac gun sonra silinecegini buradan ayarlayabilirsiniz.';
@@ -224,7 +224,7 @@ $LNG['se_del_user_sendmail']			= 'Hatirlatma mesaji';
 $LNG['se_del_user_sendmail_info']		= 'Oyuncuya inaktif oldugunu soyleyen mailin gonderilecegi gun';
 $LNG['se_sendmail_inactive']			= 'Email uyarilarini aktif et';
 $LNG['se_ref']							= 'Referans Linki';
-$LNG['se_server_colonisation_config'] 	= '<font color="yellow">Koloni Ayarlari</font>';
+$LNG['se_server_colonisation_config'] 	= 'Koloni Ayarlari';
 $LNG['se_planets_min'] 					= 'Maksimum koloni sayisi (arastirmalar/subay haric)';
 $LNG['se_planets_min_info'] 			= 'Bu secenekle oyuncunun herhangi bir arastirma olmadan sahip olabilecegi koloni sayisi';
 $LNG['se_planets_tech'] 				= 'Maksimum koloni sayisi (arastirmalar dahil)';
@@ -244,14 +244,14 @@ $LNG['se_ref_max_referals_info']		= 'Alinabilecek maksimum referans bonus sayisi
 $LNG['se_silo_factor']					= 'Roket silosu';
 $LNG['se_silo_factor_info']				= 'Roket silosu faktoru';
 $LNG['se_min_build_time_info']          = 'Eger 1 secilirse, nanit, robot, tersane, arastirma kac olursa olsun minimum uretim zamani 1 saniye olur. Eger 0 secilirse, o zaman hizi etkileyen binalar izin verirse aninda yani 0 saniyede uretim/insa gerceklesir.';
-$LNG['se_news_head']                    = '<font color="yellow"> Duruyu Ayarlari</font>';
+$LNG['se_news_head']                    = 'Duruyu Ayarlari';
 $LNG['se_news_active']                  = 'Duyurular aktif';
 $LNG['se_news_limit']                   = 'color, p align=left or right , b, i, u, del gibi HTML kodlari kuulanilabilir';
 $LNG['se_news_info']                    = 'Eger secili olmazsa, duyurular genel gorunum ekraninda gozukmezler.';
 $LNG['se_news']                         = 'Duyurular';
 $LNG['se_verfiy_mail']                  = 'Email aktivasyonu';
 $LNG['se_verfiy_mail_info']             = 'Eger bu secenek isaretli olursa, oyuncular kayit olduklarinda maillerine gelen aktivasyon linkinden hesaplarini aktive etmeleri gerekmetedir.';
-$LNG['se_smtp']                         = '<font color="yellow"> SMTP Ayarlari</font>';
+$LNG['se_smtp']                         = 'SMTP Ayarlari';
 $LNG['se_smtp_info']					= 'SMTP server ayarlarini girerek AuGame server ile oyuncular arasinda haberlesme SMTP Mail sunucusu tarafindan saglanir.';
 $LNG['se_mail_active']                 = 'Emaili aktif et?';
 $LNG['se_mail_use']						= 'Email versiyonu:';
@@ -283,7 +283,7 @@ $LNG['se_ftp_pass']                     = 'FTP Password: (Password)-Host';
 $LNG['se_ftp_dir']                      = 'FTP Game path: (where is saved the game)';
 $LNG['se_ftp_dir_info']                 = 'Here inseres the path to your game folder should start with a slash and ending up with a bar!<br>Example:/httpdocs/';
 */
-$LNG['se_google']                       = '<font color="yellow">Google Analytics Ayarlari</font>';
+$LNG['se_google']                       = 'Google Analytics Ayarlari';
 $LNG['se_google_info']                  = 'Google Analytics, ziyaretçilerin sitenize nasıl ulaştıkları ve sitenizde ne tip etkinliklerde bulundukları hakkında bilmek istediğiniz herşeyi anlatır';
 $LNG['se_google_active']                = 'Aktif/Aktif Degil?';
 $LNG['se_google_key']                   = 'Google Analytics Key';
@@ -393,7 +393,7 @@ $LNG['fb_settings']                                     = 'Facebook Connect Ayar
 $LNG['fb_active']                                       = 'Facebook Connect Aktive Et?';
 $LNG['fb_api_key']                                      = 'Facebook API Key';
 $LNG['fb_secrectkey']                                   = 'Facebook Secret Key';
-$LNG['fb_info']                                         = 'Facebook connect, sitenize Facebook kullanıcılarını kabul etmenizi sağlayan bir arayüz standardıdır. Yapı olarak facebook-uygulamalarına benzer ama biraz daha farklıdır <br> Bunu kullanmak icin Facebook uyesi olmaniz gerekmektedir. Ayrica, bir uygulama gelistirmelisiniz. Bunu <a href="http://www.facebook.com/developers/"> http://www.facebook.com/developers/ </ a> adresinden yapabilirsin.<br> <font Color="red"> FB Connect icin, email sistemi kurulu olmali! (SMTP Ayarlari)</font>';
+$LNG['fb_info']                                         = 'Facebook connect, sitenize Facebook kullanıcılarını kabul etmenizi sağlayan bir arayüz standardıdır. Yapı olarak facebook-uygulamalarına benzer ama biraz daha farklıdır <br> Bunu kullanmak icin Facebook uyesi olmaniz gerekmektedir. Ayrica, bir uygulama gelistirmelisiniz. Bunu <a href="http://www.facebook.com/developers/"> http://www.facebook.com/developers/ </ a> adresinden yapabilirsin.<br> FB Connect icin, email sistemi kurulu olmali! (SMTP Ayarlari)';
 $LNG['fb_curl_yes']                                             = '<span style="color:green">cURL Kurulu!</span>';
 $LNG['fb_curl_no']                                              = '<span style="color:red">cURL Kurulu Degil! Facebook App calismasi icin URL kurulu olmasi gerekmekte!</span>';
 
@@ -710,7 +710,7 @@ $LNG['bo_bbb_go_act'] = '[Yenile]';
 $LNG['bo_permanent'] = 'Hesabi Kapat';
 $LNG['bo_bbb_title_1'] = 'Ceza Sistemi';
 $LNG['bo_bbb_title_2'] = 'Bitis Tarihi';
-$LNG['bo_bbb_title_3'] = 'Ceza Sistemi • <font color="red">Bu oyuncu kilitli</font>';
+$LNG['bo_bbb_title_3'] = 'Ceza Sistemi • Bu oyuncu kilitli';
 $LNG['bo_bbb_title_4'] = '';
 $LNG['bo_bbb_title_5'] = 'Kilitli';
 $LNG['bo_bbb_title_6'] = 'Son guncelleme tarihi';
@@ -1133,11 +1133,11 @@ $LNG['ac_view_image2']                  = 'logoyu gor';
 $LNG['ac_view_text_ext']                = 'Herkeze acik metni goster';
 $LNG['ac_view_text_int']                = 'Ittifak ici metni goster';
 $LNG['ac_view_text_sol']                = 'Basvuru metnini goster';
-$LNG['ac_moons_no']                     = '<font color=red>(AY YOK)</font>';
+$LNG['ac_moons_no']                     = '(AY YOK)';
 $LNG['ac_urlnow']                       = 'URL:';
 $LNG['ac_time_destruyed']               = 'Yokedilen toplam';
-$LNG['ac_isnodestruyed']                = '<font color=red>(Son zamanlarda yokedilmeis gezegen yok)</font>';
-$LNG['ac_no_alliance']                  = '<font color=red>(ITTIFAK YOK)</font>';
+$LNG['ac_isnodestruyed']                = '(Son zamanlarda yokedilmeis gezegen yok)';
+$LNG['ac_no_alliance']                  = '(ITTIFAK YOK)';
 $LNG['ac_ali_text_11']                  = 'Herkese acik metin';
 $LNG['ac_ali_text_22']                  = 'ittifak ici metin';
 $LNG['ac_ali_text_33']                  = 'Basvuru metni';
@@ -1148,7 +1148,7 @@ $LNG['ac_suspended_time']               = 'Cezali';
 $LNG['ac_suspended_longer']             = 'Bitis';
 $LNG['ac_suspended_reason']             = 'Nedeni';
 $LNG['ac_suspended_autor']              = 'Cezayi Veren';
-$LNG['ac_note_k']                       = '<table><tr><th width=10%><font color=lime>T+</font></th><th>Trilyondan fazla</th></tr><tr><th width=10%><font color=lime>T</font></th><th>1 Trilyon Civari</th></tr><tr><th width=10%><font color=lime>B</font></th><th>Asagi Yukari 1 Milyar</th></tr><tr><th width=10%><font color=lime>M</font></th><th>Asagi Yukari 1 Milyon </th></tr><tr><th width=10%><font color=lime>K</font></th><th>Asagi Yukari 1000</th></tr></table>';
+$LNG['ac_note_k']                       = '<table><tr><th width=10%>T+</th><th>Trilyondan fazla</th></tr><tr><th width=10%>T</th><th>1 Trilyon Civari</th></tr><tr><th width=10%>B</th><th>Asagi Yukari 1 Milyar</th></tr><tr><th width=10%>M</th><th>Asagi Yukari 1 Milyon </th></tr><tr><th width=10%>K</th><th>Asagi Yukari 1000</th></tr></table>';
 $LNG['ac_leyend']                       = '[ Bilgiler ]';
 $LNG['ac_no_rank_level']                = 'Bilgiyi gormek icin yeterli yetkiniz yok';
 //###########################################################//

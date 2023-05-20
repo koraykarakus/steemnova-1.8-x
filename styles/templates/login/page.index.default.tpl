@@ -23,6 +23,7 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 						universe : $('#universe option:selected').val(),
 						rememberedTokenValidator : $('#rememberedTokenValidator').val(),
 						rememberedTokenSelector : $('#rememberedTokenSelector').val(),
+						rememberedEmail : $('#rememberedEmail').val(),
 					},
 	        success: function(data)
 	        {
@@ -66,6 +67,7 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 				<h1 class="fs-6">{$LNG.loginHeader}</h1>
 				<form id="login" action="" method="post">
 					<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrfToken}">
+					<input id="rememberedEmail" type="hidden" name="rememberedEmail" value="{$rememberedEmail}">
 					<input id="rememberedTokenSelector" type="hidden" name="rememberedTokenSelector" value="{$rememberedTokenSelector}">
 					<input id="rememberedTokenValidator" type="hidden" name="rememberedTokenValidator" value="{$rememberedTokenValidator}">
 					<div class="d-flex flex-column form-group">

@@ -13,7 +13,7 @@
 					<div class="d-flex justify-content-center {if $page!='imperium'}contentMiddle{else}w-100{/if}">
 						<content class="content-wrapper">
 							{if $hasAdminAccess}
-							<div class="alert alert-danger my-2 p-2 fs-12">
+							<div class="alert alert-danger my-2 p-2 fs-12 globalWarning">
 							{$LNG.admin_access_1} <a class="fw-bold hover-underline hover-pointer text-danger" id="drop-admin">{$LNG.admin_access_link}</a>{$LNG.admin_access_2}
 							</div>
 							{/if}

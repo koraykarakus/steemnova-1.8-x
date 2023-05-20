@@ -48,11 +48,14 @@ class ShowLoginPage extends AbstractLoginPage
 
 		$userEmail = HTTP::_GP('userEmail', '', true);
 		$password = HTTP::_GP('password', '', true);
+
 		$csrfToken = HTTP::_GP('csrfToken','',true);
 		$remember_me = HTTP::_GP('remember_me', 'false');
 
 		$rememberedTokenValidator = HTTP::_GP('rememberedTokenValidator', '');
 		$rememberedTokenSelector = HTTP::_GP('rememberedTokenSelector', '');
+		$rememberedEmail = HTTP::_GP('rememberedEmail','');
+
 		$universe = HTTP::_GP('universe', Universe::current());
 
 		$error = array();
@@ -87,7 +90,7 @@ class ShowLoginPage extends AbstractLoginPage
 
 		}
 
-		if (empty($rememberedTokenValidator) || empty($rememberedTokenSelector)) { //verify with password
+		if (empty($rememberedTokenValidator) || empty($rememberedTokenSelector) || $rememberedEmail != $userEmail || $password != 'password') { //verify with password
 
 			if (isset($loginData['password'])) {
 				if (!password_verify($password,$loginData['password'])) {
@@ -100,12 +103,15 @@ class ShowLoginPage extends AbstractLoginPage
 
 		}else { //verify with token
 
+			//if user type a random password
+
+		
+
 			$sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
 
 			$rememberedTokenInfo = $db->selectSingle($sql,array(
 				':selector' => $rememberedTokenSelector,
 			));
-
 
 
 			if (!$rememberedTokenInfo) {
@@ -125,7 +131,7 @@ class ShowLoginPage extends AbstractLoginPage
 					':userId' => $rememberedTokenInfo['user_id'],
 				),'email');
 
-				
+
 
 				if (empty($userEmailCheck)) {
 					$error[] = $LNG['login_error_1'];

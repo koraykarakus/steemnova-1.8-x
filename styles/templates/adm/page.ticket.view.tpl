@@ -1,4 +1,5 @@
-{include file="overall_header.tpl"}
+{block name="content"}
+
 <form action="admin.php?page=support&mode=send" method="post" id="form">
 <input type="hidden" name="id" value="{$ticketID}">
 <table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
@@ -45,4 +46,5 @@
 	</tr>
 </table>
 </form>
-{include file="overall_footer.tpl"}
+
+{/block}

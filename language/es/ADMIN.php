@@ -28,6 +28,7 @@ $LNG['adm_cp_index']		= 'Inicio';
 $LNG['mu_moderation_page']	= 'Permisos';
 $LNG['mu_universe']			= 'Universo';
 $LNG['adm_cp_logout']		= 'Salir';
+$LNG['settings_successful'] = "¡Configuración cambiada con éxito!";
 
 //	MISCELÁNEO - MISCELLANEOUS
 $LNG['ad_number']			= 'ID';

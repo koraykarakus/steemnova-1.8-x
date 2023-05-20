@@ -234,6 +234,7 @@ $(function() {
 				'opacity' :0
 			}, function() {
 				$(this).hide();
+        $(this).addClass('d-none');
 			});
 		});
 	});

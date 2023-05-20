@@ -35,6 +35,7 @@ $LNG['adm_cp_index']		= 'Inicio';
 $LNG['mu_moderation_page']	= 'Permissões';
 $LNG['mu_universe']			= 'Universo';
 $LNG['adm_cp_logout']		= 'Voltar ao jogo';
+$LNG['settings_successful'] = "Configurações alteradas com sucesso!";
 
 //	Miscelâneo
 $LNG['ad_number']			= 'ID';

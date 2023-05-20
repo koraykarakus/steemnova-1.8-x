@@ -22,8 +22,8 @@ define('ROOT_PATH', str_replace('\\', '/',dirname(__FILE__)).'/');
 set_include_path(ROOT_PATH.'includes/libs/BBCodeParser2/'.':'.ROOT_PATH.':'.get_include_path());
 require_once('includes/libs/BBCodeParser2/HTML/BBCodeParser2.php');
 
-require 'includes/pages/game/AbstractGamePage.class.php';
-require 'includes/pages/game/ShowErrorPage.class.php';
+require 'includes/pages/adm/AbstractAdminPage.class.php';
+require 'includes/pages/adm/ShowErrorPage.class.php';
 require 'includes/common.php';
 require 'includes/classes/class.Log.php';
 
@@ -32,13 +32,7 @@ if ($USER['authlevel'] == AUTH_USR)
 	HTTP::redirectTo('game.php');
 }
 
-$session	= Session::create();
-if($session->adminAccess != 1)
-{
-	include_once('includes/pages/adm/ShowLoginPage.php');
-	ShowLoginPage();
-	exit;
-}
+
 
 $uni	= HTTP::_GP('uni', 0);
 
@@ -47,6 +41,60 @@ if($USER['authlevel'] == AUTH_ADM && !empty($uni))
 	Universe::setEmulated($uni);
 }
 
+
+
+$page 		= HTTP::_GP('page', 'overview');
+$mode 		= HTTP::_GP('mode', 'show');
+
+
+
+$page		= str_replace(array('_', '\\', '/', '.', "\0"), '', $page);
+$pageClass	= 'Show'.ucwords($page).'Page';
+
+
+$path		= 'includes/pages/adm/'.$pageClass.'.class.php';
+
+
+$session	= Session::create();
+
+if($session->adminAccess != 1)
+{
+	$path		= 'includes/pages/adm/ShowLoginPage.class.php';
+	$pageClass = "ShowLoginPage";
+}
+
+
+
+if(!file_exists($path)) {
+	ShowErrorPage::printError($LNG['page_doesnt_exist']);
+}
+
+// Added Autoload in feature Versions
+require $path;
+
+$pageObj	= new $pageClass;
+// PHP 5.2 FIX
+// can't use $pageObj::$requireModule
+$pageProps	= get_class_vars(get_class($pageObj));
+
+if(isset($pageProps['requireModule']) && $pageProps['requireModule'] !== 0 && !isModuleAvailable($pageProps['requireModule'])) {
+
+	ShowErrorPage::printError($LNG['sys_module_inactive']);
+}
+
+
+if(!is_callable(array($pageObj, $mode))) {
+	if(!isset($pageProps['defaultController']) || !is_callable(array($pageObj, $pageProps['defaultController']))) {
+
+		ShowErrorPage::printError($LNG['page_doesnt_exist']);
+
+	}
+	$mode	= $pageProps['defaultController'];
+}
+
+$pageObj->{$mode}();
+
+/*
 $page	= HTTP::_GP('page', '');
 switch($page)
 {
@@ -207,3 +255,5 @@ switch($page)
 		ShowIndexPage();
 	break;
 }
+
+*/

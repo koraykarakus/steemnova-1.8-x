@@ -13,5 +13,3 @@ top.document.location.reload();
 </script>
 {/if}
 {/if}
-</body>
-</html>
