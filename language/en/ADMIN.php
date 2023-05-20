@@ -18,6 +18,33 @@
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//---------------	ShowInfosPage.class.php - page.information.default.tpl ------------------------//
+$LNG['ad_infos_server'] = "Server";
+$LNG['ad_infos_server_infos'] = "Server Information";
+$LNG['ad_infos_php_version'] = "PHP Version";
+$LNG['ad_infos_jason_active'] = "JSON Active";
+$LNG['ad_infos_bc_math_active'] = "BCMath Active";
+$LNG['ad_infos_curl_active'] = "cURL Active";
+$LNG['ad_infos_safe_mode'] = "Safe Mode";
+$LNG['ad_infos_memory_limit'] = "Memory Limit";
+$LNG['ad_infos_mysql_cli_version'] = "MySQL Client Version";
+$LNG['ad_infos_mysql_server_version'] = "MySQL Server Version";
+$LNG['ad_infos_error_log'] = "Error Log";
+$LNG['ad_infos_timezone'] = "Timezone (PHP/CONF/USER)";
+$LNG['ad_infos_db_suhosin'] = "Suhosin";
+$LNG['ad_infos_db_version'] = "DB version";
+$LNG['ad_infos_game'] = "Game";
+$LNG['ad_infos_game_version'] = "Game Version";
+$LNG['ad_infos_game_address'] = "Game Address";
+$LNG['ad_infos_game_pfad'] = "Game PFAD";
+$LNG['ad_infos_browser'] = "Browser";
+$LNG['ad_infos_yes'] = "Yes";
+$LNG['ad_infos_no'] = "No";
+$LNG['ad_infos_active'] = "Active";
+$LNG['ad_infos_inactive'] = "Inactive";
+
+
+
 
 //---------------	Geral	------------------------//
 $LNG['adm_login'] = 'Login';

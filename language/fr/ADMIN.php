@@ -4,6 +4,31 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+//--------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
+$LNG['ad_infos_server'] = "Serveur" ;
+$LNG['ad_infos_server_infos'] = "Informations sur le serveur" ;
+$LNG['ad_infos_php_version'] = "Version PHP" ;
+$LNG['ad_infos_jason_active'] = "JSON actif" ;
+$LNG['ad_infos_bc_math_active'] = "BCMath actif" ;
+$LNG['ad_infos_curl_active'] = "cURL actif" ;
+$LNG['ad_infos_safe_mode'] = "Mode sans échec" ;
+$LNG['ad_infos_memory_limit'] = "Limite de mémoire" ;
+$LNG['ad_infos_mysql_cli_version'] = "Version du client MySQL" ;
+$LNG['ad_infos_mysql_server_version'] = "Version du serveur MySQL" ;
+$LNG['ad_infos_error_log'] = "Journal des erreurs" ;
+$LNG['ad_infos_timezone'] = "Fuseau horaire (PHP/CONF/USER)" ;
+$LNG['ad_infos_db_suhosin'] = "Suhosin" ;
+$LNG['ad_infos_db_version'] = "Version BD" ;
+$LNG['ad_infos_game'] = "Jeu" ;
+$LNG['ad_infos_game_version'] = "Version du jeu" ;
+$LNG['ad_infos_game_address'] = "Adresse du jeu" ;
+$LNG['ad_infos_game_pfad'] = "Jeu PFAD" ;
+$LNG['ad_infos_browser'] = "Navigateur" ;
+$LNG['ad_infos_yes'] = "Oui" ;
+$LNG['ad_infos_no'] = "Non" ;
+$LNG['ad_infos_active'] = "Actif" ;
+$LNG['ad_infos_inactive'] = "Inactif" ;
+
 //---------------	GENERAL	------------------------//
 $LNG['adm_login']						= 'Connectez-vous';
 $LNG['adm_username']					= 'Login';

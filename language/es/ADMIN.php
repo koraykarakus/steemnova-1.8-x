@@ -15,6 +15,31 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+ //--------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
+$LNG['ad_infos_server'] = "Servidor";
+$LNG['ad_infos_server_infos'] = "Información del servidor";
+$LNG['ad_infos_php_version'] = "Versión de PHP";
+$LNG['ad_infos_jason_active'] = "JSON activo";
+$LNG['ad_infos_bc_math_active'] = "BCMath activo";
+$LNG['ad_infos_curl_active'] = "cURL activo";
+$LNG['ad_infos_safe_mode'] = "Modo seguro";
+$LNG['ad_infos_memory_limit'] = "Límite de memoria";
+$LNG['ad_infos_mysql_cli_version'] = "Versión del cliente MySQL";
+$LNG['ad_infos_mysql_server_version'] = "Versión del servidor MySQL";
+$LNG['ad_infos_error_log'] = "Registro de errores";
+$LNG['ad_infos_timezone'] = "Zona horaria (PHP/CONF/USER)";
+$LNG['ad_infos_db_suhosin'] = "Suhosin";
+$LNG['ad_infos_db_version'] = "Versión de la base de datos";
+$LNG['ad_infos_game'] = "Juego";
+$LNG['ad_infos_game_version'] = "Versión del juego";
+$LNG['ad_infos_game_address'] = "Dirección del juego";
+$LNG['ad_infos_game_pfad'] = "Juego PFAD";
+$LNG['ad_infos_browser'] = "Navegador";
+$LNG['ad_infos_yes'] = "Sí";
+$GNL['ad_infos_no'] = "No";
+$LNG['ad_infos_active'] = "Activo";
+$LNG['ad_infos_inactive'] = "Inactivo";
+
 //---------------	GENERAL	------------------------//
 $LNG['adm_login']			= 'Ingresar';
 $LNG['adm_username']		= 'Nombre Usuario';

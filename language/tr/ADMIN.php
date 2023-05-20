@@ -17,9 +17,34 @@
 
 // Turkce'ye Ibrahim Senyer tarafindan cevirilmistir. Butun Haklari saklidir (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
-// Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
+// Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+
+//------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
+$LNG['ad_infos_server'] = "Sunucu";
+$LNG['ad_infos_server_infos'] = "Sunucu Bilgileri";
+$LNG['ad_infos_php_version'] = "PHP Sürümü";
+$LNG['ad_infos_jason_active'] = "JSON Etkin";
+$LNG['ad_infos_bc_math_active'] = "BCMath Aktif";
+$LNG['ad_infos_curl_active'] = "cURL Aktif";
+$LNG['ad_infos_safe_mode'] = "Güvenli Mod";
+$LNG['ad_infos_memory_limit'] = "Bellek Sınırı";
+$LNG['ad_infos_mysql_cli_version'] = "MySQL İstemci Sürümü";
+$LNG['ad_infos_mysql_server_version'] = "MySQL Sunucu Sürümü";
+$LNG['ad_infos_error_log'] = "Hata Günlüğü";
+$LNG['ad_infos_timezone'] = "Zaman Dilimi (PHP/CONF/KULLANICI)";
+$LNG['ad_infos_db_suhosin'] = "Suhosin";
+$LNG['ad_infos_db_version'] = "Veritabanı sürümü";
+$LNG['ad_infos_game'] = "Oyun";
+$LNG['ad_infos_game_version'] = "Oyun Sürümü";
+$LNG['ad_infos_game_address'] = "Oyun Adresi";
+$LNG['ad_infos_game_pfad'] = "PFAD Oyunu";
+$LNG['ad_infos_browser'] = "Tarayıcı";
+$LNG['ad_infos_yes'] = "Evet";
+$LNG['ad_infos_no'] = "Hayır";
+$LNG['ad_infos_active'] = "Aktif";
+$LNG['ad_infos_inactive'] = "Aktif Değil";
 
 //---------------	Genel	------------------------//
 $LNG['adm_login']			= 'Giris';

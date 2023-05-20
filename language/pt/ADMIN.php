@@ -20,7 +20,30 @@
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
 
-
+//-------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
+$LNG['ad_infos_server'] = "Servidor";
+$LNG['ad_infos_server_infos'] = "Informações do servidor";
+$LNG['ad_infos_php_version'] = "Versão do PHP";
+$LNG['ad_infos_jason_active'] = "JSON ativo";
+$LNG['ad_infos_bc_math_active'] = "BCMath ativo";
+$LNG['ad_infos_curl_active'] = "cURL ativo";
+$LNG['ad_infos_safe_mode'] = "Modo de segurança";
+$LNG['ad_infos_memory_limit'] = "Limite de memória";
+$LNG['ad_infos_mysql_cli_version'] = "Versão do cliente MySQL";
+$LNG['ad_infos_mysql_server_version'] = "Versão do MySQL Server";
+$LNG['ad_infos_error_log'] = "Log de erros";
+$LNG['ad_infos_timezone'] = "Fuso horário (PHP/CONF/USER)";
+$LNG['ad_infos_db_suhosin'] = "Suhosin";
+$LNG['ad_infos_db_version'] = "Versão do banco de dados";
+$LNG['ad_infos_game'] = "Jogo";
+$LNG['ad_infos_game_version'] = "Versão do jogo";
+$LNG['ad_infos_game_address'] = "Endereço do jogo";
+$LNG['ad_infos_game_pfad'] = "Jogo PFAD";
+$LNG['ad_infos_browser'] = "Navegador";
+$LNG['ad_infos_yes'] = "Sim";
+$LNG['ad_infos_no'] = "Não";
+$LNG['ad_infos_active'] = "Ativo";
+$LNG['ad_infos_inactive'] = "Inativo";
 
 //---------------	Geral	------------------------//
 $LNG['adm_login']			= 'Login';

@@ -16,6 +16,31 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+//--------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
+$LNG['ad_infos_server'] = "Сервер";
+$LNG['ad_infos_server_infos'] = "Информация о сервере";
+$LNG['ad_infos_php_version'] = "Версия PHP";
+$LNG['ad_infos_jason_active'] = "JSON активен";
+$LNG['ad_infos_bc_math_active'] = "BCMath активен";
+$LNG['ad_infos_curl_active'] = "cURL активен";
+$LNG['ad_infos_safe_mode'] = "Безопасный режим";
+$LNG['ad_infos_memory_limit'] = "Ограничение памяти";
+$LNG['ad_infos_mysql_cli_version'] = "Версия клиента MySQL";
+$LNG['ad_infos_mysql_server_version'] = "Версия сервера MySQL";
+$LNG['ad_infos_error_log'] = "Журнал ошибок";
+$LNG['ad_infos_timezone'] = "Часовой пояс (PHP/CONF/USER)";
+$LNG['ad_infos_db_suhosin'] = "Сухосин";
+$LNG['ad_infos_db_version'] = "Версия БД";
+$LNG['ad_infos_game'] = "Игра";
+$LNG['ad_infos_game_version'] = "Версия игры";
+$LNG['ad_infos_game_address'] = "Игровой адрес";
+$LNG['ad_infos_game_pfad'] = "Игра PFAD";
+$LNG['ad_infos_browser'] = "Браузер";
+$LNG['ad_infos_yes'] = "Да";
+$LNG['ad_infos_no'] = "Нет";
+$LNG['ad_infos_active'] = "Активный";
+$LNG['ad_infos_inactive'] = "Неактивно";
+
 // Общее
 $LNG['adm_login']                      = 'Логин';
 $LNG['adm_username']                   = 'Логин';
