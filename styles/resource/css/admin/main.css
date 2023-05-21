@@ -31,3 +31,9 @@ body {
 .fs-14{
 	font-size: 14px;
 }
+/*background colors*/
+
+.bg-black{
+	background: rgb(1,1,9);
+	background: linear-gradient(0deg, rgba(1,1,9,1) 0%, rgba(18,18,22,1) 35%);
+}

@@ -28,7 +28,7 @@ class ShowLoginPage extends AbstractAdminPage
 
 		if ($USER['authlevel'] == AUTH_USR)
 		{
-		    throw new PagePermissionException("Permission error!");
+		  throw new PagePermissionException("Permission error!");
 		}
 
 		parent::__construct();
@@ -56,16 +56,27 @@ class ShowLoginPage extends AbstractAdminPage
 
 
 	function validate(){
-		global $USER;
+		global $USER, $LNG;
 
-		$enteredPassword = HTTP::_GP('admin_pw', '', true);
+		$error = array();
+
+		$enteredPassword = HTTP::_GP('password', '', true);
 
 		if (!password_verify($enteredPassword, $USER['password'])) {
-			$this->show();
-		}else {
+			$error[] = $LNG['adm_bad_password'];
+		}
+
+		if (empty($error)) {
+
 			$session	= Session::create();
 			$session->adminAccess	= 1;
-			$this->redirectTo('admin.php?page=overview');
+
+			$data = array();
+			$data['status'] = "redirect";
+			$this->sendJSON($data);
+		}else {
+			$error['status'] = "fail";
+			$this->sendJSON($error);
 		}
 
 
