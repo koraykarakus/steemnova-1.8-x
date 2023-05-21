@@ -36,4 +36,15 @@ body {
 .bg-black{
 	background: rgb(1,1,9);
 	background: linear-gradient(0deg, rgba(1,1,9,1) 0%, rgba(18,18,22,1) 35%);
+	opacity: 0.9;
+}
+
+/*effects*/
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.hover-underline:hover{
+	text-decoration: underline;
 }
