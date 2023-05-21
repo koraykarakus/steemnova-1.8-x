@@ -1090,7 +1090,7 @@ $LNG['modul_37']						= 'Baner';
 $LNG['modul_26']						= 'Wyszukiwarka';
 $LNG['modul_27']						= 'Badania techniczne';
 $LNG['modul_28']						= 'Technologia';
-
+$LNG['modul_45'] = "Informacje o wszechświecie";
 $LNG['mod_module']						= 'Moduły';
 $LNG['mod_info']						= 'Moduły w grze <br><font color="red">Admini mogą dalej używać nie aktywne opcje!</font>';
 $LNG['mod_active']						= 'AKTYWNY';

@@ -18,7 +18,16 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+//-------------------- MODULE 45 UNIVERSE INFORMATION ------------------//
 
+$LNG['si_universe_info'] = "Universe Info";
+$LNG['si_game_speed'] = "Game Speed";
+$LNG['si_fleet_speed'] = "Fleet Speed";
+$LNG['si_production_speed'] = "Production Speed";
+$LNG['si_storage_multiplier'] = "Storage Multiplier";
+
+
+//---------------------------------------------------------------------//
 
 $LNG['Messages']							= 'Messages';
 

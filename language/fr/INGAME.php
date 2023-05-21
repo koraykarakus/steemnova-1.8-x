@@ -4,6 +4,17 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+//-------------------- MODULE 45 INFORMATIONS SUR L'UNIVERS ------------------//
+
+$LNG['si_universe_info'] = "Informations sur l'univers" ;
+$LNG['si_game_speed'] = "Vitesse de jeu" ;
+$LNG['si_fleet_speed'] = "Vitesse de la flotte" ;
+$LNG['si_production_speed'] = "Vitesse de production" ;
+$LNG['si_storage_multiplier'] = "Multiplicateur de stockage" ;
+
+
+//------------------------------------------------------------- ---------------------//
+
 $LNG['Messages']							= 'Messages';
 
 $LNG['PM']									= '[PM]';

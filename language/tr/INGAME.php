@@ -19,6 +19,16 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//-------------------- MODÜL 45 EVREN BİLGİLERİ ------------------//
+
+$LNG['si_universe_info'] = "Evren Bilgisi";
+$LNG['si_game_speed'] = "Oyun Hızı";
+$LNG['si_fleet_speed'] = "Filo Hızı";
+$LNG['si_production_speed'] = "Üretim Hızı";
+$LNG['si_storage_multiplier'] = "Depolama Çarpanı";
+
+
+//------------------------------------------------ ---------------------//
 
 
 $LNG['Messages']							= 'Mesajlar';

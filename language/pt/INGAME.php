@@ -19,6 +19,18 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+//------------------- MÓDULO 45 INFORMAÇÕES DO UNIVERSO -------------------//
+
+$LNG['si_universe_info'] = "Inf. universo";
+$LNG['si_game_speed'] = "Velocidade do jogo";
+$LNG['si_fleet_speed'] = "Velocidade da frota";
+$LNG['si_production_speed'] = "Velocidade de produção";
+$LNG['si_storage_multiplier'] = "Multiplicador de armazenamento";
+
+
+//------------------------------------------------ ---------------------//
+
+
 $LNG['Messages']							= 'Mensagens';
 $LNG['write_message']						= 'Escrever mensagem';
 

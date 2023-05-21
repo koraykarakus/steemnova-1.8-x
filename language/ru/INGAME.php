@@ -17,6 +17,17 @@
 
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+//-------------------- МОДУЛЬ 45 ВСЕЛЕННАЯ ИНФОРМАЦИЯ ------------------//
+
+$LNG['si_universe_info'] = "Информация о Вселенной";
+$LNG['si_game_speed'] = "Скорость игры";
+$LNG['si_fleet_speed'] = "Скорость флота";
+$LNG['si_production_speed'] = "Скорость производства";
+$LNG['si_storage_multiplier'] = "Множитель хранилища";
+
+
+//------------------------------------------------ ---------------------//
+
 $LNG['Messages']                          = 'Сообщения';
 $LNG['write_message']                     = 'Написать сообщение';
 $LNG['PM']                                = '[ЛС]';

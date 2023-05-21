@@ -14,6 +14,17 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+ //-------------------- MÓDULO 45 INFORMACIÓN DEL UNIVERSO ------------------//
+ $LNG['si_universe_info'] = "Información del universo";
+ $LNG['si_game_speed'] = "Velocidad del juego";
+ $LNG['si_fleet_speed'] = "Velocidad de la flota";
+ $LNG['si_production_speed'] = "Velocidad de producción";
+ $LNG['si_storage_multiplier'] = "Multiplicador de almacenamiento";
+
+
+ //------------------------------------------------ ---------------------//
+
+
 $LNG['Messages']							= 'Mensajes';
 $LNG['write_message']						= 'Escribir mensaje';
 

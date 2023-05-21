@@ -1106,6 +1106,7 @@ $LNG['modul_28'] = 'Techtree';
 $LNG['modul_41'] = 'Facebook Application';
 $LNG['modul_43'] = "Discord";
 $LNG['modul_44'] = "Forum";
+$LNG['modul_45'] = "Universe Information";
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';
 $LNG['mod_active'] = 'Active';

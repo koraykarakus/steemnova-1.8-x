@@ -53,6 +53,38 @@
 		{foreach $cronjobs as $cronjob}<img src="cronjob.php?cronjobID={$cronjob}" alt="">{/foreach}
 
 		<div style="z-index:9999;" class="bg-black d-none d-sm-flex justify-content-center w-100 position-fixed bottom-0 py-1">
+			{if isModuleAvailable($smarty.const.MODULE_SERVER_INFO)}
+			<span class="font-size-12 px-2 border-end hover-underline text-white hover-pointer" data-bs-toggle="tooltip"
+			data-bs-placement="left"
+			data-bs-html="true"
+			title="
+			<table class='table-tooltip bg-black'>
+				<thead>
+					<tr>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class='text-start color-red fw-bold'>{$LNG.si_game_speed}:</td>
+						<td>{$game_speed}</td>
+					</tr>
+					<tr>
+						<td class='text-start color-red'>{$LNG.si_fleet_speed}:</td>
+						<td>{$fleet_speed}</td>
+					</tr>
+					<tr>
+						<td class='text-start color-red'>{$LNG.si_production_speed}:</td>
+						<td>{$production_speed}</td>
+					</tr>
+					<tr>
+						<td class='text-start color-red'>{$LNG.si_storage_multiplier}:</td>
+						<td>{$storage_multiplier}</td>
+					</tr>
+				</tbody>
+			</table>
+			">{$LNG.si_universe_info}</span>
+			{/if}
 			{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
 			<a class="color-red font-size-12 px-2 border-end hover-underline" href="game.php?page=banList">{$LNG.lm_banned}</a>
 			{/if}

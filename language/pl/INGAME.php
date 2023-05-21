@@ -15,6 +15,17 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+ //-------------------- MODUŁ 45 INFORMACJE O WSZECHŚWIECIE ------------------//
+
+ $LNG['si_universe_info'] = "Informacje o wszechświecie";
+ $LNG['si_game_speed'] = "Prędkość gry";
+ $LNG['si_fleet_speed'] = "Prędkość floty";
+ $LNG['si_production_speed'] = "Prędkość produkcji";
+ $LNG['si_storage_multiplier'] = "Mnożnik magazynowania";
+
+
+ //------------------------------------------------ ------//
+
 $LNG['Messages']							= 'Wiadomości';
 $LNG['write_message']						= 'Napisz wiadomość';
 

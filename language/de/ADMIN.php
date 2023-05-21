@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
- 
+
 
  //-------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
 $LNG['ad_infos_server'] = "Server";
@@ -1098,7 +1098,7 @@ $LNG['modul_37'] = 'Statistiken Banner';
 $LNG['modul_26'] = 'Suche';
 $LNG['modul_27'] = 'Support Tickets';
 $LNG['modul_28'] = 'Techtree';
-
+$LNG['modul_45'] = "Universumsinformationen";
 $LNG['mod_module'] = 'Module';
 $LNG['mod_info'] = 'Module im Game<br><font color="red">Admins können weiterhin die Bereiche betreten!</font>';
 $LNG['mod_active'] = 'AKTIV';
