@@ -18,6 +18,13 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+//-------------------- fleetTable.tpl  ------------------//
+
+$LNG['fm_no_fleet_movements'] = "No Fleet Movements";
+$LNG['fm_fleets'] = "Fleets";
+
+//------------------------------------------------------//
+
 //-------------------- MODULE 45 UNIVERSE INFORMATION ------------------//
 
 $LNG['si_universe_info'] = "Universe Info";

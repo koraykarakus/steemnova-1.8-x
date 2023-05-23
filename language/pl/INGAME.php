@@ -15,6 +15,13 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+ //-------------------- flotTable.tpl ------------------//
+
+ $LNG['fm_no_fleet_movements'] = "Brak ruchów floty";
+ $LNG['fm_fleets'] = "Floty";
+
+ //------------------------------------------------ ------//
+
  //-------------------- MODUŁ 45 INFORMACJE O WSZECHŚWIECIE ------------------//
 
  $LNG['si_universe_info'] = "Informacje o wszechświecie";

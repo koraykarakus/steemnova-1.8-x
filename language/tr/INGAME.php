@@ -19,6 +19,13 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//-------------------------------- filoTable.tpl ------------------//
+
+$LNG['fm_no_fleet_movements'] = "Filo Hareketi Yok";
+$LNG['fm_fleets'] = "Filolar";
+
+//------------------------------------------------ ------//
+
 //-------------------- MODÜL 45 EVREN BİLGİLERİ ------------------//
 
 $LNG['si_universe_info'] = "Evren Bilgisi";

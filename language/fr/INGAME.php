@@ -4,6 +4,14 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+//-------------------- flotteTable.tpl ------------------//
+
+$LNG['fm_no_fleet_movements'] = "Aucun mouvement de flotte" ;
+$LNG['fm_fleets'] = "Flottes" ;
+
+//------------------------------------------------------------- ------//
+
+
 //-------------------- MODULE 45 INFORMATIONS SUR L'UNIVERS ------------------//
 
 $LNG['si_universe_info'] = "Informations sur l'univers" ;

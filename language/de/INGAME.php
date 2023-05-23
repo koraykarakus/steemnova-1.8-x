@@ -15,8 +15,15 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+ //-------------------- FleetTable.tpl ----//
+
+ $LNG['fm_no_fleet_movements'] = "Keine Flottenbewegungen";
+ $LNG['fm_fleets'] = "Flotten";
+
+ //------------------------------------------------ ------//
+
  //-------------------- MODUL 45 UNIVERSUMINFORMATIONEN ----//
- 
+
  $LNG['si_universe_info'] = "Universumsinfo";
  $LNG['si_game_speed'] = "Spielgeschwindigkeit";
  $LNG['si_fleet_speed'] = "Flottengeschwindigkeit";

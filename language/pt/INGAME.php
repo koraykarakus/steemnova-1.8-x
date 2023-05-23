@@ -19,6 +19,13 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+//------------------- FleetTable.tpl -------------------//
+
+$LNG['fm_no_fleet_movements'] = "Sem movimentos de frota";
+$LNG['fm_fleets'] = "Frotas";
+
+//------------------------------------------------ ------//
+
 //------------------- MÓDULO 45 INFORMAÇÕES DO UNIVERSO -------------------//
 
 $LNG['si_universe_info'] = "Inf. universo";
