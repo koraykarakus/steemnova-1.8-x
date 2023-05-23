@@ -36,7 +36,7 @@ class ShowSearchPage extends AbstractGamePage
 				$sql = "SELECT a.id, a.username, a.ally_id, a.galaxy, a.system, a.planet, b.name, c.total_rank, d.ally_name
 				FROM %%USERS%% as a
 				INNER JOIN %%PLANETS%% as b ON b.id = a.id_planet
-				LEFT JOIN %%STATPOINTS%% as c ON c.id_owner = a.id AND c.stat_type = 1
+				LEFT JOIN %%USER_POINTS%% as c ON c.id_owner = a.id
 				LEFT JOIN %%ALLIANCE%% as d ON d.id = a.ally_id
 				WHERE a.universe = :universe AND a.username LIKE :searchTextLike
 				ORDER BY (
@@ -73,7 +73,7 @@ class ShowSearchPage extends AbstractGamePage
 				d.ally_name
 				FROM %%PLANETS%% as a
 				INNER JOIN %%USERS%% as b ON b.id = a.id_owner
-				LEFT JOIN  %%STATPOINTS%% as c ON c.id_owner = b.id AND c.stat_type = 1
+				LEFT JOIN  %%USER_POINTS%% as c ON c.id_owner = b.id
 				LEFT JOIN %%ALLIANCE%% as d ON d.id = b.ally_id
 				WHERE a.universe = :universe AND a.name LIKE :searchTextLike
 				ORDER BY (
@@ -106,7 +106,7 @@ class ShowSearchPage extends AbstractGamePage
 			case "allytag":
 				$sql = "SELECT a.id, a.ally_name, a.ally_tag, a.ally_members,
 				c.total_points FROM %%ALLIANCE%% as a
-				LEFT JOIN %%STATPOINTS%% as c ON c.stat_type = 1 AND c.id_owner = a.id
+				LEFT JOIN %%USER_POINTS%% as c ON c.id_owner = a.id
 				WHERE a.ally_universe = :universe AND a.ally_tag LIKE :searchTextLike
 				ORDER BY (
 				  IF(a.ally_tag = :searchText, 1, 0)
@@ -133,7 +133,7 @@ class ShowSearchPage extends AbstractGamePage
 			case "allyname":
 				$sql = "SELECT a.ally_name, a.ally_tag, a.ally_members,
 				b.total_points FROM %%ALLIANCE%% as a
-				LEFT JOIN %%STATPOINTS%% as b ON b.stat_type = 1 AND b.id_owner = a.id
+				LEFT JOIN %%USER_POINTS%% as b ON b.id_owner = a.id
 				WHERE a.ally_universe = :universe AND a.ally_name LIKE :searchTextLike
 				ORDER BY (
 				  IF(a.ally_name = :searchText, 1, 0)

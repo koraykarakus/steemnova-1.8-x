@@ -644,10 +644,9 @@ CREATE TABLE `%PREFIX%shortcuts` (
   KEY `ownerID` (`ownerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `%PREFIX%statpoints` (
+CREATE TABLE `%PREFIX%user_points` (
   `id_owner` int(11) unsigned NOT NULL DEFAULT '0',
   `id_ally` int(11) unsigned NOT NULL DEFAULT '0',
-  `stat_type` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `universe` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `tech_rank` int(11) unsigned NOT NULL DEFAULT '0',
   `tech_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
@@ -669,9 +668,36 @@ CREATE TABLE `%PREFIX%statpoints` (
   `total_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
   `total_points` double(50,0) unsigned NOT NULL DEFAULT '0',
   `total_count` bigint(20) unsigned NOT NULL DEFAULT '0',
-  KEY `id_owner` (`id_owner`),
-  KEY `universe` (`universe`),
-  KEY `stat_type` (`stat_type`)
+  PRIMARY KEY `id_owner` (`id_owner`),
+  KEY `universe` (`universe`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `%PREFIX%alliance_points` (
+  `id_ally` int(11) unsigned NOT NULL DEFAULT '0',
+  `id_owner` int(11) unsigned NOT NULL DEFAULT '0',
+  `universe` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `tech_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `tech_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `tech_points` double(50,0) unsigned NOT NULL DEFAULT '0',
+  `tech_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `build_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `build_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `build_points` double(50,0) unsigned NOT NULL DEFAULT '0',
+  `build_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `defs_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `defs_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `defs_points` double(50,0) unsigned NOT NULL DEFAULT '0',
+  `defs_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `fleet_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `fleet_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `fleet_points` double(50,0) unsigned NOT NULL DEFAULT '0',
+  `fleet_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `total_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `total_old_rank` int(11) unsigned NOT NULL DEFAULT '0',
+  `total_points` double(50,0) unsigned NOT NULL DEFAULT '0',
+  `total_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY `id_ally` (`id_ally`),
+  KEY `universe` (`universe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `%PREFIX%system` (

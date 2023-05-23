@@ -74,13 +74,13 @@ class ShowGalaxyPage extends AbstractGamePage
 		{
 			$missileSelector[$Element] = $LNG['tech'][$Element];
 		}
-		$sql	= 'SELECT total_points
-		FROM %%STATPOINTS%%
-		WHERE id_owner = :userId AND stat_type = :statType';
+
+    $sql	= "SELECT total_points
+		FROM %%USER_POINTS%%
+		WHERE id_owner = :userId;";
 
 		$USER	+= Database::get()->selectSingle($sql, array(
-			':userId'	=> $USER['id'],
-			':statType'	=> 1
+			':userId'	=> $USER['id']
 		));
 
 		$galaxyRows	= new GalaxyRows;

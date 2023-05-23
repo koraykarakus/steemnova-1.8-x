@@ -218,10 +218,11 @@ class ShowOverviewPage extends AbstractGamePage
 
 		// Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
 		$sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
-		LEFT JOIN %%STATPOINTS%% as s ON s.id_owner = u.id AND s.stat_type = '1' WHERE ref_id = :userID;";
-        $RefLinksRAW = $db->select($sql, array(
-            ':userID'   => $USER['id']
-        ));
+		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :userID;";
+
+		$RefLinksRAW = $db->select($sql, array(
+        ':userID'   => $USER['id']
+    ));
 
 		$config	= Config::get();
 
@@ -237,20 +238,16 @@ class ShowOverviewPage extends AbstractGamePage
 		}
 
 		$sql	= 'SELECT total_points, total_rank
-		FROM %%STATPOINTS%%
-		WHERE id_owner = :userId AND stat_type = :statType';
+		FROM %%USER_POINTS%%
+		WHERE id_owner = :userId;';
 
 		$statData	= $db->selectSingle($sql, array(
 			':userId'	=> $USER['id'],
-			':statType'	=> 1
 		));
 
-		if($statData['total_rank'] == 0)
-		{
+		if (!$statData) {
 			$rankInfo	= "-";
-		}
-		else
-		{
+		}else {
 			$rankInfo	= sprintf(
 			$LNG['ov_userrank_info'],
 			pretty_number($statData['total_points']),
@@ -261,6 +258,8 @@ class ShowOverviewPage extends AbstractGamePage
 			$config->users_amount
 			);
 		}
+
+		
 
 		$sql = "SELECT COUNT(*) as count FROM %%USERS%% WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
 		$usersOnline = $db->selectSingle($sql,array(),'count');

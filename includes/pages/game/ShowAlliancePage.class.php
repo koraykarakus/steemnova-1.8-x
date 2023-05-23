@@ -136,12 +136,11 @@ class ShowAlliancePage extends AbstractGamePage
 		}
 
 		$sql	= 'SELECT total_points
-		FROM %%STATPOINTS%%
-		WHERE id_owner = :userId AND stat_type = :statType';
+		FROM %%USER_POINTS%%
+		WHERE id_owner = :userId;';
 
 		$userPoints	= Database::get()->selectSingle($sql, array(
 			':userId'	=> $USER['id'],
-			':statType'	=> 1
 		), 'total_points');
 
 		$this->assign(array(
@@ -366,12 +365,11 @@ class ShowAlliancePage extends AbstractGamePage
 			$this->redirectToHome();
 		}
 		$sql	= 'SELECT total_points
-		FROM %%STATPOINTS%%
-		WHERE id_owner = :userId AND stat_type = :statType';
+		FROM %%USER_POINTS%%
+		WHERE id_owner = :userId;';
 
 		$userPoints	= Database::get()->selectSingle($sql, array(
 			':userId'	=> $USER['id'],
-			':statType'	=> 1
 		), 'total_points');
 
 		$min_points = Config::get()->alliance_create_min_points;
@@ -473,7 +471,7 @@ class ShowAlliancePage extends AbstractGamePage
 			':userId'       => $USER['id']
 		));
 
-		$sql	= "UPDATE %%STATPOINTS%% SET id_ally = :allianceId WHERE id_owner = :userId;";
+		$sql	= "UPDATE %%USER_POINTS%% SET id_ally = :allianceId WHERE id_owner = :userId;";
 		$db->update($sql, array(
 			':allianceId'	=> $allianceId,
 			':userId'       => $USER['id']
@@ -607,15 +605,14 @@ class ShowAlliancePage extends AbstractGamePage
 
 		$memberList	= array();
 
-		$sql = "SELECT DISTINCT u.id, u.username,u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points FROM %%USERS%% u LEFT JOIN %%STATPOINTS%% as s ON s.stat_type = '1' AND s.id_owner = u.id WHERE ally_id = :AllianceID;";
+		$sql = "SELECT DISTINCT u.id, u.username,u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points FROM %%USERS%% u LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ally_id = :AllianceID;";
 		$memberListResult = $db->select($sql, array(
 			':AllianceID'	=> $this->allianceData['id']
 		));
 
 		try {
-			$USER    += $db->selectSingle('SELECT total_points FROM %%STATPOINTS%% WHERE id_owner = :userId AND stat_type = :statType', array(
+			$USER    += $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId;', array(
 				':userId'    => $USER['id'],
-				':statType'    => 1
 			));
 		} catch (Exception $e) {
 			$USER['total_points'] = 0;
@@ -675,7 +672,7 @@ class ShowAlliancePage extends AbstractGamePage
 			':UserID'			=> $USER['id']
 		));
 
-		$sql	= "UPDATE %%STATPOINTS%% SET id_ally = 0 WHERE id_owner = :UserID AND stat_type = 1;";
+		$sql	= "UPDATE %%USER_POINTS%% SET id_ally = 0 WHERE id_owner = :UserID;";
 		$db->update($sql, array(
 			':UserID'			=> $USER['id']
 		));
@@ -927,12 +924,12 @@ class ShowAlliancePage extends AbstractGamePage
 				':AllianceID'	=> $this->allianceData['id']
 			));
 
-			$sql = "UPDATE %%STATPOINTS%% SET id_ally = '0' WHERE id_ally = :AllianceID;";
+			$sql = "UPDATE %%ALLIANCE_POINTS%% SET id_ally = '0' WHERE id_ally = :AllianceID;";
 			$db->update($sql, array(
 				':AllianceID'	=> $this->allianceData['id']
 			));
 
-			$sql = "DELETE FROM %%STATPOINTS%% WHERE id_owner = :AllianceID AND stat_type = 2;";
+			$sql = "DELETE FROM %%ALLIANCE_POINTS%% WHERE id_owner = :AllianceID;";
 			$db->delete($sql, array(
 				':AllianceID'	=> $this->allianceData['id']
 			));
@@ -1091,7 +1088,7 @@ class ShowAlliancePage extends AbstractGamePage
 			p.`name`
 		FROM %%ALLIANCE_REQUEST%% AS r
 		LEFT JOIN %%USERS%% AS u ON r.userId = u.id
-		INNER JOIN %%STATPOINTS%% AS stat ON r.userId = stat.id_owner
+		INNER JOIN %%USER_POINTS%% AS stat ON r.userId = stat.id_owner
 		LEFT JOIN %%PLANETS%% AS p ON p.id = u.id_planet
 		WHERE applyID = :applyID;";
 
@@ -1156,7 +1153,7 @@ class ShowAlliancePage extends AbstractGamePage
 					':userId'       => $userId
 				));
 
-				$sql = "UPDATE %%STATPOINTS%% SET id_ally = :allianceId WHERE id_owner = :userId AND stat_type = 1;";
+				$sql = "UPDATE %%USER_POINTS%% SET id_ally = :allianceId WHERE id_owner = :userId;";
 				$db->update($sql, array(
 					':allianceId'	=> $this->allianceData['id'],
 					':userId'       => $userId
@@ -1330,7 +1327,7 @@ class ShowAlliancePage extends AbstractGamePage
 
 		$sql = "SELECT DISTINCT u.id, u.username, u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points
 		FROM %%USERS%% u
-		LEFT JOIN %%STATPOINTS%% as s ON s.stat_type = '1' AND s.id_owner = u.id
+		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id
 		WHERE ally_id = :allianceId;";
 
 		$memberListResult = $db->select($sql, array(
@@ -1340,9 +1337,8 @@ class ShowAlliancePage extends AbstractGamePage
 		$memberList	= array();
 
 		try {
-			$USER    += $db->selectSingle('SELECT total_points FROM %%STATPOINTS%% WHERE id_owner = :userId AND stat_type = :statType', array(
+			$USER    += $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId ', array(
 				':userId'    => $USER['id'],
-				':statType'    => 1
 			));
 		} catch (Exception $e) {
 			$USER['total_points'] = 0;
@@ -1465,7 +1461,7 @@ class ShowAlliancePage extends AbstractGamePage
 			':id'	=> $id
 		));
 
-		$sql = "UPDATE %%STATPOINTS%% SET id_ally = 0 WHERE id_owner = :id AND stat_type = 1;";
+		$sql = "UPDATE %%USER_POINTS%% SET id_ally = 0 WHERE id_owner = :id;";
 		$db->update($sql, array(
 			':id'	=> $id
 		));

@@ -134,7 +134,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
 		total_points, onlinetime, urlaubs_modus, banaday, authattack
 		FROM %%PLANETS%% planet
 		INNER JOIN %%USERS%% user ON planet.id_owner = user.id
-		LEFT JOIN %%STATPOINTS%% as stat ON stat.id_owner = user.id AND stat.stat_type = '1'
+		LEFT JOIN %%USER_POINTS%% as stat ON stat.id_owner = user.id
 		WHERE planet.id = :planetID;";
 
 		$targetData = $db->selectSingle($sql, array(
@@ -155,12 +155,11 @@ class ShowFleetAjaxPage extends AbstractGamePage
 				$this->sendData(605, $LNG['fa_vacation_mode']);
 			}
 			$sql	= 'SELECT total_points
-			FROM %%STATPOINTS%%
-			WHERE id_owner = :userId AND stat_type = :statType';
+			FROM %%USER_POINTS%%
+			WHERE id_owner = :userId;';
 
 			$USER	+= Database::get()->selectSingle($sql, array(
 				':userId'	=> $USER['id'],
-				':statType'	=> 1
 			));
 
 			$IsNoobProtec	= CheckNoobProtec($USER, $targetData, $targetData);

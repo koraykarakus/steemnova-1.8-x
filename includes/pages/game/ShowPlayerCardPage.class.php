@@ -45,7 +45,7 @@ class ShowPlayerCardPage extends AbstractGamePage
 				a.ally_name
 				FROM %%USERS%% u
 				INNER JOIN %%PLANETS%% p ON p.id = u.id_planet
-				LEFT JOIN %%STATPOINTS%% s ON s.id_owner = u.id AND s.stat_type = 1
+				LEFT JOIN %%USER_POINTS%% s ON s.id_owner = u.id 
 				LEFT JOIN %%ALLIANCE%% a ON a.id = u.ally_id
 				WHERE u.id = :playerID AND u.universe = :universe;";
 		$query = $db->selectSingle($sql, array(

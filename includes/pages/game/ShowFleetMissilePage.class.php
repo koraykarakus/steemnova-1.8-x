@@ -85,18 +85,17 @@ class ShowFleetMissilePage extends AbstractGamePage
 		elseif($targetUser['urlaubs_modus'])
 			$error = $LNG['fl_in_vacation_player'];
 
-		$sql = "SELECT total_points FROM %%STATPOINTS%% WHERE stat_type = '1' AND id_owner = :ownerId;";
+		$sql = "SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :ownerId;";
         $User2Points = $db->selectSingle($sql, array(
             ':ownerId'  => $target['id_owner']
         ));
 
 		$sql	= 'SELECT total_points
-		FROM %%STATPOINTS%%
-		WHERE id_owner = :userId AND stat_type = :statType';
+		FROM %%USER_POINTS%%
+		WHERE id_owner = :userId;';
 
 		$USER	+= Database::get()->selectSingle($sql, array(
 			':userId'	=> $USER['id'],
-			':statType'	=> 1
 		));
 
         $IsNoobProtec	= CheckNoobProtec($USER, $User2Points, $targetUser);

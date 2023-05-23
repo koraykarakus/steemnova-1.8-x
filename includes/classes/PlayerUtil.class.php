@@ -188,16 +188,15 @@ class PlayerUtil
 			':userId'	=> $userId,
 		));
 
-		$sql 	= "SELECT MAX(total_rank) as rank FROM %%STATPOINTS%% WHERE universe = :universe AND stat_type = :type;";
+		$sql 	= "SELECT MAX(total_rank) as rank FROM %%USER_POINTS%% WHERE universe = :universe;";
+
 		$rank	= $db->selectSingle($sql, array(
 			':universe'	=> $universe,
-			':type'		=> 1,
 		), 'rank');
 
-		$sql = "INSERT INTO %%STATPOINTS%% SET
+		$sql = "INSERT INTO %%USER_POINTS%% SET
 				id_owner	= :userId,
 				universe	= :universe,
-				stat_type	= :type,
 				tech_rank	= :rank,
 				build_rank	= :rank,
 				defs_rank	= :rank,
@@ -207,7 +206,6 @@ class PlayerUtil
 		$db->insert($sql, array(
 		   ':universe'	=> $universe,
 		   ':userId'	=> $userId,
-		   ':type'		=> 1,
 		   ':rank'		=> $rank + 1,
 		));
 
@@ -437,13 +435,13 @@ class PlayerUtil
 					':allianceId'	=> $userData['ally_id']
 				));
 
-				$sql	= 'DELETE FROM %%STATPOINTS%% WHERE stat_type = :type AND id_owner = :allianceId;';
+				$sql	= 'DELETE FROM %%ALLIANCE_POINTS%% WHERE id_owner = :allianceId;';
 				$db->delete($sql, array(
 					':allianceId'	=> $userData['ally_id'],
 					':type'			=> 2
 				));
 
-				$sql	= 'UPDATE %%STATPOINTS%% SET id_ally = :resetId WHERE id_ally = :allianceId;';
+				$sql	= 'UPDATE %%USER_POINTS%% SET id_ally = :resetId WHERE id_ally = :allianceId;';
 				$db->update($sql, array(
 				  	':allianceId'	=> $userData['ally_id'],
 				  	':resetId'		=> 0
@@ -488,10 +486,9 @@ class PlayerUtil
 			':userId'	=> $userId
 		));
 
-		$sql	= 'DELETE FROM %%STATPOINTS%% WHERE stat_type = :type AND id_owner = :userId;';
+		$sql	= 'DELETE FROM %%USER_POINTS%% WHERE id_owner = :userId;';
 		$db->delete($sql, array(
 			':userId'	=> $userId,
-			':type'		=> 1
 		));
 
 		$fleetIds	= $db->select('SELECT fleet_id FROM %%FLEETS%% WHERE fleet_target_owner = :userId;', array(

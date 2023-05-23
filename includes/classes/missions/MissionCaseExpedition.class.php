@@ -140,11 +140,10 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 				$factor		= $factor / 3;
 			}
 
-			$sql		= "SELECT MAX(total_points) as total FROM %%STATPOINTS%%
-			WHERE `stat_type` = :type AND `universe` = :universe;";
+			$sql		= "SELECT MAX(total_points) as total FROM %%USER_POINTS%%
+			WHERE `universe` = :universe;";
 
 			$topPoints	= Database::get()->selectSingle($sql, array(
-				':type'		=> 1,
 				':universe'	=> $this->_fleet['fleet_universe']
 			), 'total');
 
@@ -238,11 +237,10 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 				$Message	= $LNG['sys_expe_found_ships_3_'.mt_rand(1,2)];
 			}
 
-			$sql		= "SELECT MAX(total_points) as total FROM %%STATPOINTS%%
-			WHERE `stat_type` = :type AND `universe` = :universe;";
+			$sql		= "SELECT MAX(total_points) as total FROM %%USER_POINTS%%
+			WHERE `universe` = :universe;";
 
 			$topPoints	= Database::get()->selectSingle($sql, array(
-				':type'		=> 1,
 				':universe'	=> $this->_fleet['fleet_universe']
 			), 'total');
 

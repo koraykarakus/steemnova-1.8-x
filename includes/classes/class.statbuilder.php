@@ -65,11 +65,7 @@ class statbuilder
 	private function GetUsersInfosFromDB()
 	{
 		global $resource, $reslist;
-		$select_defenses	=	'';
-		$select_buildings	=	'';
-		$selected_tech		=	'';
-		$select_fleets		=	'';
-		$select_officers		=	'';
+		$select_defenses	= $select_buildings = $selected_tech = $select_fleets = $select_officers = '';
 
 		foreach($reslist['build'] as $Building){
 			$select_buildings	.= " p.".$resource[$Building].",";
@@ -95,9 +91,12 @@ class statbuilder
 			$select_officers	.= " u.".$resource[$Officier].",";
 		}
 
-		$database		= Database::get();
+		$db		= Database::get();
+
 		$FlyingFleets	= array();
-		$SQLFleets		= $database->select('SELECT fleet_array, fleet_owner FROM %%FLEETS%%;');
+
+		$SQLFleets		= $db->select('SELECT fleet_array, fleet_owner FROM %%FLEETS%%;');
+
 		foreach($SQLFleets as $CurFleets)
 		{
 			$FleetRec   	= explode(";", $CurFleets['fleet_array']);
@@ -116,9 +115,9 @@ class statbuilder
 		}
 
 		$Return['Fleets'] 	= $FlyingFleets;
-		$Return['Planets']	= $database->select('SELECT SQL_BIG_RESULT DISTINCT '.$select_buildings.' p.id, p.universe, p.id_owner, u.authlevel, u.bana, u.username FROM %%PLANETS%% as p LEFT JOIN %%USERS%% as u ON u.id = p.id_owner;');
-		$Return['Users']	= $database->select('SELECT SQL_BIG_RESULT DISTINCT '.$selected_tech.$select_fleets.$select_defenses.$select_officers.' u.id, u.ally_id, u.authlevel, u.bana, u.universe, u.username, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%USERS%% as u LEFT JOIN %%STATPOINTS%% as s ON s.stat_type = 1 AND s.id_owner = u.id LEFT JOIN %%PLANETS%% as p ON u.id = p.id_owner GROUP BY s.id_owner, u.id, u.authlevel;');
-		$Return['Alliance']	= $database->select('SELECT SQL_BIG_RESULT DISTINCT a.id, a.ally_universe, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%ALLIANCE%% as a LEFT JOIN %%STATPOINTS%% as s ON s.stat_type = 2 AND s.id_owner = a.id GROUP BY a.id;');
+		$Return['Planets']	= $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$select_buildings.' p.id, p.universe, p.id_owner, u.authlevel, u.bana, u.username FROM %%PLANETS%% as p LEFT JOIN %%USERS%% as u ON u.id = p.id_owner;');
+		$Return['Users']	= $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$selected_tech.$select_fleets.$select_defenses.$select_officers.' u.id, u.ally_id, u.authlevel, u.bana, u.universe, u.username, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%USERS%% as u LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id LEFT JOIN %%PLANETS%% as p ON u.id = p.id_owner GROUP BY s.id_owner, u.id, u.authlevel;');
+		$Return['Alliance']	= $db->select('SELECT SQL_BIG_RESULT DISTINCT a.id, a.ally_universe, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%ALLIANCE%% as a LEFT JOIN %%ALLIANCE_POINTS%% as s ON s.id_owner = a.id GROUP BY a.id;');
 
 		return $Return;
 	}
@@ -271,20 +270,18 @@ class statbuilder
 			{
 				Database::get()->nativeQuery('SELECT @i := 0;');
 
-				$sql = 'UPDATE %%STATPOINTS%% SET '.$type.'_rank = (SELECT @i := @i + 1)
-				WHERE universe = :uni AND stat_type = :type
+				$sql = 'UPDATE %%USER_POINTS%% SET '.$type.'_rank = (SELECT @i := @i + 1)
+				WHERE universe = :uni
 				ORDER BY '.$type.'_points DESC, id_owner ASC;';
 
 				Database::get()->update($sql, array(
 					':uni'	=> $uni,
-					':type'	=> 1,
 				));
 
 				Database::get()->nativeQuery('SELECT @i := 0;');
 
 				Database::get()->update($sql, array(
 					':uni'	=> $uni,
-					':type'	=> 2,
 				));
 			}
 		}
@@ -293,14 +290,31 @@ class statbuilder
 	final public function MakeStats()
 	{
 		global $resource;
-		$AllyPoints	= array();
-		$UserPoints	= array();
+		$AllyPoints	= $UserPoints = array();
 		$TotalData	= $this->GetUsersInfosFromDB();
-		$FinalSQL	= 'TRUNCATE TABLE %%STATPOINTS%%;';
 
-		$tableHeader = "INSERT INTO  %%STATPOINTS%% (id_owner, id_ally, stat_type, universe, tech_old_rank, tech_points, tech_count, build_old_rank, build_points, build_count, defs_old_rank, defs_points, defs_count, fleet_old_rank, fleet_points, fleet_count, total_old_rank, total_points, total_count) VALUES ";
 
-		$FinalSQL	.= $tableHeader;
+		$FinalSQL =	$saveSQL = "INSERT INTO %%USER_POINTS%% (id_owner, id_ally, universe, tech_old_rank, tech_points, tech_count, build_old_rank, build_points, build_count, defs_old_rank, defs_points, defs_count, fleet_old_rank, fleet_points, fleet_count, total_old_rank, total_points, total_count) VALUES ";
+
+		$sqlEnd = " ON DUPLICATE KEY UPDATE
+		id_owner = VALUES(id_owner),
+		id_ally = VALUES(id_ally),
+		universe = VALUES(universe),
+		tech_old_rank = VALUES(tech_old_rank),
+		tech_points = VALUES(tech_points),
+		tech_count = VALUES(tech_count),
+		build_old_rank = VALUES(build_old_rank),
+		build_points = VALUES(build_points),
+		build_count = VALUES(build_count),
+		defs_old_rank = VALUES(defs_old_rank),
+		defs_points = VALUES(defs_points),
+		defs_count = VALUES(defs_count),
+		fleet_old_rank = VALUES(fleet_old_rank),
+		fleet_points = VALUES(fleet_points),
+		fleet_count = VALUES(fleet_count),
+		total_old_rank = VALUES(total_old_rank),
+		total_points = VALUES(total_points),
+		total_count = VALUES(total_count);";
 
 		foreach($TotalData['Planets'] as $PlanetData)
 		{
@@ -321,7 +335,7 @@ class statbuilder
 
 		foreach($TotalData['Users'] as $UserData)
 		{
-		    $i++;
+		  $i++;
 			if(!isset($UniData[$UserData['universe']]))
 				$UniData[$UserData['universe']] = 0;
 
@@ -329,7 +343,7 @@ class statbuilder
 
 			if ((in_array(Config::get()->stat, array(1, 2)) && $UserData['authlevel'] >= Config::get()->stat_level) || !empty($UserData['bana']))
 			{
-				$FinalSQL  .= "(".$UserData['id'].",".$UserData['ally_id'].",1,".$UserData['universe'].",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0), ";
+				$FinalSQL  .= "(".$UserData['id'].",".$UserData['ally_id'].",".$UserData['universe'].",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0), ";
 				continue;
 			}
 
@@ -388,9 +402,10 @@ class statbuilder
 				$AllyPoints[$UserData['ally_id']]['total']['points']	+= $UserPoints[$UserData['id']]['total']['points'];
 			}
 
+
 			$FinalSQL  .= "(".
 			$UserData['id'].", ".
-			$UserData['ally_id'].", 1, ".
+			$UserData['ally_id'].", ".
 			$UserData['universe'].", ".
 			(isset($UserData['old_tech_rank']) ? $UserData['old_tech_rank'] : 0).", ".
 			(isset($UserPoints[$UserData['id']]['techno']['points']) ? min($UserPoints[$UserData['id']]['techno']['points'], 1E50) : 0).", ".
@@ -408,26 +423,51 @@ class statbuilder
 			(isset($UserPoints[$UserData['id']]['total']['points']) ? min($UserPoints[$UserData['id']]['total']['points'], 1E50) : 0).", ".
 			(isset($UserPoints[$UserData['id']]['total']['count']) ? $UserPoints[$UserData['id']]['total']['count'] : 0)."), ";
 
-			if ($i >= 50) {
-                $FinalSQL = substr($FinalSQL, 0, -2).';';
-                $this->SaveDataIntoDB($FinalSQL);
-                $FinalSQL = $tableHeader;
+			if ($i == 50) {
+        $FinalSQL = substr($FinalSQL, 0, -2) . $sqlEnd;
+        $this->SaveDataIntoDB($FinalSQL);
+				$FinalSQL = $saveSQL;
+				$i = 0;
 			}
 		}
 
-		if (!empty($FinalSQL) && $FinalSQL != $tableHeader) {
-		    $FinalSQL = substr($FinalSQL, 0, -2).';';
-            $this->SaveDataIntoDB($FinalSQL);
-            unset($UserPoints);
+		//for example $i < 50 ,
+		if ($FinalSQL != $saveSQL) {
+		    $FinalSQL = substr($FinalSQL, 0, -2) . $sqlEnd;
+        $this->SaveDataIntoDB($FinalSQL);
+        unset($UserPoints);
 		}
 
 		if(count($AllyPoints) != 0)
 		{
-			$AllySQL = "INSERT INTO %%STATPOINTS%% (id_owner, id_ally, stat_type, universe, tech_old_rank, tech_points, tech_count, build_old_rank, build_points, build_count, defs_old_rank, defs_points, defs_count, fleet_old_rank, fleet_points, fleet_count, total_old_rank, total_points, total_count) VALUES ";
+			$AllySQL = $saveAllySQL = "INSERT INTO %%ALLIANCE_POINTS%% (id_owner, id_ally, universe, tech_old_rank, tech_points, tech_count, build_old_rank, build_points, build_count, defs_old_rank, defs_points, defs_count, fleet_old_rank, fleet_points, fleet_count, total_old_rank, total_points, total_count) VALUES ";
+
+			$sqlEndAlliance = " ON DUPLICATE KEY UPDATE
+			id_ally = VALUES(id_ally),
+			id_owner = VALUES(id_owner),
+			universe = VALUES(universe),
+			tech_old_rank = VALUES(tech_old_rank),
+			tech_points = VALUES(tech_points),
+			tech_count = VALUES(tech_count),
+			build_old_rank = VALUES(build_old_rank),
+			build_points = VALUES(build_points),
+			build_count = VALUES(build_count),
+			defs_old_rank = VALUES(defs_old_rank),
+			defs_points = VALUES(defs_points),
+			defs_count = VALUES(defs_count),
+			fleet_old_rank = VALUES(fleet_old_rank),
+			fleet_points = VALUES(fleet_points),
+			fleet_count = VALUES(fleet_count),
+			total_old_rank = VALUES(total_old_rank),
+			total_points = VALUES(total_points),
+			total_count = VALUES(total_count);";
+
+			$i = 0;
 			foreach($TotalData['Alliance'] as $AllianceData)
 			{
+				$i++;
 				$AllySQL  .= "(".
-				$AllianceData['id'].", 0, 2, ".
+				$AllianceData['id'].", 0, ".
 				$AllianceData['ally_universe'].", ".
 				(isset($AllyPoints['old_tech_rank']) ? $AllyPoints['old_tech_rank'] : 0).", ".
 				(isset($AllyPoints[$AllianceData['id']]['techno']['points']) ? min($AllyPoints[$AllianceData['id']]['techno']['points'], 1E50) : 0).", ".
@@ -444,10 +484,27 @@ class statbuilder
 				(isset($AllianceData['old_total_rank']) ? $AllianceData['old_total_rank'] : 0).", ".
 				(isset($AllyPoints[$AllianceData['id']]['total']['points']) ? min($AllyPoints[$AllianceData['id']]['total']['points'], 1E50) : 0).", ".
 				(isset($AllyPoints[$AllianceData['id']]['total']['count']) ? $AllyPoints[$AllianceData['id']]['total']['count'] : 0)."), ";
+
+				if ($i == 50) {
+					$AllySQL	= substr($AllySQL, 0, -2) . $sqlEndAlliance;
+					$this->SaveDataIntoDB($AllySQL);
+					$AllySQL = $saveAllySQL;
+					$i = 0;
+				}
+
 			}
+
+			// for example i < 50
+			if ($AllySQL != $saveSQL) {
+				$AllySQL	= substr($AllySQL, 0, -2) . $sqlEndAlliance;
+				$this->SaveDataIntoDB($AllySQL);
+			}
+
 			unset($AllyPoints);
-			$AllySQL	= substr($AllySQL, 0, -2).';';
-			$this->SaveDataIntoDB($AllySQL);
+
+
+
+
 		}
 
 		$this->SetNewRanks();

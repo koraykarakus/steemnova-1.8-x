@@ -25,13 +25,12 @@ class StatBanner {
 		stat.total_points, stat.total_rank,
 		planet.name, planet.galaxy, planet.system, planet.planet, config.game_name,
 		config.users_amount, config.ttf_file
-		FROM %%USERS%% as user, %%STATPOINTS%% as stat, %%PLANETS%% as planet, %%CONFIG%% as config
-		WHERE user.id = :userId AND stat.stat_type = :statType AND stat.id_owner = :userId
+		FROM %%USERS%% as user, %%USER_POINTS%% as stat, %%PLANETS%% as planet, %%CONFIG%% as config
+		WHERE user.id = :userId AND stat.id_owner = :userId
 		AND planet.id = user.id_planet AND config.uni = user.universe;';
 
 		return Database::get()->selectSingle($sql, array(
 			':userId'	=> $id,
-			':statType'	=> 1
 		));
 	}
 

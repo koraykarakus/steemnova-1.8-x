@@ -44,7 +44,7 @@ class GalaxyRows
 	{
 		global $USER;
 
-        $sql	= 'SELECT SQL_BIG_RESULT DISTINCT
+    $sql	= 'SELECT SQL_BIG_RESULT DISTINCT
 		p.galaxy, p.system, p.planet, p.id, p.id_owner, p.name, p.image, p.last_update, p.diameter, p.temp_min, p.destruyed, p.der_metal, p.der_crystal, p.id_luna,
 		u.id as userid, u.ally_id, u.username, u.onlinetime, u.urlaubs_modus, u.banaday,
 		m.id as m_id, m.diameter as m_diameter, m.name as m_name, m.temp_min as m_temp_min, m.last_update as m_last_update,
@@ -56,17 +56,15 @@ class GalaxyRows
 		FROM %%PLANETS%% p
 		LEFT JOIN %%USERS%% u ON p.id_owner = u.id
 		LEFT JOIN %%PLANETS%% m ON m.id = p.id_luna
-		LEFT JOIN %%STATPOINTS%% s ON s.id_owner = u.id AND s.stat_type = :statTypeUser
+		LEFT JOIN %%USER_POINTS%% s ON s.id_owner = u.id
 		LEFT JOIN %%ALLIANCE%% a ON a.id = u.ally_id
 		LEFT JOIN %%DIPLO%% as d ON (d.owner_1 = :allianceId AND d.owner_2 = a.id) OR (d.owner_1 = a.id AND d.owner_2 = :allianceId) AND d.accept = :accept
-		LEFT JOIN %%STATPOINTS%% allys ON allys.stat_type = :statTypeAlliance AND allys.id_owner = a.id
+		LEFT JOIN %%ALLIANCE_POINTS%% allys ON allys.id_owner = a.id
 		LEFT JOIN %%BUDDY%% buddy ON (buddy.sender = :userId AND buddy.owner = u.id) OR (buddy.sender = u.id AND buddy.owner = :userId)
 		WHERE p.universe = :universe AND p.galaxy = :galaxy AND p.system = :system AND p.planet_type = :planetTypePlanet
 		GROUP BY p.id;';
 
 		$galaxyResult	= Database::get()->select($sql, array(
-			':statTypeUser' 	=> 1,
-			':statTypeAlliance' => 2,
 			':allianceId'		=> $USER['ally_id'],
 			':userId'			=> $USER['id'],
 			':universe'			=> Universe::current(),
