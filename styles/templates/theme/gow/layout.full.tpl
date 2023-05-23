@@ -112,9 +112,7 @@
 
 
 
-			{foreach $cronjobs as $cronjob}
-				<img src="cronjob.php?cronjobID={$cronjob}" alt="">
-			{/foreach}
+			
 		</div>
 
 		{include file="main.footer.tpl" nocache}

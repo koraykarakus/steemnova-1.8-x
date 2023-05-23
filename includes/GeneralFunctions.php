@@ -442,7 +442,7 @@ function ClearCache()
 function allowedTo($side)
 {
 	global $USER;
-	
+
 	return ($USER['authlevel'] == AUTH_ADM || (isset($USER['rights']) && $USER['rights'][$side] == 1));
 }
 
@@ -513,7 +513,8 @@ function exceptionHandler($exception)
 		E_USER_WARNING		=> 'USER WARNING',
 		E_USER_NOTICE		=> 'USER NOTICE',
 		E_STRICT			=> 'STRICT NOTICE',
-		E_RECOVERABLE_ERROR	=> 'RECOVERABLE ERROR'
+		E_RECOVERABLE_ERROR	=> 'RECOVERABLE ERROR',
+		E_DEPRECATED => 'DEPRECATED ERROR'
 	);
 
 	if (file_exists(ROOT_PATH . 'install/VERSION')) {

@@ -123,7 +123,7 @@
 		static private function calculateDateTime($expression, $rtime, $next = true) {
 
 			// Initialize vars
- 
+
 			$calc_date	= true;
 
 			// Parse cron-expression (if neccessary)
@@ -153,7 +153,7 @@
 			} else {
 
 				// OK, things are getting a little bit more complicated...
- 
+
 				$nhour		= self::findValue($rtime[IDX_HOUR], $cron[IDX_HOUR], $next);
 
 				// Meh. Such a cruel world. Something has gone awry. Lets see HOW awry it went.
@@ -175,7 +175,7 @@
 					// a little odd but thats the easiest way of adding/substracting a day without
 					// screwing up the date. Just trust me on that one ;-)
 
-					$rtime			= explode(',', strftime('%M,%H,%d,%m,%w,%Y', mktime($rtime[IDX_HOUR], $rtime[IDX_MINUTE], 0, $rtime[IDX_MONTH], $rtime[IDX_DAY], $rtime[IDX_YEAR]) + ((($next) ? 1 : -1) * 86400)));
+					$rtime			= explode(',', date('i,H,d,m,w,Y', mktime($rtime[IDX_HOUR], $rtime[IDX_MINUTE], 0, $rtime[IDX_MONTH], $rtime[IDX_DAY], $rtime[IDX_YEAR]) + ((($next) ? 1 : -1) * 86400)));
 
 				} else {
 
@@ -196,7 +196,7 @@
 							$nminute	= reset($cron[IDX_MINUTE]);
 							$nhour		= reset($cron[IDX_HOUR]);
 
-							$rtime		= explode(',', strftime('%M,%H,%d,%m,%w,%Y', mktime($nhour, $nminute, 0, $rtime[IDX_MONTH], $rtime[IDX_DAY], $rtime[IDX_YEAR]) + ((($next) ? 1 : -1) * 86400)));
+							$rtime		= explode(',', date('i,H,d,m,w,Y', mktime($nhour, $nminute, 0, $rtime[IDX_MONTH], $rtime[IDX_DAY], $rtime[IDX_YEAR]) + ((($next) ? 1 : -1) * 86400)));
 
 						} else {
 
@@ -218,10 +218,10 @@
 						}
 
 						// Set time
- 
+
 						$rtime[IDX_HOUR]	= $nhour;
 						$rtime[IDX_MINUTE]	= $nminute;
- 
+
 						$calc_date	= false;
 
 					}
@@ -276,9 +276,11 @@
 
 											// WIN! :-) We found a valid date...
 
-											$rtime			= explode(',', strftime('%M,%H,%d,%m,%w,%Y', mktime($rtime[IDX_HOUR], $rtime[IDX_MINUTE], 0, $nmonth, $nday, $nyear)));
+											$rtime			= explode(',', date('i,H,d,m,w,Y', mktime($rtime[IDX_HOUR], $rtime[IDX_MINUTE], 0, $nmonth, $nday, $nyear)));
 
-											return mktime($rtime[1], $rtime[0], 0, $rtime[3], $rtime[2], $rtime[5]);
+											return mktime($rtime[IDX_HOUR], $rtime[IDX_MINUTE], 0, $nmonth, $nday, $nyear);
+
+											//mktime(int $saat,?int $dakika = null,?int $saniye = null,?int $ay = null,?int $gün = null,?int $yıl = null): int|false
 
 										}
 
@@ -322,9 +324,9 @@
 		static private function getTimestamp($timestamp = null) {
 
 			if (is_null($timestamp)) {
-				$arr	= explode(',', strftime('%M,%H,%d,%m,%w,%Y', time()));
+				$arr	= explode(',', date('i,H,d,m,w,Y', time()));
 			} else {
-				$arr	= explode(',', strftime('%M,%H,%d,%m,%w,%Y', $timestamp));
+				$arr	= explode(',', date('i,H,d,m,w,Y', $timestamp));
 			}
 
 			// Remove leading zeros (or we'll get in trouble ;-)
