@@ -11,25 +11,37 @@
     </button>
     {/if}
   </div>
-{foreach $fleets as $index => $fleet}
-<div class="fs-11 fleetRow">
-  <span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">
-    {pretty_fly_time({$fleet.resttime})}
-  </span>
-  <span id="fleettime_{$index}">{$fleet.text}</span>
-</div>
-{/foreach}
+
+    {foreach $fleets as $index => $fleet}
+    <div class="fs-11 fleetRow {if $show_fleets_active}d-none{/if}">
+      <span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">
+        {pretty_fly_time({$fleet.resttime})}
+      </span>
+      <span id="fleettime_{$index}">{$fleet.text}</span>
+    </div>
+    {/foreach}
+
 </div>
 
 
 <script>
   function showHideFleets(){
 
-    if ($('.fleetRow').hasClass('d-none')) {
-      $('.fleetRow').removeClass('d-none')
-    }else {
-      $('.fleetRow').addClass('d-none')
-    }
+    $.ajax({
+        type: "POST",
+        url: 'game.php?page=fleetTableSettings&mode=changeVisibility&ajax=1',
+        success: function(data)
+        {
+
+          if ($('.fleetRow').hasClass('d-none')) {
+            $('.fleetRow').removeClass('d-none')
+          }else {
+            $('.fleetRow').addClass('d-none')
+          }
+
+        }
+
+    });
 
   }
 </script>

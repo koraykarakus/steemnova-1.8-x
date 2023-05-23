@@ -844,6 +844,7 @@ CREATE TABLE `%PREFIX%users` (
   `user_theme` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `user_secret_question_id` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
+  `show_fleets_active` BOOLEAN NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `authlevel` (`authlevel`),
   KEY `ref_bonus` (`ref_bonus`),

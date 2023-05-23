@@ -293,6 +293,7 @@ abstract class AbstractGamePage
 			'servertime' => _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
 			'AllPlanets'				=> $AllPlanets,
 			'fleets'					=> $this->GetFleets(),
+			'show_fleets_active' => $USER['show_fleets_active']
 		));
 	}
 	protected function printMessage($message, $redirectButtons = NULL, $redirect = NULL, $fullSide = true)
