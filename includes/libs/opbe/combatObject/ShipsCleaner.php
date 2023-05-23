@@ -5,7 +5,7 @@
  *  Copyright (C) 2015  Jstar
  *
  * This file is part of OPBE.
- * 
+ *
  * OPBE is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -34,9 +34,10 @@ class ShipsCleaner
 
     private $exploded;
     private $remainLife;
+    private $fighters;
     /**
      * ShipsCleaner::__construct()
-     * 
+     *
      * @param mixed $shipType
      * @param int $lastShipHit
      * @param int $lastShot

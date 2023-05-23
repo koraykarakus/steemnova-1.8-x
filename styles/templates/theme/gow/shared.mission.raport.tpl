@@ -13,7 +13,7 @@
 {if $Raport.mode == 1}{$LNG.sys_destruc_title}{else}{$LNG.sys_attack_title}{/if}
 {$Raport.time}:<br><br>
 {foreach $Raport.rounds as $Round => $RoundInfo}
-<table class="auto">
+<table style="width:auto;" class="table table-gow table-sm fs-12">
 	<tr>
 		{foreach $RoundInfo.attacker as $Player}
 		{$PlayerInfo = $Raport.players[$Player.userID]}
@@ -70,7 +70,7 @@
 		{/foreach}
 	</tr>
 </table>
-<table class="auto">
+<table style="width:auto;" class="table table-gow table-sm fs-12 my-2">
 	<tr>
 		{foreach $RoundInfo.defender as $Player}
 		{$PlayerInfo = $Raport.players[$Player.userID]}
@@ -80,7 +80,7 @@
 					<td>
 						{$LNG.sys_attack_defender_pos} {$PlayerInfo.name} {if isset($Info)}([XX:XX:XX]){else}([{$PlayerInfo.koords[0]}:{$PlayerInfo.koords[1]}:{$PlayerInfo.koords[2]}]{if isset($PlayerInfo.koords[3])} ({$LNG.type_planet_short[$PlayerInfo.koords[3]]}){/if}){/if}<br>
 						{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield} {$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-						<table>
+						<table class="table table-gow table-sm fs-12 my-2">
 						{if !empty($Player.ships)}
 							<tr>
 								<td class="transparent">{$LNG.sys_ship_type}</td>
@@ -134,17 +134,25 @@
 {/foreach}
 <br><br>
 {if $Raport.result == "a"}
-{$LNG.sys_attacker_won}<br>
-{$LNG.sys_stealed_ressources} {foreach $Raport.steal as $elementID => $amount}{$amount|number} {$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.steal)} {$LNG.sys_and} {elseif !$amount@last}, {/if}{/foreach}
+
+<span class="text-white fs-6">{$LNG.sys_attacker_won}</span><br><br>
+
+<span class="text-white fs-6">
+	{$LNG.sys_stealed_ressources} {foreach $Raport.steal as $elementID => $amount}{$amount|number} {$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.steal)} {$LNG.sys_and} {elseif !$amount@last}, {/if}{/foreach}
+</span>
+
 {elseif $Raport.result == "r"}
-{$LNG.sys_defender_won}
+<span class="fs-6 text-white">{$LNG.sys_defender_won}</span>
 {else}
-{$LNG.sys_both_won}
+<span class="text-white fs-6">{$LNG.sys_both_won}</span>
 {/if}
 <br><br>
-{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}<br>
-{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}<br>
-{$LNG.debree_field_1} {foreach $Raport.debris as $elementID => $amount}{$amount|number} {$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.debris)} {$LNG.sys_and} {elseif !$amount@last}, {/if}{/foreach}{$LNG.debree_field_2}<br><br>
+<span class="text-white fs-6">{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}</span>
+<br>
+<span class="text-white fs-6">{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}</span>
+<br>
+<span class="text-white fs-6">{$LNG.debree_field_1} {foreach $Raport.debris as $elementID => $amount}{$amount|number} {$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.debris)} {$LNG.sys_and} {elseif !$amount@last}, {/if}{/foreach}{$LNG.debree_field_2}</span>
+<br><br>
 {if $Raport.mode == 1}
 	{* Destruction *}
 	{if $Raport.moon.moonDestroySuccess == -1}
@@ -169,7 +177,8 @@
 	{/if}
 {else}
 	{* Normal Attack *}
-	{$LNG.sys_moonproba} {$Raport.moon.moonChance} %<br>
+	<span class="text-white fs-6">{$LNG.sys_moonproba} {$Raport.moon.moonChance} %</span>
+	<br>
 	{if !empty($Raport.moon.moonName)}
 		{if isset($Info)}
 			{* Moon created (HoF Mode) *}
@@ -181,6 +190,7 @@
 	{/if}
 {/if}
 
-{$Raport.additionalInfo}
+<span class="text-white fs-6">{$Raport.additionalInfo}</span>
+
 </div>
 {/block}

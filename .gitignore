@@ -1,3 +1,4 @@
 includes/config.php
 includes/error.log
 cache
+includes/libs/opbe/errors
