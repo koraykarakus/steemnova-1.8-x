@@ -1,6 +1,5 @@
 {block name="content"}
 
-
 <table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 	<tr>
 		<th colspan="6">{$LNG.ti_header}</th>

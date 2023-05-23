@@ -39,6 +39,13 @@ body {
 	opacity: 0.9;
 }
 
+.table-dark a{
+	color: #fff;
+}
+.table-dark a:hover{
+	color: #ddd;
+}
+
 /*effects*/
 
 .cursor-pointer{
