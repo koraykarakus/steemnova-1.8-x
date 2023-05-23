@@ -1,5 +1,6 @@
 {block name="title" prepend}{$LNG.lm_logout}{/block}
-{block name="content"}<table class="table519">
+{block name="content"}
+<table class="table table-gow table-sm fs-12 my-2 w-50">
 	<tr>
 		<th>{$LNG.lo_title}</th>
 		</tr>
@@ -7,8 +8,7 @@
 		<td>{$LNG.lo_logout}</td>
 	</tr>
 </table>
-<br><br>
-<table class="table519">
+<table class="table table-gow table-sm fs-12 my-2 w-50">
 <tr>
 	<th>{$LNG.lo_redirect}</th>
 </tr>
@@ -23,7 +23,7 @@
 	function Countdown(){
 		if(second == 0)
 			return;
-			
+
 		second--;
 		$('#seconds').text(second);
 	}
