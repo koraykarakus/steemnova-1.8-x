@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_playercard}{/block}
 {block name="content"}
-<table style="width:95%">
+<table style="width:95%" class="table table-gow table-sm fs-12">
 	<tr>
 		<th colspan="3">{$LNG.pl_overview}</th>
 		</tr>
