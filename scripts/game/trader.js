@@ -7,19 +7,19 @@ $(function() {
 		$('#'+$(this).attr('id')+'Shortly').html(function(i, old) {
 			return shortly_number($(event.currentTarget).val());
 		});
-		
+
 		var needResource	= 0;
-		
+
 		$('.trade_input').each(function() {
 			needResource	+= parseFloat($(this).val()) * charge[$(this).data('resource')];
 		});
 		if (isNaN(needResource))
 		{
-			$("#ress").text(0);
+			$("#ress").val(0);
 		}
 		else
 		{
-			$("#ress").text(NumberGetHumanReadable(needResource));
+			$("#ress").val(NumberGetHumanReadable(needResource));
 		}
 		return true;
 	});
