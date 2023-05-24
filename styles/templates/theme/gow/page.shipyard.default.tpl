@@ -112,7 +112,7 @@
     {if !$Element.technologySatisfied && !empty($Element.requeriments)}
     <table class='table-tooltip'>
       <thead>
-        <tr><th colspan='2' class='color-red'>Technology is not satisfied !</th></tr>
+        <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
       </thead>
       <tbody>
         {foreach $Element.requeriments as $currentRequire}

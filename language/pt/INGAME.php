@@ -454,6 +454,7 @@ $LNG['sys_techlist'] 						= 'Lista de Pesquisa';
 $LNG['sys_buildlist_fail'] 				    = "Impossível construir";
 $LNG['sys_back']							= 'Atrás';
 $LNG['sys_forward']							= 'Próximo';
+$LNG['tech_not_satisfied'] = "A tecnologia não está satisfeita!";
 
 //----------------------------------------------------------------------------//
 // Recursos

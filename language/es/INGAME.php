@@ -447,6 +447,7 @@ $LNG['sys_nomore_level'] 					= 'Intentas destruir un edificio que ya no tiene m
 $LNG['sys_buildlist'] 						= 'Lista de Construcción';
 $LNG['sys_techlist'] 						= 'Lista de Investigación';
 $LNG['sys_buildlist_fail'] 					= 'Fallo en la lista de construcción';
+$LNG['tech_not_satisfied'] = "¡La tecnología no está satisfecha!";
 
 //----------------------------------------------------------------------------//
 //RESOURCES

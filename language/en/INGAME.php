@@ -473,7 +473,7 @@ $LNG['sys_nomore_level'] 					= "There's no building ( %s ) to demolish.";
 $LNG['sys_buildlist'] 						= "List of construction";
 $LNG['sys_techlist'] 						= 'Research list';
 $LNG['sys_buildlist_fail'] 				    = "Impossible to build";
-
+$LNG['tech_not_satisfied'] = "Technology is not satisfied !";
 //----------------------------------------------------------------------------//
 // Resources
 $LNG['rs_amount']							= 'Quantity';

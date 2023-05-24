@@ -457,6 +457,9 @@ $LNG['sys_nomore_level'] 					= 'Sie versuchen, ein Gebäude zu zerstören, was 
 $LNG['sys_buildlist'] 						= 'Bauliste';
 $LNG['sys_techlist'] 						= 'Forschungsliste';
 $LNG['sys_buildlist_fail'] 					= 'Bau nicht möglich';
+$LNG['tech_not_satisfied'] = "Technologie ist nicht zufrieden!";
+
+
 //----------------------------------------------------------------------------//
 //RESOURCES
 $LNG['rs_amount']						= 'Anzahl';

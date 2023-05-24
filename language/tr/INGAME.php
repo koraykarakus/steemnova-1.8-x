@@ -458,7 +458,7 @@ $LNG['sys_nomore_level'] 					= "Mevcut olmayan bir binayi yikmaya calisiyorsun 
 $LNG['sys_buildlist'] 						= "Insaa Listesi";
 $LNG['sys_techlist'] 						= 'Arastirma Listesi';
 $LNG['sys_buildlist_fail'] 				    = "Insaa Edilemedi";
-
+$LNG['tech_not_satisfied'] = "Teknoloji sağlanmadı !";
 //----------------------------------------------------------------------------//
 // Hammadde
 $LNG['rs_amount']							= 'Miktar';

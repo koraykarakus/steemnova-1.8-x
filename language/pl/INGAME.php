@@ -459,7 +459,7 @@ $LNG['sys_nomore_level'] 					= 'Próbujesz zniszczyć budynek, którego nie pos
 $LNG['sys_buildlist'] 						= 'Lista budowy';
 $LNG['sys_techlist'] 						= 'Lista badań';
 $LNG['sys_buildlist_fail'] 					= 'Nie udało się wykonać zadań z listy budowy';
-
+$LNG['tech_not_satisfied'] = "Technologia nie jest usatysfakcjonowana!";
 
 //----------------------------------------------------------------------------//
 //RESOURCES
