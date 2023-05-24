@@ -121,23 +121,27 @@ class ShowOverviewPage extends AbstractGamePage
 
 	function show()
 	{
-		global $LNG, $PLANET, $USER;
+		global $LNG, $PLANET, $USER, $config;
 
 		$AdminsOnline = $chatOnline  = $Moon = $RefLinks = array();
 
-
     $db = Database::get();
-
-
 
 		if ($PLANET['id_luna'] != 0) {
 
-				$sql = "SELECT id, name FROM %%PLANETS%% WHERE id = :lunaID;";
+				$sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id = :moonID;";
 
 				$Moon = $db->selectSingle($sql, array(
-            ':lunaID'   => $PLANET['id_luna']
+            ':moonID'   => $PLANET['id_luna']
         ));
+    }elseif ($PLANET['planet_type'] == 3) {
+			$sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id_luna = :moonID;";
+
+			$Moon = $db->selectSingle($sql, array(
+					':moonID'   => $PLANET['id']
+			));
     }
+
 
 		if ($PLANET['b_building'] - TIMESTAMP > 0) {
 
@@ -215,7 +219,6 @@ class ShowOverviewPage extends AbstractGamePage
 			$chatOnline[]	= $chatRow['userName'];
 		}
 
-
 		// Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
 		$sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
 		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :userID;";
@@ -223,8 +226,6 @@ class ShowOverviewPage extends AbstractGamePage
 		$RefLinksRAW = $db->select($sql, array(
         ':userID'   => $USER['id']
     ));
-
-		$config	= Config::get();
 
     if($config->ref_active){
 
@@ -259,7 +260,7 @@ class ShowOverviewPage extends AbstractGamePage
 			);
 		}
 
-		
+
 
 		$sql = "SELECT COUNT(*) as count FROM %%USERS%% WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
 		$usersOnline = $db->selectSingle($sql,array(),'count');
@@ -290,6 +291,7 @@ class ShowOverviewPage extends AbstractGamePage
 			'planet_field_max' 			=> CalculateMaxPlanetFields($PLANET),
 			'planet_temp_min' 			=> $PLANET['temp_min'],
 			'planet_temp_max' 			=> $PLANET['temp_max'],
+			'planet_id' => $PLANET['id'],
 			'ref_active'				=> $config->ref_active,
 			'ref_minpoints'				=> $config->ref_minpoints,
 			'RefLinks'					=> $RefLinks,

@@ -85,7 +85,25 @@ $("#tn3").hide();
 
     <tr>
       <td>
-        <table class="table table-dark">
+        <div class="d-flex flex-row align-items-center justify-content-center  fs-12">
+          <div class="d-flex flex-column align-items-center justify-content-center w-100">
+            <span>{$planetname}</span>
+            <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
+              <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
+            </a>
+          </div>
+          {if $Moon}
+          <div class="d-flex flex-column align-items-center justify-content-center w-100">
+            <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
+              <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50" alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
+            </a>
+            <span>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</span>
+          </div>
+          {/if}
+        </div>
+      </td>
+      <td>
+        <table class="table table-gow table-sm my-2">
           <thead></thead>
           <tbody class="fs-12">
             <tr>
@@ -104,21 +122,6 @@ $("#tn3").hide();
             </tr>
           </tbody>
         </table>
-        <div class="d-flex flex-row align-items-center justify-content-center  fs-12">
-          <div class="d-flex flex-column align-items-center justify-content-center w-100">
-            <span>{$planetname}</span>
-            <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
-          </div>
-          {if $Moon}
-          <div class="d-flex flex-column align-items-center justify-content-center w-100">
-            <a href="game.php?page=overview&amp;cp={$Moon.id}&amp;re=0" title="{$Moon.name}"><img src="{$dpath}planeten/mond.jpg" height="50" width="50" alt="{$Moon.name} ({$LNG.fcm_moon})"></a>
-            <span>{$Moon.name} ({$LNG.fcm_moon})</span>
-          </div>
-          {/if}
-
-
-        </div>
-
       </td>
     </tr>
     </tbody>
@@ -126,7 +129,7 @@ $("#tn3").hide();
 </div>
 
 
-<table class="table table-sm table-gow">
+<table class="table table-sm table-gow my-2">
   <tr>
     <td class="text-center">
       {if $buildInfo.buildings}
