@@ -2,10 +2,10 @@
 
 <script type="text/javascript">
 // this is the id of the form
-function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
+function loginSubmit(activeRecaptcha,use_recaptcha_on_admin_login){
 			var recaptchaResponse = false;
 
-			if (activeRecaptcha == 1 && use_recaptcha_on_login == 1) {
+			if (activeRecaptcha == 1 && use_recaptcha_on_admin_login == 1) {
 				recaptchaResponse = grecaptcha.getResponse();
 			}
 
@@ -22,7 +22,7 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 						$('.alert').remove();
 
 						if (dataParsed.status == 'fail') {
-							if (activeRecaptcha == 1 && use_recaptcha_on_login == 1) {
+							if (activeRecaptcha == 1 && use_recaptcha_on_admin_login == 1) {
 								grecaptcha.reset();
 							}
 
@@ -59,9 +59,19 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_login){
 			<label for="password">{$LNG.adm_password}:</label>
 			<input id="password" class="form-control" type="password" name="admin_pw" autocomplete="new-password">
 		</div>
+		{if $recaptchaEnable && $use_recaptcha_on_admin_login}
+			<div style="overflow:hidden;" class="g-recaptcha form-group w-100 fs-6 my-2 mx-auto d-flex justify-content-start" data-sitekey="{$recaptchaPublicKey}"></div>
+		{/if}
 		<div class="form-group my-2 fs-12 fw-bold text-white d-flex flex-column">
-			<input id="loginButton" onclick="loginSubmit(0,0);" class="btn btn-block w-100 btn-primary text-white" type="button" value="{$LNG.adm_absenden}">
+			<input id="loginButton" onclick="loginSubmit({$recaptchaEnable},{$use_recaptcha_on_admin_login});" class="btn btn-block w-100 btn-primary text-white" type="button" value="{$LNG.adm_absenden}">
 		</div>
 	</form>
+
+
+	{if $recaptchaEnable && $use_recaptcha_on_admin_login}
+		{block name="script" append}
+			<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
+		{/block}
+	{/if}
 
 {/block}

@@ -59,7 +59,7 @@ $LNG['mu_moderation_page']	= 'Permissões';
 $LNG['mu_universe']			= 'Universo';
 $LNG['adm_cp_logout']		= 'Voltar ao jogo';
 $LNG['settings_successful'] = "Configurações alteradas com sucesso!";
-
+$LNG['adm_login_recaptcha_false'] = "Recaptcha errada!";
 //	Miscelâneo
 $LNG['ad_number']			= 'ID';
 $LNG['ad_max']				= '(max. %d)';

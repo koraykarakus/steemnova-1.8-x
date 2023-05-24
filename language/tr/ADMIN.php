@@ -61,7 +61,7 @@ $LNG['mu_universe']			= 'Evren';
 $LNG['adm_cp_logout']		= 'Oyuna Geri Don';
 $LNG['mu_disclaimer']		= 'Iletisim';
 $LNG['settings_successful'] = "Ayarlar başarıyla değiştirildi!";
-
+$LNG['adm_login_recaptcha_false'] = "Recaptcha Yanlış !";
 
 //	Cesitli
 $LNG['ad_number'] = 'ID';

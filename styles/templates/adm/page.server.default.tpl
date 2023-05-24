@@ -107,6 +107,10 @@ $(document).ready(function(){
 	<label for="use_recaptcha_on_register" class="my-1 cursor-pointer hover-underline">Recaptcha active on register</label>
 	<input id="use_recaptcha_on_register" class="mx-2" name="use_recaptcha_on_register"{if $use_recaptcha_on_register} checked="checked"{/if}  type="checkbox">
 </div>
+<div class="form-gorup d-flex my-1 p-2 ">
+	<label for="use_recaptcha_on_admin_login" class="my-1 cursor-pointer hover-underline">Recaptcha active on admin login</label>
+	<input id="use_recaptcha_on_admin_login" class="mx-2" name="use_recaptcha_on_admin_login"{if $use_recaptcha_on_admin_login} checked="checked"{/if}  type="checkbox">
+</div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<span>{$LNG.se_smtp}</span>
 </div>

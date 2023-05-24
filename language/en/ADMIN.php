@@ -60,6 +60,7 @@ $LNG['mu_moderation_page'] = 'Permissions';
 $LNG['mu_universe'] = 'Universe';
 $LNG['adm_cp_logout'] = 'Back to Game';
 $LNG['settings_successful'] = "Settings changed successfully !";
+$LNG['adm_login_recaptcha_false'] = "Recaptcha Wrong!";
 
 //	Miscelâneo
 $LNG['ad_number'] = 'ID';

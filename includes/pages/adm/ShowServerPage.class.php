@@ -65,6 +65,7 @@
       'message_delete_days'         	=> $config->message_delete_days,
       'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
       'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
+      'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
       'server_default_theme' => $config->server_default_theme,
       'let_users_change_theme' => $config->let_users_change_theme,
       'password_recover_type' => $config->password_recover_type,
@@ -106,6 +107,7 @@
         'capprivate'			=> $config->capprivate,
         'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
         'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
+        'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
         'del_oldstuff'			=> $config->del_oldstuff,
         'del_user_manually'		=> $config->del_user_manually,
         'del_user_automatic'	=> $config->del_user_automatic,
@@ -133,6 +135,7 @@
       $cappublic				= HTTP::_GP('cappublic', '');
       $use_recaptcha_on_login = (HTTP::_GP('use_recaptcha_on_login', 'off') == 'on') ? 1 : 0;
       $use_recaptcha_on_register = (HTTP::_GP('use_recaptcha_on_register', 'off') == 'on') ? 1 : 0;
+      $use_recaptcha_on_admin_login = (HTTP::_GP('use_recaptcha_on_admin_login', 'off') == 'on') ? 1 : 0;
       $ga_key					= HTTP::_GP('ga_key', '', true);
       $mail_use				= HTTP::_GP('mail_use', 0);
       $smail_path				= HTTP::_GP('smail_path', '');
@@ -183,6 +186,7 @@
         'message_delete_days'	=> $message_delete_days,
         'use_recaptcha_on_login' => $use_recaptcha_on_login,
         'use_recaptcha_on_register' => $use_recaptcha_on_register,
+        'use_recaptcha_on_admin_login' => $use_recaptcha_on_admin_login,
         'server_default_theme' => $server_default_theme,
         'let_users_change_theme' => $let_users_change_theme,
         'password_recover_type' => $password_recover_type

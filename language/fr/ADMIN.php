@@ -43,7 +43,7 @@ $LNG['mu_moderation_page']				= 'Autorisations';
 $LNG['mu_universe']						= 'Univers';
 $LNG['adm_cp_logout']					= 'Quitter';
 $LNG['settings_successful'] = "Les paramètres ont été modifiés avec succès !" ;
-
+$LNG['adm_login_recaptcha_false'] = "Recaptcha erroné !" ;
 //	MISCELaNEO - MISCELLANEOUS
 $LNG['ad_number'] 						= 'ID';
 $LNG['ad_max']  						= '(max. % d)';

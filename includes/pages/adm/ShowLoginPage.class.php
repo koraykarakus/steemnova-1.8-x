@@ -36,7 +36,7 @@ class ShowLoginPage extends AbstractAdminPage
 	}
 
 	function show(){
-		global $USER;
+		global $USER,$config;
 
 		$session	= Session::create();
 		if($session->adminAccess == 1)
@@ -48,6 +48,9 @@ class ShowLoginPage extends AbstractAdminPage
 		$this->assign(array(
 			'bodyclass'	=> 'standalone',
 			'username'	=> $USER['username'],
+			'recaptchaEnable' => $config->capaktiv,
+			'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
+			'recaptchaPublicKey' => $config->cappublic,
 		));
 
 		$this->display('page.login.default.tpl');
@@ -56,7 +59,7 @@ class ShowLoginPage extends AbstractAdminPage
 
 
 	function validate(){
-		global $USER, $LNG;
+		global $USER, $LNG, $config;
 
 		$error = array();
 
@@ -64,6 +67,20 @@ class ShowLoginPage extends AbstractAdminPage
 
 		if (!password_verify($enteredPassword, $USER['password'])) {
 			$error[] = $LNG['adm_bad_password'];
+		}
+
+
+
+		if ($config->capaktiv && $config->use_recaptcha_on_admin_login)
+		{
+      require('includes/libs/reCAPTCHA/src/autoload.php');
+
+      $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+      $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
+      if (!$resp->isSuccess())
+      {
+          $error[]	= $LNG['adm_login_recaptcha_false'];
+      }
 		}
 
 		if (empty($error)) {

@@ -55,7 +55,7 @@ $LNG['mu_moderation_page']             = 'Права';
 $LNG['mu_universe']                    = 'Вселенные';
 $LNG['adm_cp_logout']                  = 'Выход';
 $LNG['settings_successful'] = "Настройки успешно изменены!";
-
+$LNG['adm_login_recaptcha_false'] = "Неверная рекапча!";
 // Разное
 $LNG['ad_number']                      = '№';
 $LNG['ad_max']                         = '(макс. %d)';

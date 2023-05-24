@@ -54,7 +54,7 @@ $LNG['mu_moderation_page']	= 'Permisos';
 $LNG['mu_universe']			= 'Universo';
 $LNG['adm_cp_logout']		= 'Salir';
 $LNG['settings_successful'] = "¡Configuración cambiada con éxito!";
-
+$LNG['adm_login_recaptcha_false'] = "Recaptcha incorrecta!";
 //	MISCELÁNEO - MISCELLANEOUS
 $LNG['ad_number']			= 'ID';
 $LNG['ad_max']				= '(máx. %d)';
