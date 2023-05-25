@@ -3,8 +3,8 @@
 <form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=server&mode=saveSettings" method="post">
 <input type="hidden" name="opt_save" value="1">
 
-<div class="form-group">
-	<span>{$LNG.se_server_parameters}</span>
+<div class="form-group d-flex justify-content-center">
+	<span class="text-yellow text-center fw-bold fs-14">{$LNG.se_server_parameters}</span>
 </div>
 
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
@@ -62,7 +62,7 @@ $(document).ready(function(){
 	</select>
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<span>{$LNG.se_player_settings}</span>
+	<span class="text-yellow fw-bold fs-14">{$LNG.se_player_settings}</span>
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label for="del_oldstuff" class="my-1 cursor-pointer hover-underline user-select-none">{$LNG.se_del_oldstuff}</label>
@@ -85,7 +85,7 @@ $(document).ready(function(){
 	<input id="del_user_sendmail" class="form-control bg-dark text-white border-secondary" name="del_user_sendmail" maxlength="3" size="2" value="{$del_user_sendmail}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<span>{$LNG.se_recaptcha_head}</span>
+	<span class="text-yellow fw-bold fs-14">{$LNG.se_recaptcha_head}</span>
 </div>
 <div class="form-gorup d-flex my-1 p-2 ">
 	<label for="capaktiv" class="my-1 cursor-pointer hover-underline">{$LNG.se_recaptcha_active}</label>
@@ -112,7 +112,7 @@ $(document).ready(function(){
 	<input id="use_recaptcha_on_admin_login" class="mx-2" name="use_recaptcha_on_admin_login"{if $use_recaptcha_on_admin_login} checked="checked"{/if}  type="checkbox">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<span>{$LNG.se_smtp}</span>
+	<span class="text-yellow fw-bold fs-14">{$LNG.se_smtp}</span>
 </div>
 <div class="form-gorup d-flex my-1 p-2 ">
 	<label for="mail_active" class="my-1 cursor-pointer hover-underline">{$LNG.se_mail_active}</label>
@@ -159,7 +159,7 @@ $(document).ready(function(){
 	<input id="smtp_pass" class="form-control bg-dark text-white border-secondary" name="smtp_pass" size="20" value="{$smtp_pass}" type="password" autocomplete="new-password">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<span>{$LNG.se_messages}</span>
+	<span class="text-yellow fw-bold fs-14">{$LNG.se_messages}</span>
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label for="message_delete_behavior" class="my-1 cursor-pointer hover-underline">{$LNG.se_message_delete_behavior}</label>
@@ -174,7 +174,7 @@ $(document).ready(function(){
 	<input id="message_delete_days" class="form-control bg-dark text-white border-secondary" name="message_delete_days" size="20" value="{$message_delete_days}" type="number">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-<span>{$LNG.se_google}</span>
+<span class="text-yellow fw-bold fs-14">{$LNG.se_google}</span>
 </div>
 <div class="form-gorup d-flex my-1 p-2 ">
 	<label for="ga_active" class="my-1 cursor-pointer hover-underline">{$LNG.se_google_active}</label>

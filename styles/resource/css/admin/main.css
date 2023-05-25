@@ -46,6 +46,14 @@ body {
 	color: #ddd;
 }
 
+/*colors*/
+
+.text-yellow{
+	color:#ffd600;
+}
+
+/*--*/
+
 /*effects*/
 
 .cursor-pointer{
