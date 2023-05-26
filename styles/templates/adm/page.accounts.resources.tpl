@@ -14,6 +14,18 @@
 	<td><input name="id" type="text" value="0" size="3"></td>
 </tr>
 <tr>
+	<td>Coordinate</td>
+	<td>
+		<input name="galaxy" type="text" value="0" size="3">
+		<input name="system" type="text" value="0" size="3">
+		<input name="planet" type="text" value="0" size="3">
+		<select name="planet_type">
+			<option value="1">Planet</option>
+			<option value="3">Moon</option>
+		</select>
+	</td>
+</tr>
+<tr>
 	<td>{$LNG.tech.901}</td>
 	<td><input name="metal" type="text" value="0"></td>
 </tr>

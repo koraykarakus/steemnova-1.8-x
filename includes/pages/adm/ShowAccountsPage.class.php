@@ -46,11 +46,18 @@ class ShowAccountsPage extends AbstractAdminPage
 
 		global $LNG;
 
-		$id         = HTTP::_GP('id', 0);
+		$id = HTTP::_GP('id', 0);
 		$metal      = max(0, round(HTTP::_GP('metal', 0.0)));
 		$crystal    = max(0, round(HTTP::_GP('cristal', 0.0)));
 		$deut       = max(0, round(HTTP::_GP('deut', 0.0)));
 		$type = HTTP::_GP('type','add');
+
+		$planetSelectType = '';
+		$galaxy = HTTP::_GP('galaxy',0);
+		$system = HTTP::_GP('system',0);
+		$planet = HTTP::_GP('planet',0);
+		$planet_type = HTTP::_GP('planet_type', 0);
+
 
 		if ($metal == 0 && $crystal == 0 && $deut == 0) {
 			$this->printMessage('All resources are equal to zero !');
@@ -60,17 +67,36 @@ class ShowAccountsPage extends AbstractAdminPage
 			$this->printMessage('type is wrong !');
 		}
 
-		if ($id == 0) {
-			$this->printMessage('Planet id is not entered !');
+		if ($id == 0 && $galaxy == 0 && $system == 0 && $planet == 0) {
+			$this->printMessage('Planet id or coordinate is not entered !');
 		}
+
 
 		$db = Database::get();
 
-		$sql = "SELECT `metal`,`crystal`,`deuterium`,`universe`  FROM %%PLANETS%% WHERE `id` = :id;";
+		($id != 0) ? $planetSelectType = 'id' : $planetSelectType = 'coordinate';
 
-		$before = $db->selectSingle($sql,array(
-			':id' => $id
-		));
+		if ($planetSelectType == 'id'){
+
+			$sql = "SELECT `metal`,`crystal`,`deuterium`,`universe`  FROM %%PLANETS%% WHERE `id` = :id;";
+
+			$before = $db->selectSingle($sql,array(
+				':id' => $id
+			));
+
+		}else {
+			$sql = "SELECT `metal`,`crystal`,`deuterium`,`universe`  FROM %%PLANETS%% WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet AND planet_type = :planet_type;";
+
+			$before = $db->selectSingle($sql,array(
+				':galaxy' => $galaxy,
+				':system' => $system,
+				':planet' => $planet,
+				':planet_type' => $planet_type
+			));
+
+		}
+
+
 
 		if (!$before) {
 			$this->printMessage('planet could not be found !');
@@ -80,17 +106,36 @@ class ShowAccountsPage extends AbstractAdminPage
 		if ($type == "add")
 		{
 
-			$sql  = "UPDATE %%PLANETS%% SET `metal` = `metal` + :metal,
-			 `crystal` = `crystal` + :crystal,
-			 `deuterium` = `deuterium` + :deut WHERE `id` = :id AND `universe` = :universe;";
+				if ($planetSelectType == 'id'){
+					$sql  = "UPDATE %%PLANETS%% SET `metal` = `metal` + :metal,
+					 `crystal` = `crystal` + :crystal,
+					 `deuterium` = `deuterium` + :deut WHERE `id` = :id AND `universe` = :universe;";
 
-			$db->update($sql,array(
-				':metal' => $metal,
-				':crystal' => $crystal,
-				':deut' => $deut,
-				':id' => $id,
-				':universe' => Universe::getEmulated(),
-			));
+					$db->update($sql,array(
+						':metal' => $metal,
+						':crystal' => $crystal,
+						':deut' => $deut,
+						':id' => $id,
+						':universe' => Universe::getEmulated(),
+					));
+				}else {
+					$sql  = "UPDATE %%PLANETS%% SET `metal` = `metal` + :metal,
+					 `crystal` = `crystal` + :crystal,
+					 `deuterium` = `deuterium` + :deut WHERE galaxy = :galaxy AND system = :system AND planet = :planet AND planet_type = :planet_type AND `universe` = :universe;";
+
+					$db->update($sql,array(
+						':metal' => $metal,
+						':crystal' => $crystal,
+						':deut' => $deut,
+						':galaxy' => $galaxy,
+						':system' => $system,
+						':planet' => $planet,
+						':planet_type' => $planet_type,
+						':universe' => Universe::getEmulated(),
+					));
+				}
+
+
 
 			$after 		= array(
 				'metal' => ($before['metal'] + $metal),
@@ -100,17 +145,40 @@ class ShowAccountsPage extends AbstractAdminPage
 
 		} elseif ($type == "delete") {
 
-				$sql  = "UPDATE %%PLANETS%% SET `metal` = GREATEST(0, `metal` - :metal),
-				`crystal` = GREATEST(0, `crystal` - :crystal), `deuterium` = GREATEST(0, `deuterium` - :deut)
-				WHERE `id` = :id AND `universe` = :universe;";
+				if ($planetSelectType == 'id') {
 
-				$db->update($sql,array(
-					':metal' => $metal,
-					':crystal' => $crystal,
-					':deut' => $deut,
-					':id' => $id,
-					':universe' => Universe::getEmulated()
-				));
+					$sql  = "UPDATE %%PLANETS%% SET `metal` = GREATEST(0, `metal` - :metal),
+					`crystal` = GREATEST(0, `crystal` - :crystal), `deuterium` = GREATEST(0, `deuterium` - :deut)
+					WHERE `id` = :id AND `universe` = :universe;";
+
+					$db->update($sql,array(
+						':metal' => $metal,
+						':crystal' => $crystal,
+						':deut' => $deut,
+						':id' => $id,
+						':universe' => Universe::getEmulated()
+					));
+
+				}else {
+
+					$sql  = "UPDATE %%PLANETS%% SET `metal` = GREATEST(0, `metal` - :metal),
+					`crystal` = GREATEST(0, `crystal` - :crystal), `deuterium` = GREATEST(0, `deuterium` - :deut)
+					WHERE `galaxy` = :galaxy AND system = :system AND planet = :planet AND planet_type = :planet_type AND `universe` = :universe;";
+
+					$db->update($sql,array(
+						':metal' => $metal,
+						':crystal' => $crystal,
+						':deut' => $deut,
+						':galaxy' => $galaxy,
+						':system' => $system,
+						':planet' => $planet,
+						':planet_type' => $planet_type,
+						':universe' => Universe::getEmulated()
+					));
+
+				}
+
+
 
 				$after 		= array(
 					'metal' => ($before['metal'] - $metal),
