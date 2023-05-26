@@ -1,10 +1,26 @@
 {block name="content"}
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=server&mode=saveSettings" method="post">
+<script>
+$(document).ready(function(){
+  $("#searchInServerSettings").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#serverSettings label").filter(function() {
+			if ($(this).text().toLowerCase().indexOf(value) > -1) {
+				$(this).parent().removeClass('d-none');
+			}else {
+				$(this).parent().addClass('d-none');
+			}
+    });
+  });
+});
+</script>
+
+<form id="serverSettings" class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=server&mode=saveSettings" method="post">
 <input type="hidden" name="opt_save" value="1">
 
-<div class="form-group d-flex justify-content-center">
+<div class="form-group d-flex justify-content-between">
 	<span class="text-yellow text-center fw-bold fs-14">{$LNG.se_server_parameters}</span>
+	<input style="max-width:250px;" class="form-control bg-dark text-white border-secondary" id="searchInServerSettings" type="text" name="" placeholder="search..">
 </div>
 
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
