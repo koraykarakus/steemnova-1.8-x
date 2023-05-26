@@ -269,7 +269,7 @@ class ShowUniversePage extends AbstractAdminPage
 			$show_unlearned_technology = (HTTP::_GP('show_unlearned_technology', 'off') == 'on') ? 1 : 0;
 			$user_max_notes = HTTP::_GP('user_max_notes',20);
 
-			
+
 
 			$config_after = array(
 				'noobprotectiontime'	=> $noobprotectiontime,
