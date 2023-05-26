@@ -27,7 +27,8 @@ class ShowMultiPage extends AbstractAdminPage
 	}
 
 	function show(){
-
+		global $LNG;
+		
 		$db = Database::get();
 
 		$sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown
