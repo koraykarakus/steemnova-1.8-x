@@ -181,7 +181,7 @@ CREATE TABLE `%PREFIX%config` (
   `noobprotection` int(11) NOT NULL DEFAULT '1',
   `noobprotectiontime` int(11) NOT NULL DEFAULT '5000',
   `noobprotectionmulti` int(11) NOT NULL DEFAULT '5',
-  `forum_url` varchar(128) NOT NULL DEFAULT 'http://2moons.cc',
+  `forum_url` varchar(128) NOT NULL DEFAULT 'https://2moons.de',
   `adm_attack` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `debug` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `lang` varchar(2) NOT NULL DEFAULT '',
