@@ -34,9 +34,10 @@ body {
 /*background colors*/
 
 .bg-black{
-	background: rgb(1,1,9);
-	background: linear-gradient(0deg, rgba(1,1,9,1) 0%, rgba(18,18,22,1) 35%);
-	opacity: 0.9;
+  background: linear-gradient(to right, #000000, #333333);
+  color: #ffffff;
+  padding: 50px;
+  text-align: center;
 }
 
 .table-dark a{

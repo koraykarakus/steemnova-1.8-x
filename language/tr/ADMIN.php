@@ -378,9 +378,9 @@ $LNG['cc_cache_clear']				= 'Bellek temizlendi!';
 
 //---------------	Chat Ayarlari	------------------------//
 
-$LNG['ch_socket_chatid_info']          = 'Bu IP chat tanimlarini birbirinden ayirmak icin kullanilir. Ayni server soketini kullanin.';
+$LNG['ch_socket_chatid_info']          = 'Bu IP chat tanımlarını birbirinden ayırmak icin kullanılır. Aynı server soketini kullanin.';
 $LNG['ch_socket_port_info']            = 'Server socket port.';
-$LNG['ch_socket_ip_info']              = 'Bu soketin IP adresini mesajin iletilmesi icin kullanilir.';
+$LNG['ch_socket_ip_info']              = 'Bu soketin IP adresini mesajın iletilmesi için kullanılır.';
 $LNG['ch_socket_host_info']            = 'Alan Server soketi karsi tarafa baglanti icin kullanilir (Server adi bos birakilirsa(NULL) varsayilan ad kullanilir).';
 $LNG['ch_socket_chatid']               = 'Socket ID Chat';
 $LNG['ch_socket_port']                 = 'Socket Port';
@@ -389,13 +389,13 @@ $LNG['ch_socket_host']                 = 'Host Soketi';
 $LNG['ch_socket_active']               = 'Soket dahil?';
 $LNG['ch_socket']                      = 'Server Soketi';
 $LNG['ch_closed']                      = 'Chat\'i kapat';
-$LNG['ch_allowchan']                   = 'Ozel kanallara izin ver';
-$LNG['ch_allowmes']                    = 'Ozel mesaja izin ver';
+$LNG['ch_allowchan']                   = 'Özel kanallara izin ver';
+$LNG['ch_allowmes']                    = 'Özel mesaja izin ver';
 $LNG['ch_allowcelmes']                 = 'Mesaj silmeye izin ver';
-$LNG['ch_logmessage']                  = 'Log kaydi al';
-$LNG['ch_nickchange']                  = 'Nick degistirmeye izin ver';
+$LNG['ch_logmessage']                  = 'Log kaydı al';
+$LNG['ch_nickchange']                  = 'Nick değistirmeye izin ver';
 $LNG['ch_botname']                     = 'Bot';
-$LNG['ch_channelname']                 = 'Varsayilan kanal ismi';
+$LNG['ch_channelname']                 = 'Varsayılan kanal ismi';
 
 //----------------------------------------------------------------------------//
 // TeamSpeak Ayarlari
