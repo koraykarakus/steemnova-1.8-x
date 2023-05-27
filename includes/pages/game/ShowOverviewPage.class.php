@@ -268,10 +268,24 @@ class ShowOverviewPage extends AbstractGamePage
 		$sql = "SELECT COUNT(*) as count FROM %%FLEETS%%;";
 		$fleetsOnline = $db->selectSingle($sql,array(),'count');
 
+
+		//get news
+
+		$sql = "SELECT * FROM %%NEWS%%;";
+		$news = $db->select($sql);
+
+		if (!empty($news)) {
+
+			foreach ($news as &$currentNews) {
+				$currentNews['date'] = _date($LNG['php_tdformat'], $currentNews['date'], $USER['timezone']);
+			}
+			unset($currentNews);
+
+		}
+
 		$this->assign(array(
 			'rankInfo'					=> $rankInfo,
-			'is_news'					=> $config->OverviewNewsFrame,
-			'news'						=> makebr($config->OverviewNewsText),
+			'news'						=> $news,
 			'usersOnline'				=> $usersOnline,
 			'fleetsOnline'				=> $fleetsOnline,
 			'planetname'				=> $PLANET['name'],

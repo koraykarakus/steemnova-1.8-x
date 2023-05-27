@@ -1,42 +1,18 @@
 
 {block name="title" prepend}{$LNG.lm_overview}{/block}
-{block name="script" append}
-    <script>
-
-              $(function(){
-            $("#chkbtn").on('click',function() {
-                $(this).hide();
-                $("#hidden-div").show();
-            });
-        });
-
- $(function(){
-            $("#chkbtn2").on('click',function() {
-                $("#chkbtn").show();
-                $("#hidden-div").hide();
-            });
-        });
- $(function(){
-            $("#chkbtn1").on('click',function() {
-                $(this).hide();
-                $("#hidden-div2").hide()
-$("#tn3").show();
-            });
-        });
- $(function(){
-            $("#chkbtn3").on('click',function() {
-                $("#chkbtn1").show();
-                $("#hidden-div2").show();
-$("#tn3").hide();
-
-            });
-        });
-</script>
-
-
-{/block}
 {block name="content"}
 
+<script>
+  function showNews(){
+
+    if ($('#newsRow').hasClass('d-none')) {
+      $('#newsRow').removeClass('d-none');
+    }else {
+      $('#newsRow').addClass('d-none');
+    }
+
+  }
+</script>
 
 
 <div class="table-responsive">
@@ -49,7 +25,6 @@ $("#tn3").hide();
           <a href="#"  onclick="return Dialog.PlanetAction();" title="{$LNG.ov_planetmenu}">{$planetname}&nbsp;({$username})</a>
         </td>
       </tr>
-
       <tr>
         <td class="text-start px-3">{$LNG.ov_admins_online}</td>
         <td class="text-center px-3 w-50">
@@ -72,17 +47,34 @@ $("#tn3").hide();
         <td class="text-start px-3">{$LNG.ov_points}</td>
         <td class="text-center px-3 w-50">{$rankInfo}</td>
       </tr>
-    {if $is_news}
+    {if !empty($news)}
       <tr>
-        <td class="text-start px-3">{$LNG.ov_news}</td>
-        <td class="text-center px-3 w-50">{$news}</td>
+        <td class="text-center" colspan="3">
+          <button class="text-yellow" onclick="showNews();">Check News</button>
+        </td>
       </tr>
-      <tr>
-        <td class="text-center" colspan="3"><button class="text-yellow" id="chkbtn">Check News</button></td>
+      <tr id="newsRow" class="d-none">
+        <td colspan="2">
+          <table class="table table-gow fs-12">
+            <thead>
+              <tr>
+                <th class="color-blue text-center" colspan="3">{$LNG.ov_news}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {foreach $news as $currentNews}
+              <tr>
+                <td class="text-center color-blue">{$currentNews.user}</td>
+                <td class="text-center color-blue">{$currentNews.date}</td>
+                <td class="text-center color-blue">{$currentNews.text}</td>
+              </tr>
+              {/foreach}
+            </tbody>
+          </table>
+        </td>
+
       </tr>
     {/if}
-
-
     <tr>
       <td>
         <div class="d-flex flex-row align-items-center justify-content-center  fs-12">
