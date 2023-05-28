@@ -33,9 +33,4 @@ $(document).ready(function(){
   {/foreach}
 </div>
 
-<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
-
-
-</table>
-
 {/block}
