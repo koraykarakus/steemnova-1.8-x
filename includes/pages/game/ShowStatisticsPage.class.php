@@ -86,10 +86,10 @@ class ShowStatisticsPage extends AbstractGamePage
                 $start = max(floor(($range - 1) / 100) * 100, 0);
 
                 if ($config->stat == 2) {
-                    $sql = "SELECT DISTINCT s.*, u.id, u.username, u.ally_id, u.banaday, u.urlaubs_modus, u.onlinetime, a.ally_name, (a.ally_owner=u.id) as is_leader, a.ally_owner_range FROM %%STATPOINTS%% as s
+                    $sql = "SELECT DISTINCT s.*, u.id, u.username, u.ally_id, u.banaday, u.urlaubs_modus, u.onlinetime, a.ally_name, (a.ally_owner=u.id) as is_leader, a.ally_owner_range FROM %%USER_POINTS%% as s
 					INNER JOIN %%USERS%% as u ON u.id = s.id_owner
 					LEFT JOIN %%ALLIANCE%% as a ON a.id = s.id_ally
-					WHERE s.universe = :universe AND s.stat_type = 1 AND u.authlevel < :authLevel
+					WHERE s.universe = :universe  AND u.authlevel < :authLevel
 					ORDER BY " . $Order . " ASC LIMIT :offset, :limit;";
                     $query = $db->select($sql, array(
                         ':universe'    => Universe::current(),
@@ -117,9 +117,8 @@ class ShowStatisticsPage extends AbstractGamePage
                 $RangeList    = array();
 
                 try {
-                    $USER    += $db->selectSingle('SELECT total_points FROM %%STATPOINTS%% WHERE id_owner = :userId AND stat_type = :statType', array(
-                        ':userId'    => $USER['id'],
-                        ':statType'    => 1
+                    $USER    += $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId;', array(
+                        ':userId'    => $USER['id']
                     ));
                 } catch (Exception $e) {
                     $USER['total_points'] = 0;
