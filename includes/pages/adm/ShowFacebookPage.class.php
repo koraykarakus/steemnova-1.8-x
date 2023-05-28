@@ -31,12 +31,19 @@ class ShowFacebookPage extends AbstractAdminPage
 
 		$config = Config::get(Universe::getEmulated());
 
+
+		$facebookURL = "http://www.facebook.com/developers/";
+
+		$facebookInfo = sprintf($LNG['fb_info'],$facebookURL,$facebookURL);
+
+
 		$this->assign(array(
 			'fb_on'					=> $config->fb_on,
 			'fb_apikey'				=> $config->fb_apikey,
 			'fb_skey'				=> $config->fb_skey,
 			'fb_curl'				=> function_exists('curl_init') ? 1 : 0,
 			'fb_curl_info'			=> function_exists('curl_init') ? $LNG['fb_curl_yes'] : $LNG['fb_curl_no'],
+			'fb_info' => $facebookInfo
 		));
 
 		$this->display('page.facebook.default.tpl');
@@ -45,13 +52,12 @@ class ShowFacebookPage extends AbstractAdminPage
 
 	function saveSettings(){
 
-		// TODO: buggy
 		global $LNG;
 
 		$config = Config::get(Universe::getEmulated());
 
 
-		$fb_on = HTTP::_GP('fb_on', '') === "on" ? 1 : 0;
+		$fb_on = (HTTP::_GP('fb_on', '') === "on") ? 1 : 0;
 		$fb_apikey	= HTTP::_GP('fb_apikey', '');
 		$fb_skey 	= HTTP::_GP('fb_skey', '');
 

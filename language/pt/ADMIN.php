@@ -1047,7 +1047,7 @@ $LNG['fb_settings']                     = 'Configurações da conexão pelo Face
 $LNG['fb_active']                       = 'Facebook Connect ativo?';
 $LNG['fb_api_key']                      = 'Chave do Facebook API';
 $LNG['fb_secrectkey']                   = 'Chave do Facebook Secret';
-$LNG['fb_info']                         = 'Com o Facebook Connect os usuários podem que estão conectados ao Facebook, com o meu log in, clique ou registre-se. <br><br>Para usar este sistema, deves ser registrado com Faceebok. Além disso, você deve criar um aplicativo. Registar <a href="http://www.facebook.com/developers/">http://www.facebook.com/developers/</a> Como conectar URL tens de ativar o sistema e por as duas chaves.<br><br><font color="red">Para o envio de E-Mails deves ter o sistema de envio ativo! (SMTP Settings)</font>';
+$LNG['fb_info']                         = 'Com o Facebook Connect os usuários podem que estão conectados ao Facebook, com o meu log in, clique ou registre-se. <br><br>Para usar este sistema, deves ser registrado com Faceebok. Além disso, você deve criar um aplicativo. Registar <a href="%s" target="_blank">%s</a> Como conectar URL tens de ativar o sistema e por as duas chaves.<br><br><font color="red">Para o envio de E-Mails deves ter o sistema de envio ativo! (SMTP Settings)</font>';
 $LNG['fb_curl_yes']						= '<span style="color:green">O cURL esta instalado no Servidor!</span>';
 $LNG['fb_curl_no']						= '<span style="color:red">Extenção cURL não esta instalado!, o FaceBook requer que você instale para que ele funcione!</span>';
 

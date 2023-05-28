@@ -1055,7 +1055,7 @@ $LNG['fb_settings'] = 'Facebook Connect Settings';
 $LNG['fb_active'] = 'Facebook Connect activate?';
 $LNG['fb_api_key'] = 'Facebook API Key';
 $LNG['fb_secrectkey'] = 'Facebook Secret Key';
-$LNG['fb_info'] = 'With Facebook Connect users who are logged on to Facebook, log in with my click, or register. <br>  to use this feature, you must be registered with Faceebok itself. In addition, you must create an Application. This you can do to <a href="http://www.facebook.com/developers/"> http://www.facebook.com/developers/ </ a>. As Connect URL, you must enter the URL to the game. Then you are carrying here the Keys and your game should be ready Facebook. <br> <font Color="red"> for FB Connect, the mail delivery will be available! (SMTP settings)</font>';
+$LNG['fb_info'] = 'With Facebook Connect users who are logged on to Facebook, log in with my click, or register. <br>  to use this feature, you must be registered with Faceebok itself. In addition, you must create an Application. This you can do to <a href="%s" target="_blank"> %s </ a>. As Connect URL, you must enter the URL to the game. Then you are carrying here the Keys and your game should be ready Facebook. <br> <font Color="red"> for FB Connect, the mail delivery will be available! (SMTP settings)</font>';
 $LNG['fb_curl_yes'] = '<span style="color:green">cURL Installed!</span>';
 $LNG['fb_curl_no'] = '<span style="color:red">cURL Not Installed! Facebook Requires cURL extension to work!</span>';
 

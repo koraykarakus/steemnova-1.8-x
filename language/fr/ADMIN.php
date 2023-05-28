@@ -1076,7 +1076,7 @@ $LNG['fb_settings']					= 'Paramètres de Facebook Connect';
 $LNG['fb_active']					= 'Activer la Facebook Connect?';
 $LNG['fb_api_key']					= 'Facebook API Clé';
 $LNG['fb_secrectkey']					= 'Clé Secrète Facebook';
-$LNG['fb_info']						= 'Avec Facebook Connect, les utilisateurs qui sont connectés sur Facebook peuvent se connecter en un clic, ou s\'inscrire. <br> Pour utiliser cette fonctionnalité, vous devez être inscrit à Faceebok lui-même. En outre, vous devez créer une demande. Informations : <a href="http://www.facebook.com/developers/"> http://www.facebook.com/developers/ </ a>. Vous devez vous connecter en entrant l\'URL de la partie. Ensuite, vous portez ici les clés et votre jeu devrait être prêt pour Facebook. <font color="red"> <br> Pour FB Connect, la distribution du courrier sera disponible ! (paramètres SMTP) </ font> ';
+$LNG['fb_info']						= 'Avec Facebook Connect, les utilisateurs qui sont connectés sur Facebook peuvent se connecter en un clic, ou s\'inscrire. <br> Pour utiliser cette fonctionnalité, vous devez être inscrit à Faceebok lui-même. En outre, vous devez créer une demande. Informations : <a href="%s" target="_blank"> %s </ a>. Vous devez vous connecter en entrant l\'URL de la partie. Ensuite, vous portez ici les clés et votre jeu devrait être prêt pour Facebook. <font color="red"> <br> Pour FB Connect, la distribution du courrier sera disponible ! (paramètres SMTP) </ font> ';
 $LNG['fb_curl_yes']						= '<span style="color:green">cURL installé!</span>';
 $LNG['fb_curl_no']						= '<span style="color:red">cURL n\'est pas installé! Nécessite l\'extension cURL Facebook au boulot!</span>';
 

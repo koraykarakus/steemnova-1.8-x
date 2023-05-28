@@ -418,7 +418,7 @@ $LNG['fb_settings']                                     = 'Facebook Connect Ayar
 $LNG['fb_active']                                       = 'Facebook Connect Aktive Et?';
 $LNG['fb_api_key']                                      = 'Facebook API Key';
 $LNG['fb_secrectkey']                                   = 'Facebook Secret Key';
-$LNG['fb_info']                                         = 'Facebook connect, sitenize Facebook kullanıcılarını kabul etmenizi sağlayan bir arayüz standardıdır. Yapı olarak facebook-uygulamalarına benzer ama biraz daha farklıdır <br> Bunu kullanmak icin Facebook uyesi olmaniz gerekmektedir. Ayrica, bir uygulama gelistirmelisiniz. Bunu <a href="http://www.facebook.com/developers/"> http://www.facebook.com/developers/ </ a> adresinden yapabilirsin.<br> FB Connect icin, email sistemi kurulu olmali! (SMTP Ayarlari)';
+$LNG['fb_info'] = 'Facebook connect, sitenize Facebook kullanıcılarını kabul etmenizi sağlayan bir arayüz standardıdır. Yapı olarak facebook-uygulamalarına benzer ama biraz daha farklıdır <br> Bunu kullanmak icin Facebook uyesi olmaniz gerekmektedir. Ayrica, bir uygulama gelistirmelisiniz. Bunu <a href="%s" target="_blank"> %s </a> adresinden yapabilirsin.<br> FB Connect icin, email sistemi kurulu olmali! (SMTP Ayarlari)';
 $LNG['fb_curl_yes']                                             = '<span style="color:green">cURL Kurulu!</span>';
 $LNG['fb_curl_no']                                              = '<span style="color:red">cURL Kurulu Degil! Facebook App calismasi icin URL kurulu olmasi gerekmekte!</span>';
 
