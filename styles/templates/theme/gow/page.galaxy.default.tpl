@@ -1,10 +1,8 @@
 {block name="title" prepend}{$LNG.lm_galaxy}{/block}
 {block name="content"}
-
-
 	<form action="?page=galaxy" method="post" id="galaxy_form">
 	<input type="hidden" id="auto" value="dr">
-	<table class="table table-gow table-sm fs-12">
+	<table class="table table-gow table-sm fs-12 my-1">
 		<thead>
 			<tr>
 				<th class="text-center" colspan="3">{$LNG.gl_galaxy}</th>
@@ -108,14 +106,68 @@
 			<a class="hover-pointer" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
-			title ="<table class='table table-gow fs-11' style='width:220px'><tr><th colspan='2'>{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]</th></tr><tr><td style='width:80px'><img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'></td><td>{if $currentPlanet.missions.6}<a href='javascript:doit(6,{$currentPlanet.planet.id});'>{$LNG["type_mission_6"]}</a><br><br>{/if}{foreach $currentPlanet.user.class as $class}{if $class != 'vacation' && $currentPlanet.planet.phalanx}<a href='javascript:OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>{$LNG.gl_phalanx}</a><br>{/if}{foreachelse}{if $currentPlanet.planet.phalanx}<a href='javascript:OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>{$LNG.gl_phalanx}</a><br>{/if}{/foreach}{if $currentPlanet.missions.1}<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=1'>{$LNG["type_mission_1"]}</a><br>{/if}{if $currentPlanet.missions.5}<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=5'>{$LNG["type_mission_5"]}</a><br>{/if}{if $currentPlanet.missions.4}<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=4'>{$LNG["type_mission_4"]}</a><br>{/if}{if $currentPlanet.missions.3}<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=3'>{$LNG["type_mission_3"]}</a><br>{/if}<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=17'>{$LNG["type_mission_17"]}</a><br>{if $currentPlanet.missions.10}<a href='?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}'>{$LNG["type_mission_10"]}</a><br>{/if}</td></tr></table>">
-				<img src="{$dpath}planeten/{$currentPlanet.planet.image}.jpg" height="30" width="30" alt="">
+			title ="
+			<table class='table table-gow fs-11' style='width:220px'>
+				<tr>
+					<th colspan='2'>
+						{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]
+					</th>
+				</tr>
+				<tr>
+					<td style='width:80px'><img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'></td>
+					<td>
+						<div class='d-flex flex-column'>
+						{if $currentPlanet.missions.6}
+						<a class='hover-underline my-1 hover-pointer' onclick='doit(6,{$currentPlanet.planet.id})'>{$LNG.type_mission_6}</a>
+						{/if}
+						{foreach $currentPlanet.user.class as $class}
+						{if $class != 'vacation' && $currentPlanet.planet.phalanx}
+						<a class='hover-underline my-1 hover-pointer' onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>
+							{$LNG.gl_phalanx}
+						</a>
+						{/if}
+						{foreachelse}
+						{if $currentPlanet.planet.phalanx}
+						<a class='hover-underline my-1 hover-pointer' onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>{$LNG.gl_phalanx}</a>
+						{/if}
+						{/foreach}
+						{if $currentPlanet.missions.1}
+						<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=1'>
+							{$LNG.type_mission_1}
+						</a>
+						{/if}
+						{if $currentPlanet.missions.5}
+						<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=5'>
+							{$LNG.type_mission_5}
+						</a>
+						{/if}
+						{if $currentPlanet.missions.4}
+						<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=4'>
+							{$LNG.type_mission_4}
+						</a>
+						{/if}
+						{if $currentPlanet.missions.3}
+						<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=3'>
+							{$LNG.type_mission_3}
+						</a>
+						{/if}
+						<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=17'>
+							{$LNG.type_mission_17}
+						</a>
+						{if $currentPlanet.missions.10}
+						<a class='hover-underline my-1 hover-pointer' href='?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}'>{$LNG["type_mission_10"]}</a>
+						{/if}
+					</div>
+					</td>
+				</tr>
+			</table>">
+				<img class="hover-border-yellow" src="{$dpath}planeten/{$currentPlanet.planet.image}.jpg" height="30" width="30" alt="">
 			</a>
 		</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">{$currentPlanet.planet.name} {$currentPlanet.lastActivity}</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
 			{if $currentPlanet.moon}
-			<a data-bs-toggle="popover"
+			<a class="hover-pointer" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			 title="<table class='table table-gow table-sm fs-11' style='width:240px'>
@@ -144,48 +196,49 @@
 							 </tr>
 							 <tr>
 								 <td colspan='2'>
+									 <div class='d-flex flex-column'>
 									 {if $currentPlanet.missions.1}
-									 <a href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=1'>
-										 {$LNG['type_mission_1']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=1'>
+										 {$LNG.type_mission_1}
 									 </a>
 									 {/if}
 									 {if $currentPlanet.missions.3}
-									 <a href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=3'>
-										 {$LNG['type_mission_3']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=3'>
+										 {$LNG.type_mission_3}
 									 </a>
 									 {/if}
 									 {if $currentPlanet.missions.3}
-									 <a href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=4'>
-										 {$LNG['type_mission_4']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=4'>
+										 {$LNG.type_mission_4}
 									 </a>
 									 {/if}
 									 {if $currentPlanet.missions.5}
-									 <a href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=5'>
-										 {$LNG['type_mission_5']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=5'>
+										 {$LNG.type_mission_5}
 									 </a>
 									 {/if}
 									 {if $currentPlanet.missions.6}
-									 <a href='javascript:doit(6,{$currentPlanet.moon.id});'>
-										 {$LNG['type_mission_6']}
+									 <a class='hover-underline my-1 hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});'>
+										 {$LNG.type_mission_6}
 									 </a>
 									 {/if}
 									 {if $currentPlanet.missions.9}
-
-									 <a href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=9'>
-										 {$LNG['type_mission_9']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=9'>
+										 {$LNG.type_mission_9}
 									 </a>
 										{/if}
 									 {if $currentPlanet.missions.10}
-									 <a href='?page=galaxy&action=sendMissle&galaxy={$galaxy}&system={$system}&planet={$planet}&type=3'>
-										 {$LNG['type_mission_10']}
+									 <a class='hover-underline my-1 hover-pointer' href='?page=galaxy&action=sendMissle&galaxy={$galaxy}&system={$system}&planet={$planet}&type=3'>
+										 {$LNG.type_mission_10}
 									 </a>
 									 {/if}
+								 </div>
 								</td>
 							</tr>
 						</table>
 					</td>
 			</table>">
-				<img src="{$dpath}planeten/mond.jpg" height="22" width="22" alt="{$currentPlanet.moon.name}">
+				<img class="hover-border-yellow" src="{$dpath}planeten/mond.jpg" height="22" width="22" alt="{$currentPlanet.moon.name}">
 			</a>
 			{/if}
 		</td>
@@ -194,7 +247,7 @@
 			<a data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
-			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]</th></tr><tr><td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td><td><table style='width:100%'><tr><th colspan='2'>{$LNG.gl_resources}:</th></tr><tr><td>{$LNG.tech.901}: </td><td>{$currentPlanet.debris.metal|number}</td></tr><tr><td>{$LNG.tech.902}: </td><td>{$currentPlanet.debris.crystal|number}</td></tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr><th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'><a href='javascript:doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a></td></tr>{/if}</table></td></tr></table>">
+			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]</th></tr><tr><td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td><td><table style='width:100%'><tr><th colspan='2'>{$LNG.gl_resources}:</th></tr><tr><td>{$LNG.tech.901}: </td><td>{$currentPlanet.debris.metal|number}</td></tr><tr><td>{$LNG.tech.902}: </td><td>{$currentPlanet.debris.crystal|number}</td></tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr><th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'><a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a></td></tr>{/if}</table></td></tr></table>">
 			<img src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
 			</a>
         {/if}
@@ -224,22 +277,45 @@
 		<td class="text-center align-middle" style="white-space: nowrap;">
 			{if $currentPlanet.action}
 				{if $currentPlanet.action.esp}
-				<a href="javascript:doit(6,{$currentPlanet.planet.id},{$spyShips|json|escape:'html'})">
-					<img src="{$dpath}img/e.gif" title="{$LNG.gl_spy}" alt="">
+				<a class='hover-pointer text-decoration-none' data-bs-toggle="tooltip"
+				data-bs-placement="top"
+				data-bs-html="true"
+				title="{$LNG.gl_spy}" class='hover-underline my-1 hover-pointer' onclick="doit(6,{$currentPlanet.planet.id},{$spyShips|json|escape:'html'})">
+					<img width="18" height="18" src="{$dpath}img/e.gif" alt="">
 				</a>{/if}
 				{if $currentPlanet.action.message}
-				<a href="#" onclick="return Dialog.PM({$currentPlanet.user.id})">
-					<img src="{$dpath}img/m.gif" title="{$LNG.write_message}" alt="">
+				<a class='hover-pointer text-decoration-none' data-bs-toggle="tooltip"
+				data-bs-placement="top"
+				data-bs-html="true"
+				title="{$LNG.write_message}" onclick="return Dialog.PM({$currentPlanet.user.id})">
+					<img width="18" height="18" src="{$dpath}img/m.gif" title="{$LNG.write_message}" alt="">
 				</a>{/if}
 				{if $currentPlanet.action.buddy}
-                <a href="#" onclick="return Dialog.Buddy({$currentPlanet.user.id})">
-					<img src="{$dpath}img/b.gif" title="{$LNG.gl_buddy_request}" alt="">
-				</a>{/if}
-				{if $currentPlanet.action.missle}<a href="?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;type=1">
-					<img src="{$dpath}img/r.gif" title="{$LNG.gl_missile_attack}" alt="">
-				</a>{/if}
-			{else}-{/if}
-			{if $currentPlanet.planet.phalanx}<a class="textForBlind" href="#" onclick="OpenPopup('?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1','',640,510);return false;"><span>{$LNG.gl_phalanx}</span></a>{/if}
+        <a class='hover-pointer text-decoration-none' data-bs-toggle="tooltip"
+				data-bs-placement="top"
+				data-bs-html="true"
+				title="{$LNG.gl_buddy_request}" onclick="return Dialog.Buddy({$currentPlanet.user.id})">
+					<img width="18" height="18" src="{$dpath}img/b.gif" title="{$LNG.gl_buddy_request}" alt="">
+				</a>
+				{/if}
+				{if $currentPlanet.action.missle}
+				<a data-bs-toggle="tooltip"
+				data-bs-placement="top"
+				data-bs-html="true"
+				title="{$LNG.gl_missile_attack}" class='hover-pointer text-decoration-none' href="?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;type=1">
+					<img width="18" height="18" src="{$dpath}img/r.gif" title="{$LNG.gl_missile_attack}" alt="">
+				</a>
+				{/if}
+
+			{/if}
+			{if $currentPlanet.planet.phalanx}
+			<a data-bs-toggle="tooltip"
+			data-bs-placement="top"
+			data-bs-html="true"
+			title="{$LNG.gl_phalanx}" class='hover-pointer text-decoration-none' onclick="OpenPopup('?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1','',640,510);return false;">
+				<img width="18" height="18" src="{$dpath}img/r.gif" title="{$LNG.gl_phalanx}" alt="">
+			</a>
+			{/if}
 		</td>
 	{/if}
 	</tr>
@@ -263,8 +339,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3"><span id="missiles">{$currentmip|number}</span> {$LNG.gl_avaible_missiles}</td>
-		<td colspan="5"><span id="slots">{$maxfleetcount}</span>/{$fleetmax} {$LNG.gl_fleets}</td>
+		<td colspan="4"><span id="missiles">{$currentmip|number}</span> {$LNG.gl_avaible_missiles}</td>
+		<td colspan="4"><span id="slots">{$maxfleetcount}</span>/{$fleetmax} {$LNG.gl_fleets}</td>
 	</tr>
 	<tr>
 		<td colspan="4">
@@ -274,8 +350,8 @@
 			<span id="elementID209">{$recyclers|number}</span> {$LNG.gl_avaible_recyclers}
 		</td>
 	</tr>
-	<tr style="display: none;" id="fleetstatusrow">
-		<th colspan="8">{$LNG.cff_fleet_target}</th>
+	<tr style="display:none;" id="fleetstatusrow">
+		<th class="text-center" colspan="8">{$LNG.cff_fleet_target}</th>
 	</tr>
 	</table>
 	<script type="text/javascript">

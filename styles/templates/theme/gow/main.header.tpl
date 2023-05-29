@@ -21,7 +21,7 @@
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.121" nocache}
+	{assign var="REV" value="1.0.0.122" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
@@ -212,13 +212,13 @@ myDefaultWhiteList.thead = [];
 myDefaultWhiteList.th = ['colspan'];
 myDefaultWhiteList.tr = [];
 myDefaultWhiteList.td = ['colspan','style'];
-myDefaultWhiteList.span = ['class'];
+myDefaultWhiteList.span = ['class','onclick'];
 myDefaultWhiteList.img = ['src','alt','width','height'];
 myDefaultWhiteList.form = ['class','action','method'];
 myDefaultWhiteList.input = ['type','name','value'];
 myDefaultWhiteList.button = ['type','class'];
 myDefaultWhiteList.font = ['color'];
-myDefaultWhiteList.a = ['href','class'];
+myDefaultWhiteList.a = ['href','class','onclick'];
 myDefaultWhiteList.br = [];
 
 	//initialize bootstrap tooltips

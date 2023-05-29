@@ -14,7 +14,7 @@ function doit(missionID, planetID) {
 		if(messages.length == MaxFleetSetting) {
 			messages.filter(':last').remove();
 		}
-		var element		= $('<td />').attr('colspan', 8).attr('class', data.code == 600 ? "success" : "error").text(data.mess).wrap('<tr />').parent();
+		var element		= $('<td />').attr('colspan', 8).attr('class', data.code == 600 ? "text-success text-center" : "text-danger text-center").text(data.mess).wrap('<tr />').parent();
 		statustable.removeAttr('style').after(element);
 	});
 }
