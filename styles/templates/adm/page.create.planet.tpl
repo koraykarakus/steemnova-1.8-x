@@ -1,31 +1,38 @@
 {block name="content"}
 
-<form action="?page=create&mode=createPlanet" method="post">
-<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
-<tr>
-	<th colspan="3">{$LNG.po_add_planet}</th>
-</tr>
-<tr>
-	<td>{$LNG.input_id_user}</td>
-	<td><input name="id" type="text" size="4"></td>
-</tr><tr>
-	<td>{$LNG.new_creator_coor}</td>
-	<td><input name="galaxy" type="text" size="3" maxlength="1" title="{$LNG.po_galaxy}">&nbsp; :
-	<input name="system" type="text" size="3" maxlength="3"  title="{$LNG.po_system}">&nbsp; :
-	<input name="planet" type="text" size="3" maxlength="2"  title="{$LNG.po_planet}"><br>
-	</td>
-</tr><tr>
-	<td>{$LNG.po_name_planet}</td>
-	<td><input name="name" type="text" size="15" maxlength="25" value="{$LNG.po_colony}"></td>
-</tr><tr>
-	<td>{$LNG.po_fields_max}</td>
-	<td><input name="field_max" type="text" size="6" maxlength="10"></td>
-</tr><tr>
-	<td colspan="2"><input type="Submit" value="{$LNG.button_add}"></td>
-</tr><tr>
-	<td colspan="2" style="text-align:left;"><a href="?page=create">{$LNG.new_creator_go_back}</a>&nbsp;<a href="?page=create&amp;mode=planet">{$LNG.new_creator_refresh}</a></td>
-</tr>
-</table>
+<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=create&mode=createPlanet" method="post">
+<div class="form-group">
+	<span class="text-yellow fw-bold">{$LNG.po_add_planet}</span>
+</div>
+<div class="form-group">
+	<label for="id" class="text-start my-1 cursor-pointer hover-underline d-flex w-100">{$LNG.input_id_user}</label>
+	<input id="id" name="id" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="4">
+</div>
+<div class="form-group d-flex flex-column">
+	<label for="galaxy" class="text-start my-1 cursor-pointer hover-underline d-flex w-100">{$LNG.new_creator_coor}</label>
+	<div class="d-flex align-items-center">
+		<input id="galaxy" style="width:60px;" name="galaxy" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="3" maxlength="1" title="{$LNG.po_galaxy}">
+		 <span>:</span>
+		<input style="width:60px;" name="system" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="3" maxlength="3"  title="{$LNG.po_system}">
+		<span>:</span>
+		<input style="width:60px;" name="planet" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="3" maxlength="2"  title="{$LNG.po_planet}">
+	</div>
+</div>
+<div class="form-group">
+	<label for="name" class="text-start my-1 cursor-pointer hover-underline d-flex w-100">{$LNG.po_name_planet}</label>
+	<input id="name" name="name" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="15" maxlength="25" value="{$LNG.po_colony}">
+</div>
+<div class="form-group">
+	<label for="field_max" class="text-start my-1 cursor-pointer hover-underline d-flex w-100">{$LNG.po_fields_max}</label>
+	<input id="field_max" name="field_max" class="form-control py-1 bg-dark text-white my-1 border border-secondary" type="text" size="6" maxlength="10">
+</div>
+<div class="form-group">
+	<input class="btn btn-primary text-white my-2 w-100" type="submit" value="{$LNG.button_add}">
+</div>
+<div class="form-group d-flex justify-content-start">
+	<a class="text-white" href="?page=create">{$LNG.new_creator_go_back}</a>&nbsp;
+	<a class="text-white" href="?page=create&amp;mode=planet">{$LNG.new_creator_refresh}</a>
+</div>
 </form>
 
 {/block}
