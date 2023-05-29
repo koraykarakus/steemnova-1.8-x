@@ -237,6 +237,17 @@ input[type="radio"] {
 .hover-underline:hover{
 	text-decoration: underline;
 }
+
+.border-yellow{
+	border: 1px solid yellow;
+}
+.hover-border-yellow{
+	border: 1px transparent;
+}
+.hover-border-yellow:hover{
+	border: 1px solid yellow;
+}
+
 .fs-12{
 	font-size: 12px!important;
 }

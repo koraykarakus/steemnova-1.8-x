@@ -237,10 +237,9 @@ abstract class AbstractGamePage
 			$dateTimeUser	= $dateTimeServer;
 		}
 
+		$AllPlanets = $AllMoons = array();
 		foreach($USER['PLANETS'] as $ID => $CPLANET)
 		{
-			if ($CPLANET['planet_type'] == 3)
-				continue;
 
 			if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP) {
 				$Queue = unserialize($CPLANET['b_building_id']);
@@ -249,22 +248,66 @@ abstract class AbstractGamePage
 				$BuildPlanet = $LNG['ov_free'];
 			}
 
-			$AllPlanets[] = array(
-				'id'	=> $CPLANET['id'],
-				'name'	=> (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'],0,12) . ".." : $CPLANET['name'],
-				'image'	=> $CPLANET['image'],
-				'build'	=> $BuildPlanet,
-				'galaxy' => $CPLANET['galaxy'],
-				'system' => $CPLANET['system'],
-				'planet' => $CPLANET['planet'],
-				'selected' => ($CPLANET['id'] == $PLANET['id']) ? true : false,
-				'field_current' => $CPLANET['field_current'],
-				'field_max' => $CPLANET['field_max'],
-				'diameter' => $CPLANET['diameter'],
-				'temp_min' => $CPLANET['temp_min'],
-				'temp_max' => $CPLANET['temp_max']
-			);
+			if ($CPLANET['planet_type'] == 3) {
+
+				$AllMoons[] = array(
+					'id'	=> $CPLANET['id'],
+					'name'	=> (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'],0,12) . ".." : $CPLANET['name'],
+					'image'	=> $CPLANET['image'],
+					'build'	=> $BuildPlanet,
+					'galaxy' => $CPLANET['galaxy'],
+					'system' => $CPLANET['system'],
+					'planet' => $CPLANET['planet'],
+					'selected' => ($CPLANET['id'] == $PLANET['id']) ? true : false,
+					'field_current' => $CPLANET['field_current'],
+					'field_max' => $CPLANET['field_max'],
+					'diameter' => $CPLANET['diameter'],
+					'temp_min' => $CPLANET['temp_min'],
+					'temp_max' => $CPLANET['temp_max'],
+				);
+
+			}else {
+
+				$AllPlanets[] = array(
+					'id'	=> $CPLANET['id'],
+					'name'	=> (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'],0,12) . ".." : $CPLANET['name'],
+					'image'	=> $CPLANET['image'],
+					'build'	=> $BuildPlanet,
+					'galaxy' => $CPLANET['galaxy'],
+					'system' => $CPLANET['system'],
+					'planet' => $CPLANET['planet'],
+					'selected' => ($CPLANET['id'] == $PLANET['id']) ? true : false,
+					'field_current' => $CPLANET['field_current'],
+					'field_max' => $CPLANET['field_max'],
+					'diameter' => $CPLANET['diameter'],
+					'temp_min' => $CPLANET['temp_min'],
+					'temp_max' => $CPLANET['temp_max'],
+					'id_luna' => $CPLANET['id_luna'],
+				);
+
+			}
+
+
+
 		}
+
+		// NOTE: add moon array inside planet array
+		foreach ($AllPlanets as $key => &$currentPlanet) {
+			if ($currentPlanet['id_luna'] == 0) {
+				continue;
+			}
+
+			foreach ($AllMoons as $moon_key => $currentMoon) {
+				if ($currentMoon['id'] == $currentPlanet['id_luna']) {
+					$currentPlanet['moonInfo'][] = $currentMoon;
+				}else {
+					$currentPlanet['moonInfo'][] = array();
+				}
+			}
+
+		}
+
+
 
 
 		$this->assign(array(
