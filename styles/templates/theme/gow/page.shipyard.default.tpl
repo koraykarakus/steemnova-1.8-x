@@ -28,7 +28,7 @@
 
 <div class="ItemsWrapper">
 
-<div {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative">
+<div {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative border-orange">
 {foreach $elementList as $ID => $Element}
 <div id="item_big_{$ID}" class="buildItemBig position-absolute top-0 left-0 d-none flex-column d-flex rounded border border-1 border-dark p-0 m-0 w-100">
   <div class="d-flex w-100 itemTop">
@@ -102,7 +102,7 @@
 {/foreach}
 </div>
 
-<div class="d-flex flex-wrap justify-content-start bg-black py-2">
+<div class="d-flex flex-wrap justify-content-start bg-black py-2 border-orange">
   {foreach $elementList as $ID => $Element}
     <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
     data-bs-toggle="tooltip"

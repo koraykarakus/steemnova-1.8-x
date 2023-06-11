@@ -137,9 +137,7 @@ input[type="radio"] {
 
 
 /*general classes for color and background color*/
-.ItemsWrapper{
-	border: 3px solid #c4731f;
-}
+
 .border-color-active{
 	border-color: #aa8719;
 }
@@ -246,6 +244,10 @@ input[type="radio"] {
 }
 .hover-border-yellow:hover{
 	border: 1px solid yellow;
+}
+
+.border-orange{
+	border: 1px solid #d57b1c;
 }
 
 .fs-12{

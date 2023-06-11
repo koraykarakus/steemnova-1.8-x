@@ -50,7 +50,7 @@
     {if !empty($news)}
       <tr>
         <td class="text-center" colspan="3">
-          <button class="text-yellow" onclick="showNews();">Check News</button>
+          <button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow" onclick="showNews();">Check News</button>
         </td>
       </tr>
       <tr id="newsRow" class="d-none">

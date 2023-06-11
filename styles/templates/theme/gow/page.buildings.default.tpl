@@ -24,7 +24,7 @@
 <div class="ItemsWrapper">
 
 
-<div style="background:url('{$dpath}images/buildings.webp');" class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative">
+<div style="background:url('{$dpath}images/buildings.webp');" class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative border-orange">
 
 {foreach $BuildInfoList as $ID => $Element}
 <div id="item_big_{$ID}" class="buildItemBig position-absolute top-0 left-0 d-flex flex-column d-none rounded border border-1 border-dark p-0 m-0 w-100">
@@ -165,7 +165,7 @@
 {/foreach}
 </div>
 
-<div class="d-flex flex-wrap justify-content-start bg-black py-2">
+<div class="d-flex flex-wrap justify-content-start bg-black py-2 border-orange">
   {foreach $BuildInfoList as $ID => $Element}
     <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
     data-bs-toggle="tooltip"
