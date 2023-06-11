@@ -86,12 +86,12 @@ $LNG['req_ftp_error_dir']		= 'Girdiğiniz dizin yanlış ya da mevcut degil.';
 
 $LNG['step1_head']				= 'Kurulum veritabanını konfigure et';
 $LNG['step1_desc']				= '2Moons sisteminize kurululabilir. Simdi, veritabanina baglanmak icin asagidaki bilgileri girmelisiniz. Eger gerekli bilgileri bilmiyorsaniz, domain (alan) saglayiciniz ile irtibata geciniz yada 2Moons forumlarindaki direktifleri okuyunuz.';
-$LNG['step1_mysql_server']		= 'Veritabanı sunucusu <br /> SQL Server';
+$LNG['step1_mysql_server']		= 'Veritabanı sunucusu (SQL Server)';
 $LNG['step1_mysql_port']		= 'Veritabanı-Port';
 $LNG['step1_mysql_dbuser']		= 'Veritabanı-Kullanıcı adı';
 $LNG['step1_mysql_dbpass']		= 'Veritabanı-Şifre';
 $LNG['step1_mysql_dbname']		= 'Veritabanı';
-$LNG['step1_mysql_prefix']		= 'Veritabanı prefix eki: <br /> Değiştirmeniz gerekmez';
+$LNG['step1_mysql_prefix']		= 'Veritabanı prefix eki: (Değiştirmeniz gerekmez)';
 
 $LNG['step2_prefix_invalid']	= 'Prefix eki sadece alfanumerik karakterlerden olusur ve son karakter altcizgi ( _ ) olmalidir. ';
 $LNG['step2_db_no_dbname']		= 'Veritabano adı girmediniz.';

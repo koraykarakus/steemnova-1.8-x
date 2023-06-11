@@ -282,48 +282,64 @@ switch ($mode) {
 				$template->show('ins_license.tpl');
 				break;
 			case 2:
-				$error = false;
-				$ftp   = false;
-				if (version_compare(PHP_VERSION, "5.3.0", ">=")) {
-					$PHP = "<span class=\"yes\">" . $LNG['reg_yes'] . ", v" . PHP_VERSION . "</span>";
+				$error = $ftp = false;
+
+				if (version_compare(PHP_VERSION, "8.0.0", ">="))
+				{
+					$PHP = "<span class=\"text-success\">" . $LNG['reg_yes'] . ", v" . PHP_VERSION . "</span>";
 				}
-				else {
-					$PHP   = "<span class=\"no\">" . $LNG['reg_no'] . ", v" . PHP_VERSION . "</span>";
+				else
+				{
+					$PHP   = "<span class=\"text-danger\">" . $LNG['reg_no'] . ", v" . PHP_VERSION . "</span>";
 					$error = true;
 				}
 
-				if (class_exists('PDO') && in_array('mysql', PDO::getAvailableDrivers())) {
-					$pdo = "<span class=\"yes\">" . $LNG['reg_yes'] . "</span>";
+				if (class_exists('PDO') && in_array('mysql', PDO::getAvailableDrivers()))
+				{
+					$pdo = "<span class=\"text-success\">" . $LNG['reg_yes'] . "</span>";
 				}
-				else {
-					$pdo   = "<span class=\"no\">" . $LNG['reg_no'] . "</span>";
+				else
+				{
+					$pdo   = "<span class=\"text-danger\">" . $LNG['reg_no'] . "</span>";
 					$error = true;
 				}
-				if (function_exists('json_encode')) {
-					$json = "<span class=\"yes\">" . $LNG['reg_yes'] . "</span>";
+
+				if (function_exists('json_encode'))
+				{
+					$json = "<span class=\"text-success\">" . $LNG['reg_yes'] . "</span>";
 				}
-				else {
-					$json  = "<span class=\"no\">" . $LNG['reg_no'] . "</span>";
+				else
+				{
+					$json  = "<span class=\"text-danger\">" . $LNG['reg_no'] . "</span>";
 					$error = true;
 				}
-				if (function_exists('ini_set')) {
-					$iniset = "<span class=\"yes\">" . $LNG['reg_yes'] . "</span>";
+
+				if (function_exists('ini_set'))
+				{
+					$iniset = "<span class=\"text-success\">" . $LNG['reg_yes'] . "</span>";
 				}
-				else {
-					$iniset = "<span class=\"no\">" . $LNG['reg_no'] . "</span>";
+				else
+				{
+					$iniset = "<span class=\"text-danger\">" . $LNG['reg_no'] . "</span>";
 					$error  = true;
 				}
-				if (!ini_get('register_globals')) {
-					$global = "<span class=\"yes\">" . $LNG['reg_yes'] . "</span>";
+
+				if (!ini_get('register_globals'))
+				{
+					$global = "<span class=\"text-success\">" . $LNG['reg_yes'] . "</span>";
 				}
-				else {
-					$global = "<span class=\"no\">" . $LNG['reg_no'] . "</span>";
+				else
+				{
+					$global = "<span class=\"text-danger\">" . $LNG['reg_no'] . "</span>";
 					$error  = true;
 				}
-				if (!extension_loaded('gd')) {
-					$gdlib = "<span class=\"no\">" . $LNG['reg_no'] . "</span>";
+
+				if (!extension_loaded('gd'))
+				{
+					$gdlib = "<span class=\"text-danger\">" . $LNG['reg_no'] . "</span>";
 				}
-				else {
+				else
+				{
 					$gdVerion = '0.0.0';
 					if (function_exists('gd_info')) {
 						$temp  = gd_info();
@@ -335,48 +351,76 @@ switch ($mode) {
 							$gdVerion = $match[1];
 						}
 					}
-					$gdlib = "<span class=\"yes\">" . $LNG['reg_yes'] . ", v" . $gdVerion . "</span>";
+					$gdlib = "<span class=\"text-success\">" . $LNG['reg_yes'] . ", v" . $gdVerion . "</span>";
 				}
+
 				clearstatcache();
-				if (file_exists(ROOT_PATH . "includes/config.php") || @touch(ROOT_PATH . "includes/config.php")) {
-					if (is_writable(ROOT_PATH . "includes/config.php")) {
-						$chmod = "<span class=\"yes\"> - " . $LNG['reg_writable'] . "</span>";
+
+				if (file_exists(ROOT_PATH . "includes/config.php") || @touch(ROOT_PATH . "includes/config.php"))
+				{
+
+					if (is_writable(ROOT_PATH . "includes/config.php"))
+					{
+						$chmod = "<span class=\"text-success\"> - " . $LNG['reg_writable'] . "</span>";
 					}
-					else {
-						$chmod = " - <span class=\"no\">" . $LNG['reg_not_writable'] . "</span>";
+					else
+					{
+						$chmod = " - <span class=\"text-danger\">" . $LNG['reg_not_writable'] . "</span>";
 						$error = true;
 						$ftp   = true;
 					}
-					$config = "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_file'], 'includes/config.php') . "</p></td><td class=\"transparent\"><span class=\"yes\">" . $LNG['reg_found'] . "</span>" . $chmod . "</td></tr>";
+
+					$config = "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_file'], 'includes/config.php') . "</p></td><td class=\"transparent\"><span class=\"text-success\">" . $LNG['reg_found'] . "</span>" . $chmod . "</td></tr>";
 				}
-				else {
-					$config = "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_file'], 'includes/config.php') . "</p></td><td class=\"transparent\"><span class=\"no\">" . $LNG['reg_not_found'] . "</span></td></tr>";
+				else
+				{
+					$config = "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_file'], 'includes/config.php') . "</p></td><td class=\"transparent\"><span class=\"text-danger\">" . $LNG['reg_not_found'] . "</span></td></tr>";
 					$error  = true;
 					$ftp    = true;
 				}
+
 				$directories = array('cache/', 'cache/templates/', 'cache/sessions/', 'includes/');
 				$dirs        = "";
-				foreach ($directories as $dir) {
-					if (file_exists(ROOT_PATH . $dir) || @mkdir(ROOT_PATH . $dir)) {
-						if (is_writable(ROOT_PATH . $dir)) {
-							$chmod = "<span class=\"yes\"> - " . $LNG['reg_writable'] . "</span>";
-						} else {
-							$chmod = " - <span class=\"no\">" . $LNG['reg_not_writable'] . "</span>";
+				foreach ($directories as $dir)
+				{
+					if (file_exists(ROOT_PATH . $dir) || @mkdir(ROOT_PATH . $dir))
+					{
+						if (is_writable(ROOT_PATH . $dir))
+						{
+							$chmod = "<span class=\"text-success\"> - " . $LNG['reg_writable'] . "</span>";
+						}
+						else
+						{
+							$chmod = " - <span class=\"text-danger\">" . $LNG['reg_not_writable'] . "</span>";
 							$error = true;
 							$ftp = true;
 						}
-						$dirs .= "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_dir'], $dir) . "</p></td><td class=\"transparent\"><span class=\"yes\">" . $LNG['reg_found'] . "</span>" . $chmod . "</td></tr>";
+
+						$dirs .= "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_dir'], $dir) . "</p></td><td class=\"transparent\"><span class=\"text-success\">" . $LNG['reg_found'] . "</span>" . $chmod . "</td></tr>";
+
 					}
-					else {
-						$dirs .= "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_dir'], $dir) . "</p></td><td class=\"transparent\"><span class=\"no\">" . $LNG['reg_not_found'] . "</span></td></tr>";
+					else
+					{
+						$dirs .= "<tr><td class=\"transparent left\"><p>" . sprintf($LNG['reg_dir'], $dir) . "</p></td><td class=\"transparent\"><span class=\"text-danger\">" . $LNG['reg_not_found'] . "</span></td></tr>";
 					}
+
 				}
-				if ($error == false) {
-					$done = '<tr class="noborder"><td colspan="2" class="transparent"><a href="index.php?mode=install&step=3"><button style="cursor: pointer;">' . $LNG['continue'] . '</button></a></td></tr>';
+
+				if ($error == false)
+				{
+					$done = '
+					<tr class="noborder"><td colspan="2" class="transparent">
+						<a class="btn btn-primary text-white w-100 my-2 p-1" href="index.php?mode=install&step=3">
+							' . $LNG['continue'] . '
+						</a>
+					</td>
+					</tr>';
 				}
-				else {
+				else
+				{
 					$done = '';
 				}
+
 				$template->assign(array(
 					'dir'    => $dirs,
 					'json'   => $json,
@@ -387,17 +431,22 @@ switch ($mode) {
 					'pdo'    => $pdo,
 					'ftp'    => $ftp,
 					'iniset' => $iniset,
-					'global' => $global));
+					'global' => $global
+				));
+
 				$template->show('ins_req.tpl');
 				break;
 			case 3:
-                $template->assign(array(
-                    'host'     => getenv('DB_HOST'),
-                    'user'     => getenv('DB_USER'),
-                    'password' => getenv('DB_PASSWORD'),
-                    'dbname'   => getenv('DB_NAME'),
-                ));
+
+	      $template->assign(array(
+	          'host'     => getenv('DB_HOST'),
+	          'user'     => getenv('DB_USER'),
+	          'password' => getenv('DB_PASSWORD'),
+	          'dbname'   => getenv('DB_NAME'),
+	      ));
+
 				$template->show('ins_form.tpl');
+
 				break;
 			case 4:
 				$host   = HTTP::_GP('host', '');
@@ -406,52 +455,78 @@ switch ($mode) {
 				$userpw = HTTP::_GP('passwort', '', true);
 				$dbname = HTTP::_GP('dbname', '', true);
 				$prefix = HTTP::_GP('prefix', 'uni1_');
+
 				$template->assign(array(
 					'host'   => $host,
 					'port'   => $port,
 					'user'   => $user,
 					'dbname' => $dbname,
-					'prefix' => $prefix,));
+					'prefix' => $prefix,
+				));
+
 				if (empty($dbname)) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
 						'message' => $LNG['step2_db_no_dbname'],));
+
 					$template->show('ins_step4.tpl');
 					exit;
 				}
+
 				if (strlen($prefix) > 36) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_db_too_long'],));
+						'message' => $LNG['step2_db_too_long'],
+					));
+
 					$template->show('ins_step4.tpl');
 					exit;
 				}
+
 				if (strspn($prefix, '-./\\') !== 0) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_prefix_invalid'],));
+						'message' => $LNG['step2_prefix_invalid'],
+					));
+
 					$template->show('ins_step4.tpl');
+
 					exit;
 				}
+
 				if (preg_match('!^[0-9]!', $prefix) !== 0) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_prefix_invalid'],));
+						'message' => $LNG['step2_prefix_invalid'],
+					));
+
 					$template->show('ins_step4.tpl');
 					exit;
 				}
+
 				if (is_file(ROOT_PATH . "includes/config.php") && filesize(ROOT_PATH . "includes/config.php") != 0) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_config_exists'],));
+						'message' => $LNG['step2_config_exists'],
+					));
+
 					$template->show('ins_step4.tpl');
+
 					exit;
 				}
 				@touch(ROOT_PATH . "includes/config.php");
 				if (!is_writable(ROOT_PATH . "includes/config.php")) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_conf_op_fail'],));
+						'message' => $LNG['step2_conf_op_fail'],
+					));
+
 					$template->show('ins_step4.tpl');
 					exit;
 				}
@@ -468,18 +543,24 @@ switch ($mode) {
 					Database::get();
 				}
 				catch (Exception $e) {
+
 					$template->assign(array(
 						'class'   => 'fatalerror',
-						'message' => $LNG['step2_db_con_fail'] . '</p><p>' . $e->getMessage(),));
+						'message' => $LNG['step2_db_con_fail'] . '</p><p>' . $e->getMessage(),
+					));
+
 					$template->show('ins_step4.tpl');
 
 					unlink(ROOT_PATH . 'includes/config.php');
 					exit;
 				}
 				@touch(ROOT_PATH . "includes/error.log");
+
 				$template->assign(array(
 					'class'   => 'noerror',
-					'message' => $LNG['step2_db_done'],));
+					'message' => $LNG['step2_db_done'],
+				));
+
 				$template->show('ins_step4.tpl');
 				exit;
 				break;
@@ -550,11 +631,13 @@ switch ($mode) {
 				}
 				break;
 			case 7:
-                $template->assign(array(
-                    'name'     => getenv('ADMIN_NAME'),
-                    'password' => getenv('ADMIN_PASSWORD'),
-                    'mail'     => getenv('ADMIN_MAIL'),
-                ));
+
+        $template->assign(array(
+            'name'     => getenv('ADMIN_NAME'),
+            'password' => getenv('ADMIN_PASSWORD'),
+            'mail'     => getenv('ADMIN_MAIL'),
+        ));
+
 				$template->show('ins_acc.tpl');
 				break;
 			case 8:
