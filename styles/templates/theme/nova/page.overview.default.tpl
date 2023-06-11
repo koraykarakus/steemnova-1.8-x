@@ -7,21 +7,21 @@
             $("#chkbtn").on('click',function() {
                 $(this).hide();
                 $("#hidden-div").show();
-            }); 
+            });
         });
 
  $(function(){
             $("#chkbtn2").on('click',function() {
                 $("#chkbtn").show();
                 $("#hidden-div").hide();
-            }); 
+            });
         });
  $(function(){
             $("#chkbtn1").on('click',function() {
                 $(this).hide();
                 $("#hidden-div2").hide()
 $("#tn3").show();
-            }); 
+            });
         });
  $(function(){
             $("#chkbtn3").on('click',function() {
@@ -29,53 +29,71 @@ $("#tn3").show();
                 $("#hidden-div2").show();
 $("#tn3").hide();
 
-            }); 
+            });
         });
     </script>
 
 {/block}
 {block name="content"}
 
-   
+
 <style>
 	.hidden-div {
         display:none;	}
-</style>	
+</style>
 
 <div>
 	{if $messages}
 	<div class="message"><a href="?page=messages">{$messages}</a></div>
-	
+
 	{/if}
 <div class="infos">
 <div class="planeto"><a href="#" onclick="return Dialog.PlanetAction();" title="{$LNG.ov_planetmenu}">{$LNG["type_planet_{$planet_type}"]} {$planetname}</a> ({$username})</div>
 
 	{$LNG.ov_server_time}:
 		<span class="servertime">{$servertime}</span>
-	
-	
+
+
 </br>
 
 {$LNG.ov_admins_online}:&nbsp;{foreach $AdminsOnline as $ID => $Name}{if !$Name@first}&nbsp;&bull;&nbsp;{/if}<a href="#" onclick="return Dialog.PM({$ID})"><a style="color:lime">{$Name}</a>{foreachelse}{/foreach} </br>
 {$LNG.ov_online}
 
 			<a style="color:lime">{$usersOnline}</a> {$LNG.ov_players}
-		
+
 			<a style="color:lime">{$fleetsOnline}</a> {$LNG.ov_moving_fleets}
 <br>{$LNG.ov_points} {$rankInfo}
-{if $is_news}
+{if !empty($news)}
+  <tr>
+    <td class="text-center" colspan="3">
+      <button class="text-yellow" onclick="showNews();">Check News</button>
+    </td>
+  </tr>
+  <tr id="newsRow" class="d-none">
+    <td colspan="2">
+      <table class="table table-gow fs-12">
+        <thead>
+          <tr>
+            <th class="color-blue text-center" colspan="3">{$LNG.ov_news}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foreach $news as $currentNews}
+          <tr>
+            <td class="text-center color-blue">{$currentNews.user}</td>
+            <td class="text-center color-blue">{$currentNews.date}</td>
+            <td class="text-center color-blue">{$currentNews.text}</td>
+          </tr>
+          {/foreach}
+        </tbody>
+      </table>
+    </td>
 
-                <div class="hidden-div" id="hidden-div">
-
-         
-                 {$LNG.ov_news}:&nbsp;{$news} </br><span style="display:block; margin-top:10px;"><button id="chkbtn2">Hide News</button></span>
- 
-                </div>
-                <span style="display:block; margin-top:10px;"><button id="chkbtn">Check News</button></span>
+  </tr>
 {/if}
 
     </div>
-		
+
 <div class="infos" >
 <div class="planeto">
 		{$LNG.ov_events} <button id="chkbtn1">Hide fleets</button> </div>
@@ -85,8 +103,8 @@ $("#tn3").hide();
 
 
 		<li style=" padding: 3px; "><span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">{pretty_fly_time({$fleet.resttime})}
-		</span> <td id="fleettime_{$index}">{$fleet.text}</td></li> 
-	
+		</span> <td id="fleettime_{$index}">{$fleet.text}</td></li>
+
 	{/foreach}
 </ul>
  &nbsp;<span style="display:none" id="tn3"><button id="chkbtn3">Show fleets</button></span>
@@ -99,7 +117,7 @@ $("#tn3").hide();
 		<div class="planeth">
 			<img style="float: left;" src="{$dpath}planeten/{$planetimage}.jpg" height="200" width="200" alt="{$planetname}"></div><div class="planeth">
  {$planetname}<br>
-			
+
 			{if $buildInfo.buildings}<a href="game.php?page=buildings">{$LNG.lm_buildings}: </a>{$LNG.tech[$buildInfo.buildings['id']]} ({$buildInfo.buildings['level']})<br><div class="timer" data-time="{$buildInfo.buildings['timeleft']}">{$buildInfo.buildings['starttime']}</div>{else}<a href="game.php?page=buildings">{$LNG.lm_buildings}: {$LNG.ov_free}</a><br>{/if}
 			{if $buildInfo.tech}<a href="game.php?page=research">{$LNG.lm_research}: </a>{$LNG.tech[$buildInfo.tech['id']]} ({$buildInfo.tech['level']})<br><div class="timer" data-time="{$buildInfo.tech['timeleft']}">{$buildInfo.tech['starttime']}</div>{else}<a href="game.php?page=research">{$LNG.lm_research}: {$LNG.ov_free}</a><br>{/if}
 			{if $buildInfo.fleet}<a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: </a>{$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})<br><div class="timer" data-time="{$buildInfo.fleet['timeleft']}">{$buildInfo.fleet['starttime']}</div>{else}<a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: {$LNG.ov_free}</a><br>{/if}
@@ -112,20 +130,20 @@ $("#tn3").hide();
 &nbsp;</br>
 </div>
 <br>
-<div class="infos">		
+<div class="infos">
 {if $AllPlanets}<div class="planeto">{$LNG.lv_planet}</div>
 
 
 
 
-		
+
 			{foreach $AllPlanets as $PlanetRow}
 			{if ($PlanetRow@iteration % $themeSettings.PLANET_ROWS_ON_OVERVIEW) === 1}{/if}
 			<div class="planetl"><a href="game.php?page=overview&amp;cp={$PlanetRow.id}" title="{$PlanetRow.name}"><img style="margin: 5px;" src="{$dpath}planeten/{$PlanetRow.image}.jpg" width="100" height="100" alt="{$PlanetRow.name}"></a><br>{$PlanetRow.name}<br>{$PlanetRow.build}<br></div>
 			{if $PlanetRow@last && $PlanetRow@total > 1 && ($PlanetRow@iteration % $themeSettings.PLANET_ROWS_ON_OVERVIEW) !== 0}
 			{$to = $themeSettings.PLANET_ROWS_ON_OVERVIEW - ($PlanetRow@iteration % $themeSettings.PLANET_ROWS_ON_OVERVIEW)}
 			{for $foo=1 to $to}
-			
+
 			{/for}
 			{/if}
 			{if ($PlanetRow@iteration % $themeSettings.PLANET_ROWS_ON_OVERVIEW) === 0}</tr>{/if}
@@ -133,10 +151,10 @@ $("#tn3").hide();
 
 		{else}&nbsp;{/if}
 </div></div>
-	
-	
-	
-	
+
+
+
+
 </div>
 
 {/block}

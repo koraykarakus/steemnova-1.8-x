@@ -77,15 +77,34 @@ $("#tn3").hide();
     <td>{$LNG.ov_points}</td>
     <td colspan="2">{$rankInfo}</td>
   </tr>
-{if $is_news}
-  <tr>
-    <td>{$LNG.ov_news}</td>
-    <td colspan="2">{$news}</td>
-  </tr>
-  <tr>
-    <td colspan="3"><button id="chkbtn">Check News</button></td>
-  </tr>
-{/if}
+  {if !empty($news)}
+    <tr>
+      <td class="text-center" colspan="3">
+        <button class="text-yellow" onclick="showNews();">Check News</button>
+      </td>
+    </tr>
+    <tr id="newsRow" class="d-none">
+      <td colspan="2">
+        <table class="table table-gow fs-12">
+          <thead>
+            <tr>
+              <th class="color-blue text-center" colspan="3">{$LNG.ov_news}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {foreach $news as $currentNews}
+            <tr>
+              <td class="text-center color-blue">{$currentNews.user}</td>
+              <td class="text-center color-blue">{$currentNews.date}</td>
+              <td class="text-center color-blue">{$currentNews.text}</td>
+            </tr>
+            {/foreach}
+          </tbody>
+        </table>
+      </td>
+
+    </tr>
+  {/if}
 
 
 <tr>
