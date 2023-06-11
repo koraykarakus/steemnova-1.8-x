@@ -364,6 +364,10 @@ class statbuilder
 			$UserPoints[$UserData['id']]['techno']['count'] 	= $TechnoPoints['count'];
 			$UserPoints[$UserData['id']]['techno']['points'] 	= $TechnoPoints['points'];
 
+			if (!isset($UserPoints[$UserData['id']]['build'])) { //user don't have any planets ( user id changed manually)
+				continue;
+			}
+
 			$UserPoints[$UserData['id']]['total']['count'] 		= $UserPoints[$UserData['id']]['techno']['count']
 																+ $UserPoints[$UserData['id']]['build']['count']
 																+ $UserPoints[$UserData['id']]['defense']['count']

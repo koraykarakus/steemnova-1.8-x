@@ -116,13 +116,16 @@ class ShowStatisticsPage extends AbstractGamePage
 
                 $RangeList    = array();
 
-                try {
-                    $USER    += $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId;', array(
-                        ':userId'    => $USER['id']
-                    ));
-                } catch (Exception $e) {
-                    $USER['total_points'] = 0;
+                $totalPointsUser = $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId;', array(
+                    ':userId'    => $USER['id']
+                ));
+
+                if (!$totalPointsUser) {
+                  $totalPointsUser = array('total_points' => 0);
                 }
+
+                $USER = array_merge($USER, $totalPointsUser);
+
 
                 foreach ($query as $StatRow) {
                     $IsNoobProtec = CheckNoobProtec($USER, $StatRow, $StatRow);
