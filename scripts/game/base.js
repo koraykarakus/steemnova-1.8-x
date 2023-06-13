@@ -189,6 +189,9 @@ var Dialog	= {
     type: "iframe",
     width: width,
     height: height,
+    iframeAttr:{
+      scrolling: "auto",
+    },
   },
 ]);
 
