@@ -136,11 +136,11 @@ $LNG['passwordNext']				= 'Siguiente';
 
 //case default
 
-$LNG['login_error_1']				= 'Incorrecto Usuario/Contraseña!';
-$LNG['login_error_2']				= 'Alguien se ha conectado desde otro PC en su cuenta, o su dirección IP es diferente!';
-$LNG['login_error_3']				= 'Tu sesión ha expirado!';
-$LNG['login_error_4']				= 'Se ha producido un error en la autorización externa, inténtalo de nuevo!';
-
+$LNG['login_error_1'] = "¡No se ha introducido el correo electrónico!";
+$LNG['login_error_2'] = "¡No se ha introducido la contraseña!";
+$LNG['login_error_3'] = "¡No se encuentra el usuario!";
+$LNG['login_error_4'] = "¡ReCaptcha no es correcto!";
+$LNG['login_error_5'] = "¡La contraseña ingresada es incorrecta!";
 //Rules
 $LNG['rulesHeader']					= 'Reglas';
 

@@ -134,12 +134,11 @@ $LNG['passwordBack']				= 'Wróć';
 $LNG['passwordNext']				= 'Dalej';
 
 //case default
-
-$LNG['login_error_1']				= 'Błąd nazwy użytkownika lub hasła!';
-$LNG['login_error_2']				= 'Ktoś zalogował się na twoje konto z innego komputera!';
-$LNG['login_error_3']				= 'Sesja wygasła!';
-$LNG['login_error_4']				= 'Wystąpił błąd, spróbuj potem!';
-
+$LNG['login_error_1'] = "E-mail nie został wprowadzony!";
+$LNG['login_error_2'] = "Hasło nie zostało wprowadzone!";
+$LNG['login_error_3'] = "Nie znaleziono użytkownika!";
+$LNG['login_error_4'] = "ReCaptcha jest niepoprawna!";
+$LNG['login_error_5'] = "Wprowadzone hasło jest błędne!";
 //Rules
 $LNG['rulesHeader']					= 'Regulamin';
 

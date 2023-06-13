@@ -137,12 +137,11 @@ $LNG['passwordBack']				= 'Back';
 $LNG['passwordNext']				= 'Next';
 
 //case default
-
-$LNG['login_error_1']				= 'Wrong username/password!';
-$LNG['login_error_2']				= 'Someone has logged in from a different PC in your account, or your IP is different!';
-$LNG['login_error_3']				= 'Your session has expired!';
-$LNG['login_error_4']				= 'There was an error in external authorization, please try again!';
-
+$LNG['login_error_1'] = "E-mail não inserido!";
+$LNG['login_error_2'] = "Senha não digitada!";
+$LNG['login_error_3'] = "Usuário não encontrado!";
+$LNG['login_error_4'] = "ReCaptcha não está correto!";
+$LNG['login_error_5'] = "A senha digitada está errada!";
 //Rules
 $LNG['rulesHeader']					= 'Rules';
 

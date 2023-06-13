@@ -133,12 +133,11 @@ $LNG['passwordBack']				= 'Zurück';
 $LNG['passwordNext']				= 'Weiter';
 
 //case default
-
-$LNG['login_error_1']				= 'Falscher Benutzername/Passwort!';
-$LNG['login_error_2']				= 'Jemand hat sich von einem anderem PC in deinem Account eingeloggt!';
-$LNG['login_error_3']				= 'Deine Session ist abgelaufen!';
-$LNG['login_error_4']				= 'Es gab einen Fehler bei der externen Autorisierung, bitte versuche Sie es später noch einmal!';
-
+$LNG['login_error_1'] = "E-Mail wurde nicht eingegeben!";
+$LNG['login_error_2'] = "Passwort wurde nicht eingegeben!";
+$LNG['login_error_3'] = "Benutzer wurde nicht gefunden!";
+$LNG['login_error_4'] = "ReCaptcha ist nicht korrekt!";
+$LNG['login_error_5'] = "Das eingegebene Passwort ist falsch!";
 //Rules
 $LNG['rulesHeader']					= 'Regelwerk';
 

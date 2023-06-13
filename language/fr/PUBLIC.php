@@ -14,7 +14,7 @@ $LNG['siteTitleBattleHall']			= 'Hall of Fame';
 $LNG['siteTitleRules']				= 'Règles';
 $LNG['siteTitleNews']				= 'News';
 $LNG['siteTitleDisclamer']			= 'Contacter un administrateur';
-$LNG['siteTitleLostPassword']		= 'Mot de passe perdu ?';	 
+$LNG['siteTitleLostPassword']		= 'Mot de passe perdu ?';
 /* ------------------------------------------------------------------------------------------ */
 // Menu
 $LNG['forum']						= 'Forum';
@@ -123,11 +123,11 @@ $LNG['passwordNext']				= 'Suivant';
 
 //case default
 
-$LNG['login_error_1']				= 'Combinaison login/mot de passe incorrect!';
-$LNG['login_error_2']				= 'Quelqu\'un est connecté à partir d\'un autre PC sur votre compte ou bien votre adresse IP est différente!';
-$LNG['login_error_3']				= 'Votre session a expirée !';
-$LNG['login_error_4']				= 'Il y a eu une erreur dans l\'autorisation externe,s\'il vous plaît ré-essayez !';
-
+$LNG['login_error_1'] = "E-mail non saisi !";
+$LNG['login_error_2'] = "Le mot de passe n'est pas saisi !";
+$LNG['login_error_3'] = "L'utilisateur est introuvable !";
+$LNG['login_error_4'] = "ReCaptcha n'est pas correct !";
+$LNG['login_error_5'] = "Le mot de passe saisi est erroné !";
 //Rules
 $LNG['rulesHeader']					= 'Règles';
 
