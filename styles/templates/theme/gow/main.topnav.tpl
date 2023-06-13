@@ -170,7 +170,7 @@
         </div>
         <div class="resourceWrapperOuter d-flex">
 
-          <div class="resourceWrapper d-flex align-items-center justify-content-center fs-10 text-white w-100 h-100">
+          <div class="resourceWrapper servertime d-flex align-items-center justify-content-center fs-10 text-white w-100 h-100">
             {$servertime}
           </div>
         </div>
