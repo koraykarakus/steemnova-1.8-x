@@ -39,24 +39,24 @@
 	</form>
 	{if $action == 'sendMissle'}
     <form action="?page=fleetMissile" method="post">
-	<input type="hidden" name="galaxy" value="{$galaxy}">
-	<input type="hidden" name="system" value="{$system}">
-	<input type="hidden" name="planet" value="{$planet}">
-	<input type="hidden" name="type" value="{$type}">
-	<table class="table table-gow table-sm fs-12">
-		<tr>
-			<th colspan="2">{$LNG.gl_missil_launch} [{$galaxy}:{$system}:{$planet}]</th>
-		</tr>
-		<tr>
-			<td>{$missile_count} <input type="text" name="SendMI" size="2" maxlength="7"></td>
-			<td>{$LNG.gl_objective}:
-				{html_options name=Target options=$missileSelector}
-			</td>
-		</tr>
-		<tr>
-			<th colspan="2" style="text-align:center;"><input type="submit" value="{$LNG.gl_missil_launch_action}"></th>
-		</tr>
-	</table>
+			<input type="hidden" name="galaxy" value="{$galaxy}">
+			<input type="hidden" name="system" value="{$system}">
+			<input type="hidden" name="planet" value="{$planet}">
+			<input type="hidden" name="type" value="{$type}">
+		<table class="table table-gow table-sm fs-12 my-1">
+			<tr>
+				<th colspan="2">{$LNG.gl_missil_launch} [{$galaxy}:{$system}:{$planet}]</th>
+			</tr>
+			<tr>
+				<td>{$missile_count} <input type="text" name="SendMI" size="2" maxlength="7"></td>
+				<td>{$LNG.gl_objective}:
+					{html_options name=Target options=$missileSelector}
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2" style="text-align:center;"><input type="submit" value="{$LNG.gl_missil_launch_action}"></th>
+			</tr>
+		</table>
 	</form>
     {/if}
 	<table class="table table-sm table-gow fs-12">
