@@ -163,7 +163,7 @@ var Dialog	= {
 		if(typeof Subject !== 'string')
 			Subject	= '';
 
-		return Dialog.open('game.php?page=messages&mode=write&id='+ID+'&subject='+encodeURIComponent(Subject)+'&message='+encodeURIComponent(Subject), 650, 350);
+		return Dialog.open('game.php?page=messages&mode=write&id='+ID+'&subject='+encodeURIComponent(Subject)+'&message='+encodeURIComponent(Subject), 650, 420);
 	},
 
 	Playercard: function(ID) {
@@ -171,7 +171,7 @@ var Dialog	= {
 	},
 
 	Buddy: function(ID) {
-		return Dialog.open('game.php?page=buddyList&mode=request&id='+ID, 650, 300);
+		return Dialog.open('game.php?page=buddyList&mode=request&id='+ID, 650, 380);
 	},
 
 	PlanetAction: function() {
@@ -190,7 +190,7 @@ var Dialog	= {
     width: width,
     height: height,
     iframeAttr:{
-      scrolling: "auto",
+      scrolling: "no",
     },
   },
 ]);

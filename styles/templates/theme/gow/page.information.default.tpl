@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_info}{/block}
 {block name="content"}
-<table class="table table-gow table-sm table-striped">
+<table class="table table-gow table-sm table-striped my-1">
 	<tbody>
 	<tr>
 		<th>{$LNG.tech.$elementID}</th>
@@ -10,7 +10,7 @@
 			<table>
 				<tr>
 
-					<td class="transparent left"><p>{$LNG.longDescription.$elementID}</p>
+					<td class="transparent left fs-12"><p>{$LNG.longDescription.$elementID}</p>
 					{if !empty($Bonus)}<p>
 					<b>{$LNG.in_bonus}</b><br>
 					{foreach $Bonus as $BonusName => $elementBouns}{if $elementBouns[0] < 0}-{else}+{/if}{if $elementBouns[1] == 0}{abs($elementBouns[0] * 100)}%{else}{floatval($elementBouns[0])}{/if} {$LNG.bonus.$BonusName}<br>{/foreach}
