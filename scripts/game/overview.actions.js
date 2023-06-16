@@ -19,11 +19,11 @@ function checkrename()
 
 function checkcancel()
 {
-	var planetName = $('#planetName').val();
+	var password = $('#password').val();
 
 		$.ajax({
 		type: 'POST',
-		url: 'game.php?page=overview&mode=delete&ajax=1&planetName=' + planetName,
+		url: 'game.php?page=overview&mode=delete&ajax=1&password=' + password,
 		dataType: 'json',
 		success: function (data) {
 

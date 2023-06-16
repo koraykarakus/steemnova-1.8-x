@@ -374,10 +374,10 @@ class ShowOverviewPage extends AbstractGamePage
 
 		$error = array();
 
-		$planetName	= HTTP::_GP('planetName', '', true);
+		$password	= HTTP::_GP('password', '', true);
 
-		if (empty($planetName)) {
-			$error[] = $LNG['ov_ac_error_3'];
+		if (empty($password)) {
+			$error[] = $LNG['ov_ac_error_4'];
 		}
 
 		$db = Database::get();
@@ -400,8 +400,8 @@ class ShowOverviewPage extends AbstractGamePage
 			$error[] =  $LNG['ov_principal_planet_cant_abanone'];
 		}
 
-		if ($planetName != $PLANET['name']) {
-			$error[] = $LNG['ov_wrong_name'];
+		if ( !(password_verify($password,$USER['password'])) ) {
+			$error[] = $LNG['ov_ac_error_5'];
 		}
 
 		if (!empty($error)) {
