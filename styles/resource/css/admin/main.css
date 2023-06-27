@@ -7,6 +7,10 @@ body {
 	background: url('../../../theme/gow/img/bkd_page.jpg') 0 0;
 }
 
+.content{
+	color: #fff;
+}
+
 #leftmenu .menu-active{
 	background-color: #4c4949!important;
 }

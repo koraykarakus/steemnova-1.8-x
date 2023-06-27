@@ -53,10 +53,9 @@
 	</tr>
 	{/foreach}
 </table>
-<br><br>
 {/if}
 {if $officierList}
-<table class="table table-sm table-gow fs-12">
+<table class="table table-sm table-gow fs-12 my-2">
 	<tr>
 		<th colspan="2">{$LNG.of_offi}</th>
 	</tr>

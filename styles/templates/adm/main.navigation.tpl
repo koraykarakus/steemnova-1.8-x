@@ -42,6 +42,11 @@ $(document).ready(function(){
 				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=universe" >{$LNG.mu_unisettings}</a>
 			</li>
 		{/if}
+    {if allowedTo('ShowBostPage')}
+			<li class="d-flex {if $currentPage == 'bots'}menu-active{/if}">
+				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=bots" >Bots</a>
+			</li>
+		{/if}
 		{if allowedTo('ShowChatConfigPage')}
     <li class="d-flex {if $currentPage == 'chat'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=chat" >{$LNG.mu_chat}</a>

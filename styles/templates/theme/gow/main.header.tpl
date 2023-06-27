@@ -66,183 +66,49 @@
 	{foreach item=scriptname from=$scripts}
 	<script type="text/javascript" src="./scripts/game/{$scriptname}.js?v={$REV}"></script>
 	{/foreach}
-	{block name="script"}
+
 	<!-- fancybox 5.0 -->
 	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
-  <script>
-   $(function(){
-            		$("#btn1").on('click',function() {
-                $(".infoso").hide();
-                $(".infos").show();
-								$("#btn2, #btn3").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
 
- 		$(function(){
-            $("#btn2").on('click',function() {
-                $(".infos").toggle();
-                $(".infoso").show();
-								$("#btn1, #btn3").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
- $(function(){
-            $("#btn3").on('click',function() {
-                $(".infos").show();
-                $(".infoso").show();
-								$("#btn2, #btn1").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
+<script>
+		var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
+		myDefaultWhiteList.table = ['class','style'];
+		myDefaultWhiteList.tbody = [];
+		myDefaultWhiteList.thead = [];
+		myDefaultWhiteList.th = ['colspan'];
+		myDefaultWhiteList.tr = [];
+		myDefaultWhiteList.td = ['colspan','style'];
+		myDefaultWhiteList.span = ['class','onclick'];
+		myDefaultWhiteList.img = ['src','alt','width','height'];
+		myDefaultWhiteList.form = ['class','action','method'];
+		myDefaultWhiteList.input = ['type','name','value'];
+		myDefaultWhiteList.button = ['type','class'];
+		myDefaultWhiteList.font = ['color'];
+		myDefaultWhiteList.a = ['href','class','onclick'];
+		myDefaultWhiteList.br = [];
 
-         $(function(){
-            		$("#gl1").on('click',function() {
-              	$(".planetb").hide();
-                $(".planetb1").show();
-								$("#gl2, #gl3").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
+			//initialize bootstrap tooltips
+			$(document).ready(function(){
+			  $('[data-bs-toggle="tooltip"]').tooltip({
+					container: 'body',
+				  html: true,
+				  whiteList: myDefaultWhiteList
+				});
+			});
 
- $(function(){
-            		$("#gl2").on('click',function() {
-                $(".planetb1").toggle();
-                $(".planetb").show();
-								$("#gl1, #gl3").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
+			// To allow elements
+			//popovers
 
- $(function(){
-            		$("#gl3").on('click',function() {
-                $(".planetb").show();
-                $(".planetb1").show();
-								$("#gl2, #gl1").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
+			$(document).ready(function(){
+				$('[data-bs-toggle="popover"]').popover({
+					container: 'body',
+				  html: true,
+					whiteList: myDefaultWhiteList
+				});
 
- $(function(){
-            		$("#lab1").on('click',function() {
-                $(".infos").hide();
-                $("#t108, #t113, #t114, #t123, #t124").show();
-								$("#lab2, #lab3, #lab4, #lab5").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
-
- $(function(){
-            		$("#lab2").on('click',function() {
-                $(".infos").hide();
-                $("#t109, #t106, #t110, #t111, #t120, #t121, #t122, #t199").show();
-								$("#lab1, #lab3, #lab4, #lab5").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
-
- $(function(){
-            		$("#lab3").on('click',function() {
-                $(".infos").hide();
-                $("#t114, #t115, #t117, #t118").show();
-								$("#lab2, #lab1, #lab4, #lab5").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
-
- $(function(){
-            		$("#lab4").on('click',function() {
-                $(".infos").hide();
-                $("#t131, #t132, #t133").show();
-								$("#lab2, #lab1, #lab3, #lab5").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
-
- $(function(){
-            $("#lab5").on('click',function() {
-            $(".infos").show();
-						$("#lab2, #lab1, #lab4, #lab3").removeClass("selected");
-						$(this).addClass("selected");
-            });
-        });
-
-        $(function(){
-            $("#ship1").on('click',function() {
-                $(".infos").addClass('d-none').removeClass('d-flex');
-                $("#s202, #s203, #s208, #s209, #s212").addClass('d-flex').removeClass('d-none');
-								$("#ship2, #ship3").removeClass("selected");
-								$(this).addClass("selected");
-            });
-        });
-
-				$(function(){
-            $("#ship2").on('click',function() {
-                $(".infos").addClass('d-none').removeClass('d-flex');
-                $("#s204, #s205, #s206, #s207, #s210, #s211, #s213, #s214").addClass('d-flex').removeClass('d-none');
-								$("#ship1, #ship3").removeClass("selected");
-
- 				$(function(){
-            $("#ship3").on('click',function() {
-                $(".infos").addClass('d-flex').removeClass('d-none');
-
-								$("#ship1, #ship2").removeClass("selected");
-
-$(this).addClass("selected");
-            });
-        });
-
-
-
-$(this).addClass("selected");
-            });
-        });
-
-
-    </script>
-{/block}
-
-	<script>
-
-	var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList
-myDefaultWhiteList.table = ['class','style'];
-myDefaultWhiteList.tbody = [];
-myDefaultWhiteList.thead = [];
-myDefaultWhiteList.th = ['colspan'];
-myDefaultWhiteList.tr = [];
-myDefaultWhiteList.td = ['colspan','style'];
-myDefaultWhiteList.span = ['class','onclick'];
-myDefaultWhiteList.img = ['src','alt','width','height'];
-myDefaultWhiteList.form = ['class','action','method'];
-myDefaultWhiteList.input = ['type','name','value'];
-myDefaultWhiteList.button = ['type','class'];
-myDefaultWhiteList.font = ['color'];
-myDefaultWhiteList.a = ['href','class','onclick'];
-myDefaultWhiteList.br = [];
-
-	//initialize bootstrap tooltips
-	$(document).ready(function(){
-	  $('[data-bs-toggle="tooltip"]').tooltip({
-			container: 'body',
-		  html: true,
-		  whiteList: myDefaultWhiteList
-		});
-	});
-
-	// To allow elements
-	//popovers
-
-	$(document).ready(function(){
-		$('[data-bs-toggle="popover"]').popover({
-			container: 'body',
-		  html: true,
-			whiteList: myDefaultWhiteList
-		});
-
-	});
-
-	</script>
+			});
+</script>
 
 </head>
 <body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
