@@ -253,10 +253,33 @@
         {/if}
 		</td>
 		<td class="text-center align-middle">
-			<a data-bs-toggle="popover"
+			<a class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
-			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$currentPlanet.user.playerrank}</th></tr><tr>{if !$currentPlanet.ownPlanet}{if $currentPlanet.user.isBuddy}<tr><td><a href='#' onclick='return Dialog.Buddy({$currentPlanet.user.id})'>{$LNG.gl_buddy_request}</a></td></tr>{/if}<tr><td><a href='#' onclick='return Dialog.Playercard({$currentPlanet.user.id});'>{$LNG.gl_playercard}</a></td></tr>{/if}<tr><td><a href='?page=statistics&amp;who=1&amp;start={$currentPlanet.user.rank}'>{$LNG.gl_see_on_stats}</a></td></tr></table>">
+			 title="<table class='table table-gow fs-11 w-100'>
+				 <tr>
+					 <th colspan='2'>{$currentPlanet.user.playerrank}</th>
+				 </tr>
+				 {if !$currentPlanet.ownPlanet}
+				 	{if $currentPlanet.user.isBuddy}
+					 <tr class='text-center py-1'>
+						 <td>
+							 <a class='hover-underline hover-pointer user-select-none' href='#' onclick='return Dialog.Buddy({$currentPlanet.user.id})'>{$LNG.gl_buddy_request}</a>
+						 </td>
+					 </tr>
+					 {/if}
+					 <tr class='text-center py-1'>
+						 <td>
+							 <a class='hover-underline hover-pointer user-select-none' href='#' onclick='return Dialog.Playercard({$currentPlanet.user.id});'>{$LNG.gl_playercard}</a>
+						 </td>
+					 </tr>
+					{/if}
+					 <tr class='text-center py-1'>
+						 <td>
+							 <a class='hover-underline hover-pointer user-select-none' href='?page=statistics&amp;who=1&amp;start={$currentPlanet.user.rank}'>{$LNG.gl_see_on_stats}</a>
+						 </td>
+					 </tr>
+				 </table>">
 				<span class="{foreach $currentPlanet.user.class as $class}{if !$class@first} {/if}galaxy-username-{$class}{/foreach} galaxy-username">{$currentPlanet.user.username}</span>
 
 				{if !empty($currentPlanet.user.class)}
@@ -266,10 +289,31 @@
 		</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
 			{if $currentPlanet.alliance}
-			<a data-bs-toggle="popover"
+			<a class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
-			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th>{$LNG.gl_alliance} {$currentPlanet.alliance.name} {$currentPlanet.alliance.member}</th></tr><td><table><tr><td><a href='?page=alliance&amp;mode=info&amp;id={$currentPlanet.alliance.id}'>{$LNG.gl_alliance_page}</a></td></tr><tr><td><a href='?page=statistics&amp;start={$currentPlanet.alliance.rank}&amp;who=2'>{$LNG.gl_see_on_stats}</a></td></tr>{if $currentPlanet.alliance.web}<tr><td><a href='{$currentPlanet.alliance.web}' target='allyweb'>{$LNG.gl_alliance_web_page}</td></tr>{/if}</table></td></table>">
+			 title="<table class='table table-gow fs-11 w-100 px-0'>
+				 <tr>
+					 <th>{$LNG.gl_alliance} {$currentPlanet.alliance.name} {$currentPlanet.alliance.member}</th>
+				 </tr>
+				 <tr class='text-center py-1'>
+					 <td>
+						 <a class='hover-underline hover-pointer' href='?page=alliance&amp;mode=info&amp;id={$currentPlanet.alliance.id}'>{$LNG.gl_alliance_page}</a>
+					 </td>
+				 </tr>
+				 <tr class='text-center py-1'>
+					 <td>
+						 <a class='hover-underline hover-pointer' href='?page=statistics&amp;start={$currentPlanet.alliance.rank}&amp;who=2'>{$LNG.gl_see_on_stats}</a>
+					 </td>
+				 </tr>
+				 {if $currentPlanet.alliance.web}
+				 <tr  class='text-center py-1'>
+					 <td>
+						 <a class='hover-underline hover-pointer' href='{$currentPlanet.alliance.web}' target='allyweb'>{$LNG.gl_alliance_web_page}</a>
+						</td>
+					</tr>
+					{/if}
+				 </table>">
 				<span class="{foreach $currentPlanet.alliance.class as $class}{if !$class@first} {/if}galaxy-alliance-{$class}{/foreach} galaxy-alliance">{$currentPlanet.alliance.tag}</span>
 			</a>
 			{else}-{/if}
