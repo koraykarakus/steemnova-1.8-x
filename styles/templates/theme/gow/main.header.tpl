@@ -110,6 +110,8 @@
 			});
 </script>
 
+<script src="scripts/game/overview.js"></script>
+
 </head>
 <body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}" class="{$bodyclass}">
 	<div id="tooltip" class="tip"></div>

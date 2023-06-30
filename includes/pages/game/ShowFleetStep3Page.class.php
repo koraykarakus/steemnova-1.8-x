@@ -261,7 +261,7 @@ class ShowFleetStep3Page extends AbstractGamePage
 		} elseif(!empty($targetPlanetData['id_owner'])) {
             $sql = "SELECT user.*, stat.total_points
                 FROM %%USERS%% as user
-                LEFT JOIN %%STATPOINTS%% as stat ON stat.id_owner = user.id AND stat.stat_type = '1'
+                LEFT JOIN %%USER_POINTS%% as stat ON stat.id_owner = user.id 
                 WHERE user.id = :ownerID;";
 
 			$targetPlayerData = $db->selectSingle($sql, array(
@@ -322,12 +322,11 @@ class ShowFleetStep3Page extends AbstractGamePage
 			}
 
 			$sql	= 'SELECT total_points
-			FROM %%STATPOINTS%%
-			WHERE id_owner = :userId AND stat_type = :statType';
+			FROM %%USER_POINTS%%
+			WHERE id_owner = :userId;';
 
 			$USER	+= Database::get()->selectSingle($sql, array(
 				':userId'	=> $USER['id'],
-				':statType'	=> 1
 			));
 
 			$IsNoobProtec	= CheckNoobProtec($USER, $targetPlayerData, $targetPlayerData);
