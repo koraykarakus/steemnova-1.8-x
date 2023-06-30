@@ -10,7 +10,7 @@
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
 
-	{assign var="REV" value="1.0.0.37" nocache}
+	{assign var="REV" value="1.0.0.39" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
