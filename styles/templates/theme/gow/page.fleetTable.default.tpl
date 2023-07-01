@@ -113,7 +113,7 @@
 <input type="hidden" name="planet" value="{$targetPlanet}">
 <input type="hidden" name="type" value="{$targetType}">
 <input type="hidden" name="target_mission" value="{$targetMission}">
-<table class="table table-sm bg-black fs-12 table-gow">
+<table class="table table-sm bg-black fs-12 table-gow my-1">
 	<thead>
 		<tr>
 			<th class="text-center" colspan="4">{$LNG.fl_new_mission_title}</th>
@@ -128,12 +128,12 @@
 		</tr>
 		{foreach $FleetsOnPlanet as $FleetRow}
 		<tr style="height:20px;">
-			<td>
+			<td class="align-middle">
 				{if $FleetRow.speed != 0}
-				 <a class="" data-bs-toggle="tooltip"
+				 <a class="hover-underline hover-pointer" data-bs-toggle="tooltip"
 				 data-bs-placement="left"
 				 data-bs-html="true" title='
-				 <table>
+				 <table class="table-tooltip">
 					 <thead>
 						 <tr>
 							 <td>{$LNG.fl_speed_title}</td>
@@ -149,10 +149,14 @@
 				 {$LNG.tech.{$FleetRow.id}}
 				 {/if}
 			 </td>
-			<td id="ship{$FleetRow.id}_value">{$FleetRow.count}</td>
+			<td class="align-middle" id="ship{$FleetRow.id}_value">{$FleetRow.count}</td>
 			{if $FleetRow.speed != 0}
-			<td><a href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a></td>
-			<td><input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0"></td>
+			<td class="align-middle text-center">
+				<a class="hover-underline hover-pointer" href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a>
+			</td>
+			<td>
+				<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0">
+			</td>
 			{else}
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
