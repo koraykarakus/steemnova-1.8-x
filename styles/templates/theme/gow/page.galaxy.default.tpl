@@ -1,5 +1,15 @@
 {block name="title" prepend}{$LNG.lm_galaxy}{/block}
 {block name="content"}
+
+<script type="text/javascript">
+	function closePopovers(){
+			$('.popover').not(this).popover('hide');
+	}
+	function closePopover(){
+		$('.popover').removeClass('show');
+	}
+</script>
+
 	<form action="?page=galaxy" method="post" id="galaxy_form">
 	<input type="hidden" id="auto" value="dr">
 	<table class="table table-gow table-sm fs-12 my-1">
@@ -103,14 +113,15 @@
 		</td>
         {$currentPlanet = $GalaxyRows[$planet]}
 		<td class="text-center align-middle">
-			<a class="hover-pointer" data-bs-toggle="popover"
+			<a onclick="closePopovers();" class="hover-pointer" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			title ="
-			<table class='table table-gow fs-11' style='width:220px'>
+			<table class='table table-gow position-relative fs-11' style='width:220px'>
 				<tr>
 					<th colspan='2'>
-						{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]
+						<span>{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]</span>
+						<button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0' onclick='closePopover();'>X</button>
 					</th>
 				</tr>
 				<tr>
@@ -167,7 +178,7 @@
 		<td class="text-center align-middle" style="white-space: nowrap;">{$currentPlanet.planet.name} {$currentPlanet.lastActivity}</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
 			{if $currentPlanet.moon}
-			<a class="hover-pointer" data-bs-toggle="popover"
+			<a onclick="closePopovers();" class="hover-pointer" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			 title="<table class='table table-gow table-sm fs-11' style='width:240px'>
@@ -244,7 +255,7 @@
 		</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
         {if $currentPlanet.debris}
-			<a data-bs-toggle="popover"
+			<a onclick="closePopovers();" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]</th></tr><tr><td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td><td><table style='width:100%'><tr><th colspan='2'>{$LNG.gl_resources}:</th></tr><tr><td>{$LNG.tech.901}: </td><td>{$currentPlanet.debris.metal|number}</td></tr><tr><td>{$LNG.tech.902}: </td><td>{$currentPlanet.debris.crystal|number}</td></tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr><th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'><a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a></td></tr>{/if}</table></td></tr></table>">
@@ -253,7 +264,7 @@
         {/if}
 		</td>
 		<td class="text-center align-middle">
-			<a class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
+			<a onclick="closePopovers();" class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			 title="<table class='table table-gow fs-11 w-100'>
@@ -289,7 +300,7 @@
 		</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
 			{if $currentPlanet.alliance}
-			<a class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
+			<a onclick="closePopovers();" class="hover-underline hover-pointer user-select-none" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
 			 title="<table class='table table-gow fs-11 w-100 px-0'>

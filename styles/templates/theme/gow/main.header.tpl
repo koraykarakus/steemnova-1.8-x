@@ -83,7 +83,7 @@
 		myDefaultWhiteList.img = ['src','alt','width','height'];
 		myDefaultWhiteList.form = ['class','action','method'];
 		myDefaultWhiteList.input = ['type','name','value'];
-		myDefaultWhiteList.button = ['type','class'];
+		myDefaultWhiteList.button = ['type','class','onclick','style'];
 		myDefaultWhiteList.font = ['color'];
 		myDefaultWhiteList.a = ['href','class','onclick'];
 		myDefaultWhiteList.br = [];
