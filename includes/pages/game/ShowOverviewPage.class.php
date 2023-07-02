@@ -119,6 +119,37 @@ class ShowOverviewPage extends AbstractGamePage
 		}
 	}
 
+	function botsBuild(){
+
+		$db = Database::get();
+
+		$sql = "SELECT * FROM %%USERS%% WHERE is_bot = 1 AND universe = :universe;";
+
+		$BOTUSERS = $db->select($sql,array(
+			':universe' => Universe::current(),
+		));
+
+
+		//select bot planets
+		$sql = "SELECT * FROM %%PLANETS%% WHERE is_bot = 1 AND universe = :universe;";
+
+		$BOTPLANETS = $db->select($sql,array(
+			':universe' => Universe::current(),
+		));
+
+		//update bot planets
+			//handle shipyard queue
+			//handle research queue
+			//handle building queue
+			//calculate production from time passed
+
+		//use metal,crystal deuterium for new build 
+
+		//save
+
+
+	}
+
 	function show()
 	{
 		global $LNG, $PLANET, $USER, $config;
