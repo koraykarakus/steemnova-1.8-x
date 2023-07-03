@@ -3,18 +3,27 @@
 <form name="stats" id="stats" method="post" action="">
 	<table class="table table-gow table-sm fs-12">
 		<tr>
-			<th>{$LNG.st_statistics} ({$LNG.st_updated}: {$stat_date})</th>
+			<th class="text-center">{$LNG.st_statistics} ({$LNG.st_updated}: {$stat_date})</th>
 		</tr>
 		<tr>
-			<td>
-				<label for="who">{$LNG.st_show}</label> <select name="who" id="who" onchange="$('#stats').submit();">{html_options options=$Selectors.who selected=$who}</select>
-				<label for="type">{$LNG.st_per}</label> <select name="type" id="type" onchange="$('#stats').submit();">{html_options options=$Selectors.type selected=$type}</select>
-				<label for="range">{$LNG.st_in_the_positions}</label> <select name="range" id="range" onchange="$('#stats').submit();">{html_options options=$Selectors.range selected=$range}</select>
+			<td class="d-flex align-items-center justify-content-around">
+				<label for="who">{$LNG.st_show}</label>
+				<select  style="width:auto;" class="form-select bg-dark py-0 my-0 fs-12" name="who" id="who" onchange="$('#stats').submit();">
+					{html_options options=$Selectors.who selected=$who}
+				</select>
+				<label for="type">{$LNG.st_per}</label>
+				<select  style="width:auto;" class="form-select bg-dark py-0 my-0 fs-12" name="type" id="type" onchange="$('#stats').submit();">
+					{html_options options=$Selectors.type selected=$type}
+				</select>
+				<label for="range">{$LNG.st_in_the_positions}</label>
+				<select style="width:auto;" class="form-select bg-dark py-0 my-0 fs-12" name="range" id="range" onchange="$('#stats').submit();">
+					{html_options options=$Selectors.range selected=$range}
+				</select>
 			</td>
 		</tr>
 	</table>
 </form>
-<table class="table table-gow table-sm fs-12">
+<table class="table table-gow table-sm fs-12 my-1">
 {if $who == 1}
 	{include file="shared.statistics.playerTable.tpl"}
 {elseif $who == 2}
