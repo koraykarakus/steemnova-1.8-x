@@ -11,7 +11,13 @@
 	data-bs-placement="left"
 	data-bs-html="true" title="{if $RangeInfo.ranking == 0}<span style='color:#87CEEB'>*</span>{elseif $RangeInfo.ranking < 0}<span style='color:red'>-{$RangeInfo.ranking}</span>{elseif $RangeInfo.ranking > 0}<span style='color:green'>+{$RangeInfo.ranking}</span>{/if}">{$RangeInfo.rank}</a></td>
 	<td>
-		<a class="hover-underline hover-pointer" href="#" onclick="return Dialog.Playercard({$RangeInfo.id}, '{$RangeInfo.name}');"{if $RangeInfo.id == $CUser_id} style="color:lime"{/if}>{$RangeInfo.name}&nbsp;</a>{if $RangeInfo.is_leader}<a style="color:yellow"  data-bs-toggle="tooltip"
+		<a class="hover-underline hover-pointer color-white
+		{if $RangeInfo.id != $CUser_id && !empty($RangeInfo.class)}
+		{foreach $RangeInfo.class as $class}
+		galaxy-short-{$class} galaxy-short
+		{break}
+		{/foreach}
+		{/if}" href="#" onclick="return Dialog.Playercard({$RangeInfo.id}, '{$RangeInfo.name}');"{if $RangeInfo.id == $CUser_id} style="color:lime"{/if}>{$RangeInfo.name}&nbsp;</a>{if $RangeInfo.is_leader}<a style="color:yellow"  data-bs-toggle="tooltip"
 	data-bs-placement="left"
 	data-bs-html="true" title="
 	<table>
@@ -30,6 +36,7 @@
 	{if $RangeInfo.id != $CUser_id && !empty($RangeInfo.class)}
 	{foreach $RangeInfo.class as $class}
 	<span class="galaxy-short-{$class} galaxy-short">({$ShortStatus.$class})</span>
+	{break}
 	{/foreach}
 	{/if}
 </td>

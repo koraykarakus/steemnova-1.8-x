@@ -222,6 +222,9 @@ input[type="radio"] {
 .button-upgrade:hover{
 	background-color: #6ac144;
 }
+.color-white{
+	color: #fff!important;
+}
 .color-gray{
 	color: #ddd!important;
 }
@@ -390,40 +393,40 @@ table{
 }
 
 .galaxy-alliance-member {
-	color:#99FF66;
+	color:#99FF66!important;
 }
 
 .galaxy-alliance-friend {
-	color:#99FFFF;
+	color:#99FFFF!important;
 }
 
 .galaxy-alliance-enemy {
-	color:#FF0000;
+	color:#FF0000!important;
 }
 
 .galaxy-short-noob,
 .galaxy-username-noob{
-	color:#a0ffa0
+	color:#a0ffa0!important;
 }
 
 .galaxy-short-strong,
 .galaxy-username-strong {
-	color:#ffa0a0
+	color:#ffa0a0!important;
 }
 
 .galaxy-short-vacation,
 .galaxy-username-vacation {
-	color:#659ec7
+	color:#659ec7!important;
 }
 
 .galaxy-short-inactive,
 .galaxy-username-inactive {
-	color:#ccc
+	color:#ccc!important;
 }
 
 .galaxy-short-longinactive,
 .galaxy-username-longinactive {
-	color:#999
+	color:#999!important;
 }
 
 .galaxy-short-banned {

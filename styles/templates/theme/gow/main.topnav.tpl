@@ -15,7 +15,7 @@
       <a class="text-white" href="game.php?page=buddyList" data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_buddylist}">
-        <i style="font-size:20px;" class="bi bi-people"></i>
+        <i style="font-size:20px;" class="bi bi-people {if $page == 'buddyList'}text-danger{/if}"></i>
       </a>
     </li>
     {/if}
@@ -23,7 +23,7 @@
       <a class="text-white" href="game.php?page=settings"  data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_buddylist}">
-        <i style="font-size:20px;" class="bi bi-gear"></i>
+        <i style="font-size:20px;" class="bi bi-gear {if $page == 'settings'}text-danger{/if}"></i>
       </a>
     </li>
     {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
@@ -32,7 +32,7 @@
     	<a class="text-white d-flex align-items-center text-decoration-none fs-12 m-0" href="?page=messages"   data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_messages}">
-        <i style="font-size:20px;" class="bi bi-envelope-exclamation"></i>
+        <i style="font-size:20px;" class="bi bi-envelope-exclamation {if $page == 'messages'}text-danger{/if}"></i>
         {nocache}
         {if $new_message > 0}
         <span id="newmes">&nbsp;(<span id="newmesnum">{$new_message}</span>)</span>
@@ -46,7 +46,7 @@
       <a class="text-white" href="game.php?page=statistics"   data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_statistics}">
-        <i style="font-size:20px;" class="bi bi-graph-up-arrow"></i>
+        <i style="font-size:20px;" class="bi bi-graph-up-arrow {if $page == 'statistics'}text-danger{/if}"></i>
       </a>
     </li>
     {/if}
@@ -55,7 +55,7 @@
       <a class="text-white" href="game.php?page=search"   data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_search}">
-        <i style="font-size:20px;" class="bi bi-search"></i>
+        <i style="font-size:20px;" class="bi bi-search {if $page == 'search'}text-danger{/if}"></i>
       </a>
     </li>
     {/if}
@@ -64,7 +64,7 @@
       <a class="text-white" href="game.php?page=ticket"   data-bs-toggle="tooltip"
       data-bs-placement="bottom"
       data-bs-html="true" title="{$LNG.lm_support}">
-        <i style="font-size:20px;" class="bi bi-info-circle"></i>
+        <i style="font-size:20px;" class="bi bi-info-circle {if $page == 'ticket'}text-danger{/if}"></i>
       </a>
     </li>
     {/if}
