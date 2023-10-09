@@ -220,7 +220,7 @@ class ShowResearchPage extends AbstractGamePage
 			|| !$this->CheckLabSettingsInQueue($PLANET)
 		)
 		{
-		
+
 			return false;
 		}
 
@@ -372,6 +372,11 @@ class ShowResearchPage extends AbstractGamePage
 		$queueData		= $this->getQueueData();
 		$TechQueue		= $queueData['queue'];
 		$QueueCount		= count($TechQueue);
+
+		if ($QueueCount != 0) {
+			$this->tplObj->loadscript('research.js');
+		}
+
 		$ResearchList	= array();
 
 		foreach($reslist['tech'] as $elementId)
