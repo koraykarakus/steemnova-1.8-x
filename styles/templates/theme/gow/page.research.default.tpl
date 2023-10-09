@@ -118,9 +118,9 @@
             </button>
           </span>
           {else}
-              <form action="game.php?page=buildings" method="post" class="build_form">
+              <form action="game.php?page=research" method="post" class="build_form">
                 <input type="hidden" name="cmd" value="insert">
-                <input type="hidden" name="building" value="{$ID}">
+                <input type="hidden" name="tech" value="{$ID}">
                 <button type="submit" class="button-upgrade" data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-html="true"

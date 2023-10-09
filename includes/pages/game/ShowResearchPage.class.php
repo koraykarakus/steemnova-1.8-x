@@ -220,6 +220,7 @@ class ShowResearchPage extends AbstractGamePage
 			|| !$this->CheckLabSettingsInQueue($PLANET)
 		)
 		{
+		
 			return false;
 		}
 
@@ -338,6 +339,7 @@ class ShowResearchPage extends AbstractGamePage
 		}
 
 		$TheCommand		= HTTP::_GP('cmd','');
+
 		$elementId     	= HTTP::_GP('tech', 0);
 		$ListID     	= HTTP::_GP('listid', 0);
 
