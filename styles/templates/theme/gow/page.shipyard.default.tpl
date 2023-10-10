@@ -139,9 +139,9 @@
 {if !empty($BuildList)}
 <div class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black">
 		<div id="bx" class="z my-2 text-center w-100 color-yellow"></div>
-		<form class="d-flex flex-column" action="game.php?page=shipyard&amp;mode={$mode}" method="post" >
+		<form class="d-flex flex-column" action="game.php?page=shipyard&mode={$mode}" method="post">
 			<input type="hidden" name="action" value="delete">
-			<select class="mx-2 p-2 rounded color-yellow fs-11" name="auftr[]" id="auftr" onchange="this.form.myText.setAttribute('size', this.value);" multiple class="shipl">
+			<select class="mx-2 p-2 rounded color-yellow fs-11" name="auftr[]" id="auftr" onchange="" multiple class="shipl">
 				<option class="color-yellow">&nbsp;</option>
 			</select>
 			<span class="text-center text-danger fw-bold my-2">{$LNG.bd_cancel_warning}</span>
@@ -151,9 +151,6 @@
 </div>
 {/if}
 
-
-
-{/block}
 {block name="script" append}
 <script type="text/javascript">
 data			= {$BuildList|json};
@@ -171,7 +168,6 @@ $(function() {
 
 </script>
 {/if}
-
-
+{/block}
 
 {/block}
