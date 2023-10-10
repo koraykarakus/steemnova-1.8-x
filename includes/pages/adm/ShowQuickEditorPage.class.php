@@ -204,6 +204,75 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
 	}
 
+	function planetSend(){
+		global $reslist,$resource, $LNG;
+
+		$db = Database::get();
+
+		$id = HTTP::_GP('id', 0);
+
+		$SpecifyItemsPQ	= "";
+		$DataIDs	= array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
+
+		foreach($DataIDs as $ID)
+		{
+			$SpecifyItemsPQ	.= "`".$resource[$ID]."`,";
+		}
+
+		$sql = "SELECT ".$SpecifyItemsPQ." `name`, `id_owner`, `planet_type`, `galaxy`, `system`, `planet`, `destruyed`, `diameter`, `field_current`, `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, `deuterium` FROM %%PLANETS%% WHERE `id` = '".$id."';";
+
+		$PlanetData	= $db->selectSingle($sql);
+
+		if (!$PlanetData) {
+			return;
+		}
+
+		$SQL	= "UPDATE ".PLANETS." SET ";
+		$Fields	= $PlanetData['field_current'];
+		foreach($DataIDs as $ID)
+		{
+			$level	= min(max(0, round(HTTP::_GP($resource[$ID], 0.0))), (in_array($ID, $reslist['build']) ? 255: 18446744073709551615));
+
+			if(in_array($ID, $reslist['allow'][$PlanetData['planet_type']]))
+			{
+				$Fields	+= $level - $PlanetData[$resource[$ID]];
+			}
+
+			$SQL	.= "`".$resource[$ID]."` = ".$level.", ";
+		}
+
+		$SQL	.= "`metal` = ".max(0, round(HTTP::_GP('metal', 0.0))).", ";
+		$SQL	.= "`crystal` = ".max(0, round(HTTP::_GP('crystal', 0.0))).", ";
+		$SQL	.= "`deuterium` = ".max(0, round(HTTP::_GP('deuterium', 0.0))).", ";
+		$SQL	.= "`field_current` = '".$Fields."', ";
+		$SQL	.= "`field_max` = '".HTTP::_GP('field_max', 0)."', ";
+		$SQL	.= "`name` = '".$GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT))."', ";
+		$SQL	.= "`eco_hash` = '' ";
+		$SQL	.= "WHERE `id` = '".$id."' AND `universe` = '".Universe::getEmulated()."';";
+
+		$GLOBALS['DATABASE']->query($SQL);
+
+		$old = array();
+		$new = array();
+						foreach(array_merge($DataIDs,$reslist['resstype'][1]) as $IDs)
+						{
+								$old[$IDs]    = $PlanetData[$resource[$IDs]];
+			$new[$IDs]    = max(0, round(HTTP::_GP($resource[$IDs], 0.0)));
+						}
+		$old['field_max'] = $PlanetData['field_max'];
+		$new['field_max'] = HTTP::_GP('field_max', 0);
+
+		$LOG = new Log(2);
+		$LOG->target = $id;
+		$LOG->old = $old;
+		$LOG->new = $new;
+		$LOG->save();
+
+		$this->printMessage(sprintf($LNG['qe_edit_planet_sucess'], $PlanetData['name'], $PlanetData['galaxy'],$PlanetData['system'],$PlanetData['planet']));
+
+
+	}
+
 	function planet(){
 
 		global $USER, $LNG, $reslist, $resource;
@@ -219,49 +288,8 @@ class ShowQuickEditorPage extends AbstractAdminPage
 		}
 		$PlanetData	= $GLOBALS['DATABASE']->getFirstRow("SELECT ".$SpecifyItemsPQ." `name`, `id_owner`, `planet_type`, `galaxy`, `system`, `planet`, `destruyed`, `diameter`, `field_current`, `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, `deuterium` FROM ".PLANETS." WHERE `id` = '".$id."';");
 
-		if($action == 'send'){
-			$SQL	= "UPDATE ".PLANETS." SET ";
-			$Fields	= $PlanetData['field_current'];
-			foreach($DataIDs as $ID)
-			{
-				$level	= min(max(0, round(HTTP::_GP($resource[$ID], 0.0))), (in_array($ID, $reslist['build']) ? 255: 18446744073709551615));
 
-				if(in_array($ID, $reslist['allow'][$PlanetData['planet_type']]))
-				{
-					$Fields	+= $level - $PlanetData[$resource[$ID]];
-				}
 
-				$SQL	.= "`".$resource[$ID]."` = ".$level.", ";
-			}
-
-			$SQL	.= "`metal` = ".max(0, round(HTTP::_GP('metal', 0.0))).", ";
-			$SQL	.= "`crystal` = ".max(0, round(HTTP::_GP('crystal', 0.0))).", ";
-			$SQL	.= "`deuterium` = ".max(0, round(HTTP::_GP('deuterium', 0.0))).", ";
-			$SQL	.= "`field_current` = '".$Fields."', ";
-			$SQL	.= "`field_max` = '".HTTP::_GP('field_max', 0)."', ";
-			$SQL	.= "`name` = '".$GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT))."', ";
-			$SQL	.= "`eco_hash` = '' ";
-			$SQL	.= "WHERE `id` = '".$id."' AND `universe` = '".Universe::getEmulated()."';";
-
-			$GLOBALS['DATABASE']->query($SQL);
-
-			$old = array();
-			$new = array();
-							foreach(array_merge($DataIDs,$reslist['resstype'][1]) as $IDs)
-							{
-									$old[$IDs]    = $PlanetData[$resource[$IDs]];
-				$new[$IDs]    = max(0, round(HTTP::_GP($resource[$IDs], 0.0)));
-							}
-			$old['field_max'] = $PlanetData['field_max'];
-			$new['field_max'] = HTTP::_GP('field_max', 0);
-			$LOG = new Log(2);
-			$LOG->target = $id;
-			$LOG->old = $old;
-			$LOG->new = $new;
-			$LOG->save();
-
-			exit(sprintf($LNG['qe_edit_planet_sucess'], $PlanetData['name'], $PlanetData['galaxy'], $PlanetData['system'], $PlanetData['planet']));
-		}
 		$UserInfo				= $GLOBALS['DATABASE']->getFirstRow("SELECT `username` FROM ".USERS." WHERE `id` = '".$PlanetData['id_owner']."' AND `universe` = '".Universe::getEmulated()."';");
 
 		$build = $defense = $fleet	= array();
@@ -296,12 +324,11 @@ class ShowQuickEditorPage extends AbstractAdminPage
 			);
 		}
 
-		$template	= new template();
-		$template->assign_vars(array(
+		$this->assign(array(
 			'build'			=> $build,
 			'fleet'			=> $fleet,
 			'defense'		=> $defense,
-			'id'			=> $id,
+			'planetId'			=> $id,
 			'ownerid'		=> $PlanetData['id_owner'],
 			'ownername'		=> $UserInfo['username'],
 			'name'			=> $PlanetData['name'],
@@ -319,7 +346,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 			'crystal_c'		=> pretty_number($PlanetData['crystal']),
 			'deuterium_c'	=> pretty_number($PlanetData['deuterium']),
 		));
-		$template->show('QuickEditorPlanet.tpl');
+		$this->display('page.quickeditor.planet.tpl');
 
 	}
 
