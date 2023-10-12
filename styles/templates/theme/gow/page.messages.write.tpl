@@ -29,7 +29,6 @@
 		</tr>
 	</table>
 </form>
-{/block}
 {block name="script" append}
 <script type="text/javascript">
 function check(){
@@ -46,4 +45,5 @@ function check(){
 	}
 }
 </script>
+{/block}
 {/block}
