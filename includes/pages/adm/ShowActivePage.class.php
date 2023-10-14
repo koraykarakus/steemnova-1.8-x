@@ -28,6 +28,8 @@ class ShowActivePage extends AbstractAdminPage
 
 	function show(){
 
+		global $LNG;
+
 		$db = Database::get();
 
 		$sql = "SELECT * FROM %%USERS_VALID%% WHERE `universe` = :universe ORDER BY validationID ASC;";
