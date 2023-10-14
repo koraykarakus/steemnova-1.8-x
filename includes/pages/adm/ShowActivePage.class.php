@@ -28,7 +28,7 @@ class ShowActivePage extends AbstractAdminPage
 
 	function show(){
 
-		global $LNG;
+		global $LNG, $USER;
 
 		$db = Database::get();
 
@@ -37,6 +37,7 @@ class ShowActivePage extends AbstractAdminPage
 		$usersValid = $db->select($sql,array(
 			':universe' => Universe::getEmulated(),
 		));
+
 
 		$users 	= array();
 		foreach ($usersValid as $currentUser) {
