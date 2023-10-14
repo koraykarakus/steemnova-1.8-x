@@ -304,7 +304,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
 			$infoEnergy	= "";
 			$requireEnergy = 0;
-			
+
 			if(isset($queueData['quickinfo'][$Element]))
 			{
 				$levelToBuild	= $queueData['quickinfo'][$Element];
@@ -385,6 +385,8 @@ class ShowBuildingsPage extends AbstractGamePage
 			'Queue'				=> $Queue,
 			'isBusy'			=> array('shipyard' => !empty($PLANET['b_hangar_id']), 'research' => $USER['b_tech_planet'] != 0),
 			'HaveMissiles'		=> (bool) $PLANET[$resource[503]] + $PLANET[$resource[502]],
+			'usedField' => $PLANET['field_current'],
+			'maxField' => $PLANET['field_max']
 		));
 
 		$this->display('page.buildings.default.tpl');

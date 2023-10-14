@@ -165,51 +165,57 @@
 {/foreach}
 </div>
 
-<div class="d-flex flex-wrap justify-content-start bg-black py-2 border-orange">
-  {foreach $BuildInfoList as $ID => $Element}
-    <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
-    data-bs-toggle="tooltip"
-    data-bs-placement="top"
-    data-bs-html="true"
-    title="{$LNG.tech.{$ID}}
-    {if !$Element.technologySatisfied && !empty($Element.requeriments)}
-    <table class='table-tooltip'>
-      <thead>
-        <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
-      </thead>
-      <tbody>
-        {foreach $Element.requeriments as $currentRequire}
-        <tr>
-          <td class='color-red'>
-            <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
-          </td>
-          <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
-        </tr>
-        {/foreach}
-      </tbody>
-    </table>
-    {/if}" >
-    <div class="levelInfo d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 text-yellow bg-dark fs-11">{$Element.level}</div>
+<div class="d-flex flex-wrap justify-content-start bg-black pb-2 border-orange">
+    <div class="d-flex w-100 justify-content-start m-2">
+      <span class="color-yellow fs-12 fw-bolt">  {$LNG.lm_buildings}&nbsp;(&nbsp;{$usedField}&nbsp;/&nbsp;{$maxField}&nbsp;)</span>
 
-    {if !$CanBuildElement || !$Element.buyable || !$Element.technologySatisfied ||
-       ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
-       <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
-       {/if}
-      <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
-      {if $CanBuildElement && $Element.buyable && $Element.technologySatisfied &&
-         !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
-         <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
-           <input type="hidden" name="cmd" value="insert">
-           <input type="hidden" name="building" value="{$ID}">
-           <button  type="submit" class="button-upgrade-small position-absolute top-0 left-0 d-flex" data-bs-toggle="tooltip"
-           data-bs-placement="top"
-           data-bs-html="true"
-           title = "{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}">
-           </button>
-         </form>
-      {/if}
     </div>
-  {/foreach}
+    <div class="mx-2 d-flex flex-wrap">
+      {foreach $BuildInfoList as $ID => $Element}
+        <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-html="true"
+        title="{$LNG.tech.{$ID}}
+        {if !$Element.technologySatisfied && !empty($Element.requeriments)}
+        <table class='table-tooltip'>
+          <thead>
+            <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
+          </thead>
+          <tbody>
+            {foreach $Element.requeriments as $currentRequire}
+            <tr>
+              <td class='color-red'>
+                <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
+              </td>
+              <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
+            </tr>
+            {/foreach}
+          </tbody>
+        </table>
+        {/if}" >
+        <div class="levelInfo d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 text-yellow bg-dark fs-11">{$Element.level}</div>
+
+        {if !$CanBuildElement || !$Element.buyable || !$Element.technologySatisfied ||
+           ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
+           <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
+           {/if}
+          <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
+          {if $CanBuildElement && $Element.buyable && $Element.technologySatisfied &&
+             !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
+             <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
+               <input type="hidden" name="cmd" value="insert">
+               <input type="hidden" name="building" value="{$ID}">
+               <button  type="submit" class="button-upgrade-small position-absolute top-0 left-0 d-flex" data-bs-toggle="tooltip"
+               data-bs-placement="top"
+               data-bs-html="true"
+               title = "{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}">
+               </button>
+             </form>
+          {/if}
+        </div>
+      {/foreach}
+</div>
 </div>
 
 </div>
