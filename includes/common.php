@@ -144,10 +144,11 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON')
 
 
 	$sql	= "SELECT
-	user.*,
+	user.*, userpoints.*, 
 	COUNT(message.message_id) as messages
 	FROM %%USERS%% as user
 	LEFT JOIN %%MESSAGES%% as message ON message.message_owner = user.id AND message.message_unread = :unread
+	LEFT JOIN %%USER_POINTS%% as userpoints ON userpoints.id_owner = user.id
 	WHERE user.id = :userId
 	GROUP BY message.message_owner;";
 

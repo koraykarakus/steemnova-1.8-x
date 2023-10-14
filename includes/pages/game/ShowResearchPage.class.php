@@ -431,6 +431,7 @@ class ShowResearchPage extends AbstractGamePage
 			'IsLabinBuild'	=> !$bContinue,
 			'IsFullQueue'	=> $config->max_elements_tech == 0 || $config->max_elements_tech == count($TechQueue),
 			'Queue'			=> $TechQueue,
+			'userTechPoints' => pretty_number($USER['tech_points'])
 		));
 
 		$this->display('page.research.default.tpl');

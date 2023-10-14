@@ -280,6 +280,8 @@ class ShowShipyardPage extends AbstractGamePage
 			'maxlength'		=> strlen($config->max_fleet_per_build),
 			'mode'			=> $mode,
 			'SolarEnergy'		=> $SolarEnergy,
+			'userFleetPoints' => pretty_number($USER['fleet_points']),
+			'userDefensePoints' => pretty_number($USER['defs_points'])
 		));
 
 		$this->display('page.shipyard.default.tpl');

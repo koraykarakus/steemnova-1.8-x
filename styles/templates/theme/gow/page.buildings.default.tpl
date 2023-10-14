@@ -167,8 +167,8 @@
 
 <div class="d-flex flex-wrap justify-content-start bg-black pb-2 border-orange">
     <div class="d-flex w-100 justify-content-start m-2">
-      <span class="color-yellow fs-12 fw-bolt">  {$LNG.lm_buildings}&nbsp;(&nbsp;{$usedField}&nbsp;/&nbsp;{$maxField}&nbsp;)</span>
-
+      <span class="color-yellow fs-12 fw-bolt">{$LNG.lm_buildings}&nbsp;(&nbsp;{$usedField}&nbsp;/&nbsp;{$maxField}&nbsp;)</span>
+      <span class="color-yellow fs-12 fw-bolt">&nbsp;|&nbsp;{$LNG.st_points}&nbsp;[{$userBuildPoints}]</span>
     </div>
     <div class="mx-2 d-flex flex-wrap">
       {foreach $BuildInfoList as $ID => $Element}

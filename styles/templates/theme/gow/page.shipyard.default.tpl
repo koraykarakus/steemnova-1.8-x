@@ -102,37 +102,43 @@
 {/foreach}
 </div>
 
-<div class="d-flex flex-wrap justify-content-start bg-black py-2 border-orange">
-  {foreach $elementList as $ID => $Element}
-    <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
-    data-bs-toggle="tooltip"
-    data-bs-placement="top"
-    data-bs-html="true"
-    title="{$LNG.tech.{$ID}}
-    {if !$Element.technologySatisfied && !empty($Element.requeriments)}
-    <table class='table-tooltip'>
-      <thead>
-        <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
-      </thead>
-      <tbody>
-        {foreach $Element.requeriments as $currentRequire}
-        <tr>
-          <td class='color-red'>
-            <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
-          </td>
-          <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
-        </tr>
-        {/foreach}
-      </tbody>
-    </table>
-    {/if}" >
-    <div class="d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 color-yellow bg-dark fs-11 text-center ps-1">{shortly_number($Element.available)}</div>
-    {if  !$Element.buyable || !$Element.technologySatisfied }
-       <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
-       {/if}
-      <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
-    </div>
-  {/foreach}
+<div class="d-flex flex-wrap justify-content-start bg-black pb-2 border-orange">
+  <div class="d-flex w-100 justify-content-start m-2">
+    <span class="color-yellow fs-12 fw-bolt">{$LNG.lm_shipshard}</span>
+    <span class="color-yellow fs-12 fw-bolt">&nbsp;|&nbsp;{$LNG.st_points}&nbsp;[{if $mode == "fleet"}{$userFleetPoints}{else}{$userDefensePoints}{/if}]</span>
+  </div>
+  <div class="mx-2 d-flex flex-wrap">
+    {foreach $elementList as $ID => $Element}
+      <div class="buildItemSmall position-relative d-flex user-select-none" onclick="showItem({$ID})" id="item_small_{$ID}"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="{$LNG.tech.{$ID}}
+      {if !$Element.technologySatisfied && !empty($Element.requeriments)}
+      <table class='table-tooltip'>
+        <thead>
+          <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
+        </thead>
+        <tbody>
+          {foreach $Element.requeriments as $currentRequire}
+          <tr>
+            <td class='color-red'>
+              <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
+            </td>
+            <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
+          </tr>
+          {/foreach}
+        </tbody>
+      </table>
+      {/if}" >
+      <div class="d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 color-yellow bg-dark fs-11 text-center ps-1">{shortly_number($Element.available)}</div>
+      {if  !$Element.buyable || !$Element.technologySatisfied }
+         <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
+         {/if}
+        <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
+      </div>
+    {/foreach}
+  </div>
 </div>
 </div>
 

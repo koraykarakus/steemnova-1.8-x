@@ -71,6 +71,7 @@ body {
 	background-size: cover;
 	overflow-y: scroll;
 	margin: 0!important;
+	color: #fff;
 }
 
 body.mceContentBody,input,button,select,option,textarea, .ui-widget-content{

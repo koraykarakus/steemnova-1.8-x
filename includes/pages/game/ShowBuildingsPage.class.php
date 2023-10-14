@@ -386,7 +386,8 @@ class ShowBuildingsPage extends AbstractGamePage
 			'isBusy'			=> array('shipyard' => !empty($PLANET['b_hangar_id']), 'research' => $USER['b_tech_planet'] != 0),
 			'HaveMissiles'		=> (bool) $PLANET[$resource[503]] + $PLANET[$resource[502]],
 			'usedField' => $PLANET['field_current'],
-			'maxField' => $PLANET['field_max']
+			'maxField' => $PLANET['field_max'],
+			'userBuildPoints' => pretty_number($USER['build_points'])
 		));
 
 		$this->display('page.buildings.default.tpl');
