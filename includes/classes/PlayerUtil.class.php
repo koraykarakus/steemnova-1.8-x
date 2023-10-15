@@ -126,6 +126,22 @@ class PlayerUtil
 			$config->LastSettedPlanetPos = $planet;
 		}
 
+
+		switch ($config->server_default_theme) {
+			case 1:
+				$themeName = "nova";
+				break;
+			case 2:
+			$themeName = "gow";
+				break;
+			case 3:
+			$themeName = "EpicBlueXIII";
+				break;
+			default:
+			$themeName = "nova";
+				break;
+		}
+
 		$params			= array(
 			':username'				=> $userName,
 			':email'				=> $userMail,
@@ -139,7 +155,7 @@ class PlayerUtil
 			':onlinetime'			=> TIMESTAMP,
 			':registerTimestamp'	=> TIMESTAMP,
 			':password'				=> $userPassword,
-			':dpath'				=> $config->server_default_theme,
+			':dpath'				=> $themeName,
 			':timezone'				=> $config->timezone,
 			':nameLastChanged'		=> 0,
 			':darkmatter_start'		=> $config->darkmatter_start,
