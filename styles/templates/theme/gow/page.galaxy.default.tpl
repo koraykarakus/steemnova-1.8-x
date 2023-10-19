@@ -290,6 +290,7 @@
 							 <a class='hover-underline hover-pointer user-select-none' href='?page=statistics&amp;who=1&amp;start={$currentPlanet.user.rank}'>{$LNG.gl_see_on_stats}</a>
 						 </td>
 					 </tr>
+					 <button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0 text-white fs-11' onclick='closePopover();'>X</button>
 				 </table>">
 				<span class="{foreach $currentPlanet.user.class as $class}{if !$class@first} {/if}galaxy-username-{$class}{/foreach} galaxy-username">{$currentPlanet.user.username}</span>
 
