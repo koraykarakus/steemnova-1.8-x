@@ -124,6 +124,16 @@
 						<button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0' onclick='closePopover();'>X</button>
 					</th>
 				</tr>
+				{if $userAuthLevel == 3}
+				<tr>
+					<td>user ID:</td>
+					<td>{$currentPlanet['user']['id']}</td>
+				</tr>
+				<tr>
+					<td>planet ID:</td>
+					<td>{$currentPlanet['planet']['id']}</td>
+				</tr>
+				{/if}
 				<tr>
 					<td style='width:80px'><img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'></td>
 					<td>
@@ -185,6 +195,16 @@
 				 <tr>
 					 <th colspan='2'>{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]</th>
 				 </tr>
+				 {if $userAuthLevel == 3}
+ 				<tr>
+ 					<td>user ID:</td>
+ 					<td>{$currentPlanet['user']['id']}</td>
+ 				</tr>
+ 				<tr>
+ 					<td>planet ID:</td>
+ 					<td>{$currentPlanet['moon']['id']}</td>
+ 				</tr>
+ 				{/if}
 				 <tr>
 					 <td style='width:80px'>
 						 <img src='{$dpath}planeten/mond.jpg' height='75' width='75'>

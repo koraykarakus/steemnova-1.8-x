@@ -127,6 +127,7 @@ class ShowGalaxyPage extends AbstractGamePage
 				'friend'					=> $LNG['gl_short_friend'],
 				'member'					=> $LNG['gl_short_member'],
 			),
+      'userAuthLevel' => $USER['authlevel'],
 		));
 
 		$this->display('page.galaxy.default.tpl');
