@@ -194,6 +194,7 @@
 			 title="<table class='table table-gow table-sm fs-11' style='width:240px'>
 				 <tr>
 					 <th colspan='2'>{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]</th>
+					 <button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0 text-white fs-11' onclick='closePopover();'>X</button>
 				 </tr>
 				 {if $userAuthLevel == 3}
  				<tr>
@@ -275,11 +276,39 @@
 		</td>
 		<td class="text-center align-middle" style="white-space: nowrap;">
         {if $currentPlanet.debris}
-			<a onclick="closePopovers();" data-bs-toggle="popover"
+			<a onclick="closePopovers();" class="hover-pointer" data-bs-toggle="popover"
 			data-bs-placement="right"
 			data-bs-html="true"
-			 title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]</th></tr><tr><td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td><td><table style='width:100%'><tr><th colspan='2'>{$LNG.gl_resources}:</th></tr><tr><td>{$LNG.tech.901}: </td><td>{$currentPlanet.debris.metal|number}</td></tr><tr><td>{$LNG.tech.902}: </td><td>{$currentPlanet.debris.crystal|number}</td></tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr><th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'><a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a></td></tr>{/if}</table></td></tr></table>">
-			<img src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
+			 title="<table class='table table-gow fs-11' style='width:240px'>
+				 <tr>
+					 <th colspan='2'>{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]</th>
+					 <button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0 text-white fs-11' onclick='closePopover();'>X</button>
+				 </tr>
+				 <tr>
+					 <td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td>
+					 <td>
+						 <table style='width:100%'>
+							 <tr>
+								 <th colspan='2'>{$LNG.gl_resources}:</th>
+							 </tr>
+							 <tr>
+								 <td>{$LNG.tech.901}: </td>
+								 <td>{$currentPlanet.debris.metal|number}</td>
+							 </tr>
+							 <tr>
+								 <td>{$LNG.tech.902}: </td>
+								 <td>{$currentPlanet.debris.crystal|number}</td>
+							 </tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr>
+								 <th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'>
+									 <a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a>
+								 </td>
+							 </tr>
+							 {/if}
+						 </table>
+					 </td>
+				 </tr>
+			 </table>">
+			<img class="hover-border-yellow" src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
 			</a>
         {/if}
 		</td>
