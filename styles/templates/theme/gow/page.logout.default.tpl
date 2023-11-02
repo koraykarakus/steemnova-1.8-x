@@ -16,7 +16,6 @@
 	<td>{$LNG.lo_notify}<br><a href="./index.php">{$LNG.lo_continue}</a></td>
 </tr>
 </table>
-{/block}
 {block name="script" append}
 <script type="text/javascript">
     var second = 5;
@@ -30,4 +29,5 @@
 	window.setTimeout("window.location.href='./index.php'", 5000);
 	window.setInterval("Countdown()", 1000);
 </script>
+{/block}
 {/block}
