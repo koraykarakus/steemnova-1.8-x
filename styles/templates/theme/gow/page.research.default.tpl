@@ -225,8 +225,10 @@
         </form>
       </div>
         {if $List@first}
-        <div class="d-flex my-2 w-100 flex-wrap">
-          <div class="text-center my-2 text-yellow" id="time" data-time="{$List.time}"></div>
+        <div class="d-flex flex-column align-items-start justify-content-start w-100 mx-2">
+          <span class="fs-12 text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
+          <span class="text-center my-2 text-yellow fs-12" id="time" data-time="{$List.time}"></span>
+          <span class="fs-12 text-yellow">{$List.display}</span>
         </div>
         {/if}
       </div>
