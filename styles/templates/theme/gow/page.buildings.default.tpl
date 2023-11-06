@@ -250,7 +250,7 @@
         </div>
         {if $List@first}
     		<div class="d-flex flex-column align-items-start justify-content-start w-100 mx-2">
-          <div id="progressbar" class="d-flex align-items-center my-2" data-time="{$List.resttime}"></div>
+          <div style="border-radius:10px;height:12px;" id="progressbar" class="d-flex align-items-center my-2" data-time="{$List.resttime}"></div>
           <span class="fs-12 text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
           <span class="text-center my-2 text-yellow fs-12" id="time" data-time="{$List.time}"></span>
           <span class="fs-12 text-yellow">{$List.display}</span>
