@@ -194,12 +194,9 @@
 
 
   {if !empty($Queue)}
-  <div id="buildlist" class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black">
+  <div id="buildlist" class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black border-orange">
   		{foreach $Queue as $List}
   		{$ID = $List.element}
-      {if $List@first}
-        <div id="progressbar" class="d-flex align-items-center my-2 mx-auto" data-time="{$List.resttime}"></div>
-      {/if}
       <div class="d-flex align-items-center {if $List@first}w-100{/if}">
         <div class="queueItemFirst position-relative d-flex flex-column" data-bs-toggle="tooltip"
         data-bs-placement="top"
@@ -226,6 +223,7 @@
       </div>
         {if $List@first}
         <div class="d-flex flex-column align-items-start justify-content-start w-100 mx-2">
+          <div id="progressbar" class="d-flex align-items-center my-2" data-time="{$List.resttime}"></div>
           <span class="fs-12 text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
           <span class="text-center my-2 text-yellow fs-12" id="time" data-time="{$List.time}"></span>
           <span class="fs-12 text-yellow">{$List.display}</span>
