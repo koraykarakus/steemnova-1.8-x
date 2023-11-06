@@ -90,7 +90,7 @@
             </form>
 						{/if}
 						</div>
-						<span class="my-1 fs-12 text-right">{$LNG.fgf_time}&nbsp;:&nbsp;{$Element.elementTime|time}</span>
+						<span class="my-1 fs-12 text-right">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
         </div>
       </div>
     </div>
