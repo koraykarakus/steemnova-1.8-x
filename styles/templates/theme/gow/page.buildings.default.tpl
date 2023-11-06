@@ -77,7 +77,7 @@
               <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
             </div>
   					{/foreach}
-              <span class="fs-10 my-1 text-white">{$LNG.fgf_time}:{$Element.elementTime|time}</span>
+              <span class="fs-10 my-1 text-white">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
   				</span>
   			</div>
   			<div class="d-flex flex-column justify-content-start align-items-end">

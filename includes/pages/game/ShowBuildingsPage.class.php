@@ -175,8 +175,8 @@ class ShowBuildingsPage extends AbstractGamePage
 			if(isset($costResources[903])) { $PLANET[$resource[903]]	-= $costResources[903]; }
 			if(isset($costResources[921])) { $USER[$resource[921]]		-= $costResources[921]; }
 
-			$elementTime    			= BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $costResources);
-			$BuildEndTime				= TIMESTAMP + $elementTime;
+			$elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $costResources);
+			$BuildEndTime	= TIMESTAMP + $elementTime;
 
 			$PLANET['b_building_id']	= serialize(array(array($Element, $BuildLevel, $elementTime, $BuildEndTime, $BuildMode)));
 			$PLANET['b_building']		= $BuildEndTime;
