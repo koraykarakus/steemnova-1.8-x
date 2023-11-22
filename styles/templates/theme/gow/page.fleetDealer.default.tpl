@@ -28,7 +28,6 @@
 		</tr>
 	</table>
 </form>
-{/block}
 {block name="script" append}
 <script src="scripts/game/fleettrader.js"></script>
 <script>
@@ -38,4 +37,5 @@ $(function(){
     updateVars();
 });
 </script>
+{/block}
 {/block}
