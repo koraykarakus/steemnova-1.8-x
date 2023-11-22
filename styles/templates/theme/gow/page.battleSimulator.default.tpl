@@ -7,10 +7,30 @@
 			<th>{$LNG.lm_battlesim}</th>
 		</tr>
 		<tr>
-			<td>{$LNG.bs_steal} {$LNG.tech.901}: <input type="text" size="10" value="{if isset($battleinput.0.1.901)}{$battleinput.0.1.901}{else}0{/if}" name="battleinput[0][1][901]"> {$LNG.tech.902}: <input type="text" size="10" value="{if isset($battleinput.0.1.902)}{$battleinput.0.1.902}{else}0{/if}" name="battleinput[0][1][902]"> {$LNG.tech.903}: <input type="text" size="10" value="{if isset($battleinput.0.1.903)}{$battleinput.0.1.903}{else}0{/if}" name="battleinput[0][1][903]"></td>
+			<td>
+				<div class="d-flex align-items-center">
+					<span class="py-2 text-center fw-bold color-blue">{$LNG.bs_steal}</span>
+					<div class="d-flex flex-column align-items-center justify-content-center px-2">
+						<label class="py-2 text-center" for="steal_metal">{$LNG.tech.901}:</label>
+						<input id="steal_metal" class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text"  value="{if isset($battleinput.0.1.901)}{$battleinput.0.1.901}{else}0{/if}" name="battleinput[0][1][901]">
+					</div>
+					<div class="d-flex flex-column align-items-center justify-content-center px-2">
+						<label class="py-2" for="steal_crystal">{$LNG.tech.902}:</label>
+						<input id="steal_crystal" class="form-control fs-12 bg-dark text-white p-0 border border-secondary text-center" type="text"  value="{if isset($battleinput.0.1.902)}{$battleinput.0.1.902}{else}0{/if}" name="battleinput[0][1][902]">
+					</div>
+					<div class="d-flex flex-column align-items-center justify-content-center px-2">
+						<label class="py-2" for="steal_deuterium">{$LNG.tech.903}:</label>
+						<input id="steal_deuterium" class="form-control fs-12 bg-dark text-white p-0 border border-secondary text-center" type="text"  value="{if isset($battleinput.0.1.903)}{$battleinput.0.1.903}{else}0{/if}" name="battleinput[0][1][903]">
+					</div>
+
+				</div>
+
+			</td>
 		</tr>
 		<tr>
-			<td class="left"><input type="button" onClick="return add();" value="{$LNG.bs_add_acs_slot}"></td>
+			<td class="left">
+				<input class="form-control fs-12 bg-blue text-white p-0 m-0 border border-secondary text-center" type="button" onClick="return add();" value="{$LNG.bs_add_acs_slot}">
+			</td>
 		</tr>
 		<tr>
 			<td class="transparent" style="padding:0;">
@@ -33,18 +53,20 @@
 							</tr>
 							<tr>
 								<td>{$LNG.tech.109}:</td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.109)}{$battleinput.{$smarty.section.content.index}.0.109}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][109]"></td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.109)}{$battleinput.{$smarty.section.content.index}.1.109}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][109]"></td>
+								<td>
+									<input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.109)}{$battleinput.{$smarty.section.content.index}.0.109}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][109]"></td>
+								<td>
+									<input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.109)}{$battleinput.{$smarty.section.content.index}.1.109}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][109]"></td>
 							</tr>
 							<tr>
 								<td>{$LNG.tech.110}:</td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.110)}{$battleinput.{$smarty.section.content.index}.0.110}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][110]"></td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.110)}{$battleinput.{$smarty.section.content.index}.1.110}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][110]"></td>
+								<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.110)}{$battleinput.{$smarty.section.content.index}.0.110}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][110]"></td>
+								<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.110)}{$battleinput.{$smarty.section.content.index}.1.110}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][110]"></td>
 							</tr>
 							<tr>
 								<td>{$LNG.tech.111}:</td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.111)}{$battleinput.{$smarty.section.content.index}.0.111}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][111]"></td>
-								<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.111)}{$battleinput.{$smarty.section.content.index}.1.111}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][111]"></td>
+								<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.111)}{$battleinput.{$smarty.section.content.index}.0.111}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][111]"></td>
+								<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.111)}{$battleinput.{$smarty.section.content.index}.1.111}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][111]"></td>
 							</tr>
 						</table>
 						<br>
@@ -65,8 +87,8 @@
 										{foreach $fleetList as $id}
 										<tr>
 											<td>{$LNG.tech.$id}:</td>
-											<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.$id)}{$battleinput.{$smarty.section.content.index}.0.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][{$id}]"></td>
-											<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
+											<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.0.$id)}{$battleinput.{$smarty.section.content.index}.0.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][0][{$id}]"></td>
+											<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
 										</tr>
 										{/foreach}
 									</table>
@@ -88,7 +110,7 @@
 											<tr>
 												<td>{$LNG.tech.$id}:</td>
 												<td>-</td>
-												<td><input type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
+												<td><input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" type="text" size="10" value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}" name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
 											</tr>
 										{/foreach}
 										</table>
