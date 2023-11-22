@@ -41,9 +41,11 @@
 	</tr>
 	</table>
 </form>
-{/block}
+
 {block name="script" append}
 <script type="text/javascript">
 var charge = {$charge|json};
 </script>
+{/block}
+
 {/block}
