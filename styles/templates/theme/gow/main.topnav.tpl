@@ -22,7 +22,7 @@
     <li class="px-2 f-12 hover-underline d-flex align-items-center h-100">
       <a class="text-white" href="game.php?page=settings"  data-bs-toggle="tooltip"
       data-bs-placement="bottom"
-      data-bs-html="true" title="{$LNG.lm_buddylist}">
+      data-bs-html="true" title="{$LNG.lm_options}">
         <i style="font-size:20px;" class="bi bi-gear {if $page == 'settings'}text-danger{/if}"></i>
       </a>
     </li>
