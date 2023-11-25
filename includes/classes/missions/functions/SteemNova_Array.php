@@ -61,7 +61,7 @@ function explodeAndDestroy(&$attackers)
 				$initialArmor = ($pricelist[$unit['unit']]['cost'][901] + $pricelist[$unit['unit']]['cost'][902]) / 10 * $armorTech;
 				if ($unit['armor'] < 0.7 * $initialArmor)
 				{
-					$ran = rand(0, $initialArmor);
+					$ran = rand(0, (int) $initialArmor);
 					if ($ran > $unit['armor'])
 					{
 						// explode unit
