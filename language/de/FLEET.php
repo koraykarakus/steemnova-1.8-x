@@ -145,14 +145,14 @@ $LNG['sys_expe_nothing_9'] 					= 'Ein Reaktorfehler des Führungsschiffes hätt
 $LNG['sys_expe_depleted_not_1'] 			= 'Logbuch Nachtrag des Kommunikationsoffiziers: Dieser Bereich des Universums ist wohl noch nicht erkundet worden.';
 $LNG['sys_expe_depleted_not_2'] 			= 'Logbuch Nachtrag des Kommunikationsoffiziers: Es ist ein erhebendes Gefühl, der Erste in einem unerforschten Sektor zu sein.';
 $LNG['sys_expe_depleted_min_1'] 			= 'Logbuch Nachtrag des Kommunikationsoffiziers: Es scheint nicht so, als ob jemals ein Mensch in diesem Bereich der Galaxis gewesen wäre.';
-
-
+$LNG['sys_expe_depleted_min_2'] 			= 'Eintrag aus dem Logbuch der Kommunikationsoffiziere: Wir haben Trümmer antiker Raumschiffe gefunden. Wir sind nicht die Ersten hier.';
+$LNG['sys_expe_depleted_min_3'] 			= 'Logbucheintrag des Kommunikationsoffiziers: Wir hätten beinahe eine Kollision mit einer anderen Expeditionsflotte gehabt. Ich glaubte nicht, dass es hier noch andere geben würde.';
 $LNG['sys_expe_depleted_med_1'] 			= 'Logbuch Nachtrag des Kommunikationsoffiziers: Es wurden Anzeichen für die Präsenz anderer Expeditionsflotten gefunden.';
-
-
+$LNG['sys_expe_depleted_med_2'] 			= 'Eintrag aus dem Logbuch der Kommunikationsoffiziere: Wir haben mit einigen anderen Expeditionen in diesem Sektor freundschaftlichen Funkkontakt hergestellt.';
+$LNG['sys_expe_depleted_med_3'] 			= 'Eintrag aus dem Logbuch der Kommunikationsoffiziere: Wir feierten den Abschluss der Expedition mit den Besatzungsmitgliedern einer anderen Expeditionsflotte, die im selben Sektor unterwegs waren. Sie haben nichts Neues zu berichten.';
 $LNG['sys_expe_depleted_max_1'] 			= 'Logbuch Nachtrag des Kommunikationsoffiziers: Wenn wir uns zu unsicher fühlen, können wir uns ja mit all den anderen Expeditionen, die hier herum fliegen, zusammen tun.';
-
-
+$LNG['sys_expe_depleted_max_2'] 			= 'Eintrag aus dem Logbuch der Kommunikationsoffiziere: Wenn das so weitergeht, müssen wir Navigationsbojen platzieren, um den ganzen Verkehr zu bewältigen.';
+$LNG['sys_expe_depleted_max_3'] 			= 'Logbucheintrag des Kommunikationsoffiziers: Vielleicht wäre es sinnvoller, hier einen Souvenirladen zu eröffnen, als noch eine weitere Expedition zu schicken.';
 $LNG['sys_expe_attack_1_1_1'] 				= 'Ein paar anscheinend sehr verzweifelte Weltraumpiraten haben versucht, unsere Expeditionsflotte zu kapern.';
 $LNG['sys_expe_attack_1_1_2'] 				= 'Einige primitive Barbaren greifen uns mit Raumschiffen an, die nicht einmal ansatzweise die Bezeichnung Raumschiff verdient haben. Sollte der Beschuss ernst zu nehmende Ausmaße annehmen, sehen wir uns gezwungen das Feuer zu erwidern.';
 $LNG['sys_expe_attack_1_1_3'] 				= 'Wir haben ein paar Funksprüche sehr betrunkener Piraten aufgefangen. Anscheinend sollen wir überfallen werden.';
