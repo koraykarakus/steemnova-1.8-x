@@ -41,9 +41,8 @@ class ShowMessageListPage extends AbstractAdminPage
 		$perSide	= 50;
 
 		$messageList	= array();
-		$userWhereSQL	= '';
-		$dateWhereSQL	= '';
-		$countJoinSQL	= '';
+		$userWhereSQL	= $dateWhereSQL	= $countJoinSQL	= '';
+
 
 		$categories	= $LNG['mg_type'];
 		unset($categories[999]);
@@ -56,13 +55,12 @@ class ShowMessageListPage extends AbstractAdminPage
 
 
 
-
 		if ($type != 100)
 		{
 			if (!empty($sender)) {
 				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
-				LEFT JOIN %%USERS%% as us ON message_sender = us.id
-				WHERE message_type = :type AND message_universe = :universe AND us.username = :sender ";
+				LEFT JOIN %%USERS%% as u ON message_sender = u.id
+				WHERE message_type = :type AND message_universe = :universe AND u.username = :sender ";
 
 				if($useDateStart && $useDateEnd)
 				{
@@ -78,12 +76,12 @@ class ShowMessageListPage extends AbstractAdminPage
 				}
 
 				$MessageCount	= $db->selectSingle($sql,array(
-					':receiver' => $sender
+					':sender' => $sender,
+					':type' => $type,
+					':universe' => Universe::getEmulated(),
 				),'count');
 
-			}
-
-			if (!empty($receiver)) {
+			}else if (!empty($receiver)) {
 
 				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				LEFT JOIN %%USERS%% as u ON message_owner = u.id
@@ -102,10 +100,33 @@ class ShowMessageListPage extends AbstractAdminPage
 					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
 				}
 
+
 				$MessageCount	= $db->selectSingle($sql,array(
-					':receiver' => $receiver
+					':type' => $type,
+					':receiver' => $receiver,
+					':universe' => Universe::getEmulated(),
 				),'count');
 
+			}else {
+				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+				WHERE message_universe = :universe ";
+
+				if($useDateStart && $useDateEnd)
+				{
+					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+				}
+				elseif($useDateStart)
+				{
+					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+				}
+				elseif($useDateStart)
+				{
+					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+				}
+
+				$MessageCount	= $db->selectSingle($sql,array(
+					':universe' => Universe::getEmulated()
+				),'count');
 			}
 
 		}
@@ -114,7 +135,7 @@ class ShowMessageListPage extends AbstractAdminPage
 
 			if (!empty($sender)) {
 				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
-				LEFT JOIN %%USERS%% as us ON message_sender = us.id
+				LEFT JOIN %%USERS%% as u ON message_sender = u.id
 				WHERE message_universe = :universe ";
 
 				if($useDateStart && $useDateEnd)
