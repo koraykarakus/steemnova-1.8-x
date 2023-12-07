@@ -194,12 +194,12 @@
         {/if}" >
         <div class="levelInfo d-flex align-items-center justify-content-center position-absolute bottom-0 end-0 text-yellow bg-dark fs-11">{$Element.level}</div>
 
-        {if !$CanBuildElement || !$Element.buyable || !$Element.technologySatisfied ||
+        {if !$CanBuildElement || !$RoomIsOk || !$Element.buyable || !$Element.technologySatisfied ||
            ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
            <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
            {/if}
           <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
-          {if $CanBuildElement && $Element.buyable && $Element.technologySatisfied &&
+          {if $CanBuildElement && $RoomIsOk && $Element.buyable && $Element.technologySatisfied &&
              !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
              <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
                <input type="hidden" name="cmd" value="insert">
