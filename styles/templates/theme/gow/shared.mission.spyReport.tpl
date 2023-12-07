@@ -39,9 +39,10 @@
 			{if $targetChance >= $spyChance}
 			 {$LNG.sys_mess_spy_destroyed}
 			{else}
-			 {sprintf($LNG.sys_mess_spy_lostproba, $targetChance)}{/if}
-			{if $isBattleSim}
+			 {sprintf($LNG.sys_mess_spy_lostproba, $targetChance)}
+			{/if}
 		</span>
+		{if $isBattleSim}
 		<a class="fs-11 fw-bold w-100 color-blue text-center hover-underline" href="game.php?page=battleSimulator{foreach $spyData as $Class => $elementIDs}{foreach $elementIDs as $elementID => $amount}&amp;im[{$elementID}]={$amount}{/foreach}{/foreach}">{$LNG.fl_simulate}</a>
 		{/if}
 	</div>
