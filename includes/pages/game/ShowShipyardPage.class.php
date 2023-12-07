@@ -136,7 +136,8 @@ class ShowShipyardPage extends AbstractGamePage
 	{
 		global $USER, $PLANET, $LNG, $resource, $reslist, $config, $requeriments;
 
-		if ($PLANET[$resource[21]] == 0)
+
+		if ($PLANET[$resource[21]] == 0 && !$config->show_ships_no_shipyard)
 		{
 			$this->printMessage($LNG['bd_shipyard_required']);
 		}

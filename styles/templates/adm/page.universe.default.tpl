@@ -74,6 +74,14 @@ $(document).ready(function(){
 	<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_technology">Show unlearned technology</label>
 	<input class="mx-2" id="show_unlearned_technology" name="show_unlearned_technology" {if $show_unlearned_technology} checked="checked"{/if} type="checkbox">
 </div>
+<div class="form-gorup d-flex my-1 p-2 ">
+	<label class="text-start my-1 cursor-pointer hover-underline" for="show_tech_no_research">Show technology if no research center</label>
+	<input class="mx-2" id="show_tech_no_research" name="show_tech_no_research" {if $show_tech_no_research} checked="checked"{/if} type="checkbox">
+</div>
+<div class="form-gorup d-flex my-1 p-2 ">
+	<label class="text-start my-1 cursor-pointer hover-underline" for="show_ships_no_shipyard">Show ships if no shipyard</label>
+	<input class="mx-2" id="show_ships_no_shipyard" name="show_ships_no_shipyard" {if $show_ships_no_shipyard} checked="checked"{/if} type="checkbox">
+</div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="forum_url">{$LNG.se_forum_link}</label>
 	<input id="forum_url"  class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="forum_url" size="60" maxlength="254" value="{$forum_url}" type="text">

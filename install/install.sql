@@ -298,6 +298,8 @@ CREATE TABLE `%PREFIX%config` (
   `user_max_notes` SMALLINT(5) unsigned NOT NULL DEFAULT 40,
   `recover_password_with_secret_question` BOOLEAN NOT NULL DEFAULT 1,
   `password_recover_type` ENUM('1','2') NOT NULL DEFAULT '2',
+  `show_ships_no_shipyard` BOOLEAN NOT NULL DEFAULT 0,
+  `show_tech_no_research` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

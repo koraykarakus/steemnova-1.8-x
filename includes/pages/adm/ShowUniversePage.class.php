@@ -116,7 +116,9 @@ class ShowUniversePage extends AbstractAdminPage
 			'show_unlearned_ships' => $config->show_unlearned_ships,
 			'show_unlearned_buildings' => $config->show_unlearned_buildings,
 			'show_unlearned_technology' => $config->show_unlearned_technology,
-			'user_max_notes' => $config->user_max_notes
+			'user_max_notes' => $config->user_max_notes,
+			'show_ships_no_shipyard' => $config->show_ships_no_shipyard,
+			'show_tech_no_research' => $config->show_tech_no_research,
 		));
 
 		$this->display('page.universe.default.tpl');
@@ -199,6 +201,8 @@ class ShowUniversePage extends AbstractAdminPage
 				'show_unlearned_buildings' => $config->show_unlearned_buildings,
 				'show_unlearned_technology' => $config->show_unlearned_technology,
 				'user_max_notes' => $config->user_max_notes,
+				'show_ships_no_shipyard' => $config->show_ships_no_shipyard,
+				'show_tech_no_research' => $config->show_tech_no_research,
 			);
 
 			$game_disable			= isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
@@ -268,7 +272,8 @@ class ShowUniversePage extends AbstractAdminPage
 			$show_unlearned_buildings = (HTTP::_GP('show_unlearned_buildings', 'off') == 'on') ? 1 : 0;
 			$show_unlearned_technology = (HTTP::_GP('show_unlearned_technology', 'off') == 'on') ? 1 : 0;
 			$user_max_notes = HTTP::_GP('user_max_notes',20);
-
+			$show_ships_no_shipyard =  (HTTP::_GP('show_ships_no_shipyard', 'off') == 'on') ? 1 : 0;
+			$show_tech_no_research =  (HTTP::_GP('show_tech_no_research', 'off') == 'on') ? 1 : 0;
 
 
 			$config_after = array(
@@ -337,7 +342,9 @@ class ShowUniversePage extends AbstractAdminPage
 				'show_unlearned_ships' => $show_unlearned_ships,
 				'show_unlearned_buildings' => $show_unlearned_buildings,
 				'show_unlearned_technology' => $show_unlearned_technology,
-				'user_max_notes' => $user_max_notes
+				'user_max_notes' => $user_max_notes,
+				'show_ships_no_shipyard' => $show_ships_no_shipyard,
+				'show_tech_no_research' => $show_tech_no_research,
 					);
 
 

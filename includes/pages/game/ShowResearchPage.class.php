@@ -333,7 +333,7 @@ class ShowResearchPage extends AbstractGamePage
 	{
 		global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config,$requeriments;
 
-		if ($PLANET[$resource[31]] == 0)
+		if ($PLANET[$resource[31]] == 0 && !$config->show_tech_no_research)
 		{
 			$this->printMessage($LNG['bd_lab_required']);
 		}
