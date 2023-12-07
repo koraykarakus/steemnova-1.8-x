@@ -66,7 +66,7 @@
 
   		</div>
   		<div class="d-flex mx-2 justify-content-between">
-  			<div class="m-0 p-0">
+  			<div style="width:200px;" class="m-0 p-0 overflow-auto scroll">
   				<span class="d-flex flex-column">
   					{foreach $Element.costResources as $RessID => $RessAmount}
             <div class="d-flex align-items-center my-1">
@@ -77,7 +77,6 @@
               <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
             </div>
   					{/foreach}
-              <span class="fs-10 my-1 text-white">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
   				</span>
   			</div>
   			<div class="d-flex flex-column justify-content-start align-items-end">
@@ -87,8 +86,6 @@
   					<span class="fs-12" style="color:#ffd600">{$LNG.bd_working}</span>
   				{else}
   					{if $RoomIsOk}
-
-
   						{if $CanBuildElement && $Element.buyable && $Element.technologySatisfied}
   						<form action="game.php?page=buildings" method="post" class="build_form">
   							<input type="hidden" name="cmd" value="insert">
@@ -158,8 +155,9 @@
   </div>
 
 
-  <div class="d-flex w-100 bg-light-black itemInfo">
-    <p class="text-white fs-11 p-2">{$LNG.shortDescription[$ID]}</p>
+  <div class="d-flex flex-column w-100 bg-light-black itemInfo overflow-auto scroll">
+    <span class="fs-10 px-2 my-1 text-white w-100 fw-bold">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
+    <p class="text-white fs-11 px-2">{$LNG.shortDescription[$ID]}</p>
   </div>
 </div>
 {/foreach}
