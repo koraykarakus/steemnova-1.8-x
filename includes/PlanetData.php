@@ -15,7 +15,8 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-global $config;
+$config = Config::get();
+
 
 $planetData	= array(
 	1	=> array('temp' => mt_rand(220, 260),	'fields' => mt_rand($config->planet_1_field_min, $config->planet_1_field_max),	'image' => array('trocken' => mt_rand(1, 10), 'wuesten' => mt_rand(1, 4))),
