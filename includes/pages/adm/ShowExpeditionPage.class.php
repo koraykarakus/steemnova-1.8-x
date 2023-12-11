@@ -22,6 +22,8 @@ class ShowExpeditionPage extends AbstractAdminPage
       'expedition_allow_darkmatter_find' => $config->expedition_allow_darkmatter_find,
       'expedition_allow_resources_find' => $config->expedition_allow_resources_find,
       'expedition_allow_ships_find' => $config->expedition_allow_ships_find,
+      'expedition_consider_holdtime' => $config->expedition_consider_holdtime,
+      'expedition_consider_same_coordinate' => $config->expedition_consider_same_coordinate,
       'expedition_min_darkmatter_small_min' => $config->expedition_min_darkmatter_small_min,
       'expedition_min_darkmatter_small_max' => $config->expedition_min_darkmatter_small_max,
       'expedition_min_darkmatter_large_min' => $config->expedition_min_darkmatter_large_min,
@@ -44,6 +46,8 @@ class ShowExpeditionPage extends AbstractAdminPage
       'expedition_allow_darkmatter_find' => $config->expedition_allow_darkmatter_find,
       'expedition_allow_resources_find' => $config->expedition_allow_resources_find,
       'expedition_allow_ships_find' => $config->expedition_allow_ships_find,
+      'expedition_consider_holdtime' => $config->expedition_consider_holdtime,
+      'expedition_consider_same_coordinate' => $config->expedition_consider_same_coordinate,
       'expedition_min_darkmatter_small_min' => $config->expedition_min_darkmatter_small_min,
       'expedition_min_darkmatter_small_max' => $config->expedition_min_darkmatter_small_max,
       'expedition_min_darkmatter_large_min' => $config->expedition_min_darkmatter_large_min,
@@ -59,6 +63,8 @@ class ShowExpeditionPage extends AbstractAdminPage
     $expedition_allow_darkmatter_find = (HTTP::_GP('expedition_allow_darkmatter_find', 'off') == 'on') ? 1 : 0;
     $expedition_allow_resources_find = (HTTP::_GP('expedition_allow_resources_find', 'off') == 'on') ? 1 : 0;
     $expedition_allow_ships_find = (HTTP::_GP('expedition_allow_ships_find', 'off') == 'on') ? 1 : 0;
+    $expedition_consider_holdtime = (HTTP::_GP('expedition_consider_holdtime', 'off') == 'on') ? 1 : 0;
+    $expedition_consider_same_coordinate = (HTTP::_GP('expedition_consider_same_coordinate', 'off') == 'on') ? 1 : 0;
 
     $expedition_min_darkmatter_small_min = HTTP::_GP('expedition_min_darkmatter_small_min',100);
     $expedition_min_darkmatter_small_max = HTTP::_GP('expedition_min_darkmatter_small_max',300);
@@ -75,6 +81,8 @@ class ShowExpeditionPage extends AbstractAdminPage
       'expedition_allow_darkmatter_find' => $expedition_allow_darkmatter_find,
       'expedition_allow_resources_find' => $expedition_allow_resources_find,
       'expedition_allow_ships_find' => $expedition_allow_ships_find,
+      'expedition_consider_holdtime' => $expedition_consider_holdtime,
+      'expedition_consider_same_coordinate' => $expedition_consider_same_coordinate,
       'expedition_min_darkmatter_small_min' => $expedition_min_darkmatter_small_min,
       'expedition_min_darkmatter_small_max' => $expedition_min_darkmatter_small_max,
       'expedition_min_darkmatter_large_min' => $expedition_min_darkmatter_large_min,
@@ -117,6 +125,8 @@ class ShowExpeditionPage extends AbstractAdminPage
     $expedition_allow_darkmatter_find = 1;
     $expedition_allow_resources_find = 1;
     $expedition_allow_ships_find = 1;
+    $expedition_consider_holdtime = 1;
+    $expedition_consider_same_coordinate = 1;
 
     $expedition_min_darkmatter_small_min = 100;
     $expedition_min_darkmatter_small_max = 300;
@@ -133,6 +143,8 @@ class ShowExpeditionPage extends AbstractAdminPage
       'expedition_allow_darkmatter_find' => $expedition_allow_darkmatter_find,
       'expedition_allow_resources_find' => $expedition_allow_resources_find,
       'expedition_allow_ships_find' => $expedition_allow_ships_find,
+      'expedition_consider_holdtime' => $expedition_consider_holdtime,
+      'expedition_consider_same_coordinate' => $expedition_consider_same_coordinate,
       'expedition_min_darkmatter_small_min' => $expedition_min_darkmatter_small_min,
       'expedition_min_darkmatter_small_max' => $expedition_min_darkmatter_small_max,
       'expedition_min_darkmatter_large_min' => $expedition_min_darkmatter_large_min,

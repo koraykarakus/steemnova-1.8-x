@@ -30,6 +30,14 @@
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_allow_ships_find">Allow ships to be found on expedition</label>
     <input class="mx-2" id="expedition_allow_ships_find" name="expedition_allow_ships_find" {if $expedition_allow_ships_find} checked="checked"{/if} type="checkbox">
   </div>
+  <div class="form-gorup d-flex my-1 p-2">
+    <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_consider_holdtime">Consider hold time for expeditions</label>
+    <input class="mx-2" id="expedition_consider_holdtime" name="expedition_consider_holdtime" {if $expedition_consider_holdtime} checked="checked"{/if} type="checkbox">
+  </div>
+  <div class="form-gorup d-flex my-1 p-2">
+    <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_consider_same_coordinate">Consider same coordinate for expeditions</label>
+    <input class="mx-2" id="expedition_consider_same_coordinate" name="expedition_consider_same_coordinate" {if $expedition_consider_same_coordinate} checked="checked"{/if} type="checkbox">
+  </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_small_min">min darkmatter (small event)</label>
     <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_small_min" name="expedition_min_darkmatter_small_min" value="{$expedition_min_darkmatter_small_min}" type="text">

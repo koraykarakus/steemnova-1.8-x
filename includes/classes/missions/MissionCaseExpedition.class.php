@@ -68,36 +68,45 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 		// Get a seed into the number generator (to make the results unpredictable).
 		mt_srand((int) (microtime(TRUE) * 10000));
 		usleep(50);
+		$GetEvent = mt_rand(0, 1000);
 
 		// Hold time bonus
-		$holdTime = ($this->_fleet['fleet_end_stay'] - $this->_fleet['fleet_start_time']) / 3600;
+		if ($config->expedition_consider_holdtime) {
+			$holdTime = ($this->_fleet['fleet_end_stay'] - $this->_fleet['fleet_start_time']) / 3600;
+			$GetEvent -= $holdTime * 10;
+		}
 
-		$GetEvent = mt_rand(0, 1000);
-		$GetEvent -= $holdTime * 10;
+
 
 		$Message = $LNG['sys_expe_nothing_'.mt_rand(1,8)];
-
+		$logbook = "";
 		// Depletion check
-		if ($expeditionsCount <= 10) {
-			$chanceDepleted = 0;
-			$logbook = $LNG['sys_expe_depleted_not_'.mt_rand(1,2)];
-		}
-		else if ($expeditionsCount <= 25) {
-			$chanceDepleted = 25;
-			$logbook = $LNG['sys_expe_depleted_min_'.mt_rand(1,3)];
-		}
-		else if ($expeditionsCount <= 50) {
-			$chanceDepleted = 50;
-			$logbook = $LNG['sys_expe_depleted_med_'.mt_rand(1,3)];
-		}
-		else {
-			$chanceDepleted = 75;
-			$logbook = $LNG['sys_expe_depleted_max_'.mt_rand(1,3)];
+
+		if ($config->expedition_consider_same_coordinate) {
+			if ($expeditionsCount <= 10) {
+				$chanceDepleted = 0;
+				$logbook = $LNG['sys_expe_depleted_not_'.mt_rand(1,2)];
+			}
+			else if ($expeditionsCount <= 25) {
+				$chanceDepleted = 25;
+				$logbook = $LNG['sys_expe_depleted_min_'.mt_rand(1,3)];
+			}
+			else if ($expeditionsCount <= 50) {
+				$chanceDepleted = 50;
+				$logbook = $LNG['sys_expe_depleted_med_'.mt_rand(1,3)];
+			}
+			else {
+				$chanceDepleted = 75;
+				$logbook = $LNG['sys_expe_depleted_max_'.mt_rand(1,3)];
+			}
+
+			$depleted = mt_rand(0, 100);
+			if ($depleted < $chanceDepleted)
+				$GetEvent = 1000; // nothing happens
+
 		}
 
-		$depleted = mt_rand(0, 100);
-		if ($depleted < $chanceDepleted)
-			$GetEvent = 1000; // nothing happens
+
 
 
 		do {
@@ -106,9 +115,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 			if ($GetEvent < 325)
 			{
 
-				if (!$config->expedition_allow_resources_find) {
-					break;
-				}
+				if (!$config->expedition_allow_resources_find) { break; }
 
 				$eventSize		= mt_rand(0, 100);
 				$factor			= 0;

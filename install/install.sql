@@ -343,6 +343,8 @@ CREATE TABLE `%PREFIX%config` (
   `expedition_min_darkmatter_large_max` INT unsigned NOT NULL DEFAULT 600,
   `expedition_min_darkmatter_vlarge_min` INT unsigned NOT NULL DEFAULT 601,
   `expedition_min_darkmatter_vlarge_max` INT unsigned NOT NULL DEFAULT 3000,
+  `expedition_consider_holdtime` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_consider_same_coordinate` BOOLEAN NOT NULL DEFAULT 1,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
