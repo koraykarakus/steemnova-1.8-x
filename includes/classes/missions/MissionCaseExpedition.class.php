@@ -100,8 +100,6 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 			$GetEvent = 1000; // nothing happens
 
 
-		$GetEvent = 414;
-
 		do {
 
 			// Find resources: 32,5%. Values from http://owiki.de/Expedition
