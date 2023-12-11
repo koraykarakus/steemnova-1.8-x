@@ -30,6 +30,17 @@
 	color: #ddd;
 }
 
+.tip{
+	display: none;
+	padding: 10px;
+	border: 1px solid #B63535;
+	position: fixed;
+	margin: auto;
+	background: #382F2F;
+	color: #f1f1f1;
+	top:20px;
+}
+
 /*special scrollbar*/
 
 .scroll{
@@ -327,9 +338,7 @@ table{
 .table-gow td,.table-gow th,.table-gow a{
 	color: #ffd600;
 }
-.table-gow tr{
-	border: 1px solid rgba(119,117,117,0.2);
-}
+
 .table-gow button,.table-gow select,.table-gow input{
 	color: #ddd;
 }
