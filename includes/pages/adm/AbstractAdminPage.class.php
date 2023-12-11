@@ -114,6 +114,7 @@ abstract class AbstractAdminPage
 			'id'					=> $USER['id'],
 			'supportticks'	=> $numberTickets,
 			'currentPage' => HTTP::_GP('page',''),
+			'search' => HTTP::_GP('search',''),
 		));
 	}
 

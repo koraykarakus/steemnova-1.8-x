@@ -118,7 +118,7 @@ $(document).ready(function(){
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == 'online'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search&amp;search=online&amp;minimize=on" >{$LNG.mu_connected}</a>
     </li>
     {/if}
@@ -133,7 +133,7 @@ $(document).ready(function(){
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == 'p_connect'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search&amp;search=p_connect&amp;minimize=on" >{$LNG.mu_active_planets}</a>
     </li>
     {/if}
@@ -148,17 +148,17 @@ $(document).ready(function(){
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == 'users'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search&amp;search=users&amp;minimize=on" >{$LNG.mu_user_list}</a>
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == 'planet'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search&amp;search=planet&amp;minimize=on" >{$LNG.mu_planet_list}</a>
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == 'moon'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search&amp;search=moon&amp;minimize=on" >{$LNG.mu_moon_list}</a>
     </li>
     {/if}
@@ -173,7 +173,7 @@ $(document).ready(function(){
     </li>
     {/if}
 		{if allowedTo('ShowSearchPage')}
-    <li class="d-flex {if $currentPage == 'search'}menu-active{/if}">
+    <li class="d-flex {if $currentPage == 'search' && $search == ''}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=search" >{$LNG.mu_search_page}</a>
     </li>
     {/if}
