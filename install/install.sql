@@ -330,6 +330,19 @@ CREATE TABLE `%PREFIX%config` (
   `planet_14_field_max` SMALLINT unsigned NOT NULL DEFAULT 93,
   `planet_15_field_min` SMALLINT unsigned NOT NULL DEFAULT 65,
   `planet_15_field_max` SMALLINT unsigned NOT NULL DEFAULT 74,
+  `expedition_allow_fleet_loss` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_fleet_delay` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_fleet_speedup` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_expedition_war` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_ships_find` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_darkmatter_find` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_allow_resources_find` BOOLEAN NOT NULL DEFAULT 1,
+  `expedition_min_darkmatter_small_min` INT unsigned NOT NULL DEFAULT 100,
+  `expedition_min_darkmatter_small_max` INT unsigned NOT NULL DEFAULT 300,
+  `expedition_min_darkmatter_large_min` INT unsigned NOT NULL DEFAULT 301,
+  `expedition_min_darkmatter_large_max` INT unsigned NOT NULL DEFAULT 600,
+  `expedition_min_darkmatter_vlarge_min` INT unsigned NOT NULL DEFAULT 601,
+  `expedition_min_darkmatter_vlarge_max` INT unsigned NOT NULL DEFAULT 3000,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

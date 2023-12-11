@@ -52,6 +52,11 @@ $(document).ready(function(){
 				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=planetfields" >Planet Fields</a>
 			</li>
 		{/if}
+    {if allowedTo('ShowExpeditionSettingsPage')}
+      <li class="d-flex {if $currentPage == 'expedition'}menu-active{/if}">
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=expedition" >Expedition Settings</a>
+      </li>
+    {/if}
 		{if allowedTo('ShowChatConfigPage')}
     <li class="d-flex {if $currentPage == 'chat'}menu-active{/if}">
       <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=chat" >{$LNG.mu_chat}</a>
