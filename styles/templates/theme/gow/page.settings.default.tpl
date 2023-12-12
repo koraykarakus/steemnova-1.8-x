@@ -78,9 +78,9 @@
 			<td>{$LNG.op_skin_example}</td>
 			<td>
 				<select class="form-select bg-dark text-white py-0 my-0" name="user_theme">
-					<option {if $user_theme == 1}selected{/if} value="1">Nova</option>
-					<option {if $user_theme == 2}selected{/if} value="2">Galaxy of Wars</option>
-					<option {if $user_theme == 3}selected{/if} value="3">Epic Blue</option>
+					<option {if $theme == 'nova'}selected{/if} value="nova">Nova</option>
+					<option {if $theme == 'gow'}selected{/if} value="gow">Galaxy of Wars</option>
+					<option {if $theme == 'EpicBlueXIII'}selected{/if} value="EpicBlueXIII">Epic Blue</option>
 				</select>
 			</td>
 		</tr>

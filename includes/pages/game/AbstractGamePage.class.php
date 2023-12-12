@@ -67,24 +67,10 @@ abstract class AbstractGamePage
 
 		$path = $theme = "";
 
-		$theme = ($config->let_users_change_theme) ? $USER['user_theme'] : $config->server_default_theme;
+		$theme = ($config->let_users_change_theme) ? $USER['dpath'] : $config->server_default_theme;
 
-		switch ($theme) {
-			case 1:
-				$path = "theme/nova";
-				break;
-			case 2:
-				$path = "theme/gow";
-				break;
-			case 3:
-				$path = "theme/EpicBlueXIII";
-				break;
-			default:
-				$path = "theme/nova";
-				break;
-		}
-
-
+		$path = "theme/" . $theme;
+		
 
 		$this->tplObj->setTemplateDir($tplDir. $path);
 		return true;

@@ -33,27 +33,11 @@ class Theme
 			$config = Config::get();
 			if ($config->let_users_change_theme && isset($USER)) {
 
-				if ($USER['user_theme'] == 1) {
-					$this->skin = "nova";
-				}elseif ($USER['user_theme'] == 2) {
-					$this->skin = "gow";
-				}elseif ($USER['user_theme'] == 3) {
-					$this->skin = "EpicBlueXIII";
-				}else { //default skin is nova
-					$this->skin = "nova";
-				}
+					$this->skin = $USER['dpath'];
 
 			}else {
 
-				if ($config->server_default_theme == 1) {
-					$this->skin = "nova";
-				}elseif ($config->server_default_theme == 2) {
-					$this->skin = "gow";
-				}elseif ($config->server_default_theme == 3) {
-					$this->skin = "EpicBlueXIII";
-				}else { //default skin is nova
-					$this->skin = "nova";
-				}
+					$this->skin = $config->server_default_theme;
 
 			}
 

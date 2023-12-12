@@ -77,7 +77,6 @@ class ShowSettingsPage extends AbstractGamePage
 				'ref_active'		=> $config->ref_active,
 				'SELF_URL'          => PROTOCOL.HTTP_HOST.HTTP_ROOT,
 				'let_users_change_theme' => $config->let_users_change_theme,
-				'user_theme' => $USER['user_theme']
 			));
 
 			$this->display('page.settings.default.tpl');
@@ -229,22 +228,23 @@ class ShowSettingsPage extends AbstractGamePage
 		$fleetactions		= min(max($fleetactions, 1), 99);
 
 		$language			= array_key_exists($language, $LNG->getAllowedLangs(false)) ? $language : $LNG->getLanguage();
+		$theme = HTTP::_GP('user_theme','');
 
-		$theme = HTTP::_GP('user_theme',1);
 
-		switch ($theme) {
-			case 1:
-				$themeName = "nova";
-				break;
-			case 2:
-			$themeName = "gow";
-				break;
-			case 3:
-			$themeName = "EpicBlueXIII";
-				break;
-			default:
-			$themeName = "nova";
-				break;
+		$availableThemes = array_keys(Theme::getAvalibleSkins());
+
+		if (!in_array($theme,$availableThemes)) {
+			$theme = "gow";
+		}
+
+		if ($config->let_users_change_theme) {
+
+			$themeName = $theme;
+
+		}else {
+
+			$themeName = $USER['dpath'];
+
 		}
 
 		$db = Database::get();
@@ -401,8 +401,7 @@ class ShowSettingsPage extends AbstractGamePage
 		authattack				= :adminProtection,
 		lang					= :language,
 		hof						= :queueMessages,
-		spyMessagesMode			= :spyMessagesMode,
-		user_theme = :user_theme
+		spyMessagesMode			= :spyMessagesMode
 		WHERE id = :userID;";
 
 		$db->update($sql, array(
@@ -422,7 +421,6 @@ class ShowSettingsPage extends AbstractGamePage
 			':queueMessages'	=> $queueMessages,
 			':spyMessagesMode'	=> $spyMessagesMode,
 			':userID'			=> $USER['id'],
-			':user_theme' => $theme
 		));
 
 		$this->printMessage($LNG['op_options_changed'], array(array(
