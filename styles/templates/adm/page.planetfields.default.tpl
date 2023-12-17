@@ -1,6 +1,6 @@
 {block name="content"}
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=planetfields&mode=send" method="post">
+<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=planetFields&mode=send" method="post">
 <input type="hidden" name="opt_save" value="1">
 
 <span class="fs-12 text-start d-flex fw-bold">Planet 1:</span>
@@ -175,7 +175,7 @@
 </div>
 </form>
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=planetfields&mode=default" method="post">
+<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=planetFields&mode=default" method="post">
   <div class="form-gorup d-flex flex-column my-1 p-2 ">
   	<input  class="btn btn-primary text-white" value="return default" type="submit">
   </div>

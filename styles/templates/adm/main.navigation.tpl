@@ -48,8 +48,8 @@ $(document).ready(function(){
 			</li>
 		{/if}
     {if allowedTo('ShowPlanetFieldsPage')}
-			<li class="d-flex {if $currentPage == 'planetfields'}menu-active{/if}">
-				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=planetfields" >Planet Fields</a>
+			<li class="d-flex {if $currentPage == 'planetFields'}menu-active{/if}">
+				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=planetFields" >Planet Fields</a>
 			</li>
 		{/if}
     {if allowedTo('ShowExpeditionSettingsPage')}

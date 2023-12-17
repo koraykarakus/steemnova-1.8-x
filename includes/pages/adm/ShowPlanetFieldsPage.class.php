@@ -165,7 +165,7 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
 
     $redirectButton = array();
     $redirectButton[] = array(
-      'url' => 'admin.php?page=planetfields&mode=show',
+      'url' => 'admin.php?page=planetFields&mode=show',
       'label' => $LNG['uvs_back']
     );
 
@@ -249,7 +249,7 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
 
     $redirectButton = array();
     $redirectButton[] = array(
-      'url' => 'admin.php?page=planetfields&mode=show',
+      'url' => 'admin.php?page=planetFields&mode=show',
       'label' => $LNG['uvs_back']
     );
 
