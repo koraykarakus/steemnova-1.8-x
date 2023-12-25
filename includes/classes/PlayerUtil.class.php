@@ -127,7 +127,7 @@ class PlayerUtil
 		}
 
 
-		
+
 
 		$params			= array(
 			':username'				=> $userName,
@@ -217,6 +217,123 @@ class PlayerUtil
 		return array($userId, $planetId);
 	}
 
+	static public function updateColonyWithStartValues($planetID){
+
+		$db = Database::get();
+
+		$sql = "SELECT * FROM %%COLONY_SETTINGS%%;";
+
+		$colony_settings = $db->selectSingle($sql);
+
+		$sql = "UPDATE %%PLANETS%% SET
+		`metal` = :metal_start,
+		`crystal` = :crystal_start,
+		`deuterium` = :deuterium_start,
+		`metal_mine` = :metal_mine_start,
+		`crystal_mine` = :crystal_mine_start,
+		`deuterium_sintetizer` = :deuterium_mine_start,
+		`solar_plant` = :solar_plant_start,
+		`fusion_plant` = :fusion_plant_start,
+		`robot_factory` = :robot_factory_start,
+		`nano_factory` = :nano_factory_start,
+		`hangar` = :hangar_start,
+		`metal_store` = :metal_store_start,
+		`crystal_store` = :crystal_store_start,
+		`deuterium_store` = :deuterium_store_start,
+		`laboratory` = :laboratory_start,
+		`terraformer` = :terraformer_start,
+		`university` = :university_start,
+		`ally_deposit` = :ally_deposit_start,
+		`silo` = :silo_start,
+		`small_ship_cargo` = :small_ship_cargo_start,
+		`big_ship_cargo` = :big_ship_cargo_start,
+		`light_hunter` = :light_hunter_start,
+		`heavy_hunter` = :heavy_hunter_start,
+		`crusher` = :crusher_start,
+		`battle_ship` = :battle_ship_start,
+		`colonizer` = :colonizer_start,
+		`recycler` = :recycler_start,
+		`spy_sonde` = :spy_sonde_start,
+		`bomber_ship` = :bomber_ship_start,
+		`solar_satelit` = :solar_satelit_start,
+		`destructor` = :destructor_start,
+		`dearth_star` = :dearth_star_start,
+		`battleship` = :battleship_start,
+		`ev_transporter` = :ev_transporter_start,
+		`star_crasher` = :star_crasher_start,
+		`giga_recykler` = :giga_recykler_start,
+		`dm_ship` = :dm_ship_start,
+		`orbital_station` = :orbital_station_start,
+		`misil_launcher` = :misil_launcher_start,
+		`small_laser` = :small_laser_start,
+		`big_laser` = :big_laser_start,
+		`gauss_canyon` = :gauss_canyon_start,
+		`ionic_canyon` = :ionic_canyon_start,
+		`buster_canyon` = :buster_canyon_start,
+		`small_protection_shield` = :small_protection_shield_start,
+		`planet_protector` = :planet_protector_start,
+		`big_protection_shield` = :big_protection_shield_start,
+		`graviton_canyon` = :graviton_canyon_start,
+		`interceptor_misil` = :interceptor_misil_start,
+		`interplanetary_misil` = :interplanetary_misil_start
+		WHERE id = :planetID;";
+
+		Database::get()->update($sql,array(
+			':metal_start' => $colony_settings['metal_start'],
+			':crystal_start' => $colony_settings['crystal_start'],
+			':deuterium_start' => $colony_settings['deuterium_start'],
+			':metal_mine_start' => $colony_settings['metal_mine_start'],
+			':crystal_mine_start' => $colony_settings['crystal_mine_start'],
+			':deuterium_mine_start' => $colony_settings['deuterium_mine_start'],
+			':solar_plant_start' => $colony_settings['solar_plant_start'],
+			':fusion_plant_start' => $colony_settings['fusion_plant_start'],
+			':robot_factory_start' => $colony_settings['robot_factory_start'],
+			':nano_factory_start' => $colony_settings['nano_factory_start'],
+			':hangar_start' => $colony_settings['hangar_start'],
+			':metal_store_start' => $colony_settings['metal_store_start'],
+			':crystal_store_start' => $colony_settings['crystal_store_start'],
+			':deuterium_store_start' => $colony_settings['deuterium_store_start'],
+			':laboratory_start' => $colony_settings['laboratory_start'],
+			':terraformer_start' => $colony_settings['terraformer_start'],
+			':university_start' => $colony_settings['university_start'],
+			':ally_deposit_start' => $colony_settings['ally_deposit_start'],
+			':silo_start' => $colony_settings['silo_start'],
+			':small_ship_cargo_start' => $colony_settings['small_ship_cargo_start'],
+			':big_ship_cargo_start' => $colony_settings['big_ship_cargo_start'],
+			':light_hunter_start' => $colony_settings['light_hunter_start'],
+			':heavy_hunter_start' => $colony_settings['heavy_hunter_start'],
+			':crusher_start' => $colony_settings['crusher_start'],
+			':battle_ship_start' => $colony_settings['battle_ship_start'],
+			':colonizer_start' => $colony_settings['colonizer_start'],
+			':recycler_start' => $colony_settings['recycler_start'],
+			':spy_sonde_start' => $colony_settings['spy_sonde_start'],
+			':bomber_ship_start' => $colony_settings['bomber_ship_start'],
+			':solar_satelit_start' => $colony_settings['solar_satelit_start'],
+			':destructor_start' => $colony_settings['destructor_start'],
+			':dearth_star_start' => $colony_settings['dearth_star_start'],
+			':battleship_start' => $colony_settings['battleship_start'],
+			':ev_transporter_start' => $colony_settings['ev_transporter_start'],
+			':star_crasher_start' => $colony_settings['star_crasher_start'],
+			':giga_recykler_start' => $colony_settings['giga_recykler_start'],
+			':dm_ship_start' => $colony_settings['dm_ship_start'],
+			':orbital_station_start' => $colony_settings['orbital_station_start'],
+			':misil_launcher_start' => $colony_settings['misil_launcher_start'],
+			':small_laser_start' => $colony_settings['small_laser_start'],
+			':big_laser_start' => $colony_settings['big_laser_start'],
+			':gauss_canyon_start' => $colony_settings['gauss_canyon_start'],
+			':ionic_canyon_start' => $colony_settings['ionic_canyon_start'],
+			':buster_canyon_start' => $colony_settings['buster_canyon_start'],
+			':small_protection_shield_start' => $colony_settings['small_protection_shield_start'],
+			':planet_protector_start' => $colony_settings['planet_protector_start'],
+			':big_protection_shield_start' => $colony_settings['big_protection_shield_start'],
+			':graviton_canyon_start' => $colony_settings['graviton_canyon_start'],
+			':interceptor_misil_start' => $colony_settings['interceptor_misil_start'],
+			':interplanetary_misil_start' => $colony_settings['interplanetary_misil_start'],
+			':planetID' => $planetID,
+		));
+
+	}
+
 	static public function createPlanet($galaxy, $system, $position, $universe, $userId, $name = NULL, $isHome = false, $authlevel = 0)
 	{
 		global $LNG;
@@ -274,9 +391,6 @@ class PlayerUtil
 			':maxFields'		=> $maxFields,
 			':minTemperature'	=> $minTemperature,
 			':maxTemperature'	=> $maxTemperature,
-			':metal_start'		=> $config->metal_start,
-			':crystal_start'	=> $config->crystal_start,
-			':deuterium_start'	=> $config->deuterium_start
 		);
 
 		$sql = 'INSERT INTO %%PLANETS%% SET
@@ -292,10 +406,7 @@ class PlayerUtil
 		`diameter`	= :diameter,
 		`field_max`	= :maxFields,
 		`temp_min` 	= :minTemperature,
-		`temp_max` 	= :maxTemperature,
-		`metal`		= :metal_start,
-		`crystal`		= :crystal_start,
-		`deuterium`	= :deuterium_start;';
+		`temp_max` 	= :maxTemperature;';
 
 		$db = Database::get();
 		$db->insert($sql, $params);

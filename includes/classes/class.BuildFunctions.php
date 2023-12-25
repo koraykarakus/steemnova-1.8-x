@@ -177,7 +177,6 @@ class BuildFunctions
         } else {
             $time	= floor($time * 3600);
         }
-
         return max($time, $config->min_build_time);
     }
 

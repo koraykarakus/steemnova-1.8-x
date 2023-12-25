@@ -87,6 +87,9 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
 					{
 						$this->_fleet['fleet_end_id']	= $NewOwnerPlanet;
 						$message = sprintf($LNG['sys_colo_allisok'], GetTargetAddressLink($this->_fleet, ''));
+
+						PlayerUtil::updateColonyWithStartValues($NewOwnerPlanet);
+
 						$this->StoreGoodsToPlanet();
 						if ($this->_fleet['fleet_amount'] == 1) {
 							$this->KillFleet();

@@ -152,6 +152,60 @@ CREATE TABLE `%PREFIX%chat_online` (
   KEY `dateTime` (`dateTime`,`channel`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE `%PREFIX%colony_settings` (
+  `metal_start` int(11) unsigned NOT NULL DEFAULT 500,
+  `crystal_start` int(11) unsigned NOT NULL DEFAULT 500,
+  `deuterium_start` int(11) unsigned NOT NULL DEFAULT 0,
+  `darkmatter_start` int(11) unsigned NOT NULL DEFAULT 0,
+  `metal_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `crystal_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `deuterium_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `solar_plant_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `fusion_plant_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `robot_factory_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `nano_factory_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `hangar_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `metal_store_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `crystal_store_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `deuterium_store_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `laboratory_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `terraformer_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `university_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `ally_deposit_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `silo_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `small_ship_cargo_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `big_ship_cargo_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `light_hunter_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `heavy_hunter_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `crusher_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `battle_ship_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `colonizer_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `recycler_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `spy_sonde_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `bomber_ship_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `solar_satelit_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `destructor_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `dearth_star_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `battleship_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `ev_transporter_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `star_crasher_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `giga_recykler_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `dm_ship_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `orbital_station_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `misil_launcher_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `small_laser_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `big_laser_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `gauss_canyon_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `ionic_canyon_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `buster_canyon_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `small_protection_shield_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `planet_protector_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `big_protection_shield_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `graviton_canyon_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `interceptor_misil_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
+  `interplanetary_misil_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
 CREATE TABLE `%PREFIX%config` (
   `uni` int(11) NOT NULL AUTO_INCREMENT,
   `VERSION` varchar(8) NOT NULL,
@@ -267,10 +321,6 @@ CREATE TABLE `%PREFIX%config` (
   `debris_moon` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `vmode_min_time` int(11) NOT NULL DEFAULT '259200',
   `gate_wait_time` int(11) NOT NULL DEFAULT '3600',
-  `metal_start` int(11) unsigned NOT NULL DEFAULT '500',
-  `crystal_start` int(11) unsigned NOT NULL DEFAULT '500',
-  `deuterium_start` int(11) unsigned NOT NULL DEFAULT '0',
-  `darkmatter_start` int(11) unsigned NOT NULL DEFAULT '0',
   `ttf_file` varchar(128) NOT NULL DEFAULT 'styles/resource/fonts/DroidSansMono.ttf',
   `ref_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `ref_bonus` int(11) unsigned NOT NULL DEFAULT '1000',
@@ -1046,6 +1096,8 @@ CREATE TABLE `%PREFIX%vars_requriements` (
 
 INSERT INTO `%PREFIX%config` (`uni`, `VERSION`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclamerAddress`, `disclamerPhone`, `disclamerMail`, `disclamerNotice`) VALUES
 (1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
+
+INSERT INTO `%PREFIX%colony_settings` (`metal_start`) VALUES (500);
 
 INSERT INTO `%PREFIX%cronjobs` (`cronjobID`, `name`, `isActive`, `min`, `hours`, `dom`, `month`, `dow`, `class`, `nextTime`, `lock`) VALUES
 (NULL, 'referral', 1, '0,30', '*', '*', '*', '*', 'ReferralCronjob', 0, NULL),
