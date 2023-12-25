@@ -156,7 +156,6 @@ CREATE TABLE `%PREFIX%colony_settings` (
   `metal_start` int(11) unsigned NOT NULL DEFAULT 500,
   `crystal_start` int(11) unsigned NOT NULL DEFAULT 500,
   `deuterium_start` int(11) unsigned NOT NULL DEFAULT 0,
-  `darkmatter_start` int(11) unsigned NOT NULL DEFAULT 0,
   `metal_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
   `crystal_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
   `deuterium_mine_start` SMALLINT(11) unsigned NOT NULL DEFAULT 0,
@@ -395,6 +394,7 @@ CREATE TABLE `%PREFIX%config` (
   `expedition_min_darkmatter_vlarge_max` INT unsigned NOT NULL DEFAULT 3000,
   `expedition_consider_holdtime` BOOLEAN NOT NULL DEFAULT 1,
   `expedition_consider_same_coordinate` BOOLEAN NOT NULL DEFAULT 1,
+  `darkmatter_start` int(11) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
