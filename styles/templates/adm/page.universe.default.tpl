@@ -155,18 +155,6 @@ $(document).ready(function(){
 	<span class="text-yellow fw-bold fs-14">{$LNG.se_server_planet_parameters}</span>
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<label class="text-start my-1 cursor-pointer hover-underline" for="metal_start">{$LNG.se_metal_start}</label>
-	<input id="metal_start"  class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="metal_start" maxlength="11" size="11" value="{$metal_start}" type="text">
-</div>
-<div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<label class="text-start my-1 cursor-pointer hover-underline" for="crystal_start">{$LNG.se_crystal_start}</label>
-	<input id="crystal_start"  class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="crystal_start" maxlength="11" size="11" value="{$crystal_start}" type="text">
-</div>
-<div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<label class="text-start my-1 cursor-pointer hover-underline" for="deuterium_start">{$LNG.se_deuterium_start}</label>
-	<input id="deuterium_start"  class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="deuterium_start" maxlength="11" size="11" value="{$deuterium_start}" type="text">
-</div>
-<div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="darkmatter_start">{$LNG.se_darkmatter_start}</label>
 	<input id="darkmatter_start"  class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="darkmatter_start" maxlength="11" size="11" value="{$darkmatter_start}" type="text">
 </div>

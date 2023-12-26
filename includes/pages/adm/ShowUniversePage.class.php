@@ -100,9 +100,6 @@ class ShowUniversePage extends AbstractAdminPage
 			'max_fleets_per_acs'			=> $config->max_fleets_per_acs,
 			'vmode_min_time'				=> $config->vmode_min_time,
 			'gate_wait_time'				=> $config->gate_wait_time,
-			'metal_start'					=> $config->metal_start,
-			'crystal_start'					=> $config->crystal_start,
-			'deuterium_start'				=> $config->deuterium_start,
 			'darkmatter_start'				=> $config->darkmatter_start,
 			'debris_moon'					=> $config->debris_moon,
 			'deuterium_cost_galaxy'			=> $config->deuterium_cost_galaxy,
@@ -183,9 +180,6 @@ class ShowUniversePage extends AbstractAdminPage
 				'max_fleets_per_acs'	=> $config->max_fleets_per_acs,
 				'vmode_min_time'		=> $config->vmode_min_time,
 				'gate_wait_time'		=> $config->gate_wait_time,
-				'metal_start'			=> $config->metal_start,
-				'crystal_start'			=> $config->crystal_start,
-				'deuterium_start'		=> $config->deuterium_start,
 				'darkmatter_start'		=> $config->darkmatter_start,
 				'debris_moon'			=> $config->debris_moon,
 				'deuterium_cost_galaxy'	=> $config->deuterium_cost_galaxy,
@@ -256,9 +250,6 @@ class ShowUniversePage extends AbstractAdminPage
 			$max_fleets_per_acs		= HTTP::_GP('max_fleets_per_acs', 0);
 			$vmode_min_time			= HTTP::_GP('vmode_min_time', 0);
 			$gate_wait_time			= HTTP::_GP('gate_wait_time', 0);
-			$metal_start			= HTTP::_GP('metal_start', 0);
-			$crystal_start			= HTTP::_GP('crystal_start', 0);
-			$deuterium_start		= HTTP::_GP('deuterium_start', 0);
 			$darkmatter_start		= HTTP::_GP('darkmatter_start', 0);
 			$deuterium_cost_galaxy	= HTTP::_GP('deuterium_cost_galaxy', 0);
 			$max_fleet_per_build	= max(0, round(HTTP::_GP('max_fleet_per_build', 0.0)));
@@ -325,9 +316,6 @@ class ShowUniversePage extends AbstractAdminPage
 				'max_fleets_per_acs'	=> $max_fleets_per_acs,
 				'vmode_min_time'		=> $vmode_min_time,
 				'gate_wait_time'		=> $gate_wait_time,
-				'metal_start'			=> $metal_start,
-				'crystal_start'			=> $crystal_start,
-				'deuterium_start'		=> $deuterium_start,
 				'darkmatter_start'		=> $darkmatter_start,
 				'debris_moon'			=> $debris_moon,
 				'deuterium_cost_galaxy'	=> $deuterium_cost_galaxy,
