@@ -44,19 +44,19 @@
       </tbody>
     </table>
     ">
+    {if !empty($PlanetRow)}
       <img class="mx-2
-      {if isset($PlanetRow.selected)}
       {if $PlanetRow.selected}
       border-yellow
       {else}
       hover-border-yellow
-      {/if}
       {/if}
       " src="{$dpath}planeten/{$PlanetRow.image}.jpg" width="50" height="50" alt="{$PlanetRow.name}">
     <div class="d-flex flex-column text-yellow align-items-start justify-content-start fs-11">
       <span>{$PlanetRow.name}</span>
       <span>[{$PlanetRow.galaxy}:{$PlanetRow.system}:{$PlanetRow.planet}]</span>
     </div>
+    {/if}
   </a>
     {if isset($PlanetRow.moonInfo)}
     <a class="hover-pointer" href="game.php?page={$page}&amp;cp={$PlanetRow.moonInfo[0].id}" data-bs-toggle="tooltip"
