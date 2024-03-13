@@ -70,7 +70,7 @@ abstract class AbstractGamePage
 		$theme = ($config->let_users_change_theme) ? $USER['dpath'] : $config->server_default_theme;
 
 		$path = "theme/" . $theme;
-		
+
 
 		$this->tplObj->setTemplateDir($tplDir. $path);
 		return true;
@@ -278,20 +278,29 @@ abstract class AbstractGamePage
 		}
 
 		// NOTE: add moon array inside planet array
+
 		foreach ($AllPlanets as $key => &$currentPlanet) {
-			if ($currentPlanet['id_luna'] == 0) {
+
+			if ($currentPlanet['id_luna'] == 0)
+			{
 				continue;
 			}
 
 			foreach ($AllMoons as $moon_key => $currentMoon) {
-				if ($currentMoon['id'] == $currentPlanet['id_luna']) {
+
+				if ($currentMoon['id'] == $currentPlanet['id_luna'])
+				{
 					$currentPlanet['moonInfo'][] = $currentMoon;
-				}else {
-					$currentPlanet['moonInfo'][] = array();
+					continue;
 				}
+
 			}
 
 		}
+		unset($currentPlanet);
+
+
+
 
 
 
