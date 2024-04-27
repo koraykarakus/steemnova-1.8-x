@@ -165,7 +165,7 @@ define('AUTH_USR'					, 0);
 define('ATTACK_LISTEN_TIME' , 1000);
 
 // Modules
-define('MODULE_AMOUNT'				, 47);
+define('MODULE_AMOUNT'				, 48);
 define('MODULE_ALLIANCE'			, 0);
 define('MODULE_BANLIST'				, 21);
 define('MODULE_BANNER'				, 37);
@@ -215,6 +215,7 @@ define('MODULE_DISCORD' , 43);
 define('MODULE_FORUM' , 44);
 define('MODULE_SERVER_INFO', 45);
 define('MODULE_ATTACK_ALERT', 46);
+define('MODULE_RELOCATE', 47);
 
 // FLEET STATE
 define('FLEET_OUTWARD'				, 0);
