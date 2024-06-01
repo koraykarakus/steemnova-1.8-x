@@ -191,6 +191,15 @@ class PlayerUtil
 			':userId'	=> $userId,
 		));
 
+		$sql = "UPDATE %%PLANETS%% SET metal = :metal_start, crystal = :crystal_start, deuterium = :deuterium_start WHERE id = :planetID;";
+
+		$db->update($sql,array(
+			':metal_start' => $config->metal_start,
+			':crystal_start' => $config->crystal_start,
+			':deuterium_start' => $config->deuterium_start,
+			':planetID' => $planetId
+		));
+
 		$sql 	= "SELECT MAX(total_rank) as rank FROM %%USER_POINTS%% WHERE universe = :universe;";
 
 		$rank	= $db->selectSingle($sql, array(
