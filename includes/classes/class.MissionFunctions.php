@@ -103,6 +103,7 @@ class MissionFunctions
 		p.`metal` = p.`metal` + :metal,
 		p.`crystal` = p.`crystal` + :crystal,
 		p.`deuterium` = p.`deuterium` + :deuterium,
+		p.`version` = p.`version` + 1,
 		u.`darkmatter` = u.`darkmatter` + :darkmatter
 		WHERE p.`id` = :planetId AND u.id = p.id_owner;';
 
@@ -117,7 +118,8 @@ class MissionFunctions
 		`metal`			= `metal` + :metal,
 		`crystal`		= `crystal` + :crystal,
 		`deuterium` 	= `deuterium` + :deuterium,
-		`darkmatter`	= `darkmatter` + :darkmatter
+		`darkmatter`	= `darkmatter` + :darkmatter,
+	  `version` = `version` + 1  
 		WHERE p.`id` = :planetId AND u.id = p.id_owner;';
 
 		Database::get()->update($sql, array(

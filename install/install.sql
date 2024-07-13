@@ -708,6 +708,7 @@ CREATE TABLE `%PREFIX%planets` (
   `id_luna` int(11) NOT NULL DEFAULT '0',
   `is_bot` BOOLEAN NOT NULL DEFAULT 0,
   `last_relocate` int(11) NOT NULL DEFAULT 0,
+  `version` bigint(20) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id_luna` (`id_luna`),
   KEY `id_owner` (`id_owner`),

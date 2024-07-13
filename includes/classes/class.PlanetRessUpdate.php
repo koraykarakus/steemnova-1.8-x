@@ -772,7 +772,7 @@ class ResourceUpdate
 		u.b_tech_planet		= :b_tech_planet,
 		u.b_tech_queue		= :b_tech_queue
 		'.implode("\n", $buildQueries).'
-		WHERE p.id = :planetId AND u.id = :userId;';
+		WHERE p.id = :planetId AND u.id = :userId AND p.version = p.version;';
 
 		Database::get()->update($sql, $params);
 
