@@ -18,6 +18,18 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+//MODULE_AUTOEXPEDITION
+$LNG['ae_autoexp'] = "Auto Expedition";
+$LNG['ae_galaxy'] = "Galaxy";
+$LNG['ae_system'] = "System";
+$LNG['ae_planet'] = "Planet";
+$LNG['ae_settings'] = "Settings";
+$LNG['ae_send'] = "Send expedition!";
+$LNG['ae_error_1'] = "Not enough expedition slot !";
+$LNG['ae_error_2'] = "Expedition is not possible on vacation mode !";
+$LNG['ae_error_3'] = "Recaptcha is wrong !";
+$LNG['ae_error_4'] = "No fleets found !";
+$LNG['ae_success'] = "Fleet(s) sent to expedition mission, successfully";
 //relocate module
 
 $LNG['cannot_use_in_vac'] = "You cannot use this option in vacation mode";

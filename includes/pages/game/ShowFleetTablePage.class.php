@@ -168,13 +168,13 @@ class ShowFleetTablePage extends AbstractGamePage
 
 	public function show()
 	{
-		global $USER, $PLANET, $reslist, $resource, $LNG;
+		global $USER, $PLANET, $reslist, $resource, $LNG, $config;
 
-		$acsData			= array();
-		$FleetID			= HTTP::_GP('fleetID', 0);
-		$GetAction			= HTTP::_GP('action', "");
+		$acsData = array();
+		$FleetID = HTTP::_GP('fleetID', 0);
+		$GetAction = HTTP::_GP('action', "");
 
-        $db = Database::get();
+    $db = Database::get();
 
 		$this->tplObj->loadscript('flotten.js');
 
@@ -271,6 +271,14 @@ class ShowFleetTablePage extends AbstractGamePage
 			);
 		}
 
+		$StaySelector = array();
+
+
+		for($i = 1; $i <= $USER[$resource[124]]; $i++)
+		{
+			$StaySelector[$i]	= $i / $config->halt_speed;
+		}
+
 		$this->assign(array(
 			'FleetsOnPlanet'		=> $FleetsOnPlanet,
 			'FlyingFleetList'		=> $FlyingFleetList,
@@ -291,8 +299,14 @@ class ShowFleetTablePage extends AbstractGamePage
 			'bonusCombustion'		=> $USER[$resource[115]] * 10,
 			'bonusImpulse'			=> $USER[$resource[117]] * 20,
 			'bonusHyperspace'		=> $USER[$resource[118]] * 30,
+			'galaxy' => $PLANET['galaxy'],
+			'system' => $PLANET['system'],
+			'StaySelector' => $StaySelector,
+			'recaptchaPublicKey'	=> $config->cappublic,
 		));
 
 		$this->display('page.fleetTable.default.tpl');
 	}
+
+
 }
