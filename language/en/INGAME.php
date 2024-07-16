@@ -18,6 +18,12 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+//MODULE_COLLECT_MINES
+$LNG['cm_error_1'] = "Mines cannot be collected in vacation mode !";
+$LNG['cm_error_2'] = "Mines cannot be collected under attack !";
+$LNG['cm_error_3'] = "You need to wait %s minutes before next !";
+$LNG['cm_collect_mines_submit'] = "Collect Mines!";
+
 //MODULE_AUTOEXPEDITION
 $LNG['ae_autoexp'] = "Auto Expedition";
 $LNG['ae_galaxy'] = "Galaxy";

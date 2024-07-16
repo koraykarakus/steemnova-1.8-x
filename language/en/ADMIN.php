@@ -1162,6 +1162,8 @@ $LNG['modul_45'] = "Universe Information";
 $LNG['modul_46'] = "Attack Alert";
 $LNG['modul_47'] = "Relocate";
 $LNG['modul_48'] = "Auto Expedition";
+$LNG['modul_49'] = "Collect Mines";
+
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';

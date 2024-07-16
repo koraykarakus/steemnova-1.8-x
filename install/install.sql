@@ -402,7 +402,8 @@ CREATE TABLE `%PREFIX%config` (
   `relocate_next_time` smallint(5) unsigned NOT NULL DEFAULT 24,
   `relocate_move_fleet_directly` BOOLEAN NOT NULL DEFAULT 0,
   `relocate_jump_gate_active` smallint(5) unsigned NOT NULL DEFAULT 24,
-
+  `collect_mines_under_attack` BOOLEAN NOT NULL DEFAULT 0,
+  `collect_mine_time_minutes` INT unsigned NOT NULL DEFAULT 30,
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -954,6 +955,7 @@ CREATE TABLE `%PREFIX%users` (
   `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
   `show_fleets_active` BOOLEAN NOT NULL DEFAULT 1,
   `show_news_active` BOOLEAN NOT NULL DEFAULT 1,
+  `last_collect_mine_time` int(11) NOT NULL DEFAULT 0,
   `is_bot` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `authlevel` (`authlevel`),

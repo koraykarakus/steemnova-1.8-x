@@ -1,6 +1,15 @@
 <div style="height:30px;" class="d-flex align-items-center justify-content-center bg-light-black">
 
   <ul class="d-flex justify-content-center align-items-center list-unstyled fs-12 py-3 my-0 mx-0 col-4">
+    {if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
+    <li>
+      <form action="game.php?page=collectMines" method="post">
+        <input type="hidden" name="from" value="{$page}">
+        <button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow mx-2" type="submit">{$LNG.cm_collect_mines_submit}</button>
+      </form>
+    </li>
+    {/if}
+
     {if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}
     <div style="width:15px;" class="">
       <img id="attack_alert" src="" alt="">
