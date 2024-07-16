@@ -109,10 +109,12 @@
 			{if isModuleAvailable($smarty.const.MODULE_CHAT)}
 			<a class="font-size-12 px-2 border-end text-white hover-underline" href="game.php?page=chat">{$LNG.lm_chat}</a>
 			{/if}
+			{if isModuleAvailable($smarty.const.MODULE_FLIGHT_SIMULATOR)}
+			<a class="font-size-12 px-2 border-end text-white hover-underline" href="game.php?page=flightSimulator">{$LNG.lm_flight_simulator}</a>
+			{/if}
 
 
 
-			
 		</div>
 
 		{include file="main.footer.tpl" nocache}

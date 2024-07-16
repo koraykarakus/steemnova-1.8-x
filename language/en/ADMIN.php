@@ -1163,6 +1163,7 @@ $LNG['modul_46'] = "Attack Alert";
 $LNG['modul_47'] = "Relocate";
 $LNG['modul_48'] = "Auto Expedition";
 $LNG['modul_49'] = "Collect Mines";
+$LNG['modul_50'] = "Flight Simulator";
 
 
 $LNG['mod_module'] = 'Modules';

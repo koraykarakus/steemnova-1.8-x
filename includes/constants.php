@@ -165,7 +165,7 @@ define('AUTH_USR'					, 0);
 define('ATTACK_LISTEN_TIME' , 1000);
 
 // Modules
-define('MODULE_AMOUNT'				, 50);
+define('MODULE_AMOUNT'				, 51);
 define('MODULE_ALLIANCE'			, 0);
 define('MODULE_BANLIST'				, 21);
 define('MODULE_BANNER'				, 37);
@@ -218,6 +218,7 @@ define('MODULE_ATTACK_ALERT', 46);
 define('MODULE_RELOCATE', 47);
 define('MODULE_AUTOEXPEDITION', 48);
 define('MODULE_COLLECT_MINES', 49);
+define('MODULE_FLIGHT_SIMULATOR', 50);
 
 // FLEET STATE
 define('FLEET_OUTWARD'				, 0);

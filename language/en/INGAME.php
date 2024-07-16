@@ -18,6 +18,15 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Flight Sim";
+$LNG['fs_flight_sim'] = "Flight Sim.";
+$LNG['fs_time'] = "time";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "hours";
+$LNG['fs_time_seconds'] = "seconds";
+$LNG['fs_time_minutes'] = "minutes";
+
 //MODULE_COLLECT_MINES
 $LNG['cm_error_1'] = "Mines cannot be collected in vacation mode !";
 $LNG['cm_error_2'] = "Mines cannot be collected under attack !";
