@@ -52,6 +52,11 @@ $(document).ready(function(){
         <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=relocate" >Relocate Settings</a>
       </li>
     {/if}
+    {if allowedTo('ShowCollectMinesPage')}
+      <li class="d-flex {if $currentPage == 'collectMines'}menu-active{/if}">
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=collectMines" >Collect Mines Settings</a>
+      </li>
+    {/if}
     {if allowedTo('ShowBostPage')}
 			<li class="d-flex {if $currentPage == 'bots'}menu-active{/if}">
 				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=bots" >Bots</a>
