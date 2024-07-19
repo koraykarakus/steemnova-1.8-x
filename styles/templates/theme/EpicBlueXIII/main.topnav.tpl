@@ -1,5 +1,13 @@
 <div class="d-flex flex-column align-items-center justify-content-start">
   <ul style="height:20px;" class="d-flex w-100 justify-content-start align-items-center list-unstyled fs-12 py-2 my-2 mx-0 bg-black">
+    {if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
+    <li>
+      <form action="game.php?page=collectMines" method="post">
+        <input type="hidden" name="from" value="{$page}">
+        <button style="padding:2px;" type="submit">{$LNG.cm_collect_mines_submit}</button>
+      </form>
+    </li>
+    {/if}
     {if isModuleAvailable($smarty.const.MODULE_NOTICE)}
     <li class="px-2 f-12 hover-underline d-flex align-items-center h-100">
       <a href="javascript:OpenPopup('?page=notes', 'notes', 720, 300);"><i class="bi bi-journal-check fs-6"></i></a>
