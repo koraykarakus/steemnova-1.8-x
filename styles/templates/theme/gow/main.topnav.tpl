@@ -106,7 +106,7 @@
        {/if}
           <div class="resourceWrapperOuter d-flex">
 
-            <div class="d-flex align-items-center resourceWrapper w-100 h-100" data-bs-toggle="tooltip"
+            <div class="d-flex align-items-center resourceWrapper w-100 h-100 scroll overflow-auto" data-bs-toggle="tooltip"
             data-bs-placement="bottom"
             data-bs-html="true" title="
             <table class='table-tooltip fs-11'>
@@ -155,18 +155,18 @@
                 </tbody>
               </table>">
               <div class="d-flex px-2">
-                <img  onclick="return Dialog.info({$resourceID});" src="{$dpath}images/{$resourceData.name}.gif">
+                <img class="user-select-none" onclick="return Dialog.info({$resourceID});" src="{$dpath}images/{$resourceData.name}.gif">
               </div>
               <div class="d-flex flex-column">
-                <div class="fs-10 fw-bold text-yellow mt-1">{$LNG.tech.$resourceID}</div>
+                <div class="fs-10 user-select-none fw-bold text-yellow mt-1">{$LNG.tech.$resourceID}</div>
                 <div>
                   {if !isset($resourceData.current)}
                   {$resourceData.currentt = $resourceData.max + $resourceData.used}
-                    <div class="res_current fs-10 {if $resourceData.currentt > 0}color-green{else}color-red{/if}">
+                    <div class="res_current user-select-none fs-10 {if $resourceData.currentt > 0}color-green{else}color-red{/if}">
                       {$resourceData.currentt|number}
                     </div>
                   {else}
-                    <div class="res_current fs-10" id="current_{$resourceData.name}" data-real="{$resourceData.current}">{$resourceData.current|number}</div>
+                    <div class="res_current user-select-none fs-10" id="current_{$resourceData.name}" data-real="{$resourceData.current}">{$resourceData.current|number}</div>
                   {/if}
                 </div>
               </div>
@@ -176,7 +176,7 @@
           {/foreach}
           <div class="resourceWrapperOuter d-flex">
 
-          <div class="resourceWrapper d-flex align-items-center justify-content-center w-100 h-100">
+          <div class="resourceWrapper user-select-none d-flex align-items-center justify-content-center w-100 h-100">
              <img class="bg-light" src="{$avatar}" width="25" height="25"></a>
              <span class="fs-12 text-white">&nbsp;{$LNG.tech.615}&nbsp;</span>
              <a class="fs-12 text-white hover-underline" href="game.php?page=settings">{$username}</a>
@@ -184,12 +184,11 @@
         </div>
         <div class="resourceWrapperOuter d-flex">
 
-          <div class="resourceWrapper d-flex align-items-center justify-content-center fs-10 text-white w-100 h-100">
+          <div class="resourceWrapper user-select-none d-flex align-items-center justify-content-center fs-10 text-white w-100 h-100">
             <a class="fs-12 text-white hover-underline" href="game.php?page=questions">{$LNG.lm_faq}</a>
           </div>
         </div>
-        <div class="resourceWrapperOuter d-flex">
-
+        <div class="resourceWrapperOuter user-select-none d-flex">
           <div class="resourceWrapper servertime d-flex align-items-center justify-content-center fs-10 text-white w-100 h-100">
             {$servertime}
           </div>
