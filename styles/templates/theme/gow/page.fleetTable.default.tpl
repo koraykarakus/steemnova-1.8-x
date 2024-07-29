@@ -4,7 +4,7 @@
 <table class="table table-sm fs-12 table-gow">
 	<thead>
 		<tr>
-			<th colspan="9">
+			<th colspan="9" class="border border-secondary">
 				<div class="transparent" style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$activeFleetSlots} / {$maxFleetSlots})</div>
 				<div class="transparent" style="text-align:right;float:right;">{$LNG.fl_expeditions}: ({$activeExpedition} / {$maxExpedition}) </div>
 			</th>
@@ -114,7 +114,7 @@
 <form action="?page=AutoExpedition" method="post">
 <table class="table table-sm fs-12 table-gow my-2">
 	<thead>
-		<th class="text-center" colspan="3">{$LNG.ae_autoexp}</th>
+		<th class="text-center border border-secondary" colspan="3">{$LNG.ae_autoexp}</th>
 	</thead>
 	<tbody>
 			<tr>
@@ -175,7 +175,7 @@
 <table class="table table-sm bg-black fs-12 table-gow my-1">
 	<thead>
 		<tr>
-			<th class="text-center" colspan="4">{$LNG.fl_new_mission_title}</th>
+			<th class="text-center  border border-secondary" colspan="4">{$LNG.fl_new_mission_title}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -243,24 +243,24 @@
 <table class="table table-sm bg-black fs-12 table-gow">
 	<thead>
 		<tr>
-			<th class="text-center" colspan="3">{$LNG.fl_bonus}</th>
+			<th class="text-center border border-secondary" colspan="3">{$LNG.fl_bonus}</th>
 		</tr>
 		<tr>
-			<th style="width:33%;" class="text-center">{$LNG.fl_bonus_attack}</th>
-			<th style="width:33%;" class="text-center">{$LNG.fl_bonus_defensive}</th>
-			<th style="width:33%;" class="text-center">{$LNG.fl_bonus_shield}</th>
+			<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_attack}</th>
+			<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_defensive}</th>
+			<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_shield}</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td class="text-center">+{$bonusAttack} %</td>
-			<td class="text-center">+{$bonusDefensive} %</td>
-			<td class="text-center">+{$bonusShield} %</td>
+			<td class="text-center  border border-secondary">+{$bonusAttack} %</td>
+			<td class="text-center border border-secondary">+{$bonusDefensive} %</td>
+			<td class="text-center border border-secondary">+{$bonusShield} %</td>
 		</tr>
 		<tr>
-			<th class="text-center">{$LNG.tech.115}</th>
-			<th class="text-center">{$LNG.tech.117}</th>
-			<th class="text-center">{$LNG.tech.118}</th>
+			<th class="text-center border border-secondary">{$LNG.tech.115}</th>
+			<th class="text-center border border-secondary">{$LNG.tech.117}</th>
+			<th class="text-center border border-secondary">{$LNG.tech.118}</th>
 		</tr>
 		<tr>
 			<td class="text-center">+{$bonusCombustion} %</td>
