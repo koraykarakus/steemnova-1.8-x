@@ -110,7 +110,7 @@
 	</tbody>
 </table>
 
-{if  isModuleAvailable($smarty.const.MODULE_AUTOEXPEDITION)}
+{if  isModuleAvailable($smarty.const.MODULE_AUTOEXPEDITION) && empty($targetMission)}
 <form action="?page=AutoExpedition" method="post">
 <table class="table table-sm fs-12 table-gow my-2">
 	<thead>

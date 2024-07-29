@@ -30,7 +30,17 @@
 	color: #ddd;
 }
 
+.contentLeft{
+	min-width: 250px;
+}
 
+.contentRight{
+	min-width: 350px;
+}
+
+.contentMiddle{
+	min-width: 600px;
+}
 
 /*special scrollbar*/
 

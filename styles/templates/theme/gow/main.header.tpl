@@ -21,7 +21,7 @@
 	{if !empty($goto)}
 	<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 	{/if}
-	{assign var="REV" value="1.0.0.178" nocache}
+	{assign var="REV" value="1.0.0.181" nocache}
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
@@ -79,6 +79,8 @@
 	<!-- fancybox 5.0 -->
 	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+
+
 
 <script>
 		var myDefaultWhiteList = bootstrap.Tooltip.Default.allowList

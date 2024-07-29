@@ -39,7 +39,7 @@ function check(){
 		$('submit').attr('disabled','disabled');
 		$.post('game.php?page=messages&mode=send&id={$id}&ajax=1', $('#message').serialize(), function(data) {
 			alert(data);
-			parent.$.fancybox.close();
+			parent.$.Fancybox.close();
 			return true;
 		}, 'json');
 	}
