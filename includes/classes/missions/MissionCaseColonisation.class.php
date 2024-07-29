@@ -132,6 +132,8 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
 
 	function ReturnEvent()
 	{
+		$this->savePlanetProduction($this->_fleet['fleet_start_id'], $this->_fleet['fleet_end_time']);
+
 		$this->RestoreFleet();
 	}
 }
