@@ -24,6 +24,7 @@ class MissionCaseStay extends MissionFunctions implements Mission
 
 	function TargetEvent()
 	{
+
 		$sql				= 'SELECT * FROM %%USERS%% WHERE id = :userId;';
 		$senderUser			= Database::get()->selectSingle($sql, array(
 			':userId'	=> $this->_fleet['fleet_owner']
@@ -51,6 +52,8 @@ class MissionCaseStay extends MissionFunctions implements Mission
 		PlayerUtil::sendMessage($TargetUserID, 0, $LNG['sys_mess_tower'], 5,
 			$LNG['sys_stat_mess_stay'], $TargetMessage, $this->_fleet['fleet_start_time'], NULL, 1, $this->_fleet['fleet_universe']);
 
+		$this->savePlanetProduction($this->_fleet['fleet_end_id'],$this->_fleet['fleet_start_time']);
+
 		$this->RestoreFleet(false);
 	}
 
@@ -72,6 +75,8 @@ class MissionCaseStay extends MissionFunctions implements Mission
 
 		PlayerUtil::sendMessage($this->_fleet['fleet_owner'], 0, $LNG['sys_mess_tower'], 4, $LNG['sys_mess_fleetback'],
 			$Message, $this->_fleet['fleet_end_time'], NULL, 1, $this->_fleet['fleet_universe']);
+
+		$this->savePlanetProduction($this->_fleet['fleet_start_id'],$this->_fleet['fleet_end_time']);
 
 		$this->RestoreFleet();
 	}
