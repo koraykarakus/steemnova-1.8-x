@@ -115,6 +115,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
 				);
 			}
 
+			$this->savePlanetProduction($this->_fleet['fleet_end_id'],$this->_fleet['fleet_start_time']);
 			$this->StoreGoodsToPlanet();
 		}
 
@@ -165,6 +166,8 @@ class MissionCaseTransport extends MissionFunctions implements Mission
 			1,
 			$this->_fleet['fleet_universe']
 		);
+
+		$this->savePlanetProduction($this->_fleet['fleet_start_id'],$this->_fleet['fleet_end_time']);
 
 		$this->RestoreFleet();
 	}
