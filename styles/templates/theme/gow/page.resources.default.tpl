@@ -2,6 +2,7 @@
 {block name="content"}
 <form action="?page=resources" method="post">
 <input type="hidden" name="mode" value="send">
+<div class="table-responsive scroll overflow-auto">
 <table class="table table-gow fs-12 table-sm">
 <tbody>
 <tr>
@@ -161,5 +162,6 @@
 </tr>
 </tbody>
 </table>
+</div>
 </form>
 {/block}
