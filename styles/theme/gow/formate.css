@@ -30,6 +30,10 @@
 	color: #ddd;
 }
 
+
+.layout,.footer{
+	min-width: 1200px;
+}
 .contentLeft{
 	min-width: 250px;
 }
@@ -356,6 +360,11 @@ table{
 .table-gow button,.table-gow select,.table-gow input{
 	color: #ddd;
 }
+
+.table-gow th{
+	border: 1px solid #444444;
+}
+
 .font-size-12{
 	font-size: 12px;
 }
