@@ -77,6 +77,13 @@ $("#tn3").hide();
     <td>{$LNG.ov_points}</td>
     <td colspan="2">{$rankInfo}</td>
   </tr>
+  {if  isModuleAvailable($smarty.const.MODULE_RELOCATE)}
+  <tr >
+    <td colspan="2" class="text-center">
+      <a style="font-size:11px;" class="btn py-0 px-1 border border-secondary text-yellow" href="game.php?page=relocate">{$LNG.rl_relocate}</a>
+    </td>
+  </tr>
+  {/if}
   {if !empty($news)}
     <tr>
       <td class="text-center" colspan="3">
