@@ -16,7 +16,8 @@
  */
 
 // Site Title
-$LNG['siteTitleIndex']				= 'Index';
+
+$LNG['siteTitleIndex']				= 'U700';
 $LNG['siteTitleRegister']			= 'Registrieren';
 $LNG['siteTitleScreens']			= 'Screenshots';
 $LNG['siteTitleBanList']			= 'Pranger';
@@ -39,7 +40,7 @@ $LNG['menu_register']				= 'Registration';
 // Universe select
 $LNG['chose_a_uni']					= 'Wähle ein Universum';
 $LNG['universe']					= 'Universum';
-$LNG['uni_closed']					= ' (closed)';
+$LNG['uni_closed']					= ' (Geschlossen)';
 
 // Button
 $LNG['buttonRegister']				= 'Erstelle deinen Account!';
@@ -50,6 +51,11 @@ $LNG['buttonLostPassword']			= 'Passwort vergessen?';
 $LNG['gameInformations']			= "Ein Weltraum-Strategiespiel in Echtzeit.\nSpiele zusammen mit hunderten Usern.\nKein Download, es wird nur ein Standardbrowser benötigt.\nKostenlose Registrierung";
 
 // Login
+$LNG['login_error_1']               = "E-mail ist nicht eingegeben !";
+$LNG['login_error_2']               = "Password nicht eingegeben !";
+$LNG['login_error_3']               = "User nicht gefunden !";
+$LNG['login_error_4']               = "ReCaptcha falsch !";
+$LNG['login_error_5']               = "Password ist falsch !";
 $LNG['loginHeader']					= 'Login';
 $LNG['loginUsername']				= 'Nickname';
 $LNG['loginPassword']				= 'Passwort';
@@ -60,8 +66,8 @@ $LNG['loginServerDesc']				= '%s ist ein Weltraum-Strategiespiel mit hunderten S
 
 // Register
 $LNG['registerFacebookAccount']		= 'Facebook-Account';
-$LNG['registerUsername']			= 'Nickname';
-$LNG['registerUsernameDesc']		= 'Der Nickname muss mindestens 3 und darf maximal 25 Zeichen und darf nur aus Zahlen, Buchstaben, Punkte, Binde- und Unterstriche und Leerzeichen bestehen';
+$LNG['registerUsername']			= 'Spieler Name';
+$LNG['registerUsernameDesc']		= 'Der Spieler Name muss mindestens 3 und darf maximal 25 Zeichen und darf nur aus Zahlen, Buchstaben, Punkte, Binde- und Unterstriche und Leerzeichen bestehen';
 $LNG['registerPassword']			= 'Passwort';
 $LNG['registerPasswordDesc']		= 'Das Passwort muss mindestens %s Zeichen lang sein.';
 $LNG['registerPasswordReplay']		= 'Passwort widerhohlen';
@@ -103,7 +109,22 @@ $LNG['registerSendComplete']		= 'Vielen Dank für die Registration. Du erhälst 
 
 $LNG['registerWelcomePMSenderName']	= 'Administrator';
 $LNG['registerWelcomePMSubject']	= 'Willkommen';
-$LNG['registerWelcomePMText']		= 'Willkommen bei %s! Baue zuerst ein Solarkraftwerk, denn Energie wird für die spätere Rohstoffproduktion benötigt. Um diese zu bauen, klicke links im Menu auf "Gebäude". Danach baue das 4. Gebäude von oben. Da du nun Energie hast, kannst du anfangen Minen zu bauen. Gehe dazu wieder im Menü auf Gebäude und baue eine Metallmine, danach wieder eine Kristallmine. Um Schiffe bauen zu können musst du zuerst eine Raumschiffswerft gebaut haben. Was dafür benötigt wird findest du links im Menüpunkt Technologie. Das Team wünscht dir viel Spaß beim Erkunden des Universums!';
+$LNG['registerWelcomePMText']		= 'Willkommen bei %s! Baue zuerst ein Solarkraftwerk, denn Energie wird für die spätere Rohstoffproduktion benötigt. Um diese zu bauen, klicke links im Menu auf "Gebäude". Danach baue das 4. Gebäude von oben. Da du nun Energie hast, kannst du anfangen Minen zu bauen. Gehe dazu wieder im Menü auf Gebäude und baue eine Metallmine, danach wieder eine Kristallmine. Um Schiffe bauen zu können musst du zuerst eine Raumschiffswerft gebaut haben. Was dafür benötigt wird findest du links im Menüpunkt Technologie.Schau unter Anomalie Nutze Bonus und Tutorial. Das Team wünscht dir viel Spaß beim Erkunden des Universums!';
+
+$LNG['registerSecretQuestionText'] = "Bitte wählen Sie eine Geheimfrage aus";
+$LNG['registerSecretQuestionAnswerText'] = "Beantworten Sie Ihre geheime Frage";
+$LNG['registerSecretQuestionArray'] = array(
+  0 => 'In welcher Stadt bist du geboren ?',
+  1 => 'Name deines Lieblings Haustier ?',
+  2 => "Wie lautet der Mädchenname Ihrer Mutter ?",
+  3 => "Wie heist deine Grundschule ?",
+  4 => "Wie heist deine Mittelschule ?",
+  5 => "Was war dein erstes Auto ?",
+  6 => "Was ist dein Lieblingsessen ?"
+);
+$LNG['registerSecretQuestionError_1'] = "Sie haben eine falsche Geheimfrage ausgewählt !";
+$LNG['registerSecretQuestionError_2'] = "Die Antwort auf die Geheimfrage darf nicht leer sein !";
+$LNG['registerSecretQuestionError_3'] = "Die Antwort auf die Geheimfrage darf nicht länger als 64 Zeichen sein !";
 
 //Vertify
 
