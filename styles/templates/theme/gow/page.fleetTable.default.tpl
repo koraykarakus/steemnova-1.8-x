@@ -154,7 +154,7 @@
 			</tr>
 			<tr>
 				<td class="text-center" colspan="3">
-					<button class="fleet-continue" type="submit">{$LNG.ae_send}</button>
+					<button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow" type="submit">{$LNG.ae_send}</button>
 				</td>
 			</tr>
 	</tbody>
@@ -175,7 +175,7 @@
 <table class="table table-sm bg-black fs-12 table-gow my-1">
 	<thead>
 		<tr>
-			<th class="text-center  border border-secondary" colspan="4">{$LNG.fl_new_mission_title}</th>
+			<th class="text-center  border border-secondary" colspan="5">{$LNG.fl_new_mission_title}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -211,14 +211,16 @@
 			<td class="align-middle" id="ship{$FleetRow.id}_value">{$FleetRow.count}</td>
 			{if $FleetRow.speed != 0}
 			<td class="align-middle text-center">
-				<a class="hover-underline hover-pointer" href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a>
+				<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow" onclick="maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</button>
+			</td>
+			<td class="align-middle text-center">
+				<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow" onclick="minShip('ship{$FleetRow.id}');">{$LNG.fl_min}</button>
 			</td>
 			<td>
 				<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0">
 			</td>
 			{else}
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+
 			{/if}
 		</tr>
 		{/foreach}
@@ -226,13 +228,17 @@
 		{if count($FleetsOnPlanet) == 0}
 		<td colspan="4">{$LNG.fl_no_ships}</td>
 		{else}
-		<td class="text-center" colspan="2"><a href="javascript:noShips();">{$LNG.fl_remove_all_ships}</a></td>
-		<td class="text-center" colspan="2"><a  href="javascript:maxShips();">{$LNG.fl_select_all_ships}</a></td>
+		<td class="text-center" colspan="2">
+			<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow" onclick="noShips();">{$LNG.fl_remove_all_ships}</a>
+		</td>
+		<td class="text-center" colspan="3">
+			<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"  onclick="maxShips();">{$LNG.fl_select_all_ships}</a>
+		</td>
 		{/if}
 		</tr>
 		{if $maxFleetSlots != $activeFleetSlots}
 		<tr style="height:20px;">
-		<td class="text-center" colspan="4">
+		<td class="text-center" colspan="5">
 			<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
 		</td>
 		{/if}

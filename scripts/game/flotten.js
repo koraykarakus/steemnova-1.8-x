@@ -170,6 +170,13 @@ function maxShip(id) {
 	}
 }
 
+function minShip(id) {
+	if (document.getElementsByName(id)[0]) {
+		var amount = document.getElementById(id + "_value").innerHTML;
+		document.getElementsByName(id)[0].value = 0;
+	}
+}
+
 function maxShips() {
 	var id;
 	$('input[name^="ship"]').each(function() {
