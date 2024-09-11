@@ -1,5 +1,6 @@
 {block name="title" prepend}{$LNG.lm_officiers}{/block}
 {block name="content"}
+
 {if !empty($darkmatterList)}
 	<table class="table table-sm table-gow fs-12">
 	<tr>
@@ -28,11 +29,11 @@
 															<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip" data-bs-placement="top"
 										          data-bs-html="true" title="<table class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach} | {$LNG.in_dest_durati}: <span style="color:lime">{$Element.time|time}</span></p>
 						</td>
-						<td class="transparent" style="vertical-align:middle;width:100px">
+						<td class="transparent text-center" style="vertical-align:middle;width:100px">
 						{if $Element.timeLeft > 0}
 							{$LNG.of_still}<br>
-							<span id="time_{$ID}">-</span>
-							{$LNG.of_active}
+							<span class="color-red" id="time_{$ID}">-</span>
+							<span class="color-green">({$LNG.of_active})</span>
 							{if $Element.buyable}
 							<form action="game.php?page=officier" method="post" class="build_form">
 								<input type="hidden" name="id" value="{$ID}">
@@ -104,7 +105,8 @@
 	{/foreach}
 </table>
 {/if}
-{/block}
-{block name="script"}
+
 <script src="scripts/game/officier.js"></script>
+
+
 {/block}

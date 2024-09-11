@@ -31,6 +31,8 @@ class ShowOfficierPage extends AbstractGamePage
 
 		$costResources		= BuildFunctions::getElementPrice($USER, $PLANET, $Element);
 
+
+
 		if (!BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources)) {
 			return;
 		}
@@ -106,7 +108,7 @@ class ShowOfficierPage extends AbstractGamePage
 			foreach($reslist['dmfunc'] as $Element)
 			{
 				if($USER[$resource[$Element]] > TIMESTAMP) {
-					$this->tplObj->execscript("GetOfficerTime(".$Element.", ".($USER[$resource[$Element]] - TIMESTAMP).");");
+						$this->tplObj->execscript("GetOfficerTime(".$Element.", ".($USER[$resource[$Element]] - TIMESTAMP).");");
 				}
 
 				$costResources		= BuildFunctions::getElementPrice($USER, $PLANET, $Element);

@@ -41,7 +41,11 @@
 
 
 
-
+		{foreach $execscript as $currentScript}
+			<script type="text/javascript">
+				{$currentScript}
+			</script>
+		{/foreach}
 
 
 
