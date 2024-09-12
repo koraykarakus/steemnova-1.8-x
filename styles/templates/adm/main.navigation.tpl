@@ -42,6 +42,11 @@ $(document).ready(function(){
 				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=universe" >{$LNG.mu_unisettings}</a>
 			</li>
 		{/if}
+    {if allowedTo('ShowResetPage')}
+			<li class="d-flex {if $currentPage == 'reset'}menu-active{/if}">
+				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=reset" >{$LNG.mu_reset_universe}</a>
+			</li>
+		{/if}
     {if allowedTo('ShowColonySettingsPage')}
 			<li class="d-flex {if $currentPage == 'colonySettings'}menu-active{/if}">
 				<a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=colonySettings" >Colony Settings</a>

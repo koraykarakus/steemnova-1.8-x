@@ -680,6 +680,7 @@ $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Configuration';
+$LNG['mu_reset_universe'] = "Reset Universe";
 $LNG['mu_unisettings'] = 'Universe Configuration';
 $LNG['mu_global_message'] = 'Global Message';
 $LNG['mu_users_settings'] = 'Edit menu';
