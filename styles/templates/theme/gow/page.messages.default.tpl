@@ -7,12 +7,17 @@
 		{foreach $CategoryList as $CategoryID => $CategoryRow}
 		{if ($CategoryRow@iteration % 6) === 1}<tr>{/if}
 		{if $CategoryRow@last && ($CategoryRow@iteration % 6) !== 0}<td>&nbsp;</td>{/if}
-		<td style="line-height:1;" class="text-center align-middle" style="word-wrap: break-word;color:{$CategoryRow.color};">
-			<a class="fs-12 hover-underline" href="game.php?page=messages&category={$CategoryID}" style="color:{$CategoryRow.color};">{$LNG.mg_type.{$CategoryID}}</a>
-		<br>
-		<span class="fs-12" id="unread_{$CategoryID}">{$CategoryRow.unread}</span>
-		<span class="fs-12">/</span>
-		<span data-total-number="{$CategoryRow.total}" class="fs-12" id="total_{$CategoryID}">{$CategoryRow.total}</span>
+		<td  onclick="window.location.href='game.php?page=messages&category={$CategoryID}'" class="{if $CategoryID == $MessID}bg-black{/if} text-center align-middle hover-pointer bg-hover-black" style="word-wrap: break-word;color:{$CategoryRow.color};">
+		<div class="d-flex flex-column p-0 m-0 user-select-none">
+			<div>
+				<span class="fs-12" href="" style="color:{$CategoryRow.color};">{$LNG.mg_type.{$CategoryID}}</a>
+			</div>
+			<div>
+				<span class="fs-12" id="unread_{$CategoryID}">{$CategoryRow.unread}</span>
+				<span class="fs-12">/</span>
+				<span data-total-number="{$CategoryRow.total}" class="fs-12" id="total_{$CategoryID}">{$CategoryRow.total}</span>
+			</div>
+		</div>
 		</td>
 		{if $CategoryRow@last || ($CategoryRow@iteration % 6) === 0}</tr>{/if}
 		{/foreach}
