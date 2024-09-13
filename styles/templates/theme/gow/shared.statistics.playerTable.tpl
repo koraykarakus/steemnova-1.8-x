@@ -9,7 +9,7 @@
 <tr>
 	<td><a  data-bs-toggle="tooltip"
 	data-bs-placement="left"
-	data-bs-html="true" title="{if $RangeInfo.ranking == 0}<span style='color:#87CEEB'>*</span>{elseif $RangeInfo.ranking < 0}<span style='color:red'>-{$RangeInfo.ranking}</span>{elseif $RangeInfo.ranking > 0}<span style='color:green'>+{$RangeInfo.ranking}</span>{/if}">{$RangeInfo.rank}</a></td>
+	data-bs-html="true" title="{if $RangeInfo.ranking == 0}<span style='color:#87CEEB'>*</span>{elseif $RangeInfo.ranking < 0}<span style='color:red'>-{$RangeInfo.ranking}</span>{elseif $RangeInfo.ranking > 0}<span style='color:green'>+{$RangeInfo.ranking}</span>{/if}">{$RangeInfo@iteration + $range - 1}</a></td>
 	<td>
 		<a class="hover-underline hover-pointer color-white
 		{if $RangeInfo.id != $CUser_id && !empty($RangeInfo.class)}
