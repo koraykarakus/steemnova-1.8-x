@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 <form name="message" id="message">
-	<table style="width:95%">
+	<table class="table table-sm fs-12 table-gow">
 	<tr>
 		<th colspan="2">{$LNG.al_circular_send_ciruclar}</th>
 	</tr>
@@ -17,7 +17,7 @@
 	<tr>
 		<td>{$LNG.al_message} (<span id="cntChars">0</span> / 5000 {$LNG.al_characters})</td>
 		<td>
-			<textarea name="text" cols="60" rows="10" onkeyup="$('#cntChars').text($(this).val().length);"></textarea>
+			<textarea class="color-white" name="text" cols="60" rows="10" onkeyup="$('#cntChars').text($(this).val().length);"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -28,7 +28,6 @@
 	</tr>
 	</table>
 </form>
-{/block}
 {block name="script" append}
 <script type="text/javascript">
 function check(){
@@ -47,4 +46,6 @@ function check(){
 	}
 }
 </script>
+{/block}
+
 {/block}

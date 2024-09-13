@@ -96,7 +96,7 @@
 	</tr>
 	<tr class="message_{$Message.id} messages_body{if $MessID != 999 && $Message.unread == 1} mes_unread{/if}">
 		<td class="fs-12" colspan="5" class="left">
-		{$Message.text}
+			<p class="message_{$MessID}">{$Message.text}</p>
 		</td>
 	</tr>
 	{/foreach}

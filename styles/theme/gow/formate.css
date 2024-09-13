@@ -329,6 +329,39 @@ input[type="radio"] {
 	background-color: #407eb6;
 }
 
+.message_0{
+	color:#FFFF00;
+}
+.message_1{
+	color: #ff6699;
+}
+.message_2{
+	color:#FF3300;
+}
+.message_3{
+	color:#FF9900;
+}
+.message_4{
+	color:#773399;
+}
+.message_5{
+	color:#009933;
+}
+.message_15{
+	color:#6495ed;
+}
+.message_50{
+	color:#666600;
+}
+.message_99{
+	color:#007070;
+}
+.message_100{
+	color:#ABABAB;
+}
+.message_999{
+	color:#CCCCCC;
+}
 /*--*/
 
 #tooltipNotify{
