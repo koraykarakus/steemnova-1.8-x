@@ -36,3 +36,8 @@ Follow these steps to set up the project locally:
 
 - This project aims to provide a clean and functional starting point. Most known bugs from the original SteemNova have been fixed.
 - Ensure your server meets the PHP 8.2 requirements and has all necessary extensions enabled.
+
+## References
+
+- Original SteemNova project: [https://github.com/steemnova/steemnova](https://github.com/steemnova/steemnova)  
+- 2Moons Forum: [https://2moons.de/](https://2moons.de/)
