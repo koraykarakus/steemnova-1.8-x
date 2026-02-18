@@ -20,67 +20,72 @@
  */
 class ShowMultiPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
+        global $LNG;
 
-	function show(){
-		global $LNG;
-		
-		$db = Database::get();
+        $db = Database::get();
 
-		$sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown
+        $sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown
 		FROM %%USERS%% LEFT JOIN %%MULTI%% ON userID = id
 		WHERE `universe` = :universe AND user_lastip IN (SELECT user_lastip FROM %%USERS%% WHERE `universe` = :universe GROUP BY user_lastip HAVING COUNT(*)>1) ORDER BY user_lastip, id ASC;";
 
-		$Query	= $db->select($sql,array(
-			':universe' => Universe::getEmulated()
-		));
+        $Query = $db->select($sql, [
+            ':universe' => Universe::getEmulated(),
+        ]);
 
-		$IPs	= array();
-		foreach($Query as $Data) {
-			if(!isset($IPs[$Data['user_lastip']]))
-				$IPs[$Data['user_lastip']]	= array();
+        $IPs = [];
+        foreach ($Query as $Data)
+        {
+            if (!isset($IPs[$Data['user_lastip']]))
+            {
+                $IPs[$Data['user_lastip']] = [];
+            }
 
-			$Data['register_time']	= _date($LNG['php_tdformat'], $Data['register_time']);
-			$Data['onlinetime']		= _date($LNG['php_tdformat'], $Data['onlinetime']);
+            $Data['register_time'] = _date($LNG['php_tdformat'], $Data['register_time']);
+            $Data['onlinetime'] = _date($LNG['php_tdformat'], $Data['onlinetime']);
 
-			$IPs[$Data['user_lastip']][$Data['id']]	= $Data;
-		}
+            $IPs[$Data['user_lastip']][$Data['id']] = $Data;
+        }
 
-		$this->assign(array(
-			'multiGroups'	=> $IPs,
-		));
+        $this->assign([
+            'multiGroups' => $IPs,
+        ]);
 
-		$this->display('page.multi.default.tpl');
+        $this->display('page.multi.default.tpl');
 
-	}
+    }
 
-	function known(){
-		$db = Database::get();
+    public function known()
+    {
+        $db = Database::get();
 
-		$sql = "INSERT INTO %%MULTI%% SET userID = :userID;";
+        $sql = "INSERT INTO %%MULTI%% SET userID = :userID;";
 
-		$db->insert($sql,array(
-			':userID' => HTTP::_GP('id',0)
-		));
+        $db->insert($sql, [
+            ':userID' => HTTP::_GP('id', 0),
+        ]);
 
-		$this->show();
-	}
+        $this->show();
+    }
 
-	function unknown(){
-		$db = Database::get();
+    public function unknown()
+    {
+        $db = Database::get();
 
-		$sql = "DELETE FROM %%MULTI%% WHERE userID = :userID;";
+        $sql = "DELETE FROM %%MULTI%% WHERE userID = :userID;";
 
-		$db->delete($sql,array(
-			':userID' => HTTP::_GP('id',0)
-		));
+        $db->delete($sql, [
+            ':userID' => HTTP::_GP('id', 0),
+        ]);
 
-		$this->show();
+        $this->show();
 
-	}
+    }
 
 }

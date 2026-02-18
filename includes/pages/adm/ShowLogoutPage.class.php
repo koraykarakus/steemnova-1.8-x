@@ -15,23 +15,23 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
- class ShowLogoutPage extends AbstractAdminPage
- {
+class ShowLogoutPage extends AbstractAdminPage
+{
+    public function __construct()
+    {
+        global $USER;
 
-   function __construct()
-   {
-     global $USER;
-     
-     if ($USER['authlevel'] == AUTH_USR)
-     {
-         throw new PagePermissionException("Permission error!");
-     }
+        if ($USER['authlevel'] == AUTH_USR)
+        {
+            throw new PagePermissionException("Permission error!");
+        }
 
-     parent::__construct();
-   }
+        parent::__construct();
+    }
 
-   function show(){
-     $session	= Session::create();
-     $session->adminAccess	= 0;
-   }
- }
+    public function show()
+    {
+        $session = Session::create();
+        $session->adminAccess = 0;
+    }
+}

@@ -21,226 +21,246 @@ class ShowMessagesPage extends AbstractGamePage
 
     protected $returnData;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    private function sendData($Code, $Message){
+    private function sendData($Code, $Message)
+    {
 
-    	$this->returnData['code']	= $Code;
+        $this->returnData['code'] = $Code;
 
-    	$this->returnData['mess']	= $Message;
+        $this->returnData['mess'] = $Message;
 
-    	$this->sendJSON($this->returnData);
+        $this->sendJSON($this->returnData);
 
     }
 
-    function deleteMessage(){
-    	global $LNG, $USER;
+    public function deleteMessage()
+    {
+        global $LNG, $USER;
 
-      $db = Database::get();
+        $db = Database::get();
 
-      $this->initTemplate();
+        $this->initTemplate();
 
-      $this->setWindow('ajax');
+        $this->setWindow('ajax');
 
-    	$delMessID	= HTTP::_GP('delMessID', 0);
+        $delMessID = HTTP::_GP('delMessID', 0);
 
-      if(empty($delMessID))
-      {
-        $this->sendData(0, $LNG['error']);
-      }
+        if (empty($delMessID))
+        {
+            $this->sendData(0, $LNG['error']);
+        }
 
-      $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id = :messID AND message_owner = :userId;';
+        $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id = :messID AND message_owner = :userId;';
 
-    	$db->delete($sql, array(
-    	    ':userId' => $USER['id'],
-    	    ':messID' => $delMessID,
-    	));
+        $db->delete($sql, [
+            ':userId' => $USER['id'],
+            ':messID' => $delMessID,
+        ]);
 
-    	$this->sendData($delMessID, $LNG['mg_deleted']);
+        $this->sendData($delMessID, $LNG['mg_deleted']);
     }
 
-    function action()
+    public function action()
     {
         global $USER;
 
         $db = Database::get();
 
-        $MessCategory  	= HTTP::_GP('messcat', 100);
-        $messagePage	= HTTP::_GP('page', 1);
-        $messageIDs		= HTTP::_GP('messageID', array());
+        $MessCategory = HTTP::_GP('messcat', 100);
+        $messagePage = HTTP::_GP('page', 1);
+        $messageIDs = HTTP::_GP('messageID', []);
 
-        $redirectUrl	= 'game.php?page=messages&category='.$MessCategory.'&side='.$messagePage;
+        $redirectUrl = 'game.php?page=messages&category='.$MessCategory.'&side='.$messagePage;
 
-		    $action	= false;
+        $action = false;
 
-        if(isset($_POST['submitTop']))
+        if (isset($_POST['submitTop']))
         {
-            $action	= HTTP::_GP('actionTop', '');
+            $action = HTTP::_GP('actionTop', '');
         }
-        elseif(isset($_POST['submitBottom']))
+        elseif (isset($_POST['submitBottom']))
         {
-            $action	= HTTP::_GP('actionBottom', '');
+            $action = HTTP::_GP('actionBottom', '');
         }
         else
         {
             $this->redirectTo($redirectUrl);
         }
 
-        if($action == 'deleteunmarked' && empty($messageIDs))
-            $action	= 'deletetypeall';
+        if ($action == 'deleteunmarked' && empty($messageIDs))
+        {
+            $action = 'deletetypeall';
+        }
 
-        if($action == 'deletetypeall' && $MessCategory == 100)
-            $action	= 'deleteall';
+        if ($action == 'deletetypeall' && $MessCategory == 100)
+        {
+            $action = 'deleteall';
+        }
 
-        if($action == 'readtypeall' && $MessCategory == 100)
-            $action	= 'readall';
+        if ($action == 'readtypeall' && $MessCategory == 100)
+        {
+            $action = 'readall';
+        }
 
-        switch($action)
+        switch ($action)
         {
             case 'readall':
                 $sql = "UPDATE %%MESSAGES%% SET message_unread = 0 WHERE message_owner = :userID;";
-                $db->update($sql, array(
-                    ':userID'   => $USER['id']
-                ));
-			break;
+                $db->update($sql, [
+                    ':userID' => $USER['id'],
+                ]);
+                break;
             case 'readtypeall':
                 $sql = "UPDATE %%MESSAGES%% SET message_unread = 0 WHERE message_owner = :userID AND message_type = :messCategory;";
-                $db->update($sql, array(
+                $db->update($sql, [
                     ':userID'       => $USER['id'],
-                    ':messCategory' => $MessCategory
-                ));
-			break;
+                    ':messCategory' => $MessCategory,
+                ]);
+                break;
             case 'readmarked':
-                if(empty($messageIDs))
+                if (empty($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
-                $messageIDs	= array_filter($messageIDs, 'is_numeric');
+                $messageIDs = array_filter($messageIDs, 'is_numeric');
 
-                if(empty($messageIDs))
+                if (empty($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
                 $sql = 'UPDATE %%MESSAGES%% SET message_unread = 0 WHERE message_id IN ('.implode(',', array_keys($messageIDs)).') AND message_owner = :userID;';
-                $db->update($sql, array(
-                    ':userID'       => $USER['id'],
-                ));
-			break;
+                $db->update($sql, [
+                    ':userID' => $USER['id'],
+                ]);
+                break;
             case 'deleteall':
-                if(Config::get()->message_delete_behavior == 1) {
+                if (Config::get()->message_delete_behavior == 1)
+                {
                     $sql = "UPDATE %%MESSAGES%% SET message_deleted = :timestamp WHERE message_owner = :userID;";
-                    $db->update($sql, array(
-                        ':timestamp'    => TIMESTAMP,
-                        ':userID'       => $USER['id']
-                    ));
-                } else {
+                    $db->update($sql, [
+                        ':timestamp' => TIMESTAMP,
+                        ':userID'    => $USER['id'],
+                    ]);
+                }
+                else
+                {
                     $sql = "DELETE FROM %%MESSAGES%% WHERE message_owner = :userID;";
-                    $db->delete($sql, array(
-                        ':userID'       => $USER['id']
-                    ));
+                    $db->delete($sql, [
+                        ':userID' => $USER['id'],
+                    ]);
                 }
-			break;
+                break;
             case 'deletetypeall':
-                if(Config::get()->message_delete_behavior == 1) {
+                if (Config::get()->message_delete_behavior == 1)
+                {
                     $sql = "UPDATE %%MESSAGES%% SET message_deleted = :timestamp WHERE message_owner = :userID AND message_type = :messCategory;";
-                    $db->update($sql, array(
-                        ':timestamp' => TIMESTAMP,
-                        ':userID' => $USER['id'],
-                        ':messCategory' => $MessCategory
-                    ));
-                } else {
+                    $db->update($sql, [
+                        ':timestamp'    => TIMESTAMP,
+                        ':userID'       => $USER['id'],
+                        ':messCategory' => $MessCategory,
+                    ]);
+                }
+                else
+                {
                     $sql = "DELETE FROM %%MESSAGES%% WHERE message_owner = :userID AND message_type = :messCategory;";
-                    $db->delete($sql, array(
-                        ':userID' => $USER['id'],
-                        ':messCategory' => $MessCategory
-                    ));
+                    $db->delete($sql, [
+                        ':userID'       => $USER['id'],
+                        ':messCategory' => $MessCategory,
+                    ]);
                 }
-			break;
+                break;
             case 'deletemarked':
-                if(empty($messageIDs))
+                if (empty($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
-                $messageIDs	= array_filter($messageIDs, 'is_numeric');
+                $messageIDs = array_filter($messageIDs, 'is_numeric');
 
-                if(empty($messageIDs))
+                if (empty($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
-                if(Config::get()->message_delete_behavior == 1) {
+                if (Config::get()->message_delete_behavior == 1)
+                {
                     $sql = 'UPDATE %%MESSAGES%% SET message_deleted = :timestamp WHERE message_id IN (' . implode(',', array_keys($messageIDs)) . ') AND message_owner = :userId;';
-                    $db->update($sql, array(
+                    $db->update($sql, [
                         ':timestamp' => TIMESTAMP,
-                        ':userId' => $USER['id'],
-                    ));
-                } else {
+                        ':userId'    => $USER['id'],
+                    ]);
+                }
+                else
+                {
                     $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id IN (' . implode(',', array_keys($messageIDs)) . ') AND message_owner = :userId;';
-                    $db->delete($sql, array(
+                    $db->delete($sql, [
                         ':userId' => $USER['id'],
-                    ));
+                    ]);
                 }
-			break;
+                break;
             case 'deleteunmarked':
-                if(empty($messageIDs) || !is_array($messageIDs))
+                if (empty($messageIDs) || !is_array($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
-                $messageIDs	= array_filter($messageIDs, 'is_numeric');
+                $messageIDs = array_filter($messageIDs, 'is_numeric');
 
-                if(empty($messageIDs))
+                if (empty($messageIDs))
                 {
                     $this->redirectTo($redirectUrl);
                 }
 
-                if(Config::get()->message_delete_behavior == 1) {
+                if (Config::get()->message_delete_behavior == 1)
+                {
                     $sql = 'UPDATE %%MESSAGES%% SET message_deleted = :timestamp WHERE message_id NOT IN (' . implode(',', array_keys($messageIDs)) . ') AND message_owner = :userId;';
-                    $db->update($sql, array(
+                    $db->update($sql, [
                         ':timestamp' => TIMESTAMP,
-                        ':userId' => $USER['id'],
-                    ));
-                } else {
-                    $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id NOT IN ('.implode(',', array_keys($messageIDs)).') AND message_owner = :userId;';
-                    $db->delete($sql, array(
-                        ':userId'       => $USER['id'],
-                    ));
+                        ':userId'    => $USER['id'],
+                    ]);
                 }
-			break;
+                else
+                {
+                    $sql = 'DELETE FROM %%MESSAGES%% WHERE message_id NOT IN ('.implode(',', array_keys($messageIDs)).') AND message_owner = :userId;';
+                    $db->delete($sql, [
+                        ':userId' => $USER['id'],
+                    ]);
+                }
+                break;
         }
         $this->redirectTo($redirectUrl);
     }
 
-    function send()
+    public function send()
     {
         global $USER, $LNG;
-        $receiverID	= HTTP::_GP('id', 0);
-        $subject 	= HTTP::_GP('subject', $LNG['mg_no_subject'], true);
-		$text		= HTTP::_GP('text', '', true);
-		$senderName	= $USER['username'].' ['.$USER['galaxy'].':'.$USER['system'].':'.$USER['planet'].']';
+        $receiverID = HTTP::_GP('id', 0);
+        $subject = HTTP::_GP('subject', $LNG['mg_no_subject'], true);
+        $text = HTTP::_GP('text', '', true);
+        $senderName = $USER['username'].' ['.$USER['galaxy'].':'.$USER['system'].':'.$USER['planet'].']';
 
-		$text		= makebr($text);
+        $text = makebr($text);
 
-		$session	= Session::load();
+        $session = Session::load();
 
         if (empty($receiverID) || empty($text) || !isset($session->messageToken) || $session->messageToken != md5($USER['id'].'|'.$receiverID))
         {
             $this->sendJSON($LNG['mg_error']);
         }
 
-		$session->messageToken = NULL;
+        $session->messageToken = null;
 
-		PlayerUtil::sendMessage($receiverID, $USER['id'], $senderName, 1, $subject, $text, TIMESTAMP);
+        PlayerUtil::sendMessage($receiverID, $USER['id'], $senderName, 1, $subject, $text, TIMESTAMP);
         $this->sendJSON($LNG['mg_message_send']);
     }
 
-    function write()
+    public function write()
     {
         global $LNG, $USER;
         $this->setWindow('popup');
@@ -248,15 +268,15 @@ class ShowMessagesPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $receiverID       	= HTTP::_GP('id', 0);
-        $Subject 			= HTTP::_GP('subject', $LNG['mg_no_subject'], true);
+        $receiverID = HTTP::_GP('id', 0);
+        $Subject = HTTP::_GP('subject', $LNG['mg_no_subject'], true);
 
         $sql = "SELECT a.galaxy, a.system, a.planet, b.username, b.id_planet, b.settings_blockPM
         FROM %%PLANETS%% as a, %%USERS%% as b WHERE b.id = :receiverId AND a.id = b.id_planet;";
 
-        $receiverRecord = $db->selectSingle($sql, array(
-            ':receiverId'   => $receiverID
-        ));
+        $receiverRecord = $db->selectSingle($sql, [
+            ':receiverId' => $receiverID,
+        ]);
 
         if (!$receiverRecord)
         {
@@ -270,16 +290,16 @@ class ShowMessagesPage extends AbstractGamePage
 
         Session::load()->messageToken = md5($USER['id'].'|'.$receiverID);
 
-        $this->assign(array(
-            'subject'		=> $Subject,
-            'id'			=> $receiverID,
-            'OwnerRecord'	=> $receiverRecord,
-        ));
+        $this->assign([
+            'subject'     => $Subject,
+            'id'          => $receiverID,
+            'OwnerRecord' => $receiverRecord,
+        ]);
 
         $this->display('page.messages.write.tpl');
     }
 
-    function show()
+    public function show()
     {
         global $LNG, $USER;
 
@@ -288,198 +308,200 @@ class ShowMessagesPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $MessageList = $MessagesID = array();
+        $MessageList = $MessagesID = [];
 
-        $TitleColor = array (
-          0 => '#FFFF00',
-          1 => '#FF6699',
-          2 => '#FF3300',
-          3 => '#FF9900',
-          4 => '#773399',
-          5 => '#009933',
-          15 => '#6495ed',
-          50 => '#666600',
-          99 => '#007070',
-          100 => '#ABABAB',
-          999 => '#CCCCCC'
-        );
+        $TitleColor = [
+            0   => '#FFFF00',
+            1   => '#FF6699',
+            2   => '#FF3300',
+            3   => '#FF9900',
+            4   => '#773399',
+            5   => '#009933',
+            15  => '#6495ed',
+            50  => '#666600',
+            99  => '#007070',
+            100 => '#ABABAB',
+            999 => '#CCCCCC',
+        ];
 
         $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
         WHERE message_sender = :userID AND message_type != 50;";
 
-        $MessOut = $db->selectSingle($sql, array(
-            ':userID'   => $USER['id']
-        ), 'state');
+        $MessOut = $db->selectSingle($sql, [
+            ':userID' => $USER['id'],
+        ], 'state');
 
-        $Total = array(
-          0 => 0,
-          1 => 0,
-          2 => 0,
-          3 => 0,
-          4 => 0,
-          5 => 0,
-          15 => 0,
-          50 => 0,
-          99 => 0,
-          100 => 0,
-          999 => 0
-        );
+        $Total = [
+            0   => 0,
+            1   => 0,
+            2   => 0,
+            3   => 0,
+            4   => 0,
+            5   => 0,
+            15  => 0,
+            50  => 0,
+            99  => 0,
+            100 => 0,
+            999 => 0,
+        ];
 
-        $UnRead	= array(
-          0 => 0,
-          1 => 0,
-          2 => 0,
-          3 => 0,
-          4 => 0,
-          5 => 0,
-          15 => 0,
-          50 => 0,
-          99 => 0,
-          100 => 0,
-          999 => 0
-        );
+        $UnRead = [
+            0   => 0,
+            1   => 0,
+            2   => 0,
+            3   => 0,
+            4   => 0,
+            5   => 0,
+            15  => 0,
+            50  => 0,
+            99  => 0,
+            100 => 0,
+            999 => 0,
+        ];
 
         $sql = "SELECT message_type, SUM(message_unread) as message_unread, COUNT(*) as count FROM %%MESSAGES%%
         WHERE message_owner = :userID AND message_deleted IS NULL GROUP BY message_type;";
 
-        $CategoryResult = $db->select($sql, array(
-            ':userID'   => $USER['id']
-        ));
+        $CategoryResult = $db->select($sql, [
+            ':userID' => $USER['id'],
+        ]);
 
         foreach ($CategoryResult as $CategoryRow)
         {
-          $UnRead[$CategoryRow['message_type']]	= $CategoryRow['message_unread'];
-          $Total[$CategoryRow['message_type']]	= $CategoryRow['count'];
+            $UnRead[$CategoryRow['message_type']] = $CategoryRow['message_unread'];
+            $Total[$CategoryRow['message_type']] = $CategoryRow['count'];
         }
 
-        $UnRead[100]	= array_sum($UnRead);
-        $Total[100]		= array_sum($Total);
+        $UnRead[100] = array_sum($UnRead);
+        $Total[100] = array_sum($Total);
 
-        $Total[999]		= $MessOut;
+        $Total[999] = $MessOut;
 
-        $CategoryList        = array();
+        $CategoryList = [];
 
-        foreach($TitleColor as $CategoryID => $CategoryColor) {
-            $CategoryList[$CategoryID]	= array(
-                'color'		=> $CategoryColor,
-                'unread'	=> $UnRead[$CategoryID],
-                'total'		=> $Total[$CategoryID],
-            );
+        foreach ($TitleColor as $CategoryID => $CategoryColor)
+        {
+            $CategoryList[$CategoryID] = [
+                'color'  => $CategoryColor,
+                'unread' => $UnRead[$CategoryID],
+                'total'  => $Total[$CategoryID],
+            ];
         }
 
-		if($messageCategory == 999)  {
+        if ($messageCategory == 999)
+        {
 
-        $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
+            $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
         WHERE message_sender = :userId AND message_type != 50 AND message_deleted IS NULL;";
 
-        $MessageCount = $db->selectSingle($sql, array(
-            ':userId'   => $USER['id'],
-        ), 'state');
+            $MessageCount = $db->selectSingle($sql, [
+                ':userId' => $USER['id'],
+            ], 'state');
 
-        $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-        $messagePage		= max(1, min($messagePage, $maxPage));
+            $maxPage = max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
+            $messagePage = max(1, min($messagePage, $maxPage));
 
-        $sql = "SELECT message_id, message_time, CONCAT(username, ' [',galaxy, ':', system, ':', planet,']')
+            $sql = "SELECT message_id, message_time, CONCAT(username, ' [',galaxy, ':', system, ':', planet,']')
         as message_from, message_subject, message_sender, message_type, message_unread, message_text
   			FROM %%MESSAGES%% INNER JOIN %%USERS%% ON id = message_owner
   			WHERE message_sender = :userId AND message_type != 50 AND message_deleted IS NULL
   			ORDER BY message_time DESC
 			  LIMIT :offset, :limit;";
 
-        $MessageResult = $db->select($sql, array(
-            ':userId'   => $USER['id'],
-            ':offset'   => (($messagePage - 1) * MESSAGES_PER_PAGE),
-            ':limit'    => MESSAGES_PER_PAGE
-        ));
+            $MessageResult = $db->select($sql, [
+                ':userId' => $USER['id'],
+                ':offset' => (($messagePage - 1) * MESSAGES_PER_PAGE),
+                ':limit'  => MESSAGES_PER_PAGE,
+            ]);
 
-      }
-      else
-      {
-        if ($messageCategory == 100)
+        }
+        else
         {
-          $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
+            if ($messageCategory == 100)
+            {
+                $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
           WHERE message_owner = :userId AND message_deleted IS NULL;";
 
-          $MessageCount = $db->selectSingle($sql, array(
-              ':userId'   => $USER['id'],
-          ), 'state');
+                $MessageCount = $db->selectSingle($sql, [
+                    ':userId' => $USER['id'],
+                ], 'state');
 
-          $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-          $messagePage		= max(1, min($messagePage, $maxPage));
+                $maxPage = max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
+                $messagePage = max(1, min($messagePage, $maxPage));
 
-          $sql = "SELECT message_id, message_time, message_from, message_subject, message_sender, message_type, message_unread, message_text
+                $sql = "SELECT message_id, message_time, message_from, message_subject, message_sender, message_type, message_unread, message_text
                   FROM %%MESSAGES%%
                   WHERE message_owner = :userId AND message_deleted IS NULL
                   ORDER BY message_time DESC
                   LIMIT :offset, :limit";
 
-          $MessageResult = $db->select($sql, array(
-              ':userId'       => $USER['id'],
-              ':offset'       => (($messagePage - 1) * MESSAGES_PER_PAGE),
-              ':limit'        => MESSAGES_PER_PAGE
-          ));
-      }
-			else
-			{
-        $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
+                $MessageResult = $db->select($sql, [
+                    ':userId' => $USER['id'],
+                    ':offset' => (($messagePage - 1) * MESSAGES_PER_PAGE),
+                    ':limit'  => MESSAGES_PER_PAGE,
+                ]);
+            }
+            else
+            {
+                $sql = "SELECT COUNT(*) as state FROM %%MESSAGES%%
         WHERE message_owner = :userId AND message_type = :messageCategory AND message_deleted IS NULL;";
 
-        $MessageCount = $db->selectSingle($sql, array(
-            ':userId'       => $USER['id'],
-            ':messageCategory' => $messageCategory
-        ), 'state');
+                $MessageCount = $db->selectSingle($sql, [
+                    ':userId'          => $USER['id'],
+                    ':messageCategory' => $messageCategory,
+                ], 'state');
 
-        $sql = "SELECT message_id, message_time, message_from, message_subject, message_sender, message_type, message_unread, message_text
+                $sql = "SELECT message_id, message_time, message_from, message_subject, message_sender, message_type, message_unread, message_text
                 FROM %%MESSAGES%%
                 WHERE message_owner = :userId AND message_type = :messageCategory AND message_deleted IS NULL
                 ORDER BY message_time DESC
                 LIMIT :offset, :limit";
 
-        $maxPage	= max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
-        $messagePage		= max(1, min($messagePage, $maxPage));
+                $maxPage = max(1, ceil($MessageCount / MESSAGES_PER_PAGE));
+                $messagePage = max(1, min($messagePage, $maxPage));
 
-        $MessageResult = $db->select($sql, array(
-            ':userId'       => $USER['id'],
-            ':messageCategory' => $messageCategory,
-            ':offset'       => (($messagePage - 1) * MESSAGES_PER_PAGE),
-            ':limit'        => MESSAGES_PER_PAGE
-        ));
-      }
-    }
+                $MessageResult = $db->select($sql, [
+                    ':userId'          => $USER['id'],
+                    ':messageCategory' => $messageCategory,
+                    ':offset'          => (($messagePage - 1) * MESSAGES_PER_PAGE),
+                    ':limit'           => MESSAGES_PER_PAGE,
+                ]);
+            }
+        }
 
         foreach ($MessageResult as $MessageRow)
         {
-            $MessagesID[]	= $MessageRow['message_id'];
+            $MessagesID[] = $MessageRow['message_id'];
 
-            $MessageList[]	= array(
-                'id'		=> $MessageRow['message_id'],
-                'time'		=> _date($LNG['php_tdformat'], $MessageRow['message_time'], $USER['timezone']),
-                'from'		=> $MessageRow['message_from'],
-                'subject'	=> $MessageRow['message_subject'],
-                'sender'	=> $MessageRow['message_sender'],
-                'type'		=> $MessageRow['message_type'],
-                'unread'	=> $MessageRow['message_unread'],
-                'text'		=> $MessageRow['message_text'],
-            );
+            $MessageList[] = [
+                'id'      => $MessageRow['message_id'],
+                'time'    => _date($LNG['php_tdformat'], $MessageRow['message_time'], $USER['timezone']),
+                'from'    => $MessageRow['message_from'],
+                'subject' => $MessageRow['message_subject'],
+                'sender'  => $MessageRow['message_sender'],
+                'type'    => $MessageRow['message_type'],
+                'unread'  => $MessageRow['message_unread'],
+                'text'    => $MessageRow['message_text'],
+            ];
         }
 
-        if(!empty($MessagesID) && $messageCategory != 999) {
+        if (!empty($MessagesID) && $messageCategory != 999)
+        {
             $sql = 'UPDATE %%MESSAGES%% SET message_unread = 0 WHERE message_id IN ('.implode(',', $MessagesID).') AND message_owner = :userID;';
-            $db->update($sql, array(
-                ':userID'       => $USER['id'],
-            ));
+            $db->update($sql, [
+                ':userID' => $USER['id'],
+            ]);
         }
-
 
         $this->tplObj->loadscript('message.js');
-        $this->assign(array(
-			      'MessID'		=> $messageCategory,
-			      'MessageCount'	=> $MessageCount,
-            'MessageList'	=> $MessageList,
-            'CategoryList'	=> $CategoryList,
-            'messagePage'			=> $messagePage,
-            'maxPage'		=> $maxPage,
-        ));
+        $this->assign([
+            'MessID'       => $messageCategory,
+            'MessageCount' => $MessageCount,
+            'MessageList'  => $MessageList,
+            'CategoryList' => $CategoryList,
+            'messagePage'  => $messagePage,
+            'maxPage'      => $maxPage,
+        ]);
 
         $this->display('page.messages.default.tpl');
     }

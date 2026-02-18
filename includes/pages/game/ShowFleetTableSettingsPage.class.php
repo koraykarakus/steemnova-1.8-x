@@ -1,34 +1,32 @@
 <?php
 
-
 /**
  *
  */
 class ShowFleetTableSettingsPage extends AbstractGamePage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  function __construct()
-  {
-    parent::__construct();
-  }
+    public function changeVisibility()
+    {
 
+        global $USER;
 
-  function changeVisibility(){
+        $result = 0;
 
-    global $USER;
+        ($USER['show_fleets_active']) ? $result = 0 : $result = 1;
 
-    $result = 0;
+        $sql = "UPDATE %%USERS%% SET `show_fleets_active` = " . $result . " WHERE id = :userId;";
 
-    ($USER['show_fleets_active']) ? $result = 0 : $result = 1;
+        Database::get()->update($sql, [
+            ':userId' => $USER['id'],
+        ]);
 
-    $sql = "UPDATE %%USERS%% SET `show_fleets_active` = " . $result . " WHERE id = :userId;";
+        $this->sendJSON($result);
 
-    Database::get()->update($sql,array(
-      ':userId' => $USER['id']
-    ));
-
-    $this->sendJSON($result);
-
-  }
+    }
 
 }

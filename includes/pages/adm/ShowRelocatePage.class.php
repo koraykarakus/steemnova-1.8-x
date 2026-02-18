@@ -20,74 +20,70 @@
  */
 class ShowRelocatePage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
+    public function show()
+    {
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+        global $config;
 
+        $this->assign([
+            'relocate_price'               => $config->relocate_price,
+            'relocate_next_time'           => $config->relocate_next_time,
+            'relocate_jump_gate_active'    => $config->relocate_jump_gate_active,
+            'relocate_move_fleet_directly' => $config->relocate_move_fleet_directly,
+        ]);
 
-	function show(){
+        $this->display('page.relocate.default.tpl');
 
-		global $config;
+    }
 
-		$this->assign(array(
-      'relocate_price' => $config->relocate_price,
-      'relocate_next_time' => $config->relocate_next_time,
-      'relocate_jump_gate_active' => $config->relocate_jump_gate_active,
-      'relocate_move_fleet_directly' => $config->relocate_move_fleet_directly,
-		));
+    public function saveSettings()
+    {
+        global $LNG, $config;
 
-		$this->display('page.relocate.default.tpl');
+        $config_before = [
+            'relocate_price'               => $config->relocate_price,
+            'relocate_next_time'           => $config->relocate_next_time,
+            'relocate_jump_gate_active'    => $config->relocate_jump_gate_active,
+            'relocate_move_fleet_directly' => $config->relocate_move_fleet_directly,
+        ];
 
-	}
+        $relocate_price = HTTP::_GP('relocate_price', 50000);
+        $relocate_next_time = HTTP::_GP('relocate_next_time', 24);
+        $relocate_jump_gate_active = HTTP::_GP('relocate_jump_gate_active', 24);
+        $relocate_move_fleet_directly = (HTTP::_GP('relocate_move_fleet_directly', 'off') == 'on') ? 1 : 0;
 
-	function saveSettings(){
-		global $LNG, $config;
+        $config_after = [
+            'relocate_price'               => $relocate_price,
+            'relocate_next_time'           => $relocate_next_time,
+            'relocate_jump_gate_active'    => $relocate_jump_gate_active,
+            'relocate_move_fleet_directly' => $relocate_move_fleet_directly,
+        ];
 
-			$config_before = array(
-        'relocate_price' => $config->relocate_price,
-        'relocate_next_time' => $config->relocate_next_time,
-        'relocate_jump_gate_active' => $config->relocate_jump_gate_active,
-        'relocate_move_fleet_directly' => $config->relocate_move_fleet_directly,
-			);
+        foreach ($config_after as $key => $value)
+        {
+            $config->$key = $value;
+        }
+        $config->save();
 
-      $relocate_price = HTTP::_GP('relocate_price',50000);
-  		$relocate_next_time =  HTTP::_GP('relocate_next_time',24);
-  		$relocate_jump_gate_active = HTTP::_GP('relocate_jump_gate_active',24);
-  		$relocate_move_fleet_directly = (HTTP::_GP('relocate_move_fleet_directly','off') == 'on') ? 1 : 0;
+        $LOG = new Log(3);
+        $LOG->target = 1;
+        $LOG->old = $config_before;
+        $LOG->new = $config_after;
+        $LOG->save();
 
+        $redirectButton = [];
+        $redirectButton[] = [
+            'url'   => 'admin.php?page=relocate&mode=show',
+            'label' => $LNG['uvs_back'],
+        ];
 
-			$config_after = array(
-        'relocate_price' => $relocate_price,
-        'relocate_next_time' => $relocate_next_time,
-        'relocate_jump_gate_active' => $relocate_jump_gate_active,
-        'relocate_move_fleet_directly' => $relocate_move_fleet_directly,
-			);
+        $this->printMessage($LNG['settings_successful'], $redirectButton);
 
-      foreach($config_after as $key => $value)
-      {
-        $config->$key	= $value;
-      }
-      $config->save();
-
-
-			$LOG = new Log(3);
-			$LOG->target = 1;
-			$LOG->old = $config_before;
-			$LOG->new = $config_after;
-			$LOG->save();
-
-
-			$redirectButton = array();
-      $redirectButton[] = array(
-        'url' => 'admin.php?page=relocate&mode=show',
-				'label' => $LNG['uvs_back']
-      );
-
-      $this->printMessage($LNG['settings_successful'],$redirectButton);
-
-	}
+    }
 
 }

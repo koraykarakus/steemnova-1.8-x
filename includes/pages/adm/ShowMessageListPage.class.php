@@ -20,198 +20,202 @@
  */
 class ShowMessageListPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
 
-	function show(){
+        global $LNG, $USER;
+        $page = HTTP::_GP('side', 1);
+        $type = HTTP::_GP('type', 100);
+        $sender = HTTP::_GP('sender', '', UTF8_SUPPORT);
+        $receiver = HTTP::_GP('receiver', '', UTF8_SUPPORT);
+        $dateStart = HTTP::_GP('dateStart', []);
+        $dateEnd = HTTP::_GP('dateEnd', []);
 
-		global $LNG, $USER;
-		$page		= HTTP::_GP('side', 1);
-		$type		= HTTP::_GP('type', 100);
-		$sender		= HTTP::_GP('sender', '', UTF8_SUPPORT);
-		$receiver	= HTTP::_GP('receiver', '', UTF8_SUPPORT);
-		$dateStart	= HTTP::_GP('dateStart', array());
-		$dateEnd	= HTTP::_GP('dateEnd', array());
+        $db = Database::get();
 
-		$db = Database::get();
+        $perSide = 50;
 
-		$perSide	= 50;
+        $messageList = [];
+        $userWhereSQL = $dateWhereSQL = $countJoinSQL = '';
 
-		$messageList	= array();
-		$userWhereSQL	= $dateWhereSQL	= $countJoinSQL	= '';
+        $categories = $LNG['mg_type'];
+        unset($categories[999]);
 
+        $dateStart = array_filter($dateStart, 'is_numeric');
+        $dateEnd = array_filter($dateEnd, 'is_numeric');
 
-		$categories	= $LNG['mg_type'];
-		unset($categories[999]);
+        $useDateStart = count($dateStart) == 3;
+        $useDateEnd = count($dateEnd) == 3;
 
-		$dateStart	= array_filter($dateStart, 'is_numeric');
-		$dateEnd	= array_filter($dateEnd, 'is_numeric');
-
-		$useDateStart	= count($dateStart) == 3;
-		$useDateEnd		= count($dateEnd) == 3;
-
-
-
-		if ($type != 100)
-		{
-			if (!empty($sender)) {
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+        if ($type != 100)
+        {
+            if (!empty($sender))
+            {
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				LEFT JOIN %%USERS%% as u ON message_sender = u.id
 				WHERE message_type = :type AND message_universe = :universe AND u.username = :sender ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':sender' => $sender,
-					':type' => $type,
-					':universe' => Universe::getEmulated(),
-				),'count');
+                $MessageCount = $db->selectSingle($sql, [
+                    ':sender'   => $sender,
+                    ':type'     => $type,
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
 
-			}else if (!empty($receiver)) {
+            }
+            elseif (!empty($receiver))
+            {
 
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				LEFT JOIN %%USERS%% as u ON message_owner = u.id
 				WHERE message_type = :type AND message_universe = :universe AND u.username = :receiver ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
+                $MessageCount = $db->selectSingle($sql, [
+                    ':type'     => $type,
+                    ':receiver' => $receiver,
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':type' => $type,
-					':receiver' => $receiver,
-					':universe' => Universe::getEmulated(),
-				),'count');
-
-			}else {
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+            }
+            else
+            {
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				WHERE message_universe = :universe ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':universe' => Universe::getEmulated()
-				),'count');
-			}
+                $MessageCount = $db->selectSingle($sql, [
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
+            }
 
-		}
-		else
-		{
+        }
+        else
+        {
 
-			if (!empty($sender)) {
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+            if (!empty($sender))
+            {
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				LEFT JOIN %%USERS%% as u ON message_sender = u.id
 				WHERE message_universe = :universe ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':universe' => Universe::getEmulated()
-				),'count');
+                $MessageCount = $db->selectSingle($sql, [
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
 
-			}elseif (!empty($receiver)) {
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+            }
+            elseif (!empty($receiver))
+            {
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				LEFT JOIN %%USERS%% as u ON message_owner = u.id
 				WHERE message_universe = :universe ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':universe' => Universe::getEmulated()
-				),'count');
+                $MessageCount = $db->selectSingle($sql, [
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
 
-			}else {
-				$sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
+            }
+            else
+            {
+                $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				WHERE message_universe = :universe ";
 
-				if($useDateStart && $useDateEnd)
-				{
-					$sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
-				}
-				elseif($useDateStart)
-				{
-					$sql	.= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
-				}
+                if ($useDateStart && $useDateEnd)
+                {
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                }
+                elseif ($useDateStart)
+                {
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                }
 
-				$MessageCount	= $db->selectSingle($sql,array(
-					':universe' => Universe::getEmulated()
-				),'count');
-			}
+                $MessageCount = $db->selectSingle($sql, [
+                    ':universe' => Universe::getEmulated(),
+                ], 'count');
+            }
 
+        }
 
+        $maxPage = max(1, ceil($MessageCount / $perSide));
+        $page = max(1, min($page, $maxPage));
 
-		}
+        $sqlLimit = (($page - 1) * $perSide).", ".($perSide - 1);
 
-		$maxPage	= max(1, ceil($MessageCount / $perSide));
-		$page		= max(1, min($page, $maxPage));
+        if ($type == 100)
+        {
 
-		$sqlLimit	= (($page - 1) * $perSide).", ".($perSide - 1);
-
-		if ($type == 100)
-		{
-
-			$sql = "SELECT u.username, us.username as senderName, m.*
+            $sql = "SELECT u.username, us.username as senderName, m.*
 			FROM %%MESSAGES%% as m
 			LEFT JOIN %%USERS%% as u ON m.message_owner = u.id
 			LEFT JOIN %%USERS%% as us ON m.message_sender = us.id
@@ -221,12 +225,14 @@ class ShowMessageListPage extends AbstractAdminPage
 			ORDER BY message_time DESC, message_id DESC
 			LIMIT ".$sqlLimit.";";
 
-			$messageRaw	= $db->select($sql,array(
-				':universe' => Universe::getEmulated()
-			));
-		} else {
+            $messageRaw = $db->select($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+        }
+        else
+        {
 
-			$sql = "SELECT u.username, us.username as senderName, m.*
+            $sql = "SELECT u.username, us.username as senderName, m.*
 			FROM %%MESSAGES%% as m
 			LEFT JOIN %%USERS%% as u ON m.message_owner = u.id
 			LEFT JOIN %%USERS%% as us ON m.message_sender = us.id
@@ -236,38 +242,38 @@ class ShowMessageListPage extends AbstractAdminPage
 			ORDER BY message_time DESC, message_id DESC
 			LIMIT ".$sqlLimit.";";
 
-			$messageRaw	= $db->select($sql,array(
-				':universe' => Universe::getEmulated()
-			));
-		}
+            $messageRaw = $db->select($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+        }
 
-		foreach($messageRaw as $messageRow)
-		{
-			$messageList[$messageRow['message_id']]	= array(
-				'sender'	=> empty($messageRow['senderName']) ? $messageRow['message_from'] : $messageRow['senderName'].' (ID:&nbsp;'.$messageRow['message_sender'].')',
-				'receiver'	=> $messageRow['username'].' (ID:&nbsp;'.$messageRow['message_owner'].')',
-				'subject'	=> $messageRow['message_subject'],
-				'text'		=> $messageRow['message_text'],
-				'type'		=> $messageRow['message_type'],
-				'deleted'	=> $messageRow['message_deleted'] != NULL,
-				'time'		=> str_replace(' ', '&nbsp;', _date($LNG['php_tdformat'], $messageRow['message_time']), $USER['timezone']),
-			);
-		}
+        foreach ($messageRaw as $messageRow)
+        {
+            $messageList[$messageRow['message_id']] = [
+                'sender'   => empty($messageRow['senderName']) ? $messageRow['message_from'] : $messageRow['senderName'].' (ID:&nbsp;'.$messageRow['message_sender'].')',
+                'receiver' => $messageRow['username'].' (ID:&nbsp;'.$messageRow['message_owner'].')',
+                'subject'  => $messageRow['message_subject'],
+                'text'     => $messageRow['message_text'],
+                'type'     => $messageRow['message_type'],
+                'deleted'  => $messageRow['message_deleted'] != null,
+                'time'     => str_replace(' ', '&nbsp;', _date($LNG['php_tdformat'], $messageRow['message_time']), $USER['timezone']),
+            ];
+        }
 
-		$this->assign(array(
-			'categories'	=> $categories,
-			'maxPage'		=> $maxPage,
-			'page'			=> $page,
-			'messageList'	=> $messageList,
-			'type'			=> $type,
-			'dateStart'		=> $dateStart,
-			'dateEnd'		=> $dateEnd,
-			'sender'		=> $sender,
-			'receiver'		=> $receiver,
-		));
+        $this->assign([
+            'categories'  => $categories,
+            'maxPage'     => $maxPage,
+            'page'        => $page,
+            'messageList' => $messageList,
+            'type'        => $type,
+            'dateStart'   => $dateStart,
+            'dateEnd'     => $dateEnd,
+            'sender'      => $sender,
+            'receiver'    => $receiver,
+        ]);
 
-		$this->display('page.messagelist.default.tpl');
+        $this->display('page.messagelist.default.tpl');
 
-	}
+    }
 
 }

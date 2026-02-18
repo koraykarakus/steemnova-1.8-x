@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -19,16 +20,16 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
-$LNG['Version']     = 'Version';
+$LNG['Version'] = 'Version';
 $LNG['Description'] = 'Aciklama';
 
-$LNG['changelog']   = array(
-'v1.7.3' => 'Jan 19.05.2013
+$LNG['changelog'] = [
+    'v1.7.3' => 'Jan 19.05.2013
 - 0000461: [User errors] Inexplicable errors (Jan) - resolved.
 - 0000459: [Admin Panal] Undefined variable: CONFIG (Jan) - resolved.
 - 0000429: [Langauge] Custom lang keys dont work (Jan) - resolved.
 - 0000437: [Admin Panal] Undefined variable: CONFIG (Jan) - resolved.
-- 0000434: [Admin Panal] unexpected ',' in InactiveMailCronjob (Jan) - resolved.
+- 0000434: [Admin Panal] unexpected ', ' in InactiveMailCronjob (Jan) - resolved.
 - 0000415: [Langauge] mail error (Jan) - resolved.
 - 0000427: [User errors] Chat fell (Jan) - resolved.
 - 0000425: [User errors] Chat Bug (Jan) - resolved.
@@ -37,7 +38,7 @@ $LNG['changelog']   = array(
 - 0000387: [Spell iusses] Spionageberechte zusammenfassen unter Einstellungen (Jan) - resolved.
 - 0000363: [Admin Panal] Ticket with an empty subject (Jan) - resolved.
 ',
-'v1.7.2' => 'Jan 18.03.2013
+    'v1.7.2' => 'Jan 18.03.2013
 - 0000358: [Fleet missions] Recycler mit vollem Rohstoffspeicher inkl. viel Kristall, baut TF nicht ab und geht auf Lock (Jan) - resolved.
 - 0000360: [Fleet missions] Wenn bei "Mission: Halten" Rohstoffe mitgenommen wird, werden diese dort abgeliefert und die Flotte behält diese Rohstoffe (Jan) - resolved.
 - 0000371: [Admin Panal] Support ticket kann nicht geschrieben werden (FC92) - resolved.
@@ -51,10 +52,10 @@ $LNG['changelog']   = array(
 - 0000416: [Admin Panal] MessageListe im ACP bei IE8 / IE9 wird nicht geöffnet, Error: \'console\' ist undefiniert (Jan) - resolved.
 - 0000423: [Statistical] Error in der class.statbuilder.php / Ref 2627, In der Tabelle config wird users_amount = 0 gesetzt (Jan) - resolved.
 ',
-'v1.7.1' => 'Jan 18.01.2013
+    'v1.7.1' => 'Jan 18.01.2013
 - Fix possible SQL Injections.
 ',
-'v1.7' => 'Jan 17.01.2013
+    'v1.7' => 'Jan 17.01.2013
 - 0000327: [Feature request] allowPlanetPosition integrieren (FC92) - resolved.
 - 0000316: [Feature request] List of alliances when concluding the contract (FC92) - resolved.
 - 0000328: [Admin Panal] CleanerCronjob SQL error (FC92) - resolved.
@@ -309,7 +310,7 @@ TMOONS-356 - Information about the storage capacity
 TMOONS-381 - ID sender message in the ACP
 TMOONS-398 - Engine of shipsTMOONS-301 - Bei &quot;Passwort vergessen&quot; keine Info dass eMail-Versand durchgeführt worden ist.
 TMOONS-346 - The doubling of the fleet',
-'v1.6.1' => 'Jan 19.11.11
+    'v1.6.1' => 'Jan 19.11.11
 - 0000027: [Core] Phalanx (Slaver) - resolved.
 - 0000071: [Core] The list of the moon for teleportation (Slaver) - resolved.
 - 0000078: [Fleets (Missions)] Rev. 2074 Mission atack (Slaver) - resolved.
@@ -317,7 +318,7 @@ TMOONS-346 - The doubling of the fleet',
 - 0000079: [Design] Tooltip bei Server-Konfig und Uni-Konfig werden nicht mehr angezeigt (Slaver) - resolved.
 - 0000076: [Fleets (Missions)] neue version 1.6 (Slaver) - resolved.
 ',
-'v1.6' => 'Jan 17.11.11
+    'v1.6' => 'Jan 17.11.11
 - 0000075: [Login] Registrierungserror wenn im Planeten namen ein \' vorkommt (Slaver) - resolved.
 - 0000069: [Core] Chance of destruction of the moon (Slaver) - resolved.
 - 0000066: [Core] Registration (Slaver) - resolved.
@@ -343,7 +344,7 @@ TMOONS-346 - The doubling of the fleet',
 - 0000050: [Core] Wrong redirect (Slaver) - resolved.
 - 0000049: [Core] Encoding banner (Slaver) - resolved.
 ',
-'v1.5' => 'Jan 18.09.11
+    'v1.5' => 'Jan 18.09.11
 - FIX: REMOTE FILE INCLUSION VULNERABILITY
 - ADD: Timezone Support
 - FIX: Fleetspeed Bonus
@@ -392,7 +393,7 @@ TMOONS-346 - The doubling of the fleet',
 - 0000011: [Chat] Portuguese chat don´t work (Slaver) - resolved.
 - 0000010: [EcoSystem] Demolish a level (Slaver) - closed.
 ',
-'v1.4' => 'Jan 10.07.11
+    'v1.4' => 'Jan 10.07.11
 - ADD: FirePHP Log System
 - ADD: Language selectable on Global Messages
 - ADD: New Message System (includes old global message system like another XNova versions)
@@ -429,7 +430,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'v1.3.5' => 'Jan 11.06.11
+    'v1.3.5' => 'Jan 11.06.11
 - ADD: New ChatSystem
 - ADD: New Popup UI
 - ADD: Refferalsystem
@@ -466,7 +467,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'v1.3' => 'Jan 05.03.11
+    'v1.3' => 'Jan 05.03.11
 - ADD: MultiUniverse Support
 - ADD: IPv6 Support
 - ADD: Limit of max Colony
@@ -509,7 +510,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Set new location for error.log
 - DIV: Update TS³ Lib, Soundmanager, reCAPTCHA Lib, Smarty and jQuery (UI)
 ',
-'v1.2' => 'Jan 04.10.10
+    'v1.2' => 'Jan 04.10.10
 - ADD: Set Max Fleets on ACS (Default: 16)
 - ADD: New RightsSystem on ACP
 - ADD: .htaccess Protection for some dirs
@@ -533,7 +534,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'v1.1' => 'Jan 31.08.10
+    'v1.1' => 'Jan 31.08.10
 - ADD: GoW Skin
 - ADD: Mod Versions Control
 - ADD: Cronjoboption für Banner
@@ -548,7 +549,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'v1.0' => 'Jan 07.08.10
+    'v1.0' => 'Jan 07.08.10
 - FIX: Global Messages
 - FIX: Forgotten Password
 - FIX: Gamereset
@@ -569,7 +570,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC6' => 'Jan 28.07.10
+    'RC6' => 'Jan 28.07.10
 - ADD: Russian Language (ssAAss &amp; InquisitorEA)
 - ADD: Portuguese Language (morgado)
 - ADD: Spanish Language (ZideN) ALPHA (!)
@@ -593,7 +594,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Update Smarty Engine
 - DIV: Diverse Anpassungen am Game
 ',
-'RC5.1' => 'Jan 23.06.10
+    'RC5.1' => 'Jan 23.06.10
 - ADD: Für Halten muss man in der Ally/Buddy sein
 - ADD: Name des HP bei der Reg.
 - ADD: Passwort Abfrage bei Authlevel/Reset
@@ -619,7 +620,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC5.0' => 'Jan 30.05.10
+    'RC5.0' => 'Jan 30.05.10
 - ADD: Neue Schiffe
 - ADD: Support Planet in System != 15
 - ADD: Cookie für LoginMusik
@@ -659,7 +660,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC5.0b8' => 'Jan 20.04.10
+    'RC5.0b8' => 'Jan 20.04.10
 - FIX: Bann
 - FIX: Unmarkierte Nachrichten Löschen
 - FIX: Query log
@@ -677,7 +678,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC5.0b7' => 'Jan 16.04.10
+    'RC5.0b7' => 'Jan 16.04.10
 - ADD: Google Analytics Mod
 - FIX: max Button, if thousend Sep is not "."
 - FIX: Große Transporte
@@ -686,7 +687,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC5.0b6' => 'Jan 15.04.10
+    'RC5.0b6' => 'Jan 15.04.10
 - ADD: Updated ACP (XG Proyecto 2.9.4)
 - ADD: Facebook Connector Alpha
 - ADD: Diplomatie-System
@@ -722,12 +723,12 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC5.0b5' => 'Jan 06.03.10
+    'RC5.0b5' => 'Jan 06.03.10
 - FIX: Attack
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC5.0b4' => 'Jan 01.03.10
+    'RC5.0b4' => 'Jan 01.03.10
 - ADD: Plugin-System v0.4 (Green @ XG Proyecto)
 - ADD: Neu StatBuilder
 - FIX: AKS
@@ -735,7 +736,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC5.0b3' => 'Jan 23.02.10
+    'RC5.0b3' => 'Jan 23.02.10
 - ADD: DM BANK
 - ADD: Koords werden nicht mehr in der HoF angezeigt.
 - ADD: Update System BETA
@@ -757,7 +758,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 - DIV: Update jQuery to 1.4.2
 ',
-'RC5.0b2' => 'Jan 20.02.10
+    'RC5.0b2' => 'Jan 20.02.10
 - ADD: Accountlöschung w&auml;hrend des U-Modes
 - ADD: UTF-8 Support for Names
 - ADD: Kosten Dunkle Materie
@@ -778,7 +779,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC5.0b1' => 'Jan 02.02.10
+    'RC5.0b1' => 'Jan 02.02.10
 - NEW: Search-Engine
 - NEW: LOGIN
 - NEW: Change Name to 2Moons
@@ -851,7 +852,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Update jQuery to 1.4.1
 ',
 
-'RC4.2' => 'Jan 06.12.09
+    'RC4.2' => 'Jan 06.12.09
 - ADD: StatBanner
 - ADD: Sycrogs robots.txt
 - ADD: UserVaild-Funktion einstellbar
@@ -885,7 +886,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC4.1' => 'Jan 23.11.09
+    'RC4.1' => 'Jan 23.11.09
 - FIX: Moderration-ACP
 - FIX: Userlöschung
 - FIX: cronjob.php
@@ -897,7 +898,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Diverse Anpassungen am Game
 ',
 
-'RC4' => 'Jan 13.11.09
+    'RC4' => 'Jan 13.11.09
 - ADD: Fleet/Def ins TF einstellbar
 - ADD: Neue Funktion request_var, set_var und msg_handler
 - ADD: Komplett überarbeitetes ACP (XGP 2.9.1)
@@ -950,7 +951,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: Sicherheit im Game erhöht
 - DIV: Diverse Anpassungen am Game
 ',
-'RC3' => 'Jan 18.10.09
+    'RC3' => 'Jan 18.10.09
 - ADD: AGB
 - ADD: Rules
 - ADD: Vaild E-Mail Funktion
@@ -971,7 +972,7 @@ TMOONS-346 - The doubling of the fleet',
 - DIV: W3C Vaild (Login)
 - DIV: Diverse Anpassungen am Game
 ',
-'RC2' => 'Jan 13.10.09
+    'RC2' => 'Jan 13.10.09
 - MOD: Lotterie
 - MOD: TS-Overview Mod
 - MOD: Mindestbauzeit einstellbar
@@ -999,4 +1000,4 @@ TMOONS-346 - The doubling of the fleet',
 
 Based on XG Proyect 2.8 on 11.10.09
 ',
-);
+];

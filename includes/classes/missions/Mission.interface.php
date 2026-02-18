@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -13,10 +14,11 @@
  * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
-interface Mission {
-	public function TargetEvent();
+interface Mission
+{
+    public function TargetEvent();
 
-	public function EndStayEvent();
+    public function EndStayEvent();
 
-	public function ReturnEvent();
+    public function ReturnEvent();
 }

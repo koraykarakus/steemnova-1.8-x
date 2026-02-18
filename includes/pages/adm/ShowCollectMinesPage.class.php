@@ -20,66 +20,62 @@
  */
 class ShowCollectMinesPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
+    public function show()
+    {
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+        global $config;
 
+        $this->assign([
+            'collect_mines_under_attack' => $config->collect_mines_under_attack,
+            'collect_mine_time_minutes'  => $config->collect_mine_time_minutes,
+        ]);
 
-	function show(){
+        $this->display('page.collect_mines.default.tpl');
 
-		global $config;
+    }
 
-		$this->assign(array(
-      'collect_mines_under_attack' => $config->collect_mines_under_attack,
-      'collect_mine_time_minutes' => $config->collect_mine_time_minutes,
-		));
+    public function saveSettings()
+    {
+        global $LNG, $config;
 
-		$this->display('page.collect_mines.default.tpl');
+        $config_before = [
+            'collect_mines_under_attack' => $config->collect_mines_under_attack,
+            'collect_mine_time_minutes'  => $config->collect_mine_time_minutes,
+        ];
 
-	}
+        $collect_mines_under_attack = (HTTP::_GP('collect_mines_under_attack', 'off') == 'on') ? 1 : 0;
+        $collect_mine_time_minutes = HTTP::_GP('collect_mine_time_minutes', 30);
 
-	function saveSettings(){
-		global $LNG, $config;
+        $config_after = [
+            'collect_mines_under_attack' => $collect_mines_under_attack,
+            'collect_mine_time_minutes'  => $collect_mine_time_minutes,
+        ];
 
-			$config_before = array(
-        'collect_mines_under_attack' => $config->collect_mines_under_attack,
-        'collect_mine_time_minutes' => $config->collect_mine_time_minutes,
-			);
+        foreach ($config_after as $key => $value)
+        {
+            $config->$key = $value;
+        }
+        $config->save();
 
-			$collect_mines_under_attack = (HTTP::_GP('collect_mines_under_attack','off') == 'on') ? 1 : 0;
-      $collect_mine_time_minutes = HTTP::_GP('collect_mine_time_minutes',30);
+        $LOG = new Log(3);
+        $LOG->target = 1;
+        $LOG->old = $config_before;
+        $LOG->new = $config_after;
+        $LOG->save();
 
+        $redirectButton = [];
+        $redirectButton[] = [
+            'url'   => 'admin.php?page=collectMines&mode=show',
+            'label' => $LNG['uvs_back'],
+        ];
 
-			$config_after = array(
-        'collect_mines_under_attack' => $collect_mines_under_attack,
-				'collect_mine_time_minutes' => $collect_mine_time_minutes,
-			);
+        $this->printMessage($LNG['settings_successful'], $redirectButton);
 
-      foreach($config_after as $key => $value)
-      {
-        $config->$key	= $value;
-      }
-      $config->save();
-
-
-			$LOG = new Log(3);
-			$LOG->target = 1;
-			$LOG->old = $config_before;
-			$LOG->new = $config_after;
-			$LOG->save();
-
-
-			$redirectButton = array();
-      $redirectButton[] = array(
-        'url' => 'admin.php?page=collectMines&mode=show',
-				'label' => $LNG['uvs_back']
-      );
-
-      $this->printMessage($LNG['settings_successful'],$redirectButton);
-
-	}
+    }
 
 }

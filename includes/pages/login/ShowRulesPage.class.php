@@ -15,23 +15,22 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 class ShowRulesPage extends AbstractLoginPage
 {
-	public static $requireModule = 0;
+    public static $requireModule = 0;
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function show()
-	{
-		global $LNG;
-		$this->assign(array(
-			'rules'		=> $LNG->getTemplate('rules'),
-		));
+    public function show()
+    {
+        global $LNG;
+        $this->assign([
+            'rules' => $LNG->getTemplate('rules'),
+        ]);
 
-		$this->display('page.rules.default.tpl');
-	}
+        $this->display('page.rules.default.tpl');
+    }
 }

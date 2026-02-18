@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -13,7 +14,6 @@
  * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
-
 
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
@@ -68,7 +68,6 @@ $LNG['cs_graviton_canyon_start'] = "Gravitation Canyon (amount)";
 $LNG['cs_interceptor_misil_start'] = "Intercepting Missile (amount)";
 $LNG['cs_interplanetary_misil_start'] = "Interplanetary Missile (amount)";
 
-
 //---------------	ShowInfosPage.class.php - page.information.default.tpl ------------------------//
 $LNG['ad_infos_server'] = "Server";
 $LNG['ad_infos_server_infos'] = "Server Information";
@@ -93,9 +92,6 @@ $LNG['ad_infos_yes'] = "Yes";
 $LNG['ad_infos_no'] = "No";
 $LNG['ad_infos_active'] = "Active";
 $LNG['ad_infos_inactive'] = "Inactive";
-
-
-
 
 //---------------	Geral	------------------------//
 $LNG['adm_login'] = 'Login';
@@ -125,7 +121,6 @@ $LNG['rank_1'] = 'Moderator';
 $LNG['rank_2'] = 'Operator';
 $LNG['rank_3'] = 'Admin';
 
-
 // 	Tempo
 $LNG['time_days'] = 'Days';
 $LNG['time_hours'] = 'Hour';
@@ -143,7 +138,6 @@ $LNG['one_is_no_1'] = 'Yes';
 $LNG['one_is_no_0'] = 'no';
 //###########################################################//
 
-
 //---------------	Botões	------------------------//
 $LNG['button_submit'] = 'Send';
 $LNG['button_add'] = 'Profile';
@@ -154,7 +148,6 @@ $LNG['button_reset'] = 'Reset';
 $LNG['button_des_se'] = 'Select all or deselect';
 //###########################################################//
 
-
 //---------------	ID's	------------------------//
 $LNG['input_id'] = 'ID';
 $LNG['input_id_user'] = 'Player ID';
@@ -164,12 +157,10 @@ $LNG['input_id_p_m'] = 'ID of the planet or Moon';
 $LNG['input_id_ally'] = 'ID of the Alliance';
 //###########################################################//
 
-
 //---------------	Recursos	------------------------//
 $LNG['resources_title'] = 'Resources';
 $LNG['count_res'] = 'Number of resources';
 //###########################################################//
-
 
 //---------------	Modulos   ------------------------//
 $LNG['buildings_title'] = 'Buildings';
@@ -178,7 +169,6 @@ $LNG['defenses_title'] = 'Defences';
 $LNG['researchs_title'] = 'Research';
 $LNG['officiers_title'] = 'Officers';
 //###########################################################//
-
 
 //---------------	Editor	------------------------//
 // Menu
@@ -288,7 +278,6 @@ $LNG['ad_pla_delete_planet_s'] = 'Planet successfully removed';
 
 //###########################################################//
 
-
 //---------------	Painel de Suspensão	------------------------//
 $LNG['bo_the_player'] = 'Player';
 $LNG['bo_the_player2'] = 'Player';
@@ -325,14 +314,12 @@ $LNG['bo_ban'] = 'Block';
 $LNG['bo_unban'] = 'Unlock';
 //###########################################################//
 
-
 //---------------	Encriptador de MD5	------------------------//
 $LNG['et_md5_encripter'] = 'MD5 Encryptor';
 $LNG['et_pass'] = 'Password entry you want';
 $LNG['et_result'] = 'Result of Encription';
 $LNG['et_encript'] = 'Generate code';
 //###########################################################//
-
 
 //---------------	Configuração de Estatisticas	------------------------//
 $LNG['cs_title'] = 'Statistics';
@@ -351,7 +338,6 @@ $LNG['cs_no_view'] = 'Do not display admins';
 
 //###########################################################//
 
-
 //---------------	Lista de Erros	------------------------//
 $LNG['er_errors'] = 'Error';
 $LNG['er_error_list'] = 'Error list';
@@ -359,7 +345,6 @@ $LNG['er_dlte_all'] = 'Delete all';
 $LNG['er_type'] = 'Type';
 $LNG['er_data'] = 'Date';
 //###########################################################//
-
 
 //---------------	Lista de Mensagens	------------------------//
 $LNG['ml_message_list'] = 'Message list';
@@ -373,10 +358,8 @@ $LNG['ml_subject'] = 'Subject';
 $LNG['ml_date_range'] = 'Period';
 $LNG['ml_deleted'] = 'Message deleted';
 
-
 $LNG['ml_page'] = 'Page';
 //###########################################################//
-
 
 //---------------	Mensagem Global	------------------------//
 $LNG['ma_message_sended'] = 'Your message has been sent!';
@@ -388,7 +371,7 @@ $LNG['ma_none'] = 'Global News';
 $LNG['ma_message'] = 'Message';
 $LNG['ma_mode'] = 'As transport';
 $LNG['ma_all'] = 'All';
-$LNG['ma_modes'] = array('Game', 'Mail', 'Game & Mail');
+$LNG['ma_modes'] = ['Game', 'Mail', 'Game & Mail'];
 //###########################################################//
 
 //---------------	Pagina Inicial	------------------------//
@@ -413,7 +396,6 @@ $LNG['ow_updates'] = 'Recent updates';
 $LNG['ow_developers'] = 'Developers';
 
 //###########################################################//
-
 
 //---------------  Configurações do Universo e do Servidor	------------------------//
 $LNG['se_server_parameters'] = 'Settings of the universe';
@@ -607,9 +589,7 @@ $LNG['se_disclaimerPhone'] = 'Phone number';
 $LNG['se_disclaimerMail'] = 'Email address';
 $LNG['se_disclaimerNotice'] = 'More information';
 
-
 //###########################################################//
-
 
 //---------------	Moderação	------------------------//
 //	Permissões
@@ -638,7 +618,6 @@ $LNG['ad_authlevel_tt'] = '[See All]';
 
 //###########################################################//
 
-
 //---------------	Frotas em voo	------------------------//
 
 $LNG['ff_fleetid'] = "ID";
@@ -659,7 +638,6 @@ $LNG['ff_no_fleets'] = "Is not present any fleet";
 
 //###########################################################//
 
-
 //---------------	Verificação de base de dados	------------------------//
 $LNG['sb_top_memory'] = 'Peak memory: %p KB / max. %m KB <br>';
 $LNG['sb_final_memory'] = 'Memory consumed by the end: %e KB / max. %m KB<br>';
@@ -670,11 +648,9 @@ $LNG['sb_sql_counts'] = 'SQL Querys: %d';
 
 //###########################################################//
 
-
 //---------------	Lista de jogadores	------------------------//
 $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 //###########################################################//
-
 
 //---------------	Menu Esquerdo	------------------------//
 $LNG['mu_general'] = 'General';
@@ -782,7 +758,6 @@ $LNG['re_reset_all'] = 'RESTART THE ENTIRE UNIVERSE';
 $LNG['re_reset_excess'] = 'Options reinitialized successfully!';
 //###########################################################//
 
-
 //---------------	Informação das Contas	------------------------//
 $LNG['ac_user_id_required'] = 'You must choose a player!';
 $LNG['ac_select_one_id'] = 'Choose only one player!';
@@ -868,7 +843,6 @@ $LNG['ac_note_k'] = '<table><tr><th width=10%><font color=lime>T+</font></th><th
 $LNG['ac_leyend'] = '[ Legend ]';
 $LNG['ac_no_rank_level'] = 'Dont have enough Permissions to see the informations of this user';
 //###########################################################//
-
 
 //---------------	Pesquisa Avançada	------------------------//
 $LNG['se_no_data'] = "No data";
@@ -993,7 +967,6 @@ $LNG['se_search_alliance_4'] = "Date of creation";
 $LNG['se_search_alliance_5'] = "Number of members";
 //###########################################################//
 
-
 //---------------	Criador	------------------------//
 $LNG['new_creator_title'] = 'Creator';
 $LNG['new_creator_title_u'] = 'Create/Delete users';
@@ -1045,7 +1018,6 @@ $LNG['mo_fields_avaibles'] = 'Fields';
 $LNG['po_add_moon'] = 'Add moon';
 //###########################################################//
 
-
 // Suporte
 
 $LNG['sp_admin_answer'] = 'Response of %s to %s<br><br><font color="red">%s</font>';
@@ -1053,7 +1025,6 @@ $LNG['sp_answer_message_title'] = 'Support Ticket #%d';
 $LNG['sp_answer_message'] = 'Do you have a response to your ticket number: #%d!';
 $LNG['sp_admin_closed'] = '%s closed the Ticket to %s';
 $LNG['sp_admin_open'] = '%s reopened the Ticket to %s';
-
 
 // Editor Rápido
 
@@ -1166,14 +1137,12 @@ $LNG['modul_48'] = "Auto Expedition";
 $LNG['modul_49'] = "Collect Mines";
 $LNG['modul_50'] = "Flight Simulator";
 
-
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';
 $LNG['mod_active'] = 'Active';
 $LNG['mod_deactive'] = 'Inactive';
 $LNG['mod_change_active'] = 'Activated';
 $LNG['mod_change_deactive'] = 'Deactivated';
-
 
 // Noticias
 
@@ -1224,7 +1193,6 @@ $LNG['uvs_error'] = 'Failed to import the file';
 $LNG['uvs_reload'] = 'Reloading';
 $LNG['uvs_back'] = 'Back';
 
-
 // Página de actualização
 $LNG['up_weiter'] = 'Following';
 $LNG['up_kein_update'] = 'There is no new update';
@@ -1268,7 +1236,6 @@ $LNG['ch_nickchange'] = 'Allow change nickname';
 $LNG['ch_botname'] = 'Bot';
 $LNG['ch_channelname'] = 'Name of the default channel';
 
-
 // Página de Actividade
 $LNG['ap_id'] = 'ID';
 $LNG['ap_username'] = 'Name of the user';
@@ -1283,7 +1250,6 @@ $LNG['ap_entfernen'] = 'want to remove';
 $LNG['ap_insgesamt'] = 'General';
 $LNG['ap_nicht_aktivierte'] = 'Has not been activated by the user';
 $LNG['ap_nicht_aktivierte_user'] = 'User not activated';
-
 
 // Página de Multi IP
 $LNG['mip_ip'] = 'IP';

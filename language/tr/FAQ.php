@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -14,20 +15,17 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 // Turkce'ye Ibrahim Senyer tarafindan cevirilmistir. Butun Haklari saklidir (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+$LNG['faq_overview'] = "FAQ";
 
-
-$LNG['faq_overview']	= "FAQ";
-
-$LNG['questions']					= array();
-$LNG['questions'][1]['category']	= 'Yeni Baslayanlar Icin Ipuclari';
-$LNG['questions'][1][1]['title']	= '1. Adim';
-$LNG['questions'][1][1]['body']		= <<<BODY
+$LNG['questions'] = [];
+$LNG['questions'][1]['category'] = 'Yeni Baslayanlar Icin Ipuclari';
+$LNG['questions'][1][1]['title'] = '1. Adim';
+$LNG['questions'][1][1]['body'] = <<<BODY
 <p>Bu bolumde oyundaki temel binalardan bahsedecegiz. Bu size oyuna nerden ve basarili bir imparatorluga ulasmak icin hangi binalardan baslayacaginiz ile ilgili ipuclari verecek. </p>
 <h3>Solar Enerji Santrali:</h3>
 <p>Eksiksiz, dogru ve tam kapasiteli hammade uretmek icin Solar Enerji Santralinizin sagladigi enerji, maden binalarinin sagladigi enerjiden daha fazla olmak zorunda. Eger, enerjiniz negatifte olursa, maden uretiminde enerjiye bagli bir uretim dususu gorulur</p>
@@ -36,8 +34,8 @@ $LNG['questions'][1][1]['body']		= <<<BODY
 <h3>Kristal Madeni ve Deterium Sentezleyicisi</h3>
 <p> Kristal gemiler, arastirmalar ve binalar icin hayati onem tasiyan bir madendir. The Crystal is an important resource for buildings, ships, and research. Uretim kapasitesi metale gore daha dusuktur. Oyuna devam ettikce Kristal ihtiyacinin ne kadar onemli oldugunu goreceksiniz. Kristal ihtiyaci da maliyeti de oyunla beraber artacak. Deuterium evrendeki en buyuk enerji kaynagi. Temel kullanim amaci gemi yakitlari olmakla beraber bazi arastirmalarda da deuterium ihtiyaci duyulmaktadir..</p>
 BODY;
-$LNG['questions'][1][2]['title']	= '2. Adim';
-$LNG['questions'][1][2]['body']		= <<<BODY
+$LNG['questions'][1][2]['title'] = '2. Adim';
+$LNG['questions'][1][2]['body'] = <<<BODY
 <p>Imparatorlugunuzu genisletmek ve rakiplerinizle basa cikabilmek icin diger binalari da uygun bir sekilde gelistirmeniz lazim. Gerekli arastirmalari ve binalari yaptiginizda filonuzu yapmaya baslayabilirsiniz. Ayni zamanda savunma uniteleri ile de gezegeni saldirilardan korumus olursunuz. Kisaca bu binalari tanitalim:</p>
 <h3>Tersane:</h3>
 <p>Butun gemiler burada uretilir. Bazi gemilerin uretilmeleri icin daha gelismis tersanelere ve arastirmalara gerek duyulur. Teknolojiler menusunden hangi geminin uretilmek icin nelere ihtiyaci oldugunu bulabilirsiniz. Ayni zamanda tersane gelistikce gemilerin ve savunma unitelerinin uretim hizlari da gelisir.</p>
@@ -47,8 +45,8 @@ $LNG['questions'][1][2]['body']		= <<<BODY
 <h3>Robot Fabrikasi:</h3>
 <p>R obot fabrikalari gezegenin altyapisi ve organizasyonu icin gereken vasifsiz is gucunu uretiyorlar.Kademesi arttikca diger binalarin yapim sureci de daha hizli isliyor. Her kademe bina insa suresini belli olcude azaltiyor. </p>
 BODY;
-$LNG['questions'][1][3]['title']	= '3. Adim';
-$LNG['questions'][1][3]['body']		= <<<BODY
+$LNG['questions'][1][3]['title'] = '3. Adim';
+$LNG['questions'][1][3]['body'] = <<<BODY
 <p>Bu bolumde biraz gezegen savunmasindan ve filo hareketlerinden bahsedecegiz.</p>
 <h3>Galakside:</h3>
 <p>Galakside gezinerek diger gezegenlere bakarak diger oyuncular hakkinda bilgi sahibi olursunuz. Ayni zamanda casus gondererek daha detayli bilgi sagibi olabilirsiniz. Gonderilen casus sayisini sol menudeki ayarlar seceneginden degistirebilirsiniz. </p>
@@ -60,9 +58,9 @@ $LNG['questions'][1][3]['body']		= <<<BODY
 <p> Gezegeninizi korumak icin mutlaka savunma uniteleri uretmelisiniz. Tabiki gemilerde oldugu gibi savunma uniteleri icin de tersanenin kurulmus olmasi gerekiyor. Gemilerinizin aksine savunma uniteleri saldirilar tarafindan yokedilse bile 70% oraninda tekrar kendini yeniler. </p>
 BODY;
 
-$LNG['questions'][2]['category']	= 'Gelismis Bilgiler';
-$LNG['questions'][2][1]['title']	= 'Saldiri';
-$LNG['questions'][2][1]['body']		= <<<BODY
+$LNG['questions'][2]['category'] = 'Gelismis Bilgiler';
+$LNG['questions'][2][1]['title'] = 'Saldiri';
+$LNG['questions'][2][1]['body'] = <<<BODY
 <h3>Saldiri:</h3>
 <p>Diger oyunculara saldirarak imparatorlugunuzu guclendirebilirsiniz. Ama ayni zamanda dikkatli de olmalisiniz. Bir kac cesit saldiri tipi vardir:</p>
 <ul>
@@ -83,8 +81,8 @@ $LNG['questions'][2][1]['body']		= <<<BODY
 
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Korunma';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Korunma';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Kendinizi Nasil Savunursunuz</h3>
 <p>Buyuk bir filonuz ve savunmaniz varsa bir cok oyuncuyu korkutursunuz ama ayni zamanda bir cok oyuncunun da istahini kabartirsiniz. Yani, buyuk filo buyuk sorumluluk demek ve korumaniz gerek. Eger dikkatli olmazsaniz buyuk ugraslarla yaptiginiz filoyu bir anda kaybedebilirsiniz. Savunma uniteleri belki kendilerini 70% oraninda yeniler ama gemilerde bu olmaz!
 </p>
@@ -102,8 +100,8 @@ Eger birden fazla ayiniz varsa en guvenli yol, Ay’dan Aya konuslanma gondermek
 </p>
 BODY;
 
-$LNG['questions'][2][3]['title']	= 'AYLAR';
-$LNG['questions'][2][3]['body']		= <<<BODY
+$LNG['questions'][2][3]['title'] = 'AYLAR';
+$LNG['questions'][2][3]['body'] = <<<BODY
 <p> Savaslardan sonra ortaya cikan harabelerin birleserek gezegende bir uydu olusturma sansi var. Tabi bunun icin en az 100,000 unitenin savasta imha olmasi lazim. Savastaki ortaya cikan harabe miktari arttikca Ay ortaya cikma sansi da artar. Harabe ne kadar buyuk olursa olsun maksimum ay sansi %20 olarak sinirlanmistir. </p>
 <h3>Genel</h3>
 <p>Aylarin da gezegenler gibi isimleri vardir. Ama varsayilan isim “AY” olarak belirlenmistir. Birden fazla ayiniz olabilir ama gezegen basina sadece 1 tane olur. Aylarda kuracaginiz radar istasyonlari ile dusman filolari gorebilirsiniz. Yada sicrama gecitleri yaparak bir koordinattan bir koordinata yakit tuketmeden aninda isinlanabilirsiniz. </p>
@@ -130,8 +128,8 @@ Bu siralama eger herhangi bir fikriniz yoksa tavsiye edilen siralamadir. Tabiki 
 <p>Olum Yildizi yada diger adiyla R.I.P. adli gemi ile ay yokedilebilir. Bunu icin filo menusunden bu gemiyi ve miktarini secip, vurulacak ayin koordinatlarini girdikten sonra gorevlerden “Yoket” secenegini isaretlemelisiniz. Fakat onemli bir nokta ayin yokedilme ihtimali kadar filonuzun da yok olma sansi var. !</p>
 BODY;
 
-$LNG['questions'][2][4]['title']	= 'Ittifak';
-$LNG['questions'][2][4]['body']		= <<<BODY
+$LNG['questions'][2][4]['title'] = 'Ittifak';
+$LNG['questions'][2][4]['body'] = <<<BODY
 <h3>Nasil Ittifak Kurulur</h3>
 <p>Soldaki Menuden ittifak secenegine tikladiktan sonra “Yeni Ittifak Olustur: secenegi ile ittifak kurabilirsiniz. Yapmaniz gereken Ittifak ismini ve TAG (Kisaltma) girmektir. Bunu gerceklestirdikten sonra ittifaginiz kurulmus ve sizde kurucusu olacaksiniz.</p>
 <p>Ittifak kurulduktan sonra asagidaki bilgiler bulacaksiniz:<br>"Uyeler": Buradan ittifaktaki uyelerin sayisini gorebilirsiniz<br>"Rutbeniz": burada ittifaktaki konumunuzu goreceksiniz. Eger kurucu iseniz ittifagi yonet linkinden ittifakla ilgili duzenlemeler yapabilirsiniz.<br>"Sirkuler Mesaji": Buradan ittifak uyelerine mesaj gonderebilirsiniz.</p>

@@ -20,75 +20,74 @@
  */
 class ShowDisclamerPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
+        global $LNG;
 
-	function show(){
-		global $LNG;
+        $config = Config::get(Universe::getEmulated());
 
-		$config = Config::get(Universe::getEmulated());
+        $this->assign([
+            'disclaimerAddress' => $config->disclamerAddress,
+            'disclaimerPhone'   => $config->disclamerPhone,
+            'disclaimerMail'    => $config->disclamerMail,
+            'disclaimerNotice'  => $config->disclamerNotice,
+        ]);
 
+        $this->display('page.disclamer.default.tpl');
 
-		$this->assign(array(
-			'disclaimerAddress'		=> $config->disclamerAddress,
-			'disclaimerPhone'		=> $config->disclamerPhone,
-			'disclaimerMail'		=> $config->disclamerMail,
-			'disclaimerNotice'		=> $config->disclamerNotice,
-		));
+    }
 
-		$this->display('page.disclamer.default.tpl');
+    public function saveSettings()
+    {
 
-	}
+        global $LNG;
 
-	function saveSettings(){
+        $config = Config::get(Universe::getEmulated());
 
-		global $LNG;
+        $config_before = [
+            'disclamerAddress' => $config->disclamerAddress,
+            'disclamerPhone'   => $config->disclamerPhone,
+            'disclamerMail'    => $config->disclamerMail,
+            'disclamerNotice'  => $config->disclamerNotice,
+        ];
 
-		$config = Config::get(Universe::getEmulated());
+        $disclaimerAddress = HTTP::_GP('disclaimerAddress', '', true);
+        $disclaimerPhone = HTTP::_GP('disclaimerPhone', '', true);
+        $disclaimerMail = HTTP::_GP('disclaimerMail', '', true);
+        $disclaimerNotice = HTTP::_GP('disclaimerNotice', '', true);
 
-		$config_before = array(
-			'disclamerAddress'	=> $config->disclamerAddress,
-			'disclamerPhone'	=> $config->disclamerPhone,
-			'disclamerMail'	=> $config->disclamerMail,
-			'disclamerNotice'	=> $config->disclamerNotice,
-		);
+        $config_after = [
+            'disclamerAddress' => $disclaimerAddress,
+            'disclamerPhone'   => $disclaimerPhone,
+            'disclamerMail'    => $disclaimerMail,
+            'disclamerNotice'  => $disclaimerNotice,
+        ];
 
-		$disclaimerAddress	= HTTP::_GP('disclaimerAddress', '', true);
-		$disclaimerPhone	= HTTP::_GP('disclaimerPhone', '', true);
-		$disclaimerMail		= HTTP::_GP('disclaimerMail', '', true);
-		$disclaimerNotice	= HTTP::_GP('disclaimerNotice', '', true);
+        foreach ($config_after as $key => $value)
+        {
+            $config->$key = $value;
+        }
+        $config->save();
 
-		$config_after = array(
-			'disclamerAddress'	=> $disclaimerAddress,
-			'disclamerPhone'	=> $disclaimerPhone,
-			'disclamerMail'		=> $disclaimerMail,
-			'disclamerNotice'	=> $disclaimerNotice,
-		);
+        $LOG = new Log(3);
+        $LOG->target = 5;
+        $LOG->old = $config_before;
+        $LOG->new = $config_after;
+        $LOG->save();
 
-		foreach($config_after as $key => $value)
-		{
-			$config->$key	= $value;
-		}
-		$config->save();
+        $redirectButton = [];
+        $redirectButton[] = [
+            'url'   => 'admin.php?page=disclamer&mode=show',
+            'label' => $LNG['uvs_back'],
+        ];
 
-		$LOG = new Log(3);
-		$LOG->target = 5;
-		$LOG->old = $config_before;
-		$LOG->new = $config_after;
-		$LOG->save();
+        $this->printMessage($LNG['settings_successful'], $redirectButton);
 
-		$redirectButton = array();
-		$redirectButton[] = array(
-			'url' => 'admin.php?page=disclamer&mode=show',
-			'label' => $LNG['uvs_back']
-		);
-
-		$this->printMessage($LNG['settings_successful'],$redirectButton);
-
-	}
-
+    }
 
 }

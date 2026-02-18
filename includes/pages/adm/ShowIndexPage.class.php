@@ -20,21 +20,21 @@
  */
 class ShowIndexPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
+        global $LNG;
 
-	function show(){
-		global $LNG;
+        $this->assign([
+            'game_name'    => Config::get()->game_name,
+            'adm_cp_title' => $LNG['adm_cp_title'],
+        ]);
 
-		$this->assign(array(
-			'game_name'		=> Config::get()->game_name,
-			'adm_cp_title'	=> $LNG['adm_cp_title'],
-		));
-
-		$this->display('page.index.default.tpl');
-	}
+        $this->display('page.index.default.tpl');
+    }
 
 }

@@ -15,71 +15,72 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 /**
  *
  */
 class ShowDumpPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
+        $db = Database::get();
 
-	function show(){
-		$db = Database::get();
+        $dumpData['perRequest'] = 100;
 
-		$dumpData['perRequest']		= 100;
+        $dumpData = [];
 
-		$dumpData		= array();
+        $prefixCounts = strlen(DB_PREFIX);
 
-		$prefixCounts	= strlen(DB_PREFIX);
+        $dumpData['sqlTables'] = [];
 
-		$dumpData['sqlTables']	= array();
+        $sql = "SHOW TABLE STATUS FROM `" . DB_NAME ."`;";
 
-		$sql = "SHOW TABLE STATUS FROM `" . DB_NAME ."`;";
+        $sqlTableRaw = $db->nativequery($sql);
 
-		$sqlTableRaw			= $db->nativequery($sql);
+        foreach ($sqlTableRaw as $table)
+        {
+            if (DB_PREFIX == substr($table['Name'], 0, $prefixCounts))
+            {
+                $dumpData['sqlTables'][] = $table['Name'];
+            }
+        }
 
-		foreach($sqlTableRaw as $table)
-		{
-			if(DB_PREFIX == substr($table['Name'], 0, $prefixCounts))
-			{
-				$dumpData['sqlTables'][]	= $table['Name'];
-			}
-		}
+        $this->assign([
+            'dumpData' => $dumpData,
+        ]);
 
-		$this->assign(array(
-			'dumpData'	=> $dumpData,
-		));
+        $this->display('page.dump.default.tpl');
 
-		$this->display('page.dump.default.tpl');
+    }
 
-	}
+    public function dump()
+    {
 
-	function dump(){
+        global $LNG;
 
-		global $LNG;
+        $db = Database::get();
 
-		$db = Database::get();
+        $dbTables = HTTP::_GP('dbtables', []);
 
-		$dbTables	= HTTP::_GP('dbtables', array());
+        if (empty($dbTables))
+        {
+            $this->printMessage($LNG['du_not_tables_selected']);
+        }
 
-		if(empty($dbTables)) {
-			$this->printMessage($LNG['du_not_tables_selected']);
-		}
+        $fileName = '2MoonsBackup_'.date('d_m_Y_H_i_s', TIMESTAMP).'.sql';
+        $filePath = 'includes/backups/'.$fileName;
 
-		$fileName	= '2MoonsBackup_'.date('d_m_Y_H_i_s', TIMESTAMP).'.sql';
-		$filePath	= 'includes/backups/'.$fileName;
+        require 'includes/classes/SQLDumper.class.php';
 
-		require 'includes/classes/SQLDumper.class.php';
+        $dump = new SQLDumper();
+        $dump->dumpTablesToFile($dbTables, $filePath);
 
-		$dump	= new SQLDumper;
-		$dump->dumpTablesToFile($dbTables, $filePath);
+        $this->printMessage(sprintf($LNG['du_success'], 'includes/backups/'.$fileName));
 
-		$this->printMessage(sprintf($LNG['du_success'], 'includes/backups/'.$fileName));
-
-	}
+    }
 
 }

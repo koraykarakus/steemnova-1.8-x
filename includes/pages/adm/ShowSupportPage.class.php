@@ -15,158 +15,162 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 class ShowSupportPage extends AbstractAdminPage
 {
-	private $ticketObj;
+    private $ticketObj;
 
-	function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
 
-		require('includes/classes/class.SupportTickets.php');
-		$this->ticketObj	= new SupportTickets;
-		// 2Moons 1.7TO1.6 PageClass Wrapper
-		$ACTION = HTTP::_GP('mode', 'show');
-		if(is_callable(array($this, $ACTION))) {
-			$this->{$ACTION}();
-		} else {
-			$this->show();
+        require('includes/classes/class.SupportTickets.php');
+        $this->ticketObj = new SupportTickets();
+        // 2Moons 1.7TO1.6 PageClass Wrapper
+        $ACTION = HTTP::_GP('mode', 'show');
+        if (is_callable([$this, $ACTION]))
+        {
+            $this->{$ACTION}();
+        }
+        else
+        {
+            $this->show();
+        }
     }
-	}
 
-	public function show()
-	{
-		global $USER, $LNG;
+    public function show()
+    {
+        global $USER, $LNG;
 
-		$db = Database::get();
+        $db = Database::get();
 
-		$sql = "SELECT t.*, u.username, COUNT(a.ticketID) as answer FROM
+        $sql = "SELECT t.*, u.username, COUNT(a.ticketID) as answer FROM
 		%%TICKETS%% as t INNER JOIN %%TICKETS_ANSWER%% as a USING (ticketID)
 		INNER JOIN %%USERS%% as u ON u.id = t.ownerID WHERE t.universe = :universe
 		GROUP BY a.ticketID ORDER BY t.ticketID DESC;";
 
-		$ticketResult = $db->select($sql,array(
-			':universe' => Universe::getEmulated()
-		));
+        $ticketResult = $db->select($sql, [
+            ':universe' => Universe::getEmulated(),
+        ]);
 
-		$ticketList		= array();
+        $ticketList = [];
 
-		foreach($ticketResult as &$ticketRow) {
-			$ticketRow['time']	= _date($LNG['php_tdformat'], $ticketRow['time'], $USER['timezone']);
+        foreach ($ticketResult as &$ticketRow)
+        {
+            $ticketRow['time'] = _date($LNG['php_tdformat'], $ticketRow['time'], $USER['timezone']);
 
-			$ticketList[$ticketRow['ticketID']]	= $ticketRow;
-		}
-		unset($ticketRow);
+            $ticketList[$ticketRow['ticketID']] = $ticketRow;
+        }
+        unset($ticketRow);
 
+        $this->assign([
+            'ticketList' => $ticketList,
+        ]);
 
-		$this->assign(array(
-			'ticketList'	=> $ticketList
-		));
+        $this->display('page.ticket.default.tpl');
+    }
 
-		$this->display('page.ticket.default.tpl');
-	}
+    public function send()
+    {
+        global $USER, $LNG;
 
-	function send()
-	{
-		global $USER, $LNG;
+        $db = Database::get();
 
-		$db = Database::get();
+        $ticketID = HTTP::_GP('id', 0);
+        $message = HTTP::_GP('message', '', true);
+        $change = HTTP::_GP('change_status', 0);
 
-		$ticketID	= HTTP::_GP('id', 0);
-		$message	= HTTP::_GP('message', '', true);
-		$change		= HTTP::_GP('change_status', 0);
+        $sql = "SELECT ownerID, subject, status FROM %%TICKETS%% WHERE ticketID = :ticketID;";
 
-		$sql = "SELECT ownerID, subject, status FROM %%TICKETS%% WHERE ticketID = :ticketID;";
+        $ticketDetail = $db->selectSingle($sql, [
+            ':ticketID' => $ticketID,
+        ]);
 
-		$ticketDetail = $db->selectSingle($sql,array(
-			':ticketID' => $ticketID
-		));
+        $status = ($change ? ($ticketDetail['status'] <= 1 ? 2 : 1) : 1);
 
+        if (!$change && empty($message))
+        {
+            HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticketID);
+        }
 
-		$status = ($change ? ($ticketDetail['status'] <= 1 ? 2 : 1) : 1);
+        $subject = "RE: ".$ticketDetail['subject'];
 
+        if ($change && $status == 1)
+        {
+            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_open'], $status);
+        }
 
-		if(!$change && empty($message))
-		{
-			HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticketID);
-		}
+        if (!empty($message))
+        {
+            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, $status);
+        }
 
-		$subject		= "RE: ".$ticketDetail['subject'];
+        if ($change && $status == 2)
+        {
+            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_close'], $status);
+        }
 
-		if($change && $status == 1) {
-			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_open'], $status);
-		}
+        $subject = sprintf($LNG['sp_answer_message_title'], $ticketID);
+        $text = sprintf($LNG['sp_answer_message'], $ticketID);
 
-		if(!empty($message))
-		{
-			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, $status);
-		}
+        PlayerUtil::sendMessage(
+            $ticketDetail['ownerID'],
+            $USER['id'],
+            $USER['username'],
+            4,
+            $subject,
+            $text,
+            TIMESTAMP,
+            null,
+            1,
+            Universe::getEmulated()
+        );
 
-		if($change && $status == 2) {
-			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_close'], $status);
-		}
+        HTTP::redirectTo('admin.php?page=support');
+    }
 
+    public function view()
+    {
+        global $USER, $LNG;
 
-		$subject	= sprintf($LNG['sp_answer_message_title'], $ticketID);
-		$text		= sprintf($LNG['sp_answer_message'], $ticketID);
+        $db = Database::get();
 
-		PlayerUtil::sendMessage($ticketDetail['ownerID'], $USER['id'], $USER['username'], 4,
-			$subject, $text, TIMESTAMP, NULL, 1, Universe::getEmulated());
+        $ticketID = HTTP::_GP('id', 0);
 
-		HTTP::redirectTo('admin.php?page=support');
-	}
-
-	function view()
-	{
-		global $USER, $LNG;
-
-		$db = Database::get();
-
-		$ticketID			= HTTP::_GP('id', 0);
-
-		$sql = "SELECT a.*, t.categoryID, t.status FROM %%TICKETS_ANSWER%% as a
+        $sql = "SELECT a.*, t.categoryID, t.status FROM %%TICKETS_ANSWER%% as a
 		INNER JOIN %%TICKETS%% as t USING(ticketID) WHERE a.ticketID = :ticketID
 		ORDER BY a.answerID;";
 
-		$answerResult = $db->select($sql,array(
-			':ticketID' => $ticketID
-		));
+        $answerResult = $db->select($sql, [
+            ':ticketID' => $ticketID,
+        ]);
 
-		$answerList			= array();
+        $answerList = [];
 
+        $ticket_status = 0;
+        foreach ($answerResult as &$answerRow)
+        {
 
+            if (empty($ticket_status))
+            {
+                $ticket_status = $answerRow['status'];
+            }
 
+            $answerRow['time'] = _date($LNG['php_tdformat'], $answerRow['time'], $USER['timezone']);
+            $answerRow['message'] = BBCode::parse($answerRow['message']);
 
-		$ticket_status		= 0;
-		foreach($answerResult as &$answerRow) {
+            $answerList[$answerRow['answerID']] = $answerRow;
+        }
+        unset($answerResult);
 
-			if (empty($ticket_status)){
-				$ticket_status = $answerRow['status'];
-			}
+        $categoryList = $this->ticketObj->getCategoryList();
 
-			$answerRow['time']	= _date($LNG['php_tdformat'], $answerRow['time'], $USER['timezone']);
-			$answerRow['message']	= BBCode::parse($answerRow['message']);
+        $this->assign([
+            'ticketID'      => $ticketID,
+            'ticket_status' => $ticket_status,
+            'categoryList'  => $categoryList,
+            'answerList'    => $answerList,
+        ]);
 
-			$answerList[$answerRow['answerID']]	= $answerRow;
-		}
-		unset($answerResult);
-
-
-
-		$categoryList	= $this->ticketObj->getCategoryList();
-
-
-
-		$this->assign(array(
-			'ticketID'		=> $ticketID,
-			'ticket_status' => $ticket_status,
-			'categoryList'	=> $categoryList,
-			'answerList'	=> $answerList,
-		));
-
-
-
-		$this->display('page.ticket.view.tpl');
-	}
+        $this->display('page.ticket.view.tpl');
+    }
 }

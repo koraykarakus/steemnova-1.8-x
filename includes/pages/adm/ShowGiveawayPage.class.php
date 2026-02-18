@@ -15,91 +15,95 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 /**
  *
  */
 class ShowGiveawayPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  function __construct()
-  {
-    parent::__construct();
-  }
+    public function show()
+    {
+        global $LNG, $resource, $reslist;
 
-  function show(){
-    global $LNG, $resource, $reslist;
+        $this->assign([
+            'reslist' => $reslist,
+        ]);
 
-    $this->assign(array(
-      'reslist'		=> $reslist
-    ));
+        $this->display("page.giveaway.default.tpl");
+    }
 
-    $this->display("page.giveaway.default.tpl");
-  }
+    public function send()
+    {
+        global $LNG, $resource, $reslist;
 
+        $planet = HTTP::_GP('planet', 0);
+        $moon = HTTP::_GP('moon', 0);
+        $mainplanet = HTTP::_GP('mainplanet', 0);
+        $no_inactive = HTTP::_GP('no_inactive', 0);
 
-function send(){
-  global $LNG, $resource, $reslist;
+        if (!$planet && !$moon)
+        {
+            $this->printMessage($LNG['ga_selectplanettype']);
+        }
 
-  $planet			= HTTP::_GP('planet', 0);
-  $moon			= HTTP::_GP('moon', 0);
-  $mainplanet		= HTTP::_GP('mainplanet', 0);
-  $no_inactive	= HTTP::_GP('no_inactive', 0);
+        $planetIN = [];
 
-  if (!$planet && !$moon) {
-    $this->printMessage($LNG['ga_selectplanettype']);
-  }
+        if ($planet)
+        {
+            $planetIN[] = "'1'";
+        }
 
-  $planetIN	= array();
+        if ($moon)
+        {
+            $planetIN[] = "'3'";
+        }
 
-  if ($planet) {
-    $planetIN[]	= "'1'";
-  }
+        $data = [];
 
-  if ($moon) {
-    $planetIN[]	= "'3'";
-  }
+        $DataIDs = array_merge($reslist['resstype'][1], $reslist['resstype'][3], $reslist['build'], $reslist['tech'], $reslist['fleet'], $reslist['defense'], $reslist['officier']);
 
-  $data		= array();
+        $logOld = [];
+        $logNew = [];
 
-  $DataIDs	= array_merge($reslist['resstype'][1], $reslist['resstype'][3], $reslist['build'], $reslist['tech'], $reslist['fleet'], $reslist['defense'], $reslist['officier']);
+        foreach ($DataIDs as $ID)
+        {
+            $amount = max(0, round(HTTP::_GP('element_'.$ID, 0.0)));
+            $data[] = $resource[$ID]." = ".$resource[$ID]." + ".$amount;
 
-  $logOld		= array();
-  $logNew		= array();
+            $logOld[$ID] = 0;
+            $logNew[$ID] = $amount;
+        }
 
-  foreach($DataIDs as $ID)
-  {
-    $amount	= max(0, round(HTTP::_GP('element_'.$ID, 0.0)));
-    $data[]	= $resource[$ID]." = ".$resource[$ID]." + ".$amount;
+        $SQL = "UPDATE %%PLANETS%% p INNER JOIN %%USERS%% u ON p.id_owner = u.id";
 
-    $logOld[$ID]	= 0;
-    $logNew[$ID]	= $amount;
-  }
+        if ($mainplanet == true)
+        {
+            $SQL .= " AND p.id = u.id_planet";
+        }
 
-  $SQL		= "UPDATE %%PLANETS%% p INNER JOIN %%USERS%% u ON p.id_owner = u.id";
+        if ($no_inactive == true)
+        {
+            $SQL .= " AND u.onlinetime > ".(TIMESTAMP - INACTIVE);
+        }
 
-  if ($mainplanet == true) {
-    $SQL	.= " AND p.id = u.id_planet";
-  }
+        $SQL .= " SET ".implode(', ', $data)." WHERE p.universe = :universe AND p.planet_type IN (".implode(',', $planetIN).")";
 
-  if ($no_inactive == true) {
-    $SQL	.= " AND u.onlinetime > ".(TIMESTAMP - INACTIVE);
-  }
+        Database::get()->update($SQL, [
+            ':universe' => Universe::getEmulated(),
+        ]);
 
-  $SQL	.= " SET ".implode(', ', $data)." WHERE p.universe = :universe AND p.planet_type IN (".implode(',', $planetIN).")";
+        $LOG = new Log(4);
+        $LOG->target = 0;
+        $LOG->old = $logOld;
+        $LOG->new = $logNew;
+        $LOG->save();
 
-  Database::get()->update($SQL,array(
-    ':universe' => Universe::getEmulated()
-  ));
+        $this->printMessage($LNG['ga_success']);
 
-  $LOG = new Log(4);
-  $LOG->target = 0;
-  $LOG->old = $logOld;
-  $LOG->new = $logNew;
-  $LOG->save();
-
-  $this->printMessage($LNG['ga_success']);
-
-}
+    }
 
 }

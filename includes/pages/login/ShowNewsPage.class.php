@@ -17,35 +17,35 @@
 
 class ShowNewsPage extends AbstractLoginPage
 {
-	public static $requireModule = 0;
+    public static $requireModule = 0;
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function show()
-	{
-		global $LNG;
+    public function show()
+    {
+        global $LNG;
 
-		$sql = "SELECT date, title, text, user FROM %%NEWS%% ORDER BY id DESC;";
-		$newsResult = Database::get()->select($sql);
+        $sql = "SELECT date, title, text, user FROM %%NEWS%% ORDER BY id DESC;";
+        $newsResult = Database::get()->select($sql);
 
-		$newsList	= array();
+        $newsList = [];
 
-		foreach ($newsResult as $newsRow)
-		{
-			$newsList[]	= array(
-				'title' => $newsRow['title'],
-				'from' 	=> sprintf($LNG['news_from'], _date($LNG['php_tdformat'], $newsRow['date']), $newsRow['user']),
-				'text' 	=> makebr($newsRow['text']),
-			);
-		}
+        foreach ($newsResult as $newsRow)
+        {
+            $newsList[] = [
+                'title' => $newsRow['title'],
+                'from'  => sprintf($LNG['news_from'], _date($LNG['php_tdformat'], $newsRow['date']), $newsRow['user']),
+                'text'  => makebr($newsRow['text']),
+            ];
+        }
 
-		$this->assign(array(
-			'newsList'	=> $newsList,
-		));
+        $this->assign([
+            'newsList' => $newsList,
+        ]);
 
-		$this->display('page.news.default.tpl');
-	}
+        $this->display('page.news.default.tpl');
+    }
 }

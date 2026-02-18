@@ -19,107 +19,111 @@ require 'includes/libs/facebook/facebook.php';
 
 class FacebookAuth implements externalAuth
 {
-	private $fbObj = NULL;
+    private $fbObj = null;
 
-	public function __construct()
-	{
-		if($this->isActiveMode())
-		{
-			$this->fbObj	= new Facebook(array(
-				'appId'  => Config::get()->fb_apikey,
-				'secret' => Config::get()->fb_skey,
-				'cookie' => true,
-			));
-		}
-	}
+    public function __construct()
+    {
+        if ($this->isActiveMode())
+        {
+            $this->fbObj = new Facebook([
+                'appId'  => Config::get()->fb_apikey,
+                'secret' => Config::get()->fb_skey,
+                'cookie' => true,
+            ]);
+        }
+    }
 
-	public function isActiveMode()
-	{
-		return Config::get()->fb_on == 1;
-	}
+    public function isActiveMode()
+    {
+        return Config::get()->fb_on == 1;
+    }
 
-	public function isValid()
-	{
-		if($this->getAccount() != 0)
-		{
-			return $this->getAccount();
-		}
+    public function isValid()
+    {
+        if ($this->getAccount() != 0)
+        {
+            return $this->getAccount();
+        }
 
-		if(!empty($_GET['error_reason']))
-		{
-			HTTP::redirectTo('index.php');
-		}
+        if (!empty($_GET['error_reason']))
+        {
+            HTTP::redirectTo('index.php');
+        }
 
-		HTTP::sendHeader('Location', $this->fbObj->getLoginUrl(array(
-			'scope'			=> 'public_profile,email',
-			'redirect_uri'	=> HTTP_PATH.'index.php?page=externalAuth&method=facebook'
-		)));
-		exit;
-	}
+        HTTP::sendHeader('Location', $this->fbObj->getLoginUrl([
+            'scope'        => 'public_profile,email',
+            'redirect_uri' => HTTP_PATH.'index.php?page=externalAuth&method=facebook',
+        ]));
+        exit;
+    }
 
-	public function getAccount()
-	{
-		return $this->fbObj->getUser();
-	}
+    public function getAccount()
+    {
+        return $this->fbObj->getUser();
+    }
 
-	public function register()
-	{
-		$uid	= $this->getAccount();
+    public function register()
+    {
+        $uid = $this->getAccount();
 
-		$me		= $this->fbObj->api('/me');
+        $me = $this->fbObj->api('/me');
 
-		$sql	= 'SELECT validationID, validationKey FROM %%USERS_VALID%%
+        $sql = 'SELECT validationID, validationKey FROM %%USERS_VALID%%
 		WHERE universe = :universe AND email = :email;';
 
-		$registerData	= Database::get()->selectSingle($sql, array(
-			':universe'	=> Universe::current(),
-			':email'	=> $me['email']
-		));
+        $registerData = Database::get()->selectSingle($sql, [
+            ':universe' => Universe::current(),
+            ':email'    => $me['email'],
+        ]);
 
-		if(!empty($registerData))
-		{
-			$url	= sprintf('index.php?uni=%s&page=reg&action=valid&i=%s&validationKey=%s',
-				Universe::current(), $registerData['validationID'], $registerData['validationKey']);
+        if (!empty($registerData))
+        {
+            $url = sprintf(
+                'index.php?uni=%s&page=reg&action=valid&i=%s&validationKey=%s',
+                Universe::current(),
+                $registerData['validationID'],
+                $registerData['validationKey']
+            );
 
-			HTTP::redirectTo($url);
-		}
+            HTTP::redirectTo($url);
+        }
 
-		$sql	= 'INSERT INTO %%USERS_AUTH." SET
+        $sql = 'INSERT INTO %%USERS_AUTH." SET
 		id = (SELECT id FROM %%USERS%% WHERE email = :email OR email_2 = :email),
 		account = :accountId
 		mode = :mode;';
 
-		Database::get()->insert($sql, array(
-			':email'		=> $me['email'],
-			':accountId'	=> $uid,
-			':mode'			=> 'facebook',
-		));
-	}
+        Database::get()->insert($sql, [
+            ':email'     => $me['email'],
+            ':accountId' => $uid,
+            ':mode'      => 'facebook',
+        ]);
+    }
 
-	public function getLoginData()
-	{
-		$uid	= $this->getAccount();
+    public function getLoginData()
+    {
+        $uid = $this->getAccount();
 
-		$sql	= 'SELECT user.id, id_planet
+        $sql = 'SELECT user.id, id_planet
 		FROM %%USERS_AUTH%% auth
 		INNER JOIN %%USERS%% user ON auth.id = user.id AND user.universe = :universe
 		WHERE auth.account = :accountId AND mode = :mode;';
 
-		return Database::get()->selectSingle($sql, array(
-			':mode'			=> 'facebook',
-			':accountId'	=> $uid,
-			':universe'		=> Universe::current()
-		));
-	}
+        return Database::get()->selectSingle($sql, [
+            ':mode'      => 'facebook',
+            ':accountId' => $uid,
+            ':universe'  => Universe::current(),
+        ]);
+    }
 
-	public function getAccountData()
-	{
-		$data	= $this->fbObj->api('/me', array('access_token' => $this->fbObj->getAccessToken()));
+    public function getAccountData()
+    {
+        $data = $this->fbObj->api('/me', ['access_token' => $this->fbObj->getAccessToken()]);
 
-		return array(
-			'id'		=> $data['id'],
-			'name'		=> $data['name'],
-			'locale'	=> $data['locale']
-		);
-	}
+        return [
+            'id'     => $data['id'],
+            'name'   => $data['name'],
+            'locale' => $data['locale'],
+        ];
+    }
 }

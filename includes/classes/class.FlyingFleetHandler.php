@@ -17,77 +17,78 @@
 
 class FlyingFleetHandler
 {
-	protected $token;
+    protected $token;
 
-	public static $missionObjPattern	= array(
-		1	=> 'MissionCaseAttack',
-		2	=> 'MissionCaseACS',
-		3	=> 'MissionCaseTransport',
-		4	=> 'MissionCaseStay',
-		5	=> 'MissionCaseStayAlly',
-		6	=> 'MissionCaseSpy',
-		7	=> 'MissionCaseColonisation',
-		8	=> 'MissionCaseRecycling',
-		9	=> 'MissionCaseDestruction',
-		10	=> 'MissionCaseMIP',
-		11	=> 'MissionCaseFoundDM',
-		15	=> 'MissionCaseExpedition',
-		16	=> 'MissionCaseTrade',
-		17	=> 'MissionCaseTransfer',
-	);
+    public static $missionObjPattern = [
+        1  => 'MissionCaseAttack',
+        2  => 'MissionCaseACS',
+        3  => 'MissionCaseTransport',
+        4  => 'MissionCaseStay',
+        5  => 'MissionCaseStayAlly',
+        6  => 'MissionCaseSpy',
+        7  => 'MissionCaseColonisation',
+        8  => 'MissionCaseRecycling',
+        9  => 'MissionCaseDestruction',
+        10 => 'MissionCaseMIP',
+        11 => 'MissionCaseFoundDM',
+        15 => 'MissionCaseExpedition',
+        16 => 'MissionCaseTrade',
+        17 => 'MissionCaseTransfer',
+    ];
 
-	function setToken($token)
-	{
-		$this->token	= $token;
-	}
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
 
-	function run()
-	{
-		require_once 'includes/classes/class.MissionFunctions.php';
-		require_once 'includes/classes/missions/Mission.interface.php';
+    public function run()
+    {
+        require_once 'includes/classes/class.MissionFunctions.php';
+        require_once 'includes/classes/missions/Mission.interface.php';
 
-		$db	= Database::get();
+        $db = Database::get();
 
-		$sql = 'SELECT %%FLEETS%%.*
+        $sql = 'SELECT %%FLEETS%%.*
 		FROM %%FLEETS_EVENT%%
 		INNER JOIN %%FLEETS%% ON fleetID = fleet_id
 		WHERE `lock` = :token;';
 
-		$fleetResult = $db->select($sql, array(
-			':token'	=> $this->token
-		));
+        $fleetResult = $db->select($sql, [
+            ':token' => $this->token,
+        ]);
 
-		foreach($fleetResult as $fleetRow)
-		{
-			if(!isset(self::$missionObjPattern[$fleetRow['fleet_mission']])) {
-				$sql = 'DELETE FROM %%FLEETS%% WHERE fleet_id = :fleetId;';
+        foreach ($fleetResult as $fleetRow)
+        {
+            if (!isset(self::$missionObjPattern[$fleetRow['fleet_mission']]))
+            {
+                $sql = 'DELETE FROM %%FLEETS%% WHERE fleet_id = :fleetId;';
 
-				$db->delete($sql, array(
-					':fleetId'	=> $fleetRow['fleet_id']
-			  	));
+                $db->delete($sql, [
+                    ':fleetId' => $fleetRow['fleet_id'],
+                ]);
 
-				continue;
-			}
+                continue;
+            }
 
-			$missionName	= self::$missionObjPattern[$fleetRow['fleet_mission']];
+            $missionName = self::$missionObjPattern[$fleetRow['fleet_mission']];
 
-			$path	= 'includes/classes/missions/'.$missionName.'.class.php';
-			require_once $path;
-			/** @var $missionObj Mission */
-			$missionObj	= new $missionName($fleetRow);
+            $path = 'includes/classes/missions/'.$missionName.'.class.php';
+            require_once $path;
+            /** @var $missionObj Mission */
+            $missionObj = new $missionName($fleetRow);
 
-			switch($fleetRow['fleet_mess'])
-			{
-				case 0:
-					$missionObj->TargetEvent();
-				break;
-				case 1:
-					$missionObj->ReturnEvent();
-				break;
-				case 2:
-					$missionObj->EndStayEvent();
-				break;
-			}
-		}
-	}
+            switch ($fleetRow['fleet_mess'])
+            {
+                case 0:
+                    $missionObj->TargetEvent();
+                    break;
+                case 1:
+                    $missionObj->ReturnEvent();
+                    break;
+                case 2:
+                    $missionObj->EndStayEvent();
+                    break;
+            }
+        }
+    }
 }

@@ -17,18 +17,18 @@
 
 function ShowMenuPage()
 {
-	global $USER;
-	$template	= new template();
+    global $USER;
+    $template = new template();
 
-	$sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
+    $sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
 
-	$numberTickets = Database::get()->selectSingle($sql,array(
-		':universe' => Universe::getEmulated()
-	),'count');
+    $numberTickets = Database::get()->selectSingle($sql, [
+        ':universe' => Universe::getEmulated(),
+    ], 'count');
 
-	$template->assign_vars(array(
-		'supportticks'	=> $numberTickets,
-	));
+    $template->assign_vars([
+        'supportticks' => $numberTickets,
+    ]);
 
-	$template->show('ShowMenuPage.tpl');
+    $template->show('ShowMenuPage.tpl');
 }

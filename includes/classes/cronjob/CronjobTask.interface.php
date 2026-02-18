@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -14,6 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-interface CronjobTask {
-	function run();
+interface CronjobTask
+{
+    public function run();
 }

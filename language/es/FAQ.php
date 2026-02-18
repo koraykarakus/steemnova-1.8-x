@@ -15,13 +15,12 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+$LNG['faq_overview'] = "FAQ";
 
-$LNG['faq_overview']	= "FAQ";
-
-$LNG['questions']					= array();
-$LNG['questions'][1]['category']	= 'Einsteiger-Tipps';
-$LNG['questions'][1][1]['title']	= 'Schritt 1';
-$LNG['questions'][1][1]['body']		= <<<BODY
+$LNG['questions'] = [];
+$LNG['questions'][1]['category'] = 'Einsteiger-Tipps';
+$LNG['questions'][1][1]['title'] = 'Schritt 1';
+$LNG['questions'][1][1]['body'] = <<<BODY
 <p>In diesem Teil des Tutorials werden die Hauptgebäude beschrieben. Dabei wird erklärt welche zu Beginn gebaut werden sollten und wofür diese benötigt werden. Um ein erfolgreiches Imperium zu errichten ist es wichtig die Gebäude in sinniger Reihenfolge zu bauen.</p>
 <h3>Das Solarkraftwerk:</h3>
 <p>Um Ressourcen zu produzieren, die du zum Aufbau deines Imperiums brauchst ist es notwendig dieses Gebäude gleich als erstes mit aufzubauen. Es liefert die Energie mit denen deine Minen die Ressourcen Metall, Kristall und Deuterium produzieren. Sobald der Bau abgeschlossen ist kannst du in der Ressourcen-Leiste so wie unter dem Punkt "Produktion" einsehen wieviel Energie zur Verfügung steht.</p>
@@ -30,8 +29,8 @@ $LNG['questions'][1][1]['body']		= <<<BODY
 <h3>Die Kristallmine und der Deuteriumsynthetisierer:</h3>
 <p>Kristall ist ein wichtiger Rohstoff für Gebäude, Schiffe und Forschungen. Es wird in geringerem Umfang produziert als Metall, was es dadurch aber nicht weniger wert macht. Im Verlaufe des Spiels wirst du sehen wie heiß umkämpft Kristall sein kann. Deuterium ist Energielieferant (Deuteriumsynthetisierer), Flottentreibstoff und Grundressource einiger wichtiger Forschungen und Bauten (Forschungslabor).</p>
 BODY;
-$LNG['questions'][1][2]['title']	= 'Schritt 2';
-$LNG['questions'][1][2]['body']		= <<<BODY
+$LNG['questions'][1][2]['title'] = 'Schritt 2';
+$LNG['questions'][1][2]['body'] = <<<BODY
 <p>Um dein Imperium zu vergrößern und dich mit anderen Spielern zu messen oder zu interagieren brauchst du weitere Gebäude. Durch Forschung und den Bau einer Raumschiffwerft beginnt der Aufbau deiner Flotte und der planetaren Verteidigung. Näheres findest du hier:</p>
 <h3>Die Raumschiffswerft:</h3>
 <p>Hier werden alle Schiffe die dir in diesem Spiel zur Verfügung stehen gebaut. Auch wenn dir die Werft schon sehr früh im Spiel zur Verfügung steht benötigst du jedoch noch weitere Forschungen um bestimmte Schiffsklassen bauen zu können. Einen Überblick welches Schiff oder Verteidigung welche technischen Voraussetzungen hat findest du unter dem Menüpunkt "Technik". Je höher die Raumschiffwerft ausgebaut ist, desto schneller kann gebaut werden.</p>
@@ -40,8 +39,8 @@ $LNG['questions'][1][2]['body']		= <<<BODY
 <h3>Die Roboterfabrik:</h3>
 <p>Die Roboterfabrik ist ein essenzielles Gebäude. Durch ihren Ausbau kann die Produktionszeit von Raumschiffen so wie auch die Bauzeit von Gebäuden reduziert werden. Sollten also die Bauzeiten deutlich länger werden, kann man diese mit dem Ausbau der Roboterfabrik wieder verringern.</p>
 BODY;
-$LNG['questions'][1][3]['title']	= 'Schritt 3';
-$LNG['questions'][1][3]['body']		= <<<BODY
+$LNG['questions'][1][3]['title'] = 'Schritt 3';
+$LNG['questions'][1][3]['body'] = <<<BODY
 <p>Dieser Teil des Tutorials widmet sich der Verteidigung des eigenen Planeten so wie die ersten Aktionen mit der eigenen Flotte. Dabei wird kurz beschrieben welche Möglichkeiten man hat die Flotte zu versenden und mit anderen Spielern zu interagieren.</p>
 <h3>Die Galaxieansicht:</h3>
 <p>Sie dient dazu andere Spieler zu lokalisieren. Man findet dort detaillierte Informationen zu den anderen Planten und kann auch Teile seiner Flotte direkt aus dieser Ansicht verschicken. Zusätzlich kann man über diese Ansicht auch Kontakt zu anderen Spielern aufnehmen oder einen anderen Planeten ausspionieren, sofern man bereits Spionagesonden bauen kann und gebaut hat.</p>
@@ -51,9 +50,9 @@ $LNG['questions'][1][3]['body']		= <<<BODY
 <p>Um den eigenen Planeten zu schützen können stehen mit dem Bau der Raumschiffswerft ebenfalls der Bau von Verteidigungsanlagen zu Verfügung. Diese bieten einigen Schutz vor Angreifern und kämfpen mit der eigenen Flotte die sich zum Zeitpunkt des Angriffs auf dem Planeten befindet gegen ihren Gegner. Im Unterschied zur Flotte stellen sich 70% der Verteidigung nach dem Kampf selbst wieder her.</p>
 BODY;
 
-$LNG['questions'][2]['category']	= 'Erweiterte Informationen';
-$LNG['questions'][2][1]['title']	= 'Raiden';
-$LNG['questions'][2][1]['body']		= <<<BODY
+$LNG['questions'][2]['category'] = 'Erweiterte Informationen';
+$LNG['questions'][2][1]['title'] = 'Raiden';
+$LNG['questions'][2][1]['body'] = <<<BODY
 <h3>Raiden:</h3>
 <p>Ist der landläufige Begriff für andere Spieler angreifen um sich deren Ressourcen zu bemächtigen.
 Es gibt mehrere Arten des Raids:</p>
@@ -84,8 +83,8 @@ Da die Regel bei trümmerfeldern gilt, dass sie niemandem gehören und der es be
 	<li><p>Wenn ein Spieler von einen Planeten zum anderen auf Stationieren fliegt und dann abbricht, ist es in der Phalanx nichtmehr sichtbar. Doch auch hier gibt es einen Trick, wie man diese Flotte bekommt. Man beobachtet eine Zeitlang das Saveverhalten des Opfers, also wann er losfliegt und wann er abbricht. Wenn man ungefähr weiß, wann er ungefähr abbricht, setzt man sich wieder in sein System und phalanxt im Sekundentakt seinen Planeten. Wenn er abbricht und man die Flotte dann plötzlich nichtmehr in der Phalanx sieht, schaut man auf die Funkuhr, die vorhin bereits erwähnt wurde und rechnet mit dem Rückflugsimulator die Rückflugsstrecke aus, addiert sie auf die Abbruchszeit und fliegt mit seiner Flotte und Recyclern so los, dass man ca. 4-6Sekunden nach der Flotte des Opfers ankommt.</p><p>Wenn ein Spieler vom Mond aufs TF saved und er einen Recycler oder mehrere vorschickt, ist es fast nicht abfangbar. Es gibt jedoch einen Weg, man muss den Mond zerstören. Man schickt also einen oder mehrere Rips zum Mond mit dem Angriff "zerstören" (siehte Mond).</p><p>Wenn der Mond zerstört ist phalanxt man den Planeten, zu der die Flotte zurückfliegt (Wenn der Mond weg ist, fliegt Flotte automatisch zum Plani) und hängt sich wieder ein paar Sekunden hinter die Flotte des Gegners.</p><p>Es ist bei jeder dieser Techniken sehr Hilfreich, wenn man das Saveverhalten des Gegners gut kennt. Das heißt, wenn man weiß, dass er vielleicht jeden Abend um 23Uhr saved oder jeden Mittag um 12Uhr online kommt. Also vor dem Abfangen, den Gegner genau studieren.</li></ul>
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Saven';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Saven';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Wie schütze ich mich</h3>
 <p>Eine große Anzahl von Verteidigungsgeschützen schreckt schon einige Spieler ab, leider werden andere dadurch angelockt, und diese kommen so oft wieder, bis man nur noch sehr wenig, oder gar nichts mehr hat. Dadurch verliert man sehr viele Ressourcen, da bei den Geschützen, nichts ins Trümmerfeld geht, wenn diese zerstört werden. Einzige Ausnahme bilden die sog. Deff-ins-TF-Unis, wo man aber erst recht nicht so viele Geschütze aufbaut, da man dadurch dem Angreifer die Ressourcen quasi schenkt.</p>
 <p>Hinzu kommt, dass es auch noch Interplanetarraketen gibt, deren einzige Aufgabe es ist, die Verteidigung zu zerstören. Im Gegensatz zum normalen Angriff bauen sich die Geschütze hierbei nicht wieder auf. Ein gut geplanter Angriff mit Interplanetarraketen mindert die Gefahr für die eigene Flotte stark.</p>
@@ -99,8 +98,8 @@ Die erste Methode des Savens ist das „Stationieren-Rückruf“ Saven. Dazu sch
 <p>Die wohl sicherste Methode um die Flotte zu saven, ist das Stationieren von Mond zu Mond. Dieser Flug kann in keiner Phalanx gesehen werden, und auch das Beobachten von TFs ist hierbei sinnlos. Die einzige Möglichkeit, diesen Flug abzufangen, ist, einen der Monde zu zerstören, was durch große Monde fast unmöglich, bzw. sehr unwahrscheinlich/teuer wird.</p>
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Allianzkampfsystem';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Allianzkampfsystem';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Angreifen mit dem AKS</h3>
 <p>Damit ihr gemeinsam angreifen könnt, musst du zuerst einmal eine Flotte mit dem Auftrag "Angreifen" auf das Ziel eures Angriffs abschicken. Nachdem der Angriff gestartet wurde, kannst du dann im Flottenmenü über den Button "Verband" deine Flotte in einen Flottenverband umwandeln. Im Flottenverbandsmenü hast du dann die Möglichkeit den Verband umzubenennen und neue Spieler in den Verband einzuladen, wobei der Spieler der den Angriff gestartet automatisch mit eingeladen ist Nun müssen sich nur noch alle gewünschten Flotten anschließen und euer Flottenverband ist komplett. Dazu muss jeder eingeladene Spieler beim Versenden seiner eigenen Schiffe die richtigen Zielkoordinaten angeben, den Auftrag "Verbandsangriff" auswählen und die Flotte abschicken. Der Verband fliegt immer so lange, wie die langsamste Teilflotte benötigt. Schnellere Flotten verändern die Restflugzeit nicht, wenn sie dem Verband beitreten. Langsamere Flotten erhöhen die Restflugzeit allerdings auf ihre eigene Flugzeit. Zu beachten ist noch, dass maximal 5 Spieler einen gemeinsamen Angriff fliegen können und insgesamt maximal 16 einzelne Flotten in einem Verband fliegen dürfen. Eine Flotte, die sich einem Verband anschließt, darf dessen Restflugzeit um maximal 30% erhöhen. Wenn die Restflugzeit also 100 Minuten beträgt, darf eine Flotte, die sich dem Verband zu diesem Zeitpunkt anschließen möchte, eine maximale Flugzeit von 130 Minuten haben.<br>
 <b>Achtung:</b> wenn die Flotte der Verbandsgründers zurückgerufen wird, fliegen die anderen trotzdem weiter!</p>
@@ -121,8 +120,8 @@ Zerstörer: 100<br>
 Todesstern: 1/10</p>
 BODY;
 
-$LNG['questions'][2][3]['title']	= 'Monde';
-$LNG['questions'][2][3]['body']		= <<<BODY
+$LNG['questions'][2][3]['title'] = 'Monde';
+$LNG['questions'][2][3]['body'] = <<<BODY
 <p>Ein Mond kann entstehen wenn ein Trümmerfeld von mindestens 100.000 Units, das ist dann eine 1%ige Chance Mondchance, entsteht. Maximum sind aber nur 20% Mondchance egal wie groß das TF dann ist.</p>
 <h3>Allgemeines</h3>
 <p>Monde kann man umbenenne wie Planeten nur dass hinter dem Namen immer ein „(Mond“ stehen bleibt. Man kann maximal einen Mond pro Planet haben. Monde haben den nutzen dass man von ihnen Unsichtbar für andere Saven kann, also sollte ein Mond schon relativ früh geschossen werden. Auf dem Mond kann man Roboterfabrik, Raumschiffwerft, Metallspeicher, Kristallspeicher, Deuteriumtank, Allianzdepot, Mondbasis, Sensorphalanx und Sprungtor bauen.</p>
@@ -154,8 +153,8 @@ Maximale Felder = ABRUNDEN((Durchmesser des Mondes/1000)2)<br>
 Größtmöglicher Mond: 8944 km Durchmesser, also 79 Felder.</p>
 BODY;
 
-$LNG['questions'][2][4]['title']	= 'Allianzen';
-$LNG['questions'][2][4]['body']		= <<<BODY
+$LNG['questions'][2][4]['title'] = 'Allianzen';
+$LNG['questions'][2][4]['body'] = <<<BODY
 <h3>Wie gründe ich eine Ally?</h3>
 <p>Um eine Allianz zu gründen, klicke im Menü links auf "Allianzen". Danach klicke auf "Eigene Allianz gründen". Im folgenden Menü musst du einen "Allianz-Tag" und einen Allianz-Namen eingeben, das "Allianz-Tag" ist die Abkürzung für deine Allianz. Als Beispiel: Wenn du deine Allianz "Die Top Ally" nennst, wäre ein mögliches Allianz-Tag "DTA".<br>
 Beachte bitte, dass keine Sonderzeichen erlaubt sind, nur Buchstaben, Ziffern und Leerzeichen können verwendet werden.<br>

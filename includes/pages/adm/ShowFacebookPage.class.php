@@ -20,66 +20,64 @@
  */
 class ShowFacebookPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
+        global $LNG;
 
-	function show(){
-		global $LNG;
+        $config = Config::get(Universe::getEmulated());
 
-		$config = Config::get(Universe::getEmulated());
+        $facebookURL = "http://www.facebook.com/developers/";
 
+        $facebookInfo = sprintf($LNG['fb_info'], $facebookURL, $facebookURL);
 
-		$facebookURL = "http://www.facebook.com/developers/";
+        $this->assign([
+            'fb_on'        => $config->fb_on,
+            'fb_apikey'    => $config->fb_apikey,
+            'fb_skey'      => $config->fb_skey,
+            'fb_curl'      => function_exists('curl_init') ? 1 : 0,
+            'fb_curl_info' => function_exists('curl_init') ? $LNG['fb_curl_yes'] : $LNG['fb_curl_no'],
+            'fb_info'      => $facebookInfo,
+        ]);
 
-		$facebookInfo = sprintf($LNG['fb_info'],$facebookURL,$facebookURL);
+        $this->display('page.facebook.default.tpl');
 
+    }
 
-		$this->assign(array(
-			'fb_on'					=> $config->fb_on,
-			'fb_apikey'				=> $config->fb_apikey,
-			'fb_skey'				=> $config->fb_skey,
-			'fb_curl'				=> function_exists('curl_init') ? 1 : 0,
-			'fb_curl_info'			=> function_exists('curl_init') ? $LNG['fb_curl_yes'] : $LNG['fb_curl_no'],
-			'fb_info' => $facebookInfo
-		));
+    public function saveSettings()
+    {
 
-		$this->display('page.facebook.default.tpl');
+        global $LNG;
 
-	}
+        $config = Config::get(Universe::getEmulated());
 
-	function saveSettings(){
+        $fb_on = (HTTP::_GP('fb_on', '') === "on") ? 1 : 0;
+        $fb_apikey = HTTP::_GP('fb_apikey', '');
+        $fb_skey = HTTP::_GP('fb_skey', '');
 
-		global $LNG;
+        foreach ([
+            'fb_on'     => $fb_on,
+            'fb_apikey' => $fb_apikey,
+            'fb_skey'   => $fb_skey,
+        ] as $key => $value)
+        {
+            $config->$key = $value;
+        }
 
-		$config = Config::get(Universe::getEmulated());
+        $config->save();
 
+        $redirectButton = [];
+        $redirectButton[] = [
+            'url'   => 'admin.php?page=facebook&mode=show',
+            'label' => $LNG['uvs_back'],
+        ];
 
-		$fb_on = (HTTP::_GP('fb_on', '') === "on") ? 1 : 0;
-		$fb_apikey	= HTTP::_GP('fb_apikey', '');
-		$fb_skey 	= HTTP::_GP('fb_skey', '');
+        $this->printMessage($LNG['settings_successful'], $redirectButton);
 
-
-		foreach(array(
-					'fb_on'		=> $fb_on,
-					'fb_apikey'	=> $fb_apikey,
-					'fb_skey'	=> $fb_skey
-		) as $key => $value) {
-			$config->$key	= $value;
-		}
-
-		$config->save();
-
-		$redirectButton = array();
-		$redirectButton[] = array(
-			'url' => 'admin.php?page=facebook&mode=show',
-			'label' => $LNG['uvs_back']
-		);
-
-		$this->printMessage($LNG['settings_successful'],$redirectButton);
-
-	}
+    }
 
 }

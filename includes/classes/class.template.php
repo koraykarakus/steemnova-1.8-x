@@ -19,165 +19,176 @@ require('includes/libs/Smarty/libs/Smarty.class.php');
 
 class template extends Smarty
 {
-	protected $window	= 'full';
-	public $jsscript	= array();
-	public $script		= array();
+    protected $window = 'full';
+    public $jsscript = [];
+    public $script = [];
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->smartySettings();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->smartySettings();
+    }
 
-	private function smartySettings()
-	{
-		require_once './includes/libs/Smarty/libs/plugins/modifier.number_format.php';
-		require_once './includes/libs/Smarty/libs/plugins/modifier.json.php';
-		require_once './includes/libs/Smarty/libs/plugins/modifier.time.php';
+    private function smartySettings()
+    {
+        require_once './includes/libs/Smarty/libs/plugins/modifier.number_format.php';
+        require_once './includes/libs/Smarty/libs/plugins/modifier.json.php';
+        require_once './includes/libs/Smarty/libs/plugins/modifier.time.php';
 
-		//$this->registerPlugin("modifier","htmlspecialchars", "smarty_modifier_htmlspecialchars");
-		$this->registerPlugin("modifier","number", "smarty_modifier_number_format");
-		$this->registerPlugin("modifier","json", "smarty_modifier_json");
-		$this->registerPlugin("modifier","time", "smarty_modifier_time");
+        //$this->registerPlugin("modifier","htmlspecialchars", "smarty_modifier_htmlspecialchars");
+        $this->registerPlugin("modifier", "number", "smarty_modifier_number_format");
+        $this->registerPlugin("modifier", "json", "smarty_modifier_json");
+        $this->registerPlugin("modifier", "time", "smarty_modifier_time");
 
-		$this->setForceCompile(false);
-		$this->setMergeCompiledIncludes(true);
-		$this->setCompileCheck(true);#Set false for production!
-		//$this->setCacheLifetime(604800);
-		$this->cache_lifetime = 604800;
-		$this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
-		$this->setCompileDir(is_writable(CACHE_PATH) ? CACHE_PATH : $this->getTempPath());
-		$this->setCacheDir($this->getCompileDir().'templates');
-		$this->setTemplateDir('styles/templates/');
-	}
+        $this->setForceCompile(false);
+        $this->setMergeCompiledIncludes(true);
+        $this->setCompileCheck(true);#Set false for production!
+        //$this->setCacheLifetime(604800);
+        $this->cache_lifetime = 604800;
+        $this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
+        $this->setCompileDir(is_writable(CACHE_PATH) ? CACHE_PATH : $this->getTempPath());
+        $this->setCacheDir($this->getCompileDir().'templates');
+        $this->setTemplateDir('styles/templates/');
+    }
 
-	private function getTempPath()
-	{
-		$this->setForceCompile(true);
-		$this->setCaching(Smarty::CACHING_OFF);
+    private function getTempPath()
+    {
+        $this->setForceCompile(true);
+        $this->setCaching(Smarty::CACHING_OFF);
 
-		require_once 'includes/libs/wcf/BasicFileUtil.class.php';
-		return BasicFileUtil::getTempFolder();
-	}
+        require_once 'includes/libs/wcf/BasicFileUtil.class.php';
+        return BasicFileUtil::getTempFolder();
+    }
 
-	public function assign_vars($var, $nocache = true)
-	{
-		parent::assign($var, NULL, $nocache);
-	}
+    public function assign_vars($var, $nocache = true)
+    {
+        parent::assign($var, null, $nocache);
+    }
 
-	public function loadscript($script)
-	{
-		$this->jsscript[]			= substr($script, 0, -3);
-	}
+    public function loadscript($script)
+    {
+        $this->jsscript[] = substr($script, 0, -3);
+    }
 
-	public function execscript($script)
-	{
-		$this->script[]				= $script;
-	}
+    public function execscript($script)
+    {
+        $this->script[] = $script;
+    }
 
-	private function adm_main()
-	{
-		global $LNG, $USER;
+    private function adm_main()
+    {
+        global $LNG, $USER;
 
-		$dateTimeServer		= new DateTime("now");
-		if(isset($USER['timezone'])) {
-			try {
-				$dateTimeUser	= new DateTime("now", new DateTimeZone($USER['timezone']));
-			} catch (Exception $e) {
-				$dateTimeUser	= $dateTimeServer;
-			}
-		} else {
-			$dateTimeUser	= $dateTimeServer;
-		}
+        $dateTimeServer = new DateTime("now");
+        if (isset($USER['timezone']))
+        {
+            try
+            {
+                $dateTimeUser = new DateTime("now", new DateTimeZone($USER['timezone']));
+            }
+            catch (Exception $e)
+            {
+                $dateTimeUser = $dateTimeServer;
+            }
+        }
+        else
+        {
+            $dateTimeUser = $dateTimeServer;
+        }
 
-		$config	= Config::get();
+        $config = Config::get();
 
-		$this->assign_vars(array(
-			'scripts'			=> $this->script,
-			'title'				=> $config->game_name.' - '.$LNG['adm_cp_title'],
-			'fcm_info'			=> $LNG['fcm_info'],
-            'lang'    			=> $LNG->getLanguage(),
-			'REV'				=> substr($config->VERSION, -4),
-			'date'				=> explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
-			'Offset'			=> $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
-			'VERSION'			=> $config->VERSION,
-			'dpath'				=> 'styles/theme/gow/',
-			'bodyclass'			=> 'full'
-		));
-	}
+        $this->assign_vars([
+            'scripts'   => $this->script,
+            'title'     => $config->game_name.' - '.$LNG['adm_cp_title'],
+            'fcm_info'  => $LNG['fcm_info'],
+            'lang'      => $LNG->getLanguage(),
+            'REV'       => substr($config->VERSION, -4),
+            'date'      => explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
+            'Offset'    => $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
+            'VERSION'   => $config->VERSION,
+            'dpath'     => 'styles/theme/gow/',
+            'bodyclass' => 'full',
+        ]);
+    }
 
-	public function show($file)
-	{
-		global $LNG, $THEME;
+    public function show($file)
+    {
+        global $LNG, $THEME;
 
-		if($THEME->isCustomTPL($file))
-		{
-			$this->setTemplateDir($THEME->getTemplatePath());
-		}
+        if ($THEME->isCustomTPL($file))
+        {
+            $this->setTemplateDir($THEME->getTemplatePath());
+        }
 
-		$tplDir	= $this->getTemplateDir();
+        $tplDir = $this->getTemplateDir();
 
-		if(MODE === 'INSTALL') {
-			$this->setTemplateDir($tplDir[0].'install/');
-		} elseif(MODE === 'ADMIN') {
-			$this->setTemplateDir($tplDir[0].'adm/');
-			$this->adm_main();
-		}
+        if (MODE === 'INSTALL')
+        {
+            $this->setTemplateDir($tplDir[0].'install/');
+        }
+        elseif (MODE === 'ADMIN')
+        {
+            $this->setTemplateDir($tplDir[0].'adm/');
+            $this->adm_main();
+        }
 
-		$this->assign_vars(array(
-			'scripts'		=> $this->jsscript,
-			'execscript'	=> implode("\n", $this->script),
-		));
+        $this->assign_vars([
+            'scripts'    => $this->jsscript,
+            'execscript' => implode("\n", $this->script),
+        ]);
 
-		$this->assign_vars(array(
-			'LNG'			=> $LNG,
-		), false);
+        $this->assign_vars([
+            'LNG' => $LNG,
+        ], false);
 
-		$this->compile_id	= $LNG->getLanguage();
+        $this->compile_id = $LNG->getLanguage();
 
-		parent::display($file);
-	}
+        parent::display($file);
+    }
 
-	public function display($file = NULL, $cache_id = NULL, $compile_id = NULL, $parent = NULL)
-	{
-		global $LNG;
+    public function display($file = null, $cache_id = null, $compile_id = null, $parent = null)
+    {
+        global $LNG;
 
-		$this->compile_id	= $LNG->getLanguage();
-		parent::display($file);
-	}
+        $this->compile_id = $LNG->getLanguage();
+        parent::display($file);
+    }
 
-	public function gotoside($dest, $time = 3)
-	{
-		$this->assign_vars(array(
-			'gotoinsec'	=> $time,
-			'goto'		=> $dest,
-		));
-	}
+    public function gotoside($dest, $time = 3)
+    {
+        $this->assign_vars([
+            'gotoinsec' => $time,
+            'goto'      => $dest,
+        ]);
+    }
 
-	public function message($mes, $dest = false, $time = 3, $Fatal = false)
-	{
-		global $LNG, $THEME;
+    public function message($mes, $dest = false, $time = 3, $Fatal = false)
+    {
+        global $LNG, $THEME;
 
-		$this->assign_vars(array(
-			'mes'		=> $mes,
-			'fcm_info'	=> $LNG['fcm_info'],
-			'Fatal'		=> $Fatal,
-            'dpath'		=> $THEME->getTheme(),
-		));
+        $this->assign_vars([
+            'mes'      => $mes,
+            'fcm_info' => $LNG['fcm_info'],
+            'Fatal'    => $Fatal,
+            'dpath'    => $THEME->getTheme(),
+        ]);
 
-		$this->gotoside($dest, $time);
-		$this->show('error_message_body.tpl');
-	}
+        $this->gotoside($dest, $time);
+        $this->show('error_message_body.tpl');
+    }
 
-	public static function printMessage($Message, $fullSide = true, $redirect = NULL) {
-		$template	= new self;
-		if(!isset($redirect)) {
-			$redirect	= array(false, 0);
-		}
+    public static function printMessage($Message, $fullSide = true, $redirect = null)
+    {
+        $template = new self();
+        if (!isset($redirect))
+        {
+            $redirect = [false, 0];
+        }
 
-		$template->message($Message, $redirect[0], $redirect[1], !$fullSide);
-		exit;
-	}
+        $template->message($Message, $redirect[0], $redirect[1], !$fullSide);
+        exit;
+    }
 
     /**
     * Workaround  for new Smarty Method to add custom props...
@@ -185,34 +196,40 @@ class template extends Smarty
 
     public function __get($name)
     {
-        $allowed = array(
-			'template_dir' => 'getTemplateDir',
-			'config_dir' => 'getConfigDir',
-			'plugins_dir' => 'getPluginsDir',
-			'compile_dir' => 'getCompileDir',
-			'cache_dir' => 'getCacheDir',
-        );
+        $allowed = [
+            'template_dir' => 'getTemplateDir',
+            'config_dir'   => 'getConfigDir',
+            'plugins_dir'  => 'getPluginsDir',
+            'compile_dir'  => 'getCompileDir',
+            'cache_dir'    => 'getCacheDir',
+        ];
 
-        if (isset($allowed[$name])) {
+        if (isset($allowed[$name]))
+        {
             return $this->{$allowed[$name]}();
-        } else {
+        }
+        else
+        {
             return $this->{$name};
         }
     }
 
     public function __set($name, $value)
     {
-        $allowed = array(
-			'template_dir' => 'setTemplateDir',
-			'config_dir' => 'setConfigDir',
-			'plugins_dir' => 'setPluginsDir',
-			'compile_dir' => 'setCompileDir',
-			'cache_dir' => 'setCacheDir',
-        );
+        $allowed = [
+            'template_dir' => 'setTemplateDir',
+            'config_dir'   => 'setConfigDir',
+            'plugins_dir'  => 'setPluginsDir',
+            'compile_dir'  => 'setCompileDir',
+            'cache_dir'    => 'setCacheDir',
+        ];
 
-        if (isset($allowed[$name])) {
+        if (isset($allowed[$name]))
+        {
             $this->{$allowed[$name]}($value);
-        } else {
+        }
+        else
+        {
             $this->{$name} = $value;
         }
     }

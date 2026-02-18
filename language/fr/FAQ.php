@@ -1,15 +1,16 @@
 <?php
+
 // Traduction Française by BigTwoProduction (KickXAss4Ever & Apocalypto2202) - All rights reserved (C) 2016
 // Web : http://www.big-two.tk
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
-$LNG['faq_overview']	= "Guide du Noob";
+$LNG['faq_overview'] = "Guide du Noob";
 
-$LNG['questions']					= array();
-$LNG['questions'][1]['category']	= 'Conseil pour les débutants';
-$LNG['questions'][1][1]['title']	= 'Etape 1 : Production';
-$LNG['questions'][1][1]['body']		= <<<BODY
+$LNG['questions'] = [];
+$LNG['questions'][1]['category'] = 'Conseil pour les débutants';
+$LNG['questions'][1][1]['title'] = 'Etape 1 : Production';
+$LNG['questions'][1][1]['body'] = <<<BODY
 <p>Dans cette partie du tutoriel, il est décrit les principaux bâtiments du jeu. Ceci explique la façon dont ils devraient être construits dans le début et ce qui est nécessaire pour construire un empire prospère.</p>
 <h3>Centrale solaire:</h3>
 <p>Afin de produire des ressources il est necessaire d'avoir un niveau d'énergie positif. Pour cela contruisez une centrale solaire.</p>
@@ -18,8 +19,8 @@ $LNG['questions'][1][1]['body']		= <<<BODY
 <h3>Mine de Crystal et de Deuterium: des syntétiseurs</h3>
 <p>Le Crystal est une ressources importante pour les bâtiments, les vaisseaux et la recherche. Il est produit dans une moindre meusure que le métal, ce qui le rendre plus chére. En progressant dans le jeu, vous verrez la façon dont le cristal est nécessaire. Le deuterium est une sources d'énergie, il est a la base des ressources de carburant et des recherche importante dans le laboratoire.</p>
 BODY;
-$LNG['questions'][1][2]['title']	= 'Etape 2 : Recherche et déploiment de vaisseaux';
-$LNG['questions'][1][2]['body']		= <<<BODY
+$LNG['questions'][1][2]['title'] = 'Etape 2 : Recherche et déploiment de vaisseaux';
+$LNG['questions'][1][2]['body'] = <<<BODY
 <p>Pour élargir votre empire et rivalier avec les autres joueurs ou vous avez besion d'interagir avec d'autres bâtiments. Grâce aux recherches et a la construction d'un chantier spatial pour vous constituer une flotte ainsi que des défence. Les détails peuvent être trouvés ici:</p> 
 <h3>Le chantier spatial:</h3>
 <p>Voici tous les navires disponible dans ce jeu. Certains navires requierent beaucoup d'exigences (technologie, bâtiements,...) afin qu'ils puisent etre construit. Un aperçu des navires ou à la défense qui a des exigences techniques peut être trouvée sous le titre «technologie» dans le menu. Plus le chantier spatial est développer a un haut niveau, plus la construction est rapide.</p>
@@ -28,8 +29,8 @@ $LNG['questions'][1][2]['body']		= <<<BODY
 <h3>Usine de robots:</h3>
 <p>L'usine de robots est un composant essentiel. Grâce à son expansion, le temps de production de sondes peut être réduit, ainsi que la construction des bâtiments.</p>
 BODY;
-$LNG['questions'][1][3]['title']	= 'Etape 3 : Les bases d\'un empire prospérer et conquête de l\'univers';
-$LNG['questions'][1][3]['body']		= <<<BODY
+$LNG['questions'][1][3]['title'] = 'Etape 3 : Les bases d\'un empire prospérer et conquête de l\'univers';
+$LNG['questions'][1][3]['body'] = <<<BODY
 <p>Cette partie du tutoriel est dédié à la défense de la planète, mais aussi les premières déploiment avec votre propre flotte de vaisseaux.</p>
 <h3>Recherche et Galaxie</h3>
 <p>Ces outils sont utilisé pour trouver d'autres joueurs. Vous trouverez des informations détaillées sur d'autres planètes, et vous pourrez également envoyer un peu de votre flotte directement à partir de la galxie. En outre, vous pouvez vérifier aussi dans la galaxie, contacter autres joueurs, espionner une autre planète, pour cela utilisez des sondes d'espionnage.
@@ -65,9 +66,9 @@ $LNG['questions'][1][3]['body']		= <<<BODY
 </p>
 BODY;
 
-$LNG['questions'][2]['category']	= 'Informations avancées';
-$LNG['questions'][2][1]['title']	= 'Combats';
-$LNG['questions'][2][1]['body']		= <<<BODY
+$LNG['questions'][2]['category'] = 'Informations avancées';
+$LNG['questions'][2][1]['title'] = 'Combats';
+$LNG['questions'][2][1]['body'] = <<<BODY
 <h3>Combats:</h3>
 <p>Il s'agit des attaques contre d'autres joueurs. Il y a différents tyes d'attaques comme :</p>
 <ul>
@@ -83,8 +84,8 @@ $LNG['questions'][2][1]['body']		= <<<BODY
 <p>Le concept d'une vie de Fleeter est de construire une flotte et de détruire. Une interception est une manoeuvre qui consiste a détruire une flotte dès son arrivée sur une planète/lune. On parle souvent d'interception lors d'attaques, lorsque vous êtes attaqué par un ennemi, vous pouvez demander à un allié de faire stationner sa flotte sur la planète qui va être attaquée, et de la faire arriver quelque seconde avant l'impacte. De manière à ce que l'attaquant n'ai pas le temps de faire "retour de flotte" et que sa flotte soit détruite. Il est aussi possible d'intercepter une cargaison, mais pour cela il est conseillé d'avoir une lune avec une phalange de capteur. Le principe est simple; vous suivez le déplacement de la cargaison au moyen de la phalange de capteur, et vous envoyez vos vaisseaux de combat quelque secondes après le déchargement, de manière à ce que le receveur n'ai pas le temps de dépenser les ressources reçues.</p>
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Flotte de secours';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Flotte de secours';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Comment je peut me protéger ?</h3>
 <p>Un nombre important de défense effraie la plupart des joueurs, touefois, et malheureusement il arrive que cela ne stop pas les intentions des joureurs avertis ou taquins. En conséquence, vous perdrez un grand nombre de vaisseaux, bouclier et autre resources... Mais concernant les défences, elles ne seront pas détruite (hormis les petits et grand bouclier). La seule exception est la soi-disant "destruction des défences", lorsque l'attaquant désir proséder a la destruction des défences, il ne peut que seulement engendré une perte de 7% de la totalité des défences présente sur la planéte cible.</p>
 <p>De plus, il existe les missiles interplanétaires (MIP), dont les seul but est de détruire les défenses. Par contraste avec l'attaque normale, les MIP ne ferons qu'un allé simple!! Puisqu'il ont pour seul but la destruction. Avez-vous deja vu des missiles touché leur cible et revenir par la suite ? Je ne pense pas. Soi, une attaque bien planifiée, avec plusieurs MIP réduit considérablement le risque pour flotte de se faire décimer, une parade efficace au MIP sont les missiles d'interception ainsi que les boucliers planétaires.</p>
@@ -104,4 +105,3 @@ $LNG['questions'][2][4]['body'] = <<< BODY
 <h3>Gestion de l'Alliance</h3>
 <p>Dans ce menu, vous pouvez modifier la description de l'Alliance, la supprimer, modifier les rangs ou grades, les pactes ou encore éditer les membres.<br> Le texte externe est une brève description de votre Alliance pour tous les membres qui visitent la page de l'Alliance, alors que le texte interne est un contenu exclusif pour les membres de l'Alliance, comme ennemis.<br>Dans les paramètres, vous pouvez également modifier l'image qui est affichée pour l'Alliance et vous pouvez aussi spécifier l'état du recrutement. Vous pouvez modifier le nom du rang de l'administrateur, qui est typiquement «leader» ou «fondateur»<br>"Dissoudre l'Alliance" est la fonction qui permet de supprimer l'Alliance définitivement.</p>
 BODY;
-

@@ -19,49 +19,52 @@ require_once 'includes/classes/cronjob/CronjobTask.interface.php';
 
 class TrackingCronjob implements CronjobTask
 {
-	function run()
-	{
-		$serverData['php']			= PHP_VERSION;
+    public function run()
+    {
+        $serverData['php'] = PHP_VERSION;
 
-		try
-		{
-			$sql	= 'SELECT register_time FROM %%USERS%% WHERE id = :userId';
-			$serverData['installSince']	= Database::get()->selectSingle($sql, array(
-				':userId'	=> ROOT_USER
-			), 'register_time');
-		}
-		catch (Exception $e)
-		{
-			$serverData['installSince']	= NULL;
-		}
+        try
+        {
+            $sql = 'SELECT register_time FROM %%USERS%% WHERE id = :userId';
+            $serverData['installSince'] = Database::get()->selectSingle($sql, [
+                ':userId' => ROOT_USER,
+            ], 'register_time');
+        }
+        catch (Exception $e)
+        {
+            $serverData['installSince'] = null;
+        }
 
-		try
-		{
-			$sql	= 'SELECT COUNT(*) as state FROM %%USERS%%;';
-			$serverData['users']		= Database::get()->selectSingle($sql, array(), 'state');
-		}
-		catch (Exception $e)
-		{
-			$serverData['users']		= NULL;
-		}
+        try
+        {
+            $sql = 'SELECT COUNT(*) as state FROM %%USERS%%;';
+            $serverData['users'] = Database::get()->selectSingle($sql, [], 'state');
+        }
+        catch (Exception $e)
+        {
+            $serverData['users'] = null;
+        }
 
-		try {
-			$sql	= 'SELECT COUNT(*) as state FROM %%CONFIG%%;';
-			$serverData['unis']			= Database::get()->selectSingle($sql, array(), 'state');
-		} catch (Exception $e) {
-			$serverData['unis']			= NULL;
-		}
+        try
+        {
+            $sql = 'SELECT COUNT(*) as state FROM %%CONFIG%%;';
+            $serverData['unis'] = Database::get()->selectSingle($sql, [], 'state');
+        }
+        catch (Exception $e)
+        {
+            $serverData['unis'] = null;
+        }
 
-		$serverData['version']		= Config::get(ROOT_UNI)->VERSION;
+        $serverData['version'] = Config::get(ROOT_UNI)->VERSION;
 
-		$ch	= curl_init('http://tracking.jkroepke.de/');
-		curl_setopt($ch, CURLOPT_HTTPGET, true);
-		curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $serverData);
-		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; 2Moons/".$serverData['version']."; +https://github.com/jkroepke/2Moons)");
+        $ch = curl_init('http://tracking.jkroepke.de/');
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $serverData);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; 2Moons/".$serverData['version']."; +https://github.com/jkroepke/2Moons)");
 
-		curl_exec($ch);
-		curl_close($ch);
-	}
+        curl_exec($ch);
+        curl_close($ch);
+    }
 }

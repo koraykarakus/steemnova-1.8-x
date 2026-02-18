@@ -17,118 +17,140 @@
 
 class Theme
 {
-	static public $Themes;
-	private $THEMESETTINGS;
-	private $skininfo;
-	private $skin;
-	private $customtpls;
+    public static $Themes;
+    private $THEMESETTINGS;
+    private $skininfo;
+    private $skin;
+    private $customtpls;
 
-	function __construct($install = false)
-	{
-		global $USER;
-		$this->skininfo = array();
+    public function __construct($install = false)
+    {
+        global $USER;
+        $this->skininfo = [];
 
+        if (!$install)
+        {
+            $config = Config::get();
+            if ($config->let_users_change_theme && isset($USER))
+            {
 
-		if (!$install) {
-			$config = Config::get();
-			if ($config->let_users_change_theme && isset($USER)) {
+                $this->skin = $USER['dpath'];
 
-					$this->skin = $USER['dpath'];
+            }
+            else
+            {
 
-			}else {
+                $this->skin = $config->server_default_theme;
 
-					$this->skin = $config->server_default_theme;
+            }
 
-			}
+        }
+        else
+        {
+            $this->skin = "nova";
+        }
 
+        $this->setUserTheme($this->skin);
+    }
 
-		}else {
-			$this->skin = "nova";
-		}
+    public function isHome()
+    {
+        $this->template = ROOT_PATH.'styles/home/';
+        $this->customtpls = [];
+    }
 
+    public function setUserTheme($Theme)
+    {
+        if (!file_exists(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg'))
+        {
+            return false;
+        }
 
-		$this->setUserTheme($this->skin);
-	}
+        $this->skin = $Theme;
+        $this->parseStyleCFG();
+        $this->setStyleSettings();
+    }
 
-	function isHome() {
-		$this->template		= ROOT_PATH.'styles/home/';
-		$this->customtpls	= array();
-	}
+    public function getTheme()
+    {
+        return './styles/theme/'.$this->skin.'/';
+    }
 
-	function setUserTheme($Theme) {
-		if(!file_exists(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg'))
-			return false;
+    public function getThemeName()
+    {
+        return $this->skin;
+    }
 
-		$this->skin		= $Theme;
-		$this->parseStyleCFG();
-		$this->setStyleSettings();
-	}
+    public function getTemplatePath()
+    {
+        return ROOT_PATH.'/styles/templates/'.$this->skin.'/';
+    }
 
-	function getTheme() {
-		return './styles/theme/'.$this->skin.'/';
-	}
+    public function isCustomTPL($tpl)
+    {
+        if (!isset($this->customtpls))
+        {
+            return false;
+        }
 
-	function getThemeName() {
-		return $this->skin;
-	}
+        return in_array($tpl, $this->customtpls);
+    }
 
-	function getTemplatePath() {
-		return ROOT_PATH.'/styles/templates/'.$this->skin.'/';
-	}
+    public function parseStyleCFG()
+    {
+        require(ROOT_PATH.'styles/theme/'.$this->skin.'/style.cfg');
+        $this->skininfo = $Skin;
+        $this->customtpls = (array) $Skin['templates'];
+    }
 
-	function isCustomTPL($tpl) {
-		if(!isset($this->customtpls))
-			return false;
+    public function setStyleSettings()
+    {
+        if (file_exists(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg'))
+        {
+            require(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg');
+        }
 
-		return in_array($tpl, $this->customtpls);
-	}
+        $this->THEMESETTINGS = array_merge([
+            'PLANET_ROWS_ON_OVERVIEW' => 2,
+            'SHORTCUT_ROWS_ON_FLEET1' => 2,
+            'COLONY_ROWS_ON_FLEET1'   => 2,
+            'ACS_ROWS_ON_FLEET1'      => 1,
+            'TOPNAV_SHORTLY_NUMBER'   => 0,
+        ], $THEMESETTINGS);
+    }
 
-	function parseStyleCFG() {
-		require(ROOT_PATH.'styles/theme/'.$this->skin.'/style.cfg');
-		$this->skininfo		= $Skin;
-		$this->customtpls	= (array) $Skin['templates'];
-	}
+    public function getStyleSettings()
+    {
+        return $this->THEMESETTINGS;
+    }
 
-	function setStyleSettings() {
-		if(file_exists(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg')) {
-			require(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg');
-		}
+    public static function getAvalibleSkins()
+    {
+        if (!isset(self::$Themes))
+        {
+            if (file_exists(ROOT_PATH.'cache/cache.themes.php'))
+            {
+                self::$Themes = unserialize(file_get_contents(ROOT_PATH.'cache/cache.themes.php'));
+            }
+            else
+            {
+                $Skins = array_diff(scandir(ROOT_PATH.'styles/theme/'), ['..', '.', '.svn', '.htaccess', 'index.htm']);
+                $Themes = [];
+                foreach ($Skins as $Theme)
+                {
+                    if (!file_exists(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg'))
+                    {
+                        continue;
+                    }
 
-		$this->THEMESETTINGS	= array_merge(array(
-			'PLANET_ROWS_ON_OVERVIEW' => 2,
-			'SHORTCUT_ROWS_ON_FLEET1' => 2,
-			'COLONY_ROWS_ON_FLEET1' => 2,
-			'ACS_ROWS_ON_FLEET1' => 1,
-			'TOPNAV_SHORTLY_NUMBER' => 0,
-		), $THEMESETTINGS);
-	}
+                    require(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg');
+                    $Themes[$Theme] = $Skin['name'];
+                }
+                file_put_contents(ROOT_PATH.'cache/cache.themes.php', serialize($Themes));
+                self::$Themes = $Themes;
+            }
+        }
 
-	function getStyleSettings() {
-		return $this->THEMESETTINGS;
-	}
-
-	static function getAvalibleSkins() {
-		if(!isset(self::$Themes))
-		{
-			if(file_exists(ROOT_PATH.'cache/cache.themes.php'))
-			{
-				self::$Themes	= unserialize(file_get_contents(ROOT_PATH.'cache/cache.themes.php'));
-			} else {
-				$Skins	= array_diff(scandir(ROOT_PATH.'styles/theme/'), array('..', '.', '.svn', '.htaccess', 'index.htm'));
-				$Themes	= array();
-				foreach($Skins as $Theme) {
-					if(!file_exists(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg'))
-						continue;
-
-					require(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg');
-					$Themes[$Theme]	= $Skin['name'];
-				}
-				file_put_contents(ROOT_PATH.'cache/cache.themes.php', serialize($Themes));
-				self::$Themes	= $Themes;
-			}
-		}
-
-
-		return self::$Themes;
-	}
+        return self::$Themes;
+    }
 }

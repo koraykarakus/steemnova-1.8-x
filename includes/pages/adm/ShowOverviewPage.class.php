@@ -20,56 +20,64 @@
  */
 class ShowOverviewPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
 
-	function show(){
+        global $LNG, $USER;
 
-		global $LNG, $USER;
+        $Message = [];
 
-		$Message	= array();
+        if ($USER['authlevel'] >= AUTH_ADM)
+        {
+            if (file_exists(ROOT_PATH.'update.php'))
+            {
+                $Message[] = sprintf($LNG['ow_file_detected'], 'update.php');
+            }
 
-		if ($USER['authlevel'] >= AUTH_ADM)
-		{
-			if(file_exists(ROOT_PATH.'update.php'))
-				$Message[]	= sprintf($LNG['ow_file_detected'], 'update.php');
+            if (file_exists(ROOT_PATH.'webinstall.php'))
+            {
+                $Message[] = sprintf($LNG['ow_file_detected'], 'webinstall.php');
+            }
 
-			if(file_exists(ROOT_PATH.'webinstall.php'))
-				$Message[]	= sprintf($LNG['ow_file_detected'], 'webinstall.php');
+            if (file_exists('includes/ENABLE_INSTALL_TOOL'))
+            {
+                $Message[] = sprintf($LNG['ow_file_detected'], 'includes/ENABLE_INSTALL_TOOL');
+            }
 
-			if(file_exists('includes/ENABLE_INSTALL_TOOL'))
-				$Message[]	= sprintf($LNG['ow_file_detected'], 'includes/ENABLE_INSTALL_TOOL');
+            if (!is_writable(ROOT_PATH.'cache'))
+            {
+                $Message[] = sprintf($LNG['ow_dir_not_writable'], 'cache');
+            }
 
-			if(!is_writable(ROOT_PATH.'cache'))
-				$Message[]	= sprintf($LNG['ow_dir_not_writable'], 'cache');
+            if (!is_writable('includes'))
+            {
+                $Message[] = sprintf($LNG['ow_dir_not_writable'], 'includes');
+            }
+        }
 
-			if(!is_writable('includes'))
-				$Message[]	= sprintf($LNG['ow_dir_not_writable'], 'includes');
-		}
+        $this->assign([
+            'ow_none'           => $LNG['ow_none'],
+            'ow_overview'       => $LNG['ow_overview'],
+            'ow_welcome_text'   => $LNG['ow_welcome_text'],
+            'ow_credits'        => $LNG['ow_credits'],
+            'ow_special_thanks' => $LNG['ow_special_thanks'],
+            'ow_translator'     => $LNG['ow_translator'],
+            'ow_proyect_leader' => $LNG['ow_proyect_leader'],
+            'ow_support'        => $LNG['ow_support'],
+            'ow_title'          => $LNG['ow_title'],
+            'ow_forum'          => $LNG['ow_forum'],
+            'ow_donate'         => $LNG['ow_donate'],
+            'Messages'          => $Message,
+            'date'              => date('m\_Y', TIMESTAMP),
+        ]);
 
+        $this->display('page.overview.default.tpl');
 
-
-		$this->assign(array(
-			'ow_none'			=> $LNG['ow_none'],
-			'ow_overview'		=> $LNG['ow_overview'],
-			'ow_welcome_text'	=> $LNG['ow_welcome_text'],
-			'ow_credits'		=> $LNG['ow_credits'],
-			'ow_special_thanks'	=> $LNG['ow_special_thanks'],
-			'ow_translator'		=> $LNG['ow_translator'],
-			'ow_proyect_leader'	=> $LNG['ow_proyect_leader'],
-			'ow_support'		=> $LNG['ow_support'],
-			'ow_title'			=> $LNG['ow_title'],
-			'ow_forum'			=> $LNG['ow_forum'],
-			'ow_donate'			=> $LNG['ow_donate'],
-			'Messages'			=> $Message,
-			'date'				=> date('m\_Y', TIMESTAMP),
-		));
-
-		$this->display('page.overview.default.tpl');
-
-	}
+    }
 
 }

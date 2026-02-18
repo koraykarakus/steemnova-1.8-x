@@ -17,47 +17,56 @@
 
 class MissionCaseACS extends MissionFunctions implements Mission
 {
+    public function __construct($Fleet)
+    {
+        $this->_fleet = $Fleet;
+    }
 
-	function __construct($Fleet)
-	{
-		$this->_fleet	= $Fleet;
-	}
+    public function TargetEvent()
+    {
+        $this->setState(FLEET_RETURN);
+        $this->SaveFleet();
+        return;
+    }
 
-	function TargetEvent()
-	{
-		$this->setState(FLEET_RETURN);
-		$this->SaveFleet();
-		return;
-	}
+    public function EndStayEvent()
+    {
+        return;
+    }
 
-	function EndStayEvent()
-	{
-		return;
-	}
+    public function ReturnEvent()
+    {
+        $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
+        $planetName = Database::get()->selectSingle($sql, [
+            ':planetId' => $this->_fleet['fleet_start_id'],
+        ], 'name');
 
-	function ReturnEvent()
-	{
-		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
-		$sql		= 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
-		$planetName	= Database::get()->selectSingle($sql, array(
-			':planetId'	=> $this->_fleet['fleet_start_id'],
-		), 'name');
+        $Message = sprintf(
+            $LNG['sys_fleet_won'],
+            $planetName,
+            GetTargetAddressLink($this->_fleet, ''),
+            pretty_number($this->_fleet['fleet_resource_metal']),
+            $LNG['tech'][901],
+            pretty_number($this->_fleet['fleet_resource_crystal']),
+            $LNG['tech'][902],
+            pretty_number($this->_fleet['fleet_resource_deuterium']),
+            $LNG['tech'][903]
+        );
 
-		$Message 	= sprintf(
-			$LNG['sys_fleet_won'],
-			$planetName,
-			GetTargetAddressLink($this->_fleet, ''),
-			pretty_number($this->_fleet['fleet_resource_metal']),
-			$LNG['tech'][901],
-			pretty_number($this->_fleet['fleet_resource_crystal']),
-			$LNG['tech'][902],
-			pretty_number($this->_fleet['fleet_resource_deuterium']),
-			$LNG['tech'][903]
-		);
+        PlayerUtil::sendMessage(
+            $this->_fleet['fleet_owner'],
+            0,
+            $LNG['sys_mess_tower'],
+            4,
+            $LNG['sys_mess_fleetback'],
+            $Message,
+            $this->_fleet['fleet_end_time'],
+            null,
+            1,
+            $this->_fleet['fleet_universe']
+        );
 
-		PlayerUtil::sendMessage($this->_fleet['fleet_owner'], 0, $LNG['sys_mess_tower'], 4, $LNG['sys_mess_fleetback'],
-			$Message, $this->_fleet['fleet_end_time'], NULL, 1, $this->_fleet['fleet_universe']);
-
-		$this->RestoreFleet();
-	}
+        $this->RestoreFleet();
+    }
 }

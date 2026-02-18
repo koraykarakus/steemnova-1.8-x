@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -19,12 +20,12 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
-$LNG['ub_points']		= 'Pontos';
-$LNG['ub_fleets']		= 'Frota';
-$LNG['ub_researh']		= 'Pesquisas';
-$LNG['ub_buildings']	= 'Edificios';
-$LNG['ub_defenses']		= 'Defesas';
+$LNG['ub_points'] = 'Pontos';
+$LNG['ub_fleets'] = 'Frota';
+$LNG['ub_researh'] = 'Pesquisas';
+$LNG['ub_buildings'] = 'Edificios';
+$LNG['ub_defenses'] = 'Defesas';
 
-$LNG['ub_fights']		= 'Batalhas';
-$LNG['ub_quote']		= 'Quote';
-$LNG['ub_rank']			= 'Posição';
+$LNG['ub_fights'] = 'Batalhas';
+$LNG['ub_quote'] = 'Quote';
+$LNG['ub_rank'] = 'Posição';

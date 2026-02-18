@@ -1,19 +1,20 @@
 <?php
+
 class ShowAttackAlertPage extends AbstractGamePage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  function __construct(){
-    parent::__construct();
-  }
+    public function show()
+    {
 
-  public function show(){
+        global $USER;
 
+        $db = Database::get();
 
-  		global $USER;
-
-  		$db = Database::get();
-
-  		$sql = "SELECT (SELECT
+        $sql = "SELECT (SELECT
   		COUNT(*) FROM %%FLEETS%% WHERE
   		fleet_owner != :userId AND fleet_mess = 0 AND fleet_universe = :universe AND fleet_target_owner = :userId AND (fleet_mission = 1 OR fleet_mission = 9) AND hasCanceled=0) AS attack,
   		(SELECT
@@ -21,33 +22,30 @@ class ShowAttackAlertPage extends AbstractGamePage
   		fleet_owner != :userId AND fleet_mess = 0 AND fleet_universe = :universe AND fleet_target_owner = :userId AND fleet_mission = 6 AND hasCanceled=0) AS spy
   		FROM DUAL ";
 
-  		$fleets = $db->selectSingle($sql,array(
-  			':userId' => $USER['id'],
-  			':universe' => Universe::current()
-  		));
+        $fleets = $db->selectSingle($sql, [
+            ':userId'   => $USER['id'],
+            ':universe' => Universe::current(),
+        ]);
 
-  		if ($fleets['attack'] > 0 && $fleets['spy'] > 0) {
-  			$data = "spy";
-  		}else if ($fleets['attack'] > 0 && $fleets['spy'] == 0) {
-  			$data = "attack";
-  		}else if ($fleets['spy'] >0 && $fleets['attack'] == 0){
-  			$data = "spy";
-  		}else {
-  			$data = "noattack";
-  		}
+        if ($fleets['attack'] > 0 && $fleets['spy'] > 0)
+        {
+            $data = "spy";
+        }
+        elseif ($fleets['attack'] > 0 && $fleets['spy'] == 0)
+        {
+            $data = "attack";
+        }
+        elseif ($fleets['spy'] > 0 && $fleets['attack'] == 0)
+        {
+            $data = "spy";
+        }
+        else
+        {
+            $data = "noattack";
+        }
 
+        $this->sendJSON($data);
 
-  		$this->sendJSON($data);
-
-  }
-
-
+    }
 
 }
-
-
-
-
-
-
- ?>

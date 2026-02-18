@@ -20,63 +20,63 @@
  */
 class ShowActivePage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
 
-	function show(){
+        global $LNG, $USER;
 
-		global $LNG, $USER;
+        $db = Database::get();
 
-		$db = Database::get();
+        $sql = "SELECT * FROM %%USERS_VALID%% WHERE `universe` = :universe ORDER BY validationID ASC;";
 
-		$sql = "SELECT * FROM %%USERS_VALID%% WHERE `universe` = :universe ORDER BY validationID ASC;";
+        $usersValid = $db->select($sql, [
+            ':universe' => Universe::getEmulated(),
+        ]);
 
-		$usersValid = $db->select($sql,array(
-			':universe' => Universe::getEmulated(),
-		));
+        $users = [];
+        foreach ($usersValid as $currentUser)
+        {
+            $users[] = [
+                'id'            => $currentUser['validationID'],
+                'name'          => $currentUser['userName'],
+                'date'          => _date($LNG['php_tdformat'], $currentUser['date'], $USER['timezone']),
+                'email'         => $currentUser['email'],
+                'ip'            => $currentUser['ip'],
+                'password'      => $currentUser['password'],
+                'validationKey' => $currentUser['validationKey'],
+            ];
+        }
 
+        $this->assign([
+            'Users' => $users,
+            'uni'   => Universe::getEmulated(),
+        ]);
 
-		$users 	= array();
-		foreach ($usersValid as $currentUser) {
-			$users[]	= array(
-				'id'			=> $currentUser['validationID'],
-				'name'			=> $currentUser['userName'],
-				'date'			=> _date($LNG['php_tdformat'], $currentUser['date'], $USER['timezone']),
-				'email'			=> $currentUser['email'],
-				'ip'			=> $currentUser['ip'],
-				'password'		=> $currentUser['password'],
-				'validationKey'	=> $currentUser['validationKey'],
-			);
-		}
+        $this->display('page.active.default.tpl');
 
+    }
 
-		$this->assign(array(
-			'Users'				=> $users,
-			'uni'				=> Universe::getEmulated(),
-		));
+    public function delete()
+    {
 
-		$this->display('page.active.default.tpl');
+        $sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";
 
-	}
+        $db = Database::get();
 
-	function delete(){
+        $id = HTTP::_GP('id', 0);
 
-		$sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";
+        $db->delete($sql, [
+            ':validationID' => $id,
+            ':universe'     => Universe::getEmulated(),
+        ]);
 
-		$db = Database::get();
+        $this->printMessage('deleted successfully !');
 
-		$id = HTTP::_GP('id', 0);
-
-		$db->delete($sql,array(
-			':validationID' => $id,
-			':universe' => Universe::getEmulated()
-		));
-
-		$this->printMessage('deleted successfully !');
-
-	}
+    }
 
 }

@@ -17,5 +17,5 @@
 
 interface BuildCache
 {
-	function buildCache();
+    public function buildCache();
 }

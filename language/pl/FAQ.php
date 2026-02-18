@@ -15,13 +15,12 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+$LNG['faq_overview'] = "FAQ";
 
-$LNG['faq_overview']	= "FAQ";
-
-$LNG['questions']					= array();
-$LNG['questions'][1]['category']	= 'Wskazówki dla początkujących';
-$LNG['questions'][1][1]['title']	= 'Część 1';
-$LNG['questions'][1][1]['body']		= <<<BODY
+$LNG['questions'] = [];
+$LNG['questions'][1]['category'] = 'Wskazówki dla początkujących';
+$LNG['questions'][1][1]['title'] = 'Część 1';
+$LNG['questions'][1][1]['body'] = <<<BODY
 <p>Ta część samouczka opisuje głównie budynki. Wyjaśnia, co należy budować na początku i do czego są one potrzebne. Aby zbudować udane imperium ważne jest, by budować budynki w określonej kolejności. </p>
 <h3>Elektrownia słoneczna:</h3>
 <p>W celu wytwarzania surowców tak bardzo potrzebnych twojemu rozwijającemu się imperium, pierwsze co musisz zrobić to zbudować elektrownię. Produkuje ona energię, która jest potrzebna do produkcji zasobów przez kopalnię. Ilość energii możesz sprawdzić w zakładce zasoby. Dowiesz się tam ile produkujesz i jakie są twoje potrzeby.</p>
@@ -30,8 +29,8 @@ $LNG['questions'][1][1]['body']		= <<<BODY
 <h3>Kopalnia kryształu i ekstraktor deuterium:</h3>
 <p>Kryształ również jest bardzo ważnym elementem do budowy budynków, statków czy odkrywania nowych technologii. Jego wydobycie jest znacząco mniejsze, dlatego jedna jednostka kryształu odpowiada dwóm jednostkom metalu. Deuterium to głównie paliwo dla floty, jest również wymagany podczas prowadzenia ważnych badań. Jego wydobycie jest również znacząco mniejsze w stosunku do metalu, jak i kryształu!</p>
 BODY;
-$LNG['questions'][1][2]['title']	= 'Część 2';
-$LNG['questions'][1][2]['body']		= <<<BODY
+$LNG['questions'][1][2]['title'] = 'Część 2';
+$LNG['questions'][1][2]['body'] = <<<BODY
 <p>Podczas rozbudowy swojego imperium będziesz zmuszony do konkurowania lub też współpracy w innymi graczami. Przyda się do tego zaawansowana technologia, jak również rozbudowana stocznia, umożliwiająca stworzenie floty godnej twojego imperium, jak i obronę. Więcej informacji znajdziesz tutaj:</p>
 <h3>Stocznia:</h3>
 <p>Wszystkie statki czy też elementy obrony buduje się w stoczni. Na samym początku musisz zacząć od jej zbudowania. Wszelkich informacji, jakie będą Ci potrzebne odnośnie technologii, która jest wymagana do budowy zaawansowanych jednostek, dostarczy Ci zakładka "Technologia". Rozbudowana stoczni wpływa również na szybkość budowy zarówno jednostek, jak i obrony.</p>
@@ -40,8 +39,8 @@ $LNG['questions'][1][2]['body']		= <<<BODY
 <h3>Fabryka robotów:</h3>
 <p>Fabryka robotów to jeden z ważniejszych budynków. Dzięki jego rozbudowie przyspiesza budowę innych budynków na planecie!</p>
 BODY;
-$LNG['questions'][1][3]['title']	= 'Część 3';
-$LNG['questions'][1][3]['body']		= <<<BODY
+$LNG['questions'][1][3]['title'] = 'Część 3';
+$LNG['questions'][1][3]['body'] = <<<BODY
 <p>W tej części dowiesz się krótko, jak bronić własnej planety i jak zarządzać własną flotą. Znajdziesz tutaj również informacje przydatne podczas interakcji z innymi graczami.</p>
 <h3>Galaktyka:</h3>
 <p>Galaktykę przeglądasz w celu lokalizacji innych graczy, jak i np. w celu poszukiwania złomu. Znajdziesz tam również szczegółowe informacje o sąsiedztwie planet innych graczy, możesz też wysyłać bezpośrednio z podglądu galaktyki niektóre akcje floty, np. akcję szpieguj gracza, jeśli masz zbudowane sondy szpiegowskie, czy też wysyłać wiadomości do innych graczy.</p>
@@ -51,9 +50,9 @@ $LNG['questions'][1][3]['body']		= <<<BODY
 <p>By móc bronić swoją planetę tuż po zbudowaniu stoczni będziesz miał możliwość budowy obrony stacjonarnej. Daje ona ochronę przed atakami innych graczy, jak również broni planety, gdy twoja flota jest na innej planecie. W przeciwieństwie do floty, gdy zbudujesz obronę i zostanie ona zniszczona w trakcie walki, to po walce ma 70% szans na to, że zostanie reaktywowana.</p>
 BODY;
 
-$LNG['questions'][2]['category']	= 'Informacje zaawansowane';
-$LNG['questions'][2][1]['title']	= 'Rajdy';
-$LNG['questions'][2][1]['body']		= <<<BODY
+$LNG['questions'][2]['category'] = 'Informacje zaawansowane';
+$LNG['questions'][2][1]['title'] = 'Rajdy';
+$LNG['questions'][2][1]['body'] = <<<BODY
 <h3>Ataki:</h3>
 <p>Termin, którego możemy użyć opisując ataki na innych graczy.
 Rajdy można podzielić na kilka typów:</p>
@@ -84,8 +83,8 @@ Pola zniszczeń z floty nie należą do nikogo, więc każdy może je zebrać, d
 Jak widać sposobów na przechwycenie floty przeciwnika jest wiele - wymienione tutaj to tylko kawałek góry lodowej. Więcej dowiesz się rozmawiając z innymi graczami czy też przeglądając forum.</li></ul>
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Fleet save, czyli bezpieczeństwo floty';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Fleet save, czyli bezpieczeństwo floty';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Jak mogę się chronić</h3>
 <p>Czasem wystarczy duża obrona, by odstraszyć potęcjalnego atakującego. Zbyt duża ilość obrony może go przyciągnąć tym bardziej, jeśli obrona zostaje również w jakiejś części przekształcona w pole zniszczeń.</p>
 <p>Ponadto w grze istnieją również rakiety międzyplanetarne, które bardzo dobrze sprawują się w niszczeniu obrony, zatem jeśli mamy sporą obronę na planecie, warto do niej dobudować kilka lub też kilkanaście antyrakiet.</p>
@@ -98,8 +97,8 @@ $LNG['questions'][2][2]['body']		= <<<BODY
 <p>Najpewniejszą misją niedającą praktycznie możliwości przechwycenia twojej floty jest misja "stacjonuj" między księżycami (księżyca nie można skanować falangą!). Oczywiście zawsze istnieje możliwość, iż ktoś nam księżyc zniszczy, by przechwycić tą flotę, ale taka opcja jest mało prawdopodobna!</p>
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Wspólna walka - AKS';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Wspólna walka - AKS';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Atakowanie AKS</h3>
 <p>Jak wiadomo można atakować wspólnie, by to zrobić musisz wysłać flotę z misją "atakuj". Potem wchodzisz w zakładkę floty - pod przyciskiem zawróć masz przycisk acs, a tam możliwość zmiany nazwy ataku, jak również zapraszanie innych do acs by dołączyli. Zaprasza osoba, która rozpoczyna atak, i to ona wysyła zaproszenia! Do ataku możesz zaprosić maksymalnie 5 graczy. W jednym ataku acs może być połączone maksymalnie 16 flot. Floty automatycznie dostosują prędkość do najwolniejszej floty biorącej udział w ataku, ale istnieje ograniczenie w możliwości spowolnienia floty do 30% czasu lotu. A to znaczy, że jeśli wyślesz flotę i przykładowo będzie ona mieć 100 minut do celu, to najwolniejsza flota może mieć maksymalnie 130 min do celu! Więc jeśli kolejna osoba chcąca dołączyć to tego ataku będzie miał czas dolotu mniejszy od 100 minut, to nie będzie mogła do takiego ataku dołączyć!<br>
 <b>Uwaga:</b> jeśli jedna z flot zostanie zawrócona, to reszta poleci dalej!!</p>
@@ -120,8 +119,8 @@ Niszczyciel: 100<br>
 Gwiazda śmierci: 1/10</p>
 BODY;
 
-$LNG['questions'][2][3]['title']	= 'Księżyce';
-$LNG['questions'][2][3]['body']		= <<<BODY
+$LNG['questions'][2][3]['title'] = 'Księżyce';
+$LNG['questions'][2][3]['body'] = <<<BODY
 <p>By powstał księżyc musi w trakcie walki powstać pole zniszczeń z minimalną ilością jednostek, czyli 100 000. Każde następne 100 000 jest przeliczone na 1% szansy na powstanie księżyca, aż do osiągnięcia maksymalnie 20% szansy na księżyc! Jeśli pole zniszczeń jest znacząco większe, wpływa to tylko na średnicę księżyca, ale nie modyfikuje maksymalnej szansy na powstanie go!</p>
 <h3>Ogólnie</h3>
 <p>Na jedną planetę przypada tylko 1 księżyc. Możesz zmieniać nazwę księżyca. By móc budować na księżycu musisz zbudować najpierw bazę księżycową - to najważniejszy budynek, ponieważ zwiększa ilość pól do zabudowy</p>
@@ -139,8 +138,8 @@ Najważniejsze budynki na księżycu:</p>
 
 BODY;
 
-$LNG['questions'][2][4]['title']	= 'Sojusz';
-$LNG['questions'][2][4]['body']		= <<<BODY
+$LNG['questions'][2][4]['title'] = 'Sojusz';
+$LNG['questions'][2][4]['body'] = <<<BODY
 <h3>Jak mogę założyć sojusz?</h3>
 <p>By założyć sojusz musisz się udać do zakładki sojusze w menu. Potem klikasz załóż sojusz, podajesz nazwę i tag sojuszu. Gotowe.<br>
 Pamiętaj, że w nazwach nie możesz używać znaków specjalnych.<br>

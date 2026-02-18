@@ -15,24 +15,22 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 class ShowErrorPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initTemplate();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->initTemplate();
-	}
+    public static function printError($Message, $fullSide = true, $redirect = null)
+    {
+        $pageObj = new self();
+        $pageObj->printMessage($Message, $fullSide, $redirect);
+    }
 
-	static function printError($Message, $fullSide = true, $redirect = NULL)
-	{
-		$pageObj	= new self;
-		$pageObj->printMessage($Message, $fullSide, $redirect);
-	}
+    public function show()
+    {
 
-	function show()
-	{
-
-	}
+    }
 }

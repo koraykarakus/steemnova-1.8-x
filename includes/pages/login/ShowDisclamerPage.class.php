@@ -15,26 +15,25 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 class ShowDisclamerPage extends AbstractLoginPage
 {
-	public static $requireModule = 0;
+    public static $requireModule = 0;
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function show()
-	{
-		$config	= Config::get();
-		$this->assign(array(
-			'disclamerAddress'	=> makebr($config->disclamerAddress),
-			'disclamerPhone'	=> $config->disclamerPhone,
-			'disclamerMail'		=> $config->disclamerMail,
-			'disclamerNotice'	=> $config->disclamerNotice,
-		));
+    public function show()
+    {
+        $config = Config::get();
+        $this->assign([
+            'disclamerAddress' => makebr($config->disclamerAddress),
+            'disclamerPhone'   => $config->disclamerPhone,
+            'disclamerMail'    => $config->disclamerMail,
+            'disclamerNotice'  => $config->disclamerNotice,
+        ]);
 
-		$this->display('page.disclamer.default.tpl');
-	}
+        $this->display('page.disclamer.default.tpl');
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
@@ -19,13 +20,12 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+$LNG['faq_overview'] = "FAQ";
 
-$LNG['faq_overview']	= "FAQ";
-
-$LNG['questions']					= array();
-$LNG['questions'][1]['category']	= 'Dicas para Iniciantes';
-$LNG['questions'][1][1]['title']	= 'Passo 1';
-$LNG['questions'][1][1]['body']		= <<<BODY
+$LNG['questions'] = [];
+$LNG['questions'][1]['category'] = 'Dicas para Iniciantes';
+$LNG['questions'][1][1]['title'] = 'Passo 1';
+$LNG['questions'][1][1]['body'] = <<<BODY
 <p>Nesta parte do Tutorial, é descrito os edificios principais do jogo. Este explica como estes devem ser construidos no inicio e o que é necessário para construir um império de sucesso.</p>
 <h3>Planta de Energia Solar:</h3>
 <p>A fim de produzir os recursos que precisas, precisas de construir a Planta de Energia Solar, que é necessário para uma produção positiva de recursos, de modo que a produção não fique negativa ou que tenhas os recursos produzidos por completo</p>
@@ -34,8 +34,8 @@ $LNG['questions'][1][1]['body']		= <<<BODY
 <h3>Mina de Cristal e Sintetizador de Deutério:</h3>
 <p>O Cristal é um recurso importante para edifícios, naves, e de pesquisas. É produzido em menor extensão do que o metal, o que torna assim mais caro.No decorrer do jogo, tu verás o quão o cristal é necessário. O deutério é uma fonte de energia, é a base de combustível de recursos e de uma pesquisa importante (laboratório de pesquisa).</p>
 BODY;
-$LNG['questions'][1][2]['title']	= 'Passo 2';
-$LNG['questions'][1][2]['body']		= <<<BODY
+$LNG['questions'][1][2]['title'] = 'Passo 2';
+$LNG['questions'][1][2]['body'] = <<<BODY
 <p>Para expandir o teu império e competires com outros jogadores ou precisares interagir com outros edifícios. Através da pesquisa e da construção de um Hangar começa a construção da tua frota e da defesa planetária. Detalhes podem ser encontrados aqui:</p>
 <h3>O Hangar:</h3>
 <p>Aqui estão todas as naves que tu tens disponível neste jogo. Algumas naves serão necessárias uma elevada quantidade de requesitos de modo a que estes possam ser construidos. Uma visão geral das naves ou da defesa que tem requisitos técnicos, podem ser encontrados sob o título "Tecnologia", no menu. Quanto maior o Hangar, mais rápido pode ser construída.</p>
@@ -44,8 +44,8 @@ $LNG['questions'][1][2]['body']		= <<<BODY
 <h3>Fábrica de Robots:</h3>
 <p>A fábrica de robots é um componente essencial. Através da sua expansão, o tempo de produção de sondas pode ser reduzido, bem como a construção de edifícios.</p>
 BODY;
-$LNG['questions'][1][3]['title']	= 'Passo 3';
-$LNG['questions'][1][3]['body']		= <<<BODY
+$LNG['questions'][1][3]['title'] = 'Passo 3';
+$LNG['questions'][1][3]['body'] = <<<BODY
 <p>Esta parte do tutorial é dedicada à defesa do planeta, como as primeiras ações com a tua própria frota.</p>
 <h3>A Galáxia:</h3>
 <p>É usado para localizar os outros jogadores. Tu encontrarás informações detalhadas sobre os outros planetas, e também pode enviar um pouco da tua frota diretamente a partir deste ponto de vista. Além disso, tu podes verificar neste ponto de vista também, o contacto com outros jogadores, ou espiar em outro planeta, se possuires as Sondas de Espionagem</p>
@@ -55,9 +55,9 @@ $LNG['questions'][1][3]['body']		= <<<BODY
 <p>Para ser capaz de proteger o teu próprio planeta com a construção do Hangar, é também a construção de defesa. Estes oferecem alguma proteção contra os inimigos com a tua própria frota no momento do ataque dos teus adervesários. Em contraste com a frota, 70% da defesa continua existente no planeta</p>
 BODY;
 
-$LNG['questions'][2]['category']	= 'Informação Avançada';
-$LNG['questions'][2][1]['title']	= 'Raid';
-$LNG['questions'][2][1]['body']		= <<<BODY
+$LNG['questions'][2]['category'] = 'Informação Avançada';
+$LNG['questions'][2][1]['title'] = 'Raid';
+$LNG['questions'][2][1]['body'] = <<<BODY
 <h3>Raid:</h3>
 <p>É o ataque contra outros jogadores para tomares posse dos recursos deles. Existe varios tipos de ataques como:</p>
 <ul>
@@ -80,8 +80,8 @@ Com o desenvolvimento de destroços aos "derrotados", e como ninguem pode manter
 
 BODY;
 
-$LNG['questions'][2][2]['title']	= 'Fleetsave';
-$LNG['questions'][2][2]['body']		= <<<BODY
+$LNG['questions'][2][2]['title'] = 'Fleetsave';
+$LNG['questions'][2][2]['body'] = <<<BODY
 <h3>Como posso proteger-me</h3>
 <p>Um grande número de armas de defesa assusta alguns jogadores já infelizmente, e são atraídos por outros. Como resultado, tu perdes um monte de recursos, uma vez que as defesas, nada vai para o campo de destroços, quando são destruídos. A única exceção é a chamada Destroços de Defesas, em que o atacante quando te ataca, cria destroços de defesas no campo de destroços (A perda de 7% da defesa não conta nos destroços, conta é a perda total da defesa no combate).
 </p>
@@ -95,8 +95,8 @@ O primeiro método de Fleetsaves é a "localização callback". Isso envia frota
 <p>Outro metodo de fazer fleet facilmente, é fazer fleetsave de lua a lua, em que os Inimigos não podem fazer phalanx a luas (Porque estas é que possuem o sensor!)</p>
 BODY;
 
-$LNG['questions'][2][3]['title']	= 'Luas';
-$LNG['questions'][2][3]['body']		= <<<BODY
+$LNG['questions'][2][3]['title'] = 'Luas';
+$LNG['questions'][2][3]['body'] = <<<BODY
 <p>Uma lua pode ocorrer quando um campo de destoços tem pelo menos cerca de 100.000 unidades, o que é, então, uma oportunidade lua 1% acaso. Máxima é de apenas 20% de chance não importa o quão grande é a lua.
 </p>
 <h3>Geral</h3>
@@ -124,8 +124,8 @@ Esta ordem é apenas sugerida se fores novato, pois claro jogadores mais experie
 <p>Destroços de 100 000 unidades pode render uma lua de 1% de probabilidade. A probabilidade máxima é de 20%. <p>
 BODY;
 
-$LNG['questions'][2][4]['title']	= 'Aliança';
-$LNG['questions'][2][4]['body']		= <<<BODY
+$LNG['questions'][2][4]['title'] = 'Aliança';
+$LNG['questions'][2][4]['body'] = <<<BODY
 <h3>Como faço para formar uma Aliança</h3>
 <p>Vais ao menu "Aliança" e selecionas "Criar Aliança". Neste pões a TAG (Sigla) da aliança e o nome desta. Após estes passos executados, fundaste uma aliança</p>
 <p>Abaixo tu encontrarás os seguintes links:<br>

@@ -19,48 +19,49 @@ require_once 'includes/classes/cronjob/CronjobTask.interface.php';
 
 class DailyCronJob implements CronjobTask
 {
-	function run()
-	{
-		$this->optimizeTables();
-		$this->clearCache();
-		$this->reCalculateCronjobs();
-		$this->clearEcoCache();
-	}
+    public function run()
+    {
+        $this->optimizeTables();
+        $this->clearCache();
+        $this->reCalculateCronjobs();
+        $this->clearEcoCache();
+    }
 
-	function optimizeTables()
-	{
-		$sql			= "SHOW TABLE STATUS FROM `".DB_NAME."`;";
-		$sqlTableRaw	= Database::get()->nativeQuery($sql);
+    public function optimizeTables()
+    {
+        $sql = "SHOW TABLE STATUS FROM `".DB_NAME."`;";
+        $sqlTableRaw = Database::get()->nativeQuery($sql);
 
-		$prefixCounts	= strlen(DB_PREFIX);
-		$dbTables		= array();
+        $prefixCounts = strlen(DB_PREFIX);
+        $dbTables = [];
 
-		foreach($sqlTableRaw as $table)
-		{
-			if (DB_PREFIX == substr($table['Name'], 0, $prefixCounts)) {
-				$dbTables[] = $table['Name'];
-			}
-		}
+        foreach ($sqlTableRaw as $table)
+        {
+            if (DB_PREFIX == substr($table['Name'], 0, $prefixCounts))
+            {
+                $dbTables[] = $table['Name'];
+            }
+        }
 
-		if(!empty($dbTables))
-		{
-			Database::get()->nativeQuery("OPTIMIZE TABLE ".implode(', ', $dbTables).";");
-		}
-	}
+        if (!empty($dbTables))
+        {
+            Database::get()->nativeQuery("OPTIMIZE TABLE ".implode(', ', $dbTables).";");
+        }
+    }
 
-	function clearCache()
-	{
-		ClearCache();
-	}
+    public function clearCache()
+    {
+        ClearCache();
+    }
 
-	function reCalculateCronjobs()
-	{
-		Cronjob::reCalculateCronjobs();
-	}
+    public function reCalculateCronjobs()
+    {
+        Cronjob::reCalculateCronjobs();
+    }
 
-	function clearEcoCache()
-	{
-		$sql	= "UPDATE %%PLANETS%% SET eco_hash = '';";
-		Database::get()->update($sql);
-	}
+    public function clearEcoCache()
+    {
+        $sql = "UPDATE %%PLANETS%% SET eco_hash = '';";
+        Database::get()->update($sql);
+    }
 }

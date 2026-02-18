@@ -17,106 +17,100 @@
 
 class ShowIndexPage extends AbstractLoginPage
 {
-	function __construct()
-	{
-		parent::__construct();
-		$this->setWindow('light');
-	}
-
-	function parseRememberMeToken($token) {
-    $parts = explode(':', $token);
-
-    if ($parts && count($parts) == 3) {
-        return [$parts[0], $parts[1], $parts[2]];
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setWindow('light');
     }
-    return false;
-	}
 
-	function show()
-	{
-		global $LNG, $config;
+    public function parseRememberMeToken($token)
+    {
+        $parts = explode(':', $token);
 
-		$referralID		= HTTP::_GP('ref', 0);
-		if(!empty($referralID))
-		{
-			$this->redirectTo('index.php?page=register&referralID='.$referralID);
-		}
+        if ($parts && count($parts) == 3)
+        {
+            return [$parts[0], $parts[1], $parts[2]];
+        }
+        return false;
+    }
 
-		$universeSelect	= array();
+    public function show()
+    {
+        global $LNG, $config;
 
+        $referralID = HTTP::_GP('ref', 0);
+        if (!empty($referralID))
+        {
+            $this->redirectTo('index.php?page=register&referralID='.$referralID);
+        }
 
+        $universeSelect = [];
 
-		$Code	= HTTP::_GP('code', 0);
-		$loginCode	= false;
-		if(isset($LNG['login_error_'.$Code]))
-		{
-			$loginCode	= $LNG['login_error_'.$Code];
-		}
+        $Code = HTTP::_GP('code', 0);
+        $loginCode = false;
+        if (isset($LNG['login_error_'.$Code]))
+        {
+            $loginCode = $LNG['login_error_'.$Code];
+        }
 
+        $rememberedEmail = $rememberedPassword = $rememberedTokenValidator = $rememberedTokenSelector = "";
 
+        $rememberedUniverseID = Universe::current();
 
-		$rememberedEmail = $rememberedPassword = $rememberedTokenValidator = $rememberedTokenSelector = "";
+        if (isset($_COOKIE['remember_me']))
+        {
 
-		$rememberedUniverseID = Universe::current();
+            $rememberMeInfo = $this->parseRememberMeToken($_COOKIE['remember_me']);
 
-		if (isset($_COOKIE['remember_me'])) {
+            if ($rememberMeInfo)
+            {
 
-			$rememberMeInfo = $this->parseRememberMeToken($_COOKIE['remember_me']);
+                $sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
 
-			if ($rememberMeInfo) {
+                $tokenInfo = Database::get()->selectSingle($sql, [
+                    ':selector' => $rememberMeInfo[1],
+                ]);
 
-				$sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
+                if (
+                    isset($tokenInfo['hashed_validator'])
+                    && isset($tokenInfo['user_id'])
+                    && isset($rememberMeInfo[0])
+                    && isset($rememberMeInfo[1])
+                    && isset($rememberMeInfo[2])
+                ) {
 
-				$tokenInfo = Database::get()->selectSingle($sql,array(
-					':selector' => $rememberMeInfo[1]
-				));
+                    if (password_verify($rememberMeInfo[2], $tokenInfo['hashed_validator']))
+                    {
 
-				if (
-					isset($tokenInfo['hashed_validator']) &&
-					isset($tokenInfo['user_id']) &&
-					isset($rememberMeInfo[0]) &&
-					isset($rememberMeInfo[1]) &&
-					isset($rememberMeInfo[2])
-					) {
+                        $sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
 
+                        $rememberedEmail = Database::get()->selectSingle($sql, [
+                            ':userId' => $tokenInfo['user_id'],
+                        ], 'email');
 
-					if (password_verify($rememberMeInfo[2], $tokenInfo['hashed_validator'])) {
+                        $rememberedPassword = true;
 
-						$sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
+                        $rememberedUniverseID = $rememberMeInfo[0];
+                        $rememberedTokenSelector = $rememberMeInfo[1];
+                        $rememberedTokenValidator = $rememberMeInfo[2];
+                    }
+                }
 
-						$rememberedEmail = Database::get()->selectSingle($sql,array(
-							':userId' => $tokenInfo['user_id']
-						),'email');
+            }
 
-						$rememberedPassword = true;
+        }
 
-						$rememberedUniverseID = $rememberMeInfo[0];
-						$rememberedTokenSelector = $rememberMeInfo[1];
-						$rememberedTokenValidator = $rememberMeInfo[2];
-					}
-				}
+        $this->assign([
+            'code'                     => $loginCode,
+            'use_recaptcha_on_login'   => $config->use_recaptcha_on_login,
+            'csrfToken'                => $this->generateCSRFToken(),
+            'rememberedEmail'          => $rememberedEmail,
+            'rememberedPassword'       => $rememberedPassword,
+            'rememberedTokenValidator' => $rememberedTokenValidator,
+            'rememberedTokenSelector'  => $rememberedTokenSelector,
+            'rememberedUniverseID'     => $rememberedUniverseID,
+        ]);
 
-			}
-
-
-
-
-		}
-
-
-		$this->assign(array(
-			'code'					=> $loginCode,
-			'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
-			'csrfToken' => $this->generateCSRFToken(),
-			'rememberedEmail' => $rememberedEmail,
-			'rememberedPassword' => $rememberedPassword,
-			'rememberedTokenValidator' => $rememberedTokenValidator,
-			'rememberedTokenSelector' => $rememberedTokenSelector,
-			'rememberedUniverseID' => $rememberedUniverseID,
-		));
-
-
-
-		$this->display('page.index.default.tpl');
-	}
+        $this->display('page.index.default.tpl');
+    }
 }

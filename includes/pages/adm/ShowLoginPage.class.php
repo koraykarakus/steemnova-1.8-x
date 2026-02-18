@@ -15,88 +15,87 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 /**
  *
  */
 class ShowLoginPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        global $USER;
 
-	function __construct()
-	{
-		global $USER;
+        if ($USER['authlevel'] == AUTH_USR)
+        {
+            throw new PagePermissionException("Permission error!");
+        }
 
-		if ($USER['authlevel'] == AUTH_USR)
-		{
-		  throw new PagePermissionException("Permission error!");
-		}
+        parent::__construct();
+        $this->setWindow('login');
+    }
 
-		parent::__construct();
-		$this->setWindow('login');
-	}
+    public function show()
+    {
+        global $USER,$config;
 
-	function show(){
-		global $USER,$config;
+        $session = Session::create();
+        if ($session->adminAccess == 1)
+        {
+            $this->redirectTo('admin.php?page=overview');
+        }
 
-		$session	= Session::create();
-		if($session->adminAccess == 1)
-		{
-			$this->redirectTo('admin.php?page=overview');
-		}
+        $this->assign([
+            'bodyclass'                    => 'standalone',
+            'username'                     => $USER['username'],
+            'recaptchaEnable'              => $config->capaktiv,
+            'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
+            'recaptchaPublicKey'           => $config->cappublic,
+        ]);
 
+        $this->display('page.login.default.tpl');
 
-		$this->assign(array(
-			'bodyclass'	=> 'standalone',
-			'username'	=> $USER['username'],
-			'recaptchaEnable' => $config->capaktiv,
-			'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
-			'recaptchaPublicKey' => $config->cappublic,
-		));
+    }
 
-		$this->display('page.login.default.tpl');
+    public function validate()
+    {
+        global $USER, $LNG, $config;
 
-	}
+        $error = [];
 
+        $enteredPassword = HTTP::_GP('password', '', true);
 
-	function validate(){
-		global $USER, $LNG, $config;
+        if (!password_verify($enteredPassword, $USER['password']))
+        {
+            $error[] = $LNG['adm_bad_password'];
+        }
 
-		$error = array();
+        if ($config->capaktiv && $config->use_recaptcha_on_admin_login)
+        {
+            require('includes/libs/reCAPTCHA/src/autoload.php');
 
-		$enteredPassword = HTTP::_GP('password', '', true);
+            $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+            $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
+            if (!$resp->isSuccess())
+            {
+                $error[] = $LNG['adm_login_recaptcha_false'];
+            }
+        }
 
-		if (!password_verify($enteredPassword, $USER['password'])) {
-			$error[] = $LNG['adm_bad_password'];
-		}
+        if (empty($error))
+        {
 
+            $session = Session::create();
+            $session->adminAccess = 1;
 
+            $data = [];
+            $data['status'] = "redirect";
+            $this->sendJSON($data);
+        }
+        else
+        {
+            $error['status'] = "fail";
+            $this->sendJSON($error);
+        }
 
-		if ($config->capaktiv && $config->use_recaptcha_on_admin_login)
-		{
-      require('includes/libs/reCAPTCHA/src/autoload.php');
-
-      $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
-      $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
-      if (!$resp->isSuccess())
-      {
-          $error[]	= $LNG['adm_login_recaptcha_false'];
-      }
-		}
-
-		if (empty($error)) {
-
-			$session	= Session::create();
-			$session->adminAccess	= 1;
-
-			$data = array();
-			$data['status'] = "redirect";
-			$this->sendJSON($data);
-		}else {
-			$error['status'] = "fail";
-			$this->sendJSON($error);
-		}
-
-
-	}
+    }
 
 }

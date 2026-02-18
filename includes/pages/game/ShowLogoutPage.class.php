@@ -15,20 +15,19 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 class ShowLogoutPage extends AbstractGamePage
 {
-	public static $requireModule = 0;
+    public static $requireModule = 0;
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->setWindow('popup');
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setWindow('popup');
+    }
 
-	function show()
-	{
-		Session::load()->delete();
-		$this->display('page.logout.default.tpl');
-	}
+    public function show()
+    {
+        Session::load()->delete();
+        $this->display('page.logout.default.tpl');
+    }
 }

@@ -15,38 +15,37 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-
 /**
  *
  */
 class ShowPassEncripterPage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
 
-	function show(){
+        $this->assign([
 
+        ]);
 
-		$this->assign(array(
+        $this->display('page.passwordencripter.default.tpl');
+    }
 
-		));
+    public function send()
+    {
+        $Password = HTTP::_GP('md5q', '', true);
 
-		$this->display('page.passwordencripter.default.tpl');
-	}
+        $this->assign([
+            'md5_md5' => $Password,
+            'md5_enc' => PlayerUtil::cryptPassword($Password),
+        ]);
 
-	function send(){
-		$Password	= HTTP::_GP('md5q', '', true);
+        $this->display('page.passwordencripter.default.tpl');
 
-		$this->assign(array(
-			'md5_md5' 			=> $Password,
-			'md5_enc' 			=> PlayerUtil::cryptPassword($Password),
-		));
-
-		$this->display('page.passwordencripter.default.tpl');
-
-	}
+    }
 
 }

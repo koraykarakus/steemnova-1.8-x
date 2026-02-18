@@ -17,19 +17,19 @@
 
 class ShowBattleHallPage extends AbstractLoginPage
 {
-	public static $requireModule = 0;
+    public static $requireModule = 0;
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function show()
-	{
-		global $LNG;
-		$db = Database::get();
+    public function show()
+    {
+        global $LNG;
+        $db = Database::get();
 
-		$sql = "SELECT *, (
+        $sql = "SELECT *, (
 			SELECT DISTINCT
 			IF(%%TOPKB_USERS%%.username = '', GROUP_CONCAT(%%USERS%%.username SEPARATOR ' & '), GROUP_CONCAT(%%TOPKB_USERS%%.username SEPARATOR ' & '))
 			FROM %%TOPKB_USERS%%
@@ -44,28 +44,29 @@ class ShowBattleHallPage extends AbstractLoginPage
 		) as `defender`
 		FROM %%TOPKB%% WHERE `universe` = :universe ORDER BY units DESC LIMIT 100;";
 
-		$hallRaw = $db->select($sql, array(
-			':universe'	=> Universe::current(),
-		));
+        $hallRaw = $db->select($sql, [
+            ':universe' => Universe::current(),
+        ]);
 
-		$hallList	= array();
-		foreach($hallRaw as $hallRow) {
-			$hallList[]	= array(
-				'result'	=> $hallRow['result'],
-				'time'		=> _date($LNG['php_tdformat'], $hallRow['time']),
-				'units'		=> $hallRow['units'],
-				'rid'		=> $hallRow['rid'],
-				'attacker'	=> $hallRow['attacker'],
-				'defender'	=> $hallRow['defender'],
-			);
-		}
+        $hallList = [];
+        foreach ($hallRaw as $hallRow)
+        {
+            $hallList[] = [
+                'result'   => $hallRow['result'],
+                'time'     => _date($LNG['php_tdformat'], $hallRow['time']),
+                'units'    => $hallRow['units'],
+                'rid'      => $hallRow['rid'],
+                'attacker' => $hallRow['attacker'],
+                'defender' => $hallRow['defender'],
+            ];
+        }
 
-		$universeSelect	= $this->getUniverseSelector();
+        $universeSelect = $this->getUniverseSelector();
 
-		$this->assign(array(
-			'universeSelect'	=> $universeSelect,
-			'hallList'			=> $hallList,
-		));
-		$this->display('page.battleHall.default.tpl');
-	}
+        $this->assign([
+            'universeSelect' => $universeSelect,
+            'hallList'       => $hallList,
+        ]);
+        $this->display('page.battleHall.default.tpl');
+    }
 }

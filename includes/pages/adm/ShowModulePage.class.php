@@ -20,102 +20,103 @@
  */
 class ShowModulePage extends AbstractAdminPage
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct()
-	{
-		parent::__construct();
-	}
+    public function show()
+    {
 
-	function show(){
+        global $LNG;
 
-		global $LNG;
+        $config = Config::get(Universe::getEmulated());
 
-		$config	= Config::get(Universe::getEmulated());
+        $module = explode(';', $config->moduls);
 
-		$module	= explode(';', $config->moduls);
+        $IDs = range(0, MODULE_AMOUNT - 1);
 
-		$IDs	= range(0, MODULE_AMOUNT - 1);
+        foreach ($IDs as $ID => $Name)
+        {
+            $Modules[$ID] = [
+                'name'  => $LNG['modul_'.$ID],
+                'state' => isset($module[$ID]) ? $module[$ID] : 1,
+            ];
+        }
 
-		foreach($IDs as $ID => $Name) {
-			$Modules[$ID]	= array(
-				'name'	=> $LNG['modul_'.$ID],
-				'state'	=> isset($module[$ID]) ? $module[$ID] : 1,
-			);
-		}
+        asort($Modules);
 
-		asort($Modules);
+        $this->assign([
+            'Modules' => $Modules,
+        ]);
 
+        $this->display('page.modules.default.tpl');
 
-		$this->assign(array(
-			'Modules'				=> $Modules,
-		));
+    }
 
-		$this->display('page.modules.default.tpl');
+    public function change()
+    {
+        global $LNG;
 
-	}
+        $config = Config::get(Universe::getEmulated());
 
-	function change(){
-		global $LNG;
+        $type = HTTP::_GP('type', '');
+        $id = HTTP::_GP('id', 0);
+        $module = explode(';', $config->moduls);
 
-		$config	= Config::get(Universe::getEmulated());
+        if ($type == 'activate')
+        {
+            $module[$id] = 1;
+        }
+        else
+        {
+            $module[$id] = 0;
+        }
 
-		$type = HTTP::_GP('type','');
-		$id = HTTP::_GP('id',0);
-		$module	= explode(';', $config->moduls);
+        $config->moduls = implode(";", $module);
+        $config->save();
+        ClearCache();
 
+        $redirectButton = [];
+        $redirectButton[] = [
+            'url'   => 'admin.php?page=module&mode=show',
+            'label' => $LNG['uvs_back'],
+        ];
 
-		if ($type == 'activate') {
-			$module[$id] = 1;
-		}else {
-			$module[$id] = 0;
-		}
+        $this->printMessage($LNG['settings_successful'], $redirectButton);
 
-		$config->moduls = implode(";", $module);
-		$config->save();
-		ClearCache();
-
-		$redirectButton = array();
-		$redirectButton[] = array(
-			'url' => 'admin.php?page=module&mode=show',
-			'label' => $LNG['uvs_back']
-		);
-
-		$this->printMessage($LNG['settings_successful'],$redirectButton);
-
-	}
+    }
 
 }
 
-
 function ShowModulePage()
 {
-	global $LNG;
+    global $LNG;
 
-	$config	= Config::get(Universe::getEmulated());
-	$module	= explode(';', $config->moduls);
+    $config = Config::get(Universe::getEmulated());
+    $module = explode(';', $config->moduls);
 
+    $IDs = range(0, MODULE_AMOUNT - 1);
+    foreach ($IDs as $ID => $Name)
+    {
+        $Modules[$ID] = [
+            'name'  => $LNG['modul_'.$ID],
+            'state' => isset($module[$ID]) ? $module[$ID] : 1,
+        ];
+    }
 
+    asort($Modules);
+    $template = new template();
 
-	$IDs	= range(0, MODULE_AMOUNT - 1);
-	foreach($IDs as $ID => $Name) {
-		$Modules[$ID]	= array(
-			'name'	=> $LNG['modul_'.$ID],
-			'state'	=> isset($module[$ID]) ? $module[$ID] : 1,
-		);
-	}
+    $template->assign_vars([
+        'Modules'             => $Modules,
+        'mod_module'          => $LNG['mod_module'],
+        'mod_info'            => $LNG['mod_info'],
+        'mod_active'          => $LNG['mod_active'],
+        'mod_deactive'        => $LNG['mod_deactive'],
+        'mod_change_active'   => $LNG['mod_change_active'],
+        'mod_change_deactive' => $LNG['mod_change_deactive'],
+    ]);
 
-	asort($Modules);
-	$template	= new template();
-
-	$template->assign_vars(array(
-		'Modules'				=> $Modules,
-		'mod_module'			=> $LNG['mod_module'],
-		'mod_info'				=> $LNG['mod_info'],
-		'mod_active'			=> $LNG['mod_active'],
-		'mod_deactive'			=> $LNG['mod_deactive'],
-		'mod_change_active'		=> $LNG['mod_change_active'],
-		'mod_change_deactive'	=> $LNG['mod_change_deactive'],
-	));
-
-	$template->show('ModulePage.tpl');
+    $template->show('ModulePage.tpl');
 }
