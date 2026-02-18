@@ -26,6 +26,13 @@ class MissionCaseSpy extends MissionFunctions implements Mission
     {
         global $pricelist, $reslist, $resource, $USER;
 
+        $fail_return = function ()
+        {
+            $this->setState(FLEET_RETURN);
+            $this->SaveFleet();
+            return;
+        };
+
         $db = Database::get();
 
         $sql = 'SELECT * FROM %%USERS%% WHERE id = :userId;';
@@ -46,6 +53,15 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         $senderPlanetName = $db->selectSingle($sql, [
             ':planetId' => $this->_fleet['fleet_start_id'],
         ], 'name');
+
+        if (!$senderUser
+            || !$targetUser
+            || !$targetPlanet
+            || !$senderPlanetName)
+        {
+            $fail_return();
+            return;
+        }
 
         $LNG = $this->getLanguage($senderUser['lang']);
 
