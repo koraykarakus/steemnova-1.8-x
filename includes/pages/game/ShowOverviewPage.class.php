@@ -65,37 +65,6 @@ class ShowOverviewPage extends AbstractGamePage
         ];
     }
 
-    //testing bots, for future implementation
-    public function botsBuild()
-    {
-
-        $db = Database::get();
-
-        $sql = "SELECT * FROM %%USERS%% WHERE is_bot = 1 AND universe = :universe;";
-
-        $BOTUSERS = $db->select($sql, [
-            ':universe' => Universe::current(),
-        ]);
-
-        //select bot planets
-        $sql = "SELECT * FROM %%PLANETS%% WHERE is_bot = 1 AND universe = :universe;";
-
-        $BOTPLANETS = $db->select($sql, [
-            ':universe' => Universe::current(),
-        ]);
-
-        //update bot planets
-        //handle shipyard queue
-        //handle research queue
-        //handle building queue
-        //calculate production from time passed
-
-        //use metal,crystal deuterium for new build
-
-        //save
-
-    }
-
     public function changeNewsVisibility()
     {
 
@@ -159,9 +128,7 @@ class ShowOverviewPage extends AbstractGamePage
         }
         else
         {
-
             $buildInfo['buildings'] = false;
-
         }
 
         if (!empty($PLANET['b_hangar_id']))
@@ -182,9 +149,7 @@ class ShowOverviewPage extends AbstractGamePage
         }
         else
         {
-
             $buildInfo['fleet'] = false;
-
         }
 
         if ($USER['b_tech'] - TIMESTAMP > 0)
@@ -203,9 +168,7 @@ class ShowOverviewPage extends AbstractGamePage
         }
         else
         {
-
             $buildInfo['tech'] = false;
-
         }
 
         $sql = "SELECT id,username FROM %%USERS%% WHERE universe = :universe AND onlinetime >= :onlinetime AND authlevel > :authlevel;";
@@ -276,7 +239,9 @@ class ShowOverviewPage extends AbstractGamePage
             );
         }
 
-        $sql = "SELECT COUNT(*) as count FROM %%USERS%% WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
+        $sql = "SELECT COUNT(*) as count FROM %%USERS%% 
+        WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
+
         $usersOnline = $db->selectSingle($sql, [], 'count');
 
         $sql = "SELECT COUNT(*) as count FROM %%FLEETS%%;";
