@@ -44,14 +44,17 @@ $pageObj = new $pageClass();
 // can't use $pageObj::$requireModule
 $pageProps = get_class_vars(get_class($pageObj));
 
-if (isset($pageProps['requireModule']) && $pageProps['requireModule'] !== 0 && !isModuleAvailable($pageProps['requireModule']))
+if (isset($pageProps['requireModule'])
+    && $pageProps['requireModule'] !== 0
+    && !isModuleAvailable($pageProps['requireModule']))
 {
     ShowErrorPage::printError($LNG['sys_module_inactive']);
 }
 
 if (!is_callable([$pageObj, $mode]))
 {
-    if (!isset($pageProps['defaultController']) || !is_callable([$pageObj, $pageProps['defaultController']]))
+    if (!isset($pageProps['defaultController'])
+        || !is_callable([$pageObj, $pageProps['defaultController']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
