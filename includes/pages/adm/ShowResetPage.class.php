@@ -23,9 +23,7 @@ class ShowResetPage extends AbstractAdminPage
     }
     public function show()
     {
-        global $LNG, $reslist, $resource;
-
-        $config = Config::get(ROOT_UNI);
+        global $LNG;
 
         $this->assign([
             'button_submit'                  => $LNG['button_submit'],
@@ -69,6 +67,8 @@ class ShowResetPage extends AbstractAdminPage
     public function send()
     {
         global $reslist, $resource, $LNG;
+
+        $config = Config::get(Universe::getEmulated());
 
         foreach ($reslist['build'] as $ID)
         {
@@ -136,123 +136,308 @@ class ShowResetPage extends AbstractAdminPage
         $deleteMessages = (HTTP::_GP('messages', 'off') == 'on') ? true : false;
         $deleteStatpoints = (HTTP::_GP('statpoints', 'off') == 'on') ? true : false;
 
-        #players
+        $db = Database::get();
+
+        // delete players and their planets, keep admins.
         if ($deletePlayers)
         {
-            $ID = $GLOBALS['DATABASE']->getFirstCell("SELECT `id_owner` FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `galaxy` = '1' AND `system` = '1' AND `planet` = '1';");
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".USERS." WHERE `universe` = ".Universe::getEmulated()." AND `id` != '".$ID."';DELETE FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `id_owner` != '".$ID."';");
+            $sql = "DELETE FROM %%USERS%% WHERE authlevel = 0 AND universe = :universe;";
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
+            // delete planets of players.
+            $sql = "DELETE FROM %%PLANETS%% 
+                    WHERE universe = :universe 
+                    AND id NOT IN (
+                        SELECT id_planet FROM %%USERS%% WHERE universe = :universe AND authlevel != 0
+                    );";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
-        #planets
+        // delete planets, not
         if ($deletePlanets)
         {
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".PLANETS." WHERE `universe` = ".Universe::getEmulated()." AND `id` NOT IN (SELECT id_planet FROM ".USERS." WHERE `universe` = ".Universe::getEmulated().");UPDATE ".PLANETS." SET `id_luna` = '0' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%PLANETS%% 
+                    WHERE universe = :universe 
+                    AND id NOT IN (
+                        SELECT id_planet FROM %%USERS%% WHERE universe = :universe
+                    )";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
+            $sql = "UPDATE %%PLANETS%% SET id_luna = '0' WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
         }
 
-        #moons
+        // delete moons
         if ($deleteMoons)
         {
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".PLANETS." WHERE `planet_type` = '3' AND `universe` = ".Universe::getEmulated().";UPDATE ".PLANETS." SET `id_luna` = '0' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%PLANETS%% 
+            WHERE planet_type = 3 
+            AND universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
+            $sql = "UPDATE %%PLANETS%% 
+            SET id_luna = 0 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
-        # shipyard & defenses
+        // delete shipyard & defenses
         if ($deleteDefenses)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ", $dbcol['defense'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET " . implode(", ", $dbcol['defense']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
+        // delete ships
         if ($deleteShips)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ", $dbcol['fleet'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET " . implode(", ", $dbcol['fleet']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteHd)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET `b_hangar` = '0', `b_hangar_id` = '' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET b_hangar = :b_hangar, b_hangar_id = :b_hangar_id 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':b_hangar'    => 0,
+                ':b_hangar_id' => '',
+                ':universe'    => Universe::getEmulated(),
+            ]);
         }
 
-        # buildings
+        // fix terra bugs.
         if ($deleteEdif_p)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ", $dbcol['build']).", `field_current` = '0' WHERE `planet_type` = '1' AND `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET " . implode(", ", $dbcol['build']) . ", 
+            field_current = :field_current
+            WHERE planet_type = :planet_type 
+            AND universe = :universe";
+
+            $db->update($sql, [
+                ':field_current' => 0,
+                ':planet_type'   => 1,
+                ':universe'      => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteEdif_l)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ", $dbcol['build']).", `field_current` = '0' WHERE `planet_type` = '3' AND `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET " . implode(", ", $dbcol['build']) . ", 
+            field_current = :field_current WHERE planet_type = :planet_type 
+            AND universe = :universe";
+
+            $db->update($sql, [
+                ':field_current' => 0,
+                ':planet_type'   => 3,
+                ':universe'      => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteEdif)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET `b_building` = '0', `b_building_id` = '' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% SET b_building = :b_building, b_building_id = :b_building_id 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':b_building'    => 0,
+                ':b_building_id' => '',
+                ':universe'      => Universe::getEmulated(),
+            ]);
         }
 
-        # research & officers
+        // research & officers
         if ($deleteInves)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ", $dbcol['tech'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%USERS%% 
+            SET " . implode(", ", $dbcol['tech']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteOfis)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ", $dbcol['officier'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%USERS%% 
+            SET " . implode(", ", $dbcol['officier']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteInves_c)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `b_tech_planet` = '0', `b_tech` = '0', `b_tech_id` = '0', `b_tech_queue` = '' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%USERS%% 
+            SET b_tech_planet = :b_tech_planet,
+            b_tech = :b_tech,
+            b_tech_id = :b_tech_id,
+            b_tech_queue = :b_tech_queue
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':b_tech_planet' => 0,
+                ':b_tech'        => 0,
+                ':b_tech_id'     => 0,
+                ':b_tech_queue'  => '',
+                ':universe'      => Universe::getEmulated(),
+            ]);
         }
 
-        # Resources
+        // Resources
         if ($deleteDark)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".USERS." SET ".implode(", ", $dbcol['resource_user_start'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%USERS%% 
+            SET " . implode(", ", $dbcol['resource_user_start']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteResources)
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(", ", $dbcol['resource_planet_start'])." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "UPDATE %%PLANETS%% 
+            SET " . implode(", ", $dbcol['resource_planet_start']) . " 
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
-        // GENERAL
+        // notes
         if ($deleteNotes)
         {
-            $GLOBALS['DATABASE']->query("DELETE FROM ".NOTES." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%NOTES%% WHERE universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteRW)
         {
-            $GLOBALS['DATABASE']->query("DELETE FROM ".TOPKB." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%TOPKB%% WHERE universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteFriends)
         {
-            $GLOBALS['DATABASE']->query("DELETE FROM ".BUDDY." WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%BUDDY%% WHERE universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteAlliances)
         {
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".ALLIANCE." WHERE `ally_universe` = '".Universe::getEmulated()."';UPDATE ".USERS." SET `ally_id` = '0', `ally_register_time` = '0', `ally_rank_id` = '0' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%ALLIANCE%% 
+            WHERE ally_universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
+            $sql = "UPDATE %%USERS%% 
+            SET ally_id = :ally_id,
+            ally_register_time = :ally_register_time,
+            ally_rank_id = :ally_rank_id
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':ally_id'            => 0,
+                ':ally_register_time' => 0,
+                ':ally_rank_id'       => 0,
+                ':universe'           => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteFleets)
         {
-            $GLOBALS['DATABASE']->query("DELETE FROM ".FLEETS." WHERE `fleet_universe` = '".Universe::getEmulated()."';");
+            $sql = "DELETE FROM %%FLEETS%% 
+            WHERE fleet_universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteBanneds)
         {
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".BANNED." WHERE `universe` = ".Universe::getEmulated().";UPDATE ".USERS." SET `bana` = '0', `banaday` = '0' WHERE `universe` = ".Universe::getEmulated().";");
+            $sql = "DELETE FROM %%BANNED%% 
+            WHERE universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
+
+            $sql = "UPDATE %%USERS%% 
+            SET bana = :bana, 
+            banaday = :banaday
+            WHERE universe = :universe";
+
+            $db->update($sql, [
+                ':bana'     => 0,
+                ':banaday'  => 0,
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteMessages)
         {
-            $GLOBALS['DATABASE']->multi_query("DELETE FROM ".MESSAGES." WHERE `message_universe` = '".Universe::getEmulated()."';");
+            $sql = "DELETE FROM %%MESSAGES%% 
+            WHERE message_universe = :universe";
+
+            $db->delete($sql, [
+                ':universe' => Universe::getEmulated(),
+            ]);
         }
 
         if ($deleteStatpoints)
         {
-            $GLOBALS['DATABASE']->query("DELETE FROM ".STATPOINTS." WHERE `universe` = ".Universe::getEmulated().";");
+            // TODO : fix
+            // if stat points is removed user should also be removed.
         }
 
         $this->printMessage($LNG['re_reset_excess']);
