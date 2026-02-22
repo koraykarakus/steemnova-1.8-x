@@ -67,8 +67,10 @@ require 'includes/classes/class.theme.php';
 require 'includes/classes/class.template.php';
 require 'includes/classes/BBCode.class.php';
 
+/* safe cookie support for old browsers like IE 6 - 9
 // Say Browsers to Allow ThirdParty Cookies (Thanks to morktadela)
 HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+*/
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 if (MODE === 'INSTALL')
