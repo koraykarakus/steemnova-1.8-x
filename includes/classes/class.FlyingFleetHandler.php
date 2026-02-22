@@ -74,7 +74,7 @@ class FlyingFleetHandler
 
             $path = 'includes/classes/missions/'.$missionName.'.class.php';
             require_once $path;
-            /** @var $missionObj Mission */
+            /** @var Mission $missionObj */
             $missionObj = new $missionName($fleetRow);
 
             switch ($fleetRow['fleet_mess'])

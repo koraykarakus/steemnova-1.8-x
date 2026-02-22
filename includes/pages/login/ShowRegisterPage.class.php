@@ -47,7 +47,7 @@ class ShowRegisterPage extends AbstractLoginPage
             $path = 'includes/extauth/'.$externalAuth['method'].'.class.php';
             require($path);
             $methodClass = ucwords($externalAuth['method']).'Auth';
-            /** @var $authObj externalAuth */
+            /** @var externalAuth $authObj */
             $authObj = new $methodClass();
 
             if (!$authObj->isActiveMode())
@@ -256,7 +256,7 @@ class ShowRegisterPage extends AbstractLoginPage
             require($path);
 
             $methodClass = ucwords($externalAuthMethod).'Auth';
-            /** @var $authObj externalAuth */
+            /** @var externalAuth $authObj */
             $authObj = new $methodClass();
             $externalAuthUID = 0;
             if ($authObj->isActiveMode() && $authObj->isValid())

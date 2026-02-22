@@ -103,7 +103,7 @@ class Database
 
         $qry = str_replace($this->dbTableNames['keys'], $this->dbTableNames['names'], $qry);
 
-        /** @var $stmt PDOStatement */
+        /** @var PDOStatement $stmt */
         $stmt = $this->dbHandle->prepare($qry);
 
         if (isset($params[':limit']) || isset($params[':offset']))
@@ -283,7 +283,7 @@ class Database
 
         $qry = str_replace($this->dbTableNames['keys'], $this->dbTableNames['names'], $qry);
 
-        /** @var $stmt PDOStatement */
+        /** @var PDOStatement $stmt */
         $stmt = $this->dbHandle->query($qry);
 
         $this->rowCount = $stmt->rowCount();

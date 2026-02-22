@@ -129,7 +129,7 @@ switch ($mode)
         $fileRevision = 0;
 
         $directoryIterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
-        /** @var $fileInfo DirectoryIterator */
+        /** @var DirectoryIterator $fileInfo */
         foreach ($directoryIterator as $fileInfo)
         {
             if (!$fileInfo->isFile() || !preg_match('/^migration_\d+/', $fileInfo->getFilename()))
@@ -200,7 +200,7 @@ switch ($mode)
         $revision = $dbVersion;
         $fileList = [];
         $directoryIterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
-        /** @var $fileInfo DirectoryIterator */
+        /** @var DirectoryIterator $fileInfo */
         foreach ($directoryIterator as $fileInfo)
         {
             if (!$fileInfo->isFile())

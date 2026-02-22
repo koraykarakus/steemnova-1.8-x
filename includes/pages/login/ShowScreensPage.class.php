@@ -30,7 +30,7 @@ class ShowScreensPage extends AbstractLoginPage
         $directoryIterator = new DirectoryIterator('styles/resource/images/login/screens/');
         foreach ($directoryIterator as $fileInfo)
         {
-            /** @var $fileInfo DirectoryIterator */
+            /** @var DirectoryIterator $fileInfo */
             if (!$fileInfo->isFile())
             {
                 continue;

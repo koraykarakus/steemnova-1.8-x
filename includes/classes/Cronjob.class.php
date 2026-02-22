@@ -52,7 +52,7 @@ class Cronjob
         // die hard, if file not exists.
         require_once($cronjobPath);
 
-        /** @var $cronjobObj CronjobTask */
+        /** @var CronjobTask $cronjobObj  */
         $cronjobObj = new $cronjobClassName();
         $cronjobObj->run();
 

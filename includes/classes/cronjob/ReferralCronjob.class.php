@@ -25,7 +25,7 @@ class ReferralCronJob implements CronjobTask
         {
             return null;
         }
-        /** @var $langObjects Language[] */
+        /** @var Language[] $langObjects */
         $langObjects = [];
 
         $db = Database::get();

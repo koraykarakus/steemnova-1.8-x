@@ -30,7 +30,7 @@ class ShowSteemconnectPage extends AbstractLoginPage
 
         $methodClass = 'SteemconnectAuth';
 
-        /** @var $authObj externalAuth */
+        /** @var externalAuth $authObj */
         $authObj = new $methodClass();
 
         if (!$authObj->isActiveMode())

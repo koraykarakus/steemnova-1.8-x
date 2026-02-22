@@ -27,7 +27,7 @@ class InactiveMailCronjob
 
         if ($config->mail_active == 1)
         {
-            /** @var $langObjects Language[] */
+            /** @var Language[] $langObjects */
             $langObjects = [];
 
             require 'includes/classes/Mail.class.php';

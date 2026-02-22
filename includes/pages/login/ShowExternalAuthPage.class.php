@@ -42,7 +42,7 @@ class ShowExternalAuthPage extends AbstractLoginPage
 
         $methodClass = ucwords($method).'Auth';
 
-        /** @var $authObj externalAuth */
+        /** @var externalAuth $authObj */
         $authObj = new $methodClass();
 
         if (!$authObj->isActiveMode())

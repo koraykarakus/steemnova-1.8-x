@@ -99,7 +99,7 @@ class Cache
         $path = 'includes/classes/cache/builder/'.$className.'.class.php';
         require_once $path;
 
-        /** @var $cacheBuilder BuildCache */
+        /** @var BuildCache $cacheBuilder  */
         $cacheBuilder = new $className();
         $cacheData = $cacheBuilder->buildCache();
         $cacheData = (array) $cacheData;
