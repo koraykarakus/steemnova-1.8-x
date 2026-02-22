@@ -64,10 +64,10 @@ class ShowAutoExpeditionPage extends AbstractGamePage
         }
 
         //variable $j is used to put time between expedition fleets
-        $j = 0;
 
         $PlanetRess = new ResourceUpdate();
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userId AND destruyed = '0' AND id = :planetId";
+        $sql = "SELECT * FROM %%PLANETS%% 
+                WHERE id_owner = :userId AND destruyed = '0' AND id = :planetId";
 
         $PlanetsRAW = $db->select($sql, [
             ':userId'   => $USER['id'],
@@ -81,9 +81,10 @@ class ShowAutoExpeditionPage extends AbstractGamePage
             unset($CPLANET);
         }
 
-        $sql = "SELECT COUNT(*) as count FROM %%FLEETS%%
-    WHERE fleet_mission = 1 AND fleet_target_owner = :uid AND hasCanceled = 0 AND fleet_mess = 0
-    AND fleet_start_time < :limitTime";
+        $sql = 'SELECT COUNT(*) as count FROM %%FLEETS%%
+                WHERE fleet_mission = 1 AND fleet_target_owner = :uid 
+                AND hasCanceled = 0 AND fleet_mess = 0
+                AND fleet_start_time < :limitTime';
 
         $attack = $db->selectSingle($sql, [
             ':uid'       => $USER['id'],
@@ -107,31 +108,26 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
         $targetType = 1;
         $targetMission = 15;
-        $fleetSpeed = 10; //10 = %100 , 9 = %90,..
+        // percentage speed, 10 = %100 , 9 = %90,..
+        $fleetSpeed = 10;
         $fleetGroup = 0;
         $targetPlanetData = ['id' => 0, 'id_owner' => 0, 'planettype' => 1];
 
         $fleet = [];
         $possible = min($room, $maxExpSlots - $activeExpedition);
 
-        $i = 0;
-
-        foreach ($reslist['fleet'] as $fkey => $fval)
+        foreach ($reslist['fleet'] as $elementID)
         {
 
-            if ($fval == 212 || $fval == 221 || floor($PLANET[$resource[$fval]] / $possible) == 0)
+            if ($elementID == 212
+                || $elementID == 221
+                || floor($PLANET[$resource[$elementID]] / $possible) == 0)
             {
                 continue;
             }
 
-            /* future concerns
-            if (!in_array($fval,unserialize($USER['auto_expedition_ship_types']))) {
-              continue;
-            }
-            */
-
             $fleet = $fleet + [
-                $fval => floor($PLANET[$resource[$fval]] / $possible),
+                $elementID => floor($PLANET[$resource[$elementID]] / $possible),
             ];
         }
 
@@ -140,25 +136,14 @@ class ShowAutoExpeditionPage extends AbstractGamePage
             $this->printMessage($LNG['ae_error_4']);
         }
 
+        $timeBetweenFleets = 0;
         for ($i = 0; $i < $possible; $i++)
         {
-
-            $MisInfo = [
-                'galaxy'     => $targetGalaxy,
-                'system'     => $targetSystem,
-                'planet'     => $targetPlanet,
-                'planettype' => $targetType,
-                'IsAKS'      => $fleetGroup,
-                'Ship'       => $fleet,
-            ];
-
-            $MissionOutput = FleetFunctions::GetFleetMissions($USER, $MisInfo, $targetPlanetData);
             $GameSpeedFactor = FleetFunctions::GetGameSpeedFactor();
             $MaxFleetSpeed = FleetFunctions::GetFleetMaxSpeed($fleet, $USER);
             $distance = FleetFunctions::GetTargetDistance([$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']], [$targetGalaxy, $targetSystem, $targetPlanet]);
             $duration = FleetFunctions::GetMissionDuration($fleetSpeed, $MaxFleetSpeed, $distance, $GameSpeedFactor, $USER);
             $consumption = FleetFunctions::GetFleetConsumption($fleet, $duration, $distance, $USER, $GameSpeedFactor);
-            $availableMissions = FleetFunctions::GetFleetMissions($USER, $MisInfo, $targetPlanetData);
 
             $Staytime = HTTP::_GP('staytime', 0);
 
@@ -176,7 +161,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
             $token = getRandomString();
             $_SESSION['fleet'][$token] = [
-                'time'         => TIMESTAMP + $j,
+                'time'         => TIMESTAMP + $timeBetweenFleets,
                 'fleet'        => $fleet,
                 'fleetRoom'    => 0,
                 'speed'        => $MaxFleetSpeed,
@@ -190,17 +175,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
                 'ownPlanet'    => $PLANET['id'],
             ];
 
-            $targetPlayerData = [
-                'id'            => 0,
-                'onlinetime'    => TIMESTAMP,
-                'ally_id'       => 0,
-                'urlaubs_modus' => 0,
-                'authattack'    => 0,
-                'total_points'  => 0,
-                'lang'          => "en",
-            ];
-
-            $fleetStartTime = $duration + TIMESTAMP + $j;
+            $fleetStartTime = $duration + TIMESTAMP + $timeBetweenFleets;
             $fleetStayTime = $fleetStartTime + $StayDuration;
             $fleetEndTime = $fleetStayTime + $duration;
 
@@ -232,16 +207,12 @@ class ShowAutoExpeditionPage extends AbstractGamePage
                 $fleetGroup,
                 0,
                 0,
-                0,
-                $USER['lang'],
-                $targetPlayerData['lang'],
-                $PLANET['name'],
-                $LNG['gl_infinite_aways']
+                0
             );
 
             $PLANET['deuterium'] = $PLANET['deuterium'] - $consumption;
 
-            $j += 10;
+            $timeBetweenFleets += 10;
 
         }
 
