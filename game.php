@@ -23,11 +23,10 @@ require_once('includes/libs/BBCodeParser2/HTML/BBCodeParser2.php');
 require 'includes/pages/game/AbstractGamePage.class.php';
 require 'includes/pages/game/ShowErrorPage.class.php';
 require 'includes/common.php';
-/** @var $LNG Language */
 
 $page = HTTP::_GP('page', 'overview');
 $mode = HTTP::_GP('mode', 'show');
-$page = str_replace(array('_', '\\', '/', '.', "\0"), '', $page);
+$page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $pageClass = 'Show'.ucwords($page).'Page';
 
 $path = 'includes/pages/game/'.$pageClass.'.class.php';
@@ -45,13 +44,14 @@ $pageObj = new $pageClass();
 // can't use $pageObj::$requireModule
 $pageProps = get_class_vars(get_class($pageObj));
 
-if (isset($pageProps['requireModule']) && $pageProps['requireModule'] !== 0 && !isModuleAvailable($pageProps['requireModule'])){
+if (isset($pageProps['requireModule']) && $pageProps['requireModule'] !== 0 && !isModuleAvailable($pageProps['requireModule']))
+{
     ShowErrorPage::printError($LNG['sys_module_inactive']);
 }
 
-if (!is_callable(array($pageObj, $mode)))
+if (!is_callable([$pageObj, $mode]))
 {
-    if (!isset($pageProps['defaultController']) || !is_callable(array($pageObj, $pageProps['defaultController'])))
+    if (!isset($pageProps['defaultController']) || !is_callable([$pageObj, $pageProps['defaultController']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
