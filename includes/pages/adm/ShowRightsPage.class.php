@@ -29,8 +29,7 @@ class ShowRightsPage extends AbstractAdminPage
 
     public function show()
     {
-
-        global $LNG, $USER;
+        global $LNG;
 
         $type = HTTP::_GP('type', '');
 
@@ -79,14 +78,14 @@ class ShowRightsPage extends AbstractAdminPage
 
     public function rights()
     {
-
-        global $USER;
+        global $USER, $LNG;
 
         $db = Database::get();
 
         $id = HTTP::_GP('id_1', 0);
 
-        if ($USER['id'] != ROOT_USER && $id == ROOT_USER)
+        if ($USER['id'] != ROOT_USER
+            && $id == ROOT_USER)
         {
             $this->printMessage($LNG['ad_authlevel_error_3'], '?page=rights&mode=rights&sid='.session_id());
         }
@@ -98,7 +97,15 @@ class ShowRightsPage extends AbstractAdminPage
 
         if ($_POST['action'] == 'send')
         {
-            $GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `rights` = '".serialize(array_map('intval', $_POST['rights']))."' WHERE `id` = '".$id."';");
+            $sql = "UPDATE %%USERS%% 
+            SET rights = :rights 
+            WHERE id = :id";
+
+            $db->update($sql, [
+                ':rights' => serialize(array_map('intval', $_POST['rights'])),
+                ':id'     => (int)$id,
+            ]);
+
         }
 
         $sql = "SELECT rights FROM %%USERS%% WHERE id = :userId;";
@@ -130,7 +137,6 @@ class ShowRightsPage extends AbstractAdminPage
 
     public function users()
     {
-
         global $LNG;
 
         $this->tplObj->loadscript('./scripts/game/filterlist.js');
@@ -156,12 +162,22 @@ class ShowRightsPage extends AbstractAdminPage
                 break;
         }
 
-        $QueryUsers = $GLOBALS['DATABASE']->query("SELECT `id`, `username`, `authlevel` FROM ".USERS." WHERE `universe` = '".Universe::getEmulated()."'".$WHEREUSERS.";");
+        $sql = "SELECT id, username, authlevel 
+        FROM %%USERS%% 
+        WHERE universe = :universe " . $WHEREUSERS;
+
+        $QueryUsers = Database::get()->select($sql, [
+            ':universe' => Universe::getEmulated(),
+        ]);
 
         $UserList = "";
-        while ($List = $GLOBALS['DATABASE']->fetch_array($QueryUsers))
+        foreach ($QueryUsers as $List)
         {
-            $UserList .= '<option value="'.$List['id'].'">'.$List['username'].'&nbsp;&nbsp;('.$LNG['rank_'.$List['authlevel']].')</option>';
+            $UserList .= '<option value="'.(int)$List['id'].'">'
+                .htmlspecialchars($List['username'], ENT_QUOTES, 'UTF-8')
+                .'&nbsp;&nbsp;('
+                .$LNG['rank_'.$List['authlevel']]
+                .')</option>';
         }
 
         $this->assign([
@@ -191,7 +207,6 @@ class ShowRightsPage extends AbstractAdminPage
         global $USER, $LNG;
 
         $id = HTTP::_GP('id_1', 0);
-        $authlevel = HTTP::_GP('authlevel', 0);
 
         if ($id == 0)
         {
