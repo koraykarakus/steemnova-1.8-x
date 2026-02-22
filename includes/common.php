@@ -73,9 +73,7 @@ define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 if (MODE === 'INSTALL')
 {
-
     $THEME = new Theme($install = true);
-
     return;
 }
 
@@ -90,9 +88,7 @@ $THEME = new Theme($install = false);
 try
 {
     $sql = "SELECT dbVersion FROM %%SYSTEM%%;";
-
     $dbVersion = Database::get()->selectSingle($sql, [], 'dbVersion');
-
     $dbNeedsUpgrade = $dbVersion < DB_VERSION_REQUIRED;
 }
 catch (Exception $e)
@@ -130,7 +126,12 @@ if (MODE === 'INGAME'
 {
     $session = Session::load();
 
-    if (!(!$session->isValidSession() && isset($_GET['page']) && $_GET['page'] == "raport" && isset($_GET['raport']) && count($_GET) == 2 && MODE === 'INGAME'))
+    if (!(!$session->isValidSession()
+        && isset($_GET['page'])
+        && $_GET['page'] == "raport"
+        && isset($_GET['raport'])
+        && count($_GET) == 2
+        && MODE === 'INGAME'))
     {
         if (!$session->isValidSession())
         {
