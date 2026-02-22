@@ -171,7 +171,7 @@ class template extends Smarty
             'mes'      => $mes,
             'fcm_info' => $LNG['fcm_info'],
             'Fatal'    => $Fatal,
-            'dpath'    => $THEME->getTheme(),
+            'dpath'    => $THEME->getThemePath(),
         ]);
 
         $this->gotoside($dest, $time);

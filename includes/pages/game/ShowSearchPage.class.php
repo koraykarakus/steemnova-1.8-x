@@ -227,7 +227,7 @@ class ShowSearchPage extends AbstractGamePage
 
         $this->assign([
             'searchList' => $searchList,
-            'dpath'      => $THEME->getTheme(),
+            'dpath'      => $THEME->getThemePath(),
         ]);
 
         $templateSuffix = ($seachMode === "allyname" || $seachMode === "allytag") ? "ally" : "default";

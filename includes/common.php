@@ -75,7 +75,8 @@ define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 if (MODE === 'INSTALL')
 {
-    $THEME = new Theme($install = true);
+    $THEME = new Theme();
+    $THEME->setUserTheme('nova');
     return;
 }
 
@@ -84,8 +85,6 @@ if (!file_exists('includes/config.php')
 {
     HTTP::redirectTo('install/index.php');
 }
-
-$THEME = new Theme($install = false);
 
 try
 {
@@ -169,8 +168,14 @@ if (MODE === 'INGAME'
         ':userId' => $session->userId,
     ]);
 
-    $THEME = new Theme($install = false);
+    $THEME = new Theme();
+    if (!empty($USER))
+    {
+        $THEME->setUserTheme($USER['dpath']);
+    }
 
+    // copy paste sharing link with friend who is not logged in
+    // this should be handled better.
     if (!$session->isValidSession()
         && isset($_GET['page'])
         && $_GET['page'] == "raport"
@@ -178,12 +183,16 @@ if (MODE === 'INGAME'
         && count($_GET) == 2
         && MODE === 'INGAME')
     {
+        // create dummy user.
+        $USER = [];
         $USER['lang'] = 'en';
         $USER['bana'] = 0;
         $USER['timezone'] = "Europe/Berlin";
         $USER['urlaubs_modus'] = 0;
         $USER['authlevel'] = 0;
         $USER['id'] = 0;
+        $USER['dpath'] = 'gow';
+        $USER['show_fleets_active'] = false;
     }
 
     if (!(!$session->isValidSession()
@@ -201,7 +210,6 @@ if (MODE === 'INGAME'
 
     $LNG = new Language($USER['lang']);
     $LNG->includeData(['L18N', 'INGAME', 'TECH', 'CUSTOM']);
-    //if(!empty($USER['dpath'])) { $THEME->setUserTheme($USER['dpath']); }
 
     if ($config->game_disable == 0
         && $USER['authlevel'] == AUTH_USR)

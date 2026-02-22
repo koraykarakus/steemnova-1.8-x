@@ -17,120 +17,81 @@
 
 class Theme
 {
-    public static $Themes;
-    private $THEMESETTINGS;
-    private $skininfo;
-    private $skin;
-    private $customtpls;
+    public static array $theme_array = [];
+    private array $theme_settings = [];
 
-    public function __construct($install = false)
+    // default theme is nova.
+    private string $theme = 'nova';
+
+    private $custom_tpls;
+
+    public function setUserTheme($inputTheme): void
     {
-        global $USER;
-        $this->skininfo = [];
-
-        if (!$install)
+        if (empty($inputTheme))
         {
-            $config = Config::get();
-            if ($config->let_users_change_theme && isset($USER))
-            {
-
-                $this->skin = $USER['dpath'];
-
-            }
-            else
-            {
-
-                $this->skin = $config->server_default_theme;
-
-            }
-
-        }
-        else
-        {
-            $this->skin = "nova";
+            return;
         }
 
-        $this->setUserTheme($this->skin);
-    }
-
-    public function isHome()
-    {
-        $this->template = ROOT_PATH.'styles/home/';
-        $this->customtpls = [];
-    }
-
-    public function setUserTheme($Theme)
-    {
-        if (!file_exists(ROOT_PATH.'styles/theme/'.$Theme.'/style.cfg'))
+        if (!file_exists(ROOT_PATH.'styles/theme/'.$inputTheme.'/style.cfg'))
         {
-            return false;
+            return;
         }
 
-        $this->skin = $Theme;
+        $this->theme = $inputTheme;
         $this->parseStyleCFG();
         $this->setStyleSettings();
     }
 
-    public function getTheme()
+    public function getThemePath()
     {
-        return './styles/theme/'.$this->skin.'/';
-    }
-
-    public function getThemeName()
-    {
-        return $this->skin;
+        return './styles/theme/'.$this->theme.'/';
     }
 
     public function getTemplatePath()
     {
-        return ROOT_PATH.'/styles/templates/'.$this->skin.'/';
+        return ROOT_PATH.'/styles/templates/'.$this->theme.'/';
     }
 
     public function isCustomTPL($tpl)
     {
-        if (!isset($this->customtpls))
+        if (!isset($this->custom_tpls))
         {
             return false;
         }
 
-        return in_array($tpl, $this->customtpls);
+        return in_array($tpl, $this->custom_tpls);
     }
 
-    public function parseStyleCFG()
+    private function parseStyleCFG()
     {
-        require(ROOT_PATH.'styles/theme/'.$this->skin.'/style.cfg');
-        $this->skininfo = $Skin;
-        $this->customtpls = (array) $Skin['templates'];
+        require(ROOT_PATH.'styles/theme/'.$this->theme.'/style.cfg');
+        // get $Skin array from style.cfg of related theme
+        $this->custom_tpls = (array) $Skin['templates'];
     }
 
-    public function setStyleSettings()
+    private function setStyleSettings()
     {
-        if (file_exists(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg'))
+        if (file_exists(ROOT_PATH.'styles/theme/'.$this->theme.'/settings.cfg'))
         {
-            require(ROOT_PATH.'styles/theme/'.$this->skin.'/settings.cfg');
+            require(ROOT_PATH.'styles/theme/'.$this->theme.'/settings.cfg');
         }
 
-        $this->THEMESETTINGS = array_merge([
-            'PLANET_ROWS_ON_OVERVIEW' => 2,
-            'SHORTCUT_ROWS_ON_FLEET1' => 2,
-            'COLONY_ROWS_ON_FLEET1'   => 2,
-            'ACS_ROWS_ON_FLEET1'      => 1,
-            'TOPNAV_SHORTLY_NUMBER'   => 0,
-        ], $THEMESETTINGS);
+        /** @var Array $THEMESETTINGS */
+        $this->theme_settings = $THEMESETTINGS;
     }
 
     public function getStyleSettings()
     {
-        return $this->THEMESETTINGS;
+        return $this->theme_settings;
     }
 
-    public static function getAvalibleSkins()
+    public static function getAvalibleSkins(): array
     {
-        if (!isset(self::$Themes))
+        if (empty(self::$theme_array))
         {
             if (file_exists(ROOT_PATH.'cache/cache.themes.php'))
             {
-                self::$Themes = unserialize(file_get_contents(ROOT_PATH.'cache/cache.themes.php'));
+                self::$theme_array = unserialize(file_get_contents(ROOT_PATH.'cache/cache.themes.php'));
             }
             else
             {
@@ -147,10 +108,10 @@ class Theme
                     $Themes[$Theme] = $Skin['name'];
                 }
                 file_put_contents(ROOT_PATH.'cache/cache.themes.php', serialize($Themes));
-                self::$Themes = $Themes;
+                self::$theme_array = $Themes;
             }
         }
 
-        return self::$Themes;
+        return self::$theme_array;
     }
 }

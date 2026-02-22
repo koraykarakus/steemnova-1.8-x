@@ -53,6 +53,13 @@ abstract class AbstractGamePage
     protected function GetFleets()
     {
         global $USER, $PLANET;
+
+        if (empty($USER)
+            || empty($PLANET))
+        {
+            return;
+        }
+
         require_once 'includes/classes/class.FlyingFleetsTable.php';
         $fleetTableObj = new FlyingFleetsTable();
         $fleetTableObj->setUser($USER['id']);
@@ -286,61 +293,64 @@ abstract class AbstractGamePage
         }
 
         $AllPlanets = $AllMoons = [];
-        foreach ($USER['PLANETS'] as $ID => $CPLANET)
+        if (!empty($USER['PLANETS']))
         {
-
-            if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP)
-            {
-                $Queue = unserialize($CPLANET['b_building_id']);
-                $BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
-            }
-            else
-            {
-                $BuildPlanet = $LNG['ov_free'];
-            }
-
-            if ($CPLANET['planet_type'] == 3)
+            foreach ($USER['PLANETS'] as $ID => $CPLANET)
             {
 
-                $AllMoons[] = [
-                    'id'            => $CPLANET['id'],
-                    'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
-                    'image'         => $CPLANET['image'],
-                    'build'         => $BuildPlanet,
-                    'galaxy'        => $CPLANET['galaxy'],
-                    'system'        => $CPLANET['system'],
-                    'planet'        => $CPLANET['planet'],
-                    'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
-                    'field_current' => $CPLANET['field_current'],
-                    'field_max'     => $CPLANET['field_max'],
-                    'diameter'      => pretty_number($CPLANET['diameter']) . " km",
-                    'temp_min'      => $CPLANET['temp_min'] . " °C",
-                    'temp_max'      => $CPLANET['temp_max'] . " °C",
-                ];
+                if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP)
+                {
+                    $Queue = unserialize($CPLANET['b_building_id']);
+                    $BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
+                }
+                else
+                {
+                    $BuildPlanet = $LNG['ov_free'];
+                }
+
+                if ($CPLANET['planet_type'] == 3)
+                {
+
+                    $AllMoons[] = [
+                        'id'            => $CPLANET['id'],
+                        'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
+                        'image'         => $CPLANET['image'],
+                        'build'         => $BuildPlanet,
+                        'galaxy'        => $CPLANET['galaxy'],
+                        'system'        => $CPLANET['system'],
+                        'planet'        => $CPLANET['planet'],
+                        'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
+                        'field_current' => $CPLANET['field_current'],
+                        'field_max'     => $CPLANET['field_max'],
+                        'diameter'      => pretty_number($CPLANET['diameter']) . " km",
+                        'temp_min'      => $CPLANET['temp_min'] . " °C",
+                        'temp_max'      => $CPLANET['temp_max'] . " °C",
+                    ];
+
+                }
+                else
+                {
+
+                    $AllPlanets[] = [
+                        'id'            => $CPLANET['id'],
+                        'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
+                        'image'         => $CPLANET['image'],
+                        'build'         => $BuildPlanet,
+                        'galaxy'        => $CPLANET['galaxy'],
+                        'system'        => $CPLANET['system'],
+                        'planet'        => $CPLANET['planet'],
+                        'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
+                        'field_current' => $CPLANET['field_current'],
+                        'field_max'     => $CPLANET['field_max'],
+                        'diameter'      => pretty_number($CPLANET['diameter']) . " km",
+                        'temp_min'      => $CPLANET['temp_min'] . " °C",
+                        'temp_max'      => $CPLANET['temp_max'] . " °C",
+                        'id_luna'       => $CPLANET['id_luna'],
+                    ];
+
+                }
 
             }
-            else
-            {
-
-                $AllPlanets[] = [
-                    'id'            => $CPLANET['id'],
-                    'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
-                    'image'         => $CPLANET['image'],
-                    'build'         => $BuildPlanet,
-                    'galaxy'        => $CPLANET['galaxy'],
-                    'system'        => $CPLANET['system'],
-                    'planet'        => $CPLANET['planet'],
-                    'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
-                    'field_current' => $CPLANET['field_current'],
-                    'field_max'     => $CPLANET['field_max'],
-                    'diameter'      => pretty_number($CPLANET['diameter']) . " km",
-                    'temp_min'      => $CPLANET['temp_min'] . " °C",
-                    'temp_max'      => $CPLANET['temp_max'] . " °C",
-                    'id_luna'       => $CPLANET['id_luna'],
-                ];
-
-            }
-
         }
 
         // NOTE: add moon array inside planet array
@@ -443,7 +453,7 @@ abstract class AbstractGamePage
 
         $this->assign([
             'lang'       => $LNG->getLanguage(),
-            'dpath'      => $THEME->getTheme(),
+            'dpath'      => $THEME->getThemePath(),
             'scripts'    => $this->tplObj->jsscript,
             'execscript' => implode("\n", $this->tplObj->script),
             'basepath'   => PROTOCOL.HTTP_HOST.HTTP_BASE,
