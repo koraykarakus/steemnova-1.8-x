@@ -24,7 +24,7 @@ class ShowNewsPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 

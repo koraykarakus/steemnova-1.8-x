@@ -23,7 +23,7 @@ class ShowIndexPage extends AbstractLoginPage
         $this->setWindow('light');
     }
 
-    public function parseRememberMeToken($token)
+    public function parseRememberMeToken($token): array
     {
         $parts = explode(':', $token);
 
@@ -31,10 +31,10 @@ class ShowIndexPage extends AbstractLoginPage
         {
             return [$parts[0], $parts[1], $parts[2]];
         }
-        return false;
+        return [];
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $config;
 
@@ -62,7 +62,7 @@ class ShowIndexPage extends AbstractLoginPage
 
             $rememberMeInfo = $this->parseRememberMeToken($_COOKIE['remember_me']);
 
-            if ($rememberMeInfo)
+            if (!empty($rememberMeInfo))
             {
 
                 $sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";

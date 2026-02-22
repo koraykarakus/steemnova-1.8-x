@@ -24,9 +24,8 @@ class ShowLoginPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function generateRememberMeToken($universe)
+    public function generateRememberMeToken($universe): array
     {
-
         $selector = bin2hex(random_bytes(16));
         $validator = bin2hex(random_bytes(32));
 
@@ -35,10 +34,9 @@ class ShowLoginPage extends AbstractLoginPage
             'validator' => $validator,
             'full'      => $universe . ':' . $selector . ':' . $validator,
         ];
-
     }
 
-    public function validate()
+    public function validate(): void
     {
         global $config, $LNG;
 
@@ -90,13 +88,14 @@ class ShowLoginPage extends AbstractLoginPage
         }
 
         if (empty($rememberedTokenValidator) || empty($rememberedTokenSelector) || $rememberedEmail != $userEmail || $password != 'password') //verify with password
-        {if (isset($loginData['password']))
         {
-            if (!password_verify($password, $loginData['password']))
+            if (isset($loginData['password']))
             {
-                $error[] = $LNG['login_error_5'];
+                if (!password_verify($password, $loginData['password']))
+                {
+                    $error[] = $LNG['login_error_5'];
+                }
             }
-        }
 
         }
         else //verify with token

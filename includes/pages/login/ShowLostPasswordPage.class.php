@@ -24,7 +24,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $universeSelect = $this->getUniverseSelector();
 
@@ -35,7 +35,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
         $this->display('page.lostPassword.default.tpl');
     }
 
-    public function newPassword()
+    public function newPassword(): void
     {
         global $LNG;
         $userID = HTTP::_GP('u', 0);
@@ -112,7 +112,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
         ]]);
     }
 
-    public function send()
+    public function send(): void
     {
         global $LNG;
         $username = HTTP::_GP('username', '', UTF8_SUPPORT);

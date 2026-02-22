@@ -24,7 +24,7 @@ class ShowVertifyPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    private function _activeUser()
+    private function _activeUser(): array
     {
         global $LNG;
 
@@ -123,7 +123,7 @@ class ShowVertifyPage extends AbstractLoginPage
         ];
     }
 
-    public function show()
+    public function show(): void
     {
         $userData = $this->_activeUser();
 
@@ -135,7 +135,7 @@ class ShowVertifyPage extends AbstractLoginPage
         HTTP::redirectTo('game.php');
     }
 
-    public function json()
+    public function json(): void
     {
         global $LNG;
         $userData = $this->_activeUser();

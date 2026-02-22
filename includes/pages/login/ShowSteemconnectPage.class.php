@@ -21,7 +21,7 @@ class ShowSteemconnectPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $session = Session::create();
 

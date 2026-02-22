@@ -24,7 +24,7 @@ class ShowExternalAuthPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $method = HTTP::_GP('method', '');
         $method = strtolower(str_replace(['_', '\\', '/', '.', "\0"], '', $method));

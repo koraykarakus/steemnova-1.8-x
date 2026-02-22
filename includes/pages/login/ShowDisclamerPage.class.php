@@ -24,7 +24,7 @@ class ShowDisclamerPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $config = Config::get();
         $this->assign([

@@ -39,7 +39,8 @@ abstract class AbstractLoginPage
         }
     }
 
-    protected function generateCSRFToken()
+    // TODO : this should only generate, not set cookie
+    protected function generateCSRFToken(): string
     {
 
         //generate token
@@ -52,7 +53,7 @@ abstract class AbstractLoginPage
         return  $csrfToken;
     }
 
-    protected function getUniverseSelector()
+    protected function getUniverseSelector(): array
     {
         $universeSelect = [];
         foreach (Universe::availableUniverses() as $uniId)
@@ -63,30 +64,29 @@ abstract class AbstractLoginPage
         return $universeSelect;
     }
 
-    protected function initTemplate()
+    protected function initTemplate(): void
     {
         if (isset($this->tplObj))
         {
-            return true;
+            return;
         }
 
         $this->tplObj = new template();
         list($tplDir) = $this->tplObj->getTemplateDir();
         $this->tplObj->setTemplateDir($tplDir.'login/');
-        return true;
     }
 
-    protected function setWindow($window)
+    protected function setWindow($window): void
     {
         $this->window = $window;
     }
 
-    protected function getWindow()
+    protected function getWindow(): string
     {
         return $this->window;
     }
 
-    protected function getQueryString()
+    protected function getQueryString(): string
     {
         $queryString = [];
         $page = HTTP::_GP('page', '');
@@ -105,7 +105,8 @@ abstract class AbstractLoginPage
         return http_build_query($queryString);
     }
 
-    protected function getPageData()
+    // TODO: this is not getter, rename
+    protected function getPageData(): void
     {
         global $LNG, $config;
 
@@ -138,7 +139,7 @@ abstract class AbstractLoginPage
         ]);
     }
 
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true)
+    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
     {
         $this->assign([
             'message'         => $message,
@@ -158,17 +159,17 @@ abstract class AbstractLoginPage
         $this->display('error.default.tpl');
     }
 
-    protected function save()
+    protected function save(): void
     {
 
     }
 
-    protected function assign($array, $nocache = true)
+    protected function assign($array, $nocache = true): void
     {
         $this->tplObj->assign_vars($array, $nocache);
     }
 
-    protected function display($file)
+    protected function display($file): void
     {
         global $LNG;
 
@@ -210,21 +211,21 @@ abstract class AbstractLoginPage
         exit;
     }
 
-    protected function sendJSON($data)
+    protected function sendJSON($data): void
     {
         $this->save();
         echo json_encode($data);
         exit;
     }
 
-    protected function redirectTo($url)
+    protected function redirectTo($url): void
     {
         $this->save();
         HTTP::redirectTo($url);
         exit;
     }
 
-    protected function redirectPost($url, $postFields)
+    protected function redirectPost($url, $postFields): void
     {
         $this->save();
         $this->assign([

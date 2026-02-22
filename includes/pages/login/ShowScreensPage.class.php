@@ -24,7 +24,7 @@ class ShowScreensPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $screenshots = [];
         $directoryIterator = new DirectoryIterator('styles/resource/images/login/screens/');

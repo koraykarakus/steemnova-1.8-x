@@ -23,7 +23,7 @@ class ShowRegisterPage extends AbstractLoginPage
         $this->setWindow('light');
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $config;
         $referralData = ['id' => 0, 'name' => ''];
@@ -93,7 +93,7 @@ class ShowRegisterPage extends AbstractLoginPage
         $this->display('page.register.default.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $LNG, $config;
 
