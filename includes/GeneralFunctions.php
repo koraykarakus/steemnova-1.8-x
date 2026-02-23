@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function getFactors($USER, $Type = 'basic', $TIME = null)
+function getFactors($USER, $Type = 'basic', $TIME = null): array
 {
     global $resource, $pricelist, $reslist;
     if (empty($TIME))
@@ -67,9 +67,9 @@ function getFactors($USER, $Type = 'basic', $TIME = null)
     return $factor;
 }
 
-function userStatus($data, $noobprotection = false)
+function userStatus($data, $noobprotection = false): array
 {
-    $Array = array();
+    $Array = [];
 
     if (isset($data['banaday']) && $data['banaday'] > TIMESTAMP)
     {
@@ -104,21 +104,21 @@ function userStatus($data, $noobprotection = false)
     return $Array;
 }
 
-function getLanguage($language = null, $userID = null)
+function getLanguage($language = null, $userID = null): object
 {
     if (is_null($language) && !is_null($userID))
     {
-        $language = Database::get()->selectSingle('SELECT lang FROM %%USERS%% WHERE id = :id;', array(
-            ':id' => $userID
-        ))['lang'];
+        $language = Database::get()->selectSingle('SELECT lang FROM %%USERS%% WHERE id = :id;', [
+            ':id' => $userID,
+        ])['lang'];
     }
 
     $LNG = new Language($language);
-    $LNG->includeData(array('L18N', 'FLEET', 'TECH', 'CUSTOM', 'INGAME'));
+    $LNG->includeData(['L18N', 'FLEET', 'TECH', 'CUSTOM', 'INGAME']);
     return $LNG;
 }
 
-function getPlanets($USER)
+function getPlanets($USER): array
 {
     if (isset($USER['PLANETS']))
     {
@@ -143,12 +143,12 @@ function getPlanets($USER)
             break;
     }
 
-    $planetsResult = Database::get()->select($sql, array(
-        ':userId' => $USER['id'],
-        ':destruyed' => 0
-    ));
+    $planetsResult = Database::get()->select($sql, [
+        ':userId'    => $USER['id'],
+        ':destruyed' => 0,
+    ]);
 
-    $planetsList = array();
+    $planetsList = [];
 
     foreach ($planetsResult as $planetRow)
     {
@@ -158,12 +158,12 @@ function getPlanets($USER)
     return $planetsList;
 }
 
-function get_timezone_selector()
+function get_timezone_selector(): array
 {
     // New Timezone Selector, better support for changes in tzdata (new russian timezones, e.g.)
     // http://www.php.net/manual/en/datetimezone.listidentifiers.php
 
-    $timezones = array();
+    $timezones = [];
     $timezone_identifiers = DateTimeZone::listIdentifiers();
 
     foreach ($timezone_identifiers as $value)
@@ -178,7 +178,7 @@ function get_timezone_selector()
     return $timezones;
 }
 
-function locale_date_format($format, $time, $LNG = null)
+function locale_date_format($format, $time, $LNG = null): string
 {
     // Workaround for locale Names.
 
@@ -190,14 +190,14 @@ function locale_date_format($format, $time, $LNG = null)
     $weekDay = date('w', (int) $time);
     $months = date('n', (int) $time) - 1;
 
-    $format = str_replace(array('D', 'M'), array('$D$', '$M$'), $format);
+    $format = str_replace(['D', 'M'], ['$D$', '$M$'], $format);
     $format = str_replace('$D$', addcslashes($LNG['week_day'][$weekDay], 'A..z'), $format);
     $format = str_replace('$M$', addcslashes($LNG['months'][$months], 'A..z'), $format);
 
     return $format;
 }
 
-function _date($format, $time = null, $toTimeZone = null, $LNG = null)
+function _date($format, $time = null, $toTimeZone = null, $LNG = null): string
 {
     if (!isset($time))
     {
@@ -234,6 +234,7 @@ function _date($format, $time = null, $toTimeZone = null, $LNG = null)
     return date($format, (int) $time);
 }
 
+// TODO : rework
 function ValidateAddress($address)
 {
 
@@ -251,7 +252,7 @@ function ValidateAddress($address)
     }
 }
 
-function message($mes, $dest = "", $time = "3", $topnav = false)
+function message($mes, $dest = "", $time = "3", $topnav = false): void
 {
     require_once('includes/classes/class.template.php');
     $template = new template();
@@ -259,13 +260,13 @@ function message($mes, $dest = "", $time = "3", $topnav = false)
     exit;
 }
 
-function CalculateMaxPlanetFields($planet)
+function CalculateMaxPlanetFields($planet): int
 {
     global $resource;
     return $planet['field_max'] + ($planet[$resource[33]] * FIELDS_BY_TERRAFORMER) + ($planet[$resource[41]] * FIELDS_BY_MOONBASIS_LEVEL);
 }
 
-function pretty_time($seconds)
+function pretty_time($seconds): string
 {
     global $LNG;
 
@@ -293,7 +294,7 @@ function pretty_time($seconds)
     );
 }
 
-function pretty_fly_time($seconds)
+function pretty_fly_time($seconds): string
 {
 
     $hour = $seconds / 3600;
@@ -305,27 +306,28 @@ function pretty_fly_time($seconds)
     return sprintf('%02d:%02d:%02d', $hour, $minute, $second);
 }
 
-function GetStartAddressLink($FleetRow, $FleetType = '')
+function GetStartAddressLink($FleetRow, $FleetType = ''): string
 {
     return '<a href="game.php?page=galaxy&amp;galaxy=' . $FleetRow['fleet_start_galaxy'] . '&amp;system=' . $FleetRow['fleet_start_system'] . '" class="' . $FleetType . '">[' . $FleetRow['fleet_start_galaxy'] . ':' . $FleetRow['fleet_start_system'] . ':' . $FleetRow['fleet_start_planet'] . ']</a>';
 }
 
-function GetTargetAddressLink($FleetRow, $FleetType = '')
+function GetTargetAddressLink($FleetRow, $FleetType = ''): string
 {
     return '<a href="game.php?page=galaxy&amp;galaxy=' . $FleetRow['fleet_end_galaxy'] . '&amp;system=' . $FleetRow['fleet_end_system'] . '" class="' . $FleetType . '">[' . $FleetRow['fleet_end_galaxy'] . ':' . $FleetRow['fleet_end_system'] . ':' . $FleetRow['fleet_end_planet'] . ']</a>';
 }
 
-function BuildPlanetAddressLink($CurrentPlanet)
+function BuildPlanetAddressLink($CurrentPlanet): string
 {
     return '<a href="game.php?page=galaxy&amp;galaxy=' . $CurrentPlanet['galaxy'] . '&amp;system=' . $CurrentPlanet['system'] . '">[' . $CurrentPlanet['galaxy'] . ':' . $CurrentPlanet['system'] . ':' . $CurrentPlanet['planet'] . ']</a>';
 }
 
-function pretty_number($n, $dec = 0)
+function pretty_number($n, $dec = 0): string
 {
     return number_format(floatToString($n, $dec), $dec, ',', '.');
 }
 
-function GetUserByID($userId, $GetInfo = "*")
+// TODO: fix return type
+function GetUserByID($userId, $GetInfo = "*"): bool|array
 {
     if (is_array($GetInfo))
     {
@@ -338,23 +340,23 @@ function GetUserByID($userId, $GetInfo = "*")
 
     $sql = 'SELECT ' . $GetOnSelect . ' FROM %%USERS%% WHERE id = :userId';
 
-    $User = Database::get()->selectSingle($sql, array(
-        ':userId' => $userId
-    ));
+    $User = Database::get()->selectSingle($sql, [
+        ':userId' => $userId,
+    ]);
 
     return $User;
 }
 
-function makebr($text)
+function makebr($text): string
 {
     // XHTML FIX for PHP 5.3.0
     // Danke an Meikel
 
     $BR = "<br>\n";
-    return (version_compare(PHP_VERSION, "5.3.0", ">=")) ? nl2br($text, false) : strtr($text, array("\r\n" => $BR, "\r" => $BR, "\n" => $BR));
+    return (version_compare(PHP_VERSION, "5.3.0", ">=")) ? nl2br($text, false) : strtr($text, ["\r\n" => $BR, "\r" => $BR, "\n" => $BR]);
 }
 
-function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
+function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player): array
 {
     $config = Config::get();
     if (
@@ -364,10 +366,10 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
         || $Player['banaday'] > TIMESTAMP
         || $Player['onlinetime'] < TIMESTAMP - INACTIVE
     ) {
-        return array('NoobPlayer' => false, 'StrongPlayer' => false);
+        return ['NoobPlayer' => false, 'StrongPlayer' => false];
     }
 
-    return array(
+    return [
         'NoobPlayer' => (
             /* WAHR:
                 Wenn Spieler mehr als 25000 Punkte hat UND
@@ -386,14 +388,14 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
             ($OwnerPlayer['total_points'] < $config->noobprotectiontime) // Default: 5.000
             && ($OwnerPlayer['total_points'] * $config->noobprotectionmulti < $TargetPlayer['total_points'])
         ),
-    );
+    ];
 }
 
-function shortly_number($number, $decial = null)
+function shortly_number($number, $decial = null): string
 {
     $negate = $number < 0 ? -1 : 1;
     $number = abs($number);
-    $unit = array("", "K", "M", "B", "T", "Q", "Q+", "S", "S+", "O", "N");
+    $unit = ["", "K", "M", "B", "T", "Q", "Q+", "S", "S+", "O", "N"];
     $key = 0;
 
     if ($number >= 1000000)
@@ -415,12 +417,12 @@ function shortly_number($number, $decial = null)
     return pretty_number($negate * $number, $decial) . '&nbsp;' . $unit[$key];
 }
 
-function floatToString($number, $Pro = 0, $output = false)
+function floatToString($number, $Pro = 0, $output = false): string
 {
     return $output ? str_replace(",", ".", sprintf("%." . $Pro . "f", $number)) : sprintf("%." . $Pro . "f", $number);
 }
 
-function isModuleAvailable($ID)
+function isModuleAvailable($ID): bool
 {
     global $USER;
     $modules = explode(';', Config::get()->moduls);
@@ -433,12 +435,12 @@ function isModuleAvailable($ID)
     return $modules[$ID] == 1; // || (isset($USER['authlevel']) && $USER['authlevel'] > AUTH_USR);
 }
 
-function ClearCache()
+function ClearCache(): void
 {
-    $DIRS = array('cache/', 'cache/templates/');
+    $DIRS = ['cache/', 'cache/templates/'];
     foreach ($DIRS as $DIR)
     {
-        $FILES = array_diff(scandir($DIR), array('..', '.', '.htaccess'));
+        $FILES = array_diff(scandir($DIR), ['..', '.', '.htaccess']);
         foreach ($FILES as $FILE)
         {
             if (is_dir(ROOT_PATH . $DIR . $FILE))
@@ -457,9 +459,9 @@ function ClearCache()
     Cronjob::reCalculateCronjobs();
 
     $sql = 'UPDATE %%PLANETS%% SET eco_hash = :ecoHash;';
-    Database::get()->update($sql, array(
-        ':ecoHash' => ''
-    ));
+    Database::get()->update($sql, [
+        ':ecoHash' => '',
+    ]);
     clearstatcache();
 
     /* does no work on git.
@@ -491,34 +493,34 @@ function ClearCache()
     $config->save();
 }
 
-function allowedTo($side)
+function allowedTo($side): bool
 {
     global $USER;
 
     return ($USER['authlevel'] == AUTH_ADM || (isset($USER['rights']) && $USER['rights'][$side] == 1));
 }
 
-function isactiveDMExtra($Extra, $Time)
+function isactiveDMExtra($Extra, $Time): bool
 {
     return $Time - $Extra <= 0;
 }
 
-function DMExtra($Extra, $Time, $true, $false)
+function DMExtra($Extra, $Time, $true, $false): bool
 {
     return isactiveDMExtra($Extra, $Time) ? $true : $false;
 }
 
-function getRandomString()
+function getRandomString(): string
 {
     return md5(uniqid());
 }
 
-function isVacationMode($USER)
+function isVacationMode($USER): bool
 {
     return ($USER['urlaubs_modus'] == 1) ? true : false;
 }
 
-function clearGIF()
+function clearGIF(): void
 {
     header('Cache-Control: no-cache');
     header('Content-type: image/gif');
@@ -534,7 +536,7 @@ function clearGIF()
  * @param object
  * @return Exception
  */
-function exceptionHandler($exception)
+function exceptionHandler($exception): void
 {
     /** @var $exception ErrorException|Exception */
 
@@ -557,22 +559,22 @@ function exceptionHandler($exception)
         $errno = E_USER_ERROR;
     }
 
-    $errorType = array(
-        E_ERROR => 'ERROR',
-        E_WARNING => 'WARNING',
-        E_PARSE => 'PARSING ERROR',
-        E_NOTICE => 'NOTICE',
-        E_CORE_ERROR => 'CORE ERROR',
-        E_CORE_WARNING => 'CORE WARNING',
-        E_COMPILE_ERROR => 'COMPILE ERROR',
-        E_COMPILE_WARNING => 'COMPILE WARNING',
-        E_USER_ERROR => 'USER ERROR',
-        E_USER_WARNING => 'USER WARNING',
-        E_USER_NOTICE => 'USER NOTICE',
-        E_STRICT => 'STRICT NOTICE',
+    $errorType = [
+        E_ERROR             => 'ERROR',
+        E_WARNING           => 'WARNING',
+        E_PARSE             => 'PARSING ERROR',
+        E_NOTICE            => 'NOTICE',
+        E_CORE_ERROR        => 'CORE ERROR',
+        E_CORE_WARNING      => 'CORE WARNING',
+        E_COMPILE_ERROR     => 'COMPILE ERROR',
+        E_COMPILE_WARNING   => 'COMPILE WARNING',
+        E_USER_ERROR        => 'USER ERROR',
+        E_USER_WARNING      => 'USER WARNING',
+        E_USER_NOTICE       => 'USER NOTICE',
+        E_STRICT            => 'STRICT NOTICE',
         E_RECOVERABLE_ERROR => 'RECOVERABLE ERROR',
-        E_DEPRECATED => 'DEPRECATED ERROR'
-    );
+        E_DEPRECATED        => 'DEPRECATED ERROR',
+    ];
 
     if (file_exists(ROOT_PATH . 'install/VERSION'))
     {
@@ -600,12 +602,12 @@ function exceptionHandler($exception)
     $DIR = MODE == 'INSTALL' ? '..' : '.';
     ob_start();
     echo '<!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="de" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="de" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="de" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="de" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="de" class="no-js"> <!--<![endif]-->
-<head>
+    <!--[if lt IE 7 ]> <html lang="de" class="no-js ie6"> <![endif]-->
+    <!--[if IE 7 ]>    <html lang="de" class="no-js ie7"> <![endif]-->
+    <!--[if IE 8 ]>    <html lang="de" class="no-js ie8"> <![endif]-->
+    <!--[if IE 9 ]>    <html lang="de" class="no-js ie9"> <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!--> <html lang="de" class="no-js"> <!--<![endif]-->
+    <head>
 	<title>' . $gameName . ' - Error</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="' . $DIR . '/styles/resource/css/base/boilerplate.css?v=' . $VERSION . '">
@@ -645,13 +647,13 @@ function exceptionHandler($exception)
 	<script type="text/javascript" src="' . $DIR . '/scripts/base/jquery.validationEngine.js?v=2123"></script>
 	<script type="text/javascript" src="' . $DIR . '/scripts/base/tooltip.js?v=2123"></script>
 	<script type="text/javascript" src="' . $DIR . '/scripts/game/base.js?v=2123"></script>
-</head>
-<body id="overview" class="full">
-<table class="table table-striped text-white fs-12">
-	<tr>
-		<th>Unknown error</th>
-	</tr>
-	<tr>
+    </head>
+    <body id="overview" class="full">
+    <table class="table table-striped text-white fs-12">
+        <tr>
+            <th>Unknown error</th>
+        </tr>
+        <tr>
 		<td class="left">
 			<b>Message: </b>' . $exception->getMessage() . '<br>
 			<b>File: </b>' . $exception->getFile() . '<br>
@@ -663,11 +665,11 @@ function exceptionHandler($exception)
 			<b>Debug Backtrace:</b><br>' . makebr(htmlspecialchars($exception->getTraceAsString())) . '
 		</td>
 	</tr>
-</table>
-</body>
-</html>';
+    </table>
+    </body>
+    </html>';
 
-    echo str_replace(array('\\', ROOT_PATH, substr(ROOT_PATH, 0, 15)), array('/', '/', 'FILEPATH '), ob_get_clean());
+    echo str_replace(['\\', ROOT_PATH, substr(ROOT_PATH, 0, 15)], ['/', '/', 'FILEPATH '], ob_get_clean());
 
     $errorText = date("[d-M-Y H:i:s]", TIMESTAMP) . ' ' . $errorType[$errno] . ': "' . strip_tags($exception->getMessage()) . "\"\r\n";
     $errorText .= 'File: ' . $exception->getFile() . ' | Line: ' . $exception->getLine() . "\r\n";
@@ -704,7 +706,7 @@ function exceptionHandler($exception)
  * @return bool If its an hidden error.
  *
  */
-function errorHandler($errno, $errstr, $errfile, $errline)
+function errorHandler($errno, $errstr, $errfile, $errline): bool
 {
     if (!($errno & error_reporting()))
     {
@@ -714,6 +716,7 @@ function errorHandler($errno, $errstr, $errfile, $errline)
     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 }
 
+// TODO : remove
 // "workaround" for PHP version pre 5.3.0
 if (!function_exists('array_replace_recursive'))
 {
@@ -728,7 +731,7 @@ if (!function_exists('array_replace_recursive'))
                     // create new key in $array, if it is empty or not an array
                     if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key])))
                     {
-                        $array[$key] = array();
+                        $array[$key] = [];
                     }
 
                     // overwrite the value in the base array
