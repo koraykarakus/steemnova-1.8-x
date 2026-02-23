@@ -47,44 +47,52 @@ class ShowAccountsPage extends AbstractAdminPage
         $deut = max(0, round(HTTP::_GP('deut', 0.0)));
         $type = HTTP::_GP('type', 'add');
 
-        $planetSelectType = '';
+        $planet_select_type = '';
         $galaxy = HTTP::_GP('galaxy', 0);
         $system = HTTP::_GP('system', 0);
         $planet = HTTP::_GP('planet', 0);
         $planet_type = HTTP::_GP('planet_type', 0);
 
-        if ($metal == 0 && $crystal == 0 && $deut == 0)
+        if ($metal == 0
+            && $crystal == 0
+            && $deut == 0)
         {
-            $this->printMessage('All resources are equal to zero !');
+            $this->printMessage('All resources are equal to zero !', $this->createButtonBack());
         }
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('type is wrong !');
+            $this->printMessage('type is wrong !', $this->createButtonBack());
         }
 
-        if ($id == 0 && $galaxy == 0 && $system == 0 && $planet == 0)
+        if ($id == 0
+            && $galaxy == 0
+            && $system == 0
+            && $planet == 0)
         {
-            $this->printMessage('Planet id or coordinate is not entered !');
+            $this->printMessage('Planet id or coordinate is not entered !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
-        ($id != 0) ? $planetSelectType = 'id' : $planetSelectType = 'coordinate';
+        ($id != 0) ? $planet_select_type = 'id' : $planet_select_type = 'coordinate';
 
-        if ($planetSelectType == 'id')
+        if ($planet_select_type == 'id')
         {
-
-            $sql = "SELECT `metal`,`crystal`,`deuterium`,`universe`  FROM %%PLANETS%% WHERE `id` = :id;";
+            $sql = "SELECT `metal`,`crystal`,`deuterium`,`universe` 
+            FROM %%PLANETS%% 
+            WHERE `id` = :id;";
 
             $before = $db->selectSingle($sql, [
                 ':id' => $id,
             ]);
-
         }
         else
         {
-            $sql = "SELECT `metal`,`crystal`,`deuterium`,`universe`  FROM %%PLANETS%% WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet AND planet_type = :planet_type;";
+            $sql = "SELECT `metal`,`crystal`,`deuterium`,`universe` 
+            FROM %%PLANETS%% 
+            WHERE `galaxy` = :galaxy AND `system` = :system 
+            AND `planet` = :planet AND planet_type = :planet_type;";
 
             $before = $db->selectSingle($sql, [
                 ':galaxy'      => $galaxy,
@@ -92,18 +100,17 @@ class ShowAccountsPage extends AbstractAdminPage
                 ':planet'      => $planet,
                 ':planet_type' => $planet_type,
             ]);
-
         }
 
         if (!$before)
         {
-            $this->printMessage('planet could not be found !');
+            $this->printMessage('planet could not be found !', $this->createButtonBack());
         }
 
         if ($type == "add")
         {
 
-            if ($planetSelectType == 'id')
+            if ($planet_select_type == 'id')
             {
                 $sql = "UPDATE %%PLANETS%% SET `metal` = `metal` + :metal,
 					 `crystal` = `crystal` + :crystal,
@@ -119,9 +126,13 @@ class ShowAccountsPage extends AbstractAdminPage
             }
             else
             {
-                $sql = "UPDATE %%PLANETS%% SET `metal` = `metal` + :metal,
-					 `crystal` = `crystal` + :crystal,
-					 `deuterium` = `deuterium` + :deut WHERE galaxy = :galaxy AND system = :system AND planet = :planet AND planet_type = :planet_type AND `universe` = :universe;";
+                $sql = "UPDATE %%PLANETS%% SET 
+                `metal` = `metal` + :metal,
+				`crystal` = `crystal` + :crystal,
+                `deuterium` = `deuterium` + :deut 
+                WHERE galaxy = :galaxy AND system = :system 
+                AND planet = :planet AND planet_type = :planet_type 
+                AND `universe` = :universe;";
 
                 $db->update($sql, [
                     ':metal'       => $metal,
@@ -145,9 +156,8 @@ class ShowAccountsPage extends AbstractAdminPage
         elseif ($type == "delete")
         {
 
-            if ($planetSelectType == 'id')
+            if ($planet_select_type == 'id')
             {
-
                 $sql = "UPDATE %%PLANETS%% SET `metal` = GREATEST(0, `metal` - :metal),
 					`crystal` = GREATEST(0, `crystal` - :crystal), `deuterium` = GREATEST(0, `deuterium` - :deut)
 					WHERE `id` = :id AND `universe` = :universe;";
@@ -159,14 +169,16 @@ class ShowAccountsPage extends AbstractAdminPage
                     ':id'       => $id,
                     ':universe' => Universe::getEmulated(),
                 ]);
-
             }
             else
             {
-
-                $sql = "UPDATE %%PLANETS%% SET `metal` = GREATEST(0, `metal` - :metal),
-					`crystal` = GREATEST(0, `crystal` - :crystal), `deuterium` = GREATEST(0, `deuterium` - :deut)
-					WHERE `galaxy` = :galaxy AND system = :system AND planet = :planet AND planet_type = :planet_type AND `universe` = :universe;";
+                $sql = "UPDATE %%PLANETS%% SET 
+                `metal` = GREATEST(0, `metal` - :metal),
+                `crystal` = GREATEST(0, `crystal` - :crystal), 
+                `deuterium` = GREATEST(0, `deuterium` - :deut)
+                WHERE `galaxy` = :galaxy AND system = :system 
+                AND planet = :planet AND planet_type = :planet_type 
+                AND `universe` = :universe;";
 
                 $db->update($sql, [
                     ':metal'       => $metal,
@@ -178,7 +190,6 @@ class ShowAccountsPage extends AbstractAdminPage
                     ':planet_type' => $planet_type,
                     ':universe'    => Universe::getEmulated(),
                 ]);
-
             }
 
             $after = [
@@ -189,24 +200,23 @@ class ShowAccountsPage extends AbstractAdminPage
 
         }
 
-        $LOG = new Log(2);
-        $LOG->target = $id;
-        $LOG->universe = $before['universe'];
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(2);
+        $log->target = $id;
+        $log->universe = $before['universe'];
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         if ($type == "add")
         {
-            $this->printMessage($LNG['ad_add_res_sucess'], '?page=accounteditor&edit=resources');
+            $this->printMessage($LNG['ad_add_res_sucess'], $this->createButtonBack());
         }
         elseif ($type == "delete")
         {
-            $this->printMessage($LNG['ad_delete_res_sucess'], '?page=accounteditor&edit=resources');
+            $this->printMessage($LNG['ad_delete_res_sucess'], $this->createButtonBack());
         }
 
         $this->display('page.accounts.resources.tpl');
-
     }
 
     public function darkmatterSend(): void
@@ -219,17 +229,17 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($user_id == 0)
         {
-            $this->printMessage('user id is not entered !');
+            $this->printMessage('user id is not entered !', $this->createButtonBack());
         }
 
         if ($dark == 0)
         {
-            $this->printMessage('Amount of dark matter is not set !');
+            $this->printMessage('Amount of dark matter is not set !', $this->createButtonBack());
         }
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('type is wrong !');
+            $this->printMessage('type is wrong !', $this->createButtonBack());
         }
 
         $db = Database::get();
@@ -242,13 +252,14 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!$before_dm)
         {
-            $this->printMessage('user could not be found !');
+            $this->printMessage('user could not be found !', $this->createButtonBack());
         }
 
         if ($type == "add")
         {
-
-            $sql = "UPDATE %%USERS%% SET `darkmatter` = `darkmatter` + :dark WHERE `id` = :user_id AND `universe` = :universe;";
+            $sql = "UPDATE %%USERS%% SET 
+            `darkmatter` = `darkmatter` + :dark 
+            WHERE `id` = :user_id AND `universe` = :universe;";
 
             $db->update($sql, [
                 ':dark'     => $dark,
@@ -263,8 +274,9 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == "delete")
         {
-
-            $sql = "UPDATE %%USERS%% SET `darkmatter` = GREATEST(0, `darkmatter` - :dark) WHERE `id` = :user_id;";
+            $sql = "UPDATE %%USERS%% 
+            SET `darkmatter` = GREATEST(0, `darkmatter` - :dark) 
+            WHERE `id` = :user_id;";
 
             $db->update($sql, [
                 ':dark'    => $dark,
@@ -277,91 +289,90 @@ class ShowAccountsPage extends AbstractAdminPage
 
         }
 
-        $LOG = new Log(1);
-        $LOG->target = $user_id;
-        $LOG->universe = $before_dm['universe'];
-        $LOG->old = $before_dm;
-        $LOG->new = $after_dm;
-        $LOG->save();
+        $log = new Log(1);
+        $log->target = $user_id;
+        $log->universe = $before_dm['universe'];
+        $log->old = $before_dm;
+        $log->new = $after_dm;
+        $log->save();
 
         if ($type == "add")
         {
-            $this->printMessage($LNG['ad_add_res_sucess'], '?page=accounteditor&edit=resources');
+            $this->printMessage($LNG['ad_add_res_sucess'], $this->createButtonBack());
         }
         elseif ($type == "delete")
         {
-            $this->printMessage($LNG['ad_delete_res_sucess'], '?page=accounteditor&edit=resources');
+            $this->printMessage($LNG['ad_delete_res_sucess'], $this->createButtonBack());
         }
 
         $this->display('page.accounts.resources.tpl');
-
     }
 
     public function ships(): void
     {
         global $reslist, $resource;
 
-        $INPUT = [];
-
-        foreach ($reslist['fleet'] as $ID)
+        $input = [];
+        foreach ($reslist['fleet'] as $row_id)
         {
-            $INPUT[$ID] = [
-                'type' => $resource[$ID],
+            $input[$row_id] = [
+                'type' => $resource[$row_id],
             ];
         }
 
         $this->assign([
-            'inputlist' => $INPUT,
+            'inputlist' => $input,
         ]);
 
         $this->display('page.accounts.ships.tpl');
-
     }
 
     public function shipsSend(): void
     {
-
         global $reslist, $resource, $LNG;
 
         $type = HTTP::_GP('type', 'add');
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('Wrong type !');
+            $this->printMessage('Wrong type !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
         $sql = "SELECT * FROM %%PLANETS%% WHERE `id` = :planetId;";
 
-        $planetInfo = $db->selectSingle($sql, [
+        $planet_info = $db->selectSingle($sql, [
             ':planetId' => HTTP::_GP('id', 0),
         ]);
 
-        if (!$planetInfo)
+        if (!$planet_info)
         {
-            $this->printMessage('Target planet does not exist !');
+            $this->printMessage('Target planet does not exist !', $this->createButtonBack());
         }
 
         $before = $after = [];
-
-        foreach ($reslist['fleet'] as $ID)
+        foreach ($reslist['fleet'] as $row_id)
         {
-            $before[$ID] = $planetInfo[$resource[$ID]];
+            $before[$row_id] = $planet_info[$resource[$row_id]];
         }
+
         if ($type == "add")
         {
-            $SQL = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
-            foreach ($reslist['fleet'] as $ID)
+            $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
+            foreach ($reslist['fleet'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` + '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."'";
-                $after[$ID] = $before[$ID] + max(0, round(HTTP::_GP($resource[$ID], 0.0)));
-            }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :planetId AND `universe` = :universe;";
+                $qry_update[] = "`" . $resource[$row_id] . 
+                "` = `" . $resource[$row_id] . "` + '" . 
+                max(0, round(HTTP::_GP($resource[$row_id], 0.0))) . "'";
 
-            $db->update($SQL, [
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+            }
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :planetId AND `universe` = :universe;";
+
+            $db->update($sql, [
                 ':planetId' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
@@ -369,37 +380,38 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == "delete")
         {
-            $SQL = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
+            $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
 
-            foreach ($reslist['fleet'] as $ID)
+            foreach ($reslist['fleet'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = GREATEST(0,  `".$resource[$ID]."` - '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."')";
-                $after[$ID] = max($before[$ID] - max(0, round(HTTP::_GP($resource[$ID], 0.0))), 0);
+                $qry_update[] = "`".$resource[$row_id]."` = GREATEST(0,  `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
             }
 
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :planetId AND `universe` = :universe;";
-            $db->update($SQL, [
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :planetId AND `universe` = :universe;";
+            
+            $db->update($sql, [
                 ':planetId' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
-        $LOG = new Log(2);
-        $LOG->target = HTTP::_GP('id', 0);
-        $LOG->universe = $planetInfo['universe'];
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(2);
+        $log->target = HTTP::_GP('id', 0);
+        $log->universe = $planet_info['universe'];
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         if ($type == "add")
         {
-            $this->printMessage($LNG['ad_add_ships_sucess']);
+            $this->printMessage($LNG['ad_add_ships_sucess'], $this->createButtonBack());
         }
         elseif ($type == "delete")
         {
-            $this->printMessage($LNG['ad_delete_ships_sucess']);
+            $this->printMessage($LNG['ad_delete_ships_sucess'], $this->createButtonBack());
         }
 
     }
@@ -408,15 +420,16 @@ class ShowAccountsPage extends AbstractAdminPage
     {
         global $reslist, $resource;
 
-        foreach ($reslist['defense'] as $ID)
+        $input = [];
+        foreach ($reslist['defense'] as $row_id)
         {
-            $INPUT[$ID] = [
-                'type' => $resource[$ID],
+            $input[$row_id] = [
+                'type' => $resource[$row_id],
             ];
         }
 
         $this->assign([
-            'inputlist' => $INPUT,
+            'inputlist' => $input,
         ]);
 
         $this->display('page.accounts.defenses.tpl');
@@ -425,7 +438,6 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function defensesSend(): void
     {
-
         global $reslist, $resource, $LNG;
 
         $type = HTTP::_GP('type', 'add');
@@ -434,41 +446,44 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('Wrong type !');
+            $this->printMessage('Wrong type !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
         $sql = "SELECT * FROM %%PLANETS%% WHERE `id` = :planetId;";
 
-        $planetInfo = $db->selectSingle($sql, [
+        $planet_info = $db->selectSingle($sql, [
             ':planetId' => $planetId,
         ]);
 
-        if (!$planetInfo)
+        if (!$planet_info)
         {
-            $this->printMessage('Target planet does not exist !');
+            $this->printMessage('Target planet does not exist !', $this->createButtonBack());
         }
 
         $before = $after = [];
 
-        foreach ($reslist['defense'] as $ID)
+        foreach ($reslist['defense'] as $row_id)
         {
-            $before[$ID] = $planetInfo[$resource[$ID]];
+            $before[$row_id] = $planet_info[$resource[$row_id]];
         }
         if ($type == 'add')
         {
-            $SQL = "UPDATE %%PLANETS%% SET ";
-            foreach ($reslist['defense'] as $ID)
+            $sql = "UPDATE %%PLANETS%% SET ";
+            
+            $qry_update = [];
+            foreach ($reslist['defense'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` + '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."'";
-                $after[$ID] = $before[$ID] + max(0, round(HTTP::_GP($resource[$ID], 0.0)));
+                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :planetId AND `universe` = :universe;";
 
-            $db->update($SQL, [
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :planetId AND `universe` = :universe;";
+
+            $db->update($sql, [
                 ':planetId' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
@@ -476,54 +491,57 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == 'delete')
         {
-            $SQL = "UPDATE %%PLANETS%% SET ";
-            foreach ($reslist['defense'] as $ID)
+            $sql = "UPDATE %%PLANETS%% SET ";
+
+            $qry_update = [];
+            foreach ($reslist['defense'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = GREATEST (0, `".$resource[$ID]."` - '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."')";
-                $after[$ID] = max($before[$ID] - max(0, round(HTTP::_GP($resource[$ID], 0.0))), 0);
+                $qry_update[] = "`".$resource[$row_id]."` = GREATEST (0, `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :planetId AND `universe` = :universe;";
-            $db->update($SQL, [
+
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :planetId AND `universe` = :universe;";
+            $db->update($sql, [
                 ':planetId' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
-            $Name = $LNG['log_nomoree'];
+
         }
 
-        $LOG = new Log(2);
-        $LOG->target = HTTP::_GP('id', 0);
-        $LOG->universe = $planetInfo['universe'];
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(2);
+        $log->target = HTTP::_GP('id', 0);
+        $log->universe = $planet_info['universe'];
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         if ($type == 'add')
         {
-            $this->printMessage($LNG['ad_add_defenses_success']);
+            $this->printMessage($LNG['ad_add_defenses_success'], $this->createButtonBack());
         }
         elseif ($type == 'delete')
         {
-            $this->printMessage($LNG['ad_delete_defenses_success']);
+            $this->printMessage($LNG['ad_delete_defenses_success'], $this->createButtonBack());
         }
 
     }
 
     public function buildings(): void
     {
+        global $reslist, $resource;
 
-        global $reslist,$resource;
-
-        foreach ($reslist['build'] as $ID)
+        $input = [];
+        foreach ($reslist['build'] as $row_id)
         {
-            $INPUT[$ID] = [
-                'type' => $resource[$ID],
+            $input[$row_id] = [
+                'type' => $resource[$row_id],
             ];
         }
 
         $this->assign([
-            'inputlist' => $INPUT,
+            'inputlist' => $input,
         ]);
 
         $this->display('page.accounts.buildings.tpl');
@@ -537,108 +555,112 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $type = HTTP::_GP('type', 'add');
 
-        $planetId = HTTP::_GP('id', 0);
+        $planet_id = HTTP::_GP('id', 0);
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('Wrong type !');
+            $this->printMessage('Wrong type !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE `id` = :planetId;";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE `id` = :planet_id;";
 
-        $planetInfo = $db->selectSingle($sql, [
-            ':planetId' => $planetId,
+        $planet_info = $db->selectSingle($sql, [
+            ':planet_id' => $planet_id,
         ]);
 
-        if (!$planetInfo)
+        if (!$planet_info)
         {
-            $this->printMessage($LNG['ad_add_not_exist']);
+            $this->printMessage($LNG['ad_add_not_exist'], $this->createButtonBack());
         }
 
         $before = $after = [];
 
-        foreach ($reslist['allow'][$planetInfo['planet_type']] as $ID)
+        foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
         {
-            $before[$ID] = $planetInfo[$resource[$ID]];
+            $before[$row_id] = $planet_info[$resource[$row_id]];
         }
+
         if ($type == 'add')
         {
-            $Fields = 0;
-            $SQL = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
-            foreach ($reslist['allow'][$planetInfo['planet_type']] as $ID)
+            $fields = 0;
+            $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
+            
+            foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
             {
-                $Count = max(0, round(HTTP::_GP($resource[$ID], 0.0)));
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` + '".$Count."'";
-                $after[$ID] = $before[$ID] + $Count;
-                $Fields += $Count;
+                $count = max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $QryUpdate[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".$count."'";
+                $after[$row_id] = $before[$row_id] + $count;
+                $fields += $count;
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= ", `field_current` = `field_current` + :Fields WHERE `id` = :planetId AND `universe` = :universe;";
 
-            $db->update($SQL, [
-                ':Fields'   => $Fields,
-                ':planetId' => HTTP::_GP('id', 0),
+            $sql .= implode(", ", $QryUpdate);
+            $sql .= ", `field_current` = `field_current` + :fields WHERE 
+            `id` = :planet_id AND `universe` = :universe;";
+
+            $db->update($sql, [
+                ':fields'   => $fields,
+                ':planet_id' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
 
         }
         elseif ($type == 'delete')
         {
-            $Fields = 0;
-            $QryUpdate = [];
-
-            $SQL = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
-
-            foreach ($reslist['allow'][$planetInfo['planet_type']] as $ID)
+            $fields = 0;
+            $qry_update = [];
+            foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
             {
-                $Count = max(0, round(HTTP::_GP($resource[$ID], 0.0)));
-                $QryUpdate[] = "`" . $resource[$ID] . "` = GREATEST(0, `".$resource[$ID]."` - '".$Count."'" . ")";
-                $after[$ID] = max($before[$ID] - $Count, 0);
-                $Fields += $Count;
+                $count = max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $qry_update[] = "`" . $resource[$row_id] . "` = GREATEST(0, `".$resource[$row_id]."` - '".$count."'" . ")";
+                $after[$row_id] = max($before[$row_id] - $count, 0);
+                $fields += $count;
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= ", `field_current` = GREATEST(0, `field_current` - :Fields) WHERE `id` = :planetId AND `universe` = :universe;";
-            $db->update($SQL, [
-                ':Fields'   => $Fields,
+
+            $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
+            $sql .= implode(", ", $qry_update);
+            $sql .= ", `field_current` = GREATEST(0, `field_current` - :fields) WHERE `id` = :planetId AND `universe` = :universe;";
+            
+            $db->update($sql, [
+                ':fields'   => $fields,
                 ':planetId' => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
-        $LOG = new Log(2);
-        $LOG->target = HTTP::_GP('id', 0);
-        $LOG->universe = Universe::getEmulated();
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(2);
+        $log->target = HTTP::_GP('id', 0);
+        $log->universe = Universe::getEmulated();
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         if ($type == 'add')
         {
-            $this->printMessage($LNG['ad_add_build_success']);
+            $this->printMessage($LNG['ad_add_build_success'], $this->createButtonBack());
         }
         elseif ($type == 'delete')
         {
-            $this->printMessage($LNG['ad_delete_build_success']);
+            $this->printMessage($LNG['ad_delete_build_success'], $this->createButtonBack());
         }
 
     }
 
     public function researchs(): void
     {
+        global $reslist, $resource;
 
-        global $reslist,$resource;
-
-        foreach ($reslist['tech'] as $ID)
+        $input = [];
+        foreach ($reslist['tech'] as $row_id)
         {
-            $INPUT[$ID] = [
-                'type' => $resource[$ID],
+            $input[$row_id] = [
+                'type' => $resource[$row_id],
             ];
         }
 
         $this->assign([
-            'inputlist' => $INPUT,
+            'inputlist' => $input,
         ]);
 
         $this->display('page.accounts.researchs.tpl');
@@ -647,52 +669,52 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function researchsSend(): void
     {
-
         global $reslist, $resource, $LNG;
 
-        $userId = HTTP::_GP('id', 0);
+        $user_id = HTTP::_GP('id', 0);
 
         $type = HTTP::_GP('type', 'add');
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('Wrong type !');
+            $this->printMessage('Wrong type !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%USERS%% WHERE `id` = :userId;";
+        $sql = "SELECT * FROM %%USERS%% WHERE `id` = :user_id;";
 
-        $userInfo = $db->selectSingle($sql, [
-            ':userId' => $userId,
+        $user_info = $db->selectSingle($sql, [
+            ':user_id' => $user_id,
         ]);
 
-        if (!$userInfo)
+        if (!$user_info)
         {
-            $this->printMessage('User not found !');
+            $this->printMessage('User not found !', $this->createButtonBack());
         }
 
         $before = $after = [];
 
-        foreach ($reslist['tech'] as $ID)
+        foreach ($reslist['tech'] as $row_id)
         {
-            $before[$ID] = $userInfo[$resource[$ID]];
+            $before[$row_id] = $user_info[$resource[$row_id]];
         }
+
         if ($type == 'add')
         {
-            $SQL = "UPDATE %%USERS%% SET ";
 
-            foreach ($reslist['tech'] as $ID)
+            foreach ($reslist['tech'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` + '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."'";
-                $after[$ID] = $before[$ID] + max(0, round(HTTP::_GP($resource[$ID], 0.0)));
+                $QryUpdate[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
             }
+            
+            $sql = "UPDATE %%USERS%% SET ";
+            $sql .= implode(", ", $QryUpdate);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :userId AND `universe` = :universe;";
 
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :userId AND `universe` = :universe;";
-
-            $db->update($SQL, [
+            $db->update($sql, [
                 ':userId'   => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
@@ -700,37 +722,38 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == 'delete')
         {
-            $SQL = "UPDATE %%USERS%% SET ";
-            foreach ($reslist['tech'] as $ID)
+            foreach ($reslist['tech'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = GREATEST(0, `".$resource[$ID]."` - '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."')";
-                $after[$ID] = max($before[$ID] - max(0, round(HTTP::_GP($resource[$ID], 0.0))), 0);
+                $QryUpdate[] = "`".$resource[$row_id]."` = GREATEST(0, `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :userId AND `universe` = :universe;";
 
-            $db->update($SQL, [
+            $sql = "UPDATE %%USERS%% SET ";
+            $sql .= implode(", ", $QryUpdate);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :userId AND `universe` = :universe;";
+
+            $db->update($sql, [
                 ':userId'   => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
 
         }
 
-        $LOG = new Log(1);
-        $LOG->target = HTTP::_GP('id', 0);
-        $LOG->universe = $userInfo['universe'];
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(1);
+        $log->target = HTTP::_GP('id', 0);
+        $log->universe = $user_info['universe'];
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         if ($type == 'add')
         {
-            $this->printMessage($LNG['ad_add_tech_success']);
+            $this->printMessage($LNG['ad_add_tech_success'], $this->createButtonBack());
         }
         elseif ($type == 'delete')
         {
-            $this->printMessage($LNG['ad_delete_tech_success']);
+            $this->printMessage($LNG['ad_delete_tech_success'], $this->createButtonBack());
         }
         exit;
 
@@ -738,7 +761,6 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function personal(): void
     {
-
         global $LNG;
 
         $this->assign([
@@ -751,14 +773,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function personalSend(): void
     {
-
         global $LNG;
 
         $id = HTTP::_GP('id', 0);
 
         if ($id == 0)
         {
-            $this->printMessage('Wrong user ID');
+            $this->printMessage('Wrong user ID', $this->createButtonBack());
         }
 
         $username = HTTP::_GP('username', '', UTF8_SUPPORT);
@@ -767,87 +788,92 @@ class ShowAccountsPage extends AbstractAdminPage
         $email_2 = HTTP::_GP('email_2', '');
         $vacation = HTTP::_GP('vacation', '');
 
-        if (empty($username) && empty($password) && empty($email) && empty($email_2) && empty($vacation))
+        if (empty($username) 
+            && empty($password) 
+            && empty($email) 
+            && empty($email_2) 
+            && empty($vacation))
         {
-            $this->printMessage('Form is empty !');
+            $this->printMessage('Form is empty !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
         $sql = "SELECT `username`,`email`,`email_2`,`password`,`urlaubs_modus`,`urlaubs_until`
-		FROM %%USERS%% WHERE `id` = :userId;";
+		FROM %%USERS%% WHERE `id` = :user_id;";
 
-        $userInfo = $db->selectSingle($sql, [
-            ':userId' => $id,
+        $user_info = $db->selectSingle($sql, [
+            ':user_id' => $id,
         ]);
 
-        if (!$userInfo)
+        if (!$user_info)
         {
-            $this->printMessage('user could not be found !');
+            $this->printMessage('user could not be found !', $this->createButtonBack());
         }
 
         $after = [];
 
-        $PersonalQuery = "UPDATE %%USERS%% SET ";
+        $personal_qry = "UPDATE %%USERS%% SET ";
 
         if (!empty($username) && $id != ROOT_USER)
         {
-            $PersonalQuery .= "`username` = :username, ";
+            $personal_qry .= "`username` = :username, ";
             $after['username'] = $username;
         }
 
         if (!empty($email) && $id != ROOT_USER)
         {
-            $PersonalQuery .= "`email` = :email, ";
+            $personal_qry .= "`email` = :email, ";
             $after['email'] = $email;
         }
 
         if (!empty($email_2) && $id != ROOT_USER)
         {
-            $PersonalQuery .= "`email_2` = :email_2, ";
+            $personal_qry .= "`email_2` = :email_2, ";
             $after['email_2'] = $email_2;
         }
 
         if (!empty($password) && $id != ROOT_USER)
         {
-            $PersonalQuery .= "`password` = :password, ";
-            $after['password'] = (PlayerUtil::cryptPassword($password) != $userInfo['password']) ? 'CHANGED' : '';
+            $personal_qry .= "`password` = :password, ";
+            $after['password'] = (PlayerUtil::cryptPassword($password) != $user_info['password']) ? 'CHANGED' : '';
         }
-        $userInfo['password'] = '';
 
-        $Answer = 0;
-        $TimeAns = 0;
+        $user_info['password'] = '';
+
+        $answer = 0;
+        $answer_time = 0;
 
         if ($vacation == 'yes')
         {
-            $Answer = 1;
+            $answer = 1;
             $after['urlaubs_modus'] = 1;
-            $TimeAns = TIMESTAMP + $_POST['d'] * 86400 + $_POST['h'] * 3600 + $_POST['m'] * 60 + $_POST['s'];
-            $after['urlaubs_until'] = $TimeAns;
+            $answer_time = TIMESTAMP + $_POST['d'] * 86400 + $_POST['h'] * 3600 + $_POST['m'] * 60 + $_POST['s'];
+            $after['urlaubs_until'] = $answer_time;
         }
 
-        $PersonalQuery .= "`urlaubs_modus` = :Answer, `urlaubs_until` = :TimeAns ";
-        $PersonalQuery .= "WHERE `id` = :id AND `universe` = :universe";
+        $personal_qry .= "`urlaubs_modus` = :answer, `urlaubs_until` = :answer_time ";
+        $personal_qry .= "WHERE `id` = :id AND `universe` = :universe";
 
-        $db->update($PersonalQuery, [
+        $db->update($personal_qry, [
             ':username' => $username,
             ':email'    => $email,
             ':email_2'  => $email_2,
             ':password' => PlayerUtil::cryptPassword($password),
-            ':Answer'   => $Answer,
-            ':TimeAns'  => $TimeAns,
+            ':answer'   => $answer,
+            ':answer_time'  => $answer_time,
             ':id'       => $id,
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $LOG = new Log(1);
-        $LOG->target = $id;
-        $LOG->universe = $userInfo['universe'];
-        $LOG->old = $userInfo;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(1);
+        $log->target = $id;
+        $log->universe = $user_info['universe'];
+        $log->old = $user_info;
+        $log->new = $after;
+        $log->save();
 
-        $this->printMessage($LNG['ad_personal_succes']);
+        $this->printMessage($LNG['ad_personal_succes'], $this->createButtonBack());
 
     }
 
@@ -864,11 +890,11 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($id == 0)
         {
-            $this->printMessage('Alliance id is not entered !');
+            $this->printMessage('Alliance id is not entered !', $this->createButtonBack());
         }
 
         $name = HTTP::_GP('name', '', UTF8_SUPPORT);
-        $changeleader = HTTP::_GP('changeleader', 0);
+        $change_leader = HTTP::_GP('changeleader', 0);
         $tag = HTTP::_GP('tag', '', UTF8_SUPPORT);
         $externo = HTTP::_GP('externo', '', true);
         $interno = HTTP::_GP('interno', '', true);
@@ -887,12 +913,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!$QueryF)
         {
-            $this->printMessage('Alliance is not found !');
+            $this->printMessage('Alliance is not found !', $this->createButtonBack());
         }
 
         if (!empty($name))
         {
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_name` = :name WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_name` = :name 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':name'     => $name,
@@ -904,7 +931,8 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!empty($tag))
         {
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_tag` = :tag WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_tag` = :tag 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':tag'      => $tag,
@@ -914,56 +942,58 @@ class ShowAccountsPage extends AbstractAdminPage
 
         }
 
-        $sql = "SELECT ally_id FROM %%USERS%% WHERE `id` = :changeleader;";
+        $sql = "SELECT ally_id FROM %%USERS%% 
+        WHERE `id` = :change_leader;";
 
         $QueryF2 = $db->selectSingle($sql, [
-            ':changeleader' => $changeleader,
+            ':change_leader' => $change_leader,
         ]);
 
-        $sql = "UPDATE %%ALLIANCE%% SET `ally_owner` = :changeleader WHERE `id` = :id AND `ally_universe` = :universe;";
+        $sql = "UPDATE %%ALLIANCE%% SET `ally_owner` = :change_leader 
+        WHERE `id` = :id AND `ally_universe` = :universe;";
 
         $db->update($sql, [
-            ':changeleader' => $changeleader,
+            ':change_leader' => $change_leader,
             ':id'           => $id,
             ':universe'     => Universe::getEmulated(),
         ]);
 
-        $sql = "UPDATE %%USERS%% SET `ally_rank_id` = '0' WHERE `id` = :changeleader;";
+        $sql = "UPDATE %%USERS%% SET `ally_rank_id` = '0' 
+        WHERE `id` = :change_leader;";
 
         $db->update($sql, [
-            ':changeleader' => $changeleader,
+            ':changeleader' => $change_leader,
         ]);
 
         if (!empty($externo))
         {
-
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_description` = :externo WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_description` = :externo 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':externo'  => $externo,
                 ':id'       => $id,
                 ':universe' => Universe::getEmulated(),
             ]);
-
         }
 
         if (!empty($interno))
         {
-
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_text` = :interno WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_text` = :interno 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':interno'  => $interno,
                 ':id'       => $id,
                 ':universe' => Universe::getEmulated(),
             ]);
-
         }
 
         if (!empty($solicitud))
         {
 
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_request` = :solicitud WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_request` = :solicitud 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':solicitud' => $solicitud,
@@ -975,8 +1005,8 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($delete == 'on')
         {
-
-            $sql = "DELETE FROM %%ALLIANCE%% WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "DELETE FROM %%ALLIANCE%% 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->delete($sql, [
                 ':id'       => $id,
@@ -988,13 +1018,12 @@ class ShowAccountsPage extends AbstractAdminPage
             $db->update($sql, [
                 ':id' => $id,
             ]);
-
         }
 
         if (!empty($delete_u))
         {
-
-            $sql = "UPDATE %%ALLIANCE%% SET `ally_members` = ally_members - 1 WHERE `id` = :id AND `ally_universe` = :universe;";
+            $sql = "UPDATE %%ALLIANCE%% SET `ally_members` = ally_members - 1 
+            WHERE `id` = :id AND `ally_universe` = :universe;";
 
             $db->update($sql, [
                 ':id'       => $id,
@@ -1007,35 +1036,32 @@ class ShowAccountsPage extends AbstractAdminPage
                 ':delete_u' => $delete_u,
                 ':id'       => $id,
             ]);
-
         }
 
-        $this->printMessage($LNG['ad_ally_succes']);
-
+        $this->printMessage($LNG['ad_ally_succes'], $this->createButtonBack());
     }
 
     public function officers(): void
     {
         global $reslist, $resource;
 
-        foreach ($reslist['officier'] as $ID)
+        $input = [];
+        foreach ($reslist['officier'] as $row_id)
         {
-            $INPUT[$ID] = [
-                'type' => $resource[$ID],
+            $input[$row_id] = [
+                'type' => $resource[$row_id],
             ];
         }
 
         $this->assign([
-            'inputlist' => $INPUT,
+            'inputlist' => $input,
         ]);
 
         $this->display('page.accounts.officers.tpl');
-
     }
 
     public function officersSend(): void
     {
-
         global $reslist, $resource, $LNG;
 
         $id = HTTP::_GP('id', 0);
@@ -1043,12 +1069,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!in_array($type, ['add', 'delete']))
         {
-            $this->printMessage('Wrong type !');
+            $this->printMessage('Wrong type !', $this->createButtonBack());
         }
 
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%USERS%% WHERE `id` = :id;";
+        $sql = "SELECT * FROM %%USERS%% 
+        WHERE `id` = :id;";
 
         $userInfo = $db->selectSingle($sql, [
             ':id' => $id,
@@ -1056,28 +1083,31 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!$userInfo)
         {
-            $this->printMessage('User is not found !');
+            $this->printMessage('User is not found !', $this->createButtonBack());
         }
 
         $before = $after = [];
 
-        foreach ($reslist['officier'] as $ID)
+        foreach ($reslist['officier'] as $row_id)
         {
-            $before[$ID] = $userInfo[$resource[$ID]];
+            $before[$row_id] = $userInfo[$resource[$row_id]];
         }
+
         if ($type == 'add')
         {
-            $SQL = "UPDATE %%USERS%% SET ";
-            foreach ($reslist['officier'] as $ID)
+            $qry_update = [];
+            foreach ($reslist['officier'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` + '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."'";
-                $after[$ID] = $before[$ID] + max(0, round(HTTP::_GP($resource[$ID], 0.0)));
+                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :id AND `universe` = :universe;";
 
-            $db->update($SQL, [
+            $sql = "UPDATE %%USERS%% SET ";
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :id AND `universe` = :universe;";
+
+            $db->update($sql, [
                 ':id'       => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
@@ -1086,31 +1116,33 @@ class ShowAccountsPage extends AbstractAdminPage
         elseif ($type == 'delete')
         {
 
-            $SQL = "UPDATE %%USERS%% SET ";
-            foreach ($reslist['officier'] as $ID)
+            $qry_update = [];
+            foreach ($reslist['officier'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$ID]."` = `".$resource[$ID]."` - '".max(0, round(HTTP::_GP($resource[$ID], 0.0)))."'";
-                $after[$ID] = max($before[$ID] - max(0, round(HTTP::_GP($resource[$ID], 0.0))), 0);
+                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
             }
-            $SQL .= implode(", ", $QryUpdate);
-            $SQL .= "WHERE ";
-            $SQL .= "`id` = :id AND `universe` = :universe;";
-            $db->update($SQL, [
+
+            $sql = "UPDATE %%USERS%% SET ";
+            $sql .= implode(", ", $qry_update);
+            $sql .= "WHERE ";
+            $sql .= "`id` = :id AND `universe` = :universe;";
+            $db->update($sql, [
                 ':id'       => HTTP::_GP('id', 0),
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
-        $LOG = new Log(1);
-        $LOG->target = HTTP::_GP('id', 0);
-        $LOG->universe = $userInfo['universe'];
-        $LOG->old = $before;
-        $LOG->new = $after;
-        $LOG->save();
+        $log = new Log(1);
+        $log->target = HTTP::_GP('id', 0);
+        $log->universe = $userInfo['universe'];
+        $log->old = $before;
+        $log->new = $after;
+        $log->save();
 
         $message = ($type == 'add') ? $LNG['ad_add_offi_success'] : $LNG['ad_delete_offi_success'];
 
-        $this->printMessage($message);
+        $this->printMessage($message, $this->createButtonBack());
 
     }
 
@@ -1121,9 +1153,9 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function planetsSend(): void
     {
-        global $reslist,$resource,$LNG;
+        global $reslist, $resource, $LNG;
 
-        $id = HTTP::_GP('id', 0);
+        $planet_id = HTTP::_GP('id', 0);
         $name = HTTP::_GP('name', '', UTF8_SUPPORT);
         $diameter = HTTP::_GP('diameter', 0);
         $fields = HTTP::_GP('fields', 0);
@@ -1137,51 +1169,57 @@ class ShowAccountsPage extends AbstractAdminPage
         $system = HTTP::_GP('s', 0);
         $planet = HTTP::_GP('p', 0);
 
-        if ($id == 0)
+        if ($planet_id == 0)
         {
-            $this->printMessage('Wrong planet ID');
+            $this->printMessage('Wrong planet ID', $this->createButtonBack());
         }
 
         $db = Database::get();
 
         if (!empty($name))
         {
-            $sql = "UPDATE %%PLANETS%% SET `name` = :name WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET `name` = :name 
+            WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
                 ':name'     => $name,
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
-
         }
 
         if ($buildings == 'on')
         {
-            foreach ($reslist['build'] as $ID)
+            $build = [];
+            foreach ($reslist['build'] as $row_id)
             {
-                $BUILD[] = "`".$resource[$ID]."` = '0'";
+                $build[] = "`".$resource[$row_id]."` = '0'";
             }
 
-            $sql = "UPDATE %%PLANETS%% SET " . implode(', ', $BUILD) . " WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET " . 
+            implode(', ', $build) . 
+            " WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
         if ($ships == 'on')
         {
-            foreach ($reslist['fleet'] as $ID)
+            $ships_qry = [];
+            foreach ($reslist['fleet'] as $row_id)
             {
-                $SHIPS[] = "`".$resource[$ID]."` = '0'";
+                $ships_qry[] = "`".$resource[$row_id]."` = '0'";
             }
 
-            $sql = "UPDATE %%PLANETS%% SET ".implode(', ', $SHIPS)." WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET " .
+            implode(', ', $ships_qry) .
+            " WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
@@ -1189,15 +1227,18 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($defenses == 'on')
         {
-            foreach ($reslist['defense'] as $ID)
+            $defs = [];
+            foreach ($reslist['defense'] as $row_id)
             {
-                $DEFS[] = "`".$resource[$ID]."` = '0'";
+                $defs[] = "`".$resource[$row_id]."` = '0'";
             }
 
-            $sql = "UPDATE %%PLANETS%% SET ".implode(', ', $DEFS)." WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET " . 
+            implode(', ', $defs) . 
+            " WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
@@ -1205,11 +1246,14 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($c_hangar == 'on')
         {
-
-            $sql = "UPDATE %%PLANETS%% SET `b_hangar` = '0', `b_hangar_plus` = '0', `b_hangar_id` = '' WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET 
+            `b_hangar` = '0', 
+            `b_hangar_plus` = '0', 
+            `b_hangar_id` = '' 
+            WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
@@ -1218,22 +1262,27 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($c_buildings == 'on')
         {
 
-            $sql = "UPDATE %%PLANETS%% SET `b_building` = '0', `b_building_id` = '' WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% 
+            SET `b_building` = '0', 
+            `b_building_id` = '' 
+            WHERE `id` = :planet_id 
+            AND `universe` = :universe;";
 
             $db->update($sql, [
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
         if (!empty($diameter))
         {
-
-            $sql = "UPDATE %%PLANETS%% SET `diameter` = :diameter WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% SET 
+            `diameter` = :diameter 
+            WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [
                 ':diameter' => $diameter,
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
@@ -1241,54 +1290,74 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if (!empty($fields))
         {
-
-            $sql = "UPDATE %%PLANETS%% SET `field_max` = :fields WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "UPDATE %%PLANETS%% 
+            SET `field_max` = :fields 
+            WHERE `id` = :planet_id 
+            AND `universe` = :universe;";
 
             $db->update($sql, [
                 ':fields'   => $fields,
-                ':id'       => $id,
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
         }
 
-        if ($change_pos == 'on' && $galaxy > 0 && $system > 0 && $planet > 0 && $galaxy <= Config::get(Universe::getEmulated())->max_galaxy && $system <= Config::get(Universe::getEmulated())->max_system && $planet <= Config::get(Universe::getEmulated())->max_planets)
+        $config = Config::get(Universe::getEmulated());
+        if ($change_pos == 'on' 
+            && $galaxy > 0 
+            && $system > 0 
+            && $planet > 0 
+            && $galaxy <= $config->max_galaxy 
+            && $system <= $config->max_system 
+            && $planet <= $config->max_planets)
         {
-            $sql = "SELECT galaxy,system,planet,planet_type FROM %%PLANETS%% WHERE `id` = :id AND `universe` = :universe;";
+            $sql = "SELECT galaxy, system, planet, planet_type 
+            FROM %%PLANETS%% 
+            WHERE `id` = :planet_id AND `universe` = :universe;";
 
-            $P = $db->selectSingle($sql, [
-                ':id'       => $id,
+            $planet_info = $db->selectSingle($sql, [
+                ':planet_id' => $planet_id,
                 ':universe' => Universe::getEmulated(),
             ]);
 
-            if ($P['planet_type'] == '1')
+            if ($planet_info['planet_type'] == '1')
             {
-                if (PlayerUtil::checkPosition(Universe::getEmulated(), $galaxy, $system, $planet, $P['planet_type']))
+                if (PlayerUtil::checkPosition(Universe::getEmulated(), $galaxy, $system, $planet, $planet_info['planet_type']))
                 {
-                    $template->message($LNG['ad_pla_error_planets3'], '?page=accounteditor&edit=planets');
-                    exit;
+                    $this->printMessage($LNG['ad_pla_error_planets3'], $this->createButtonBack());
+                    return;
                 }
 
-                $sql = "UPDATE %%PLANETS%% SET `galaxy` = :galaxy, `system` = :system, `planet` = :planet WHERE `id` = :id AND `universe` = :universe;";
+                $sql = "UPDATE %%PLANETS%% SET 
+                `galaxy` = :galaxy, 
+                `system` = :system, 
+                `planet` = :planet 
+                WHERE `id` = :planet_id AND `universe` = :universe;";
 
                 $db->update($sql, [
                     ':galaxy'   => $galaxy,
                     ':system'   => $system,
                     ':planet'   => $planet,
-                    ':id'       => $id,
+                    ':planet_id' => $planet_id,
                     ':universe' => Universe::getEmulated(),
                 ]);
 
             }
             else
             {
-                if (PlayerUtil::checkPosition(Universe::getEmulated(), $galaxy, $system, $planet, $P['planet_type']))
+                if (PlayerUtil::checkPosition(Universe::getEmulated(), 
+                $galaxy, $system, $planet, $planet_info['planet_type']))
                 {
-                    $template->message($LNG['ad_pla_error_planets5'], '?page=accounteditor&edit=planets');
-                    exit;
+                    $this->printMessage($LNG['ad_pla_error_planets5'], $this->createButtonBack());
+                    return;
                 }
 
-                $sql = "SELECT id_luna FROM %%PLANETS%% WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet AND `planet_type` = '1';";
+                $sql = "SELECT id_luna FROM %%PLANETS%% 
+                WHERE `galaxy` = :galaxy 
+                AND `system` = :system 
+                AND `planet` = :planet 
+                AND `planet_type` = '1';";
 
                 $Target = $db->selectSingle($sql, [
                     ':galaxy' => $galaxy,
@@ -1298,38 +1367,55 @@ class ShowAccountsPage extends AbstractAdminPage
 
                 if ($Target['id_luna'] != '0')
                 {
-                    $template->message($LNG['ad_pla_error_planets4'], '?page=accounteditor&edit=planets');
-                    exit;
+                    $this->printMessage($LNG['ad_pla_error_planets4'], $this->createButtonBack());
+                    return;
                 }
 
-                $sql = "UPDATE %%PLANETS%% SET `id_luna` = '0' WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet AND `planet_type` = '1';";
+                $sql = "UPDATE %%PLANETS%% 
+                SET `id_luna` = '0' 
+                WHERE `galaxy` = :galaxy 
+                AND `system` = :system 
+                AND `planet` = :planet 
+                AND `planet_type` = '1';";
 
                 $db->update($sql, [
-                    ':galaxy' => $P['galaxy'],
-                    ':system' => $P['system'],
-                    ':planet' => $P['planet'],
+                    ':galaxy' => $planet_info['galaxy'],
+                    ':system' => $planet_info['system'],
+                    ':planet' => $planet_info['planet'],
                 ]);
 
-                $sql = "UPDATE %%PLANETS%% SET `id_luna` = :id  WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet AND planet_type = '1';";
+                $sql = "UPDATE %%PLANETS%% SET `id_luna` = :id 
+                WHERE `galaxy` = :galaxy 
+                AND `system` = :system 
+                AND `planet` = :planet 
+                AND planet_type = '1';";
 
                 $db->update($sql, [
-                    ':id'     => $id,
+                    ':id'     => $planet_id,
                     ':galaxy' => $galaxy,
                     ':system' => $system,
                     ':planet' => $planet,
                 ]);
 
-                $sql = "UPDATE %%PLANETS%% SET `galaxy` = :galaxy, `system` = :system, `planet` = :planet WHERE `id` = :id AND `universe` = :universe;";
+                $sql = "UPDATE %%PLANETS%% SET 
+                `galaxy` = :galaxy, 
+                `system` = :system, 
+                `planet` = :planet 
+                WHERE `id` = :planet_id AND `universe` = :universe;";
 
                 $db->update($sql, [
                     ':galaxy'   => $galaxy,
                     ':system'   => $system,
                     ':planet'   => $planet,
-                    ':id'       => $id,
+                    ':planet_id' => $planet_id,
                     ':universe' => Universe::getEmulated(),
                 ]);
 
-                $sql = "SELECT id_owner FROM %%PLANETS%% WHERE `galaxy` = :galaxy AND `system` = :system AND `planet` = :planet;";
+                $sql = "SELECT id_owner 
+                FROM %%PLANETS%% 
+                WHERE `galaxy` = :galaxy 
+                AND `system` = :system 
+                AND `planet` = :planet;";
 
                 $QMOON2 = $db->selectSingle($sql, [
                     ':galaxy' => $galaxy,
@@ -1337,46 +1423,26 @@ class ShowAccountsPage extends AbstractAdminPage
                     ':planet' => $planet,
                 ]);
 
-                $sql = "UPDATE %%PLANETS%% SET `galaxy` = :galaxy, `system` = :system, `planet` = :planet, `id_owner` = :id_owner WHERE `id` = :id AND `universe` = :universe AND `planet_type` = '3';";
+                $sql = "UPDATE %%PLANETS%% SET 
+                `galaxy` = :galaxy, 
+                `system` = :system, 
+                `planet` = :planet, 
+                `id_owner` = :id_owner 
+                WHERE `id` = :id AND `universe` = :universe AND `planet_type` = '3';";
 
                 $db->update($sql, [
                     ':galaxy'   => $galaxy,
                     ':system'   => $system,
                     ':planet'   => $planet,
                     ':id_owner' => $QMOON2['id_owner'],
-                    ':id'       => $id,
+                    ':id'       => $planet_id,
                     ':universe' => Universe::getEmulated(),
                 ]);
             }
         }
 
-        $this->printMessage($LNG['ad_pla_succes']);
+        $this->printMessage($LNG['ad_pla_succes'], $this->createButtonBack());
 
     }
 
-}
-
-function ShowAccountEditorPage()
-{
-    global $LNG, $reslist, $resource;
-    $template = new template();
-    $db = Database::get();
-
-    $editType = HTTP::_GP('edit', '');
-
-    switch ($editType)
-    {
-
-        case 'planets':
-            if ($_POST)
-            {
-
-            }
-
-            break;
-
-        default:
-            $template->show('AccountEditorPageMenu.tpl');
-            break;
-    }
 }
