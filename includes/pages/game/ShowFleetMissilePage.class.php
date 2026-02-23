@@ -24,7 +24,7 @@ class ShowFleetMissilePage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $LNG, $reslist, $resource;
 
@@ -38,8 +38,8 @@ class ShowFleetMissilePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "SELECT id, id_owner FROM %%PLANETS%%
-    WHERE universe = :universe AND galaxy = :targetGalaxy
-    AND system = :targetSystem AND planet = :targetPlanet AND planet_type = :targetType;";
+        WHERE universe = :universe AND galaxy = :targetGalaxy
+        AND system = :targetSystem AND planet = :targetPlanet AND planet_type = :targetType;";
 
         $target = $db->selectSingle($sql, [
             ':universe'     => Universe::current(),

@@ -26,7 +26,7 @@ class ShowShipyardPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function CancelAuftr()
+    private function CancelAuftr(): bool
     {
         global $USER, $PLANET, $resource;
         $ElementQueue = unserialize($PLANET['b_hangar_id']);
@@ -87,7 +87,7 @@ class ShowShipyardPage extends AbstractGamePage
         return true;
     }
 
-    private function BuildAuftr($fmenge)
+    private function BuildAuftr($fmenge): void
     {
         global $USER, $PLANET, $reslist, $resource;
 
@@ -170,7 +170,7 @@ class ShowShipyardPage extends AbstractGamePage
         }
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $LNG, $resource, $reslist, $config, $requeriments;
 

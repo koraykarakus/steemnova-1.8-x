@@ -18,7 +18,7 @@ class ShowMarketPlacePage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function checkSlots($USER)
+    private function checkSlots($USER): array
     {
         global $LNG;
         $ActualFleets = FleetFunctions::GetCurrentFleets($USER['id']);
@@ -29,7 +29,7 @@ class ShowMarketPlacePage extends AbstractGamePage
         return ['result' => 0];
     }
 
-    private function checkTechs($SELLER)
+    private function checkTechs($SELLER): array
     {
         global $USER, $resource, $LNG;
 
@@ -54,7 +54,7 @@ class ShowMarketPlacePage extends AbstractGamePage
             'reason'      => ''];
     }
 
-    private function checkDiplo($visibility, $level, $seller_ally, $ally)
+    private function checkDiplo($visibility, $level, $seller_ally, $ally): array
     {
         global $LNG;
         if ($visibility == 2 && $level == 5)
@@ -77,7 +77,7 @@ class ShowMarketPlacePage extends AbstractGamePage
             'reason'      => ''];
     }
 
-    private function getResourceTradeHistory()
+    private function getResourceTradeHistory(): array
     {
         $db = Database::get();
         $sql = 'SELECT
@@ -97,7 +97,7 @@ class ShowMarketPlacePage extends AbstractGamePage
         return $trades;
     }
 
-    private function getFleetTradeHistory()
+    private function getFleetTradeHistory(): array
     {
         global $LNG;
         $db = Database::get();
@@ -126,7 +126,7 @@ class ShowMarketPlacePage extends AbstractGamePage
         return $trades;
     }
 
-    private function doBuy()
+    private function doBuy(): string
     {
         global $USER, $PLANET, $reslist, $resource, $LNG, $pricelist;
         $FleetID = HTTP::_GP('fleetID', 0);
@@ -420,7 +420,7 @@ class ShowMarketPlacePage extends AbstractGamePage
         return sprintf($LNG['market_p_msg_sent'], $LC, $HC);
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $reslist, $resource, $LNG;
 

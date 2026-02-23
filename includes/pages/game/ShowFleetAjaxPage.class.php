@@ -27,14 +27,14 @@ class ShowFleetAjaxPage extends AbstractGamePage
         $this->setWindow('ajax');
     }
 
-    private function sendData($Code, $Message)
+    private function sendData($Code, $Message): void
     {
         $this->returnData['code'] = $Code;
         $this->returnData['mess'] = $Message;
         $this->sendJSON($this->returnData);
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $resource, $LNG, $pricelist;
 

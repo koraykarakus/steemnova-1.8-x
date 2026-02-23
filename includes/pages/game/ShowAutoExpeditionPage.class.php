@@ -9,7 +9,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $LNG, $resource, $reslist, $config;
 

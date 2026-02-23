@@ -24,7 +24,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function send()
+    public function send(): void
     {
         global $reslist, $pricelist, $LNG;
 
@@ -218,7 +218,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         $this->sendJSON($reportID);
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $reslist, $resource;
 

@@ -26,7 +26,7 @@ class ShowNotesPage extends AbstractGamePage
         $this->initTemplate();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $USER;
 
@@ -56,7 +56,7 @@ class ShowNotesPage extends AbstractGamePage
         $this->display('page.notes.default.tpl');
     }
 
-    public function detail()
+    public function detail(): void
     {
         global $LNG, $USER;
 
@@ -93,7 +93,7 @@ class ShowNotesPage extends AbstractGamePage
         $this->display('page.notes.detail.tpl');
     }
 
-    public function insert()
+    public function insert(): void
     {
         global $LNG, $USER, $config;
         $priority = HTTP::_GP('priority', 1);
@@ -149,7 +149,7 @@ class ShowNotesPage extends AbstractGamePage
         $this->redirectTo('game.php?page=notes');
     }
 
-    public function delete()
+    public function delete(): void
     {
         global $USER;
 

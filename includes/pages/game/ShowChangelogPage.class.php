@@ -24,7 +24,7 @@ class ShowChangelogPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         include ROOT_PATH.'includes/libs/Parsedown/Parsedown.php';
 

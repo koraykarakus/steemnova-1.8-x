@@ -28,7 +28,7 @@ class ShowTicketPage extends AbstractGamePage
         $this->ticketObj = new SupportTickets();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $LNG;
 
@@ -59,7 +59,7 @@ class ShowTicketPage extends AbstractGamePage
         $this->display('page.ticket.default.tpl');
     }
 
-    public function create()
+    public function create(): void
     {
         $categoryList = $this->ticketObj->getCategoryList();
 
@@ -70,7 +70,7 @@ class ShowTicketPage extends AbstractGamePage
         $this->display('page.ticket.create.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $LNG;
 
@@ -122,7 +122,7 @@ class ShowTicketPage extends AbstractGamePage
         $this->redirectTo('game.php?page=ticket&mode=view&id='.$ticketID);
     }
 
-    public function view()
+    public function view(): void
     {
         global $USER, $LNG;
 

@@ -24,7 +24,7 @@ class ShowBuildingsPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function CancelBuildingFromQueue()
+    private function CancelBuildingFromQueue(): bool
     {
         global $PLANET, $USER, $resource;
         $CurrentQueue = unserialize($PLANET['b_building_id'] ?? '');
@@ -96,19 +96,20 @@ class ShowBuildingsPage extends AbstractGamePage
         return true;
     }
 
-    private function RemoveBuildingFromQueue($QueueID)
+    private function RemoveBuildingFromQueue($QueueID): void
     {
         global $USER, $PLANET;
         if ($QueueID <= 1 || empty($PLANET['b_building_id']))
         {
-            return false;
+            return;
         }
 
         $CurrentQueue = unserialize($PLANET['b_building_id']);
         $ActualCount = count($CurrentQueue);
         if ($ActualCount <= 1)
         {
-            return $this->CancelBuildingFromQueue();
+            $this->CancelBuildingFromQueue();
+            return;
         }
 
         if ($QueueID - $ActualCount >= 1)
@@ -149,10 +150,9 @@ class ShowBuildingsPage extends AbstractGamePage
             $PLANET['b_building_id'] = "";
         }
 
-        return true;
     }
 
-    private function AddBuildingToQueue($Element, $AddMode = true)
+    private function AddBuildingToQueue($Element, $AddMode = true): void
     {
         global $PLANET, $USER, $resource, $reslist, $pricelist, $config;
 
@@ -277,7 +277,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
     }
 
-    private function getQueueData()
+    private function getQueueData(): array
     {
         global $LNG, $PLANET, $USER;
 
@@ -314,7 +314,7 @@ class ShowBuildingsPage extends AbstractGamePage
         return ['queue' => $scriptData, 'quickinfo' => $quickinfo];
     }
 
-    public function show()
+    public function show(): void
     {
         global $ProdGrid, $LNG, $resource, $reslist, $PLANET, $USER, $pricelist, $config, $requeriments;
 

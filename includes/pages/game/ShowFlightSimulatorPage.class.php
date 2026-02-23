@@ -9,7 +9,7 @@ class ShowFlightSimulatorPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $LNG, $reslist, $resource, $PLANET;
 
@@ -43,7 +43,7 @@ class ShowFlightSimulatorPage extends AbstractGamePage
         $this->display('page.flightSimulator.default.tpl');
     }
 
-    public function calcFleetSpeed()
+    public function calcFleetSpeed(): void
     {
         global $USER,$PLANET,$reslist;
 

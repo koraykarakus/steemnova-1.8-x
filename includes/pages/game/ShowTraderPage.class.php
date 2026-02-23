@@ -30,7 +30,7 @@ class ShowTraderPage extends AbstractGamePage
         903 => [901 => 0.25, 902 => 0.5, 903 => 1],
     ];
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $USER, $resource;
 
@@ -46,7 +46,7 @@ class ShowTraderPage extends AbstractGamePage
         $this->display("page.trader.default.tpl");
     }
 
-    public function trade()
+    public function trade(): void
     {
         global $USER, $LNG;
 
@@ -76,7 +76,7 @@ class ShowTraderPage extends AbstractGamePage
         $this->display('page.trader.trade.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $PLANET, $LNG, $resource;
 

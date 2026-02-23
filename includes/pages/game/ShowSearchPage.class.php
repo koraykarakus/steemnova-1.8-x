@@ -24,7 +24,7 @@ class ShowSearchPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function _getSearchList($searchMode, $searchText, $maxResult)
+    public static function _getSearchList($searchMode, $searchText, $maxResult): array
     {
         $db = Database::get();
 
@@ -164,7 +164,7 @@ class ShowSearchPage extends AbstractGamePage
         return $searchList;
     }
 
-    public function autocomplete()
+    public function autocomplete(): void
     {
         global $LNG;
 
@@ -208,7 +208,7 @@ class ShowSearchPage extends AbstractGamePage
         $this->sendJSON($searchList);
     }
 
-    public function result()
+    public function result(): void
     {
         global $THEME;
 
@@ -235,7 +235,7 @@ class ShowSearchPage extends AbstractGamePage
         $this->display('page.search.result.'.$templateSuffix.'.tpl');
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $THEME;
 

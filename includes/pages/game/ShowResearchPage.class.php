@@ -26,7 +26,7 @@ class ShowResearchPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function CheckLabSettingsInQueue()
+    private function CheckLabSettingsInQueue(): bool
     {
         global $USER;
         $db = Database::get();
@@ -55,7 +55,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function CancelBuildingFromQueue()
+    private function CancelBuildingFromQueue(): bool
     {
         global $PLANET, $USER, $resource;
         $CurrentQueue = unserialize($USER['b_tech_queue']);
@@ -182,7 +182,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function RemoveBuildingFromQueue($QueueID)
+    private function RemoveBuildingFromQueue($QueueID): bool
     {
         global $USER, $PLANET, $resource;
 
@@ -256,7 +256,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function AddBuildingToQueue($elementId, $AddMode = true)
+    private function AddBuildingToQueue($elementId, $AddMode = true): bool
     {
         global $PLANET, $USER, $resource, $reslist, $pricelist;
 
@@ -354,7 +354,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function getQueueData()
+    private function getQueueData(): array
     {
         global $LNG, $PLANET, $USER;
 
@@ -399,7 +399,7 @@ class ShowResearchPage extends AbstractGamePage
         return ['queue' => $scriptData, 'quickinfo' => $quickinfo];
     }
 
-    public function show()
+    public function show(): void
     {
         global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config,$requeriments;
 

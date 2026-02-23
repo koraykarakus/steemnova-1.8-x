@@ -24,7 +24,7 @@ class ShowFleetDealerPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $PLANET, $LNG, $pricelist, $resource;
 
@@ -63,7 +63,7 @@ class ShowFleetDealerPage extends AbstractGamePage
 
     }
 
-    public function show()
+    public function show(): void
     {
         global $PLANET, $LNG, $pricelist, $resource, $reslist;
 

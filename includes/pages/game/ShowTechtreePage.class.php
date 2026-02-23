@@ -24,7 +24,7 @@ class ShowTechtreePage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $resource, $requeriments, $reslist, $USER, $PLANET, $LNG;
 

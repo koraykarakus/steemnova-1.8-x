@@ -24,7 +24,7 @@ class ShowOverviewPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function GetTeamspeakData()
+    private function GetTeamspeakData(): array
     {
         global $USER, $LNG;
 
@@ -32,7 +32,7 @@ class ShowOverviewPage extends AbstractGamePage
 
         if ($config->ts_modon == 0)
         {
-            return false;
+            return [];
         }
 
         Cache::get()->add('teamspeak', 'TeamspeakBuildCache');
@@ -65,7 +65,7 @@ class ShowOverviewPage extends AbstractGamePage
         ];
     }
 
-    public function changeNewsVisibility()
+    public function changeNewsVisibility(): void
     {
 
         global $USER;
@@ -84,7 +84,7 @@ class ShowOverviewPage extends AbstractGamePage
 
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $PLANET, $USER, $config;
 
@@ -297,7 +297,7 @@ class ShowOverviewPage extends AbstractGamePage
         $this->display('page.overview.default.tpl');
     }
 
-    public function actions()
+    public function actions(): void
     {
         global $LNG, $PLANET;
 
@@ -312,7 +312,7 @@ class ShowOverviewPage extends AbstractGamePage
         $this->display('page.overview.actions.tpl');
     }
 
-    public function rename()
+    public function rename(): void
     {
         global $LNG, $PLANET;
 
@@ -353,7 +353,7 @@ class ShowOverviewPage extends AbstractGamePage
 
     }
 
-    public function delete()
+    public function delete(): void
     {
         global $LNG, $PLANET, $USER;
 

@@ -50,14 +50,14 @@ abstract class AbstractGamePage
         }
     }
 
-    protected function GetFleets()
+    protected function GetFleets(): array
     {
         global $USER, $PLANET;
 
         if (empty($USER)
             || empty($PLANET))
         {
-            return;
+            return [];
         }
 
         require_once 'includes/classes/class.FlyingFleetsTable.php';
@@ -67,7 +67,7 @@ abstract class AbstractGamePage
         return $fleetTableObj->renderTable();
     }
 
-    public function getAttack()
+    public function getAttack(): void
     {
         global $USER;
 
@@ -106,13 +106,13 @@ abstract class AbstractGamePage
         $this->sendJSON($data);
     }
 
-    protected function initTemplate()
+    protected function initTemplate(): void
     {
         global $config, $USER;
 
         if (isset($this->tplObj))
         {
-            return true;
+            return;
         }
 
         $this->tplObj = new template();
@@ -125,20 +125,19 @@ abstract class AbstractGamePage
         $path = "theme/" . $theme;
 
         $this->tplObj->setTemplateDir($tplDir. $path);
-        return true;
     }
 
-    protected function setWindow($window)
+    protected function setWindow($window): void
     {
         $this->window = $window;
     }
 
-    protected function getWindow()
+    protected function getWindow(): string
     {
         return $this->window;
     }
 
-    protected function getQueryString()
+    protected function getQueryString(): string
     {
         $queryString = [];
         $page = HTTP::_GP('page', '');
@@ -157,7 +156,7 @@ abstract class AbstractGamePage
         return http_build_query($queryString);
     }
 
-    protected function getCronjobsTodo()
+    protected function getCronjobsTodo(): void
     {
         require_once 'includes/classes/Cronjob.class.php';
 
@@ -166,7 +165,7 @@ abstract class AbstractGamePage
         ]);
     }
 
-    protected function getNavigationData()
+    protected function getNavigationData(): void
     {
         global $PLANET, $LNG, $USER, $THEME, $resource, $reslist, $config;
 
@@ -265,7 +264,7 @@ abstract class AbstractGamePage
         ]);
     }
 
-    protected function getPageData()
+    protected function getPageData(): void
     {
         global $USER, $THEME, $config, $PLANET, $LNG;
 
@@ -407,7 +406,8 @@ abstract class AbstractGamePage
             'attackListenTime'   => ATTACK_LISTEN_TIME,
         ]);
     }
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true)
+
+    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
     {
         $this->assign([
             'message'         => $message,
@@ -427,7 +427,7 @@ abstract class AbstractGamePage
         $this->display('error.default.tpl');
     }
 
-    protected function save()
+    protected function save(): void
     {
         if (isset($this->ecoObj))
         {
@@ -435,12 +435,12 @@ abstract class AbstractGamePage
         }
     }
 
-    protected function assign($array, $nocache = true)
+    protected function assign($array, $nocache = true): void
     {
         $this->tplObj->assign_vars($array, $nocache);
     }
 
-    protected function display($file)
+    protected function display($file): void
     {
         global $THEME, $LNG;
 
@@ -467,14 +467,14 @@ abstract class AbstractGamePage
         exit;
     }
 
-    protected function sendJSON($data)
+    protected function sendJSON($data): void
     {
         $this->save();
         echo json_encode($data);
         exit;
     }
 
-    protected function redirectTo($url)
+    protected function redirectTo($url): void
     {
         $this->save();
         HTTP::redirectTo($url);

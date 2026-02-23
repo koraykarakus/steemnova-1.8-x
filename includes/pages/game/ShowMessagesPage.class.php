@@ -26,18 +26,14 @@ class ShowMessagesPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function sendData($Code, $Message)
+    private function sendData($Code, $Message): void
     {
-
         $this->returnData['code'] = $Code;
-
         $this->returnData['mess'] = $Message;
-
         $this->sendJSON($this->returnData);
-
     }
 
-    public function deleteMessage()
+    public function deleteMessage(): void
     {
         global $LNG, $USER;
 
@@ -64,7 +60,7 @@ class ShowMessagesPage extends AbstractGamePage
         $this->sendData($delMessID, $LNG['mg_deleted']);
     }
 
-    public function action()
+    public function action(): void
     {
         global $USER;
 
@@ -237,7 +233,7 @@ class ShowMessagesPage extends AbstractGamePage
         $this->redirectTo($redirectUrl);
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $LNG;
         $receiverID = HTTP::_GP('id', 0);
@@ -260,7 +256,7 @@ class ShowMessagesPage extends AbstractGamePage
         $this->sendJSON($LNG['mg_message_send']);
     }
 
-    public function write()
+    public function write(): void
     {
         global $LNG, $USER;
         $this->setWindow('popup');
@@ -299,7 +295,7 @@ class ShowMessagesPage extends AbstractGamePage
         $this->display('page.messages.write.tpl');
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $USER;
 

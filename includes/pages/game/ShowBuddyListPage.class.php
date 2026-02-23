@@ -24,7 +24,7 @@ class ShowBuddyListPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function request()
+    public function request(): void
     {
         global $USER, $LNG;
 
@@ -67,7 +67,7 @@ class ShowBuddyListPage extends AbstractGamePage
         $this->display('page.buddyList.request.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $LNG;
 
@@ -129,7 +129,7 @@ class ShowBuddyListPage extends AbstractGamePage
         $this->printMessage($LNG['bu_request_send']);
     }
 
-    public function delete()
+    public function delete(): void
     {
         global $USER, $LNG;
 
@@ -176,7 +176,7 @@ class ShowBuddyListPage extends AbstractGamePage
         $this->redirectTo("game.php?page=buddyList");
     }
 
-    public function accept()
+    public function accept(): void
     {
         global $USER, $LNG;
 
@@ -206,7 +206,7 @@ class ShowBuddyListPage extends AbstractGamePage
         $this->redirectTo("game.php?page=buddyList");
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER;
 

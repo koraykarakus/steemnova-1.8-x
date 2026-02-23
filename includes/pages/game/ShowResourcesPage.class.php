@@ -24,7 +24,7 @@ class ShowResourcesPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function send()
+    public function send(): void
     {
         global $resource, $USER, $PLANET;
         if ($USER['urlaubs_modus'] == 0)
@@ -66,7 +66,8 @@ class ShowResourcesPage extends AbstractGamePage
         $this->save();
         $this->redirectTo('game.php?page=resources');
     }
-    public function show()
+
+    public function show(): void
     {
         global $LNG, $ProdGrid, $resource, $reslist, $USER, $PLANET;
 

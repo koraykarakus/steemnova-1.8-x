@@ -24,7 +24,7 @@ class ShowImperiumPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $resource, $reslist;
 

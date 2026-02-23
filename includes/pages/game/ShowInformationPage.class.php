@@ -26,12 +26,12 @@ class ShowInformationPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function getNextJumpWaitTime($lastTime)
+    public static function getNextJumpWaitTime($lastTime): int
     {
-        return $lastTime + Config::get()->gate_wait_time;
+        return (int) $lastTime + (int) Config::get()->gate_wait_time;
     }
 
-    public function sendFleet()
+    public function sendFleet(): void
     {
         global $PLANET, $USER, $resource, $LNG, $reslist;
 
@@ -123,7 +123,7 @@ class ShowInformationPage extends AbstractGamePage
         ]);
     }
 
-    private function getAvailableFleets()
+    private function getAvailableFleets(): array
     {
         global $reslist, $resource, $PLANET;
 
@@ -142,7 +142,7 @@ class ShowInformationPage extends AbstractGamePage
         return $fleetList;
     }
 
-    public function destroyMissiles()
+    public function destroyMissiles(): void
     {
         global $resource, $PLANET;
 
@@ -162,7 +162,7 @@ class ShowInformationPage extends AbstractGamePage
         $this->sendJSON([$PLANET[$resource[502]], $PLANET[$resource[503]]]);
     }
 
-    private function getTargetGates()
+    private function getTargetGates(): array
     {
         global $resource, $USER, $PLANET;
 
@@ -202,7 +202,7 @@ class ShowInformationPage extends AbstractGamePage
         return $moonList;
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $LNG, $resource, $pricelist, $reslist, $CombatCaps, $ProdGrid;
 

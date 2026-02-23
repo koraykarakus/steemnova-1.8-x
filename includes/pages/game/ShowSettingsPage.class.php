@@ -24,7 +24,7 @@ class ShowSettingsPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $LNG, $config;
         if ($USER['urlaubs_modus'] == 1)
@@ -83,7 +83,7 @@ class ShowSettingsPage extends AbstractGamePage
         }
     }
 
-    private function CheckVMode()
+    private function CheckVMode(): bool
     {
         global $USER, $PLANET;
 
@@ -125,7 +125,7 @@ class ShowSettingsPage extends AbstractGamePage
         return true;
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER;
         if ($USER['urlaubs_modus'] == 1)
@@ -138,10 +138,9 @@ class ShowSettingsPage extends AbstractGamePage
         }
     }
 
-    private function sendVacation()
+    private function sendVacation(): void
     {
-        global $USER, $LNG;
-        $PLANET;
+        global $USER, $LNG, $PLANET;
 
         $delete = HTTP::_GP('delete', 0);
         $vacation = HTTP::_GP('vacation', 0);
@@ -199,7 +198,7 @@ class ShowSettingsPage extends AbstractGamePage
         ]]);
     }
 
-    private function sendDefault()
+    private function sendDefault(): void
     {
         global $USER, $LNG, $THEME, $config;
 

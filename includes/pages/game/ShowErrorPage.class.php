@@ -27,13 +27,13 @@ class ShowErrorPage extends AbstractGamePage
         $this->initTemplate();
     }
 
-    public static function printError($Message, $fullSide = true, $redirect = null)
+    public static function printError($Message, $fullSide = true, $redirect = null): void
     {
         $pageObj = new self();
         $pageObj->printMessage($Message, $fullSide, $redirect);
     }
 
-    public function show()
+    public function show(): void
     {
 
     }

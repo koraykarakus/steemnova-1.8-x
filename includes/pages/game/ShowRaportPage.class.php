@@ -26,7 +26,7 @@ class ShowRaportPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function BCWrapperPreRev2321($combatReport)
+    private function BCWrapperPreRev2321($combatReport): mixed
     {
         if (isset($combatReport['moon']['desfail']))
         {
@@ -74,7 +74,7 @@ class ShowRaportPage extends AbstractGamePage
         return $combatReport;
     }
 
-    public function battlehall()
+    public function battlehall(): void
     {
         global $LNG, $USER;
 
@@ -125,7 +125,7 @@ class ShowRaportPage extends AbstractGamePage
         $this->display('shared.mission.raport.tpl');
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $USER;
 

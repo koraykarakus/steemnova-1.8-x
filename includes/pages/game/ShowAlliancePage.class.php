@@ -51,7 +51,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function setAllianceData($allianceId)
+    private function setAllianceData($allianceId): void
     {
         global $USER;
         $db = Database::get();
@@ -91,7 +91,8 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function isApply()
+    // TODO : avoid multiple report type to support lower versions of php.
+    private function isApply() : bool|array
     {
         global $USER;
         $db = Database::get();
@@ -101,7 +102,7 @@ class ShowAlliancePage extends AbstractGamePage
         ], 'count');
     }
 
-    public function info()
+    public function info(): void
     {
         global $LNG, $USER;
 
@@ -173,7 +174,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.info.tpl');
     }
 
-    public function show()
+    public function show(): void
     {
         if ($this->hasAlliance)
         {
@@ -189,17 +190,17 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function redirectToHome()
+    private function redirectToHome(): void
     {
         $this->redirectTo('game.php?page=alliance');
     }
 
-    private function getAction()
+    private function getAction(): string
     {
         return HTTP::_GP('action', '');
     }
 
-    private function applyWaitScreen()
+    private function applyWaitScreen(): void
     {
         global $USER, $LNG;
 
@@ -227,12 +228,12 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.applyWait.tpl');
     }
 
-    private function createSelection()
+    private function createSelection(): void
     {
         $this->display('page.alliance.createSelection.tpl');
     }
 
-    public function search()
+    public function search(): void
     {
 
         if ($this->hasApply)
@@ -278,7 +279,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.search.tpl');
     }
 
-    public function apply()
+    public function apply(): void
     {
         global $LNG, $USER;
 
@@ -362,7 +363,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.apply.tpl');
     }
 
-    public function cancelApply()
+    public function cancelApply(): void
     {
         global $LNG, $USER;
 
@@ -388,7 +389,7 @@ class ShowAlliancePage extends AbstractGamePage
         ]]);
     }
 
-    public function create()
+    public function create(): void
     {
         global $USER, $LNG;
 
@@ -434,7 +435,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function createAlliance()
+    private function createAlliance(): void
     {
         $action = $this->getAction();
         if ($action == "send")
@@ -447,7 +448,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function createAllianceProcessor()
+    private function createAllianceProcessor(): void
     {
         global $USER, $LNG;
         $allianceTag = HTTP::_GP('atag', '', UTF8_SUPPORT);
@@ -528,7 +529,7 @@ class ShowAlliancePage extends AbstractGamePage
         ]]);
     }
 
-    private function getDiplomatic()
+    private function getDiplomatic(): array
     {
         $Return = [];
         $db = Database::get();
@@ -556,7 +557,7 @@ class ShowAlliancePage extends AbstractGamePage
         return $Return;
     }
 
-    private function homeAlliance()
+    private function homeAlliance(): void
     {
         global $USER, $LNG;
 
@@ -641,7 +642,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.home.tpl');
     }
 
-    public function memberList()
+    public function memberList(): void
     {
         global $USER, $LNG;
         if (!$this->rights['MEMBERLIST'])
@@ -730,7 +731,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.memberList.tpl');
     }
 
-    public function close()
+    public function close(): void
     {
         global $USER;
 
@@ -754,7 +755,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance');
     }
 
-    public function circular()
+    public function circular(): void
     {
         global $LNG, $USER;
 
@@ -826,7 +827,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.circular.tpl');
     }
 
-    public function admin()
+    public function admin(): void
     {
         global $LNG;
 
@@ -841,7 +842,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->{$methodName}();
     }
 
-    protected function adminOverview()
+    protected function adminOverview(): void
     {
         global $LNG;
         $send = HTTP::_GP('send', 0);
@@ -1008,7 +1009,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.overview.tpl');
     }
 
-    protected function adminClose()
+    protected function adminClose(): void
     {
         global $USER;
         if ($this->allianceData['ally_owner'] == $USER['id'])
@@ -1049,7 +1050,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectToHome();
     }
 
-    protected function adminTransfer()
+    protected function adminTransfer(): void
     {
         global $USER;
 
@@ -1110,7 +1111,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    protected function adminMangeApply()
+    protected function adminMangeApply(): void
     {
         global $LNG, $USER;
         if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
@@ -1143,7 +1144,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.mangeApply.tpl');
     }
 
-    protected function adminDetailApply()
+    protected function adminDetailApply(): void
     {
         global $LNG, $USER;
         if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
@@ -1224,7 +1225,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.detailApply.tpl');
     }
 
-    protected function adminSendAnswerToApply()
+    protected function adminSendAnswerToApply(): void
     {
         global $LNG, $USER;
         if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
@@ -1291,7 +1292,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance&mode=admin&action=mangeApply');
     }
 
-    protected function adminPermissions()
+    protected function adminPermissions(): void
     {
         if (!$this->rights['RANKS'])
         {
@@ -1327,7 +1328,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.permissions.tpl');
     }
 
-    protected function adminPermissionsSend()
+    protected function adminPermissionsSend(): void
     {
         global $LNG;
         if (!$this->rights['RANKS'])
@@ -1418,7 +1419,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance&mode=admin&action=permissions');
     }
 
-    protected function adminMembers()
+    protected function adminMembers(): void
     {
         global $USER, $LNG;
         if (!$this->rights['MANAGEUSERS'])
@@ -1525,12 +1526,12 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.members.tpl');
     }
 
-    protected function adminRank()
+    protected function adminRank(): void
     {
         global $LNG;
         if (!$this->rights['MANAGEUSERS'])
         {
-            $this->sendJSON();
+            $this->sendJSON('');
         }
 
         $userRanks = HTTP::_GP('rank', []);
@@ -1580,7 +1581,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->sendJSON($LNG['fl_shortcut_saved']);
     }
 
-    protected function adminMembersKick()
+    protected function adminMembersKick(): void
     {
         if (!$this->rights['KICK'])
         {
@@ -1621,7 +1622,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance&mode=admin&action=members');
     }
 
-    protected function adminDiplomacy()
+    protected function adminDiplomacy(): void
     {
         if (!$this->rights['DIPLOMATIC'])
         {
@@ -1688,7 +1689,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.diplomacy.default.tpl');
     }
 
-    protected function adminDiplomacyAccept()
+    protected function adminDiplomacyAccept(): void
     {
         if (!$this->rights['DIPLOMATIC'])
         {
@@ -1706,7 +1707,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance&mode=admin&action=diplomacy');
     }
 
-    protected function adminDiplomacyDelete()
+    protected function adminDiplomacyDelete(): void
     {
         if (!$this->rights['DIPLOMATIC'])
         {
@@ -1724,7 +1725,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->redirectTo('game.php?page=alliance&mode=admin&action=diplomacy');
     }
 
-    protected function adminDiplomacyCreate()
+    protected function adminDiplomacyCreate(): void
     {
         global $USER;
         if (!$this->rights['DIPLOMATIC'])
@@ -1760,7 +1761,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->display('page.alliance.admin.diplomacy.create.tpl');
     }
 
-    protected function adminDiplomacyCreateProcessor()
+    protected function adminDiplomacyCreateProcessor(): void
     {
         global $LNG, $USER;
         if (!$this->rights['DIPLOMATIC'])

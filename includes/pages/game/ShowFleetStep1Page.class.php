@@ -24,7 +24,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $pricelist, $reslist, $LNG;
 
@@ -110,7 +110,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         $this->display('page.fleetStep1.default.tpl');
     }
 
-    public function saveShortcuts()
+    public function saveShortcuts(): void
     {
         global $USER, $LNG;
 
@@ -173,7 +173,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         $this->sendJSON($LNG['fl_shortcut_saved']);
     }
 
-    private function GetColonyList()
+    private function GetColonyList(): array
     {
         global $PLANET, $USER;
 
@@ -198,7 +198,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         return $ColonyList;
     }
 
-    private function GetUserShotcut()
+    private function GetUserShotcut(): array
     {
         global $USER;
 
@@ -224,7 +224,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         return $ShortcutList;
     }
 
-    private function GetAvalibleACS()
+    private function GetAvalibleACS(): array
     {
         global $USER;
 
@@ -250,7 +250,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         return $ACSList;
     }
 
-    public function checkTarget()
+    public function checkTarget(): void
     {
         global $PLANET, $LNG, $USER, $resource;
 

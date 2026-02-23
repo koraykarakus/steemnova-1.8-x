@@ -19,7 +19,12 @@ class ShowPhalanxPage extends AbstractGamePage
 {
     public static $requireModule = MODULE_PHALANX;
 
-    public static function allowPhalanx($toGalaxy, $toSystem)
+    public function __construct()
+    {
+
+    }
+
+    public static function allowPhalanx($toGalaxy, $toSystem): bool
     {
         global $PLANET, $resource;
 
@@ -35,17 +40,12 @@ class ShowPhalanxPage extends AbstractGamePage
         return $toSystem >= $systemMin && $toSystem <= $systemMax;
     }
 
-    public static function GetPhalanxRange($PhalanxLevel)
+    public static function GetPhalanxRange($PhalanxLevel): int
     {
         return ($PhalanxLevel == 1) ? 1 : pow($PhalanxLevel, 2) - 1;
     }
 
-    public function __construct()
-    {
-
-    }
-
-    public function show()
+    public function show(): void
     {
         global $PLANET, $LNG, $resource;
 

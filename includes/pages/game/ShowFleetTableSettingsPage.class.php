@@ -10,7 +10,7 @@ class ShowFleetTableSettingsPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function changeVisibility()
+    public function changeVisibility(): void
     {
 
         global $USER;

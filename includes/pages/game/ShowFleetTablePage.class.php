@@ -24,7 +24,7 @@ class ShowFleetTablePage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function createACS($fleetID, $fleetData)
+    public function createACS($fleetID, $fleetData): array
     {
         global $USER;
 
@@ -60,7 +60,8 @@ class ShowFleetTablePage extends AbstractGamePage
         ];
     }
 
-    public function loadACS($fleetData)
+    // TODO : return type
+    public function loadACS($fleetData): bool|array
     {
         global $USER;
 
@@ -74,7 +75,7 @@ class ShowFleetTablePage extends AbstractGamePage
         return $acsResult;
     }
 
-    public function getACSPageData($fleetID)
+    public function getACSPageData($fleetID): array
     {
         global $USER, $LNG;
 
@@ -183,7 +184,7 @@ class ShowFleetTablePage extends AbstractGamePage
         ];
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $PLANET, $reslist, $resource, $LNG, $config;
 

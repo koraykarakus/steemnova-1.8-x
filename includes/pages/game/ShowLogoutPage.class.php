@@ -25,7 +25,7 @@ class ShowLogoutPage extends AbstractGamePage
         $this->setWindow('popup');
     }
 
-    public function show()
+    public function show(): void
     {
         Session::load()->delete();
         $this->display('page.logout.default.tpl');

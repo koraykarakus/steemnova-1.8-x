@@ -24,7 +24,7 @@ class ShowQuestionsPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
@@ -33,7 +33,7 @@ class ShowQuestionsPage extends AbstractGamePage
         $this->display('page.questions.default.tpl');
     }
 
-    public function single()
+    public function single(): void
     {
         global $LNG;
 

@@ -9,7 +9,7 @@ class ShowRelocatePage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $PLANET, $LNG, $reslist, $resource, $config;
 
@@ -340,9 +340,9 @@ class ShowRelocatePage extends AbstractGamePage
         $this->printMessage($LNG['rl_success'] . " [$galaxy:$system:$planet]");
     }
 
-    public function show()
+    public function show(): void
     {
-        global $USER, $LNG, $PLANET,$config;
+        global $LNG, $PLANET,$config;
 
         $this->assign([
             'info'     => sprintf($LNG['rl_info'], pretty_number($config->relocate_price)),
