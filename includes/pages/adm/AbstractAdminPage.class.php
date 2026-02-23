@@ -116,6 +116,20 @@ abstract class AbstractAdminPage
         ]);
     }
 
+    protected function createButtonBack(): array
+    {
+        global $LNG;
+
+        $redirectButton = [];
+
+        $redirectButton[] = [
+            'url'   => $_SERVER['HTTP_REFERER'] ?? '',
+            'label' => $LNG['uvs_back'] ?? '',
+        ];
+
+        return $redirectButton;
+    }
+
     protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
     {
 

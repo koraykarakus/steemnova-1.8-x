@@ -61,6 +61,7 @@ class ShowAccountDataPage extends AbstractAdminPage
     // TODO : cleanup html and JS from php
     public function FilterByID(): void
     {
+
         global $reslist, $resource, $LNG, $USER;
         $user_id = HTTP::_GP('id_u', 0);
         $user_id_input = HTTP::_GP('id_u2', 0);
@@ -83,7 +84,7 @@ class ShowAccountDataPage extends AbstractAdminPage
 
         if (!$user)
         {
-            $this->printMessage($LNG['ac_username_doesnt']);
+            $this->printMessage($LNG['ac_username_doesnt'], $this->createButtonBack());
             return;
         }
 
@@ -166,6 +167,11 @@ class ShowAccountDataPage extends AbstractAdminPage
         $StatQuery = $db->selectSingle($sql, [
             ':userId' => $user_id,
         ]);
+
+        if (!$StatQuery)
+        {
+            $this->printMessage("stats could not be found update stats !", $this->createButtonBack());
+        }
 
         $count_tecno = pretty_number($StatQuery['tech_count']);
         $count_def = pretty_number($StatQuery['defs_count']);
