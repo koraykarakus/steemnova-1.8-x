@@ -28,7 +28,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $this->getColonySettings();
     }
 
-    private function getColonySettings()
+    private function getColonySettings(): void
     {
         $db = Database::get();
 
@@ -37,7 +37,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $this->colony_settings = $db->selectSingle($sql);
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG;
@@ -97,7 +97,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
         global $LNG;
 

@@ -28,7 +28,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     }
 
-    public function player()
+    public function player(): void
     {
 
         global $USER, $LNG, $reslist, $resource;
@@ -104,7 +104,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     }
 
-    public function playerSend()
+    public function playerSend(): void
     {
 
         global $USER, $LNG, $reslist, $resource;
@@ -198,7 +198,8 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     }
 
-    public function planetSend()
+    // TODO : strip old database
+    public function planetSend(): void
     {
         global $reslist,$resource, $LNG;
 
@@ -268,7 +269,8 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     }
 
-    public function planet()
+    // TODO : strip old database
+    public function planet(): void
     {
 
         global $USER, $LNG, $reslist, $resource;

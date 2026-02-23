@@ -33,7 +33,7 @@ class ShowLoginPage extends AbstractAdminPage
         $this->setWindow('login');
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER,$config;
 
@@ -55,7 +55,7 @@ class ShowLoginPage extends AbstractAdminPage
 
     }
 
-    public function validate()
+    public function validate(): void
     {
         global $USER, $LNG, $config;
 

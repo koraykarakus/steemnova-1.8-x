@@ -26,7 +26,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function show()
+    public function show(): void
     {
 
         $this->assign([
@@ -37,7 +37,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function user()
+    public function user(): void
     {
 
         global $LNG, $USER;
@@ -69,9 +69,8 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function createUser()
+    public function createUser(): void
     {
-
         global $LNG;
         $LNG->includeData(['PUBLIC']);
 
@@ -188,7 +187,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function moon()
+    public function moon(): void
     {
 
         global $USER, $LNG;
@@ -202,7 +201,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function createMoon()
+    public function createMoon(): void
     {
         global $LNG;
         $PlanetID = HTTP::_GP('add_moon', 0);
@@ -249,7 +248,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function planet()
+    public function planet(): void
     {
 
         global $USER, $LNG;
@@ -262,7 +261,7 @@ class ShowCreatePage extends AbstractAdminPage
 
     }
 
-    public function createPlanet()
+    public function createPlanet(): void
     {
         global $LNG;
 

@@ -25,7 +25,7 @@ class ShowFleetsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG, $USER;
@@ -115,7 +115,7 @@ class ShowFleetsPage extends AbstractAdminPage
 
     }
 
-    public function lock()
+    public function lock(): void
     {
         $id = HTTP::_GP('id', 0);
 

@@ -10,7 +10,7 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $config;
 
@@ -50,7 +50,7 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
         $this->display('page.planetfields.default.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $LNG, $config;
 
@@ -173,7 +173,7 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
 
     }
 
-    public function default()
+    public function default(): void
     {
 
         global $config, $LNG;

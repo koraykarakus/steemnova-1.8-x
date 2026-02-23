@@ -25,7 +25,7 @@ class ShowMultiPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
@@ -61,7 +61,7 @@ class ShowMultiPage extends AbstractAdminPage
 
     }
 
-    public function known()
+    public function known(): void
     {
         $db = Database::get();
 
@@ -74,7 +74,7 @@ class ShowMultiPage extends AbstractAdminPage
         $this->show();
     }
 
-    public function unknown()
+    public function unknown(): void
     {
         $db = Database::get();
 

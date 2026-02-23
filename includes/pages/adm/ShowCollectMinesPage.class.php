@@ -25,7 +25,7 @@ class ShowCollectMinesPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $config;
@@ -39,7 +39,7 @@ class ShowCollectMinesPage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
         global $LNG, $config;
 

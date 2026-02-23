@@ -25,7 +25,7 @@ class ShowPassEncripterPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         $this->assign([
@@ -35,7 +35,7 @@ class ShowPassEncripterPage extends AbstractAdminPage
         $this->display('page.passwordencripter.default.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         $Password = HTTP::_GP('md5q', '', true);
 

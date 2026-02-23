@@ -10,7 +10,7 @@ class ShowExpeditionPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $config;
 
@@ -35,7 +35,7 @@ class ShowExpeditionPage extends AbstractAdminPage
         $this->display('page.expedition_settings.default.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $LNG, $config;
 
@@ -114,7 +114,7 @@ class ShowExpeditionPage extends AbstractAdminPage
 
     }
 
-    public function default()
+    public function default(): void
     {
 
         global $config, $LNG;

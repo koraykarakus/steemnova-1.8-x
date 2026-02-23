@@ -37,7 +37,7 @@ class ShowSupportPage extends AbstractAdminPage
         }
     }
 
-    public function show()
+    public function show(): void
     {
         global $USER, $LNG;
 
@@ -69,7 +69,7 @@ class ShowSupportPage extends AbstractAdminPage
         $this->display('page.ticket.default.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $USER, $LNG;
 
@@ -128,7 +128,7 @@ class ShowSupportPage extends AbstractAdminPage
         HTTP::redirectTo('admin.php?page=support');
     }
 
-    public function view()
+    public function view(): void
     {
         global $USER, $LNG;
 

@@ -25,7 +25,7 @@ class ShowGiveawayPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $resource, $reslist;
 
@@ -36,7 +36,7 @@ class ShowGiveawayPage extends AbstractAdminPage
         $this->display("page.giveaway.default.tpl");
     }
 
-    public function send()
+    public function send(): void
     {
         global $LNG, $resource, $reslist;
 

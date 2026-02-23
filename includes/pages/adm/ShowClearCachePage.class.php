@@ -25,12 +25,11 @@ class ShowClearCachePage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
         ClearCache();
         $this->printMessage($LNG['cc_cache_clear']);
-
     }
 
 }

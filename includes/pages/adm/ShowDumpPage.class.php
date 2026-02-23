@@ -25,7 +25,7 @@ class ShowDumpPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $db = Database::get();
 
@@ -57,7 +57,7 @@ class ShowDumpPage extends AbstractAdminPage
 
     }
 
-    public function dump()
+    public function dump(): void
     {
 
         global $LNG;

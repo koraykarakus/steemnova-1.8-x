@@ -25,7 +25,7 @@ class ShowNewsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG, $USER;
@@ -59,7 +59,7 @@ class ShowNewsPage extends AbstractAdminPage
 
     }
 
-    public function create()
+    public function create(): void
     {
         global $LNG;
 
@@ -71,7 +71,7 @@ class ShowNewsPage extends AbstractAdminPage
 
     }
 
-    public function createSend()
+    public function createSend(): void
     {
 
         global $USER;
@@ -95,7 +95,7 @@ class ShowNewsPage extends AbstractAdminPage
 
     }
 
-    public function delete()
+    public function delete(): void
     {
 
         $db = Database::get();
@@ -110,7 +110,7 @@ class ShowNewsPage extends AbstractAdminPage
 
     }
 
-    public function edit()
+    public function edit(): void
     {
 
         global $LNG;
@@ -135,7 +135,7 @@ class ShowNewsPage extends AbstractAdminPage
 
     }
 
-    public function editSend()
+    public function editSend(): void
     {
 
         $db = Database::get();

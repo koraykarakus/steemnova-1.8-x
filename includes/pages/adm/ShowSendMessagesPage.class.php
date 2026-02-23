@@ -25,9 +25,8 @@ class ShowSendMessagesPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
-
         global $USER, $LNG;
 
         $db = Database::get();
@@ -49,9 +48,8 @@ class ShowSendMessagesPage extends AbstractAdminPage
 
     }
 
-    public function send()
+    public function send(): void
     {
-
         global $USER, $LNG;
 
         $db = Database::get();

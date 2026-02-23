@@ -25,7 +25,7 @@ class ShowVertifyPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $file = HTTP::_GP("file", "");
         $this->tplObj->loadscript('vertify.js');
@@ -34,7 +34,7 @@ class ShowVertifyPage extends AbstractAdminPage
 
     }
 
-    public function check()
+    public function check(): void
     {
 
         $REV = explode(".", Config::get("VERSION"));
@@ -77,7 +77,7 @@ class ShowVertifyPage extends AbstractAdminPage
 
     }
 
-    public function getFileList()
+    public function getFileList(): void
     {
         $EXT = explode("|", HTTP::_GP("ext", ""));
 
@@ -93,7 +93,7 @@ class ShowVertifyPage extends AbstractAdminPage
 
     }
 
-    public function dir_tree($dir, $EXT, $subDir = true)
+    public function dir_tree($dir, $EXT, $subDir = true): array
     {
         $path = [];
         $stack[] = $dir;

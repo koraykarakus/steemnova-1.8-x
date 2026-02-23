@@ -21,7 +21,7 @@ class ShowResetPage extends AbstractAdminPage
     {
         parent::__construct();
     }
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
@@ -64,7 +64,7 @@ class ShowResetPage extends AbstractAdminPage
         $this->display('ResetPage.tpl');
     }
 
-    public function send()
+    public function send(): void
     {
         global $reslist, $resource, $LNG;
 

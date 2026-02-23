@@ -25,7 +25,7 @@ class ShowTeamspeakPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG;
@@ -60,7 +60,7 @@ class ShowTeamspeakPage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
         global $LNG;
 
@@ -133,7 +133,7 @@ class ShowTeamspeakPage extends AbstractAdminPage
 
 }
 
-function ShowTeamspeakPage()
+function ShowTeamspeakPage(): void
 {
     global $LNG;
 

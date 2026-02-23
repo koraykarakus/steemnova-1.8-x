@@ -27,23 +27,18 @@ class ShowAccountsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
-
         $this->display('page.accounts.default.tpl');
-
     }
 
-    public function resources()
+    public function resources(): void
     {
-
         $this->display('page.accounts.resources.tpl');
-
     }
 
-    public function resourcesSend()
+    public function resourcesSend(): void
     {
-
         global $LNG;
 
         $id = HTTP::_GP('id', 0);
@@ -214,7 +209,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function darkmatterSend()
+    public function darkmatterSend(): void
     {
         global $LNG;
 
@@ -302,7 +297,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function ships()
+    public function ships(): void
     {
         global $reslist, $resource;
 
@@ -323,7 +318,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function shipsSend()
+    public function shipsSend(): void
     {
 
         global $reslist, $resource, $LNG;
@@ -409,7 +404,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function defenses()
+    public function defenses(): void
     {
         global $reslist, $resource;
 
@@ -428,7 +423,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function defensesSend()
+    public function defensesSend(): void
     {
 
         global $reslist, $resource, $LNG;
@@ -515,7 +510,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function buildings()
+    public function buildings(): void
     {
 
         global $reslist,$resource;
@@ -535,7 +530,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function buildingsSend()
+    public function buildingsSend(): void
     {
 
         global $reslist, $resource, $LNG;
@@ -630,7 +625,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function researchs()
+    public function researchs(): void
     {
 
         global $reslist,$resource;
@@ -650,7 +645,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function researchsSend()
+    public function researchsSend(): void
     {
 
         global $reslist, $resource, $LNG;
@@ -741,7 +736,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function personal()
+    public function personal(): void
     {
 
         global $LNG;
@@ -754,7 +749,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function personalSend()
+    public function personalSend(): void
     {
 
         global $LNG;
@@ -856,16 +851,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function alliance()
+    public function alliance(): void
     {
-
         $this->display('page.accounts.alliance.tpl');
-
     }
 
-    public function allianceSend()
+    public function allianceSend(): void
     {
-
         global $LNG;
 
         $id = HTTP::_GP('id', 0);
@@ -1022,9 +1014,8 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function officers()
+    public function officers(): void
     {
-
         global $reslist, $resource;
 
         foreach ($reslist['officier'] as $ID)
@@ -1042,7 +1033,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function officersSend()
+    public function officersSend(): void
     {
 
         global $reslist, $resource, $LNG;
@@ -1123,16 +1114,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     }
 
-    public function planets()
+    public function planets(): void
     {
-
         $this->display('page.accounts.planets.tpl');
-
     }
 
-    public function planetsSend()
+    public function planetsSend(): void
     {
-
         global $reslist,$resource,$LNG;
 
         $id = HTTP::_GP('id', 0);
@@ -1374,7 +1362,7 @@ function ShowAccountEditorPage()
     $template = new template();
     $db = Database::get();
 
-    $editType = HTTP::_GP('edit','');
+    $editType = HTTP::_GP('edit', '');
 
     switch ($editType)
     {

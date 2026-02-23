@@ -25,7 +25,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $USER, $LNG;

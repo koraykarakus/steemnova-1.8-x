@@ -25,7 +25,7 @@ class ShowMessageListPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG, $USER;

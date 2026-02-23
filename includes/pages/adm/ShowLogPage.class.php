@@ -25,14 +25,14 @@ class ShowLogPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
         $this->display("page.log.default.tpl");
     }
 
-    public function planet()
+    public function planet(): void
     {
 
         global $LNG, $USER;
@@ -79,7 +79,7 @@ class ShowLogPage extends AbstractAdminPage
 
     }
 
-    public function player()
+    public function player(): void
     {
 
         global $LNG, $USER;
@@ -125,7 +125,7 @@ class ShowLogPage extends AbstractAdminPage
 
     }
 
-    public function settings()
+    public function settings(): void
     {
 
         global $LNG, $USER;
@@ -177,7 +177,7 @@ class ShowLogPage extends AbstractAdminPage
 
     }
 
-    public function present()
+    public function present(): void
     {
 
         global $LNG, $USER;
@@ -221,7 +221,7 @@ class ShowLogPage extends AbstractAdminPage
 
     }
 
-    public function detail()
+    public function detail(): void
     {
 
         global $LNG, $USER;

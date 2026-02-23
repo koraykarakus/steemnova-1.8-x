@@ -25,7 +25,7 @@ class ShowActivePage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG, $USER;
@@ -61,7 +61,7 @@ class ShowActivePage extends AbstractAdminPage
 
     }
 
-    public function delete()
+    public function delete(): void
     {
 
         $sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";

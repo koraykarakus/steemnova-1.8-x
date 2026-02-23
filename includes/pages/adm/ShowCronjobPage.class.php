@@ -25,6 +25,7 @@ class ShowCronjobPage extends AbstractAdminPage
         parent::__construct();
     }
 
+    // TODO: set return type
     public function getCronjobTimes($row, $max)
     {
         $arr = explode(',', $row);
@@ -43,6 +44,7 @@ class ShowCronjobPage extends AbstractAdminPage
         }
     }
 
+    // TODO : set return type
     public function checkPostData($column, $max)
     {
         $all = HTTP::_GP($column.'_all', 0);
@@ -78,9 +80,9 @@ class ShowCronjobPage extends AbstractAdminPage
 
     }
 
-    public function show()
+    public function show(): void
     {
-
+        global $LNG;
         $db = Database::get();
 
         $sql = "SELECT * FROM %%CRONJOBS%%;";
@@ -118,7 +120,7 @@ class ShowCronjobPage extends AbstractAdminPage
 
     }
 
-    public function showCronjobDetail()
+    public function showCronjobDetail(): void
     {
 
         $db = Database::get();
@@ -165,7 +167,7 @@ class ShowCronjobPage extends AbstractAdminPage
 
     }
 
-    public function showCronjobCreate()
+    public function showCronjobCreate(): void
     {
 
         $avalibleCrons = [];
@@ -197,7 +199,7 @@ class ShowCronjobPage extends AbstractAdminPage
 
     }
 
-    public function lock()
+    public function lock(): void
     {
 
         $cronjobId = HTTP::_GP('id', 0);
@@ -211,7 +213,7 @@ class ShowCronjobPage extends AbstractAdminPage
         HTTP::redirectTo('admin.php?page=cronjob');
     }
 
-    public function unlock()
+    public function unlock(): void
     {
 
         $cronjobId = HTTP::_GP('id', 0);
@@ -225,7 +227,7 @@ class ShowCronjobPage extends AbstractAdminPage
         HTTP::redirectTo('admin.php?page=cronjob');
     }
 
-    public function enable()
+    public function enable(): void
     {
 
         $cronjobId = HTTP::_GP('id', 0);
@@ -240,7 +242,7 @@ class ShowCronjobPage extends AbstractAdminPage
         HTTP::redirectTo('admin.php?page=cronjob');
     }
 
-    public function delete()
+    public function delete(): void
     {
 
         $cronjobId = HTTP::_GP('id', 0);
@@ -260,7 +262,7 @@ class ShowCronjobPage extends AbstractAdminPage
         HTTP::redirectTo('admin.php?page=cronjob');
     }
 
-    public function edit()
+    public function edit(): void
     {
         global $LNG;
         $post_id = HTTP::_GP('id', 0);
@@ -356,7 +358,7 @@ class ShowCronjobPage extends AbstractAdminPage
 
     }
 
-    public function create()
+    public function create(): void
     {
         global $LNG;
 

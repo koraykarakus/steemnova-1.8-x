@@ -27,7 +27,7 @@ class ShowRightsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
@@ -76,7 +76,7 @@ class ShowRightsPage extends AbstractAdminPage
 
     }
 
-    public function rights()
+    public function rights(): void
     {
         global $USER, $LNG;
 
@@ -135,7 +135,7 @@ class ShowRightsPage extends AbstractAdminPage
 
     }
 
-    public function users()
+    public function users(): void
     {
         global $LNG;
 
@@ -202,7 +202,7 @@ class ShowRightsPage extends AbstractAdminPage
 
     }
 
-    public function usersSend()
+    public function usersSend(): void
     {
         global $USER, $LNG;
 

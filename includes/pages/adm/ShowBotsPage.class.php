@@ -38,19 +38,19 @@ class ShowBotsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         $this->display('page.bots.default.tpl');
     }
 
-    public function create()
+    public function create(): void
     {
 
         $this->display('page.bots.create.tpl');
     }
 
-    public function generateName()
+    public function generateName(): string
     {
 
         $randomName = $this->title[rand(0, ($this->titleCount - 1))] . ' ' . $this->name[rand(0, ($this->nameCount - 1))];
@@ -73,7 +73,7 @@ class ShowBotsPage extends AbstractAdminPage
 
     }
 
-    public function getAllNames()
+    public function getAllNames(): void
     {
 
         $db = Database::get();
@@ -89,7 +89,7 @@ class ShowBotsPage extends AbstractAdminPage
 
     }
 
-    public function createSend()
+    public function createSend(): void
     {
         global $LNG;
 
@@ -362,9 +362,9 @@ class ShowBotsPage extends AbstractAdminPage
                     if ($i == 50)
                     {
                         $sql_refresh_bot_planets = substr($sql_refresh_bot_planets, 0, -2) . " ON DUPLICATE KEY UPDATE
-            id = VALUES(id),
-            universe = VALUES(universe),
-            id_owner = VALUES(id_owner);";
+                        id = VALUES(id),
+                        universe = VALUES(universe),
+                        id_owner = VALUES(id_owner);";
 
                         $i = 0;
 
@@ -383,9 +383,9 @@ class ShowBotsPage extends AbstractAdminPage
         if ($sql_refresh_bot_planets != $save_sql_refresh_bot_planets)
         {
             $sql_refresh_bot_planets = substr($sql_refresh_bot_planets, 0, -2) . " ON DUPLICATE KEY UPDATE
-      id = VALUES(id),
-      universe = VALUES(universe),
-      id_owner = VALUES(id_owner);";
+            id = VALUES(id),
+            universe = VALUES(universe),
+            id_owner = VALUES(id_owner);";
             $db->insert($sql_refresh_bot_planets);
         }
 

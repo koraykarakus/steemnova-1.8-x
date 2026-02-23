@@ -29,7 +29,7 @@ class ShowLogoutPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         $session = Session::create();
         $session->adminAccess = 0;

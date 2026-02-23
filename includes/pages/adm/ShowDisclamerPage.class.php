@@ -25,7 +25,7 @@ class ShowDisclamerPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG;
 
@@ -42,7 +42,7 @@ class ShowDisclamerPage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
 
         global $LNG;

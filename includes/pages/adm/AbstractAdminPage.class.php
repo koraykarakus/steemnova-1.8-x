@@ -23,16 +23,13 @@ abstract class AbstractAdminPage
      */
     protected $tplObj;
 
-    /**
-     * reference of the template object
-     * @var ResourceUpdate
-     */
+    /** @var string $window */
     protected $window;
 
     protected function __construct()
     {
 
-        if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FILE__)))
+        if (!allowedTo(str_replace([dirname(__FILE__), '\\', '/', '.php'], '', __FILE__)))
         {
             throw new Exception("Permission error!");
         }
@@ -48,38 +45,32 @@ abstract class AbstractAdminPage
         }
     }
 
-
-
-    protected function initTemplate()
+    protected function initTemplate(): void
     {
-        global $config, $USER;
-
         if (isset($this->tplObj))
         {
-            return true;
+            return;
         }
 
         $this->tplObj = new template();
         list($tplDir) = $this->tplObj->getTemplateDir();
 
-
         $this->tplObj->setTemplateDir($tplDir. '/adm');
-        return true;
     }
 
-    protected function setWindow($window)
+    protected function setWindow($window): void
     {
         $this->window = $window;
     }
 
-    protected function getWindow()
+    protected function getWindow(): string
     {
         return $this->window;
     }
 
-    protected function getQueryString()
+    protected function getQueryString(): string
     {
-        $queryString = array();
+        $queryString = [];
         $page = HTTP::_GP('page', '');
 
         if (!empty($page))
@@ -96,14 +87,11 @@ abstract class AbstractAdminPage
         return http_build_query($queryString);
     }
 
-
-
-
-    protected function getPageData()
+    protected function getPageData(): void
     {
         global $USER, $THEME, $config, $PLANET, $LNG;
 
-        $universeSelect = array();
+        $universeSelect = [];
         foreach (Universe::availableUniverses() as $uniId)
         {
             $config = Config::get($uniId);
@@ -112,31 +100,30 @@ abstract class AbstractAdminPage
 
         $sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
 
-        $numberTickets = Database::get()->selectSingle($sql, array(
-            ':universe' => Universe::getEmulated()
-        ), 'count');
+        $numberTickets = Database::get()->selectSingle($sql, [
+            ':universe' => Universe::getEmulated(),
+        ], 'count');
 
-
-        $this->assign(array(
-            'title' => 'pageTitle',
-            'authlevel' => $USER['authlevel'],
+        $this->assign([
+            'title'         => 'pageTitle',
+            'authlevel'     => $USER['authlevel'],
             'AvailableUnis' => $universeSelect,
-            'UNI' => Universe::getEmulated(),
-            'sid' => session_id(),
-            'id' => $USER['id'],
-            'supportticks' => $numberTickets,
-            'currentPage' => HTTP::_GP('page', ''),
-            'search' => HTTP::_GP('search', ''),
-        ));
+            'UNI'           => Universe::getEmulated(),
+            'sid'           => session_id(),
+            'id'            => $USER['id'],
+            'supportticks'  => $numberTickets,
+            'currentPage'   => HTTP::_GP('page', ''),
+            'search'        => HTTP::_GP('search', ''),
+        ]);
     }
 
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true)
+    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
     {
 
-        $this->assign(array(
-            'message' => $message,
+        $this->assign([
+            'message'         => $message,
             'redirectButtons' => $redirectButtons,
-        ));
+        ]);
 
         if (isset($redirect))
         {
@@ -151,14 +138,12 @@ abstract class AbstractAdminPage
         $this->display('error.default.tpl');
     }
 
-
-
-    protected function assign($array, $nocache = true)
+    protected function assign($array, $nocache = true): void
     {
         $this->tplObj->assign_vars($array, $nocache);
     }
 
-    protected function display($file)
+    protected function display($file): void
     {
         global $THEME, $LNG;
 
@@ -167,30 +152,29 @@ abstract class AbstractAdminPage
             $this->getPageData();
         }
 
-        $this->assign(array(
-            'lang' => $LNG->getLanguage(),
-            'scripts' => $this->tplObj->jsscript,
+        $this->assign([
+            'lang'       => $LNG->getLanguage(),
+            'scripts'    => $this->tplObj->jsscript,
             'execscript' => implode("\n", $this->tplObj->script),
-            'basepath' => PROTOCOL.HTTP_HOST.HTTP_BASE,
-            'bodyclass' => $this->getWindow(),
-        ));
+            'basepath'   => PROTOCOL.HTTP_HOST.HTTP_BASE,
+            'bodyclass'  => $this->getWindow(),
+        ]);
 
-        $this->assign(array(
+        $this->assign([
             'LNG' => $LNG,
-        ), false);
-
+        ], false);
 
         $this->tplObj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
         exit;
     }
 
-    protected function sendJSON($data)
+    protected function sendJSON($data): void
     {
         echo json_encode($data);
         exit;
     }
 
-    protected function redirectTo($url)
+    protected function redirectTo($url): void
     {
         HTTP::redirectTo($url);
         exit;

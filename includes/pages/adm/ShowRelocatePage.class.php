@@ -25,7 +25,7 @@ class ShowRelocatePage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $config;
@@ -41,7 +41,7 @@ class ShowRelocatePage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
         global $LNG, $config;
 

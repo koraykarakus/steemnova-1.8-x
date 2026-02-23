@@ -25,7 +25,7 @@ class ShowModulePage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG;
@@ -54,7 +54,7 @@ class ShowModulePage extends AbstractAdminPage
 
     }
 
-    public function change()
+    public function change(): void
     {
         global $LNG;
 

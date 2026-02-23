@@ -28,7 +28,7 @@ class ShowBannedPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
         global $LNG, $USER;
 
@@ -99,7 +99,7 @@ class ShowBannedPage extends AbstractAdminPage
 
     }
 
-    public function unbanUser()
+    public function unbanUser(): void
     {
 
         global $LNG;
@@ -123,14 +123,12 @@ class ShowBannedPage extends AbstractAdminPage
             ':universe' => Universe::getEmulated(),
         ]);
 
-        #;
         $this->printMessage($LNG['bo_the_player2'].$Name.$LNG['bo_unbanned']);
 
     }
 
-    public function banUser()
+    public function banUser(): void
     {
-
         global $USER, $LNG;
 
         $Name = HTTP::_GP('ban_name', '', true);
@@ -229,9 +227,8 @@ class ShowBannedPage extends AbstractAdminPage
 
     }
 
-    public function userDetail()
+    public function userDetail(): void
     {
-
         global $LNG;
 
         $targetUserID = HTTP::_GP('target_id', 0);

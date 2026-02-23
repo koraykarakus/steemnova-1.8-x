@@ -25,7 +25,7 @@ class ShowSearchPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
 
         global $LNG, $USER;
@@ -305,7 +305,7 @@ class ShowSearchPage extends AbstractAdminPage
 
     }
 
-    public function deleteUser()
+    public function deleteUser(): void
     {
         global $LNG;
 
@@ -316,7 +316,7 @@ class ShowSearchPage extends AbstractAdminPage
         $this->printMessage($LNG['se_delete_succes_p']);
     }
 
-    public function deletePlanet()
+    public function deletePlanet(): void
     {
         global $LNG;
 
@@ -328,7 +328,7 @@ class ShowSearchPage extends AbstractAdminPage
 
     }
 
-    public function MyCrazyLittleSearch($SpecifyItems, $WhereItem, $SpecifyWhere, $SpecialSpecify, $Order, $OrderBY, $Limit, $Table, $Page, $NameLang, $ArrayOSec, $Minimize, $SName, $SearchFile)
+    public function MyCrazyLittleSearch($SpecifyItems, $WhereItem, $SpecifyWhere, $SpecialSpecify, $Order, $OrderBY, $Limit, $Table, $Page, $NameLang, $ArrayOSec, $Minimize, $SName, $SearchFile): array
     {
         global $USER, $LNG;
 

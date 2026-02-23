@@ -25,9 +25,8 @@ class ShowStatsPage extends AbstractAdminPage
         parent::__construct();
     }
 
-    public function show()
+    public function show(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
@@ -49,7 +48,7 @@ class ShowStatsPage extends AbstractAdminPage
 
     }
 
-    public function saveSettings()
+    public function saveSettings(): void
     {
         global $LNG;
         $config = Config::get(Universe::getEmulated());
