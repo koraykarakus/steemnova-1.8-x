@@ -28,7 +28,6 @@ abstract class AbstractAdminPage
 
     protected function __construct()
     {
-
         if (!allowedTo(str_replace([dirname(__FILE__), '\\', '/', '.php'], '', __FILE__)))
         {
             throw new Exception("Permission error!");
@@ -89,7 +88,7 @@ abstract class AbstractAdminPage
 
     protected function getPageData(): void
     {
-        global $USER, $THEME, $config, $PLANET, $LNG;
+        global $USER;
 
         $universeSelect = [];
         foreach (Universe::availableUniverses() as $uniId)
@@ -145,7 +144,7 @@ abstract class AbstractAdminPage
 
     protected function display($file): void
     {
-        global $THEME, $LNG;
+        global $LNG;
 
         if ($this->getWindow() !== 'ajax')
         {
