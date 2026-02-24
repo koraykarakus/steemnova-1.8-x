@@ -32,44 +32,49 @@ class ShowBanListPage extends AbstractLoginPage
 
         $page = HTTP::_GP('side', 1);
 
-        $sql = "SELECT COUNT(*) as count FROM %%BANNED%% WHERE universe = :universe ORDER BY time DESC;";
+        $sql = "SELECT COUNT(*) as count FROM %%BANNED%% 
+        WHERE universe = :universe 
+        ORDER BY time DESC;";
 
-        $banCount = $db->selectSingle($sql, [
+        $ban_count = $db->selectSingle($sql, [
             ':universe' => Universe::current(),
         ], 'count');
 
-        $maxPage = ceil($banCount / BANNED_USERS_PER_PAGE);
-        $page = max(1, min($page, $maxPage));
+        $max_page = ceil($ban_count / BANNED_USERS_PER_PAGE);
+        $page = max(1, min($page, $max_page));
 
-        $sql = "SELECT * FROM %%BANNED%% WHERE universe = :universe ORDER BY time DESC LIMIT :offset, :limit;";
-        $banResult = $db->select($sql, [
+        $sql = "SELECT * FROM %%BANNED%% 
+        WHERE universe = :universe 
+        ORDER BY time DESC LIMIT :offset, :limit;";
+
+        $banned_users = $db->select($sql, [
             ':universe' => Universe::current(),
             ':offset'   => (($page - 1) * BANNED_USERS_PER_PAGE),
             ':limit'    => BANNED_USERS_PER_PAGE,
         ]);
 
-        $banList = [];
+        $ban_list = [];
 
-        foreach ($banResult as $banRow)
+        foreach ($banned_users as $c_user)
         {
-            $banList[] = [
-                'player' => $banRow['who'],
-                'theme'  => $banRow['theme'],
-                'from'   => _date($LNG['php_tdformat'], $banRow['time'], Config::get()->timezone),
-                'to'     => _date($LNG['php_tdformat'], $banRow['longer'], Config::get()->timezone),
-                'admin'  => $banRow['author'],
-                'mail'   => $banRow['email'],
-                'info'   => sprintf($LNG['bn_writemail'], $banRow['author']),
+            $ban_list[] = [
+                'player' => $c_user['who'],
+                'theme'  => $c_user['theme'],
+                'from'   => _date($LNG['php_tdformat'], $c_user['time'], Config::get()->timezone),
+                'to'     => _date($LNG['php_tdformat'], $c_user['longer'], Config::get()->timezone),
+                'admin'  => $c_user['author'],
+                'mail'   => $c_user['email'],
+                'info'   => sprintf($LNG['bn_writemail'], $c_user['author']),
             ];
         }
 
-        $universeSelect = $this->getUniverseSelector();
+        $universe_select = $this->getUniverseSelector();
         $this->assign([
-            'universeSelect' => $universeSelect,
-            'banList'        => $banList,
-            'banCount'       => $banCount,
+            'universeSelect' => $universe_select,
+            'banList'        => $ban_list,
+            'banCount'       => $ban_count,
             'pageNumber'     => $page,
-            'maxPage'        => $maxPage,
+            'maxPage'        => $max_page,
         ]);
 
         $this->display('page.banList.default.tpl');

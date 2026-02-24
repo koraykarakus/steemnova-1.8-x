@@ -40,29 +40,29 @@ class ShowExternalAuthPage extends AbstractLoginPage
         require 'includes/classes/extauth/externalAuth.interface.php';
         require $path;
 
-        $methodClass = ucwords($method).'Auth';
+        $method_class = ucwords($method).'Auth';
 
         /** @var externalAuth $authObj */
-        $authObj = new $methodClass();
+        $auth_obj = new $method_class();
 
-        if (!$authObj->isActiveMode())
+        if (!$auth_obj->isActiveMode())
         {
             $session->delete();
             $this->redirectTo('index.php?code=5');
         }
 
-        if (!$authObj->isValid())
+        if (!$auth_obj->isValid())
         {
             $session->delete();
             $this->redirectTo('index.php?code=4');
         }
 
-        $loginData = $authObj->getLoginData();
+        $loginData = $auth_obj->getLoginData();
 
         if (empty($loginData))
         {
             $session->delete();
-            $this->redirectTo('index.php?page=register&externalAuth[account]='.$authObj->getAccount().'&externalAuth[method]='.$method);
+            $this->redirectTo('index.php?page=register&externalAuth[account]='.$auth_obj->getAccount().'&externalAuth[method]='.$method);
         }
 
         $session->userId = (int) $loginData['id'];

@@ -38,61 +38,60 @@ class ShowIndexPage extends AbstractLoginPage
     {
         global $LNG, $config;
 
-        $referralID = HTTP::_GP('ref', 0);
-        if (!empty($referralID))
+        $referral_id = HTTP::_GP('ref', 0);
+
+        if (!empty($referral_id))
         {
-            $this->redirectTo('index.php?page=register&referralID='.$referralID);
+            $this->redirectTo('index.php?page=register&referralID='.$referral_id);
         }
 
         $universeSelect = [];
 
-        $Code = HTTP::_GP('code', 0);
-        $loginCode = false;
-        if (isset($LNG['login_error_'.$Code]))
+        $code = HTTP::_GP('code', 0);
+        $login_code = false;
+        if (isset($LNG['login_error_'.$code]))
         {
-            $loginCode = $LNG['login_error_'.$Code];
+            $login_code = $LNG['login_error_'.$code];
         }
 
-        $rememberedEmail = $rememberedPassword = $rememberedTokenValidator = $rememberedTokenSelector = "";
+        $mem_email = $mem_pass = $mem_token_valid = $mem_token_sel = "";
 
-        $rememberedUniverseID = Universe::current();
+        $mem_uni_id = Universe::current();
 
         if (isset($_COOKIE['remember_me']))
         {
 
-            $rememberMeInfo = $this->parseRememberMeToken($_COOKIE['remember_me']);
+            $token_parsed = $this->parseRememberMeToken($_COOKIE['remember_me']);
 
-            if (!empty($rememberMeInfo))
+            if (!empty($token_parsed))
             {
-
                 $sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
 
-                $tokenInfo = Database::get()->selectSingle($sql, [
-                    ':selector' => $rememberMeInfo[1],
+                $token_db = Database::get()->selectSingle($sql, [
+                    ':selector' => $token_parsed[1],
                 ]);
 
-                if (
-                    isset($tokenInfo['hashed_validator'])
-                    && isset($tokenInfo['user_id'])
-                    && isset($rememberMeInfo[0])
-                    && isset($rememberMeInfo[1])
-                    && isset($rememberMeInfo[2])
-                ) {
+                if (isset($token_db['hashed_validator'])
+                    && isset($token_db['user_id'])
+                    && isset($token_parsed[0])
+                    && isset($token_parsed[1])
+                    && isset($token_parsed[2]))
+                {
 
-                    if (password_verify($rememberMeInfo[2], $tokenInfo['hashed_validator']))
+                    if (password_verify($token_parsed[2], $token_db['hashed_validator']))
                     {
 
                         $sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
 
-                        $rememberedEmail = Database::get()->selectSingle($sql, [
-                            ':userId' => $tokenInfo['user_id'],
+                        $mem_email = Database::get()->selectSingle($sql, [
+                            ':userId' => $token_db['user_id'],
                         ], 'email');
 
-                        $rememberedPassword = true;
+                        $mem_pass = true;
 
-                        $rememberedUniverseID = $rememberMeInfo[0];
-                        $rememberedTokenSelector = $rememberMeInfo[1];
-                        $rememberedTokenValidator = $rememberMeInfo[2];
+                        $mem_uni_id = $token_parsed[0];
+                        $mem_token_sel = $token_parsed[1];
+                        $mem_token_valid = $token_parsed[2];
                     }
                 }
 
@@ -101,14 +100,14 @@ class ShowIndexPage extends AbstractLoginPage
         }
 
         $this->assign([
-            'code'                     => $loginCode,
+            'code'                     => $login_code,
             'use_recaptcha_on_login'   => $config->use_recaptcha_on_login,
             'csrfToken'                => $this->generateCSRFToken(),
-            'rememberedEmail'          => $rememberedEmail,
-            'rememberedPassword'       => $rememberedPassword,
-            'rememberedTokenValidator' => $rememberedTokenValidator,
-            'rememberedTokenSelector'  => $rememberedTokenSelector,
-            'rememberedUniverseID'     => $rememberedUniverseID,
+            'rememberedEmail'          => $mem_email,
+            'rememberedPassword'       => $mem_pass,
+            'rememberedTokenValidator' => $mem_token_valid,
+            'rememberedTokenSelector'  => $mem_token_sel,
+            'rememberedUniverseID'     => $mem_uni_id,
         ]);
 
         $this->display('page.index.default.tpl');

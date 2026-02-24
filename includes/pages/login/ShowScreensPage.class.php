@@ -27,23 +27,26 @@ class ShowScreensPage extends AbstractLoginPage
     public function show(): void
     {
         $screenshots = [];
-        $directoryIterator = new DirectoryIterator('styles/resource/images/login/screens/');
-        foreach ($directoryIterator as $fileInfo)
+        $directory_iterator = new DirectoryIterator('styles/resource/images/login/screens/');
+        foreach ($directory_iterator as $c_file_info)
         {
-            /** @var DirectoryIterator $fileInfo */
-            if (!$fileInfo->isFile())
+            /** @var DirectoryIterator $c_file_info */
+            if (!$c_file_info->isFile())
             {
                 continue;
             }
 
-            $thumbnail = 'styles/resource/images/login/screens/'.$fileInfo->getFilename();
-            if (file_exists('styles/resource/images/login/screens/thumbnails/'.$fileInfo->getFilename()))
+            $thumbnail = 'styles/resource/images/login/screens/' .
+            $c_file_info->getFilename();
+
+            if (file_exists('styles/resource/images/login/screens/thumbnails/' . $c_file_info->getFilename()))
             {
-                $thumbnail = 'styles/resource/images/login/screens/thumbnails/'.$fileInfo->getFilename();
+                $thumbnail = 'styles/resource/images/login/screens/thumbnails/' .
+                $c_file_info->getFilename();
             }
 
             $screenshots[] = [
-                'path'      => 'styles/resource/images/login/screens/'.$fileInfo->getFilename(),
+                'path'      => 'styles/resource/images/login/screens/' . $c_file_info->getFilename(),
                 'thumbnail' => $thumbnail,
             ];
         }

@@ -42,26 +42,27 @@ class ShowLoginPage extends AbstractLoginPage
 
         $db = Database::get();
 
-        $userEmail = HTTP::_GP('userEmail', '', true);
+        $email = HTTP::_GP('userEmail', '', true);
         $password = HTTP::_GP('password', '', true);
 
-        $csrfToken = HTTP::_GP('csrfToken', '', true);
+        $csrf_token = HTTP::_GP('csrfToken', '', true);
         $remember_me = HTTP::_GP('remember_me', 'false');
 
-        $rememberedTokenValidator = HTTP::_GP('rememberedTokenValidator', '');
-        $rememberedTokenSelector = HTTP::_GP('rememberedTokenSelector', '');
-        $rememberedEmail = HTTP::_GP('rememberedEmail', '');
+        $token_val = HTTP::_GP('rememberedTokenValidator', '');
+        $token_sel = HTTP::_GP('rememberedTokenSelector', '');
+        $mem_email = HTTP::_GP('rememberedEmail', '');
 
         $universe = HTTP::_GP('universe', Universe::current());
 
         $error = [];
 
-        if ($_COOKIE['csrfToken'] != $csrfToken)
+        if (isset($_COOKIE['csrfToken'])
+            && $_COOKIE['csrfToken'] != $csrf_token)
         {
             $error[] = "csrf attack";
         }
 
-        if (empty($userEmail))
+        if (empty($email))
         {
             $error[] = $LNG['login_error_1'];
         }
@@ -71,66 +72,72 @@ class ShowLoginPage extends AbstractLoginPage
             $error[] = $LNG['login_error_2'];
         }
 
-        if (!empty($password) && !empty($userEmail))
+        if (!empty($password)
+            && !empty($email))
         {
             $sql = "SELECT id, password FROM %%USERS%% WHERE email = :email AND universe = :universe;";
 
-            $loginData = $db->selectSingle($sql, [
-                ':email'    => $userEmail,
+            $login_data = $db->selectSingle($sql, [
+                ':email'    => $email,
                 ':universe' => $universe,
             ]);
 
-            if (!$loginData)
+            if (!$login_data)
             {
                 $error[] = $LNG['login_error_3'];
             }
 
         }
 
-        if (empty($rememberedTokenValidator) || empty($rememberedTokenSelector) || $rememberedEmail != $userEmail || $password != 'password') //verify with password
+        //verify with password
+        if (empty($token_val)
+            || empty($token_sel)
+            || $mem_email != $email
+            || $password != 'password')
         {
-            if (isset($loginData['password']))
+            if (isset($login_data['password']))
             {
-                if (!password_verify($password, $loginData['password']))
+                if (!password_verify($password, $login_data['password']))
                 {
                     $error[] = $LNG['login_error_5'];
                 }
             }
 
         }
-        else //verify with token
-        {//if user type a random password
-
+        //verify with token
+        //if user type a random password
+        else
+        {
             $sql = "SELECT * FROM %%REMEMBER_ME%% WHERE selector = :selector;";
 
-            $rememberedTokenInfo = $db->selectSingle($sql, [
-                ':selector' => $rememberedTokenSelector,
+            $token_full = $db->selectSingle($sql, [
+                ':selector' => $token_sel,
             ]);
 
-            if (!$rememberedTokenInfo)
+            if (!$token_full)
             {
                 $error[] = $LNG['login_error_3'];
             }
 
-            if (isset($rememberedTokenInfo['hashed_validator']))
+            if (isset($token_full['hashed_validator']))
             {
-                if (!password_verify($rememberedTokenValidator, $rememberedTokenInfo['hashed_validator']))
+                if (!password_verify($token_val, $token_full['hashed_validator']))
                 {
                     $error[] = $LNG['login_error_3'];
                 }
 
                 $sql = "SELECT email FROM %%USERS%% WHERE id = :userId;";
 
-                $userEmailCheck = $db->selectSingle($sql, [
-                    ':userId' => $rememberedTokenInfo['user_id'],
+                $email_check = $db->selectSingle($sql, [
+                    ':userId' => $token_full['user_id'],
                 ], 'email');
 
-                if (empty($userEmailCheck))
+                if (empty($email_check))
                 {
                     $error[] = $LNG['login_error_1'];
                 }
 
-                if ($userEmailCheck != $userEmail)
+                if ($email_check != $email)
                 {
                     $error[] = $LNG['login_error_3'];
                 }
@@ -139,7 +146,8 @@ class ShowLoginPage extends AbstractLoginPage
 
         }
 
-        if ($config->capaktiv === '1' && $config->use_recaptcha_on_login)
+        if ($config->capaktiv === '1'
+            && $config->use_recaptcha_on_login)
         {
             require('includes/libs/reCAPTCHA/src/autoload.php');
 
@@ -154,23 +162,23 @@ class ShowLoginPage extends AbstractLoginPage
         if (empty($error))
         {
             $session = Session::create();
-            $session->userId = (int) $loginData['id'];
+            $session->userId = (int) $login_data['id'];
             $session->adminAccess = 0;
             $session->save();
 
             if ($remember_me == 'true')
             {
-                $rememberMeToken = $this->generateRememberMeToken($universe);
+                $token = $this->generateRememberMeToken($universe);
 
                 //set a cookie
-                HTTP::sendCookie('remember_me', $rememberMeToken['full'], TIMESTAMP + 60 * 60 * 24 * 30);
+                HTTP::sendCookie('remember_me', $token['full'], TIMESTAMP + 60 * 60 * 24 * 30);
 
                 //delete old remember me data
 
                 $sql = "DELETE FROM %%REMEMBER_ME%% WHERE `user_id` = :userId;";
 
                 $db->delete($sql, [
-                    ':userId' => (int) $loginData['id'],
+                    ':userId' => (int) $login_data['id'],
                 ]);
 
                 //insert new remember data,
@@ -179,10 +187,10 @@ class ShowLoginPage extends AbstractLoginPage
 				VALUES (:selector,:hashed_validator,:expiration_date,:user_id,:universe);";
 
                 $db->insert($sql, [
-                    ':selector'         => $rememberMeToken['selector'],
-                    ':hashed_validator' => password_hash($rememberMeToken['validator'], PASSWORD_DEFAULT),
+                    ':selector'         => $token['selector'],
+                    ':hashed_validator' => password_hash($token['validator'], PASSWORD_DEFAULT),
                     ':expiration_date'  => TIMESTAMP + 60 * 60 * 24 * 30, //30 days
-                    ':user_id'          => (int) $loginData['id'],
+                    ':user_id'          => (int) $login_data['id'],
                     ':universe'         => $universe,
                 ]);
 
@@ -192,7 +200,7 @@ class ShowLoginPage extends AbstractLoginPage
             {
                 $sql = "DELETE FROM %%REMEMBER_ME%% WHERE user_id = :userId;";
                 $db->delete($sql, [
-                    ':userId' => (int) $loginData['id'],
+                    ':userId' => (int) $login_data['id'],
                 ]);
             }
 
