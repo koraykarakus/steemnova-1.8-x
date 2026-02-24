@@ -134,41 +134,41 @@ class ShowSupportPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $ticketID = HTTP::_GP('id', 0);
+        $ticket_id = HTTP::_GP('id', 0);
 
         $sql = "SELECT a.*, t.categoryID, t.status FROM %%TICKETS_ANSWER%% as a
 		INNER JOIN %%TICKETS%% as t USING(ticketID) WHERE a.ticketID = :ticketID
 		ORDER BY a.answerID;";
 
-        $answerResult = $db->select($sql, [
-            ':ticketID' => $ticketID,
+        $answer_result = $db->select($sql, [
+            ':ticketID' => $ticket_id,
         ]);
 
-        $answerList = [];
+        $answer_list = [];
 
         $ticket_status = 0;
-        foreach ($answerResult as &$answerRow)
+        foreach ($answer_result as &$c_answer)
         {
 
             if (empty($ticket_status))
             {
-                $ticket_status = $answerRow['status'];
+                $ticket_status = $c_answer['status'];
             }
 
-            $answerRow['time'] = _date($LNG['php_tdformat'], $answerRow['time'], $USER['timezone']);
-            $answerRow['message'] = BBCode::parse($answerRow['message']);
+            $c_answer['time'] = _date($LNG['php_tdformat'], $c_answer['time'], $USER['timezone']);
+            $c_answer['message'] = BBCode::parse($c_answer['message']);
 
-            $answerList[$answerRow['answerID']] = $answerRow;
+            $answer_list[$c_answer['answerID']] = $c_answer;
         }
-        unset($answerResult);
+        unset($c_answer);
 
-        $categoryList = $this->ticketObj->getCategoryList();
+        $category_list = $this->ticketObj->getCategoryList();
 
         $this->assign([
-            'ticketID'      => $ticketID,
+            'ticketID'      => $ticket_id,
             'ticket_status' => $ticket_status,
-            'categoryList'  => $categoryList,
-            'answerList'    => $answerList,
+            'categoryList'  => $category_list,
+            'answerList'    => $answer_list,
         ]);
 
         $this->display('page.ticket.view.tpl');

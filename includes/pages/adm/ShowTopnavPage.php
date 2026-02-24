@@ -20,14 +20,14 @@ function ShowTopnavPage()
     global $LNG, $USER;
     $template = new template();
 
-    $universeSelect = [];
-    foreach (Universe::availableUniverses() as $uniId)
+    $universe_select = [];
+    foreach (Universe::availableUniverses() as $c_uni_id)
     {
-        $config = Config::get($uniId);
-        $universeSelect[$uniId] = sprintf('%s (ID: %d)', $config->uni_name, $uniId);
+        $config = Config::get($c_uni_id);
+        $universe_select[$c_uni_id] = sprintf('%s (ID: %d)', $config->uni_name, $c_uni_id);
     }
 
-    ksort($universeSelect);
+    ksort($universe_select);
     $template->assign_vars([
         'ad_authlevel_title' => $LNG['ad_authlevel_title'],
         're_reset_universe'  => $LNG['re_reset_universe'],
@@ -39,7 +39,7 @@ function ShowTopnavPage()
         'sid'                => session_id(),
         'id'                 => $USER['id'],
         'authlevel'          => $USER['authlevel'],
-        'AvailableUnis'      => $universeSelect,
+        'AvailableUnis'      => $universe_select,
         'UNI'                => Universe::getEmulated(),
     ]);
 

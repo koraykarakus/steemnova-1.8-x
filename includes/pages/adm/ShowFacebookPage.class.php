@@ -31,9 +31,9 @@ class ShowFacebookPage extends AbstractAdminPage
 
         $config = Config::get(Universe::getEmulated());
 
-        $facebookURL = "http://www.facebook.com/developers/";
+        $facebook_url = "http://www.facebook.com/developers/";
 
-        $facebookInfo = sprintf($LNG['fb_info'], $facebookURL, $facebookURL);
+        $facebook_info = sprintf($LNG['fb_info'], $facebook_url, $facebook_url);
 
         $this->assign([
             'fb_on'        => $config->fb_on,
@@ -41,16 +41,14 @@ class ShowFacebookPage extends AbstractAdminPage
             'fb_skey'      => $config->fb_skey,
             'fb_curl'      => function_exists('curl_init') ? 1 : 0,
             'fb_curl_info' => function_exists('curl_init') ? $LNG['fb_curl_yes'] : $LNG['fb_curl_no'],
-            'fb_info'      => $facebookInfo,
+            'fb_info'      => $facebook_info,
         ]);
 
         $this->display('page.facebook.default.tpl');
-
     }
 
     public function saveSettings(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
@@ -70,14 +68,13 @@ class ShowFacebookPage extends AbstractAdminPage
 
         $config->save();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=facebook&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
-
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
 }

@@ -115,55 +115,20 @@ class ShowTeamspeakPage extends AbstractAdminPage
             ':isActive' => $ts_modon,
         ]);
 
-        $LOG = new Log(3);
-        $LOG->target = 4;
-        $LOG->old = $config_before;
-        $LOG->new = $config_after;
-        $LOG->save();
+        $log = new Log(3);
+        $log->target = 4;
+        $log->old = $config_before;
+        $log->new = $config_after;
+        $log->save();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=teamspeak&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
 
     }
-
-}
-
-function ShowTeamspeakPage(): void
-{
-    global $LNG;
-
-    $config = Config::get(Universe::getEmulated());
-
-    $template = new template();
-
-    $template->assign_vars([
-        'se_save_parameters' => $LNG['se_save_parameters'],
-        'ts_tcpport'         => $LNG['ts_tcpport'],
-        'ts_serverip'        => $LNG['ts_serverip'],
-        'ts_version'         => $LNG['ts_version'],
-        'ts_active'          => $LNG['ts_active'],
-        'ts_settings'        => $LNG['ts_settings'],
-        'ts_udpport'         => $LNG['ts_udpport'],
-        'ts_timeout'         => $LNG['ts_timeout'],
-        'ts_server_query'    => $LNG['ts_server_query'],
-        'ts_sq_login'        => $LNG['ts_login'],
-        'ts_sq_pass'         => $LNG['ts_pass'],
-        'ts_lng_cron'        => $LNG['ts_cron'],
-        'ts_to'              => $config->ts_timeout,
-        'ts_on'              => $config->ts_modon,
-        'ts_ip'              => $config->ts_server,
-        'ts_tcp'             => $config->ts_tcpport,
-        'ts_udp'             => $config->ts_udpport,
-        'ts_v'               => $config->ts_version,
-        'ts_login'           => $config->ts_login,
-        'ts_password'        => $config->ts_password,
-        'ts_cron'            => $config->ts_cron_interval,
-    ]);
-    $template->show('TeamspeakPage.tpl');
 
 }

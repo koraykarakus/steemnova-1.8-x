@@ -110,20 +110,20 @@ class ShowRightsPage extends AbstractAdminPage
 
         $sql = "SELECT rights FROM %%USERS%% WHERE id = :userId;";
 
-        $Rights = $db->selectSingle($sql, [
+        $rights = $db->selectSingle($sql, [
             ':userId' => $id,
         ]);
 
-        if (($Rights['rights'] = unserialize($Rights['rights'])) === false)
+        if (($rights['rights'] = unserialize($rights['rights'])) === false)
         {
-            $Rights['rights'] = [];
+            $rights['rights'] = [];
         }
 
-        $Files = array_map('prepare', array_diff(scandir('includes/pages/adm/'), ['.', '..', '.svn', 'index.html', '.htaccess', 'ShowIndexPage.php', 'ShowOverviewPage.php', 'ShowMenuPage.php', 'ShowTopnavPage.php']));
+        $files = array_map('prepare', array_diff(scandir('includes/pages/adm/'), ['.', '..', '.svn', 'index.html', '.htaccess', 'ShowIndexPage.php', 'ShowOverviewPage.php', 'ShowMenuPage.php', 'ShowTopnavPage.php']));
 
         $this->assign([
-            'Files'              => $Files,
-            'Rights'             => $Rights['rights'],
+            'Files'              => $files,
+            'Rights'             => $rights['rights'],
             'id'                 => $id,
             'yesorno'            => [1 => $LNG['one_is_yes_1'], 0 => $LNG['one_is_yes_0']],
             'ad_authlevel_title' => $LNG['ad_authlevel_title'],
@@ -146,34 +146,34 @@ class ShowRightsPage extends AbstractAdminPage
         switch ($type)
         {
             case 'adm':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_ADM."'";
+                $sql_where = "AND `authlevel` = '".AUTH_ADM."'";
                 break;
             case 'ope':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_OPS."'";
+                $sql_where = "AND `authlevel` = '".AUTH_OPS."'";
                 break;
             case 'mod':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_MOD."'";
+                $sql_where = "AND `authlevel` = '".AUTH_MOD."'";
                 break;
             case 'pla':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_USR."'";
+                $sql_where = "AND `authlevel` = '".AUTH_USR."'";
                 break;
             default:
-                $WHEREUSERS = "";
+                $sql_where = "";
                 break;
         }
 
         $sql = "SELECT id, username, authlevel 
         FROM %%USERS%% 
-        WHERE universe = :universe " . $WHEREUSERS;
+        WHERE universe = :universe " . $sql_where;
 
-        $QueryUsers = Database::get()->select($sql, [
+        $users = Database::get()->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $UserList = "";
-        foreach ($QueryUsers as $List)
+        $user_list = "";
+        foreach ($users as $List)
         {
-            $UserList .= '<option value="'.(int)$List['id'].'">'
+            $user_list .= '<option value="'.(int)$List['id'].'">'
                 .htmlspecialchars($List['username'], ENT_QUOTES, 'UTF-8')
                 .'&nbsp;&nbsp;('
                 .$LNG['rank_'.$List['authlevel']]
@@ -182,7 +182,7 @@ class ShowRightsPage extends AbstractAdminPage
 
         $this->assign([
             'Selector'               => [0 => $LNG['rank_0'], 1 => $LNG['rank_1'], 2 => $LNG['rank_2'], 3 => $LNG['rank_3']],
-            'UserList'               => $UserList,
+            'UserList'               => $user_list,
             'ad_authlevel_title'     => $LNG['ad_authlevel_title'],
             'bo_select_title'        => $LNG['bo_select_title'],
             'button_submit'          => $LNG['button_submit'],

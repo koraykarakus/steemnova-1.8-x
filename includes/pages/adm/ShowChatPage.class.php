@@ -27,12 +27,8 @@ class ShowChatPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG;
-
         $config = Config::get(Universe::getEmulated());
-
-        $template = new template();
 
         $this->assign([
             'chat_closed'          => $config->chat_closed,
@@ -55,12 +51,10 @@ class ShowChatPage extends AbstractAdminPage
         ]);
 
         $this->display('page.chat.default.tpl');
-
     }
 
     public function saveSettings(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
@@ -101,22 +95,22 @@ class ShowChatPage extends AbstractAdminPage
         {
             $config->$key = $value;
         }
+
         $config->save();
 
-        $LOG = new Log(3);
-        $LOG->target = 3;
-        $LOG->old = $config_before;
-        $LOG->new = $config_after;
-        $LOG->save();
+        $log = new Log(3);
+        $log->target = 3;
+        $log->old = $config_before;
+        $log->new = $config_after;
+        $log->save();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=chat&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
-
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
 }

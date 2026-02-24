@@ -36,23 +36,22 @@ class ShowNewsPage extends AbstractAdminPage
 
         $news = $db->select($sql);
 
-        $NewsList = [];
+        $news_list = [];
 
-        foreach ($news as $u)
+        foreach ($news as $c_news)
         {
-            $NewsList[] = [
-                'id'      => $u['id'],
-                'title'   => $u['title'],
-                'date'    => _date($LNG['php_tdformat'], $u['date'], $USER['timezone']),
-                'user'    => $u['user'],
-                'confirm' => sprintf($LNG['nws_confirm'], $u['title']),
+            $news_list[] = [
+                'id'      => $c_news['id'],
+                'title'   => $c_news['title'],
+                'date'    => _date($LNG['php_tdformat'], $c_news['date'], $USER['timezone']),
+                'user'    => $c_news['user'],
+                'confirm' => sprintf($LNG['nws_confirm'], $c_news['title']),
             ];
         }
 
         $this->assign([
-            'NewsList'  => $NewsList,
-            'nws_total' => sprintf($LNG['nws_total'], $NewsList && count($NewsList)),
-
+            'NewsList'  => $news_list,
+            'nws_total' => sprintf($LNG['nws_total'], $news_list && count($news_list)),
         ]);
 
         $this->display('page.news.default.tpl');
@@ -73,7 +72,6 @@ class ShowNewsPage extends AbstractAdminPage
 
     public function createSend(): void
     {
-
         global $USER;
 
         $title = HTTP::_GP('title', '', true);
@@ -97,7 +95,6 @@ class ShowNewsPage extends AbstractAdminPage
 
     public function delete(): void
     {
-
         $db = Database::get();
 
         $sql = "DELETE FROM %%NEWS%% WHERE `id` = :news_id;";
@@ -107,28 +104,26 @@ class ShowNewsPage extends AbstractAdminPage
         ]);
 
         $this->show();
-
     }
 
     public function edit(): void
     {
-
         global $LNG;
 
         $db = Database::get();
 
         $sql = "SELECT id, title, text FROM %%NEWS%% WHERE id = :id;";
 
-        $News = $db->selectSingle($sql, [
+        $news = $db->selectSingle($sql, [
             ':id' => HTTP::_GP('id', 0),
         ]);
 
         $this->assign([
             'mode'       => 1,
-            'nws_head'   => sprintf($LNG['nws_head_edit'], $News['title']),
-            'news_id'    => $News['id'],
-            'news_title' => $News['title'],
-            'news_text'  => $News['text'],
+            'nws_head'   => sprintf($LNG['nws_head_edit'], $news['title']),
+            'news_id'    => $news['id'],
+            'news_title' => $news['title'],
+            'news_text'  => $news['text'],
         ]);
 
         $this->display('page.news.edit.tpl');

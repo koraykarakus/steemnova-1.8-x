@@ -34,97 +34,110 @@ class ShowBannedPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $orderType = HTTP::_GP('order', 'id');
+        $order_type = HTTP::_GP('order', 'id');
 
-        if (!in_array($orderType, ['id', 'username']))
+        if (!in_array($order_type, ['id', 'username']))
         {
-            $this->printMessage('Wrong order type !');
+            $this->printMessage('Wrong order type !', $this->createButtonBack());
+            return;
         }
 
-        $whereType = HTTP::_GP('view', '');
+        $where_type = HTTP::_GP('view', '');
 
-        $whereText = "";
-        if ($whereType == "banned")
+        $where_text = "";
+        if ($where_type == "banned")
         {
-            $whereText = " AND `bana` = '1' ";
+            $where_text = " AND `bana` = '1' ";
         }
 
         $sql = "SELECT `username`, `id`, `bana` FROM %%USERS%%
-		WHERE `id` != 1 AND `authlevel` <= :authlevel AND `universe` = :universe " . $whereText . " ORDER BY " . $orderType . " ASC;";
+		WHERE `id` != 1 AND `authlevel` <= :authlevel AND `universe` = :universe " .
+        $where_text . " ORDER BY " . $order_type . " ASC;";
 
-        $userList = $db->select($sql, [
+        $user_list = $db->select($sql, [
             ':authlevel' => $USER['authlevel'],
             ':universe'  => Universe::getEmulated(),
         ]);
 
-        $userSelect = ['List' => '', 'ListBan' => ''];
+        $user_select = ['List' => '', 'ListBan' => ''];
 
-        foreach ($userList as $currentUser)
+        foreach ($user_list as $c_user)
         {
-            $userSelect['List'] .= '<option value="'.$currentUser['id'].'">'.$currentUser['username'].'&nbsp;&nbsp;(ID:&nbsp;'.$currentUser['id'].')'.(($currentUser['bana'] == '1') ? $LNG['bo_characters_suus'] : '').'</option>';
+            $user_select['List'] .= '<option value="'.$c_user['id'].'">' .
+            $c_user['username'] .
+            '&nbsp;&nbsp;(ID:&nbsp;' .
+            $c_user['id'] .')' .
+            (($c_user['bana'] == '1') ? $LNG['bo_characters_suus'] : '') .
+            '</option>';
         }
 
-        $ORDER2 = (HTTP::_GP('order2', '') == 'id') ? "id" : "username";
+        $order_2 = (HTTP::_GP('order2', '') == 'id') ? "id" : "username";
 
-        $sql = "SELECT `username`,`id` FROM %%USERS%% WHERE `bana` = '1' AND `universe` = :universe ORDER BY " . $ORDER2 . " ASC;";
+        $sql = "SELECT `username`,`id` FROM %%USERS%% 
+        WHERE `bana` = '1' AND `universe` = :universe ORDER BY " . $order_2 . " ASC;";
 
-        $UserListBan = $db->select($sql, [
+        $banned_users = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        foreach ($UserListBan as $currentBannedUser)
+        foreach ($banned_users as $c_user)
         {
-            $userSelect['ListBan'] .= '<option value="'.$currentBannedUser['username'].'">'.$currentBannedUser['username'].'&nbsp;&nbsp;(ID:&nbsp;'.$currentBannedUser['id'].')</option>';
+            $user_select['ListBan'] .= '<option value="' .
+            $c_user['username'] .
+            '">' .
+            $c_user['username'] .
+            '&nbsp;&nbsp;(ID:&nbsp;' .
+            $c_user['id'] .
+            ')</option>';
         }
 
         $this->tplObj->loadscript('./scripts/game/filterlist.js');
 
-        $Name = HTTP::_GP('ban_name', '', true);
+        $name = HTTP::_GP('ban_name', '', true);
 
-        $sql = "SELECT b.theme, b.longer, u.id, u.urlaubs_modus, u.banaday FROM %%USERS%% as u
-		LEFT JOIN %%BANNED%% as b ON u.`username` = b.`who` WHERE u.`username` = :Name AND u.`universe` = :universe;";
+        $sql = "SELECT b.theme, b.longer, u.id, u.urlaubs_modus, u.banaday 
+        FROM %%USERS%% as u
+		LEFT JOIN %%BANNED%% as b ON u.`username` = b.`who` 
+        WHERE u.`username` = :Name AND u.`universe` = :universe;";
 
         $BANUSER = $db->selectSingle($sql, [
-            ':Name'     => $Name,
+            ':Name'     => $name,
             ':universe' => Universe::getEmulated(),
         ]);
 
         $this->assign([
-            'UserSelect' => $userSelect,
-            'usercount'  => count($userList),
-            'bancount'   => count($UserListBan),
+            'UserSelect' => $user_select,
+            'usercount'  => count($user_list),
+            'bancount'   => count($banned_users),
         ]);
 
         $this->display('page.banned.default.tpl');
-
     }
 
     public function unbanUser(): void
     {
-
         global $LNG;
 
-        $Name = HTTP::_GP('unban_name', '', true);
+        $name = HTTP::_GP('unban_name', '', true);
 
         $sql = "UPDATE %%USERS%% SET bana = '0', banaday = '0'
-						WHERE username = :Name AND `universe` = :universe;";
+						WHERE username = :name AND `universe` = :universe;";
 
         $db = Database::get();
 
         $db->update($sql, [
-            ':Name'     => $Name,
+            ':name'     => $name,
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $sql = "DELETE FROM %%BANNED%% WHERE who = :Name AND `universe` = :universe";
+        $sql = "DELETE FROM %%BANNED%% WHERE who = :name AND `universe` = :universe";
 
         $db->delete($sql, [
-            ':Name'     => $Name,
+            ':name'     => $name,
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $this->printMessage($LNG['bo_the_player2'].$Name.$LNG['bo_unbanned']);
-
+        $this->printMessage($LNG['bo_the_player2'] . $name . $LNG['bo_unbanned'], $this->createButtonBack());
     }
 
     public function banUser(): void
@@ -139,91 +152,92 @@ class ShowBannedPage extends AbstractAdminPage
         $secs = HTTP::_GP('secs', 0);
         $admin = $USER['username'];
         $mail = $USER['email'];
-        $BanTime = $days * 86400 + $hour * 3600 + $mins * 60 + $secs;
-        $banPermanently = (HTTP::_GP('ban_permanently', '') == "on") ? 1 : 0;
-        $targetUserID = HTTP::_GP('target_id', 0);
+        $ban_time = $days * 86400 + $hour * 3600 + $mins * 60 + $secs;
+        $ban_perma = (HTTP::_GP('ban_permanently', '') == "on") ? 1 : 0;
+        $target_user_id = HTTP::_GP('target_id', 0);
 
         $db = Database::get();
 
         $sql = "SELECT u.username,u.urlaubs_modus,u.banaday,u.id as user_id,b.* FROM %%USERS%% as u
 		LEFT JOIN %%BANNED%% as b ON b.id = u.id
-		WHERE u.id = :targetUserID AND u.universe = :universe;";
+		WHERE u.id = :target_user_id AND u.universe = :universe;";
 
-        $targetUserInfo = $db->selectSingle($sql, [
-            ':targetUserID' => $targetUserID,
-            ':universe'     => Universe::getEmulated(),
+        $target_user_info = $db->selectSingle($sql, [
+            ':target_user_id' => $target_user_id,
+            ':universe'       => Universe::getEmulated(),
         ]);
 
-        if ($targetUserInfo['longer'] > TIMESTAMP)
+        if ($target_user_info['longer'] > TIMESTAMP)
         {
-            $BanTime += ($targetUserInfo['longer'] - TIMESTAMP);
+            $ban_time += ($target_user_info['longer'] - TIMESTAMP);
         }
 
-        if ($banPermanently)
+        $banned_until = ($ban_time + TIMESTAMP) < TIMESTAMP ? TIMESTAMP : TIMESTAMP + $ban_time;
+        if ($ban_perma)
         {
-            $BannedUntil = 2147483647;
-        }
-        else
-        {
-            $BannedUntil = ($BanTime + TIMESTAMP) < TIMESTAMP ? TIMESTAMP : TIMESTAMP + $BanTime;
+            $banned_until = 2147483647;
         }
 
-        if ($targetUserInfo['banaday'] > TIMESTAMP)
+        if ($target_user_info['banaday'] > TIMESTAMP)
         {
-            $SQL = "UPDATE %%BANNED%% SET ";
-            $SQL .= "`who` = :Name, ";
-            $SQL .= "`theme` = :reas, ";
-            $SQL .= "`time` = :actionTime, ";
-            $SQL .= "`longer` = :BannedUntil, ";
-            $SQL .= "`author` = :admin, ";
-            $SQL .= "`email` = :mail ";
-            $SQL .= "WHERE `who` = :Name AND `universe` = :universe;";
+            $sql = "UPDATE %%BANNED%% SET ";
+            $sql .= "`who` = :name, ";
+            $sql .= "`theme` = :reas, ";
+            $sql .= "`time` = :action_time, ";
+            $sql .= "`longer` = :banned_until, ";
+            $sql .= "`author` = :admin, ";
+            $sql .= "`email` = :mail ";
+            $sql .= "WHERE `who` = :name AND `universe` = :universe;";
 
-            $db->update($SQL, [
-                ':Name'        => $targetUserInfo['username'],
-                ':reas'        => $reas,
-                ':actionTime'  => TIMESTAMP,
-                ':BannedUntil' => $BannedUntil,
-                ':admin'       => $admin,
-                ':mail'        => $mail,
-                ':universe'    => Universe::getEmulated(),
+            $db->update($sql, [
+                ':name'         => $target_user_info['username'],
+                ':reas'         => $reas,
+                ':action_time'  => TIMESTAMP,
+                ':banned_until' => $banned_until,
+                ':admin'        => $admin,
+                ':mail'         => $mail,
+                ':universe'     => Universe::getEmulated(),
             ]);
 
         }
         else
         {
-            $SQL = "INSERT INTO %%BANNED%% SET ";
-            $SQL .= "`who` = :Name, ";
-            $SQL .= "`theme` = :reas, ";
-            $SQL .= "`time` = :actionTime, ";
-            $SQL .= "`longer` = :BannedUntil, ";
-            $SQL .= "`author` = :admin, ";
-            $SQL .= "`universe` = :universe, ";
-            $SQL .= "`email` = :mail;";
+            $sql = "INSERT INTO %%BANNED%% SET ";
+            $sql .= "`who` = :name, ";
+            $sql .= "`theme` = :reas, ";
+            $sql .= "`time` = :action_time, ";
+            $sql .= "`longer` = :banned_until, ";
+            $sql .= "`author` = :admin, ";
+            $sql .= "`universe` = :universe, ";
+            $sql .= "`email` = :mail;";
 
-            $db->insert($SQL, [
-                ':Name'        => $targetUserInfo['username'],
-                ':reas'        => $reas,
-                ':actionTime'  => TIMESTAMP,
-                ':BannedUntil' => $BannedUntil,
-                ':admin'       => $admin,
-                ':universe'    => Universe::getEmulated(),
-                ':mail'        => $mail,
+            $db->insert($sql, [
+                ':name'         => $target_user_info['username'],
+                ':reas'         => $reas,
+                ':action_time'  => TIMESTAMP,
+                ':banned_until' => $banned_until,
+                ':admin'        => $admin,
+                ':universe'     => Universe::getEmulated(),
+                ':mail'         => $mail,
             ]);
 
         }
 
-        $SQL = "UPDATE %%USERS%% SET `bana` = '1',`banaday` = :BannedUntil, urlaubs_modus = :urlaubs_modus
-						WHERE `username` = :Name AND `universe` = :universe;";
+        $sql = "UPDATE %%USERS%% SET 
+        `bana` = '1', 
+        `banaday` = :banned_until, 
+        urlaubs_modus = :urlaubs_modus
+		WHERE `username` = :Name 
+        AND `universe` = :universe;";
 
-        $db->update($SQL, [
-            ':BannedUntil'   => $BannedUntil,
+        $db->update($sql, [
+            ':banned_until'  => $banned_until,
             ':urlaubs_modus' => isset($_POST['vacat']) ? '1' : '0',
-            ':Name'          => $targetUserInfo['username'],
+            ':Name'          => $target_user_info['username'],
             ':universe'      => Universe::getEmulated(),
         ]);
 
-        $this->printMessage($LNG['bo_the_player'].$targetUserInfo['username'].$LNG['bo_banned']);
+        $this->printMessage($LNG['bo_the_player'].$target_user_info['username'].$LNG['bo_banned']);
 
     }
 
@@ -231,25 +245,26 @@ class ShowBannedPage extends AbstractAdminPage
     {
         global $LNG;
 
-        $targetUserID = HTTP::_GP('target_id', 0);
+        $target_user_id = HTTP::_GP('target_id', 0);
 
         $db = Database::get();
 
-        $sql = "SELECT u.username,u.urlaubs_modus,u.banaday,u.id as user_id,b.* FROM %%USERS%% as u
+        $sql = "SELECT u.username,u.urlaubs_modus,u.banaday,u.id as user_id,b.* 
+        FROM %%USERS%% as u
 		LEFT JOIN %%BANNED%% as b ON b.id = u.id
-		WHERE u.id = :targetUserID AND u.universe = :universe;";
+		WHERE u.id = :target_user_id AND u.universe = :universe;";
 
-        $targetUserInfo = $db->selectSingle($sql, [
-            ':targetUserID' => $targetUserID,
-            ':universe'     => Universe::getEmulated(),
+        $target_user_info = $db->selectSingle($sql, [
+            ':target_user_id' => $target_user_id,
+            ':universe'       => Universe::getEmulated(),
         ]);
 
-        if (!$targetUserInfo)
+        if (!$target_user_info)
         {
-            $this->printMessage('user could not be found !');
+            $this->printMessage('user could not be found !', $this->createButtonBack());
         }
 
-        if ($targetUserInfo['banaday'] <= TIMESTAMP)
+        if ($target_user_info['banaday'] <= TIMESTAMP)
         {
             $title = $LNG['bo_bbb_title_1'];
             $changedate = $LNG['bo_bbb_title_2'];
@@ -263,19 +278,19 @@ class ShowBannedPage extends AbstractAdminPage
             $changedate = $LNG['bo_bbb_title_6'];
             $changedate_advert = '<td class="c" width="18px"><img src="./styles/resource/images/admin/i.gif" class="tooltip" data-tooltip-content="'.$LNG['bo_bbb_title_4'].'"></td>';
 
-            $reas = $targetUserInfo['theme'];
+            $reas = $target_user_info['theme'];
             $timesus =
                 "<tr>
 					<th>".$LNG['bo_bbb_title_5']."</th>
-					<th height=25 colspan=2>".date($LNG['php_tdformat'], $targetUserInfo['longer'])."</th>
+					<th height=25 colspan=2>".date($LNG['php_tdformat'], $target_user_info['longer'])."</th>
 				</tr>";
         }
 
-        $vacation = ($targetUserInfo['urlaubs_modus'] == 1) ? true : false;
+        $vacation = ($target_user_info['urlaubs_modus'] == 1) ? true : false;
 
         $this->assign([
-            'target_id'         => $targetUserInfo['user_id'],
-            'name'              => $targetUserInfo['username'],
+            'target_id'         => $target_user_info['user_id'],
+            'name'              => $target_user_info['username'],
             'bantitle'          => $title,
             'changedate'        => $changedate,
             'reas'              => $reas,
@@ -285,25 +300,6 @@ class ShowBannedPage extends AbstractAdminPage
         ]);
 
         $this->display('page.banned.detail.tpl');
-
-    }
-
-}
-
-function ShowBanPage()
-{
-
-    if (isset($_POST['panel']))
-    {
-
-    }
-    elseif (isset($_POST['bannow']) && $BANUSER['id'] != 1)
-    {
-
-    }
-    elseif (isset($_POST['unban_name']))
-    {
-
     }
 
 }

@@ -23,10 +23,10 @@ class ShowErrorPage extends AbstractAdminPage
         $this->initTemplate();
     }
 
-    public static function printError($Message, $fullSide = true, $redirect = null): void
+    public static function printError($Message, $full_side = true, $redirect = null): void
     {
-        $pageObj = new self();
-        $pageObj->printMessage($Message, $fullSide, $redirect);
+        $page_obj = new self();
+        $page_obj->printMessage($Message, $full_side, $redirect);
     }
 
     public function show(): void

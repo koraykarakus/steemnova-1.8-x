@@ -27,28 +27,28 @@ class ShowActivePage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG, $USER;
 
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%USERS_VALID%% WHERE `universe` = :universe ORDER BY validationID ASC;";
+        $sql = "SELECT * FROM %%USERS_VALID%% 
+        WHERE `universe` = :universe ORDER BY validationID ASC;";
 
-        $usersValid = $db->select($sql, [
+        $valid_users = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
         $users = [];
-        foreach ($usersValid as $currentUser)
+        foreach ($valid_users as $cur_user)
         {
             $users[] = [
-                'id'            => $currentUser['validationID'],
-                'name'          => $currentUser['userName'],
-                'date'          => _date($LNG['php_tdformat'], $currentUser['date'], $USER['timezone']),
-                'email'         => $currentUser['email'],
-                'ip'            => $currentUser['ip'],
-                'password'      => $currentUser['password'],
-                'validationKey' => $currentUser['validationKey'],
+                'id'            => $cur_user['validationID'],
+                'name'          => $cur_user['userName'],
+                'date'          => _date($LNG['php_tdformat'], $cur_user['date'], $USER['timezone']),
+                'email'         => $cur_user['email'],
+                'ip'            => $cur_user['ip'],
+                'password'      => $cur_user['password'],
+                'validationKey' => $cur_user['validationKey'],
             ];
         }
 
@@ -58,13 +58,13 @@ class ShowActivePage extends AbstractAdminPage
         ]);
 
         $this->display('page.active.default.tpl');
-
     }
 
     public function delete(): void
     {
 
-        $sql = "DELETE FROM %%USERS_VALID% WHERE `validationID` = :validationID AND `universe` = :universe;";
+        $sql = "DELETE FROM %%USERS_VALID% 
+        WHERE `validationID` = :validationID AND `universe` = :universe;";
 
         $db = Database::get();
 
@@ -76,7 +76,6 @@ class ShowActivePage extends AbstractAdminPage
         ]);
 
         $this->printMessage('deleted successfully !');
-
     }
 
 }

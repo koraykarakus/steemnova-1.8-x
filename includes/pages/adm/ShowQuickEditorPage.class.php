@@ -23,40 +23,43 @@ class ShowQuickEditorPage extends AbstractAdminPage
     public function __construct()
     {
         parent::__construct();
-
         $this->setWindow('light');
-
     }
 
     public function player(): void
     {
-
         global $USER, $LNG, $reslist, $resource;
+
         $action = HTTP::_GP('action', '');
-        $targetID = HTTP::_GP('id', 0);
+        $target_id = HTTP::_GP('id', 0);
 
         $db = Database::get();
 
-        $DataIDs = array_merge($reslist['tech'], $reslist['officier']);
-        $SpecifyItemsPQ = "";
+        $data_id_arr = array_merge($reslist['tech'], $reslist['officier']);
+        $specify_items_pq = "";
 
-        foreach ($DataIDs as $ID)
+        foreach ($data_id_arr as $c_id)
         {
-            $SpecifyItemsPQ .= "`".$resource[$ID]."`,";
+            $specify_items_pq .= "`".$resource[$c_id]."`,";
         }
 
-        $sql = "SELECT ".$SpecifyItemsPQ." `username`, `authlevel`, `galaxy`, `system`, `planet`, `id_planet`, `darkmatter`, `authattack`, `authlevel` FROM %%USERS%% WHERE `id` = :targetID;";
+        $sql = "SELECT ".$specify_items_pq." `username`, `authlevel`, 
+        `galaxy`, `system`, `planet`, `id_planet`, 
+        `darkmatter`, `authattack`, `authlevel` 
+        FROM %%USERS%% WHERE `id` = :target_id;";
 
-        $UserData = $db->selectSingle($sql, [
-            ':targetID' => $targetID,
+        $user_data = $db->selectSingle($sql, [
+            ':target_id' => $target_id,
         ]);
 
-        $ChangePW = $USER['id'] == ROOT_USER || ($targetID != ROOT_USER && $USER['authlevel'] > $UserData['authlevel']);
+        $change_pw = $USER['id'] == ROOT_USER
+        || ($target_id != ROOT_USER && $USER['authlevel'] > $user_data['authlevel']);
 
-        $sql = "SELECT `name` FROM %%PLANETS%% WHERE `id` = :planetId AND `universe` = :universe;";
+        $sql = "SELECT `name` FROM %%PLANETS%% 
+        WHERE `id` = :planetId AND `universe` = :universe;";
 
-        $PlanetInfo = $db->selectSingle($sql, [
-            ':planetId' => $UserData['id_planet'],
+        $planet_info = $db->selectSingle($sql, [
+            ':planetId' => $user_data['id_planet'],
             ':universe' => Universe::getEmulated(),
         ]);
 
@@ -67,71 +70,79 @@ class ShowQuickEditorPage extends AbstractAdminPage
             $tech[] = [
                 'type'  => $resource[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($UserData[$resource[$ID]]),
-                'input' => $UserData[$resource[$ID]],
+                'count' => pretty_number($user_data[$resource[$ID]]),
+                'input' => $user_data[$resource[$ID]],
             ];
         }
+
         foreach ($reslist['officier'] as $ID)
         {
             $officier[] = [
                 'type'  => $resource[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($UserData[$resource[$ID]]),
-                'input' => $UserData[$resource[$ID]],
+                'count' => pretty_number($user_data[$resource[$ID]]),
+                'input' => $user_data[$resource[$ID]],
             ];
         }
+
+        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :target_id;";
+        $multi = $db->selectSingle($sql, [
+            ':target_id' => $target_id,
+        ]);
 
         $this->assign([
             'tech'         => $tech,
             'officier'     => $officier,
-            'targetID'     => $targetID,
-            'planetid'     => $UserData['id_planet'],
-            'planetname'   => $PlanetInfo['name'],
-            'name'         => $UserData['username'],
-            'galaxy'       => $UserData['galaxy'],
-            'system'       => $UserData['system'],
-            'planet'       => $UserData['planet'],
-            'authlevel'    => $UserData['authlevel'],
-            'authattack'   => $UserData['authattack'],
-            'multi'        => $GLOBALS['DATABASE']->getFirstCell("SELECT COUNT(*) FROM ".MULTI." WHERE userID = ".$targetID.";"),
-            'ChangePW'     => $ChangePW,
+            'targetID'     => $target_id,
+            'planetid'     => $user_data['id_planet'],
+            'planetname'   => $planet_info['name'],
+            'name'         => $user_data['username'],
+            'galaxy'       => $user_data['galaxy'],
+            'system'       => $user_data['system'],
+            'planet'       => $user_data['planet'],
+            'authlevel'    => $user_data['authlevel'],
+            'authattack'   => $user_data['authattack'],
+            'multi'        => $multi,
+            'ChangePW'     => $change_pw,
             'yesorno'      => [1 => $LNG['one_is_yes_1'], 0 => $LNG['one_is_yes_0']],
-            'darkmatter'   => floatToString($UserData['darkmatter']),
-            'darkmatter_c' => pretty_number($UserData['darkmatter']),
+            'darkmatter'   => floatToString($user_data['darkmatter']),
+            'darkmatter_c' => pretty_number($user_data['darkmatter']),
         ]);
 
         $this->display('page.quickeditor.user.tpl');
-
     }
 
     public function playerSend(): void
     {
-
         global $USER, $LNG, $reslist, $resource;
-        $targetID = HTTP::_GP('id', 0);
-        $db = Database::get();
 
-        $DataIDs = array_merge($reslist['tech'], $reslist['officier']);
+        $data_id_arr = array_merge($reslist['tech'], $reslist['officier']);
 
-        $SpecifyItemsPQ = "";
-        foreach ($DataIDs as $ID)
+        $specify_items_pq = "";
+        foreach ($data_id_arr as $c_id)
         {
-            $SpecifyItemsPQ .= "`" . $resource[$ID] . "`,";
+            $specify_items_pq .= "`" . $resource[$c_id] . "`,";
         }
 
-        $sql = "SELECT " . $SpecifyItemsPQ . " `username`, `authlevel`, `galaxy`, `system`, `planet`, `id_planet`, `darkmatter`, `authattack`, `authlevel` FROM %%USERS%% WHERE `id` = :userId;";
+        $sql = "SELECT " . $specify_items_pq . " `username`, 
+        `authlevel`, `galaxy`, `system`, `planet`, 
+        `id_planet`, `darkmatter`, `authattack`, 
+        `authlevel` FROM %%USERS%% WHERE `id` = :userId;";
 
-        $UserData = $db->selectSingle($sql, [
-            ':userId' => $targetID,
+        $db = Database::get();
+        $target_id = HTTP::_GP('id', 0);
+        $user_data = $db->selectSingle($sql, [
+            ':userId' => $target_id,
         ]);
 
-        $ChangePW = $USER['id'] == ROOT_USER || ($targetID != ROOT_USER && $USER['authlevel'] > $UserData['authlevel']);
+        $change_pw = $USER['id'] == ROOT_USER
+        || ($target_id != ROOT_USER && $USER['authlevel'] > $user_data['authlevel']);
 
         $sql = "UPDATE %%USERS%% SET ";
 
-        foreach ($DataIDs as $ID)
+        foreach ($data_id_arr as $c_id)
         {
-            $sql .= "`".$resource[$ID]."` = ".min(abs(HTTP::_GP($resource[$ID], 0)), 255).", ";
+            $sql .= "`".$resource[$c_id]."` = ".min(abs(HTTP::_GP($resource[$c_id], 0)), 255).", ";
         }
 
         $sql .= "`darkmatter` = :darkmatter, ";
@@ -142,181 +153,231 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $db->update($sql, [
             ':darkmatter' => max(HTTP::_GP('darkmatter', 0), 0),
             ':username'   => HTTP::_GP('name', '', UTF8_SUPPORT),
-            ':authattack' => ($UserData['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $UserData['authlevel'] : 0),
-            ':userId'     => $targetID,
+            ':authattack' => ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0),
+            ':userId'     => $target_id,
             ':universe'   => Universe::getEmulated(),
         ]);
 
-        if (!empty($_POST['password']) && $ChangePW)
+        if (!empty($_POST['password'])
+            && $change_pw)
         {
-
             $sql = "UPDATE %%USERS%% SET password = :password WHERE id = :userId;";
 
             $db->update($sql, [
-                ':userId'   => $targetID,
+                ':userId'   => $target_id,
                 ':password' => PlayerUtil::cryptPassword(HTTP::_GP('password', '', true)),
             ]);
-
         }
 
         $old = [];
         $new = [];
         $multi = HTTP::_GP('multi', 0);
-        foreach ($DataIDs as $IDs)
+
+        foreach ($data_id_arr as $c_id)
         {
-            $old[$IDs] = $UserData[$resource[$IDs]];
-            $new[$IDs] = abs(HTTP::_GP($resource[$IDs], 0));
+            $old[$c_id] = $user_data[$resource[$c_id]];
+            $new[$c_id] = abs(HTTP::_GP($resource[$c_id], 0));
         }
-        $old[921] = $UserData[$resource[921]];
+
+        $old[921] = $user_data[$resource[921]];
         $new[921] = abs(HTTP::_GP($resource[921], 0));
-        $old['username'] = $UserData['username'];
+
+        $old['username'] = $user_data['username'];
         $new['username'] = $GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT));
-        $old['authattack'] = $UserData['authattack'];
-        $new['authattack'] = ($UserData['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $UserData['authlevel'] : 0);
-        $old['multi'] = $GLOBALS['DATABASE']->getFirstCell("SELECT COUNT(*) FROM ".MULTI." WHERE userID = ".$targetID.";");
+        $old['authattack'] = $user_data['authattack'];
+        $new['authattack'] = ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0);
+
+        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :target_id;";
+
+        $old['multi'] = $db->selectSingle($sql, [
+            ':target_id' => $target_id,
+        ]);
+
         $new['authattack'] = $multi;
 
         if ($old['multi'] != $multi)
         {
             if ($multi == 0)
             {
-                $GLOBALS['DATABASE']->query("DELETE FROM ".MULTI." WHERE userID = ".((int) $targetID).";");
+                $sql = "DELETE FROM %%MULTI%% WHERE userID = :target_id;";
+                $db->delete($sql, [
+                    ':target_id' => $target_id,
+                ]);
             }
             elseif ($multi == 1)
             {
-                $GLOBALS['DATABASE']->query("INSERT INTO ".MULTI." SET userID = ".((int) $targetID).";");
+                $sql = "INSERT INTO %%MULTI%% SET userID = :target_id;";
+                $db->insert($sql, [
+                    ':target_id' => $target_id,
+                ]);
             }
         }
 
-        $LOG = new Log(1);
-        $LOG->target = $targetID;
-        $LOG->old = $old;
-        $LOG->new = $new;
-        $LOG->save();
+        $log = new Log(1);
+        $log->target = $target_id;
+        $log->old = $old;
+        $log->new = $new;
+        $log->save();
 
-        $this->printMessage(sprintf($LNG['qe_edit_player_sucess'], $UserData['username'], $targetID));
-
+        $this->printMessage(sprintf($LNG['qe_edit_player_sucess'], $user_data['username'], $target_id));
     }
 
-    // TODO : strip old database
     public function planetSend(): void
     {
-        global $reslist,$resource, $LNG;
+        global $reslist, $resource, $LNG;
 
         $db = Database::get();
 
         $id = HTTP::_GP('id', 0);
 
-        $SpecifyItemsPQ = "";
-        $DataIDs = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
+        $specify_items_pq = "";
+        $data_ids = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
 
-        foreach ($DataIDs as $ID)
+        foreach ($data_ids as $c_id)
         {
-            $SpecifyItemsPQ .= "`".$resource[$ID]."`,";
+            $specify_items_pq .= "`".$resource[$c_id]."`,";
         }
 
-        $sql = "SELECT ".$SpecifyItemsPQ." `name`, `id_owner`, `planet_type`, `galaxy`, `system`, `planet`, `destruyed`, `diameter`, `field_current`, `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, `deuterium` FROM %%PLANETS%% WHERE `id` = '".$id."';";
+        $sql = "SELECT " . $specify_items_pq .
+        " `name`, `id_owner`, `planet_type`, `galaxy`, `system`, 
+        `planet`, `destruyed`, `diameter`, `field_current`, 
+        `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, 
+        `deuterium` FROM %%PLANETS%% WHERE `id` = :planet_id;";
 
-        $PlanetData = $db->selectSingle($sql);
+        $planet_data = $db->selectSingle($sql, [
+            ':planet_id' => $id,
+        ]);
 
-        if (!$PlanetData)
+        if (!$planet_data)
         {
             return;
         }
 
-        $SQL = "UPDATE ".PLANETS." SET ";
-        $Fields = $PlanetData['field_current'];
-        foreach ($DataIDs as $ID)
-        {
-            $level = min(max(0, round(HTTP::_GP($resource[$ID], 0.0))), (in_array($ID, $reslist['build']) ? 255 : 18446744073709551615));
+        $sql = "UPDATE %PLANETS%% SET ";
+        $Fields = $planet_data['field_current'];
 
-            if (in_array($ID, $reslist['allow'][$PlanetData['planet_type']]))
+        foreach ($data_ids as $c_id)
+        {
+            $level = min(max(0, round(HTTP::_GP($resource[$c_id], 0.0))), (in_array($c_id, $reslist['build']) ? 255 : 18446744073709551615));
+
+            if (in_array($c_id, $reslist['allow'][$planet_data['planet_type']]))
             {
-                $Fields += $level - $PlanetData[$resource[$ID]];
+                $Fields += $level - $planet_data[$resource[$c_id]];
             }
 
-            $SQL .= "`".$resource[$ID]."` = ".$level.", ";
+            $sql .= "`".$resource[$c_id]."` = ".$level.", ";
         }
 
-        $SQL .= "`metal` = ".max(0, round(HTTP::_GP('metal', 0.0))).", ";
-        $SQL .= "`crystal` = ".max(0, round(HTTP::_GP('crystal', 0.0))).", ";
-        $SQL .= "`deuterium` = ".max(0, round(HTTP::_GP('deuterium', 0.0))).", ";
-        $SQL .= "`field_current` = '".$Fields."', ";
-        $SQL .= "`field_max` = '".HTTP::_GP('field_max', 0)."', ";
-        $SQL .= "`name` = '".$GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT))."', ";
-        $SQL .= "`eco_hash` = '' ";
-        $SQL .= "WHERE `id` = '".$id."' AND `universe` = '".Universe::getEmulated()."';";
+        $sql .= "`metal` = :metal, ";
+        $sql .= "`crystal` = :crystal, ";
+        $sql .= "`deuterium` = :deuterium, ";
+        $sql .= "`field_current` = :field_current, ";
+        $sql .= "`field_max` = :field_max, ";
+        $sql .= "`name` = :name, ";
+        $sql .= "`eco_hash` = '' ";
+        $sql .= "WHERE `id` = :id' AND `universe` = :universe;";
 
-        $GLOBALS['DATABASE']->query($SQL);
+        $db->update($sql, [
+            ':metal'         => max(0, round(HTTP::_GP('metal', 0.0))),
+            ':crystal'       => max(0, round(HTTP::_GP('crystal', 0.0))),
+            ':deuterium'     => max(0, round(HTTP::_GP('deuterium', 0.0))),
+            ':field_current' => $Fields,
+            ':field_max'     => HTTP::_GP('field_max', 0),
+            ':name'          => HTTP::_GP('name', ''),
+            ':id'            => $id,
+            ':universe'      => Universe::getEmulated(),
+        ]);
 
         $old = [];
         $new = [];
-        foreach (array_merge($DataIDs, $reslist['resstype'][1]) as $IDs)
+
+        foreach (array_merge($data_ids, $reslist['resstype'][1]) as $c_id)
         {
-            $old[$IDs] = $PlanetData[$resource[$IDs]];
-            $new[$IDs] = max(0, round(HTTP::_GP($resource[$IDs], 0.0)));
+            $old[$c_id] = $planet_data[$resource[$c_id]];
+            $new[$c_id] = max(0, round(HTTP::_GP($resource[$c_id], 0.0)));
         }
-        $old['field_max'] = $PlanetData['field_max'];
+
+        $old['field_max'] = $planet_data['field_max'];
         $new['field_max'] = HTTP::_GP('field_max', 0);
 
-        $LOG = new Log(2);
-        $LOG->target = $id;
-        $LOG->old = $old;
-        $LOG->new = $new;
-        $LOG->save();
+        $log = new Log(2);
+        $log->target = $id;
+        $log->old = $old;
+        $log->new = $new;
+        $log->save();
 
-        $this->printMessage(sprintf($LNG['qe_edit_planet_sucess'], $PlanetData['name'], $PlanetData['galaxy'], $PlanetData['system'], $PlanetData['planet']));
+        $this->printMessage(sprintf(
+            $LNG['qe_edit_planet_sucess'],
+            $planet_data['name'],
+            $planet_data['galaxy'],
+            $planet_data['system'],
+            $planet_data['planet']
+        ));
 
     }
 
-    // TODO : strip old database
     public function planet(): void
     {
+        global $LNG, $reslist, $resource;
 
-        global $USER, $LNG, $reslist, $resource;
         $action = HTTP::_GP('action', '');
         $id = HTTP::_GP('id', 0);
 
-        $DataIDs = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
-        $SpecifyItemsPQ = "";
+        $data_ids = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
+        $specify_items_pq = "";
 
-        foreach ($DataIDs as $ID)
+        foreach ($data_ids as $c_id)
         {
-            $SpecifyItemsPQ .= "`".$resource[$ID]."`,";
+            $specify_items_pq .= "`".$resource[$c_id]."`,";
         }
-        $PlanetData = $GLOBALS['DATABASE']->getFirstRow("SELECT ".$SpecifyItemsPQ." `name`, `id_owner`, `planet_type`, `galaxy`, `system`, `planet`, `destruyed`, `diameter`, `field_current`, `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, `deuterium` FROM ".PLANETS." WHERE `id` = '".$id."';");
 
-        $UserInfo = $GLOBALS['DATABASE']->getFirstRow("SELECT `username` FROM ".USERS." WHERE `id` = '".$PlanetData['id_owner']."' AND `universe` = '".Universe::getEmulated()."';");
+        $db = Database::get();
+
+        $sql = "SELECT " . $specify_items_pq . " `name`, `id_owner`, `planet_type`, 
+        `galaxy`, `system`, `planet`, `destruyed`, `diameter`, 
+        `field_current`, `field_max`, `temp_min`, `temp_max`, 
+        `metal`, `crystal`, `deuterium` FROM %%PLANETS%% WHERE `id` = :id;";
+
+        $planet_data = $db->selectSingle($sql, [
+            ':id' => $id,
+        ]);
+
+        $sql = "SELECT `username` FROM %%USERS%% 
+        WHERE `id` = :user_id AND `universe` = '".Universe::getEmulated()."';";
+
+        $UserInfo = $db->selectSingle($sql, [
+            ':user_id' => $planet_data['id_owner'],
+        ]);
 
         $build = $defense = $fleet = [];
 
-        foreach ($reslist['allow'][$PlanetData['planet_type']] as $ID)
+        foreach ($reslist['allow'][$planet_data['planet_type']] as $ID)
         {
             $build[] = [
                 'type'  => $resource[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($PlanetData[$resource[$ID]]),
-                'input' => $PlanetData[$resource[$ID]],
+                'count' => pretty_number($planet_data[$resource[$ID]]),
+                'input' => $planet_data[$resource[$ID]],
             ];
         }
 
-        foreach ($reslist['fleet'] as $ID)
+        foreach ($reslist['fleet'] as $c_id)
         {
             $fleet[] = [
-                'type'  => $resource[$ID],
-                'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($PlanetData[$resource[$ID]]),
-                'input' => $PlanetData[$resource[$ID]],
+                'type'  => $resource[$c_id],
+                'name'  => $LNG['tech'][$c_id],
+                'count' => pretty_number($planet_data[$resource[$c_id]]),
+                'input' => $planet_data[$resource[$c_id]],
             ];
         }
 
-        foreach ($reslist['defense'] as $ID)
+        foreach ($reslist['defense'] as $c_id)
         {
             $defense[] = [
-                'type'  => $resource[$ID],
-                'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($PlanetData[$resource[$ID]]),
-                'input' => $PlanetData[$resource[$ID]],
+                'type'  => $resource[$c_id],
+                'name'  => $LNG['tech'][$c_id],
+                'count' => pretty_number($planet_data[$resource[$c_id]]),
+                'input' => $planet_data[$resource[$c_id]],
             ];
         }
 
@@ -325,39 +386,25 @@ class ShowQuickEditorPage extends AbstractAdminPage
             'fleet'       => $fleet,
             'defense'     => $defense,
             'planetId'    => $id,
-            'ownerid'     => $PlanetData['id_owner'],
+            'ownerid'     => $planet_data['id_owner'],
             'ownername'   => $UserInfo['username'],
-            'name'        => $PlanetData['name'],
-            'galaxy'      => $PlanetData['galaxy'],
-            'system'      => $PlanetData['system'],
-            'planet'      => $PlanetData['planet'],
-            'field_min'   => $PlanetData['field_current'],
-            'field_max'   => $PlanetData['field_max'],
-            'temp_min'    => $PlanetData['temp_min'],
-            'temp_max'    => $PlanetData['temp_max'],
-            'metal'       => floatToString($PlanetData['metal']),
-            'crystal'     => floatToString($PlanetData['crystal']),
-            'deuterium'   => floatToString($PlanetData['deuterium']),
-            'metal_c'     => pretty_number($PlanetData['metal']),
-            'crystal_c'   => pretty_number($PlanetData['crystal']),
-            'deuterium_c' => pretty_number($PlanetData['deuterium']),
+            'name'        => $planet_data['name'],
+            'galaxy'      => $planet_data['galaxy'],
+            'system'      => $planet_data['system'],
+            'planet'      => $planet_data['planet'],
+            'field_min'   => $planet_data['field_current'],
+            'field_max'   => $planet_data['field_max'],
+            'temp_min'    => $planet_data['temp_min'],
+            'temp_max'    => $planet_data['temp_max'],
+            'metal'       => floatToString($planet_data['metal']),
+            'crystal'     => floatToString($planet_data['crystal']),
+            'deuterium'   => floatToString($planet_data['deuterium']),
+            'metal_c'     => pretty_number($planet_data['metal']),
+            'crystal_c'   => pretty_number($planet_data['crystal']),
+            'deuterium_c' => pretty_number($planet_data['deuterium']),
         ]);
+
         $this->display('page.quickeditor.planet.tpl');
-
     }
 
-}
-
-function ShowQuickEditorPage()
-{
-
-    switch ($edit)
-    {
-        case 'planet':
-
-            break;
-        case 'player':
-
-            break;
-    }
 }

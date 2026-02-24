@@ -31,14 +31,13 @@ class ShowVertifyPage extends AbstractAdminPage
         $this->tplObj->loadscript('vertify.js');
 
         $this->display("page.vertify.default.tpl");
-
     }
 
     public function check(): void
     {
+        $rev = explode(".", Config::get("VERSION"));
+        $rev = $rev[2];
 
-        $REV = explode(".", Config::get("VERSION"));
-        $REV = $REV[2];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_AUTOREFERER, true);
         curl_setopt($ch, CURLOPT_URL, 'https://raw.githubusercontent.com/jkroepke/2Moons/master/'.$file);

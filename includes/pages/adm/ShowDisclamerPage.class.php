@@ -27,8 +27,6 @@ class ShowDisclamerPage extends AbstractAdminPage
 
     public function show(): void
     {
-        global $LNG;
-
         $config = Config::get(Universe::getEmulated());
 
         $this->assign([
@@ -39,12 +37,10 @@ class ShowDisclamerPage extends AbstractAdminPage
         ]);
 
         $this->display('page.disclamer.default.tpl');
-
     }
 
     public function saveSettings(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
@@ -56,38 +52,38 @@ class ShowDisclamerPage extends AbstractAdminPage
             'disclamerNotice'  => $config->disclamerNotice,
         ];
 
-        $disclaimerAddress = HTTP::_GP('disclaimerAddress', '', true);
-        $disclaimerPhone = HTTP::_GP('disclaimerPhone', '', true);
-        $disclaimerMail = HTTP::_GP('disclaimerMail', '', true);
-        $disclaimerNotice = HTTP::_GP('disclaimerNotice', '', true);
+        $disclaimer_address = HTTP::_GP('disclaimerAddress', '', true);
+        $disclaimer_phone = HTTP::_GP('disclaimerPhone', '', true);
+        $disclaimer_mail = HTTP::_GP('disclaimerMail', '', true);
+        $disclaimer_notice = HTTP::_GP('disclaimerNotice', '', true);
 
         $config_after = [
-            'disclamerAddress' => $disclaimerAddress,
-            'disclamerPhone'   => $disclaimerPhone,
-            'disclamerMail'    => $disclaimerMail,
-            'disclamerNotice'  => $disclaimerNotice,
+            'disclamerAddress' => $disclaimer_address,
+            'disclamerPhone'   => $disclaimer_phone,
+            'disclamerMail'    => $disclaimer_mail,
+            'disclamerNotice'  => $disclaimer_notice,
         ];
 
         foreach ($config_after as $key => $value)
         {
             $config->$key = $value;
         }
+
         $config->save();
 
-        $LOG = new Log(3);
-        $LOG->target = 5;
-        $LOG->old = $config_before;
-        $LOG->new = $config_after;
-        $LOG->save();
+        $log = new Log(3);
+        $log->target = 5;
+        $log->old = $config_before;
+        $log->new = $config_after;
+        $log->save();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=disclamer&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
-
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
 }

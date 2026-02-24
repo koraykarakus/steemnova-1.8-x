@@ -27,36 +27,35 @@ class ShowOverviewPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG, $USER;
 
-        $Message = [];
+        $msg = [];
 
         if ($USER['authlevel'] >= AUTH_ADM)
         {
             if (file_exists(ROOT_PATH.'update.php'))
             {
-                $Message[] = sprintf($LNG['ow_file_detected'], 'update.php');
+                $msg[] = sprintf($LNG['ow_file_detected'], 'update.php');
             }
 
             if (file_exists(ROOT_PATH.'webinstall.php'))
             {
-                $Message[] = sprintf($LNG['ow_file_detected'], 'webinstall.php');
+                $msg[] = sprintf($LNG['ow_file_detected'], 'webinstall.php');
             }
 
             if (file_exists('includes/ENABLE_INSTALL_TOOL'))
             {
-                $Message[] = sprintf($LNG['ow_file_detected'], 'includes/ENABLE_INSTALL_TOOL');
+                $msg[] = sprintf($LNG['ow_file_detected'], 'includes/ENABLE_INSTALL_TOOL');
             }
 
             if (!is_writable(ROOT_PATH.'cache'))
             {
-                $Message[] = sprintf($LNG['ow_dir_not_writable'], 'cache');
+                $msg[] = sprintf($LNG['ow_dir_not_writable'], 'cache');
             }
 
             if (!is_writable('includes'))
             {
-                $Message[] = sprintf($LNG['ow_dir_not_writable'], 'includes');
+                $msg[] = sprintf($LNG['ow_dir_not_writable'], 'includes');
             }
         }
 
@@ -72,7 +71,7 @@ class ShowOverviewPage extends AbstractAdminPage
             'ow_title'          => $LNG['ow_title'],
             'ow_forum'          => $LNG['ow_forum'],
             'ow_donate'         => $LNG['ow_donate'],
-            'Messages'          => $Message,
+            'Messages'          => $msg,
             'date'              => date('m\_Y', TIMESTAMP),
         ]);
 

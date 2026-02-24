@@ -5,7 +5,7 @@
  */
 class ShowBotsPage extends AbstractAdminPage
 {
-    protected $allNames = [];
+    protected $all_names = [];
 
     protected $title = ['Marshal', 'Czar', 'Governor', 'Technocrat', 'Geologist', 'Commander',
         'Lord', 'Commodore', 'Chancellor', 'Emperor', 'Mogul', 'Sovereign', 'Proconsul',
@@ -30,8 +30,8 @@ class ShowBotsPage extends AbstractAdminPage
         'Ganimed', 'Forma', 'Pulsar', 'Holmes', 'Rhea', 'Deneb',
         'Nova', 'Omega', 'Zagadra', 'Hunter', 'Ranger', 'Zibal', 'Asteroid'];
 
-    protected $titleCount;
-    protected $nameCount;
+    protected $title_count;
+    protected $name_count;
 
     public function __construct()
     {
@@ -40,25 +40,24 @@ class ShowBotsPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         $this->display('page.bots.default.tpl');
     }
 
     public function create(): void
     {
-
         $this->display('page.bots.create.tpl');
     }
 
     public function generateName(): string
     {
-
-        $randomName = $this->title[rand(0, ($this->titleCount - 1))] . ' ' . $this->name[rand(0, ($this->nameCount - 1))];
+        $random_name = $this->title[rand(0, ($this->title_count - 1))] .
+        ' ' .
+        $this->name[rand(0, ($this->name_count - 1))];
 
         $i = 0;
-        foreach ($this->allNames as $userName)
+        foreach ($this->all_names as $c_name)
         {
-            if (strpos($userName, $randomName) !== false)
+            if (strpos($c_name, $random_name) !== false)
             {
                 $i++;
             }
@@ -66,27 +65,24 @@ class ShowBotsPage extends AbstractAdminPage
 
         if ($i > 0)
         {
-            $randomName = $randomName . ' (' . ($i + 1) . ')';
+            $random_name = $random_name . ' (' . ($i + 1) . ')';
         }
 
-        return $randomName;
-
+        return $random_name;
     }
 
     public function getAllNames(): void
     {
-
         $db = Database::get();
 
         $sql = "SELECT username FROM %%USERS%%";
 
-        $userNames = $db->select($sql);
+        $user_name_array = $db->select($sql);
 
-        foreach ($userNames as $currentName)
+        foreach ($user_name_array as $c_name)
         {
-            $this->allNames[] = $currentName['username'];
+            $this->all_names[] = $c_name['username'];
         }
-
     }
 
     public function createSend(): void
@@ -97,110 +93,115 @@ class ShowBotsPage extends AbstractAdminPage
         $db = Database::get();
 
         $target_galaxy = HTTP::_GP('target_galaxy', 1);
-
         $bots_number = HTTP::_GP('bots_number', 0);
-
         $bot_name_type = HTTP::_GP('bot_name_type', 0);
-
         $bots_dm = HTTP::_GP('bots_dm', 0);
-
         $bots_password = HTTP::_GP('bots_password', '', true);
 
-        $planetMetal = HTTP::_GP('planet_metal', 0);
-        $planetCrystal = HTTP::_GP('planet_crystal', 0);
-        $planetDeuterium = HTTP::_GP('planet_deuterium', 0);
-        $planetFieldMax = HTTP::_GP('planet_field_max', 163);
+        $planet_metal = HTTP::_GP('planet_metal', 0);
+        $planet_crystal = HTTP::_GP('planet_crystal', 0);
+        $planet_deuterium = HTTP::_GP('planet_deuterium', 0);
+        $planet_field_max = HTTP::_GP('planet_field_max', 163);
 
         if ($bots_number == 0)
         {
-            $this->printMessage('Enter bots number to be created !');
+            $this->printMessage('Enter bots number to be created !', $this->createButtonBack());
         }
 
         if (empty($bots_password))
         {
-            $this->printMessage('Enter a password for bots !');
+            $this->printMessage('Enter a password for bots !', $this->createButtonBack());
         }
 
-        if ($target_galaxy > $config->max_galaxy || $target_galaxy < 1)
+        if ($target_galaxy > $config->max_galaxy
+            || $target_galaxy < 1)
         {
-            $this->printMessage('Wrong galaxy !');
+            $this->printMessage('Wrong galaxy !', $this->createButtonBack());
         }
 
         if ($bot_name_type == 0)
         {
             $this->getAllNames();
-            $this->nameCount = count($this->name);
-            $this->titleCount = count($this->title);
+            $this->name_count = count($this->name);
+            $this->title_count = count($this->title);
         }
 
-        $numberOfPossiblePlanets = $config->max_system * $config->max_planets;
+        $number_planets_max = $config->max_system * $config->max_planets;
 
-        $sql = "SELECT COUNT(*) as planet_number FROM %%PLANETS%% WHERE galaxy = :target_galaxy AND universe = :universe;";
+        $sql = "SELECT COUNT(*) as planet_number 
+        FROM %%PLANETS%% 
+        WHERE galaxy = :target_galaxy AND universe = :universe;";
 
-        $usedPlanetSlots = $db->selectSingle($sql, [
+        $used_planet_slots = $db->selectSingle($sql, [
             ':target_galaxy' => $target_galaxy,
             ':universe'      => Universe::getEmulated(),
         ], 'planet_number');
 
-        $numberOfPossiblePlanets -= $usedPlanetSlots;
+        $number_planets_max -= $used_planet_slots;
 
-        if ($bots_number > $numberOfPossiblePlanets)
+        if ($bots_number > $number_planets_max)
         {
             $this->printMessage('universe do not have enough space for bots !');
         }
 
-        $sql = "SELECT galaxy,system,planet FROM %%PLANETS%% WHERE universe = :universe AND galaxy = :target_galaxy";
+        $sql = "SELECT galaxy, system, planet 
+        FROM %%PLANETS%% 
+        WHERE universe = :universe AND galaxy = :target_galaxy";
 
-        $currentPlanets = $db->select($sql, [
+        $current_planets = $db->select($sql, [
             ':universe'      => Universe::getEmulated(),
             ':target_galaxy' => $target_galaxy,
         ]);
 
-        $coordinatesNotAvailable = [];
-        foreach ($currentPlanets as $cPlanet)
+        $coordinates_not_available = [];
+        foreach ($current_planets as $c_planet)
         {
-            $coordinatesNotAvailable[] = $cPlanet['galaxy'] . ":" . $cPlanet['system'] . ":" . $cPlanet['planet'];
+            $coordinates_not_available[] = $c_planet['galaxy'] .
+            ":" .
+            $c_planet['system'] .
+            ":" .
+            $c_planet['planet'];
         }
 
-        $allCoordinates = [];
+        $all_coordinates = [];
 
         for ($i = 1; $i <= $config->max_system; $i++)
         {
 
             for ($j = 1; $j <= $config->max_planets ; $j++)
             {
-                $allCoordinates[] = $target_galaxy . ":" . $i . ":" . $j;
+                $all_coordinates[] = $target_galaxy . ":" . $i . ":" . $j;
             }
 
         }
 
-        $possibleCoordinates = array_diff($allCoordinates, $coordinatesNotAvailable);
+        $possible_coordinates = array_diff($all_coordinates, $coordinates_not_available);
 
-        $botInfo = [];
+        $bot_info = [];
         $universeCurrent = Universe::getEmulated();
 
         $sql = "SELECT COUNT(*) as count FROM %%USERS%% WHERE is_bot = 1;";
-        $numberOfBots = $db->selectSingle($sql, [], 'count');
+        $bots_num = $db->selectSingle($sql, [], 'count');
 
         //generate main planet coordinates for bots
         for ($i = 1; $i <= $bots_number; $i++)
         {
 
-            $randomNumber = mt_rand(0, count($possibleCoordinates) - 1);
-            $coordinate = explode(':', $possibleCoordinates[$randomNumber]);
+            $random_num = mt_rand(0, count($possible_coordinates) - 1);
+            $coordinate = explode(':', $possible_coordinates[$random_num]);
 
-            $botInfo[] = [
+            $bot_info[] = [
                 'galaxy'     => $coordinate[0],
                 'system'     => $coordinate[1],
                 'planet'     => $coordinate[2],
                 'username'   => ($bot_name_type == 1) ? 'bot ' . $i : $this->generateName(),
-                'email'      => 'bot' . $i + $numberOfBots . '@2moons.de',
+                'email'      => 'bot' . $i + $bots_num . '@2moons.de',
                 'lang'       => 'tr',
                 'darkmatter' => $bots_dm,
             ];
 
-            unset($possibleCoordinates[$randomNumber]);
-            $possibleCoordinates = array_values($possibleCoordinates);
+            unset($possible_coordinates[$random_num]);
+            $possible_coordinates = array_values($possible_coordinates);
         }
 
         $sql_user = $save_sql_user = "INSERT INTO %%USERS%% (username, password, email, email_2, lang, universe, galaxy, system, planet, darkmatter,register_time,onlinetime, is_bot) VALUES ";
@@ -208,12 +209,12 @@ class ShowBotsPage extends AbstractAdminPage
         $bots_password = PlayerUtil::cryptPassword($bots_password);
 
         $i = 0;
-        foreach ($botInfo as $currentBotInfo)
+        foreach ($bot_info as $c_bot_info)
         {
-            $sql_user .= "('" . $currentBotInfo['username'] . "', '" . $bots_password . "', '"
-            . $currentBotInfo['email'] . "', '" . $currentBotInfo['email'] . "', '" . $currentBotInfo['lang'] . "', "
-            . $universeCurrent . ", " . $currentBotInfo['galaxy'] . ", " . $currentBotInfo['system'] . ", "
-            . $currentBotInfo['planet'] . ", " . $currentBotInfo['darkmatter'] . ", " . TIMESTAMP . ", " . TIMESTAMP . ", " . "1" . "), ";
+            $sql_user .= "('" . $c_bot_info['username'] . "', '" . $bots_password . "', '"
+            . $c_bot_info['email'] . "', '" . $c_bot_info['email'] . "', '" . $c_bot_info['lang'] . "', "
+            . $universeCurrent . ", " . $c_bot_info['galaxy'] . ", " . $c_bot_info['system'] . ", "
+            . $c_bot_info['planet'] . ", " . $c_bot_info['darkmatter'] . ", " . TIMESTAMP . ", " . TIMESTAMP . ", " . "1" . "), ";
 
             $i++;
 
@@ -239,27 +240,28 @@ class ShowBotsPage extends AbstractAdminPage
 
         $planetData = [];
         require 'includes/PlanetData.php';
-        $diameter = (int) floor(1000 * sqrt($planetFieldMax));
+
+        // ??
+        $diameter = (int) floor(1000 * sqrt($planet_field_max));
 
         $i = 0;
-        foreach ($botInfo as $currentBotInfo)
+        foreach ($bot_info as $c_bot_info)
         {
+            $data_index = (int) ceil($c_bot_info['planet'] / ($config->max_planets / count($planetData)));
+            $planet_temp_max = $planetData[$data_index]['temp'];
+            $planet_temp_min = $planet_temp_max - 40;
 
-            $dataIndex = (int) ceil($currentBotInfo['planet'] / ($config->max_planets / count($planetData)));
-            $planetTempMax = $planetData[$dataIndex]['temp'];
-            $planetTempMin = $planetTempMax - 40;
+            $image_names = array_keys($planetData[$data_index]['image']);
+            $image_name_type = $image_names[array_rand($image_names)];
+            $image_name = $image_name_type;
+            $image_name .= 'planet';
+            $image_name .= $planetData[$data_index]['image'][$image_name_type] < 10 ? '0' : '';
+            $image_name .= $planetData[$data_index]['image'][$image_name_type];
 
-            $imageNames = array_keys($planetData[$dataIndex]['image']);
-            $imageNameType = $imageNames[array_rand($imageNames)];
-            $imageName = $imageNameType;
-            $imageName .= 'planet';
-            $imageName .= $planetData[$dataIndex]['image'][$imageNameType] < 10 ? '0' : '';
-            $imageName .= $planetData[$dataIndex]['image'][$imageNameType];
-
-            $sql_planets .= "('" . $LNG['fcm_mainplanet'] . "', " . $universeCurrent . ", " . $currentBotInfo['galaxy'] . ", "
-            . $currentBotInfo['system'] . ", " . $currentBotInfo['planet'] . ", " . TIMESTAMP . ", " . "1" . ", '"
-            . $imageName . "', " . $planetFieldMax . ", " . $planetTempMin . ", " . $planetTempMax . ", "
-            . $planetMetal . ", " . $planetCrystal . ", " . $planetDeuterium . ", " . "1" . "), ";
+            $sql_planets .= "('" . $LNG['fcm_mainplanet'] . "', " . $universeCurrent . ", " . $c_bot_info['galaxy'] . ", "
+            . $c_bot_info['system'] . ", " . $c_bot_info['planet'] . ", " . TIMESTAMP . ", " . "1" . ", '"
+            . $image_name . "', " . $planet_field_max . ", " . $planet_temp_min . ", " . $planet_temp_max . ", "
+            . $planet_metal . ", " . $planet_crystal . ", " . $planet_deuterium . ", " . "1" . "), ";
 
             $i++;
 
@@ -281,14 +283,21 @@ class ShowBotsPage extends AbstractAdminPage
             $sql_planets = $save_sql_planets;
         }
 
-        $sql = "SELECT id,galaxy,system,planet FROM %%USERS%% WHERE is_bot = 1 AND id_planet = 0 AND universe = :universe ORDER BY id ASC;";
-        $newBots = $db->select($sql, [
+        $sql = "SELECT id, galaxy, system, planet 
+        FROM %%USERS%% 
+        WHERE is_bot = 1 AND id_planet = 0 AND universe = :universe 
+        ORDER BY id ASC;";
+
+        $new_bots = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $sql = "SELECT id,galaxy,system,planet FROM %%PLANETS%% WHERE is_bot = 1 AND id_owner IS NULL AND universe = :universe ORDER BY id ASC;";
+        $sql = "SELECT id, galaxy, system, planet 
+        FROM %%PLANETS%% WHERE is_bot = 1 AND id_owner IS NULL 
+        AND universe = :universe 
+        ORDER BY id ASC;";
 
-        $newBotPlanets = $db->select($sql, [
+        $new_bot_planets = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
@@ -297,10 +306,10 @@ class ShowBotsPage extends AbstractAdminPage
         $sql_refresh_bot_users = $save_sql_refresh_bot_users = "INSERT INTO %%USERS%% (id,universe,id_planet) VALUES ";
 
         $i = 0;
-        foreach ($newBots as $currentNewBot)
+        foreach ($new_bots as $currentNewBot)
         {
 
-            foreach ($newBotPlanets as $currentNewBotPlanet)
+            foreach ($new_bot_planets as $currentNewBotPlanet)
             {
 
                 if ($currentNewBot['galaxy'] == $currentNewBotPlanet['galaxy']
@@ -346,18 +355,18 @@ class ShowBotsPage extends AbstractAdminPage
         $sql_refresh_bot_planets = $save_sql_refresh_bot_planets = "INSERT INTO %%PLANETS%% (id,universe,id_owner) VALUES ";
 
         $i = 0;
-        foreach ($newBots as $currentNewBot)
+        foreach ($new_bots as $c_new_bot)
         {
 
-            foreach ($newBotPlanets as $currentNewBotPlanet)
+            foreach ($new_bot_planets as $c_new_bot_planet)
             {
 
-                if ($currentNewBot['galaxy'] == $currentNewBotPlanet['galaxy']
-                    && $currentNewBot['system'] == $currentNewBotPlanet['system']
-                    && $currentNewBot['planet'] == $currentNewBotPlanet['planet']
+                if ($c_new_bot['galaxy'] == $c_new_bot_planet['galaxy']
+                    && $c_new_bot['system'] == $c_new_bot_planet['system']
+                    && $c_new_bot['planet'] == $c_new_bot_planet['planet']
                 ) {
                     $i++;
-                    $sql_refresh_bot_planets .= "(" . $currentNewBotPlanet['id'] . ", " . $universeCurrent . ", " . $currentNewBot['id']  . "), ";
+                    $sql_refresh_bot_planets .= "(" . $c_new_bot_planet['id'] . ", " . $universeCurrent . ", " . $c_new_bot['id']  . "), ";
 
                     if ($i == 50)
                     {

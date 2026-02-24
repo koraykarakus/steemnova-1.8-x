@@ -27,7 +27,6 @@ class ShowStatsUpdatePage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG;
         require_once('includes/classes/class.statbuilder.php');
         $stat = new statbuilder();
@@ -39,6 +38,5 @@ class ShowStatsUpdatePage extends AbstractAdminPage
         $stats_sql = sprintf($LNG['sb_sql_counts'], $result['sql_count']);
 
         $this->printMessage($LNG['sb_stats_updated'].$stats_end_time.$memory_i.$memory_e.$memory_p.$stats_sql);
-
     }
 }

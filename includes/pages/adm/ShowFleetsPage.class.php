@@ -18,6 +18,9 @@
 /**
  *
  */
+
+require 'includes/classes/class.FlyingFleetsTable.php';
+
 class ShowFleetsPage extends AbstractAdminPage
 {
     public function __construct()
@@ -51,68 +54,67 @@ class ShowFleetsPage extends AbstractAdminPage
 		GROUP BY event.fleetID
 		ORDER BY fleet_id;";
 
-        $fleetResult = $db->select($sql, [
+        $fleet_result = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $FleetList = [];
+        $fleet_list = [];
 
-        foreach ($fleetResult as $fleetRow)
+        foreach ($fleet_result as $c_fleet)
         {
             $shipList = [];
-            $shipArray = array_filter(explode(';', $fleetRow['fleet_array']));
+            $shipArray = array_filter(explode(';', $c_fleet['fleet_array']));
             foreach ($shipArray as $ship)
             {
                 $shipDetail = explode(',', $ship);
                 $shipList[$shipDetail[0]] = $shipDetail[1];
             }
 
-            $FleetList[] = [
-                'fleetID'            => $fleetRow['fleet_id'],
-                'lock'               => !empty($fleetRow['lock']),
-                'count'              => $fleetRow['fleet_amount'],
-                'error'              => !$fleetRow['error'],
+            $fleet_list[] = [
+                'fleetID'            => $c_fleet['fleet_id'],
+                'lock'               => !empty($c_fleet['lock']),
+                'count'              => $c_fleet['fleet_amount'],
+                'error'              => !$c_fleet['error'],
                 'ships'              => $shipList,
-                'state'              => $fleetRow['fleet_mess'],
-                'starttime'          => _date($LNG['php_tdformat'], $fleetRow['start_time'], $USER['timezone']),
-                'arrivaltime'        => _date($LNG['php_tdformat'], $fleetRow['fleet_start_time'], $USER['timezone']),
-                'stayhour'           => round(($fleetRow['fleet_end_stay'] - $fleetRow['fleet_start_time']) / 3600),
-                'staytime'           => $fleetRow['fleet_start_time'] !== $fleetRow['fleet_end_stay'] ? _date($LNG['php_tdformat'], $fleetRow['fleet_end_stay'], $USER['timezone']) : 0,
-                'endtime'            => _date($LNG['php_tdformat'], $fleetRow['fleet_end_time'], $USER['timezone']),
-                'missionID'          => $fleetRow['fleet_mission'],
-                'acsID'              => $fleetRow['fleet_group'],
-                'acsName'            => $fleetRow['acsName'],
-                'startUserID'        => $fleetRow['fleet_owner'],
-                'startUserName'      => $fleetRow['startUserName'],
-                'startPlanetID'      => $fleetRow['fleet_start_id'],
-                'startPlanetName'    => $fleetRow['startPlanetName'],
-                'startPlanetGalaxy'  => $fleetRow['fleet_start_galaxy'],
-                'startPlanetSystem'  => $fleetRow['fleet_start_system'],
-                'startPlanetPlanet'  => $fleetRow['fleet_start_planet'],
-                'startPlanetType'    => $fleetRow['fleet_start_type'],
-                'targetUserID'       => $fleetRow['fleet_target_owner'],
-                'targetUserName'     => $fleetRow['targetUserName'],
-                'targetPlanetID'     => $fleetRow['fleet_end_id'],
-                'targetPlanetName'   => $fleetRow['targetPlanetName'],
-                'targetPlanetGalaxy' => $fleetRow['fleet_end_galaxy'],
-                'targetPlanetSystem' => $fleetRow['fleet_end_system'],
-                'targetPlanetPlanet' => $fleetRow['fleet_end_planet'],
-                'targetPlanetType'   => $fleetRow['fleet_end_type'],
+                'state'              => $c_fleet['fleet_mess'],
+                'starttime'          => _date($LNG['php_tdformat'], $c_fleet['start_time'], $USER['timezone']),
+                'arrivaltime'        => _date($LNG['php_tdformat'], $c_fleet['fleet_start_time'], $USER['timezone']),
+                'stayhour'           => round(($c_fleet['fleet_end_stay'] - $c_fleet['fleet_start_time']) / 3600),
+                'staytime'           => $c_fleet['fleet_start_time'] !== $c_fleet['fleet_end_stay'] ? _date($LNG['php_tdformat'], $c_fleet['fleet_end_stay'], $USER['timezone']) : 0,
+                'endtime'            => _date($LNG['php_tdformat'], $c_fleet['fleet_end_time'], $USER['timezone']),
+                'missionID'          => $c_fleet['fleet_mission'],
+                'acsID'              => $c_fleet['fleet_group'],
+                'acsName'            => $c_fleet['acsName'],
+                'startUserID'        => $c_fleet['fleet_owner'],
+                'startUserName'      => $c_fleet['startUserName'],
+                'startPlanetID'      => $c_fleet['fleet_start_id'],
+                'startPlanetName'    => $c_fleet['startPlanetName'],
+                'startPlanetGalaxy'  => $c_fleet['fleet_start_galaxy'],
+                'startPlanetSystem'  => $c_fleet['fleet_start_system'],
+                'startPlanetPlanet'  => $c_fleet['fleet_start_planet'],
+                'startPlanetType'    => $c_fleet['fleet_start_type'],
+                'targetUserID'       => $c_fleet['fleet_target_owner'],
+                'targetUserName'     => $c_fleet['targetUserName'],
+                'targetPlanetID'     => $c_fleet['fleet_end_id'],
+                'targetPlanetName'   => $c_fleet['targetPlanetName'],
+                'targetPlanetGalaxy' => $c_fleet['fleet_end_galaxy'],
+                'targetPlanetSystem' => $c_fleet['fleet_end_system'],
+                'targetPlanetPlanet' => $c_fleet['fleet_end_planet'],
+                'targetPlanetType'   => $c_fleet['fleet_end_type'],
                 'resource'           => [
-                    901 => $fleetRow['fleet_resource_metal'],
-                    902 => $fleetRow['fleet_resource_crystal'],
-                    903 => $fleetRow['fleet_resource_deuterium'],
-                    921 => $fleetRow['fleet_resource_darkmatter'],
+                    901 => $c_fleet['fleet_resource_metal'],
+                    902 => $c_fleet['fleet_resource_crystal'],
+                    903 => $c_fleet['fleet_resource_deuterium'],
+                    921 => $c_fleet['fleet_resource_darkmatter'],
                 ],
             ];
         }
 
         $this->assign([
-            'FleetList' => $FleetList,
+            'FleetList' => $fleet_list,
         ]);
 
         $this->display('page.fleets.default.tpl');
-
     }
 
     public function lock(): void
@@ -123,15 +125,14 @@ class ShowFleetsPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "UPDATE %%FLEETS%% SET `fleet_busy` = :lock WHERE `fleet_id` = :id AND `fleet_universe` = :universe;";
+        $sql = "UPDATE %%FLEETS%% SET `fleet_busy` = :lock 
+        WHERE `fleet_id` = :id AND `fleet_universe` = :universe;";
 
         $db->update($sql, [
             ':lock'     => $lock,
             ':id'       => $id,
             ':universe' => Universe::getEmulated(),
         ]);
-
-        $SQL = ($lock == 0) ? "NULL" : "'ADM_LOCK'";
 
         if ($lock == 0)
         {
@@ -147,14 +148,6 @@ class ShowFleetsPage extends AbstractAdminPage
         ]);
 
         $this->show();
-
     }
-
-}
-
-require 'includes/classes/class.FlyingFleetsTable.php';
-
-function ShowFlyingFleetPage()
-{
 
 }

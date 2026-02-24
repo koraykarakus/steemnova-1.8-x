@@ -27,12 +27,11 @@ class ShowServerPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
 
-        $TimeZones = get_timezone_selector();
+        $time_zones = get_timezone_selector();
 
         $this->assign([
             'del_oldstuff'                 => $config->del_oldstuff,
@@ -67,7 +66,7 @@ class ShowServerPage extends AbstractAdminPage
             'let_users_change_theme'       => $config->let_users_change_theme,
             'password_recover_type'        => $config->password_recover_type,
             'Selector'                     => [
-                'timezone'                => $TimeZones,
+                'timezone'                => $time_zones,
                 'mail'                    => $LNG['se_mail_sel'],
                 'encry'                   => ['' => $LNG['se_smtp_ssl_1'], 'ssl' => $LNG['se_smtp_ssl_2'], 'tls' => $LNG['se_smtp_ssl_3']],
                 'message_delete_behavior' => [0 => $LNG['se_message_delete_behavior_0'], 1 => $LNG['se_message_delete_behavior_1']],
@@ -80,7 +79,6 @@ class ShowServerPage extends AbstractAdminPage
 
     public function saveSettings(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
@@ -195,19 +193,19 @@ class ShowServerPage extends AbstractAdminPage
         }
         $config->save();
 
-        $LOG = new Log(3);
-        $LOG->target = 0;
-        $LOG->old = $config_before;
-        $LOG->new = $config_after;
-        $LOG->save();
+        $log = new Log(3);
+        $log->target = 0;
+        $log->old = $config_before;
+        $log->new = $config_after;
+        $log->save();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=server&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
 
     }
 

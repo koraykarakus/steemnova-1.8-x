@@ -29,7 +29,7 @@ class ShowClearCachePage extends AbstractAdminPage
     {
         global $LNG;
         ClearCache();
-        $this->printMessage($LNG['cc_cache_clear']);
+        $this->printMessage($LNG['cc_cache_clear'], $this->createButtonBack());
     }
 
 }

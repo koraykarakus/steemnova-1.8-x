@@ -94,96 +94,95 @@ class ShowCronjobPage extends AbstractAdminPage
             $this->printMessage($LNG['cronjob_no_data']);
         }
 
-        $CronjobArray = [];
-        foreach ($data as $CronjobRow)
+        $cronjob_array = [];
+        foreach ($data as $c_data)
         {
-            $CronjobArray[] = [
-                'id'       => $CronjobRow['cronjobID'],
-                'isActive' => $CronjobRow['isActive'],
-                'name'     => $CronjobRow['name'],
-                'min'      => $CronjobRow['min'],
-                'hours'    => $CronjobRow['hours'],
-                'dom'      => $CronjobRow['dom'],
-                'month'    => $this->getCronjobTimes($CronjobRow['month'], 12),
-                'dow'      => $this->getCronjobTimes($CronjobRow['dow'], 6),
-                'class'    => $CronjobRow['class'],
-                'nextTime' => $CronjobRow['nextTime'],
-                'lock'     => !empty($CronjobRow['lock']),
+            $cronjob_array[] = [
+                'id'       => $c_data['cronjobID'],
+                'isActive' => $c_data['isActive'],
+                'name'     => $c_data['name'],
+                'min'      => $c_data['min'],
+                'hours'    => $c_data['hours'],
+                'dom'      => $c_data['dom'],
+                'month'    => $this->getCronjobTimes($c_data['month'], 12),
+                'dow'      => $this->getCronjobTimes($c_data['dow'], 6),
+                'class'    => $c_data['class'],
+                'nextTime' => $c_data['nextTime'],
+                'lock'     => !empty($c_data['lock']),
             ];
         }
 
         $this->assign([
-            'CronjobArray' => $CronjobArray,
+            'CronjobArray' => $cronjob_array,
         ]);
 
         $this->display("page.cronjob.overview.tpl");
-
     }
 
     public function showCronjobDetail(): void
     {
-
         $db = Database::get();
 
-        $cronjobID = HTTP::_GP('id', 0);
+        $cronjob_id = HTTP::_GP('id', 0);
 
-        $avalibleCrons = [];
+        $avalible_crons = [];
 
         $dir = new DirectoryIterator('includes/classes/cronjob/');
 
-        foreach ($dir as $fileinfo)
+        foreach ($dir as $file_info)
         {
-            if ($fileinfo->isFile() && $fileinfo->getBasename('.class.php') != $fileinfo->getFilename())
+            if ($file_info->isFile()
+                && $file_info->getBasename('.class.php') != $file_info->getFilename())
             {
-                $avalibleCrons[] = $fileinfo->getBasename('.class.php');
+                $avalible_crons[] = $file_info->getBasename('.class.php');
             }
         }
 
-        $sql = "SELECT * FROM %%CRONJOBS%% WHERE cronjobID = :cronjobID";
+        $sql = "SELECT * FROM %%CRONJOBS%% WHERE cronjobID = :cronjob_id";
 
-        $CronjobRow = $db->selectSingle($sql, [
-            ':cronjobID' => $cronjobID,
+        $cronjob_row = $db->selectSingle($sql, [
+            ':cronjob_id' => $cronjob_id,
         ]);
 
-        if (!$CronjobRow)
+        if (!$cronjob_row)
         {
             $this->printMessage('Cronjob could not be found !');
         }
 
         $this->assign([
-            'avalibleCrons' => $avalibleCrons,
-            'cronjobID'     => $cronjobID,
-            'name'          => isset($_POST['name']) ? HTTP::_GP('name', '') : $CronjobRow['name'],
-            'min'           => isset($_POST['min_all']) ? [0 => '*'] : (isset($_POST['min']) ? HTTP::_GP('min', []) : $this->getCronjobTimes($CronjobRow['min'], 59)),
-            'hours'         => isset($_POST['hours_all']) ? [0 => '*'] : (isset($_POST['hours']) ? HTTP::_GP('hours', []) : $this->getCronjobTimes($CronjobRow['hours'], 23)),
-            'dom'           => isset($_POST['dom_all']) ? [0 => '*'] : (isset($_POST['dom']) ? HTTP::_GP('dom', []) : $this->getCronjobTimes($CronjobRow['dom'], 31)),
-            'month'         => isset($_POST['month_all']) ? [0 => '*'] : (isset($_POST['month']) ? HTTP::_GP('month', []) : $this->getCronjobTimes($CronjobRow['month'], 12)),
-            'dow'           => isset($_POST['dow_all']) ? [0 => '*'] : (isset($_POST['dow']) ? HTTP::_GP('dow', []) : $this->getCronjobTimes($CronjobRow['dow'], 6)),
-            'class'         => isset($_POST['class']) ? HTTP::_GP('class', '') : $CronjobRow['class'],
+            'avalibleCrons' => $avalible_crons,
+            'cronjob_id'    => $cronjob_id,
+            'name'          => isset($_POST['name']) ? HTTP::_GP('name', '') : $cronjob_row['name'],
+            'min'           => isset($_POST['min_all']) ? [0 => '*'] : (isset($_POST['min']) ? HTTP::_GP('min', []) : $this->getCronjobTimes($cronjob_row['min'], 59)),
+            'hours'         => isset($_POST['hours_all']) ? [0 => '*'] : (isset($_POST['hours']) ? HTTP::_GP('hours', []) : $this->getCronjobTimes($cronjob_row['hours'], 23)),
+            'dom'           => isset($_POST['dom_all']) ? [0 => '*'] : (isset($_POST['dom']) ? HTTP::_GP('dom', []) : $this->getCronjobTimes($cronjob_row['dom'], 31)),
+            'month'         => isset($_POST['month_all']) ? [0 => '*'] : (isset($_POST['month']) ? HTTP::_GP('month', []) : $this->getCronjobTimes($cronjob_row['month'], 12)),
+            'dow'           => isset($_POST['dow_all']) ? [0 => '*'] : (isset($_POST['dow']) ? HTTP::_GP('dow', []) : $this->getCronjobTimes($cronjob_row['dow'], 6)),
+            'class'         => isset($_POST['class']) ? HTTP::_GP('class', '') : $cronjob_row['class'],
             'error_msg'     => null,
         ]);
 
         $this->display("page.cronjob.detail.tpl");
-
     }
 
     public function showCronjobCreate(): void
     {
 
-        $avalibleCrons = [];
+        $avalible_crons = [];
 
         $dir = new DirectoryIterator('includes/classes/cronjob/');
 
-        foreach ($dir as $fileinfo)
+        foreach ($dir as $file_info)
         {
-            if ($fileinfo->isFile() && $fileinfo->getBasename('.class.php') != $fileinfo->getFilename())
+            if ($file_info->isFile()
+                && $file_info->getBasename('.class.php') != $file_info->getFilename())
             {
-                $avalibleCrons[] = $fileinfo->getBasename('.class.php');
+                $avalible_crons[] = $file_info->getBasename('.class.php');
             }
         }
 
         $this->assign([
-            'avalibleCrons' => $avalibleCrons,
+            'avalibleCrons' => $avalible_crons,
             'cronjobID'     => 'add',
             'name'          => HTTP::_GP('name', ''),
             'min'           => isset($_POST['min_all']) ? [0 => '*'] : HTTP::_GP('min', [0 => 0]),
@@ -196,18 +195,17 @@ class ShowCronjobPage extends AbstractAdminPage
         ]);
 
         $this->display("page.cronjob.create.tpl");
-
     }
 
     public function lock(): void
     {
+        $cronjob_id = HTTP::_GP('id', 0);
 
-        $cronjobId = HTTP::_GP('id', 0);
-
-        $sql = "UPDATE %%CRONJOBS%% SET `lock` = MD5(UNIX_TIMESTAMP()) WHERE cronjobID = :cronjobId;";
+        $sql = "UPDATE %%CRONJOBS%% SET `lock` = MD5(UNIX_TIMESTAMP()) 
+        WHERE cronjobID = :cronjob_id;";
 
         Database::get()->update($sql, [
-            ':cronjobId' => $cronjobId,
+            ':cronjob_id' => $cronjob_id,
         ]);
 
         HTTP::redirectTo('admin.php?page=cronjob');
@@ -215,13 +213,12 @@ class ShowCronjobPage extends AbstractAdminPage
 
     public function unlock(): void
     {
+        $cronjob_id = HTTP::_GP('id', 0);
 
-        $cronjobId = HTTP::_GP('id', 0);
-
-        $sql = "UPDATE %%CRONJOBS%% SET `lock` = NULL WHERE cronjobID = :cronjobId;";
+        $sql = "UPDATE %%CRONJOBS%% SET `lock` = NULL WHERE cronjobID = :cronjob_id;";
 
         Database::get()->update($sql, [
-            ':cronjobId' => $cronjobId,
+            ':cronjob_id' => $cronjob_id,
         ]);
 
         HTTP::redirectTo('admin.php?page=cronjob');
@@ -229,14 +226,13 @@ class ShowCronjobPage extends AbstractAdminPage
 
     public function enable(): void
     {
+        $cronjob_id = HTTP::_GP('id', 0);
 
-        $cronjobId = HTTP::_GP('id', 0);
-
-        $sql = "UPDATE %%CRONJOBS%% SET `isActive` = :isActive WHERE cronjobID = :cronjobId;";
+        $sql = "UPDATE %%CRONJOBS%% SET `isActive` = :isActive WHERE cronjobID = :cronjob_id;";
 
         Database::get()->update($sql, [
-            ':isActive'  => HTTP::_GP('enable', 0),
-            ':cronjobId' => $cronjobId,
+            ':isActive'   => HTTP::_GP('enable', 0),
+            ':cronjob_id' => $cronjob_id,
         ]);
 
         HTTP::redirectTo('admin.php?page=cronjob');
@@ -244,19 +240,18 @@ class ShowCronjobPage extends AbstractAdminPage
 
     public function delete(): void
     {
+        $cronjob_id = HTTP::_GP('id', 0);
 
-        $cronjobId = HTTP::_GP('id', 0);
-
-        $sql = "DELETE FROM %%CRONJOBS%% WHERE cronjobID = :cronjobId;";
+        $sql = "DELETE FROM %%CRONJOBS%% WHERE cronjobID = :cronjob_id;";
 
         Database::get()->delete($sql, [
-            ':cronjobId' => $cronjobId,
+            ':cronjob_id' => $cronjob_id,
         ]);
 
-        $sql = "DELETE FROM %%CRONJOBS_LOG%% WHERE cronjobId = :cronjobId;";
+        $sql = "DELETE FROM %%CRONJOBS_LOG%% WHERE cronjobId = :cronjob_id;";
 
         Database::get()->delete($sql, [
-            ':cronjobId' => $cronjobId,
+            ':cronjob_id' => $cronjob_id,
         ]);
 
         HTTP::redirectTo('admin.php?page=cronjob');
@@ -348,14 +343,13 @@ class ShowCronjobPage extends AbstractAdminPage
 
         }
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=cronjob&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
-
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
     public function create(): void
@@ -421,17 +415,18 @@ class ShowCronjobPage extends AbstractAdminPage
             ':post_class' => $post_class,
         ]);
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=cronjob&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
 }
 
+/* OLD
 function ShowCronjob()
 {
     $cronId = HTTP::_GP('id', 0);
@@ -620,3 +615,4 @@ function ShowCronjobDetail($detail, $error_msg = null)
     }
     $template->show("CronjobDetail.tpl");
 }
+*/

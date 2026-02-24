@@ -35,7 +35,7 @@ class ShowLoginPage extends AbstractAdminPage
 
     public function show(): void
     {
-        global $USER,$config;
+        global $USER, $config;
 
         $session = Session::create();
         if ($session->adminAccess == 1)
@@ -61,14 +61,15 @@ class ShowLoginPage extends AbstractAdminPage
 
         $error = [];
 
-        $enteredPassword = HTTP::_GP('password', '', true);
+        $entered_password = HTTP::_GP('password', '', true);
 
-        if (!password_verify($enteredPassword, $USER['password']))
+        if (!password_verify($entered_password, $USER['password']))
         {
             $error[] = $LNG['adm_bad_password'];
         }
 
-        if ($config->capaktiv && $config->use_recaptcha_on_admin_login)
+        if ($config->capaktiv
+            && $config->use_recaptcha_on_admin_login)
         {
             require('includes/libs/reCAPTCHA/src/autoload.php');
 
@@ -82,7 +83,6 @@ class ShowLoginPage extends AbstractAdminPage
 
         if (empty($error))
         {
-
             $session = Session::create();
             $session->adminAccess = 1;
 

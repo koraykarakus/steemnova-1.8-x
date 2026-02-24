@@ -27,31 +27,30 @@ class ShowModulePage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG;
 
         $config = Config::get(Universe::getEmulated());
 
         $module = explode(';', $config->moduls);
 
-        $IDs = range(0, MODULE_AMOUNT - 1);
+        $ids = range(0, MODULE_AMOUNT - 1);
 
-        foreach ($IDs as $ID => $Name)
+        $modules = [];
+        foreach ($ids as $c_id => $c_name)
         {
-            $Modules[$ID] = [
-                'name'  => $LNG['modul_'.$ID],
-                'state' => isset($module[$ID]) ? $module[$ID] : 1,
+            $modules[$c_id] = [
+                'name'  => $LNG['modul_'.$c_id],
+                'state' => isset($module[$c_id]) ? $module[$c_id] : 1,
             ];
         }
 
-        asort($Modules);
+        asort($modules);
 
         $this->assign([
-            'Modules' => $Modules,
+            'Modules' => $modules,
         ]);
 
         $this->display('page.modules.default.tpl');
-
     }
 
     public function change(): void
@@ -77,18 +76,18 @@ class ShowModulePage extends AbstractAdminPage
         $config->save();
         ClearCache();
 
-        $redirectButton = [];
-        $redirectButton[] = [
+        $redirect_button = [];
+        $redirect_button[] = [
             'url'   => 'admin.php?page=module&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 
-        $this->printMessage($LNG['settings_successful'], $redirectButton);
-
+        $this->printMessage($LNG['settings_successful'], $redirect_button);
     }
 
 }
 
+/* OLD
 function ShowModulePage()
 {
     global $LNG;
@@ -120,3 +119,4 @@ function ShowModulePage()
 
     $template->show('ModulePage.tpl');
 }
+*/

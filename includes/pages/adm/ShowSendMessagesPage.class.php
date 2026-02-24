@@ -27,21 +27,19 @@ class ShowSendMessagesPage extends AbstractAdminPage
 
     public function show(): void
     {
-        global $USER, $LNG;
+        global $LNG;
 
-        $db = Database::get();
-
-        $sendModes = $LNG['ma_modes'];
+        $send_modes = $LNG['ma_modes'];
 
         if (Config::get()->mail_active == 0)
         {
-            unset($sendModes[1]);
-            unset($sendModes[2]);
+            unset($send_modes[1]);
+            unset($send_modes[2]);
         }
 
         $this->assign([
             'langSelector' => array_merge(['' => $LNG['ma_all']], $LNG->getAllowedLangs(false)),
-            'modes'        => $sendModes,
+            'modes'        => $send_modes,
         ]);
 
         $this->display('page.sendmessages.default.tpl');
@@ -70,20 +68,25 @@ class ShowSendMessagesPage extends AbstractAdminPage
                 break;
         }
 
-        $Subject = HTTP::_GP('subject', '', true);
-        $Message = HTTP::_GP('text', '', true);
-        $Mode = HTTP::_GP('type', 0);
-        $Lang = HTTP::_GP('globalmessagelang', '');
+        $subject = HTTP::_GP('subject', '', true);
+        $message = HTTP::_GP('text', '', true);
+        $mode = HTTP::_GP('type', 0);
+        $lang = HTTP::_GP('globalmessagelang', '');
 
-        if (!empty($Message) && !empty($Subject))
+        if (!empty($message)
+            && !empty($subject))
         {
-            if ($Mode == 0 || $Mode == 2)
+            if ($mode == 0
+                || $mode == 2)
             {
-                $From = '<span class="'.$class.'">'.$LNG['user_level_'.$USER['authlevel']].' '.$USER['username'].'</span>';
-                $pmSubject = '<span class="'.$class.'">'.$Subject.'</span>';
-                $pmMessage = '<span class="'.$class.'">'.BBCode::parse($Message).'</span>';
+                $from = '<span class="'.$class.'">' .
+                $LNG['user_level_'.$USER['authlevel']] . ' ' .
+                $USER['username'].'</span>';
 
-                if (!empty($Lang))
+                $pm_subject = '<span class="'.$class.'">'.$subject.'</span>';
+                $pm_msg = '<span class="'.$class.'">'.BBCode::parse($message).'</span>';
+
+                if (!empty($lang))
                 {
                     $sql = "SELECT `id`, `username` FROM %%USERS%%
 					WHERE `universe` = :universe ";
@@ -91,30 +94,40 @@ class ShowSendMessagesPage extends AbstractAdminPage
 
                     $USERS = $db->select($sql, [
                         ':universe' => Universe::getEmulated(),
-                        ':lang'     => $Lang,
+                        ':lang'     => $lang,
                     ]);
 
                 }
                 else
                 {
-
                     $sql = "SELECT `id`, `username` FROM %%USERS%%
 					WHERE `universe` = :universe ";
 
-                    $USERS = $db->select($sql, [
+                    $users = $db->select($sql, [
                         ':universe' => Universe::getEmulated(),
                     ]);
-
                 }
 
-                foreach ($USERS as $UserData)
+                foreach ($users as $c_user)
                 {
-                    $sendMessage = str_replace('{USERNAME}', $UserData['username'], $pmMessage);
-                    PlayerUtil::sendMessage($UserData['id'], $USER['id'], $From, 50, $pmSubject, $sendMessage, TIMESTAMP, null, 1, Universe::getEmulated());
+                    $sendMessage = str_replace('{USERNAME}', $c_user['username'], $pm_msg);
+                    PlayerUtil::sendMessage(
+                        $c_user['id'],
+                        $USER['id'],
+                        $from,
+                        50,
+                        $pm_subject,
+                        $sendMessage,
+                        TIMESTAMP,
+                        null,
+                        1,
+                        Universe::getEmulated()
+                    );
                 }
             }
 
-            if ($Mode == 1 || $Mode == 2)
+            if ($mode == 1
+                || $mode == 2)
             {
                 require 'includes/classes/Mail.class.php';
                 $userList = [];
@@ -125,9 +138,9 @@ class ShowSendMessagesPage extends AbstractAdminPage
 					WHERE `universe` = :universe ";
                     $sql .= " AND `lang` = :lang;";
 
-                    $USERS = $db->select($sql, [
+                    $users = $db->select($sql, [
                         ':universe' => Universe::getEmulated(),
-                        ':lang'     => $Lang,
+                        ':lang'     => $lang,
                     ]);
 
                 }
@@ -137,21 +150,25 @@ class ShowSendMessagesPage extends AbstractAdminPage
                     $sql = "SELECT `email`, `username` FROM %%USERS%%
 					WHERE `universe` = :universe ";
 
-                    $USERS = $db->select($sql, [
+                    $users = $db->select($sql, [
                         ':universe' => Universe::getEmulated(),
                     ]);
 
                 }
 
-                foreach ($USERS as $UserData)
+                foreach ($users as $c_user)
                 {
                     $userList[$UserData['email']] = [
-                        'username' => $UserData['username'],
-                        'body'     => BBCode::parse(str_replace('{USERNAME}', $UserData['username'], $Message)),
+                        'username' => $c_user['username'],
+                        'body'     => BBCode::parse(str_replace(
+                            '{USERNAME}',
+                            $c_user['username'],
+                            $message
+                        )),
                     ];
                 }
 
-                Mail::multiSend($userList, strip_tags($Subject));
+                Mail::multiSend($userList, strip_tags($subject));
             }
             $this->printMessage($LNG['ma_message_sended']);
         }

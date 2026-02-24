@@ -21,6 +21,7 @@ class ShowResetPage extends AbstractAdminPage
     {
         parent::__construct();
     }
+
     public function show(): void
     {
         global $LNG;
@@ -70,76 +71,54 @@ class ShowResetPage extends AbstractAdminPage
 
         $config = Config::get(Universe::getEmulated());
 
-        foreach ($reslist['build'] as $ID)
+        foreach ($reslist['build'] as $c_id)
         {
-            $dbcol['build'][$ID] = "`".$resource[$ID]."` = '0'";
+            $dbcol['build'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['tech'] as $ID)
+        foreach ($reslist['tech'] as $c_id)
         {
-            $dbcol['tech'][$ID] = "`".$resource[$ID]."` = '0'";
+            $dbcol['tech'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['fleet'] as $ID)
+        foreach ($reslist['fleet'] as $c_id)
         {
-            $dbcol['fleet'][$ID] = "`".$resource[$ID]."` = '0'";
+            $dbcol['fleet'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['defense'] as $ID)
+        foreach ($reslist['defense'] as $c_id)
         {
-            $dbcol['defense'][$ID] = "`".$resource[$ID]."` = '0'";
+            $dbcol['defense'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['officier'] as $ID)
+        foreach ($reslist['officier'] as $c_id)
         {
-            $dbcol['officier'][$ID] = "`".$resource[$ID]."` = '0'";
+            $dbcol['officier'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['resstype'][1] as $ID)
+        foreach ($reslist['resstype'][1] as $c_id)
         {
-            if (isset($config->{$resource[$ID].'_start'}))
+            if (isset($config->{$resource[$c_id].'_start'}))
             {
-                $dbcol['resource_planet_start'][$ID] = "`".$resource[$ID]."` = ".$config->{$resource[$ID].'_start'};
+                $dbcol['resource_planet_start'][$c_id] = "`".$resource[$c_id]."` = ".$config->{$resource[$c_id].'_start'};
             }
         }
 
-        foreach ($reslist['resstype'][3] as $ID)
+        foreach ($reslist['resstype'][3] as $c_id)
         {
-            if (isset($config->{$resource[$ID].'_start'}))
+            if (isset($config->{$resource[$c_id].'_start'}))
             {
-                $dbcol['resource_user_start'][$ID] = "`".$resource[$ID]."` = ".$config->{$resource[$ID].'_start'};
+                $dbcol['resource_user_start'][$c_id] = "`".$resource[$c_id]."` = ".$config->{$resource[$c_id].'_start'};
             }
         }
 
         // Players and Planets
 
-        $deletePlayers = (HTTP::_GP('players', 'off') == 'on') ? true : false;
-        $deletePlanets = (HTTP::_GP('planets', 'off') == 'on') ? true : false;
-        $deleteMoons = (HTTP::_GP('moons', 'off') == 'on') ? true : false;
-        $deleteDefenses = (HTTP::_GP('defenses', 'off') == 'on') ? true : false;
-        $deleteShips = (HTTP::_GP('ships', 'off') == 'on') ? true : false;
-        $deleteHd = (HTTP::_GP('h_d', 'off') == 'on') ? true : false;
-        $deleteEdif_p = (HTTP::_GP('edif_p', 'off') == 'on') ? true : false;
-        $deleteEdif_l = (HTTP::_GP('edif_l', 'off') == 'on') ? true : false;
-        $deleteEdif = (HTTP::_GP('edif', 'off') == 'on') ? true : false;
-        $deleteInves = (HTTP::_GP('inves', 'off') == 'on') ? true : false;
-        $deleteOfis = (HTTP::_GP('ofis', 'off') == 'on') ? true : false;
-        $deleteInves_c = (HTTP::_GP('inves_c', 'off') == 'on') ? true : false;
-        $deleteDark = (HTTP::_GP('dark', 'off') == 'on') ? true : false;
-        $deleteResources = (HTTP::_GP('resources', 'off') == 'on') ? true : false;
-        $deleteNotes = (HTTP::_GP('notes', 'off') == 'on') ? true : false;
-        $deleteRW = (HTTP::_GP('rw', 'off') == 'on') ? true : false;
-        $deleteFriends = (HTTP::_GP('rw', 'off') == 'on') ? true : false;
-        $deleteAlliances = (HTTP::_GP('alliances', 'off') == 'on') ? true : false;
-        $deleteFleets = (HTTP::_GP('fleets', 'off') == 'on') ? true : false;
-        $deleteBanneds = (HTTP::_GP('banneds', 'off') == 'on') ? true : false;
-        $deleteMessages = (HTTP::_GP('messages', 'off') == 'on') ? true : false;
-        $deleteStatpoints = (HTTP::_GP('statpoints', 'off') == 'on') ? true : false;
-
         $db = Database::get();
 
+        $delete_players = (HTTP::_GP('players', 'off') == 'on') ? true : false;
         // delete players and their planets, keep admins.
-        if ($deletePlayers)
+        if ($delete_players)
         {
             $sql = "DELETE FROM %%USERS%% WHERE authlevel = 0 AND universe = :universe;";
             $db->delete($sql, [
@@ -158,8 +137,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_planets = (HTTP::_GP('planets', 'off') == 'on') ? true : false;
         // delete planets, not
-        if ($deletePlanets)
+        if ($delete_planets)
         {
             $sql = "DELETE FROM %%PLANETS%% 
                     WHERE universe = :universe 
@@ -179,8 +159,9 @@ class ShowResetPage extends AbstractAdminPage
 
         }
 
+        $delete_moons = (HTTP::_GP('moons', 'off') == 'on') ? true : false;
         // delete moons
-        if ($deleteMoons)
+        if ($delete_moons)
         {
             $sql = "DELETE FROM %%PLANETS%% 
             WHERE planet_type = 3 
@@ -199,8 +180,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_defenses = (HTTP::_GP('defenses', 'off') == 'on') ? true : false;
         // delete shipyard & defenses
-        if ($deleteDefenses)
+        if ($delete_defenses)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET " . implode(", ", $dbcol['defense']) . " 
@@ -211,8 +193,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_ships = (HTTP::_GP('ships', 'off') == 'on') ? true : false;
         // delete ships
-        if ($deleteShips)
+        if ($delete_ships)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET " . implode(", ", $dbcol['fleet']) . " 
@@ -223,7 +206,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteHd)
+        $delete_hd = (HTTP::_GP('h_d', 'off') == 'on') ? true : false;
+        if ($delete_hd)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET b_hangar = :b_hangar, b_hangar_id = :b_hangar_id 
@@ -236,8 +220,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_edif_p = (HTTP::_GP('edif_p', 'off') == 'on') ? true : false;
         // fix terra bugs.
-        if ($deleteEdif_p)
+        if ($delete_edif_p)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET " . implode(", ", $dbcol['build']) . ", 
@@ -252,7 +237,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteEdif_l)
+        $delete_edif_l = (HTTP::_GP('edif_l', 'off') == 'on') ? true : false;
+        if ($delete_edif_l)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET " . implode(", ", $dbcol['build']) . ", 
@@ -266,7 +252,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteEdif)
+        $delete_edif = (HTTP::_GP('edif', 'off') == 'on') ? true : false;
+        if ($delete_edif)
         {
             $sql = "UPDATE %%PLANETS%% SET b_building = :b_building, b_building_id = :b_building_id 
             WHERE universe = :universe";
@@ -278,8 +265,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_inves = (HTTP::_GP('inves', 'off') == 'on') ? true : false;
         // research & officers
-        if ($deleteInves)
+        if ($delete_inves)
         {
             $sql = "UPDATE %%USERS%% 
             SET " . implode(", ", $dbcol['tech']) . " 
@@ -290,7 +278,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteOfis)
+        $delete_ofis = (HTTP::_GP('ofis', 'off') == 'on') ? true : false;
+        if ($delete_ofis)
         {
             $sql = "UPDATE %%USERS%% 
             SET " . implode(", ", $dbcol['officier']) . " 
@@ -301,7 +290,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteInves_c)
+        $delete_inves_c = (HTTP::_GP('inves_c', 'off') == 'on') ? true : false;
+        if ($delete_inves_c)
         {
             $sql = "UPDATE %%USERS%% 
             SET b_tech_planet = :b_tech_planet,
@@ -319,8 +309,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_dark = (HTTP::_GP('dark', 'off') == 'on') ? true : false;
         // Resources
-        if ($deleteDark)
+        if ($delete_dark)
         {
             $sql = "UPDATE %%USERS%% 
             SET " . implode(", ", $dbcol['resource_user_start']) . " 
@@ -331,7 +322,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteResources)
+        $delete_resources = (HTTP::_GP('resources', 'off') == 'on') ? true : false;
+        if ($delete_resources)
         {
             $sql = "UPDATE %%PLANETS%% 
             SET " . implode(", ", $dbcol['resource_planet_start']) . " 
@@ -342,8 +334,9 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
+        $delete_notes = (HTTP::_GP('notes', 'off') == 'on') ? true : false;
         // notes
-        if ($deleteNotes)
+        if ($delete_notes)
         {
             $sql = "DELETE FROM %%NOTES%% WHERE universe = :universe";
 
@@ -352,7 +345,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteRW)
+        $delete_rw = (HTTP::_GP('rw', 'off') == 'on') ? true : false;
+        if ($delete_rw)
         {
             $sql = "DELETE FROM %%TOPKB%% WHERE universe = :universe";
 
@@ -361,7 +355,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteFriends)
+        $delete_friends = (HTTP::_GP('rw', 'off') == 'on') ? true : false;
+        if ($delete_friends)
         {
             $sql = "DELETE FROM %%BUDDY%% WHERE universe = :universe";
 
@@ -370,7 +365,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteAlliances)
+        $delete_alliances = (HTTP::_GP('alliances', 'off') == 'on') ? true : false;
+        if ($delete_alliances)
         {
             $sql = "DELETE FROM %%ALLIANCE%% 
             WHERE ally_universe = :universe";
@@ -393,7 +389,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteFleets)
+        $delete_fleets = (HTTP::_GP('fleets', 'off') == 'on') ? true : false;
+        if ($delete_fleets)
         {
             $sql = "DELETE FROM %%FLEETS%% 
             WHERE fleet_universe = :universe";
@@ -403,7 +400,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteBanneds)
+        $delete_banneds = (HTTP::_GP('banneds', 'off') == 'on') ? true : false;
+        if ($delete_banneds)
         {
             $sql = "DELETE FROM %%BANNED%% 
             WHERE universe = :universe";
@@ -424,7 +422,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteMessages)
+        $delete_messages = (HTTP::_GP('messages', 'off') == 'on') ? true : false;
+        if ($delete_messages)
         {
             $sql = "DELETE FROM %%MESSAGES%% 
             WHERE message_universe = :universe";
@@ -434,7 +433,8 @@ class ShowResetPage extends AbstractAdminPage
             ]);
         }
 
-        if ($deleteStatpoints)
+        $delete_statpoints = (HTTP::_GP('statpoints', 'off') == 'on') ? true : false;
+        if ($delete_statpoints)
         {
             // TODO : fix
             // if stat points is removed user should also be removed.

@@ -27,53 +27,52 @@ class ShowInfosPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG, $USER, $config;
 
         // @ for open_basedir
         if (@file_exists(ini_get('error_log')))
         {
-            $Lines = count(file(ini_get('error_log')));
+            $lines = count(file(ini_get('error_log')));
         }
         else
         {
-            $Lines = 0;
+            $lines = 0;
         }
 
         try
         {
-            $dateTimeZoneServer = new DateTimeZone($config->timezone);
+            $date_time_zone_server = new DateTimeZone($config->timezone);
         }
         catch (Exception $e)
         {
-            $dateTimeZoneServer = new DateTimeZone(date_default_timezone_get());
+            $date_time_zone_server = new DateTimeZone(date_default_timezone_get());
         }
 
         try
         {
-            $dateTimeZoneUser = new DateTimeZone($USER['timezone']);
+            $date_time_zone_user = new DateTimeZone($USER['timezone']);
         }
         catch (Exception $e)
         {
-            $dateTimeZoneUser = new DateTimeZone(date_default_timezone_get());
+            $date_time_zone_user = new DateTimeZone(date_default_timezone_get());
         }
 
         try
         {
-            $dateTimeZonePHP = new DateTimeZone(ini_get('date.timezone'));
+            $date_time_zone_php = new DateTimeZone(ini_get('date.timezone'));
         }
         catch (Exception $e)
         {
-            $dateTimeZonePHP = new DateTimeZone(date_default_timezone_get());
+            $date_time_zone_php = new DateTimeZone(date_default_timezone_get());
         }
 
-        $dateTimeServer = new DateTime("now", $dateTimeZoneServer);
-        $dateTimeUser = new DateTime("now", $dateTimeZoneUser);
-        $dateTimePHP = new DateTime("now", $dateTimeZonePHP);
+        $date_time_server = new DateTime("now", $date_time_zone_server);
+        $date_time_user = new DateTime("now", $date_time_zone_user);
+        $date_time_php = new DateTime("now", $date_time_zone_php);
 
         $sql = "SELECT dbVersion FROM %%SYSTEM%%;";
 
-        $dbVersion = Database::get()->selectSingle($sql, [], 'dbVersion');
+        $db_version = Database::get()->selectSingle($sql, [], 'dbVersion');
 
         $this->assign([
             'info_information' => sprintf($LNG['info_information'], 'https://github.com/koraykarakus/steemnova-1.8-x/issues'),
@@ -94,11 +93,11 @@ class ShowInfosPage extends AbstractAdminPage
             'suhosin'          => ini_get('suhosin.request.max_value_length') ? $LNG['ad_infos_yes'] : $LNG['ad_infos_no'],
             'log_errors'       => ini_get('log_errors') ? $LNG['ad_infos_active'] : $LNG['ad_infos_inactive'],
             'errorlog'         => ini_get('error_log'),
-            'errorloglines'    => $Lines,
-            'dbVersion'        => $dbVersion,
-            'php_tz'           => $dateTimePHP->getOffset() / 3600,
-            'conf_tz'          => $dateTimeServer->getOffset() / 3600,
-            'user_tz'          => $dateTimeUser->getOffset() / 3600,
+            'errorloglines'    => $lines,
+            'dbVersion'        => $db_version,
+            'php_tz'           => $date_time_php->getOffset() / 3600,
+            'conf_tz'          => $date_time_server->getOffset() / 3600,
+            'user_tz'          => $date_time_user->getOffset() / 3600,
         ]);
 
         $this->display('page.information.default.tpl');

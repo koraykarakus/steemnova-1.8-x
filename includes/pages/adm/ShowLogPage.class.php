@@ -27,14 +27,11 @@ class ShowLogPage extends AbstractAdminPage
 
     public function show(): void
     {
-        global $LNG;
-
         $this->display("page.log.default.tpl");
     }
 
     public function planet(): void
     {
-
         global $LNG, $USER;
 
         $db = Database::get();
@@ -53,19 +50,20 @@ class ShowLogPage extends AbstractAdminPage
             $this->printMessage($LNG['log_no_data']);
         }
 
-        foreach ($result as $LogRow)
+        $log_array = [];
+        foreach ($result as $c_result)
         {
-            $LogArray[] = [
-                'id'         => $LogRow['id'],
-                'admin'      => $LogRow['admin_username'],
-                'target_uni' => $LogRow['universe'],
-                'target'     => '['.$LogRow['target_galaxy'].':'.$LogRow['target_system'].':'.$LogRow['target_planet'].'] -> '.$LogRow['target_username'],
-                'time'       => _date($LNG['php_tdformat'], $LogRow['time'], $USER['timezone']),
+            $log_array[] = [
+                'id'         => $c_result['id'],
+                'admin'      => $c_result['admin_username'],
+                'target_uni' => $c_result['universe'],
+                'target'     => '['.$c_result['target_galaxy'].':'.$c_result['target_system'].':'.$c_result['target_planet'].'] -> '.$c_result['target_username'],
+                'time'       => _date($LNG['php_tdformat'], $c_result['time'], $USER['timezone']),
             ];
         }
 
         $this->assign([
-            'LogArray'   => $LogArray,
+            'LogArray'   => $log_array,
             'log_log'    => $LNG['log_log'],
             'log_admin'  => $LNG['log_admin'],
             'log_time'   => $LNG['log_time'],
@@ -353,6 +351,7 @@ class ShowLogPage extends AbstractAdminPage
 
 }
 
+/* OLD
 function ShowLog()
 {
     global $LNG, $resources;
@@ -413,7 +412,7 @@ function ShowLogDetail()
     $db = Database::get();
 
     $sql = "SELECT l.*, u_a.username as admin_username FROM %%LOG%% as l
-	LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin WHERE l.id = :logid;";
+    LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin WHERE l.id = :logid;";
 
     $result = $db->selectSingle($sql, [
         ':logid' => $logid,
@@ -541,7 +540,7 @@ function ShowLogSettingsList()
     $db = Database::get();
 
     $sql = "SELECT l.id, l.admin, l.time, l.universe, l.target,u_a.username as admin_username FROM
-	 %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin WHERE mode = 3 ORDER BY id DESC;";
+     %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin WHERE mode = 3 ORDER BY id DESC;";
 
     $result = $db->select($sql);
 
@@ -592,11 +591,11 @@ function ShowLogPlanetsList()
     $db = Database::get();
 
     $sql = "SELECT DISTINCT l.id, l.admin, l.target, l.time, l.universe,u_t.username as target_username, p.galaxy as target_galaxy, p.system as target_system,
-	p.planet as target_planet,u_a.username as admin_username FROM %%LOG%% as l
-	 LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin
-	 LEFT JOIN %%PLANETS%% as p ON p.id = l.target
-	 LEFT JOIN %%USERS%% as u_t ON u_t.id = p.id_owner WHERE mode = 2
-	 ORDER BY id DESC;";
+    p.planet as target_planet,u_a.username as admin_username FROM %%LOG%% as l
+     LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin
+     LEFT JOIN %%PLANETS%% as p ON p.id = l.target
+     LEFT JOIN %%USERS%% as u_t ON u_t.id = p.id_owner WHERE mode = 2
+     ORDER BY id DESC;";
 
     $result = $db->select($sql);
 
@@ -640,9 +639,9 @@ function ShowLogPlayersList()
     $db = Database::get();
 
     $sql = "SELECT DISTINCT l.id, l.admin, l.target, l.time, l.universe,u_t.username as target_username,
-	u_a.username as admin_username FROM %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin
-	LEFT JOIN %%USERS%% as u_t ON u_t.id = l.target
-	WHERE mode = 1 ORDER BY l.id DESC;";
+    u_a.username as admin_username FROM %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON  u_a.id = l.admin
+    LEFT JOIN %%USERS%% as u_t ON u_t.id = l.target
+    WHERE mode = 1 ORDER BY l.id DESC;";
 
     $result = $db->select($sql);
 
@@ -685,7 +684,7 @@ function ShowLogPresent()
     $db = Database::get();
 
     $sql = "SELECT DISTINCT l.id, l.admin, l.target, l.time, l.universe, u_a.username as admin_username
-	FROM %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON u_a.id = l.admin WHERE mode = 4 ORDER BY l.id DESC;";
+    FROM %%LOG%% as l LEFT JOIN %%USERS%% as u_a ON u_a.id = l.admin WHERE mode = 4 ORDER BY l.id DESC;";
 
     $result = $db->select($sql);
 
@@ -720,3 +719,4 @@ function ShowLogPresent()
 
     $template->show("LogList.tpl");
 }
+*/

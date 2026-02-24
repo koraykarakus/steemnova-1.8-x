@@ -35,26 +35,26 @@ class ShowMultiPage extends AbstractAdminPage
 		FROM %%USERS%% LEFT JOIN %%MULTI%% ON userID = id
 		WHERE `universe` = :universe AND user_lastip IN (SELECT user_lastip FROM %%USERS%% WHERE `universe` = :universe GROUP BY user_lastip HAVING COUNT(*)>1) ORDER BY user_lastip, id ASC;";
 
-        $Query = $db->select($sql, [
+        $query = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $IPs = [];
-        foreach ($Query as $Data)
+        $ip_array = [];
+        foreach ($query as $c_data)
         {
-            if (!isset($IPs[$Data['user_lastip']]))
+            if (!isset($ip_array[$c_data['user_lastip']]))
             {
-                $IPs[$Data['user_lastip']] = [];
+                $ip_array[$c_data['user_lastip']] = [];
             }
 
-            $Data['register_time'] = _date($LNG['php_tdformat'], $Data['register_time']);
-            $Data['onlinetime'] = _date($LNG['php_tdformat'], $Data['onlinetime']);
+            $c_data['register_time'] = _date($LNG['php_tdformat'], $c_data['register_time']);
+            $c_data['onlinetime'] = _date($LNG['php_tdformat'], $c_data['onlinetime']);
 
-            $IPs[$Data['user_lastip']][$Data['id']] = $Data;
+            $ip_array[$c_data['user_lastip']][$c_data['id']] = $c_data;
         }
 
         $this->assign([
-            'multiGroups' => $IPs,
+            'multiGroups' => $ip_array,
         ]);
 
         $this->display('page.multi.default.tpl');

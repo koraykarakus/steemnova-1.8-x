@@ -27,30 +27,29 @@ class ShowMessageListPage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $LNG, $USER;
         $page = HTTP::_GP('side', 1);
         $type = HTTP::_GP('type', 100);
         $sender = HTTP::_GP('sender', '', UTF8_SUPPORT);
         $receiver = HTTP::_GP('receiver', '', UTF8_SUPPORT);
-        $dateStart = HTTP::_GP('dateStart', []);
-        $dateEnd = HTTP::_GP('dateEnd', []);
+        $date_start = HTTP::_GP('dateStart', []);
+        $date_end = HTTP::_GP('dateEnd', []);
 
         $db = Database::get();
 
-        $perSide = 50;
+        $per_side = 50;
 
-        $messageList = [];
-        $userWhereSQL = $dateWhereSQL = $countJoinSQL = '';
+        $message_list = [];
+        $user_where_sql = $date_where_sql = $countJoinSQL = '';
 
         $categories = $LNG['mg_type'];
         unset($categories[999]);
 
-        $dateStart = array_filter($dateStart, 'is_numeric');
-        $dateEnd = array_filter($dateEnd, 'is_numeric');
+        $date_start = array_filter($date_start, 'is_numeric');
+        $date_end = array_filter($date_end, 'is_numeric');
 
-        $useDateStart = count($dateStart) == 3;
-        $useDateEnd = count($dateEnd) == 3;
+        $use_date_start = count($date_start) == 3;
+        $use_date_end = count($date_end) == 3;
 
         if ($type != 100)
         {
@@ -60,20 +59,21 @@ class ShowMessageListPage extends AbstractAdminPage
 				LEFT JOIN %%USERS%% as u ON message_sender = u.id
 				WHERE message_type = :type AND message_universe = :universe AND u.username = :sender ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':sender'   => $sender,
                     ':type'     => $type,
                     ':universe' => Universe::getEmulated(),
@@ -87,20 +87,21 @@ class ShowMessageListPage extends AbstractAdminPage
 				LEFT JOIN %%USERS%% as u ON message_owner = u.id
 				WHERE message_type = :type AND message_universe = :universe AND u.username = :receiver ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':type'     => $type,
                     ':receiver' => $receiver,
                     ':universe' => Universe::getEmulated(),
@@ -112,20 +113,21 @@ class ShowMessageListPage extends AbstractAdminPage
                 $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				WHERE message_universe = :universe ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':universe' => Universe::getEmulated(),
                 ], 'count');
             }
@@ -140,20 +142,21 @@ class ShowMessageListPage extends AbstractAdminPage
 				LEFT JOIN %%USERS%% as u ON message_sender = u.id
 				WHERE message_universe = :universe ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':universe' => Universe::getEmulated(),
                 ], 'count');
 
@@ -164,20 +167,21 @@ class ShowMessageListPage extends AbstractAdminPage
 				LEFT JOIN %%USERS%% as u ON message_owner = u.id
 				WHERE message_universe = :universe ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':universe' => Universe::getEmulated(),
                 ], 'count');
 
@@ -187,30 +191,31 @@ class ShowMessageListPage extends AbstractAdminPage
                 $sql = "SELECT COUNT(*) as count FROM %%MESSAGES%%
 				WHERE message_universe = :universe ";
 
-                if ($useDateStart && $useDateEnd)
+                if ($use_date_start
+                    && $use_date_end)
                 {
-                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']).' AND '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time BETWEEN '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']).' AND '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $dateStart['month'], (int) $dateStart['day'], (int) $dateStart['year']);
+                    $sql .= ' AND message_time > '.mktime(0, 0, 0, (int) $date_start['month'], (int) $date_start['day'], (int) $date_start['year']);
                 }
-                elseif ($useDateStart)
+                elseif ($use_date_start)
                 {
-                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $dateEnd['month'], (int) $dateEnd['day'], (int) $dateEnd['year']);
+                    $sql .= ' AND message_time < '.mktime(23, 59, 59, (int) $date_end['month'], (int) $date_end['day'], (int) $date_end['year']);
                 }
 
-                $MessageCount = $db->selectSingle($sql, [
+                $message_count = $db->selectSingle($sql, [
                     ':universe' => Universe::getEmulated(),
                 ], 'count');
             }
 
         }
 
-        $maxPage = max(1, ceil($MessageCount / $perSide));
-        $page = max(1, min($page, $maxPage));
+        $max_page = max(1, ceil($message_count / $per_side));
+        $page = max(1, min($page, $max_page));
 
-        $sqlLimit = (($page - 1) * $perSide).", ".($perSide - 1);
+        $sql_limit = (($page - 1) * $per_side).", ".($per_side - 1);
 
         if ($type == 100)
         {
@@ -220,12 +225,12 @@ class ShowMessageListPage extends AbstractAdminPage
 			LEFT JOIN %%USERS%% as u ON m.message_owner = u.id
 			LEFT JOIN %%USERS%% as us ON m.message_sender = us.id
 			WHERE m.message_universe = :universe
-			".$dateWhereSQL."
-			".$userWhereSQL."
+			".$date_where_sql."
+			".$user_where_sql."
 			ORDER BY message_time DESC, message_id DESC
-			LIMIT ".$sqlLimit.";";
+			LIMIT ".$sql_limit.";";
 
-            $messageRaw = $db->select($sql, [
+            $message_raw = $db->select($sql, [
                 ':universe' => Universe::getEmulated(),
             ]);
         }
@@ -237,37 +242,37 @@ class ShowMessageListPage extends AbstractAdminPage
 			LEFT JOIN %%USERS%% as u ON m.message_owner = u.id
 			LEFT JOIN %%USERS%% as us ON m.message_sender = us.id
 			WHERE m.message_type = ".$type." AND message_universe = :universe
-			".$dateWhereSQL."
-			".$userWhereSQL."
+			".$date_where_sql."
+			".$user_where_sql."
 			ORDER BY message_time DESC, message_id DESC
-			LIMIT ".$sqlLimit.";";
+			LIMIT ".$sql_limit.";";
 
-            $messageRaw = $db->select($sql, [
+            $message_raw = $db->select($sql, [
                 ':universe' => Universe::getEmulated(),
             ]);
         }
 
-        foreach ($messageRaw as $messageRow)
+        foreach ($message_raw as $c_message)
         {
-            $messageList[$messageRow['message_id']] = [
-                'sender'   => empty($messageRow['senderName']) ? $messageRow['message_from'] : $messageRow['senderName'].' (ID:&nbsp;'.$messageRow['message_sender'].')',
-                'receiver' => $messageRow['username'].' (ID:&nbsp;'.$messageRow['message_owner'].')',
-                'subject'  => $messageRow['message_subject'],
-                'text'     => $messageRow['message_text'],
-                'type'     => $messageRow['message_type'],
-                'deleted'  => $messageRow['message_deleted'] != null,
-                'time'     => str_replace(' ', '&nbsp;', _date($LNG['php_tdformat'], $messageRow['message_time']), $USER['timezone']),
+            $message_list[$c_message['message_id']] = [
+                'sender'   => empty($c_message['senderName']) ? $c_message['message_from'] : $c_message['senderName'].' (ID:&nbsp;'.$c_message['message_sender'].')',
+                'receiver' => $c_message['username'].' (ID:&nbsp;'.$c_message['message_owner'].')',
+                'subject'  => $c_message['message_subject'],
+                'text'     => $c_message['message_text'],
+                'type'     => $c_message['message_type'],
+                'deleted'  => $c_message['message_deleted'] != null,
+                'time'     => str_replace(' ', '&nbsp;', _date($LNG['php_tdformat'], $c_message['message_time']), $USER['timezone']),
             ];
         }
 
         $this->assign([
             'categories'  => $categories,
-            'maxPage'     => $maxPage,
+            'maxPage'     => $max_page,
             'page'        => $page,
-            'messageList' => $messageList,
+            'messageList' => $message_list,
             'type'        => $type,
-            'dateStart'   => $dateStart,
-            'dateEnd'     => $dateEnd,
+            'dateStart'   => $date_start,
+            'dateEnd'     => $date_end,
             'sender'      => $sender,
             'receiver'    => $receiver,
         ]);

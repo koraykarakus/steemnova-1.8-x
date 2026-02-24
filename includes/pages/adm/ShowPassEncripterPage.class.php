@@ -37,11 +37,11 @@ class ShowPassEncripterPage extends AbstractAdminPage
 
     public function send(): void
     {
-        $Password = HTTP::_GP('md5q', '', true);
+        $pass = HTTP::_GP('md5q', '', true);
 
         $this->assign([
-            'md5_md5' => $Password,
-            'md5_enc' => PlayerUtil::cryptPassword($Password),
+            'md5_md5' => $pass,
+            'md5_enc' => PlayerUtil::cryptPassword($pass),
         ]);
 
         $this->display('page.passwordencripter.default.tpl');
