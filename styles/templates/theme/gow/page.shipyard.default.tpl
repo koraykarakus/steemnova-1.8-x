@@ -143,17 +143,26 @@
 </div>
 
 {if !empty($BuildList)}
-<div class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black">
-		<div id="bx" class="z my-2 text-center w-100 color-yellow"></div>
-		<form class="d-flex flex-column" action="game.php?page=shipyard&mode={$mode}" method="post">
-			<input type="hidden" name="action" value="delete">
-			<select class="mx-2 p-2 rounded color-yellow fs-11" name="auftr[]" id="auftr" onchange="" multiple class="shipl">
-				<option class="color-yellow">&nbsp;</option>
-			</select>
-			<span class="text-center text-danger fw-bold my-2">{$LNG.bd_cancel_warning}</span>
-			<button style="width:auto;" class="btn btn-secondary text-white fw-bold" type="submit"/>{$LNG.bd_cancel_send}</button>
-		</form>
-		<span class="text-center my-2 color-red" id="timeleft"></span>
+<div class="container-fluid my-1 border-orange bg-black">
+		<div class="card-body text-center">
+			<div id="bx" class="fw-semibold text-warning mb-2"></div>
+			<div id="timeleft" class="text-danger small mb-3"></div>
+			<form action="game.php?page=shipyard&mode={$mode}" method="post" class="mx-auto" style="max-width: 500px;">
+				<input type="hidden" name="action" value="delete">
+				<select name="auftr[]" id="auftr"
+					class="form-select bg-dark text-warning mb-3 border-orange"
+					multiple>
+					<option>&nbsp;</option>
+				</select>
+				<button type="submit"
+					class="btn btn-outline-danger w-75 fw-bold">
+					{$LNG.bd_cancel_send}
+				</button>
+			</form>
+			<div class="text-danger small mt-3">
+				{$LNG.bd_cancel_warning}
+			</div>
+		</div>
 </div>
 {/if}
 
