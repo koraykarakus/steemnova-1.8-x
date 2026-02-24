@@ -36,9 +36,9 @@ class ShowOverviewPage extends AbstractGamePage
         }
 
         Cache::get()->add('teamspeak', 'TeamspeakBuildCache');
-        $tsInfo = Cache::get()->getData('teamspeak', false);
+        $ts_info = Cache::get()->getData('teamspeak', false);
 
-        if (empty($tsInfo))
+        if (empty($ts_info))
         {
             return [
                 'error' => $LNG['ov_teamspeak_not_online'],
@@ -58,16 +58,15 @@ class ShowOverviewPage extends AbstractGamePage
         }
 
         return [
-            'url'     => sprintf($url, $config->ts_server, $config->ts_tcpport, $USER['username'], $tsInfo['password']),
-            'current' => $tsInfo['current'],
-            'max'     => $tsInfo['maxuser'],
+            'url'     => sprintf($url, $config->ts_server, $config->ts_tcpport, $USER['username'], $ts_info['password']),
+            'current' => $ts_info['current'],
+            'max'     => $ts_info['maxuser'],
             'error'   => false,
         ];
     }
 
     public function changeNewsVisibility(): void
     {
-
         global $USER;
 
         $result = 0;
@@ -81,54 +80,46 @@ class ShowOverviewPage extends AbstractGamePage
         ]);
 
         $this->sendJSON($result);
-
     }
 
     public function show(): void
     {
         global $LNG, $PLANET, $USER, $config;
 
-        $AdminsOnline = $chatOnline = $Moon = $RefLinks = [];
-
         $db = Database::get();
-
+        $moon = [];
         if ($PLANET['id_luna'] != 0)
         {
-
             $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id = :moonID;";
 
-            $Moon = $db->selectSingle($sql, [
+            $moon = $db->selectSingle($sql, [
                 ':moonID' => $PLANET['id_luna'],
             ]);
-
         }
         elseif ($PLANET['planet_type'] == 3)
         {
-
             $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id_luna = :moonID;";
 
-            $Moon = $db->selectSingle($sql, [
+            $moon = $db->selectSingle($sql, [
                 ':moonID' => $PLANET['id'],
             ]);
-
         }
 
+        $build_info = [];
         if ($PLANET['b_building'] - TIMESTAMP > 0)
         {
-
             $Queue = unserialize($PLANET['b_building_id']);
-            $buildInfo['buildings'] = [
+            $build_info['buildings'] = [
                 'id'        => $Queue[0][0],
                 'level'     => $Queue[0][1],
                 'timeleft'  => $PLANET['b_building'] - TIMESTAMP,
                 'time'      => $PLANET['b_building'],
                 'starttime' => pretty_time($PLANET['b_building'] - TIMESTAMP),
             ];
-
         }
         else
         {
-            $buildInfo['buildings'] = false;
+            $build_info['buildings'] = false;
         }
 
         if (!empty($PLANET['b_hangar_id']))
@@ -138,7 +129,7 @@ class ShowOverviewPage extends AbstractGamePage
 
             $time = BuildFunctions::getBuildingTime($USER, $PLANET, $Queue[0][0]) * $Queue[0][1];
 
-            $buildInfo['fleet'] = [
+            $build_info['fleet'] = [
                 'id'        => $Queue[0][0],
                 'level'     => $Queue[0][1],
                 'timeleft'  => $time - $PLANET['b_hangar'],
@@ -149,7 +140,7 @@ class ShowOverviewPage extends AbstractGamePage
         }
         else
         {
-            $buildInfo['fleet'] = false;
+            $build_info['fleet'] = false;
         }
 
         if ($USER['b_tech'] - TIMESTAMP > 0)
@@ -157,7 +148,7 @@ class ShowOverviewPage extends AbstractGamePage
 
             $Queue = unserialize($USER['b_tech_queue']);
 
-            $buildInfo['tech'] = [
+            $build_info['tech'] = [
                 'id'        => $Queue[0][0],
                 'level'     => $Queue[0][1],
                 'timeleft'  => $USER['b_tech'] - TIMESTAMP,
@@ -168,72 +159,75 @@ class ShowOverviewPage extends AbstractGamePage
         }
         else
         {
-            $buildInfo['tech'] = false;
+            $build_info['tech'] = false;
         }
 
-        $sql = "SELECT id,username FROM %%USERS%% WHERE universe = :universe AND onlinetime >= :onlinetime AND authlevel > :authlevel;";
+        $sql = "SELECT id, username FROM %%USERS%% 
+        WHERE universe = :universe AND onlinetime >= :onlinetime AND authlevel > :authlevel;";
 
-        $onlineAdmins = $db->select($sql, [
+        $online_admins = $db->select($sql, [
             ':universe'   => Universe::current(),
             ':onlinetime' => TIMESTAMP - 10 * 60,
             ':authlevel'  => AUTH_USR,
         ]);
 
-        foreach ($onlineAdmins as $AdminRow)
+        $admins_online = [];
+        foreach ($online_admins as $c_admin)
         {
-            $AdminsOnline[$AdminRow['id']] = $AdminRow['username'];
+            $admins_online[$c_admin['id']] = $c_admin['username'];
         }
 
-        $sql = "SELECT userName FROM %%CHAT_ON%% WHERE dateTime > DATE_SUB(NOW(), interval 2 MINUTE) AND channel = 0";
+        $sql = "SELECT userName FROM %%CHAT_ON%% WHERE 
+        dateTime > DATE_SUB(NOW(), interval 2 MINUTE) AND channel = 0";
 
         $chatUsers = $db->select($sql);
 
-        foreach ($chatUsers as $chatRow)
+        $chat_online = [];
+        foreach ($chatUsers as $c_user)
         {
-            $chatOnline[] = $chatRow['userName'];
+            $chat_online[] = $c_user['userName'];
         }
 
-        // Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
-        $sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
-		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :userID;";
-
-        $RefLinksRAW = $db->select($sql, [
-            ':userID' => $USER['id'],
-        ]);
-
+        $ref_links = [];
         if ($config->ref_active)
         {
+            // Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
+            $sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
+            LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :userID;";
 
-            foreach ($RefLinksRAW as $RefRow)
+            $ref_links_db = $db->select($sql, [
+                ':userID' => $USER['id'],
+            ]);
+
+            foreach ($ref_links_db as $c_ref)
             {
-                $RefLinks[$RefRow['id']] = [
-                    'username' => $RefRow['username'],
-                    'points'   => min($RefRow['total_points'], $config->ref_minpoints),
+                $ref_links[$c_ref['id']] = [
+                    'username' => $c_ref['username'],
+                    'points'   => min($c_ref['total_points'], $config->ref_minpoints),
                 ];
             }
-
         }
 
         $sql = 'SELECT total_points, total_rank
 		FROM %%USER_POINTS%%
 		WHERE id_owner = :userId;';
 
-        $statData = $db->selectSingle($sql, [
+        $stat_data = $db->selectSingle($sql, [
             ':userId' => $USER['id'],
         ]);
 
-        if (!$statData)
+        if (!$stat_data)
         {
-            $rankInfo = "-";
+            $rank_info = "-";
         }
         else
         {
-            $rankInfo = sprintf(
+            $rank_info = sprintf(
                 $LNG['ov_userrank_info'],
-                pretty_number($statData['total_points']),
+                pretty_number($stat_data['total_points']),
                 $LNG['ov_place'],
-                $statData['total_rank'],
-                $statData['total_rank'],
+                $stat_data['total_rank'],
+                $stat_data['total_rank'],
                 $LNG['ov_of'],
                 $config->users_amount
             );
@@ -242,32 +236,32 @@ class ShowOverviewPage extends AbstractGamePage
         $sql = "SELECT COUNT(*) as count FROM %%USERS%% 
         WHERE onlinetime >= UNIX_TIMESTAMP(NOW() - INTERVAL 15 MINUTE);";
 
-        $usersOnline = $db->selectSingle($sql, [], 'count');
+        $users_online = $db->selectSingle($sql, [], 'count');
 
         $sql = "SELECT COUNT(*) as count FROM %%FLEETS%%;";
-        $fleetsOnline = $db->selectSingle($sql, [], 'count');
+        $fleets_online = $db->selectSingle($sql, [], 'count');
 
-        //get news
+        // get news
 
         $sql = "SELECT * FROM %%NEWS%%;";
         $news = $db->select($sql);
 
-        if (!empty($news))
+        if (!empty($news)) 
         {
-
-            foreach ($news as &$currentNews)
+            foreach ($news as &$c_news)
             {
-                $currentNews['date'] = _date($LNG['php_tdformat'], $currentNews['date'], $USER['timezone']);
+                $c_news['date'] = _date($LNG['php_tdformat'], 
+                $c_news['date'], $USER['timezone']);
             }
-            unset($currentNews);
 
+            unset($c_news);
         }
-
+        
         $this->assign([
-            'rankInfo'             => $rankInfo,
+            'rankInfo'             => $rank_info,
             'news'                 => $news,
-            'usersOnline'          => $usersOnline,
-            'fleetsOnline'         => $fleetsOnline,
+            'usersOnline'          => $users_online,
+            'fleetsOnline'         => $fleets_online,
             'planetname'           => $PLANET['name'],
             'planetimage'          => $PLANET['image'],
             'galaxy'               => $PLANET['galaxy'],
@@ -276,9 +270,9 @@ class ShowOverviewPage extends AbstractGamePage
             'planet_type'          => $PLANET['planet_type'],
             'username'             => $USER['username'],
             'userid'               => $USER['id'],
-            'buildInfo'            => $buildInfo,
-            'Moon'                 => $Moon,
-            'AdminsOnline'         => $AdminsOnline,
+            'buildInfo'            => $build_info,
+            'Moon'                 => $moon,
+            'AdminsOnline'         => $admins_online,
             'teamspeakData'        => $this->GetTeamspeakData(),
             'planet_diameter'      => pretty_number($PLANET['diameter']),
             'planet_field_current' => $PLANET['field_current'],
@@ -288,8 +282,8 @@ class ShowOverviewPage extends AbstractGamePage
             'planet_id'            => $PLANET['id'],
             'ref_active'           => $config->ref_active,
             'ref_minpoints'        => $config->ref_minpoints,
-            'RefLinks'             => $RefLinks,
-            'chatOnline'           => $chatOnline,
+            'RefLinks'             => $ref_links,
+            'chatOnline'           => $chat_online,
             'path'                 => HTTP_PATH,
             'show_news_active'     => $USER['show_news_active'],
         ]);
