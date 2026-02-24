@@ -370,7 +370,6 @@ class ShowColonySettingsPage extends AbstractAdminPage
         ];
 
         $this->printMessage($LNG['settings_successful'], $redirect_button);
-
     }
 
 }
