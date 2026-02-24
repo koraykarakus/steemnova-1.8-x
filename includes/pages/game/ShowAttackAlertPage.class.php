@@ -9,43 +9,47 @@ class ShowAttackAlertPage extends AbstractGamePage
 
     public function show(): void
     {
-
         global $USER;
 
         $db = Database::get();
 
-        $sql = "SELECT (SELECT
-  		COUNT(*) FROM %%FLEETS%% WHERE
-  		fleet_owner != :userId AND fleet_mess = 0 AND fleet_universe = :universe AND fleet_target_owner = :userId AND (fleet_mission = 1 OR fleet_mission = 9) AND hasCanceled=0) AS attack,
-  		(SELECT
-  		COUNT(*) FROM %%FLEETS%% WHERE
-  		fleet_owner != :userId AND fleet_mess = 0 AND fleet_universe = :universe AND fleet_target_owner = :userId AND fleet_mission = 6 AND hasCanceled=0) AS spy
-  		FROM DUAL ";
+        $sql = "SELECT
+        SUM(CASE WHEN fleet_mission IN (1,9) THEN 1 ELSE 0 END) AS attack,
+        SUM(CASE WHEN fleet_mission = 6 THEN 1 ELSE 0 END) AS spy
+        FROM %%FLEETS%%
+        WHERE
+        fleet_owner != :userId
+        AND fleet_mess = 0
+        AND fleet_universe = :universe
+        AND fleet_target_owner = :userId
+        AND hasCanceled = 0;";
 
         $fleets = $db->selectSingle($sql, [
             ':userId'   => $USER['id'],
             ':universe' => Universe::current(),
         ]);
 
-        if ($fleets['attack'] > 0 && $fleets['spy'] > 0)
+        $data = "noattack";
+        if ($fleets) 
         {
-            $data = "spy";
-        }
-        elseif ($fleets['attack'] > 0 && $fleets['spy'] == 0)
-        {
-            $data = "attack";
-        }
-        elseif ($fleets['spy'] > 0 && $fleets['attack'] == 0)
-        {
-            $data = "spy";
-        }
-        else
-        {
-            $data = "noattack";
+            if ($fleets['attack'] > 0 
+            && $fleets['spy'] > 0)
+            {
+                $data = "spy";
+            }
+            elseif ($fleets['attack'] > 0 
+                && $fleets['spy'] == 0)
+            {
+                $data = "attack";
+            }
+            elseif ($fleets['spy'] > 0 
+                && $fleets['attack'] == 0)
+            {
+                $data = "spy";
+            }
         }
 
         $this->sendJSON($data);
-
     }
 
 }
