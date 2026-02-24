@@ -81,12 +81,52 @@ a:hover{
 
 /*main.navigation.tpl*/
 
-#navbar{
+#navbar {
 	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	padding: 10px 18px;
+	background: linear-gradient(145deg, #0f172a, #1e293b);
+	border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-#navbar .active{
+#navbar a {
+	color: #cbd5e1;
+	text-decoration: none;
+	font-weight: 500;
+	letter-spacing: 0.3px;
+	transition: all 0.2s ease;
+	position: relative;
+	padding: 6px 4px;
+}
+
+#navbar a:hover {
+	color: #ffffff;
+}
+
+#navbar a::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	width: 0%;
+	height: 2px;
+	background: #3b82f6;
+	transition: width 0.25s ease;
+}
+
+#navbar a:hover::after {
+	width: 100%;
+}
+
+#navbar .active {
 	color: #FFD700;
+}
+
+#navbar .active::after {
+	width: 100%;
+	background: #FFD700;
 }
 
 /*--*/
@@ -277,8 +317,9 @@ ul#rules {
 /** INNER BOX **/
 
 .box-inner {
-	margin:20px auto;
-	width: 80%;
+	padding: 20px;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .box-inner h1{
@@ -286,8 +327,21 @@ ul#rules {
 	font-weight: 700;
 	padding-top: 14px;
 	color: #FFF;
-	font-size: 12px;
+	font-size: 16px;
+	letter-spacing: 0.8px;
 	margin: 0;
+}
+
+.box-inner p {
+	font-size: 13px;
+	line-height: 1.6;
+	color: #cbd5e1;
+	margin-bottom: 10px;
+}
+
+.box-inner b{
+	font-size: 15px;
+	font-weight: 800;
 }
 
 .box-inner table{
