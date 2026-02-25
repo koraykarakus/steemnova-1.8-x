@@ -4,26 +4,75 @@
 }
 
 /*main.topnav.tpl*/
-.resourceWrapperOuter{
-	margin:2px;
-	width: calc(50% - 4px);
-	height: 40px;
-	clip-path:
-      polygon(0 0, calc(100% - 10px) 0, 100% 10px,
-              100% 100%, 10px 100%,0 calc(100% - 10px)
-             );
-						 background: #8c8c8c;
-						 border: 2px solid #8c8c8c;
-						 cursor: pointer;
+.resourceWrapperOuter {
+    margin: 4px;
+    width: calc(50% - 8px);
+    height: 44px;
+    position: relative;
+
+    clip-path: polygon(
+        0 0,
+        calc(100% - 12px) 0,
+        100% 12px,
+        100% 100%,
+        12px 100%,
+        0 calc(100% - 12px)
+    );
+
+    background: linear-gradient(145deg, #9a9a9a, #6e6e6e);
+    
+    /* İnce border efekti */
+    border: 1px solid rgba(255,255,255,0.15);
+
+    /* Derinlik */
+    box-shadow: 
+        0 2px 6px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.resourceWrapper{
-	background: rgb(51,77,108);
-  background: linear-gradient(0deg, rgba(51,77,108,1) 27%, rgba(31,48,68,1) 95%);
-  clip-path:
-      polygon(0 0, calc(100% - 12px) 0, 100% 12px,
-              100% 100%, 12px 100%,0 calc(100% - 12px)
-             );
+.resourceWrapperOuter:hover {
+    border-color: rgba(255,255,255,0.45);
+
+    box-shadow: 
+        0 2px 8px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.resourceWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    box-sizing: border-box;
+
+    clip-path: polygon(
+        0 0,
+        calc(100% - 12px) 0,
+        100% 12px,
+        100% 100%,
+        12px 100%,
+        0 calc(100% - 12px)
+    );
+
+    background: linear-gradient(
+        180deg,
+        #3f5e85 0%,
+        #2a3f5a 55%,
+        #1c2c40 100%
+    );
+
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    /* İç derinlik */
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.6),
+        inset 0 0 4px rgba(255,255,255,0.05);
 }
 
 .res_current{
@@ -193,12 +242,68 @@ input[type="radio"] {
 .fancybox__content{
 	padding: 0!important;
 }
-.popover-header{
-	padding: 0!important;
+/*popover galaxy*/
+
+.popover-header {
+    padding: 0!important;
+	display: flex;
+    justify-content: center; /* yatay ortalama */
+    align-items: center;    /* dikey ortalama */
+    flex-direction: column; /* table altına başka şey gelirse de doğru hizalama */
+
+    background: linear-gradient(
+        180deg,
+        #1c1c1f 0%,
+        #111113 100%
+    ) !important;
+
+    border-bottom: 1px solid rgba(255,214,0,0.25);
+
+    color: #ffd600;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
-.popover {
-  background-color: rgba(191,38,21,0.5)!important;
+
+.popover-header table {
+    margin: 0;  /* yatay ortalama */
+    border-collapse: collapse;
+	width: 100%;
+    display: block;  /* flex ile uyumlu */
 }
+
+.bs-popover-end .popover-arrow::before {
+    border-right-color: rgba(255,214,0,0.35) !important;
+}
+
+.bs-popover-end .popover-arrow::after {
+    border-right-color: #111113 !important;
+}
+
+.popover a {
+    color: #e6c200;
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.popover a:hover {
+    color: #ffd600;
+    text-shadow: 0 0 6px rgba(255,214,0,0.6);
+}
+
+.popover button {
+    border: 1px solid rgba(255,214,0,0.4);
+    color: #ffd600;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.popover button:hover {
+    background: rgba(255,214,0,0.15);
+    box-shadow: 0 0 6px rgba(255,214,0,0.4);
+}
+
+/**/
 
 .button-upgrade{
 	width: 80px;
@@ -376,32 +481,80 @@ input[type="radio"] {
 }
 
 /*general fonts for font sizes*/
-table{
-	background-color:#151212;
-	color: #fff;
-}
-.table-gow{
-	background-color:#151212;
-	margin: 0 auto;
-	border: 3px solid #c4731f;
-}
-.table-tooltip{
-	background: transparent;
-}
-.table-gow td{
-	border: 1px solid rgba(119,117,117,0.2);
-}
-.table-gow td,.table-gow th,.table-gow a{
-	color: #ffd600;
+/*table gow*/
+.table-gow {
+    width: 100%;
+    border-collapse: collapse;
+    background: linear-gradient(
+        180deg,
+        #1a1a1d 0%,
+        #111113 100%
+    );
+
+    border: 1px solid rgba(255,214,0,0.35);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,214,0,0.08);
+
+    color: #ddd;
 }
 
-.table-gow button,.table-gow select,.table-gow input{
-	color: #ddd;
+.table-gow th {
+    background: linear-gradient(
+        180deg,
+        #2b282e 0%,   /* hafif açık koyu gri-kahve */
+        #1b1a17 100%  /* koyu zemin */
+    );
+
+    color: #f1ebc9;      /* Altın tonlu yazı */
+    letter-spacing: 0.5px;
+
+    border: 1px solid rgba(29, 29, 27, 0.35);  /* Altın vurgulu border */
+    padding: 8px 10px;      /* biraz daha rahat dolgu */
+    text-align: center;      /* başlıkları ortala */
 }
 
-.table-gow th{
-	border: 1px solid #444444;
+.table-gow td {
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+    color: #ccc;
 }
+
+.table-gow tbody tr {
+    transition: background 0.15s ease;
+}
+
+.table-gow tbody tr:hover {
+    background: rgba(19, 18, 18, 0.11);
+}
+
+.table-gow a {
+    color: #e6c200;
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.table-gow a:hover {
+    color: #ecc00c;
+    text-shadow: 0 0 6px rgba(255,214,0,0.5);
+}
+
+.table-gow button,
+.table-gow select,
+.table-gow input {
+    background: #1c1c1f;
+    border: 1px solid rgba(255,214,0,0.3);
+    color: #ddd;
+}
+
+.table-gow input:focus,
+.table-gow select:focus {
+    outline: none;
+    border-color: #ffd600;
+    box-shadow: 0 0 6px rgba(255,214,0,0.4);
+}
+/**/
 
 .font-size-12{
 	font-size: 12px;
@@ -651,47 +804,130 @@ table{
 }
 
 /*button test */
-.menu-button a{
-	width: 100%;
-	height: 100%;
-	color: #ddd;
-	text-align: center;
-}
-.menu-button a:hover{
-	color: #999999;
-}
-
+/* main.navigation.tpl */
 .menu-button {
-  cursor: pointer;
-  color: #12405f;
-	background: rgb(68,90,117);
-	background: linear-gradient(0deg, rgba(68,90,117,1) 27%, rgba(42,47,54,1) 95%);
+	width: 182px;
+    position: relative;
+    cursor: pointer;
 
-  clip-path:
-      polygon(0 0, calc(100% - 10px) 0, 100% 10px,
-              100% 100%, 10px 100%,0 calc(100% - 10px)
-             );
-	transition: 0.3 ease;
+    /* Daha yumuşak kırpma */
+    clip-path: polygon(
+        0 0,
+        calc(100% - 8px) 0,
+        100% 8px,
+        100% 100%,
+        8px 100%,
+        0 calc(100% - 8px)
+    );
+
+    background: linear-gradient(
+        180deg,
+        #3f5e85 0%,
+        #2a3f5a 65%,
+        #1f2f42 100%
+    );
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 0 6px rgba(0,0,0,0.5);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.menu-button:hover{
-	background:#2a2f36;
+.menu-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 600;
+	font-size: 11px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
 }
 
-.tooltip-inner{
-	background: rgb(36,33,34);
-	background: linear-gradient(0deg, rgba(36,33,34,1) 44%, rgba(78,85,93,1) 100%);
-	border: 1px solid #000;
-	color: #ddd;
-	font-size: 12px!important;
-	max-width: 400px!important;
+.menu-button:hover {
+    border-color: rgba(16, 12, 231, 0.35);
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        inset 0 0 10px rgba(255,255,255,0.05);
 }
+
+.menu-button:hover a {
+    color: #ffffff;
+}
+
+#menu .menuActive {
+    border-color: rgba(255,214,0,0.5);
+
+    background: linear-gradient(
+        180deg,
+        #4f6f94 0%,
+        #2f4863 65%,
+        #1d2e40 100%
+    );
+
+    box-shadow:
+        0 0 8px rgba(255,214,0,0.25),
+        inset 0 0 8px rgba(255,214,0,0.12);
+}
+
+#menu .menu-button a.menuActive {
+    color: #ebc713;
+}
+
+/*tooltip*/
+
+.tooltip-inner {
+    background: linear-gradient(
+        180deg,
+        #3a566f 0%,
+        #2a3f55 60%,
+        #1c2b3a 100%
+    );
+
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #e4e4e4;
+    font-size: 12px !important;
+    max-width: 400px !important;
+    padding: 8px 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 0 8px rgba(0,0,0,0.6);
+
+    letter-spacing: 0.3px;
+}
+
 .tooltip.show {
     opacity: 1;
+    transition: opacity 0.15s ease-in-out;
 }
-.bs-tooltip-bottom .tooltip-arrow::before{
-  border-bottom-color: #736767!important; /* black */
+
+.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #2a3f55 !important;
 }
+
+.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #2a3f55 !important;
+}
+
+.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: #2a3f55 !important;
+}
+
+.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: #2a3f55 !important;
+}
+
 
 /**/
 
@@ -779,13 +1015,6 @@ table{
 	align-items: center;
 	justify-content: center;
 }
-/* main.navigation.tpl */
-
-#menu .menuActive{
-	color: #ffd600;
-	background: #12405f;
-}
-
 
 
 @media only screen and (min-width: 576px) {
