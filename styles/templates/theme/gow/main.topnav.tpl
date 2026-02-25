@@ -150,7 +150,7 @@
             <img class="user-select-none" onclick="return Dialog.info({$resourceID});"
               src="{$dpath}images/{$resourceData.name}.gif">
           </div>
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column w-50">
             <div class="fs-10 user-select-none fw-bold text-yellow mt-1">{$LNG.tech.$resourceID}</div>
             <div>
               {if !isset($resourceData.current)}
