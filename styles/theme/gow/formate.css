@@ -556,6 +556,36 @@ input[type="radio"] {
 }
 /**/
 
+/*steemnova img*/
+.centered-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;               /* panel boyutu */
+    height: 70px;              /* kare görünüm */
+    margin: 0 auto;             
+    background: linear-gradient(
+        180deg,
+        #1c1c1f 0%,
+        #111113 100%
+    );                            /* koyu oyun paneli arka planı */
+    border: 1px solid rgba(255,214,0,0.35); /* ince altın border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,214,0,0.1);
+    border-radius: 8px;          /* hafif köşe yumuşatma */
+    transition: all 0.2s ease;
+}
+
+.centered-image:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,214,0,0.15);
+}
+
+.centered-image img {
+    max-width: 85px;             /* görsel boyutu panel içinde */
+    height: auto;
+    display: block;
+}
+/**/
+
 .font-size-12{
 	font-size: 12px;
 }
@@ -1016,6 +1046,12 @@ input[type="radio"] {
 	justify-content: center;
 }
 
+.topnavWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1200px;
+}
 
 @media only screen and (min-width: 576px) {
 
