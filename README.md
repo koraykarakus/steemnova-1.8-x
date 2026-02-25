@@ -34,8 +34,15 @@ Follow these steps to set up the project locally:
 
 ## Notes
 
-- This project aims to provide a clean and functional starting point. Most known bugs from the original SteemNova have been fixed.
+- This project aims to provide a clean and functional starting point.
+
 - Ensure your server meets the PHP 8.2 requirements and has all necessary extensions enabled.
+
+- This project has previously received contributions from various developers, so there is no consistent coding style throughout. The main purpose of the project is to unify content written or added in different languages under a common language (English) and to apply a consistent coding style and notation across the entire codebase.
+
+- The project does not prioritize UI design and is developed only as needed to test backend improvements for the GoW theme.
+
+- The primary focus is on cleaning the existing codebase from unnecessary dependencies, resolving existing bugs, and creating a more useful and advanced monitoring system / admin panel.
 
 ## References
 
