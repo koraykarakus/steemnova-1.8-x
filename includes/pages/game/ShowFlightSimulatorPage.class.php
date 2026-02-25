@@ -11,29 +11,28 @@ class ShowFlightSimulatorPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $LNG, $reslist, $resource, $PLANET;
+        global $USER, $reslist, $resource, $PLANET;
 
-        $possibleShips = [];
-
-        foreach ($reslist['fleet'] as $ID)
+        $possible_ships = [];
+        foreach ($reslist['fleet'] as $c_id)
         {
-            if ($ID == 212 or $ID == 221)
+            if ($c_id == 212
+                || $c_id == 221)
             {
                 continue;
             }
 
-            $possibleShips[] = [
-                'id'    => $ID,
-                'count' => $PLANET[$resource[$ID]],
+            $possible_ships[] = [
+                'id'    => $c_id,
+                'count' => $PLANET[$resource[$c_id]],
             ];
-
         }
 
         $this->assign([
             'startGalaxy'    => $PLANET['galaxy'],
             'startSystem'    => $PLANET['system'],
             'startPlanet'    => $PLANET['planet'],
-            'ships'          => $possibleShips,
+            'ships'          => $possible_ships,
             'combustionTech' => $USER['combustion_tech'],
             'hyperspaceTech' => $USER['hyperspace_motor_tech'],
             'impulseTech'    => $USER['impulse_motor_tech'],
@@ -45,18 +44,18 @@ class ShowFlightSimulatorPage extends AbstractGamePage
 
     public function calcFleetSpeed(): void
     {
-        global $USER,$PLANET,$reslist;
+        global $reslist;
 
         $fleet = $player = [];
-        foreach ($reslist['fleet'] as $ID)
+        foreach ($reslist['fleet'] as $c_id)
         {
-            if ($ID == 212 or $ID == 221)
+            if ($c_id == 212
+                || $c_id == 221)
             {
                 continue;
             }
 
-            $fleet[$ID] = HTTP::_GP("ship_$ID", 0);
-
+            $fleet[$c_id] = HTTP::_GP("ship_$c_id", 0);
         }
 
         foreach ($fleet as $key => $count)
@@ -89,22 +88,22 @@ class ShowFlightSimulatorPage extends AbstractGamePage
         ];
 
         $distance = FleetFunctions::GetTargetDistance($start, $end);
-        $maxSpeed = FleetFunctions::GetFleetMaxSpeed($fleet, $player);
-        $gameSpeed = FleetFunctions::GetGameSpeedFactor();
+        $max_speed = FleetFunctions::GetFleetMaxSpeed($fleet, $player);
+        $game_speed = FleetFunctions::GetGameSpeedFactor();
 
-        $speedFactor = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+        $speed_factor = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-        $timeSeconds = [];
+        $time_seconds = [];
 
-        if ($maxSpeed)
+        if ($max_speed)
         {
-            foreach ($speedFactor as $factor)
+            foreach ($speed_factor as $factor)
             {
-                $timeSeconds[$factor] = round(FleetFunctions::GetMissionDuration($factor, $maxSpeed, $distance, $gameSpeed, $player));
+                $time_seconds[$factor] = round(FleetFunctions::GetMissionDuration($factor, $max_speed, $distance, $game_speed, $player));
             }
         }
 
-        $this->sendJSON($timeSeconds);
+        $this->sendJSON($time_seconds);
 
     }
 

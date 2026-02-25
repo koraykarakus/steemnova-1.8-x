@@ -51,27 +51,29 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function setAllianceData($allianceId): void
+    private function setAllianceData($ally_id): void
     {
         global $USER;
         $db = Database::get();
 
-        $sql = 'SELECT * FROM %%ALLIANCE%% WHERE id = :allianceId;';
+        $sql = 'SELECT * FROM %%ALLIANCE%% WHERE id = :ally_id;';
         $this->allianceData = $db->selectSingle($sql, [
-            ':allianceId' => $allianceId,
+            ':ally_id' => $ally_id,
         ]);
 
-        if ($USER['ally_id'] == $allianceId)
+        if ($USER['ally_id'] == $ally_id)
         {
             if ($this->allianceData['ally_owner'] == $USER['id'])
             {
-                $this->rights = array_combine($this->availableRanks, array_fill(0, count($this->availableRanks), true));
+                $this->rights = array_combine($this->availableRanks, 
+                array_fill(0, count($this->availableRanks), true));
             }
             elseif ($USER['ally_rank_id'] != 0)
             {
-                $sql = 'SELECT ' . implode(', ', $this->availableRanks) . ' FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId AND rankID = :ally_rank_id;';
+                $sql = 'SELECT ' . implode(', ', $this->availableRanks) . 
+                ' FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId AND rankID = :ally_rank_id;';
                 $this->rights = $db->selectSingle($sql, [
-                    ':allianceId'   => $allianceId,
+                    ':allianceId'   => $ally_id,
                     ':ally_rank_id' => $USER['ally_rank_id'],
                 ]);
             }
@@ -106,12 +108,12 @@ class ShowAlliancePage extends AbstractGamePage
     {
         global $LNG, $USER;
 
-        $allianceId = HTTP::_GP('id', 0);
+        $ally_id = HTTP::_GP('id', 0);
 
-        $statisticData = [];
-        $diplomaticmaticData = false;
+        $stats_data = [];
+        $diplomacy_data = false;
 
-        $this->setAllianceData($allianceId);
+        $this->setAllianceData($ally_id);
 
         if (!isset($this->allianceData))
         {
@@ -120,28 +122,33 @@ class ShowAlliancePage extends AbstractGamePage
 
         if ($this->allianceData['ally_diplo'] == 1)
         {
-            $diplomaticmaticData = $this->getDiplomatic();
+            $diplomacy_data = $this->getDiplomatic();
         }
 
         if ($this->allianceData['ally_stats'] == 1)
         {
-            $sql = 'SELECT SUM(wons) as wons, SUM(loos) as loos, SUM(draws) as draws, SUM(kbmetal) as kbmetal,
-            SUM(kbcrystal) as kbcrystal, SUM(lostunits) as lostunits, SUM(desunits) as desunits
+            $sql = 'SELECT SUM(wons) as wons, 
+            SUM(loos) as loos, 
+            SUM(draws) as draws, 
+            SUM(kbmetal) as kbmetal,
+            SUM(kbcrystal) as kbcrystal, 
+            SUM(lostunits) as lostunits, 
+            SUM(desunits) as desunits
             FROM %%USERS%% WHERE ally_id = :allyID;';
 
-            $statisticResult = Database::get()->selectSingle($sql, [
+            $stats_res = Database::get()->selectSingle($sql, [
                 ':allyID' => $this->allianceData['id'],
             ]);
 
-            $statisticData = [
-                'totalfight' => $statisticResult['wons'] + $statisticResult['loos'] + $statisticResult['draws'],
-                'fightwon'   => $statisticResult['wons'],
-                'fightlose'  => $statisticResult['loos'],
-                'fightdraw'  => $statisticResult['draws'],
-                'unitsshot'  => pretty_number($statisticResult['desunits']),
-                'unitslose'  => pretty_number($statisticResult['lostunits']),
-                'dermetal'   => pretty_number($statisticResult['kbmetal']),
-                'dercrystal' => pretty_number($statisticResult['kbcrystal']),
+            $stats_data = [
+                'totalfight' => $stats_res['wons'] + $stats_res['loos'] + $stats_res['draws'],
+                'fightwon'   => $stats_res['wons'],
+                'fightlose'  => $stats_res['loos'],
+                'fightdraw'  => $stats_res['draws'],
+                'unitsshot'  => pretty_number($stats_res['desunits']),
+                'unitslose'  => pretty_number($stats_res['lostunits']),
+                'dermetal'   => pretty_number($stats_res['kbmetal']),
+                'dercrystal' => pretty_number($stats_res['kbcrystal']),
             ];
         }
 
@@ -149,13 +156,13 @@ class ShowAlliancePage extends AbstractGamePage
 		FROM %%USER_POINTS%%
 		WHERE id_owner = :userId;';
 
-        $userPoints = Database::get()->selectSingle($sql, [
+        $user_points = Database::get()->selectSingle($sql, [
             ':userId' => $USER['id'],
         ], 'total_points');
 
         $this->assign([
-            'diplomaticData'               => $diplomaticmaticData,
-            'statisticData'                => $statisticData,
+            'diplomaticData'               => $diplomacy_data,
+            'statisticData'                => $stats_data,
             'ally_description'             => BBCode::parse($this->allianceData['ally_description']),
             'ally_id'                      => $this->allianceData['id'],
             'ally_image'                   => $this->allianceData['ally_image'],
@@ -167,7 +174,7 @@ class ShowAlliancePage extends AbstractGamePage
             'ally_stats'                   => $this->allianceData['ally_stats'],
             'ally_diplo'                   => $this->allianceData['ally_diplo'],
             'ally_request'                 => !$this->hasAlliance && !$this->hasApply && $this->allianceData['ally_request_notallow'] == 0 && $this->allianceData['ally_max_members'] > $this->allianceData['ally_members'],
-            'ally_request_min_points'      => $userPoints >= $this->allianceData['ally_request_min_points'],
+            'ally_request_min_points'      => $user_points >= $this->allianceData['ally_request_min_points'],
             'ally_request_min_points_info' => sprintf($LNG['al_requests_min_points'], pretty_number($this->allianceData['ally_request_min_points'])),
         ]);
 
@@ -205,24 +212,28 @@ class ShowAlliancePage extends AbstractGamePage
         global $USER, $LNG;
 
         $db = Database::get();
-        $sql = "SELECT a.ally_tag FROM %%ALLIANCE_REQUEST%% r INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId WHERE r.userId = :userId;";
+        
+        $sql = "SELECT a.ally_tag 
+        FROM %%ALLIANCE_REQUEST%% r 
+        INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId 
+        WHERE r.userId = :userId;";
 
-        $allianceResult = $db->selectSingle($sql, [
+        $ally_result = $db->selectSingle($sql, [
             ':userId' => $USER['id_planet'],
         ]);
 
-        if (!$allianceResult)
+        if (!$ally_result)
         {
-            $allianceResult = [];
+            $ally_result = [];
         }
 
-        if (empty($allianceResult['ally_tag']))
+        if (empty($ally_result['ally_tag']))
         {
-            $allianceResult['ally_tag'] = 0;
+            $ally_result['ally_tag'] = 0;
         }
 
         $this->assign([
-            'request_text' => sprintf($LNG['al_request_wait_message'], $allianceResult['ally_tag']),
+            'request_text' => sprintf($LNG['al_request_wait_message'], $ally_result['ally_tag']),
         ]);
 
         $this->display('page.alliance.applyWait.tpl');
@@ -235,16 +246,15 @@ class ShowAlliancePage extends AbstractGamePage
 
     public function search(): void
     {
-
         if ($this->hasApply)
         {
             $this->redirectToHome();
         }
 
-        $searchText = HTTP::_GP('searchtext', '', UTF8_SUPPORT);
-        $searchList = [];
+        $search_text = HTTP::_GP('searchtext', '', UTF8_SUPPORT);
+        $search_list = [];
 
-        if (!empty($searchText))
+        if (!empty($search_text))
         {
             $db = Database::get();
             $sql = "SELECT id, ally_name, ally_tag, ally_members
@@ -256,13 +266,13 @@ class ShowAlliancePage extends AbstractGamePage
 
             $searchResult = $db->select($sql, [
                 ':universe'        => Universe::current(),
-                ':searchTextLike'  => '%' . $searchText . '%',
-                ':searchTextEqual' => $searchText,
+                ':searchTextLike'  => '%' . $search_text . '%',
+                ':searchTextEqual' => $search_text,
             ]);
 
             foreach ($searchResult as $searchRow)
             {
-                $searchList[] = [
+                $search_list[] = [
                     'id'      => $searchRow['id'],
                     'tag'     => $searchRow['ally_tag'],
                     'members' => $searchRow['ally_members'],
@@ -272,8 +282,8 @@ class ShowAlliancePage extends AbstractGamePage
         }
 
         $this->assign([
-            'searchText' => $searchText,
-            'searchList' => $searchList,
+            'searchText' => $search_text,
+            'searchList' => $search_list,
         ]);
 
         $this->display('page.alliance.search.tpl');
@@ -289,21 +299,24 @@ class ShowAlliancePage extends AbstractGamePage
         }
 
         $text = HTTP::_GP('text', '', true);
-        $allianceId = HTTP::_GP('id', 0);
+        $ally_id = HTTP::_GP('id', 0);
 
         $db = Database::get();
-        $sql = "SELECT ally_tag, ally_request, ally_request_notallow, ally_owner FROM %%ALLIANCE%% WHERE id = :allianceId AND ally_universe = :universe;";
-        $allianceResult = $db->selectSingle($sql, [
-            ':allianceId' => $allianceId,
+        $sql = "SELECT ally_tag, ally_request, ally_request_notallow, ally_owner 
+        FROM %%ALLIANCE%% 
+        WHERE id = :ally_id AND ally_universe = :universe;";
+
+        $ally_result = $db->selectSingle($sql, [
+            ':ally_id' => $ally_id,
             ':universe'   => Universe::current(),
         ]);
 
-        if (!isset($allianceResult))
+        if (!isset($ally_result))
         {
             $this->redirectToHome();
         }
 
-        if ($allianceResult['ally_request_notallow'] == 1)
+        if ($ally_result['ally_request_notallow'] == 1)
         {
             $this->printMessage($LNG['al_alliance_closed'], [[
                 'label' => $LNG['sys_forward'],
@@ -319,13 +332,13 @@ class ShowAlliancePage extends AbstractGamePage
         if (!empty($text))
         {
             $sql = "INSERT INTO %%ALLIANCE_REQUEST%% SET
-                allianceId	= :allianceId,
+                allianceId	= :ally_id,
                 text		= :text,
                 time		= :time,
                 userId		= :userId;";
 
             $db->insert($sql, [
-                ':allianceId' => $allianceId,
+                ':ally_id' => $ally_id,
                 ':text'       => $text,
                 ':time'       => TIMESTAMP,
                 ':userId'     => $USER['id'],
@@ -337,7 +350,7 @@ class ShowAlliancePage extends AbstractGamePage
             ]]);
         }
 
-        $applyMessage = sprintf(
+        $apply_msg = sprintf(
             $LNG['al_new_apply'],
             $USER['id'],
             $USER['username'],
@@ -345,19 +358,19 @@ class ShowAlliancePage extends AbstractGamePage
         );
 
         PlayerUtil::sendMessage(
-            $allianceResult['ally_owner'],
+            $ally_result['ally_owner'],
             0,
             $LNG['al_alliance'],
             2,
             $LNG['al_request'],
-            $applyMessage,
+            $apply_msg,
             TIMESTAMP
         );
 
         $this->assign([
-            'allyid'           => $allianceId,
-            'applytext'        => $allianceResult['ally_request'],
-            'al_write_request' => sprintf($LNG['al_write_request'], $allianceResult['ally_tag']),
+            'allyid'           => $ally_id,
+            'applytext'        => $ally_result['ally_request'],
+            'al_write_request' => sprintf($LNG['al_write_request'], $ally_result['ally_tag']),
         ]);
 
         $this->display('page.alliance.apply.tpl');
@@ -373,17 +386,23 @@ class ShowAlliancePage extends AbstractGamePage
         }
 
         $db = Database::get();
-        $sql = "SELECT a.ally_tag FROM %%ALLIANCE_REQUEST%% r INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId WHERE r.userId = :userId;";
-        $allyTag = $db->selectSingle($sql, [
+        
+        $sql = "SELECT a.ally_tag 
+        FROM %%ALLIANCE_REQUEST%% r 
+        INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId 
+        WHERE r.userId = :userId;";
+
+        $ally_tag = $db->selectSingle($sql, [
             ':userId' => $USER['id'],
         ], 'ally_tag');
 
         $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE userId = :userId;";
+        
         $db->delete($sql, [
             ':userId' => $USER['id'],
         ]);
 
-        $this->printMessage(sprintf($LNG['al_request_deleted'], $allyTag), [[
+        $this->printMessage(sprintf($LNG['al_request_deleted'], $ally_tag), [[
             'label' => $LNG['sys_forward'],
             'url'   => '?page=alliance',
         ]]);
@@ -397,17 +416,18 @@ class ShowAlliancePage extends AbstractGamePage
         {
             $this->redirectToHome();
         }
+
         $sql = 'SELECT total_points
 		FROM %%USER_POINTS%%
 		WHERE id_owner = :userId;';
 
-        $userPoints = Database::get()->selectSingle($sql, [
+        $user_points = Database::get()->selectSingle($sql, [
             ':userId' => $USER['id'],
         ], 'total_points');
 
         $min_points = Config::get()->alliance_create_min_points;
 
-        if ($userPoints >= $min_points)
+        if ($user_points >= $min_points)
         {
             $action = $this->getAction();
             if ($action == "send")
@@ -421,14 +441,14 @@ class ShowAlliancePage extends AbstractGamePage
         }
         else
         {
-            $diff_points = $min_points - $userPoints;
-            $messageText = sprintf(
+            $diff_points = $min_points - $user_points;
+            $text_msg = sprintf(
                 $LNG['al_make_ally_insufficient_points'],
                 pretty_number($min_points),
                 pretty_number($diff_points)
             );
 
-            $this->printMessage($messageText, [[
+            $this->printMessage($text_msg, [[
                 'label' => $LNG['sys_back'],
                 'url'   => '?page=alliance',
             ]]);
@@ -451,10 +471,10 @@ class ShowAlliancePage extends AbstractGamePage
     private function createAllianceProcessor(): void
     {
         global $USER, $LNG;
-        $allianceTag = HTTP::_GP('atag', '', UTF8_SUPPORT);
-        $allianceName = HTTP::_GP('aname', '', UTF8_SUPPORT);
+        $ally_tag = HTTP::_GP('atag', '', UTF8_SUPPORT);
+        $ally_name = HTTP::_GP('aname', '', UTF8_SUPPORT);
 
-        if (empty($allianceTag))
+        if (empty($ally_tag))
         {
             $this->printMessage($LNG['al_tag_required'], [[
                 'label' => $LNG['sys_back'],
@@ -462,7 +482,7 @@ class ShowAlliancePage extends AbstractGamePage
             ]]);
         }
 
-        if (empty($allianceName))
+        if (empty($ally_name))
         {
             $this->printMessage($LNG['al_name_required'], [[
                 'label' => $LNG['sys_back'],
@@ -470,7 +490,8 @@ class ShowAlliancePage extends AbstractGamePage
             ]]);
         }
 
-        if (!PlayerUtil::isNameValid($allianceName) || !PlayerUtil::isNameValid($allianceTag))
+        if (!PlayerUtil::isNameValid($ally_name) 
+            || !PlayerUtil::isNameValid($ally_tag))
         {
             $this->printMessage($LNG['al_newname_specialchar'], [[
                 'label' => $LNG['sys_back'],
@@ -481,49 +502,53 @@ class ShowAlliancePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = 'SELECT COUNT(*) as count FROM %%ALLIANCE%% WHERE ally_universe = :universe
-        AND (ally_tag = :allianceTag OR ally_name = :allianceName);';
+        AND (ally_tag = :allianceTag OR ally_name = :ally_name);';
 
         $allianceCount = $db->selectSingle($sql, [
             ':universe'     => Universe::current(),
-            ':allianceTag'  => $allianceTag,
-            ':allianceName' => $allianceName,
+            ':allianceTag'  => $ally_tag,
+            ':ally_name'    => $ally_name,
         ], 'count');
 
         if ($allianceCount != 0)
         {
-            $this->printMessage(sprintf($LNG['al_already_exists'], $allianceName), [[
+            $this->printMessage(sprintf($LNG['al_already_exists'], $ally_name), [[
                 'label' => $LNG['sys_back'],
                 'url'   => '?page=alliance&mode=create',
             ]]);
         }
 
-        $sql = "INSERT INTO %%ALLIANCE%% SET ally_name = :allianceName, ally_tag = :allianceTag, ally_owner = :userId,
-        ally_owner_range = :allianceOwnerRange, ally_members = 1, ally_register_time = :time, ally_universe = :universe;";
+        $sql = "INSERT INTO %%ALLIANCE%% SET ally_name = :ally_name, 
+        ally_tag = :ally_tag, ally_owner = :userId,
+        ally_owner_range = :allianceOwnerRange, ally_members = 1, 
+        ally_register_time = :time, ally_universe = :universe;";
+
         $db->insert($sql, [
-            ':allianceName'       => $allianceName,
-            ':allianceTag'        => $allianceTag,
+            ':ally_name'          => $ally_name,
+            ':ally_tag'           => $ally_tag,
             ':userId'             => $USER['id'],
             ':allianceOwnerRange' => $LNG['al_default_leader_name'],
             ':time'               => TIMESTAMP,
             ':universe'           => Universe::current(),
         ]);
 
-        $allianceId = $db->lastInsertId();
+        $ally_id = $db->lastInsertId();
 
-        $sql = "UPDATE %%USERS%% SET ally_id	= :allianceId, ally_rank_id	= 0, ally_register_time = :time WHERE id = :userId;";
+        $sql = "UPDATE %%USERS%% SET ally_id = :ally_id, ally_rank_id	= 0, 
+        ally_register_time = :time WHERE id = :userId;";
         $db->update($sql, [
-            ':allianceId' => $allianceId,
+            ':ally_id'    => $ally_id,
             ':time'       => TIMESTAMP,
             ':userId'     => $USER['id'],
         ]);
 
-        $sql = "UPDATE %%USER_POINTS%% SET id_ally = :allianceId WHERE id_owner = :userId;";
+        $sql = "UPDATE %%USER_POINTS%% SET id_ally = :ally_id WHERE id_owner = :userId;";
         $db->update($sql, [
-            ':allianceId' => $allianceId,
+            ':ally_id'    => $ally_id,
             ':userId'     => $USER['id'],
         ]);
 
-        $this->printMessage(sprintf($LNG['al_created'], $allianceName . ' [' . $allianceTag . ']'), [[
+        $this->printMessage(sprintf($LNG['al_created'], $ally_name . ' [' . $ally_tag . ']'), [[
             'label' => $LNG['sys_forward'],
             'url'   => '?page=alliance',
         ]]);
@@ -534,24 +559,33 @@ class ShowAlliancePage extends AbstractGamePage
         $Return = [];
         $db = Database::get();
 
-        $sql = "SELECT d.level, d.accept, d.accept_text, d.id, a.id as ally_id, a.ally_name, a.ally_tag, d.owner_1, d.owner_2 FROM %%DIPLO%% as d INNER JOIN %%ALLIANCE%% as a ON IF(:allianceId = d.owner_1, a.id = d.owner_2, a.id = d.owner_1) WHERE :allianceId = d.owner_1 OR :allianceId = d.owner_2;";
-        $DiploResult = $db->select($sql, [
+        $sql = "SELECT d.level, d.accept, 
+        d.accept_text, d.id, a.id as ally_id, 
+        a.ally_name, a.ally_tag, d.owner_1, d.owner_2 
+        FROM %%DIPLO%% as d 
+        INNER JOIN %%ALLIANCE%% as a ON 
+        IF(:allianceId = d.owner_1, a.id = d.owner_2, a.id = d.owner_1) 
+        WHERE :allianceId = d.owner_1 OR :allianceId = d.owner_2;";
+
+        $diplo_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        foreach ($DiploResult as $CurDiplo)
+        foreach ($diplo_result as $c_diplo)
         {
-            if ($CurDiplo['accept'] == 0 && $CurDiplo['owner_2'] == $this->allianceData['id'])
+            if ($c_diplo['accept'] == 0 
+                && $c_diplo['owner_2'] == $this->allianceData['id'])
             {
-                $Return[5][$CurDiplo['id']] = [$CurDiplo['ally_name'], $CurDiplo['ally_id'], $CurDiplo['level'], $CurDiplo['accept_text'], $CurDiplo['ally_tag']];
+                $Return[5][$c_diplo['id']] = [$c_diplo['ally_name'], $c_diplo['ally_id'], $c_diplo['level'], $c_diplo['accept_text'], $c_diplo['ally_tag']];
             }
-            elseif ($CurDiplo['accept'] == 0 && $CurDiplo['owner_1'] == $this->allianceData['id'])
+            elseif ($c_diplo['accept'] == 0 
+                && $c_diplo['owner_1'] == $this->allianceData['id'])
             {
-                $Return[6][$CurDiplo['id']] = [$CurDiplo['ally_name'], $CurDiplo['ally_id'], $CurDiplo['level'], $CurDiplo['accept_text'], $CurDiplo['ally_tag']];
+                $Return[6][$c_diplo['id']] = [$c_diplo['ally_name'], $c_diplo['ally_id'], $c_diplo['level'], $c_diplo['accept_text'], $c_diplo['ally_tag']];
             }
             else
             {
-                $Return[$CurDiplo['level']][$CurDiplo['id']] = [$CurDiplo['ally_name'], $CurDiplo['ally_id'], $CurDiplo['owner_1'], $CurDiplo['ally_tag']];
+                $Return[$c_diplo['level']][$c_diplo['id']] = [$c_diplo['ally_name'], $c_diplo['ally_id'], $c_diplo['owner_1'], $c_diplo['ally_tag']];
             }
         }
         return $Return;
@@ -565,28 +599,34 @@ class ShowAlliancePage extends AbstractGamePage
 
         if ($this->allianceData['ally_owner'] == $USER['id'])
         {
-            $rankName = ($this->allianceData['ally_owner_range'] != '') ? $this->allianceData['ally_owner_range'] : $LNG['al_founder_rank_text'];
+            $rank_name = ($this->allianceData['ally_owner_range'] != '') ? 
+                        $this->allianceData['ally_owner_range'] : 
+                        $LNG['al_founder_rank_text'];
         }
         elseif ($USER['ally_rank_id'] != 0)
         {
             $sql = "SELECT rankName FROM %%ALLIANCE_RANK%% WHERE rankID = :UserRankID;";
-            $rankName = $db->selectSingle($sql, [
+            $rank_name = $db->selectSingle($sql, [
                 ':UserRankID' => $USER['ally_rank_id'],
             ], 'rankName');
         }
 
-        if (empty($rankName))
+        if (empty($rank_name))
         {
-            $rankName = $LNG['al_new_member_rank_text'];
+            $rank_name = $LNG['al_new_member_rank_text'];
         }
 
-        $sql = "SELECT SUM(wons) as wons, SUM(loos) as loos, SUM(draws) as draws, SUM(kbmetal) as kbmetal, SUM(kbcrystal) as kbcrystal, SUM(lostunits) as lostunits, SUM(desunits) as desunits FROM %%USERS%% WHERE ally_id = :AllianceID;";
-        $statisticResult = $db->selectSingle($sql, [
+        $sql = "SELECT SUM(wons) as wons, SUM(loos) as loos, SUM(draws) as draws, 
+        SUM(kbmetal) as kbmetal, SUM(kbcrystal) as kbcrystal, 
+        SUM(lostunits) as lostunits, SUM(desunits) as desunits 
+        FROM %%USERS%% WHERE ally_id = :AllianceID;";
+
+        $stats_result = $db->selectSingle($sql, [
             ':AllianceID' => $this->allianceData['id'],
         ]);
 
         $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE allianceId = :AllianceID;";
-        $ApplyCount = $db->selectSingle($sql, [
+        $apply_count = $db->selectSingle($sql, [
             ':AllianceID' => $this->allianceData['id'],
         ], 'count');
 
@@ -594,9 +634,9 @@ class ShowAlliancePage extends AbstractGamePage
 
         if (!empty($this->allianceData['ally_events']))
         {
-            $sql = "SELECT id, username FROM %%USERS%% WHERE ally_id = :AllianceID;";
+            $sql = "SELECT id, username FROM %%USERS%% WHERE ally_id = :ally_id;";
             $result = $db->select($sql, [
-                ':AllianceID' => $this->allianceData['id'],
+                ':ally_id' => $this->allianceData['id'],
             ]);
 
             require_once('includes/classes/class.FlyingFleetsTable.php');
@@ -624,17 +664,17 @@ class ShowAlliancePage extends AbstractGamePage
             'ally_image'       => $this->allianceData['ally_image'],
             'ally_description' => BBCode::parse($this->allianceData['ally_description']),
             'ally_text'        => BBCode::parse($this->allianceData['ally_text']),
-            'rankName'         => $rankName,
-            'requests'         => sprintf($LNG['al_new_requests'], $ApplyCount),
-            'applyCount'       => $ApplyCount,
-            'totalfight'       => $statisticResult['wons'] + $statisticResult['loos'] + $statisticResult['draws'],
-            'fightwon'         => $statisticResult['wons'],
-            'fightlose'        => $statisticResult['loos'],
-            'fightdraw'        => $statisticResult['draws'],
-            'unitsshot'        => pretty_number($statisticResult['desunits']),
-            'unitslose'        => pretty_number($statisticResult['lostunits']),
-            'dermetal'         => pretty_number($statisticResult['kbmetal']),
-            'dercrystal'       => pretty_number($statisticResult['kbcrystal']),
+            'rankName'         => $rank_name,
+            'requests'         => sprintf($LNG['al_new_requests'], $apply_count),
+            'applyCount'       => $apply_count,
+            'totalfight'       => $stats_result['wons'] + $stats_result['loos'] + $stats_result['draws'],
+            'fightwon'         => $stats_result['wons'],
+            'fightlose'        => $stats_result['loos'],
+            'fightdraw'        => $stats_result['draws'],
+            'unitsshot'        => pretty_number($stats_result['desunits']),
+            'unitslose'        => pretty_number($stats_result['lostunits']),
+            'dermetal'         => pretty_number($stats_result['kbmetal']),
+            'dercrystal'       => pretty_number($stats_result['kbcrystal']),
             'isOwner'          => $this->allianceData['ally_owner'] == $USER['id'],
             'ally_events'      => $ally_events,
         ]);
@@ -650,24 +690,30 @@ class ShowAlliancePage extends AbstractGamePage
             $this->redirectToHome();
         }
 
-        $rankList = [];
+        $rank_list = [];
 
         $db = Database::get();
         $sql = "SELECT rankID, rankName FROM %%ALLIANCE_RANK%% WHERE allianceId = :AllianceID";
-        $rankResult = $db->select($sql, [
+        $rank_result = $db->select($sql, [
             ':AllianceID' => $this->allianceData['id'],
         ]);
 
-        foreach ($rankResult as $rankRow)
+        foreach ($rank_result as $c_rank)
         {
-            $rankList[$rankRow['rankID']] = $rankRow['rankName'];
+            $rank_list[$c_rank['rankID']] = $c_rank['rankName'];
         }
 
-        $memberList = [];
+        $member_list = [];
 
-        $sql = "SELECT DISTINCT u.id, u.username,u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points FROM %%USERS%% u LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ally_id = :AllianceID;";
-        $memberListResult = $db->select($sql, [
-            ':AllianceID' => $this->allianceData['id'],
+        $sql = "SELECT DISTINCT u.id, u.username,u.galaxy, u.system, u.planet, 
+        u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, 
+        u.ally_rank_id, s.total_points 
+        FROM %%USERS%% u LEFT JOIN %%USER_POINTS%% as s 
+        ON s.id_owner = u.id 
+        WHERE ally_id = :ally_id;";
+
+        $member_list_result = $db->select($sql, [
+            ':ally_id' => $this->allianceData['id'],
         ]);
 
         try
@@ -681,40 +727,41 @@ class ShowAlliancePage extends AbstractGamePage
             $USER['total_points'] = 0;
         }
 
-        foreach ($memberListResult as $memberListRow)
+        foreach ($member_list_result as $c_member_list)
         {
-            $IsNoobProtec = CheckNoobProtec($USER, $memberListRow, $memberListRow);
-            $Class = userStatus($memberListRow, $IsNoobProtec);
+            $IsNoobProtec = CheckNoobProtec($USER, $c_member_list, $c_member_list);
+            $Class = userStatus($c_member_list, $IsNoobProtec);
 
-            if ($this->allianceData['ally_owner'] == $memberListRow['id'])
+            if ($this->allianceData['ally_owner'] == $c_member_list['id'])
             {
-                $memberListRow['ally_rankName'] = empty($this->allianceData['ally_owner_range']) ? $LNG['al_founder_rank_text'] : $this->allianceData['ally_owner_range'];
+                $c_member_list['ally_rankName'] = empty($this->allianceData['ally_owner_range']) ? $LNG['al_founder_rank_text'] : $this->allianceData['ally_owner_range'];
             }
-            elseif ($memberListRow['ally_rank_id'] != 0 && isset($rankList[$memberListRow['ally_rank_id']]))
+            elseif ($c_member_list['ally_rank_id'] != 0 
+                && isset($rank_list[$c_member_list['ally_rank_id']]))
             {
-                $memberListRow['ally_rankName'] = $rankList[$memberListRow['ally_rank_id']];
+                $c_member_list['ally_rankName'] = $rank_list[$c_member_list['ally_rank_id']];
             }
             else
             {
-                $memberListRow['ally_rankName'] = $LNG['al_new_member_rank_text'];
+                $c_member_list['ally_rankName'] = $LNG['al_new_member_rank_text'];
             }
 
-            $memberList[$memberListRow['id']] = [
+            $member_list[$c_member_list['id']] = [
                 'class'         => $Class,
-                'username'      => $memberListRow['username'],
-                'galaxy'        => $memberListRow['galaxy'],
-                'system'        => $memberListRow['system'],
-                'planet'        => $memberListRow['planet'],
-                'register_time' => _date($LNG['php_tdformat'], $memberListRow['ally_register_time'], $USER['timezone']),
-                'points'        => $memberListRow['total_points'],
-                'rankName'      => $memberListRow['ally_rankName'],
-                'onlinetime'    => floor((TIMESTAMP - $memberListRow['onlinetime']) / 60),
+                'username'      => $c_member_list['username'],
+                'galaxy'        => $c_member_list['galaxy'],
+                'system'        => $c_member_list['system'],
+                'planet'        => $c_member_list['planet'],
+                'register_time' => _date($LNG['php_tdformat'], $c_member_list['ally_register_time'], $USER['timezone']),
+                'points'        => $c_member_list['total_points'],
+                'rankName'      => $c_member_list['ally_rankName'],
+                'onlinetime'    => floor((TIMESTAMP - $c_member_list['onlinetime']) / 60),
             ];
         }
 
         $this->assign([
-            'memberList'    => $memberList,
-            'al_users_list' => sprintf($LNG['al_users_list'], count($memberList)),
+            'memberList'    => $member_list,
+            'al_users_list' => sprintf($LNG['al_users_list'], count($member_list)),
             'ShortStatus'   => [
                 'vacation'     => $LNG['gl_short_vacation'],
                 'banned'       => $LNG['gl_short_ban'],
@@ -737,19 +784,26 @@ class ShowAlliancePage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "UPDATE %%USERS%% SET ally_id = 0, ally_register_time = 0, ally_register_time = 5 WHERE id = :UserID;";
+        $sql = "UPDATE %%USERS%% SET ally_id = 0, ally_register_time = 0, 
+        ally_register_time = 5 
+        WHERE id = :user_id;";
+
         $db->update($sql, [
-            ':UserID' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
-        $sql = "UPDATE %%USER_POINTS%% SET id_ally = 0 WHERE id_owner = :UserID;";
+        $sql = "UPDATE %%USER_POINTS%% SET id_ally = 0 WHERE id_owner = :user_id;";
+       
         $db->update($sql, [
-            ':UserID' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
-        $sql = "UPDATE %%ALLIANCE%% SET ally_members = (SELECT COUNT(*) FROM %%USERS%% WHERE ally_id = :AllianceID) WHERE id = :AllianceID;";
+        $sql = "UPDATE %%ALLIANCE%% SET ally_members = (SELECT COUNT(*) 
+        FROM %%USERS%% WHERE ally_id = :ally_id) 
+        WHERE id = :ally_id;";
+        
         $db->update($sql, [
-            ':AllianceID' => $this->allianceData['id'],
+            ':ally_id' => $this->allianceData['id'],
         ]);
 
         $this->redirectTo('game.php?page=alliance');
@@ -768,7 +822,7 @@ class ShowAlliancePage extends AbstractGamePage
 
         if ($action == "send")
         {
-            $rankId = HTTP::_GP('rankID', 0);
+            $rank_id = HTTP::_GP('rankID', 0);
             $subject = HTTP::_GP('subject', '', true);
             $text = HTTP::_GP('text', $LNG['mg_no_subject'], true);
 
@@ -779,49 +833,49 @@ class ShowAlliancePage extends AbstractGamePage
 
             $db = Database::get();
 
-            if ($rankId == 0)
+            if ($rank_id == 0)
             {
                 $sql = 'SELECT id, username FROM %%USERS%% WHERE ally_id = :AllianceID;';
-                $sendUsersResult = $db->select($sql, [
+                $send_user_result = $db->select($sql, [
                     ':AllianceID' => $this->allianceData['id'],
                 ]);
             }
             else
             {
                 $sql = 'SELECT id, username FROM %%USERS%% WHERE ally_id = :AllianceID AND ally_rank_id = :RankID;';
-                $sendUsersResult = $db->select($sql, [
+                $send_user_result = $db->select($sql, [
                     ':AllianceID' => $this->allianceData['id'],
-                    ':RankID'     => $rankId,
+                    ':RankID'     => $rank_id,
                 ]);
             }
 
-            $sendList = $LNG['al_circular_sended'];
+            $send_list = $LNG['al_circular_sended'];
             $title = $LNG['al_circular_alliance'] . $this->allianceData['ally_tag'];
             $text = sprintf($LNG['al_circular_front_text'], $USER['username']) . "\r\n" . $text;
 
-            foreach ($sendUsersResult as $sendUsersRow)
+            foreach ($send_user_result as $c_send_user)
             {
-                PlayerUtil::sendMessage($sendUsersRow['id'], $USER['id'], $title, 2, $subject, makebr($text), TIMESTAMP);
-                $sendList .= "\n" . $sendUsersRow['username'];
+                PlayerUtil::sendMessage($c_send_user['id'], $USER['id'], $title, 2, $subject, makebr($text), TIMESTAMP);
+                $send_list .= "\n" . $c_send_user['username'];
             }
 
-            $this->sendJSON(['message' => $sendList, 'error' => false]);
+            $this->sendJSON(['message' => $send_list, 'error' => false]);
         }
 
         $this->initTemplate();
         $this->setWindow('popup');
-        $RangeList[] = $LNG['al_all_players'];
+        $range_list[] = $LNG['al_all_players'];
 
         if (is_array($this->ranks))
         {
             foreach ($this->ranks as $id => $array)
             {
-                $RangeList[$id + 1] = $array['name'];
+                $range_list[$id + 1] = $array['name'];
             }
         }
 
         $this->assign([
-            'RangeList' => $RangeList,
+            'RangeList' => $range_list,
         ]);
 
         $this->display('page.alliance.circular.tpl');
@@ -832,21 +886,21 @@ class ShowAlliancePage extends AbstractGamePage
         global $LNG;
 
         $action = HTTP::_GP('action', 'overview');
-        $methodName = 'admin' . ucwords($action);
+        $method_name = 'admin' . ucwords($action);
 
-        if (!is_callable([$this, $methodName]))
+        if (!is_callable([$this, $method_name]))
         {
             ShowErrorPage::printError($LNG['page_doesnt_exist']);
         }
 
-        $this->{$methodName}();
+        $this->{$method_name}();
     }
 
     protected function adminOverview(): void
     {
         global $LNG;
         $send = HTTP::_GP('send', 0);
-        $textMode = HTTP::_GP('textMode', 'external');
+        $text_mode = HTTP::_GP('textMode', 'external');
 
         if ($send)
         {
@@ -865,15 +919,18 @@ class ShowAlliancePage extends AbstractGamePage
             $new_ally_tag = HTTP::_GP('ally_tag', $this->allianceData['ally_tag'], UTF8_SUPPORT);
             $new_ally_name = HTTP::_GP('ally_name', $this->allianceData['ally_name'], UTF8_SUPPORT);
 
-            if (!empty($new_ally_tag) && $this->allianceData['ally_tag'] != $new_ally_tag)
+            if (!empty($new_ally_tag) 
+                && $this->allianceData['ally_tag'] != $new_ally_tag)
             {
-                $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE%% WHERE ally_universe = :universe AND ally_tag = :NewAllianceTag;";
-                $allianceCount = $db->selectSingle($sql, [
+                $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE%% 
+                WHERE ally_universe = :universe AND ally_tag = :NewAllianceTag;";
+
+                $ally_count = $db->selectSingle($sql, [
                     ':universe'       => Universe::current(),
                     ':NewAllianceTag' => $new_ally_tag,
                 ], 'count');
 
-                if ($allianceCount != 0)
+                if ($ally_count != 0)
                 {
                     $this->printMessage(sprintf($LNG['al_already_exists'], $new_ally_tag), [[
                         'label' => $LNG['sys_back'],
@@ -886,15 +943,18 @@ class ShowAlliancePage extends AbstractGamePage
                 }
             }
 
-            if (!empty($new_ally_name) && $this->allianceData['ally_name'] != $new_ally_name)
+            if (!empty($new_ally_name) 
+                && $this->allianceData['ally_name'] != $new_ally_name)
             {
-                $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE%% WHERE ally_universe = :universe AND ally_name = :NewAllianceName;";
-                $allianceCount = $db->selectSingle($sql, [
+                $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE%% 
+                WHERE ally_universe = :universe AND ally_name = :NewAllianceName;";
+                
+                $ally_count = $db->selectSingle($sql, [
                     ':universe'        => Universe::current(),
                     ':NewAllianceName' => $new_ally_name,
                 ], 'count');
 
-                if ($allianceCount != 0)
+                if ($ally_count != 0)
                 {
                     $this->printMessage(sprintf($LNG['al_already_exists'], $new_ally_name), [[
                         'label' => $LNG['sys_back'],
@@ -907,31 +967,32 @@ class ShowAlliancePage extends AbstractGamePage
                 }
             }
 
-            if ($this->allianceData['ally_request_notallow'] != 0 && $this->allianceData['ally_request_notallow'] != 1)
+            if ($this->allianceData['ally_request_notallow'] != 0 
+                && $this->allianceData['ally_request_notallow'] != 1)
             {
                 $this->allianceData['ally_request_notallow'] = 0;
             }
 
             $text = HTTP::_GP('text', '', true);
-            $textMode = HTTP::_GP('textMode', 'external');
+            $text_mode = HTTP::_GP('textMode', 'external');
 
-            $textSQL = "";
+            $sql_text = "";
 
-            switch ($textMode)
+            switch ($text_mode)
             {
                 case 'external':
-                    $textSQL = "ally_description = :text, ";
+                    $sql_text = "ally_description = :text, ";
                     break;
                 case 'internal':
-                    $textSQL = "ally_text = :text, ";
+                    $sql_text = "ally_text = :text, ";
                     break;
                 case 'apply':
-                    $textSQL = "ally_request = :text, ";
+                    $sql_text = "ally_request = :text, ";
                     break;
             }
 
             $sql = "UPDATE %%ALLIANCE%% SET
-			" . $textSQL . "
+			" . $sql_text . "
 			ally_tag = :AllianceTag,
 			ally_name = :AllianceName,
 			ally_owner_range = :AllianceOwnerRange,
@@ -963,7 +1024,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
         else
         {
-            switch ($textMode)
+            switch ($text_mode)
             {
                 case 'internal':
                     $text = $this->allianceData['ally_text'];
@@ -989,7 +1050,7 @@ class ShowAlliancePage extends AbstractGamePage
         $this->assign([
             'RequestSelector'         => [0 => $LNG['al_requests_allowed'], 1 => $LNG['al_requests_not_allowed']],
             'YesNoSelector'           => [1 => $LNG['al_go_out_yes'], 0 => $LNG['al_go_out_no']],
-            'textMode'                => $textMode,
+            'textMode'                => $text_mode,
             'text'                    => $text,
             'ally_tag'                => $this->allianceData['ally_tag'],
             'ally_name'               => $this->allianceData['ally_name'],
@@ -1061,28 +1122,28 @@ class ShowAlliancePage extends AbstractGamePage
 
         $db = Database::get();
 
-        $postleader = HTTP::_GP('newleader', 0);
-        if (!empty($postleader))
+        $post_leader = HTTP::_GP('newleader', 0);
+        if (!empty($post_leader))
         {
             $sql = "SELECT ally_rank_id FROM %%USERS%% WHERE id = :LeaderID;";
-            $Rank = $db->selectSingle($sql, [
-                ':LeaderID' => $postleader,
+            $rank = $db->selectSingle($sql, [
+                ':LeaderID' => $post_leader,
             ]);
 
             $sql = "UPDATE %%USERS%% SET ally_rank_id = :AllyRank WHERE id = :UserID;";
             $db->update($sql, [
                 ':UserID'   => $USER['id'],
-                ':AllyRank' => $Rank['ally_rank_id'],
+                ':AllyRank' => $rank['ally_rank_id'],
             ]);
 
             $sql = "UPDATE %%USERS%% SET ally_rank_id = 0 WHERE id = :LeaderID;";
             $db->update($sql, [
-                ':LeaderID' => $postleader,
+                ':LeaderID' => $post_leader,
             ]);
 
             $sql = "UPDATE %%ALLIANCE%% SET ally_owner = :LeaderID WHERE id = :AllianceID;";
             $db->update($sql, [
-                ':LeaderID'   => $postleader,
+                ':LeaderID'   => $post_leader,
                 ':AllianceID' => $this->allianceData['id'],
             ]);
 
@@ -1091,20 +1152,23 @@ class ShowAlliancePage extends AbstractGamePage
         else
         {
             $sql = "SELECT u.id, r.rankName, u.username FROM %%USERS%% u INNER JOIN %%ALLIANCE_RANK%% r ON r.rankID = u.ally_rank_id AND r.TRANSFER = 1 WHERE u.ally_id = :allianceId AND id != :allianceOwner;";
-            $transferUserResult = $db->select($sql, [
+            $transfer_user_result = $db->select($sql, [
                 ':allianceOwner' => $this->allianceData['ally_owner'],
                 ':allianceId'    => $this->allianceData['id'],
             ]);
 
-            $transferUserList = [];
+            $transfer_user_list = [];
 
-            foreach ($transferUserResult as $transferUserRow)
+            foreach ($transfer_user_result as $c_transfer_user)
             {
-                $transferUserList[$transferUserRow['id']] = $transferUserRow['username'] . " [" . $transferUserRow['rankName'] . "]";
+                $transfer_user_list[$c_transfer_user['id']] = $c_transfer_user['username'] . 
+                " [" .
+                 $c_transfer_user['rankName'] .
+                 "]";
             }
 
             $this->assign([
-                'transferUserList' => $transferUserList,
+                'transferUserList' => $transfer_user_list,
             ]);
 
             $this->display('page.alliance.admin.transfer.tpl');
@@ -1114,31 +1178,36 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminMangeApply(): void
     {
         global $LNG, $USER;
-        if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
+        if (!$this->rights['SEEAPPLY'] 
+            || !$this->rights['MANAGEAPPLY'])
         {
             $this->redirectToHome();
         }
 
         $db = Database::get();
 
-        $sql = "SELECT applyID, u.username, r.time FROM %%ALLIANCE_REQUEST%% r INNER JOIN %%USERS%% u ON r.userId = u.id WHERE r.allianceId = :allianceId;";
-        $applyResult = $db->select($sql, [
+        $sql = "SELECT applyID, u.username, r.time 
+        FROM %%ALLIANCE_REQUEST%% r 
+        INNER JOIN %%USERS%% u ON r.userId = u.id 
+        WHERE r.allianceId = :allianceId;";
+
+        $apply_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        $applyList = [];
+        $apply_list = [];
 
-        foreach ($applyResult as $applyRow)
+        foreach ($apply_result as $c_apply)
         {
-            $applyList[] = [
-                'username' => $applyRow['username'],
-                'id'       => $applyRow['applyID'],
-                'time'     => _date($LNG['php_tdformat'], $applyRow['time'], $USER['timezone']),
+            $apply_list[] = [
+                'username' => $c_apply['username'],
+                'id'       => $c_apply['applyID'],
+                'time'     => _date($LNG['php_tdformat'], $c_apply['time'], $USER['timezone']),
             ];
         }
 
         $this->assign([
-            'applyList' => $applyList,
+            'applyList' => $apply_list,
         ]);
 
         $this->display('page.alliance.admin.mangeApply.tpl');
@@ -1197,11 +1266,11 @@ class ShowAlliancePage extends AbstractGamePage
 		LEFT JOIN %%PLANETS%% AS p ON p.id = u.id_planet
 		WHERE applyID = :applyID;";
 
-        $applyDetail = $db->selectSingle($sql, [
+        $apply_detail = $db->selectSingle($sql, [
             ':applyID' => $id,
         ]);
 
-        if (empty($applyDetail))
+        if (empty($apply_detail))
         {
             $this->printMessage($LNG['al_apply_not_exists'], [[
                 'label' => $LNG['sys_back'],
@@ -1209,17 +1278,17 @@ class ShowAlliancePage extends AbstractGamePage
             ]]);
         }
 
-        $applyDetail['text'] = BBCode::parse($applyDetail['text']);
-        $applyDetail['kbmetal'] = pretty_number($applyDetail['kbmetal']);
-        $applyDetail['kbcrystal'] = pretty_number($applyDetail['kbcrystal']);
-        $applyDetail['lostunits'] = pretty_number($applyDetail['lostunits']);
-        $applyDetail['desunits'] = pretty_number($applyDetail['desunits']);
+        $apply_detail['text'] = BBCode::parse($apply_detail['text']);
+        $apply_detail['kbmetal'] = pretty_number($apply_detail['kbmetal']);
+        $apply_detail['kbcrystal'] = pretty_number($apply_detail['kbcrystal']);
+        $apply_detail['lostunits'] = pretty_number($apply_detail['lostunits']);
+        $apply_detail['desunits'] = pretty_number($apply_detail['desunits']);
 
         $this->assign([
-            'applyDetail'   => $applyDetail,
-            'apply_time'    => _date($LNG['php_tdformat'], $applyDetail['time'], $USER['timezone']),
-            'register_time' => _date($LNG['php_tdformat'], $applyDetail['register_time'], $USER['timezone']),
-            'onlinetime'    => _date($LNG['php_tdformat'], $applyDetail['onlinetime'], $USER['timezone']),
+            'applyDetail'   => $apply_detail,
+            'apply_time'    => _date($LNG['php_tdformat'], $apply_detail['time'], $USER['timezone']),
+            'register_time' => _date($LNG['php_tdformat'], $apply_detail['register_time'], $USER['timezone']),
+            'onlinetime'    => _date($LNG['php_tdformat'], $apply_detail['onlinetime'], $USER['timezone']),
         ]);
 
         $this->display('page.alliance.admin.detailApply.tpl');
@@ -1228,7 +1297,9 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminSendAnswerToApply(): void
     {
         global $LNG, $USER;
-        if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
+        
+        if (!$this->rights['SEEAPPLY'] 
+            || !$this->rights['MANAGEAPPLY'])
         {
             $this->redirectToHome();
         }
@@ -1237,11 +1308,12 @@ class ShowAlliancePage extends AbstractGamePage
 
         $text = makebr(HTTP::_GP('text', '', true));
         $answer = HTTP::_GP('answer', '');
-        $applyID = HTTP::_GP('id', 0);
+        $apply_id = HTTP::_GP('id', 0);
 
         $sql = "SELECT userId FROM %%ALLIANCE_REQUEST%% WHERE applyID = :applyID;";
+        
         $userId = $db->selectSingle($sql, [
-            ':applyID' => $applyID,
+            ':applyID' => $apply_id,
         ], 'userId');
 
         // only if alliance request still exist
@@ -1249,25 +1321,35 @@ class ShowAlliancePage extends AbstractGamePage
         {
             if ($answer == 'yes')
             {
-                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE applyID = :applyID";
+                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% 
+                WHERE applyID = :apply_id";
+
                 $db->delete($sql, [
-                    ':applyID' => $applyID,
+                    ':apply_id' => $apply_id,
                 ]);
 
-                $sql = "UPDATE %%USERS%% SET ally_id = :allianceId, ally_register_time = :time, ally_rank_id = 0 WHERE id = :userId;";
+                $sql = "UPDATE %%USERS%% 
+                SET ally_id = :allianceId, ally_register_time = :time, ally_rank_id = 0 
+                WHERE id = :userId;";
+
                 $db->update($sql, [
                     ':allianceId' => $this->allianceData['id'],
                     ':time'       => TIMESTAMP,
                     ':userId'     => $userId,
                 ]);
 
-                $sql = "UPDATE %%USER_POINTS%% SET id_ally = :allianceId WHERE id_owner = :userId;";
+                $sql = "UPDATE %%USER_POINTS%% SET id_ally = :allianceId 
+                WHERE id_owner = :userId;";
+
                 $db->update($sql, [
                     ':allianceId' => $this->allianceData['id'],
                     ':userId'     => $userId,
                 ]);
 
-                $sql = "UPDATE %%ALLIANCE%% SET ally_members = (SELECT COUNT(*) FROM %%USERS%% WHERE ally_id = :allianceId) WHERE id = :allianceId;";
+                $sql = "UPDATE %%ALLIANCE%% SET ally_members = (SELECT COUNT(*) 
+                FROM %%USERS%% WHERE ally_id = :allianceId) 
+                WHERE id = :allianceId;";
+
                 $db->update($sql, [
                     ':allianceId' => $this->allianceData['id'],
                 ]);
@@ -1277,18 +1359,29 @@ class ShowAlliancePage extends AbstractGamePage
             }
             else
             {
-                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE applyID = :applyID";
+                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE applyID = :apply_id";
                 $db->delete($sql, [
-                    ':applyID' => $applyID,
+                    ':apply_id' => $apply_id,
                 ]);
 
-                $text = $LNG['al_hi_the_alliance'] . $this->allianceData['ally_name'] . $LNG['al_has_declined'] . $text;
+                $text = $LNG['al_hi_the_alliance'] . 
+                $this->allianceData['ally_name'] . 
+                $LNG['al_has_declined'] . $text;
+
                 $subject = $LNG['al_you_was_declined'] . $this->allianceData['ally_name'];
             }
 
-            $senderName = $LNG['al_the_alliance'] . $this->allianceData['ally_name'] . ' [' . $this->allianceData['ally_tag'] . ']';
-            PlayerUtil::sendMessage($userId, $USER['id'], $senderName, 2, $subject, $text, TIMESTAMP);
+            $sender_name = $LNG['al_the_alliance'] . 
+            $this->allianceData['ally_name'] . 
+            ' [' . 
+            $this->allianceData['ally_tag'] . 
+            ']';
+            
+            PlayerUtil::sendMessage($userId, $USER['id'], 
+                $sender_name, 2, $subject, $text, TIMESTAMP);
+
         }
+
         $this->redirectTo('game.php?page=alliance&mode=admin&action=mangeApply');
     }
 
@@ -1300,29 +1393,29 @@ class ShowAlliancePage extends AbstractGamePage
         }
 
         $sql = "SELECT * FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId;";
-        $rankResult = Database::get()->select($sql, [
+        $rank_result = Database::get()->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        $rankList = [];
-        foreach ($rankResult as $rankRow)
+        $rank_list = [];
+        foreach ($rank_result as $c_rank)
         {
-            $rankList[$rankRow['rankID']] = $rankRow;
+            $rank_list[$c_rank['rankID']] = $c_rank;
         }
 
-        $availableRanks = [];
-        foreach ($this->availableRanks as $rankId => $rankName)
+        $available_ranks = [];
+        foreach ($this->availableRanks as $c_rank_id => $c_rank_name)
         {
-            if ($this->rights[$rankName])
+            if ($this->rights[$c_rank_name])
             {
-                $availableRanks[$rankId] = $rankName;
+                $available_ranks[$c_rank_id] = $c_rank_name;
             }
         }
 
         $this->assign([
-            'rankList'       => $rankList,
+            'rankList'       => $rank_list,
             'ownRights'      => $this->rights,
-            'availableRanks' => $availableRanks,
+            'availableRanks' => $available_ranks,
         ]);
 
         $this->display('page.alliance.admin.permissions.tpl');
@@ -1336,15 +1429,15 @@ class ShowAlliancePage extends AbstractGamePage
             $this->redirectToHome();
         }
 
-        $newRank = HTTP::_GP('newrank', [], true);
+        $new_rank = HTTP::_GP('newrank', [], true);
         $delete = HTTP::_GP('deleteRank', 0);
-        $rankData = HTTP::_GP('rank', []);
+        $rank_data = HTTP::_GP('rank', []);
 
         $db = Database::get();
 
-        if (!empty($newRank['rankName']))
+        if (!empty($new_rank['rankName']))
         {
-            if (!PlayerUtil::isNameValid($newRank['rankName']))
+            if (!PlayerUtil::isNameValid($new_rank['rankName']))
             {
                 $this->printMessage($LNG['al_invalid_rank_name'], [[
                     'label' => $LNG['sys_back'],
@@ -1354,15 +1447,16 @@ class ShowAlliancePage extends AbstractGamePage
 
             $sql = 'INSERT INTO %%ALLIANCE_RANK%% SET rankName = :rankName, allianceID = :allianceID';
             $params = [
-                ':rankName'   => $newRank['rankName'],
+                ':rankName'   => $new_rank['rankName'],
                 ':allianceID' => $this->allianceData['id'],
             ];
 
-            unset($newRank['rankName']);
+            unset($new_rank['rankName']);
 
-            foreach ($newRank as $key => $value)
+            foreach ($new_rank as $key => $value)
             {
-                if (isset($this->availableRanks[$key]) && $this->rights[$this->availableRanks[$key]])
+                if (isset($this->availableRanks[$key]) 
+                    && $this->rights[$this->availableRanks[$key]])
                 {
                     $sql .= ', `' . $this->availableRanks[$key] . '` = :' . $this->availableRanks[$key];
                     $params[':' . $this->availableRanks[$key]] = $value == 1 ? 1 : 0;
@@ -1375,13 +1469,17 @@ class ShowAlliancePage extends AbstractGamePage
         {
             if (!empty($delete))
             {
-                $sql = "DELETE FROM %%ALLIANCE_RANK%% WHERE rankID = :rankID AND allianceId = :allianceId;";
+                $sql = "DELETE FROM %%ALLIANCE_RANK%% 
+                WHERE rankID = :rankID AND allianceId = :allianceId;";
+
                 $db->delete($sql, [
                     ':allianceId' => $this->allianceData['id'],
                     ':rankID'     => $delete,
                 ]);
 
-                $sql = "UPDATE %%USERS%% SET ally_rank_id = 0 WHERE ally_rank_id = :rankID AND ally_id = :allianceId;";
+                $sql = "UPDATE %%USERS%% SET ally_rank_id = 0 
+                WHERE ally_rank_id = :rankID AND ally_id = :allianceId;";
+
                 $db->update($sql, [
                     ':allianceId' => $this->allianceData['id'],
                     ':rankID'     => $delete,
@@ -1389,27 +1487,35 @@ class ShowAlliancePage extends AbstractGamePage
             }
             else
             {
-                foreach ($rankData as $rankId => $rowData)
+                foreach ($rank_data as $rank_id => $c_rank_data)
                 {
-                    $sql = 'UPDATE %%ALLIANCE_RANK%% SET rankName = :rankName';
+                    $sql = 'UPDATE %%ALLIANCE_RANK%% SET rankName = :rank_name';
+                    
                     $params = [
-                        ':rankName'   => $rowData['rankName'],
+                        ':rank_name'   => $c_rank_data['rankName'],
                         ':allianceID' => $this->allianceData['id'],
-                        ':rankId'     => $rankId,
+                        ':rank_id'     => $rank_id,
                     ];
 
-                    unset($rowData['rankName']);
+                    unset($c_rank_data['rankName']);
 
                     foreach ($this->availableRanks as $key => $value)
                     {
-                        if (isset($this->availableRanks[$key]) && $this->rights[$this->availableRanks[$key]])
+                        if (isset($this->availableRanks[$key]) 
+                            && $this->rights[$this->availableRanks[$key]])
                         {
-                            $sql .= ', `' . $this->availableRanks[$key] . '` = :' . $this->availableRanks[$key];
-                            $params[':' . $this->availableRanks[$key]] = (isset($rowData[$key])) == 1 ? 1 : 0;
+                            $sql .= ', `' . 
+                            $this->availableRanks[$key] . 
+                            '` = :' . 
+                            $this->availableRanks[$key];
+
+                            $params[':' . $this->availableRanks[$key]] = 
+                            (isset($c_rank_data[$key])) ? 1 : 0;
+
                         }
                     }
 
-                    $sql .= ' WHERE rankID = :rankId AND allianceID = :allianceID';
+                    $sql .= ' WHERE rankID = :rank_id AND allianceID = :allianceID';
 
                     $db->update($sql, $params);
                 }
@@ -1430,31 +1536,31 @@ class ShowAlliancePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "SELECT rankID, rankName FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId;";
-        $rankResult = $db->select($sql, [
+        $rank_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        $rankList = [$LNG['al_new_member_rank_text']];
-        $rankSelectList = $rankList;
+        $rank_list = [$LNG['al_new_member_rank_text']];
+        $rank_select_list = $rank_list;
 
-        foreach ($rankResult as $rankRow)
+        foreach ($rank_result as $c_rank)
         {
-            $hasRankRight = true;
+            $has_rank_right = true;
             foreach ($this->availableRanks as $rankName)
             {
                 if (!$this->rights[$rankName])
                 {
-                    $hasRankRight = false;
+                    $has_rank_right = false;
                     break;
                 }
             }
 
-            if ($hasRankRight)
+            if ($has_rank_right)
             {
-                $rankSelectList[$rankRow['rankID']] = $rankRow['rankName'];
+                $rank_select_list[$c_rank['rankID']] = $c_rank['rankName'];
             }
 
-            $rankList[$rankRow['rankID']] = $rankRow['rankName'];
+            $rank_list[$c_rank['rankID']] = $c_rank['rankName'];
         }
 
         $sql = "SELECT DISTINCT u.id, u.username, u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points
@@ -1462,53 +1568,51 @@ class ShowAlliancePage extends AbstractGamePage
 		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id
 		WHERE ally_id = :allianceId;";
 
-        $memberListResult = $db->select($sql, [
+        $member_list_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        $memberList = [];
+        $member_list = [];
 
-        try
-        {
-            $USER += $db->selectSingle('SELECT total_points FROM %%USER_POINTS%% WHERE id_owner = :userId ', [
-                ':userId' => $USER['id'],
-            ]);
-        }
-        catch (Exception $e)
-        {
-            $USER['total_points'] = 0;
-        }
+        $total_points = ['total_points' => 0]; // default
+        $sql = 'SELECT `total_points` FROM %%USER_POINTS%% WHERE id_owner = :userId;';
+        $total_points = $db->selectSingle($sql, [
+            ':userId' => $USER['id'],
+        ]);
+        $USER += $total_points;
 
-        foreach ($memberListResult as $memberListRow)
+        foreach ($member_list_result as $c_member_list)
         {
-            $IsNoobProtec = CheckNoobProtec($USER, $memberListRow, $memberListRow);
-            $Class = userStatus($memberListRow, $IsNoobProtec);
+            $is_noob_protect = CheckNoobProtec($USER, $c_member_list, $c_member_list);
+            $class = userStatus($c_member_list, $is_noob_protect);
 
-            if ($this->allianceData['ally_owner'] == $memberListRow['id'])
+            if ($this->allianceData['ally_owner'] == $c_member_list['id'])
             {
-                $memberListRow['ally_rank_id'] = -1;
+                $c_member_list['ally_rank_id'] = -1;
             }
 
-            $memberList[$memberListRow['id']] = [
-                'class'         => $Class,
-                'username'      => $memberListRow['username'],
-                'galaxy'        => $memberListRow['galaxy'],
-                'system'        => $memberListRow['system'],
-                'planet'        => $memberListRow['planet'],
-                'register_time' => _date($LNG['php_tdformat'], $memberListRow['ally_register_time'], $USER['timezone']),
-                'points'        => $memberListRow['total_points'],
-                'rankID'        => $memberListRow['ally_rank_id'],
-                'onlinetime'    => floor((TIMESTAMP - $memberListRow['onlinetime']) / 60),
-                'kickQuestion'  => sprintf($LNG['al_kick_player'], $memberListRow['username']),
+            $member_list[$c_member_list['id']] = [
+                'class'         => $class,
+                'username'      => $c_member_list['username'],
+                'galaxy'        => $c_member_list['galaxy'],
+                'system'        => $c_member_list['system'],
+                'planet'        => $c_member_list['planet'],
+                'register_time' => _date($LNG['php_tdformat'], 
+                                    $c_member_list['ally_register_time'], 
+                                    $USER['timezone']),
+                'points'        => $c_member_list['total_points'],
+                'rankID'        => $c_member_list['ally_rank_id'],
+                'onlinetime'    => floor((TIMESTAMP - $c_member_list['onlinetime']) / 60),
+                'kickQuestion'  => sprintf($LNG['al_kick_player'], $c_member_list['username']),
             ];
         }
 
         $this->assign([
-            'memberList'     => $memberList,
-            'rankList'       => $rankList,
-            'rankSelectList' => $rankSelectList,
+            'memberList'     => $member_list,
+            'rankList'       => $rank_list,
+            'rankSelectList' => $rank_select_list,
             'founder'        => empty($this->allianceData['ally_owner_range']) ? $LNG['al_founder_rank_text'] : $this->allianceData['ally_owner_range'],
-            'al_users_list'  => sprintf($LNG['al_users_list'], count($memberList)),
+            'al_users_list'  => sprintf($LNG['al_users_list'], count($member_list)),
             'canKick'        => $this->rights['KICK'],
             'ShortStatus'    => [
                 'vacation'     => $LNG['gl_short_vacation'],
@@ -1534,18 +1638,22 @@ class ShowAlliancePage extends AbstractGamePage
             $this->sendJSON('');
         }
 
-        $userRanks = HTTP::_GP('rank', []);
+        $user_ranks = HTTP::_GP('rank', []);
 
         $db = Database::get();
 
-        $sql = 'SELECT rankID, ' . implode(', ', $this->availableRanks) . ' FROM %%ALLIANCE_RANK%% WHERE allianceID = :allianceId;';
-        $rankResult = $db->select($sql, [
+        $sql = 'SELECT rankID, ' . 
+                implode(', ', $this->availableRanks) . 
+                ' FROM %%ALLIANCE_RANK%% WHERE allianceID = :allianceId;';
+
+        $rank_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
-        $rankList = [];
-        $rankList[0] = array_combine($this->availableRanks, array_fill(0, count($this->availableRanks), true));
 
-        foreach ($rankResult as $rankRow)
+        $rank_list = [];
+        $rank_list[0] = array_combine($this->availableRanks, array_fill(0, count($this->availableRanks), true));
+
+        foreach ($rank_result as $rankRow)
         {
             $hasRankRight = true;
             foreach ($this->availableRanks as $rankName)
@@ -1559,18 +1667,21 @@ class ShowAlliancePage extends AbstractGamePage
 
             if ($hasRankRight)
             {
-                $rankList[$rankRow['rankID']] = $rankRow;
+                $rank_list[$rankRow['rankID']] = $rankRow;
             }
         }
 
-        foreach ($userRanks as $userId => $rankId)
+        foreach ($user_ranks as $userId => $rankId)
         {
-            if ($userId == $this->allianceData['ally_owner'] || !isset($rankList[$rankId]))
+            if ($userId == $this->allianceData['ally_owner'] 
+                || !isset($rank_list[$rankId]))
             {
                 continue;
             }
 
-            $sql = 'UPDATE %%USERS%% SET ally_rank_id = :rankID WHERE id = :userId AND ally_id = :allianceId;';
+            $sql = 'UPDATE %%USERS%% SET ally_rank_id = :rankID 
+            WHERE id = :userId AND ally_id = :allianceId;';
+
             $db->update($sql, [
                 ':allianceId' => $this->allianceData['id'],
                 ':rankID'     => (int) $rankId,
@@ -1593,17 +1704,22 @@ class ShowAlliancePage extends AbstractGamePage
         $id = HTTP::_GP('id', 0);
 
         $sql = "SELECT ally_id FROM %%USERS%% WHERE id = :id;";
-        $kickUserAllianceId = $db->selectSingle($sql, [
+        
+        $kick_user_ally_id = $db->selectSingle($sql, [
             ':id' => $id,
         ], 'ally_id');
 
         # Check, if user is in alliance, see #205
-        if (empty($kickUserAllianceId) || $kickUserAllianceId != $this->allianceData['id'])
+        if (empty($kick_user_ally_id) 
+            || $kick_user_ally_id != $this->allianceData['id'])
         {
             $this->redirectToHome();
         }
 
-        $sql = "UPDATE %%USERS%% SET ally_id = 0, ally_register_time = 0, ally_rank_id = 0 WHERE id = :id;";
+        $sql = "UPDATE %%USERS%% 
+        SET ally_id = 0, ally_register_time = 0, ally_rank_id = 0 
+        WHERE id = :id;";
+
         $db->update($sql, [
             ':id' => $id,
         ]);
@@ -1631,7 +1747,7 @@ class ShowAlliancePage extends AbstractGamePage
 
         $db = Database::get();
 
-        $diplomaticList = [
+        $diplomacy_list = [
             0 => [
                 1 => [],
                 2 => [],
@@ -1661,29 +1777,30 @@ class ShowAlliancePage extends AbstractGamePage
         $sql = "SELECT d.id, d.level, d.accept, d.owner_1, d.owner_2, a.ally_name FROM %%DIPLO%% d
 		INNER JOIN %%ALLIANCE%% a ON IF(:allianceId = d.owner_1, a.id = d.owner_2, a.id = d.owner_1)
 		WHERE owner_1 = :allianceId OR owner_2 = :allianceId;";
-        $diplomaticResult = $db->select($sql, [
+        
+        $diplomacy_result = $db->select($sql, [
             ':allianceId' => $this->allianceData['id'],
         ]);
 
-        foreach ($diplomaticResult as $diplomaticRow)
+        foreach ($diplomacy_result as $c_diplomacy)
         {
-            $own = $diplomaticRow['owner_1'] == $this->allianceData['id'];
-            if ($diplomaticRow['accept'] == 1)
+            $own = $c_diplomacy['owner_1'] == $this->allianceData['id'];
+            if ($c_diplomacy['accept'] == 1)
             {
-                $diplomaticList[0][$diplomaticRow['level']][$diplomaticRow['id']] = $diplomaticRow['ally_name'];
+                $diplomacy_list[0][$c_diplomacy['level']][$c_diplomacy['id']] = $c_diplomacy['ally_name'];
             }
             elseif ($own)
             {
-                $diplomaticList[2][$diplomaticRow['level']][$diplomaticRow['id']] = $diplomaticRow['ally_name'];
+                $diplomacy_list[2][$c_diplomacy['level']][$c_diplomacy['id']] = $c_diplomacy['ally_name'];
             }
             else
             {
-                $diplomaticList[1][$diplomaticRow['level']][$diplomaticRow['id']] = $diplomaticRow['ally_name'];
+                $diplomacy_list[1][$c_diplomacy['level']][$c_diplomacy['id']] = $c_diplomacy['ally_name'];
             }
         }
 
         $this->assign([
-            'diploList' => $diplomaticList,
+            'diploList' => $diplomacy_list,
         ]);
 
         $this->display('page.alliance.admin.diplomacy.default.tpl');
@@ -1699,6 +1816,7 @@ class ShowAlliancePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "UPDATE %%DIPLO%% SET accept = 1 WHERE id = :id AND owner_2 = :allianceId;";
+        
         $db->update($sql, [
             ':allianceId' => $this->allianceData['id'],
             ':id'         => HTTP::_GP('id', 0),
@@ -1717,6 +1835,7 @@ class ShowAlliancePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "DELETE FROM %%DIPLO%% WHERE id = :id AND (owner_1 = :allianceId OR owner_2 = :allianceId);";
+        
         $db->delete($sql, [
             ':allianceId' => $this->allianceData['id'],
             ':id'         => HTTP::_GP('id', 0),
@@ -1738,22 +1857,24 @@ class ShowAlliancePage extends AbstractGamePage
         $this->initTemplate();
         $this->setWindow('popup');
 
-        $diplomaticMode = HTTP::_GP('diploMode', 0);
+        $diplomacy_mode = HTTP::_GP('diploMode', 0);
 
         $sql = "SELECT ally_tag,ally_name,id FROM %%ALLIANCE%% WHERE id != :allianceId ORDER BY ally_tag ASC;";
-        $diplomaticAlly = $db->select($sql, [
+        
+        $diplomacy_ally = $db->select($sql, [
             ':allianceId' => $USER['ally_id'],
         ]);
 
         $AllyList = [];
         $IdList = [];
-        foreach ($diplomaticAlly as $i)
+        foreach ($diplomacy_ally as $i)
         {
             $IdList[] = $i['id'];
             $AllyList[] = $i['ally_name'];
         }
+
         $this->assign([
-            'diploMode' => $diplomaticMode,
+            'diploMode' => $diplomacy_mode,
             'AllyList'  => $AllyList,
             'IdList'    => $IdList,
         ]);
@@ -1773,29 +1894,33 @@ class ShowAlliancePage extends AbstractGamePage
 
         $id = HTTP::_GP('ally_id', '', UTF8_SUPPORT);
 
-        $sql = "SELECT id, ally_name, ally_owner, ally_tag, (SELECT level FROM %%DIPLO%% WHERE (owner_1 = :id AND owner_2 = :allianceId) OR (owner_2 = :id AND owner_1 = :allianceId)) as diplo FROM %%ALLIANCE%% WHERE ally_universe = :universe AND id = :id;";
-        $targetAlliance = $db->selectSingle($sql, [
+        $sql = "SELECT id, ally_name, ally_owner, ally_tag, (SELECT level 
+        FROM %%DIPLO%% WHERE (owner_1 = :id AND owner_2 = :allianceId) 
+        OR (owner_2 = :id AND owner_1 = :allianceId)) as diplo 
+        FROM %%ALLIANCE%% WHERE ally_universe = :universe AND id = :id;";
+
+        $target_ally = $db->selectSingle($sql, [
             ':allianceId' => $USER['ally_id'],
             ':id'         => $id,
             ':universe'   => Universe::current(),
         ]);
 
-        if (empty($targetAlliance))
+        if (empty($target_ally))
         {
             $this->sendJSON([
                 'error'   => true,
-                'message' => sprintf($LNG['al_diplo_no_alliance'], $targetAlliance['id']),
+                'message' => sprintf($LNG['al_diplo_no_alliance'], $target_ally['id']),
             ]);
         }
 
-        if (!empty($targetAlliance['diplo']))
+        if (!empty($target_ally['diplo']))
         {
             $this->sendJSON([
                 'error'   => true,
-                'message' => sprintf($LNG['al_diplo_exists'], $targetAlliance['ally_name']),
+                'message' => sprintf($LNG['al_diplo_exists'], $target_ally['ally_name']),
             ]);
         }
-        if ($targetAlliance['id'] == $this->allianceData['id'])
+        if ($target_ally['id'] == $this->allianceData['id'])
         {
             $this->sendJSON([
                 'error'   => true,
@@ -1810,17 +1935,33 @@ class ShowAlliancePage extends AbstractGamePage
 
         if ($level == 5)
         {
-            PlayerUtil::sendMessage($targetAlliance['ally_owner'], $USER['id'], $LNG['al_circular_alliance'] . $this->allianceData['ally_tag'], 1, $LNG['al_diplo_war'], sprintf($LNG['al_diplo_war_mes'], "[" . $this->allianceData['ally_tag'] . "] " . $this->allianceData['ally_name'], "[" . $targetAlliance['ally_tag'] . "] " . $targetAlliance['ally_name'], $LNG['al_diplo_level'][$level], $text), TIMESTAMP);
+            PlayerUtil::sendMessage($target_ally['ally_owner'], 
+            $USER['id'], $LNG['al_circular_alliance'] . 
+            $this->allianceData['ally_tag'], 1, $LNG['al_diplo_war'], 
+            sprintf($LNG['al_diplo_war_mes'], "[" . 
+            $this->allianceData['ally_tag'] . "] " . 
+            $this->allianceData['ally_name'], "[" . 
+            $target_ally['ally_tag'] . "] " . 
+            $target_ally['ally_name'], $LNG['al_diplo_level'][$level], $text), TIMESTAMP);
         }
         else
         {
-            PlayerUtil::sendMessage($targetAlliance['ally_owner'], $USER['id'], $LNG['al_circular_alliance'] . $this->allianceData['ally_tag'], 1, $LNG['al_diplo_war'], sprintf($LNG['al_diplo_ask_mes'], $LNG['al_diplo_level'][$level], "[" . $this->allianceData['ally_tag'] . "] " . $this->allianceData['ally_name'], "[" . $targetAlliance['ally_tag'] . "] " . $targetAlliance['ally_name'], $text), TIMESTAMP);
+            PlayerUtil::sendMessage($target_ally['ally_owner'], 
+            $USER['id'], $LNG['al_circular_alliance'] . 
+            $this->allianceData['ally_tag'], 1, $LNG['al_diplo_war'], 
+            sprintf($LNG['al_diplo_ask_mes'], $LNG['al_diplo_level'][$level], 
+            "[" . $this->allianceData['ally_tag'] . "] " . 
+            $this->allianceData['ally_name'], "[" . $target_ally['ally_tag'] 
+            . "] " . $target_ally['ally_name'], $text), TIMESTAMP);
         }
 
-        $sql = "INSERT INTO %%DIPLO%% SET owner_1 = :allianceId, owner_2 = :allianceTargetID, level	= :level, accept = 0, accept_text = :text, universe	= :universe";
+        $sql = "INSERT INTO %%DIPLO%% SET owner_1 = :allianceId, 
+        owner_2 = :allianceTargetID, level	= :level, accept = 0, 
+        accept_text = :text, universe	= :universe";
+
         $db->insert($sql, [
             ':allianceId'       => $USER['ally_id'],
-            ':allianceTargetID' => $targetAlliance['id'],
+            ':allianceTargetID' => $target_ally['id'],
             ':level'            => $level,
             ':text'             => $text,
             ':universe'         => Universe::current(),

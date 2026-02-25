@@ -28,7 +28,7 @@ class ShowTechtreePage extends AbstractGamePage
     {
         global $resource, $requeriments, $reslist, $USER, $PLANET, $LNG;
 
-        $elementIDs = array_merge(
+        $element_ids = array_merge(
             [0],
             $reslist['build'],
             [100],
@@ -43,33 +43,33 @@ class ShowTechtreePage extends AbstractGamePage
             $reslist['officier']
         );
 
-        $techTreeList = [];
-        foreach ($elementIDs as $elementId)
+        $tech_tree_list = [];
+        foreach ($element_ids as $c_id)
         {
-            if (!isset($resource[$elementId]))
+            if (!isset($resource[$c_id]))
             {
-                $techTreeList[$elementId] = $elementId;
+                $tech_tree_list[$c_id] = $c_id;
             }
             else
             {
-                $requirementsList = [];
-                if (isset($requeriments[$elementId]))
+                $requirements_list = [];
+                if (isset($requeriments[$c_id]))
                 {
-                    foreach ($requeriments[$elementId] as $requireID => $RedCount)
+                    foreach ($requeriments[$c_id] as $require_id => $red_count)
                     {
-                        $requirementsList[$requireID] = [
-                            'count' => $RedCount,
-                            'own'   => isset($PLANET[$resource[$requireID]]) ? $PLANET[$resource[$requireID]] : $USER[$resource[$requireID]],
+                        $requirements_list[$require_id] = [
+                            'count' => $red_count,
+                            'own'   => isset($PLANET[$resource[$require_id]]) ? $PLANET[$resource[$require_id]] : $USER[$resource[$require_id]],
                         ];
                     }
                 }
 
-                $techTreeList[$elementId] = $requirementsList;
+                $tech_tree_list[$c_id] = $requirements_list;
             }
         }
 
         $this->assign([
-            'TechTreeList' => $techTreeList,
+            'TechTreeList' => $tech_tree_list,
         ]);
 
         $this->display('page.techTree.default.tpl');

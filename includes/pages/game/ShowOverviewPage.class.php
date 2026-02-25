@@ -108,10 +108,10 @@ class ShowOverviewPage extends AbstractGamePage
         $build_info = [];
         if ($PLANET['b_building'] - TIMESTAMP > 0)
         {
-            $Queue = unserialize($PLANET['b_building_id']);
+            $queue = unserialize($PLANET['b_building_id']);
             $build_info['buildings'] = [
-                'id'        => $Queue[0][0],
-                'level'     => $Queue[0][1],
+                'id'        => $queue[0][0],
+                'level'     => $queue[0][1],
                 'timeleft'  => $PLANET['b_building'] - TIMESTAMP,
                 'time'      => $PLANET['b_building'],
                 'starttime' => pretty_time($PLANET['b_building'] - TIMESTAMP),
@@ -125,13 +125,13 @@ class ShowOverviewPage extends AbstractGamePage
         if (!empty($PLANET['b_hangar_id']))
         {
 
-            $Queue = unserialize($PLANET['b_hangar_id']);
+            $queue = unserialize($PLANET['b_hangar_id']);
 
-            $time = BuildFunctions::getBuildingTime($USER, $PLANET, $Queue[0][0]) * $Queue[0][1];
+            $time = BuildFunctions::getBuildingTime($USER, $PLANET, $queue[0][0]) * $queue[0][1];
 
             $build_info['fleet'] = [
-                'id'        => $Queue[0][0],
-                'level'     => $Queue[0][1],
+                'id'        => $queue[0][0],
+                'level'     => $queue[0][1],
                 'timeleft'  => $time - $PLANET['b_hangar'],
                 'time'      => $time,
                 'starttime' => pretty_time($time - $PLANET['b_hangar']),
@@ -146,11 +146,11 @@ class ShowOverviewPage extends AbstractGamePage
         if ($USER['b_tech'] - TIMESTAMP > 0)
         {
 
-            $Queue = unserialize($USER['b_tech_queue']);
+            $queue = unserialize($USER['b_tech_queue']);
 
             $build_info['tech'] = [
-                'id'        => $Queue[0][0],
-                'level'     => $Queue[0][1],
+                'id'        => $queue[0][0],
+                'level'     => $queue[0][1],
                 'timeleft'  => $USER['b_tech'] - TIMESTAMP,
                 'time'      => $USER['b_tech'],
                 'starttime' => pretty_time($USER['b_tech'] - TIMESTAMP),
@@ -246,17 +246,20 @@ class ShowOverviewPage extends AbstractGamePage
         $sql = "SELECT * FROM %%NEWS%%;";
         $news = $db->select($sql);
 
-        if (!empty($news)) 
+        if (!empty($news))
         {
             foreach ($news as &$c_news)
             {
-                $c_news['date'] = _date($LNG['php_tdformat'], 
-                $c_news['date'], $USER['timezone']);
+                $c_news['date'] = _date(
+                    $LNG['php_tdformat'],
+                    $c_news['date'],
+                    $USER['timezone']
+                );
             }
 
             unset($c_news);
         }
-        
+
         $this->assign([
             'rankInfo'             => $rank_info,
             'news'                 => $news,
@@ -351,10 +354,9 @@ class ShowOverviewPage extends AbstractGamePage
     {
         global $LNG, $PLANET, $USER;
 
-        $error = [];
-
         $password = HTTP::_GP('password', '', true);
 
+        $error = [];
         if (empty($password))
         {
             $error[] = $LNG['ov_ac_error_4'];
@@ -366,13 +368,13 @@ class ShowOverviewPage extends AbstractGamePage
 						(fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
 						(fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
 
-        $IfFleets = $db->selectSingle($sql, [
+        $fleet_count = $db->selectSingle($sql, [
             ':userID'   => $USER['id'],
             ':planetID' => $PLANET['id'],
             ':lunaID'   => $PLANET['id_luna'],
         ], 'count');
 
-        if ($IfFleets > 0)
+        if ($fleet_count > 0)
         {
             $error[] = $LNG['ov_abandon_planet_not_possible'];
         }
@@ -392,31 +394,35 @@ class ShowOverviewPage extends AbstractGamePage
             $this->sendJSON($error);
         }
 
-        if ($USER['b_tech_planet'] == $PLANET['id'] && !empty($USER['b_tech_queue']))
+        if ($USER['b_tech_planet'] == $PLANET['id']
+            && !empty($USER['b_tech_queue']))
         {
-            $TechQueue = unserialize($USER['b_tech_queue']);
-            $NewCurrentQueue = [];
-            foreach ($TechQueue as $ID => $ListIDArray)
+            $tech_q = unserialize($USER['b_tech_queue']);
+            $new_current_q = [];
+            foreach ($tech_q as $ID => $ListIDArray)
             {
                 if ($ListIDArray[4] == $PLANET['id'])
                 {
                     $ListIDArray[4] = $USER['id_planet'];
-                    $NewCurrentQueue[] = $ListIDArray;
+                    $new_current_q[] = $ListIDArray;
                 }
             }
 
             $USER['b_tech_planet'] = $USER['id_planet'];
-            $USER['b_tech_queue'] = serialize($NewCurrentQueue);
+            $USER['b_tech_queue'] = serialize($new_current_q);
         }
 
         if ($PLANET['planet_type'] == 1)
         {
             $sql = "UPDATE %%PLANETS%% SET destruyed = :time WHERE id = :planetID;";
+
             $db->update($sql, [
                 ':time'     => TIMESTAMP + 86400,
                 ':planetID' => $PLANET['id'],
             ]);
+
             $sql = "DELETE FROM %%PLANETS%% WHERE id = :lunaID;";
+
             $db->delete($sql, [
                 ':lunaID' => $PLANET['id_luna'],
             ]);
@@ -424,10 +430,13 @@ class ShowOverviewPage extends AbstractGamePage
         else
         {
             $sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planetID;";
+
             $db->update($sql, [
                 ':planetID' => $PLANET['id'],
             ]);
+
             $sql = "DELETE FROM %%PLANETS%% WHERE id = :planetID;";
+
             $db->delete($sql, [
                 ':planetID' => $PLANET['id'],
             ]);
@@ -435,6 +444,5 @@ class ShowOverviewPage extends AbstractGamePage
 
         Session::load()->planetId = $USER['id_planet'];
         $this->sendJSON($LNG['ov_planet_abandoned']);
-
     }
 }

@@ -27,10 +27,10 @@ class ShowBoardPage extends AbstractGamePage
     public function show(): void
     {
         global $LNG;
-        $boardUrl = Config::get()->forum_url;
-        if (filter_var($boardUrl, FILTER_VALIDATE_URL))
+        $board_url = Config::get()->forum_url;
+        if (filter_var($board_url, FILTER_VALIDATE_URL))
         {
-            HTTP::sendHeader('Location', $boardUrl);
+            HTTP::sendHeader('Location', $board_url);
         }
         else
         {

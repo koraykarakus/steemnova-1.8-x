@@ -33,7 +33,6 @@ abstract class AbstractGamePage
 
     protected function __construct()
     {
-
         if (!AJAX_REQUEST)
         {
             $this->setWindow('full');
@@ -61,10 +60,10 @@ abstract class AbstractGamePage
         }
 
         require_once 'includes/classes/class.FlyingFleetsTable.php';
-        $fleetTableObj = new FlyingFleetsTable();
-        $fleetTableObj->setUser($USER['id']);
-        $fleetTableObj->setPlanet($PLANET['id']);
-        return $fleetTableObj->renderTable();
+        $fleet_table_obj = new FlyingFleetsTable();
+        $fleet_table_obj->setUser($USER['id']);
+        $fleet_table_obj->setPlanet($PLANET['id']);
+        return $fleet_table_obj->renderTable();
     }
 
     public function getAttack(): void
@@ -86,15 +85,18 @@ abstract class AbstractGamePage
             ':universe' => Universe::current(),
         ]);
 
-        if ($fleets['attack'] > 0 && $fleets['spy'] > 0)
+        if ($fleets['attack'] > 0
+            && $fleets['spy'] > 0)
         {
             $data = "spy";
         }
-        elseif ($fleets['attack'] > 0 && $fleets['spy'] == 0)
+        elseif ($fleets['attack'] > 0
+            && $fleets['spy'] == 0)
         {
             $data = "attack";
         }
-        elseif ($fleets['spy'] > 0 && $fleets['attack'] == 0)
+        elseif ($fleets['spy'] > 0
+            && $fleets['attack'] == 0)
         {
             $data = "spy";
         }
@@ -116,7 +118,7 @@ abstract class AbstractGamePage
         }
 
         $this->tplObj = new template();
-        list($tplDir) = $this->tplObj->getTemplateDir();
+        list($tpl_dir) = $this->tplObj->getTemplateDir();
 
         $path = $theme = "";
 
@@ -124,7 +126,7 @@ abstract class AbstractGamePage
 
         $path = "theme/" . $theme;
 
-        $this->tplObj->setTemplateDir($tplDir. $path);
+        $this->tplObj->setTemplateDir($tpl_dir. $path);
     }
 
     protected function setWindow($window): void
@@ -139,21 +141,21 @@ abstract class AbstractGamePage
 
     protected function getQueryString(): string
     {
-        $queryString = [];
+        $query_string = [];
         $page = HTTP::_GP('page', '');
 
         if (!empty($page))
         {
-            $queryString['page'] = $page;
+            $query_string['page'] = $page;
         }
 
         $mode = HTTP::_GP('mode', '');
         if (!empty($mode))
         {
-            $queryString['mode'] = $mode;
+            $query_string['mode'] = $mode;
         }
 
-        return http_build_query($queryString);
+        return http_build_query($query_string);
     }
 
     protected function getCronjobsTodo(): void
@@ -169,11 +171,12 @@ abstract class AbstractGamePage
     {
         global $PLANET, $LNG, $USER, $THEME, $resource, $reslist, $config;
 
-        $PlanetSelect = [];
+        $planet_select = [];
 
         if ($USER['bana'] == 1)
         {
-            echo 'You received a Ban. If you think this is a mistake, write on our Discord: <a href="https://discord.gg/g6UHwXE">https://discord.gg/g6UHwXE</a>';
+            echo "You received a Ban. If you think this is a mistake, 
+            write on our <a href='".DISCORD_URL."'>discord</a>";
             die();
         }
 
@@ -182,50 +185,59 @@ abstract class AbstractGamePage
             $USER['PLANETS'] = getPlanets($USER);
         }
 
-        foreach ($USER['PLANETS'] as $PlanetQuery)
+        foreach ($USER['PLANETS'] as $c_planet)
         {
-            $PlanetSelect[$PlanetQuery['id']] = $PlanetQuery['name'].(($PlanetQuery['planet_type'] == 3) ? " (" . $LNG['fcm_moon'] . ")" : "")." [".$PlanetQuery['galaxy'].":".$PlanetQuery['system'].":".$PlanetQuery['planet']."]";
+            $planet_select[$c_planet['id']] = $c_planet['name'] .
+            (($c_planet['planet_type'] == 3) ?
+            " (" . $LNG['fcm_moon'] . ")" :
+            "") .
+            " [" .
+            $c_planet['galaxy'] . ":" .
+            $c_planet['system'] . ":" .
+            $c_planet['planet'] . "]";
         }
 
-        $resourceTable = [];
-        $resourceSpeed = $config->resource_multiplier;
-        foreach ($reslist['resstype'][1] as $resourceID)
+        $resource_table = [];
+        $resource_speed = $config->resource_multiplier;
+        foreach ($reslist['resstype'][1] as $c_id)
         {
-            $resourceTable[$resourceID]['name'] = $resource[$resourceID];
-            $resourceTable[$resourceID]['current'] = $PLANET[$resource[$resourceID]];
-            $resourceTable[$resourceID]['max'] = $PLANET[$resource[$resourceID].'_max'];
+            $resource_table[$c_id]['name'] = $resource[$c_id];
+            $resource_table[$c_id]['current'] = $PLANET[$resource[$c_id]];
+            $resource_table[$c_id]['max'] = $PLANET[$resource[$c_id].'_max'];
 
-            if ($USER['urlaubs_modus'] == 1 || $PLANET['planet_type'] != 1)
+            if ($USER['urlaubs_modus'] == 1
+                || $PLANET['planet_type'] != 1)
             {
-                $resourceTable[$resourceID]['production'] = $PLANET[$resource[$resourceID].'_perhour'];
+                $resource_table[$c_id]['production'] = $PLANET[$resource[$c_id].'_perhour'];
             }
             else
             {
-                $resourceTable[$resourceID]['production'] = $PLANET[$resource[$resourceID].'_perhour'] + $config->{$resource[$resourceID].'_basic_income'} * $resourceSpeed;
+                $resource_table[$c_id]['production'] = $PLANET[$resource[$c_id].'_perhour']
+                + $config->{$resource[$c_id].'_basic_income'} * $resource_speed;
             }
         }
 
-        foreach ($reslist['resstype'][2] as $resourceID)
+        foreach ($reslist['resstype'][2] as $c_id)
         {
-            $resourceTable[$resourceID]['name'] = $resource[$resourceID];
-            $resourceTable[$resourceID]['used'] = $PLANET[$resource[$resourceID].'_used'];
-            $resourceTable[$resourceID]['max'] = $PLANET[$resource[$resourceID]];
+            $resource_table[$c_id]['name'] = $resource[$c_id];
+            $resource_table[$c_id]['used'] = $PLANET[$resource[$c_id].'_used'];
+            $resource_table[$c_id]['max'] = $PLANET[$resource[$c_id]];
         }
 
-        foreach ($reslist['resstype'][3] as $resourceID)
+        foreach ($reslist['resstype'][3] as $c_id)
         {
-            $resourceTable[$resourceID]['name'] = $resource[$resourceID];
-            $resourceTable[$resourceID]['current'] = $USER[$resource[$resourceID]];
+            $resource_table[$c_id]['name'] = $resource[$c_id];
+            $resource_table[$c_id]['current'] = $USER[$resource[$c_id]];
         }
 
-        $themeSettings = $THEME->getStyleSettings();
+        $theme_settings = $THEME->getStyleSettings();
 
         $commit = '';
-        $commitShort = '';
+        $commit_short = '';
         if (file_exists('.git/FETCH_HEAD'))
         {
             $commit = explode('	', file_get_contents('.git/FETCH_HEAD'))[0];
-            $commitShort = substr($commit, 0, 7);
+            $commit_short = substr($commit, 0, 7);
         }
 
         $avatar = 'styles/resource/images/user.png';
@@ -241,10 +253,10 @@ abstract class AbstractGamePage
         }
 
         $this->assign([
-            'PlanetSelect'   => $PlanetSelect,
+            'PlanetSelect'   => $planet_select,
             'new_message'    => $USER['messages'],
             'commit'         => $commit,
-            'commitShort'    => $commitShort,
+            'commitShort'    => $commit_short,
             'vacation'       => $USER['urlaubs_modus'] ? _date($LNG['php_tdformat'], $USER['urlaubs_until'], $USER['timezone']) : false,
             'delete'         => $USER['db_deaktjava'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['db_deaktjava'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
             'darkmatter'     => $USER['darkmatter'],
@@ -252,8 +264,8 @@ abstract class AbstractGamePage
             'image'          => $PLANET['image'],
             'username'       => $USER['username'],
             'avatar'         => $avatar,
-            'resourceTable'  => $resourceTable,
-            'shortlyNumber'  => $themeSettings['TOPNAV_SHORTLY_NUMBER'],
+            'resourceTable'  => $resource_table,
+            'shortlyNumber'  => $theme_settings['TOPNAV_SHORTLY_NUMBER'],
             'closed'         => !$config->game_disable,
             'hasBoard'       => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
@@ -274,77 +286,84 @@ abstract class AbstractGamePage
             $this->getCronjobsTodo();
         }
 
-        $dateTimeServer = new DateTime("now");
+        $date_time_server = new DateTime("now");
         if (isset($USER['timezone']))
         {
             try
             {
-                $dateTimeUser = new DateTime("now", new DateTimeZone($USER['timezone']));
+                $date_time_user = new DateTime("now", new DateTimeZone($USER['timezone']));
             }
             catch (Exception $e)
             {
-                $dateTimeUser = $dateTimeServer;
+                $date_time_user = $date_time_server;
             }
         }
         else
         {
-            $dateTimeUser = $dateTimeServer;
+            $date_time_user = $date_time_server;
         }
 
-        $AllPlanets = $AllMoons = [];
+        $all_planets = $all_moons = [];
         if (!empty($USER['PLANETS']))
         {
-            foreach ($USER['PLANETS'] as $ID => $CPLANET)
+            foreach ($USER['PLANETS'] as $ID => $c_planet)
             {
-
-                if (!empty($CPLANET['b_building']) && $CPLANET['b_building'] > TIMESTAMP)
+                if (!empty($c_planet['b_building'])
+                    && $c_planet['b_building'] > TIMESTAMP)
                 {
-                    $Queue = unserialize($CPLANET['b_building_id']);
-                    $BuildPlanet = $LNG['tech'][$Queue[0][0]]." (".$Queue[0][1].")<br><span style=\"color:#7F7F7F;\">(".pretty_time($Queue[0][3] - TIMESTAMP).")</span>";
+                    $queue = unserialize($c_planet['b_building_id']);
+                    $build_planet = $LNG['tech'][$queue[0][0]] .
+                    " (" .
+                    $queue[0][1] .
+                    ")<br><span style=\"color:#7F7F7F;\">(" .
+                    pretty_time($queue[0][3] - TIMESTAMP) .
+                    ")</span>";
                 }
                 else
                 {
-                    $BuildPlanet = $LNG['ov_free'];
+                    $build_planet = $LNG['ov_free'];
                 }
 
-                if ($CPLANET['planet_type'] == 3)
+                if ($c_planet['planet_type'] == 3)
                 {
 
-                    $AllMoons[] = [
-                        'id'            => $CPLANET['id'],
-                        'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
-                        'image'         => $CPLANET['image'],
-                        'build'         => $BuildPlanet,
-                        'galaxy'        => $CPLANET['galaxy'],
-                        'system'        => $CPLANET['system'],
-                        'planet'        => $CPLANET['planet'],
-                        'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
-                        'field_current' => $CPLANET['field_current'],
-                        'field_max'     => $CPLANET['field_max'],
-                        'diameter'      => pretty_number($CPLANET['diameter']) . " km",
-                        'temp_min'      => $CPLANET['temp_min'] . " °C",
-                        'temp_max'      => $CPLANET['temp_max'] . " °C",
+                    $all_moons[] = [
+                        'id'            => $c_planet['id'],
+                        'name'          => (strlen($c_planet['name']) >= 12) ? substr($c_planet['name'], 0, 12) . ".." : $c_planet['name'],
+                        'image'         => $c_planet['image'],
+                        'build'         => $build_planet,
+                        'galaxy'        => $c_planet['galaxy'],
+                        'system'        => $c_planet['system'],
+                        'planet'        => $c_planet['planet'],
+                        'selected'      => ($c_planet['id'] == $PLANET['id']) ? true : false,
+                        'field_current' => $c_planet['field_current'],
+                        'field_max'     => $c_planet['field_max'],
+                        'diameter'      => pretty_number($c_planet['diameter']) . " km",
+                        'temp_min'      => $c_planet['temp_min'] . " °C",
+                        'temp_max'      => $c_planet['temp_max'] . " °C",
                     ];
 
                 }
                 else
                 {
 
-                    $AllPlanets[] = [
-                        'id'            => $CPLANET['id'],
-                        'name'          => (strlen($CPLANET['name']) >= 12) ? substr($CPLANET['name'], 0, 12) . ".." : $CPLANET['name'],
-                        'image'         => $CPLANET['image'],
-                        'build'         => $BuildPlanet,
-                        'galaxy'        => $CPLANET['galaxy'],
-                        'system'        => $CPLANET['system'],
-                        'planet'        => $CPLANET['planet'],
-                        'selected'      => ($CPLANET['id'] == $PLANET['id']) ? true : false,
-                        'field_current' => $CPLANET['field_current'],
-                        'field_max'     => $CPLANET['field_max'],
-                        'diameter'      => pretty_number($CPLANET['diameter']) . " km",
-                        'temp_min'      => $CPLANET['temp_min'] . " °C",
-                        'temp_max'      => $CPLANET['temp_max'] . " °C",
-                        'id_luna'       => $CPLANET['id_luna'],
+                    $all_planets[] = [
+                        'id'   => $c_planet['id'],
+                        'name' => (strlen($c_planet['name']) >= 12) ?
+                                   substr($c_planet['name'], 0, 12) . ".." :
+                                   $c_planet['name'],
+                        'image'         => $c_planet['image'],
+                        'build'         => $build_planet,
+                        'galaxy'        => $c_planet['galaxy'],
+                        'system'        => $c_planet['system'],
+                        'planet'        => $c_planet['planet'],
+                        'selected'      => ($c_planet['id'] == $PLANET['id']) ? true : false,
+                        'field_current' => $c_planet['field_current'],
+                        'field_max'     => $c_planet['field_max'],
+                        'diameter'      => pretty_number($c_planet['diameter']) . " km",
+                        'temp_min'      => $c_planet['temp_min'] . " °C",
+                        'temp_max'      => $c_planet['temp_max'] . " °C",
+                        'id_luna'       => $c_planet['id_luna'],
                     ];
 
                 }
@@ -354,27 +373,22 @@ abstract class AbstractGamePage
 
         // NOTE: add moon array inside planet array
 
-        foreach ($AllPlanets as $key => &$currentPlanet)
+        foreach ($all_planets as &$c_planet)
         {
-
-            if ($currentPlanet['id_luna'] == 0)
+            if ($c_planet['id_luna'] == 0)
             {
                 continue;
             }
 
-            foreach ($AllMoons as $moon_key => $currentMoon)
+            foreach ($all_moons as $c_moon)
             {
-
-                if ($currentMoon['id'] == $currentPlanet['id_luna'])
+                if ($c_moon['id'] == $c_planet['id_luna'])
                 {
-                    $currentPlanet['moonInfo'][] = $currentMoon;
-                    continue;
+                    $c_planet['moonInfo'][] = $c_moon;
                 }
-
             }
-
         }
-        unset($currentPlanet);
+        unset($c_planet);
 
         $this->assign([
             'vmode'              => $USER['urlaubs_modus'],
@@ -394,24 +408,24 @@ abstract class AbstractGamePage
             'date'               => explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
             'isPlayerCardActive' => isModuleAvailable(MODULE_PLAYERCARD),
             'REV'                => substr($config->VERSION, -4),
-            'Offset'             => $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
+            'Offset'             => $date_time_user->getOffset() - $date_time_server->getOffset(),
             'queryString'        => $this->getQueryString(),
             'themeSettings'      => $THEME->getStyleSettings(),
             'page'               => HTTP::_GP('page', ''),
             'mode'               => HTTP::_GP('mode', ''),
             'servertime'         => _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
-            'AllPlanets'         => $AllPlanets,
+            'AllPlanets'         => $all_planets,
             'fleets'             => $this->GetFleets(),
             'show_fleets_active' => $USER['show_fleets_active'],
             'attackListenTime'   => ATTACK_LISTEN_TIME,
         ]);
     }
 
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
+    protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
     {
         $this->assign([
-            'message'         => $message,
-            'redirectButtons' => $redirectButtons,
+            'message'         => $msg,
+            'redirectButtons' => $redirect_buttons,
         ]);
 
         if (isset($redirect))
@@ -419,7 +433,7 @@ abstract class AbstractGamePage
             $this->tplObj->gotoside($redirect[0], $redirect[1]);
         }
 
-        if (!$fullSide)
+        if (!$full)
         {
             $this->setWindow('popup');
         }
@@ -435,9 +449,9 @@ abstract class AbstractGamePage
         }
     }
 
-    protected function assign($array, $nocache = true): void
+    protected function assign($array, $not_cache = true): void
     {
-        $this->tplObj->assign_vars($array, $nocache);
+        $this->tplObj->assign_vars($array, $not_cache);
     }
 
     protected function display($file): void

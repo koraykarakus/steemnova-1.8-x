@@ -39,17 +39,18 @@ class ShowQuestionsPage extends AbstractGamePage
 
         $LNG->includeData(['FAQ']);
 
-        $categoryID = HTTP::_GP('categoryID', 0);
-        $questionID = HTTP::_GP('questionID', 0);
+        $category_id = HTTP::_GP('categoryID', 0);
+        $question_id = HTTP::_GP('questionID', 0);
 
-        if (!isset($LNG['questions'][$categoryID][$questionID]))
+        if (!isset($LNG['questions'][$category_id][$question_id]))
         {
             HTTP::redirectTo('game.php?page=questions');
         }
 
         $this->assign([
-            'questionRow' => $LNG['questions'][$categoryID][$questionID],
+            'questionRow' => $LNG['questions'][$category_id][$question_id],
         ]);
+
         $this->display('page.questions.single.tpl');
     }
 }

@@ -35,53 +35,57 @@ class ShowRecordsPage extends AbstractGamePage
 		INNER JOIN %%RECORDS%% ON userID = id
 		WHERE universe = :universe;";
 
-        $recordResult = $db->select($sql, [
+        $records = $db->select($sql, [
             ':universe' => Universe::current(),
         ]);
 
-        $defenseList = array_fill_keys($reslist['defense'], []);
-        $fleetList = array_fill_keys($reslist['fleet'], []);
-        $researchList = array_fill_keys($reslist['tech'], []);
-        $buildList = array_fill_keys($reslist['build'], []);
-        $officerList = array_fill_keys($reslist['officier'], []);
+        $defense_list = array_fill_keys($reslist['defense'], []);
+        $fleet_list = array_fill_keys($reslist['fleet'], []);
+        $research_list = array_fill_keys($reslist['tech'], []);
+        $build_list = array_fill_keys($reslist['build'], []);
+        $officer_list = array_fill_keys($reslist['officier'], []);
 
-        foreach ($recordResult as $recordRow)
+        foreach ($records as $c_record)
         {
-            if (in_array($recordRow['elementID'], $reslist['defense']))
+            if (in_array($c_record['elementID'], $reslist['defense']))
             {
-                $defenseList[$recordRow['elementID']][] = $recordRow;
+                $defense_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($recordRow['elementID'], $reslist['fleet']))
+            elseif (in_array($c_record['elementID'], $reslist['fleet']))
             {
-                $fleetList[$recordRow['elementID']][] = $recordRow;
+                $fleet_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($recordRow['elementID'], $reslist['tech']))
+            elseif (in_array($c_record['elementID'], $reslist['tech']))
             {
-                $researchList[$recordRow['elementID']][] = $recordRow;
+                $research_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($recordRow['elementID'], $reslist['build']))
+            elseif (in_array($c_record['elementID'], $reslist['build']))
             {
-                $buildList[$recordRow['elementID']][] = $recordRow;
+                $build_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($recordRow['elementID'], $reslist['officier']))
+            elseif (in_array($c_record['elementID'], $reslist['officier']))
             {
-                $officerList[$recordRow['elementID']][] = $recordRow;
+                $officer_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($recordRow['elementID'], $reslist['missile']))
+            elseif (in_array($c_record['elementID'], $reslist['missile']))
             {
-                $defenseList[$recordRow['elementID']][] = $recordRow;
+                $defense_list[$c_record['elementID']][] = $c_record;
             }
         }
 
         require_once 'includes/classes/Cronjob.class.php';
 
         $this->assign([
-            'defenseList'  => $defenseList,
-            'fleetList'    => $fleetList,
-            'researchList' => $researchList,
-            'buildList'    => $buildList,
-            'officerList'  => $officerList,
-            'update'       => _date($LNG['php_tdformat'], Cronjob::getLastExecutionTime('statistic'), $USER['timezone']),
+            'defenseList'  => $defense_list,
+            'fleetList'    => $fleet_list,
+            'researchList' => $research_list,
+            'buildList'    => $build_list,
+            'officerList'  => $officer_list,
+            'update'       => _date(
+                $LNG['php_tdformat'],
+                Cronjob::getLastExecutionTime('statistic'),
+                $USER['timezone']
+            ),
         ]);
 
         $this->display('page.records.default.tpl');

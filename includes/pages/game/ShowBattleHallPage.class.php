@@ -29,6 +29,7 @@ class ShowBattleHallPage extends AbstractGamePage
         global $USER, $LNG;
 
         $db = Database::get();
+
         $sql = "SELECT *, (
 			SELECT DISTINCT
 			IF(%%TOPKB_USERS%%.username = '', GROUP_CONCAT(%%USERS%%.username SEPARATOR ' & '), GROUP_CONCAT(%%TOPKB_USERS%%.username SEPARATOR ' & '))
@@ -48,10 +49,10 @@ class ShowBattleHallPage extends AbstractGamePage
             ':universe' => Universe::current(),
         ]);
 
-        $TopKBList = [];
+        $top_kb_list = [];
         foreach ($top as $data)
         {
-            $TopKBList[] = [
+            $top_kb_list[] = [
                 'result'   => $data['result'],
                 'date'     => _date($LNG['php_tdformat'], $data['time'], $USER['timezone']),
                 'time'     => TIMESTAMP - $data['time'],
@@ -63,7 +64,7 @@ class ShowBattleHallPage extends AbstractGamePage
         }
 
         $this->assign([
-            'TopKBList' => $TopKBList,
+            'TopKBList' => $top_kb_list,
         ]);
 
         $this->display('page.battleHall.default.tpl');

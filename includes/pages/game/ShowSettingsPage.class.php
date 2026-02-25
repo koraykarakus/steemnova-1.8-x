@@ -24,70 +24,82 @@ class ShowSettingsPage extends AbstractGamePage
         parent::__construct();
     }
 
+    public function showVacation(): void
+    {
+        global $LNG, $USER;
+
+        $this->assign([
+            'vacationUntil' => _date(
+                $LNG['php_tdformat'],
+                $USER['urlaubs_until'],
+                $USER['timezone']
+            ),
+            'delete'              => $USER['db_deaktjava'],
+            'canVacationDisbaled' => $USER['urlaubs_until'] < TIMESTAMP,
+        ]);
+
+        $this->display('page.settings.vacation.tpl');
+    }
+
     public function show(): void
     {
         global $USER, $LNG, $config;
         if ($USER['urlaubs_modus'] == 1)
         {
-            $this->assign([
-                'vacationUntil'       => _date($LNG['php_tdformat'], $USER['urlaubs_until'], $USER['timezone']),
-                'delete'              => $USER['db_deaktjava'],
-                'canVacationDisbaled' => $USER['urlaubs_until'] < TIMESTAMP,
-            ]);
-
-            $this->display('page.settings.vacation.tpl');
+            $this->showVacation();
+            return;
         }
-        else
-        {
-            $this->assign([
-                'Selectors' => [
-                    'timezones' => get_timezone_selector(),
-                    'Sort'      => [
-                        0 => $LNG['op_sort_normal'],
-                        1 => $LNG['op_sort_koords'],
-                        2 => $LNG['op_sort_abc']],
-                    'SortUpDown' => [
-                        0 => $LNG['op_sort_up'],
-                        1 => $LNG['op_sort_down'],
-                    ],
-                    'lang' => $LNG->getAllowedLangs(false),
+
+        $this->assign([
+            'Selectors' => [
+                'timezones' => get_timezone_selector(),
+                'Sort'      => [
+                    0 => $LNG['op_sort_normal'],
+                    1 => $LNG['op_sort_koords'],
+                    2 => $LNG['op_sort_abc']],
+                'SortUpDown' => [
+                    0 => $LNG['op_sort_up'],
+                    1 => $LNG['op_sort_down'],
                 ],
-                'adminProtection'        => $USER['authattack'],
-                'userAuthlevel'          => $USER['authlevel'],
-                'changeNickTime'         => ($USER['uctime'] + USERNAME_CHANGETIME) - TIMESTAMP,
-                'username'               => $USER['username'],
-                'email'                  => $USER['email'],
-                'permaEmail'             => $USER['email_2'],
-                'userLang'               => $USER['lang'],
-                'theme'                  => $USER['dpath'],
-                'planetSort'             => $USER['planet_sort'],
-                'planetOrder'            => $USER['planet_sort_order'],
-                'spycount'               => $USER['spio_anz'],
-                'fleetActions'           => $USER['settings_fleetactions'],
-                'timezone'               => $USER['timezone'],
-                'delete'                 => $USER['db_deaktjava'],
-                'queueMessages'          => $USER['hof'],
-                'spyMessagesMode'        => $USER['spyMessagesMode'],
-                'galaxySpy'              => $USER['settings_esp'],
-                'galaxyBuddyList'        => $USER['settings_bud'],
-                'galaxyMissle'           => $USER['settings_mis'],
-                'galaxyMessage'          => $USER['settings_wri'],
-                'blockPM'                => $USER['settings_blockPM'],
-                'userid'                 => $USER['id'],
-                'ref_active'             => $config->ref_active,
-                'SELF_URL'               => PROTOCOL.HTTP_HOST.HTTP_ROOT,
-                'let_users_change_theme' => $config->let_users_change_theme,
-            ]);
+                'lang' => $LNG->getAllowedLangs(false),
+            ],
+            'adminProtection'        => $USER['authattack'],
+            'userAuthlevel'          => $USER['authlevel'],
+            'changeNickTime'         => ($USER['uctime'] + USERNAME_CHANGETIME) - TIMESTAMP,
+            'username'               => $USER['username'],
+            'email'                  => $USER['email'],
+            'permaEmail'             => $USER['email_2'],
+            'userLang'               => $USER['lang'],
+            'theme'                  => $USER['dpath'],
+            'planetSort'             => $USER['planet_sort'],
+            'planetOrder'            => $USER['planet_sort_order'],
+            'spycount'               => $USER['spio_anz'],
+            'fleetActions'           => $USER['settings_fleetactions'],
+            'timezone'               => $USER['timezone'],
+            'delete'                 => $USER['db_deaktjava'],
+            'queueMessages'          => $USER['hof'],
+            'spyMessagesMode'        => $USER['spyMessagesMode'],
+            'galaxySpy'              => $USER['settings_esp'],
+            'galaxyBuddyList'        => $USER['settings_bud'],
+            'galaxyMissle'           => $USER['settings_mis'],
+            'galaxyMessage'          => $USER['settings_wri'],
+            'blockPM'                => $USER['settings_blockPM'],
+            'userid'                 => $USER['id'],
+            'ref_active'             => $config->ref_active,
+            'SELF_URL'               => PROTOCOL.HTTP_HOST.HTTP_ROOT,
+            'let_users_change_theme' => $config->let_users_change_theme,
+        ]);
 
-            $this->display('page.settings.default.tpl');
-        }
+        $this->display('page.settings.default.tpl');
     }
 
     private function CheckVMode(): bool
     {
         global $USER, $PLANET;
 
-        if (!empty($USER['b_tech']) || !empty($PLANET['b_building']) || !empty($PLANET['b_hangar']))
+        if (!empty($USER['b_tech'])
+            || !empty($PLANET['b_building'])
+            || !empty($PLANET['b_hangar']))
         {
             return false;
         }
@@ -104,22 +116,25 @@ class ShowSettingsPage extends AbstractGamePage
             return false;
         }
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND id != :planetID AND destruyed = 0;";
-        $query = $db->select($sql, [
+        $sql = "SELECT * FROM %%PLANETS%% 
+        WHERE id_owner = :userID AND id != :planetID AND destruyed = 0;";
+
+        $planets = $db->select($sql, [
             ':userID'   => $USER['id'],
             ':planetID' => $PLANET['id'],
         ]);
 
-        foreach ($query as $CPLANET)
+        foreach ($planets as $c_planet)
         {
-            list($USER, $CPLANET) = $this->ecoObj->CalcResource($USER, $CPLANET, true);
+            list($USER, $c_planet) = $this->ecoObj->CalcResource($USER, $c_planet, true);
 
-            if (!empty($CPLANET['b_building']) || !empty($CPLANET['b_hangar']))
+            if (!empty($c_planet['b_building'])
+                || !empty($c_planet['b_hangar']))
             {
                 return false;
             }
 
-            unset($CPLANET);
+            unset($c_planet);
         }
 
         return true;
@@ -200,7 +215,7 @@ class ShowSettingsPage extends AbstractGamePage
 
     private function sendDefault(): void
     {
-        global $USER, $LNG, $THEME, $config;
+        global $USER, $LNG, $config;
 
         $adminprotection = HTTP::_GP('adminprotection', 0);
 
@@ -252,20 +267,17 @@ class ShowSettingsPage extends AbstractGamePage
 
         if ($config->let_users_change_theme)
         {
-
             $themeName = $theme;
-
         }
         else
         {
-
             $themeName = $USER['dpath'];
-
         }
 
         $db = Database::get();
 
-        if (!empty($username) && $USER['username'] != $username)
+        if (!empty($username)
+            && $USER['username'] != $username)
         {
             if (!PlayerUtil::isNameValid($username))
             {
@@ -313,7 +325,10 @@ class ShowSettingsPage extends AbstractGamePage
             }
         }
 
-        if (!empty($newpassword) && !empty($password) && password_verify($password, $USER['password']) && $newpassword == $newpassword2)
+        if (!empty($newpassword)
+            && !empty($password)
+            && password_verify($password, $USER['password'])
+            && $newpassword == $newpassword2)
         {
             $newpass = PlayerUtil::cryptPassword($newpassword);
             $sql = "UPDATE %%USERS%% SET password = :newpass WHERE id = :userID;";
@@ -324,7 +339,8 @@ class ShowSettingsPage extends AbstractGamePage
             Session::load()->delete();
         }
 
-        if (!empty($email) && $email != $USER['email'])
+        if (!empty($email)
+            && $email != $USER['email'])
         {
             if (!password_verify($password, $USER['password']))
             {

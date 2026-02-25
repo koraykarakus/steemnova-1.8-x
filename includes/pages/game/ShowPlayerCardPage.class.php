@@ -35,40 +35,47 @@ class ShowPlayerCardPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $PlayerID = HTTP::_GP('id', 0);
+        $uid = HTTP::_GP('id', 0);
 
         $sql = "SELECT
-				u.username, u.galaxy, u.system, u.planet, u.wons, u.loos, u.draws, u.kbmetal, u.kbcrystal, u.lostunits, u.desunits, u.ally_id,
+				u.username, u.galaxy, u.system, u.planet, u.wons, u.loos, u.draws, 
+                u.kbmetal, u.kbcrystal, u.lostunits, u.desunits, u.ally_id,
 				p.name,
-				s.tech_rank, s.tech_points, s.build_rank, s.build_points, s.defs_rank, s.defs_points, s.fleet_rank, s.fleet_points, s.total_rank, s.total_points,
+				s.tech_rank, s.tech_points, s.build_rank, s.build_points, 
+                s.defs_rank, s.defs_points, s.fleet_rank, s.fleet_points, 
+                s.total_rank, s.total_points,
 				a.ally_name
 				FROM %%USERS%% u
 				INNER JOIN %%PLANETS%% p ON p.id = u.id_planet
 				LEFT JOIN %%USER_POINTS%% s ON s.id_owner = u.id 
 				LEFT JOIN %%ALLIANCE%% a ON a.id = u.ally_id
-				WHERE u.id = :playerID AND u.universe = :universe;";
+				WHERE u.id = :uid AND u.universe = :universe;";
+
         $query = $db->selectSingle($sql, [
             ':universe' => Universe::current(),
-            ':playerID' => $PlayerID,
+            ':uid'      => $uid,
         ]);
 
-        $totalfights = $query['wons'] + $query['loos'] + $query['draws'];
-
-        if ($totalfights == 0)
+        if (!$query)
         {
-            $siegprozent = 0;
-            $loosprozent = 0;
-            $drawsprozent = 0;
+            // TODO : create new language key
+            $this->printMessage('wrong user id');
+            return;
         }
-        else
+
+        $total_fights = $query['wons'] + $query['loos'] + $query['draws'];
+
+        $win_percent = $lose_percent = $draw_percent = 0;
+
+        if ($total_fights > 0)
         {
-            $siegprozent = 100 / $totalfights * $query['wons'];
-            $loosprozent = 100 / $totalfights * $query['loos'];
-            $drawsprozent = 100 / $totalfights * $query['draws'];
+            $win_percent = ($query['wons'] / $total_fights) * 100;
+            $lose_percent = ($query['loos'] / $total_fights) * 100;
+            $draw_percent = ($query['draws'] / $total_fights) * 100;
         }
 
         $this->assign([
-            'id'            => $PlayerID,
+            'id'            => $uid,
             'yourid'        => $USER['id'],
             'name'          => $query['username'],
             'homeplanet'    => $query['name'],
@@ -95,10 +102,10 @@ class ShowPlayerCardPage extends AbstractGamePage
             'kbcrystal'     => pretty_number($query['kbcrystal']),
             'lostunits'     => pretty_number($query['lostunits']),
             'desunits'      => pretty_number($query['desunits']),
-            'totalfights'   => pretty_number($totalfights),
-            'siegprozent'   => round($siegprozent, 2),
-            'loosprozent'   => round($loosprozent, 2),
-            'drawsprozent'  => round($drawsprozent, 2),
+            'totalfights'   => pretty_number($total_fights),
+            'siegprozent'   => round($win_percent, 2),
+            'loosprozent'   => round($lose_percent, 2),
+            'drawsprozent'  => round($draw_percent, 2),
         ]);
 
         $this->display('page.playerCard.default.tpl');

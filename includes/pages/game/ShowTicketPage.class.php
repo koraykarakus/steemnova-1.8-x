@@ -19,13 +19,13 @@ class ShowTicketPage extends AbstractGamePage
 {
     public static $requireModule = MODULE_SUPPORT;
 
-    private $ticketObj;
+    private $ticket_obj;
 
     public function __construct()
     {
         parent::__construct();
         require('includes/classes/class.SupportTickets.php');
-        $this->ticketObj = new SupportTickets();
+        $this->ticket_obj = new SupportTickets();
     }
 
     public function show(): void
@@ -39,21 +39,21 @@ class ShowTicketPage extends AbstractGamePage
 		INNER JOIN %%TICKETS_ANSWER%% a USING (ticketID)
 		WHERE t.ownerID = :userID GROUP BY a.ticketID ORDER BY t.ticketID DESC;";
 
-        $ticketResult = $db->select($sql, [
+        $ticket_result = $db->select($sql, [
             ':userID' => $USER['id'],
         ]);
 
-        $ticketList = [];
+        $ticket_list = [];
 
-        foreach ($ticketResult as $ticketRow)
+        foreach ($ticket_result as $c_ticket)
         {
-            $ticketRow['time'] = _date($LNG['php_tdformat'], $ticketRow['time'], $USER['timezone']);
+            $c_ticket['time'] = _date($LNG['php_tdformat'], $c_ticket['time'], $USER['timezone']);
 
-            $ticketList[$ticketRow['ticketID']] = $ticketRow;
+            $ticket_list[$c_ticket['ticketID']] = $c_ticket;
         }
 
         $this->assign([
-            'ticketList' => $ticketList,
+            'ticketList' => $ticket_list,
         ]);
 
         $this->display('page.ticket.default.tpl');
@@ -61,10 +61,10 @@ class ShowTicketPage extends AbstractGamePage
 
     public function create(): void
     {
-        $categoryList = $this->ticketObj->getCategoryList();
+        $category_list = $this->ticket_obj->getCategoryList();
 
         $this->assign([
-            'categoryList' => $categoryList,
+            'categoryList' => $category_list,
         ]);
 
         $this->display('page.ticket.create.tpl');
@@ -74,24 +74,24 @@ class ShowTicketPage extends AbstractGamePage
     {
         global $USER, $LNG;
 
-        $ticketID = HTTP::_GP('id', 0);
-        $categoryID = HTTP::_GP('category', 0);
+        $ticket_id = HTTP::_GP('id', 0);
+        $category_id = HTTP::_GP('category', 0);
         $message = HTTP::_GP('message', '', true);
         $subject = HTTP::_GP('subject', '', true);
 
         if (empty($message))
         {
-            if (empty($ticketID))
+            if (empty($ticket_id))
             {
                 $this->redirectTo('game.php?page=ticket&mode=create');
             }
             else
             {
-                $this->redirectTo('game.php?page=ticket&mode=view&id='.$ticketID);
+                $this->redirectTo('game.php?page=ticket&mode=view&id='.$ticket_id);
             }
         }
 
-        if (empty($ticketID))
+        if (empty($ticket_id))
         {
             if (empty($subject))
             {
@@ -101,25 +101,33 @@ class ShowTicketPage extends AbstractGamePage
                 ]]);
             }
 
-            $ticketID = $this->ticketObj->createTicket($USER['id'], $categoryID, $subject);
+            $ticket_id = $this->ticket_obj->createTicket($USER['id'], $category_id, $subject);
         }
         else
         {
             $db = Database::get();
 
             $sql = "SELECT status FROM %%TICKETS%% WHERE ticketID = :ticketID;";
-            $ticketStatus = $db->selectSingle($sql, [
-                ':ticketID' => $ticketID,
+            $ticket_status = $db->selectSingle($sql, [
+                ':ticketID' => $ticket_id,
             ], 'status');
 
-            if ($ticketStatus == 2)
+            if ($ticket_status == 2)
             {
                 $this->printMessage($LNG['ti_error_closed']);
             }
         }
 
-        $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, 0);
-        $this->redirectTo('game.php?page=ticket&mode=view&id='.$ticketID);
+        $this->ticket_obj->createAnswer(
+            $ticket_id,
+            $USER['id'],
+            $USER['username'],
+            $subject,
+            $message,
+            0
+        );
+
+        $this->redirectTo('game.php?page=ticket&mode=view&id='.$ticket_id);
     }
 
     public function view(): void
@@ -130,19 +138,22 @@ class ShowTicketPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $ticketID = HTTP::_GP('id', 0);
+        $ticket_id = HTTP::_GP('id', 0);
 
-        $sql = "SELECT a.*, t.categoryID, t.status FROM %%TICKETS_ANSWER%% a INNER JOIN %%TICKETS%% t USING(ticketID) WHERE a.ticketID = :ticketID AND t.ownerID = :ownerID ORDER BY a.answerID;";
-        $answerResult = $db->select($sql, [
-            ':ticketID' => $ticketID,
+        $sql = "SELECT a.*, t.categoryID, t.status 
+        FROM %%TICKETS_ANSWER%% a INNER JOIN %%TICKETS%% t USING(ticketID) 
+        WHERE a.ticketID = :ticketID AND t.ownerID = :ownerID ORDER BY a.answerID;";
+
+        $answer_result = $db->select($sql, [
+            ':ticketID' => $ticket_id,
             ':ownerID'  => $USER['id'],
         ]);
 
-        $answerList = [];
+        $answer_list = [];
 
-        if (empty($answerResult))
+        if (empty($answer_result))
         {
-            $this->printMessage(sprintf($LNG['ti_not_exist'], $ticketID), [[
+            $this->printMessage(sprintf($LNG['ti_not_exist'], $ticket_id), [[
                 'label' => $LNG['sys_back'],
                 'url'   => 'game.php?page=ticket',
             ]]);
@@ -150,23 +161,23 @@ class ShowTicketPage extends AbstractGamePage
 
         $ticket_status = 0;
 
-        foreach ($answerResult as $answerRow)
+        foreach ($answer_result as $c_answer)
         {
-            $answerRow['time'] = _date($LNG['php_tdformat'], $answerRow['time'], $USER['timezone']);
-            $answerRow['message'] = BBCode::parse($answerRow['message']);
-            $answerList[$answerRow['answerID']] = $answerRow;
+            $c_answer['time'] = _date($LNG['php_tdformat'], $c_answer['time'], $USER['timezone']);
+            $c_answer['message'] = BBCode::parse($c_answer['message']);
+            $answer_list[$c_answer['answerID']] = $c_answer;
             if (empty($ticket_status))
             {
-                $ticket_status = $answerRow['status'];
+                $ticket_status = $c_answer['status'];
             }
         }
 
-        $categoryList = $this->ticketObj->getCategoryList();
+        $category_list = $this->ticket_obj->getCategoryList();
 
         $this->assign([
-            'ticketID'     => $ticketID,
-            'categoryList' => $categoryList,
-            'answerList'   => $answerList,
+            'ticketID'     => $ticket_id,
+            'categoryList' => $category_list,
+            'answerList'   => $answer_list,
             'status'       => $ticket_status,
         ]);
 

@@ -12,7 +12,6 @@ class ShowFleetTableSettingsPage extends AbstractGamePage
 
     public function changeVisibility(): void
     {
-
         global $USER;
 
         $result = 0;
@@ -26,7 +25,6 @@ class ShowFleetTableSettingsPage extends AbstractGamePage
         ]);
 
         $this->sendJSON($result);
-
     }
 
 }

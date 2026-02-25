@@ -30,19 +30,19 @@ class ShowAttackAlertPage extends AbstractGamePage
         ]);
 
         $data = "noattack";
-        if ($fleets) 
+        if ($fleets)
         {
-            if ($fleets['attack'] > 0 
-            && $fleets['spy'] > 0)
+            if ($fleets['attack'] > 0
+                && $fleets['spy'] > 0)
             {
                 $data = "spy";
             }
-            elseif ($fleets['attack'] > 0 
+            elseif ($fleets['attack'] > 0
                 && $fleets['spy'] == 0)
             {
                 $data = "attack";
             }
-            elseif ($fleets['spy'] > 0 
+            elseif ($fleets['spy'] > 0
                 && $fleets['attack'] == 0)
             {
                 $data = "spy";

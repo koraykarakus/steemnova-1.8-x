@@ -26,52 +26,52 @@ class ShowRaportPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function BCWrapperPreRev2321($combatReport): mixed
+    private function BCWrapperPreRev2321($combat_report): mixed
     {
-        if (isset($combatReport['moon']['desfail']))
+        if (isset($combat_report['moon']['desfail']))
         {
-            $combatReport['moon'] = [
-                'moonName'            => $combatReport['moon']['name'],
-                'moonChance'          => $combatReport['moon']['chance'],
-                'moonDestroySuccess'  => !$combatReport['moon']['desfail'],
-                'fleetDestroyChance'  => $combatReport['moon']['chance2'],
-                'fleetDestroySuccess' => !$combatReport['moon']['fleetfail'],
+            $combat_report['moon'] = [
+                'moonName'            => $combat_report['moon']['name'],
+                'moonChance'          => $combat_report['moon']['chance'],
+                'moonDestroySuccess'  => !$combat_report['moon']['desfail'],
+                'fleetDestroyChance'  => $combat_report['moon']['chance2'],
+                'fleetDestroySuccess' => !$combat_report['moon']['fleetfail'],
             ];
         }
-        elseif (isset($combatReport['moon'][0]))
+        elseif (isset($combat_report['moon'][0]))
         {
-            $combatReport['moon'] = [
-                'moonName'            => $combatReport['moon'][1],
-                'moonChance'          => $combatReport['moon'][0],
-                'moonDestroySuccess'  => !$combatReport['moon'][2],
-                'fleetDestroyChance'  => $combatReport['moon'][3],
-                'fleetDestroySuccess' => !$combatReport['moon'][4],
-            ];
-        }
-
-        if (isset($combatReport['simu']))
-        {
-            $combatReport['additionalInfo'] = $combatReport['simu'];
-        }
-
-        if (isset($combatReport['debris'][0]))
-        {
-            $combatReport['debris'] = [
-                901 => $combatReport['debris'][0],
-                902 => $combatReport['debris'][1],
+            $combat_report['moon'] = [
+                'moonName'            => $combat_report['moon'][1],
+                'moonChance'          => $combat_report['moon'][0],
+                'moonDestroySuccess'  => !$combat_report['moon'][2],
+                'fleetDestroyChance'  => $combat_report['moon'][3],
+                'fleetDestroySuccess' => !$combat_report['moon'][4],
             ];
         }
 
-        if (!empty($combatReport['steal']['metal']))
+        if (isset($combat_report['simu']))
         {
-            $combatReport['steal'] = [
-                901 => $combatReport['steal']['metal'],
-                902 => $combatReport['steal']['crystal'],
-                903 => $combatReport['steal']['deuterium'],
+            $combat_report['additionalInfo'] = $combat_report['simu'];
+        }
+
+        if (isset($combat_report['debris'][0]))
+        {
+            $combat_report['debris'] = [
+                901 => $combat_report['debris'][0],
+                902 => $combat_report['debris'][1],
             ];
         }
 
-        return $combatReport;
+        if (!empty($combat_report['steal']['metal']))
+        {
+            $combat_report['steal'] = [
+                901 => $combat_report['steal']['metal'],
+                902 => $combat_report['steal']['crystal'],
+                903 => $combat_report['steal']['deuterium'],
+            ];
+        }
+
+        return $combat_report;
     }
 
     public function battlehall(): void
@@ -83,7 +83,7 @@ class ShowRaportPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $RID = HTTP::_GP('raport', '');
+        $rid = HTTP::_GP('raport', '');
 
         $sql = "SELECT
 			raport, time,
@@ -91,34 +91,37 @@ class ShowRaportPage extends AbstractGamePage
 				SELECT
 				GROUP_CONCAT(username SEPARATOR ' & ') as attacker
 				FROM %%USERS%%
-				WHERE id IN (SELECT uid FROM %%TOPKB_USERS%% WHERE %%TOPKB_USERS%%.rid = %%RW%%.rid AND role = 1)
+				WHERE id IN (SELECT uid FROM %%TOPKB_USERS%% 
+                WHERE %%TOPKB_USERS%%.rid = %%RW%%.rid AND role = 1)
 			) as attacker,
 			(
 				SELECT
 				GROUP_CONCAT(username SEPARATOR ' & ') as defender
 				FROM %%USERS%%
-				WHERE id IN (SELECT uid FROM %%TOPKB_USERS%% WHERE %%TOPKB_USERS%%.rid = %%RW%%.rid AND role = 2)
+				WHERE id IN (SELECT uid FROM %%TOPKB_USERS%% 
+                WHERE %%TOPKB_USERS%%.rid = %%RW%%.rid AND role = 2)
 			) as defender
 			FROM %%RW%%
 			WHERE rid = :reportID;";
-        $reportData = $db->selectSingle($sql, [
-            ':reportID' => $RID,
+
+        $report_data = $db->selectSingle($sql, [
+            ':reportID' => $rid,
         ]);
 
-        $Info = [$reportData["attacker"], $reportData["defender"]];
-
-        if (!isset($reportData))
+        if (!$report_data)
         {
             $this->printMessage($LNG['sys_raport_not_found']);
         }
 
-        $combatReport = unserialize($reportData['raport']);
-        $combatReport['time'] = _date($LNG['php_tdformat'], $combatReport['time'], $USER['timezone']);
-        $combatReport = $this->BCWrapperPreRev2321($combatReport);
+        $info = [$report_data["attacker"], $report_data["defender"]];
+
+        $combat_report = unserialize($report_data['raport']);
+        $combat_report['time'] = _date($LNG['php_tdformat'], $combat_report['time'], $USER['timezone']);
+        $combat_report = $this->BCWrapperPreRev2321($combat_report);
 
         $this->assign([
-            'Raport'    => $combatReport,
-            'Info'      => $Info,
+            'Raport'    => $combat_report,
+            'Info'      => $info,
             'pageTitle' => $LNG['lm_topkb'],
         ]);
 
@@ -134,38 +137,41 @@ class ShowRaportPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $RID = HTTP::_GP('raport', '');
+        $rid = HTTP::_GP('raport', '');
 
         $sql = "SELECT raport,attacker,defender FROM %%RW%% WHERE rid = :reportID;";
-        $reportData = $db->selectSingle($sql, [
-            ':reportID' => $RID,
+        $report_data = $db->selectSingle($sql, [
+            ':reportID' => $rid,
         ]);
 
-        if (empty($reportData))
+        if (empty($report_data))
         {
             $this->printMessage($LNG['sys_raport_not_found']);
         }
 
         // empty is BC for pre r2484
-        $isAttacker = empty($reportData['attacker']) || in_array($USER['id'], explode(",", $reportData['attacker']));
-        $isDefender = empty($reportData['defender']) || in_array($USER['id'], explode(",", $reportData['defender']));
+        $isAttacker = empty($report_data['attacker']) || in_array($USER['id'], explode(",", $report_data['attacker']));
+        $isDefender = empty($report_data['defender']) || in_array($USER['id'], explode(",", $report_data['defender']));
 
-        if (empty($reportData))
+        if (empty($report_data))
         {
             $this->printMessage($LNG['sys_raport_not_found']);
         }
 
-        $combatReport = unserialize($reportData['raport']);
-        if ($isAttacker && !$isDefender && $combatReport['result'] == 'r' && count($combatReport['rounds']) <= 2)
+        $combat_report = unserialize($report_data['raport']);
+        if ($isAttacker
+            && !$isDefender
+            && $combat_report['result'] == 'r'
+            && count($combat_report['rounds']) <= 2)
         {
             $this->printMessage($LNG['sys_raport_lost_contact']);
         }
 
-        $combatReport['time'] = _date($LNG['php_tdformat'], $combatReport['time'], $USER['timezone']);
-        $combatReport = $this->BCWrapperPreRev2321($combatReport);
+        $combat_report['time'] = _date($LNG['php_tdformat'], $combat_report['time'], $USER['timezone']);
+        $combat_report = $this->BCWrapperPreRev2321($combat_report);
 
         $this->assign([
-            'Raport'    => $combatReport,
+            'Raport'    => $combat_report,
             'pageTitle' => $LNG['sys_mess_attack_report'],
         ]);
 
