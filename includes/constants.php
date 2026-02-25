@@ -24,10 +24,10 @@ define('HTTPS', isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on');
 define('PROTOCOL', HTTPS ? 'https://' : 'http://');
 if (PHP_SAPI === 'cli')
 {
-    $requestUrl = str_replace(array(dirname(dirname(__FILE__)), '\\'), array('', '/'), $_SERVER["PHP_SELF"]);
+    $requestUrl = str_replace([dirname(dirname(__FILE__)), '\\'], ['', '/'], $_SERVER["PHP_SELF"]);
 
     //debug mode
-    define('HTTP_BASE', str_replace(array('\\', '//'), '/', dirname($_SERVER['SCRIPT_NAME']).'/'));
+    define('HTTP_BASE', str_replace(['\\', '//'], '/', dirname($_SERVER['SCRIPT_NAME']).'/'));
     define('HTTP_ROOT', str_replace(basename($_SERVER['SCRIPT_FILENAME']), '', parse_url($requestUrl, PHP_URL_PATH)));
 
     define('HTTP_FILE', basename($_SERVER['SCRIPT_NAME']));
@@ -36,7 +36,7 @@ if (PHP_SAPI === 'cli')
 }
 else
 {
-    define('HTTP_BASE', str_replace(array('\\', '//'), '/', dirname($_SERVER['SCRIPT_NAME']).'/'));
+    define('HTTP_BASE', str_replace(['\\', '//'], '/', dirname($_SERVER['SCRIPT_NAME']).'/'));
     define('HTTP_ROOT', str_replace(basename($_SERVER['SCRIPT_FILENAME']), '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
 
     define('HTTP_FILE', basename($_SERVER['SCRIPT_NAME']));
@@ -167,7 +167,7 @@ define('AUTH_USR', 0);
 define('ATTACK_LISTEN_TIME', 1000);
 
 // Modules
-define('MODULE_AMOUNT', 51);
+define('MODULE_AMOUNT', 52);
 define('MODULE_ALLIANCE', 0);
 define('MODULE_BANLIST', 21);
 define('MODULE_BANNER', 37);
@@ -221,6 +221,7 @@ define('MODULE_RELOCATE', 47);
 define('MODULE_AUTOEXPEDITION', 48);
 define('MODULE_COLLECT_MINES', 49);
 define('MODULE_FLIGHT_SIMULATOR', 50);
+define('MODULE_CHANGELOG', 51);
 
 // FLEET STATE
 define('FLEET_OUTWARD', 0);

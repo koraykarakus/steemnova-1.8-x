@@ -28,16 +28,16 @@
 
 	<content>
 		{if $hasAdminAccess}
-		<div class="globalWarning">
-		{$LNG.admin_access_1} <a id="drop-admin">{$LNG.admin_access_link}</a>{$LNG.admin_access_2}
-		</div>
+			<div class="globalWarning">
+				{$LNG.admin_access_1} <a id="drop-admin">{$LNG.admin_access_link}</a>{$LNG.admin_access_2}
+			</div>
 		{/if}
 		{if $closed}
-		<div class="infobox">{$LNG.ov_closed}</div>
+			<div class="infobox">{$LNG.ov_closed}</div>
 		{elseif $delete}
-		<div class="infobox">{$delete}</div>
+			<div class="infobox">{$delete}</div>
 		{elseif $vacation}
-		<div class="infobox">{$LNG.tn_vacation_mode} {$vacation}</div>
+			<div class="infobox">{$LNG.tn_vacation_mode} {$vacation}</div>
 		{/if}
 
 		{block name="content"}{/block}
@@ -47,31 +47,38 @@
 	<footer>
 		{foreach $cronjobs as $cronjob}<img src="cronjob.php?cronjobID={$cronjob}" alt="">{/foreach}
 
-		<div style="z-index:9999;" class="bg-black d-none d-sm-flex justify-content-center w-100 position-fixed bottom-0 py-1">
+		<div style="z-index:9999;"
+			class="bg-black d-none d-sm-flex justify-content-center w-100 position-fixed bottom-0 py-1">
 			{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
-			<a class="color-red font-size-12 px-2 border-end" href="game.php?page=banList">{$LNG.lm_banned}</a>
+				<a class="color-red font-size-12 px-2 border-end" href="game.php?page=banList">{$LNG.lm_banned}</a>
 			{/if}
 			{if isModuleAvailable($smarty.const.MODULE_RECORDS)}
-			<a class="font-size-12 px-2 border-end" href="game.php?page=records">{$LNG.lm_records}</a>
+				<a class="font-size-12 px-2 border-end" href="game.php?page=records">{$LNG.lm_records}</a>
 			{/if}
-	    {if isModuleAvailable($smarty.const.MODULE_BATTLEHALL)}
-			<a class="font-size-12 px-2 border-end" href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
+			{if isModuleAvailable($smarty.const.MODULE_BATTLEHALL)}
+				<a class="font-size-12 px-2 border-end" href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
 			{/if}
 			{if isModuleAvailable($smarty.const.MODULE_SIMULATOR)}
-			<a class="font-size-12 px-2 border-end" href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
+				<a class="font-size-12 px-2 border-end" href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
 			{/if}
 
 			<a class="font-size-12 px-2 border-end" href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
 
 			<a class="font-size-12 px-2 border-end" href="game.php?page=questions">{$LNG.lm_faq}</a>
-			{if isModuleAvailable($smarty.const.MODULE_FORUM)}{if !empty($hasBoard)}
-			<a class="font-size-12 px-2 border-end" href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
-			{/if}{/if}
+			{if isModuleAvailable($smarty.const.MODULE_FORUM)}
+				{if !empty($hasBoard)}
+					<a class="font-size-12 px-2 border-end" href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
+				{/if}
+			{/if}
 			{if isModuleAvailable($smarty.const.MODULE_DISCORD)}
-			<a class="font-size-12 px-2 border-end" href="{$discordUrl}" target="copy">Discord</a>
+				<a class="font-size-12 px-2 border-end" href="{$discordUrl}" target="copy">Discord</a>
 			{/if}
 			{if isModuleAvailable($smarty.const.MODULE_CHAT)}
-			<a class="font-size-12 px-2 border-end" href="game.php?page=chat">{$LNG.lm_chat}</a>
+				<a class="font-size-12 px-2 border-end" href="game.php?page=chat">{$LNG.lm_chat}</a>
+			{/if}
+			{if isModuleAvailable($smarty.const.MODULE_CHANGELOG)}
+				<a class="font-size-12 px-2 border-end text-white hover-underline"
+					href="game.php?page=changeLog">{$LNG.lm_changelog}</a>
 			{/if}
 
 
@@ -86,4 +93,5 @@
 </div>
 
 </body>
+
 </html>
