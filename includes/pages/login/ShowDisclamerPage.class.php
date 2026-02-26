@@ -28,10 +28,10 @@ class ShowDisclamerPage extends AbstractLoginPage
     {
         $config = Config::get();
         $this->assign([
-            'disclamerAddress' => makebr($config->disclamerAddress),
-            'disclamerPhone'   => $config->disclamerPhone,
-            'disclamerMail'    => $config->disclamerMail,
-            'disclamerNotice'  => $config->disclamerNotice,
+            'disclaimer_address' => makebr($config->disclamerAddress),
+            'disclaimer_phone'   => $config->disclamerPhone,
+            'disclaimer_mail'    => $config->disclamerMail,
+            'disclaimer_notice'  => $config->disclamerNotice,
         ]);
 
         $this->display('page.disclamer.default.tpl');

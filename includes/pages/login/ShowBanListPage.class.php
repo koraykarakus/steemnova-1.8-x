@@ -49,7 +49,7 @@ class ShowBanListPage extends AbstractLoginPage
 
         $banned_users = $db->select($sql, [
             ':universe' => Universe::current(),
-            ':offset'   => (($page - 1) * BANNED_USERS_PER_PAGE),
+            ':offset'   => ($page - 1) * BANNED_USERS_PER_PAGE,
             ':limit'    => BANNED_USERS_PER_PAGE,
         ]);
 
@@ -70,11 +70,11 @@ class ShowBanListPage extends AbstractLoginPage
 
         $universe_select = $this->getUniverseSelector();
         $this->assign([
-            'universeSelect' => $universe_select,
-            'banList'        => $ban_list,
-            'banCount'       => $ban_count,
-            'pageNumber'     => $page,
-            'maxPage'        => $max_page,
+            'universe_select' => $universe_select,
+            'ban_list'        => $ban_list,
+            'ban_count'       => $ban_count,
+            'page_number'     => $page,
+            'max_page'        => $max_page,
         ]);
 
         $this->display('page.banList.default.tpl');

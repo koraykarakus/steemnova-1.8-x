@@ -64,8 +64,8 @@ class ShowBattleHallPage extends AbstractLoginPage
         $universe_select = $this->getUniverseSelector();
 
         $this->assign([
-            'universeSelect' => $universe_select,
-            'hallList'       => $hall_list,
+            'universe_select' => $universe_select,
+            'hall_list'       => $hall_list,
         ]);
 
         $this->display('page.battleHall.default.tpl');
