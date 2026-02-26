@@ -190,7 +190,7 @@ var Dialog	= {
     width: width,
     height: height,
     iframeAttr:{
-      scrolling: "no",
+      scrolling: "auto",
     },
   },
 ]);

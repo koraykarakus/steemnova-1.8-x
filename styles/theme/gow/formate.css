@@ -116,7 +116,35 @@
 }
 
 
-/*--*/
+/*popup scroll bar styling for fancybox feauture*/
+/* Webkit (Chrome, Edge, Opera) */
+body.popup::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.popup::-webkit-scrollbar-track {
+    background: #111113;
+    border-left: 1px solid rgba(255,214,0,0.15);
+}
+
+body.popup::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #3a3420 0%,
+        #1f1b10 100%
+    );
+    border: 1px solid rgba(255,214,0,0.35);
+    border-radius: 6px;
+}
+
+body.popup::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        #5a4d1f 0%,
+        #2c250f 100%
+    );
+    border: 1px solid #ffd600;
+}
 
 /*--*/
 
@@ -241,6 +269,9 @@ input[type="radio"] {
 }
 .fancybox__content{
 	padding: 0!important;
+}
+.popup{
+	overflow-y: auto;
 }
 /*popover galaxy*/
 
