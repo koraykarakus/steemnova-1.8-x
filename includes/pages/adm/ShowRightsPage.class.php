@@ -36,44 +36,51 @@ class ShowRightsPage extends AbstractAdminPage
         switch ($type)
         {
             case 'adm':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_ADM."'";
+                $sql_where = "AND `authlevel` = '".AUTH_ADM."'";
                 break;
             case 'ope':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_OPS."'";
+                $sql_where = "AND `authlevel` = '".AUTH_OPS."'";
                 break;
             case 'mod':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_MOD."'";
+                $sql_where = "AND `authlevel` = '".AUTH_MOD."'";
                 break;
             case 'pla':
-                $WHEREUSERS = "AND `authlevel` = '".AUTH_USR."'";
+                $sql_where = "AND `authlevel` = '".AUTH_USR."'";
                 break;
             default:
-                $WHEREUSERS = "";
+                $sql_where = "";
                 break;
         }
 
         $this->tplObj->loadscript('./scripts/game/filterlist.js');
 
-        $sql = "SELECT `id`, `username`, `authlevel` FROM %%USERS%% WHERE `universe` = :universe ".$WHEREUSERS.";";
+        $sql = "SELECT `id`, `username`, `authlevel` 
+        FROM %%USERS%% WHERE `universe` = :universe ".$sql_where.";";
 
-        $QueryUsers = Database::get()->select($sql, [
+        $users = Database::get()->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $UserList = "";
-        foreach ($QueryUsers as $currentQueryUser)
+        $user_list = "";
+        foreach ($users as $c_user)
         {
-            $UserList .= '<option value="'.$currentQueryUser['id'].'">'.$currentQueryUser['username'].'&nbsp;&nbsp;('.$LNG['rank_'.$currentQueryUser['authlevel']].')</option>';
+            $user_list .= '<option value="' .
+            $c_user['id'] .
+            '">' .
+            $c_user['username'] .
+            '&nbsp;&nbsp;(' .
+            $LNG['rank_' .
+            $c_user['authlevel']] .
+            ')</option>';
         }
 
         $this->assign([
             'Selector' => [0 => $LNG['rank_0'], 1 => $LNG['rank_1'], 2 => $LNG['rank_2'], 3 => $LNG['rank_3']],
-            'UserList' => $UserList,
+            'UserList' => $user_list,
             'sid'      => session_id(),
         ]);
 
         $this->display('page.rights.default.tpl');
-
     }
 
     public function rights(): void
@@ -105,7 +112,6 @@ class ShowRightsPage extends AbstractAdminPage
                 ':rights' => serialize(array_map('intval', $_POST['rights'])),
                 ':id'     => (int)$id,
             ]);
-
         }
 
         $sql = "SELECT rights FROM %%USERS%% WHERE id = :userId;";
@@ -132,7 +138,6 @@ class ShowRightsPage extends AbstractAdminPage
         ]);
 
         $this->display('ModerrationRightsPostPage.tpl');
-
     }
 
     public function users(): void

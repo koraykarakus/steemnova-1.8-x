@@ -30,7 +30,8 @@ class ShowAccountDataPage extends AbstractAdminPage
         global $USER, $LNG;
 
         $sql = "SELECT `id`, `username`, `authlevel` FROM %%USERS%% 
-        WHERE `authlevel` <= :authLevel AND `universe` = :universe ORDER BY `username` ASC;";
+        WHERE `authlevel` <= :authLevel AND `universe` = :universe 
+        ORDER BY `username` ASC;";
 
         $users = Database::get()->select($sql, [
             ':authLevel' => $USER['authlevel'],
@@ -38,9 +39,13 @@ class ShowAccountDataPage extends AbstractAdminPage
         ]);
 
         $user_list_html = "";
-        foreach ($users as $currentUser)
+        foreach ($users as $c_user)
         {
-            $user_list_html .= "<option value=\"".$currentUser['id']."\">".$currentUser['username']."&nbsp;&nbsp;(".$LNG['rank_'.$currentUser['authlevel']].")</option>";
+            $user_list_html .= "<option value=\"" .
+            $c_user['id']."\">" .
+            $c_user['username'] .
+            "&nbsp;&nbsp;(".$LNG['rank_' .
+            $c_user['authlevel']].")</option>";
         }
 
         $this->tplObj->loadscript('./scripts/game/filterlist.js');
@@ -61,8 +66,8 @@ class ShowAccountDataPage extends AbstractAdminPage
     // TODO : cleanup html and JS from php
     public function FilterByID(): void
     {
-
         global $reslist, $resource, $LNG, $USER;
+
         $user_id = HTTP::_GP('id_u', 0);
         $user_id_input = HTTP::_GP('id_u2', 0);
 
@@ -332,36 +337,36 @@ class ShowAccountDataPage extends AbstractAdminPage
         $resources = '';
         $MoonZ = 0;
         $DestruyeD = 0;
-        foreach ($planets as $current_planet)
+        foreach ($planets as $c_planet)
         {
-            if ($current_planet['planet_type'] == 3)
+            if ($c_planet['planet_type'] == 3)
             {
-                $Planettt = $current_planet['name']."&nbsp;(".$LNG['ac_moon'].")<br><font color=aqua>["
-                            .$current_planet['galaxy'].":".$current_planet['system'].":".$current_planet['planet']."]</font>";
+                $Planettt = $c_planet['name']."&nbsp;(".$LNG['ac_moon'].")<br><font color=aqua>["
+                            .$c_planet['galaxy'].":".$c_planet['system'].":".$c_planet['planet']."]</font>";
 
-                $Moons = $current_planet['name']."&nbsp;(".$LNG['ac_moon'].")<br><font color=aqua>["
-                            .$current_planet['galaxy'].":".$current_planet['system'].":".$current_planet['planet']."]</font>";
+                $Moons = $c_planet['name']."&nbsp;(".$LNG['ac_moon'].")<br><font color=aqua>["
+                            .$c_planet['galaxy'].":".$c_planet['system'].":".$c_planet['planet']."]</font>";
                 $MoonZ = 1;
             }
             else
             {
-                $Planettt = $current_planet['name']."<br><font color=aqua>[".$current_planet['galaxy'].":".$current_planet['system'].":"
-                            .$current_planet['planet']."]</font>";
+                $Planettt = $c_planet['name']."<br><font color=aqua>[".$c_planet['galaxy'].":".$c_planet['system'].":"
+                            .$c_planet['planet']."]</font>";
             }
 
-            if ($current_planet["destruyed"] == 0)
+            if ($c_planet["destruyed"] == 0)
             {
                 $planets_moons .= "
                 <tr>
                     <td>".$Planettt."</td>
-                    <td>".$current_planet['id']."</td>
-                    <td>".pretty_number($current_planet['diameter'])."</td>
-                    <td>".pretty_number($current_planet['field_current'])." / ".pretty_number(CalculateMaxPlanetFields($current_planet))." (".pretty_number($current_planet['field_current'])." / ".pretty_number($current_planet['field_max']).")</td>
-                    <td>".pretty_number($current_planet['temp_min'])." / ".pretty_number($current_planet['temp_max'])."</td>"
-                    .(allowedTo('ShowQuickEditorPage') ? "<td><a href=\"javascript:openEdit('".$current_planet['id']."', 'planet');\" border=\"0\"><img src=\"./styles/resource/images/admin/GO.png\" title=".$LNG['se_search_edit']."></a></td>" : "").
+                    <td>".$c_planet['id']."</td>
+                    <td>".pretty_number($c_planet['diameter'])."</td>
+                    <td>".pretty_number($c_planet['field_current'])." / ".pretty_number(CalculateMaxPlanetFields($c_planet))." (".pretty_number($c_planet['field_current'])." / ".pretty_number($c_planet['field_max']).")</td>
+                    <td>".pretty_number($c_planet['temp_min'])." / ".pretty_number($c_planet['temp_max'])."</td>"
+                    .(allowedTo('ShowQuickEditorPage') ? "<td><a href=\"javascript:openEdit('".$c_planet['id']."', 'planet');\" border=\"0\"><img src=\"./styles/resource/images/admin/GO.png\" title=".$LNG['se_search_edit']."></a></td>" : "").
                 "</tr>";
 
-                $SumOfEnergy = ($current_planet['energy'] + $current_planet['energy_used']);
+                $SumOfEnergy = ($c_planet['energy'] + $c_planet['energy_used']);
 
                 if ($SumOfEnergy < 0)
                 {
@@ -379,29 +384,29 @@ class ShowAccountDataPage extends AbstractAdminPage
                 $resources .= "
                 <tr>
                     <td>".$Planettt."</td>
-                    <td><a title=\"".pretty_number($current_planet['metal'])."\">".shortly_number($current_planet['metal'])."</a></td>
-                    <td><a title=\"".pretty_number($current_planet['crystal'])."\">".shortly_number($current_planet['crystal'])."</a></td>
-                    <td><a title=\"".pretty_number($current_planet['deuterium'])."\">".shortly_number($current_planet['deuterium'])."</a></td>
-                    <td><a title=\"".pretty_number($SumOfEnergy)."\">".$Color."</a>/<a title=\"".pretty_number($current_planet['energy'])."\">".shortly_number($current_planet['energy'])."</a></td>
+                    <td><a title=\"".pretty_number($c_planet['metal'])."\">".shortly_number($c_planet['metal'])."</a></td>
+                    <td><a title=\"".pretty_number($c_planet['crystal'])."\">".shortly_number($c_planet['crystal'])."</a></td>
+                    <td><a title=\"".pretty_number($c_planet['deuterium'])."\">".shortly_number($c_planet['deuterium'])."</a></td>
+                    <td><a title=\"".pretty_number($SumOfEnergy)."\">".$Color."</a>/<a title=\"".pretty_number($c_planet['energy'])."\">".shortly_number($c_planet['energy'])."</a></td>
                 </tr>";
                 $names .= "<th class=\"center\" width=\"60\">".$Planettt."</th>";
                 foreach (array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']) as $ID)
                 {
-                    $RES[$resource[$ID]] .= "<td width=\"60\"><a title=\"".pretty_number($current_planet[$resource[$ID]])."\">".shortly_number($current_planet[$resource[$ID]])."</a></td>";
+                    $RES[$resource[$ID]] .= "<td width=\"60\"><a title=\"".pretty_number($c_planet[$resource[$ID]])."\">".shortly_number($c_planet[$resource[$ID]])."</a></td>";
                 }
 
                 $MoonHave = $MoonZ != 0 ? '<a href="#" onclick="$(\'#especiales\').slideToggle();return false" class="link"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10"/> '.$LNG['moon_build']."</a>" : "<span class=\"no_moon\"><img src=\"./styles/resource/images/admin/arrowright.png\" width=\"16\" height=\"10\"/>".$LNG['moon_build']."&nbsp;".$LNG['ac_moons_no']."</span>";
             }
 
             $destroyed = '';
-            if ($current_planet["destruyed"] > 0)
+            if ($c_planet["destruyed"] > 0)
             {
                 $destroyed .= "
                     <tr>
-                        <td>".$current_planet['name']."</td>
-                        <td>".$current_planet['id']."</td>
-                        <td>[".$current_planet['galaxy'].":".$current_planet['system'].":".$current_planet['planet']."]</td>
-                        <td>".date("d-m-Y   H:i:s", $current_planet['destruyed'])."</td>
+                        <td>".$c_planet['name']."</td>
+                        <td>".$c_planet['id']."</td>
+                        <td>[".$c_planet['galaxy'].":".$c_planet['system'].":".$c_planet['planet']."]</td>
+                        <td>".date("d-m-Y   H:i:s", $c_planet['destruyed'])."</td>
                     </tr>";
                 $DestruyeD++;
             }

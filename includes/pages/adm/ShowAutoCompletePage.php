@@ -22,37 +22,39 @@ if ($USER['authlevel'] == AUTH_USR)
 
 function ShowAutoCompletePage()
 {
-    $searchText = HTTP::_GP('term', '', UTF8_SUPPORT);
+    $search_text = HTTP::_GP('term', '', UTF8_SUPPORT);
     $searchList = [];
 
-    if (empty($searchText) || $searchText === '#')
+    if (empty($search_text)
+        || $search_text === '#')
     {
         echo json_encode([]);
         exit;
     }
 
-    if (substr($searchText, 0, 1) === '#')
+    if (substr($search_text, 0, 1) === '#')
     {
-        $where = 'id = '.((int) substr($searchText, 1));
+        $where = 'id = '.((int) substr($search_text, 1));
         $orderBy = ' ORDER BY id ASC';
     }
     else
     {
-        $where = "username LIKE '%". $searchText ."%'";
-        $orderBy = " ORDER BY (IF(username = '". $searchText ."', 1, 0) + IF(username LIKE '" . $searchText ."%', 1, 0)) DESC, username";
+        $where = "username LIKE '%". $search_text ."%'";
+        $orderBy = " ORDER BY (IF(username = '". $search_text ."', 1, 0) + IF(username LIKE '" . $search_text ."%', 1, 0)) DESC, username";
     }
 
-    $sql = "SELECT id, username FROM %%USERS%% WHERE universe = :universe AND " . $where . $orderBy . " LIMIT 20";
+    $sql = "SELECT id, username 
+    FROM %%USERS%% WHERE universe = :universe AND " . $where . $orderBy . " LIMIT 20";
 
-    $userRaw = Database::get()->select($sql, [
+    $users = Database::get()->select($sql, [
         ':universe' => Universe::getEmulated(),
     ]);
 
-    foreach ($userRaw as $userRow)
+    foreach ($users as $c_user)
     {
         $searchList[] = [
-            'label' => $userRow['username'].' (ID:'.$userRow['id'].')',
-            'value' => $userRow['username'],
+            'label' => $c_user['username'].' (ID:'.$c_user['id'].')',
+            'value' => $c_user['username'],
         ];
     }
 

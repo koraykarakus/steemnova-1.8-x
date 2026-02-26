@@ -48,22 +48,22 @@ class ShowSupportPage extends AbstractAdminPage
 		INNER JOIN %%USERS%% as u ON u.id = t.ownerID WHERE t.universe = :universe
 		GROUP BY a.ticketID ORDER BY t.ticketID DESC;";
 
-        $ticketResult = $db->select($sql, [
+        $ticket_result = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $ticketList = [];
+        $ticket_list = [];
 
-        foreach ($ticketResult as &$ticketRow)
+        foreach ($ticket_result as &$c_ticket)
         {
-            $ticketRow['time'] = _date($LNG['php_tdformat'], $ticketRow['time'], $USER['timezone']);
+            $c_ticket['time'] = _date($LNG['php_tdformat'], $c_ticket['time'], $USER['timezone']);
 
-            $ticketList[$ticketRow['ticketID']] = $ticketRow;
+            $ticket_list[$c_ticket['ticketID']] = $c_ticket;
         }
-        unset($ticketRow);
+        unset($c_ticket);
 
         $this->assign([
-            'ticketList' => $ticketList,
+            'ticketList' => $ticket_list,
         ]);
 
         $this->display('page.ticket.default.tpl');
@@ -75,45 +75,49 @@ class ShowSupportPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $ticketID = HTTP::_GP('id', 0);
+        $ticket_id = HTTP::_GP('id', 0);
         $message = HTTP::_GP('message', '', true);
         $change = HTTP::_GP('change_status', 0);
 
-        $sql = "SELECT ownerID, subject, status FROM %%TICKETS%% WHERE ticketID = :ticketID;";
+        $sql = "SELECT ownerID, subject, status 
+        FROM %%TICKETS%% WHERE ticketID = :ticketID;";
 
-        $ticketDetail = $db->selectSingle($sql, [
-            ':ticketID' => $ticketID,
+        $ticket_detail = $db->selectSingle($sql, [
+            ':ticketID' => $ticket_id,
         ]);
 
-        $status = ($change ? ($ticketDetail['status'] <= 1 ? 2 : 1) : 1);
+        $status = ($change ? ($ticket_detail['status'] <= 1 ? 2 : 1) : 1);
 
-        if (!$change && empty($message))
+        if (!$change
+            && empty($message))
         {
-            HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticketID);
+            HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticket_id);
         }
 
-        $subject = "RE: ".$ticketDetail['subject'];
+        $subject = "RE: ".$ticket_detail['subject'];
 
-        if ($change && $status == 1)
+        if ($change
+            && $status == 1)
         {
-            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_open'], $status);
+            $this->ticketObj->createAnswer($ticket_id, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_open'], $status);
         }
 
         if (!empty($message))
         {
-            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, $status);
+            $this->ticketObj->createAnswer($ticket_id, $USER['id'], $USER['username'], $subject, $message, $status);
         }
 
-        if ($change && $status == 2)
+        if ($change
+            && $status == 2)
         {
-            $this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_close'], $status);
+            $this->ticketObj->createAnswer($ticket_id, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_close'], $status);
         }
 
-        $subject = sprintf($LNG['sp_answer_message_title'], $ticketID);
-        $text = sprintf($LNG['sp_answer_message'], $ticketID);
+        $subject = sprintf($LNG['sp_answer_message_title'], $ticket_id);
+        $text = sprintf($LNG['sp_answer_message'], $ticket_id);
 
         PlayerUtil::sendMessage(
-            $ticketDetail['ownerID'],
+            $ticket_detail['ownerID'],
             $USER['id'],
             $USER['username'],
             4,

@@ -27,7 +27,6 @@ class ShowRelocatePage extends AbstractAdminPage
 
     public function show(): void
     {
-
         global $config;
 
         $this->assign([
@@ -38,7 +37,6 @@ class ShowRelocatePage extends AbstractAdminPage
         ]);
 
         $this->display('page.relocate.default.tpl');
-
     }
 
     public function saveSettings(): void

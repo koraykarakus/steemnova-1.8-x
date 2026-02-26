@@ -157,11 +157,11 @@ class ShowPlanetFieldsPage extends AbstractAdminPage
         }
         $config->save();
 
-        $LOG = new Log(3);
-        $LOG->target = 1;
-        $LOG->old = $config_before;
-        $LOG->new = $config_after;
-        $LOG->save();
+        $log = new Log(3);
+        $log->target = 1;
+        $log->old = $config_before;
+        $log->new = $config_after;
+        $log->save();
 
         $redirectButton = [];
         $redirectButton[] = [

@@ -17,17 +17,16 @@
 
 function ShowMenuPage()
 {
-    global $USER;
     $template = new template();
 
     $sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
 
-    $numberTickets = Database::get()->selectSingle($sql, [
+    $num_tickets = Database::get()->selectSingle($sql, [
         ':universe' => Universe::getEmulated(),
     ], 'count');
 
     $template->assign_vars([
-        'supportticks' => $numberTickets,
+        'supportticks' => $num_tickets,
     ]);
 
     $template->show('ShowMenuPage.tpl');

@@ -69,48 +69,49 @@ abstract class AbstractAdminPage
 
     protected function getQueryString(): string
     {
-        $queryString = [];
+        $query_string = [];
         $page = HTTP::_GP('page', '');
 
         if (!empty($page))
         {
-            $queryString['page'] = $page;
+            $query_string['page'] = $page;
         }
 
         $mode = HTTP::_GP('mode', '');
         if (!empty($mode))
         {
-            $queryString['mode'] = $mode;
+            $query_string['mode'] = $mode;
         }
 
-        return http_build_query($queryString);
+        return http_build_query($query_string);
     }
 
     protected function getPageData(): void
     {
         global $USER;
 
-        $universeSelect = [];
-        foreach (Universe::availableUniverses() as $uniId)
+        $universe_select = [];
+        foreach (Universe::availableUniverses() as $uni_id)
         {
-            $config = Config::get($uniId);
-            $universeSelect[$uniId] = sprintf('%s (ID: %d)', $config->uni_name, $uniId);
+            $config = Config::get($uni_id);
+            $universe_select[$uni_id] = sprintf('%s (ID: %d)', $config->uni_name, $uni_id);
         }
 
-        $sql = "SELECT COUNT(*) as count FROM %%TICKETS%% WHERE universe = :universe AND status = 0;";
+        $sql = "SELECT COUNT(*) as count FROM %%TICKETS%% 
+        WHERE universe = :universe AND status = 0;";
 
-        $numberTickets = Database::get()->selectSingle($sql, [
+        $number_tickets = Database::get()->selectSingle($sql, [
             ':universe' => Universe::getEmulated(),
         ], 'count');
 
         $this->assign([
             'title'         => 'pageTitle',
             'authlevel'     => $USER['authlevel'],
-            'AvailableUnis' => $universeSelect,
+            'AvailableUnis' => $universe_select,
             'UNI'           => Universe::getEmulated(),
             'sid'           => session_id(),
             'id'            => $USER['id'],
-            'supportticks'  => $numberTickets,
+            'supportticks'  => $number_tickets,
             'currentPage'   => HTTP::_GP('page', ''),
             'search'        => HTTP::_GP('search', ''),
         ]);
@@ -119,23 +120,18 @@ abstract class AbstractAdminPage
     protected function createButtonBack(): array
     {
         global $LNG;
-
-        $redirectButton = [];
-
-        $redirectButton[] = [
+        return $btn[] = [
             'url'   => $_SERVER['HTTP_REFERER'] ?? '',
             'label' => $LNG['uvs_back'] ?? '',
         ];
-
-        return $redirectButton;
     }
 
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
+    protected function printMessage($msg, $btns = null, $redirect = null, $full = true): void
     {
 
         $this->assign([
-            'message'         => $message,
-            'redirectButtons' => $redirectButtons,
+            'message'         => $msg,
+            'redirectButtons' => $btns,
         ]);
 
         if (isset($redirect))
@@ -143,7 +139,7 @@ abstract class AbstractAdminPage
             $this->tplObj->gotoside($redirect[0], $redirect[1]);
         }
 
-        if (!$fullSide)
+        if (!$full)
         {
             $this->setWindow('popup');
         }
@@ -151,9 +147,9 @@ abstract class AbstractAdminPage
         $this->display('error.default.tpl');
     }
 
-    protected function assign($array, $nocache = true): void
+    protected function assign($array, $no_cache = true): void
     {
-        $this->tplObj->assign_vars($array, $nocache);
+        $this->tplObj->assign_vars($array, $no_cache);
     }
 
     protected function display($file): void

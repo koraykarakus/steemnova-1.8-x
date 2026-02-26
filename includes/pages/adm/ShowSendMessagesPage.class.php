@@ -92,7 +92,7 @@ class ShowSendMessagesPage extends AbstractAdminPage
 					WHERE `universe` = :universe ";
                     $sql .= " AND `lang` = :lang;";
 
-                    $USERS = $db->select($sql, [
+                    $users = $db->select($sql, [
                         ':universe' => Universe::getEmulated(),
                         ':lang'     => $lang,
                     ]);
