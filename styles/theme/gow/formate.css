@@ -336,42 +336,77 @@ input[type="radio"] {
 
 /**/
 
-.button-upgrade{
-	width: 80px;
-	height: 28px;
+/*button upgrade*/
+.button-upgrade {
+	width: 90px;
+	height: 32px;
 	font-weight: 700;
-	font-size: 11px;
-	color: #fff;
-	background-color: #5f9946;
-	transition: 0.3s ease;
-	border: 1px solid #747c70;
-	border-radius: 5px;
-	overflow: hidden;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	color: #ffffff;
+	background: linear-gradient(180deg, #6edc5f 0%, #2f7d1f 100%);
+	border: 1px solid #1e4f14;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.25s ease;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+	text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
-.button-upgrade-disabled{
-	width: 80px;
-	height: 28px;
+
+.button-upgrade:hover {
+	background: linear-gradient(180deg, #8df57b 0%, #256b18 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+.button-upgrade:active {
+	transform: scale(0.95);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.button-upgrade:disabled {
+	background: #555;
+	color: #999;
+	cursor: not-allowed;
+	box-shadow: none;
+	border: 1px solid #444;
+}
+/*downgrade button*/
+.button-downgrade {
+	width: 90px;
+	height: 32px;
 	font-weight: 700;
-	font-size: 11px;
-	color: #fff;
-	background-color: gray;
-	transition: 0.3s ease;
-	border: 1px solid #747c70;
-	border-radius: 5px;
-	overflow: hidden;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	background: linear-gradient(180deg, #ff3b2f 0%, #b31212 100%);
+	color: #ffffff;
+	border: 1px solid #5a0f0f;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.25s ease;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+	text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
-.button-downgrade{
-	width: 80px;
-	height: 28px;
-	font-weight: 700;
-	font-size: 11px;
-	background-color: #c22216;
-	color: #000;
-	transition: 0.3s ease;
-	border: 1px solid #747c70;
-	border-radius: 5px;
-	overflow: hidden;
+
+.button-downgrade:hover {
+	background: linear-gradient(180deg, #ff5a4f 0%, #8f0d0d 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
 }
+
+.button-downgrade:active {
+	transform: scale(0.95);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.button-downgrade:disabled {
+	background: #555;
+	color: #999;
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
+/*--*/
 .button-upgrade:hover{
 	background-color: #6ac144;
 }
