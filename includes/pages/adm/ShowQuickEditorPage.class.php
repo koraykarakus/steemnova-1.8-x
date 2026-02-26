@@ -45,7 +45,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $sql = "SELECT ".$specify_items_pq." `username`, `authlevel`, 
         `galaxy`, `system`, `planet`, `id_planet`, 
-        `darkmatter`, `authattack`, `authlevel` 
+        `darkmatter`, `authattack`, `authlevel`, `urlaubs_modus` 
         FROM %%USERS%% WHERE `id` = :target_id;";
 
         $user_data = $db->selectSingle($sql, [
@@ -90,23 +90,26 @@ class ShowQuickEditorPage extends AbstractAdminPage
             ':target_id' => $target_id,
         ]);
 
+        var_dump($user_data['urlaubs_modus']);
+
         $this->assign([
-            'tech'         => $tech,
-            'officier'     => $officier,
-            'targetID'     => $target_id,
-            'planetid'     => $user_data['id_planet'],
-            'planetname'   => $planet_info['name'],
-            'name'         => $user_data['username'],
-            'galaxy'       => $user_data['galaxy'],
-            'system'       => $user_data['system'],
-            'planet'       => $user_data['planet'],
-            'authlevel'    => $user_data['authlevel'],
-            'authattack'   => $user_data['authattack'],
-            'multi'        => $multi,
-            'ChangePW'     => $change_pw,
-            'yesorno'      => [1 => $LNG['one_is_yes_1'], 0 => $LNG['one_is_yes_0']],
-            'darkmatter'   => floatToString($user_data['darkmatter']),
-            'darkmatter_c' => pretty_number($user_data['darkmatter']),
+            'tech'          => $tech,
+            'officier'      => $officier,
+            'targetID'      => $target_id,
+            'planetid'      => $user_data['id_planet'],
+            'planetname'    => $planet_info['name'],
+            'name'          => $user_data['username'],
+            'galaxy'        => $user_data['galaxy'],
+            'system'        => $user_data['system'],
+            'planet'        => $user_data['planet'],
+            'authlevel'     => $user_data['authlevel'],
+            'authattack'    => $user_data['authattack'],
+            'vacation_mode' => $user_data['urlaubs_modus'],
+            'multi'         => $multi,
+            'ChangePW'      => $change_pw,
+            'yesorno'       => [1 => $LNG['one_is_yes_1'], 0 => $LNG['one_is_yes_0']],
+            'darkmatter'    => floatToString($user_data['darkmatter']),
+            'darkmatter_c'  => pretty_number($user_data['darkmatter']),
         ]);
 
         $this->display('page.quickeditor.user.tpl');
@@ -147,15 +150,17 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $sql .= "`darkmatter` = :darkmatter, ";
         $sql .= "`username` = :username, ";
-        $sql .= "`authattack` = :authattack ";
+        $sql .= "`authattack` = :authattack, ";
+        $sql .= "`urlaubs_modus` = :vacation_mode ";
         $sql .= "WHERE `id` = :userId AND `universe` = :universe;";
 
         $db->update($sql, [
-            ':darkmatter' => max(HTTP::_GP('darkmatter', 0), 0),
-            ':username'   => HTTP::_GP('name', '', UTF8_SUPPORT),
-            ':authattack' => ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0),
-            ':userId'     => $target_id,
-            ':universe'   => Universe::getEmulated(),
+            ':darkmatter'    => max(HTTP::_GP('darkmatter', 0), 0),
+            ':username'      => HTTP::_GP('name', '', UTF8_SUPPORT),
+            ':authattack'    => ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0),
+            ':vacation_mode' => HTTP::_GP('vacation_mode', '') == 'on' ? 1 : 0,
+            ':userId'        => $target_id,
+            ':universe'      => Universe::getEmulated(),
         ]);
 
         if (!empty($_POST['password'])
