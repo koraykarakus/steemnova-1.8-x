@@ -198,7 +198,7 @@
 					<td class="text-center align-middle" style="white-space: nowrap;">
 						{if $currentPlanet.moon}
 							<a onclick="closePopovers();" class="hover-pointer" data-bs-toggle="popover" data-bs-placement="right"
-								data-bs-html="true" title="<table class='table table-gow table-sm fs-11' style='width:240px'>
+								data-bs-html="true" title="<table class='table table-gow table-sm fs-11'>
 				 <tr>
 					 <th colspan='2'>{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]</th>
 					 <button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0 text-white fs-11' onclick='closePopover();'>X</button>
@@ -347,9 +347,12 @@
 				 </table>">
 							<span class="{foreach $currentPlanet.user.class as $class}
 
+
 								{if !$class@first} 
 
+
 								{/if}galaxy-username-{$class}
+
 
 							{/foreach} galaxy-username">{$currentPlanet.user.username}</span>
 
@@ -389,9 +392,12 @@
 				 </table>">
 								<span class="{foreach $currentPlanet.alliance.class as $class}
 
+
 									{if !$class@first} 
 
+
 									{/if}galaxy-alliance-{$class}
+
 
 								{/foreach} galaxy-alliance">{$currentPlanet.alliance.tag}</span>
 							</a>
