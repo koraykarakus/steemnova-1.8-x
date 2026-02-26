@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowDisclamerPage extends AbstractLoginPage
+class ShowDisclaimerPage extends AbstractLoginPage
 {
     public static $requireModule = 0;
 
@@ -34,6 +34,6 @@ class ShowDisclamerPage extends AbstractLoginPage
             'disclaimer_notice'  => $config->disclamerNotice,
         ]);
 
-        $this->display('page.disclamer.default.tpl');
+        $this->display('page.disclaimer.default.tpl');
     }
 }

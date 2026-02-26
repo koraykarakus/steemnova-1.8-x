@@ -7,7 +7,7 @@
 			<li><a href="index.php?page=rules">{$LNG.menu_rules}</a></li>
 			<li><a href="index.php?page=battleHall">{$LNG.menu_battlehall}</a></li>
 			<li><a href="index.php?page=banList">{$LNG.menu_banlist}</a></li>
-			<li><a href="index.php?page=disclamer">{$LNG.menu_disclamer}</a></li>
+			<li><a href="index.php?page=disclaimer">{$LNG.menu_disclamer}</a></li>
 		</ul>
 	</nav> -->
 	<nav id="navbar" class="container-fluid py-2 bg-dark d-flex align-items-center justify-content-between">
@@ -38,8 +38,8 @@
 					href="index.php?page=rules">{$LNG.siteTitleRules}</a>
 			</li>
 			<li class="d-flex align-items-center">
-				<a class="hover-color-yellow text-decoration-none {if $page == 'disclamer'}active{/if}"
-					href="index.php?page=disclamer">{$LNG.siteTitleDisclamer}</a>
+				<a class="hover-color-yellow text-decoration-none {if $page == 'disclaimer'}active{/if}"
+					href="index.php?page=disclaimer">{$LNG.siteTitleDisclamer}</a>
 			</li>
 		</ul>
 
@@ -104,8 +104,8 @@
 						href="index.php?page=rules">{$LNG.siteTitleRules}</a>
 				</li>
 				<li class="d-flex align-items-center">
-					<a class="fs-6 w-100 hover-color-yellow text-decoration-none py-2 border-light {if $page == 'disclamer'}active{/if}"
-						href="index.php?page=disclamer">{$LNG.siteTitleDisclamer}</a>
+					<a class="fs-6 w-100 hover-color-yellow text-decoration-none py-2 border-light {if $page == 'disclaimer'}active{/if}"
+						href="index.php?page=disclaimer">{$LNG.siteTitleDisclamer}</a>
 				</li>
 			</ul>
 		</div>
