@@ -472,13 +472,55 @@ ul#rules {
 	margin-top:20px;
 }
 
-#disclamerTable {
-	width:50%;
-	margin:20px auto 0;
+/*Disclaimer*/
+#disclaimer_table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	background-color: #1e1e1e; /* koyu tema */
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+	font-size: 14px;
+	color: #ddd;
 }
-#disclamerTable td{
-	padding:3px 0;
+
+#disclaimer_table th,
+#disclaimer_table td {
+	padding: 12px 15px;
+	text-align: left;
 }
+
+#disclaimer_table th {
+	font-weight: 600;
+	color: #aaa;
+	width: 35%;
+}
+
+#disclaimer_table td {
+	color: #fff;
+}
+
+#disclaimer_table tr:not(:last-child) {
+	border-bottom: 1px solid #2c2c2c;
+}
+
+#disclaimer_table tr:hover {
+	background-color: #2a2a2a;
+	transition: background 0.2s ease;
+}
+
+#disclaimer_notice {
+	margin-top: 15px auto;
+	padding: 10px 15px;
+	background-color: #2c2c2c;
+	border-left: 4px solid #ffbb33;
+	border-radius: 4px;
+	color: #eee;
+	display: flex;
+	align-items: center;
+}
+/*--*/
 
 #lostPassword #universe {
 	float: left;

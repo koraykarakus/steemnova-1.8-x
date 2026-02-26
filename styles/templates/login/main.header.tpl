@@ -9,7 +9,7 @@
 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		{assign var="REV" value="1.0.0.9" nocache}
+		{assign var="REV" value="1.0.0.10" nocache}
 
 		<!-- Bootstrap 5 - No IE support -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
