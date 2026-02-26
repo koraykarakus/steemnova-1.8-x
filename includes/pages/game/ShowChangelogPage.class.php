@@ -35,9 +35,12 @@ class ShowChangelogPage extends AbstractGamePage
         }
 
         $parse_down = new Parsedown();
+        $lines = explode("\n", $str);
+        $html_lines = array_map([$parse_down, 'text'], $lines);
+        //$html_lines = array_map([$parse_down, 'text'], $lines);
 
         $this->assign([
-            'ChangelogList' => $parse_down->text($str),
+            'ChangelogList' => $html_lines,
         ]);
 
         $this->display('page.changelog.default.tpl');
