@@ -17,7 +17,7 @@
 
 class ShowNewsPage extends AbstractLoginPage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_LOGIN_NEWS;
 
     public function __construct()
     {

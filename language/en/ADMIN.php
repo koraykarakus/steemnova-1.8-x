@@ -1139,6 +1139,12 @@ $LNG['modul_50'] = 'Auto Expedition';
 $LNG['modul_51'] = 'Collect Mines';
 $LNG['modul_52'] = 'Flight Simulator';
 $LNG['modul_53'] = 'Changelog';
+$LNG['modul_54'] = 'Login - News';
+$LNG['modul_55'] = 'Login - ScreenShots';
+$LNG['modul_56'] = 'Login - Ban List';
+$LNG['modul_57'] = 'Login - Battle Hall';
+$LNG['modul_58'] = 'Login - Disclaimer';
+
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';

@@ -17,7 +17,7 @@
 
 class ShowDisclaimerPage extends AbstractLoginPage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_LOGIN_DISCLAIMER;
 
     public function __construct()
     {

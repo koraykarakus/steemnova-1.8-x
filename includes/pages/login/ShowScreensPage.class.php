@@ -17,7 +17,7 @@
 
 class ShowScreensPage extends AbstractLoginPage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_LOGIN_SCREENSHOTS;
 
     public function __construct()
     {
