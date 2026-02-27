@@ -15,7 +15,6 @@ class ShowCollectMinesPage extends AbstractGamePage
 
     public function show(): void
     {
-
         global $USER, $PLANET, $resource, $LNG, $db, $config;
 
         //Don't allow user to collect mine if in vacation mode
@@ -28,17 +27,16 @@ class ShowCollectMinesPage extends AbstractGamePage
 
         if (!$config->collect_mines_under_attack)
         {
-
             $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
                     fleet_owner != :userId AND fleet_mess = 0 AND
                     fleet_target_owner = :userId AND fleet_mission = 1 AND hasCanceled = 0 AND fleet_start_time < :limitTime;";
 
-            $attackingFleetsCount = $db->selectSingle($sql, [
+            $attacking_fleets_count = $db->selectSingle($sql, [
                 ':userId'    => $USER['id'],
                 ':limitTime' => TIMESTAMP + 5 * 60,
             ], 'count');
 
-            if ($attackingFleetsCount > 0)
+            if ($attacking_fleets_count > 0)
             {
                 $this->printMessage($LNG['cm_error_2']);
             }
@@ -52,78 +50,83 @@ class ShowCollectMinesPage extends AbstractGamePage
         //if conditions is not satisfied return without calculating anything ..
         if ($lastcollect < $timelimit)
         {
-            $this->printMessage(sprintf($LNG['cm_error_3'], $config->collect_mine_time_minutes));
+            $this->printMessage(sprintf(
+                $LNG['cm_error_3'],
+                $config->collect_mine_time_minutes
+            ));
         }
 
-        $PlanetRess = new ResourceUpdate();
+        $res_update_obj = new ResourceUpdate();
 
         $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destruyed = '0'";
 
-        $PlanetsRAW = $db->select($sql, [
+        $planets = $db->select($sql, [
             ':userID' => $USER['id'],
         ]);
 
-        foreach ($PlanetsRAW as $CPLANET)
+        foreach ($planets as $c_planet)
         {
-            list($USER, $CPLANET) = $PlanetRess->CalcResource($USER, $CPLANET, true);
-            $PLANETS[] = $CPLANET;
-            unset($CPLANET);
+            list($USER, $c_planet) = $res_update_obj->CalcResource($USER, $c_planet, true);
+            $PLANETS[] = $c_planet;
+            unset($c_planet);
         }
 
         $metal = $crystal = $deuterium = [];
 
-        foreach ($PLANETS as $currentPlanet)
+        foreach ($PLANETS as $c_planet)
         {
-            if ($currentPlanet['id'] != $PLANET['id'])
+            if ($c_planet['id'] != $PLANET['id'])
             {
-                $metal[] = $currentPlanet['metal'];
-                $crystal[] = $currentPlanet['crystal'];
-                $deuterium[] = $currentPlanet['deuterium'];
+                $metal[] = $c_planet['metal'];
+                $crystal[] = $c_planet['crystal'];
+                $deuterium[] = $c_planet['deuterium'];
             }
         }
 
         //reset resources of other planets as 0
-        $sql_reset = "UPDATE %%PLANETS%% SET metal = :metal, deuterium = :deuterium, crystal = :crystal
-    WHERE id_owner = :userId AND id != :planetID;";
+        $sql_reset = "UPDATE %%PLANETS%% SET metal = :metal, 
+        deuterium = :deuterium, crystal = :crystal
+        WHERE id_owner = :user_id AND id != :planet_id;";
 
         $db->update($sql_reset, [
             ':metal'     => 0,
             ':deuterium' => 0,
             ':crystal'   => 0,
-            ':userId'    => $USER['id'],
-            ':planetID'  => $PLANET['id'],
+            ':user_id'    => $USER['id'],
+            ':planet_id'  => $PLANET['id'],
         ]);
 
-        $metalSum = $crystalSum = $deuteriumSum = 0;
+        $metal_sum = $crystal_sum = $deuterium_sum = 0;
 
         foreach ($metal as $val)
         {
-            $metalSum += $val;
+            $metal_sum += $val;
         }
 
         foreach ($crystal as $val)
         {
-            $crystalSum += $val;
+            $crystal_sum += $val;
         }
 
         foreach ($deuterium as $val)
         {
-            $deuteriumSum += $val;
+            $deuterium_sum += $val;
         }
 
-        $PLANET[$resource[901]] += $metalSum;
-        $PLANET[$resource[902]] += $crystalSum;
-        $PLANET[$resource[903]] += $deuteriumSum;
+        $PLANET[$resource[901]] += $metal_sum;
+        $PLANET[$resource[902]] += $crystal_sum;
+        $PLANET[$resource[903]] += $deuterium_sum;
 
-        $sql = "UPDATE %%USERS%% SET last_collect_mine_time = :timeCollect WHERE id = :userId;";
+        $sql = "UPDATE %%USERS%% 
+        SET last_collect_mine_time = :time_collect 
+        WHERE id = :user_id;";
 
         $db->update($sql, [
-            ':timeCollect' => TIMESTAMP,
-            ':userId'      => $USER['id'],
+            ':time_collect' => TIMESTAMP,
+            ':user_id'      => $USER['id'],
         ]);
 
         $this->redirectTo("game.php?page=$from");
-
     }
 
 }
