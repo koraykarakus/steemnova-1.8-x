@@ -70,7 +70,7 @@ class ShowTraderPage extends AbstractGamePage
             [$resource_id]
         ));
 
-        $this->tplObj->loadscript("trader.js");
+        $this->tpl_obj->loadscript("trader.js");
         $this->assign([
             'tradeResourceID' => $resource_id,
             'tradeResources'  => $trade_resources,

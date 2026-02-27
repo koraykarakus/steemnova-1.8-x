@@ -28,7 +28,7 @@ class ShowFleetStep2Page extends AbstractGamePage
     {
         global $USER, $PLANET, $LNG;
 
-        $this->tplObj->loadscript('flotten.js');
+        $this->tpl_obj->loadscript('flotten.js');
 
         $targetGalaxy = HTTP::_GP('galaxy', 0);
         $targetSystem = HTTP::_GP('system', 0);
@@ -120,7 +120,7 @@ class ShowFleetStep2Page extends AbstractGamePage
             'consumption' => floatToString($consumption),
         ];
 
-        $this->tplObj->execscript('calculateTransportCapacity();');
+        $this->tpl_obj->execscript('calculateTransportCapacity();');
         $this->assign([
             'fleetdata'           => $fleetData,
             'consumption'         => floatToString($consumption),

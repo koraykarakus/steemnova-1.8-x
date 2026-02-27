@@ -473,7 +473,7 @@ class ShowResearchPage extends AbstractGamePage
 
         if ($queue_count != 0)
         {
-            $this->tplObj->loadscript('research.js');
+            $this->tpl_obj->loadscript('research.js');
         }
 
         $research_list = [];

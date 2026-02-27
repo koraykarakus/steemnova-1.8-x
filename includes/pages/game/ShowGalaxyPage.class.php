@@ -102,7 +102,7 @@ class ShowGalaxyPage extends AbstractGamePage
             $Result = [];
         }
 
-        $this->tplObj->loadscript('galaxy.js');
+        $this->tpl_obj->loadscript('galaxy.js');
         $this->assign([
             'GalaxyRows'            => $Result,
             'planetcount'           => sprintf($LNG['gl_populed_planets'], count($Result)),

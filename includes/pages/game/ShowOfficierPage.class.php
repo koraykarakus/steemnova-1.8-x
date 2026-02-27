@@ -139,7 +139,7 @@ class ShowOfficierPage extends AbstractGamePage
             {
                 if ($USER[$resource[$c_element]] > TIMESTAMP)
                 {
-                    $this->tplObj->execscript("GetOfficerTime(".$c_element.", ".($USER[$resource[$c_element]] - TIMESTAMP).");");
+                    $this->tpl_obj->execscript("GetOfficerTime(".$c_element.", ".($USER[$resource[$c_element]] - TIMESTAMP).");");
                 }
 
                 $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $c_element);

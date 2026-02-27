@@ -489,7 +489,7 @@ class ShowMessagesPage extends AbstractGamePage
             ]);
         }
 
-        $this->tplObj->loadscript('message.js');
+        $this->tpl_obj->loadscript('message.js');
         $this->assign([
             'MessID'       => $messageCategory,
             'MessageCount' => $MessageCount,

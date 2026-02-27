@@ -73,7 +73,7 @@ class ShowBuddyListPage extends AbstractGamePage
 
         $this->initTemplate();
         $this->setWindow('popup');
-        $this->tplObj->execscript('window.setTimeout(parent.$.fancybox.close, 2000);');
+        $this->tpl_obj->execscript('window.setTimeout(parent.$.fancybox.close, 2000);');
 
         $id = HTTP::_GP('id', 0);
         $text = HTTP::_GP('text', '', UTF8_SUPPORT);

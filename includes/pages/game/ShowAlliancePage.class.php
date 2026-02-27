@@ -83,7 +83,7 @@ class ShowAlliancePage extends AbstractGamePage
                 $this->rights = array_combine($this->availableRanks, array_fill(0, count($this->availableRanks), false));
             }
 
-            if (isset($this->tplObj))
+            if (isset($this->tpl_obj))
             {
                 $this->assign([
                     'rights'        => $this->rights,
@@ -642,7 +642,7 @@ class ShowAlliancePage extends AbstractGamePage
             require_once('includes/classes/class.FlyingFleetsTable.php');
             $FlyingFleetsTable = new FlyingFleetsTable();
 
-            $this->tplObj->loadscript('overview.js');
+            $this->tpl_obj->loadscript('overview.js');
 
             foreach ($result as $row)
             {

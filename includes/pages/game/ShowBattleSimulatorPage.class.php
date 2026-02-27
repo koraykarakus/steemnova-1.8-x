@@ -252,7 +252,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
             }
         }
 
-        $this->tplObj->loadscript('battlesim.js');
+        $this->tpl_obj->loadscript('battlesim.js');
 
         $this->assign([
             'Slots'         => $Slots,

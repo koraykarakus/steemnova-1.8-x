@@ -541,7 +541,7 @@ class ShowMarketPlacePage extends AbstractGamePage
             'resourceHistory' => $this->getResourceTradeHistory(),
             'fleetHistory'    => $this->getFleetTradeHistory(),
         ]);
-        $this->tplObj->loadscript('marketplace.js');
+        $this->tpl_obj->loadscript('marketplace.js');
         $this->display('page.marketPlace.default.tpl');
     }
 }

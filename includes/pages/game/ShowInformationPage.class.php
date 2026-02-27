@@ -343,7 +343,7 @@ class ShowInformationPage extends AbstractGamePage
 
         if ($elementID == 43 && $PLANET[$resource[43]] > 0)
         {
-            $this->tplObj->loadscript('gate.js');
+            $this->tpl_obj->loadscript('gate.js');
             $nextTime = self::getNextJumpWaitTime($PLANET['last_jump_time']);
             $gateData = [
                 'nextTime'  => _date($LNG['php_tdformat'], $nextTime, $USER['timezone']),

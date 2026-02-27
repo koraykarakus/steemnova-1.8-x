@@ -80,7 +80,7 @@ class ShowNotesPage extends AbstractGamePage
             $this->printMessage('wrong note id');
         }
 
-        $this->tplObj->execscript("$('#cntChars').text($('#text').val().length);");
+        $this->tpl_obj->execscript("$('#cntChars').text($('#text').val().length);");
         $this->assign([
             'PriorityList' => [2 => $LNG['nt_important'],
                 1                => $LNG['nt_normal'],

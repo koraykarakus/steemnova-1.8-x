@@ -455,7 +455,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
         if ($QueueCount != 0)
         {
-            $this->tplObj->loadscript('buildlist.js');
+            $this->tpl_obj->loadscript('buildlist.js');
         }
 
         $this->assign([

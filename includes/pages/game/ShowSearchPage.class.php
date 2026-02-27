@@ -258,7 +258,7 @@ class ShowSearchPage extends AbstractGamePage
             'planetname'               => $LNG['sh_planet_name'],
             'allytag'                  => $LNG['sh_alliance_tag'],
             'allyname'                 => $LNG['sh_alliance_name']];
-        $this->tplObj->loadscript('search.js');
+        $this->tpl_obj->loadscript('search.js');
         $this->assign([
             'modeSelector' => $mode_selector,
             'seachMode'    => $seach_mode,

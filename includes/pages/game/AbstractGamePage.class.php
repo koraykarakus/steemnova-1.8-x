@@ -21,7 +21,7 @@ abstract class AbstractGamePage
      * reference of the template object
      * @var template
      */
-    protected $tplObj;
+    protected $tpl_obj;
 
     /**
      * reference of the template object
@@ -112,13 +112,13 @@ abstract class AbstractGamePage
     {
         global $config, $USER;
 
-        if (isset($this->tplObj))
+        if (isset($this->tpl_obj))
         {
             return;
         }
 
-        $this->tplObj = new template();
-        list($tpl_dir) = $this->tplObj->getTemplateDir();
+        $this->tpl_obj = new template();
+        list($tpl_dir) = $this->tpl_obj->getTemplateDir();
 
         $path = $theme = "";
 
@@ -126,7 +126,7 @@ abstract class AbstractGamePage
 
         $path = "theme/" . $theme;
 
-        $this->tplObj->setTemplateDir($tpl_dir. $path);
+        $this->tpl_obj->setTemplateDir($tpl_dir. $path);
     }
 
     protected function setWindow($window): void
@@ -431,7 +431,7 @@ abstract class AbstractGamePage
 
         if (isset($redirect))
         {
-            $this->tplObj->gotoside($redirect[0], $redirect[1]);
+            $this->tpl_obj->gotoside($redirect[0], $redirect[1]);
         }
 
         if (!$full)
@@ -452,7 +452,7 @@ abstract class AbstractGamePage
 
     protected function assign($array, $not_cache = true): void
     {
-        $this->tplObj->assign_vars($array, $not_cache);
+        $this->tpl_obj->assign_vars($array, $not_cache);
     }
 
     protected function display($file): void
@@ -469,8 +469,8 @@ abstract class AbstractGamePage
         $this->assign([
             'lang'       => $LNG->getLanguage(),
             'dpath'      => $THEME->getThemePath(),
-            'scripts'    => $this->tplObj->jsscript,
-            'execscript' => implode("\n", $this->tplObj->script),
+            'scripts'    => $this->tpl_obj->jsscript,
+            'execscript' => implode("\n", $this->tpl_obj->script),
             'basepath'   => PROTOCOL.HTTP_HOST.HTTP_BASE,
         ]);
 
@@ -478,7 +478,7 @@ abstract class AbstractGamePage
             'LNG' => $LNG,
         ], false);
 
-        $this->tplObj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
+        $this->tpl_obj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
         exit;
     }
 
