@@ -14,7 +14,7 @@
 
 class ShowSteemconnectPage extends AbstractLoginPage
 {
-    public static $requireModule = 0;
+    public static $require_module = 0;
 
     public function __construct()
     {
@@ -28,36 +28,36 @@ class ShowSteemconnectPage extends AbstractLoginPage
         require 'includes/classes/extauth/externalAuth.interface.php';
         require 'includes/classes/extauth/steemconnect.class.php';
 
-        $methodClass = 'SteemconnectAuth';
+        $method_class = 'SteemconnectAuth';
 
         /** @var externalAuth $authObj */
-        $authObj = new $methodClass();
+        $auth_obj = new $method_class();
 
-        if (!$authObj->isActiveMode())
+        if (!$auth_obj->isActiveMode())
         {
             $session->delete();
             $this->redirectTo('index.php?code=5');
         }
 
-        if (!$authObj->isValid())
+        if (!$auth_obj->isValid())
         {
             $session->delete();
             $this->redirectTo('index.php?code=4');
         }
 
-        $loginData = $authObj->getLoginData();
+        $login_data = $auth_obj->getLoginData();
 
-        if (empty($loginData))
+        if (empty($login_data))
         {
             // create account
             // $session->delete();
-            $authObj->register();
-            $loginData = $authObj->getLoginData();
+            $auth_obj->register();
+            $login_data = $auth_obj->getLoginData();
         }
 
-        $session->userId = (int) $loginData['id'];
+        $session->userId = (int) $login_data['id'];
         $session->adminAccess = 0;
-        $session->data = $authObj->getAccountData();
+        $session->data = $auth_obj->getAccountData();
         $session->save();
         $this->redirectTo("game.php");
     }

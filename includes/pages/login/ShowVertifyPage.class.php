@@ -17,7 +17,7 @@
 
 class ShowVertifyPage extends AbstractLoginPage
 {
-    public static $requireModule = 0;
+    public static $require_module = 0;
 
     public function __construct()
     {
@@ -28,54 +28,72 @@ class ShowVertifyPage extends AbstractLoginPage
     {
         global $LNG;
 
-        $validationID = HTTP::_GP('i', 0);
-        $validationKey = HTTP::_GP('k', '');
+        $validation_id = HTTP::_GP('i', 0);
+        $validation_key = HTTP::_GP('k', '');
 
         $db = Database::get();
 
         $sql = "SELECT * FROM %%USERS_VALID%%
-		WHERE validationID	= :validationID
-		AND validationKey	= :validationKey
+		WHERE validationID	= :validation_id
+		AND validationKey	= :validation_key
 		AND universe		= :universe;";
 
-        $userData = $db->selectSingle($sql, [
-            ':validationKey' => $validationKey,
-            ':validationID'  => $validationID,
-            ':universe'      => Universe::current(),
+        $user_data = $db->selectSingle($sql, [
+            ':validation_id'  => $validation_id,
+            ':validation_key' => $validation_key,
+            ':universe'       => Universe::current(),
         ]);
 
-        if (empty($userData))
+        if (empty($user_data))
         {
             $this->printMessage($LNG['vertifyNoUserFound']);
         }
 
         $config = Config::get();
 
-        $sql = "DELETE FROM %%USERS_VALID%% WHERE validationID = :validationID;";
+        $sql = "DELETE FROM %%USERS_VALID%% WHERE validationID = :validation_id;";
         $db->delete($sql, [
-            ':validationID' => $validationID,
+            ':validation_id' => $validation_id,
         ]);
 
-        list($userID, $planetID) = PlayerUtil::createPlayer($userData['universe'], $userData['userName'], $userData['password'], $userData['email'], $userData['language'], null, null, null, null, 0, null, $userData['user_secret_question_id'], $userData['user_secret_question_answer']);
+        list($userID, $planetID) = PlayerUtil::createPlayer(
+            $user_data['universe'],
+            $user_data['userName'],
+            $user_data['password'],
+            $user_data['email'],
+            $user_data['language'],
+            null,
+            null,
+            null,
+            null,
+            0,
+            null,
+            $user_data['user_secret_question_id'],
+            $user_data['user_secret_question_answer']
+        );
 
         if ($config->mail_active == 1)
         {
             require('includes/classes/Mail.class.php');
-            $MailSubject = sprintf($LNG['registerMailCompleteTitle'], $config->game_name, Universe::current());
-            $MailRAW = $LNG->getTemplate('email_reg_done');
-            $MailContent = str_replace([
+            $mail_subject = sprintf(
+                $LNG['registerMailCompleteTitle'],
+                $config->game_name,
+                Universe::current()
+            );
+            $mail_raw = $LNG->getTemplate('email_reg_done');
+            $mail_content = str_replace([
                 '{USERNAME}',
                 '{GAMENAME}',
                 '{GAMEMAIL}',
             ], [
-                $userData['userName'],
+                $user_data['userName'],
                 $config->game_name.' - '.$config->uni_name,
                 $config->smtp_sendmail,
-            ], $MailRAW);
+            ], $mail_raw);
 
             try
             {
-                Mail::send($userData['email'], $userData['userName'], $MailSubject, $MailContent);
+                Mail::send($user_data['email'], $user_data['userName'], $mail_subject, $mail_content);
             }
             catch (Exception $e)
             {
@@ -83,7 +101,7 @@ class ShowVertifyPage extends AbstractLoginPage
             }
         }
 
-        if (!empty($userData['referralID']))
+        if (!empty($user_data['referralID']))
         {
             $sql = "UPDATE %%USERS%% SET
 			`ref_id`	= :referralId,
@@ -92,12 +110,12 @@ class ShowVertifyPage extends AbstractLoginPage
 			`id`		= :userID;";
 
             $db->update($sql, [
-                ':referralId' => $userData['referralID'],
+                ':referralId' => $user_data['referralID'],
                 ':userID'     => $userID,
             ]);
         }
 
-        if (!empty($userData['externalAuthUID']))
+        if (!empty($user_data['externalAuthUID']))
         {
             $sql = "INSERT INTO %%USERS_AUTH%% SET
 			`id`		= :userID,
@@ -105,30 +123,30 @@ class ShowVertifyPage extends AbstractLoginPage
 			`mode`		= :externalAuthMethod;";
             $db->insert($sql, [
                 ':userID'             => $userID,
-                ':externalAuthUID'    => $userData['externalAuthUID'],
-                ':externalAuthMethod' => $userData['externalAuthMethod'],
+                ':externalAuthUID'    => $user_data['externalAuthUID'],
+                ':externalAuthMethod' => $user_data['externalAuthMethod'],
             ]);
         }
 
-        $senderName = $LNG['registerWelcomePMSenderName'];
+        $sender_name = $LNG['registerWelcomePMSenderName'];
         $subject = $LNG['registerWelcomePMSubject'];
-        $message = sprintf($LNG['registerWelcomePMText'], $config->game_name, $userData['universe']);
+        $message = sprintf($LNG['registerWelcomePMText'], $config->game_name, $user_data['universe']);
 
-        PlayerUtil::sendMessage($userID, 1, $senderName, 1, $subject, $message, TIMESTAMP);
+        PlayerUtil::sendMessage($userID, 1, $sender_name, 1, $subject, $message, TIMESTAMP);
 
         return [
             'userID'   => $userID,
-            'userName' => $userData['userName'],
+            'userName' => $user_data['userName'],
             'planetID' => $planetID,
         ];
     }
 
     public function show(): void
     {
-        $userData = $this->_activeUser();
+        $user_data = $this->_activeUser();
 
         $session = Session::create();
-        $session->userId = (int) $userData['userID'];
+        $session->userId = (int) $user_data['userID'];
         $session->adminAccess = 0;
         $session->save();
 
@@ -138,7 +156,7 @@ class ShowVertifyPage extends AbstractLoginPage
     public function json(): void
     {
         global $LNG;
-        $userData = $this->_activeUser();
-        $this->sendJSON(sprintf($LNG['vertifyAdminMessage'], $userData['userName']));
+        $user_data = $this->_activeUser();
+        $this->sendJSON(sprintf($LNG['vertifyAdminMessage'], $user_data['userName']));
     }
 }

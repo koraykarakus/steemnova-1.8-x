@@ -21,16 +21,15 @@ abstract class AbstractLoginPage
      * reference of the template object
      * @var template
      */
-    protected $tplObj = null;
+    protected $tpl_obj = null;
     protected $window;
-    public $defaultWindow = 'normal';
+    public $default_window = 'normal';
 
     protected function __construct()
     {
-
         if (!AJAX_REQUEST)
         {
-            $this->setWindow($this->defaultWindow);
+            $this->setWindow($this->default_window);
             $this->initTemplate();
         }
         else
@@ -44,36 +43,36 @@ abstract class AbstractLoginPage
     {
 
         //generate token
-        $csrfToken = md5(uniqid(mt_rand(), true));
+        $csrf_token = md5(uniqid(mt_rand(), true));
 
         //write in to session
 
-        HTTP::sendCookie('csrfToken', $csrfToken, TIMESTAMP + 3600);
+        HTTP::sendCookie('csrfToken', $csrf_token, TIMESTAMP + 3600);
 
-        return  $csrfToken;
+        return  $csrf_token;
     }
 
     protected function getUniverseSelector(): array
     {
-        $universeSelect = [];
-        foreach (Universe::availableUniverses() as $uniId)
+        $uni_sel = [];
+        foreach (Universe::availableUniverses() as $c_uni_id)
         {
-            $universeSelect[$uniId] = Config::get($uniId)->uni_name;
+            $uni_sel[$c_uni_id] = Config::get($c_uni_id)->uni_name;
         }
 
-        return $universeSelect;
+        return $uni_sel;
     }
 
     protected function initTemplate(): void
     {
-        if (isset($this->tplObj))
+        if (isset($this->tpl_obj))
         {
             return;
         }
 
-        $this->tplObj = new template();
-        list($tplDir) = $this->tplObj->getTemplateDir();
-        $this->tplObj->setTemplateDir($tplDir.'login/');
+        $this->tpl_obj = new template();
+        list($tpl_dir) = $this->tpl_obj->getTemplateDir();
+        $this->tpl_obj->setTemplateDir($tpl_dir.'login/');
     }
 
     protected function setWindow($window): void
@@ -88,35 +87,30 @@ abstract class AbstractLoginPage
 
     protected function getQueryString(): string
     {
-        $queryString = [];
+        $query_string = [];
         $page = HTTP::_GP('page', '');
 
         if (!empty($page))
         {
-            $queryString['page'] = $page;
+            $query_string['page'] = $page;
         }
 
         $mode = HTTP::_GP('mode', '');
         if (!empty($mode))
         {
-            $queryString['mode'] = $mode;
+            $query_string['mode'] = $mode;
         }
 
-        return http_build_query($queryString);
+        return http_build_query($query_string);
     }
 
     // TODO: this is not getter, rename
     protected function getPageData(): void
     {
-        global $LNG, $config;
+        global $LNG;
+        $config = Config::get();
 
-        foreach (Universe::availableUniverses() as $uniId)
-        {
-            $config = Config::get($uniId);
-            $universeSelect[$uniId] = $config->uni_name.($config->game_disable == 0 ? $LNG['uni_closed'] : '');
-        }
-
-        $this->tplObj->assign_vars([
+        $this->tpl_obj->assign_vars([
             'recaptchaEnable'        => $config->capaktiv,
             'recaptchaPublicKey'     => $config->cappublic,
             'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
@@ -134,24 +128,24 @@ abstract class AbstractLoginPage
             'REV'                    => substr($config->VERSION, -4),
             'languages'              => Language::getAllowedLangs(false),
             'loginInfo'              => sprintf($LNG['loginInfo'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
-            'universeSelect'         => $universeSelect,
+            'universeSelect'         => $this->getUniverseSelector(),
             'page'                   => HTTP::_GP('page', ''),
         ]);
     }
 
-    protected function printMessage($message, $redirectButtons = null, $redirect = null, $fullSide = true): void
+    protected function printMessage($msg, $redirect_btns = null, $redirect = null, $full = true): void
     {
         $this->assign([
-            'message'         => $message,
-            'redirectButtons' => $redirectButtons,
+            'message'         => $msg,
+            'redirectButtons' => $redirect_btns,
         ]);
 
         if (isset($redirect))
         {
-            $this->tplObj->gotoside($redirect[0], $redirect[1]);
+            $this->tpl_obj->gotoside($redirect[0], $redirect[1]);
         }
 
-        if (!$fullSide)
+        if (!$full)
         {
             $this->setWindow('popup');
         }
@@ -159,21 +153,14 @@ abstract class AbstractLoginPage
         $this->display('error.default.tpl');
     }
 
-    protected function save(): void
-    {
-
-    }
-
     protected function assign($array, $nocache = true): void
     {
-        $this->tplObj->assign_vars($array, $nocache);
+        $this->tpl_obj->assign_vars($array, $nocache);
     }
 
     protected function display($file): void
     {
         global $LNG;
-
-        $this->save();
 
         if ($this->getWindow() !== 'ajax')
         {
@@ -182,23 +169,23 @@ abstract class AbstractLoginPage
 
         if (UNIS_WILDCAST)
         {
-            $hostParts = explode('.', HTTP_HOST);
-            if (preg_match('/uni[0-9]+/', $hostParts[0]))
+            $host_parts = explode('.', HTTP_HOST);
+            if (preg_match('/uni[0-9]+/', $host_parts[0]))
             {
-                array_shift($hostParts);
+                array_shift($host_parts);
             }
-            $host = implode('.', $hostParts);
-            $basePath = PROTOCOL.$host.HTTP_BASE;
+            $host = implode('.', $host_parts);
+            $base_path = PROTOCOL.$host.HTTP_BASE;
         }
         else
         {
-            $basePath = PROTOCOL.HTTP_HOST.HTTP_BASE;
+            $base_path = PROTOCOL.HTTP_HOST.HTTP_BASE;
         }
 
         $this->assign([
             'lang'            => $LNG->getLanguage(),
             'bodyclass'       => $this->getWindow(),
-            'basepath'        => $basePath,
+            'basepath'        => $base_path,
             'isMultiUniverse' => count(Universe::availableUniverses()) > 1,
             'unisWildcast'    => UNIS_WILDCAST,
         ]);
@@ -207,27 +194,24 @@ abstract class AbstractLoginPage
             'LNG' => $LNG,
         ], false);
 
-        $this->tplObj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
+        $this->tpl_obj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
         exit;
     }
 
     protected function sendJSON($data): void
     {
-        $this->save();
         echo json_encode($data);
         exit;
     }
 
     protected function redirectTo($url): void
     {
-        $this->save();
         HTTP::redirectTo($url);
         exit;
     }
 
     protected function redirectPost($url, $postFields): void
     {
-        $this->save();
         $this->assign([
             'url'        => $url,
             'postFields' => $postFields,

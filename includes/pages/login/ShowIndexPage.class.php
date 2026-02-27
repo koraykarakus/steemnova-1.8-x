@@ -17,6 +17,8 @@
 
 class ShowIndexPage extends AbstractLoginPage
 {
+    public static $require_module = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -44,8 +46,6 @@ class ShowIndexPage extends AbstractLoginPage
         {
             $this->redirectTo('index.php?page=register&referralID='.$referral_id);
         }
-
-        $universeSelect = [];
 
         $code = HTTP::_GP('code', 0);
         $login_code = false;
@@ -100,14 +100,14 @@ class ShowIndexPage extends AbstractLoginPage
         }
 
         $this->assign([
-            'code'                     => $login_code,
-            'use_recaptcha_on_login'   => $config->use_recaptcha_on_login,
-            'csrfToken'                => $this->generateCSRFToken(),
-            'rememberedEmail'          => $mem_email,
-            'rememberedPassword'       => $mem_pass,
-            'rememberedTokenValidator' => $mem_token_valid,
-            'rememberedTokenSelector'  => $mem_token_sel,
-            'rememberedUniverseID'     => $mem_uni_id,
+            'code'                   => $login_code,
+            'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
+            'csrf_token'             => $this->generateCSRFToken(),
+            'mem_email'              => $mem_email,
+            'mem_pass'               => $mem_pass,
+            'mem_token_valid'        => $mem_token_valid,
+            'mem_token_sel'          => $mem_token_sel,
+            'mem_uni_id'             => $mem_uni_id,
         ]);
 
         $this->display('page.index.default.tpl');

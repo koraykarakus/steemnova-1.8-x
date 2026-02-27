@@ -17,6 +17,8 @@
 
 class ShowRegisterPage extends AbstractLoginPage
 {
+    public static $require_module = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -26,68 +28,72 @@ class ShowRegisterPage extends AbstractLoginPage
     public function show(): void
     {
         global $LNG, $config;
-        $referralData = ['id' => 0, 'name' => ''];
-        $accountName = "";
+        $referral_data = ['id' => 0, 'name' => ''];
+        $account_name = "";
 
-        $externalAuth = HTTP::_GP('externalAuth', []);
-        $referralID = HTTP::_GP('referralID', 0);
+        $external_auth = HTTP::_GP('externalAuth', []);
+        $referral_id = HTTP::_GP('referralID', 0);
 
-        if (!isset($externalAuth['account'], $externalAuth['method']))
+        if (!isset($external_auth['account'], $external_auth['method']))
         {
-            $externalAuth['account'] = 0;
-            $externalAuth['method'] = '';
+            $external_auth['account'] = 0;
+            $external_auth['method'] = '';
         }
         else
         {
-            $externalAuth['method'] = strtolower(str_replace(['_', '\\', '/', '.', "\0"], '', $externalAuth['method']));
+            $external_auth['method'] = strtolower(
+                str_replace(['_', '\\', '/', '.', "\0"], '', $external_auth['method'])
+            );
         }
 
-        if (!empty($externalAuth['account']) && file_exists('includes/extauth/'.$externalAuth['method'].'.class.php'))
+        if (!empty($external_auth['account'])
+            && file_exists('includes/extauth/'.$external_auth['method'].'.class.php'))
         {
-            $path = 'includes/extauth/'.$externalAuth['method'].'.class.php';
+            $path = 'includes/extauth/'.$external_auth['method'].'.class.php';
             require($path);
-            $methodClass = ucwords($externalAuth['method']).'Auth';
+            $method_class = ucwords($external_auth['method']).'Auth';
             /** @var externalAuth $authObj */
-            $authObj = new $methodClass();
+            $auth_obj = new $method_class();
 
-            if (!$authObj->isActiveMode())
+            if (!$auth_obj->isActiveMode())
             {
                 $this->redirectTo('index.php?code=5');
             }
 
-            if (!$authObj->isValid())
+            if (!$auth_obj->isValid())
             {
                 $this->redirectTo('index.php?code=4');
             }
 
-            $accountData = $authObj->getAccountData();
-            $accountName = $accountData['name'];
+            $account_data = $authObj->getAccountData();
+            $account_name = $account_data['name'];
         }
 
-        if ($config->ref_active == 1 && !empty($referralID))
+        if ($config->ref_active == 1
+            && !empty($referral_id))
         {
             $db = Database::get();
 
             $sql = "SELECT username FROM %%USERS%% WHERE id = :referralID AND universe = :universe;";
-            $referralAccountName = $db->selectSingle($sql, [
-                ':referralID' => $referralID,
+            $referral_account_name = $db->selectSingle($sql, [
+                ':referralID' => $referral_id,
                 ':universe'   => Universe::current(),
             ], 'username');
 
-            if (!empty($referralAccountName))
+            if (!empty($referral_account_name))
             {
-                $referralData = ['id' => $referralID, 'name' => $referralAccountName];
+                $referral_data = ['id' => $referral_id, 'name' => $referral_account_name];
             }
         }
 
         $this->assign([
             'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
-            'referralData'              => $referralData,
-            'accountName'               => $accountName,
-            'externalAuth'              => $externalAuth,
-            'registerPasswordDesc'      => sprintf($LNG['registerPasswordDesc'], 6),
-            'registerRulesDesc'         => sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
-            'csrfToken'                 => $this->generateCSRFToken(),
+            'referral_data'             => $referral_data,
+            'account_name'              => $account_name,
+            'external_auth'             => $external_auth,
+            'register_password_desc'    => sprintf($LNG['registerPasswordDesc'], 6),
+            'register_rules_desc'       => sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
+            'csrf_token'                => $this->generateCSRFToken(),
         ]);
 
         $this->display('page.register.default.tpl');

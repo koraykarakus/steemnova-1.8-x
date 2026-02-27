@@ -17,6 +17,8 @@
 
 class ShowBoardPage extends AbstractLoginPage
 {
+    public static $require_module = 0;
+
     public function __construct()
     {
         parent::__construct();

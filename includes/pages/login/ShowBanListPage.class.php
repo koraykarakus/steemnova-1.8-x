@@ -17,7 +17,7 @@
 
 class ShowBanListPage extends AbstractLoginPage
 {
-    public static $requireModule = MODULE_BANLIST;
+    public static $require_module = MODULE_BANLIST;
 
     public function __construct()
     {
