@@ -28,24 +28,31 @@ class ShowFleetDealerPage extends AbstractGamePage
     {
         global $USER, $PLANET, $LNG, $pricelist, $resource;
 
-        $shipID = HTTP::_GP('shipID', 0);
-        $Count = max(0, round(HTTP::_GP('count', 0.0)));
-        $allowedShipIDs = explode(',', Config::get()->trade_allowed_ships);
+        $ship_id = HTTP::_GP('shipID', 0);
+        $count = max(0, round(HTTP::_GP('count', 0.0)));
+        $allowed_ship_ids = explode(',', Config::get()->trade_allowed_ships);
 
-        if (!empty($shipID) && !empty($Count) && in_array($shipID, $allowedShipIDs) && $PLANET[$resource[$shipID]] >= $Count)
+        if (!empty($ship_id) 
+            && !empty($count) 
+            && in_array($ship_id, $allowed_ship_ids) 
+            && $PLANET[$resource[$ship_id]] >= $count)
         {
-            $tradeCharge = 1 - (Config::get()->trade_charge / 100);
-            $PLANET[$resource[901]] += $Count * $pricelist[$shipID]['cost'][901] * $tradeCharge;
-            $PLANET[$resource[902]] += $Count * $pricelist[$shipID]['cost'][902] * $tradeCharge;
-            $PLANET[$resource[903]] += $Count * $pricelist[$shipID]['cost'][903] * $tradeCharge;
-            $USER[$resource[921]] += $Count * $pricelist[$shipID]['cost'][921] * $tradeCharge;
+            $trade_charge = 1 - (Config::get()->trade_charge / 100);
+            $PLANET[$resource[901]] += $count * $pricelist[$ship_id]['cost'][901] * $trade_charge;
+            $PLANET[$resource[902]] += $count * $pricelist[$ship_id]['cost'][902] * $trade_charge;
+            $PLANET[$resource[903]] += $count * $pricelist[$ship_id]['cost'][903] * $trade_charge;
+            $USER[$resource[921]] += $count * $pricelist[$ship_id]['cost'][921] * $trade_charge;
 
-            $PLANET[$resource[$shipID]] -= $Count;
+            $PLANET[$resource[$ship_id]] -= $count;
 
-            $sql = 'UPDATE %%PLANETS%% SET '.$resource[$shipID].' = '.$resource[$shipID].' - :count WHERE id = :planetID;';
+            $sql = 'UPDATE %%PLANETS%% SET ' . 
+            $resource[$ship_id] . 
+            ' = ' . 
+            $resource[$ship_id].' - :count WHERE id = :planet_id;';
+            
             Database::get()->update($sql, [
-                ':count'    => $Count,
-                ':planetID' => $PLANET['id'],
+                ':count'    => $count,
+                ':planet_id' => $PLANET['id'],
             ]);
 
             $this->printMessage($LNG['tr_exchange_done'], [[
@@ -67,19 +74,20 @@ class ShowFleetDealerPage extends AbstractGamePage
     {
         global $PLANET, $LNG, $pricelist, $resource, $reslist;
 
-        $Cost = [];
+        $cost = [];
 
-        $allowedShipIDs = explode(',', Config::get()->trade_allowed_ships);
+        $allowed_ship_ids = explode(',', Config::get()->trade_allowed_ships);
 
-        foreach ($allowedShipIDs as $shipID)
+        foreach ($allowed_ship_ids as $c_ship_id)
         {
-            if (in_array($shipID, $reslist['fleet']) || in_array($shipID, $reslist['defense']))
+            if (in_array($c_ship_id, $reslist['fleet']) 
+                || in_array($c_ship_id, $reslist['defense']))
             {
-                $Cost[$shipID] = [$PLANET[$resource[$shipID]], $LNG['tech'][$shipID], $pricelist[$shipID]['cost']];
+                $cost[$c_ship_id] = [$PLANET[$resource[$c_ship_id]], $LNG['tech'][$c_ship_id], $pricelist[$c_ship_id]['cost']];
             }
         }
 
-        if (empty($Cost))
+        if (empty($cost))
         {
             $this->printMessage($LNG['ft_empty'], [[
                 'label' => $LNG['sys_back'],
@@ -88,8 +96,8 @@ class ShowFleetDealerPage extends AbstractGamePage
         }
 
         $this->assign([
-            'shipIDs'   => $allowedShipIDs,
-            'CostInfos' => $Cost,
+            'shipIDs'   => $allowed_ship_ids,
+            'CostInfos' => $cost,
             'Charge'    => Config::get()->trade_charge,
         ]);
 
