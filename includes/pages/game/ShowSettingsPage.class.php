@@ -17,7 +17,7 @@
 
 class ShowSettingsPage extends AbstractGamePage
 {
-    public static $requireModule = 0;
+    public static $require_module = 0;
 
     public function __construct()
     {
@@ -126,7 +126,7 @@ class ShowSettingsPage extends AbstractGamePage
 
         foreach ($planets as $c_planet)
         {
-            list($USER, $c_planet) = $this->ecoObj->CalcResource($USER, $c_planet, true);
+            list($USER, $c_planet) = $this->eco_obj->CalcResource($USER, $c_planet, true);
 
             if (!empty($c_planet['b_building'])
                 || !empty($c_planet['b_hangar']))

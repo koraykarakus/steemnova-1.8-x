@@ -17,9 +17,9 @@
 
 class ShowInformationPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_INFORMATION;
+    public static $require_module = MODULE_INFORMATION;
 
-    protected $disableEcoSystem = true;
+    protected $disable_eco_system = true;
 
     public function __construct()
     {

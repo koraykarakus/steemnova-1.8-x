@@ -17,7 +17,7 @@
 
 class ShowShipyardPage extends AbstractGamePage
 {
-    public static $requireModule = 0;
+    public static $require_module = 0;
 
     public static $defaultController = 'show';
 

@@ -17,7 +17,7 @@
 
 class ShowAlliancePage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_ALLIANCE;
+    public static $require_module = MODULE_ALLIANCE;
 
     private $allianceData;
     private $ranks;

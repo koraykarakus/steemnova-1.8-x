@@ -17,7 +17,7 @@
 
 class ShowResourcesPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_RESSOURCE_LIST;
+    public static $require_module = MODULE_RESSOURCE_LIST;
 
     public function __construct()
     {
@@ -58,10 +58,10 @@ class ShowResourcesPage extends AbstractGamePage
 
                 Database::get()->update($sql, $param);
 
-                $this->ecoObj->setData($USER, $PLANET);
-                $this->ecoObj->ReBuildCache();
-                list($USER, $PLANET) = $this->ecoObj->getData();
-                $PLANET['eco_hash'] = $this->ecoObj->CreateHash();
+                $this->eco_obj->setData($USER, $PLANET);
+                $this->eco_obj->ReBuildCache();
+                list($USER, $PLANET) = $this->eco_obj->getData();
+                $PLANET['eco_hash'] = $this->eco_obj->CreateHash();
             }
         }
 

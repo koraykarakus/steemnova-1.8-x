@@ -17,7 +17,7 @@
 
 class ShowTechtreePage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_TECHTREE;
+    public static $require_module = MODULE_TECHTREE;
 
     public function __construct()
     {

@@ -17,7 +17,7 @@
 
 class ShowImperiumPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_IMPERIUM;
+    public static $require_module = MODULE_IMPERIUM;
 
     public function __construct()
     {

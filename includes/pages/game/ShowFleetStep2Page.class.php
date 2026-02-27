@@ -17,7 +17,7 @@
 
 class ShowFleetStep2Page extends AbstractGamePage
 {
-    public static $requireModule = MODULE_FLEET_TABLE;
+    public static $require_module = MODULE_FLEET_TABLE;
 
     public function __construct()
     {

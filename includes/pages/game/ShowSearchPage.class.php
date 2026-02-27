@@ -17,7 +17,7 @@
 
 class ShowSearchPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_SEARCH;
+    public static $require_module = MODULE_SEARCH;
 
     public function __construct()
     {

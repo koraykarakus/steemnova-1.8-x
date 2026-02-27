@@ -2,7 +2,7 @@
 
 class ShowFlightSimulatorPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_FLIGHT_SIMULATOR;
+    public static $require_module = MODULE_FLIGHT_SIMULATOR;
 
     public function __construct()
     {

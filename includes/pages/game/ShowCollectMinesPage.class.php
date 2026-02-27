@@ -6,7 +6,7 @@
 
 class ShowCollectMinesPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_COLLECT_MINES;
+    public static $require_module = MODULE_COLLECT_MINES;
 
     public function __construct()
     {

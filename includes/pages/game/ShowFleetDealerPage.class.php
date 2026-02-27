@@ -17,7 +17,7 @@
 
 class ShowFleetDealerPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_FLEET_TRADER;
+    public static $require_module = MODULE_FLEET_TRADER;
 
     public function __construct()
     {

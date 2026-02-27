@@ -17,7 +17,7 @@
 
 class ShowBuildingsPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_BUILDING;
+    public static $require_module = MODULE_BUILDING;
 
     public function __construct()
     {
@@ -83,9 +83,9 @@ class ShowBuildingsPage extends AbstractGamePage
             {
                 $PLANET['b_building'] = TIMESTAMP;
                 $PLANET['b_building_id'] = serialize($NewQueueArray);
-                $this->ecoObj->setData($USER, $PLANET);
-                $this->ecoObj->SetNextQueueElementOnTop();
-                list($USER, $PLANET) = $this->ecoObj->getData();
+                $this->eco_obj->setData($USER, $PLANET);
+                $this->eco_obj->SetNextQueueElementOnTop();
+                list($USER, $PLANET) = $this->eco_obj->getData();
             }
             else
             {

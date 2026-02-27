@@ -17,7 +17,7 @@
 
 class ShowMessagesPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_MESSAGES;
+    public static $require_module = MODULE_MESSAGES;
 
     protected $returnData;
 

@@ -17,7 +17,7 @@
 
 class ShowBuddyListPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_BUDDYLIST;
+    public static $require_module = MODULE_BUDDYLIST;
 
     public function __construct()
     {

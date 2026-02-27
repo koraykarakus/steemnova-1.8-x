@@ -17,7 +17,7 @@
 
 class ShowRecordsPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_RECORDS;
+    public static $require_module = MODULE_RECORDS;
 
     public function __construct()
     {

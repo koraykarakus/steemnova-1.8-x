@@ -17,7 +17,7 @@
 
 class ShowNotesPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_NOTICE;
+    public static $require_module = MODULE_NOTICE;
 
     public function __construct()
     {

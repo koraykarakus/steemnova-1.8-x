@@ -27,19 +27,19 @@ abstract class AbstractGamePage
      * reference of the template object
      * @var ResourceUpdate
      */
-    protected $ecoObj;
+    protected $eco_obj;
     protected $window;
-    protected $disableEcoSystem = false;
+    protected $disable_eco_system = false;
 
     protected function __construct()
     {
         if (!AJAX_REQUEST)
         {
             $this->setWindow('full');
-            if (!$this->disableEcoSystem)
+            if (!$this->disable_eco_system)
             {
-                $this->ecoObj = new ResourceUpdate();
-                $this->ecoObj->CalcResource();
+                $this->eco_obj = new ResourceUpdate();
+                $this->eco_obj->CalcResource();
             }
             $this->initTemplate();
         }
@@ -443,9 +443,9 @@ abstract class AbstractGamePage
 
     protected function save(): void
     {
-        if (isset($this->ecoObj))
+        if (isset($this->eco_obj))
         {
-            $this->ecoObj->SavePlanetToDB();
+            $this->eco_obj->SavePlanetToDB();
         }
     }
 

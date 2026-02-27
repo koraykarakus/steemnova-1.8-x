@@ -2,7 +2,7 @@
 
 class ShowRelocatePage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_RELOCATE;
+    public static $require_module = MODULE_RELOCATE;
 
     public function __construct()
     {
@@ -333,10 +333,10 @@ class ShowRelocatePage extends AbstractGamePage
             ':planetId' => $PLANET['id'],
         ]);
         //part 2: update hash
-        $this->ecoObj->setData($USER, $PLANET_NEW);
-        $this->ecoObj->ReBuildCache();
-        list($USER, $PLANET) = $this->ecoObj->getData();
-        $PLANET['eco_hash'] = $this->ecoObj->CreateHash();
+        $this->eco_obj->setData($USER, $PLANET_NEW);
+        $this->eco_obj->ReBuildCache();
+        list($USER, $PLANET) = $this->eco_obj->getData();
+        $PLANET['eco_hash'] = $this->eco_obj->CreateHash();
         $this->printMessage($LNG['rl_success'] . " [$galaxy:$system:$planet]");
     }
 

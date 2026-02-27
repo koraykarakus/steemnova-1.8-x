@@ -19,7 +19,7 @@ require_once('AbstractGamePage.class.php');
 
 class ShowResearchPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_RESEARCH;
+    public static $require_module = MODULE_RESEARCH;
 
     public function __construct()
     {
@@ -169,7 +169,7 @@ class ShowResearchPage extends AbstractGamePage
                     $cplanet = $PLANET;
                 }
 
-                $cplanet[$resource[31].'_inter'] = $this->ecoObj->getNetworkLevel($USER, $cplanet);
+                $cplanet[$resource[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
                 $build_end_time += BuildFunctions::getBuildingTime(
                     $USER,
                     $cplanet,
@@ -186,9 +186,9 @@ class ShowResearchPage extends AbstractGamePage
             {
                 $USER['b_tech'] = TIMESTAMP;
                 $USER['b_tech_queue'] = serialize($new_current_queue);
-                $this->ecoObj->setData($USER, $PLANET);
-                $this->ecoObj->SetNextQueueTechOnTop();
-                list($USER, $PLANET) = $this->ecoObj->getData();
+                $this->eco_obj->setData($USER, $PLANET);
+                $this->eco_obj->SetNextQueueTechOnTop();
+                list($USER, $PLANET) = $this->eco_obj->getData();
             }
             else
             {
@@ -255,7 +255,7 @@ class ShowResearchPage extends AbstractGamePage
                     $cplanet = $PLANET;
                 }
 
-                $cplanet[$resource[31].'_inter'] = $this->ecoObj->getNetworkLevel($USER, $cplanet);
+                $cplanet[$resource[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
 
                 $build_end_time += BuildFunctions::getBuildingTime(
                     $USER,

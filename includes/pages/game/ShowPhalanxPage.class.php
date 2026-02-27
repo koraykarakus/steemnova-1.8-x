@@ -17,7 +17,7 @@
 
 class ShowPhalanxPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_PHALANX;
+    public static $require_module = MODULE_PHALANX;
 
     public function __construct()
     {

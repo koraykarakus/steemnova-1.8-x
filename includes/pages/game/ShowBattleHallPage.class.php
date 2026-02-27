@@ -17,7 +17,7 @@
 
 class ShowBattleHallPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_BATTLEHALL;
+    public static $require_module = MODULE_BATTLEHALL;
 
     public function __construct()
     {

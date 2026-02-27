@@ -17,7 +17,7 @@
 
 class ShowTraderPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_TRADER;
+    public static $require_module = MODULE_TRADER;
 
     public function __construct()
     {

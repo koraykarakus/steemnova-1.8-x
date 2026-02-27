@@ -17,7 +17,7 @@
 
 class ShowTicketPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_SUPPORT;
+    public static $require_module = MODULE_SUPPORT;
 
     private $ticket_obj;
 

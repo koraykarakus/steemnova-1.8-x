@@ -17,7 +17,7 @@
 
 class ShowBattleSimulatorPage extends AbstractGamePage
 {
-    public static $requireModule = MODULE_SIMULATOR;
+    public static $require_module = MODULE_SIMULATOR;
 
     public function __construct()
     {

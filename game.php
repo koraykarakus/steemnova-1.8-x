@@ -27,9 +27,9 @@ require 'includes/common.php';
 $page = HTTP::_GP('page', 'overview');
 $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
-$pageClass = 'Show'.ucwords($page).'Page';
+$page_class = 'Show'.ucwords($page).'Page';
 
-$path = 'includes/pages/game/'.$pageClass.'.class.php';
+$path = 'includes/pages/game/'.$page_class.'.class.php';
 
 if (!file_exists($path))
 {
@@ -39,26 +39,26 @@ if (!file_exists($path))
 // Added Autoload in feature Versions
 require $path;
 
-$pageObj = new $pageClass();
+$page_obj = new $page_class();
 // PHP 5.2 FIX
-// can't use $pageObj::$requireModule
-$pageProps = get_class_vars(get_class($pageObj));
+// can't use $pageObj::$require_module
+$page_props = get_class_vars(get_class($page_obj));
 
-if (isset($pageProps['requireModule'])
-    && $pageProps['requireModule'] !== 0
-    && !isModuleAvailable($pageProps['requireModule']))
+if (isset($page_props['require_module'])
+    && $page_props['require_module'] !== 0
+    && !isModuleAvailable($page_props['require_module']))
 {
     ShowErrorPage::printError($LNG['sys_module_inactive']);
 }
 
-if (!is_callable([$pageObj, $mode]))
+if (!is_callable([$page_obj, $mode]))
 {
-    if (!isset($pageProps['defaultController'])
-        || !is_callable([$pageObj, $pageProps['defaultController']]))
+    if (!isset($page_props['defaultController'])
+        || !is_callable([$page_obj, $page_props['defaultController']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
-    $mode = $pageProps['defaultController'];
+    $mode = $page_props['defaultController'];
 }
 
-$pageObj->{$mode}();
+$page_obj->{$mode}();
