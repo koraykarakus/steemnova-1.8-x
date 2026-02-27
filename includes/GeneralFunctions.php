@@ -127,8 +127,10 @@ function getPlanets($USER): array
 
     $order = $USER['planet_sort_order'] == 1 ? "DESC" : "ASC";
 
-    $sql = "SELECT id, id_luna, name, galaxy, system, planet, planet_type, image, b_building, b_building_id, field_current, field_max, temp_max, temp_min, diameter
-			FROM %%PLANETS%% WHERE id_owner = :userId AND destruyed = :destruyed ORDER BY ";
+    $sql = "SELECT id, id_luna, name, galaxy, system, planet, 
+    planet_type, image, b_building, b_building_id, field_current, 
+    field_max, temp_max, temp_min, diameter 
+    FROM %%PLANETS%% WHERE id_owner = :userId AND destruyed = :destruyed ORDER BY ";
 
     switch ($USER['planet_sort'])
     {
@@ -143,19 +145,19 @@ function getPlanets($USER): array
             break;
     }
 
-    $planetsResult = Database::get()->select($sql, [
+    $planets_result = Database::get()->select($sql, [
         ':userId'    => $USER['id'],
         ':destruyed' => 0,
     ]);
 
-    $planetsList = [];
+    $planets_list = [];
 
-    foreach ($planetsResult as $planetRow)
+    foreach ($planets_result as $c_planet)
     {
-        $planetsList[$planetRow['id']] = $planetRow;
+        $planets_list[$c_planet['id']] = $c_planet;
     }
 
-    return $planetsList;
+    return $planets_list;
 }
 
 function get_timezone_selector(): array

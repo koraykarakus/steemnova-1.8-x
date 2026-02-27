@@ -180,7 +180,7 @@ abstract class AbstractGamePage
             die();
         }
 
-        if (isset($USER['PLANETS']))
+        if (!isset($USER['PLANETS']))
         {
             $USER['PLANETS'] = getPlanets($USER);
         }
@@ -303,10 +303,11 @@ abstract class AbstractGamePage
             $date_time_user = $date_time_server;
         }
 
+        // TODO: this is not good...
         $all_planets = $all_moons = [];
         if (!empty($USER['PLANETS']))
         {
-            foreach ($USER['PLANETS'] as $ID => $c_planet)
+            foreach ($USER['PLANETS'] as $c_planet)
             {
                 if (!empty($c_planet['b_building'])
                     && $c_planet['b_building'] > TIMESTAMP)
