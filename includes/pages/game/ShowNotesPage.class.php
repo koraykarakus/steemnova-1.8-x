@@ -75,9 +75,13 @@ class ShowNotesPage extends AbstractGamePage
             ':note_id' => $note_id,
         ]);
 
-        if (!$note_detail)
+        if ($note_detail === false)
         {
-            $this->printMessage('wrong note id');
+            $note_detail = [];
+            $note_detail['id'] = 0;
+            $note_detail['priority'] = 1;
+            $note_detail['title'] = "";
+            $note_detail['text'] = "";
         }
 
         $this->tpl_obj->execscript("$('#cntChars').text($('#text').val().length);");
