@@ -180,3 +180,6 @@ $LNG['disclamerLabelAddress'] = 'Game Address:';
 $LNG['disclamerLabelPhone'] = 'Telephone Nr.:';
 $LNG['disclamerLabelMail'] = 'Support Email:';
 $LNG['disclamerLabelNotice'] = 'More information';
+
+// battle hall
+$LNG['bh_no_battles'] = "There are no battles yet.";
