@@ -17,7 +17,7 @@
 
 class ShowFleetAjaxPage extends AbstractGamePage
 {
-    public $returnData = [];
+    public $return_data = [];
 
     public static $require_module = 0;
 
@@ -29,45 +29,45 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
     private function sendData($Code, $Message): void
     {
-        $this->returnData['code'] = $Code;
-        $this->returnData['mess'] = $Message;
-        $this->sendJSON($this->returnData);
+        $this->return_data['code'] = $Code;
+        $this->return_data['mess'] = $Message;
+        $this->sendJSON($this->return_data);
     }
 
     public function show(): void
     {
         global $USER, $PLANET, $resource, $LNG, $pricelist;
 
-        $UserDeuterium = $PLANET['deuterium'];
+        $user_deu = $PLANET['deuterium'];
 
-        $planetID = HTTP::_GP('planetID', 0);
-        $targetMission = HTTP::_GP('mission', 0);
+        $planet_id = HTTP::_GP('planetID', 0);
+        $target_mission = HTTP::_GP('mission', 0);
 
-        $activeSlots = FleetFunctions::GetCurrentFleets($USER['id']);
-        $maxSlots = FleetFunctions::GetMaxFleetSlots($USER);
+        $active_slots = FleetFunctions::GetCurrentFleets($USER['id']);
+        $max_slots = FleetFunctions::GetMaxFleetSlots($USER);
 
-        $this->returnData['slots'] = $activeSlots;
+        $this->return_data['slots'] = $active_slots;
 
         if (IsVacationMode($USER))
         {
             $this->sendData(620, $LNG['fa_vacation_mode_current']);
         }
 
-        if (empty($planetID))
+        if (empty($planet_id))
         {
             $this->sendData(601, $LNG['fa_planet_not_exist']);
         }
 
-        if ($maxSlots <= $activeSlots)
+        if ($max_slots <= $active_slots)
         {
             $this->sendData(612, $LNG['fa_no_more_slots']);
         }
 
-        $fleetArray = [];
+        $fleet_array = [];
 
         $db = Database::get();
 
-        switch ($targetMission)
+        switch ($target_mission)
         {
             case 6:
                 if (!isModuleAvailable(MODULE_MISSION_SPY))
@@ -82,8 +82,8 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(611, $LNG['fa_no_spios']);
                 }
 
-                $fleetArray = [210 => $ships];
-                $this->returnData['ships'][210] = $PLANET[$resource[210]] - $ships;
+                $fleet_array = [210 => $ships];
+                $this->return_data['ships'][210] = $PLANET[$resource[210]] - $ships;
                 break;
             case 8:
                 if (!isModuleAvailable(MODULE_MISSION_RECYCLE))
@@ -91,31 +91,33 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(699, $LNG['sys_module_inactive']);
                 }
 
-                $sql = "SELECT (der_metal + der_crystal) as sum FROM %%PLANETS%% WHERE id = :planetID;";
-                $totalDebris = $db->selectSingle($sql, [
-                    ':planetID' => $planetID,
+                $sql = "SELECT (der_metal + der_crystal) as sum 
+                FROM %%PLANETS%% WHERE id = :planet_id;";
+
+                $total_debris = $db->selectSingle($sql, [
+                    ':planet_id' => $planet_id,
                 ], 'sum');
 
-                $recElementIDs = [219, 209];
+                $rec_element_ids = [219, 209];
 
-                $fleetArray = [];
+                $fleet_array = [];
 
-                foreach ($recElementIDs as $elementID)
+                foreach ($rec_element_ids as $c_element_id)
                 {
-                    $a = $pricelist[$elementID]['capacity'] * (1 + $USER['factor']['ShipStorage']);
-                    $shipsNeed = min(ceil($totalDebris / $a), $PLANET[$resource[$elementID]]);
-                    $totalDebris -= ($shipsNeed * $a);
+                    $a = $pricelist[$c_element_id]['capacity'] * (1 + $USER['factor']['ShipStorage']);
+                    $shipsNeed = min(ceil($total_debris / $a), $PLANET[$resource[$c_element_id]]);
+                    $total_debris -= ($shipsNeed * $a);
 
-                    $fleetArray[$elementID] = $shipsNeed;
-                    $this->returnData['ships'][$elementID] = $PLANET[$resource[$elementID]] - $shipsNeed;
+                    $fleet_array[$c_element_id] = $shipsNeed;
+                    $this->return_data['ships'][$c_element_id] = $PLANET[$resource[$c_element_id]] - $shipsNeed;
 
-                    if ($totalDebris <= 0)
+                    if ($total_debris <= 0)
                     {
                         break;
                     }
                 }
 
-                if (empty($fleetArray))
+                if (empty($fleet_array))
                 {
                     $this->sendData(611, $LNG['fa_no_recyclers']);
                 }
@@ -125,9 +127,9 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 break;
         }
 
-        $fleetArray = array_filter($fleetArray);
+        $fleet_array = array_filter($fleet_array);
 
-        if (empty($fleetArray))
+        if (empty($fleet_array))
         {
             $this->sendData(610, $LNG['fa_not_enough_probes']);
         }
@@ -141,28 +143,30 @@ class ShowFleetAjaxPage extends AbstractGamePage
 		FROM %%PLANETS%% planet
 		INNER JOIN %%USERS%% user ON planet.id_owner = user.id
 		LEFT JOIN %%USER_POINTS%% as stat ON stat.id_owner = user.id
-		WHERE planet.id = :planetID;";
+		WHERE planet.id = :planet_id;";
 
-        $targetData = $db->selectSingle($sql, [
-            ':planetID' => $planetID,
+        $target_data = $db->selectSingle($sql, [
+            ':planet_id' => $planet_id,
         ]);
 
-        if (empty($targetData))
+        if (empty($target_data))
         {
             $this->sendData(601, $LNG['fa_planet_not_exist']);
         }
 
-        if ($targetMission == 6)
+        if ($target_mission == 6)
         {
-            if (Config::get()->adm_attack == 1 && $targetData['authattack'] > $USER['authlevel'])
+            if (Config::get()->adm_attack == 1
+                && $target_data['authattack'] > $USER['authlevel'])
             {
                 $this->sendData(619, $LNG['fa_action_not_allowed']);
             }
 
-            if (IsVacationMode($targetData))
+            if (IsVacationMode($target_data))
             {
                 $this->sendData(605, $LNG['fa_vacation_mode']);
             }
+
             $sql = 'SELECT total_points
 			FROM %%USER_POINTS%%
 			WHERE id_owner = :userId;';
@@ -171,52 +175,72 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 ':userId' => $USER['id'],
             ]);
 
-            $IsNoobProtec = CheckNoobProtec($USER, $targetData, $targetData);
+            $is_noob_protect = CheckNoobProtec($USER, $target_data, $target_data);
 
-            if ($IsNoobProtec['NoobPlayer'])
+            if ($is_noob_protect['NoobPlayer'])
             {
                 $this->sendData(603, $LNG['fa_week_player']);
             }
 
-            if ($IsNoobProtec['StrongPlayer'])
+            if ($is_noob_protect['StrongPlayer'])
             {
                 $this->sendData(604, $LNG['fa_strong_player']);
             }
 
-            if ($USER['id'] == $targetData['id_owner'])
+            if ($USER['id'] == $target_data['id_owner'])
             {
                 $this->sendData(618, $LNG['fa_not_spy_yourself']);
             }
         }
 
-        $speedPercentageMax = 10;
-        $SpeedFactor = $Distance = $SpeedAllMin = $Duration = $consumption = 0;
-        for ($i = 0; $i < $speedPercentageMax ; $i++)
+        $speed_per_max = 10;
+        $speed_factor = $distance = $speed_all_min = $duration = $consumption = 0;
+        for ($i = 0; $i < $speed_per_max ; $i++)
         {
 
-            $speedPercentage = $speedPercentageMax - $i;
+            $speed_percentage = $speed_per_max - $i;
 
-            $SpeedFactor = FleetFunctions::GetGameSpeedFactor();
-            $Distance = FleetFunctions::GetTargetDistance([$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']], [$targetData['galaxy'], $targetData['system'], $targetData['planet']]);
-            $SpeedAllMin = FleetFunctions::GetFleetMaxSpeed($fleetArray, $USER);
-            $Duration = FleetFunctions::GetMissionDuration($speedPercentage, $SpeedAllMin, $Distance, $SpeedFactor, $USER);
-            $consumption = FleetFunctions::GetFleetConsumption($fleetArray, $Duration, $Distance, $USER, $SpeedFactor);
+            $speed_factor = FleetFunctions::GetGameSpeedFactor();
 
-            if ($consumption <= FleetFunctions::GetFleetRoom($fleetArray))
+            $distance = FleetFunctions::GetTargetDistance(
+                [$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']],
+                [$target_data['galaxy'], $target_data['system'], $target_data['planet']]
+            );
+
+            $speed_all_min = FleetFunctions::GetFleetMaxSpeed($fleet_array, $USER);
+
+            $duration = FleetFunctions::GetMissionDuration(
+                $speed_percentage,
+                $speed_all_min,
+                $distance,
+                $speed_factor,
+                $USER
+            );
+
+            $consumption = FleetFunctions::GetFleetConsumption(
+                $fleet_array,
+                $duration,
+                $distance,
+                $USER,
+                $speed_factor
+            );
+
+            if ($consumption <= FleetFunctions::GetFleetRoom($fleet_array))
             {
                 break;
             }
 
         }
 
-        if ($consumption > FleetFunctions::GetFleetRoom($fleetArray) && $targetMission != 6)
+        if ($consumption > FleetFunctions::GetFleetRoom($fleet_array)
+            && $target_mission != 6)
         {
             $this->sendData(613, $LNG['fa_no_fleetroom']);
         }
 
-        $UserDeuterium -= $consumption;
+        $user_deu -= $consumption;
 
-        if ($UserDeuterium < 0)
+        if ($user_deu < 0)
         {
             $this->sendData(613, $LNG['fa_not_enough_fuel']);
         }
@@ -226,46 +250,62 @@ class ShowFleetAjaxPage extends AbstractGamePage
             exit;
         }
 
-        $this->returnData['slots']++;
+        $this->return_data['slots']++;
 
-        $fleetResource = [
+        $fleet_resource = [
             901 => 0,
             902 => 0,
             903 => 0,
         ];
 
-        $fleetStartTime = $Duration + TIMESTAMP;
-        $fleetStayTime = $fleetStartTime;
-        $fleetEndTime = $fleetStayTime + $Duration;
+        $fleet_start_time = $duration + TIMESTAMP;
+        $fleet_stay_time = $fleet_start_time;
+        $fleet_end_time = $fleet_stay_time + $duration;
 
-        $shipID = array_keys($fleetArray);
+        $ship_ids = array_keys($fleet_array);
         $PLANET['deuterium'] -= $consumption;
 
         FleetFunctions::sendFleet(
-            $fleetArray,
-            $targetMission,
+            $fleet_array,
+            $target_mission,
             $USER['id'],
             $PLANET['id'],
             $PLANET['galaxy'],
             $PLANET['system'],
             $PLANET['planet'],
             $PLANET['planet_type'],
-            $targetData['id_owner'],
-            $planetID,
-            $targetData['galaxy'],
-            $targetData['system'],
-            $targetData['planet'],
-            $targetData['planet_type'],
-            $fleetResource,
-            $fleetStartTime,
-            $fleetStayTime,
-            $fleetEndTime,
+            $target_data['id_owner'],
+            $planet_id,
+            $target_data['galaxy'],
+            $target_data['system'],
+            $target_data['planet'],
+            $target_data['planet_type'],
+            $fleet_resource,
+            $fleet_start_time,
+            $fleet_stay_time,
+            $fleet_end_time,
             0,
             0,
             0,
             $consumption
         );
 
-        $this->sendData(600, $LNG['fa_sending']." ".array_sum($fleetArray)." ". $LNG['tech'][$shipID[0]] ." ".$LNG['gl_to']." ".$targetData['galaxy'].":".$targetData['system'].":".$targetData['planet']." ...");
+        $this->sendData(
+            600,
+            $LNG['fa_sending'] .
+            " " .
+            array_sum($fleet_array) .
+            " " .
+            $LNG['tech'][$ship_ids[0]] .
+            " " .
+            $LNG['gl_to'] .
+            " " .
+            $target_data['galaxy'] .
+            ":" .
+            $target_data['system'].
+            ":".
+            $target_data['planet'].
+            " ..."
+        );
     }
 }
