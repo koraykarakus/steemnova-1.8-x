@@ -213,79 +213,77 @@ class Session
 
         $userIpAddress = self::getClientIp();
 
-        if (!(isset($_GET['page']) && $_GET['page'] == "raport" && isset($_GET['raport']) && count($_GET) == 2 && MODE === 'INGAME'))
-        {
-            $sql = 'REPLACE INTO %%SESSION%% SET
+        $sql = 'REPLACE INTO %%SESSION%% SET
 		sessionID	= :sessionId,
 		userID		= :userId,
 		lastonline	= :lastActivity,
 		created		= :created,
 		userIP		= :userAddress;';
 
-            $db = Database::get();
+        $db = Database::get();
 
-            $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :sessionId AND userID = :userId;';
+        $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :sessionId AND userID = :userId;';
 
-            $created = $db->selectSingle($sql_created, [
-                ':sessionId' => session_id(),
-                ':userId'    => $this->data['userId'],
-            ], 'created');
+        $created = $db->selectSingle($sql_created, [
+            ':sessionId' => session_id(),
+            ':userId'    => $this->data['userId'],
+        ], 'created');
 
-            if (empty($created))
-            {
-                $created = time();
-            }
+        if (empty($created))
+        {
+            $created = time();
+        }
 
-            $db->replace($sql, [
-                ':sessionId'    => session_id(),
-                ':userId'       => $this->data['userId'],
-                ':lastActivity' => TIMESTAMP,
-                ':created'      => $created,
-                ':userAddress'  => $userIpAddress,
-            ]);
+        $db->replace($sql, [
+            ':sessionId'    => session_id(),
+            ':userId'       => $this->data['userId'],
+            ':lastActivity' => TIMESTAMP,
+            ':created'      => $created,
+            ':userAddress'  => $userIpAddress,
+        ]);
 
-            $sql = 'UPDATE %%USERS%% SET
+        $sql = 'UPDATE %%USERS%% SET
 		onlinetime	= :lastActivity,
 		user_lastip = :userAddress
 		WHERE
 		id = :userId;';
 
-            $db->update($sql, [
-                ':userAddress'  => $userIpAddress,
-                ':lastActivity' => TIMESTAMP,
-                ':userId'       => $this->data['userId'],
+        $db->update($sql, [
+            ':userAddress'  => $userIpAddress,
+            ':lastActivity' => TIMESTAMP,
+            ':userId'       => $this->data['userId'],
+        ]);
+
+        // Remove multisessions
+        if (PREVENT_MULTISESSIONS == true)
+        {
+            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID != :sessionId);';
+            $db->delete($sql, [
+                ':userId'    => $this->data['userId'],
+                ':sessionId' => session_id(),
             ]);
-
-            // Remove multisessions
-            if (PREVENT_MULTISESSIONS == true)
-            {
-                $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID != :sessionId);';
-                $db->delete($sql, [
-                    ':userId'    => $this->data['userId'],
-                    ':sessionId' => session_id(),
-                ]);
-            }
-
-            // Remove old sessions
-            if ($created + SESSION_LIFETIME < time())
-            {
-                $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID = :sessionId);';
-
-                $db->delete($sql, [
-                    ':userId'    => $this->data['userId'],
-                    ':sessionId' => session_id(),
-                ]);
-            }
-
-            $this->data['lastActivity'] = TIMESTAMP;
-            $this->data['sessionId'] = session_id();
-            $this->data['userIpAddress'] = $userIpAddress;
-            $this->data['requestPath'] = $this->getRequestPath();
-
-            $_SESSION['obj'] = serialize($this);
-
-            @session_write_close();
         }
+
+        // Remove old sessions
+        if ($created + SESSION_LIFETIME < time())
+        {
+            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID = :sessionId);';
+
+            $db->delete($sql, [
+                ':userId'    => $this->data['userId'],
+                ':sessionId' => session_id(),
+            ]);
+        }
+
+        $this->data['lastActivity'] = TIMESTAMP;
+        $this->data['sessionId'] = session_id();
+        $this->data['userIpAddress'] = $userIpAddress;
+        $this->data['requestPath'] = $this->getRequestPath();
+
+        $_SESSION['obj'] = serialize($this);
+
+        @session_write_close();
+
     }
 
     public function delete()
@@ -307,16 +305,9 @@ class Session
         // return false;
         // }
 
-        if (isset($_GET['page']) && $_GET['page'] == "raport" && isset($_GET['raport']) && count($_GET) == 2 && MODE === 'INGAME')
+        if (!isset($_SESSION["obj"]))
         {
-            $this->data['lastActivity'] = time();
-        }
-        else
-        {
-            if (!isset($_SESSION["obj"]))
-            {
-                return false;
-            }
+            return false;
         }
 
         if ($this->data['lastActivity'] < TIMESTAMP - SESSION_LIFETIME)

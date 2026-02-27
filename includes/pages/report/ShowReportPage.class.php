@@ -15,17 +15,8 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowRaportPage extends AbstractGamePage
+class ShowReportPage extends AbstractReportPage
 {
-    public static $requireModule = 0;
-
-    protected $disableEcoSystem = true;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     private function BCWrapperPreRev2321($combat_report): mixed
     {
         if (isset($combat_report['moon']['desfail']))
@@ -76,14 +67,12 @@ class ShowRaportPage extends AbstractGamePage
 
     public function battlehall(): void
     {
-        global $LNG, $USER;
-
-        $LNG->includeData(['FLEET']);
-        $this->setWindow('popup');
+        global $LNG;
+        $config = Config::get();
 
         $db = Database::get();
 
-        $rid = HTTP::_GP('raport', '');
+        $rid = HTTP::_GP('id', '');
 
         $sql = "SELECT
 			raport, time,
@@ -116,7 +105,12 @@ class ShowRaportPage extends AbstractGamePage
         $info = [$report_data["attacker"], $report_data["defender"]];
 
         $combat_report = unserialize($report_data['raport']);
-        $combat_report['time'] = _date($LNG['php_tdformat'], $combat_report['time'], $USER['timezone']);
+        $combat_report['time'] = _date(
+            $LNG['php_tdformat'],
+            $combat_report['time'],
+            $config->timezone
+        );
+
         $combat_report = $this->BCWrapperPreRev2321($combat_report);
 
         $this->assign([
@@ -130,14 +124,12 @@ class ShowRaportPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $LNG, $USER;
-
-        $LNG->includeData(['FLEET']);
-        $this->setWindow('popup');
+        global $LNG;
+        $config = Config::get();
 
         $db = Database::get();
 
-        $rid = HTTP::_GP('raport', '');
+        $rid = HTTP::_GP('id', '');
 
         $sql = "SELECT raport,attacker,defender FROM %%RW%% WHERE rid = :reportID;";
         $report_data = $db->selectSingle($sql, [
@@ -150,8 +142,8 @@ class ShowRaportPage extends AbstractGamePage
         }
 
         // empty is BC for pre r2484
-        $isAttacker = empty($report_data['attacker']) || in_array($USER['id'], explode(",", $report_data['attacker']));
-        $isDefender = empty($report_data['defender']) || in_array($USER['id'], explode(",", $report_data['defender']));
+        $isAttacker = true;
+        $isDefender = true;
 
         if (empty($report_data))
         {
@@ -167,7 +159,11 @@ class ShowRaportPage extends AbstractGamePage
             $this->printMessage($LNG['sys_raport_lost_contact']);
         }
 
-        $combat_report['time'] = _date($LNG['php_tdformat'], $combat_report['time'], $USER['timezone']);
+        $combat_report['time'] = _date(
+            $LNG['php_tdformat'],
+            $combat_report['time'],
+            $config->timezone
+        );
         $combat_report = $this->BCWrapperPreRev2321($combat_report);
 
         $this->assign([

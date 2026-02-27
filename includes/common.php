@@ -127,18 +127,10 @@ if (MODE === 'INGAME'
 {
     $session = Session::load();
 
-    if (!(!$session->isValidSession()
-        && isset($_GET['page'])
-        && $_GET['page'] == "raport"
-        && isset($_GET['raport'])
-        && count($_GET) == 2
-        && MODE === 'INGAME'))
+    if (!$session->isValidSession())
     {
-        if (!$session->isValidSession())
-        {
-            $session->delete();
-            HTTP::redirectTo('index.php?code=3');
-        }
+        $session->delete();
+        HTTP::redirectTo('index.php?code=3');
     }
 
     require 'includes/vars.php';
@@ -174,38 +166,9 @@ if (MODE === 'INGAME'
         $THEME->setUserTheme($USER['dpath']);
     }
 
-    // copy paste sharing link with friend who is not logged in
-    // this should be handled better.
-    if (!$session->isValidSession()
-        && isset($_GET['page'])
-        && $_GET['page'] == "raport"
-        && isset($_GET['raport'])
-        && count($_GET) == 2
-        && MODE === 'INGAME')
+    if (empty($USER))
     {
-        // create dummy user.
-        $USER = [];
-        $USER['lang'] = 'en';
-        $USER['bana'] = 0;
-        $USER['timezone'] = "Europe/Berlin";
-        $USER['urlaubs_modus'] = 0;
-        $USER['authlevel'] = 0;
-        $USER['id'] = 0;
-        $USER['dpath'] = 'gow';
-        $USER['show_fleets_active'] = false;
-    }
-
-    if (!(!$session->isValidSession()
-        && isset($_GET['page'])
-        && $_GET['page'] == "raport"
-        && isset($_GET['raport'])
-        && count($_GET) == 2
-        && MODE === 'INGAME'))
-    {
-        if (empty($USER))
-        {
-            HTTP::redirectTo('index.php?code=3');
-        }
+        HTTP::redirectTo('index.php?code=3');
     }
 
     $LNG = new Language($USER['lang']);
@@ -222,56 +185,49 @@ if (MODE === 'INGAME'
         ShowErrorPage::printError("<font size=\"6px\">".$LNG['css_account_banned_message']."</font><br><br>".sprintf($LNG['css_account_banned_expire'], _date($LNG['php_tdformat'], $USER['banaday'], $USER['timezone']))."<br><br>".$LNG['css_goto_homeside'], false);
     }
 
-    if (!(!$session->isValidSession()
-        && isset($_GET['page'])
-        && $_GET['page'] == "raport"
-        && isset($_GET['raport'])
-        && count($_GET) == 2
-        && MODE === 'INGAME'))
+    if (MODE === 'INGAME')
     {
-        if (MODE === 'INGAME')
+        $universeAmount = count(Universe::availableUniverses());
+        if (Universe::current() != $USER['universe'] && $universeAmount > 1)
         {
-            $universeAmount = count(Universe::availableUniverses());
-            if (Universe::current() != $USER['universe'] && $universeAmount > 1)
-            {
-                HTTP::redirectToUniverse($USER['universe']);
-            }
+            HTTP::redirectToUniverse($USER['universe']);
+        }
 
-            $session->selectActivePlanet();
+        $session->selectActivePlanet();
 
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
+        $PLANET = $db->selectSingle($sql, [
+            ':planetId' => $session->planetId,
+        ]);
+
+        if (empty($PLANET))
+        {
             $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
             $PLANET = $db->selectSingle($sql, [
-                ':planetId' => $session->planetId,
+                ':planetId' => $USER['id_planet'],
             ]);
 
             if (empty($PLANET))
             {
-                $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
-                $PLANET = $db->selectSingle($sql, [
-                    ':planetId' => $USER['id_planet'],
-                ]);
-
-                if (empty($PLANET))
-                {
-                    throw new Exception("Main Planet does not exist!");
-                }
-                else
-                {
-                    $session->planetId = $USER['id_planet'];
-                }
+                throw new Exception("Main Planet does not exist!");
             }
-
-            $USER['factor'] = getFactors($USER);
-            $USER['PLANETS'] = getPlanets($USER);
+            else
+            {
+                $session->planetId = $USER['id_planet'];
+            }
         }
-        elseif (MODE === 'ADMIN')
-        {
-            error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-            $USER['rights'] = unserialize($USER['rights']);
-            $LNG->includeData(['ADMIN', 'CUSTOM']);
-        }
+        $USER['factor'] = getFactors($USER);
+        $USER['PLANETS'] = getPlanets($USER);
     }
+    elseif (MODE === 'ADMIN')
+    {
+        error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
+        $USER['rights'] = unserialize($USER['rights']);
+        $LNG->includeData(['ADMIN', 'CUSTOM']);
+    }
+
 }
 elseif (MODE === 'LOGIN')
 {
@@ -287,4 +243,44 @@ elseif (MODE === 'CHAT')
     {
         HTTP::redirectTo('index.php?code=3');
     }
+}
+elseif (MODE === 'REPORT')
+{
+    $THEME = new Theme();
+    $session = Session::load();
+    $LNG = new Language();
+    $theme = $lang = '';
+    if ($session->isValidSession())
+    {
+        $sql = "SELECT `dpath`,`lang` FROM %%USERS%% WHERE `id` = :userId";
+
+        $USER = Database::get()->selectSingle($sql, [
+            ':userId' => $session->userId,
+        ]);
+
+        if (!$USER)
+        {
+            HTTP::redirectTo('index.php?code=3');
+        }
+
+        $theme = $USER['dpath'];
+        $lang = $USER['lang'];
+    }
+    else
+    {
+        $session->delete();
+        $theme = Config::get()->server_default_theme;
+        $lang = $LNG->getUserAgentLanguage();
+        if (!in_array($lang, Language::getAllowedLangs(true)))
+        {
+            $lang = 'en';
+        }
+    }
+
+    $THEME->setUserTheme($theme);
+    $LNG->setLanguage($lang);
+    $LNG->includeData(['FLEET']);
+    $LNG->includeData(['L18N', 'INGAME', 'TECH', 'CUSTOM']);
+
+    require 'includes/vars.php';
 }
