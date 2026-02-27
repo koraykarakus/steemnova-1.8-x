@@ -38,27 +38,32 @@ $template->assign([
     'canUpgrade' => file_exists('includes/config.php') && filesize('includes/config.php') !== 0,
 ]);
 
-$enableInstallToolFile = 'includes/ENABLE_INSTALL_TOOL';
-$quickStartFile = 'includes/FIRST_INSTALL';
+$path_install_file = 'includes/ENABLE_INSTALL_TOOL';
+$path_quick_start_file = 'includes/FIRST_INSTALL';
+
 // If include/FIRST_INSTALL is present and can be deleted, automatically create include/ENABLE_INSTALL_TOOL
-if (is_file($quickStartFile) && is_writeable($quickStartFile) && unlink($quickStartFile))
+if (is_file($path_quick_start_file)
+    && is_writeable($path_quick_start_file)
+    && unlink($path_quick_start_file))
 {
-    @touch($enableInstallToolFile);
+    @touch($path_install_file);
 }
+
 // Only allow Install Tool access if the file "include/ENABLE_INSTALL_TOOL" is found
-if (is_file($enableInstallToolFile) && (time() - filemtime($enableInstallToolFile) > 3600))
+if (is_file($path_install_file)
+    && (time() - filemtime($path_install_file) > 3600))
 {
-    $content = file_get_contents($enableInstallToolFile);
-    $verifyString = 'KEEP_FILE';
-    if (trim($content) !== $verifyString)
+    $content = file_get_contents($path_install_file);
+    $verify_string = 'KEEP_FILE';
+    if (trim($content) !== $verify_string)
     {
         // Delete the file if it is older than 3600s (1 hour)
-        unlink($enableInstallToolFile);
+        unlink($path_install_file);
     }
 }
-if (!is_file($enableInstallToolFile))
-{
 
+if (!is_file($path_install_file))
+{
     switch ($mode)
     {
         case 'upgrade':
@@ -71,9 +76,11 @@ if (!is_file($enableInstallToolFile))
     $template->message($message, false, 0, true);
     exit;
 }
+
 $language = HTTP::_GP('lang', '');
 
-if (!empty($language) && in_array($language, $LNG->getAllowedLangs()))
+if (!empty($language)
+    && in_array($language, $LNG->getAllowedLangs()))
 {
     setcookie('lang', $language);
 }
@@ -84,7 +91,7 @@ switch ($mode)
         require 'includes/libs/ftp/ftp.class.php';
         require 'includes/libs/ftp/ftpexception.class.php';
         $LNG->includeData(['ADMIN']);
-        $connectionConfig = [
+        $connection_config = [
             "host"     => $_GET['host'],
             "username" => $_GET['user'],
             "password" => $_GET['pass'],
@@ -94,7 +101,7 @@ switch ($mode)
         try
         {
             $ftp = FTP::getInstance();
-            $ftp->connect($connectionConfig);
+            $ftp->connect($connection_config);
         }
         catch (FTPException $error)
         {
@@ -117,39 +124,47 @@ switch ($mode)
         {
             $sql = "SELECT dbVersion FROM %%SYSTEM%%;";
 
-            $dbVersion = Database::get()->selectSingle($sql, [], 'dbVersion');
+            $db_version = Database::get()->selectSingle($sql, [], 'dbVersion');
         }
         catch (Exception $e)
         {
-            $dbVersion = 0;
+            $db_version = 0;
         }
 
         $updates = [];
 
-        $fileRevision = 0;
+        $file_revision = 0;
 
-        $directoryIterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
-        /** @var DirectoryIterator $fileInfo */
-        foreach ($directoryIterator as $fileInfo)
+        $directory_iterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
+        /** @var DirectoryIterator $file_info */
+        foreach ($directory_iterator as $file_info)
         {
-            if (!$fileInfo->isFile() || !preg_match('/^migration_\d+/', $fileInfo->getFilename()))
+            if (!$file_info->isFile()
+                || !preg_match('/^migration_\d+/', $file_info->getFilename()))
             {
                 continue;
             }
 
-            $fileRevision = substr($fileInfo->getFilename(), 10, -4);
+            $file_revision = substr($file_info->getFilename(), 10, -4);
 
-            if ($fileRevision <= $dbVersion || $fileRevision > DB_VERSION_REQUIRED)
+            if ($file_revision <= $db_version
+                || $file_revision > DB_VERSION_REQUIRED)
             {
                 continue;
             }
 
-            $updates[$fileInfo->getPathname()] = makebr(str_replace('%PREFIX%', DB_PREFIX, file_get_contents($fileInfo->getPathname())));
+            $updates[$file_info->getPathname()] = makebr(
+                str_replace(
+                    '%PREFIX%',
+                    DB_PREFIX,
+                    file_get_contents($file_info->getPathname())
+                )
+            );
         }
 
         $template->assign_vars([
-            'file_revision' => min(DB_VERSION_REQUIRED, $fileRevision),
-            'sql_revision'  => $dbVersion,
+            'file_revision' => min(DB_VERSION_REQUIRED, $file_revision),
+            'sql_revision'  => $db_version,
             'updates'       => $updates,
             'header'        => $LNG['menu_upgrade'],
         ]);
@@ -161,95 +176,103 @@ switch ($mode)
         require 'includes/config.php';
 
         // Create a Backup
-        $sqlTableRaw = Database::get()->nativeQuery("SHOW TABLE STATUS FROM `" . DB_NAME . "`;");
-        $prefixCounts = strlen(DB_PREFIX);
-        $dbTables = [];
-        foreach ($sqlTableRaw as $table)
+        $sql_table_raw = Database::get()->nativeQuery("SHOW TABLE STATUS FROM `" . DB_NAME . "`;");
+        $prefix_counts = strlen(DB_PREFIX);
+        $db_tables = [];
+        foreach ($sql_table_raw as $table)
         {
-            if (DB_PREFIX == substr($table['Name'], 0, $prefixCounts))
+            if (DB_PREFIX == substr($table['Name'], 0, $prefix_counts))
             {
-                $dbTables[] = $table['Name'];
+                $db_tables[] = $table['Name'];
             }
         }
 
-        if (empty($dbTables))
+        if (empty($db_tables))
         {
             throw new Exception('No tables found for dump.');
         }
 
         @set_time_limit(600);
 
-        $fileName = '2MoonsBackup_' . date('Y_m_d_H_i_s', TIMESTAMP) . '.sql';
-        $filePath = 'includes/backups/' . $fileName;
+        $file_name = '2MoonsBackup_' . date('Y_m_d_H_i_s', TIMESTAMP) . '.sql';
+        $file_path = 'includes/backups/' . $file_name;
         require 'includes/classes/SQLDumper.class.php';
         $dump = new SQLDumper();
-        $dump->dumpTablesToFile($dbTables, $filePath);
+        $dump->dumpTablesToFile($db_tables, $file_path);
 
         try
         {
             $sql = "SELECT dbVersion FROM %%SYSTEM%%;";
-
-            $dbVersion = Database::get()->selectSingle($sql, [], 'dbVersion');
+            $db_version = Database::get()->selectSingle($sql, [], 'dbVersion');
         }
         catch (Exception $e)
         {
-            $dbVersion = 0;
+            $db_version = 0;
         }
 
-        $httpRoot = PROTOCOL . HTTP_HOST . str_replace(['\\', '//'], '/', dirname(dirname($_SERVER['SCRIPT_NAME'])) . '/');
-        $revision = $dbVersion;
-        $fileList = [];
-        $directoryIterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
-        /** @var DirectoryIterator $fileInfo */
-        foreach ($directoryIterator as $fileInfo)
+        $http_root = PROTOCOL . HTTP_HOST . str_replace(
+            ['\\', '//'],
+            '/',
+            dirname(dirname($_SERVER['SCRIPT_NAME'])) . '/'
+        );
+
+        $revision = $db_version;
+        $file_list = [];
+        $directory_iterator = new DirectoryIterator(ROOT_PATH . 'install/migrations/');
+        /** @var DirectoryIterator $file_info */
+        foreach ($directory_iterator as $file_info)
         {
-            if (!$fileInfo->isFile())
+            if (!$file_info->isFile())
             {
                 continue;
             }
-            $fileRevision = substr($fileInfo->getFilename(), 10, -4);
-            if ($fileRevision > $revision && $fileRevision <= DB_VERSION_REQUIRED)
+            $file_revision = substr($file_info->getFilename(), 10, -4);
+            if ($file_revision > $revision
+                && $file_revision <= DB_VERSION_REQUIRED)
             {
-                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-                $key = $fileRevision . ((int)$fileExtension === 'php');
-                $fileList[$key] = [
-                    'fileName'      => $fileInfo->getFilename(),
-                    'fileRevision'  => $fileRevision,
-                    'fileExtension' => $fileExtension,
+                $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                $key = $file_revision . ((int)$file_extension === 'php');
+                $file_list[$key] = [
+                    'fileName'       => $file_info->getFilename(),
+                    'fileRevision'   => $file_revision,
+                    'file_extension' => $file_extension,
                 ];
             }
         }
-        ksort($fileList);
-        foreach ($fileList as $fileInfo)
+        ksort($file_list);
+        foreach ($file_list as $file_info)
         {
-            switch ($fileInfo['fileExtension'])
+            switch ($file_info['file_extension'])
             {
                 case 'php':
-                    copy(ROOT_PATH.'install/migrations/' . $fileInfo['fileName'], ROOT_PATH.$fileInfo['fileName']);
-                    $ch = curl_init($httpRoot . $fileInfo['fileName']);
+                    copy(
+                        ROOT_PATH.'install/migrations/' . $file_info['fileName'],
+                        ROOT_PATH.$file_info['fileName']
+                    );
+                    $ch = curl_init($http_root . $file_info['fileName']);
                     curl_setopt($ch, CURLOPT_HEADER, false);
                     curl_setopt($ch, CURLOPT_NOBODY, true);
                     curl_setopt($ch, CURLOPT_MUTE, true);
                     curl_exec($ch);
                     if (curl_errno($ch))
                     {
-                        $errorMessage = 'CURL-Error on update ' . basename($fileInfo['filePath']) . ':' . curl_error($ch);
+                        $error_msg = 'CURL-Error on update ' . basename($file_info['filePath']) . ':' . curl_error($ch);
                         try
                         {
-                            $dump->restoreDatabase($filePath);
-                            $message = 'Update error.<br><br>' . $errorMessage . '<br><br><b><i>Backup restored.</i></b>';
+                            $dump->restoreDatabase($file_path);
+                            $message = 'Update error.<br><br>' . $error_msg . '<br><br><b><i>Backup restored.</i></b>';
                         }
                         catch (Exception $e)
                         {
-                            $message = 'Update error.<br><br>' . $errorMessage . '<br><br><b><i>Can not restore backup. Your game is maybe broken right now.</i></b><br><br>Restore error:<br>' . $e->getMessage();
+                            $message = 'Update error.<br><br>' . $error_msg . '<br><br><b><i>Can not restore backup. Your game is maybe broken right now.</i></b><br><br>Restore error:<br>' . $e->getMessage();
                         }
                         throw new Exception($message);
                     }
                     curl_close($ch);
-                    unlink($fileInfo['fileName']);
+                    unlink($file_info['fileName']);
                     break;
                 case 'sql':
-                    $data = file_get_contents(ROOT_PATH . 'install/migrations/' . $fileInfo['fileName']);
+                    $data = file_get_contents(ROOT_PATH . 'install/migrations/' . $file_info['fileName']);
                     try
                     {
                         $queries = explode(";\n", str_replace('%PREFIX%', DB_PREFIX, $data));
@@ -269,22 +292,22 @@ switch ($mode)
                     }
                     catch (Exception $e)
                     {
-                        $errorMessage = $e->getMessage();
+                        $error_msg = $e->getMessage();
                         try
                         {
-                            $dump->restoreDatabase($filePath);
-                            $message = 'Update error.<br><br>' . $errorMessage . '<br><br><b><i>Backup restored.</i></b>';
+                            $dump->restoreDatabase($file_path);
+                            $message = 'Update error.<br><br>' . $error_msg . '<br><br><b><i>Backup restored.</i></b>';
                         }
                         catch (Exception $e)
                         {
-                            $message = 'Update error.<br><br>' . $errorMessage . '<br><br><b><i>Can not restore backup. Your game is maybe broken right now.</i></b><br><br>Restore error:<br>' . $e->getMessage();
+                            $message = 'Update error.<br><br>' . $error_msg . '<br><br><b><i>Can not restore backup. Your game is maybe broken right now.</i></b><br><br>Restore error:<br>' . $e->getMessage();
                         }
                         throw new Exception($message);
                     }
                     break;
             }
         }
-        $revision = end($fileList);
+        $revision = end($file_list);
         $revision = $revision['fileRevision'];
 
         Database::get()->update("UPDATE %%SYSTEM%% SET dbVersion = " . DB_VERSION_REQUIRED . ";");
@@ -292,12 +315,12 @@ switch ($mode)
         ClearCache();
 
         $template->assign_vars([
-            'update'   => !empty($fileList),
+            'update'   => !empty($file_list),
             'revision' => $revision,
             'header'   => $LNG['menu_upgrade'],
         ]);
         $template->show('ins_doupdate.tpl');
-        unlink($enableInstallToolFile);
+        unlink($path_install_file);
         break;
     case 'install':
         $step = HTTP::_GP('step', 0);
@@ -332,7 +355,8 @@ switch ($mode)
                     $error = true;
                 }
 
-                if (class_exists('PDO') && in_array('mysql', PDO::getAvailableDrivers()))
+                if (class_exists('PDO')
+                    && in_array('mysql', PDO::getAvailableDrivers()))
                 {
                     $pdo = "<span class=\"text-success\">" . $LNG['reg_yes'] . "</span>";
                 }
@@ -378,7 +402,7 @@ switch ($mode)
                 }
                 else
                 {
-                    $gdVerion = '0.0.0';
+                    $gd_version = '0.0.0';
                     if (function_exists('gd_info'))
                     {
                         $temp = gd_info();
@@ -389,15 +413,16 @@ switch ($mode)
                             {
                                 $match[1] .= '.0';
                             }
-                            $gdVerion = $match[1];
+                            $gd_version = $match[1];
                         }
                     }
-                    $gdlib = "<span class=\"text-success\">" . $LNG['reg_yes'] . ", v" . $gdVerion . "</span>";
+                    $gdlib = "<span class=\"text-success\">" . $LNG['reg_yes'] . ", v" . $gd_version . "</span>";
                 }
 
                 clearstatcache();
 
-                if (file_exists(ROOT_PATH . "includes/config.php") || @touch(ROOT_PATH . "includes/config.php"))
+                if (file_exists(ROOT_PATH . "includes/config.php")
+                    || @touch(ROOT_PATH . "includes/config.php"))
                 {
 
                     if (is_writable(ROOT_PATH . "includes/config.php"))
@@ -424,7 +449,8 @@ switch ($mode)
                 $dirs = "";
                 foreach ($directories as $dir)
                 {
-                    if (file_exists(ROOT_PATH . $dir) || @mkdir(ROOT_PATH . $dir))
+                    if (file_exists(ROOT_PATH . $dir)
+                        || @mkdir(ROOT_PATH . $dir))
                     {
                         if (is_writable(ROOT_PATH . $dir))
                         {
@@ -553,7 +579,8 @@ switch ($mode)
                     exit;
                 }
 
-                if (is_file(ROOT_PATH . "includes/config.php") && filesize(ROOT_PATH . "includes/config.php") != 0)
+                if (is_file(ROOT_PATH . "includes/config.php")
+                    && filesize(ROOT_PATH . "includes/config.php") != 0)
                 {
 
                     $template->assign([
@@ -618,23 +645,23 @@ switch ($mode)
                 break;
             case 6:
                 $db = Database::get();
-                $installSQL = file_get_contents('install/install.sql');
-                $installVersion = file_get_contents('install/VERSION');
-                $installRevision = 0;
-                preg_match('!\$' . 'Id: install.sql ([0-9]+)!', $installSQL, $match);
-                $installVersion = explode('.', $installVersion);
+                $install_sql = file_get_contents('install/install.sql');
+                $install_version = file_get_contents('install/VERSION');
+                $install_revision = 0;
+                preg_match('!\$' . 'Id: install.sql ([0-9]+)!', $install_sql, $match);
+                $install_version = explode('.', $install_version);
 
                 if (isset($match[1]))
                 {
-                    $installRevision = (int)$match[1];
-                    $installVersion[2] = $installRevision;
+                    $install_revision = (int)$match[1];
+                    $install_version[2] = $install_revision;
                 }
                 else
                 {
-                    $installRevision = (int)$installVersion[2];
+                    $install_revision = (int)$install_version[2];
                 }
 
-                $installVersion = implode('.', $installVersion);
+                $install_version = implode('.', $install_version);
                 try
                 {
                     $db->query(str_replace([
@@ -644,20 +671,20 @@ switch ($mode)
                         '%DB_VERSION%',
                     ], [
                         DB_PREFIX,
-                        $installVersion,
-                        $installRevision,
+                        $install_version,
+                        $install_revision,
                         DB_VERSION_REQUIRED,
-                    ], $installSQL));
+                    ], $install_sql));
 
                     $config = Config::get(Universe::current());
                     $config->timezone = @date_default_timezone_get();
                     $config->lang = $LNG->getLanguage();
-                    $config->OverviewNewsText = $LNG['sql_welcome'] . $installVersion;
+                    $config->OverviewNewsText = $LNG['sql_welcome'] . $install_version;
                     $config->uni_name = $LNG['fcm_universe'] . ' ' . Universe::current();
                     $config->close_reason = $LNG['sql_close_reason'];
                     $config->moduls = implode(';', array_fill(0, MODULE_AMOUNT - 1, 1));
 
-                    unset($installSQL, $installRevision, $installVersion);
+                    unset($install_sql, $install_revision, $install_version);
 
                     $config->save();
 
@@ -699,9 +726,11 @@ switch ($mode)
                 require 'includes/config.php';
                 require 'includes/vars.php';
 
-                $hashPassword = PlayerUtil::cryptPassword($password);
+                $hash_password = PlayerUtil::cryptPassword($password);
 
-                if (empty($username) || empty($password) || empty($mail))
+                if (empty($username)
+                    || empty($password)
+                    || empty($mail))
                 {
                     $template->assign([
                         'message'  => $LNG['step8_need_fields'],
@@ -712,13 +741,24 @@ switch ($mode)
                     exit;
                 }
 
-                list($userId, $planetId) = PlayerUtil::createPlayer(Universe::current(), $username, $hashPassword, $mail, $LNG->getLanguage(), 1, 1, 2, null, AUTH_ADM);
+                list($user_id, $planet_id) = PlayerUtil::createPlayer(
+                    Universe::current(),
+                    $username,
+                    $hash_password,
+                    $mail,
+                    $LNG->getLanguage(),
+                    1,
+                    1,
+                    2,
+                    null,
+                    AUTH_ADM
+                );
 
                 $session = Session::create();
-                $session->userId = $userId;
+                $session->userId = $user_id;
                 $session->adminAccess = 1;
 
-                @unlink($enableInstallToolFile);
+                @unlink($path_install_file);
                 $template->show('ins_step8.tpl');
                 break;
         }
