@@ -40,10 +40,13 @@ class ShowBuddyListPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% WHERE (sender = :userID AND owner = :friendID) OR (owner = :userID AND sender = :friendID);";
+        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% 
+        WHERE (sender = :user_id AND owner = :friend_id) 
+        OR (owner = :user_id AND sender = :friend_id);";
+
         $exists = $db->selectSingle($sql, [
-            ':userID'   => $USER['id'],
-            ':friendID' => $id,
+            ':user_id'   => $USER['id'],
+            ':friend_id' => $id,
         ], 'count');
 
         if ($exists != 0)
@@ -51,9 +54,12 @@ class ShowBuddyListPage extends AbstractGamePage
             $this->printMessage($LNG['bu_request_exists']);
         }
 
-        $sql = "SELECT username, galaxy, system, planet FROM %%USERS%% WHERE id = :friendID;";
+        $sql = "SELECT username, galaxy, system, planet 
+        FROM %%USERS%% 
+        WHERE id = :friend_id;";
+
         $user_data = $db->selectSingle($sql, [
-            ':friendID' => $id,
+            ':friend_id' => $id,
         ]);
 
         $this->assign([
@@ -85,10 +91,13 @@ class ShowBuddyListPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% WHERE (sender = :userID AND owner = :friendID) OR (owner = :userID AND sender = :friendID);";
+        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% 
+        WHERE (sender = :user_id AND owner = :friend_id) 
+        OR (owner = :user_id AND sender = :friend_id);";
+
         $exists = $db->selectSingle($sql, [
-            ':userID'   => $USER['id'],
-            ':friendID' => $id,
+            ':user_id'   => $USER['id'],
+            ':friend_id' => $id,
         ], 'count');
 
         if ($exists != 0)
@@ -96,24 +105,27 @@ class ShowBuddyListPage extends AbstractGamePage
             $this->printMessage($LNG['bu_request_exists']);
         }
 
-        $sql = "INSERT INTO %%BUDDY%% SET sender = :userID,	owner = :friendID, universe = :universe;";
+        $sql = "INSERT INTO %%BUDDY%% 
+        SET sender = :user_id, 
+        owner = :friend_id, universe = :universe;";
+
         $db->insert($sql, [
-            ':userID'   => $USER['id'],
-            ':friendID' => $id,
-            ':universe' => Universe::current(),
+            ':user_id'   => $USER['id'],
+            ':friend_id' => $id,
+            ':universe'  => Universe::current(),
         ]);
 
         $buddy_id = $db->lastInsertId();
 
-        $sql = "INSERT INTO %%BUDDY_REQUEST%% SET id = :buddyID, text = :text;";
+        $sql = "INSERT INTO %%BUDDY_REQUEST%% SET `id` = :buddy_id, `text` = :text;";
         $db->insert($sql, [
-            ':buddyID' => $buddy_id,
-            ':text'    => $text,
+            ':buddy_id' => $buddy_id,
+            ':text'     => $text,
         ]);
 
-        $sql = "SELECT username, lang FROM %%USERS%% WHERE id = :friendID;";
+        $sql = "SELECT username, lang FROM %%USERS%% WHERE id = :friend_id;";
         $row = $db->selectSingle($sql, [
-            ':friendID' => $id,
+            ':friend_id' => $id,
         ]);
 
         $friend_lang = $LNG;
@@ -148,10 +160,12 @@ class ShowBuddyListPage extends AbstractGamePage
         $id = HTTP::_GP('id', 0);
         $db = Database::get();
 
-        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% WHERE id = :id AND (sender = :userID OR owner = :userID);";
+        $sql = "SELECT COUNT(*) as count FROM %%BUDDY%% 
+        WHERE id = :id AND (sender = :user_id OR owner = :user_id);";
+
         $is_allowed = $db->selectSingle($sql, [
-            ':id'     => $id,
-            ':userID' => $USER['id'],
+            ':id'      => $id,
+            ':user_id' => $USER['id'],
         ], 'count');
 
         if ($is_allowed)
@@ -163,10 +177,13 @@ class ShowBuddyListPage extends AbstractGamePage
 
             if ($is_request)
             {
-                $sql = "SELECT u.username, u.id, u.lang FROM %%BUDDY%% b INNER JOIN %%USERS%% u ON u.id = IF(b.sender = :userID,b.owner,b.sender) WHERE b.id = :id;";
+                $sql = "SELECT u.username, u.id, u.lang FROM %%BUDDY%% b 
+                INNER JOIN %%USERS%% u ON u.id = IF(b.sender = :user_id,b.owner,b.sender) 
+                WHERE b.id = :id;";
+
                 $request_data = $db->selectSingle($sql, [
-                    ':id'    => $id,
-                    'userID' => $USER['id'],
+                    ':id'      => $id,
+                    ':user_id' => $USER['id'],
                 ]);
 
                 $enemy_lang = $LNG;
@@ -215,7 +232,10 @@ class ShowBuddyListPage extends AbstractGamePage
             ':id' => $id,
         ]);
 
-        $sql = "SELECT sender, u.username, u.lang FROM %%BUDDY%% b INNER JOIN %%USERS%% u ON sender = u.id WHERE b.id = :id;";
+        $sql = "SELECT sender, u.username, u.lang 
+        FROM %%BUDDY%% b INNER JOIN %%USERS%% u ON sender = u.id 
+        WHERE b.id = :id;";
+
         $sender = $db->selectSingle($sql, [
             ':id' => $id,
         ]);
@@ -228,7 +248,19 @@ class ShowBuddyListPage extends AbstractGamePage
             $Friend_LNG->includeData(['INGAME']);
         }
 
-        PlayerUtil::sendMessage($sender['sender'], $USER['id'], $USER['username'], 4, $Friend_LNG['bu_accepted_request_title'], sprintf($Friend_LNG['bu_accepted_request_body'], $sender['username'], $USER['username']), TIMESTAMP);
+        PlayerUtil::sendMessage(
+            $sender['sender'],
+            $USER['id'],
+            $USER['username'],
+            4,
+            $Friend_LNG['bu_accepted_request_title'],
+            sprintf(
+                $Friend_LNG['bu_accepted_request_body'],
+                $sender['username'],
+                $USER['username']
+            ),
+            TIMESTAMP
+        );
 
         $this->redirectTo("game.php?page=buddyList");
     }
@@ -238,12 +270,17 @@ class ShowBuddyListPage extends AbstractGamePage
         global $USER;
 
         $db = Database::get();
-        $sql = "SELECT a.sender, a.id as buddyid, b.id, b.username, b.onlinetime, b.galaxy, b.system, b.planet, b.ally_id, c.ally_name, d.text
-		FROM (%%BUDDY%% as a, %%USERS%% as b) LEFT JOIN %%ALLIANCE%% as c ON c.id = b.ally_id LEFT JOIN %%BUDDY_REQUEST%% as d ON a.id = d.id
-		WHERE (a.sender = ".$USER['id']." AND a.owner = b.id) OR (a.owner = :userID AND a.sender = b.id);";
+        $sql = "SELECT a.sender, a.id as buddyid, b.id, b.username, 
+        b.onlinetime, b.galaxy, b.system, b.planet, b.ally_id, 
+        c.ally_name, d.text
+		FROM (%%BUDDY%% as a, %%USERS%% as b) 
+        LEFT JOIN %%ALLIANCE%% as c ON c.id = b.ally_id 
+        LEFT JOIN %%BUDDY_REQUEST%% as d ON a.id = d.id
+		WHERE (a.sender = :user_id AND a.owner = b.id) 
+        OR (a.owner = :user_id AND a.sender = b.id);";
 
         $buddy_list_data = $db->select($sql, [
-            'userID' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
         $my_request_list = [];
