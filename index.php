@@ -30,7 +30,6 @@ $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $page_class = 'Show'.ucfirst($page).'Page';
 
-
 $path = 'includes/pages/login/'.$page_class.'.class.php';
 
 if (!file_exists($path))
@@ -55,12 +54,12 @@ if (isset($page_props['require_module'])
 
 if (!is_callable([$page_obj, $mode]))
 {
-    if (!isset($page_props['defaultController'])
-        || !is_callable([$page_obj, $page_props['defaultController']]))
+    if (!isset($page_props['default_controller'])
+        || !is_callable([$page_obj, $page_props['default_controller']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
-    $mode = $page_props['defaultController'];
+    $mode = $page_props['default_controller'];
 }
 
 $page_obj->{$mode}();
