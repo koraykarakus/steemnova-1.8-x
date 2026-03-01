@@ -66,7 +66,20 @@ class Log
     {
         $data = serialize([$this->data['old'], $this->data['new']]);
         $uni = (empty($this->data['universe']) ? $this->data['uni'] : $this->data['universe']);
-        $GLOBALS['DATABASE']->query("INSERT INTO ".LOG." (`id`,`mode`,`admin`,`target`,`time`,`data`,`universe`) VALUES
-		(NULL , ".$GLOBALS['DATABASE']->sql_escape($this->data['mode']).", ".$GLOBALS['DATABASE']->sql_escape($this->data['admin']).", '".$GLOBALS['DATABASE']->sql_escape($this->data['target'])."', ".TIMESTAMP." , '".$GLOBALS['DATABASE']->sql_escape($data)."', '".$uni."');");
+
+        $sql = "INSERT INTO %%LOG%% 
+        (`id`,`mode`,`admin`,`target`,`time`,`data`,`universe`) 
+        VALUES (:id, :mode, :admin, :target, :time, :data, :universe);";
+
+        Database::get()->insert($sql, [
+            ':id'       => null,
+            ':mode'     => $this->data['mode'],
+            ':admin'    => $this->data['admin'],
+            ':target'   => $this->data['target'],
+            ':time'     => TIMESTAMP,
+            ':data'     => $data,
+            ':universe' => $uni,
+        ]);
+
     }
 }
