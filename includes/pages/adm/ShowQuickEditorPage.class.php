@@ -188,7 +188,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $new[921] = abs(HTTP::_GP($resource[921], 0));
 
         $old['username'] = $user_data['username'];
-        $new['username'] = $GLOBALS['DATABASE']->sql_escape(HTTP::_GP('name', '', UTF8_SUPPORT));
+        $new['username'] = HTTP::_GP('name', '', UTF8_SUPPORT);
         $old['authattack'] = $user_data['authattack'];
         $new['authattack'] = ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0);
 
