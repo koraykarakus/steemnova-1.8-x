@@ -19,8 +19,6 @@ class ShowErrorPage extends AbstractLoginPage
 {
     public static $require_module = 0;
 
-    protected $disableEcoSystem = true;
-
     public function __construct()
     {
         parent::__construct();
