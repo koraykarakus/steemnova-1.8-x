@@ -190,7 +190,7 @@ class ShowRightsPage extends AbstractAdminPage
             'sid'                    => session_id(),
         ]);
 
-        $this->display('page.search.users.tpl');
+        $this->display('page.rights.users.tpl');
 
     }
 
