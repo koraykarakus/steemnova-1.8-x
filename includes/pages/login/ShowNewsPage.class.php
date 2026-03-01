@@ -44,7 +44,7 @@ class ShowNewsPage extends AbstractLoginPage
         }
 
         $this->assign([
-            'newsList' => $news_list,
+            'news_list' => $news_list,
         ]);
 
         $this->display('page.news.default.tpl');
