@@ -99,12 +99,6 @@
           href="?page=googleAuth">{$LNG.mu_google_options}</a>
       </li>
     {/if}
-    {if allowedTo('ShowFacebookPage')}
-      <li class="d-flex {if $currentPage == 'facebook'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6"
-          href="?page=facebook">{$LNG.mu_fb_options}</a>
-      </li>
-    {/if}
     {if allowedTo('ShowModulePage')}
       <li class="d-flex {if $currentPage == 'module'}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=module">{$LNG.mu_module}</a>
