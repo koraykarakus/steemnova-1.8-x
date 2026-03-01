@@ -103,13 +103,13 @@ $LNG['registerErrorCaptcha'] = 'Der Sicherheitscode ist falsch!';
 $LNG['registerMailVertifyTitle'] = 'Aktivierung der Registrierung auf der Website: %s';
 $LNG['registerMailVertifyError'] = 'Fehler beim Versenden der Mail: %s';
 
-$LNG['registerMailCompleteTitle'] = 'Willkommen bei %s!';
+$LNG['reg_complete_mail_title'] = 'Willkommen bei %s!';
 
 $LNG['registerSendComplete'] = 'Vielen Dank für die Registration. Du erhälst in Kürze eine E-Mail mit weiteren Informationen.';
 
-$LNG['registerWelcomePMSenderName'] = 'Administrator';
-$LNG['registerWelcomePMSubject'] = 'Willkommen';
-$LNG['registerWelcomePMText'] = 'Willkommen bei %s! Baue zuerst ein Solarkraftwerk, denn Energie wird für die spätere Rohstoffproduktion benötigt. Um diese zu bauen, klicke links im Menu auf "Gebäude". Danach baue das 4. Gebäude von oben. Da du nun Energie hast, kannst du anfangen Minen zu bauen. Gehe dazu wieder im Menü auf Gebäude und baue eine Metallmine, danach wieder eine Kristallmine. Um Schiffe bauen zu können musst du zuerst eine Raumschiffswerft gebaut haben. Was dafür benötigt wird findest du links im Menüpunkt Technologie.Schau unter Anomalie Nutze Bonus und Tutorial. Das Team wünscht dir viel Spaß beim Erkunden des Universums!';
+$LNG['reg_welcome_msg_sender'] = 'Administrator';
+$LNG['reg_welcome_msg_subject'] = 'Willkommen';
+$LNG['reg_welcome_msg_text'] = 'Willkommen bei %s! Baue zuerst ein Solarkraftwerk, denn Energie wird für die spätere Rohstoffproduktion benötigt. Um diese zu bauen, klicke links im Menu auf "Gebäude". Danach baue das 4. Gebäude von oben. Da du nun Energie hast, kannst du anfangen Minen zu bauen. Gehe dazu wieder im Menü auf Gebäude und baue eine Metallmine, danach wieder eine Kristallmine. Um Schiffe bauen zu können musst du zuerst eine Raumschiffswerft gebaut haben. Was dafür benötigt wird findest du links im Menüpunkt Technologie.Schau unter Anomalie Nutze Bonus und Tutorial. Das Team wünscht dir viel Spaß beim Erkunden des Universums!';
 
 $LNG['registerSecretQuestionText'] = "Bitte wählen Sie eine Geheimfrage aus";
 $LNG['registerSecretQuestionAnswerText'] = "Beantworten Sie Ihre geheime Frage";
@@ -128,8 +128,8 @@ $LNG['registerSecretQuestionError_3'] = "Die Antwort auf die Geheimfrage darf ni
 
 //Vertify
 
-$LNG['vertifyNoUserFound'] = 'Ungültiger Anfrage!';
-$LNG['vertifyAdminMessage'] = 'Der Username "%s" wurder aktiviert!';
+$LNG['verify_no_user_found'] = 'Ungültiger Anfrage!';
+$LNG['verify_success'] = 'Der Username "%s" wurder aktiviert!';
 
 //lostpassword
 $LNG['passwordInfo'] = 'Wenn du dein Kennwort vergessen hast, musst du den Benutzernamen und die E-Mail-Adresse angeben, die du in deinem Profil hinterlegt hast. Wenn du die Daten nicht mehr weißt, wende dich an den Gameadministrator.';

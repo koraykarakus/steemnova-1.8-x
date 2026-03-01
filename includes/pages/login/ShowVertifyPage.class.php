@@ -46,7 +46,7 @@ class ShowVertifyPage extends AbstractLoginPage
 
         if (empty($user_data))
         {
-            $this->printMessage($LNG['vertifyNoUserFound']);
+            $this->printMessage($LNG['verify_no_user_found']);
         }
 
         $config = Config::get();
@@ -56,7 +56,7 @@ class ShowVertifyPage extends AbstractLoginPage
             ':validation_id' => $validation_id,
         ]);
 
-        list($userID, $planetID) = PlayerUtil::createPlayer(
+        list($user_id, $planet_id) = PlayerUtil::createPlayer(
             $user_data['universe'],
             $user_data['userName'],
             $user_data['password'],
@@ -76,7 +76,7 @@ class ShowVertifyPage extends AbstractLoginPage
         {
             require('includes/classes/Mail.class.php');
             $mail_subject = sprintf(
-                $LNG['registerMailCompleteTitle'],
+                $LNG['reg_complete_mail_title'],
                 $config->game_name,
                 Universe::current()
             );
@@ -93,7 +93,12 @@ class ShowVertifyPage extends AbstractLoginPage
 
             try
             {
-                Mail::send($user_data['email'], $user_data['userName'], $mail_subject, $mail_content);
+                Mail::send(
+                    $user_data['email'],
+                    $user_data['userName'],
+                    $mail_subject,
+                    $mail_content
+                );
             }
             catch (Exception $e)
             {
@@ -107,37 +112,37 @@ class ShowVertifyPage extends AbstractLoginPage
 			`ref_id`	= :referralId,
 			`ref_bonus`	= 1
 			WHERE
-			`id`		= :userID;";
+			`id`		= :user_id;";
 
             $db->update($sql, [
                 ':referralId' => $user_data['referralID'],
-                ':userID'     => $userID,
+                ':user_id'    => $user_id,
             ]);
         }
 
         if (!empty($user_data['externalAuthUID']))
         {
             $sql = "INSERT INTO %%USERS_AUTH%% SET
-			`id`		= :userID,
+			`id`		= :user_id,
 			`account`	= :externalAuthUID,
 			`mode`		= :externalAuthMethod;";
             $db->insert($sql, [
-                ':userID'             => $userID,
+                ':user_id'            => $user_id,
                 ':externalAuthUID'    => $user_data['externalAuthUID'],
                 ':externalAuthMethod' => $user_data['externalAuthMethod'],
             ]);
         }
 
-        $sender_name = $LNG['registerWelcomePMSenderName'];
-        $subject = $LNG['registerWelcomePMSubject'];
-        $message = sprintf($LNG['registerWelcomePMText'], $config->game_name, $user_data['universe']);
+        $sender_name = $LNG['reg_welcome_msg_sender'];
+        $subject = $LNG['reg_welcome_msg_subject'];
+        $message = sprintf($LNG['reg_welcome_msg_text'], $config->game_name, $user_data['universe']);
 
-        PlayerUtil::sendMessage($userID, 1, $sender_name, 1, $subject, $message, TIMESTAMP);
+        PlayerUtil::sendMessage($user_id, 1, $sender_name, 1, $subject, $message, TIMESTAMP);
 
         return [
-            'userID'   => $userID,
-            'userName' => $user_data['userName'],
-            'planetID' => $planetID,
+            'user_id'   => $user_id,
+            'userName'  => $user_data['userName'],
+            'planet_id' => $planet_id,
         ];
     }
 
@@ -146,7 +151,7 @@ class ShowVertifyPage extends AbstractLoginPage
         $user_data = $this->_activeUser();
 
         $session = Session::create();
-        $session->userId = (int) $user_data['userID'];
+        $session->userId = (int) $user_data['user_id'];
         $session->adminAccess = 0;
         $session->save();
 
@@ -157,6 +162,6 @@ class ShowVertifyPage extends AbstractLoginPage
     {
         global $LNG;
         $user_data = $this->_activeUser();
-        $this->sendJSON(sprintf($LNG['vertifyAdminMessage'], $user_data['userName']));
+        $this->sendJSON(sprintf($LNG['verify_success'], $user_data['userName']));
     }
 }

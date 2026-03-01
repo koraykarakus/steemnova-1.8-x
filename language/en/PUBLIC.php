@@ -125,11 +125,11 @@ $LNG['reg_suc_2'] = 'Your account is waiting for verification, new mail has been
 
 $LNG['registerMailVertifyTitle'] = 'Activation of registration on the game: %s';
 $LNG['registerMailVertifyError'] = 'Failed to send mail: %s';
-$LNG['registerMailCompleteTitle'] = 'Welcome to %s!';
+$LNG['reg_complete_mail_title'] = 'Welcome to %s!';
 
-$LNG['registerWelcomePMSenderName'] = 'Administrator';
-$LNG['registerWelcomePMSubject'] = 'Welcome';
-$LNG['registerWelcomePMText'] = 'Welcome to %s! First build a solar power plant, because energy is needed for the production of raw materials. To build one, left click in the menu on "buildings". Then build the 4th Building from the top. </br> When you have energy, you can begin to build mines. Go to buildings on the menu and build a metal mine, followed by a crystal mine. </br></br>In order to be able to build ships you need to have a shipyard. To see what is needed to unlock that building you can take a look at "Technologies" at the left menu.</br>If you more questions you can look at the beginnersguide, our forum or open a support ticket. </br></br> The team wishes you much fun exploring the universe!';
+$LNG['reg_welcome_msg_sender'] = 'Administrator';
+$LNG['reg_welcome_msg_subject'] = 'Welcome';
+$LNG['reg_welcome_msg_text'] = 'Welcome to %s! First build a solar power plant, because energy is needed for the production of raw materials. To build one, left click in the menu on "buildings". Then build the 4th Building from the top. </br> When you have energy, you can begin to build mines. Go to buildings on the menu and build a metal mine, followed by a crystal mine. </br></br>In order to be able to build ships you need to have a shipyard. To see what is needed to unlock that building you can take a look at "Technologies" at the left menu.</br>If you more questions you can look at the beginnersguide, our forum or open a support ticket. </br></br> The team wishes you much fun exploring the universe!';
 
 $LNG['registerSecretQuestionText'] = "Please select a secret question";
 $LNG['registerSecretQuestionAnswerText'] = "Answer to your secret question";
@@ -156,7 +156,7 @@ What was your favorite food as a child?
 
 //Vertify
 
-$LNG['vertifyNoUserFound'] = 'Invalid Request!';
+$LNG['verify_no_user_found'] = 'Invalid Request!';
 $LNG['vertifyAdminMessage'] = 'The username "%s" has enabled!';
 
 //lostpassword

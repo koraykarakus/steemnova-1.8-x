@@ -109,18 +109,18 @@ $LNG['registerErrorCaptcha'] = 'Guvenlik kodu dogru degil!';
 $LNG['registerMailVertifyTitle'] = 'Activation of registration on the game: %s';
 $LNG['registerMailVertifyError'] = 'Email gondermede basarisiz oldu: %s';
 
-$LNG['registerMailCompleteTitle'] = ' %s dunyasina hosgeldiniz!';
+$LNG['reg_complete_mail_title'] = ' %s dunyasina hosgeldiniz!';
 
 $LNG['registerSendComplete'] = 'Thank you for the registration. You must check your email (Attention with the SPAM) with further information.';
 
-$LNG['registerWelcomePMSenderName'] = 'Admin';
-$LNG['registerWelcomePMSubject'] = 'Hosgeldiniz';
-$LNG['registerWelcomePMText'] = ' %s dunyasina hosgeldin! Oncelikle solar enerji santrali yapmalisin, cunku hammadde uretimi icin enerjiye ihtiyacin vars. Insa etmek icin soldaki menuden binlara tiklayip,  acilan pencerede yukaridan 4. bina (solar enerji ) binasini insa et demen lazim </br> Enerjiden sonra madenleri insa etmeye baslayabilirsin. </br></br> Gemi uretmek icinse tersane yapmalisin. Onun icin de Robot Fabrikasini 2. kademeye getirmelisin.  Hangi binanin hangisini, yada hangi geminin uretilmesi icin nelere ihtiyacin var gormek icin soldaki menuden teknoloji butonuna tiklayip gorebilirsin. </br> Eger sorularin varsa, yeni baslayanlar menusune girebilirsin yada destek bileti gonderebilirsin.  </br></br> Hos ve guzel vakit gecirmen dilegiyle!';
+$LNG['reg_welcome_msg_sender'] = 'Admin';
+$LNG['reg_welcome_msg_subject'] = 'Hosgeldiniz';
+$LNG['reg_welcome_msg_text'] = ' %s dunyasina hosgeldin! Oncelikle solar enerji santrali yapmalisin, cunku hammadde uretimi icin enerjiye ihtiyacin vars. Insa etmek icin soldaki menuden binlara tiklayip,  acilan pencerede yukaridan 4. bina (solar enerji ) binasini insa et demen lazim </br> Enerjiden sonra madenleri insa etmeye baslayabilirsin. </br></br> Gemi uretmek icinse tersane yapmalisin. Onun icin de Robot Fabrikasini 2. kademeye getirmelisin.  Hangi binanin hangisini, yada hangi geminin uretilmesi icin nelere ihtiyacin var gormek icin soldaki menuden teknoloji butonuna tiklayip gorebilirsin. </br> Eger sorularin varsa, yeni baslayanlar menusune girebilirsin yada destek bileti gonderebilirsin.  </br></br> Hos ve guzel vakit gecirmen dilegiyle!';
 
 //Vertify
 
-$LNG['vertifyNoUserFound'] = 'Hata!';
-$LNG['vertifyAdminMessage'] = 'Kullanici adi "%s" aktif!';
+$LNG['verify_no_user_found'] = 'Hata!';
+$LNG['verify_success'] = 'Kullanici adi "%s" aktif!';
 
 //lostpassword
 $LNG['passwordInfo'] = 'Eger sifreni unuttuysan, kullanici adi ve kayitli email adresini saglamalisin.';

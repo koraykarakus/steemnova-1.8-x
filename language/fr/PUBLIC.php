@@ -88,18 +88,18 @@ $LNG['registerErrorCaptcha'] = 'Le code de sècuritè est incorrect!';
 $LNG['registerMailVertifyTitle'] = 'Activation de l\'enregistrement sur le jeu: %s';
 $LNG['registerMailVertifyError'] = 'Impossible d\'envoyer l\'e-Mail: %s';
 
-$LNG['registerMailCompleteTitle'] = 'Bienvenue sur %s!';
+$LNG['reg_complete_mail_title'] = 'Bienvenue sur %s!';
 
 $LNG['registerSendComplete'] = 'Merci pour votre enregistrement. Vous devez consulter vos e-Mail (Attention peut-etre dans les SPAM) avec plus d\'informations.';
 
-$LNG['registerWelcomePMSenderName'] = 'Administrateur';
-$LNG['registerWelcomePMSubject'] = 'Bienvenue';
-$LNG['registerWelcomePMText'] = 'Bienvenue sur %s! D\'abord vous devez construire une centrale solaire, parce que l\'ènergie est nècessaire pour la production de matières premières. Pour en construire une, clic gauche dans le menu «bâtiments». Puis construire le 4e bâtiment à partir du haut. </br>Lorsque vous avez de l\'énergie, vous pouvez commencer 	à construire des mines. Aller aux bâtiments dans le menu et de construire une mine de métal, suivie d\'une mine de cristal.</br></br>Afin d\'être en mesure de construire des vaisseaux, vous devez avoir un chantier naval. Pour voir ce qui est nécessaire pour débloquer la construction vous pouvez jeter un oeil à Technologies dans le menu de gauche.</br>Si vous avez plus de questions, vous pouvez consulter le guide des débutants, notre forum ou ouvrir un ticket de support.</br></br>L\'équipe vous souhaite beaucoup de plaisir à explorez l\'univers!';
+$LNG['reg_welcome_msg_sender'] = 'Administrateur';
+$LNG['reg_welcome_msg_subject'] = 'Bienvenue';
+$LNG['reg_welcome_msg_text'] = 'Bienvenue sur %s! D\'abord vous devez construire une centrale solaire, parce que l\'ènergie est nècessaire pour la production de matières premières. Pour en construire une, clic gauche dans le menu «bâtiments». Puis construire le 4e bâtiment à partir du haut. </br>Lorsque vous avez de l\'énergie, vous pouvez commencer 	à construire des mines. Aller aux bâtiments dans le menu et de construire une mine de métal, suivie d\'une mine de cristal.</br></br>Afin d\'être en mesure de construire des vaisseaux, vous devez avoir un chantier naval. Pour voir ce qui est nécessaire pour débloquer la construction vous pouvez jeter un oeil à Technologies dans le menu de gauche.</br>Si vous avez plus de questions, vous pouvez consulter le guide des débutants, notre forum ou ouvrir un ticket de support.</br></br>L\'équipe vous souhaite beaucoup de plaisir à explorez l\'univers!';
 
 //Vertify
 
-$LNG['vertifyNoUserFound'] = 'Requête invalide!';
-$LNG['vertifyAdminMessage'] = 'Le login "%s" est actif!';
+$LNG['verify_no_user_found'] = 'Requête invalide!';
+$LNG['verify_success'] = 'Le login "%s" est actif!';
 
 //lostpassword
 $LNG['passwordInfo'] = 'Si vous avez oublié votre mot de passe, vous devez spécifier le login et l\'adresse e-Mail que vous avez renseigné lors de la création de votre compte.';

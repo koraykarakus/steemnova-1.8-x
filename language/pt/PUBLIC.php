@@ -102,18 +102,18 @@ $LNG['registerErrorCaptcha'] = 'O código de segurança está errado!';
 $LNG['registerMailVertifyTitle'] = 'Aktivierung der Registrierung auf der Website: %s';
 $LNG['registerMailVertifyError'] = 'Fehler beim Versenden der Mail: %s';
 
-$LNG['registerMailCompleteTitle'] = 'Welcome to %s!';
+$LNG['reg_complete_mail_title'] = 'Welcome to %s!';
 
 $LNG['registerSendComplete'] = 'Thank you for the registration. You must check your email (Attention with the SPAM) with further information.';
 
-$LNG['registerWelcomePMSenderName'] = 'Administrator';
-$LNG['registerWelcomePMSubject'] = 'Welcome';
-$LNG['registerWelcomePMText'] = 'Welcome to %s! First build a solar power plant,because energy is needed for the production of raw materials. To build one, left click in the menu on "buildings". Then build the 4th Building from the top. </br> When you have energy, you can begin to build mines. Go to buildings on the menu and build a metal mine, followed by a crystal mine. </br></br>In order to be able to build ships you need to have a shipyard. To see what is needed to unlock that building you can take a look at "Technologies" at the left menu.</br>If you more questions you can look at the beginnersguide, our forum or open a support ticket. </br></br> The team wishes you much fun exploring the universe!';
+$LNG['reg_welcome_msg_sender'] = 'Administrator';
+$LNG['reg_welcome_msg_subject'] = 'Welcome';
+$LNG['reg_welcome_msg_text'] = 'Welcome to %s! First build a solar power plant,because energy is needed for the production of raw materials. To build one, left click in the menu on "buildings". Then build the 4th Building from the top. </br> When you have energy, you can begin to build mines. Go to buildings on the menu and build a metal mine, followed by a crystal mine. </br></br>In order to be able to build ships you need to have a shipyard. To see what is needed to unlock that building you can take a look at "Technologies" at the left menu.</br>If you more questions you can look at the beginnersguide, our forum or open a support ticket. </br></br> The team wishes you much fun exploring the universe!';
 
 //Vertify
 
-$LNG['vertifyNoUserFound'] = 'Invalid Request!';
-$LNG['vertifyAdminMessage'] = 'The username "%s" has enabled!';
+$LNG['verify_no_user_found'] = 'Invalid Request!';
+$LNG['verify_success'] = 'The username "%s" has enabled!';
 
 //lostpassword
 $LNG['passwordInfo'] = 'If you have forgotten your password, you must specify the user name and the E-Mail address that you have entered in your account.';
