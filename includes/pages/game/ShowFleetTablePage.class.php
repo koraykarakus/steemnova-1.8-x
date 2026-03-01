@@ -33,7 +33,7 @@ class ShowFleetTablePage extends AbstractGamePage
         $acsCreator = $USER['id'];
 
         $db = Database::get();
-        $sql = "INSERT INTO %%AKS%% SET name = :acsName, ankunft = :time, target = :target;";
+        $sql = "INSERT INTO %%AKS%% SET name = :acsName, arrive_time = :time, target = :target;";
         $db->insert($sql, [
             ':acsName' => $acsName,
             ':time'    => $fleetData['fleet_start_time'],

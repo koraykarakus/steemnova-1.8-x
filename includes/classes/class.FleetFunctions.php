@@ -280,10 +280,10 @@ class FleetFunctions
             return 0;
         }
 
-        $sql = 'SELECT ankunft FROM %%AKS%% WHERE id = :acsId;';
+        $sql = 'SELECT arrive_time FROM %%AKS%% WHERE id = :acsId;';
         $acsEndTime = Database::get()->selectSingle($sql, [
             ':acsId' => $acsId,
-        ], 'ankunft');
+        ], 'arrive_time');
 
         return empty($acsEndTime) ? $acsEndTime - TIMESTAMP : 0;
     }
@@ -297,7 +297,7 @@ class FleetFunctions
 
         $db = Database::get();
 
-        $sql = 'UPDATE %%AKS%% SET ankunft = ankunft + :time WHERE id = :acsId;';
+        $sql = 'UPDATE %%AKS%% SET arrive_time = arrive_time + :time WHERE id = :acsId;';
         $db->update($sql, [
             ':time'  => $timeDifference,
             ':acsId' => $acsId,
