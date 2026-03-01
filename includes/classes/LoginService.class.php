@@ -785,4 +785,59 @@ class LoginService
         return Login::success;
     }
 
+    public function getJsonDataByResultLogin($result): array
+    {
+        global $LNG;
+
+        $data = [];
+        $data['status'] = "fail";
+        $data['msg'] = '';
+
+        switch ($result)
+        {
+            case Login::csrf_wrong:
+                $data['msg'] = $LNG['log_err_1'];
+                break;
+            case Login::mail_empty:
+                $data['msg'] = $LNG['log_err_3'];
+                break;
+            case Login::password_empty:
+                $data['msg'] = $LNG['log_err_2'];
+                break;
+            case Login::login_captcha_wrong:
+                $data['msg'] = $LNG['log_err_6'];
+                break;
+            case Login::login_data_not_found:
+                $data['msg'] = $LNG['log_err_4'];
+                break;
+            case Login::unset_id:
+                $data['msg'] = $LNG['log_err_0'];
+                break;
+            case Login::verify_token_wrong_data:
+                $data['msg'] = $LNG['log_err_5'];
+                break;
+            case Login::verify_token_not_match:
+                $data['msg'] = $LNG['log_err_5'];
+                break;
+            case Login::verify_token_no_email:
+                $data['msg'] = $LNG['log_err_5'];
+                break;
+            case Login::verify_token_email_not_match:
+                $data['msg'] = $LNG['log_err_5'];
+                break;
+            case Login::verify_st_wrong_data:
+                $data['msg'] = $LNG['log_err_5'];
+                break;
+            case Login::success:
+                $data['status'] = "redirect";
+                $data['msg'] = $LNG['log_suc_1'];
+                break;
+            default:
+                $data['status'] = "fail";
+                break;
+        }
+
+        return $data;
+    }
+
 }

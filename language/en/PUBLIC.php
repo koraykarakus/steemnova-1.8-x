@@ -59,6 +59,16 @@ $LNG['login_error_3'] = "User is not found !";
 $LNG['login_error_4'] = "ReCaptcha is not correct !";
 $LNG['login_error_5'] = "Entered password is wrong !";
 
+$LNG['log_err_0'] = "id is unset.";
+$LNG['log_err_1'] = "Wrong csrf, refresh the page and try again.";
+$LNG['log_err_2'] = "Password is empty.";
+$LNG['log_err_3'] = "Mail is empty.";
+$LNG['log_err_4'] = "Login data not found !";
+$LNG['log_err_5'] = "Wrong data, verification is failed.";
+$LNG['log_err_6'] = "Login captcha is wrong.";
+
+$LNG['log_suc_1'] = "Success.";
+
 $LNG['login_email'] = "E-mail address";
 $LNG['loginHeader'] = 'Login';
 $LNG['loginUsername'] = 'Username';
@@ -116,7 +126,6 @@ $LNG['reg_suc_2'] = 'Your account is waiting for verification, new mail has been
 $LNG['registerMailVertifyTitle'] = 'Activation of registration on the game: %s';
 $LNG['registerMailVertifyError'] = 'Failed to send mail: %s';
 $LNG['registerMailCompleteTitle'] = 'Welcome to %s!';
-
 
 $LNG['registerWelcomePMSenderName'] = 'Administrator';
 $LNG['registerWelcomePMSubject'] = 'Welcome';

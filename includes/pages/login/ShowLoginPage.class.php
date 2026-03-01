@@ -63,7 +63,6 @@ class ShowLoginPage extends AbstractLoginPage
             $external_auth
         );
 
-        $data = $error = [];
         if ($result == Login::success)
         {
             $session = Session::create();
@@ -109,17 +108,10 @@ class ShowLoginPage extends AbstractLoginPage
                     ':userId' => (int) $login_service->login_id,
                 ]);
             }
-
-            $data = [];
-            $data['status'] = "redirect";
-            $this->sendJSON($data);
-        }
-        else
-        {
-            $error['status'] = "fail";
-            $this->sendJSON($error);
         }
 
+        $data = $login_service->getJsonDataByResultLogin($result);
+        $this->sendJSON($data);
     }
 
 }

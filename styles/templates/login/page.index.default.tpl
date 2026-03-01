@@ -26,11 +26,15 @@
 					rememberedEmail: $('#rememberedEmail').val(),
 				},
 				success: function(data) {
+
 					var dataParsed = jQuery.parseJSON(data);
 					$('.alert').remove();
+					console.log(dataParsed);
+
 
 					if (dataParsed.status == 'fail') {
-						if (activeRecaptcha == 1 && use_recaptcha_on_login == 1) {
+						if (activeRecaptcha == 1 &&
+							use_recaptcha_on_login == 1) {
 							grecaptcha.reset();
 						}
 
@@ -92,7 +96,8 @@
 				</div>
 
 				<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button"
-					onclick="loginSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_login = '{$use_recaptcha_on_login}');">{$LNG.loginButton}</button>
+					onclick="loginSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_login = '{$use_recaptcha_on_login}');">{$LNG.loginButton}
+				</button>
 
 			</div>
 
