@@ -28,7 +28,7 @@ class ShowVertifyPage extends AbstractAdminPage
     public function show(): void
     {
         $file = HTTP::_GP("file", "");
-        $this->tplObj->loadscript('vertify.js');
+        $this->tpl_obj->loadscript('vertify.js');
 
         $this->display("page.vertify.default.tpl");
     }

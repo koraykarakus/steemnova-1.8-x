@@ -91,7 +91,7 @@ class ShowBannedPage extends AbstractAdminPage
             ')</option>';
         }
 
-        $this->tplObj->loadscript('./scripts/game/filterlist.js');
+        $this->tpl_obj->loadscript('./scripts/game/filterlist.js');
 
         $name = HTTP::_GP('ban_name', '', true);
 

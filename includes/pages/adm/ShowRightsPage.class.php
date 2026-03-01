@@ -52,7 +52,7 @@ class ShowRightsPage extends AbstractAdminPage
                 break;
         }
 
-        $this->tplObj->loadscript('./scripts/game/filterlist.js');
+        $this->tpl_obj->loadscript('./scripts/game/filterlist.js');
 
         $sql = "SELECT `id`, `username`, `authlevel` 
         FROM %%USERS%% WHERE `universe` = :universe ".$sql_where.";";
@@ -144,7 +144,7 @@ class ShowRightsPage extends AbstractAdminPage
     {
         global $LNG;
 
-        $this->tplObj->loadscript('./scripts/game/filterlist.js');
+        $this->tpl_obj->loadscript('./scripts/game/filterlist.js');
 
         $type = HTTP::_GP('type', '');
 

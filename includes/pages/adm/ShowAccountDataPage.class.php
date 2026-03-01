@@ -48,7 +48,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             $c_user['authlevel']].")</option>";
         }
 
-        $this->tplObj->loadscript('./scripts/game/filterlist.js');
+        $this->tpl_obj->loadscript('./scripts/game/filterlist.js');
 
         $this->assign([
             'Userlist'         => $user_list_html,

@@ -21,7 +21,7 @@ abstract class AbstractAdminPage
      * reference of the template object
      * @var template
      */
-    protected $tplObj;
+    protected $tpl_obj;
 
     /** @var string $window */
     protected $window;
@@ -46,15 +46,15 @@ abstract class AbstractAdminPage
 
     protected function initTemplate(): void
     {
-        if (isset($this->tplObj))
+        if (isset($this->tpl_obj))
         {
             return;
         }
 
-        $this->tplObj = new template();
-        list($tplDir) = $this->tplObj->getTemplateDir();
+        $this->tpl_obj = new template();
+        list($tplDir) = $this->tpl_obj->getTemplateDir();
 
-        $this->tplObj->setTemplateDir($tplDir. '/adm');
+        $this->tpl_obj->setTemplateDir($tplDir. '/adm');
     }
 
     protected function setWindow($window): void
@@ -136,7 +136,7 @@ abstract class AbstractAdminPage
 
         if (isset($redirect))
         {
-            $this->tplObj->gotoside($redirect[0], $redirect[1]);
+            $this->tpl_obj->gotoside($redirect[0], $redirect[1]);
         }
 
         if (!$full)
@@ -149,7 +149,7 @@ abstract class AbstractAdminPage
 
     protected function assign($array, $no_cache = true): void
     {
-        $this->tplObj->assign_vars($array, $no_cache);
+        $this->tpl_obj->assign_vars($array, $no_cache);
     }
 
     protected function display($file): void
@@ -163,8 +163,8 @@ abstract class AbstractAdminPage
 
         $this->assign([
             'lang'       => $LNG->getLanguage(),
-            'scripts'    => $this->tplObj->jsscript,
-            'execscript' => implode("\n", $this->tplObj->script),
+            'scripts'    => $this->tpl_obj->jsscript,
+            'execscript' => implode("\n", $this->tpl_obj->script),
             'basepath'   => PROTOCOL.HTTP_HOST.HTTP_BASE,
             'bodyclass'  => $this->getWindow(),
         ]);
@@ -173,7 +173,7 @@ abstract class AbstractAdminPage
             'LNG' => $LNG,
         ], false);
 
-        $this->tplObj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
+        $this->tpl_obj->display('extends:layout.'.$this->getWindow().'.tpl|'.$file);
         exit;
     }
 
