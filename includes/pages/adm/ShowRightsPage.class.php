@@ -61,22 +61,9 @@ class ShowRightsPage extends AbstractAdminPage
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $user_list = "";
-        foreach ($users as $c_user)
-        {
-            $user_list .= '<option value="' .
-            $c_user['id'] .
-            '">' .
-            $c_user['username'] .
-            '&nbsp;&nbsp;(' .
-            $LNG['rank_' .
-            $c_user['authlevel']] .
-            ')</option>';
-        }
-
         $this->assign([
             'Selector' => [0 => $LNG['rank_0'], 1 => $LNG['rank_1'], 2 => $LNG['rank_2'], 3 => $LNG['rank_3']],
-            'UserList' => $user_list,
+            'users'    => $users,
             'sid'      => session_id(),
         ]);
 
