@@ -30,44 +30,7 @@ class ShowRegisterPage extends AbstractLoginPage
         global $LNG, $config;
         $referral_data = ['id' => 0, 'name' => ''];
         $account_name = "";
-
-        $external_auth = HTTP::_GP('externalAuth', []);
         $referral_id = HTTP::_GP('referralID', 0);
-
-        if (!isset($external_auth['account'], $external_auth['method']))
-        {
-            $external_auth['account'] = 0;
-            $external_auth['method'] = '';
-        }
-        else
-        {
-            $external_auth['method'] = strtolower(
-                str_replace(['_', '\\', '/', '.', "\0"], '', $external_auth['method'])
-            );
-        }
-
-        if (!empty($external_auth['account'])
-            && file_exists('includes/extauth/'.$external_auth['method'].'.class.php'))
-        {
-            $path = 'includes/extauth/'.$external_auth['method'].'.class.php';
-            require($path);
-            $method_class = ucwords($external_auth['method']).'Auth';
-            /** @var externalAuth $authObj */
-            $auth_obj = new $method_class();
-
-            if (!$auth_obj->isActiveMode())
-            {
-                $this->redirectTo('index.php?code=5');
-            }
-
-            if (!$auth_obj->isValid())
-            {
-                $this->redirectTo('index.php?code=4');
-            }
-
-            $account_data = $authObj->getAccountData();
-            $account_name = $account_data['name'];
-        }
 
         if ($config->ref_active == 1
             && !empty($referral_id))
@@ -90,7 +53,6 @@ class ShowRegisterPage extends AbstractLoginPage
             'use_recaptcha_on_register' => $config->use_recaptcha_on_register,
             'referral_data'             => $referral_data,
             'account_name'              => $account_name,
-            'external_auth'             => $external_auth,
             'register_password_desc'    => sprintf($LNG['registerPasswordDesc'], 6),
             'register_rules_desc'       => sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
             'csrf_token'                => $this->generateCSRFToken(),
@@ -101,260 +63,34 @@ class ShowRegisterPage extends AbstractLoginPage
 
     public function send(): void
     {
-        global $LNG, $config;
-
-        $data = [];
-
-        if ($config->game_disable == 0 || $config->reg_closed == 1)
-        {
-            $data['status'] = "fail";
-            $data[] = $LNG['registerErrorUniClosed'];
-            $this->sendJSON($data);
-        }
-
-        $userName = HTTP::_GP('userName', '', UTF8_SUPPORT);
+        $user_name = HTTP::_GP('userName', '', UTF8_SUPPORT);
         $password = HTTP::_GP('password', '', true);
-        $mailAddress = HTTP::_GP('email', '', true);
+        $email = HTTP::_GP('email', '', true);
         $language = HTTP::_GP('language', '');
-        $rulesChecked = HTTP::_GP('rules', 'false');
-        $csrfToken = HTTP::_GP('csrfToken', '', true);
-
+        $rules_checked = HTTP::_GP('rules', 0);
+        $csrf_token = HTTP::_GP('csrfToken', '', true);
         $user_secret_question_id = HTTP::_GP('secretQuestion', 0);
         $user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
-        $referralID = HTTP::_GP('referralID', 0);
+        $referral_id = HTTP::_GP('referralID', 0);
+        $external_auth = false;
 
-        // NOTE: This should be corrected and tested (externalAuth)
-        $externalAuth = HTTP::_GP('externalAuth', []);
-        if (!isset($externalAuth['account'], $externalAuth['method']))
-        {
-            $externalAuthUID = 0;
-            $externalAuthMethod = '';
-        }
-        else
-        {
-            $externalAuthUID = $externalAuth['account'];
-            $externalAuthMethod = strtolower(str_replace(['_', '\\', '/', '.', "\0"], '', $externalAuth['method']));
-        }
+        $service_obj = new LoginService();
+        
+        $result = $service_obj->register(
+            $user_name,
+            $password,
+            $email,
+            $language,
+            $rules_checked,
+            $csrf_token,
+            $user_secret_question_id,
+            $user_secret_question_answer,
+            $referral_id,
+            $external_auth
+        );
 
-        $error = [];
+        $data = $service_obj->getJsonDataByResult($result);
 
-        if (!array_key_exists($user_secret_question_id, $LNG['registerSecretQuestionArray']))
-        {
-            $error[] = $LNG['registerSecretQuestionError_1'];
-        }
-
-        if (empty($user_secret_question_answer))
-        {
-            $error[] = $LNG['registerSecretQuestionError_2'];
-        }
-
-        if (strlen($user_secret_question_answer) > 64)
-        {
-            $error[] = $LNG['registerSecretQuestionError_3'];
-        }
-
-        if (empty($userName))
-        {
-            $error[] = $LNG['registerErrorUsernameEmpty'];
-        }
-
-        if (!PlayerUtil::isNameValid($userName))
-        {
-            $error[] = $LNG['registerErrorUsernameChar'];
-        }
-
-        if (strlen($password) < 6)
-        {
-            $error[] = sprintf($LNG['registerErrorPasswordLength'], 6);
-        }
-
-        if (!PlayerUtil::isMailValid($mailAddress))
-        {
-            $error[] = $LNG['registerErrorMailInvalid'];
-        }
-
-        if (empty($mailAddress))
-        {
-            $error[] = $LNG['registerErrorMailEmpty'];
-        }
-
-        if ($rulesChecked == 'false')
-        {
-            $error[] = $LNG['registerErrorRules'];
-        }
-
-        if ($_COOKIE['csrfToken'] != $csrfToken)
-        {
-            $error[] = "csrf attack";
-        }
-
-        $db = Database::get();
-
-        $sql = "SELECT (
-				SELECT COUNT(*)
-				FROM %%USERS%%
-				WHERE universe = :universe
-				AND username = :userName
-			) + (
-				SELECT COUNT(*)
-				FROM %%USERS_VALID%%
-				WHERE universe = :universe
-				AND username = :userName
-			) as count;";
-
-        $countUsername = $db->selectSingle($sql, [
-            ':universe' => Universe::current(),
-            ':userName' => $userName,
-        ], 'count');
-
-        $sql = "SELECT (
-			SELECT COUNT(*)
-			FROM %%USERS%%
-			WHERE universe = :universe
-			AND (
-				email = :mailAddress
-				OR email_2 = :mailAddress
-			)
-		) + (
-			SELECT COUNT(*)
-			FROM %%USERS_VALID%%
-			WHERE universe = :universe
-			AND email = :mailAddress
-		) as count;";
-
-        $countMail = $db->selectSingle($sql, [
-            ':universe'    => Universe::current(),
-            ':mailAddress' => $mailAddress,
-        ], 'count');
-
-        if ($countUsername != 0)
-        {
-            $error[] = $LNG['registerErrorUsernameExist'];
-        }
-
-        if ($countMail != 0)
-        {
-            $error[] = $LNG['registerErrorMailExist'];
-        }
-
-        if ($config->capaktiv === '1' && $config->use_recaptcha_on_register)
-        {
-            require('includes/libs/reCAPTCHA/src/autoload.php');
-
-            $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
-            $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
-            if (!$resp->isSuccess())
-            {
-                $errors[] = $LNG['registerErrorCaptcha'];
-            }
-        }
-
-        if (!empty($error))
-        {
-            $error['status'] = "fail";
-            $this->sendJSON($error);
-        }
-
-        $path = 'includes/extauth/'.$externalAuthMethod.'.class.php';
-
-        if (!empty($externalAuth['account']) && file_exists($path))
-        {
-            require($path);
-
-            $methodClass = ucwords($externalAuthMethod).'Auth';
-            /** @var externalAuth $authObj */
-            $authObj = new $methodClass();
-            $externalAuthUID = 0;
-            if ($authObj->isActiveMode() && $authObj->isValid())
-            {
-                $externalAuthUID = $authObj->getAccount();
-            }
-        }
-
-        if ($config->ref_active == 1 && !empty($referralID))
-        {
-            $sql = "SELECT COUNT(*) as state FROM %%USERS%% WHERE id = :referralID AND universe = :universe;";
-            $Count = $db->selectSingle($sql, [
-                ':referralID' => $referralID,
-                ':universe'   => Universe::current(),
-            ], 'state');
-
-            if ($Count == 0)
-            {
-                $referralID = 0;
-            }
-        }
-        else
-        {
-            $referralID = 0;
-        }
-
-        $validationKey = md5(uniqid('2m'));
-
-        $sql = "INSERT INTO %%USERS_VALID%% SET
-				`userName` = :userName,
-				`validationKey` = :validationKey,
-				`password` = :password,
-				`email` = :mailAddress,
-				`date` = :timestamp,
-				`ip` = :remoteAddr,
-				`language` = :language,
-				`universe` = :universe,
-				`referralID` = :referralID,
-				`externalAuthUID` = :externalAuthUID,
-				`externalAuthMethod` = :externalAuthMethod,
-				`user_secret_question_id` = :user_secret_question_id,
-				`user_secret_question_answer` = :user_secret_question_answer;";
-
-        $db->insert($sql, [
-            ':userName'                    => $userName,
-            ':validationKey'               => $validationKey,
-            ':password'                    => PlayerUtil::cryptPassword($password),
-            ':mailAddress'                 => $mailAddress,
-            ':timestamp'                   => TIMESTAMP,
-            ':remoteAddr'                  => Session::getClientIp(),
-            ':language'                    => $language,
-            ':universe'                    => Universe::current(),
-            ':referralID'                  => $referralID,
-            ':externalAuthUID'             => $externalAuthUID,
-            ':externalAuthMethod'          => $externalAuthMethod,
-            ':user_secret_question_id'     => $user_secret_question_id,
-            ':user_secret_question_answer' => $user_secret_question_answer,
-        ]);
-
-        $validationID = $db->lastInsertId();
-        $verifyURL = 'index.php?page=vertify&i='.$validationID.'&k='.$validationKey;
-
-        if ($config->user_valid == 0 || !empty($externalAuthUID))
-        {
-            $data['status'] = "redirect";
-            $data['url'] = $verifyURL;
-            $this->sendJSON($data);
-        }
-        else
-        {
-            require 'includes/classes/Mail.class.php';
-            $MailRAW = $LNG->getTemplate('email_vaild_reg');
-            $MailContent = str_replace([
-                '{USERNAME}',
-                '{PASSWORD}',
-                '{GAMENAME}',
-                '{VERTIFYURL}',
-                '{GAMEMAIL}',
-            ], [
-                $userName,
-                $password,
-                $config->game_name.' - '.$config->uni_name,
-                HTTP_PATH.$verifyURL,
-                $config->smtp_sendmail,
-            ], $MailRAW);
-
-            $subject = sprintf($LNG['registerMailVertifyTitle'], $config->game_name);
-            Mail::send($mailAddress, $userName, $subject, $MailContent);
-
-            $data['status'] = "success";
-            $data['successMessage'] = $LNG['registerSendComplete'];
-            $this->sendJSON($data);
-        }
+        $this->sendJSON($data); 
     }
 }

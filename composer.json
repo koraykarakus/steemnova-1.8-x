@@ -12,5 +12,14 @@
     "minimum-stability": "stable",
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.94"
+    },
+    "require": {
+        "google/apiclient": "^2.19"
+    },
+    "scripts": {
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": []
     }
 }

@@ -68,5 +68,6 @@ $dbTableNames = array(
     'VARS_REQUIRE' => DB_PREFIX.'vars_requriements',
     'REMEMBER_ME' => DB_PREFIX.'remember_me',
     'COLONY_SETTINGS' => DB_PREFIX.'colony_settings',
+    'GOOGLE_AUTH' => DB_PREFIX.'google_auth',
 );
 // MOD-TABLES

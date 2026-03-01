@@ -22,6 +22,7 @@ set_include_path(ROOT_PATH);
 require 'includes/pages/login/AbstractLoginPage.class.php';
 require 'includes/pages/login/ShowErrorPage.class.php';
 require 'includes/common.php';
+require_once 'includes/classes/LoginService.class.php';
 /** @var $LNG Language */
 
 $page = HTTP::_GP('page', 'index');

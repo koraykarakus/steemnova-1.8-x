@@ -20,7 +20,7 @@
 					secretQuestion: $("#secretQuestion").val(),
 					secretQuestionAnswer: $('#secretQuestionAnswer').val(),
 					language: $('#language option:selected').val(),
-					rules: $('#rules').is(':checked'),
+					rules: $('#rules').is(':checked') ? 1 : 0,
 					referralID: $('#referralID').val(),
 					g_recaptcha_response: recaptchaResponse,
 					csrfToken: $('#csrfToken').val(),
@@ -35,16 +35,9 @@
 							grecaptcha.reset();
 						}
 
-						$.each(dataParsed, function(typeError, errorText) {
-
-							if (typeError == 'status') {
-								return;
-							}
-
-							$('#registerButton').before(
-								"<span class='alert alert-danger fs-6 py-1 my-1'>" + errorText +
-								"</span>")
-						});
+						$('#registerButton').before(
+							"<span class='alert alert-danger fs-6 py-1 my-1'>" + dataParsed.msg +
+							"</span>")
 
 					} else if (dataParsed.status == 'success') {
 						$('#registerButton').before("<span class='alert alert-success fs-6 py-1 my-1'>" +
@@ -64,8 +57,6 @@
 		id="registerForm" method="post" action="index.php?page=register" data-action="index.php?page=register">
 		<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrf_token}">
 		<input type="hidden" value="send" name="mode">
-		<input type="hidden" value="{$external_auth.account}" name="externalAuth[account]">
-		<input type="hidden" value="{$external_auth.method}" name="externalAuth[method]">
 		<input id="referralID" type="hidden" value="{$referral_data.id}" name="referralID">
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="universe">{$LNG.universe}</label>
@@ -77,22 +68,6 @@
 			<span class="error errorUni"></span>
 		{/if}
 
-		{if !empty($external_auth.account)}
-			{if $facebookEnable}
-				<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
-					<label class="fs-6 my-2 text-start w-100">{$LNG.registerFacebookAccount}</label>
-					<span class="text fbname">{$account_name}</span>
-				</div>
-			{/if}
-		{elseif empty($referral_data.id)}
-			{if $facebookEnable}
-				<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
-					<label class="fs-6 my-2 text-start w-100">{$LNG.registerFacebookAccount}</label>
-					<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img
-							src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>
-				</div>
-			{/if}
-		{/if}
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="username">{$LNG.registerUsername}</label>
 			<input type="text" class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"

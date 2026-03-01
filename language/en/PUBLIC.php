@@ -67,6 +67,7 @@ $LNG['loginButton'] = 'Login';
 $LNG['loginInfo'] = 'With the login I accept the %s.';
 $LNG['loginWelcome'] = 'Welcome to %s';
 $LNG['loginServerDesc'] = '%s is a space strategy game with hundreds of players playing together <strong>at the same time</strong> trying to be the best. Everything what you need to the play is a Standard Browser.';
+$LNG['auth_google_btn_text'] = "Continue with Google.";
 
 // Register
 $LNG['registerFacebookAccount'] = 'Facebook Account';
@@ -91,25 +92,31 @@ $LNG['registerRulesDesc'] = 'I agree with the %s';
 $LNG['registerBack'] = 'Back';
 $LNG['registerNext'] = 'Next';
 
-$LNG['registerErrorUniClosed'] = 'The registration is closed in this universe.!';
-$LNG['registerErrorUsernameEmpty'] = 'You must enter a username!';
-$LNG['registerErrorUsernameChar'] = 'Your username must consist in numbers, Letters, Spaces, _, -, . only!';
-$LNG['registerErrorUsernameExist'] = 'The username is already taken!';
-$LNG['registerErrorPasswordLength'] = 'The password must be at least %s characters long!';
-$LNG['registerErrorPasswordSame'] = 'Entering 2 different Passwords!';
-$LNG['registerErrorMailEmpty'] = 'You must specify an E-Mail address!';
-$LNG['registerErrorMailInvalid'] = 'Invalid E-Mail address!';
-$LNG['registerErrorMailSame'] = 'You have specified 2 different email addresses!';
-$LNG['registerErrorMailExist'] = 'The E-Mail address is already registered!';
-$LNG['registerErrorRules'] = 'You have to accept the rules!';
-$LNG['registerErrorCaptcha'] = 'The security code is incorrect!';
+$LNG['reg_err_1'] = 'Game is disabled, you cannot register at the moment.';
+$LNG['reg_err_2'] = 'The registration is closed in this universe.!';
+$LNG['reg_err_3'] = "You selected a wrong secret question !";
+$LNG['reg_err_4'] = "Answer of secret question cannot be empty !";
+$LNG['reg_err_5'] = "Answer of secret question cannot be longer than 64 characters !";
+$LNG['reg_err_6'] = 'You must enter an username!';
+$LNG['reg_err_7'] = 'Your username must consist in numbers, Letters, Spaces, _, -, . only!';
+$LNG['reg_err_8'] = 'The password must be at least %s characters long!';
+$LNG['reg_err_9'] = 'The password is too long';
+$LNG['reg_err_10'] = 'Invalid E-Mail address!';
+$LNG['reg_err_11'] = 'E-mail cannot be empty.';
+$LNG['reg_err_12'] = 'E-mail is too long.';
+$LNG['reg_err_13'] = 'You have to accept the rules!';
+$LNG['reg_err_14'] = 'Wrong csrf, refresh the page and try again.';
+$LNG['reg_err_15'] = 'The username is already taken!';
+$LNG['reg_err_16'] = 'The E-Mail address is already registered!';
+$LNG['reg_err_17'] = 'Wrong recaptcha';
+
+$LNG['reg_suc_1'] = 'Thank you for the registration. Check your email to verify your account.';
+$LNG['reg_suc_2'] = 'Your account is waiting for verification, new mail has been sent!';
 
 $LNG['registerMailVertifyTitle'] = 'Activation of registration on the game: %s';
 $LNG['registerMailVertifyError'] = 'Failed to send mail: %s';
-
 $LNG['registerMailCompleteTitle'] = 'Welcome to %s!';
 
-$LNG['registerSendComplete'] = 'Thank you for the registration. You must check your email (Attention with the SPAM) with further information.';
 
 $LNG['registerWelcomePMSenderName'] = 'Administrator';
 $LNG['registerWelcomePMSubject'] = 'Welcome';
@@ -126,9 +133,6 @@ $LNG['registerSecretQuestionArray'] = [
     5 => "What was the make of your first car ?",
     6 => "What was your favorite food as a child ?",
 ];
-$LNG['registerSecretQuestionError_1'] = "You selected a wrong secret question !";
-$LNG['registerSecretQuestionError_2'] = "Answer of secret question cannot be empty !";
-$LNG['registerSecretQuestionError_3'] = "Answer of secret question cannot be longer than 64 characters !";
 
 /*
 

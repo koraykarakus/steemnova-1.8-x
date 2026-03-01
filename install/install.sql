@@ -407,6 +407,14 @@ CREATE TABLE `%PREFIX%config` (
   PRIMARY KEY (`uni`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
+CREATE TABLE `%PREFIX%google_auth` (
+  `id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `client_id` VARCHAR(255) NOT NULL DEFAULT '',
+  `client_secret` VARCHAR(255) NOT NULL DEFAULT '',
+  `callback_url` VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `%PREFIX%cronjobs` (
   `cronjobID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -1109,6 +1117,9 @@ CREATE TABLE `%PREFIX%vars_requriements` (
 
 INSERT INTO `%PREFIX%config` (`uni`, `VERSION`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclamerAddress`, `disclamerPhone`, `disclamerMail`, `disclamerNotice`) VALUES
 (1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
+
+INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES
+('http://localhost/index.php?page=googleAuth&mode=callBack');
 
 INSERT INTO `%PREFIX%colony_settings` (`metal_start`) VALUES (500);
 

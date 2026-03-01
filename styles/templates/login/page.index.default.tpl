@@ -48,6 +48,9 @@
 						location.href = "game.php";
 					}
 
+				},
+				error: function(xhr, status, error) {
+					console.log(status, error, xhr.responseText);
 				}
 
 			});
@@ -94,14 +97,20 @@
 			</div>
 
 		</form>
-		{if $facebookEnable}
-			<a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login">
-				<img src="styles/resource/images/facebook/fb-connect-large.png" alt="">
-			</a>
-		{/if}
+
 
 		<a class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white my-2 fs-6"
 			href="index.php?page=register">{$LNG.buttonRegister}</a>
+
+		{if isModuleAvailable(MODULE_AUTH_GOOGLE)}
+			<a href="index.php?page=googleAuth&mode=show"
+				class="btn btn-light my-2 d-flex align-items-center border text-dark w-100 fs-6">
+
+				<img src="https://developers.google.com/identity/images/g-logo.png" alt="Google"
+					style="width:18px; height:18px; margin-right:8px;">
+				<span>{$LNG.auth_google_btn_text}</span>
+			</a>
+		{/if}
 
 		<span class="fs-6">{$loginInfo}</span>
 
@@ -118,9 +127,8 @@
 	{block name="script" append}
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=tr"></script>
 	{/block}
-
-	{block name="script" append}
-		<script type="text/javascript" src="./scripts/base/avoid_submit_on_refresh.js"></script>
-	{/block}
-
 {/if}
+
+{block name="script" append}
+	<script type="text/javascript" src="./scripts/base/avoid_submit_on_refresh.js"></script>
+{/block}

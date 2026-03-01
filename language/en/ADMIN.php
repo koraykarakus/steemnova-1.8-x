@@ -687,6 +687,7 @@ $LNG['mu_chat'] = 'Chat Configuration';
 $LNG['mu_module'] = 'Modules';
 $LNG['mu_mod_update'] = 'Checking version of MOD';
 $LNG['mu_fb_options'] = 'Registration by Facebook';
+$LNG['mu_google_options'] = "Registration by Google";
 $LNG['mu_ts_options'] = 'Teamspeak Options';
 $LNG['mu_game_info'] = 'Information';
 $LNG['mu_vaild_users'] = 'User activity';
@@ -1082,6 +1083,18 @@ $LNG['fb_info'] = 'With Facebook Connect users who are logged on to Facebook, lo
 $LNG['fb_curl_yes'] = '<span style="color:green">cURL Installed!</span>';
 $LNG['fb_curl_no'] = '<span style="color:red">cURL Not Installed! Facebook Requires cURL extension to work!</span>';
 
+// Google Auth admin panel
+$LNG['google_auth_settings'] = "Google Auth Connection Settings";
+$LNG['google_auth_info'] = "This feature can be activated/disactivated from Modules page.\n
+Signup Google API console, get your client + secret IDs from google.\n
+Set your callback URL correctly on Google API console,\n page should always be googleAuth and mode should always be callback.\n
+Your callback URLs from API console should match with this forms callback url\n
+use https if you got SSL.";
+$LNG['google_auth_client_id'] = "Client ID:";
+$LNG['google_auth_client_secret'] = "Client Secret:";
+$LNG['google_auth_callback_url'] = "Callback URL [ full link ]";
+
+
 //----------------------------------------------------------------------------//
 //GameModule.php
 
@@ -1144,6 +1157,7 @@ $LNG['modul_55'] = 'Login - ScreenShots';
 $LNG['modul_56'] = 'Login - Ban List';
 $LNG['modul_57'] = 'Login - Battle Hall';
 $LNG['modul_58'] = 'Login - Disclaimer';
+$LNG['modul_59'] = 'Auth - Google';
 
 
 $LNG['mod_module'] = 'Modules';
