@@ -457,8 +457,8 @@ class LoginService
             return $result;
         }
 
-        if (!isset($_COOKIE['csrfToken'])
-            || $_COOKIE['csrfToken'] != $csrf_token)
+        if (!isset($_COOKIE['csrf_token'])
+            || $_COOKIE['csrf_token'] != $csrf_token)
         {
             return Register::csrf_wrong;
         }
@@ -749,8 +749,8 @@ class LoginService
         $universe = null,
         $external_auth = false,
     ) {
-        if (!isset($_COOKIE['csrfToken'])
-            || $_COOKIE['csrfToken'] != $csrf_token)
+        if (!isset($_COOKIE['csrf_token'])
+            || $_COOKIE['csrf_token'] != $csrf_token)
         {
             return Login::csrf_wrong;
         }

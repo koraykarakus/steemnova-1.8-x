@@ -68,14 +68,14 @@ class ShowRegisterPage extends AbstractLoginPage
         $email = HTTP::_GP('email', '', true);
         $language = HTTP::_GP('language', '');
         $rules_checked = HTTP::_GP('rules', 0);
-        $csrf_token = HTTP::_GP('csrfToken', '', true);
+        $csrf_token = HTTP::_GP('csrf_token', '', true);
         $user_secret_question_id = HTTP::_GP('secretQuestion', 0);
         $user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
         $referral_id = HTTP::_GP('referralID', 0);
         $external_auth = false;
 
         $service_obj = new LoginService();
-        
+
         $result = $service_obj->register(
             $user_name,
             $password,
@@ -91,6 +91,6 @@ class ShowRegisterPage extends AbstractLoginPage
 
         $data = $service_obj->getJsonDataByResult($result);
 
-        $this->sendJSON($data); 
+        $this->sendJSON($data);
     }
 }

@@ -18,7 +18,7 @@
 					userEmail: $("#userEmail").val(),
 					password: $("#password").val(),
 					g_recaptcha_response: recaptchaResponse,
-					csrfToken: $('#csrfToken').val(),
+					csrf_token: $('#csrf_token').val(),
 					remember_me: $('#remember_me').is(':checked'),
 					universe: $('#universe option:selected').val(),
 					rememberedTokenValidator: $('#rememberedTokenValidator').val(),
@@ -69,7 +69,7 @@
 
 		<h1 class="fs-6">{$LNG.loginHeader}</h1>
 		<form id="login" action="" method="post">
-			<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrf_token}">
+			<input id="csrf_token" type="hidden" name="csrf_token" value="{$csrf_token}">
 			<input id="rememberedEmail" type="hidden" name="rememberedEmail" value="{$mem_email}">
 			<input id="rememberedTokenSelector" type="hidden" name="rememberedTokenSelector" value="{$mem_token_sel}">
 			<input id="rememberedTokenValidator" type="hidden" name="rememberedTokenValidator" value="{$mem_token_valid}">

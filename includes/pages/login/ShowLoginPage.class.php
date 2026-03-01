@@ -42,7 +42,7 @@ class ShowLoginPage extends AbstractLoginPage
     {
         $email = HTTP::_GP('userEmail', '', true);
         $password = HTTP::_GP('password', '', true);
-        $csrf_token = HTTP::_GP('csrfToken', '', true);
+        $csrf_token = HTTP::_GP('csrf_token', '', true);
         $remember_me = HTTP::_GP('remember_me', 'false');
         $token_val = HTTP::_GP('rememberedTokenValidator', '');
         $token_sel = HTTP::_GP('rememberedTokenSelector', '');

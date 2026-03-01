@@ -43,11 +43,11 @@ abstract class AbstractLoginPage
     {
 
         //generate token
-        $csrf_token = md5(uniqid(mt_rand(), true));
+        $csrf_token = bin2hex(random_bytes(32));
 
         //write in to session
 
-        HTTP::sendCookie('csrfToken', $csrf_token, TIMESTAMP + 3600);
+        HTTP::sendCookie('csrf_token', $csrf_token, TIMESTAMP + 3600);
 
         return  $csrf_token;
     }

@@ -23,7 +23,7 @@
 					rules: $('#rules').is(':checked') ? 1 : 0,
 					referralID: $('#referralID').val(),
 					g_recaptcha_response: recaptchaResponse,
-					csrfToken: $('#csrfToken').val(),
+					csrf_token: $('#csrf_token').val(),
 				},
 				success: function(data) {
 					var dataParsed = jQuery.parseJSON(data);
@@ -55,7 +55,7 @@
 
 	<form style="max-width:500px;" class="form-group mx-auto my-sm-5 d-flex flex-column px-3 rounded bg-transparent-blue"
 		id="registerForm" method="post" action="index.php?page=register" data-action="index.php?page=register">
-		<input id="csrfToken" type="hidden" name="csrfToken" value="{$csrf_token}">
+		<input id="csrf_token" type="hidden" name="csrf_token" value="{$csrf_token}">
 		<input type="hidden" value="send" name="mode">
 		<input id="referralID" type="hidden" value="{$referral_data.id}" name="referralID">
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
