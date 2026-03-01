@@ -115,8 +115,6 @@ abstract class AbstractLoginPage
             'recaptchaPublicKey'     => $config->cappublic,
             'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
             'gameName'               => $config->game_name,
-            'facebookEnable'         => $config->fb_on,
-            'fb_key'                 => $config->fb_apikey,
             'mailEnable'             => $config->mail_active,
             'reg_close'              => $config->reg_closed,
             'referralEnable'         => $config->ref_active,

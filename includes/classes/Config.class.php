@@ -27,7 +27,7 @@ class Config
         'ts_version', 'ts_cron_last', 'ts_cron_interval', 'ts_login', 'ts_password',
         'capaktiv', 'cappublic', 'capprivate', 'mail_active', 'mail_use', 'smtp_host',
         'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_ssl', 'smtp_sendmail',
-        'smail_path', 'fb_on', 'fb_apikey', 'fb_skey', 'ga_active', 'ga_key',
+        'smail_path', 'ga_active', 'ga_key',
         'chat_closed', 'chat_allowchan', 'chat_allowmes', 'chat_allowdelmes',
         'chat_logmessage', 'chat_nickchange', 'chat_botname', 'chat_channelname',
         'chat_socket_active', 'chat_socket_host', 'chat_socket_ip', 'chat_socket_port',
