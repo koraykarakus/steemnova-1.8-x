@@ -986,15 +986,6 @@ CREATE TABLE `%PREFIX%users_to_acs` (
   KEY `acsID` (`acsID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `%PREFIX%users_to_extauth` (
-  `id` int(11) NOT NULL,
-  `account` varchar(64) NOT NULL,
-  `mode` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`),
-  KEY `account` (`account`,`mode`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 CREATE TABLE `%PREFIX%users_to_topkb` (
   `rid` varchar(32) NOT NULL,
   `uid` int(11) NOT NULL,

@@ -120,19 +120,6 @@ class ShowVerifyPage extends AbstractLoginPage
             ]);
         }
 
-        if (!empty($user_data['externalAuthUID']))
-        {
-            $sql = "INSERT INTO %%USERS_AUTH%% SET
-			`id`		= :user_id,
-			`account`	= :externalAuthUID,
-			`mode`		= :externalAuthMethod;";
-            $db->insert($sql, [
-                ':user_id'            => $user_id,
-                ':externalAuthUID'    => $user_data['externalAuthUID'],
-                ':externalAuthMethod' => $user_data['externalAuthMethod'],
-            ]);
-        }
-
         $sender_name = $LNG['reg_welcome_msg_sender'];
         $subject = $LNG['reg_welcome_msg_subject'];
         $message = sprintf($LNG['reg_welcome_msg_text'], $config->game_name, $user_data['universe']);
