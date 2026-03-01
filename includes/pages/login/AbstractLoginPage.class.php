@@ -210,13 +210,14 @@ abstract class AbstractLoginPage
         exit;
     }
 
-    protected function redirectPost($url, $postFields): void
+    // TODO : unused maybe strip
+    protected function redirectPost($url, $post_fields): void
     {
         $this->assign([
             'url'        => $url,
-            'postFields' => $postFields,
+            'postFields' => $post_fields,
         ]);
 
-        $this->display('info.redirectPost.tpl');
+        $this->display('info_redirect_post.tpl');
     }
 }
