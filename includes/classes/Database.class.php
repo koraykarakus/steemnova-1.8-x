@@ -39,6 +39,16 @@ class Database
         return $this->dbTableNames;
     }
 
+    public function getMySQLServerVersion()
+    {
+        return $this->dbHandle->getAttribute(PDO::ATTR_SERVER_VERSION);
+    }
+
+    public function getMySQLClientVersion()
+    {
+        return $this->dbHandle->getAttribute(PDO::ATTR_CLIENT_VERSION);
+    }
+
     private function __clone()
     {
 
