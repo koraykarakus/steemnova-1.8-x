@@ -100,8 +100,8 @@ $LNG['registerErrorMailExist'] = 'Die E-Mail-Adresse ist bereits registriert!';
 $LNG['registerErrorRules'] = 'Du musst die Regeln akzeptieren!';
 $LNG['registerErrorCaptcha'] = 'Der Sicherheitscode ist falsch!';
 
-$LNG['registerMailVertifyTitle'] = 'Aktivierung der Registrierung auf der Website: %s';
-$LNG['registerMailVertifyError'] = 'Fehler beim Versenden der Mail: %s';
+$LNG['registerMailVerifyTitle'] = 'Aktivierung der Registrierung auf der Website: %s';
+$LNG['registerMailVerifyError'] = 'Fehler beim Versenden der Mail: %s';
 
 $LNG['reg_complete_mail_title'] = 'Willkommen bei %s!';
 
@@ -126,7 +126,7 @@ $LNG['registerSecretQuestionError_1'] = "Sie haben eine falsche Geheimfrage ausg
 $LNG['registerSecretQuestionError_2'] = "Die Antwort auf die Geheimfrage darf nicht leer sein !";
 $LNG['registerSecretQuestionError_3'] = "Die Antwort auf die Geheimfrage darf nicht länger als 64 Zeichen sein !";
 
-//Vertify
+//Verify
 
 $LNG['verify_no_user_found'] = 'Ungültiger Anfrage!';
 $LNG['verify_success'] = 'Der Username "%s" wurder aktiviert!';

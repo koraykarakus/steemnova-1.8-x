@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowVertifyPage extends AbstractLoginPage
+class ShowVerifyPage extends AbstractLoginPage
 {
     public static $require_module = 0;
 

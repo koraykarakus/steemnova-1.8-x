@@ -5,7 +5,7 @@ Nim aktywujesz swoje konto jeszcze jeden krok przed tobą.
 
 Kliknij na ten link poniżej aktywujący twoje konto.
 
-Link aktywacyjny: {VERTIFYURL}
+Link aktywacyjny: {VERIFYURL}
 
 Dane do logowania
 

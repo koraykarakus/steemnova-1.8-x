@@ -11,7 +11,7 @@ verify your identity.
 In order to complete your registration please click the 
 following activation link:
 
-{VERTIFYURL}
+{VERIFYURL}
 
 Your login data:
 

@@ -5,7 +5,7 @@ Obrigada por registares em {GAMENAME}
 
 Para completar o seu registo por favor clique no seguinte link:
 
-{VERTIFYURL}
+{VERIFYURL}
 
 Dados de Login:
 

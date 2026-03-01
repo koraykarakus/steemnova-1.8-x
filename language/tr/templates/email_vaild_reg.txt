@@ -8,7 +8,7 @@ Lutfen unutmayin oyuna baslayabilmeniz icin bu adim zorunludur.Asagidaki linke t
 
 Kayit isleminizi tamamlamak icin asgidaki aktivasyon linkine tiklayiniz:
 
-{VERTIFYURL}
+{VERIFYURL}
 
 Bilgileriniz:
 

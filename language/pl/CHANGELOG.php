@@ -240,7 +240,7 @@ TMOONS-361 - Colorful background in ACP
 TMOONS-363 - Installation Fehler
 TMOONS-365 - Disabling modules
 TMOONS-366 - Not used languages keys
-TMOONS-367 - Page vertify - white screen
+TMOONS-367 - Page verify - white screen
 TMOONS-368 - New user from ACP
 TMOONS-369 - Double &quot;name&quot;
 TMOONS-370 - Untranslated word

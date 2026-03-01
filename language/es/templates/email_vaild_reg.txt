@@ -9,7 +9,7 @@ continuación, una vez realizado esto usted habrá activado la cuenta..
 
 Para completar el registro haga click en el siguiente enlace:
 
-{VERTIFYURL}
+{VERIFYURL}
 
 Sus datos de acceso son:
 

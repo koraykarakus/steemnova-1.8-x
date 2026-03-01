@@ -96,8 +96,8 @@ $LNG['registerErrorMailExist'] = 'Указанный адрес электрон
 $LNG['registerErrorRules'] = 'Вы не приняли правила игры.';
 $LNG['registerErrorCaptcha'] = 'Защитный код введён неправильно.';
 
-$LNG['registerMailVertifyTitle'] = 'Активация аккаунта на сайте %s';
-$LNG['registerMailVertifyError'] = 'Не удалось отправить сообщение на электронную почту %s';
+$LNG['registerMailVerifyTitle'] = 'Активация аккаунта на сайте %s';
+$LNG['registerMailVerifyError'] = 'Не удалось отправить сообщение на электронную почту %s';
 
 $LNG['reg_complete_mail_title'] = 'Добро пожаловать в %s!';
 

@@ -223,9 +223,9 @@ switch($page)
         include_once('includes/pages/adm/ShowLogPage.php');
         ShowLog();
     break;
-    case 'vertify':
-        include_once('includes/pages/adm/ShowVertify.php');
-        ShowVertify();
+    case 'verify':
+        include_once('includes/pages/adm/ShowVerify.php');
+        ShowVerify();
     break;
     case 'cronjob':
         include_once('includes/pages/adm/ShowCronjobPage.php');

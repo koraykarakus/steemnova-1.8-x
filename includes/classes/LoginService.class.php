@@ -386,7 +386,7 @@ class LoginService
             '{USERNAME}',
             '{PASSWORD}',
             '{GAMENAME}',
-            '{VERTIFYURL}',
+            '{VERIFYURL}',
             '{GAMEMAIL}',
         ], [
             $user_name,
@@ -396,7 +396,7 @@ class LoginService
             $config->smtp_sendmail,
         ], $MailRAW);
 
-        $subject = sprintf($LNG['registerMailVertifyTitle'], $config->game_name);
+        $subject = sprintf($LNG['registerMailVerifyTitle'], $config->game_name);
         Mail::send($email, $user_name, $subject, $MailContent);
     }
 
@@ -495,7 +495,7 @@ class LoginService
             $user_secret_question_answer
         );
 
-        $this->verify_url = 'index.php?page=vertify&i=' .
+        $this->verify_url = 'index.php?page=verify&i=' .
         $this->validation_id .
         '&k=' .
         $this->validation_key;

@@ -18,7 +18,7 @@
 /**
  *
  */
-class ShowVertifyPage extends AbstractAdminPage
+class ShowVerifyPage extends AbstractAdminPage
 {
     public function __construct()
     {
@@ -28,9 +28,9 @@ class ShowVertifyPage extends AbstractAdminPage
     public function show(): void
     {
         $file = HTTP::_GP("file", "");
-        $this->tpl_obj->loadscript('vertify.js');
+        $this->tpl_obj->loadscript('verify.js');
 
-        $this->display("page.vertify.default.tpl");
+        $this->display("page.verify.default.tpl");
     }
 
     public function check(): void

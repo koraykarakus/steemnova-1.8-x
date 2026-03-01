@@ -10,7 +10,7 @@ ein einziges Mal aufrufen, um dein Benutzerkonto zu aktivieren.
 Um deine Registrierung abzuschließen, klicke bitte auf folgenden 
 Link:
 
-{VERTIFYURL}
+{VERIFYURL}
 
 Deine Logindaten:
 

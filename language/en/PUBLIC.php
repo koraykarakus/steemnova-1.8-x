@@ -123,8 +123,8 @@ $LNG['reg_err_17'] = 'Wrong recaptcha';
 $LNG['reg_suc_1'] = 'Thank you for the registration. Check your email to verify your account.';
 $LNG['reg_suc_2'] = 'Your account is waiting for verification, new mail has been sent!';
 
-$LNG['registerMailVertifyTitle'] = 'Activation of registration on the game: %s';
-$LNG['registerMailVertifyError'] = 'Failed to send mail: %s';
+$LNG['registerMailVerifyTitle'] = 'Activation of registration on the game: %s';
+$LNG['registerMailVerifyError'] = 'Failed to send mail: %s';
 $LNG['reg_complete_mail_title'] = 'Welcome to %s!';
 
 $LNG['reg_welcome_msg_sender'] = 'Administrator';
@@ -154,10 +154,10 @@ What was the make of your first car?
 What was your favorite food as a child?
 */
 
-//Vertify
+//Verify
 
 $LNG['verify_no_user_found'] = 'Invalid Request!';
-$LNG['vertifyAdminMessage'] = 'The username "%s" has enabled!';
+$LNG['verifyAdminMessage'] = 'The username "%s" has enabled!';
 
 //lostpassword
 $LNG['passwordInfo'] = 'If you have forgotten your password, you must specify the user name and the E-Mail address that you have entered in your account.';

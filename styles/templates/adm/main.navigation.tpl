@@ -116,9 +116,9 @@
           href="?page=stats">{$LNG.mu_stats_options}</a>
       </li>
     {/if}
-    {if allowedTo('ShowVertifyPage')}
-      <li class="d-flex {if $currentPage == 'vertify'}menu-active{/if}">
-        <a class="d-flexw-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=vertify">{$LNG.mu_vertify}</a>
+    {if allowedTo('ShowVerifyPage')}
+      <li class="d-flex {if $currentPage == 'verify'}menu-active{/if}">
+        <a class="d-flexw-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=verify">{$LNG.mu_verify}</a>
       </li>
     {/if}
     {if allowedTo('ShowCronjobPage')}
