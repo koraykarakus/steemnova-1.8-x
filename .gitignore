@@ -3,3 +3,4 @@ includes/error.log
 cache
 includes/libs/opbe/errors
 vendor/
+includes/backups/
