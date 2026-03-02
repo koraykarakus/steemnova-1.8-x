@@ -412,6 +412,15 @@ CREATE TABLE `%PREFIX%google_auth` (
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `%PREFIX%discord_auth` (
+  `id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `client_id` VARCHAR(255) NOT NULL DEFAULT '',
+  `client_secret` VARCHAR(255) NOT NULL DEFAULT '',
+  `redirect_url` VARCHAR(255) NOT NULL DEFAULT '',
+  `callback_url` VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `%PREFIX%cronjobs` (
   `cronjobID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -1108,6 +1117,9 @@ INSERT INTO `%PREFIX%config` (`uni`, `VERSION`, `uni_name`, `game_name`, `close_
 
 INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES
 ('http://localhost/index.php?page=googleAuth&mode=callBack');
+
+INSERT INTO `%PREFIX%discord_auth` (`callback_url`) VALUES
+('');
 
 INSERT INTO `%PREFIX%colony_settings` (`metal_start`) VALUES (500);
 

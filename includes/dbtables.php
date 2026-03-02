@@ -68,5 +68,6 @@ $dbTableNames = [
     'REMEMBER_ME'      => DB_PREFIX.'remember_me',
     'COLONY_SETTINGS'  => DB_PREFIX.'colony_settings',
     'GOOGLE_AUTH'      => DB_PREFIX.'google_auth',
+    'DISCORD_AUTH'     => DB_PREFIX.'discord_auth',
 ];
 // MOD-TABLES

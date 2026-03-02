@@ -688,6 +688,7 @@ $LNG['mu_module'] = 'Modules';
 $LNG['mu_mod_update'] = 'Checking version of MOD';
 $LNG['mu_fb_options'] = 'Registration by Facebook';
 $LNG['mu_google_options'] = "Registration by Google";
+$LNG['mu_discord_options'] = "Registration by Discord";
 $LNG['mu_ts_options'] = 'Teamspeak Options';
 $LNG['mu_game_info'] = 'Information';
 $LNG['mu_vaild_users'] = 'User activity';
@@ -1094,6 +1095,21 @@ $LNG['google_auth_client_id'] = "Client ID:";
 $LNG['google_auth_client_secret'] = "Client Secret:";
 $LNG['google_auth_callback_url'] = "Callback URL [ full link ]";
 
+// DISCORD Auth admin panel
+$LNG['discord_auth_settings'] = "Discord Auth Connection Settings";
+
+$LNG['discord_auth_info'] = "This feature can be activated/disactivated from Modules page.\n
+Signup Discord Developer Portal, create an application and get your Client ID + Client Secret.\n
+Set your calback URI correctly in Discord OAuth2 settings,\n page should always be discordAuth and mode should always be callback.\n
+ex: [ http://localhost/index.php?page=discordAuth&mode=callback ] \n
+Your callback URI in Developer Portal must match exactly with this form's callback URL.\n
+chosing scope as email is enough on Discord Dev. Portal\n
+Use https if you have SSL enabled.";
+
+$LNG['discord_auth_client_id'] = "Client ID:";
+$LNG['discord_auth_client_secret'] = "Client Secret:";
+$LNG['discord_auth_redirect_url'] = "Redirect URL [ full link ]";
+$LNG['discord_auth_callback_url'] = "Callback URL [ full link ] [ex: http://localhost/index.php?page=discordAuth&mode=callback]";
 
 //----------------------------------------------------------------------------//
 //GameModule.php
@@ -1158,7 +1174,7 @@ $LNG['modul_56'] = 'Login - Ban List';
 $LNG['modul_57'] = 'Login - Battle Hall';
 $LNG['modul_58'] = 'Login - Disclaimer';
 $LNG['modul_59'] = 'Auth - Google';
-
+$LNG['modul_60'] = 'Auth - Discord';
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';

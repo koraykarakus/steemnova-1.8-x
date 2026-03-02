@@ -116,6 +116,15 @@
 				<span>{$LNG.auth_google_btn_text}</span>
 			</a>
 		{/if}
+		{if isModuleAvailable(MODULE_AUTH_DISCORD)}
+			<a href="index.php?page=discordAuth&mode=show"
+				class="btn btn-light my-2 d-flex align-items-center border text-dark w-100 fs-6">
+
+				<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord"
+					style="width:18px; height:18px; margin-right:8px;">
+				<span>Continue with Discord</span>
+			</a>
+		{/if}
 
 		<span class="fs-6">{$loginInfo}</span>
 
