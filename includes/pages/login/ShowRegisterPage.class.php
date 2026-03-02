@@ -55,7 +55,6 @@ class ShowRegisterPage extends AbstractLoginPage
             'account_name'              => $account_name,
             'register_password_desc'    => sprintf($LNG['registerPasswordDesc'], 6),
             'register_rules_desc'       => sprintf($LNG['registerRulesDesc'], '<a href="index.php?page=rules">'.$LNG['menu_rules'].'</a>'),
-            'csrf_token'                => $this->generateCSRFToken(),
         ]);
 
         $this->display('page.register.default.tpl');
@@ -68,7 +67,6 @@ class ShowRegisterPage extends AbstractLoginPage
         $email = HTTP::_GP('email', '', true);
         $language = HTTP::_GP('language', '');
         $rules_checked = HTTP::_GP('rules', 0);
-        $csrf_token = HTTP::_GP('csrf_token', '', true);
         $user_secret_question_id = HTTP::_GP('secretQuestion', 0);
         $user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
         $referral_id = HTTP::_GP('referralID', 0);
@@ -82,7 +80,6 @@ class ShowRegisterPage extends AbstractLoginPage
             $email,
             $language,
             $rules_checked,
-            $csrf_token,
             $user_secret_question_id,
             $user_secret_question_answer,
             $referral_id,

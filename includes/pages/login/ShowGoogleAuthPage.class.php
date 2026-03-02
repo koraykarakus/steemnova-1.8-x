@@ -99,7 +99,6 @@ class ShowGoogleAuthPage extends AbstractLoginPage
                 $user_info->email,
                 $language,
                 null,
-                $_COOKIE['csrf_token'] ?? '',
                 null,
                 null,
                 0,
@@ -129,7 +128,6 @@ class ShowGoogleAuthPage extends AbstractLoginPage
             $result = $service_obj->Login(
                 $user['email'],
                 $user['password'],
-                $_COOKIE['csrf_token'] ?? '',
                 null,
                 null,
                 null,

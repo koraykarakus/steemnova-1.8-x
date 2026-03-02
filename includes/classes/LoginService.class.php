@@ -406,7 +406,6 @@ class LoginService
         $email = '',
         $language = 'en',
         $rules_checked = 0,
-        $csrf_token = '',
         $user_secret_question_id = 0,
         $user_secret_question_answer = '',
         $referral_id = 0,
@@ -455,12 +454,6 @@ class LoginService
         if ($result != Register::form_is_valid)
         {
             return $result;
-        }
-
-        if (!isset($_COOKIE['csrf_token'])
-            || $_COOKIE['csrf_token'] != $csrf_token)
-        {
-            return Register::csrf_wrong;
         }
 
         if ($this->existsUserNameInDB($user_name))
@@ -555,9 +548,6 @@ class LoginService
                 break;
             case Register::rules_not_checked:
                 $data['msg'] = $LNG['reg_err_13'];
-                break;
-            case Register::csrf_wrong:
-                $data['msg'] = $LNG['reg_err_14'];
                 break;
             case Register::username_exists_in_db:
                 $data['msg'] = $LNG['reg_err_15'];
@@ -742,18 +732,12 @@ class LoginService
     public function Login(
         $email = null,
         $password = null,
-        $csrf_token = null,
         $token_val = null,
         $token_sel = null,
         $mem_email = null,
         $universe = null,
         $external_auth = false,
     ) {
-        if (!isset($_COOKIE['csrf_token'])
-            || $_COOKIE['csrf_token'] != $csrf_token)
-        {
-            return Login::csrf_wrong;
-        }
 
         $result = $this->checkLoginInput($email, $password);
 
@@ -795,9 +779,6 @@ class LoginService
 
         switch ($result)
         {
-            case Login::csrf_wrong:
-                $data['msg'] = $LNG['log_err_1'];
-                break;
             case Login::mail_empty:
                 $data['msg'] = $LNG['log_err_3'];
                 break;

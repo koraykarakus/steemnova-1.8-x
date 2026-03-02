@@ -38,20 +38,6 @@ abstract class AbstractLoginPage
         }
     }
 
-    // TODO : this should only generate, not set cookie
-    protected function generateCSRFToken(): string
-    {
-
-        //generate token
-        $csrf_token = bin2hex(random_bytes(32));
-
-        //write in to session
-
-        HTTP::sendCookie('csrf_token', $csrf_token, TIMESTAMP + 3600);
-
-        return  $csrf_token;
-    }
-
     protected function getUniverseSelector(): array
     {
         $uni_sel = [];

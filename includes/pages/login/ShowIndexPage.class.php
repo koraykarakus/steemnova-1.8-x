@@ -102,7 +102,6 @@ class ShowIndexPage extends AbstractLoginPage
         $this->assign([
             'code'                   => $login_code,
             'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
-            'csrf_token'             => $this->generateCSRFToken(),
             'mem_email'              => $mem_email,
             'mem_pass'               => $mem_pass,
             'mem_token_valid'        => $mem_token_valid,
