@@ -23,7 +23,6 @@ class ShowAjaxPage extends AbstractInstallPage
     {
         parent::__construct();
         $this->window = 'ajax';
-        $this->initTemplate();
     }
 
     public function show(): void

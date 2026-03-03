@@ -22,7 +22,6 @@ class ShowDoUpgradePage extends AbstractInstallPage
     public function __construct()
     {
         parent::__construct();
-        $this->initTemplate();
     }
 
     public function show(): void

@@ -22,7 +22,6 @@ class ShowInstallPage extends AbstractInstallPage
     public function __construct()
     {
         parent::__construct();
-        $this->initTemplate();
     }
 
     public function display_step_1()
