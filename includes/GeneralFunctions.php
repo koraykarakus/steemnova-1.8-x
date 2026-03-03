@@ -15,52 +15,52 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function getFactors($USER, $Type = 'basic', $TIME = null): array
+function getFactors($USER, $Type = 'basic', $time = null): array
 {
     global $resource, $pricelist, $reslist;
-    if (empty($TIME))
+    if (empty($time))
     {
-        $TIME = TIMESTAMP;
+        $time = TIMESTAMP;
     }
 
-    $bonusList = BuildFunctions::getBonusList();
-    $factor = ArrayUtil::combineArrayWithSingleElement($bonusList, 0);
+    $bonus_list = BuildFunctions::getBonusList();
+    $factor = ArrayUtil::combineArrayWithSingleElement($bonus_list, 0);
 
-    foreach ($reslist['bonus'] as $elementID)
+    foreach ($reslist['bonus'] as $element_id)
     {
-        $bonus = $pricelist[$elementID]['bonus'];
+        $bonus = $pricelist[$element_id]['bonus'];
 
-        if (isset($USER[$resource[$elementID]]))
+        if (isset($USER[$resource[$element_id]]))
         {
-            $elementLevel = $USER[$resource[$elementID]];
+            $element_level = $USER[$resource[$element_id]];
         }
         /* this is not inside planet table, but user table, commented out.
-        elseif (isset($PLANET[$resource[$elementID]]))
+        elseif (isset($PLANET[$resource[$element_id]]))
         {
-            $elementLevel = $PLANET[$resource[$elementID]];
+            $element_level = $PLANET[$resource[$element_id]];
         }
         */ else
         {
             continue;
         }
 
-        if (in_array($elementID, $reslist['dmfunc']))
+        if (in_array($element_id, $reslist['dmfunc']))
         {
-            if (DMExtra($elementLevel, $TIME, false, true))
+            if (DMExtra($element_level, $time, false, true))
             {
                 continue;
             }
 
-            foreach ($bonusList as $bonusKey)
+            foreach ($bonus_list as $bonus_key)
             {
-                $factor[$bonusKey] += $bonus[$bonusKey][0];
+                $factor[$bonus_key] += $bonus[$bonus_key][0];
             }
         }
         else
         {
-            foreach ($bonusList as $bonusKey)
+            foreach ($bonus_list as $bonus_key)
             {
-                $factor[$bonusKey] += $elementLevel * $bonus[$bonusKey][0];
+                $factor[$bonus_key] += $element_level * $bonus[$bonus_key][0];
             }
         }
     }
@@ -68,50 +68,58 @@ function getFactors($USER, $Type = 'basic', $TIME = null): array
     return $factor;
 }
 
-function userStatus($data, $noobprotection = false): array
+function userStatus($data, $noob_protection = false): array
 {
-    $Array = [];
+    $result = [];
 
-    if (isset($data['banaday']) && $data['banaday'] > TIMESTAMP)
+    if (isset($data['banaday'])
+        && $data['banaday'] > TIMESTAMP)
     {
-        $Array[] = 'banned';
+        $result[] = 'banned';
     }
 
-    if (isset($data['urlaubs_modus']) && $data['urlaubs_modus'] == 1)
+    if (isset($data['urlaubs_modus'])
+        && $data['urlaubs_modus'] == 1)
     {
-        $Array[] = 'vacation';
+        $result[] = 'vacation';
     }
 
-    if (isset($data['onlinetime']) && $data['onlinetime'] < TIMESTAMP - INACTIVE_LONG)
+    if (isset($data['onlinetime'])
+        && $data['onlinetime'] < TIMESTAMP - INACTIVE_LONG)
     {
-        $Array[] = 'longinactive';
+        $result[] = 'longinactive';
     }
 
-    if (isset($data['onlinetime']) && $data['onlinetime'] < TIMESTAMP - INACTIVE)
+    if (isset($data['onlinetime'])
+        && $data['onlinetime'] < TIMESTAMP - INACTIVE)
     {
-        $Array[] = 'inactive';
+        $result[] = 'inactive';
     }
 
-    if ($noobprotection && $noobprotection['NoobPlayer'])
+    if ($noob_protection
+        && $noob_protection['NoobPlayer'])
     {
-        $Array[] = 'noob';
+        $result[] = 'noob';
     }
 
-    if ($noobprotection && $noobprotection['StrongPlayer'])
+    if ($noob_protection
+        && $noob_protection['StrongPlayer'])
     {
-        $Array[] = 'strong';
+        $result[] = 'strong';
     }
 
-    return $Array;
+    return $result;
 }
 
-function getLanguage($language = null, $userID = null): object
+function getLanguage($language = null, $user_id = null): object
 {
-    if (is_null($language) && !is_null($userID))
+    if (is_null($language)
+        && !is_null($user_id))
     {
-        $language = Database::get()->selectSingle('SELECT lang FROM %%USERS%% WHERE id = :id;', [
-            ':id' => $userID,
-        ])['lang'];
+        $sql = 'SELECT `lang` FROM %%USERS%% WHERE id = :id;';
+        $language = Database::get()->selectSingle($sql, [
+            ':id' => $user_id,
+        ], 'lang');
     }
 
     $LNG = new Language($language);
@@ -190,24 +198,24 @@ function locale_date_format($format, $time, $LNG = null): string
         global $LNG;
     }
 
-    $weekDay = date('w', (int) $time);
+    $week_day = date('w', (int) $time);
     $months = date('n', (int) $time) - 1;
 
     $format = str_replace(['D', 'M'], ['$D$', '$M$'], $format);
-    $format = str_replace('$D$', addcslashes($LNG['week_day'][$weekDay], 'A..z'), $format);
+    $format = str_replace('$D$', addcslashes($LNG['week_day'][$week_day], 'A..z'), $format);
     $format = str_replace('$M$', addcslashes($LNG['months'][$months], 'A..z'), $format);
 
     return $format;
 }
 
-function _date($format, $time = null, $toTimeZone = null, $LNG = null): string
+function _date($format, $time = null, $to_time_zone = null, $LNG = null): string
 {
     if (!isset($time))
     {
         $time = TIMESTAMP;
     }
 
-    if (isset($toTimeZone))
+    if (isset($to_time_zone))
     {
         $date = new DateTime();
         if (method_exists($date, 'setTimestamp'))	// PHP > 5.3
@@ -225,7 +233,7 @@ function _date($format, $time = null, $toTimeZone = null, $LNG = null): string
         $time -= $date->getOffset();
         try
         {
-            $date->setTimezone(new DateTimeZone($toTimeZone));
+            $date->setTimezone(new DateTimeZone($to_time_zone));
         }
         catch (Exception $e)
         {
@@ -309,19 +317,53 @@ function pretty_fly_time($seconds): string
     return sprintf('%02d:%02d:%02d', $hour, $minute, $second);
 }
 
-function GetStartAddressLink($FleetRow, $FleetType = ''): string
+function GetStartAddressLink($fleet_row, $fleet_type = ''): string
 {
-    return '<a href="game.php?page=galaxy&amp;galaxy=' . $FleetRow['fleet_start_galaxy'] . '&amp;system=' . $FleetRow['fleet_start_system'] . '" class="' . $FleetType . '">[' . $FleetRow['fleet_start_galaxy'] . ':' . $FleetRow['fleet_start_system'] . ':' . $FleetRow['fleet_start_planet'] . ']</a>';
+    return '<a href="game.php?page=galaxy&amp;galaxy=' .
+    $fleet_row['fleet_start_galaxy'] .
+    '&amp;system=' .
+    $fleet_row['fleet_start_system'] .
+    '" class="' .
+    $fleet_type .
+    '">[' .
+    $fleet_row['fleet_start_galaxy'] .
+    ':' .
+    $fleet_row['fleet_start_system'] .
+    ':' .
+    $fleet_row['fleet_start_planet'] .
+    ']</a>';
 }
 
-function GetTargetAddressLink($FleetRow, $FleetType = ''): string
+function GetTargetAddressLink($fleet_row, $fleet_type = ''): string
 {
-    return '<a href="game.php?page=galaxy&amp;galaxy=' . $FleetRow['fleet_end_galaxy'] . '&amp;system=' . $FleetRow['fleet_end_system'] . '" class="' . $FleetType . '">[' . $FleetRow['fleet_end_galaxy'] . ':' . $FleetRow['fleet_end_system'] . ':' . $FleetRow['fleet_end_planet'] . ']</a>';
+    return '<a href="game.php?page=galaxy&amp;galaxy=' .
+    $fleet_row['fleet_end_galaxy'] .
+    '&amp;system=' .
+    $fleet_row['fleet_end_system'] .
+    '" class="' .
+    $fleet_type .
+    '">[' .
+    $fleet_row['fleet_end_galaxy'] .
+    ':' .
+    $fleet_row['fleet_end_system'] .
+    ':' .
+    $fleet_row['fleet_end_planet'] .
+    ']</a>';
 }
 
-function BuildPlanetAddressLink($CurrentPlanet): string
+function BuildPlanetAddressLink($current_planet): string
 {
-    return '<a href="game.php?page=galaxy&amp;galaxy=' . $CurrentPlanet['galaxy'] . '&amp;system=' . $CurrentPlanet['system'] . '">[' . $CurrentPlanet['galaxy'] . ':' . $CurrentPlanet['system'] . ':' . $CurrentPlanet['planet'] . ']</a>';
+    return '<a href="game.php?page=galaxy&amp;galaxy=' .
+    $current_planet['galaxy'] .
+    '&amp;system=' .
+    $current_planet['system'] .
+    '">[' .
+    $current_planet['galaxy'] .
+    ':' .
+    $current_planet['system'] .
+    ':' .
+    $current_planet['planet'] .
+    ']</a>';
 }
 
 function pretty_number($n, $dec = 0): string
@@ -330,24 +372,24 @@ function pretty_number($n, $dec = 0): string
 }
 
 // TODO: fix return type
-function GetUserByID($userId, $GetInfo = "*"): bool|array
+function GetUserByID($user_id, $get_info = "*"): bool|array
 {
-    if (is_array($GetInfo))
+    if (is_array($get_info))
     {
-        $GetOnSelect = implode(', ', $GetInfo);
+        $part_query = implode(', ', $get_info);
     }
     else
     {
-        $GetOnSelect = $GetInfo;
+        $part_query = $get_info;
     }
 
-    $sql = 'SELECT ' . $GetOnSelect . ' FROM %%USERS%% WHERE id = :userId';
+    $sql = 'SELECT ' . $part_query . ' FROM %%USERS%% WHERE id = :user_id';
 
-    $User = Database::get()->selectSingle($sql, [
-        ':userId' => $userId,
+    $user = Database::get()->selectSingle($sql, [
+        ':user_id' => $user_id,
     ]);
 
-    return $User;
+    return $user;
 }
 
 function makebr($text): string
@@ -359,15 +401,15 @@ function makebr($text): string
     return (version_compare(PHP_VERSION, "5.3.0", ">=")) ? nl2br($text, false) : strtr($text, ["\r\n" => $BR, "\r" => $BR, "\n" => $BR]);
 }
 
-function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player): array
+function CheckNoobProtec($owner_player, $target_player, $player): array
 {
     $config = Config::get();
     if (
         $config->noobprotection == 0
         || $config->noobprotectiontime == 0
         || $config->noobprotectionmulti == 0
-        || $Player['banaday'] > TIMESTAMP
-        || $Player['onlinetime'] < TIMESTAMP - INACTIVE
+        || $player['banaday'] > TIMESTAMP
+        || $player['onlinetime'] < TIMESTAMP - INACTIVE
     ) {
         return ['NoobPlayer' => false, 'StrongPlayer' => false];
     }
@@ -380,16 +422,16 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player): array
                 ODER weniger als 5.000 hat.
             */
             // Addional Comment: Letzteres ist eigentlich sinnfrei, bitte testen.a
-            ($TargetPlayer['total_points'] <= $config->noobprotectiontime) // Default: 25.000
-            && ($OwnerPlayer['total_points'] > $TargetPlayer['total_points'] * $config->noobprotectionmulti)
+            ($target_player['total_points'] <= $config->noobprotectiontime) // Default: 25.000
+            && ($owner_player['total_points'] > $target_player['total_points'] * $config->noobprotectionmulti)
         ),
         'StrongPlayer' => (
             /* WAHR:
                 Wenn Spieler weniger als 5000 Punkte hat UND
                 Mehr als das funfache der eigende Punkte hat
             */
-            ($OwnerPlayer['total_points'] < $config->noobprotectiontime) // Default: 5.000
-            && ($OwnerPlayer['total_points'] * $config->noobprotectionmulti < $TargetPlayer['total_points'])
+            ($owner_player['total_points'] < $config->noobprotectiontime) // Default: 5.000
+            && ($owner_player['total_points'] * $config->noobprotectionmulti < $target_player['total_points'])
         ),
     ];
 }
@@ -425,33 +467,33 @@ function floatToString($number, $Pro = 0, $output = false): string
     return $output ? str_replace(",", ".", sprintf("%." . $Pro . "f", $number)) : sprintf("%." . $Pro . "f", $number);
 }
 
-function isModuleAvailable($ID): bool
+function isModuleAvailable($id): bool
 {
-    global $USER;
+    // global $USER;
     $modules = explode(';', Config::get()->moduls);
 
-    if (!isset($modules[$ID]))
+    if (!isset($modules[$id]))
     {
-        $modules[$ID] = 1;
+        $modules[$id] = 1;
     }
 
-    return $modules[$ID] == 1; // || (isset($USER['authlevel']) && $USER['authlevel'] > AUTH_USR);
+    return $modules[$id] == 1; // || (isset($USER['authlevel']) && $USER['authlevel'] > AUTH_USR);
 }
 
 function ClearCache(): void
 {
-    $DIRS = ['cache/', 'cache/templates/'];
-    foreach ($DIRS as $DIR)
+    $dirs = ['cache/', 'cache/templates/'];
+    foreach ($dirs as $c_dir)
     {
-        $FILES = array_diff(scandir($DIR), ['..', '.', '.htaccess']);
-        foreach ($FILES as $FILE)
+        $files = array_diff(scandir($c_dir), ['..', '.', '.htaccess']);
+        foreach ($files as $c_file)
         {
-            if (is_dir(ROOT_PATH . $DIR . $FILE))
+            if (is_dir(ROOT_PATH . $c_dir . $c_file))
             {
                 continue;
             }
 
-            unlink(ROOT_PATH . $DIR . $FILE);
+            unlink(ROOT_PATH . $c_dir . $c_file);
         }
     }
 
@@ -500,17 +542,18 @@ function allowedTo($side): bool
 {
     global $USER;
 
-    return ($USER['authlevel'] == AUTH_ADM || (isset($USER['rights']) && $USER['rights'][$side] == 1));
+    return ($USER['authlevel'] == AUTH_ADM
+    || (isset($USER['rights']) && $USER['rights'][$side] == 1));
 }
 
-function isactiveDMExtra($Extra, $Time): bool
+function isactiveDMExtra($extra, $time): bool
 {
-    return $Time - $Extra <= 0;
+    return $time - $extra <= 0;
 }
 
-function DMExtra($Extra, $Time, $true, $false): bool
+function DMExtra($extra, $time, $true, $false): bool
 {
-    return isactiveDMExtra($Extra, $Time) ? $true : $false;
+    return isactiveDMExtra($extra, $time) ? $true : $false;
 }
 
 function getRandomString(): string
@@ -520,7 +563,7 @@ function getRandomString(): string
 
 function isVacationMode($USER): bool
 {
-    return ($USER['urlaubs_modus'] == 1) ? true : false;
+    return $USER['urlaubs_modus'] == 1;
 }
 
 function clearGIF(): void
@@ -717,52 +760,4 @@ function errorHandler($errno, $errstr, $errfile, $errline): bool
     }
 
     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-}
-
-// TODO : remove
-// "workaround" for PHP version pre 5.3.0
-if (!function_exists('array_replace_recursive'))
-{
-    function array_replace_recursive()
-    {
-        if (!function_exists('recurse'))
-        {
-            function recurse($array, $array1)
-            {
-                foreach ($array1 as $key => $value)
-                {
-                    // create new key in $array, if it is empty or not an array
-                    if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key])))
-                    {
-                        $array[$key] = [];
-                    }
-
-                    // overwrite the value in the base array
-                    if (is_array($value))
-                    {
-                        $value = recurse($array[$key], $value);
-                    }
-                    $array[$key] = $value;
-                }
-                return $array;
-            }
-        }
-
-        // handle the arguments, merge one by one
-        $args = func_get_args();
-        $array = $args[0];
-        if (!is_array($array))
-        {
-            return $array;
-        }
-        $count = count($args);
-        for ($i = 1; $i < $count; ++$i)
-        {
-            if (is_array($args[$i]))
-            {
-                $array = recurse($array, $args[$i]);
-            }
-        }
-        return $array;
-    }
 }
