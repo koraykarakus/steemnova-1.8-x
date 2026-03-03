@@ -17,8 +17,6 @@
 
 class ShowAjaxPage extends AbstractInstallPage
 {
-    public static $requireModule = 0;
-
     public function __construct()
     {
         parent::__construct();
