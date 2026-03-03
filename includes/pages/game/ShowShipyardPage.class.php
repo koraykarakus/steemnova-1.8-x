@@ -19,7 +19,7 @@ class ShowShipyardPage extends AbstractGamePage
 {
     public static $require_module = 0;
 
-    public static $defaultController = 'show';
+    public static $default_controller = 'show';
 
     public function __construct()
     {

@@ -53,12 +53,12 @@ if (isset($page_props['require_module'])
 
 if (!is_callable([$page_obj, $mode]))
 {
-    if (!isset($page_props['defaultController'])
-        || !is_callable([$page_obj, $page_props['defaultController']]))
+    if (!isset($page_props['default_controller'])
+        || !is_callable([$page_obj, $page_props['default_controller']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
-    $mode = $page_props['defaultController'];
+    $mode = $page_props['default_controller'];
 }
 
 $page_obj->{$mode}();
