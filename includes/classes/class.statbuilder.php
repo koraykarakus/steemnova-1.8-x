@@ -203,11 +203,22 @@ class statbuilder
                 continue;
             }
 
-            // PointsPerCot == Config::get()->stat_settings
-            for ($i = 1; $i <= $USER[$resource[$Techno]]; $i++)
+            $base_cost = $pricelist[$Techno]['cost'][901] +
+            $pricelist[$Techno]['cost'][902] +
+            $pricelist[$Techno]['cost'][903];
+            $level = $USER[$resource[$Techno]];
+            $factor = $pricelist[$Techno]['factor'];
+            if ($factor == 1)
             {
-                $TechPoints += ($pricelist[$Techno]['cost'][901] + $pricelist[$Techno]['cost'][902] + $pricelist[$Techno]['cost'][903]) * pow($pricelist[$Techno]['factor'], $i - 1);
+                // if factor is 1 normal multiply
+                $TechPoints += $base_cost * $level;
             }
+            else
+            {
+                // geometric series formula
+                $TechPoints += $base_cost * ((pow($factor, $level) - 1) / ($factor - 1));
+            }
+
             $TechCounts += $USER[$resource[$Techno]];
 
             $this->setRecords($USER['id'], $Techno, $USER[$resource[$Techno]]);
@@ -229,11 +240,24 @@ class statbuilder
                 continue;
             }
 
-            // PointsPerCot == Config::get()->stat_settings
-            for ($i = 1; $i <= $PLANET[$resource[$Build]]; $i++)
+            $base_cost = $pricelist[$Build]['cost'][901] +
+            $pricelist[$Build]['cost'][902] +
+            $pricelist[$Build]['cost'][903];
+
+            $level = $PLANET[$resource[$Build]];
+            $factor = $pricelist[$Build]['factor'];
+
+            if ($factor == 1)
             {
-                $BuildPoints += ($pricelist[$Build]['cost'][901] + $pricelist[$Build]['cost'][902] + $pricelist[$Build]['cost'][903]) * pow($pricelist[$Build]['factor'], $i - 1);
+                // if factor is 1 normal multiply
+                $BuildPoints += $base_cost * $level;
             }
+            else
+            {
+                // geometric series formula
+                $BuildPoints += $base_cost * ((pow($factor, $level) - 1) / ($factor - 1));
+            }
+
             $BuildCounts += $PLANET[$resource[$Build]];
 
             $this->setRecords($PLANET['id_owner'], $Build, $PLANET[$resource[$Build]]);
@@ -413,7 +437,8 @@ class statbuilder
             $UserPoints[$UserData['id']]['techno']['points'] = $TechnoPoints['points'];
 
             if (!isset($UserPoints[$UserData['id']]['build'])) //user don't have any planets ( user id changed manually)
-            {continue;
+            {
+                continue;
             }
 
             $UserPoints[$UserData['id']]['total']['count'] = $UserPoints[$UserData['id']]['techno']['count']
