@@ -40,7 +40,7 @@ class ShowLoginPage extends AbstractLoginPage
 
     public function validate(): void
     {
-        $email = HTTP::_GP('userEmail', '', true);
+        $email = HTTP::_GP('email', '', true);
         $password = HTTP::_GP('password', '', true);
         $remember_me = HTTP::_GP('remember_me', 'false');
         $token_val = HTTP::_GP('rememberedTokenValidator', '');

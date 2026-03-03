@@ -15,7 +15,7 @@
 				type: "POST",
 				url: 'index.php?page=login&mode=validate&ajax=1',
 				data: {
-					userEmail: $("#userEmail").val(),
+					email: $("#email").val(),
 					password: $("#password").val(),
 					g_recaptcha_response: recaptchaResponse,
 					remember_me: $('#remember_me').is(':checked'),
@@ -78,7 +78,7 @@
 							{$currentUniverse}</option>
 					{/foreach}
 				</select>
-				<input class="form-control fs-6 my-2 w-100" id="userEmail" type="text" name="userEmail"
+				<input class="form-control fs-6 my-2 w-100" id="email" type="email" name="email" autocomplete="off"
 					placeholder="{$LNG.login_email}" value="{if !empty($mem_email) && $mem_email}{$mem_email}{/if}">
 				<input class="form-control fs-6 my-2 w-100" id="password" type="password" name="password"
 					placeholder="{$LNG.loginPassword}" value="{if $mem_pass}password{/if}">
