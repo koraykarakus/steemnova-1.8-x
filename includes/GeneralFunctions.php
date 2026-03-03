@@ -30,15 +30,16 @@ function getFactors($USER, $Type = 'basic', $TIME = null): array
     {
         $bonus = $pricelist[$elementID]['bonus'];
 
-        if (isset($PLANET[$resource[$elementID]]))
-        {
-            $elementLevel = $PLANET[$resource[$elementID]];
-        }
-        elseif (isset($USER[$resource[$elementID]]))
+        if (isset($USER[$resource[$elementID]]))
         {
             $elementLevel = $USER[$resource[$elementID]];
         }
-        else
+        /* this is not inside planet table, but user table, commented out.
+        elseif (isset($PLANET[$resource[$elementID]]))
+        {
+            $elementLevel = $PLANET[$resource[$elementID]];
+        }
+        */ else
         {
             continue;
         }
