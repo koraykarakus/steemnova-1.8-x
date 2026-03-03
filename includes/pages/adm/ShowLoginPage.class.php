@@ -68,6 +68,13 @@ class ShowLoginPage extends AbstractAdminPage
             $error[] = $LNG['adm_bad_password'];
         }
 
+        if ($USER['authlevel'] != AUTH_ADM
+            && $USER['authlevel'] != AUTH_MOD
+            && $USER['authlevel'] != AUTH_OPS)
+        {
+            $error[] = $LNG['adm_bad_password'];
+        }
+
         if ($config->capaktiv
             && $config->use_recaptcha_on_admin_login)
         {
