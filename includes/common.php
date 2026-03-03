@@ -75,8 +75,6 @@ define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 if (MODE === 'INSTALL')
 {
-    $THEME = new Theme();
-    $THEME->setUserTheme('nova');
     return;
 }
 
@@ -99,7 +97,7 @@ catch (Exception $e)
 
 if ($dbNeedsUpgrade)
 {
-    HTTP::redirectTo('install/index.php?mode=upgrade');
+    HTTP::redirectTo('install/index.php?page=upgrade');
 }
 
 if (defined('DATABASE_VERSION')
