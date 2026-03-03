@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_logout}{/block}
 {block name="content"}
-	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto">
+	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto text-center">
 		<tr>
 			<th>{$LNG.lo_title}</th>
 		</tr>
@@ -8,12 +8,12 @@
 			<td>{$LNG.lo_logout}</td>
 		</tr>
 	</table>
-	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto">
+	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto text-center">
 		<tr>
 			<th>{$LNG.lo_redirect}</th>
 		</tr>
 		<tr>
-			<td>{$LNG.lo_notify}<br><a href="./index.php">{$LNG.lo_continue}</a></td>
+			<td>{$LNG.lo_notify}<br><a href="index.php">{$LNG.lo_continue}</a></td>
 		</tr>
 	</table>
 	{block name="script" append}
