@@ -28,8 +28,6 @@ class ShowAjaxPage extends AbstractInstallPage
 
     public function show(): void
     {
-        $this->sendJSON('test');
-        exit;
         require 'includes/libs/ftp/ftp.class.php';
         require 'includes/libs/ftp/ftpexception.class.php';
         $LNG->includeData(['ADMIN']);
