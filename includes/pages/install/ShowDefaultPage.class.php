@@ -24,12 +24,6 @@ class ShowDefaultPage extends AbstractInstallPage
 
     public function show(): void
     {
-        global $LNG;
-        $this->assign([
-            'intro_text'    => $LNG['intro_text'],
-            'intro_welcome' => $LNG['intro_welcome'],
-            'intro_install' => $LNG['intro_install'],
-        ]);
         $this->display('ins_intro.tpl');
     }
 }
