@@ -122,27 +122,9 @@ abstract class AbstractInstallPage
             $this->getPageData();
         }
 
-        if (UNIS_WILDCAST)
-        {
-            $host_parts = explode('.', HTTP_HOST);
-            if (preg_match('/uni[0-9]+/', $host_parts[0]))
-            {
-                array_shift($host_parts);
-            }
-            $host = implode('.', $host_parts);
-            $base_path = PROTOCOL.$host.HTTP_BASE;
-        }
-        else
-        {
-            $base_path = PROTOCOL.HTTP_HOST.HTTP_BASE;
-        }
-
         $this->assign([
-            'lang'            => $LNG->getLanguage(),
-            'bodyclass'       => $this->getWindow(),
-            'basepath'        => $base_path,
-            'isMultiUniverse' => count(Universe::availableUniverses()) > 1,
-            'unisWildcast'    => UNIS_WILDCAST,
+            'lang'      => $LNG->getLanguage(),
+            'bodyclass' => $this->getWindow(),
         ]);
 
         $this->assign([
