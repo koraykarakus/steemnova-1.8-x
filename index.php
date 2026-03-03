@@ -23,7 +23,7 @@ require 'includes/pages/login/AbstractLoginPage.class.php';
 require 'includes/pages/login/ShowErrorPage.class.php';
 require 'includes/common.php';
 require_once 'includes/classes/LoginService.class.php';
-/** @var $LNG Language */
+/** @var Language $LNG */
 
 $page = HTTP::_GP('page', 'index');
 $mode = HTTP::_GP('mode', 'show');
