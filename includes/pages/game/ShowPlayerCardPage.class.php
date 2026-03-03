@@ -24,14 +24,12 @@ class ShowPlayerCardPage extends AbstractGamePage
     public function __construct()
     {
         parent::__construct();
+        $this->setWindow('popup');
     }
 
     public function show(): void
     {
         global $USER, $LNG;
-
-        $this->setWindow('popup');
-        $this->initTemplate();
 
         $db = Database::get();
 
@@ -58,9 +56,7 @@ class ShowPlayerCardPage extends AbstractGamePage
 
         if (!$query)
         {
-            // TODO : create new language key
             $this->printMessage('wrong user id');
-            return;
         }
 
         $total_fights = $query['wons'] + $query['loos'] + $query['draws'];
