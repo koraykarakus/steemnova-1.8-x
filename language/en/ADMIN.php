@@ -68,6 +68,9 @@ $LNG['cs_graviton_canyon_start'] = "Gravitation Canyon (amount)";
 $LNG['cs_interceptor_misil_start'] = "Intercepting Missile (amount)";
 $LNG['cs_interplanetary_misil_start'] = "Interplanetary Missile (amount)";
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['relocate_move_fleet_directly'] = "Move fleet directly on relocate";
+
 //---------------	ShowInfosPage.class.php - page.information.default.tpl ------------------------//
 $LNG['ad_infos_server'] = "Server";
 $LNG['ad_infos_server_infos'] = "Server Information";
