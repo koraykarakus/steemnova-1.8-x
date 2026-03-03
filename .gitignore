@@ -1,5 +1,6 @@
 includes/config.php
 includes/error.log
+includes/ENABLE_INSTALL_TOOL
 cache
 includes/libs/opbe/errors
 vendor/
