@@ -15,88 +15,88 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function calculateSteal($attackFleets, $defenderPlanet, $simulate = false)
+function calculateSteal($attack_fleets, $defender_planet, $simulate = false)
 {
     // See: http://www.owiki.de/Beute
     global $pricelist, $resource;
 
-    $firstResource = 901;
-    $secondResource = 902;
-    $thirdResource = 903;
+    $metal = 901;
+    $crystal = 902;
+    $deu = 903;
 
-    $SortFleets = [];
+    $sort_fleets = [];
     $capacity = 0;
 
-    $stealResource = [
-        $firstResource  => 0,
-        $secondResource => 0,
-        $thirdResource  => 0,
+    $steal_res = [
+        $metal   => 0,
+        $crystal => 0,
+        $deu     => 0,
     ];
 
-    foreach ($attackFleets as $FleetID => $Attacker)
+    foreach ($attack_fleets as $fleet_id => $attacker)
     {
-        $SortFleets[$FleetID] = 0;
+        $sort_fleets[$fleet_id] = 0;
 
-        foreach ($Attacker['unit'] as $Element => $amount)
+        foreach ($attacker['unit'] as $element => $amount)
         {
-            $SortFleets[$FleetID] += $pricelist[$Element]['capacity'] * $amount;
+            $sort_fleets[$fleet_id] += $pricelist[$element]['capacity'] * $amount;
         }
 
-        $SortFleets[$FleetID] *= (1 + $Attacker['player']['factor']['ShipStorage']);
+        $sort_fleets[$fleet_id] *= (1 + $attacker['player']['factor']['ShipStorage']);
 
-        $SortFleets[$FleetID] -= $Attacker['fleetDetail']['fleet_resource_metal'];
-        $SortFleets[$FleetID] -= $Attacker['fleetDetail']['fleet_resource_crystal'];
-        $SortFleets[$FleetID] -= $Attacker['fleetDetail']['fleet_resource_deuterium'];
-        $capacity += $SortFleets[$FleetID];
+        $sort_fleets[$fleet_id] -= $attacker['fleetDetail']['fleet_resource_metal'];
+        $sort_fleets[$fleet_id] -= $attacker['fleetDetail']['fleet_resource_crystal'];
+        $sort_fleets[$fleet_id] -= $attacker['fleetDetail']['fleet_resource_deuterium'];
+        $capacity += $sort_fleets[$fleet_id];
     }
 
-    $AllCapacity = $capacity;
-    if ($AllCapacity <= 0)
+    $all_capacity = $capacity;
+    if ($all_capacity <= 0)
     {
-        return $stealResource;
+        return $steal_res;
     }
 
     // Step 1
-    $stealResource[$firstResource] = min($capacity / 3, $defenderPlanet[$resource[$firstResource]] / 2);
-    $capacity -= $stealResource[$firstResource];
+    $steal_res[$metal] = min($capacity / 3, $defender_planet[$resource[$metal]] / 2);
+    $capacity -= $steal_res[$metal];
 
     // Step 2
-    $stealResource[$secondResource] = min($capacity / 2, $defenderPlanet[$resource[$secondResource]] / 2);
-    $capacity -= $stealResource[$secondResource];
+    $steal_res[$crystal] = min($capacity / 2, $defender_planet[$resource[$crystal]] / 2);
+    $capacity -= $steal_res[$crystal];
 
     // Step 3
-    $stealResource[$thirdResource] = min($capacity, $defenderPlanet[$resource[$thirdResource]] / 2);
-    $capacity -= $stealResource[$thirdResource];
+    $steal_res[$deu] = min($capacity, $defender_planet[$resource[$deu]] / 2);
+    $capacity -= $steal_res[$deu];
 
     // Step 4
-    $oldMetalBooty = $stealResource[$firstResource];
-    $stealResource[$firstResource] += min($capacity / 2, $defenderPlanet[$resource[$firstResource]] / 2 - $stealResource[$firstResource]);
-    $capacity -= $stealResource[$firstResource] - $oldMetalBooty;
+    $old_metal_booty = $steal_res[$metal];
+    $steal_res[$metal] += min($capacity / 2, $defender_planet[$resource[$metal]] / 2 - $steal_res[$metal]);
+    $capacity -= $steal_res[$metal] - $old_metal_booty;
 
     // Step 5
-    $stealResource[$secondResource] += min($capacity, $defenderPlanet[$resource[$secondResource]] / 2 - $stealResource[$secondResource]);
+    $steal_res[$crystal] += min($capacity, $defender_planet[$resource[$crystal]] / 2 - $steal_res[$crystal]);
 
     if ($simulate)
     {
-        return $stealResource;
+        return $steal_res;
     }
 
     $db = Database::get();
 
-    foreach ($SortFleets as $FleetID => $Capacity)
+    foreach ($sort_fleets as $fleet_id => $fleet_capacity)
     {
-        $slotFactor = $Capacity / $AllCapacity;
+        $slot_factor = $fleet_capacity / $all_capacity;
 
         $sql = "UPDATE %%FLEETS%% SET
-		`fleet_resource_metal` = `fleet_resource_metal` + '".($stealResource[$firstResource] * $slotFactor)."',
-		`fleet_resource_crystal` = `fleet_resource_crystal` + '".($stealResource[$secondResource] * $slotFactor)."',
-		`fleet_resource_deuterium` = `fleet_resource_deuterium` + '".($stealResource[$thirdResource] * $slotFactor)."'
-		WHERE fleet_id = :fleetId;";
+		`fleet_resource_metal` = `fleet_resource_metal` + '".($steal_res[$metal] * $slot_factor)."',
+		`fleet_resource_crystal` = `fleet_resource_crystal` + '".($steal_res[$crystal] * $slot_factor)."',
+		`fleet_resource_deuterium` = `fleet_resource_deuterium` + '".($steal_res[$deu] * $slot_factor)."'
+		WHERE fleet_id = :fleet_id;";
 
         $db->update($sql, [
-            ':fleetId' => $FleetID,
+            ':fleet_id' => $fleet_id,
         ]);
     }
 
-    return $stealResource;
+    return $steal_res;
 }
