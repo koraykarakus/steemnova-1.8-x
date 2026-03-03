@@ -29,11 +29,11 @@ class Session
 
     public static function init()
     {
-        if (self::$iniSet === true)
+        if (self::$ini_set === true)
         {
             return false;
         }
-        self::$iniSet = true;
+        self::$ini_set = true;
 
         ini_set('session.use_cookies', '1');
         ini_set('session.use_only_cookies', '1');
@@ -199,8 +199,8 @@ class Session
     public function save()
     {
         // do not save an empty session
-        $sessionId = session_id();
-        if (empty($sessionId))
+        $session_id = session_id();
+        if (empty($session_id))
         {
             return;
         }
@@ -211,100 +211,104 @@ class Session
             $this->delete();
         }
 
-        $userIpAddress = self::getClientIp();
+        $user_ip_address = self::getClientIp();
 
         $sql = 'REPLACE INTO %%SESSION%% SET
-		sessionID	= :sessionId,
-		userID		= :userId,
-		lastonline	= :lastActivity,
-		userIP		= :userAddress,
+		sessionID	= :session_id,
+		userID		= :user_id,
+		lastonline	= :last_activity,
+		userIP		= :user_address,
 		created		= :created;';
 
         $db = Database::get();
 
-        $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :sessionId AND userID = :userId;';
+        $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :session_id 
+        AND userID = :user_id;';
 
         $created = $db->selectSingle($sql_created, [
-            ':sessionId' => session_id(),
-            ':userId'    => $this->data['userId'],
+            ':session_id' => session_id(),
+            ':user_id'    => $this->data['userId'],
         ], 'created');
 
         if (empty($created))
         {
             $created = time();
-            $sql_is_exists = 'SELECT * FROM uni1_session_forcekill WHERE sessionID = :sessionId;';
-            $session_is_exists = $db->selectSingle($sql_is_exists, [':sessionId' => session_id()]);
+            $sql_is_exists = 'SELECT * FROM uni1_session_forcekill WHERE sessionID = :session_id;';
+            $session_is_exists = $db->selectSingle($sql_is_exists, [
+                ':session_id' => session_id(),
+            ]);
             if (empty($session_is_exists))
             {
-                $sql_forcekill = 'REPLACE INTO uni1_session_forcekill SET
-			sessionID	= :sessionId,
-			 created	= :created;';
+                $sql_forcekill = 'REPLACE INTO uni1_session_forcekill SET 
+                sessionID	= :session_id, 
+                created	= :created;';
 
                 $db->replace($sql_forcekill, [
-                    ':sessionId' => session_id(),
-                    ':created'   => $created,
+                    ':session_id' => session_id(),
+                    ':created'    => $created,
                 ]);
             }
         }
 
         $db->replace($sql, [
-            ':sessionId'    => session_id(),
-            ':userId'       => $this->data['userId'],
-            ':lastActivity' => time(),
-            ':userAddress'  => $userIpAddress,
-            ':created'      => $created,
+            ':session_id'    => session_id(),
+            ':user_id'       => $this->data['userId'],
+            ':last_activity' => time(),
+            ':user_address'  => $user_ip_address,
+            ':created'       => $created,
         ]);
 
         // Remove collided sessions
-        $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID != :sessionId);';
+        $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :user_id AND sessionID != :session_id);';
         $db->delete($sql, [
-            ':userId'    => $this->data['userId'],
-            ':sessionId' => session_id(),
+            ':user_id'    => $this->data['userId'],
+            ':session_id' => session_id(),
         ]);
 
         // Remove old sessions
         if ($created + SESSION_LIFETIME < time())
         {
-            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID = :sessionId);';
+            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :user_id AND sessionID = :session_id);';
             $db->delete($sql, [
-                ':userId'    => $this->data['userId'],
-                ':sessionId' => session_id(),
+                ':user_id'    => $this->data['userId'],
+                ':session_id' => session_id(),
             ]);
         }
 
         // Force kill sessions ID colliders
-        $sql_force_kill = 'SELECT created FROM uni1_session_forcekill WHERE (sessionID = :sessionId AND created < :time);';
+        $sql_force_kill = 'SELECT created FROM uni1_session_forcekill 
+        WHERE (sessionID = :session_id AND created < :time);';
 
         $sql_force_kill_data = $db->selectSingle($sql_force_kill, [
-            ':sessionId' => session_id(),
-            ':time'      => time() - SESSION_LIFETIME,
+            ':session_id' => session_id(),
+            ':time'       => time() - SESSION_LIFETIME,
         ], 'created');
 
         if (!empty($sql_force_kill_data))
         {
-            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID = :sessionId);';
+            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :user_id AND sessionID = :session_id);';
             $db->delete($sql, [
-                ':userId'    => $this->data['userId'],
-                ':sessionId' => session_id(),
+                ':user_id'    => $this->data['userId'],
+                ':session_id' => session_id(),
             ]);
         }
 
         $sql = 'UPDATE %%USERS%% SET
-		onlinetime	= :lastActivity,
-		user_lastip = :userAddress
+		onlinetime	= :last_activity,
+		user_lastip = :user_address
 		WHERE
-		id = :userId;';
+		id = :user_id;';
 
         $db->update($sql, [
-            ':userAddress'  => $userIpAddress,
-            ':lastActivity' => TIMESTAMP,
-            ':userId'       => $this->data['userId'],
+            ':user_address'  => $user_ip_address,
+            ':last_activity' => TIMESTAMP,
+            ':user_id'       => $this->data['userId'],
         ]);
 
-        $this->data['lastActivity'] = TIMESTAMP;
-        $this->data['sessionId'] = session_id();
-        $this->data['userIpAddress'] = $userIpAddress;
-        $this->data['requestPath'] = $this->getRequestPath();
+        $this->data['last_activity'] = TIMESTAMP;
+        $this->data['session_id'] = session_id();
+        $this->data['user_ip_address'] = $user_ip_address;
+        $this->data['request_path'] = $this->getRequestPath();
 
         $_SESSION['obj'] = serialize($this);
 
@@ -313,11 +317,11 @@ class Session
 
     public function delete()
     {
-        $sql = 'DELETE FROM %%SESSION%% WHERE sessionID = :sessionId;';
+        $sql = 'DELETE FROM %%SESSION%% WHERE sessionID = :session_id;';
         $db = Database::get();
 
         $db->delete($sql, [
-            ':sessionId' => session_id(),
+            ':session_id' => session_id(),
         ]);
 
         @session_destroy();
@@ -325,7 +329,7 @@ class Session
 
     public function isValidSession()
     {
-        // if($this->compareIpAddress($this->data['userIpAddress'], self::getClientIp(), COMPARE_IP_BLOCKS) === false)
+        // if($this->compareIpAddress($this->data['user_ip_address'], self::getClientIp(), COMPARE_IP_BLOCKS) === false)
         // {
         // return false;
         // }
@@ -335,16 +339,16 @@ class Session
             return false;
         }
 
-        if ($this->data['lastActivity'] < TIMESTAMP - SESSION_LIFETIME)
+        if ($this->data['last_activity'] < TIMESTAMP - SESSION_LIFETIME)
         {
             return false;
         }
 
-        $sql = 'SELECT COUNT(*) as record FROM %%SESSION%% WHERE sessionID = :sessionId;';
+        $sql = 'SELECT COUNT(*) as record FROM %%SESSION%% WHERE sessionID = :session_id;';
         $db = Database::get();
 
         $sessionCount = $db->selectSingle($sql, [
-            ':sessionId' => session_id(),
+            ':session_id' => session_id(),
         ], 'record');
 
         if ($sessionCount == 0)

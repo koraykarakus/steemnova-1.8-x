@@ -18,7 +18,7 @@
 class Session
 {
     private static $obj = null;
-    private static $iniSet = false;
+    private static $ini_set = false;
     private $data = null;
 
     /**
@@ -27,13 +27,13 @@ class Session
      * @return bool
      */
 
-    public static function init()
+    public static function init(): bool
     {
-        if (self::$iniSet === true)
+        if (self::$ini_set === true)
         {
             return false;
         }
-        self::$iniSet = true;
+        self::$ini_set = true;
 
         ini_set('session.use_cookies', '1');
         ini_set('session.use_only_cookies', '1');
@@ -72,35 +72,34 @@ class Session
 
     public static function getClientIp()
     {
+        $ip_address = 'UNKNOWN';
+
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
         {
-            $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
+            $ip_address = $_SERVER['HTTP_CLIENT_IP'];
         }
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
         {
-            $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
         elseif (!empty($_SERVER['HTTP_X_FORWARDED']))
         {
-            $ipAddress = $_SERVER['HTTP_X_FORWARDED'];
+            $ip_address = $_SERVER['HTTP_X_FORWARDED'];
         }
         elseif (!empty($_SERVER['HTTP_FORWARDED_FOR']))
         {
-            $ipAddress = $_SERVER['HTTP_FORWARDED_FOR'];
+            $ip_address = $_SERVER['HTTP_FORWARDED_FOR'];
         }
         elseif (!empty($_SERVER['HTTP_FORWARDED']))
         {
-            $ipAddress = $_SERVER['HTTP_FORWARDED'];
+            $ip_address = $_SERVER['HTTP_FORWARDED'];
         }
         elseif (!empty($_SERVER['REMOTE_ADDR']))
         {
-            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            $ip_address = $_SERVER['REMOTE_ADDR'];
         }
-        else
-        {
-            $ipAddress = 'UNKNOWN';
-        }
-        return $ipAddress;
+
+        return $ip_address;
     }
 
     /**
@@ -199,8 +198,8 @@ class Session
     public function save()
     {
         // do not save an empty session
-        $sessionId = session_id();
-        if (empty($sessionId))
+        $session_id = session_id();
+        if (empty($session_id))
         {
             return;
         }
@@ -211,22 +210,23 @@ class Session
             $this->delete();
         }
 
-        $userIpAddress = self::getClientIp();
+        $user_ip_address = self::getClientIp();
 
         $sql = 'REPLACE INTO %%SESSION%% SET
-		sessionID	= :sessionId,
-		userID		= :userId,
-		lastonline	= :lastActivity,
+		sessionID	= :session_id,
+		userID		= :user_id,
+		lastonline	= :last_activity,
 		created		= :created,
-		userIP		= :userAddress;';
+		userIP		= :user_address;';
 
         $db = Database::get();
 
-        $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :sessionId AND userID = :userId;';
+        $sql_created = 'SELECT created FROM %%SESSION%% WHERE sessionID = :session_id 
+        AND userID = :user_id;';
 
         $created = $db->selectSingle($sql_created, [
-            ':sessionId' => session_id(),
-            ':userId'    => $this->data['userId'],
+            ':session_id' => session_id(),
+            ':user_id'    => $this->data['userId'],
         ], 'created');
 
         if (empty($created))
@@ -235,50 +235,51 @@ class Session
         }
 
         $db->replace($sql, [
-            ':sessionId'    => session_id(),
-            ':userId'       => $this->data['userId'],
-            ':lastActivity' => TIMESTAMP,
-            ':created'      => $created,
-            ':userAddress'  => $userIpAddress,
+            ':session_id'    => session_id(),
+            ':user_id'       => $this->data['userId'],
+            ':last_activity' => TIMESTAMP,
+            ':created'       => $created,
+            ':user_address'  => $user_ip_address,
         ]);
 
         $sql = 'UPDATE %%USERS%% SET
-		onlinetime	= :lastActivity,
-		user_lastip = :userAddress
+		onlinetime	= :last_activity,
+		user_lastip = :user_address
 		WHERE
-		id = :userId;';
+		id = :user_id;';
 
         $db->update($sql, [
-            ':userAddress'  => $userIpAddress,
-            ':lastActivity' => TIMESTAMP,
-            ':userId'       => $this->data['userId'],
+            ':user_address'  => $user_ip_address,
+            ':last_activity' => TIMESTAMP,
+            ':user_id'       => $this->data['userId'],
         ]);
 
         // Remove multisessions
         if (PREVENT_MULTISESSIONS == true)
         {
-            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID != :sessionId);';
+            $sql = 'DELETE FROM %%SESSION%% 
+            WHERE (userID = :user_id AND sessionID != :session_id);';
             $db->delete($sql, [
-                ':userId'    => $this->data['userId'],
-                ':sessionId' => session_id(),
+                ':user_id'    => $this->data['userId'],
+                ':session_id' => session_id(),
             ]);
         }
 
         // Remove old sessions
         if ($created + SESSION_LIFETIME < time())
         {
-            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :userId AND sessionID = :sessionId);';
+            $sql = 'DELETE FROM %%SESSION%% WHERE (userID = :user_id AND sessionID = :session_id);';
 
             $db->delete($sql, [
-                ':userId'    => $this->data['userId'],
-                ':sessionId' => session_id(),
+                ':user_id'    => $this->data['userId'],
+                ':session_id' => session_id(),
             ]);
         }
 
-        $this->data['lastActivity'] = TIMESTAMP;
-        $this->data['sessionId'] = session_id();
-        $this->data['userIpAddress'] = $userIpAddress;
-        $this->data['requestPath'] = $this->getRequestPath();
+        $this->data['last_activity'] = TIMESTAMP;
+        $this->data['session_id'] = session_id();
+        $this->data['user_ip_address'] = $user_ip_address;
+        $this->data['request_path'] = $this->getRequestPath();
 
         $_SESSION['obj'] = serialize($this);
 
@@ -288,11 +289,10 @@ class Session
 
     public function delete()
     {
-        $sql = 'DELETE FROM %%SESSION%% WHERE sessionID = :sessionId;';
-        $db = Database::get();
+        $sql = 'DELETE FROM %%SESSION%% WHERE sessionID = :session_id;';
 
-        $db->delete($sql, [
-            ':sessionId' => session_id(),
+        Database::get()->delete($sql, [
+            ':session_id' => session_id(),
         ]);
 
         @session_destroy();
@@ -300,7 +300,7 @@ class Session
 
     public function isValidSession()
     {
-        // if($this->compareIpAddress($this->data['userIpAddress'], self::getClientIp(), COMPARE_IP_BLOCKS) === false)
+        // if($this->compareIpAddress($this->data['user_ip_address'], self::getClientIp(), COMPARE_IP_BLOCKS) === false)
         // {
         // return false;
         // }
@@ -310,16 +310,16 @@ class Session
             return false;
         }
 
-        if ($this->data['lastActivity'] < TIMESTAMP - SESSION_LIFETIME)
+        if ($this->data['last_activity'] < TIMESTAMP - SESSION_LIFETIME)
         {
             return false;
         }
 
-        $sql = 'SELECT COUNT(*) as record FROM %%SESSION%% WHERE sessionID = :sessionId;';
+        $sql = 'SELECT COUNT(*) as record FROM %%SESSION%% WHERE sessionID = :session_id;';
         $db = Database::get();
 
         $sessionCount = $db->selectSingle($sql, [
-            ':sessionId' => session_id(),
+            ':session_id' => session_id(),
         ], 'record');
 
         if ($sessionCount == 0)
@@ -332,21 +332,21 @@ class Session
 
     public function selectActivePlanet()
     {
-        $httpData = HTTP::_GP('cp', 0);
+        $http_data = HTTP::_GP('cp', 0);
 
-        if (!empty($httpData))
+        if (!empty($http_data))
         {
-            $sql = 'SELECT id FROM %%PLANETS%% WHERE id = :planetId AND id_owner = :userId;';
+            $sql = 'SELECT id FROM %%PLANETS%% WHERE id = :planet_id AND id_owner = :userId;';
 
             $db = Database::get();
-            $planetId = $db->selectSingle($sql, [
-                ':userId'   => $this->data['userId'],
-                ':planetId' => $httpData,
+            $planet_id = $db->selectSingle($sql, [
+                ':userId'    => $this->data['userId'],
+                ':planet_id' => $http_data,
             ], 'id');
 
-            if (!empty($planetId))
+            if (!empty($planet_id))
             {
-                $this->data['planetId'] = $planetId;
+                $this->data['planetId'] = $planet_id;
             }
         }
     }
