@@ -25,9 +25,9 @@ require 'includes/common.php';
 $page = HTTP::_GP('page', 'report');
 $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
-$pageClass = 'Show'.ucwords($page).'Page';
+$page_class = 'Show'.ucwords($page).'Page';
 
-$path = 'includes/pages/report/'.$pageClass.'.class.php';
+$path = 'includes/pages/report/'.$page_class.'.class.php';
 
 if (!file_exists($path))
 {
@@ -36,18 +36,18 @@ if (!file_exists($path))
 
 require $path;
 
-$pageObj = new $pageClass();
+$page_obj = new $page_class();
 
-$pageProps = get_class_vars(get_class($pageObj));
+$page_props = get_class_vars(get_class($page_obj));
 
-if (!is_callable([$pageObj, $mode]))
+if (!is_callable([$page_obj, $mode]))
 {
-    if (!isset($pageProps['default_controller'])
-        || !is_callable([$pageObj, $pageProps['default_controller']]))
+    if (!isset($page_props['default_controller'])
+        || !is_callable([$page_obj, $page_props['default_controller']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
-    $mode = $pageProps['default_controller'];
+    $mode = $page_props['default_controller'];
 }
 
-$pageObj->{$mode}();
+$page_obj->{$mode}();
