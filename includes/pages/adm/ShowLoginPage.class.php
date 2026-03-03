@@ -26,7 +26,7 @@ class ShowLoginPage extends AbstractAdminPage
 
         if ($USER['authlevel'] == AUTH_USR)
         {
-            throw new PagePermissionException("Permission error!");
+            throw new Exception("Permission error!");
         }
 
         parent::__construct();
