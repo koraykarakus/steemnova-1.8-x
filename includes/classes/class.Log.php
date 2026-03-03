@@ -45,12 +45,12 @@ class Log
         $uni = (empty($this->data['universe']) ? $this->data['uni'] : $this->data['universe']);
 
         $sql = "INSERT INTO %%LOG%% SET
-	target		= :id,
-	mode		= :mode,
-	admin		= :admin,
-	time		= :time,
-	data		= :data,
-	universe 	= :universe;";
+                target		= :id,
+                mode		= :mode,
+                admin		= :admin,
+                time		= :time,
+                data		= :data,
+                universe 	= :universe;";
 
         $db->insert($sql, [
             ':id'       => $this->data['target'],
