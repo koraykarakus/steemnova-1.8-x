@@ -1,9 +1,9 @@
 {block name="title" prepend}{$LNG.fcm_info}{/block}
 {block name="content"}
     <div class="container">
-        <div class="bg-black mx-auto text-white p-3 my-3 d-flex flex-column align-items-center">
-            <span class="fs-14 text-yellow my-2">{$LNG.fcm_info}</span>
-            <span class="my-2 fs-14">{$msg}</span>
+        <div class="bg-dark border border-secondary mx-auto text-white p-3 my-3 d-flex flex-column align-items-start">
+            <h3 class="text-left my-1 w-100">{$LNG.fcm_info}</h3>
+            <span class="my-1 fs-14 w-100">{$msg}</span>
             {if !empty($redirect_btns)}
                 <p class="my-2 fs-14">
                     {foreach $redirect_btns as $button}
