@@ -17,7 +17,7 @@
 
 class ShowBoardPage extends AbstractGamePage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_FORUM;
 
     public function __construct()
     {
