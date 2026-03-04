@@ -185,7 +185,7 @@ if (MODE === 'INGAME'
 
     if (MODE === 'INGAME')
     {
-        $universeAmount = count(Universe::availableUniverses());
+        $universeAmount = count(Universe::getAvailableUniverses());
         if (Universe::current() != $USER['universe'] && $universeAmount > 1)
         {
             HTTP::redirectToUniverse($USER['universe']);

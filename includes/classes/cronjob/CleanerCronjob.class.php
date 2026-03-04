@@ -23,7 +23,7 @@ class CleanerCronjob implements CronjobTask
     {
         $config = Config::get(ROOT_UNI);
 
-        $unis = Universe::availableUniverses();
+        $unis = Universe::getAvailableUniverses();
 
         //Delete old messages
         $del_before = TIMESTAMP - ($config->del_oldstuff * 86400);

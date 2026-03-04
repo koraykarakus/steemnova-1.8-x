@@ -41,7 +41,7 @@ abstract class AbstractLoginPage
     protected function getUniverseSelector(): array
     {
         $uni_sel = [];
-        foreach (Universe::availableUniverses() as $c_uni_id)
+        foreach (Universe::getAvailableUniverses() as $c_uni_id)
         {
             $uni_sel[$c_uni_id] = Config::get($c_uni_id)->uni_name;
         }
@@ -170,7 +170,7 @@ abstract class AbstractLoginPage
             'lang'            => $LNG->getLanguage(),
             'bodyclass'       => $this->getWindow(),
             'basepath'        => $base_path,
-            'isMultiUniverse' => count(Universe::availableUniverses()) > 1,
+            'isMultiUniverse' => count(Universe::getAvailableUniverses()) > 1,
             'unisWildcast'    => UNIS_WILDCAST,
         ]);
 

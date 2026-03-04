@@ -91,7 +91,7 @@ abstract class AbstractAdminPage
         global $USER;
 
         $universe_select = [];
-        foreach (Universe::availableUniverses() as $uni_id)
+        foreach (Universe::getAvailableUniverses() as $uni_id)
         {
             $config = Config::get($uni_id);
             $universe_select[$uni_id] = sprintf('%s (ID: %d)', $config->uni_name, $uni_id);

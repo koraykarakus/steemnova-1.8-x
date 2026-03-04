@@ -17,64 +17,9 @@
 
 class Universe
 {
-    private static $currentUniverse = null;
-    private static $emulatedUniverse = null;
-    private static $availableUniverses = [];
-
-    /**
-     * Return the current universe id.
-     *
-     * @return int
-     */
-
-    public static function current()
-    {
-        if (is_null(self::$currentUniverse))
-        {
-            self::$currentUniverse = self::defineCurrentUniverse();
-        }
-
-        return self::$currentUniverse;
-    }
-
-    public static function add($universe)
-    {
-        self::$availableUniverses[] = $universe;
-    }
-
-    public static function getEmulated()
-    {
-        if (is_null(self::$emulatedUniverse))
-        {
-            $session = Session::load();
-            if (isset($session->emulatedUniverse))
-            {
-                self::setEmulated($session->emulatedUniverse);
-            }
-            else
-            {
-                self::setEmulated(self::current());
-            }
-        }
-
-        return self::$emulatedUniverse;
-    }
-
-    public static function setEmulated($universeId)
-    {
-        if (!self::exists($universeId))
-        {
-            throw new Exception('Unknown universe ID: '.$universeId);
-        }
-
-        $session = Session::load();
-        $session->emulatedUniverse = $universeId;
-        $session->save();
-
-        self::$emulatedUniverse = $universeId;
-
-        return true;
-    }
+    private static $current_universe = null;
+    private static $emulated_universe = null;
+    private static $universe_array = [];
 
     /**
      * Find current universe id using cookies, get parameter or session keys.
@@ -82,16 +27,17 @@ class Universe
      * @return int
      */
 
-    private static function defineCurrentUniverse()
+    private static function getCurrentUniverse()
     {
-        $universe = null;
         if (MODE === 'INSTALL')
         {
             // Installer are always in the first universe.
             return ROOT_UNI;
         }
 
-        if (count(self::availableUniverses()) != 1)
+        $universe = null;
+        $universe_count = count(self::getAvailableUniverses());
+        if ($universe_count != 1)
         {
             if (MODE == 'LOGIN')
             {
@@ -162,10 +108,71 @@ class Universe
             {
                 HTTP::redirectTo(PROTOCOL.HTTP_HOST.HTTP_BASE.HTTP_FILE, true);
             }
+
             $universe = ROOT_UNI;
         }
 
         return $universe;
+    }
+
+    /**
+     * Return the current universe id.
+     *
+     * @return int
+     */
+
+    public static function current()
+    {
+        if (is_null(self::$current_universe))
+        {
+            self::$current_universe = self::getCurrentUniverse();
+        }
+
+        return self::$current_universe;
+    }
+
+    /**
+     * User by Config class
+     * adds config row inside universe array
+     */
+
+    public static function add($universe)
+    {
+        self::$universe_array[] = $universe;
+    }
+
+    public static function getEmulated()
+    {
+        if (is_null(self::$emulated_universe))
+        {
+            $session = Session::load();
+            if (isset($session->emulatedUniverse))
+            {
+                self::setEmulated($session->emulatedUniverse);
+            }
+            else
+            {
+                self::setEmulated(self::current());
+            }
+        }
+
+        return self::$emulated_universe;
+    }
+
+    public static function setEmulated($universe_id)
+    {
+        if (!self::exists($universe_id))
+        {
+            throw new Exception('Unknown universe ID: '.$universe_id);
+        }
+
+        $session = Session::load();
+        $session->emulatedUniverse = $universe_id;
+        $session->save();
+
+        self::$emulated_universe = $universe_id;
+
+        return true;
     }
 
     /**
@@ -174,9 +181,9 @@ class Universe
      * @return array
      */
 
-    public static function availableUniverses()
+    public static function getAvailableUniverses(): array
     {
-        return self::$availableUniverses;
+        return self::$universe_array;
     }
 
     /**
@@ -187,8 +194,8 @@ class Universe
      * @return int
      */
 
-    public static function exists($universeId)
+    public static function exists($universe_id)
     {
-        return in_array($universeId, self::availableUniverses());
+        return in_array($universe_id, self::getAvailableUniverses());
     }
 }
