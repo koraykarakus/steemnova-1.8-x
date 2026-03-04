@@ -141,7 +141,7 @@ class Config
             //TODO: find a better way ...
             if (!$options['noGlobalSave'] && in_array($columnName, self::$globalConfigKeys))
             {
-                foreach (Universe::availableUniverses() as $universeId)
+                foreach (Universe::getAvailableUniverses() as $universeId)
                 {
                     if ($universeId != $this->configData['uni'])
                     {
