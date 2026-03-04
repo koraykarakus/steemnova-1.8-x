@@ -258,7 +258,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
             return;
         }
 
-        $sql = "UPDATE %PLANETS%% SET ";
+        $sql = "UPDATE %%PLANETS%% SET ";
         $Fields = $planet_data['field_current'];
 
         foreach ($data_ids as $c_id)
@@ -280,7 +280,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $sql .= "`field_max` = :field_max, ";
         $sql .= "`name` = :name, ";
         $sql .= "`eco_hash` = '' ";
-        $sql .= "WHERE `id` = :id' AND `universe` = :universe;";
+        $sql .= "WHERE `id` = :id AND `universe` = :universe;";
 
         $db->update($sql, [
             ':metal'         => max(0, round(HTTP::_GP('metal', 0.0))),
