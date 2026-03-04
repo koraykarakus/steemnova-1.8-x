@@ -21,11 +21,11 @@ if (isset($_POST['GLOBALS'])
     exit('You cannot set the GLOBALS-array from outside the script.');
 }
 
-$composerAutoloader = __DIR__.'/../vendor/autoload.php';
+$composer_auto_loader = __DIR__.'/../vendor/autoload.php';
 
-if (file_exists($composerAutoloader))
+if (file_exists($composer_auto_loader))
 {
-    require $composerAutoloader;
+    require $composer_auto_loader;
 }
 
 if (function_exists('mb_internal_encoding'))
@@ -87,15 +87,15 @@ if (!file_exists('includes/config.php')
 try
 {
     $sql = "SELECT dbVersion FROM %%SYSTEM%%;";
-    $dbVersion = Database::get()->selectSingle($sql, [], 'dbVersion');
-    $dbNeedsUpgrade = $dbVersion < DB_VERSION_REQUIRED;
+    $db_version = Database::get()->selectSingle($sql, [], 'dbVersion');
+    $db_needs_upgrade = $db_version < DB_VERSION_REQUIRED;
 }
 catch (Exception $e)
 {
-    $dbNeedsUpgrade = true;
+    $db_needs_upgrade = true;
 }
 
-if ($dbNeedsUpgrade)
+if ($db_needs_upgrade)
 {
     HTTP::redirectTo('install/index.php?page=upgrade');
 }
@@ -107,12 +107,12 @@ if (defined('DATABASE_VERSION')
     require 'includes/classes/Database_BC.class.php';
     $DATABASE = new Database_BC();
 
-    $dbTableNames = Database::get()->getDbTableNames();
-    $dbTableNames = array_combine($dbTableNames['keys'], $dbTableNames['names']);
+    $db_table_names = Database::get()->getDbTableNames();
+    $db_table_names = array_combine($db_table_names['keys'], $db_table_names['names']);
 
-    foreach ($dbTableNames as $dbAlias => $dbName)
+    foreach ($db_table_names as $db_alias => $db_name)
     {
-        define(substr($dbAlias, 2, -2), $dbName);
+        define(substr($db_alias, 2, -2), $db_name);
     }
 }
 
