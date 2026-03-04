@@ -24,7 +24,6 @@ class ShowErrorPage extends AbstractGamePage
     public function __construct()
     {
         parent::__construct();
-        $this->initTemplate();
     }
 
     public static function printError($msg, $is_full = true, $redirect = null): void
