@@ -38,7 +38,7 @@
       </li>
     {/if}
     {if allowedTo('ShowConfigUniPage')}
-      <li class="d-flex {if $page == 'universe'}menu-active{/if}">
+      <li class="d-flex {if $page == 'universe' && $mode == ''}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6"
           href="?page=universe">{$LNG.mu_unisettings}</a>
       </li>
@@ -50,9 +50,9 @@
       </li>
     {/if}
     {if allowedTo('ShowUniversePage')}
-      <li class="d-flex {if $page == 'universe'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=universe&mode=create">Create
-          new universe</a>
+      <li class="d-flex {if $page == 'universe' && $mode == 'create'}menu-active{/if}">
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6"
+          href="?page=universe&mode=create">{$LNG.mu_create_universe}</a>
       </li>
     {/if}
     {if allowedTo('ShowColonySettingsPage')}
