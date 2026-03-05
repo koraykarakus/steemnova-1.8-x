@@ -77,7 +77,7 @@
 			</table>
 		</form>
 	{/if}
-	<table class="table table-sm table-gow fs-12">
+	<table style="width: 100%;table-layout:fixed" class="table table-sm table-gow fs-12">
 		<tr>
 			<th class="text-center" colspan="8">{$LNG.gl_solar_system} {$galaxy}:{$system}</th>
 		</tr>
@@ -349,11 +349,14 @@
 
 
 
+
 								{if !$class@first} 
 
 
 
+
 								{/if}galaxy-username-{$class}
+
 
 
 
@@ -397,11 +400,14 @@
 
 
 
+
 									{if !$class@first} 
 
 
 
+
 									{/if}galaxy-alliance-{$class}
+
 
 
 
