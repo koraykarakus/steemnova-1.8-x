@@ -62,7 +62,7 @@ class ShowResetPage extends AbstractAdminPage
             're_general'                     => $LNG['re_general'],
         ]);
 
-        $this->display('ResetPage.tpl');
+        $this->display('page.reset.default.tpl');
     }
 
     public function send(): void
