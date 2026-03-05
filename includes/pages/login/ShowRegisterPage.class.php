@@ -70,6 +70,7 @@ class ShowRegisterPage extends AbstractLoginPage
         $user_secret_question_id = HTTP::_GP('secretQuestion', 0);
         $user_secret_question_answer = HTTP::_GP('secretQuestionAnswer', '', true);
         $referral_id = HTTP::_GP('referralID', 0);
+        $universe = HTTP::_GP('universe', ROOT_UNI);
         $external_auth = false;
 
         $service_obj = new LoginService();
@@ -83,6 +84,7 @@ class ShowRegisterPage extends AbstractLoginPage
             $user_secret_question_id,
             $user_secret_question_answer,
             $referral_id,
+            $universe,
             $external_auth
         );
 

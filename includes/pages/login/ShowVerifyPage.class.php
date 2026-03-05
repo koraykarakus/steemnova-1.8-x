@@ -35,13 +35,11 @@ class ShowVerifyPage extends AbstractLoginPage
 
         $sql = "SELECT * FROM %%USERS_VALID%%
 		WHERE validationID	= :validation_id
-		AND validationKey	= :validation_key
-		AND universe		= :universe;";
+		AND validationKey	= :validation_key;";
 
         $user_data = $db->selectSingle($sql, [
             ':validation_id'  => $validation_id,
             ':validation_key' => $validation_key,
-            ':universe'       => Universe::current(),
         ]);
 
         if (empty($user_data))

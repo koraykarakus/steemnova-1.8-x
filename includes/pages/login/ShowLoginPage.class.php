@@ -46,7 +46,7 @@ class ShowLoginPage extends AbstractLoginPage
         $token_val = HTTP::_GP('rememberedTokenValidator', '');
         $token_sel = HTTP::_GP('rememberedTokenSelector', '');
         $mem_email = HTTP::_GP('rememberedEmail', '');
-        $universe = HTTP::_GP('universe', Universe::current());
+        $universe = HTTP::_GP('universe', 0);
         $external_auth = false;
 
         $login_service = new LoginService();

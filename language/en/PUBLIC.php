@@ -119,6 +119,7 @@ $LNG['reg_err_14'] = 'Wrong csrf, refresh the page and try again.';
 $LNG['reg_err_15'] = 'The username is already taken!';
 $LNG['reg_err_16'] = 'The E-Mail address is already registered!';
 $LNG['reg_err_17'] = 'Wrong recaptcha';
+$LNG['reg_err_18'] = 'Modified or wrong universe input by form, please refresh the page and try again';
 
 $LNG['reg_suc_1'] = 'Thank you for the registration. Check your email to verify your account.';
 $LNG['reg_suc_2'] = 'Your account is waiting for verification, new mail has been sent!';

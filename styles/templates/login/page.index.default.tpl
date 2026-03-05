@@ -19,7 +19,7 @@
 					password: $("#password").val(),
 					g_recaptcha_response: recaptchaResponse,
 					remember_me: $('#remember_me').is(':checked'),
-					universe: $('#universe option:selected').val(),
+					universe: $('#universe').val(),
 					rememberedTokenValidator: $('#rememberedTokenValidator').val(),
 					rememberedTokenSelector: $('#rememberedTokenSelector').val(),
 					rememberedEmail: $('#rememberedEmail').val(),
@@ -28,7 +28,6 @@
 
 					var dataParsed = jQuery.parseJSON(data);
 					$('.alert').remove();
-					console.log(dataParsed);
 
 
 					if (dataParsed.status == 'fail') {
@@ -60,6 +59,29 @@
 
 
 		}
+
+		function changeUni(value) {
+			console.log(value);
+
+			$.ajax({
+				type: "POST",
+				url: 'index.php?page=index&mode=changeUni&ajax=1',
+				data: {
+					uni: value,
+				},
+				success: function(data) {
+					var dataParsed = jQuery.parseJSON(data);
+					console.log(dataParsed);
+
+				},
+				error: function(xhr, status, error) {
+					console.log(status, error, xhr.responseText);
+				}
+
+			});
+
+
+		}
 	</script>
 
 	<h1 class="fs-3 my-4 w-100">{sprintf($LNG.loginWelcome, $gameName)}</h1>
@@ -72,7 +94,7 @@
 			<input id="rememberedTokenSelector" type="hidden" name="rememberedTokenSelector" value="{$mem_token_sel}">
 			<input id="rememberedTokenValidator" type="hidden" name="rememberedTokenValidator" value="{$mem_token_valid}">
 			<div class="d-flex flex-column form-group">
-				<select class="form-select my-2 w-100" name="uni" id="universe">
+				<select onchange="changeUni(this.value);" class="form-select my-2 w-100" name="uni" id="universe">
 					{foreach $universeSelect as $universeID => $currentUniverse}
 						<option class="fs-6" {if $currentUniverse == $mem_uni_id}selected{/if} value="{$universeID}">
 							{$currentUniverse}</option>

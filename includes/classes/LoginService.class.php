@@ -64,7 +64,7 @@ class LoginService
         $answer = $result;
     }
 
-    private function checkFormInput($user_name, $password, $email, $rules_checked)
+    private function checkFormInput($user_name, $password, $email, $rules_checked, $universe)
     {
         if (empty($user_name))
         {
@@ -104,6 +104,11 @@ class LoginService
         if ($rules_checked === 0)
         {
             return Register::rules_not_checked;
+        }
+
+        if (!in_array($universe, Universe::getAvailableUniverses()))
+        {
+            return Register::wrong_universe;
         }
 
         return Register::form_is_valid;
@@ -155,7 +160,7 @@ class LoginService
         $rules_checked = 1;
     }
 
-    private function existsUserNameInDB($user_name): bool
+    private function existsUserNameInDB($user_name, $universe): bool
     {
 
         $sql = "SELECT (
@@ -171,7 +176,7 @@ class LoginService
 			) as count;";
 
         $count = Database::get()->selectSingle($sql, [
-            ':universe' => Universe::current(),
+            ':universe' => $universe,
             ':userName' => $user_name,
         ]);
 
@@ -183,7 +188,7 @@ class LoginService
         return (((int) $count['count']) ?? 0) > 0;
     }
 
-    private function existsEmailInDB($email): bool
+    private function existsEmailInDB($email, $universe): bool
     {
         $sql = "SELECT COUNT(*) as count
         FROM %%USERS%%
@@ -191,7 +196,7 @@ class LoginService
 		AND (email = :email OR email_2 = :email);";
 
         $count = Database::get()->selectSingle($sql, [
-            ':universe' => Universe::current(),
+            ':universe' => $universe,
             ':email'    => $email,
         ]);
 
@@ -204,7 +209,7 @@ class LoginService
         return (((int) $count['count']) ?? 0) > 0;
     }
 
-    private function existsEmailInVerificationTable($email): bool
+    private function existsEmailInVerificationTable($email, $universe): bool
     {
         $sql = "SELECT COUNT(*) as count 
 			FROM %%USERS_VALID%%
@@ -212,7 +217,7 @@ class LoginService
 			AND email = :email";
 
         $count = Database::get()->selectSingle($sql, [
-            ':universe' => Universe::current(),
+            ':universe' => $universe,
             ':email'    => $email,
         ]);
 
@@ -254,7 +259,7 @@ class LoginService
         return true;
     }
 
-    private function setReferralID($id): void
+    private function setReferralID($id, $universe): void
     {
         if (Config::get()->ref_active != 1
             || $id === 0)
@@ -268,7 +273,7 @@ class LoginService
 
         $count = Database::get()->selectSingle($sql, [
             ':referral_id' => $id,
-            ':universe'    => Universe::current(),
+            ':universe'    => $universe,
         ]);
 
         if ($count === false)
@@ -289,7 +294,8 @@ class LoginService
         $email,
         $language,
         $user_secret_question_id,
-        $user_secret_question_answer
+        $user_secret_question_answer,
+        $universe
     ): void {
         $this->validation_key = md5(uniqid('2m'));
 
@@ -316,7 +322,7 @@ class LoginService
             ':timestamp'                   => TIMESTAMP,
             ':ip'                          => Session::getClientIp(),
             ':language'                    => $language,
-            ':universe'                    => Universe::current(),
+            ':universe'                    => $universe,
             ':referral_id'                 => $this->referral_id,
             ':external_auth_uid'           => null,
             ':external_auth_method'        => null,
@@ -409,6 +415,7 @@ class LoginService
         $user_secret_question_id = 0,
         $user_secret_question_answer = '',
         $referral_id = 0,
+        $universe = ROOT_UNI,
         $external_auth = false
     ): int {
 
@@ -433,7 +440,7 @@ class LoginService
             {
                 $this->createUserName($user_name);
             }
-            while ($this->existsUserNameInDB($user_name));
+            while ($this->existsUserNameInDB($user_name, $universe));
 
             $this->createPassword($password);
             $this->setRulesAsChecked($rules_checked);
@@ -449,25 +456,25 @@ class LoginService
             return $result;
         }
 
-        $result = $this->checkFormInput($user_name, $password, $email, $rules_checked);
+        $result = $this->checkFormInput($user_name, $password, $email, $rules_checked, $universe);
 
         if ($result != Register::form_is_valid)
         {
             return $result;
         }
 
-        if ($this->existsUserNameInDB($user_name))
+        if ($this->existsUserNameInDB($user_name, $universe))
         {
             return Register::username_exists_in_db;
         }
 
         // TODO: inform, someone tried to register with your mail..
-        if ($this->existsEmailInDB($email))
+        if ($this->existsEmailInDB($email, $universe))
         {
             return Register::email_exists_in_db;
         }
 
-        if ($this->existsEmailInVerificationTable($email))
+        if ($this->existsEmailInVerificationTable($email, $universe))
         {
             return Register::register_success_verify_with_mail_existing;
         }
@@ -477,7 +484,7 @@ class LoginService
             return Register::recaptcha_error;
         }
 
-        $this->setReferralID($referral_id);
+        $this->setReferralID($referral_id, $universe);
 
         $this->saveToValidationTable(
             $user_name,
@@ -485,7 +492,8 @@ class LoginService
             $email,
             $language,
             $user_secret_question_id,
-            $user_secret_question_answer
+            $user_secret_question_answer,
+            $universe
         );
 
         $this->verify_url = 'index.php?page=verify&i=' .
@@ -549,6 +557,9 @@ class LoginService
             case Register::rules_not_checked:
                 $data['msg'] = $LNG['reg_err_13'];
                 break;
+            case Register::wrong_universe:
+                $data['msg'] = $LNG['reg_err_18'];
+                break;
             case Register::username_exists_in_db:
                 $data['msg'] = $LNG['reg_err_15'];
                 break;
@@ -578,7 +589,7 @@ class LoginService
     }
 
     // LOGIN
-    private function checkLoginInput($email, $password)
+    private function checkLoginInput($email, $password, $universe)
     {
         if (empty($email))
         {
@@ -588,6 +599,11 @@ class LoginService
         if (empty($password))
         {
             return Login::password_empty;
+        }
+
+        if (!in_array($universe, Universe::getAvailableUniverses()))
+        {
+            return Login::wrong_universe;
         }
 
         return Login::form_is_valid;
@@ -739,7 +755,7 @@ class LoginService
         $external_auth = false,
     ) {
 
-        $result = $this->checkLoginInput($email, $password);
+        $result = $this->checkLoginInput($email, $password, $universe);
 
         if ($result != Login::form_is_valid)
         {

@@ -22,6 +22,7 @@
 					language: $('#language option:selected').val(),
 					rules: $('#rules').is(':checked') ? 1 : 0,
 					referralID: $('#referralID').val(),
+					universe: $('#universe').val(),
 					g_recaptcha_response: recaptchaResponse,
 				},
 				success: function(data) {
@@ -45,6 +46,9 @@
 						location.href = dataParsed.url;
 					}
 
+				},
+				error: function(xhr, status, error) {
+					console.log(status, error, xhr.responseText);
 				}
 
 			});

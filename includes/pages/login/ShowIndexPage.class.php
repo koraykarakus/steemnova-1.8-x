@@ -23,6 +23,18 @@ class ShowIndexPage extends AbstractLoginPage
     {
         parent::__construct();
         $this->setWindow('light');
+        HTTP::sendCookie('uni', ROOT_UNI, TIMESTAMP + 3600);
+    }
+
+    public function changeUni(): void
+    {
+        $universe = HTTP::_GP('uni', 0);
+        if (!in_array($universe, Universe::getAvailableUniverses()))
+        {
+            return;
+        }
+        HTTP::sendCookie('uni', $universe, TIMESTAMP + 3600);
+        $this->sendJSON([1 => 'success']);
     }
 
     public function parseRememberMeToken($token): array

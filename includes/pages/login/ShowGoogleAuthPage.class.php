@@ -76,11 +76,21 @@ class ShowGoogleAuthPage extends AbstractLoginPage
             $this->printMessage("No mail");
         }
 
+        if (!isset($_COOKIE['uni'])
+            || !in_array((int) $_COOKIE['uni'], Universe::getAvailableUniverses()))
+        {
+            $this->printMessage('Universe is wrong or not selected.');
+        }
+
+        $universe = (int) $_COOKIE['uni'];
+
         $db = Database::get();
-        $sql = "SELECT * FROM %%USERS%% WHERE email = :email;";
+        $sql = "SELECT * FROM %%USERS%% 
+        WHERE email = :email AND universe = :universe;";
 
         $user = $db->selectSingle($sql, [
-            ':email' => $user_info->email,
+            ':email'    => $user_info->email,
+            ':universe' => $universe,
         ]);
 
         if ($user === false)
@@ -102,6 +112,7 @@ class ShowGoogleAuthPage extends AbstractLoginPage
                 null,
                 null,
                 0,
+                $universe,
                 true
             );
 

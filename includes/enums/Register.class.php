@@ -17,11 +17,12 @@ class Register
     public const mail_empty = 13;
     public const mail_too_long = 14;
     public const rules_not_checked = 15;
-    public const form_is_valid = 16;
-    public const username_exists_in_db = 17;
-    public const email_exists_in_db = 18;
-    public const register_success_verify_with_mail_existing = 19;
-    public const recaptcha_error = 20;
-    public const register_success_verify_with_mail = 21;
-    public const register_success_no_verify = 22;
+    public const wrong_universe = 16;
+    public const form_is_valid = 17;
+    public const username_exists_in_db = 18;
+    public const email_exists_in_db = 19;
+    public const register_success_verify_with_mail_existing = 20;
+    public const recaptcha_error = 21;
+    public const register_success_verify_with_mail = 22;
+    public const register_success_no_verify = 23;
 }
