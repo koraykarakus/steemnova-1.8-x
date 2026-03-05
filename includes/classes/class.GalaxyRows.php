@@ -189,18 +189,19 @@ class GalaxyRows
         $IsNoobProtec = CheckNoobProtec($USER, $this->galaxyRow, $this->galaxyRow);
         $Class = userStatus($this->galaxyRow, $IsNoobProtec);
 
+        $user_name = htmlspecialchars($this->galaxyRow['username'] ?? 'DELETED_USER', ENT_QUOTES, "UTF-8");
         $this->galaxyData[$this->galaxyRow['planet']]['user'] = [
             'id'         => $this->galaxyRow['userid'],
-            'username'   => htmlspecialchars($this->galaxyRow['username'], ENT_QUOTES, "UTF-8"),
+            'username'   => $user_name,
             'rank'       => $this->galaxyRow['total_rank'],
             'points'     => pretty_number($this->galaxyRow['total_points']),
             'playerrank' => isModuleAvailable(MODULE_STATISTICS) ?
                                 sprintf(
                                     $LNG['gl_in_the_rank'],
-                                    htmlspecialchars($this->galaxyRow['username'], ENT_QUOTES, "UTF-8"),
+                                    $user_name,
                                     $this->galaxyRow['total_rank']
                                 ) :
-                                htmlspecialchars($this->galaxyRow['username'], ENT_QUOTES, "UTF-8"),
+                                $user_name,
             'class'   => $Class,
             'isBuddy' => $this->galaxyRow['buddy'] == 0,
         ];
