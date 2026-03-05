@@ -378,4 +378,11 @@ class ShowUniversePage extends AbstractAdminPage
         $this->display('page.universe.create.tpl');
     }
 
+    public function sendCreate(): void
+    {
+        $sql = "INSERT INTO %%CONFIG%% SET `users_amount` = 0;";
+        Database::get()->insert($sql, []);
+        $this->printMessage('new universe created by success');
+    }
+
 }

@@ -162,8 +162,8 @@ class Config
         return true;
     }
 
-    public static function getAll()
+    public function getAll(): array
     {
-        throw new Exception("Config::getAll is deprecated!");
+        return $this->configData;
     }
 }
