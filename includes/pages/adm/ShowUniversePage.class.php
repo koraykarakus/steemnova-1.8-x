@@ -368,4 +368,14 @@ class ShowUniversePage extends AbstractAdminPage
 
     }
 
+    // create universe, display
+    public function create(): void
+    {
+        $this->assign([
+
+        ]);
+
+        $this->display('page.universe.create.tpl');
+    }
+
 }

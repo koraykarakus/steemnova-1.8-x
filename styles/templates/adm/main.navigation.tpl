@@ -49,6 +49,12 @@
           href="?page=reset">{$LNG.mu_reset_universe}</a>
       </li>
     {/if}
+    {if allowedTo('ShowUniversePage')}
+      <li class="d-flex {if $currentPage == 'universe'}menu-active{/if}">
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=universe&mode=create">Create
+          new universe</a>
+      </li>
+    {/if}
     {if allowedTo('ShowColonySettingsPage')}
       <li class="d-flex {if $currentPage == 'colonySettings'}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=colonySettings">Colony
