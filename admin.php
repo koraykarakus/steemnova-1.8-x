@@ -68,12 +68,12 @@ $pageProps = get_class_vars(get_class($pageObj));
 
 if (!is_callable([$pageObj, $mode]))
 {
-    if (!isset($pageProps['defaultController'])
-        || !is_callable([$pageObj, $pageProps['defaultController']]))
+    if (!isset($pageProps['default_controller'])
+        || !is_callable([$pageObj, $pageProps['default_controller']]))
     {
         ShowErrorPage::printError($LNG['page_doesnt_exist']);
     }
-    $mode = $pageProps['defaultController'];
+    $mode = $pageProps['default_controller'];
 }
 
 $pageObj->{$mode}();
