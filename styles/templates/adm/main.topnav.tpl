@@ -2,7 +2,7 @@
 	{$LNG.adm_cp_title}</div>
 <div class="d-flex justify-content-center align-items-center">
 	{if $authlevel == $smarty.const.AUTH_ADM}
-		<select style="width:auto;" class="form-select bg-dark text-white mx-1" id="universe">
+		<select style="width:auto;" class="form-select bg-dark text-white mx-1" id="universe_select">
 			{html_options options=$AvailableUnis selected=$UNI}
 		</select>
 	{/if}
@@ -24,11 +24,12 @@
 		class="border mx-1 p-1 border-danger rounded text-decoration-none text-danger fs-6">{$LNG.adm_cp_logout}</a>
 </div>
 <script>
-	$(function() {
-		$('#universe').on('change', function(e) {
-			parent.frames['Hauptframe'].location.href = parent.frames['Hauptframe'].location.href +
-				'&uni=' + $(this).val();
-			parent.frames['rightFrame'].location.reload();
-		});
+	$(document).on('change', '#universe_select', function() {
+		const val = $('#universe_select').val();
+		if (val === undefined || val === null) return;
+		const url = new URL(window.location.href);
+		const params = url.searchParams;
+		params.set('uni', val);
+		window.location.href = url.pathname + '?' + params.toString();
 	});
 </script>
