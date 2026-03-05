@@ -112,7 +112,8 @@ abstract class AbstractAdminPage
             'sid'           => session_id(),
             'id'            => $USER['id'],
             'supportticks'  => $number_tickets,
-            'currentPage'   => HTTP::_GP('page', ''),
+            'page'          => HTTP::_GP('page', ''),
+            'mode'          => HTTP::_GP('mode', ''),
             'search'        => HTTP::_GP('search', ''),
         ]);
     }
