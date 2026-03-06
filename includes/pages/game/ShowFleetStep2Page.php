@@ -30,13 +30,13 @@ class ShowFleetStep2Page extends AbstractGamePage
 
         $this->tpl_obj->loadscript('flotten.js');
 
-        $targetGalaxy = HTTP::_GP('galaxy', 0);
-        $targetSystem = HTTP::_GP('system', 0);
-        $targetPlanet = HTTP::_GP('planet', 0);
-        $targetType = HTTP::_GP('type', 0);
-        $targetMission = HTTP::_GP('target_mission', 0);
-        $fleetSpeed = HTTP::_GP('speed', 0);
-        $fleetGroup = HTTP::_GP('fleet_group', 0);
+        $target_galaxy = HTTP::_GP('galaxy', 0);
+        $target_system = HTTP::_GP('system', 0);
+        $target_planet = HTTP::_GP('planet', 0);
+        $target_type = HTTP::_GP('type', 0);
+        $target_mission = HTTP::_GP('target_mission', 0);
+        $fleet_speed = HTTP::_GP('speed', 0);
+        $fleet_group = HTTP::_GP('fleet_group', 0);
         $token = HTTP::_GP('token', '');
 
         if (!isset($_SESSION['fleet'][$token]))
@@ -44,18 +44,23 @@ class ShowFleetStep2Page extends AbstractGamePage
             FleetFunctions::GotoFleetPage();
         }
 
-        $fleetArray = $_SESSION['fleet'][$token]['fleet'];
+        $fleet_array = $_SESSION['fleet'][$token]['fleet'];
 
         $db = Database::get();
-        $sql = "SELECT id, id_owner, der_metal, der_crystal FROM %%PLANETS%% WHERE universe = :universe AND galaxy = :targetGalaxy AND system = :targetSystem AND planet = :targetPlanet AND planet_type = '1';";
-        $targetPlanetData = $db->selectSingle($sql, [
-            ':universe'     => Universe::current(),
-            ':targetGalaxy' => $targetGalaxy,
-            ':targetSystem' => $targetSystem,
-            ':targetPlanet' => $targetPlanet,
+        $sql = "SELECT id, id_owner, der_metal, der_crystal FROM %%PLANETS%% 
+        WHERE universe = :universe AND galaxy = :target_galaxy 
+        AND system = :target_system AND planet = :target_planet AND planet_type = '1';";
+
+        $target_planet_data = $db->selectSingle($sql, [
+            ':universe'      => Universe::current(),
+            ':target_galaxy' => $target_galaxy,
+            ':target_system' => $target_system,
+            ':target_planet' => $target_planet,
         ]);
 
-        if ($targetType == 2 && $targetPlanetData['der_metal'] == 0 && $targetPlanetData['der_crystal'] == 0)
+        if ($target_type == 2
+            && $target_planet_data['der_metal'] == 0
+            && $target_planet_data['der_crystal'] == 0)
         {
             $this->printMessage($LNG['fl_error_empty_derbis'], [[
                 'label' => $LNG['sys_back'],
@@ -63,17 +68,21 @@ class ShowFleetStep2Page extends AbstractGamePage
             ]]);
         }
 
-        $MisInfo = [];
-        $MisInfo['galaxy'] = $targetGalaxy;
-        $MisInfo['system'] = $targetSystem;
-        $MisInfo['planet'] = $targetPlanet;
-        $MisInfo['planettype'] = $targetType;
-        $MisInfo['IsAKS'] = $fleetGroup;
-        $MisInfo['Ship'] = $fleetArray;
+        $mission_info = [];
+        $mission_info['galaxy'] = $target_galaxy;
+        $mission_info['system'] = $target_system;
+        $mission_info['planet'] = $target_planet;
+        $mission_info['planettype'] = $target_type;
+        $mission_info['IsAKS'] = $fleet_group;
+        $mission_info['Ship'] = $fleet_array;
 
-        $MissionOutput = FleetFunctions::GetFleetMissions($USER, $MisInfo, $targetPlanetData);
+        $mission_output = FleetFunctions::GetFleetMissions(
+            $USER,
+            $mission_info,
+            $target_planet_data
+        );
 
-        if (empty($MissionOutput['MissionSelector']))
+        if (empty($mission_output['MissionSelector']))
         {
             $this->printMessage($LNG['fl_empty_target'], [[
                 'label' => $LNG['sys_back'],
@@ -81,11 +90,26 @@ class ShowFleetStep2Page extends AbstractGamePage
             ]]);
         }
 
-        $GameSpeedFactor = FleetFunctions::GetGameSpeedFactor();
-        $MaxFleetSpeed = FleetFunctions::GetFleetMaxSpeed($fleetArray, $USER);
-        $distance = FleetFunctions::GetTargetDistance([$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']], [$targetGalaxy, $targetSystem, $targetPlanet]);
-        $duration = FleetFunctions::GetMissionDuration($fleetSpeed, $MaxFleetSpeed, $distance, $GameSpeedFactor, $USER);
-        $consumption = FleetFunctions::GetFleetConsumption($fleetArray, $duration, $distance, $USER, $GameSpeedFactor);
+        $game_speed_factor = FleetFunctions::GetGameSpeedFactor();
+        $max_fleet_speed = FleetFunctions::GetFleetMaxSpeed($fleet_array, $USER);
+        $distance = FleetFunctions::GetTargetDistance(
+            [$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']],
+            [$target_galaxy, $target_system, $target_planet]
+        );
+        $duration = FleetFunctions::GetMissionDuration(
+            $fleet_speed,
+            $max_fleet_speed,
+            $distance,
+            $game_speed_factor,
+            $USER
+        );
+        $consumption = FleetFunctions::GetFleetConsumption(
+            $fleet_array,
+            $duration,
+            $distance,
+            $USER,
+            $game_speed_factor
+        );
 
         if ($consumption > $PLANET['deuterium'])
         {
@@ -95,46 +119,50 @@ class ShowFleetStep2Page extends AbstractGamePage
             ]]);
         }
 
-        if (!FleetFunctions::CheckUserSpeed($fleetSpeed))
+        if (!FleetFunctions::CheckUserSpeed($fleet_speed))
         {
             FleetFunctions::GotoFleetPage(0);
         }
 
-        $_SESSION['fleet'][$token]['speed'] = $MaxFleetSpeed;
+        $_SESSION['fleet'][$token]['speed'] = $max_fleet_speed;
         $_SESSION['fleet'][$token]['distance'] = $distance;
-        $_SESSION['fleet'][$token]['targetGalaxy'] = $targetGalaxy;
-        $_SESSION['fleet'][$token]['targetSystem'] = $targetSystem;
-        $_SESSION['fleet'][$token]['targetPlanet'] = $targetPlanet;
-        $_SESSION['fleet'][$token]['targetType'] = $targetType;
-        $_SESSION['fleet'][$token]['fleetGroup'] = $fleetGroup;
-        $_SESSION['fleet'][$token]['fleetSpeed'] = $fleetSpeed;
+        $_SESSION['fleet'][$token]['targetGalaxy'] = $target_galaxy;
+        $_SESSION['fleet'][$token]['targetSystem'] = $target_system;
+        $_SESSION['fleet'][$token]['targetPlanet'] = $target_planet;
+        $_SESSION['fleet'][$token]['targetType'] = $target_type;
+        $_SESSION['fleet'][$token]['fleetGroup'] = $fleet_group;
+        $_SESSION['fleet'][$token]['fleetSpeed'] = $fleet_speed;
         $_SESSION['fleet'][$token]['ownPlanet'] = $PLANET['id'];
 
         if (!empty($fleet_group))
         {
-            $targetMission = 2;
+            $target_mission = 2;
         }
 
-        $fleetData = [
+        $fleet_data = [
             'fleetroom'   => floatToString($_SESSION['fleet'][$token]['fleetRoom']),
             'consumption' => floatToString($consumption),
         ];
 
         $this->tpl_obj->execscript('calculateTransportCapacity();');
         $this->assign([
-            'fleetdata'           => $fleetData,
+            'fleetdata'           => $fleet_data,
             'consumption'         => floatToString($consumption),
-            'mission'             => $targetMission,
+            'mission'             => $target_mission,
             'galaxy'              => $PLANET['galaxy'],
             'system'              => $PLANET['system'],
             'planet'              => $PLANET['planet'],
             'type'                => $PLANET['planet_type'],
-            'MissionSelector'     => $MissionOutput['MissionSelector'],
-            'StaySelector'        => $MissionOutput['StayBlock'],
-            'Exchange'            => $MissionOutput['Exchange'],
-            'fl_dm_alert_message' => sprintf($LNG['fl_dm_alert_message'], $LNG['type_mission_11'], $LNG['tech'][921]),
-            'fl_continue'         => $LNG['fl_continue'],
-            'token'               => $token,
+            'MissionSelector'     => $mission_output['MissionSelector'],
+            'StaySelector'        => $mission_output['StayBlock'],
+            'Exchange'            => $mission_output['Exchange'],
+            'fl_dm_alert_message' => sprintf(
+                $LNG['fl_dm_alert_message'],
+                $LNG['type_mission_11'],
+                $LNG['tech'][921]
+            ),
+            'fl_continue' => $LNG['fl_continue'],
+            'token'       => $token,
         ]);
 
         $this->display('page.fleetStep2.default.tpl');
