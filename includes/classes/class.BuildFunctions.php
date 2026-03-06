@@ -17,7 +17,7 @@
 
 class BuildFunctions
 {
-    public static $bonusList = [
+    public static $bonus_list = [
         'Attack',
         'Defensive',
         'Shield',
@@ -40,7 +40,7 @@ class BuildFunctions
 
     public static function getBonusList()
     {
-        return self::$bonusList;
+        return self::$bonus_list;
     }
 
     public static function getRestPrice($USER, $PLANET, $element, $element_price = null)
@@ -79,19 +79,19 @@ class BuildFunctions
             || in_array($element, $reslist['defense'])
             || in_array($element, $reslist['missile']))
         {
-            $elementLevel = $for_level;
+            $element_level = $for_level;
         }
         elseif (isset($for_level))
         {
-            $elementLevel = $for_level;
+            $element_level = $for_level;
         }
         elseif (isset($PLANET[$resource[$element]]))
         {
-            $elementLevel = $PLANET[$resource[$element]];
+            $element_level = $PLANET[$resource[$element]];
         }
         elseif (isset($USER[$resource[$element]]))
         {
-            $elementLevel = $USER[$resource[$element]];
+            $element_level = $USER[$resource[$element]];
         }
         else
         {
@@ -105,20 +105,20 @@ class BuildFunctions
             {
                 continue;
             }
-            $ressourceAmount = $pricelist[$element]['cost'][$resType];
+            $ressource_amount = $pricelist[$element]['cost'][$resType];
 
-            if ($ressourceAmount == 0)
+            if ($ressource_amount == 0)
             {
                 continue;
             }
 
-            $price[$resType] = $ressourceAmount;
+            $price[$resType] = $ressource_amount;
 
             if (isset($pricelist[$element]['factor'])
                 && $pricelist[$element]['factor'] != 0
                 && $pricelist[$element]['factor'] != 1)
             {
-                $price[$resType] *= pow($pricelist[$element]['factor'], $elementLevel - 1);
+                $price[$resType] *= pow($pricelist[$element]['factor'], $element_level - 1);
             }
 
             if ($for_level
@@ -126,7 +126,7 @@ class BuildFunctions
                 || in_array($element, $reslist['defense'])
                 || in_array($element, $reslist['missile'])))
             {
-                $price[$resType] *= $elementLevel;
+                $price[$resType] *= $element_level;
             }
 
             if ($for_destroy === true)
@@ -185,33 +185,33 @@ class BuildFunctions
             );
         }
 
-        $elementCost = 0;
+        $element_cost = 0;
 
         if (isset($element_price[901]))
         {
-            $elementCost += $element_price[901];
+            $element_cost += $element_price[901];
         }
 
         if (isset($element_price[902]))
         {
-            $elementCost += $element_price[902];
+            $element_cost += $element_price[902];
         }
 
         if (in_array($element, $reslist['build']))
         {
-            $time = $elementCost / ($config->game_speed * (1 + $PLANET[$resource[14]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['BuildTime']);
+            $time = $element_cost / ($config->game_speed * (1 + $PLANET[$resource[14]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['BuildTime']);
         }
         elseif (in_array($element, $reslist['fleet']))
         {
-            $time = $elementCost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['ShipTime']);
+            $time = $element_cost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['ShipTime']);
         }
         elseif (in_array($element, $reslist['defense']))
         {
-            $time = $elementCost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['DefensiveTime']);
+            $time = $element_cost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['DefensiveTime']);
         }
         elseif (in_array($element, $reslist['missile']))
         {
-            $time = $elementCost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['DefensiveTime']);
+            $time = $element_cost / ($config->game_speed * (1 + $PLANET[$resource[21]])) * pow(0.5, $PLANET[$resource[15]]) * (1 + $USER['factor']['DefensiveTime']);
         }
         elseif (in_array($element, $reslist['tech']))
         {
@@ -232,7 +232,7 @@ class BuildFunctions
                 }
             }
 
-            $time = $elementCost / (1000 * (1 + $Level)) / ($config->game_speed / 2500) * pow(1 - $config->factor_university / 100, $PLANET[$resource[6]]) * (1 + $USER['factor']['ResearchTime']);
+            $time = $element_cost / (1000 * (1 + $Level)) / ($config->game_speed / 2500) * pow(1 - $config->factor_university / 100, $PLANET[$resource[6]]) * (1 + $USER['factor']['ResearchTime']);
         }
 
         if ($for_destroy)
@@ -347,7 +347,7 @@ class BuildFunctions
 
         $element_bonus = [];
 
-        foreach (self::$bonusList as $bonus)
+        foreach (self::$bonus_list as $bonus)
         {
             $temp = (float) $pricelist[$element]['bonus'][$bonus][0];
             if (empty($temp))
