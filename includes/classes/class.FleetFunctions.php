@@ -846,7 +846,6 @@ class FleetFunctions
 		fleet_group					= :fleetGroup,
 		fleet_target_obj			= :missileTarget,
 		start_time					= :timestamp;';
-        var_dump(Universe::current());
 
         $db->insert($sql, [
             ':fleetStartOwner'         => $fleetStartOwner,
