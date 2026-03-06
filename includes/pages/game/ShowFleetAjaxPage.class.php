@@ -17,9 +17,8 @@
 
 class ShowFleetAjaxPage extends AbstractGamePage
 {
-    public $return_data = [];
-
     public static $require_module = 0;
+    public $return_data = [];
 
     public function __construct()
     {
@@ -27,10 +26,10 @@ class ShowFleetAjaxPage extends AbstractGamePage
         $this->setWindow('ajax');
     }
 
-    private function sendData($Code, $Message): void
+    private function sendData($code, $message): void
     {
-        $this->return_data['code'] = $Code;
-        $this->return_data['mess'] = $Message;
+        $this->return_data['code'] = $code;
+        $this->return_data['mess'] = $message;
         $this->sendJSON($this->return_data);
     }
 
