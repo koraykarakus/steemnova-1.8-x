@@ -28,7 +28,7 @@ class ShowMessageListPage extends AbstractAdminPage
     public function show(): void
     {
         global $LNG, $USER;
-        $page = HTTP::_GP('side', 1);
+        $c_page = HTTP::_GP('side', 1);
         $type = HTTP::_GP('type', 100);
         $sender = HTTP::_GP('sender', '', UTF8_SUPPORT);
         $receiver = HTTP::_GP('receiver', '', UTF8_SUPPORT);
@@ -213,9 +213,9 @@ class ShowMessageListPage extends AbstractAdminPage
         }
 
         $max_page = max(1, ceil($message_count / $per_side));
-        $page = max(1, min($page, $max_page));
+        $c_page = max(1, min($c_page, $max_page));
 
-        $sql_limit = (($page - 1) * $per_side).", ".($per_side - 1);
+        $sql_limit = (($c_page - 1) * $per_side).", ".($per_side - 1);
 
         if ($type == 100)
         {
@@ -266,15 +266,15 @@ class ShowMessageListPage extends AbstractAdminPage
         }
 
         $this->assign([
-            'categories'  => $categories,
-            'maxPage'     => $max_page,
-            'page'        => $page,
-            'messageList' => $message_list,
-            'type'        => $type,
-            'dateStart'   => $date_start,
-            'dateEnd'     => $date_end,
-            'sender'      => $sender,
-            'receiver'    => $receiver,
+            'categories'   => $categories,
+            'max_page'     => $max_page,
+            'c_page'       => $c_page,
+            'message_list' => $message_list,
+            'type'         => $type,
+            'date_start'   => $date_start,
+            'date_end'     => $date_end,
+            'sender'       => $sender,
+            'receiver'     => $receiver,
         ]);
 
         $this->display('page.messagelist.default.tpl');
