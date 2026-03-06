@@ -17,15 +17,15 @@
 
 class BBCode
 {
-    public static function parse($sText)
+    public static function parse($text)
     {
-        if (!isset($sText))
+        if (!isset($text))
         {
-            $sText = '';
+            $text = '';
         }
-        $sText = str_replace("\r\n", "\n", $sText);
-        $sText = str_replace("\r", "\n", $sText);
-        $sText = str_replace("\n", '<br />', $sText);
+        $text = str_replace("\r\n", "\n", $text);
+        $text = str_replace("\r", "\n", $text);
+        $text = str_replace("\n", '<br />', $text);
 
         $config = parse_ini_file('BBCodeParser2.ini', true);
 
@@ -33,7 +33,7 @@ class BBCode
 
         $parser = new HTML_BBCodeParser2($options);
 
-        $parser->setText($sText);
+        $parser->setText($text);
 
         $parser->parse();
 
