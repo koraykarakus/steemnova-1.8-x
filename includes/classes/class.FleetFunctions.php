@@ -774,4 +774,175 @@ class FleetFunctions
         ]);
         return $fleetId;
     }
+
+    public static function sendFleetTest(
+        $fleetArray,
+        $fleetMission,
+        $fleetStartOwner,
+        $fleetStartPlanetID,
+        $fleetStartPlanetGalaxy,
+        $fleetStartPlanetSystem,
+        $fleetStartPlanetPlanet,
+        $fleetStartPlanetType,
+        $fleetTargetOwner,
+        $fleetTargetPlanetID,
+        $fleetTargetPlanetGalaxy,
+        $fleetTargetPlanetSystem,
+        $fleetTargetPlanetPlanet,
+        $fleetTargetPlanetType,
+        $fleetResource,
+        $fleetStartTime,
+        $fleetStayTime,
+        $fleetEndTime,
+        $fleetGroup = 0,
+        $missileTarget = 0,
+        $fleetNoMReturn = 0,
+        $consumption = 0
+    ) {
+        global $resource;
+        $fleetShipCount = array_sum($fleetArray);
+        $fleetData = [];
+
+        $db = Database::get();
+
+        $params = [':planetId' => $fleetStartPlanetID];
+
+        foreach ($fleetArray as $ShipID => $ShipCount)
+        {
+            $fleetData[] = $ShipID.','.floatToString($ShipCount);
+
+            $params[':'.$resource[$ShipID]] = floatToString($ShipCount);
+        }
+
+        if ($consumption > 0)
+        {
+            $params[':'.$resource[903]] = $consumption;
+        }
+
+        $sql = 'INSERT INTO %%FLEETS%% SET
+		fleet_owner					= :fleetStartOwner,
+		fleet_target_owner			= :fleetTargetOwner,
+		fleet_mission				= :fleetMission,
+		fleet_amount				= :fleetShipCount,
+		fleet_array					= :fleetData,
+		fleet_universe				= :universe,
+		fleet_start_time			= :fleetStartTime,
+		fleet_end_stay				= :fleetStayTime,
+		fleet_end_time				= :fleetEndTime,
+		fleet_start_id				= :fleetStartPlanetID,
+		fleet_start_galaxy			= :fleetStartPlanetGalaxy,
+		fleet_start_system			= :fleetStartPlanetSystem,
+		fleet_start_planet			= :fleetStartPlanetPlanet,
+		fleet_start_type			= :fleetStartPlanetType,
+		fleet_end_id				= :fleetTargetPlanetID,
+		fleet_end_galaxy			= :fleetTargetPlanetGalaxy,
+		fleet_end_system			= :fleetTargetPlanetSystem,
+		fleet_end_planet			= :fleetTargetPlanetPlanet,
+		fleet_end_type				= :fleetTargetPlanetType,
+		fleet_resource_metal		= :fleetResource901,
+		fleet_resource_crystal		= :fleetResource902,
+		fleet_resource_deuterium	= :fleetResource903,
+		fleet_no_m_return = :fleetNoMReturn,
+		fleet_group					= :fleetGroup,
+		fleet_target_obj			= :missileTarget,
+		start_time					= :timestamp;';
+        var_dump(Universe::current());
+
+        $db->insert($sql, [
+            ':fleetStartOwner'         => $fleetStartOwner,
+            ':fleetTargetOwner'        => $fleetTargetOwner,
+            ':fleetMission'            => $fleetMission,
+            ':fleetShipCount'          => $fleetShipCount,
+            ':fleetData'               => implode(';', $fleetData),
+            ':fleetStartTime'          => $fleetStartTime,
+            ':fleetStayTime'           => $fleetStayTime,
+            ':fleetEndTime'            => $fleetEndTime,
+            ':fleetStartPlanetID'      => $fleetStartPlanetID,
+            ':fleetStartPlanetGalaxy'  => $fleetStartPlanetGalaxy,
+            ':fleetStartPlanetSystem'  => $fleetStartPlanetSystem,
+            ':fleetStartPlanetPlanet'  => $fleetStartPlanetPlanet,
+            ':fleetStartPlanetType'    => $fleetStartPlanetType,
+            ':fleetTargetPlanetID'     => $fleetTargetPlanetID,
+            ':fleetTargetPlanetGalaxy' => $fleetTargetPlanetGalaxy,
+            ':fleetTargetPlanetSystem' => $fleetTargetPlanetSystem,
+            ':fleetTargetPlanetPlanet' => $fleetTargetPlanetPlanet,
+            ':fleetTargetPlanetType'   => $fleetTargetPlanetType,
+            ':fleetResource901'        => $fleetResource[901],
+            ':fleetResource902'        => $fleetResource[902],
+            ':fleetResource903'        => $fleetResource[903],
+            ':fleetNoMReturn'          => $fleetNoMReturn,
+            ':fleetGroup'              => $fleetGroup,
+            ':missileTarget'           => $missileTarget,
+            ':timestamp'               => TIMESTAMP,
+            ':universe'                => Universe::current(),
+        ]);
+
+        $fleetId = $db->lastInsertId();
+
+        $sql = 'INSERT INTO %%FLEETS_EVENT%% SET fleetID	= :fleetId, `time` = :endTime;';
+        $db->insert($sql, [
+            ':fleetId' => $fleetId,
+            ':endTime' => $fleetStartTime,
+        ]);
+
+        $sql = 'INSERT INTO %%LOG_FLEETS%% SET
+		fleet_id					= :fleetId,
+		fleet_owner					= :fleetStartOwner,
+		fleet_target_owner			= :fleetTargetOwner,
+		fleet_mission				= :fleetMission,
+		fleet_amount				= :fleetShipCount,
+		fleet_array					= :fleetData,
+		fleet_universe				= :universe,
+		fleet_start_time			= :fleetStartTime,
+		fleet_end_stay				= :fleetStayTime,
+		fleet_end_time				= :fleetEndTime,
+		fleet_start_id				= :fleetStartPlanetID,
+		fleet_start_galaxy			= :fleetStartPlanetGalaxy,
+		fleet_start_system			= :fleetStartPlanetSystem,
+		fleet_start_planet			= :fleetStartPlanetPlanet,
+		fleet_start_type			= :fleetStartPlanetType,
+		fleet_end_id				= :fleetTargetPlanetID,
+		fleet_end_galaxy			= :fleetTargetPlanetGalaxy,
+		fleet_end_system			= :fleetTargetPlanetSystem,
+		fleet_end_planet			= :fleetTargetPlanetPlanet,
+		fleet_end_type				= :fleetTargetPlanetType,
+		fleet_resource_metal		= :fleetResource901,
+		fleet_resource_crystal		= :fleetResource902,
+		fleet_resource_deuterium	= :fleetResource903,
+		fleet_no_m_return = :fleetNoMReturn,
+		fleet_group					= :fleetGroup,
+		fleet_target_obj			= :missileTarget,
+		start_time					= :timestamp;';
+
+        $db->insert($sql, [
+            ':fleetId'                 => $fleetId,
+            ':fleetStartOwner'         => $fleetStartOwner,
+            ':fleetTargetOwner'        => $fleetTargetOwner,
+            ':fleetMission'            => $fleetMission,
+            ':fleetShipCount'          => $fleetShipCount,
+            ':fleetData'               => implode(';', $fleetData),
+            ':fleetStartTime'          => $fleetStartTime,
+            ':fleetStayTime'           => $fleetStayTime,
+            ':fleetEndTime'            => $fleetEndTime,
+            ':fleetStartPlanetID'      => $fleetStartPlanetID,
+            ':fleetStartPlanetGalaxy'  => $fleetStartPlanetGalaxy,
+            ':fleetStartPlanetSystem'  => $fleetStartPlanetSystem,
+            ':fleetStartPlanetPlanet'  => $fleetStartPlanetPlanet,
+            ':fleetStartPlanetType'    => $fleetStartPlanetType,
+            ':fleetTargetPlanetID'     => $fleetTargetPlanetID,
+            ':fleetTargetPlanetGalaxy' => $fleetTargetPlanetGalaxy,
+            ':fleetTargetPlanetSystem' => $fleetTargetPlanetSystem,
+            ':fleetTargetPlanetPlanet' => $fleetTargetPlanetPlanet,
+            ':fleetTargetPlanetType'   => $fleetTargetPlanetType,
+            ':fleetResource901'        => $fleetResource[901],
+            ':fleetResource902'        => $fleetResource[902],
+            ':fleetResource903'        => $fleetResource[903],
+            ':fleetNoMReturn'          => $fleetNoMReturn,
+            ':fleetGroup'              => $fleetGroup,
+            ':missileTarget'           => $missileTarget,
+            ':timestamp'               => TIMESTAMP,
+            ':universe'                => Universe::current(),
+        ]);
+        return $fleetId;
+    }
 }

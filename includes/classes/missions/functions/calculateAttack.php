@@ -8,7 +8,7 @@
 999 - SteemNova's Battle Engine based on Arrays; Very slow, not recommended
 */
 
-$battle_engine = 2;
+$battle_engine = 0;
 
 /*
 DON'T MODIFY ↓

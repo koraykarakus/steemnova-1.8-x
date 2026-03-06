@@ -77,6 +77,10 @@
       <a class="w-100 d-flex align-items-center text-center justify-content-center" href="./admin.php"
         style="color:lime">{$LNG.lm_administration} ({$VERSION})</a>
     </li>
+    <li class="menu-button">
+      <a class="w-100 d-flex align-items-center text-center justify-content-center" href="?page=testBattle"
+        style="color:lime" target="_blank">Test Battle</a>
+    </li>
   {/if}
   {if $commit != ''}
     <li class="menu-button">
