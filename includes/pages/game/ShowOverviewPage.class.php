@@ -303,7 +303,10 @@ class ShowOverviewPage extends AbstractGamePage
         $this->setWindow('popup');
 
         $this->assign([
-            'ov_security_confirm' => sprintf($LNG['ov_security_confirm'], $PLANET['name'].' ['.$PLANET['galaxy'].':'.$PLANET['system'].':'.$PLANET['planet'].']'),
+            'ov_security_confirm' => sprintf(
+                $LNG['ov_security_confirm'],
+                $PLANET['name'].' ['.$PLANET['galaxy'].':'.$PLANET['system'].':'.$PLANET['planet'].']'
+            ),
         ]);
 
         $this->display('page.overview.actions.tpl');
@@ -313,21 +316,21 @@ class ShowOverviewPage extends AbstractGamePage
     {
         global $LNG, $PLANET;
 
-        $newname = HTTP::_GP('name', '', UTF8_SUPPORT);
+        $new_name = HTTP::_GP('name', '', UTF8_SUPPORT);
 
         $error = [];
 
-        if (empty($newname))
+        if (empty($new_name))
         {
             $error[] = $LNG['ov_ac_error_1'];
         }
 
-        if (strlen($newname) > 20)
+        if (strlen($new_name) > 20)
         {
             $error[] = $LNG['ov_ac_error_2'];
         }
 
-        if (!PlayerUtil::isNameValid($newname))
+        if (!PlayerUtil::isNameValid($new_name))
         {
             $error[] = $LNG['ov_newname_specialchar'];
         }
@@ -339,15 +342,15 @@ class ShowOverviewPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "UPDATE %%PLANETS%% SET name = :newName WHERE id = :planetID;";
+        $sql = "UPDATE %%PLANETS%% SET `name` = :new_name 
+        WHERE id = :planet_id;";
 
         $db->update($sql, [
-            ':newName'  => $newname,
-            ':planetID' => $PLANET['id'],
+            ':new_name'  => $new_name,
+            ':planet_id' => $PLANET['id'],
         ]);
 
         $this->sendJSON($LNG['ov_newname_done']);
-
     }
 
     public function delete(): void
@@ -365,13 +368,13 @@ class ShowOverviewPage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
-						(fleet_owner = :userID AND (fleet_start_id = :planetID OR fleet_start_id = :lunaID)) OR
-						(fleet_target_owner = :userID AND (fleet_end_id = :planetID OR fleet_end_id = :lunaID));";
+        (fleet_owner = :user_id AND (fleet_start_id = :planet_id OR fleet_start_id = :moon_id)) OR
+        (fleet_target_owner = :user_id AND (fleet_end_id = :planet_id OR fleet_end_id = :moon_id));";
 
         $fleet_count = $db->selectSingle($sql, [
-            ':userID'   => $USER['id'],
-            ':planetID' => $PLANET['id'],
-            ':lunaID'   => $PLANET['id_luna'],
+            ':user_id'   => $USER['id'],
+            ':planet_id' => $PLANET['id'],
+            ':moon_id'   => $PLANET['id_luna'],
         ], 'count');
 
         if ($fleet_count > 0)
@@ -384,7 +387,7 @@ class ShowOverviewPage extends AbstractGamePage
             $error[] = $LNG['ov_principal_planet_cant_abanone'];
         }
 
-        if (!(password_verify($password, $USER['password'])))
+        if (!password_verify($password, $USER['password']))
         {
             $error[] = $LNG['ov_ac_error_5'];
         }
@@ -399,12 +402,12 @@ class ShowOverviewPage extends AbstractGamePage
         {
             $tech_q = unserialize($USER['b_tech_queue']);
             $new_current_q = [];
-            foreach ($tech_q as $ID => $ListIDArray)
+            foreach ($tech_q as $ID => $list_id_array)
             {
-                if ($ListIDArray[4] == $PLANET['id'])
+                if ($list_id_array[4] == $PLANET['id'])
                 {
-                    $ListIDArray[4] = $USER['id_planet'];
-                    $new_current_q[] = $ListIDArray;
+                    $list_id_array[4] = $USER['id_planet'];
+                    $new_current_q[] = $list_id_array;
                 }
             }
 
@@ -414,31 +417,33 @@ class ShowOverviewPage extends AbstractGamePage
 
         if ($PLANET['planet_type'] == 1)
         {
-            $sql = "UPDATE %%PLANETS%% SET destruyed = :time WHERE id = :planetID;";
+            $sql = "UPDATE %%PLANETS%% SET destruyed = :time 
+            WHERE id = :planet_id;";
 
             $db->update($sql, [
-                ':time'     => TIMESTAMP + 86400,
-                ':planetID' => $PLANET['id'],
+                ':time'      => TIMESTAMP + 86400,
+                ':planet_id' => $PLANET['id'],
             ]);
 
-            $sql = "DELETE FROM %%PLANETS%% WHERE id = :lunaID;";
+            $sql = "DELETE FROM %%PLANETS%% 
+            WHERE id = :moon_id;";
 
             $db->delete($sql, [
-                ':lunaID' => $PLANET['id_luna'],
+                ':moon_id' => $PLANET['id_luna'],
             ]);
         }
         else
         {
-            $sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planetID;";
+            $sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planet_id;";
 
             $db->update($sql, [
-                ':planetID' => $PLANET['id'],
+                ':planet_id' => $PLANET['id'],
             ]);
 
-            $sql = "DELETE FROM %%PLANETS%% WHERE id = :planetID;";
+            $sql = "DELETE FROM %%PLANETS%% WHERE id = :planet_id;";
 
             $db->delete($sql, [
-                ':planetID' => $PLANET['id'],
+                ':planet_id' => $PLANET['id'],
             ]);
         }
 
