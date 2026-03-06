@@ -17,7 +17,7 @@
 
 class ShowFleetAjaxPage extends AbstractGamePage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_FLEET_TABLE;
     public $return_data = [];
 
     public function __construct()
