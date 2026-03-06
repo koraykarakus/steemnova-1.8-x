@@ -33,30 +33,30 @@ class ShowGalaxyPage extends AbstractGamePage
         $config = Config::get();
 
         $action = HTTP::_GP('action', '');
-        $galaxyLeft = HTTP::_GP('galaxyLeft', '');
-        $galaxyRight = HTTP::_GP('galaxyRight', '');
-        $systemLeft = HTTP::_GP('systemLeft', '');
-        $systemRight = HTTP::_GP('systemRight', '');
+        $galaxy_left = HTTP::_GP('galaxyLeft', '');
+        $galaxy_right = HTTP::_GP('galaxyRight', '');
+        $system_left = HTTP::_GP('systemLeft', '');
+        $system_right = HTTP::_GP('systemRight', '');
         $galaxy = min(max(HTTP::_GP('galaxy', (int) $PLANET['galaxy']), 1), $config->max_galaxy);
         $system = min(max(HTTP::_GP('system', (int) $PLANET['system']), 1), $config->max_system);
         $planet = min(max(HTTP::_GP('planet', (int) $PLANET['planet']), 1), $config->max_planets);
         $type = HTTP::_GP('type', 1);
         $current = HTTP::_GP('current', 0);
 
-        if (!empty($galaxyLeft))
+        if (!empty($galaxy_left))
         {
             $galaxy = max($galaxy - 1, 1);
         }
-        elseif (!empty($galaxyRight))
+        elseif (!empty($galaxy_right))
         {
             $galaxy = min($galaxy + 1, $config->max_galaxy);
         }
 
-        if (!empty($systemLeft))
+        if (!empty($system_left))
         {
             $system = max($system - 1, 1);
         }
-        elseif (!empty($systemRight))
+        elseif (!empty($system_right))
         {
             $system = min($system + 1, $config->max_system);
         }
