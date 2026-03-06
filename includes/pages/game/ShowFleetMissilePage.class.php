@@ -45,14 +45,14 @@ class ShowFleetMissilePage extends AbstractGamePage
         $target = $db->selectSingle($sql, [
             ':universe'      => Universe::current(),
             ':target_galaxy' => $target_galaxy,
-            ':target_system'  => $target_system,
-            ':target_planet'  => $target_planet,
-            ':target_type'    => $target_type,
+            ':target_system' => $target_system,
+            ':target_planet' => $target_planet,
+            ':target_type'   => $target_type,
         ]);
 
         $range = FleetFunctions::GetMissileRange($USER[$resource[117]]);
-        $systemMin = $PLANET['system'] - $range;
-        $systemMax = $PLANET['system'] + $range;
+        $system_min = $PLANET['system'] - $range;
+        $system_max = $PLANET['system'] + $range;
 
         $error = [];
 
@@ -72,8 +72,8 @@ class ShowFleetMissilePage extends AbstractGamePage
         }
 
         if ($target_galaxy != $PLANET['galaxy']
-            || $target_system < $systemMin
-            || $target_system > $systemMax)
+            || $target_system < $system_min
+            || $target_system > $system_max)
         {
             $error[] = $LNG['ma_not_send_other_galaxy'];
         }
@@ -83,7 +83,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             $error[] = $LNG['ma_planet_doesnt_exists'];
         }
 
-        if (!in_array($primary_target, $reslist['defense']) 
+        if (!in_array($primary_target, $reslist['defense'])
             && $primary_target != 0)
         {
             $error[] = $LNG['ma_wrong_target'];
@@ -110,7 +110,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             $target_user = GetUserByID($target['id_owner'], ['onlinetime', 'banaday', 'urlaubs_modus', 'authattack']);
         }
 
-        if (Config::get()->adm_attack == 1 
+        if (Config::get()->adm_attack == 1
             && $target_user['authattack'] > $USER['authlevel'])
         {
             $error[] = $LNG['fl_admin_attack'];
@@ -160,8 +160,8 @@ class ShowFleetMissilePage extends AbstractGamePage
 
         $duration = FleetFunctions::GetMIPDuration($PLANET['system'], $target_system);
 
-        $defense_label = ($primary_target == 0) ? 
-                        $LNG['ma_all'] : 
+        $defense_label = ($primary_target == 0) ?
+                        $LNG['ma_all'] :
                         $LNG['tech'][$primary_target];
 
         $fleet_array = [503 => $anz];
