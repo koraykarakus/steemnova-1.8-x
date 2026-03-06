@@ -18,8 +18,8 @@
 define('MODE', 'REPORT');
 define('ROOT_PATH', str_replace('\\', '/', dirname(__FILE__)).'/');
 
-require 'includes/pages/report/AbstractReportPage.class.php';
-require 'includes/pages/report/ShowErrorPage.class.php';
+require 'includes/pages/report/AbstractReportPage.php';
+require 'includes/pages/report/ShowErrorPage.php';
 require 'includes/common.php';
 
 $page = HTTP::_GP('page', 'report');
@@ -27,7 +27,7 @@ $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $page_class = 'Show'.ucwords($page).'Page';
 
-$path = 'includes/pages/report/'.$page_class.'.class.php';
+$path = 'includes/pages/report/'.$page_class.'.php';
 
 if (!file_exists($path))
 {

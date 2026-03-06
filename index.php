@@ -19,8 +19,8 @@ define('MODE', 'LOGIN');
 define('ROOT_PATH', str_replace('\\', '/', dirname(__FILE__)).'/');
 set_include_path(ROOT_PATH);
 
-require 'includes/pages/login/AbstractLoginPage.class.php';
-require 'includes/pages/login/ShowErrorPage.class.php';
+require 'includes/pages/login/AbstractLoginPage.php';
+require 'includes/pages/login/ShowErrorPage.php';
 require 'includes/common.php';
 require_once 'includes/classes/LoginService.class.php';
 /** @var Language $LNG */
@@ -30,7 +30,7 @@ $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $page_class = 'Show'.ucfirst($page).'Page';
 
-$path = 'includes/pages/login/'.$page_class.'.class.php';
+$path = 'includes/pages/login/'.$page_class.'.php';
 
 if (!file_exists($path))
 {

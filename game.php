@@ -20,8 +20,8 @@ define('ROOT_PATH', str_replace('\\', '/', dirname(__FILE__)).'/');
 set_include_path(ROOT_PATH.'includes/libs/BBCodeParser2/'.':'.ROOT_PATH.':'.get_include_path());
 require_once('includes/libs/BBCodeParser2/HTML/BBCodeParser2.php');
 
-require 'includes/pages/game/AbstractGamePage.class.php';
-require 'includes/pages/game/ShowErrorPage.class.php';
+require 'includes/pages/game/AbstractGamePage.php';
+require 'includes/pages/game/ShowErrorPage.php';
 require 'includes/common.php';
 
 $page = HTTP::_GP('page', 'overview');
@@ -29,7 +29,7 @@ $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $page_class = 'Show'.ucwords($page).'Page';
 
-$path = 'includes/pages/game/'.$page_class.'.class.php';
+$path = 'includes/pages/game/'.$page_class.'.php';
 
 if (!file_exists($path))
 {

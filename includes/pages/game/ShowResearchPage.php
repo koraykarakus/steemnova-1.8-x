@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-require_once('AbstractGamePage.class.php');
+require_once('AbstractGamePage.php');
 
 class ShowResearchPage extends AbstractGamePage
 {

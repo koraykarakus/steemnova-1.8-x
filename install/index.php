@@ -89,14 +89,14 @@ if (!is_file($path_install_file))
 }
 
 // add
-require 'includes/pages/install/AbstractInstallPage.class.php';
-require 'includes/pages/install/ShowErrorPage.class.php';
+require 'includes/pages/install/AbstractInstallPage.php';
+require 'includes/pages/install/ShowErrorPage.php';
 
 $mode = HTTP::_GP('mode', 'show');
 $page = str_replace(['_', '\\', '/', '.', "\0"], '', $page);
 $page_class = 'Show'.ucwords($page).'Page';
 
-$path = 'includes/pages/install/'.$page_class.'.class.php';
+$path = 'includes/pages/install/'.$page_class.'.php';
 if (!file_exists($path))
 {
     ShowErrorPage::printError($LNG['page_doesnt_exist']);

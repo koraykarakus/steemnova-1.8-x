@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-require_once 'includes/pages/game/ShowPhalanxPage.class.php';
+require_once 'includes/pages/game/ShowPhalanxPage.php';
 
 class GalaxyRows
 {
