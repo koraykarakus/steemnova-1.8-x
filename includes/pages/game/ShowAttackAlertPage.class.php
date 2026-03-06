@@ -20,14 +20,14 @@ class ShowAttackAlertPage extends AbstractGamePage
         SUM(CASE WHEN fleet_mission = 6 THEN 1 ELSE 0 END) AS spy
         FROM %%FLEETS%%
         WHERE
-        fleet_owner != :userId
+        fleet_owner != :user_id
         AND fleet_mess = 0
         AND fleet_universe = :universe
-        AND fleet_target_owner = :userId
+        AND fleet_target_owner = :user_id
         AND hasCanceled = 0;";
 
         $fleets = $db->selectSingle($sql, [
-            ':userId'   => $USER['id'],
+            ':user_id'  => $USER['id'],
             ':universe' => Universe::current(),
         ]);
 
