@@ -26,9 +26,9 @@ class ShowInformationPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function getNextJumpWaitTime($lastTime): int
+    public static function getNextJumpWaitTime($last_time): int
     {
-        return (int) $lastTime + (int) Config::get()->gate_wait_time;
+        return (int) $last_time + (int) Config::get()->gate_wait_time;
     }
 
     public function sendFleet(): void
@@ -37,25 +37,29 @@ class ShowInformationPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $NextJumpTime = self::getNextJumpWaitTime($PLANET['last_jump_time']);
+        $next_jump_time = self::getNextJumpWaitTime($PLANET['last_jump_time']);
 
-        if (TIMESTAMP < $NextJumpTime)
+        if (TIMESTAMP < $next_jump_time)
         {
             $this->sendJSON([
-                'message' => $LNG['in_jump_gate_already_used'].' '.pretty_time($NextJumpTime - TIMESTAMP),
+                'message' => $LNG['in_jump_gate_already_used'].' '.pretty_time($next_jump_time - TIMESTAMP),
                 'error'   => true,
             ]);
         }
 
-        $TargetPlanet = HTTP::_GP('jmpto', (int) $PLANET['id']);
+        $target_planet = HTTP::_GP('jmpto', (int) $PLANET['id']);
 
-        $sql = "SELECT id, last_jump_time FROM %%PLANETS%% WHERE id = :targetID AND id_owner = :userID AND sprungtor > 0;";
-        $TargetGate = $db->selectSingle($sql, [
-            ':targetID' => $TargetPlanet,
-            ':userID'   => $USER['id'],
+        $sql = "SELECT id, last_jump_time 
+        FROM %%PLANETS%% 
+        WHERE id = :target_id AND id_owner = :user_id AND sprungtor > 0;";
+
+        $target_gate = $db->selectSingle($sql, [
+            ':target_id' => $target_planet,
+            ':user_id'   => $USER['id'],
         ]);
 
-        if (!isset($TargetGate) || $TargetPlanet == $PLANET['id'])
+        if (!isset($target_gate)
+            || $target_planet == $PLANET['id'])
         {
             $this->sendJSON([
                 'message' => $LNG['in_jump_gate_doesnt_have_one'],
@@ -63,41 +67,42 @@ class ShowInformationPage extends AbstractGamePage
             ]);
         }
 
-        $NextJumpTime = self::getNextJumpWaitTime($TargetGate['last_jump_time']);
+        $next_jump_time = self::getNextJumpWaitTime($target_gate['last_jump_time']);
 
-        if (TIMESTAMP < $NextJumpTime)
+        if (TIMESTAMP < $next_jump_time)
         {
             $this->sendJSON([
-                'message' => $LNG['in_jump_gate_not_ready_target'].' '.pretty_time($NextJumpTime - TIMESTAMP),
+                'message' => $LNG['in_jump_gate_not_ready_target'].' '.pretty_time($next_jump_time - TIMESTAMP),
                 'error'   => true,
             ]);
         }
 
-        $ShipArray = [];
-        $SubQueryOri = "";
-        $SubQueryDes = "";
-        $Ships = HTTP::_GP('ship', []);
+        $ship_array = [];
+        $sub_query_ori = "";
+        $sub_query_des = "";
+        $ships = HTTP::_GP('ship', []);
 
-        foreach ($reslist['fleet'] as $Ship)
+        foreach ($reslist['fleet'] as $c_ship)
         {
-            if (!isset($Ships[$Ship]) || $Ship == 212)
+            if (!isset($ships[$c_ship])
+                || $c_ship == 212)
             {
                 continue;
             }
 
-            $ShipArray[$Ship] = max(0, min($Ships[$Ship], $PLANET[$resource[$Ship]]));
+            $ship_array[$c_ship] = max(0, min($ships[$c_ship], $PLANET[$resource[$c_ship]]));
 
-            if (empty($ShipArray[$Ship]))
+            if (empty($ship_array[$c_ship]))
             {
                 continue;
             }
 
-            $SubQueryOri .= $resource[$Ship]." = ".$resource[$Ship]." - ".$ShipArray[$Ship].", ";
-            $SubQueryDes .= $resource[$Ship]." = ".$resource[$Ship]." + ".$ShipArray[$Ship].", ";
-            $PLANET[$resource[$Ship]] -= $ShipArray[$Ship];
+            $sub_query_ori .= $resource[$c_ship]." = ".$resource[$c_ship]." - ".$ship_array[$c_ship].", ";
+            $sub_query_des .= $resource[$c_ship]." = ".$resource[$c_ship]." + ".$ship_array[$c_ship].", ";
+            $PLANET[$resource[$c_ship]] -= $ship_array[$c_ship];
         }
 
-        if (empty($SubQueryOri))
+        if (empty($sub_query_ori))
         {
             $this->sendJSON([
                 'message' => $LNG['in_jump_gate_error_data'],
@@ -105,20 +110,24 @@ class ShowInformationPage extends AbstractGamePage
             ]);
         }
 
-        $array_merge = [':planetID' => $PLANET['id'], ':jumptime' => TIMESTAMP];
-        $sql = "UPDATE %%PLANETS%% SET ".$SubQueryOri." `last_jump_time` = :jumptime WHERE id = :planetID;";
+        $array_merge = [':planet_id' => $PLANET['id'], ':jump_time' => TIMESTAMP];
+        $sql = "UPDATE %%PLANETS%% 
+        SET ".$sub_query_ori." `last_jump_time` = :jump_time WHERE id = :planet_id;";
+
         $db->update($sql, $array_merge);
 
-        $sql = "UPDATE %%PLANETS%% SET ".$SubQueryDes." `last_jump_time` = :jumptime WHERE id = :targetID;";
+        $sql = "UPDATE %%PLANETS%% 
+        SET ".$sub_query_des." `last_jump_time` = :jump_time WHERE id = :target_id;";
+
         $db->update($sql, [
-            ':targetID' => $TargetPlanet,
-            ':jumptime' => TIMESTAMP,
+            ':target_id' => $target_planet,
+            ':jump_time' => TIMESTAMP,
         ]);
 
         $PLANET['last_jump_time'] = TIMESTAMP;
-        $NextJumpTime = self::getNextJumpWaitTime($PLANET['last_jump_time']);
+        $next_jump_time = self::getNextJumpWaitTime($PLANET['last_jump_time']);
         $this->sendJSON([
-            'message' => sprintf($LNG['in_jump_gate_done'], pretty_time($NextJumpTime - TIMESTAMP)),
+            'message' => sprintf($LNG['in_jump_gate_done'], pretty_time($next_jump_time - TIMESTAMP)),
             'error'   => false,
         ]);
     }
@@ -127,19 +136,20 @@ class ShowInformationPage extends AbstractGamePage
     {
         global $reslist, $resource, $PLANET;
 
-        $fleetList = [];
+        $fleet_list = [];
 
-        foreach ($reslist['fleet'] as $Ship)
+        foreach ($reslist['fleet'] as $ship)
         {
-            if ($Ship == 212 || $PLANET[$resource[$Ship]] <= 0)
+            if ($ship == 212
+                || $PLANET[$resource[$ship]] <= 0)
             {
                 continue;
             }
 
-            $fleetList[$Ship] = $PLANET[$resource[$Ship]];
+            $fleet_list[$ship] = $PLANET[$resource[$ship]];
         }
 
-        return $fleetList;
+        return $fleet_list;
     }
 
     public function destroyMissiles(): void
@@ -148,15 +158,15 @@ class ShowInformationPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $Missle = HTTP::_GP('missile', []);
-        $PLANET[$resource[502]] -= max(0, min($Missle[502], $PLANET[$resource[502]]));
-        $PLANET[$resource[503]] -= max(0, min($Missle[503], $PLANET[$resource[503]]));
+        $missile = HTTP::_GP('missile', []);
+        $PLANET[$resource[502]] -= max(0, min($missile[502], $PLANET[$resource[502]]));
+        $PLANET[$resource[503]] -= max(0, min($missile[503], $PLANET[$resource[503]]));
 
-        $sql = "UPDATE %%PLANETS%% SET ".$resource[502]." = :resource502Val, ".$resource[503]." = :resource503Val WHERE id = :planetID;";
+        $sql = "UPDATE %%PLANETS%% SET ".$resource[502]." = :resource_502_val, ".$resource[503]." = :resource_503_val WHERE id = :planet_id;";
         $db->update($sql, [
-            ':resource502Val' => $PLANET[$resource[502]],
-            ':resource503Val' => $PLANET[$resource[503]],
-            ':planetID'       => $PLANET['id'],
+            ':resource_502_val' => $PLANET[$resource[502]],
+            ':resource_503_val' => $PLANET[$resource[503]],
+            ':planet_id'        => $PLANET['id'],
         ]);
 
         $this->sendJSON([$PLANET[$resource[502]], $PLANET[$resource[503]]]);
@@ -171,209 +181,235 @@ class ShowInformationPage extends AbstractGamePage
         $order = $USER['planet_sort_order'] == 1 ? "DESC" : "ASC" ;
         $sort = $USER['planet_sort'];
 
-        $sql = "SELECT id, name, galaxy, system, planet, last_jump_time, ".$resource[43]." FROM %%PLANETS%% WHERE id != :planetID AND id_owner = :userID AND planet_type = '3' AND ".$resource[43]." > 0 ORDER BY ";
+        $sql = "SELECT id, name, galaxy, system, planet, last_jump_time, " .
+        $resource[43] .
+        " FROM %%PLANETS%% WHERE id != :planetID AND id_owner = :userID AND planet_type = '3' AND " .
+        $resource[43] .
+        " > 0 ORDER BY ";
 
         switch ($sort)
         {
             case 1:
-                $sql .= 'galaxy '.$order.', system '.$order.', planet '.$order.', planet_type '.$order;
+                $sql .= 'galaxy ' .
+                $order .
+                ', system ' .
+                $order .
+                ', planet ' .
+                $order .
+                ', planet_type ' .
+                $order;
                 break;
             case 2:
-                $sql .= 'name '.$order;
+                $sql .= 'name ' . $order;
                 break;
             default:
-                $sql .= 'id '.$order;
+                $sql .= 'id ' . $order;
                 break;
         }
 
-        $moonResult = $db->select($sql, [
+        $moon_result = $db->select($sql, [
             ':planetID' => $PLANET['id'],
             ':userID'   => $USER['id'],
         ]);
 
-        $moonList = [];
+        $moon_list = [];
 
-        foreach ($moonResult as $moonRow)
+        foreach ($moon_result as $c_moon)
         {
-            $NextJumpTime = self::getNextJumpWaitTime($moonRow['last_jump_time']);
-            $moonList[$moonRow['id']] = '['.$moonRow['galaxy'].':'.$moonRow['system'].':'.$moonRow['planet'].'] '.$moonRow['name'].(TIMESTAMP < $NextJumpTime ? ' ('.pretty_time($NextJumpTime - TIMESTAMP).')' : '');
+            $next_jump_time = self::getNextJumpWaitTime($c_moon['last_jump_time']);
+            $moon_list[$c_moon['id']] = '[' .
+            $c_moon['galaxy'] .
+            ':' .
+            $c_moon['system'] .
+            ':' .
+            $c_moon['planet'] .
+            '] ' .
+            $c_moon['name'] .
+            (TIMESTAMP < $next_jump_time ? ' (' . pretty_time($next_jump_time - TIMESTAMP) . ')' : '');
         }
 
-        return $moonList;
+        return $moon_list;
     }
 
     public function show(): void
     {
         global $USER, $PLANET, $LNG, $resource, $pricelist, $reslist, $CombatCaps, $ProdGrid;
 
-        $elementID = HTTP::_GP('id', 0);
+        $element_id = HTTP::_GP('id', 0);
 
         $this->setWindow('popup');
         $this->initTemplate();
 
-        $productionTable = [];
-        $FleetInfo = [];
-        $MissileList = [];
-        $gateData = [];
+        $production_table = [];
+        $fleet_info = [];
+        $missile_list = [];
+        $gate_data = [];
 
-        $CurrentLevel = 0;
+        $current_level = 0;
 
-        $ressIDs = array_merge([], $reslist['resstype'][1], $reslist['resstype'][2]);
+        $ress_ids = array_merge([], $reslist['resstype'][1], $reslist['resstype'][2]);
 
-        if (in_array($elementID, $reslist['prod']))
+        if (in_array($element_id, $reslist['prod']))
         {
 
             /* Data for eval */
             $BuildEnergy = $USER[$resource[113]];
             $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$resource[$elementID].'_porcent'];
+            $BuildLevelFactor = $PLANET[$resource[$element_id].'_porcent'];
 
-            $CurrentLevel = $PLANET[$resource[$elementID]];
-            $BuildStartLvl = max($CurrentLevel - 2, 0);
-            for ($BuildLevel = $BuildStartLvl; $BuildLevel < $BuildStartLvl + 15; $BuildLevel++)
+            $current_level = $PLANET[$resource[$element_id]];
+            $build_start_lvl = max($current_level - 2, 0);
+            for ($BuildLevel = $build_start_lvl; $BuildLevel < $build_start_lvl + 15; $BuildLevel++)
             {
-                foreach ($ressIDs as $ID)
+                foreach ($ress_ids as $c_id)
                 {
 
-                    if (!isset($ProdGrid[$elementID]['production'][$ID]))
+                    if (!isset($ProdGrid[$element_id]['production'][$c_id]))
                     {
                         continue;
                     }
 
-                    $Production = eval(ResourceUpdate::getProd($ProdGrid[$elementID]['production'][$ID], $elementID));
+                    $production = eval(ResourceUpdate::getProd($ProdGrid[$element_id]['production'][$c_id], $element_id));
 
-                    if (in_array($ID, $reslist['resstype'][2]))
+                    if (in_array($c_id, $reslist['resstype'][2]))
                     {
-                        $Production *= Config::get()->energySpeed;
+                        $production *= Config::get()->energySpeed;
                     }
                     else
                     {
-                        $Production *= Config::get()->resource_multiplier;
+                        $production *= Config::get()->resource_multiplier;
                     }
 
-                    $productionTable['production'][$BuildLevel][$ID] = $Production;
+                    $production_table['production'][$BuildLevel][$c_id] = $production;
                 }
             }
 
-            $productionTable['usedResource'] = array_keys($productionTable['production'][$BuildStartLvl]);
+            $production_table['usedResource'] = array_keys($production_table['production'][$build_start_lvl]);
         }
-        if (in_array($elementID, $reslist['storage']))
+        if (in_array($element_id, $reslist['storage']))
         {
-            $CurrentLevel = $PLANET[$resource[$elementID]];
-            $BuildStartLvl = max($CurrentLevel - 2, 0);
+            $current_level = $PLANET[$resource[$element_id]];
+            $build_start_lvl = max($current_level - 2, 0);
 
-            for ($BuildLevel = $BuildStartLvl; $BuildLevel < $BuildStartLvl + 15; $BuildLevel++)
+            for ($BuildLevel = $build_start_lvl; $BuildLevel < $build_start_lvl + 15; $BuildLevel++)
             {
-                foreach ($ressIDs as $ID)
+                foreach ($ress_ids as $c_id)
                 {
-                    if (!isset($ProdGrid[$elementID]['storage'][$ID]))
+                    if (!isset($ProdGrid[$element_id]['storage'][$c_id]))
                     {
                         continue;
                     }
 
-                    $production = round(eval(ResourceUpdate::getProd($ProdGrid[$elementID]['storage'][$ID])));
+                    $production = round(eval(ResourceUpdate::getProd($ProdGrid[$element_id]['storage'][$c_id])));
                     $production *= Config::get()->storage_multiplier;
 
-                    $productionTable['storage'][$BuildLevel][$ID] = $production;
+                    $production_table['storage'][$BuildLevel][$c_id] = $production;
                 }
             }
 
-            $productionTable['usedResource'] = array_keys($productionTable['storage'][$BuildStartLvl]);
+            $production_table['usedResource'] = array_keys($production_table['storage'][$build_start_lvl]);
         }
-        if (in_array($elementID, $reslist['fleet']))
+        if (in_array($element_id, $reslist['fleet']))
         {
-            $FleetInfo = [
-                'structure'    => $pricelist[$elementID]['cost'][901] + $pricelist[$elementID]['cost'][902],
-                'tech'         => $pricelist[$elementID]['tech'],
-                'attack'       => $CombatCaps[$elementID]['attack'],
-                'shield'       => $CombatCaps[$elementID]['shield'],
-                'capacity'     => $pricelist[$elementID]['capacity'],
-                'speed1'       => $pricelist[$elementID]['speed'],
-                'speed2'       => $pricelist[$elementID]['speed2'],
-                'consumption1' => $pricelist[$elementID]['consumption'],
-                'consumption2' => $pricelist[$elementID]['consumption2'],
+            $fleet_info = [
+                'structure'    => $pricelist[$element_id]['cost'][901] + $pricelist[$element_id]['cost'][902],
+                'tech'         => $pricelist[$element_id]['tech'],
+                'attack'       => $CombatCaps[$element_id]['attack'],
+                'shield'       => $CombatCaps[$element_id]['shield'],
+                'capacity'     => $pricelist[$element_id]['capacity'],
+                'speed1'       => $pricelist[$element_id]['speed'],
+                'speed2'       => $pricelist[$element_id]['speed2'],
+                'consumption1' => $pricelist[$element_id]['consumption'],
+                'consumption2' => $pricelist[$element_id]['consumption2'],
                 'rapidfire'    => [
                     'from' => [],
                     'to'   => [],
                 ],
             ];
 
-            $fleetIDs = array_merge($reslist['fleet'], $reslist['defense']);
+            $fleet_ids = array_merge($reslist['fleet'], $reslist['defense']);
 
-            foreach ($fleetIDs as $fleetID)
+            foreach ($fleet_ids as $fleetID)
             {
-                if (isset($CombatCaps[$elementID]['sd']) && !empty($CombatCaps[$elementID]['sd'][$fleetID]))
+                if (isset($CombatCaps[$element_id]['sd'])
+                    && !empty($CombatCaps[$element_id]['sd'][$fleetID]))
                 {
-                    $FleetInfo['rapidfire']['to'][$fleetID] = $CombatCaps[$elementID]['sd'][$fleetID];
+                    $fleet_info['rapidfire']['to'][$fleetID] = $CombatCaps[$element_id]['sd'][$fleetID];
                 }
 
-                if (isset($CombatCaps[$fleetID]['sd']) && !empty($CombatCaps[$fleetID]['sd'][$elementID]))
+                if (isset($CombatCaps[$fleetID]['sd'])
+                    && !empty($CombatCaps[$fleetID]['sd'][$element_id]))
                 {
-                    $FleetInfo['rapidfire']['from'][$fleetID] = $CombatCaps[$fleetID]['sd'][$elementID];
+                    $fleet_info['rapidfire']['from'][$fleetID] = $CombatCaps[$fleetID]['sd'][$element_id];
                 }
             }
         }
-        if (in_array($elementID, $reslist['defense']))
+        if (in_array($element_id, $reslist['defense']))
         {
-            $FleetInfo = [
-                'structure' => $pricelist[$elementID]['cost'][901] + $pricelist[$elementID]['cost'][902],
-                'attack'    => $CombatCaps[$elementID]['attack'],
-                'shield'    => $CombatCaps[$elementID]['shield'],
+            $fleet_info = [
+                'structure' => $pricelist[$element_id]['cost'][901] + $pricelist[$element_id]['cost'][902],
+                'attack'    => $CombatCaps[$element_id]['attack'],
+                'shield'    => $CombatCaps[$element_id]['shield'],
                 'rapidfire' => [
                     'from' => [],
                     'to'   => [],
                 ],
             ];
 
-            $fleetIDs = array_merge($reslist['fleet'], $reslist['defense']);
+            $fleet_ids = array_merge($reslist['fleet'], $reslist['defense']);
 
-            foreach ($fleetIDs as $fleetID)
+            foreach ($fleet_ids as $c_fleet_id)
             {
-                if (isset($CombatCaps[$elementID]['sd']) && !empty($CombatCaps[$elementID]['sd'][$fleetID]))
+                if (isset($CombatCaps[$element_id]['sd'])
+                    && !empty($CombatCaps[$element_id]['sd'][$c_fleet_id]))
                 {
-                    $FleetInfo['rapidfire']['to'][$fleetID] = $CombatCaps[$elementID]['sd'][$fleetID];
+                    $fleet_info['rapidfire']['to'][$c_fleet_id] = $CombatCaps[$element_id]['sd'][$c_fleet_id];
                 }
 
-                if (isset($CombatCaps[$fleetID]['sd']) && !empty($CombatCaps[$fleetID]['sd'][$elementID]))
+                if (isset($CombatCaps[$c_fleet_id]['sd'])
+                    && !empty($CombatCaps[$c_fleet_id]['sd'][$element_id]))
                 {
-                    $FleetInfo['rapidfire']['from'][$fleetID] = $CombatCaps[$fleetID]['sd'][$elementID];
+                    $fleet_info['rapidfire']['from'][$c_fleet_id] = $CombatCaps[$c_fleet_id]['sd'][$element_id];
                 }
             }
         }
 
-        if ($elementID == 43 && $PLANET[$resource[43]] > 0)
+        if ($element_id == 43
+            && $PLANET[$resource[43]] > 0)
         {
             $this->tpl_obj->loadscript('gate.js');
-            $nextTime = self::getNextJumpWaitTime($PLANET['last_jump_time']);
-            $gateData = [
-                'nextTime'  => _date($LNG['php_tdformat'], $nextTime, $USER['timezone']),
-                'restTime'  => max(0, $nextTime - TIMESTAMP),
+            $next_time = self::getNextJumpWaitTime($PLANET['last_jump_time']);
+            $gate_data = [
+                'nextTime'  => _date($LNG['php_tdformat'], $next_time, $USER['timezone']),
+                'restTime'  => max(0, $next_time - TIMESTAMP),
                 'startLink' => $PLANET['name'].' '.strip_tags(BuildPlanetAddressLink($PLANET)),
                 'gateList'  => $this->getTargetGates(),
                 'fleetList' => $this->getAvailableFleets(),
             ];
         }
-        elseif ($elementID == 44 && $PLANET[$resource[44]] > 0)
+        elseif ($element_id == 44
+                && $PLANET[$resource[44]] > 0)
         {
-            $MissileList = [
+            $missile_list = [
                 502 => $PLANET[$resource[502]],
                 503 => $PLANET[$resource[503]],
             ];
         }
 
         $this->assign([
-            'elementID'       => $elementID,
-            'productionTable' => $productionTable,
-            'CurrentLevel'    => $CurrentLevel,
-            'MissileList'     => $MissileList,
-            'FleetInfo'       => $FleetInfo,
-            'gateData'        => $gateData,
+            'elementID'       => $element_id,
+            'productionTable' => $production_table,
+            'CurrentLevel'    => $current_level,
+            'MissileList'     => $missile_list,
+            'FleetInfo'       => $fleet_info,
+            'gateData'        => $gate_data,
         ]);
 
-        if ($elementID <= 900 || $elementID >= 930)
+        if ($element_id <= 900
+            || $element_id >= 930)
         {
             $this->assign([
-                'Bonus' => BuildFunctions::getAvalibleBonus($elementID),
+                'Bonus' => BuildFunctions::getAvalibleBonus($element_id),
             ]);
         }
 
