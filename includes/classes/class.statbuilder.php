@@ -488,26 +488,25 @@ class statbuilder
                 $ally_points[$user_data['ally_id']]['total']['count'] += $user_points[$user_data['id']]['total']['count'];
                 $ally_points[$user_data['ally_id']]['total']['points'] += $user_points[$user_data['id']]['total']['points'];
             }
-
             $final_sql .= "(".
             $user_data['id'].", ".
             $user_data['ally_id'].", ".
             $user_data['universe'].", ".
-            (isset($user_data['old_tech_rank']) ? $user_data['old_tech_rank'] : 0).", ".
-            (isset($user_points[$user_data['id']]['techno']['points']) ? min($user_points[$user_data['id']]['techno']['points'], 1E50) : 0).", ".
-            (isset($user_points[$user_data['id']]['techno']['count']) ? $user_points[$user_data['id']]['techno']['count'] : 0).", ".
-            (isset($user_data['old_build_rank']) ? $user_data['old_build_rank'] : 0).", ".
-            (isset($user_points[$user_data['id']]['build']['points']) ? min($user_points[$user_data['id']]['build']['points'], 1E50) : 0).", ".
-            (isset($user_points[$user_data['id']]['build']['count']) ? $user_points[$user_data['id']]['build']['count'] : 0).", ".
-            (isset($user_data['old_defs_rank']) ? $user_data['old_defs_rank'] : 0).", ".
-            (isset($user_points[$user_data['id']]['defense']['points']) ? min($user_points[$user_data['id']]['defense']['points'], 1E50) : 0).", ".
-            (isset($user_points[$user_data['id']]['defense']['count']) ? $user_points[$user_data['id']]['defense']['count'] : 0).", ".
-            (isset($user_data['old_fleet_rank']) ? $user_data['old_fleet_rank'] : 0).", ".
-            (isset($user_points[$user_data['id']]['fleet']['points']) ? min($user_points[$user_data['id']]['fleet']['points'], 1E50) : 0).", ".
-            (isset($user_points[$user_data['id']]['fleet']['count']) ? $user_points[$user_data['id']]['fleet']['count'] : 0).", ".
-            (isset($user_data['old_total_rank']) ? $user_data['old_total_rank'] : 0).", ".
-            (isset($user_points[$user_data['id']]['total']['points']) ? min($user_points[$user_data['id']]['total']['points'], 1E50) : 0).", ".
-            (isset($user_points[$user_data['id']]['total']['count']) ? $user_points[$user_data['id']]['total']['count'] : 0)."), ";
+            ($user_data['old_tech_rank'] ?? 0) . ", ".
+            min($user_points[$user_data['id']]['techno']['points'] ?? 0, 1E50) . ", ".
+            ($user_points[$user_data['id']]['techno']['count'] ?? 0) .", ".
+            ($user_data['old_build_rank'] ?? 0). ", " .
+            min($user_points[$user_data['id']]['build']['points'] ?? 0, 1E50) .", ".
+            ($user_points[$user_data['id']]['build']['count'] ?? 0) .", ".
+            ($user_data['old_defs_rank'] ?? 0) . ", " .
+            min($user_points[$user_data['id']]['defense']['points'] ?? 0, 1E50) . ", ".
+            ($user_points[$user_data['id']]['defense']['count'] ?? 0) .", ".
+            ($user_data['old_fleet_rank'] ?? 0) . ", ".
+            min($user_points[$user_data['id']]['fleet']['points'] ?? 0, 1E50) . ", ".
+            ($user_points[$user_data['id']]['fleet']['count'] ?? 0) .", ".
+            ($user_data['old_total_rank'] ?? 0) . ", ".
+            min($user_points[$user_data['id']]['total']['points'] ?? 0, 1E50) .", ".
+            ($user_points[$user_data['id']]['total']['count'] ?? 0). "), ";
 
             if ($i == 50)
             {
@@ -522,6 +521,7 @@ class statbuilder
         if ($final_sql != $save_sql)
         {
             $final_sql = substr($final_sql, 0, -2) . $sql_end;
+            var_dump($final_sql);
             $this->SaveDataIntoDB($final_sql);
             unset($user_points);
         }
@@ -562,21 +562,21 @@ class statbuilder
                 $ally_sql .= "(".
                 $alliance_data['id'].", 0, ".
                 $alliance_data['ally_universe'].", ".
-                (isset($ally_points['old_tech_rank']) ? $ally_points['old_tech_rank'] : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['techno']['points']) ? min($ally_points[$alliance_data['id']]['techno']['points'], 1E50) : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['techno']['count']) ? $ally_points[$alliance_data['id']]['techno']['count'] : 0).", ".
-                (isset($alliance_data['old_build_rank']) ? $alliance_data['old_build_rank'] : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['build']['points']) ? min($ally_points[$alliance_data['id']]['build']['points'], 1E50) : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['build']['count']) ? $ally_points[$alliance_data['id']]['build']['count'] : 0).", ".
-                (isset($alliance_data['old_defs_rank']) ? $alliance_data['old_defs_rank'] : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['defense']['points']) ? min($ally_points[$alliance_data['id']]['defense']['points'], 1E50) : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['defense']['count']) ? $ally_points[$alliance_data['id']]['defense']['count'] : 0).", ".
-                (isset($alliance_data['old_fleet_rank']) ? $alliance_data['old_fleet_rank'] : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['fleet']['points']) ? min($ally_points[$alliance_data['id']]['fleet']['points'], 1E50) : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['fleet']['count']) ? $ally_points[$alliance_data['id']]['fleet']['count'] : 0).", ".
-                (isset($alliance_data['old_total_rank']) ? $alliance_data['old_total_rank'] : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['total']['points']) ? min($ally_points[$alliance_data['id']]['total']['points'], 1E50) : 0).", ".
-                (isset($ally_points[$alliance_data['id']]['total']['count']) ? $ally_points[$alliance_data['id']]['total']['count'] : 0)."), ";
+                ($ally_points['old_tech_rank'] ?? 0) .", ".
+                min($ally_points[$alliance_data['id']]['techno']['points'] ?? 0, 1E50) .", ".
+                ($ally_points[$alliance_data['id']]['techno']['count'] ?? 0) . ", " .
+                ($alliance_data['old_build_rank'] ?? 0) . ", ".
+                min($ally_points[$alliance_data['id']]['build']['points'] ?? 0, 1E50) .", ".
+                ($ally_points[$alliance_data['id']]['build']['count'] ?? 0) . ", " .
+                ($alliance_data['old_defs_rank'] ?? 0) . ", ".
+                min($ally_points[$alliance_data['id']]['defense']['points'] ?? 0, 1E50) .", ".
+                ($ally_points[$alliance_data['id']]['defense']['count'] ?? 0). ", " .
+                ($alliance_data['old_fleet_rank'] ?? 0) . ", ".
+                min($ally_points[$alliance_data['id']]['fleet']['points'] ?? 0, 1E50) . ", ".
+                ($ally_points[$alliance_data['id']]['fleet']['count'] ?? 0) . ", " .
+                ($alliance_data['old_total_rank'] ?? 0) . ", " .
+                min($ally_points[$alliance_data['id']]['total']['points'] ?? 0, 1E50) . ", ".
+                ($ally_points[$alliance_data['id']]['total']['count'] ?? 0). "), ";
 
                 if ($i == 50)
                 {
