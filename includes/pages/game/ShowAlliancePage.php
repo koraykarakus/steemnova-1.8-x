@@ -25,18 +25,18 @@ class ShowAlliancePage extends AbstractGamePage
     private $has_ally = false;
     private $has_apply = false;
     public $available_ranks = [
-        'MEMBERLIST',
-        'ONLINESTATE',
-        'TRANSFER',
-        'SEEAPPLY',
-        'MANAGEAPPLY',
-        'ROUNDMAIL',
-        'ADMIN',
-        'KICK',
-        'DIPLOMATIC',
-        'RANKS',
-        'MANAGEUSERS',
-        'EVENTS',
+        'member_list',
+        'online_state',
+        'transfer',
+        'see_apply',
+        'manage_apply',
+        'round_mail',
+        'admin',
+        'kick',
+        'diplomatic',
+        'ranks',
+        'manage_users',
+        'events',
     ];
 
     public function __construct()
@@ -72,10 +72,10 @@ class ShowAlliancePage extends AbstractGamePage
             elseif ($USER['ally_rank_id'] != 0)
             {
                 $sql = 'SELECT ' . implode(', ', $this->available_ranks) . 
-                ' FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId AND rankID = :ally_rank_id;';
+                ' FROM %%ALLIANCE_RANK%% WHERE alliance_id = :alliance_id AND rank_id = :rank_id;';
                 $this->rights = $db->selectSingle($sql, [
-                    ':allianceId'   => $ally_id,
-                    ':ally_rank_id' => $USER['ally_rank_id'],
+                    ':alliance_id'   => $ally_id,
+                    ':rank_id' => $USER['ally_rank_id'],
                 ]);
             }
 
@@ -606,10 +606,10 @@ class ShowAlliancePage extends AbstractGamePage
         }
         elseif ($USER['ally_rank_id'] != 0)
         {
-            $sql = "SELECT rankName FROM %%ALLIANCE_RANK%% WHERE rankID = :UserRankID;";
+            $sql = "SELECT rank_name FROM %%ALLIANCE_RANK%% WHERE rank_id = :rank_id;";
             $rank_name = $db->selectSingle($sql, [
-                ':UserRankID' => $USER['ally_rank_id'],
-            ], 'rankName');
+                ':rank_id' => $USER['ally_rank_id'],
+            ], 'rank_name');
         }
 
         if (empty($rank_name))
@@ -620,15 +620,15 @@ class ShowAlliancePage extends AbstractGamePage
         $sql = "SELECT SUM(wons) as wons, SUM(loos) as loos, SUM(draws) as draws, 
         SUM(kbmetal) as kbmetal, SUM(kbcrystal) as kbcrystal, 
         SUM(lostunits) as lostunits, SUM(desunits) as desunits 
-        FROM %%USERS%% WHERE ally_id = :AllianceID;";
+        FROM %%USERS%% WHERE ally_id = :alliance_id;";
 
         $stats_result = $db->selectSingle($sql, [
-            ':AllianceID' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
-        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE allianceId = :AllianceID;";
+        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE allianceId = :alliance_id;";
         $apply_count = $db->selectSingle($sql, [
-            ':AllianceID' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ], 'count');
 
         $ally_events = [];
@@ -686,7 +686,7 @@ class ShowAlliancePage extends AbstractGamePage
     public function memberList(): void
     {
         global $USER, $LNG;
-        if (!$this->rights['MEMBERLIST'])
+        if (!$this->rights['member_list'])
         {
             $this->redirectToHome();
         }
@@ -694,14 +694,14 @@ class ShowAlliancePage extends AbstractGamePage
         $rank_list = [];
 
         $db = Database::get();
-        $sql = "SELECT rankID, rankName FROM %%ALLIANCE_RANK%% WHERE allianceId = :AllianceID";
+        $sql = "SELECT rank_id, rank_name FROM %%ALLIANCE_RANK%% WHERE alliance_id = :alliance_id";
         $rank_result = $db->select($sql, [
-            ':AllianceID' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
         foreach ($rank_result as $c_rank)
         {
-            $rank_list[$c_rank['rankID']] = $c_rank['rankName'];
+            $rank_list[$c_rank['rank_id']] = $c_rank['rank_name'];
         }
 
         $member_list = [];
@@ -814,7 +814,7 @@ class ShowAlliancePage extends AbstractGamePage
     {
         global $LNG, $USER;
 
-        if (!$this->rights['ROUNDMAIL'])
+        if (!$this->rights['round_mail'])
         {
             $this->redirectToHome();
         }
@@ -1152,10 +1152,12 @@ class ShowAlliancePage extends AbstractGamePage
         }
         else
         {
-            $sql = "SELECT u.id, r.rankName, u.username FROM %%USERS%% u INNER JOIN %%ALLIANCE_RANK%% r ON r.rankID = u.ally_rank_id AND r.TRANSFER = 1 WHERE u.ally_id = :allianceId AND id != :allianceOwner;";
+            $sql = "SELECT u.id, r.rank_name, u.username FROM %%USERS%% u 
+            INNER JOIN %%ALLIANCE_RANK%% r ON r.rank_id = u.ally_rank_id AND r.transfer = 1 
+            WHERE u.ally_id = :alliance_id AND id != :alliance_owner;";
             $transfer_user_result = $db->select($sql, [
-                ':allianceOwner' => $this->alliance_data['ally_owner'],
-                ':allianceId'    => $this->alliance_data['id'],
+                ':alliance_owner' => $this->alliance_data['ally_owner'],
+                ':alliance_id'    => $this->alliance_data['id'],
             ]);
 
             $transfer_user_list = [];
@@ -1164,7 +1166,7 @@ class ShowAlliancePage extends AbstractGamePage
             {
                 $transfer_user_list[$c_transfer_user['id']] = $c_transfer_user['username'] . 
                 " [" .
-                 $c_transfer_user['rankName'] .
+                 $c_transfer_user['rank_name'] .
                  "]";
             }
 
@@ -1179,8 +1181,8 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminMangeApply(): void
     {
         global $LNG, $USER;
-        if (!$this->rights['SEEAPPLY'] 
-            || !$this->rights['MANAGEAPPLY'])
+        if (!$this->rights['see_apply'] 
+            || !$this->rights['manage_apply'])
         {
             $this->redirectToHome();
         }
@@ -1217,7 +1219,7 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminDetailApply(): void
     {
         global $LNG, $USER;
-        if (!$this->rights['SEEAPPLY'] || !$this->rights['MANAGEAPPLY'])
+        if (!$this->rights['see_apply'] || !$this->rights['manage_apply'])
         {
             $this->redirectToHome();
         }
@@ -1299,8 +1301,8 @@ class ShowAlliancePage extends AbstractGamePage
     {
         global $LNG, $USER;
         
-        if (!$this->rights['SEEAPPLY'] 
-            || !$this->rights['MANAGEAPPLY'])
+        if (!$this->rights['see_apply'] 
+            || !$this->rights['manage_apply'])
         {
             $this->redirectToHome();
         }
@@ -1388,20 +1390,20 @@ class ShowAlliancePage extends AbstractGamePage
 
     protected function adminPermissions(): void
     {
-        if (!$this->rights['RANKS'])
+        if (!$this->rights['ranks'])
         {
             $this->redirectToHome();
         }
 
-        $sql = "SELECT * FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId;";
+        $sql = "SELECT * FROM %%ALLIANCE_RANK%% WHERE alliance_id = :alliance_id;";
         $rank_result = Database::get()->select($sql, [
-            ':allianceId' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
         $rank_list = [];
         foreach ($rank_result as $c_rank)
         {
-            $rank_list[$c_rank['rankID']] = $c_rank;
+            $rank_list[$c_rank['rank_id']] = $c_rank;
         }
 
         $available_ranks = [];
@@ -1425,7 +1427,7 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminPermissionsSend(): void
     {
         global $LNG;
-        if (!$this->rights['RANKS'])
+        if (!$this->rights['ranks'])
         {
             $this->redirectToHome();
         }
@@ -1446,10 +1448,10 @@ class ShowAlliancePage extends AbstractGamePage
                 ]]);
             }
 
-            $sql = 'INSERT INTO %%ALLIANCE_RANK%% SET rankName = :rankName, allianceID = :allianceID';
+            $sql = 'INSERT INTO %%ALLIANCE_RANK%% SET rank_name = :rank_name, alliance_id = :alliance_id';
             $params = [
-                ':rankName'   => $new_rank['rankName'],
-                ':allianceID' => $this->alliance_data['id'],
+                ':rank_name'   => $new_rank['rankName'],
+                ':alliance_id' => $this->alliance_data['id'],
             ];
 
             unset($new_rank['rankName']);
@@ -1471,34 +1473,34 @@ class ShowAlliancePage extends AbstractGamePage
             if (!empty($delete))
             {
                 $sql = "DELETE FROM %%ALLIANCE_RANK%% 
-                WHERE rankID = :rankID AND allianceId = :allianceId;";
+                WHERE rank_id = :rank_id AND alliance_id = :alliance_id;";
 
                 $db->delete($sql, [
-                    ':allianceId' => $this->alliance_data['id'],
-                    ':rankID'     => $delete,
+                    ':alliance_id' => $this->alliance_data['id'],
+                    ':rank_id'     => $delete,
                 ]);
 
                 $sql = "UPDATE %%USERS%% SET ally_rank_id = 0 
-                WHERE ally_rank_id = :rankID AND ally_id = :allianceId;";
+                WHERE ally_rank_id = :rank_id AND ally_id = :alliance_id;";
 
                 $db->update($sql, [
-                    ':allianceId' => $this->alliance_data['id'],
-                    ':rankID'     => $delete,
+                    ':alliance_id' => $this->alliance_data['id'],
+                    ':rank_id'     => $delete,
                 ]);
             }
             else
             {
                 foreach ($rank_data as $rank_id => $c_rank_data)
                 {
-                    $sql = 'UPDATE %%ALLIANCE_RANK%% SET rankName = :rank_name';
+                    $sql = 'UPDATE %%ALLIANCE_RANK%% SET rank_name = :rank_name';
                     
                     $params = [
-                        ':rank_name'   => $c_rank_data['rankName'],
-                        ':allianceID' => $this->alliance_data['id'],
+                        ':rank_name'   => $c_rank_data['rank_name'],
+                        ':alliance_id' => $this->alliance_data['id'],
                         ':rank_id'     => $rank_id,
                     ];
 
-                    unset($c_rank_data['rankName']);
+                    unset($c_rank_data['rank_name']);
 
                     foreach ($this->available_ranks as $key => $value)
                     {
@@ -1516,7 +1518,7 @@ class ShowAlliancePage extends AbstractGamePage
                         }
                     }
 
-                    $sql .= ' WHERE rankID = :rank_id AND allianceID = :allianceID';
+                    $sql .= ' WHERE rank_id = :rank_id AND alliance_id = :alliance_id';
 
                     $db->update($sql, $params);
                 }
@@ -1529,16 +1531,16 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminMembers(): void
     {
         global $USER, $LNG;
-        if (!$this->rights['MANAGEUSERS'])
+        if (!$this->rights['manage_users'])
         {
             $this->redirectToHome();
         }
 
         $db = Database::get();
 
-        $sql = "SELECT rankID, rankName FROM %%ALLIANCE_RANK%% WHERE allianceId = :allianceId;";
+        $sql = "SELECT rank_id, rank_name FROM %%ALLIANCE_RANK%% WHERE alliance_id = :alliance_id;";
         $rank_result = $db->select($sql, [
-            ':allianceId' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
         $rank_list = [$LNG['al_new_member_rank_text']];
@@ -1558,19 +1560,21 @@ class ShowAlliancePage extends AbstractGamePage
 
             if ($has_rank_right)
             {
-                $rank_select_list[$c_rank['rankID']] = $c_rank['rankName'];
+                $rank_select_list[$c_rank['rank_id']] = $c_rank['rank_name'];
             }
 
-            $rank_list[$c_rank['rankID']] = $c_rank['rankName'];
+            $rank_list[$c_rank['rank_id']] = $c_rank['rank_name'];
         }
 
-        $sql = "SELECT DISTINCT u.id, u.username, u.galaxy, u.system, u.planet, u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points
+        $sql = "SELECT DISTINCT u.id, u.username, u.galaxy, u.system, 
+        u.planet, u.banaday, u.urlaubs_modus, 
+        u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points
 		FROM %%USERS%% u
 		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id
-		WHERE ally_id = :allianceId;";
+		WHERE ally_id = :alliance_id;";
 
         $member_list_result = $db->select($sql, [
-            ':allianceId' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
         $member_list = [];
@@ -1614,7 +1618,7 @@ class ShowAlliancePage extends AbstractGamePage
             'rankSelectList' => $rank_select_list,
             'founder'        => empty($this->alliance_data['ally_owner_range']) ? $LNG['al_founder_rank_text'] : $this->alliance_data['ally_owner_range'],
             'al_users_list'  => sprintf($LNG['al_users_list'], count($member_list)),
-            'canKick'        => $this->rights['KICK'],
+            'canKick'        => $this->rights['kick'],
             'ShortStatus'    => [
                 'vacation'     => $LNG['gl_short_vacation'],
                 'banned'       => $LNG['gl_short_ban'],
@@ -1634,7 +1638,7 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminRank(): void
     {
         global $LNG;
-        if (!$this->rights['MANAGEUSERS'])
+        if (!$this->rights['manage_users'])
         {
             $this->sendJSON('');
         }
@@ -1643,12 +1647,12 @@ class ShowAlliancePage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = 'SELECT rankID, ' . 
+        $sql = 'SELECT rank_id, ' . 
                 implode(', ', $this->available_ranks) . 
-                ' FROM %%ALLIANCE_RANK%% WHERE allianceID = :allianceId;';
+                ' FROM %%ALLIANCE_RANK%% WHERE alliance_id = :alliance_id;';
 
         $rank_result = $db->select($sql, [
-            ':allianceId' => $this->alliance_data['id'],
+            ':alliance_id' => $this->alliance_data['id'],
         ]);
 
         $rank_list = [];
@@ -1668,7 +1672,7 @@ class ShowAlliancePage extends AbstractGamePage
 
             if ($hasRankRight)
             {
-                $rank_list[$rankRow['rankID']] = $rankRow;
+                $rank_list[$rankRow['rank_id']] = $rankRow;
             }
         }
 
@@ -1680,13 +1684,13 @@ class ShowAlliancePage extends AbstractGamePage
                 continue;
             }
 
-            $sql = 'UPDATE %%USERS%% SET ally_rank_id = :rankID 
-            WHERE id = :userId AND ally_id = :allianceId;';
+            $sql = 'UPDATE %%USERS%% SET ally_rank_id = :rank_id 
+            WHERE id = :user_id AND ally_id = :alliance_id;';
 
             $db->update($sql, [
-                ':allianceId' => $this->alliance_data['id'],
-                ':rankID'     => (int) $rankId,
-                ':userId'     => (int) $userId,
+                ':alliance_id' => $this->alliance_data['id'],
+                ':rank_id'     => (int) $rankId,
+                ':user_id'     => (int) $userId,
             ]);
         }
 
@@ -1695,7 +1699,7 @@ class ShowAlliancePage extends AbstractGamePage
 
     protected function adminMembersKick(): void
     {
-        if (!$this->rights['KICK'])
+        if (!$this->rights['kick'])
         {
             $this->redirectToHome();
         }
@@ -1741,7 +1745,7 @@ class ShowAlliancePage extends AbstractGamePage
 
     protected function adminDiplomacy(): void
     {
-        if (!$this->rights['DIPLOMATIC'])
+        if (!$this->rights['diplomatic'])
         {
             $this->redirectToHome();
         }
@@ -1809,7 +1813,7 @@ class ShowAlliancePage extends AbstractGamePage
 
     protected function adminDiplomacyAccept(): void
     {
-        if (!$this->rights['DIPLOMATIC'])
+        if (!$this->rights['diplomatic'])
         {
             $this->redirectToHome();
         }
@@ -1828,7 +1832,7 @@ class ShowAlliancePage extends AbstractGamePage
 
     protected function adminDiplomacyDelete(): void
     {
-        if (!$this->rights['DIPLOMATIC'])
+        if (!$this->rights['diplomatic'])
         {
             $this->redirectToHome();
         }
@@ -1848,7 +1852,7 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminDiplomacyCreate(): void
     {
         global $USER;
-        if (!$this->rights['DIPLOMATIC'])
+        if (!$this->rights['diplomatic'])
         {
             $this->redirectToHome();
         }
@@ -1886,7 +1890,7 @@ class ShowAlliancePage extends AbstractGamePage
     protected function adminDiplomacyCreateProcessor(): void
     {
         global $LNG, $USER;
-        if (!$this->rights['DIPLOMATIC'])
+        if (!$this->rights['diplomatic'])
         {
             $this->redirectToHome();
         }

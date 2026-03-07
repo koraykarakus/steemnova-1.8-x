@@ -58,23 +58,23 @@ CREATE TABLE `%PREFIX%alliance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%alliance_ranks` (
-  `rankID` int(11) NOT NULL AUTO_INCREMENT,
-  `rankName` varchar(32) NOT NULL,
-  `allianceID` int(10) unsigned NOT NULL,
-  `MEMBERLIST` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `ONLINESTATE` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `TRANSFER` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `SEEAPPLY` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `MANAGEAPPLY` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `ROUNDMAIL` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `ADMIN` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `KICK` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `DIPLOMATIC` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `RANKS` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `MANAGEUSERS` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `EVENTS` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`rankID`),
-  KEY `allianceID` (`allianceID`,`rankID`)
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rank_name` varchar(32) NOT NULL,
+  `alliance_id` int(10) unsigned NOT NULL,
+  `member_list` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `online_state` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `transfer` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `see_apply` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `manage_apply` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `round_mail` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `admin` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `kick` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `diplomatic` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `ranks` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `manage_users` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `events` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`rank_id`),
+  KEY `alliance_id` (`alliance_id`,`rank_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
