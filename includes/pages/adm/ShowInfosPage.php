@@ -79,7 +79,7 @@ class ShowInfosPage extends AbstractAdminPage
             'info'                 => $_SERVER['SERVER_SOFTWARE'],
             'php_version'          => PHP_VERSION,
             'php_api_version'      => PHP_SAPI,
-            'game_version'         => $config->VERSION.(file_exists(ROOT_PATH.'/.git/ORIG_HEAD') ? ' ('.trim(file_get_contents(ROOT_PATH.'/.git/ORIG_HEAD')).')' : ''),
+            'game_version'         => $config->version.(file_exists(ROOT_PATH.'/.git/ORIG_HEAD') ? ' ('.trim(file_get_contents(ROOT_PATH.'/.git/ORIG_HEAD')).')' : ''),
             'mysql_client_version' => Database::get()->getMySQLClientVersion(),
             'mysql_server_version' => Database::get()->getMySQLServerVersion(),
             'root'                 => $_SERVER['SERVER_NAME'],

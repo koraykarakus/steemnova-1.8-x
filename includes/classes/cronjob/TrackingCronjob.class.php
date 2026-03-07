@@ -55,7 +55,7 @@ class TrackingCronjob implements CronjobTask
             $serverData['unis'] = null;
         }
 
-        $serverData['version'] = Config::get(ROOT_UNI)->VERSION;
+        $serverData['version'] = Config::get(ROOT_UNI)->version;
 
         $ch = curl_init('http://tracking.jkroepke.de/');
         curl_setopt($ch, CURLOPT_HTTPGET, true);

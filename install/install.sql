@@ -207,7 +207,7 @@ CREATE TABLE `%PREFIX%colony_settings` (
 
 CREATE TABLE `%PREFIX%config` (
   `uni` int(11) NOT NULL AUTO_INCREMENT,
-  `VERSION` varchar(8) NOT NULL DEFAULT '1.8.git',
+  `version` varchar(8) NOT NULL DEFAULT '1.8.git',
   `sql_revision` INT NOT NULL DEFAULT  '0',
   `users_amount` int(11) unsigned NOT NULL DEFAULT '1',
   `game_speed` bigint(20) unsigned NOT NULL DEFAULT '2500',
@@ -1112,7 +1112,7 @@ CREATE TABLE `%PREFIX%vars_requriements` (
   KEY `requireID` (`requireID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `%PREFIX%config` (`uni`, `VERSION`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclamerAddress`, `disclamerPhone`, `disclamerMail`, `disclamerNotice`) VALUES
+INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclamerAddress`, `disclamerPhone`, `disclamerMail`, `disclamerNotice`) VALUES
 (1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
 
 INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES

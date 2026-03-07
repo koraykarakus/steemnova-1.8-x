@@ -516,12 +516,12 @@ function ClearCache(): void
         }
     }
 
-    $config->VERSION	= $version[0].'.'.$version[1].'.'.$REV;
+    $config->version	= $version[0].'.'.$version[1].'.'.$REV;
     */
 
     $config = Config::get();
-    $version = explode('.', $config->VERSION);
-    $config->VERSION = $version[0] . '.' . $version[1] . '.' . 'git';
+    $version = explode('.', $config->version);
+    $config->version = $version[0] . '.' . $version[1] . '.' . 'git';
     $config->save();
 }
 
@@ -624,7 +624,7 @@ function exceptionHandler($exception): void
         {
             $config = Config::get();
             $gameName = $config->game_name;
-            $VERSION = $config->VERSION;
+            $VERSION = $config->version;
         }
         catch (ErrorException $e)
         {

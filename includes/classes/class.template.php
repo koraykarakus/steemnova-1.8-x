@@ -103,10 +103,10 @@ class template extends Smarty
             'title'     => $config->game_name.' - '.$LNG['adm_cp_title'],
             'fcm_info'  => $LNG['fcm_info'],
             'lang'      => $LNG->getLanguage(),
-            'REV'       => substr($config->VERSION, -4),
+            'REV'       => substr($config->version, -4),
             'date'      => explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
             'Offset'    => $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
-            'VERSION'   => $config->VERSION,
+            'VERSION'   => $config->version,
             'dpath'     => 'styles/theme/gow/',
             'bodyclass' => 'full',
         ]);

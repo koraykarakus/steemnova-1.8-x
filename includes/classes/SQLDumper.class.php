@@ -72,7 +72,7 @@ class SQLDumper
         $database = [];
         require 'includes/config.php';
         $integerTypes = ['tinyint', 'smallint', 'mediumint', 'int', 'bigint', 'decimal', 'float', 'double', 'real'];
-        $gameVersion = Config::get()->VERSION;
+        $gameVersion = Config::get()->version;
         $fp = fopen($filePath, 'w');
         fwrite($fp, "-- MySQL dump | 2Moons dumper v{$gameVersion}
 --

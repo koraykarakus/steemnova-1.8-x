@@ -34,7 +34,7 @@ class HTTPRequest
             curl_setopt($this->ch, CURLOPT_HTTPGET, true);
             curl_setopt($this->ch, CURLOPT_AUTOREFERER, true);
             curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($this->ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; 2Moons/".Config::get()->VERSION."; +http://2moons.cc)");
+            curl_setopt($this->ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; 2Moons/".Config::get()->version."; +http://2moons.cc)");
             curl_setopt($this->ch, CURLOPT_HTTPHEADER, [
                 "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3",

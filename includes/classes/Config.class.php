@@ -21,7 +21,7 @@ class Config
     protected static $instances = [];
 
     // Global configkeys
-    protected static $globalConfigKeys = ['VERSION', 'game_name', 'stat', 'stat_level', 'stat_last_update',
+    protected static $globalConfigKeys = ['version', 'game_name', 'stat', 'stat_level', 'stat_last_update',
         'stat_settings', 'stat_update_time', 'stat_last_db_update', 'stats_fly_lock',
         'cron_lock', 'ts_modon', 'ts_server', 'ts_tcpport', 'ts_udpport', 'ts_timeout',
         'ts_version', 'ts_cron_last', 'ts_cron_interval', 'ts_login', 'ts_password',
