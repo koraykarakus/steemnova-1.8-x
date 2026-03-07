@@ -20,29 +20,29 @@ class MissionFunctions
     public $kill = 0;
     public $_fleet = [];
     public $_upd = [];
-    public $eventTime = 0;
+    public $event_time = 0;
 
-    public function UpdateFleet($Option, $Value)
+    public function UpdateFleet($option, $val)
     {
-        $this->_fleet[$Option] = $Value;
-        $this->_upd[$Option] = $Value;
+        $this->_fleet[$option] = $val;
+        $this->_upd[$option] = $val;
     }
 
-    public function setState($Value)
+    public function setState($val)
     {
-        $this->_fleet['fleet_mess'] = $Value;
-        $this->_upd['fleet_mess'] = $Value;
+        $this->_fleet['fleet_mess'] = $val;
+        $this->_upd['fleet_mess'] = $val;
 
-        switch ($Value)
+        switch ($val)
         {
             case FLEET_OUTWARD:
-                $this->eventTime = $this->_fleet['fleet_start_time'];
+                $this->event_time = $this->_fleet['fleet_start_time'];
                 break;
             case FLEET_RETURN:
-                $this->eventTime = $this->_fleet['fleet_end_time'];
+                $this->event_time = $this->_fleet['fleet_end_time'];
                 break;
             case FLEET_HOLD:
-                $this->eventTime = $this->_fleet['fleet_end_stay'];
+                $this->event_time = $this->_fleet['fleet_end_stay'];
                 break;
         }
     }
@@ -56,80 +56,83 @@ class MissionFunctions
 
         $param = [];
 
-        $updateQuery = [];
+        $update_query = [];
 
-        foreach ($this->_upd as $Opt => $Val)
+        foreach ($this->_upd as $option => $val)
         {
-            $updateQuery[] = "`".$Opt."` = :".$Opt;
-            $param[':'.$Opt] = $Val;
+            $update_query[] = "`".$option."` = :".$option;
+            $param[':'.$option] = $val;
         }
 
-        if (!empty($updateQuery))
+        if (!empty($update_query))
         {
-            $sql = 'UPDATE %%FLEETS%% SET '.implode(', ', $updateQuery).' WHERE `fleet_id` = :fleetId;';
-            $param[':fleetId'] = $this->_fleet['fleet_id'];
+            $sql = 'UPDATE %%FLEETS%% SET ' .
+            implode(', ', $update_query) .
+            ' WHERE `fleet_id` = :fleet_id;';
+
+            $param[':fleet_id'] = $this->_fleet['fleet_id'];
             Database::get()->update($sql, $param);
 
-            $sql = 'UPDATE %%FLEETS_EVENT%% SET time = :time WHERE `fleetID` = :fleetId;';
+            $sql = 'UPDATE %%FLEETS_EVENT%% SET time = :time WHERE `fleetID` = :fleet_id;';
             Database::get()->update($sql, [
-                ':time'    => $this->eventTime,
-                ':fleetId' => $this->_fleet['fleet_id'],
+                ':time'     => $this->event_time,
+                ':fleet_id' => $this->_fleet['fleet_id'],
             ]);
         }
     }
 
-    public function RestoreFleet($onStart = true)
+    public function RestoreFleet($on_start = true)
     {
         global $resource;
 
-        $fleetData = FleetFunctions::unserialize($this->_fleet['fleet_array']);
+        $fleet_data = FleetFunctions::unserialize($this->_fleet['fleet_array']);
 
-        $updateQuery = [];
+        $update_query = [];
 
         $param = [
             ':metal'      => $this->_fleet['fleet_resource_metal'],
             ':crystal'    => $this->_fleet['fleet_resource_crystal'],
             ':deuterium'  => $this->_fleet['fleet_resource_deuterium'],
             ':darkmatter' => $this->_fleet['fleet_resource_darkmatter'],
-            ':planetId'   => $onStart == true ? $this->_fleet['fleet_start_id'] : $this->_fleet['fleet_end_id'],
+            ':planet_id'  => $on_start == true ? $this->_fleet['fleet_start_id'] : $this->_fleet['fleet_end_id'],
         ];
 
-        foreach ($fleetData as $shipId => $shipAmount)
+        foreach ($fleet_data as $ship_id => $ship_amount)
         {
-            $updateQuery[] = "p.`".$resource[$shipId]."` = p.`".$resource[$shipId]."` + :".$resource[$shipId];
-            $param[':'.$resource[$shipId]] = $shipAmount;
+            $update_query[] = "p.`".$resource[$ship_id]."` = p.`".$resource[$ship_id]."` + :".$resource[$ship_id];
+            $param[':'.$resource[$ship_id]] = $ship_amount;
         }
 
         $sql = 'UPDATE %%PLANETS%% as p, %%USERS%% as u SET
-		'.implode(', ', $updateQuery).',
+		'.implode(', ', $update_query).',
 		p.`metal` = p.`metal` + :metal,
 		p.`crystal` = p.`crystal` + :crystal,
 		p.`deuterium` = p.`deuterium` + :deuterium,
 		p.`version` = p.`version` + 1,
 		u.`darkmatter` = u.`darkmatter` + :darkmatter
-		WHERE p.`id` = :planetId AND u.id = p.id_owner;';
+		WHERE p.`id` = :planet_id AND u.id = p.id_owner;';
 
         Database::get()->update($sql, $param);
 
         $this->KillFleet();
     }
 
-    public function StoreGoodsToPlanet($onStart = false)
+    public function StoreGoodsToPlanet($on_start = false)
     {
         $sql = 'UPDATE %%PLANETS%% as p, %%USERS%% as u SET
 		`metal`			= `metal` + :metal,
 		`crystal`		= `crystal` + :crystal,
 		`deuterium` 	= `deuterium` + :deuterium,
 		`darkmatter`	= `darkmatter` + :darkmatter,
-	  `version` = `version` + 1
-		WHERE p.`id` = :planetId AND u.id = p.id_owner;';
+	    `version` = `version` + 1 
+        WHERE p.`id` = :planetId AND u.id = p.id_owner;';
 
         Database::get()->update($sql, [
             ':metal'      => $this->_fleet['fleet_resource_metal'],
             ':crystal'    => $this->_fleet['fleet_resource_crystal'],
             ':deuterium'  => $this->_fleet['fleet_resource_deuterium'],
             ':darkmatter' => $this->_fleet['fleet_resource_darkmatter'],
-            ':planetId'   => ($onStart == true ? $this->_fleet['fleet_start_id'] : $this->_fleet['fleet_end_id']),
+            ':planetId'   => ($on_start == true ? $this->_fleet['fleet_start_id'] : $this->_fleet['fleet_end_id']),
         ]);
 
         $this->UpdateFleet('fleet_resource_metal', '0');
@@ -149,13 +152,13 @@ class MissionFunctions
         ]);
     }
 
-    public function getLanguage($language = null, $userID = null)
+    public function getLanguage($language = null, $user_id = null)
     {
-        if (is_null($language) && !is_null($userID))
+        if (is_null($language) && !is_null($user_id))
         {
-            $sql = 'SELECT lang FROM %%USERS%% WHERE id = :userId;';
+            $sql = 'SELECT lang FROM %%USERS%% WHERE id = :user_id;';
             $language = Database::get()->selectSingle($sql, [
-                ':userId' => $userID,
+                ':user_id' => $user_id,
             ], 'lang');
         }
 
@@ -164,32 +167,32 @@ class MissionFunctions
         return $LNG;
     }
 
-    public function savePlanetProduction($planetId, $startTime)
+    public function savePlanetProduction($planet_id, $start_time)
     {
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planet_id;";
 
-        $Planet = $db->selectSingle($sql, [
-            ':planetId' => $planetId,
+        $planet = $db->selectSingle($sql, [
+            ':planet_id' => $planet_id,
         ]);
 
         $sql = "SELECT * FROM %%USERS%% WHERE id = :userId;";
 
-        $User = $db->selectSingle($sql, [
-            ':userId' => $Planet['id_owner'],
+        $user = $db->selectSingle($sql, [
+            ':userId' => $planet['id_owner'],
         ]);
 
-        if (!$Planet || !$User) //moon is destroyed and deleted from planets table
-        {return;
+        if (!$planet || !$user) //moon is destroyed and deleted from planets table
+        {
+            return;
         }
 
-        $User['factor'] = getFactors($User, 'basic', $startTime);
+        $user['factor'] = getFactors($user, 'basic', $start_time);
 
-        $planetUpdater = new ResourceUpdate();
+        $planet_updater = new ResourceUpdate();
 
-        $planetUpdater->CalcResource($User, $Planet, true, $startTime);
-
+        $planet_updater->CalcResource($user, $planet, true, $start_time);
     }
 
 }
