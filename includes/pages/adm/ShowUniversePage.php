@@ -39,7 +39,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'            => ($config->fleet_speed / 2500),
             'resource_multiplier'    => $config->resource_multiplier,
             'storage_multiplier'     => $config->storage_multiplier,
-            'halt_speed'             => $config->halt_speed,
+            'expedition_speed'             => $config->expedition_speed,
             'energySpeed'            => $config->energySpeed,
             'forum_url'              => $config->forum_url,
             'initial_fields'         => $config->initial_fields,
@@ -145,7 +145,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'                => $config->fleet_speed,
             'resource_multiplier'        => $config->resource_multiplier,
             'storage_multiplier'         => $config->storage_multiplier,
-            'halt_speed'                 => $config->halt_speed,
+            'expedition_speed'                 => $config->expedition_speed,
             'energySpeed'                => $config->energySpeed,
             'initial_fields'             => $config->initial_fields,
             'metal_basic_income'         => $config->metal_basic_income,
@@ -218,7 +218,7 @@ class ShowUniversePage extends AbstractAdminPage
         $fleet_speed = (2500 * HTTP::_GP('fleet_speed', 0.0));
         $resource_multiplier = HTTP::_GP('resource_multiplier', 0.0);
         $storage_multiplier = HTTP::_GP('storage_multiplier', 0.0);
-        $halt_speed = HTTP::_GP('halt_speed', 0.0);
+        $expedition_speed = HTTP::_GP('expedition_speed', 0.0);
         $energySpeed = HTTP::_GP('energySpeed', 0.0);
         $initial_fields = HTTP::_GP('initial_fields', 0);
         $metal_basic_income = HTTP::_GP('metal_basic_income', 0);
@@ -284,7 +284,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'                => $fleet_speed,
             'resource_multiplier'        => $resource_multiplier,
             'storage_multiplier'         => $storage_multiplier,
-            'halt_speed'                 => $halt_speed,
+            'expedition_speed'                 => $expedition_speed,
             'energySpeed'                => $energySpeed,
             'initial_fields'             => $initial_fields,
             'metal_basic_income'         => $metal_basic_income,

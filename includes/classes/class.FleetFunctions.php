@@ -211,13 +211,13 @@ class FleetFunctions
         $stayBlock = [];
         $exchange = false;
 
-        $haltSpeed = Config::get($USER['universe'])->halt_speed;
+        $expedition_speed = Config::get($USER['universe'])->expedition_speed;
 
         if (in_array(15, $Missions))
         {
             for ($i = 1;$i <= $USER[$resource[124]];$i++)
             {
-                $stayBlock[$i] = round($i / $haltSpeed, 2);
+                $stayBlock[$i] = round($i / $expedition_speed, 2);
             }
         }
         elseif (in_array(11, $Missions))

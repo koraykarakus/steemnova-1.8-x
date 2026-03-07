@@ -117,9 +117,9 @@
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="halt_speed">{$LNG.se_halt_speed}</label>
-					<input id="halt_speed" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="halt_speed" value="{$halt_speed}" type="text">
+						for="expedition_speed">{$LNG.se_expedition_speed}</label>
+					<input id="expedition_speed" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="expedition_speed" value="{$expedition_speed}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"

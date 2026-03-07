@@ -314,7 +314,7 @@ class ShowFleetTablePage extends AbstractGamePage
 
         for ($i = 1; $i <= $USER[$resource[124]]; $i++)
         {
-            $stay_selector[$i] = $i / $config->halt_speed;
+            $stay_selector[$i] = $i / $config->expedition_speed;
         }
 
         $this->assign([

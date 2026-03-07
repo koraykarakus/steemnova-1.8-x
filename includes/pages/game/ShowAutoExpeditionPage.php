@@ -162,10 +162,10 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
             $stay_time = HTTP::_GP('staytime', 0);
 
-            $halt_speed = $config->halt_speed;
-            $stay_duration = round(($stay_time / $halt_speed) * 3600, 0);
+            $expedition_speed = $config->expedition_speed;
+            $stay_duration = round(($stay_time / $expedition_speed) * 3600, 0);
 
-            $possible_min_speed = round(1 / $halt_speed, 2) * 3600;
+            $possible_min_speed = round(1 / $expedition_speed, 2) * 3600;
 
             $stay_duration = max($stay_duration, $possible_min_speed);
 

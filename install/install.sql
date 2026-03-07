@@ -216,7 +216,7 @@ CREATE TABLE `%PREFIX%config` (
   `storage_multiplier` smallint(5) unsigned NOT NULL DEFAULT '1',
   `message_delete_behavior` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `message_delete_days` tinyint(3) unsigned NOT NULL DEFAULT '7',
-  `halt_speed` smallint(5) unsigned NOT NULL DEFAULT '1',
+  `expedition_speed` smallint(5) unsigned NOT NULL DEFAULT '1',
   `Fleet_Cdr` tinyint(3) unsigned NOT NULL DEFAULT '30',
   `Defs_Cdr` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `initial_fields` smallint(5) unsigned NOT NULL DEFAULT '163',
