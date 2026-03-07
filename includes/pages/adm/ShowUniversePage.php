@@ -39,7 +39,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'            => ($config->fleet_speed / 2500),
             'resource_multiplier'    => $config->resource_multiplier,
             'storage_multiplier'     => $config->storage_multiplier,
-            'expedition_speed'             => $config->expedition_speed,
+            'expedition_speed'       => $config->expedition_speed,
             'energySpeed'            => $config->energySpeed,
             'forum_url'              => $config->forum_url,
             'initial_fields'         => $config->initial_fields,
@@ -50,8 +50,8 @@ class ShowUniversePage extends AbstractAdminPage
             'close_reason'           => $config->close_reason,
             'debug'                  => $config->debug,
             'adm_attack'             => $config->adm_attack,
-            'defenses'               => $config->Defs_Cdr,
-            'shiips'                 => $config->Fleet_Cdr,
+            'defenses'               => $config->debris_percentage_defense,
+            'shiips'                 => $config->debris_percentage_fleet,
             'noobprot'               => $config->noobprotection,
             'noobprot2'              => $config->noobprotectiontime,
             'noobprot3'              => $config->noobprotectionmulti,
@@ -132,8 +132,8 @@ class ShowUniversePage extends AbstractAdminPage
             'noobprotectiontime'         => $config->noobprotectiontime,
             'noobprotectionmulti'        => $config->noobprotectionmulti,
             'noobprotection'             => $config->noobprotection,
-            'Defs_Cdr'                   => $config->Defs_Cdr,
-            'Fleet_Cdr'                  => $config->Fleet_Cdr,
+            'debris_percentage_defense'  => $config->debris_percentage_defense,
+            'debris_percentage_fleet'    => $config->debris_percentage_fleet,
             'game_disable'               => $config->game_disable,
             'close_reason'               => $config->close_reason,
             'OverviewNewsFrame'          => $config->OverviewNewsFrame,
@@ -145,7 +145,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'                => $config->fleet_speed,
             'resource_multiplier'        => $config->resource_multiplier,
             'storage_multiplier'         => $config->storage_multiplier,
-            'expedition_speed'                 => $config->expedition_speed,
+            'expedition_speed'           => $config->expedition_speed,
             'energySpeed'                => $config->energySpeed,
             'initial_fields'             => $config->initial_fields,
             'metal_basic_income'         => $config->metal_basic_income,
@@ -225,8 +225,8 @@ class ShowUniversePage extends AbstractAdminPage
         $crystal_basic_income = HTTP::_GP('crystal_basic_income', 0);
         $deuterium_basic_income = HTTP::_GP('deuterium_basic_income', 0);
         $lang = HTTP::_GP('lang', '');
-        $Defs_Cdr = HTTP::_GP('Defs_Cdr', 0);
-        $Fleet_Cdr = HTTP::_GP('Fleet_Cdr', 0);
+        $debris_percentage_defense = HTTP::_GP('debris_percentage_defense', 0);
+        $debris_percentage_fleet = HTTP::_GP('debris_percentage_fleet', 0);
         $noobprotectiontime = HTTP::_GP('noobprotectiontime', 0);
         $noobprotectionmulti = HTTP::_GP('noobprotectionmulti', 0);
         $min_build_time = HTTP::_GP('min_build_time', 0);
@@ -271,8 +271,8 @@ class ShowUniversePage extends AbstractAdminPage
             'noobprotectiontime'         => $noobprotectiontime,
             'noobprotectionmulti'        => $noobprotectionmulti,
             'noobprotection'             => $noobprotection,
-            'Defs_Cdr'                   => $Defs_Cdr,
-            'Fleet_Cdr'                  => $Fleet_Cdr,
+            'debris_percentage_defense'  => $debris_percentage_defense,
+            'debris_percentage_fleet'    => $debris_percentage_fleet,
             'game_disable'               => $game_disable,
             'close_reason'               => $close_reason,
             'OverviewNewsFrame'          => $OverviewNewsFrame,
@@ -284,7 +284,7 @@ class ShowUniversePage extends AbstractAdminPage
             'fleet_speed'                => $fleet_speed,
             'resource_multiplier'        => $resource_multiplier,
             'storage_multiplier'         => $storage_multiplier,
-            'expedition_speed'                 => $expedition_speed,
+            'expedition_speed'           => $expedition_speed,
             'energySpeed'                => $energySpeed,
             'initial_fields'             => $initial_fields,
             'metal_basic_income'         => $metal_basic_income,

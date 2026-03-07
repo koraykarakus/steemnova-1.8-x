@@ -330,15 +330,17 @@
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="Fleet_Cdr">{$LNG.se_ships_cdr}&nbsp;(%)</label>
-					<input id="Fleet_Cdr" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="Fleet_Cdr" maxlength="3" size="3" value="{$shiips}" type="text">
+						for="debris_percentage_fleet">{$LNG.se_ships_cdr}&nbsp;(%)</label>
+					<input id="debris_percentage_fleet"
+						class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="debris_percentage_fleet" maxlength="3" size="3" value="{$shiips}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="Defs_Cdr">{$LNG.se_def_cdr}&nbsp;(%)</label>
-					<input id="Defs_Cdr" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="Defs_Cdr" maxlength="3" size="3" value="{$defenses}" type="text">
+						for="debris_percentage_defense">{$LNG.se_def_cdr}&nbsp;(%)</label>
+					<input id="debris_percentage_defense"
+						class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="debris_percentage_defense" maxlength="3" size="3" value="{$defenses}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"

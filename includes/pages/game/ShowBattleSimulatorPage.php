@@ -127,7 +127,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         require_once 'includes/classes/missions/functions/calculateSteal.php';
         require_once 'includes/classes/missions/functions/GenerateReport.php';
 
-        $combatResult = calculateAttack($attackers, $defenders, Config::get()->Fleet_Cdr, Config::get()->Defs_Cdr);
+        $combatResult = calculateAttack($attackers, $defenders, Config::get()->debris_percentage_fleet, Config::get()->debris_percentage_defense);
 
         if ($combatResult['won'] == "a")
         {

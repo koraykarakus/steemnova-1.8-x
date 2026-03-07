@@ -235,8 +235,8 @@ class MissionCaseSpy extends MissionFunctions implements Mission
 			WHERE '.$whereCol.' = :planetId;';
 
             $db->update($sql, [
-                ':metal'    => $fleetAmount * $pricelist[210]['cost'][901] * $config->Fleet_Cdr / 100,
-                ':crystal'  => $fleetAmount * $pricelist[210]['cost'][902] * $config->Fleet_Cdr / 100,
+                ':metal'    => $fleetAmount * $pricelist[210]['cost'][901] * $config->debris_percentage_fleet / 100,
+                ':crystal'  => $fleetAmount * $pricelist[210]['cost'][902] * $config->debris_percentage_fleet / 100,
                 ':planetId' => $this->_fleet['fleet_end_id'],
             ]);
 
