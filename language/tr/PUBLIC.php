@@ -28,7 +28,7 @@ $LNG['siteTitleBanList'] = 'Banlananlar';
 $LNG['siteTitleBattleHall'] = 'En Buyuk Savaslar';
 $LNG['siteTitleRules'] = 'Kurallar';
 $LNG['siteTitleNews'] = 'Haberler';
-$LNG['siteTitleDisclamer'] = 'Iletisim';
+$LNG['siteTitleDisclaimer'] = 'Iletisim';
 $LNG['siteTitleLostPassword'] = 'Sifremi Unuttum?';
 
 // Menu

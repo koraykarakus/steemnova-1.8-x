@@ -124,10 +124,10 @@
         <a class="d-flex w-100 h-100 p-1  text-decoration-none text-white fs-6" href="?page=module">{$LNG.mu_module}</a>
       </li>
     {/if}
-    {if allowedTo('ShowDisclamerPage')}
+    {if allowedTo('ShowDisclaimerPage')}
       <li class="d-flex {if $page == 'disclamer'}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6"
-          href="?page=disclamer">{$LNG.mu_disclaimer}</a>
+          href="?page=disclaimer">{$LNG.mu_disclaimer}</a>
       </li>
     {/if}
     {if allowedTo('ShowStatsPage')}

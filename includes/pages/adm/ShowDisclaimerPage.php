@@ -18,7 +18,7 @@
 /**
  *
  */
-class ShowDisclamerPage extends AbstractAdminPage
+class ShowDisclaimerPage extends AbstractAdminPage
 {
     public function __construct()
     {
@@ -30,13 +30,13 @@ class ShowDisclamerPage extends AbstractAdminPage
         $config = Config::get(Universe::getEmulated());
 
         $this->assign([
-            'disclaimerAddress' => $config->disclamerAddress,
-            'disclaimerPhone'   => $config->disclamerPhone,
-            'disclaimerMail'    => $config->disclamerMail,
-            'disclaimerNotice'  => $config->disclamerNotice,
+            'disclaimer_address' => $config->disclaimer_address,
+            'disclaimer_phone'   => $config->disclaimer_phone,
+            'disclaimer_mail'    => $config->disclaimer_mail,
+            'disclaimer_notice'  => $config->disclaimer_notice,
         ]);
 
-        $this->display('page.disclamer.default.tpl');
+        $this->display('page.disclaimer.default.tpl');
     }
 
     public function saveSettings(): void
@@ -46,22 +46,22 @@ class ShowDisclamerPage extends AbstractAdminPage
         $config = Config::get(Universe::getEmulated());
 
         $config_before = [
-            'disclamerAddress' => $config->disclamerAddress,
-            'disclamerPhone'   => $config->disclamerPhone,
-            'disclamerMail'    => $config->disclamerMail,
-            'disclamerNotice'  => $config->disclamerNotice,
+            'disclaimer_address' => $config->disclaimer_address,
+            'disclaimer_phone'   => $config->disclaimer_phone,
+            'disclaimer_mail'    => $config->disclaimer_mail,
+            'disclaimer_notice'  => $config->disclaimer_notice,
         ];
 
-        $disclaimer_address = HTTP::_GP('disclaimerAddress', '', true);
-        $disclaimer_phone = HTTP::_GP('disclaimerPhone', '', true);
-        $disclaimer_mail = HTTP::_GP('disclaimerMail', '', true);
-        $disclaimer_notice = HTTP::_GP('disclaimerNotice', '', true);
+        $disclaimer_address = HTTP::_GP('disclaimer_address', '', true);
+        $disclaimer_phone = HTTP::_GP('disclaimer_phone', '', true);
+        $disclaimer_mail = HTTP::_GP('disclaimer_mail', '', true);
+        $disclaimer_notice = HTTP::_GP('disclaimer_notice', '', true);
 
         $config_after = [
-            'disclamerAddress' => $disclaimer_address,
-            'disclamerPhone'   => $disclaimer_phone,
-            'disclamerMail'    => $disclaimer_mail,
-            'disclamerNotice'  => $disclaimer_notice,
+            'disclaimer_address' => $disclaimer_address,
+            'disclaimer_phone'   => $disclaimer_phone,
+            'disclaimer_mail'    => $disclaimer_mail,
+            'disclaimer_notice'  => $disclaimer_notice,
         ];
 
         foreach ($config_after as $key => $value)
@@ -79,7 +79,7 @@ class ShowDisclamerPage extends AbstractAdminPage
 
         $redirect_button = [];
         $redirect_button[] = [
-            'url'   => 'admin.php?page=disclamer&mode=show',
+            'url'   => 'admin.php?page=disclaimer&mode=show',
             'label' => $LNG['uvs_back'],
         ];
 

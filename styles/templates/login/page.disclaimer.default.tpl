@@ -1,4 +1,4 @@
-{block name="title" prepend}{$LNG.siteTitleDisclamer}{/block}
+{block name="title" prepend}{$LNG.siteTitleDisclaimer}{/block}
 {block name="content"}
 	<table id="disclaimer_table">
 		<tbody>

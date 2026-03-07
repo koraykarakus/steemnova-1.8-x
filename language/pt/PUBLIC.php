@@ -28,7 +28,7 @@ $LNG['siteTitleBanList'] = 'Muro da Vergonha';
 $LNG['siteTitleBattleHall'] = 'Muro da Batalha';
 $LNG['siteTitleRules'] = 'Regras';
 $LNG['siteTitleNews'] = 'Notícias';
-$LNG['siteTitleDisclamer'] = 'Contatos';
+$LNG['siteTitleDisclaimer'] = 'Contatos';
 $LNG['siteTitleLostPassword'] = 'Senha perdida?';
 
 // Menu

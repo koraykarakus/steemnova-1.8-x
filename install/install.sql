@@ -331,10 +331,10 @@ CREATE TABLE `%PREFIX%config` (
   `timezone` varchar(32) NOT NULL DEFAULT 'Europe/London',
   `dst` enum('0','1','2') NOT NULL DEFAULT '2',
   `energySpeed` smallint(6) NOT NULL DEFAULT '1',
-  `disclamerAddress` text NOT NULL DEFAULT '',
-  `disclamerPhone` text NOT NULL DEFAULT '',
-  `disclamerMail` text NOT NULL DEFAULT '',
-  `disclamerNotice` text NOT NULL DEFAULT '',
+  `disclaimer_address` text NOT NULL DEFAULT '',
+  `disclaimer_phone` text NOT NULL DEFAULT '',
+  `disclaimer_mail` text NOT NULL DEFAULT '',
+  `disclaimer_notice` text NOT NULL DEFAULT '',
   `alliance_create_min_points` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `server_default_theme` varchar(20) NOT NULL DEFAULT 'gow',
   `let_users_change_theme` BOOLEAN NOT NULL DEFAULT 0,
@@ -1112,7 +1112,7 @@ CREATE TABLE `%PREFIX%vars_requriements` (
   KEY `requireID` (`requireID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclamerAddress`, `disclamerPhone`, `disclamerMail`, `disclamerNotice`) VALUES
+INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclaimer_address`, `disclaimer_phone`, `disclaimer_mail`, `disclaimer_notice`) VALUES
 (1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
 
 INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES

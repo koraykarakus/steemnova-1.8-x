@@ -28,10 +28,10 @@ class ShowDisclaimerPage extends AbstractLoginPage
     {
         $config = Config::get();
         $this->assign([
-            'disclaimer_address' => makebr($config->disclamerAddress),
-            'disclaimer_phone'   => $config->disclamerPhone,
-            'disclaimer_mail'    => $config->disclamerMail,
-            'disclaimer_notice'  => $config->disclamerNotice,
+            'disclaimer_address' => makebr($config->disclaimer_address),
+            'disclaimer_phone'   => $config->disclaimer_phone,
+            'disclaimer_mail'    => $config->disclaimer_mail,
+            'disclaimer_notice'  => $config->disclaimer_notice,
         ]);
 
         $this->display('page.disclaimer.default.tpl');

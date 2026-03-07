@@ -25,7 +25,7 @@ $LNG['siteTitleBanList'] = 'Заблокированные';
 $LNG['siteTitleBattleHall'] = 'Зал славы';
 $LNG['siteTitleRules'] = 'Правила';
 $LNG['siteTitleNews'] = 'Новости';
-$LNG['siteTitleDisclamer'] = 'Контакты';
+$LNG['siteTitleDisclaimer'] = 'Контакты';
 $LNG['siteTitleLostPassword'] = 'Восстановление пароля';
 
 // Меню

@@ -24,7 +24,7 @@ $LNG['siteTitleBanList'] = 'Pranger';
 $LNG['siteTitleBattleHall'] = 'BattleHall';
 $LNG['siteTitleRules'] = 'Regeln';
 $LNG['siteTitleNews'] = 'News';
-$LNG['siteTitleDisclamer'] = 'Impressum';
+$LNG['siteTitleDisclaimer'] = 'Impressum';
 $LNG['siteTitleLostPassword'] = 'Passwort vergessen?';
 
 // Menu

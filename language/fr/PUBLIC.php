@@ -14,7 +14,7 @@ $LNG['siteTitleBanList'] = 'Bannis';
 $LNG['siteTitleBattleHall'] = 'Hall of Fame';
 $LNG['siteTitleRules'] = 'Règles';
 $LNG['siteTitleNews'] = 'News';
-$LNG['siteTitleDisclamer'] = 'Contacter un administrateur';
+$LNG['siteTitleDisclaimer'] = 'Contacter un administrateur';
 $LNG['siteTitleLostPassword'] = 'Mot de passe perdu ?';
 /* ------------------------------------------------------------------------------------------ */
 // Menu

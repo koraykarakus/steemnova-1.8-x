@@ -370,10 +370,10 @@ $LNG['se_buildlist'] = 'Insa/Uretim/Arastirma Listesi';
 $LNG['se_timzone'] = 'Zaman Dilimi';
 $LNG['se_max_dm_missions'] = 'Ayni anda yapilabilecek KM Arastirma Gorevi';
 $LNG['se_alliance_create_min_points'] = 'Ittifak kurmak icin gereken min. Puan';
-$LNG['se_disclamerAddress'] = 'Adres';
-$LNG['se_disclamerPhone'] = 'Telefon';
-$LNG['se_disclamerMail'] = 'Email';
-$LNG['se_disclamerNotice'] = 'Daha fazla bilgi';
+$LNG['se_disclaimer_address'] = 'Adres';
+$LNG['se_disclaimer_phone'] = 'Telefon';
+$LNG['se_disclaimer_mail'] = 'Email';
+$LNG['se_disclaimer_notice'] = 'Daha fazla bilgi';
 
 //###########################################################//
 

@@ -33,7 +33,7 @@ class Config
         'chat_socket_active', 'chat_socket_host', 'chat_socket_ip', 'chat_socket_port',
         'chat_socket_chatid', 'ttf_file', 'sendmail_inactive', 'del_user_sendmail',
         'del_user_automatic', 'del_oldstuff', 'del_user_manually', 'ref_max_referals',
-        'disclamerAddress', 'disclamerPhone', 'disclamerMail', 'disclamerNotice'];
+        'disclaimer_address', 'disclaimer_phone', 'disclaimer_mail', 'disclaimer_notice'];
 
     public static function getGlobalConfigKeys()
     {

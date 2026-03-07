@@ -23,7 +23,7 @@ $LNG['siteTitleBanList'] = 'Pręgierz';
 $LNG['siteTitleBattleHall'] = 'Hala sław';
 $LNG['siteTitleRules'] = 'Regulamin';
 $LNG['siteTitleNews'] = 'News';
-$LNG['siteTitleDisclamer'] = 'Kontakt';
+$LNG['siteTitleDisclaimer'] = 'Kontakt';
 $LNG['siteTitleLostPassword'] = 'Reset hasła';
 
 // Menu

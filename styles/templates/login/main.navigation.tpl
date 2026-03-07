@@ -49,7 +49,7 @@
 			{if isModuleAvailable(MODULE_LOGIN_DISCLAIMER)}
 				<li class="d-flex align-items-center">
 					<a class="hover-color-yellow text-decoration-none {if $page == 'disclaimer'}active{/if}"
-						href="index.php?page=disclaimer">{$LNG.siteTitleDisclamer}</a>
+						href="index.php?page=disclaimer">{$LNG.siteTitleDisclaimer}</a>
 				</li>
 			{/if}
 		</ul>
@@ -116,7 +116,7 @@
 				</li>
 				<li class="d-flex align-items-center">
 					<a class="fs-6 w-100 hover-color-yellow text-decoration-none py-2 border-light {if $page == 'disclaimer'}active{/if}"
-						href="index.php?page=disclaimer">{$LNG.siteTitleDisclamer}</a>
+						href="index.php?page=disclaimer">{$LNG.siteTitleDisclaimer}</a>
 				</li>
 			</ul>
 		</div>

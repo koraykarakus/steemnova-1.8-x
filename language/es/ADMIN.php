@@ -522,10 +522,10 @@ $LNG['se_silo_factor_info'] = 'Factor de Tamaño para el Silo';
 $LNG['se_timzone'] = 'Zona Horaria de Unis';
 $LNG['se_max_dm_missions'] = 'Max. de misiones actuales en paralelo de Busqueda de DM';
 $LNG['se_alliance_create_min_points'] = 'Número mínimo de puntos necesarios para crear una alianza';
-$LNG['se_disclamerAddress'] = 'Dirección';
-$LNG['se_disclamerPhone'] = 'Número de Teléfono';
-$LNG['se_disclamerMail'] = 'Dirección de E-Mail';
-$LNG['se_disclamerNotice'] = 'Para obtener más información';
+$LNG['se_disclaimer_address'] = 'Dirección';
+$LNG['se_disclaimer_phone'] = 'Número de Teléfono';
+$LNG['se_disclaimer_mail'] = 'Dirección de E-Mail';
+$LNG['se_disclaimer_notice'] = 'Para obtener más información';
 
 //###########################################################//
 
