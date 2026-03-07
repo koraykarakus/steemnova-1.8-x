@@ -97,8 +97,8 @@ abstract class AbstractLoginPage
         $config = Config::get();
 
         $this->tpl_obj->assign_vars([
-            'recaptchaEnable'        => $config->capaktiv,
-            'recaptchaPublicKey'     => $config->cappublic,
+            'recaptchaEnable'        => $config->google_recaptcha_active,
+            'recaptchaPublicKey'     => $config->google_recaptcha_public_key,
             'use_recaptcha_on_login' => $config->use_recaptcha_on_login,
             'gameName'               => $config->game_name,
             'mailEnable'             => $config->mail_active,

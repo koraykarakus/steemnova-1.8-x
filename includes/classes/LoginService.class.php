@@ -241,7 +241,7 @@ class LoginService
         $config = Config::get();
 
         if ($external_auth === true
-            || $config->capaktiv !== '1'
+            || $config->google_recaptcha_active !== '1'
             || !$config->use_recaptcha_on_register)
         {
             return true;
@@ -249,7 +249,7 @@ class LoginService
 
         require_once('./includes/libs/reCAPTCHA/src/autoload.php');
 
-        $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+        $recaptcha = new \ReCaptcha\ReCaptcha($config->google_recaptcha_private_key);
         $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
         if (!$resp->isSuccess())
         {
@@ -730,12 +730,12 @@ class LoginService
     public function verifyLoginCaptcha(): bool
     {
         $config = Config::get();
-        if ($config->capaktiv === '1'
+        if ($config->google_recaptcha_active === '1'
             && $config->use_recaptcha_on_login)
         {
             require_once('./includes/libs/reCAPTCHA/src/autoload.php');
 
-            $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+            $recaptcha = new \ReCaptcha\ReCaptcha($config->google_recaptcha_private_key);
             $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
             if (!$resp->isSuccess())
             {

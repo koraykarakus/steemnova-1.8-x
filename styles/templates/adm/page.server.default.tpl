@@ -165,22 +165,24 @@
 			</div>
 			<div class="tab-pane fade" id="tab_3">
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label for="capaktiv"
+					<label for="google_recaptcha_active"
 						class="text-start my-1 cursor-pointer hover-underline">{$LNG.se_recaptcha_active}</label>
-					<input id="capaktiv" class="mx-2" name="capaktiv" {if $capaktiv} checked="checked" {/if}
-						type="checkbox">
+					<input id="google_recaptcha_active" class="mx-2" name="google_recaptcha_active"
+						{if $google_recaptcha_active} checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
-					<label for="cappublic"
+					<label for="google_recaptcha_public_key"
 						class="text-start my-1 cursor-pointer hover-underline">{$LNG.se_recaptcha_public}</label>
-					<input id="cappublic" class="form-control bg-dark text-white border-secondary" name="cappublic"
-						maxlength="40" size="60" value="{$cappublic}" type="text">
+					<input id="google_recaptcha_public_key" class="form-control bg-dark text-white border-secondary"
+						name="google_recaptcha_public_key" maxlength="40" size="60" value="{$google_recaptcha_public_key}"
+						type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
-					<label for="capprivate"
+					<label for="google_recaptcha_private_key"
 						class="text-start my-1 cursor-pointer hover-underline">{$LNG.se_recaptcha_private}</label>
-					<input id="capprivate" class="form-control bg-dark text-white border-secondary" name="capprivate"
-						maxlength="40" size="60" value="{$capprivate}" type="text">
+					<input id="google_recaptcha_private_key" class="form-control bg-dark text-white border-secondary"
+						name="google_recaptcha_private_key" maxlength="40" size="60" value="{$google_recaptcha_private_key}"
+						type="text">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
 					<label for="use_recaptcha_on_login" class="text-start my-1 cursor-pointer hover-underline">Recaptcha

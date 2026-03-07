@@ -340,7 +340,7 @@ class ShowFleetTablePage extends AbstractGamePage
             'galaxy'             => $PLANET['galaxy'],
             'system'             => $PLANET['system'],
             'StaySelector'       => $stay_selector,
-            'recaptchaPublicKey' => $config->cappublic,
+            'recaptchaPublicKey' => $config->google_recaptcha_public_key,
         ]);
 
         $this->display('page.fleetTable.default.tpl');

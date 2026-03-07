@@ -46,9 +46,9 @@ class ShowLoginPage extends AbstractAdminPage
         $this->assign([
             'bodyclass'                    => 'standalone',
             'username'                     => $USER['username'],
-            'recaptchaEnable'              => $config->capaktiv,
+            'recaptchaEnable'              => $config->google_recaptcha_active,
             'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
-            'recaptchaPublicKey'           => $config->cappublic,
+            'recaptchaPublicKey'           => $config->google_recaptcha_public_key,
         ]);
 
         $this->display('page.login.default.tpl');
@@ -75,12 +75,12 @@ class ShowLoginPage extends AbstractAdminPage
             $error[] = $LNG['adm_bad_password'];
         }
 
-        if ($config->capaktiv
+        if ($config->google_recaptcha_active
             && $config->use_recaptcha_on_admin_login)
         {
             require('includes/libs/reCAPTCHA/src/autoload.php');
 
-            $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+            $recaptcha = new \ReCaptcha\ReCaptcha($config->google_recaptcha_private_key);
             $resp = $recaptcha->verify(HTTP::_GP('g_recaptcha_response', ''), Session::getClientIp());
             if (!$resp->isSuccess())
             {

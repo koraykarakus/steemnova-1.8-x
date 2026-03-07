@@ -279,10 +279,10 @@ class ShowLogPage extends AbstractAdminPage
             'stat_update_time' => $LNG['cs_time_between_updates'],
             'stat_level'       => $LNG['cs_access_lvl'],
 
-            'capaktiv'   => $LNG['se_recaptcha_active'],
-            'cappublic'  => $LNG['se_recaptcha_public'],
-            'capprivate' => $LNG['se_recaptcha_private'],
-            'ga_key'     => $LNG['se_google_key'],
+            'google_recaptcha_active'      => $LNG['se_recaptcha_active'],
+            'google_recaptcha_public_key'  => $LNG['se_recaptcha_public'],
+            'google_recaptcha_private_key' => $LNG['se_recaptcha_private'],
+            'ga_key'                       => $LNG['se_google_key'],
 
             'metal'      => $LNG['tech'][901],
             'crystal'    => $LNG['tech'][902],
@@ -463,9 +463,9 @@ function ShowLogDetail()
         'stat_update_time' => $LNG['cs_time_between_updates'],
         'stat_level'       => $LNG['cs_access_lvl'],
 
-        'capaktiv'   => $LNG['se_recaptcha_active'],
-        'cappublic'  => $LNG['se_recaptcha_public'],
-        'capprivate' => $LNG['se_recaptcha_private'],
+        'google_recaptcha_active'   => $LNG['se_recaptcha_active'],
+        'google_recaptcha_public_key'  => $LNG['se_recaptcha_public'],
+        'google_recaptcha_private_key' => $LNG['se_recaptcha_private'],
         'ga_key'     => $LNG['se_google_key'],
 
         'metal'      => $LNG['tech'][901],

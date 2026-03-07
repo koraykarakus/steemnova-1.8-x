@@ -46,10 +46,10 @@ class ShowAutoExpeditionPage extends AbstractGamePage
             ]]);
         }
 
-        if ($config->capaktiv)
+        if ($config->google_recaptcha_active)
         {
             require_once 'includes/libs/reCAPTCHA/src/autoload.php';
-            $recaptcha = new \ReCaptcha\ReCaptcha($config->capprivate);
+            $recaptcha = new \ReCaptcha\ReCaptcha($config->google_recaptcha_private_key);
 
             $resp = $recaptcha->verify(HTTP::_GP('g-recaptcha-response', ''), Session::getClientIp());
 

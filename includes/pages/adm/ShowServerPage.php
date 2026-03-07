@@ -50,9 +50,9 @@ class ShowServerPage extends AbstractAdminPage
             'smtp_pass'                    => $config->smtp_pass,
             'smtp_sendmail'                => $config->smtp_sendmail,
             'smtp_ssl'                     => $config->smtp_ssl,
-            'capprivate'                   => $config->capprivate,
-            'cappublic'                    => $config->cappublic,
-            'capaktiv'                     => $config->capaktiv,
+            'google_recaptcha_private_key' => $config->google_recaptcha_private_key,
+            'google_recaptcha_public_key'  => $config->google_recaptcha_public_key,
+            'google_recaptcha_active'      => $config->google_recaptcha_active,
             'ga_active'                    => $config->ga_active,
             'ga_key'                       => $config->ga_key,
             'timezone'                     => $config->timezone,
@@ -97,9 +97,9 @@ class ShowServerPage extends AbstractAdminPage
             'smtp_sendmail'                => $config->smtp_sendmail,
             'ga_active'                    => $config->ga_active,
             'ga_key'                       => $config->ga_key,
-            'capaktiv'                     => $config->capaktiv,
-            'cappublic'                    => $config->cappublic,
-            'capprivate'                   => $config->capprivate,
+            'google_recaptcha_active'      => $config->google_recaptcha_active,
+            'google_recaptcha_public_key'  => $config->google_recaptcha_public_key,
+            'google_recaptcha_private_key' => $config->google_recaptcha_private_key,
             'use_recaptcha_on_login'       => $config->use_recaptcha_on_login,
             'use_recaptcha_on_register'    => $config->use_recaptcha_on_register,
             'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
@@ -118,7 +118,7 @@ class ShowServerPage extends AbstractAdminPage
             'password_recover_type'        => $config->password_recover_type,
         ];
 
-        $capaktiv = isset($_POST['capaktiv']) && $_POST['capaktiv'] == 'on' ? 1 : 0;
+        $google_recaptcha_active = isset($_POST['google_recaptcha_active']) && $_POST['google_recaptcha_active'] == 'on' ? 1 : 0;
         $ga_active = isset($_POST['ga_active']) && $_POST['ga_active'] == 'on' ? 1 : 0;
         $sendmail_inactive = isset($_POST['sendmail_inactive']) && $_POST['sendmail_inactive'] == 'on' ? 1 : 0;
         $mail_active = isset($_POST['mail_active']) && $_POST['mail_active'] == 'on' ? 1 : 0;
@@ -126,8 +126,8 @@ class ShowServerPage extends AbstractAdminPage
         $ttf_file = HTTP::_GP('ttf_file', '');
         $close_reason = HTTP::_GP('close_reason', '', true);
         $game_name = HTTP::_GP('game_name', '', true);
-        $capprivate = HTTP::_GP('capprivate', '');
-        $cappublic = HTTP::_GP('cappublic', '');
+        $google_recaptcha_private_key = HTTP::_GP('google_recaptcha_private_key', '');
+        $google_recaptcha_public_key = HTTP::_GP('google_recaptcha_public_key', '');
         $use_recaptcha_on_login = (HTTP::_GP('use_recaptcha_on_login', 'off') == 'on') ? 1 : 0;
         $use_recaptcha_on_register = (HTTP::_GP('use_recaptcha_on_register', 'off') == 'on') ? 1 : 0;
         $use_recaptcha_on_admin_login = (HTTP::_GP('use_recaptcha_on_admin_login', 'off') == 'on') ? 1 : 0;
@@ -166,9 +166,9 @@ class ShowServerPage extends AbstractAdminPage
             'smtp_sendmail'                => $smtp_sendmail,
             'ga_active'                    => $ga_active,
             'ga_key'                       => $ga_key,
-            'capaktiv'                     => $capaktiv,
-            'cappublic'                    => $cappublic,
-            'capprivate'                   => $capprivate,
+            'google_recaptcha_active'      => $google_recaptcha_active,
+            'google_recaptcha_public_key'  => $google_recaptcha_public_key,
+            'google_recaptcha_private_key' => $google_recaptcha_private_key,
             'del_oldstuff'                 => $del_oldstuff,
             'del_user_manually'            => $del_user_manually,
             'del_user_automatic'           => $del_user_automatic,
