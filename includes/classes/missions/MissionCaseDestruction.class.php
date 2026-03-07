@@ -93,7 +93,7 @@ HTML;
 
         if ($this->_fleet['fleet_group'] != 0)
         {
-            $sql = "DELETE FROM %%AKS%% WHERE id = :acsId;";
+            $sql = "DELETE FROM %%ACS%% WHERE id = :acsId;";
             $db->delete($sql, [
                 ':acsId' => $this->_fleet['fleet_group'],
             ]);
@@ -400,7 +400,7 @@ HTML;
                         ':fleetId'  => $this->_fleet['fleet_id'],
                     ]);
 
-                    $sql = "UPDATE %%AKS%% SET target = :planetId WHERE target = :moonId;";
+                    $sql = "UPDATE %%ACS%% SET target = :planetId WHERE target = :moonId;";
                     $db->update($sql, [
                         ':planetId' => $planetID,
                         ':moonId'   => $targetPlanet['id'],

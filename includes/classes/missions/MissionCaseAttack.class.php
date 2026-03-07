@@ -94,7 +94,7 @@ HTML;
 
         if ($this->_fleet['fleet_group'] != 0)
         {
-            $sql = "DELETE FROM %%AKS%% WHERE id = :acsId;";
+            $sql = "DELETE FROM %%ACS%% WHERE id = :acsId;";
             $db->delete($sql, [
                 ':acsId' => $this->_fleet['fleet_group'],
             ]);

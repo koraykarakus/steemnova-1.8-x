@@ -21,7 +21,7 @@ define('DB_PREFIX', $database['tableprefix']);
 
 // Data Tabells
 $dbTableNames = [
-    'AKS'              => DB_PREFIX.'aks',
+    'ACS'              => DB_PREFIX.'acs',
     'ALLIANCE'         => DB_PREFIX.'alliance',
     'ALLIANCE_RANK'    => DB_PREFIX.'alliance_ranks',
     'ALLIANCE_REQUEST' => DB_PREFIX.'alliance_request',

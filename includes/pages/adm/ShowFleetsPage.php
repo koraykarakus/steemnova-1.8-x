@@ -49,7 +49,7 @@ class ShowFleetsPage extends AbstractAdminPage
 		LEFT JOIN %%PLANETS%% ptarget ON ptarget.id = fleet_end_id
 		LEFT JOIN %%USERS%% ustart ON ustart.id = fleet_owner
 		LEFT JOIN %%USERS%% utarget ON utarget.id = fleet_target_owner
-		LEFT JOIN %%AKS%% acs ON acs.id = fleet_group
+		LEFT JOIN %%ACS%% acs ON acs.id = fleet_group
 		WHERE fleet_universe = :universe
 		GROUP BY event.fleetID
 		ORDER BY fleet_id;";

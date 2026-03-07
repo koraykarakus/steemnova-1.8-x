@@ -280,7 +280,7 @@ class FleetFunctions
             return 0;
         }
 
-        $sql = 'SELECT arrive_time FROM %%AKS%% WHERE id = :acsId;';
+        $sql = 'SELECT arrive_time FROM %%ACS%% WHERE id = :acsId;';
         $acsEndTime = Database::get()->selectSingle($sql, [
             ':acsId' => $acsId,
         ], 'arrive_time');
@@ -297,7 +297,7 @@ class FleetFunctions
 
         $db = Database::get();
 
-        $sql = 'UPDATE %%AKS%% SET arrive_time = arrive_time + :time WHERE id = :acsId;';
+        $sql = 'UPDATE %%ACS%% SET arrive_time = arrive_time + :time WHERE id = :acsId;';
         $db->update($sql, [
             ':time'  => $timeDifference,
             ':acsId' => $acsId,
@@ -393,10 +393,10 @@ class FleetFunctions
 
             if ($isInGroup)
             {
-                $sql = 'DELETE %%AKS%%, %%USERS_ACS%%
-				FROM %%AKS%%
-				LEFT JOIN %%USERS_ACS%% ON acsID = %%AKS%%.id
-				WHERE %%AKS%%.id = :acsId;';
+                $sql = 'DELETE %%ACS%%, %%USERS_ACS%%
+				FROM %%ACS%%
+				LEFT JOIN %%USERS_ACS%% ON acsID = %%ACS%%.id
+				WHERE %%ACS%%.id = :acsId;';
 
                 $db->delete($sql, [
                     ':acsId' => $fleetResult['fleet_group'],

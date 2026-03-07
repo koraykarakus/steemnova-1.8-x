@@ -33,7 +33,7 @@ class ShowFleetTablePage extends AbstractGamePage
         $acs_creator = $USER['id'];
 
         $db = Database::get();
-        $sql = "INSERT INTO %%AKS%% SET name = :acs_name, arrive_time = :time, target = :target;";
+        $sql = "INSERT INTO %%ACS%% SET name = :acs_name, arrive_time = :time, target = :target;";
         $db->insert($sql, [
             ':acs_name' => $acs_name,
             ':time'     => $fleetData['fleet_start_time'],
@@ -66,7 +66,7 @@ class ShowFleetTablePage extends AbstractGamePage
         global $USER;
 
         $db = Database::get();
-        $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%AKS%% ON acsID = id 
+        $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%ACS%% ON acsID = id 
         WHERE userID = :user_id AND acsID = :acs_id;";
         $acs_result = $db->selectSingle($sql, [
             ':user_id' => $USER['id'],
@@ -122,7 +122,7 @@ class ShowFleetTablePage extends AbstractGamePage
                 $this->sendJSON($LNG['fl_acs_newname_alphanum']);
             }
 
-            $sql = "UPDATE %%AKS%% SET name = :acs_name WHERE id = :acs_id;";
+            $sql = "UPDATE %%ACS%% SET name = :acs_name WHERE id = :acs_id;";
             $db->update($sql, [
                 ':acs_name' => $acs_name,
                 ':acs_id'   => $acs_data['id'],
