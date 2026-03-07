@@ -439,22 +439,23 @@
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="noobprotection">{$LNG.se_noob_protect}</label>
-					<input class="mx-2" id="noobprotection" name="noobprotection" {if $noobprot} checked="checked" {/if}
-						type="checkbox">
+						for="noob_protection">{$LNG.se_noob_protect}</label>
+					<input class="mx-2" id="noob_protection" name="noob_protection" {if $noob_protection} checked="checked"
+						{/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="noobprotectiontime">{$LNG.se_noob_protect2}</label>
-					<input id="noobprotectiontime" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="noobprotectiontime" value="{$noobprot2}" type="text">
+						for="noob_protection_max_points">{$LNG.se_noob_protect2}</label>
+					<input id="noob_protection_max_points"
+						class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="noob_protection_max_points" value="{$noob_protection_max_points}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="noobprotectionmulti">{$LNG.se_noob_protect3}</label>
-					<input id="noobprotectionmulti"
-						class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="noobprotectionmulti"
-						value="{$noobprot3}" type="text">
+						for="noob_protection_multiplier">{$LNG.se_noob_protect3}</label>
+					<input id="noob_protection_multiplier"
+						class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="noob_protection_multiplier" value="{$noob_protection_multiplier}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"

@@ -99,9 +99,9 @@ class PlayerUtil
         }
         else
         {
-            $galaxy = $config->LastSettedGalaxyPos;
-            $system = $config->LastSettedSystemPos;
-            $planet = $config->LastSettedPlanetPos;
+            $galaxy = $config->last_settled_galaxy_pos;
+            $system = $config->last_settled_system_pos;
+            $planet = $config->last_settled_planet_pos;
 
             if ($galaxy > $config->max_galaxy)
             {
@@ -143,9 +143,9 @@ class PlayerUtil
             while (self::isPositionFree($universe, $galaxy, $system, $position) === false);
 
             // Update last coordinates to config table
-            $config->LastSettedGalaxyPos = $galaxy;
-            $config->LastSettedSystemPos = $system;
-            $config->LastSettedPlanetPos = $planet;
+            $config->last_settled_galaxy_pos = $galaxy;
+            $config->last_settled_system_pos = $system;
+            $config->last_settled_planet_pos = $planet;
         }
 
         $params = [

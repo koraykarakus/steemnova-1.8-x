@@ -33,48 +33,48 @@ class ShowUniversePage extends AbstractAdminPage
         $config = Config::get(Universe::getEmulated());
 
         $this->assign([
-            'game_name'              => $config->game_name,
-            'uni_name'               => $config->uni_name,
-            'game_speed'             => ($config->game_speed / 2500),
-            'fleet_speed'            => ($config->fleet_speed / 2500),
-            'resource_multiplier'    => $config->resource_multiplier,
-            'storage_multiplier'     => $config->storage_multiplier,
-            'expedition_speed'       => $config->expedition_speed,
-            'energySpeed'            => $config->energySpeed,
-            'forum_url'              => $config->forum_url,
-            'initial_fields'         => $config->initial_fields,
-            'metal_basic_income'     => $config->metal_basic_income,
-            'crystal_basic_income'   => $config->crystal_basic_income,
-            'deuterium_basic_income' => $config->deuterium_basic_income,
-            'game_disable'           => $config->game_disable,
-            'close_reason'           => $config->close_reason,
-            'debug'                  => $config->debug,
-            'adm_attack'             => $config->adm_attack,
-            'defenses'               => $config->debris_percentage_defense,
-            'shiips'                 => $config->debris_percentage_fleet,
-            'noobprot'               => $config->noobprotection,
-            'noobprot2'              => $config->noobprotectiontime,
-            'noobprot3'              => $config->noobprotectionmulti,
-            'mail_active'            => $config->mail_active,
-            'mail_use'               => $config->mail_use,
-            'smail_path'             => $config->smail_path,
-            'smtp_host'              => $config->smtp_host,
-            'smtp_port'              => $config->smtp_port,
-            'smtp_user'              => $config->smtp_user,
-            'smtp_pass'              => $config->smtp_pass,
-            'smtp_sendmail'          => $config->smtp_sendmail,
-            'smtp_ssl'               => $config->smtp_ssl,
-            'user_valid'             => $config->user_valid,
-            'newsframe'              => $config->OverviewNewsFrame,
-            'reg_closed'             => $config->reg_closed,
-            'NewsTextVal'            => $config->OverviewNewsText,
-            'capprivate'             => $config->capprivate,
-            'cappublic'              => $config->cappublic,
-            'capaktiv'               => $config->capaktiv,
-            'min_build_time'         => $config->min_build_time,
-            'trade_allowed_ships'    => $config->trade_allowed_ships,
-            'trade_charge'           => $config->trade_charge,
-            'Selector'               => [
+            'game_name'                  => $config->game_name,
+            'uni_name'                   => $config->uni_name,
+            'game_speed'                 => ($config->game_speed / 2500),
+            'fleet_speed'                => ($config->fleet_speed / 2500),
+            'resource_multiplier'        => $config->resource_multiplier,
+            'storage_multiplier'         => $config->storage_multiplier,
+            'expedition_speed'           => $config->expedition_speed,
+            'energySpeed'                => $config->energySpeed,
+            'forum_url'                  => $config->forum_url,
+            'initial_fields'             => $config->initial_fields,
+            'metal_basic_income'         => $config->metal_basic_income,
+            'crystal_basic_income'       => $config->crystal_basic_income,
+            'deuterium_basic_income'     => $config->deuterium_basic_income,
+            'game_disable'               => $config->game_disable,
+            'close_reason'               => $config->close_reason,
+            'debug'                      => $config->debug,
+            'adm_attack'                 => $config->adm_attack,
+            'defenses'                   => $config->debris_percentage_defense,
+            'shiips'                     => $config->debris_percentage_fleet,
+            'noob_protection'            => $config->noob_protection,
+            'noob_protection_max_points' => $config->noob_protection_max_points,
+            'noob_protection_multiplier' => $config->noob_protection_multiplier,
+            'mail_active'                => $config->mail_active,
+            'mail_use'                   => $config->mail_use,
+            'smail_path'                 => $config->smail_path,
+            'smtp_host'                  => $config->smtp_host,
+            'smtp_port'                  => $config->smtp_port,
+            'smtp_user'                  => $config->smtp_user,
+            'smtp_pass'                  => $config->smtp_pass,
+            'smtp_sendmail'              => $config->smtp_sendmail,
+            'smtp_ssl'                   => $config->smtp_ssl,
+            'user_valid'                 => $config->user_valid,
+            'newsframe'                  => $config->OverviewNewsFrame,
+            'reg_closed'                 => $config->reg_closed,
+            'NewsTextVal'                => $config->OverviewNewsText,
+            'capprivate'                 => $config->capprivate,
+            'cappublic'                  => $config->cappublic,
+            'capaktiv'                   => $config->capaktiv,
+            'min_build_time'             => $config->min_build_time,
+            'trade_allowed_ships'        => $config->trade_allowed_ships,
+            'trade_charge'               => $config->trade_charge,
+            'Selector'                   => [
                 'langs' => $LNG->getAllowedLangs(false),
                 'mail'  => [0 => $LNG['se_mail_sel_0'], 1 => $LNG['se_mail_sel_1'], 2 => $LNG['se_mail_sel_2']],
                 'encry' => ['' => $LNG['se_smtp_ssl_1'], 'ssl' => $LNG['se_smtp_ssl_2'], 'tls' => $LNG['se_smtp_ssl_3']],
@@ -129,9 +129,9 @@ class ShowUniversePage extends AbstractAdminPage
         $config = Config::get(Universe::getEmulated());
 
         $config_before = [
-            'noobprotectiontime'         => $config->noobprotectiontime,
-            'noobprotectionmulti'        => $config->noobprotectionmulti,
-            'noobprotection'             => $config->noobprotection,
+            'noob_protection_max_points' => $config->noob_protection_max_points,
+            'noob_protection_multiplier' => $config->noob_protection_multiplier,
+            'noob_protection'            => $config->noob_protection,
             'debris_percentage_defense'  => $config->debris_percentage_defense,
             'debris_percentage_fleet'    => $config->debris_percentage_fleet,
             'game_disable'               => $config->game_disable,
@@ -201,7 +201,7 @@ class ShowUniversePage extends AbstractAdminPage
         ];
 
         $game_disable = isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
-        $noobprotection = isset($_POST['noobprotection']) && $_POST['noobprotection'] == 'on' ? 1 : 0;
+        $noob_protection = isset($_POST['noob_protection']) && $_POST['noob_protection'] == 'on' ? 1 : 0;
         $debug = isset($_POST['debug']) && $_POST['debug'] == 'on' ? 1 : 0;
         $adm_attack = isset($_POST['adm_attack']) && $_POST['adm_attack'] == 'on' ? 1 : 0;
         $OverviewNewsFrame = isset($_POST['newsframe']) && $_POST['newsframe'] == 'on' ? 1 : 0;
@@ -227,8 +227,8 @@ class ShowUniversePage extends AbstractAdminPage
         $lang = HTTP::_GP('lang', '');
         $debris_percentage_defense = HTTP::_GP('debris_percentage_defense', 0);
         $debris_percentage_fleet = HTTP::_GP('debris_percentage_fleet', 0);
-        $noobprotectiontime = HTTP::_GP('noobprotectiontime', 0);
-        $noobprotectionmulti = HTTP::_GP('noobprotectionmulti', 0);
+        $noob_protection_max_points = HTTP::_GP('noob_protection_max_points', 0);
+        $noob_protection_multiplier = HTTP::_GP('noob_protection_multiplier', 0);
         $min_build_time = HTTP::_GP('min_build_time', 0);
         $trade_allowed_ships = HTTP::_GP('trade_allowed_ships', '');
         $trade_charge = HTTP::_GP('trade_charge', 0.0);
@@ -268,9 +268,9 @@ class ShowUniversePage extends AbstractAdminPage
         $show_tech_no_research = (HTTP::_GP('show_tech_no_research', 'off') == 'on') ? 1 : 0;
 
         $config_after = [
-            'noobprotectiontime'         => $noobprotectiontime,
-            'noobprotectionmulti'        => $noobprotectionmulti,
-            'noobprotection'             => $noobprotection,
+            'noob_protection_max_points' => $noob_protection_max_points,
+            'noob_protection_multiplier' => $noob_protection_multiplier,
+            'noob_protection'            => $noob_protection,
             'debris_percentage_defense'  => $debris_percentage_defense,
             'debris_percentage_fleet'    => $debris_percentage_fleet,
             'game_disable'               => $game_disable,

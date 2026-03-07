@@ -392,9 +392,9 @@ function CheckNoobProtec($owner_player, $target_player, $player): array
 {
     $config = Config::get();
     if (
-        $config->noobprotection == 0
-        || $config->noobprotectiontime == 0
-        || $config->noobprotectionmulti == 0
+        $config->noob_protection == 0
+        || $config->noob_protection_max_points == 0
+        || $config->noob_protection_multiplier == 0
         || $player['banaday'] > TIMESTAMP
         || $player['onlinetime'] < TIMESTAMP - INACTIVE
     ) {
@@ -409,16 +409,16 @@ function CheckNoobProtec($owner_player, $target_player, $player): array
                 ODER weniger als 5.000 hat.
             */
             // Addional Comment: Letzteres ist eigentlich sinnfrei, bitte testen.a
-            ($target_player['total_points'] <= $config->noobprotectiontime) // Default: 25.000
-            && ($owner_player['total_points'] > $target_player['total_points'] * $config->noobprotectionmulti)
+            ($target_player['total_points'] <= $config->noob_protection_max_points) // Default: 25.000
+            && ($owner_player['total_points'] > $target_player['total_points'] * $config->noob_protection_multiplier)
         ),
         'StrongPlayer' => (
             /* WAHR:
                 Wenn Spieler weniger als 5000 Punkte hat UND
                 Mehr als das funfache der eigende Punkte hat
             */
-            ($owner_player['total_points'] < $config->noobprotectiontime) // Default: 5.000
-            && ($owner_player['total_points'] * $config->noobprotectionmulti < $target_player['total_points'])
+            ($owner_player['total_points'] < $config->noob_protection_max_points) // Default: 5.000
+            && ($owner_player['total_points'] * $config->noob_protection_multiplier < $target_player['total_points'])
         ),
     ];
 }
