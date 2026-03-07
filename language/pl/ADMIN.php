@@ -635,6 +635,16 @@ $LNG['mu_logs'] = 'Admin-Log';
 $LNG['mu_giveaway'] = 'Bonusy';
 $LNG['mu_disclaimer'] = 'Ustawienia prawne';
 $LNG['mu_dump'] = 'Baza danych - Kopia';
+$LNG['mu_colony_settings'] = "Ustawienia Kolonii";
+$LNG['mu_relocate_settings'] = "Ustawienia Relokacji";
+$LNG['mu_collect_mines_settings'] = "Ustawienia Zbierania Kopalni";
+$LNG['mu_bots'] = "Boty";
+$LNG['mu_planet_fields'] = "Pola Planety";
+$LNG['mu_expedition_settings'] = "Ustawienia Ekspedycji";
+$LNG['mu_create_universe'] = "Utwórz Nowy Wszechświat";
+$LNG['mu_google_options'] = "Rejestracja przez Google";
+$LNG['mu_discord_options'] = "Rejestracja przez Discord";
+$LNG['mu_reset_universe'] = "Zresetuj Wszechświat";
 
 $LNG['vt_error'] = 'Błąd plików - wymagana aktualizacja!';
 $LNG['vt_fail'] = 'Zmienione Pliki';

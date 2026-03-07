@@ -57,35 +57,43 @@
     {/if}
     {if allowedTo('ShowColonySettingsPage')}
       <li class="d-flex {if $page == 'colonySettings'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=colonySettings">Colony
-          Settings</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=colonySettings">
+          {$LNG.mu_colony_settings}
+        </a>
       </li>
     {/if}
     {if allowedTo('ShowRelocatePage')}
       <li class="d-flex {if $page == 'relocate'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=relocate">Relocate Settings</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=relocate">
+          {$LNG.mu_relocate_settings}
+        </a>
       </li>
     {/if}
     {if allowedTo('ShowCollectMinesPage')}
       <li class="d-flex {if $page == 'collectMines'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=collectMines">Collect Mines
-          Settings</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=collectMines">
+          {$LNG.mu_collect_mines_settings}</a>
       </li>
     {/if}
     {if allowedTo('ShowBostPage')}
       <li class="d-flex {if $page == 'bots'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=bots">Bots</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=bots">
+          {$LNG.mu_bots}
+        </a>
       </li>
     {/if}
     {if allowedTo('ShowPlanetFieldsPage')}
       <li class="d-flex {if $page == 'planetFields'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=planetFields">Planet Fields</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=planetFields">
+          {$LNG.mu_planet_fields}
+        </a>
       </li>
     {/if}
     {if allowedTo('ShowExpeditionSettingsPage')}
       <li class="d-flex {if $page == 'expedition'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=expedition">Expedition
-          Settings</a>
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none text-white fs-6" href="?page=expedition">
+          {$LNG.mu_expedition_settings}
+        </a>
       </li>
     {/if}
     {if allowedTo('ShowChatConfigPage')}

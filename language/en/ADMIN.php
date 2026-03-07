@@ -655,12 +655,10 @@ $LNG['sb_sql_counts'] = 'SQL Querys: %d';
 $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 //###########################################################//
 
-//---------------	Menu Esquerdo	------------------------//
+//---------------	Admin Menu	------------------------//
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Configuration';
-$LNG['mu_reset_universe'] = "Reset Universe";
-$LNG['mu_create_universe'] = 'Create New Universe';
 $LNG['mu_unisettings'] = 'Universe Configuration';
 $LNG['mu_global_message'] = 'Global Message';
 $LNG['mu_users_settings'] = 'Edit menu';
@@ -691,8 +689,6 @@ $LNG['mu_chat'] = 'Chat Configuration';
 $LNG['mu_module'] = 'Modules';
 $LNG['mu_mod_update'] = 'Checking version of MOD';
 $LNG['mu_fb_options'] = 'Registration by Facebook';
-$LNG['mu_google_options'] = "Registration by Google";
-$LNG['mu_discord_options'] = "Registration by Discord";
 $LNG['mu_ts_options'] = 'Teamspeak Options';
 $LNG['mu_game_info'] = 'Information';
 $LNG['mu_vaild_users'] = 'User activity';
@@ -705,6 +701,17 @@ $LNG['mu_logs'] = 'Admin Log';
 $LNG['mu_giveaway'] = 'Giveaways';
 $LNG['mu_disclaimer'] = 'Contact settings';
 $LNG['mu_dump'] = 'Database Backup';
+$LNG['mu_colony_settings'] = "Colony Settings";
+$LNG['mu_relocate_settings'] = "Relocate Settings";
+$LNG['mu_collect_mines_settings'] = "Collect Mines Settings";
+$LNG['mu_bots'] = "Bots";
+$LNG['mu_planet_fields'] = "Planet Fields";
+$LNG['mu_expedition_settings'] = "Expedition Settings";
+$LNG['mu_create_universe'] = 'Create New Universe';
+$LNG['mu_google_options'] = "Registration by Google";
+$LNG['mu_discord_options'] = "Registration by Discord";
+$LNG['mu_reset_universe'] = "Reset Universe";
+
 
 $LNG['vt_error'] = 'Hashfile is not available! - Run Update!';
 $LNG['vt_fail'] = 'Changed Files';

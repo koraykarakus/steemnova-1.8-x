@@ -597,7 +597,7 @@ $LNG['sb_sql_counts'] = 'SQL Abfrage: %d';
 $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 //###########################################################//
 
-//---------------	MENU	------------------------//
+//---------------	ADMIN MENU	------------------------//
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Konfiguration';
@@ -643,6 +643,16 @@ $LNG['mu_logs'] = 'Admin-Log';
 $LNG['mu_giveaway'] = 'Giveaways';
 $LNG['mu_disclaimer'] = 'Impressum-Einstellungen';
 $LNG['mu_dump'] = 'Datenbank-Backup';
+$LNG['mu_colony_settings'] = "Kolonie Einstellungen";
+$LNG['mu_relocate_settings'] = "Umsiedlungs Einstellungen";
+$LNG['mu_collect_mines_settings'] = "Minen Sammel Einstellungen";
+$LNG['mu_bots'] = "Bots";
+$LNG['mu_planet_fields'] = "Planetenfelder";
+$LNG['mu_expedition_settings'] = "Expeditions Einstellungen";
+$LNG['mu_create_universe'] = "Neues Universum erstellen";
+$LNG['mu_google_options'] = "Registrierung über Google";
+$LNG['mu_discord_options'] = "Registrierung über Discord";
+$LNG['mu_reset_universe'] = "Universum Zurücksetzen";
 
 $LNG['vt_error'] = 'HashFile ist nicht verfügbar! - Update durchführen!';
 $LNG['vt_fail'] = 'Geänderte Dateien';

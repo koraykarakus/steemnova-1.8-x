@@ -655,6 +655,16 @@ $LNG['mu_logs'] = 'Admin-Log';
 $LNG['mu_giveaway'] = 'Giveaways';
 $LNG['mu_disclaimer'] = 'Paramétres de contact';
 $LNG['mu_dump'] = 'Database Backup';
+$LNG['mu_colony_settings'] = "Paramètres des Colonies";
+$LNG['mu_relocate_settings'] = "Paramètres de Relocalisation";
+$LNG['mu_collect_mines_settings'] = "Paramètres de Collecte des Mines";
+$LNG['mu_bots'] = "Bots";
+$LNG['mu_planet_fields'] = "Champs de Planète";
+$LNG['mu_expedition_settings'] = "Paramètres des Expéditions";
+$LNG['mu_create_universe'] = "Créer un Nouvel Univers";
+$LNG['mu_google_options'] = "Inscription via Google";
+$LNG['mu_discord_options'] = "Inscription via Discord";
+$LNG['mu_reset_universe'] = "Réinitialiser l'Univers";
 
 $LNG['vt_error'] = 'Le Hash du fichier n\'est pas disponible ! Effectuer une mise à jour';
 $LNG['vt_fail'] = 'Fichiers modifiès';

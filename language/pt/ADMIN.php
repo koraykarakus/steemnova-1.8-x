@@ -649,6 +649,16 @@ $LNG['mu_giveaway'] = 'Sistema Giveaway';
 $LNG['mu_cronjob'] = 'Cronjobs';
 $LNG['mu_disclaimer'] = 'Configurações de contato';
 $LNG['mu_dump'] = 'Backup da Base de Dados';
+$LNG['mu_colony_settings'] = "Configurações da Colônia";
+$LNG['mu_relocate_settings'] = "Configurações de Realocação";
+$LNG['mu_collect_mines_settings'] = "Configurações de Coleta de Minas";
+$LNG['mu_bots'] = "Bots";
+$LNG['mu_planet_fields'] = "Campos do Planeta";
+$LNG['mu_expedition_settings'] = "Configurações de Expedição";
+$LNG['mu_create_universe'] = "Criar Novo Universo";
+$LNG['mu_google_options'] = "Registro pelo Google";
+$LNG['mu_discord_options'] = "Registro pelo Discord";
+$LNG['mu_reset_universe'] = "Redefinir Universo";
 
 $LNG['vt_error'] = 'Hashfile não está disponível! - Executar Atualização!';
 $LNG['vt_fail'] = 'Arquivos Alterados';

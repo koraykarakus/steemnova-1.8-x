@@ -169,6 +169,16 @@ $LNG['mu_logs'] = 'Admin Log';
 $LNG['mu_giveaway'] = 'Genel Hediye/Evrene Dagit';
 $LNG['mu_disclamer'] = 'Iletisim Ayarlari';
 $LNG['mu_dump'] = 'Veritabani Yedekle';
+$LNG['mu_colony_settings'] = "Koloni Ayarları";
+$LNG['mu_relocate_settings'] = "İskan Ayarları";
+$LNG['mu_collect_mines_settings'] = "Maden Toplama Ayarları";
+$LNG['mu_bots'] = "Botlar";
+$LNG['mu_planet_fields'] = "Gezegen Alanları";
+$LNG['mu_expedition_settings'] = "Keşif Ayarları";
+$LNG['mu_create_universe'] = "Yeni Evren Oluştur";
+$LNG['mu_google_options'] = "Google ile Kayıt";
+$LNG['mu_discord_options'] = "Discord ile Kayıt";
+$LNG['mu_reset_universe'] = "Evreni Sıfırla";
 
 $LNG['vt_error'] = 'Hasfile dosyasi yok! - Guncelle!';
 $LNG['vt_fail'] = 'Degisen Dosyalar';

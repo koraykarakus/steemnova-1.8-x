@@ -607,6 +607,16 @@ $LNG['mu_logs'] = 'Логи';
 $LNG['mu_giveaway'] = 'Подарки';
 $LNG['mu_disclaimer'] = 'Контакты';
 $LNG['mu_dump'] = 'Резервное копирование БД';
+$LNG['mu_colony_settings'] = "Настройки Колонии";
+$LNG['mu_relocate_settings'] = "Настройки Переселения";
+$LNG['mu_collect_mines_settings'] = "Настройки Сбора Рудников";
+$LNG['mu_bots'] = "Боты";
+$LNG['mu_planet_fields'] = "Поля Планеты";
+$LNG['mu_expedition_settings'] = "Настройки Экспедиции";
+$LNG['mu_create_universe'] = "Создать Новый Универсум";
+$LNG['mu_google_options'] = "Регистрация через Google";
+$LNG['mu_discord_options'] = "Регистрация через Discord";
+$LNG['mu_reset_universe'] = "Сбросить Универсум";
 
 $LNG['vt_error'] = 'Хэш файл не доступен. Выполните обновление.';
 $LNG['vt_fail'] = 'Измененные файлы';
