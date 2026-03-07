@@ -151,7 +151,7 @@ class ShowCronjobPage extends AbstractAdminPage
 
         $this->assign([
             'avalibleCrons' => $avalible_crons,
-            'cronjob_id'    => $cronjob_id,
+            'cronjobID'     => $cronjob_id,
             'name'          => isset($_POST['name']) ? HTTP::_GP('name', '') : $cronjob_row['name'],
             'min'           => isset($_POST['min_all']) ? [0 => '*'] : (isset($_POST['min']) ? HTTP::_GP('min', []) : $this->getCronjobTimes($cronjob_row['min'], 59)),
             'hours'         => isset($_POST['hours_all']) ? [0 => '*'] : (isset($_POST['hours']) ? HTTP::_GP('hours', []) : $this->getCronjobTimes($cronjob_row['hours'], 23)),
