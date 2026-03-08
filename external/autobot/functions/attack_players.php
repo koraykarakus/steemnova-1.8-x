@@ -55,9 +55,9 @@ function attack($id_owner, $fleet_start_id, $fleet_start_galaxy, $fleet_start_sy
 	mysqli_query($connection, "INSERT INTO uni1_fleet_event (fleetID, time) VALUES ($fleet_id, $fleet_start_time)");
 
 	if($destroyers > 0) {
-		mysqli_query($connection, "UPDATE uni1_planets SET destructor = 0 WHERE id=$fleet_start_id");
+		mysqli_query($connection, "UPDATE uni1_planets SET destroyer = 0 WHERE id=$fleet_start_id");
 	} else {
-		mysqli_query($connection, "UPDATE uni1_planets SET dearth_star = 0 WHERE id=$fleet_start_id");
+		mysqli_query($connection, "UPDATE uni1_planets SET death_star = 0 WHERE id=$fleet_start_id");
 	}
 }
 
@@ -70,7 +70,7 @@ $id_offensive_bots = [];
 
 for($i=0; $i<=count($get_bots)-1; $i++) {
 	$id_bot = $get_bots[$i][0];
-	$get_planets_data = mysqli_fetch_all(mysqli_query($connection, "SELECT id_owner, destructor, dearth_star, id FROM uni1_planets WHERE (id_owner=$id_bot AND (destructor > 0 || dearth_star > 0))"));
+	$get_planets_data = mysqli_fetch_all(mysqli_query($connection, "SELECT id_owner, destroyer, death_star, id FROM uni1_planets WHERE (id_owner=$id_bot AND (destroyer > 0 || death_star > 0))"));
 
 	if(count($get_planets_data) > 1) {
 
@@ -79,10 +79,10 @@ for($i=0; $i<=count($get_bots)-1; $i++) {
 			$id_current_planet = $get_planets_data[$k][3];
 			$destroyers = $get_planets_data[$k][1];
 			$death_stars = $get_planets_data[$k][2];
-			mysqli_query($connection, "UPDATE uni1_planets SET destructor = destructor + $destroyers WHERE id = $id_main_planet");
-			mysqli_query($connection, "UPDATE uni1_planets SET dearth_star = dearth_star + $death_stars WHERE id = $id_main_planet");
-			mysqli_query($connection, "UPDATE uni1_planets SET destructor = 0 WHERE id = $id_current_planet");
-			mysqli_query($connection, "UPDATE uni1_planets SET dearth_star = 0 WHERE id = $id_current_planet");
+			mysqli_query($connection, "UPDATE uni1_planets SET destroyer = destroyer + $destroyers WHERE id = $id_main_planet");
+			mysqli_query($connection, "UPDATE uni1_planets SET death_star = death_star + $death_stars WHERE id = $id_main_planet");
+			mysqli_query($connection, "UPDATE uni1_planets SET destroyer = 0 WHERE id = $id_current_planet");
+			mysqli_query($connection, "UPDATE uni1_planets SET death_star = 0 WHERE id = $id_current_planet");
 			}
 		}
 	}
@@ -114,7 +114,7 @@ foreach($get_users as $get_user) {
 // Gets all bots ready
 for($i=0; $i<=count($get_bots)-1; $i++) {
 	$id_bot = $get_bots[$i][0];
-	$get_planets_data = mysqli_fetch_all(mysqli_query($connection, "SELECT id_owner, destructor, dearth_star, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_bot AND (destructor > 0 OR dearth_star > 0)"));
+	$get_planets_data = mysqli_fetch_all(mysqli_query($connection, "SELECT id_owner, destroyer, death_star, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_bot AND (destroyer > 0 OR death_star > 0)"));
 
 	if(!empty($get_planets_data[0])) {
 		$random_target = $planets[array_rand($planets)];

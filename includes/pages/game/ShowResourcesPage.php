@@ -40,7 +40,7 @@ class ShowResourcesPage extends AbstractGamePage
 
             foreach ($_POST['prod'] as $resource_id => $val)
             {
-                $field_name = $resource[$resource_id].'_porcent';
+                $field_name = $resource[$resource_id].'_percent';
                 if (!isset($PLANET[$field_name])
                     || !in_array($val, range(0, 10)))
                 {
@@ -139,12 +139,12 @@ class ShowResourcesPage extends AbstractGamePage
             $production_list[$c_prod_id] = [
                 'production'   => [901 => 0, 902 => 0, 903 => 0, 911 => 0],
                 'elementLevel' => $PLANET[$resource[$c_prod_id]],
-                'prodLevel'    => $PLANET[$resource[$c_prod_id].'_porcent'],
+                'prodLevel'    => $PLANET[$resource[$c_prod_id].'_percent'],
             ];
 
             /* Data for eval */
             $BuildLevel = $PLANET[$resource[$c_prod_id]];
-            $BuildLevelFactor = $PLANET[$resource[$c_prod_id].'_porcent'];
+            $BuildLevelFactor = $PLANET[$resource[$c_prod_id].'_percent'];
 
             foreach ($ress_ids as $c_id)
             {

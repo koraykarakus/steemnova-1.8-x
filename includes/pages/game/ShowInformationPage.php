@@ -51,7 +51,7 @@ class ShowInformationPage extends AbstractGamePage
 
         $sql = "SELECT id, last_jump_time 
         FROM %%PLANETS%% 
-        WHERE id = :target_id AND id_owner = :user_id AND sprungtor > 0;";
+        WHERE id = :target_id AND id_owner = :user_id AND jump_gate > 0;";
 
         $target_gate = $db->selectSingle($sql, [
             ':target_id' => $target_planet,
@@ -255,7 +255,7 @@ class ShowInformationPage extends AbstractGamePage
             /* Data for eval */
             $BuildEnergy = $USER[$resource[113]];
             $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$resource[$element_id].'_porcent'];
+            $BuildLevelFactor = $PLANET[$resource[$element_id].'_percent'];
 
             $current_level = $PLANET[$resource[$element_id]];
             $build_start_lvl = max($current_level - 2, 0);

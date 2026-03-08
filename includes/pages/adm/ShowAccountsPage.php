@@ -1353,7 +1353,7 @@ class ShowAccountsPage extends AbstractAdminPage
                     return;
                 }
 
-                $sql = "SELECT id_luna FROM %%PLANETS%% 
+                $sql = "SELECT id_moon FROM %%PLANETS%% 
                 WHERE `galaxy` = :galaxy 
                 AND `system` = :system 
                 AND `planet` = :planet 
@@ -1365,14 +1365,14 @@ class ShowAccountsPage extends AbstractAdminPage
                     ':planet' => $planet,
                 ]);
 
-                if ($Target['id_luna'] != '0')
+                if ($Target['id_moon'] != '0')
                 {
                     $this->printMessage($LNG['ad_pla_error_planets4'], $this->createButtonBack());
                     return;
                 }
 
                 $sql = "UPDATE %%PLANETS%% 
-                SET `id_luna` = '0' 
+                SET `id_moon` = '0' 
                 WHERE `galaxy` = :galaxy 
                 AND `system` = :system 
                 AND `planet` = :planet 
@@ -1384,7 +1384,7 @@ class ShowAccountsPage extends AbstractAdminPage
                     ':planet' => $planet_info['planet'],
                 ]);
 
-                $sql = "UPDATE %%PLANETS%% SET `id_luna` = :id 
+                $sql = "UPDATE %%PLANETS%% SET `id_moon` = :id 
                 WHERE `galaxy` = :galaxy 
                 AND `system` = :system 
                 AND `planet` = :planet 

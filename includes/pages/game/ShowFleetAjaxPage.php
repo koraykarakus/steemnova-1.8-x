@@ -90,7 +90,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(699, $LNG['sys_module_inactive']);
                 }
 
-                $sql = "SELECT (der_metal + der_crystal) as sum 
+                $sql = "SELECT (debris_metal + debris_crystal) as sum 
                 FROM %%PLANETS%% WHERE id = :planet_id;";
 
                 $total_debris = $db->selectSingle($sql, [

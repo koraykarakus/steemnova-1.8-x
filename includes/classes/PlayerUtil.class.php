@@ -260,37 +260,37 @@ class PlayerUtil
 		`deuterium` = :deuterium_start,
 		`metal_mine` = :metal_mine_start,
 		`crystal_mine` = :crystal_mine_start,
-		`deuterium_sintetizer` = :deuterium_mine_start,
+		`deuterium_synthesizer` = :deuterium_synthesizer_start,
 		`solar_plant` = :solar_plant_start,
 		`fusion_plant` = :fusion_plant_start,
 		`robot_factory` = :robot_factory_start,
 		`nanite_factory` = :nanite_factory_start,
 		`shipyard` = :shipyard_start,
-		`metal_store` = :metal_store_start,
-		`crystal_store` = :crystal_store_start,
-		`deuterium_store` = :deuterium_store_start,
-		`laboratory` = :laboratory_start,
+		`metal_storage` = :metal_storage_start,
+		`crystal_storage` = :crystal_storage_start,
+		`deuterium_tank` = :deuterium_tank_start,
+		`research_lab` = :research_lab_start,
 		`terraformer` = :terraformer_start,
 		`university` = :university_start,
 		`ally_deposit` = :ally_deposit_start,
-		`silo` = :silo_start,
-		`small_ship_cargo` = :small_ship_cargo_start,
-		`big_ship_cargo` = :big_ship_cargo_start,
+		`missile_silo` = :missile_silo_start,
+		`small_cargo` = :small_cargo_start,
+		`big_cargo` = :big_cargo_start,
 		`light_hunter` = :light_hunter_start,
 		`heavy_hunter` = :heavy_hunter_start,
-		`crusher` = :crusher_start,
+		`cruiser` = :cruiser_start,
 		`battle_ship` = :battle_ship_start,
-		`colonizer` = :colonizer_start,
+		`colony_ship` = :colony_ship_start,
 		`recycler` = :recycler_start,
-		`spy_sonde` = :spy_sonde_start,
+		`espionage_probe` = :espionage_probe_start,
 		`bomber_ship` = :bomber_ship_start,
-		`solar_satelit` = :solar_satelit_start,
-		`destructor` = :destructor_start,
-		`dearth_star` = :dearth_star_start,
-		`battleship` = :battleship_start,
+		`solar_satellite` = :solar_satellite_start,
+		`destroyer` = :destroyer_start,
+		`death_star` = :death_star_start,
+		`battle_cruiser` = :battle_cruiser_start,
 		`ev_transporter` = :ev_transporter_start,
 		`star_crasher` = :star_crasher_start,
-		`giga_recykler` = :giga_recykler_start,
+		`giga_recycler` = :giga_recycler_start,
 		`dm_ship` = :dm_ship_start,
 		`orbital_station` = :orbital_station_start,
 		`misil_launcher` = :misil_launcher_start,
@@ -313,37 +313,37 @@ class PlayerUtil
             ':deuterium_start'               => $colony_settings['deuterium_start'],
             ':metal_mine_start'              => $colony_settings['metal_mine_start'],
             ':crystal_mine_start'            => $colony_settings['crystal_mine_start'],
-            ':deuterium_mine_start'          => $colony_settings['deuterium_mine_start'],
+            ':deuterium_synthesizer_start'          => $colony_settings['deuterium_synthesizer_start'],
             ':solar_plant_start'             => $colony_settings['solar_plant_start'],
             ':fusion_plant_start'            => $colony_settings['fusion_plant_start'],
             ':robot_factory_start'           => $colony_settings['robot_factory_start'],
             ':nanite_factory_start'          => $colony_settings['nanite_factory_start'],
             ':shipyard_start'                => $colony_settings['shipyard_start'],
-            ':metal_store_start'             => $colony_settings['metal_store_start'],
-            ':crystal_store_start'           => $colony_settings['crystal_store_start'],
-            ':deuterium_store_start'         => $colony_settings['deuterium_store_start'],
-            ':laboratory_start'              => $colony_settings['laboratory_start'],
+            ':metal_storage_start'             => $colony_settings['metal_storage_start'],
+            ':crystal_storage_start'           => $colony_settings['crystal_storage_start'],
+            ':deuterium_tank_start'         => $colony_settings['deuterium_tank_start'],
+            ':research_lab_start'              => $colony_settings['research_lab_start'],
             ':terraformer_start'             => $colony_settings['terraformer_start'],
             ':university_start'              => $colony_settings['university_start'],
             ':ally_deposit_start'            => $colony_settings['ally_deposit_start'],
-            ':silo_start'                    => $colony_settings['silo_start'],
-            ':small_ship_cargo_start'        => $colony_settings['small_ship_cargo_start'],
-            ':big_ship_cargo_start'          => $colony_settings['big_ship_cargo_start'],
+            ':missile_silo_start'                    => $colony_settings['missile_silo_start'],
+            ':small_cargo_start'             => $colony_settings['small_cargo_start'],
+            ':big_cargo_start'               => $colony_settings['big_cargo_start'],
             ':light_hunter_start'            => $colony_settings['light_hunter_start'],
             ':heavy_hunter_start'            => $colony_settings['heavy_hunter_start'],
-            ':crusher_start'                 => $colony_settings['crusher_start'],
+            ':cruiser_start'                 => $colony_settings['cruiser_start'],
             ':battle_ship_start'             => $colony_settings['battle_ship_start'],
-            ':colonizer_start'               => $colony_settings['colonizer_start'],
+            ':colony_ship_start'             => $colony_settings['colony_ship_start'],
             ':recycler_start'                => $colony_settings['recycler_start'],
-            ':spy_sonde_start'               => $colony_settings['spy_sonde_start'],
+            ':espionage_probe_start'         => $colony_settings['espionage_probe_start'],
             ':bomber_ship_start'             => $colony_settings['bomber_ship_start'],
-            ':solar_satelit_start'           => $colony_settings['solar_satelit_start'],
-            ':destructor_start'              => $colony_settings['destructor_start'],
-            ':dearth_star_start'             => $colony_settings['dearth_star_start'],
-            ':battleship_start'              => $colony_settings['battleship_start'],
+            ':solar_satellite_start'           => $colony_settings['solar_satellite_start'],
+            ':destroyer_start'              => $colony_settings['destroyer_start'],
+            ':death_star_start'             => $colony_settings['death_star_start'],
+            ':battle_cruiser_start'              => $colony_settings['battle_cruiser_start'],
             ':ev_transporter_start'          => $colony_settings['ev_transporter_start'],
             ':star_crasher_start'            => $colony_settings['star_crasher_start'],
-            ':giga_recykler_start'           => $colony_settings['giga_recykler_start'],
+            ':giga_recycler_start'           => $colony_settings['giga_recycler_start'],
             ':dm_ship_start'                 => $colony_settings['dm_ship_start'],
             ':orbital_station_start'         => $colony_settings['orbital_station_start'],
             ':misil_launcher_start'          => $colony_settings['misil_launcher_start'],
@@ -452,7 +452,7 @@ class PlayerUtil
 
         $db = Database::get();
 
-        $sql = "SELECT `id_luna`, `planet_type`, `id`, `name`, `temp_max`, `temp_min`
+        $sql = "SELECT `id_moon`, `planet_type`, `id`, `name`, `temp_max`, `temp_min`
 				FROM %%PLANETS%%
 				WHERE `universe` = :universe
 				AND `galaxy` = :galaxy
@@ -468,7 +468,7 @@ class PlayerUtil
             ':type'     => 1,
         ]);
 
-        if ($parentPlanet['id_luna'] != 0)
+        if ($parentPlanet['id_moon'] != 0)
         {
             return false;
         }
@@ -529,16 +529,16 @@ class PlayerUtil
             ':deuPerHour'      => 0,
         ]);
 
-        $moonId = $db->lastInsertId();
+        $id_moon = $db->lastInsertId();
 
-        $sql = "UPDATE %%PLANETS%% SET id_luna = :moonId WHERE id = :planetId;";
+        $sql = "UPDATE %%PLANETS%% SET id_moon = :id_moon WHERE id = :planetId;";
 
         $db->update($sql, [
-            ':moonId'   => $moonId,
+            ':id_moon'   => $id_moon,
             ':planetId' => $parentPlanet['id'],
         ]);
 
-        return $moonId;
+        return $id_moon;
     }
 
     public static function deletePlayer($userId)
@@ -662,7 +662,7 @@ class PlayerUtil
     {
         $db = Database::get();
 
-        $sql = "SELECT `id_owner`, `planet_type`, `id_luna` FROM %%PLANETS%%
+        $sql = "SELECT `id_owner`, `planet_type`, `id_moon` FROM %%PLANETS%%
 		WHERE `id` = :planetId AND `id` NOT IN (SELECT `id_planet` FROM %%USERS%%);";
 
         $planetData = $db->selectSingle($sql, [
@@ -679,7 +679,7 @@ class PlayerUtil
 
         $fleetIds = $db->select($sql, [
             ':planetId' => $planetId,
-            ':moondId'  => $planetData['id_luna'],
+            ':moondId'  => $planetData['id_moon'],
         ]);
 
         foreach ($fleetIds as $fleetId)
@@ -694,7 +694,7 @@ class PlayerUtil
                 ':planetId' => $planetId,
             ]);
 
-            $sql = "UPDATE %%PLANETS%% SET `id_luna` = :resetId WHERE `id_luna` = :planetId;";
+            $sql = "UPDATE %%PLANETS%% SET `id_moon` = :resetId WHERE `id_moon` = :planetId;";
             $db->update($sql, [
                 ':resetId'  => 0,
                 ':planetId' => $planetId,
@@ -702,7 +702,7 @@ class PlayerUtil
         }
         else
         {
-            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planetId OR `id_luna` = :planetId;";
+            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planetId OR `id_moon` = :planetId;";
             $db->delete($sql, [
                 ':planetId' => $planetId,
             ]);

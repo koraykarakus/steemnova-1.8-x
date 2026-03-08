@@ -176,12 +176,12 @@ class ShowSettingsPage extends AbstractGamePage
 						last_update = :timestamp,
 						energy_used = '10',
 						energy = '10',
-						metal_mine_porcent = '10',
-						crystal_mine_porcent = '10',
-						deuterium_sintetizer_porcent = '10',
-						solar_plant_porcent = '10',
-						fusion_plant_porcent = '10',
-						solar_satelit_porcent = '10'
+						metal_mine_percent = '10',
+						crystal_mine_percent = '10',
+						deuterium_synthesizer_percent = '10',
+						solar_plant_percent = '10',
+						fusion_plant_percent = '10',
+						solar_satellite_percent = '10'
 						WHERE id_owner = :userID;";
             $db->update($sql, [
                 ':userID'    => $USER['id'],
@@ -404,7 +404,7 @@ class ShowSettingsPage extends AbstractGamePage
                     ':time'   => (TIMESTAMP + Config::get()->vmode_min_time),
                 ]);
 
-                $sql = "UPDATE %%PLANETS%% SET energy_used = '0', energy = '0', metal_mine_porcent = '0', crystal_mine_porcent = '0', deuterium_sintetizer_porcent = '0', solar_plant_porcent = '0', fusion_plant_porcent = '0', solar_satelit_porcent = '0', metal_perhour = '0', crystal_perhour = '0', deuterium_perhour = '0' WHERE id_owner = :userID;";
+                $sql = "UPDATE %%PLANETS%% SET energy_used = '0', energy = '0', metal_mine_percent = '0', crystal_mine_percent = '0', deuterium_synthesizer_percent = '0', solar_plant_percent = '0', fusion_plant_percent = '0', solar_satellite_percent = '0', metal_perhour = '0', crystal_perhour = '0', deuterium_perhour = '0' WHERE id_owner = :userID;";
                 $db->update($sql, [
                     ':userID' => $USER['id'],
                 ]);

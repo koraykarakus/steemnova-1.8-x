@@ -35,13 +35,13 @@ for ($j = 0;$j <= count($bots) - 1;$j++)
     {
 	// Get user planet
         $id_planet = $bot_planet[0];
-        $planet_buildings = mysqli_fetch_array(mysqli_query($connection, "SELECT metal_mine, crystal_mine, deuterium_sintetizer, solar_plant, fusion_plant, robot_factory, nanite_factory, shipyard, metal_store, crystal_store, deuterium_store, laboratory ,terraformer, university, ally_deposit, silo FROM uni1_planets WHERE (id=$id_planet AND b_building = '')"));
+        $planet_buildings = mysqli_fetch_array(mysqli_query($connection, "SELECT metal_mine, crystal_mine, deuterium_synthesizer, solar_plant, fusion_plant, robot_factory, nanite_factory, shipyard, metal_storage, crystal_storage, deuterium_tank, research_lab ,terraformer, university, ally_deposit, missile_silo FROM uni1_planets WHERE (id=$id_planet AND b_building = '')"));
         $planet_position = mysqli_fetch_array(mysqli_query($connection, "SELECT galaxy, system, planet FROM uni1_planets WHERE (id=$id_planet AND b_building = '')"));
         $bot_resources = mysqli_fetch_array(mysqli_query($connection, "SELECT metal, crystal, deuterium FROM uni1_planets WHERE (id=$id_planet)"));
 	$metal = $bot_resources[0];
 	$crystal = $bot_resources[1];
 	$deuterium = $bot_resources[2];
-        mysqli_query($connection, "UPDATE uni1_planets SET spy_sonde = 0 WHERE id=$id_planet");
+        mysqli_query($connection, "UPDATE uni1_planets SET espionage_probe = 0 WHERE id=$id_planet");
 
 	// Check if something can be built by a bot
         $build_planet_array = [];
@@ -98,14 +98,14 @@ for ($j = 0;$j <= count($bots) - 1;$j++)
 				mysqli_query($connection, "UPDATE uni1_planets SET metal = metal - 60000 WHERE id = $id_planet");
 				mysqli_query($connection, "UPDATE uni1_planets SET crystal = crystal - 50000 WHERE id = $id_planet");
 				mysqli_query($connection, "UPDATE uni1_planets SET deuterium = deuterium - 15000 WHERE id = $id_planet");
-				mysqli_query($connection, "UPDATE uni1_planets SET destructor = destructor + 1 WHERE id = $id_planet");
+				mysqli_query($connection, "UPDATE uni1_planets SET destroyer = destroyer + 1 WHERE id = $id_planet");
 			}
 		else if ( ($id_bot % 2 == 0) && ($metal >= 5000000 ) && ($crystal >= 4000000 ) && ($deuterium >= 1000000 ) )
 			{
 				mysqli_query($connection, "UPDATE uni1_planets SET metal = metal - 5000000 WHERE id = $id_planet");
 				mysqli_query($connection, "UPDATE uni1_planets SET crystal = crystal - 4000000 WHERE id = $id_planet");
 				mysqli_query($connection, "UPDATE uni1_planets SET deuterium = deuterium - 1000000 WHERE id = $id_planet");
-				mysqli_query($connection, "UPDATE uni1_planets SET dearth_star = dearth_star + 1 WHERE id = $id_planet");
+				mysqli_query($connection, "UPDATE uni1_planets SET death_star = death_star + 1 WHERE id = $id_planet");
 		}
 		else {
 		echo 'Lack of sufficient resources'.PHP_EOL;

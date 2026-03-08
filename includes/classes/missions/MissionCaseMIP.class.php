@@ -48,9 +48,9 @@ class MissionCaseMIP extends MissionFunctions implements Mission
 
         if ($this->_fleet['fleet_end_type'] == 3)
         {
-            $sql = 'SELECT ' . $resource[502] . ' FROM %%PLANETS%% WHERE id_luna = :moonId;';
+            $sql = 'SELECT ' . $resource[502] . ' FROM %%PLANETS%% WHERE id_moon = :id_moon;';
             $targetData[$resource[502]] = $db->selectSingle($sql, [
-                ':moonId' => $this->_fleet['fleet_end_id'],
+                ':id_moon' => $this->_fleet['fleet_end_id'],
             ], $resource[502]);
         }
 
@@ -90,7 +90,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
         {
             $senderData['MSG'] = $senderData['LNG']['sys_irak_no_att'];
             $targetData['MSG'] = $targetData['LNG']['sys_irak_no_att'];
-            $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_luna' : 'id';
+            $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_moon' : 'id';
 
             $sql = 'UPDATE %%PLANETS%% SET ' . $resource[502] . ' = ' . $resource[502] . ' - :amount WHERE ' . $where . ' = :planetId;';
 
@@ -103,7 +103,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
         {
             if ($targetData[$resource[502]] > 0)
             {
-                $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_luna' : 'id';
+                $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_moon' : 'id';
                 $sql = 'UPDATE %%PLANETS%% SET ' . $resource[502] . ' = :amount WHERE ' . $where . ' = :planetId;';
 
                 $db->update($sql, [

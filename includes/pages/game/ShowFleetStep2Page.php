@@ -47,7 +47,7 @@ class ShowFleetStep2Page extends AbstractGamePage
         $fleet_array = $_SESSION['fleet'][$token]['fleet'];
 
         $db = Database::get();
-        $sql = "SELECT id, id_owner, der_metal, der_crystal FROM %%PLANETS%% 
+        $sql = "SELECT id, id_owner, debris_metal, debris_crystal FROM %%PLANETS%% 
         WHERE universe = :universe AND galaxy = :target_galaxy 
         AND system = :target_system AND planet = :target_planet AND planet_type = '1';";
 
@@ -59,8 +59,8 @@ class ShowFleetStep2Page extends AbstractGamePage
         ]);
 
         if ($target_type == 2
-            && $target_planet_data['der_metal'] == 0
-            && $target_planet_data['der_crystal'] == 0)
+            && $target_planet_data['debris_metal'] == 0
+            && $target_planet_data['debris_crystal'] == 0)
         {
             $this->printMessage($LNG['fl_error_empty_derbis'], [[
                 'label' => $LNG['sys_back'],

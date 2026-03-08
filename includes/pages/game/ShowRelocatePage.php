@@ -44,14 +44,14 @@ class ShowRelocatePage extends AbstractGamePage
         }
 
         //you cannot move planet if there is a fleet which is started from this planet at the time of relocation
-        if ($PLANET['id_luna'] != 0)
+        if ($PLANET['id_moon'] != 0)
         {
             $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE fleet_owner = :userId AND (fleet_start_id = :planetId OR fleet_start_id =:moonId) AND fleet_end_time > :thisTime ;";
             $activeFleets = $db->selectSingle($sql, [
                 ':userId'   => $USER['id'],
                 ':planetId' => $PLANET['id'],
                 ':thisTime' => TIMESTAMP,
-                ':moonId'   => $PLANET['id_luna'],
+                ':moonId'   => $PLANET['id_moon'],
             ], 'count');
         }
         else
@@ -89,7 +89,7 @@ class ShowRelocatePage extends AbstractGamePage
         $attackfleets = $db->selectSingle($sql, [
             ':userId'   => $USER['id'],
             ':planetId' => $PLANET['id'],
-            ':moonId'   => $PLANET['id_luna'],
+            ':moonId'   => $PLANET['id_moon'],
         ], 'count');
 
         if ($attackfleets > 0)
@@ -137,11 +137,11 @@ class ShowRelocatePage extends AbstractGamePage
             ];
         }
 
-        if ($PLANET['id_luna'] != 0)
+        if ($PLANET['id_moon'] != 0)
         {
             $sql = "SELECT * FROM %%PLANETS%% WHERE id = :idLuna;";
             $MOON = $db->selectSingle($sql, [
-                ':idLuna' => $PLANET['id_luna'],
+                ':idLuna' => $PLANET['id_moon'],
             ]);
 
             foreach ($reslist['fleet'] as $key => $fleetID)
@@ -297,7 +297,7 @@ class ShowRelocatePage extends AbstractGamePage
             ':relocateTime' => TIMESTAMP,
         ]);
 
-        if ($PLANET['id_luna'] != 0)
+        if ($PLANET['id_moon'] != 0)
         {
             // NOTE: jumpgate is deactivated for 24 hours to the new location
             // NOTE: divided to fleet speed ? no info ?
@@ -308,7 +308,7 @@ class ShowRelocatePage extends AbstractGamePage
                 ':galaxy'       => $galaxy,
                 ':system'       => $system,
                 ':planet'       => $planet,
-                ':moonId'       => $PLANET['id_luna'],
+                ':moonId'       => $PLANET['id_moon'],
                 ':relocateTime' => $next_jump_time,
             ]);
         }

@@ -490,7 +490,7 @@ class FleetFunctions
         }
         elseif ($MissionInfo['planettype'] == 2)
         {
-            if ((isset($MissionInfo['Ship'][209]) || isset($MissionInfo['Ship'][219])) && isModuleAvailable(MODULE_MISSION_RECYCLE) && !($GetInfoPlanet['der_metal'] == 0 && $GetInfoPlanet['der_crystal'] == 0))
+            if ((isset($MissionInfo['Ship'][209]) || isset($MissionInfo['Ship'][219])) && isModuleAvailable(MODULE_MISSION_RECYCLE) && !($GetInfoPlanet['debris_metal'] == 0 && $GetInfoPlanet['debris_crystal'] == 0))
             {
                 $availableMissions[] = 8;
             }

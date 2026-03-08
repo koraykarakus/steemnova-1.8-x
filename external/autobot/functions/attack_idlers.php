@@ -21,13 +21,13 @@ for ($i = 0;$i <= count($get_bots_techs) - 1;$i++) {
     $max_fleets = min(($get_bots_techs[$i][1] + 1) - $count_fleets, 3);
     if ($max_fleets > 0) {
     // Check how many Big Cargos Bot have, also receive info about resources needed to build it
-    $planet_resources = mysqli_fetch_all(mysqli_query($connection, "SELECT big_ship_cargo, floor(metal), floor(crystal), shipyard, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_owner")) [0];
+    $planet_resources = mysqli_fetch_all(mysqli_query($connection, "SELECT big_cargo, floor(metal), floor(crystal), shipyard, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_owner")) [0];
     $id_planet = $planet_resources[4];
 
     if ($planet_resources[0] == 0 && $planet_resources[1] >= 6000 && $planet_resources[2] >= 6000 && $planet_resources[3] >= 4 && $get_bots_techs[$i][2] >= 6) {
         mysqli_query($connection, "UPDATE uni1_planets SET metal = metal - 6000 WHERE id=$id_planet");
         mysqli_query($connection, "UPDATE uni1_planets SET crystal = crystal - 6000 WHERE id=$id_planet");
-        mysqli_query($connection, "UPDATE uni1_planets SET big_ship_cargo = big_ship_cargo + 1 WHERE id=$id_planet");
+        mysqli_query($connection, "UPDATE uni1_planets SET big_cargo = big_cargo + 1 WHERE id=$id_planet");
         $planet_resources[0]++;
     }
 
@@ -70,7 +70,7 @@ for ($i = 0;$i <= count($get_bots_techs) - 1;$i++) {
         $fleet_id = mysqli_fetch_all(mysqli_query($connection, "SELECT fleet_id FROM uni1_fleets ORDER by fleet_id DESC LIMIT 1")) [0][0];
         mysqli_query($connection, "INSERT INTO uni1_log_fleets (fleet_id, fleet_owner, fleet_mission, fleet_amount, fleet_array, fleet_universe, fleet_start_id, fleet_start_galaxy, fleet_start_system, fleet_start_planet, fleet_start_type, fleet_end_id, fleet_end_galaxy, fleet_end_system, fleet_end_planet, fleet_end_type, start_time, fleet_start_time, fleet_end_stay, fleet_end_time, fleet_target_owner) VALUES ($fleet_id, $id_owner, 1, 1, '203,1', 1, $fleet_start_id, $fleet_start_galaxy, $fleet_start_system, $fleet_start_planet, 1, $id_planet_attacked, $x, $y, $z, 1, $start_time, $fleet_start_time, $fleet_end_stay, $fleet_end_time, $random_player)");
         mysqli_query($connection, "INSERT INTO uni1_fleet_event (fleetID, time) VALUES ($fleet_id, $fleet_start_time)");
-        mysqli_query($connection, "UPDATE uni1_planets SET big_ship_cargo = big_ship_cargo - 1 WHERE id=$fleet_start_id");
+        mysqli_query($connection, "UPDATE uni1_planets SET big_cargo = big_cargo - 1 WHERE id=$fleet_start_id");
     }
     $max_fleets--;
     }

@@ -88,20 +88,20 @@ class ShowOverviewPage extends AbstractGamePage
 
         $db = Database::get();
         $moon = [];
-        if ($PLANET['id_luna'] != 0)
+        if ($PLANET['id_moon'] != 0)
         {
             $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id = :moonID;";
 
             $moon = $db->selectSingle($sql, [
-                ':moonID' => $PLANET['id_luna'],
+                ':moonID' => $PLANET['id_moon'],
             ]);
         }
         elseif ($PLANET['planet_type'] == 3)
         {
-            $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id_luna = :moonID;";
+            $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id_moon = :id_moon;";
 
             $moon = $db->selectSingle($sql, [
-                ':moonID' => $PLANET['id'],
+                ':id_moon' => $PLANET['id'],
             ]);
         }
 
@@ -374,7 +374,7 @@ class ShowOverviewPage extends AbstractGamePage
         $fleet_count = $db->selectSingle($sql, [
             ':user_id'   => $USER['id'],
             ':planet_id' => $PLANET['id'],
-            ':moon_id'   => $PLANET['id_luna'],
+            ':moon_id'   => $PLANET['id_moon'],
         ], 'count');
 
         if ($fleet_count > 0)
@@ -429,12 +429,12 @@ class ShowOverviewPage extends AbstractGamePage
             WHERE id = :moon_id;";
 
             $db->delete($sql, [
-                ':moon_id' => $PLANET['id_luna'],
+                ':moon_id' => $PLANET['id_moon'],
             ]);
         }
         else
         {
-            $sql = "UPDATE %%PLANETS%% SET id_luna = 0 WHERE id_luna = :planet_id;";
+            $sql = "UPDATE %%PLANETS%% SET id_moon = 0 WHERE id_moon = :planet_id;";
 
             $db->update($sql, [
                 ':planet_id' => $PLANET['id'],

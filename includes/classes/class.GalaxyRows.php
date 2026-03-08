@@ -48,7 +48,7 @@ class GalaxyRows
         global $USER;
 
         $sql = 'SELECT SQL_BIG_RESULT DISTINCT
-		p.galaxy, p.system, p.planet, p.id, p.id_owner, p.name, p.image, p.last_update, p.diameter, p.temp_min, p.destroyed, p.der_metal, p.der_crystal, p.id_luna,
+		p.galaxy, p.system, p.planet, p.id, p.id_owner, p.name, p.image, p.last_update, p.diameter, p.temp_min, p.destroyed, p.debris_metal, p.debris_crystal, p.id_moon,
 		u.id as userid, u.ally_id, u.username, u.onlinetime, u.urlaubs_modus, u.banaday,
 		m.id as m_id, m.diameter as m_diameter, m.name as m_name, m.temp_min as m_temp_min, m.last_update as m_last_update,
 		s.total_points, s.total_rank,
@@ -58,7 +58,7 @@ class GalaxyRows
 		d.level as diploLevel
 		FROM %%PLANETS%% p
 		LEFT JOIN %%USERS%% u ON p.id_owner = u.id
-		LEFT JOIN %%PLANETS%% m ON m.id = p.id_luna
+		LEFT JOIN %%PLANETS%% m ON m.id = p.id_moon
 		LEFT JOIN %%USER_POINTS%% s ON s.id_owner = u.id
 		LEFT JOIN %%ALLIANCE%% a ON a.id = u.ally_id
 		LEFT JOIN %%DIPLO%% as d ON (d.owner_1 = :allianceId AND d.owner_2 = a.id) OR (d.owner_1 = a.id AND d.owner_2 = :allianceId) AND d.accept = :accept
@@ -251,7 +251,7 @@ class GalaxyRows
 
     protected function getDebrisData()
     {
-        $total = $this->galaxy_row['der_metal'] + $this->galaxy_row['der_crystal'];
+        $total = $this->galaxy_row['debris_metal'] + $this->galaxy_row['debris_crystal'];
         if ($total == 0)
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['debris'] = false;
@@ -259,8 +259,8 @@ class GalaxyRows
         else
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['debris'] = [
-                'metal'   => $this->galaxy_row['der_metal'],
-                'crystal' => $this->galaxy_row['der_crystal'],
+                'metal'   => $this->galaxy_row['debris_metal'],
+                'crystal' => $this->galaxy_row['debris_crystal'],
             ];
         }
     }

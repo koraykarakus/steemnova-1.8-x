@@ -62,8 +62,8 @@ if($random_event==1) {
 	$galaxy = $mother_planet[$i][0];
 	$system = $mother_planet[$i][1];
 	$planet = $mother_planet[$i][2];
-	mysqli_query($connection, "UPDATE uni1_planets SET der_metal=der_metal+$metal WHERE (galaxy=$galaxy AND system=$system AND planet=$planet)");
-	mysqli_query($connection, "UPDATE uni1_planets SET der_crystal=der_crystal+$crystal WHERE (galaxy=$galaxy AND system=$system AND planet=$planet)");
+	mysqli_query($connection, "UPDATE uni1_planets SET debris_metal=debris_metal+$metal WHERE (galaxy=$galaxy AND system=$system AND planet=$planet)");
+	mysqli_query($connection, "UPDATE uni1_planets SET debris_crystal=debris_crystal+$crystal WHERE (galaxy=$galaxy AND system=$system AND planet=$planet)");
 	}
 } else if($random_event==7) {
 	$text = '<span class="admin">Strange thing. It turned out that one of the citizens detained by the police had small amounts of dark matter in his trouser pocket. Of course, we seized it.</span>';

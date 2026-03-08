@@ -364,7 +364,7 @@ abstract class AbstractGamePage
                         'diameter'      => pretty_number($c_planet['diameter']) . " km",
                         'temp_min'      => $c_planet['temp_min'] . " °C",
                         'temp_max'      => $c_planet['temp_max'] . " °C",
-                        'id_luna'       => $c_planet['id_luna'],
+                        'id_moon'       => $c_planet['id_moon'],
                     ];
 
                 }
@@ -376,14 +376,14 @@ abstract class AbstractGamePage
 
         foreach ($all_planets as &$c_planet)
         {
-            if ($c_planet['id_luna'] == 0)
+            if ($c_planet['id_moon'] == 0)
             {
                 continue;
             }
 
             foreach ($all_moons as $c_moon)
             {
-                if ($c_moon['id'] == $c_planet['id_luna'])
+                if ($c_moon['id'] == $c_planet['id_moon'])
                 {
                     $c_planet['moonInfo'][] = $c_moon;
                 }

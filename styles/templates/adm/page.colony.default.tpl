@@ -32,9 +32,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="deuterium_mine_start">{$LNG.cs_deuterium_mine_start}</label>
-      <input id="deuterium_mine_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="deuterium_mine_start" value="{$deuterium_mine_start}" type="text" maxlength="5">
+        for="deuterium_synthesizer_start">{$LNG.cs_deuterium_synthesizer_start}</label>
+      <input id="deuterium_synthesizer_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="deuterium_synthesizer_start" value="{$deuterium_synthesizer_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
@@ -67,27 +67,27 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="metal_store_start">{$LNG.cs_metal_store_start}</label>
-      <input id="metal_store_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="metal_store_start" value="{$metal_store_start}" type="text" maxlength="5">
+        for="metal_storage_start">{$LNG.cs_metal_storage_start}</label>
+      <input id="metal_storage_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="metal_storage_start" value="{$metal_storage_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="crystal_store_start">{$LNG.cs_crystal_store_start}</label>
-      <input id="crystal_store_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="crystal_store_start" value="{$crystal_store_start}" type="text" maxlength="5">
+        for="crystal_storage_start">{$LNG.cs_crystal_storage_start}</label>
+      <input id="crystal_storage_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="crystal_storage_start" value="{$crystal_storage_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="deuterium_store_start">{$LNG.cs_deuterium_store_start}</label>
-      <input id="deuterium_store_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="deuterium_store_start" value="{$deuterium_store_start}" type="text" maxlength="5">
+        for="deuterium_tank_start">{$LNG.cs_deuterium_tank_start}</label>
+      <input id="deuterium_tank_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="deuterium_tank_start" value="{$deuterium_tank_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="laboratory_start">{$LNG.cs_laboratory_start}</label>
-      <input id="laboratory_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="laboratory_start" value="{$laboratory_start}" type="text" maxlength="5">
+        for="research_lab_start">{$LNG.cs_research_lab_start}</label>
+      <input id="research_lab_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="research_lab_start" value="{$research_lab_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
@@ -108,21 +108,22 @@
         name="ally_deposit_start" value="{$ally_deposit_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
-      <label class="text-start my-1 cursor-pointer hover-underline" for="silo_start">{$LNG.cs_silo_start}</label>
-      <input id="silo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="silo_start"
-        value="{$silo_start}" type="text" maxlength="5">
+      <label class="text-start my-1 cursor-pointer hover-underline"
+        for="missile_silo_start">{$LNG.cs_missile_silo_start}</label>
+      <input id="missile_silo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="silo_start" value="{$missile_silo_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="small_ship_cargo_start">{$LNG.cs_small_ship_cargo_start}</label>
-      <input id="small_ship_cargo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="small_ship_cargo_start" value="{$small_ship_cargo_start}" type="text" maxlength="5">
+        for="small_cargo_start">{$LNG.cs_small_cargo_start}</label>
+      <input id="small_cargo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="small_cargo_start" value="{$small_cargo_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="big_ship_cargo_start">{$LNG.cs_big_ship_cargo_start}</label>
-      <input id="big_ship_cargo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="big_ship_cargo_start" value="{$big_ship_cargo_start}" type="text" maxlength="5">
+        for="big_cargo_start">{$LNG.cs_big_cargo_start}</label>
+      <input id="big_cargo_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="big_cargo_start" value="{$big_cargo_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
@@ -137,9 +138,9 @@
         name="heavy_hunter_start" value="{$heavy_hunter_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
-      <label class="text-start my-1 cursor-pointer hover-underline" for="crusher_start">{$LNG.cs_crusher_start}</label>
-      <input id="crusher_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="crusher_start" value="{$crusher_start}" type="text" maxlength="5">
+      <label class="text-start my-1 cursor-pointer hover-underline" for="cruiser_start">{$LNG.cs_cruiser_start}</label>
+      <input id="cruiser_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="cruiser_start" value="{$cruiser_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
@@ -149,9 +150,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="colonizer_start">{$LNG.cs_colonizer_start}</label>
-      <input id="colonizer_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="colonizer_start" value="{$colonizer_start}" type="text" maxlength="5">
+        for="colony_ship_start">{$LNG.cs_colony_ship_start}</label>
+      <input id="colony_ship_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="colony_ship_start" value="{$colony_ship_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline" for="recycler_start">{$LNG.cs_recycler_start}</label>
@@ -160,9 +161,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="spy_sonde_start">{$LNG.cs_spy_sonde_start}</label>
-      <input id="spy_sonde_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="spy_sonde_start" value="{$spy_sonde_start}" type="text" maxlength="5">
+        for="espionage_probe_start">{$LNG.cs_espionage_probe_start}</label>
+      <input id="espionage_probe_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="espionage_probe_start" value="{$espionage_probe_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
@@ -172,21 +173,21 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="solar_satelit_start">{$LNG.cs_solar_satelit_start}</label>
-      <input id="solar_satelit_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="solar_satelit_start" value="{$solar_satelit_start}" type="text" maxlength="5">
+        for="solar_satellite_start">{$LNG.cs_solar_satellite_start}</label>
+      <input id="solar_satellite_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="solar_satellite_start" value="{$solar_satellite_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="destructor_start">{$LNG.cs_destructor_start}</label>
-      <input id="destructor_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="destructor_start" value="{$destructor_start}" type="text" maxlength="5">
+        for="destroyer_start">{$LNG.cs_destroyer_start}</label>
+      <input id="destroyer_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="destroyer_start" value="{$destroyer_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="dearth_star_start">{$LNG.cs_dearth_star_start}</label>
-      <input id="dearth_star_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="dearth_star_start" value="{$dearth_star_start}" type="text" maxlength="5">
+        for="death_star_start">{$LNG.cs_death_star_start}</label>
+      <input id="death_star_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="death_star_start" value="{$death_star_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

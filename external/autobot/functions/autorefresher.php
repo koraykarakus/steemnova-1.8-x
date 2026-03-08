@@ -12,7 +12,7 @@ function attack($id_owner, $fleet_start_id, $fleet_start_galaxy, $fleet_start_sy
         $fleet_id = mysqli_fetch_all(mysqli_query($connection, "SELECT fleet_id FROM uni1_fleets ORDER by fleet_id DESC LIMIT 1"))[0][0];
         mysqli_query($connection, "INSERT INTO uni1_log_fleets (fleet_id, fleet_owner, fleet_mission, fleet_amount, fleet_array, fleet_universe, fleet_start_id, fleet_start_galaxy, fleet_start_system, fleet_start_planet, fleet_start_type, fleet_end_id, fleet_end_galaxy, fleet_end_system, fleet_end_planet, fleet_end_type, start_time, fleet_start_time, fleet_end_stay, fleet_end_time, fleet_target_owner) VALUES ($fleet_id, $id_owner, 6, 1, '210,1', 1, $fleet_start_id, $fleet_start_galaxy, $fleet_start_system, $fleet_start_planet, 1, $fleet_start_id, $fleet_start_galaxy, $fleet_start_system, $fleet_start_planet, 1, $start_time, $fleet_start_time, $fleet_end_stay, $fleet_end_time, $id_owner)");
         mysqli_query($connection, "INSERT INTO uni1_fleet_event (fleetID, time) VALUES ($fleet_id, $fleet_start_time)");
-	mysqli_query($connection, "UPDATE uni1_planets SET spy_sonde = 0 WHERE id=$fleet_start_id");
+	mysqli_query($connection, "UPDATE uni1_planets SET espionage_probe = 0 WHERE id=$fleet_start_id");
 	mysqli_query($connection, "UPDATE uni1_users SET onlinetime = $start_time WHERE id=$id_owner");
 }
 

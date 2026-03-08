@@ -227,11 +227,11 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         if ($targetChance >= $spyChance)
         {
             $config = Config::get($this->_fleet['fleet_universe']);
-            $whereCol = $this->_fleet['fleet_end_type'] == 3 ? "id_luna" : "id";
+            $whereCol = $this->_fleet['fleet_end_type'] == 3 ? "id_moon" : "id";
 
             $sql = 'UPDATE %%PLANETS%% SET
-			der_metal	= der_metal + :metal,
-			der_crystal = der_crystal + :crystal
+			debris_metal	= debris_metal + :metal,
+			debris_crystal = debris_crystal + :crystal
 			WHERE '.$whereCol.' = :planetId;';
 
             $db->update($sql, [

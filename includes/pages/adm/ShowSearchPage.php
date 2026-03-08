@@ -199,7 +199,7 @@ class ShowSearchPage extends AbstractAdminPage
                     6 => $LNG['se_search_planets_6'],
                     7 => $LNG['se_search_planets_7'],
                 ];
-                $specify_items = "p.id,p.name,CONCAT(u.username, ' (ID:&nbsp;', p.id_owner, ')'),p.last_update,p.galaxy,p.system,p.planet,p.id_luna";
+                $specify_items = "p.id,p.name,CONCAT(u.username, ' (ID:&nbsp;', p.id_owner, ')'),p.last_update,p.galaxy,p.system,p.planet,p.id_moon";
 
                 if ($search_file == "planet")
                 {
@@ -228,7 +228,7 @@ class ShowSearchPage extends AbstractAdminPage
                     $where_item .= "WHERE p.id";
                 }
 
-                $array_o_sec = ["id", "name", "id_owner", "id_luna", "last_update", "galaxy", "system", "planet"];
+                $array_o_sec = ["id", "name", "id_owner", "id_moon", "last_update", "galaxy", "system", "planet"];
                 $array_0_sec_count = count($array_o_sec);
 
                 for ($order_num = 0; $order_num < $array_0_sec_count; $order_num++)

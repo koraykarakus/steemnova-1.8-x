@@ -334,12 +334,12 @@ HTML;
         if ($this->_fleet['fleet_end_type'] == 3)
         {
             // Use planet debris, if attack on moons
-            $sql = "SELECT der_metal, der_crystal FROM %%PLANETS%% WHERE id_luna = :moonId;";
+            $sql = "SELECT debris_metal, debris_crystal FROM %%PLANETS%% WHERE id_moon = :id_moon;";
             $targetDebris = $db->selectSingle($sql, [
-                ':moonId' => $this->_fleet['fleet_end_id'],
+                ':id_moon' => $this->_fleet['fleet_end_id'],
             ]);
-            $targetPlanet['der_metal'] += $targetDebris['der_metal'];
-            $targetPlanet['der_crystal'] += $targetDebris['der_crystal'];
+            $targetPlanet['debris_metal'] += $targetDebris['debris_metal'];
+            $targetPlanet['debris_crystal'] += $targetDebris['debris_crystal'];
         }
 
         foreach ($debrisResource as $elementID)
@@ -353,7 +353,7 @@ HTML;
         $moonFactor = $config->moon_factor;
         $maxMoonChance = $config->moon_chance;
 
-        if ($targetPlanet['id_luna'] == 0 && $targetPlanet['planet_type'] == 1)
+        if ($targetPlanet['id_moon'] == 0 && $targetPlanet['planet_type'] == 1)
         {
             $chanceCreateMoon = round($debrisTotal / 100000 * $moonFactor);
             $chanceCreateMoon = min($chanceCreateMoon, $maxMoonChance);
@@ -516,7 +516,7 @@ HTML;
 
         if ($this->_fleet['fleet_end_type'] == 3)
         {
-            $debrisType = 'id_luna';
+            $debrisType = 'id_moon';
         }
         else
         {
@@ -524,8 +524,8 @@ HTML;
         }
 
         $sql = 'UPDATE %%PLANETS%% SET
-		der_metal	= :metal,
-		der_crystal	= :crystal
+		debris_metal	= :metal,
+		debris_crystal	= :crystal
 		WHERE '.$debrisType.' = :planetId;';
 
         $db->update($sql, [

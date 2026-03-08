@@ -72,7 +72,7 @@ class ResourceUpdate
         foreach ($reslist['prod'] as $ID)
         {
             $Hash[] = $this->PLANET[$resource[$ID]];
-            $Hash[] = $this->PLANET[$resource[$ID].'_porcent'];
+            $Hash[] = $this->PLANET[$resource[$ID].'_percent'];
         }
 
         $ressource = array_merge([], $reslist['resstype'][1], $reslist['resstype'][2]);
@@ -211,7 +211,7 @@ class ResourceUpdate
         {
             $BuildEnergy = $USER[$resource[113]];
             $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$resource[$Element] . '_porcent'];
+            $BuildLevelFactor = $PLANET[$resource[$Element] . '_percent'];
 
             if (in_array($Element, array_merge($reslist['build'], $reslist['fleet'], $reslist['defense'])))
             {
@@ -309,7 +309,7 @@ class ResourceUpdate
 
         foreach ($reslist['prod'] as $ProdID)
         {
-            $BuildLevelFactor = $this->PLANET[$resource[$ProdID].'_porcent'];
+            $BuildLevelFactor = $this->PLANET[$resource[$ProdID].'_percent'];
             $BuildLevel = $this->PLANET[$resource[$ProdID]];
 
             foreach ($ressIDs as $ID)

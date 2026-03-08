@@ -333,7 +333,7 @@ HTML;
         if ($this->_fleet['fleet_end_type'] == 3)
         {
             // Use planet debris, if attack on moons
-            $sql = "SELECT der_metal, der_crystal FROM %%PLANETS%% WHERE id_luna = :moonId;";
+            $sql = "SELECT debris_metal, debris_crystal FROM %%PLANETS%% WHERE id_moon = :moonId;";
             $targetDebris = $db->selectSingle($sql, [
                 ':moonId' => $this->_fleet['fleet_end_id'],
             ]);
@@ -372,38 +372,38 @@ HTML;
                 $randChance = mt_rand(1, 100);
                 if ($randChance <= $moonDestroyChance)
                 {
-                    $sql = 'SELECT id FROM %%PLANETS%% WHERE id_luna = :moonId;';
+                    $sql = 'SELECT id FROM %%PLANETS%% WHERE id_moon = :id_moon;';
                     $planetID = $db->selectSingle($sql, [
-                        ':moonId' => $targetPlanet['id'],
+                        ':id_moon' => $targetPlanet['id'],
                     ], 'id');
 
                     $sql = 'UPDATE %%FLEETS%% SET
 					fleet_start_type		= 1,
 					fleet_start_id			= :planetId
-					WHERE fleet_start_id	= :moonId;';
+					WHERE fleet_start_id	= :id_moon;';
 
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':moonId'   => $targetPlanet['id'],
+                        ':id_moon'   => $targetPlanet['id'],
                     ]);
 
                     $sql = 'UPDATE %%FLEETS%% SET
 					fleet_end_type	= 1,
-					fleet_end_id	= :moonId,
+					fleet_end_id	= :id_moon,
 					fleet_mission	= IF(fleet_mission = 9, 1, fleet_mission)
 					WHERE fleet_end_id = :planetId
 					AND fleet_id != :fleetId;';
 
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':moonId'   => $targetPlanet['id'],
+                        ':id_moon'   => $targetPlanet['id'],
                         ':fleetId'  => $this->_fleet['fleet_id'],
                     ]);
 
-                    $sql = "UPDATE %%ACS%% SET target = :planetId WHERE target = :moonId;";
+                    $sql = "UPDATE %%ACS%% SET target = :planetId WHERE target = :id_moon;";
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':moonId'   => $targetPlanet['id'],
+                        ':id_moon'   => $targetPlanet['id'],
                     ]);
 
                     // Redirect fleets from moon to player's main planet.
@@ -553,7 +553,7 @@ HTML;
 
         if ($this->_fleet['fleet_end_type'] == 3)
         {
-            $debrisType = 'id_luna';
+            $debrisType = 'id_moon';
         }
         else
         {
@@ -561,8 +561,8 @@ HTML;
         }
 
         $sql = 'UPDATE %%PLANETS%% SET
-		der_metal	= :metal,
-		der_crystal	= :crystal
+		debris_metal	= :metal,
+		debris_crystal	= :crystal
 		WHERE '.$debrisType.' = :planetId;';
 
         $db->update($sql, [

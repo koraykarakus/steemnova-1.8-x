@@ -136,7 +136,7 @@ function getPlanets($USER): array
 
     $order = $USER['planet_sort_order'] == 1 ? "DESC" : "ASC";
 
-    $sql = "SELECT id, id_luna, name, galaxy, system, planet, 
+    $sql = "SELECT id, id_moon, name, galaxy, system, planet, 
     planet_type, image, b_building, b_building_id, field_current, 
     field_max, temp_max, temp_min, diameter 
     FROM %%PLANETS%% WHERE id_owner = :userId AND destroyed = :destroyed ORDER BY ";

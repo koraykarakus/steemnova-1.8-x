@@ -61,7 +61,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             $error[] = $LNG['fl_vacation_mode_active'];
         }
 
-        if ($PLANET['silo'] < 4)
+        if ($PLANET['missile_silo'] < 4)
         {
             $error[] = $LNG['ma_silo_level'];
         }

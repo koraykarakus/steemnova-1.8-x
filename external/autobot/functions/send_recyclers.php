@@ -5,7 +5,7 @@ $connection = mysqli_connect(trim($config[0]), trim($config[1]), trim($config[2]
 $fleet_speed = mysqli_fetch_all(mysqli_query($connection, "SELECT FLOOR(fleet_speed/2500) FROM uni1_config")) [0][0];
 $get_bots_techs = mysqli_fetch_all(mysqli_query($connection, "SELECT id, computer_tech, combustion_tech, shield_tech FROM uni1_users WHERE email='bot'"));
 for ($i = 0;$i <= count($get_bots_techs) - 1;$i++) {
-    $random_planet = mysqli_fetch_all(mysqli_query($connection, "SELECT galaxy, system, planet, id, id_owner FROM uni1_planets WHERE (der_metal!=0 || der_crystal!=0) ORDER BY RAND() LIMIT 1")) [0];
+    $random_planet = mysqli_fetch_all(mysqli_query($connection, "SELECT galaxy, system, planet, id, id_owner FROM uni1_planets WHERE (debris_metal!=0 || debris_crystal!=0) ORDER BY RAND() LIMIT 1")) [0];
     if (empty($random_planet)) {
 	continue;
     } else {

@@ -151,7 +151,7 @@ class ShowResetPage extends AbstractAdminPage
                 ':universe' => Universe::getEmulated(),
             ]);
 
-            $sql = "UPDATE %%PLANETS%% SET id_luna = '0' WHERE universe = :universe";
+            $sql = "UPDATE %%PLANETS%% SET id_moon = '0' WHERE universe = :universe";
 
             $db->update($sql, [
                 ':universe' => Universe::getEmulated(),
@@ -172,7 +172,7 @@ class ShowResetPage extends AbstractAdminPage
             ]);
 
             $sql = "UPDATE %%PLANETS%% 
-            SET id_luna = 0 
+            SET id_moon = 0 
             WHERE universe = :universe";
 
             $db->update($sql, [

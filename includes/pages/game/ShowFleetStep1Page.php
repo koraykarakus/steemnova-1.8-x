@@ -287,7 +287,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         {
             $db = Database::get();
             $sql = "SELECT u.id, u.urlaubs_modus, u.user_lastip, u.authattack,
-            	p.destroyed, p.der_metal, p.der_crystal, p.destroyed
+            	p.destroyed, p.debris_metal, p.debris_crystal, p.destroyed
                 FROM %%USERS%% as u, %%PLANETS%% as p WHERE
                 p.universe = :universe AND
                 p.galaxy = :target_galaxy AND
@@ -333,8 +333,8 @@ class ShowFleetStep1Page extends AbstractGamePage
             }
 
             if ($target_planet_type == 2
-                && empty($planet_data['der_metal'])
-                && empty($planet_data['der_crystal']))
+                && empty($planet_data['debris_metal'])
+                && empty($planet_data['debris_crystal']))
             {
                 $this->sendJSON($LNG['fl_error_empty_derbis']);
             }
