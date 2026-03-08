@@ -172,7 +172,7 @@ if (MODE === 'INGAME'
     $LNG = new Language($USER['lang']);
     $LNG->includeData(['L18N', 'INGAME', 'TECH', 'CUSTOM']);
 
-    if ($config->game_disable == 0
+    if ($config->game_disable === 1
         && $USER['authlevel'] == AUTH_USR)
     {
         ShowErrorPage::printError($LNG['sys_closed_game'].'<br><br>'.$config->close_reason, false);

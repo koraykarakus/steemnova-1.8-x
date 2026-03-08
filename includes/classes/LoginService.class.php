@@ -18,7 +18,7 @@ class LoginService
 
     private function isGameDisabled(): bool
     {
-        return Config::get()->game_disable === 0;
+        return Config::get()->game_disable === 1;
     }
 
     private function checkSecretQuestion($sec_quest_id, $sec_quest_ans): int

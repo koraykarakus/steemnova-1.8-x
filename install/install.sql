@@ -222,7 +222,7 @@ CREATE TABLE `%PREFIX%config` (
   `initial_fields` smallint(5) unsigned NOT NULL DEFAULT '163',
   `uni_name` varchar(30) NOT NULL DEFAULT 'uni_unnamed',
   `game_name` varchar(30) NOT NULL DEFAULT 'game_unnamed',
-  `game_disable` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `game_disable` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `close_reason` text NOT NULL DEFAULT 'no_reason',
   `metal_basic_income` int(11) NOT NULL DEFAULT '20',
   `crystal_basic_income` int(11) NOT NULL DEFAULT '10',

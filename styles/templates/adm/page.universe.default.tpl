@@ -170,7 +170,7 @@
 				<div class="form-gorup d-flex my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
 						for="closed">{$LNG.se_server_op_close}</label>
-					<input class="mx-2" id="closed" name="closed" {if $game_disable == '1'} checked="checked" {/if}
+					<input class="mx-2" id="closed" name="closed" {if $game_disable === 1} checked="checked" {/if}
 						type="checkbox">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">

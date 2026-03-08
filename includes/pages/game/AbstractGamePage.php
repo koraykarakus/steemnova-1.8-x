@@ -266,7 +266,7 @@ abstract class AbstractGamePage
             'avatar'         => $avatar,
             'resourceTable'  => $resource_table,
             'shortlyNumber'  => $theme_settings['TOPNAV_SHORTLY_NUMBER'],
-            'closed'         => !$config->game_disable,
+            'closed'         => $config->game_disable,
             'hasBoard'       => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
             'hasGate'        => $PLANET[$resource[43]] > 0,
