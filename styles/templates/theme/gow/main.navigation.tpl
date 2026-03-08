@@ -1,4 +1,4 @@
-<ul class="list-unstyled d-flex flex-column align-items-center w-100 m-0 p-0" id="menu">
+<ul id="menu">
   <li class="menu-button">
     <a class="{if $page == 'overview'}menuActive{/if}" href="game.php?page=overview">{$LNG.lm_overview}</a>
   </li>

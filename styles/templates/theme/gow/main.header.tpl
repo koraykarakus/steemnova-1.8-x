@@ -8,7 +8,7 @@
 		{if !empty($goto)}
 			<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 		{/if}
-		{assign var="REV" value="1.0.0.203" nocache}
+		{assign var="REV" value="1.0.0.1" nocache}
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
 		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.css?v={$REV}">
@@ -69,4 +69,13 @@
 
 	<body id="{if isset($smarty.get.page)}{$smarty.get.page|htmlspecialchars|default:'overview'}{/if}"
 		class="{$bodyclass}">
-<div id="tooltipNotify" class="tip"></div>
+		<div id="tooltipNotify" class="tip"></div>
+		<div class="site_header">
+			{if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
+				<form action="game.php?page=collectMines" method="post">
+					<input type="hidden" name="from" value="{$page}">
+					<button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow mx-2"
+						type="submit">{$LNG.cm_collect_mines_submit}</button>
+				</form>
+			{/if}
+</div>
