@@ -159,7 +159,7 @@ class ShowBuildingsPage extends AbstractGamePage
         if (!in_array($Element, $reslist['allow'][$PLANET['planet_type']])
             || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
             || ($Element == 31 && $USER["b_tech_planet"] != 0)
-            || (($Element == 15 || $Element == 21) && !empty($PLANET['b_hangar_id']))
+            || (($Element == 15 || $Element == 21) && !empty($PLANET['b_shipyard_id']))
             || (!$AddMode && $PLANET[$resource[$Element]] == 0)
         ) {
             return;
@@ -463,7 +463,7 @@ class ShowBuildingsPage extends AbstractGamePage
             'CanBuildElement' => $CanBuildElement,
             'RoomIsOk'        => $RoomIsOk,
             'Queue'           => $Queue,
-            'isBusy'          => ['shipyard' => !empty($PLANET['b_hangar_id']), 'research' => $USER['b_tech_planet'] != 0],
+            'isBusy'          => ['shipyard' => !empty($PLANET['b_shipyard_id']), 'research' => $USER['b_tech_planet'] != 0],
             'HaveMissiles'    => (bool) $PLANET[$resource[503]] + $PLANET[$resource[502]],
             'usedField'       => $PLANET['field_current'],
             'maxField'        => CalculateMaxPlanetFields($PLANET),

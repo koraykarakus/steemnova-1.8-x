@@ -325,7 +325,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         $names = "<tr><th class=\"center\" width=\"150\">&nbsp;</th>";
 
         // COMIENZA EL SAQUEO DE DATOS DE LOS PLANETAS
-        $SpecifyItemsP = "planet_type,id,name,galaxy,system,planet,destruyed,diameter,field_current,field_max,temp_min,temp_max,metal,crystal,deuterium,energy,".$SpecifyItemsPQ."energy_used";
+        $SpecifyItemsP = "planet_type,id,name,galaxy,system,planet,destroyed,diameter,field_current,field_max,temp_min,temp_max,metal,crystal,deuterium,energy,".$SpecifyItemsPQ."energy_used";
 
         $sql = "SELECT " . $SpecifyItemsP . " FROM %%PLANETS%% WHERE `id_owner` = :userId;";
 
@@ -354,7 +354,7 @@ class ShowAccountDataPage extends AbstractAdminPage
                             .$c_planet['planet']."]</font>";
             }
 
-            if ($c_planet["destruyed"] == 0)
+            if ($c_planet["destroyed"] == 0)
             {
                 $planets_moons .= "
                 <tr>
@@ -399,14 +399,14 @@ class ShowAccountDataPage extends AbstractAdminPage
             }
 
             $destroyed = '';
-            if ($c_planet["destruyed"] > 0)
+            if ($c_planet["destroyed"] > 0)
             {
                 $destroyed .= "
                     <tr>
                         <td>".$c_planet['name']."</td>
                         <td>".$c_planet['id']."</td>
                         <td>[".$c_planet['galaxy'].":".$c_planet['system'].":".$c_planet['planet']."]</td>
-                        <td>".date("d-m-Y   H:i:s", $c_planet['destruyed'])."</td>
+                        <td>".date("d-m-Y   H:i:s", $c_planet['destroyed'])."</td>
                     </tr>";
                 $DestruyeD++;
             }
@@ -520,7 +520,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             'ships_title'                 => $LNG['ships_title'],
             'defenses_title'              => $LNG['defenses_title'],
             'ac_recent_destroyed_planets' => $LNG['ac_recent_destroyed_planets'],
-            'ac_isnodestruyed'            => $LNG['ac_isnodestruyed'],
+            'ac_is_not_destroyed'            => $LNG['ac_is_not_destroyed'],
             'ac_note_k'                   => $LNG['ac_note_k'],
             'ac_leyend'                   => $LNG['ac_leyend'],
             'ac_account_data'             => $LNG['ac_account_data'],

@@ -1247,9 +1247,9 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($c_hangar == 'on')
         {
             $sql = "UPDATE %%PLANETS%% SET 
-            `b_hangar` = '0', 
-            `b_hangar_plus` = '0', 
-            `b_hangar_id` = '' 
+            `b_shipyard` = '0', 
+            `b_shipyard_plus` = '0', 
+            `b_shipyard_id` = '' 
             WHERE `id` = :planet_id AND `universe` = :universe;";
 
             $db->update($sql, [

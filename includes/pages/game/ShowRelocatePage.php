@@ -37,8 +37,8 @@ class ShowRelocatePage extends AbstractGamePage
             $this->printMessage($LNG['rl_error_type_6']);
         }
 
-        //you cannot move planet if there is a hangar production
-        if (!empty(unserialize($PLANET['b_hangar_id'])))
+        //you cannot move planet if there is a shipyard production
+        if (!empty(unserialize($PLANET['b_shipyard_id'])))
         {
             $this->printMessage($LNG['rl_error_type_9']);
         }

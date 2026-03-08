@@ -167,7 +167,7 @@ class ShowFleetStep3Page extends AbstractGamePage
             }
         }
 
-        $sql = "SELECT id, id_owner, der_metal, der_crystal, destruyed, ally_deposit FROM %%PLANETS%% WHERE universe = :universe AND galaxy = :targetGalaxy AND system = :targetSystem AND planet = :targetPlanet AND planet_type = :targetType;";
+        $sql = "SELECT id, id_owner, der_metal, der_crystal, destroyed, ally_deposit FROM %%PLANETS%% WHERE universe = :universe AND galaxy = :targetGalaxy AND system = :targetSystem AND planet = :targetPlanet AND planet_type = :targetType;";
         $targetPlanetData = $db->selectSingle($sql, [
             ':universe'     => Universe::current(),
             ':targetGalaxy' => $targetGalaxy,
@@ -201,7 +201,7 @@ class ShowFleetStep3Page extends AbstractGamePage
         }
         else
         {
-            if (!empty($targetPlanetData["destruyed"]))
+            if (!empty($targetPlanetData["destroyed"]))
             {
                 $this->printMessage($LNG['fl_no_target'], [[
                     'label' => $LNG['sys_back'],

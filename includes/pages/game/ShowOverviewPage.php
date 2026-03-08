@@ -122,19 +122,19 @@ class ShowOverviewPage extends AbstractGamePage
             $build_info['buildings'] = false;
         }
 
-        if (!empty($PLANET['b_hangar_id']))
+        if (!empty($PLANET['b_shipyard_id']))
         {
 
-            $queue = unserialize($PLANET['b_hangar_id']);
+            $queue = unserialize($PLANET['b_shipyard_id']);
 
             $time = BuildFunctions::getBuildingTime($USER, $PLANET, $queue[0][0]) * $queue[0][1];
 
             $build_info['fleet'] = [
                 'id'        => $queue[0][0],
                 'level'     => $queue[0][1],
-                'timeleft'  => $time - $PLANET['b_hangar'],
+                'timeleft'  => $time - $PLANET['b_shipyard'],
                 'time'      => $time,
-                'starttime' => pretty_time($time - $PLANET['b_hangar']),
+                'starttime' => pretty_time($time - $PLANET['b_shipyard']),
             ];
 
         }
@@ -417,7 +417,7 @@ class ShowOverviewPage extends AbstractGamePage
 
         if ($PLANET['planet_type'] == 1)
         {
-            $sql = "UPDATE %%PLANETS%% SET destruyed = :time 
+            $sql = "UPDATE %%PLANETS%% SET destroyed = :time 
             WHERE id = :planet_id;";
 
             $db->update($sql, [

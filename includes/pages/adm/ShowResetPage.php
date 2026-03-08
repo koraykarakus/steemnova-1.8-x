@@ -210,12 +210,12 @@ class ShowResetPage extends AbstractAdminPage
         if ($delete_hd)
         {
             $sql = "UPDATE %%PLANETS%% 
-            SET b_hangar = :b_hangar, b_hangar_id = :b_hangar_id 
+            SET b_shipyard = :b_shipyard, b_shipyard_id = :b_shipyard_id 
             WHERE universe = :universe";
 
             $db->update($sql, [
-                ':b_hangar'    => 0,
-                ':b_hangar_id' => '',
+                ':b_shipyard'    => 0,
+                ':b_shipyard_id' => '',
                 ':universe'    => Universe::getEmulated(),
             ]);
         }

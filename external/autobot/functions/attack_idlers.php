@@ -21,7 +21,7 @@ for ($i = 0;$i <= count($get_bots_techs) - 1;$i++) {
     $max_fleets = min(($get_bots_techs[$i][1] + 1) - $count_fleets, 3);
     if ($max_fleets > 0) {
     // Check how many Big Cargos Bot have, also receive info about resources needed to build it
-    $planet_resources = mysqli_fetch_all(mysqli_query($connection, "SELECT big_ship_cargo, floor(metal), floor(crystal), hangar, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_owner")) [0];
+    $planet_resources = mysqli_fetch_all(mysqli_query($connection, "SELECT big_ship_cargo, floor(metal), floor(crystal), shipyard, id, galaxy, system, planet FROM uni1_planets WHERE id_owner=$id_owner")) [0];
     $id_planet = $planet_resources[4];
 
     if ($planet_resources[0] == 0 && $planet_resources[1] >= 6000 && $planet_resources[2] >= 6000 && $planet_resources[3] >= 4 && $get_bots_techs[$i][2] >= 6) {

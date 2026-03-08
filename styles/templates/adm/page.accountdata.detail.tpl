@@ -492,7 +492,7 @@
                         <img src="./styles/resource/images/admin/arrowright.png" width="16" height="10">
                         {$ac_recent_destroyed_planets}</a>
                 {else}<span class="no_moon"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10">
-                    {$ac_recent_destroyed_planets}&nbsp;{$ac_isnodestruyed}</span>{/if}
+                    {$ac_recent_destroyed_planets}&nbsp;{$ac_is_not_destroyed}</span>{/if}
             </td>
         </tr>
         <tr>
@@ -503,7 +503,7 @@
                             <th>{$ac_name}</th>
                             <th>{$input_id}</th>
                             <th>{$ac_coords}</th>
-                            <th>{$ac_time_destruyed}</th>
+                            <th>{$ac_time_destroyed}</th>
                         </tr>
                         {$destroyed}
                     </table>

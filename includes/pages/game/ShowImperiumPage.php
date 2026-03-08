@@ -32,7 +32,7 @@ class ShowImperiumPage extends AbstractGamePage
 
         $order = $USER['planet_sort_order'] == 1 ? 'DESC' : 'ASC';
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destruyed = '0' ORDER BY ";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destroyed = '0' ORDER BY ";
 
         switch ($USER['planet_sort'])
         {

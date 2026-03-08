@@ -44,7 +44,7 @@ class CleanerCronjob implements CronjobTask
         $sql = 'DELETE FROM %%ALLIANCE%% WHERE `ally_members` = 0;';
         Database::get()->delete($sql);
 
-        $sql = 'DELETE FROM %%PLANETS%% WHERE `destruyed` < :time AND `destruyed` != 0;';
+        $sql = 'DELETE FROM %%PLANETS%% WHERE `destroyed` < :time AND `destroyed` != 0;';
         Database::get()->delete($sql, [
             ':time' => TIMESTAMP,
         ]);

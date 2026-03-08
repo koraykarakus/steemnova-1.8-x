@@ -99,7 +99,7 @@ class ShowSettingsPage extends AbstractGamePage
 
         if (!empty($USER['b_tech'])
             || !empty($PLANET['b_building'])
-            || !empty($PLANET['b_hangar']))
+            || !empty($PLANET['b_shipyard']))
         {
             return false;
         }
@@ -117,7 +117,7 @@ class ShowSettingsPage extends AbstractGamePage
         }
 
         $sql = "SELECT * FROM %%PLANETS%% 
-        WHERE id_owner = :userID AND id != :planetID AND destruyed = 0;";
+        WHERE id_owner = :userID AND id != :planetID AND destroyed = 0;";
 
         $planets = $db->select($sql, [
             ':userID'   => $USER['id'],
@@ -129,7 +129,7 @@ class ShowSettingsPage extends AbstractGamePage
             list($USER, $c_planet) = $this->eco_obj->CalcResource($USER, $c_planet, true);
 
             if (!empty($c_planet['b_building'])
-                || !empty($c_planet['b_hangar']))
+                || !empty($c_planet['b_shipyard']))
             {
                 return false;
             }

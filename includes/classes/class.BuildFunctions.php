@@ -318,8 +318,8 @@ class BuildFunctions
             }
         }
 
-        $build_array = !empty($PLANET['b_hangar_id']) ?
-                    unserialize($PLANET['b_hangar_id']) :
+        $build_array = !empty($PLANET['b_shipyard_id']) ?
+                    unserialize($PLANET['b_shipyard_id']) :
                     [];
 
         $max_missiles = $PLANET[$resource[44]] * 10 * max(Config::get()->silo_factor, 1);

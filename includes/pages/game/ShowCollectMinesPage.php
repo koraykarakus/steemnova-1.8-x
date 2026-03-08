@@ -58,7 +58,7 @@ class ShowCollectMinesPage extends AbstractGamePage
 
         $res_update_obj = new ResourceUpdate();
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destruyed = '0'";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destroyed = '0'";
 
         $planets = $db->select($sql, [
             ':userID' => $USER['id'],

@@ -239,7 +239,7 @@ class ResourceUpdate
         $researchLevelList = [$PLANET[$resource[31]]];
         if ($USER[$resource[123]] > 0)
         {
-            $sql = 'SELECT '.$resource[31].' FROM %%PLANETS%% WHERE id != :planetId AND id_owner = :userId AND destruyed = 0 ORDER BY '.$resource[31].' DESC LIMIT :limit;';
+            $sql = 'SELECT '.$resource[31].' FROM %%PLANETS%% WHERE id != :planetId AND id_owner = :userId AND destroyed = 0 ORDER BY '.$resource[31].' DESC LIMIT :limit;';
             $researchResult = Database::get()->select($sql, [
                 ':limit'    => (int) $USER[$resource[123]],
                 ':planetId' => $PLANET['id'],
@@ -363,15 +363,15 @@ class ResourceUpdate
     {
         global $resource;
 
-        $BuildQueue = unserialize($this->PLANET['b_hangar_id'] ?? '');
+        $BuildQueue = unserialize($this->PLANET['b_shipyard_id'] ?? '');
         if (!$BuildQueue)
         {
-            $this->PLANET['b_hangar'] = 0;
-            $this->PLANET['b_hangar_id'] = '';
+            $this->PLANET['b_shipyard'] = 0;
+            $this->PLANET['b_shipyard_id'] = '';
             return false;
         }
 
-        $this->PLANET['b_hangar'] += ($this->TIME - $this->PLANET['last_update']);
+        $this->PLANET['b_shipyard'] += ($this->TIME - $this->PLANET['last_update']);
         $BuildArray = [];
         foreach ($BuildQueue as $Item)
         {
@@ -402,7 +402,7 @@ class ResourceUpdate
                     continue;
                 }
 
-                $Build = max(min(floor($this->PLANET['b_hangar'] / $BuildTime), $Count), 0);
+                $Build = max(min(floor($this->PLANET['b_shipyard'] / $BuildTime), $Count), 0);
 
                 if ($Build == 0)
                 {
@@ -417,7 +417,7 @@ class ResourceUpdate
                 }
 
                 $this->Builded[$Element] += $Build;
-                $this->PLANET['b_hangar'] -= $Build * $BuildTime;
+                $this->PLANET['b_shipyard'] -= $Build * $BuildTime;
                 $this->PLANET[$resource[$Element]] += $Build;
                 $Count -= $Build;
 
@@ -432,7 +432,7 @@ class ResourceUpdate
             }
             $NewQueue[] = [$Element, $Count];
         }
-        $this->PLANET['b_hangar_id'] = !empty($NewQueue) ? serialize($NewQueue) : '';
+        $this->PLANET['b_shipyard_id'] = !empty($NewQueue) ? serialize($NewQueue) : '';
 
         return true;
     }
@@ -841,7 +841,7 @@ class ResourceUpdate
             ':b_building'        => $PLANET['b_building'],
             ':b_building_id'     => $PLANET['b_building_id'],
             ':field_current'     => $PLANET['field_current'],
-            ':b_hangar_id'       => $PLANET['b_hangar_id'],
+            ':b_shipyard_id'     => $PLANET['b_shipyard_id'],
             ':metal_perhour'     => $PLANET['metal_perhour'],
             ':crystal_perhour'   => $PLANET['crystal_perhour'],
             ':deuterium_perhour' => $PLANET['deuterium_perhour'],
@@ -850,7 +850,7 @@ class ResourceUpdate
             ':deuterium_max'     => $PLANET['deuterium_max'],
             ':energy_used'       => $PLANET['energy_used'],
             ':energy'            => $PLANET['energy'],
-            ':b_hangar'          => $PLANET['b_hangar'],
+            ':b_shipyard'        => $PLANET['b_shipyard'],
             ':darkmatter'        => $USER['darkmatter'],
             ':b_tech'            => $USER['b_tech'],
             ':b_tech_id'         => $USER['b_tech_id'],
@@ -896,7 +896,7 @@ class ResourceUpdate
 		p.b_building		= :b_building,
 		p.b_building_id 	= :b_building_id,
 		p.field_current 	= :field_current,
-		p.b_hangar_id		= :b_hangar_id,
+		p.b_shipyard_id		= :b_shipyard_id,
 		p.metal_perhour		= :metal_perhour,
 		p.crystal_perhour	= :crystal_perhour,
 		p.deuterium_perhour	= :deuterium_perhour,
@@ -905,7 +905,7 @@ class ResourceUpdate
 		p.deuterium_max		= :deuterium_max,
 		p.energy_used		= :energy_used,
 		p.energy			= :energy,
-		p.b_hangar			= :b_hangar,
+		p.b_shipyard		= :b_shipyard,
 		u.darkmatter		= :darkmatter,
 		u.b_tech			= :b_tech,
 		u.b_tech_id			= :b_tech_id,

@@ -61,9 +61,9 @@
         name="nanite_factory_start" value="{$nanite_factory_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
-      <label class="text-start my-1 cursor-pointer hover-underline" for="hangar_start">{$LNG.cs_hangar_start}</label>
-      <input id="hangar_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-        name="hangar_start" value="{$hangar_start}" type="text" maxlength="5">
+      <label class="text-start my-1 cursor-pointer hover-underline" for="shipyard_start">{$LNG.cs_shipyard_start}</label>
+      <input id="shipyard_start" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+        name="shipyard_start" value="{$shipyard_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

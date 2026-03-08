@@ -67,7 +67,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
         $planet_ress_obj = new ResourceUpdate();
         $sql = "SELECT * FROM %%PLANETS%% 
-        WHERE id_owner = :user_id AND destruyed = '0' AND id = :planet_id";
+        WHERE id_owner = :user_id AND destroyed = '0' AND id = :planet_id";
 
         $planets_raw = $db->select($sql, [
             ':user_id'   => $USER['id'],

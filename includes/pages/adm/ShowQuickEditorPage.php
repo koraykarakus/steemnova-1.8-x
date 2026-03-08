@@ -245,7 +245,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $sql = "SELECT " . $specify_items_pq .
         " `name`, `id_owner`, `planet_type`, `galaxy`, `system`, 
-        `planet`, `destruyed`, `diameter`, `field_current`, 
+        `planet`, `destroyed`, `diameter`, `field_current`, 
         `field_max`, `temp_min`, `temp_max`, `metal`, `crystal`, 
         `deuterium` FROM %%PLANETS%% WHERE `id` = :planet_id;";
 
@@ -339,7 +339,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $db = Database::get();
 
         $sql = "SELECT " . $specify_items_pq . " `name`, `id_owner`, `planet_type`, 
-        `galaxy`, `system`, `planet`, `destruyed`, `diameter`, 
+        `galaxy`, `system`, `planet`, `destroyed`, `diameter`, 
         `field_current`, `field_max`, `temp_min`, `temp_max`, 
         `metal`, `crystal`, `deuterium` FROM %%PLANETS%% WHERE `id` = :id;";
 

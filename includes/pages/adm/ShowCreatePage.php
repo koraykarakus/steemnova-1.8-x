@@ -206,10 +206,10 @@ class ShowCreatePage extends AbstractAdminPage
         $diameter = HTTP::_GP('diameter', 0);
 
         $sql = "SELECT temp_max, temp_min, id_luna, galaxy, system, planet, 
-        planet_type, destruyed, id_owner 
+        planet_type, destroyed, id_owner 
         FROM %%PLANETS%% 
         WHERE id = :planet_id AND universe = :universe 
-        AND planet_type = '1' AND destruyed = '0';";
+        AND planet_type = '1' AND destroyed = '0';";
 
         $moon_planet = Database::get()->selectSingle($sql, [
             ':planet_id' => $planet_id,
