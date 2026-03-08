@@ -50,7 +50,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'solar_plant_start'             => $this->colony_settings['solar_plant_start'],
             'fusion_plant_start'            => $this->colony_settings['fusion_plant_start'],
             'robot_factory_start'           => $this->colony_settings['robot_factory_start'],
-            'nano_factory_start'            => $this->colony_settings['nano_factory_start'],
+            'nanite_factory_start'          => $this->colony_settings['nanite_factory_start'],
             'hangar_start'                  => $this->colony_settings['hangar_start'],
             'metal_store_start'             => $this->colony_settings['metal_store_start'],
             'crystal_store_start'           => $this->colony_settings['crystal_store_start'],
@@ -109,7 +109,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'solar_plant_start'             => $this->colony_settings['solar_plant_start'],
             'fusion_plant_start'            => $this->colony_settings['fusion_plant_start'],
             'robot_factory_start'           => $this->colony_settings['robot_factory_start'],
-            'nano_factory_start'            => $this->colony_settings['nano_factory_start'],
+            'nanite_factory_start'          => $this->colony_settings['nanite_factory_start'],
             'hangar_start'                  => $this->colony_settings['hangar_start'],
             'metal_store_start'             => $this->colony_settings['metal_store_start'],
             'crystal_store_start'           => $this->colony_settings['crystal_store_start'],
@@ -159,7 +159,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $solar_plant_start = HTTP::_GP('solar_plant_start', 0);
         $fusion_plant_start = HTTP::_GP('fusion_plant_start', 0);
         $robot_factory_start = HTTP::_GP('robot_factory_start', 0);
-        $nano_factory_start = HTTP::_GP('nano_factory_start', 0);
+        $nanite_factory_start = HTTP::_GP('nanite_factory_start', 0);
         $hangar_start = HTTP::_GP('hangar_start', 0);
         $metal_store_start = HTTP::_GP('metal_store_start', 0);
         $crystal_store_start = HTTP::_GP('crystal_store_start', 0);
@@ -211,7 +211,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`solar_plant_start` = :solar_plant_start,
 			`fusion_plant_start` = :fusion_plant_start,
 			`robot_factory_start` = :robot_factory_start,
-			`nano_factory_start` = :nano_factory_start,
+			`nanite_factory_start` = :nanite_factory_start,
 			`hangar_start` = :hangar_start,
 			`metal_store_start` = :metal_store_start,
 			`crystal_store_start` = :crystal_store_start,
@@ -263,7 +263,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':solar_plant_start'             => $solar_plant_start,
             ':fusion_plant_start'            => $fusion_plant_start,
             ':robot_factory_start'           => $robot_factory_start,
-            ':nano_factory_start'            => $nano_factory_start,
+            ':nanite_factory_start'          => $nanite_factory_start,
             ':hangar_start'                  => $hangar_start,
             ':metal_store_start'             => $metal_store_start,
             ':crystal_store_start'           => $crystal_store_start,
@@ -316,7 +316,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'solar_plant_start'             => $solar_plant_start,
             'fusion_plant_start'            => $fusion_plant_start,
             'robot_factory_start'           => $robot_factory_start,
-            'nano_factory_start'            => $nano_factory_start,
+            'nanite_factory_start'          => $nanite_factory_start,
             'hangar_start'                  => $hangar_start,
             'metal_store_start'             => $metal_store_start,
             'crystal_store_start'           => $crystal_store_start,
