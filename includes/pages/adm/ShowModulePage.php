@@ -86,37 +86,3 @@ class ShowModulePage extends AbstractAdminPage
     }
 
 }
-
-/* OLD
-function ShowModulePage()
-{
-    global $LNG;
-
-    $config = Config::get(Universe::getEmulated());
-    $module = explode(';', $config->moduls);
-
-    $IDs = range(0, MODULE_AMOUNT - 1);
-    foreach ($IDs as $ID => $Name)
-    {
-        $Modules[$ID] = [
-            'name'  => $LNG['modul_'.$ID],
-            'state' => isset($module[$ID]) ? $module[$ID] : 1,
-        ];
-    }
-
-    asort($Modules);
-    $template = new template();
-
-    $template->assign_vars([
-        'Modules'             => $Modules,
-        'mod_module'          => $LNG['mod_module'],
-        'mod_info'            => $LNG['mod_info'],
-        'mod_active'          => $LNG['mod_active'],
-        'mod_deactive'        => $LNG['mod_deactive'],
-        'mod_change_active'   => $LNG['mod_change_active'],
-        'mod_change_deactive' => $LNG['mod_change_deactive'],
-    ]);
-
-    $template->show('ModulePage.tpl');
-}
-*/
