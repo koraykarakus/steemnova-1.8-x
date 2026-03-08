@@ -496,14 +496,16 @@
 			<div class="tab-pane fade" id="tab_8">
 				<div class="form-gorup d-flex my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="newsframe">{$LNG.se_news_active}</label>
-					<input class="mx-2" id="newsframe" name="newsframe" {if $newsframe} checked="checked" {/if}
-						type="checkbox">
+						for="display_announcement_frame">{$LNG.se_news_active}</label>
+					<input class="mx-2" id="display_announcement_frame" name="display_announcement_frame"
+						{if $display_announcement_frame} checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="NewsText">{$LNG.se_news}</label>
-					<textarea id="NewsText" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="NewsText" cols="80" rows="5">{$NewsTextVal}</textarea>
+					<label class="text-start my-1 cursor-pointer hover-underline"
+						for="announcement_text">{$LNG.se_news}</label>
+					<textarea id="announcement_text"
+						class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="announcement_text"
+						cols="80" rows="5">{$announcement_text}</textarea>
 				</div>
 			</div>
 		</div>

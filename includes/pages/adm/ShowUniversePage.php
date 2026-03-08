@@ -65,9 +65,9 @@ class ShowUniversePage extends AbstractAdminPage
             'smtp_sendmail'                => $config->smtp_sendmail,
             'smtp_ssl'                     => $config->smtp_ssl,
             'user_valid'                   => $config->user_valid,
-            'newsframe'                    => $config->OverviewNewsFrame,
+            'display_announcement_frame'   => $config->display_announcement_frame,
             'reg_closed'                   => $config->reg_closed,
-            'NewsTextVal'                  => $config->OverviewNewsText,
+            'announcement_text'            => $config->announcement_text,
             'google_recaptcha_private_key' => $config->google_recaptcha_private_key,
             'google_recaptcha_public_key'  => $config->google_recaptcha_public_key,
             'google_recaptcha_active'      => $config->google_recaptcha_active,
@@ -136,9 +136,9 @@ class ShowUniversePage extends AbstractAdminPage
             'debris_percentage_fleet'      => $config->debris_percentage_fleet,
             'game_disable'                 => $config->game_disable,
             'close_reason'                 => $config->close_reason,
-            'OverviewNewsFrame'            => $config->OverviewNewsFrame,
+            'display_announcement_frame'   => $config->display_announcement_frame,
             'reg_closed'                   => $config->reg_closed,
-            'OverviewNewsText'             => $config->OverviewNewsText,
+            'announcement_text'            => $config->announcement_text,
             'uni_name'                     => $config->uni_name,
             'forum_url'                    => $config->forum_url,
             'game_speed'                   => $config->game_speed,
@@ -204,13 +204,13 @@ class ShowUniversePage extends AbstractAdminPage
         $noob_protection = isset($_POST['noob_protection']) && $_POST['noob_protection'] == 'on' ? 1 : 0;
         $debug = isset($_POST['debug']) && $_POST['debug'] == 'on' ? 1 : 0;
         $adm_attack = isset($_POST['adm_attack']) && $_POST['adm_attack'] == 'on' ? 1 : 0;
-        $OverviewNewsFrame = isset($_POST['newsframe']) && $_POST['newsframe'] == 'on' ? 1 : 0;
+        $display_announcement_frame = isset($_POST['display_announcement_frame']) && $_POST['display_announcement_frame'] == 'on' ? 1 : 0;
         $reg_closed = isset($_POST['reg_closed']) && $_POST['reg_closed'] == 'on' ? 1 : 0;
         $user_valid = isset($_POST['user_valid']) && $_POST['user_valid'] == 'on' ? 1 : 0;
         $debris_moon = isset($_POST['debris_moon']) && $_POST['debris_moon'] == 'on' ? 1 : 0;
         $ref_active = isset($_POST['ref_active']) && $_POST['ref_active'] == 'on' ? 1 : 0;
 
-        $OverviewNewsText = $_POST['NewsText'];
+        $announcement_text = $_POST['announcement_text'];
         $close_reason = HTTP::_GP('close_reason', '', true);
         $uni_name = HTTP::_GP('uni_name', '', true);
         $forum_url = HTTP::_GP('forum_url', '', true);
@@ -275,9 +275,9 @@ class ShowUniversePage extends AbstractAdminPage
             'debris_percentage_fleet'    => $debris_percentage_fleet,
             'game_disable'               => $game_disable,
             'close_reason'               => $close_reason,
-            'OverviewNewsFrame'          => $OverviewNewsFrame,
+            'display_announcement_frame' => $display_announcement_frame,
             'reg_closed'                 => $reg_closed,
-            'OverviewNewsText'           => $OverviewNewsText,
+            'announcement_text'          => $announcement_text,
             'uni_name'                   => $uni_name,
             'forum_url'                  => $forum_url,
             'game_speed'                 => $game_speed,

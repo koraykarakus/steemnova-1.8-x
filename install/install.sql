@@ -257,8 +257,8 @@ CREATE TABLE `%PREFIX%config` (
   `ts_login` varchar(32) NOT NULL DEFAULT '',
   `ts_password` varchar(32) NOT NULL DEFAULT '',
   `reg_closed` tinyint(1) NOT NULL DEFAULT '0',
-  `OverviewNewsFrame` tinyint(1) NOT NULL DEFAULT '1',
-  `OverviewNewsText` text NOT NULL DEFAULT '',
+  `display_announcement_frame` tinyint NOT NULL DEFAULT 1,
+  `announcement_text` text NOT NULL DEFAULT '',
   `google_recaptcha_active` tinyint(1) NOT NULL DEFAULT '0',
   `google_recaptcha_public_key` varchar(42) NOT NULL DEFAULT '',
   `google_recaptcha_private_key` varchar(42) NOT NULL DEFAULT '',
@@ -1112,7 +1112,7 @@ CREATE TABLE `%PREFIX%vars_requriements` (
   KEY `requireID` (`requireID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `OverviewNewsText`, `moduls`, `disclaimer_address`, `disclaimer_phone`, `disclaimer_mail`, `disclaimer_notice`) VALUES
+INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `announcement_text`, `moduls`, `disclaimer_address`, `disclaimer_phone`, `disclaimer_mail`, `disclaimer_notice`) VALUES
 (1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
 
 INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES

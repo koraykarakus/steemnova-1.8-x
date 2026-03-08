@@ -387,7 +387,7 @@ class ShowInstallPage extends AbstractInstallPage
             $config = Config::get(Universe::current());
             $config->timezone = @date_default_timezone_get();
             $config->lang = $LNG->getLanguage();
-            $config->OverviewNewsText = $LNG['sql_welcome'] . $install_version;
+            $config->announcement_text = $LNG['sql_welcome'] . $install_version;
             $config->uni_name = $LNG['fcm_universe'] . ' ' . Universe::current();
             $config->close_reason = $LNG['sql_close_reason'];
             $config->moduls = implode(';', array_fill(0, MODULE_AMOUNT - 1, 1));
