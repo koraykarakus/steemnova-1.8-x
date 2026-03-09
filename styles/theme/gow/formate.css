@@ -80,19 +80,23 @@ body {
 	clear: both;
 	background: linear-gradient(to bottom, #0b0f1a, #000000, #0b0f1a);
 }
-#footer a, #footer span{
+
+#footer a,
+#footer span {
 	color: #ddd;
 	height: 15px;
 	text-decoration: none;
 	padding: 0 5px;
 	border-right: 1px solid #ddd;
 }
-#footer a:hover{
+
+#footer a:hover {
 	text-decoration: underline;
 }
-#footer>.active{
-text-decoration: underline;
-color: red;
+
+#footer>.active {
+	text-decoration: underline;
+	color: red;
 }
 
 /*--*/
@@ -140,6 +144,44 @@ color: red;
 	align-items: center;
 	justify-content: center;
 	height: 70px;
+	position: relative;
+}
+
+.resources>.resource>.tooltip {
+	display: none;
+	position: absolute;
+	top:100%;
+	z-index: 9999;
+	background: linear-gradient(180deg,
+			#3a566f 0%,
+			#2a3f55 60%,
+			#1c2b3a 100%);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	color: #e4e4e4;
+	padding: 4px;
+	font-size: 11px;
+	box-shadow:
+		0 4px 12px rgba(0, 0, 0, 0.6),
+		inset 0 1px 0 rgba(255, 255, 255, 0.15),
+		inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+/* Arrow */
+.tooltip::after {
+	content: "";
+	position: absolute;
+	bottom: 100%; /* tooltip’in hemen üstüne yapışıyor */
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #374a5e transparent; /* alt kenarı görünür */
+}
+
+.resources>.resource:hover{
+	cursor: pointer;
+}
+.resources>.resource:hover>.tooltip {
+	display: flex;
 }
 
 .resources>.resource>.resource_name {
@@ -188,7 +230,7 @@ color: red;
 	text-decoration: underline;
 }
 
-.bar .active{
+.bar .active {
 	text-decoration: underline;
 }
 
@@ -1195,52 +1237,6 @@ input[type="radio"] {
 	background-image: none;
 	border: 0 none
 }
-
-/*tooltip*/
-
-.tooltip-inner {
-	background: linear-gradient(180deg,
-			#3a566f 0%,
-			#2a3f55 60%,
-			#1c2b3a 100%);
-
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	color: #e4e4e4;
-	font-size: 12px !important;
-	max-width: 400px !important;
-	padding: 8px 12px;
-
-	box-shadow:
-		0 4px 12px rgba(0, 0, 0, 0.6),
-		inset 0 1px 0 rgba(255, 255, 255, 0.15),
-		inset 0 0 8px rgba(0, 0, 0, 0.6);
-
-	letter-spacing: 0.3px;
-}
-
-.tooltip.show {
-	opacity: 1;
-	transition: opacity 0.15s ease-in-out;
-}
-
-.bs-tooltip-bottom .tooltip-arrow::before {
-	border-bottom-color: #2a3f55 !important;
-}
-
-.bs-tooltip-top .tooltip-arrow::before {
-	border-top-color: #2a3f55 !important;
-}
-
-.bs-tooltip-start .tooltip-arrow::before {
-	border-left-color: #2a3f55 !important;
-}
-
-.bs-tooltip-end .tooltip-arrow::before {
-	border-right-color: #2a3f55 !important;
-}
-
-
-/**/
 
 .raportWin {
 	color: lime;
