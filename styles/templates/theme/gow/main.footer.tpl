@@ -2,6 +2,7 @@
 	{foreach $cronjobs as $cronjob}
 		<img src="cronjob.php?cronjobID={$cronjob}" alt="">
 	{/foreach}
+
 	{if isModuleAvailable($smarty.const.MODULE_SERVER_INFO)}
 		<span class="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="
 			<table class='table-tooltip bg-black'>

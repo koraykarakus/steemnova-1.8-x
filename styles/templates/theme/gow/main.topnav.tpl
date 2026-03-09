@@ -1,13 +1,9 @@
   <div class="bar">
     <div class="left">
-      <div>
-        <img class="user_icon" src="{$avatar}" width="25" height="25"></a>
-        <a href="game.php?page=settings">{$LNG.tech.615}&nbsp;{$username}</a>
-      </div>
+      <img class="user_icon" src="{$avatar}" width="25" height="25"></a>
+      <a href="game.php?page=settings">{$LNG.tech.615}&nbsp;{$username}</a>
       {if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}
-        <div style="width:15px;" class="">
-          <img id="attack_alert" src="" alt="">
-        </div>
+        <img style="min-width: 15px;" id="attack_alert" src="" alt="">
       {/if}
       {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
         <a href="?page=messages">
