@@ -1,6 +1,14 @@
-/** Edit Color here **/
+/** defaults **/
 * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
 	font-family: Verdana, Helvetica, Arial;
+	font-size: 11px;
+	color: #fff;
 }
 
 /*layout.full.tpl*/
@@ -60,7 +68,7 @@
 }
 
 #footer {
-	font: normal 10px Verdana, Arial, Helvetica, sans-serif;
+	font: normal 11px Verdana, Arial, Helvetica, sans-serif;
 	height: 19px;
 	line-height: 19px;
 	text-align: center;
@@ -713,22 +721,22 @@ input[type="radio"] {
 }
 
 /*buttons*/
-.button_dark{
-	color:#fff;
-	background-color:#0d0d0d;
-	border:1px solid #997b29;
-	padding:3px 5px;
-	font-size:11px;
-	border-radius:3px;
-	cursor:pointer;
-	transition:all .2s ease;
-	box-sizing:border-box;
+.button_dark {
+	color: #fff;
+	background-color: #0d0d0d;
+	border: 1px solid #997b29;
+	padding: 3px 5px;
+	font-size: 11px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: all .2s ease;
+	box-sizing: border-box;
 }
 
-.button_dark:hover{
-	background-color:#1a1a1a;
-	border-color:#c9a53b;
-	color:#fff;
+.button_dark:hover {
+	background-color: #1a1a1a;
+	border-color: #c9a53b;
+	color: #fff;
 }
 
 .button-blue {
@@ -1316,47 +1324,16 @@ input[type="radio"] {
 	min-width: 1200px;
 }
 
-@media only screen and (min-width: 576px) {
-
-	.topnavWrapper {
-		width: 576px;
-	}
-
-}
+@media only screen and (min-width: 576px) {}
 
 
-@media only screen and (min-width: 768px) {
-
-	.topnavWrapper {
-		width: 768px;
-	}
+@media only screen and (min-width: 768px) {}
 
 
-}
-
-
-@media only screen and (min-width: 992px) {
-
-	.topnavWrapper {
-		width: 992px;
-	}
-
-}
+@media only screen and (min-width: 992px) {}
 
 
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) {}
 
-	.topnavWrapper {
-		width: 1200px;
-	}
-
-}
-
-@media only screen and (min-width: 1400px) {
-
-	.topnavWrapper {
-		width: 1400px;
-	}
-
-}
+@media only screen and (min-width: 1400px) {}

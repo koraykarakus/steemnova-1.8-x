@@ -8,13 +8,9 @@
 		{if !empty($goto)}
 			<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 		{/if}
-		{assign var="REV" value="1.0.0.2" nocache}
+		{assign var="REV" value="1.0.0.5" nocache}
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/boilerplate.css?v={$REV}">
-		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.css?v={$REV}">
-		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/validationEngine.jquery.css?v={$REV}">
 		<link rel="stylesheet" type="text/css" href="{$dpath}formate.css?v={$REV}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 		<script type="text/javascript">
 			var ServerTimezoneOffset = {$Offset};

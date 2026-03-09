@@ -3,8 +3,7 @@
 		<img src="cronjob.php?cronjobID={$cronjob}" alt="">
 	{/foreach}
 	{if isModuleAvailable($smarty.const.MODULE_SERVER_INFO)}
-		<span class="font-size-12 px-2 border-end hover-underline text-white hover-pointer" data-bs-toggle="tooltip"
-			data-bs-placement="left" data-bs-html="true" title="
+		<span class="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="
 			<table class='table-tooltip bg-black'>
 				<thead>
 					<tr>
@@ -33,43 +32,36 @@
 			">{$LNG.si_universe_info}</span>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
-		<a class="color-red font-size-12 px-2 border-end hover-underline" href="game.php?page=banList">{$LNG.lm_banned}</a>
+		<a class="" href="game.php?page=banList">{$LNG.lm_banned}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_RECORDS)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline"
-			href="game.php?page=records">{$LNG.lm_records}</a>
+		<a class="" href="game.php?page=records">{$LNG.lm_records}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_BATTLEHALL)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline"
-			href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
+		<a class="" href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_SIMULATOR)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline"
-			href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
+		<a class="" href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
 	{/if}
 
-	<a class="font-size-12 px-2 border-end text-white hover-underline" href="index.php?page=rules"
-		target="rules">{$LNG.lm_rules}</a>
+	<a class="" href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
 
 	{if isModuleAvailable($smarty.const.MODULE_FORUM)}
 		{if !empty($hasBoard)}
-			<a class="font-size-12 px-2 border-end text-white hover-underline" href="game.php?page=board"
-				target="forum">{$LNG.lm_forums}</a>
+			<a class="" href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
 		{/if}
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_DISCORD)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline" href="{$discordUrl}" target="copy">Discord</a>
+		<a class="" href="{$discordUrl}" target="copy">Discord</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_CHAT)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline" href="game.php?page=chat">{$LNG.lm_chat}</a>
+		<a class="" href="game.php?page=chat">{$LNG.lm_chat}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_FLIGHT_SIMULATOR)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline"
-			href="game.php?page=flightSimulator">{$LNG.lm_flight_simulator}</a>
+		<a class="" href="game.php?page=flightSimulator">{$LNG.lm_flight_simulator}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_CHANGELOG)}
-		<a class="font-size-12 px-2 border-end text-white hover-underline"
-			href="game.php?page=changeLog">{$LNG.lm_changelog}</a>
+		<a class="" href="game.php?page=changeLog">{$LNG.lm_changelog}</a>
 	{/if}
 </footer>
 
