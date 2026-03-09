@@ -163,6 +163,11 @@ body {
 		0 4px 12px rgba(0, 0, 0, 0.6),
 		inset 0 1px 0 rgba(255, 255, 255, 0.15),
 		inset 0 0 8px rgba(0, 0, 0, 0.6);
+
+	white-space: nowrap;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
 }
 
 /* tooltip types*/
@@ -530,7 +535,7 @@ input[type="radio"] {
 	align-items: center;
 }
 
-.item_small .button-upgrade-small {
+.item_small .button_upgrade_small {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -541,7 +546,7 @@ input[type="radio"] {
 	border: 1px solid #111;
 }
 
-.item_small .button-upgrade-small:hover {
+.item_small .button_upgrade_small:hover {
 	background-position: 0 -18px;
 	cursor: pointer;
 }
@@ -564,17 +569,17 @@ input[type="radio"] {
 .item_small:hover > .tooltip {
 	display: flex;
 }
-.item_small:has(.button-upgrade-small:hover) > .tooltip {
+.item_small:has(.button_upgrade_small:hover) > .tooltip {
 	display: none;
 }
-.button-upgrade-small > .tooltip {
+.button_upgrade_small > .tooltip {
 	position: absolute;
 	bottom: calc(100% + 8px);
 	left: 50%;
 	transform: translateX(-50%);
 	display: none;
 }
-.button-upgrade-small:hover > .tooltip {
+.button_upgrade_small:hover > .tooltip {
 	display: flex;
 }
 
