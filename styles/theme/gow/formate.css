@@ -188,6 +188,10 @@ color: red;
 	text-decoration: underline;
 }
 
+.bar .active{
+	text-decoration: underline;
+}
+
 .user_icon {
 	filter: invert(1);
 }

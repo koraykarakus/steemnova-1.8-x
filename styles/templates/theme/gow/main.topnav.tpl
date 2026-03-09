@@ -6,7 +6,7 @@
         <img style="min-width: 15px;" id="attack_alert" src="" alt="">
       {/if}
       {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
-        <a href="?page=messages">
+        <a href="?page=messages" class="{if $page === "messages"}active{/if}">
           {$LNG.lm_messages}
           {nocache}
           {if $new_message > 0}
@@ -18,7 +18,7 @@
     </div>
     <div class="mid">
       {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}
-        <a href="game.php?page=statistics">
+        <a href="game.php?page=statistics" class="{if $page === "statistics"}active{/if}">
           {$LNG.lm_statistics}
         </a>
       {/if}
@@ -28,23 +28,23 @@
         </a>
       {/if}
       {if isModuleAvailable($smarty.const.MODULE_BUDDYLIST)}
-        <a href="game.php?page=buddyList">
+        <a href="game.php?page=buddyList" class="{if $page === "buddyList"}active{/if}">
           {$LNG.lm_buddylist}
         </a>
       {/if}
-      <a href="game.php?page=settings">
+      <a href="game.php?page=settings" class="{if $page === "settings"}active{/if}">
         {$LNG.lm_options}
       </a>
       {if isModuleAvailable($smarty.const.MODULE_SEARCH)}
-        <a href="game.php?page=search">
+        <a href="game.php?page=search" class="{if $page === "search"}active{/if}">
         </a>
       {/if}
       {if isModuleAvailable($smarty.const.MODULE_SUPPORT)}
-        <a href="game.php?page=ticket">
+        <a href="game.php?page=ticket" class="{if $page === "ticket"}active{/if}">
           {$LNG.lm_support}
         </a>
       {/if}
-      <a href="game.php?page=questions">
+      <a href="game.php?page=questions" class="{if $page === "questions"}active{/if}">
         {$LNG.lm_faq}
       </a>
       <a href="game.php?page=logout">
