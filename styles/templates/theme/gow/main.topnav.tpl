@@ -65,7 +65,7 @@
   <div class="resources">
     {foreach $resourceTable as $resourceID => $resourceData}
       <div class="resource">
-        <div class="tooltip">
+        <div class="tooltip tooltip_bottom">
           <table class=''>
             {if in_array($resourceID,array(901,902,903))}
               <tr>

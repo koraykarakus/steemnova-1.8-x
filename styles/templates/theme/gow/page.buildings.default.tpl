@@ -160,7 +160,7 @@
       <div class="list">
         {foreach $BuildInfoList as $ID => $Element}
           <div class="item_small" onclick="showItem({$ID})" id="item_small_{$ID}">
-            <div class="tooltip">
+            <div class="tooltip tooltip_top">
               {$LNG.tech.{$ID}}
               {if !$Element.technologySatisfied && !empty($Element.requeriments)}
                 <table class='table-tooltip'>

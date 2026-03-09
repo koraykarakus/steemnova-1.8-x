@@ -147,10 +147,9 @@ body {
 	position: relative;
 }
 
-.resources>.resource>.tooltip {
+.tooltip{
 	display: none;
 	position: absolute;
-	top:100%;
 	z-index: 9999;
 	background: linear-gradient(180deg,
 			#3a566f 0%,
@@ -165,8 +164,25 @@ body {
 		inset 0 1px 0 rgba(255, 255, 255, 0.15),
 		inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
-/* Arrow */
-.tooltip::after {
+
+/* tooltip types*/
+.tooltip_top{
+	bottom: calc(100% + 8px);
+}
+.tooltip_top::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 6px;
+	border-style: solid;
+	border-color:#374a5e transparent transparent  transparent; 
+}
+.tooltip_bottom {
+	top:calc(100% + 8px);
+}
+.tooltip_bottom::after {
 	content: "";
 	position: absolute;
 	bottom: 100%;
@@ -529,12 +545,6 @@ input[type="radio"] {
 	top: 0;
 }
 
-.item_small .tooltip{
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	display: none;
-}
 .item_small:hover>.tooltip{
 	display: flex;
 }
