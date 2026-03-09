@@ -1,7 +1,7 @@
   <div class="bar">
     <div class="left">
       <div>
-        <img src="{$avatar}" width="25" height="25"></a>
+        <img class="user_icon" src="{$avatar}" width="25" height="25"></a>
         <a href="game.php?page=settings">{$LNG.tech.615}&nbsp;{$username}</a>
       </div>
       {if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}

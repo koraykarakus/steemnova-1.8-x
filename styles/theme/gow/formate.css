@@ -144,18 +144,21 @@
 .bar * {
 	font-size: 11px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #fff;
 }
 
 .bar a {
 	text-decoration: none;
 	transition: 0.2s ease;
 	padding: 0 3px;
+	color: #fff;
 }
 
 .bar a:hover {
 	cursor: pointer;
 	text-decoration: underline;
+}
+.user_icon{
+    filter: invert(1);
 }
 
 .bar>.left {
