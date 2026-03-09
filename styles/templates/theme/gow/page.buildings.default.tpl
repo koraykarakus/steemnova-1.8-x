@@ -200,8 +200,10 @@
               <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
                 <input type="hidden" name="cmd" value="insert">
                 <input type="hidden" name="building" value="{$ID}">
-                <button type="submit" class="button-upgrade-small" data-bs-toggle="tooltip" data-bs-placement="top"
-                  data-bs-html="true" title="{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}">
+                <button type="submit" class="button-upgrade-small">
+                  <div class="tooltip tooltip_top">
+                    {$LNG.bd_build_next_level}{$Element.levelToBuild + 1}
+                  </div>
                 </button>
               </form>
             {/if}
