@@ -68,15 +68,31 @@ body {
 }
 
 #footer {
-	font: normal 11px Verdana, Arial, Helvetica, sans-serif;
-	height: 19px;
-	line-height: 19px;
-	text-align: center;
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: fixed;
 	bottom: 0;
 	z-index: 999999;
 	width: 100%;
 	clear: both;
+	background: linear-gradient(to bottom, #0b0f1a, #000000, #0b0f1a);
+}
+#footer a, #footer span{
+	color: #ddd;
+	height: 15px;
+	text-decoration: none;
+	padding: 0 5px;
+	border-right: 1px solid #ddd;
+}
+#footer a:hover{
+	text-decoration: underline;
+}
+#footer>.active{
+text-decoration: underline;
+color: red;
 }
 
 /*--*/

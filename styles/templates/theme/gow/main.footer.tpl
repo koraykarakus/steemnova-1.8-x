@@ -33,36 +33,37 @@
 			">{$LNG.si_universe_info}</span>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
-		<a class="" href="game.php?page=banList">{$LNG.lm_banned}</a>
+		<a href="game.php?page=banList" class="{if $page ==="banList"}active{/if}">{$LNG.lm_banned}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_RECORDS)}
-		<a class="" href="game.php?page=records">{$LNG.lm_records}</a>
+		<a href="game.php?page=records" class="{if $page ==="records"}active{/if}">{$LNG.lm_records}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_BATTLEHALL)}
-		<a class="" href="game.php?page=battleHall">{$LNG.lm_topkb}</a>
+		<a href="game.php?page=battleHall" class="{if $page ==="battleHall"}active{/if}">{$LNG.lm_topkb}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_SIMULATOR)}
-		<a class="" href="game.php?page=battleSimulator">{$LNG.lm_battlesim}</a>
+		<a href="game.php?page=battleSimulator" class="{if $page ==="battleSimulator"}active{/if}">{$LNG.lm_battlesim}</a>
 	{/if}
 
-	<a class="" href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
+	<a href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
 
 	{if isModuleAvailable($smarty.const.MODULE_FORUM)}
 		{if !empty($hasBoard)}
-			<a class="" href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
+			<a href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
 		{/if}
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_DISCORD)}
-		<a class="" href="{$discordUrl}" target="copy">Discord</a>
+		<a href="{$discordUrl}" target="copy">Discord</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_CHAT)}
-		<a class="" href="game.php?page=chat">{$LNG.lm_chat}</a>
+		<a href="game.php?page=chat" class="{if $page ==="chat"}active{/if}">{$LNG.lm_chat}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_FLIGHT_SIMULATOR)}
-		<a class="" href="game.php?page=flightSimulator">{$LNG.lm_flight_simulator}</a>
+		<a href="game.php?page=flightSimulator"
+			class="{if $page ==="flightSimulator"}active{/if}">{$LNG.lm_flight_simulator}</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_CHANGELOG)}
-		<a class="" href="game.php?page=changeLog">{$LNG.lm_changelog}</a>
+		<a href="game.php?page=changeLog" class="{if $page ==="changeLog"}active{/if}">{$LNG.lm_changelog}</a>
 	{/if}
 </footer>
 
