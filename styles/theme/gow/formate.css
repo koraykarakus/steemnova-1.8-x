@@ -265,15 +265,6 @@
 #menu .menu-button a.menuActive {
 	color: #ebc713;
 }
-/*--*/
-.contentLeft {
-	min-width: 250px;
-}
-
-.contentRight {
-	min-width: 350px;
-}
-
 
 /*special scrollbar*/
 
@@ -1296,34 +1287,14 @@ input[type="radio"] {
 
 @media only screen and (min-width: 576px) {
 
-	.contentLeft {
-		width: 144px;
-	}
-
-	.contentRight {
-		width: 144px;
-	}
-
 	.topnavWrapper {
 		width: 576px;
-	}
-
-	.contentLeft,
-	.contentRight {
-		margin-top: 50px;
 	}
 
 }
 
 
 @media only screen and (min-width: 768px) {
-	.contentLeft {
-		width: 192px;
-	}
-
-	.contentRight {
-		width: 192px;
-	}
 
 	.topnavWrapper {
 		width: 768px;
@@ -1334,13 +1305,6 @@ input[type="radio"] {
 
 
 @media only screen and (min-width: 992px) {
-	.contentLeft {
-		width: 248px;
-	}
-
-	.contentRight {
-		width: 248px;
-	}
 
 	.topnavWrapper {
 		width: 992px;
@@ -1351,13 +1315,6 @@ input[type="radio"] {
 
 
 @media only screen and (min-width: 1200px) {
-	.contentLeft {
-		width: 300px;
-	}
-
-	.contentRight {
-		width: 300px;
-	}
 
 	.topnavWrapper {
 		width: 1200px;
@@ -1366,13 +1323,7 @@ input[type="radio"] {
 }
 
 @media only screen and (min-width: 1400px) {
-	.contentLeft {
-		width: 350px;
-	}
-
-	.contentRight {
-		width: 350px;
-	}
+	
 	.topnavWrapper {
 		width: 1400px;
 	}
