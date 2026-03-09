@@ -543,6 +543,7 @@ input[type="radio"] {
 	position: absolute;
 	right: 0;
 	top: 0;
+	background-color: #546791;
 }
 
 .item_small:hover>.tooltip{

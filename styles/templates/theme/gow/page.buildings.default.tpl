@@ -161,15 +161,19 @@
         {foreach $BuildInfoList as $ID => $Element}
           <div class="item_small" onclick="showItem({$ID})" id="item_small_{$ID}">
             <div class="tooltip tooltip_top">
-              {$LNG.tech.{$ID}}
-              {if !$Element.technologySatisfied && !empty($Element.requeriments)}
-                <table class='table-tooltip'>
-                  <thead>
+              <table>
+                <thead>
+                  <tr>
+                    <th colspan="2">
+                      {$LNG.tech.{$ID}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {if !$Element.technologySatisfied && !empty($Element.requeriments)}
                     <tr>
                       <th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th>
                     </tr>
-                  </thead>
-                  <tbody>
                     {foreach $Element.requeriments as $currentRequire}
                       <tr>
                         <td class='color-red'>
@@ -181,9 +185,9 @@
                             class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
                       </tr>
                     {/foreach}
-                  </tbody>
-                </table>
-              {/if}
+                  {/if}
+                </tbody>
+              </table>
             </div>
             <div class="level_info">
               {$Element.level}
