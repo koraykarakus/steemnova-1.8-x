@@ -38,34 +38,39 @@
 	height: 153px;
 	position: relative;
 }
-#content_left{
+
+#content_left {
 	width: 160px;
-    float: left;
-    position: relative;
+	float: left;
+	position: relative;
 	display: flex;
 	height: 604px;
-    top: -32px
+	top: -32px
 }
-#content_mid{
+
+#content_mid {
 	width: 670px;
-    margin-left: 10px;
-    float: left;
+	margin-left: 10px;
+	float: left;
 }
-#content_right{
+
+#content_right {
 	width: 150px;
-    float: right;
+	float: right;
 }
-#footer{
+
+#footer {
 	font: normal 10px Verdana, Arial, Helvetica, sans-serif;
-    height: 19px;
-    line-height: 19px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    z-index: 999999;
-    width: 100%;
-    clear: both;
+	height: 19px;
+	line-height: 19px;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	z-index: 999999;
+	width: 100%;
+	clear: both;
 }
+
 /*--*/
 
 /*main.topnav.tpl*/
@@ -112,7 +117,8 @@
 	justify-content: center;
 	height: 70px;
 }
-.resources>.resource>.resource_name{
+
+.resources>.resource>.resource_name {
 	font-size: 10px;
 }
 
@@ -157,8 +163,9 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
-.user_icon{
-    filter: invert(1);
+
+.user_icon {
+	filter: invert(1);
 }
 
 .bar>.left {
@@ -184,19 +191,22 @@
 	justify-content: left;
 	align-items: center;
 }
+
 /*--*/
 
 /* main.navigation.tpl */
-#menu{
-	margin:0;
+#menu {
+	margin: 0;
 	padding: 0;
 	position: absolute;
 	left: 0;
 }
+
 #menu li {
 	margin: 1px 0;
 	height: 28px;
 }
+
 .menu-button {
 	width: 136px;
 	position: relative;
@@ -702,6 +712,25 @@ input[type="radio"] {
 	font-size: 14px !important;
 }
 
+/*buttons*/
+.button_dark{
+	color:#fff;
+	background-color:#0d0d0d;
+	border:1px solid #997b29;
+	padding:3px 5px;
+	font-size:11px;
+	border-radius:3px;
+	cursor:pointer;
+	transition:all .2s ease;
+	box-sizing:border-box;
+}
+
+.button_dark:hover{
+	background-color:#1a1a1a;
+	border-color:#c9a53b;
+	color:#fff;
+}
+
 .button-blue {
 	background: #316797;
 	color: #ddd;
@@ -714,6 +743,8 @@ input[type="radio"] {
 .button-blue:hover {
 	background-color: #407eb6;
 }
+
+/*buttons*/
 
 .message_0 {
 	color: #FFFF00;
@@ -1137,9 +1168,6 @@ input[type="radio"] {
 	border: 0 none
 }
 
-/*button test */
-
-
 /*tooltip*/
 
 .tooltip-inner {
@@ -1326,7 +1354,7 @@ input[type="radio"] {
 }
 
 @media only screen and (min-width: 1400px) {
-	
+
 	.topnavWrapper {
 		width: 1400px;
 	}

@@ -74,8 +74,7 @@
 			{if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
 				<form action="game.php?page=collectMines" method="post">
 					<input type="hidden" name="from" value="{$page}">
-					<button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow mx-2"
-						type="submit">{$LNG.cm_collect_mines_submit}</button>
+					<button class="button_dark" type="submit">{$LNG.cm_collect_mines_submit}</button>
 				</form>
 			{/if}
 </div>
