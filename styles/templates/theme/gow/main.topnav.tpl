@@ -52,7 +52,7 @@
       </a>
     </div>
     <div class="right">
-      <div>
+      <div class="servertime">
         {$servertime}
       </div>
     </div>
