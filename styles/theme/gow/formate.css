@@ -485,9 +485,61 @@ input[type="radio"] {
 
 .items_wrapper>.top>.item_big {
 	display: flex;
+	flex-direction: column;
 	position: absolute;
 	top: 0;
 	left: 0;
+	background-color: #0b0f1a;
+}
+.items_wrapper>.top>.item_big>.title{
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 120px;
+	height: 26px;
+	width: 534px;
+	justify-content: start;
+	align-items: center;
+	padding: 0 12px;
+	background: linear-gradient(180deg,#2a2f38,#151a22);
+    border-bottom:1px solid #3a404a;
+    transition: all 0.25s ease;
+}
+.items_wrapper>.top>.item_big>.title:hover{
+    background: linear-gradient(180deg,#343a44,#1b212b);
+    color:#ffe27a;
+}
+.items_wrapper>.top>.item_big>.requirements{
+	position: absolute;
+	top: 26px;
+	left: 120px;
+	width: 534px;
+	background-color: #0d263d;
+	display: flex;
+	justify-content: space-between;
+	min-height: 94px;
+	padding: 3px 5px;
+}
+.items_wrapper .button-upgrade, .items_wrapper .button-downgrade{
+	margin: 3px 0;
+}
+.items_wrapper>.top>.item_big>.requirements>.resource_wrapper>.resource{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	height: 28px;
+}
+.items_wrapper>.top>.item_big>.requirements>.resource_wrapper>.resource> span{
+	padding: 0 3px;
+}
+.items_wrapper>.top>.item_big>.bottom{
+	background-color: #111f36;
+	position: absolute;
+	top: 120px;
+	left: 0;
+	width: 654px;
+	height: 180px;
+	padding: 3px 8px;
 }
 
 .items_wrapper>.top>.hidden {

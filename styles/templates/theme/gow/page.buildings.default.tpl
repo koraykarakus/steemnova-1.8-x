@@ -23,7 +23,7 @@
         <div class="item_big hidden" id="item_big_{$ID}">
           <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
             alt="{$LNG.tech.{$ID}}" width="120" height="120">
-          <div>
+          <div class="title">
             <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if}">
               {if $Element.costOverflowTotal > 0}
                 <div class="tooltip">
@@ -58,10 +58,10 @@
               </span>
             {/if}
           </div>
-          <div class="">
-            <div class="">
+          <div class="requirements">
+            <div class="resource_wrapper">
               {foreach $Element.costResources as $RessID => $RessAmount}
-                <div class="">
+                <div class="resource">
                   <img data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="{$LNG.tech.$RessID}"
                     src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
                   <span
@@ -143,7 +143,7 @@
               {/if}
             </div>
           </div>
-          <div>
+          <div class="bottom">
             <span>{$LNG.fgf_time}&nbsp;:&nbsp;
               {pretty_time($Element.elementTime)}
             </span>
