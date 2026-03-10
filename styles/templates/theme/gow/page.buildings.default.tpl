@@ -21,13 +21,15 @@
     <div class="top" style="background:url('{$dpath}images/buildings.webp');" class="bg-black border-orange">
       {foreach $BuildInfoList as $ID => $Element}
         <div class="item_big hidden" id="item_big_{$ID}">
-          <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
-            alt="{$LNG.tech.{$ID}}" width="120" height="120">
+          <div class="img_wrapper">
+            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
+              alt="{$LNG.tech.{$ID}}" width="120" height="120">
+          </div>
           <div class="title">
             <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if}">
               {if $Element.costOverflowTotal > 0}
                 <div class="tooltip">
-                  <table class='table-tooltip fs-11'>
+                  <table class='table-tooltip'>
                     <thead>
                       <tr>
                         <th colspan='2' class='text-center'>{$LNG.bd_remaining}</th>
@@ -46,20 +48,17 @@
               {/if}
               {$LNG.tech.{$ID}}
             </span>
-            <span class="text-white" id="val_{$ID} p-0">
-              &nbsp;({$LNG.bd_lvl}&nbsp;{$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if})
+            <span id="val_{$ID} p-0">
+              {$LNG.bd_lvl}&nbsp;{$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if}
             </span>
-            {if !empty($Element.infoEnergyLong)}
-              <span class="hover-pointer {if {$Element.infoEnergyShort} > 0}color-green{else}color-red{/if}">
-                <div class="tooltip">
-                  <span class="fs-12">{$LNG.bd_next_level}&nbsp;{$Element.infoEnergyLong}</span>
-                </div>
-                <i class="bi bi-activity"></i>&nbsp;{$Element.infoEnergyShort}
-              </span>
-            {/if}
           </div>
           <div class="requirements">
             <div class="resource_wrapper">
+              {if !empty($Element.infoEnergyLong)}
+                <span class="hover-pointer {if {$Element.infoEnergyShort} > 0}color-green{else}color-red{/if}">
+                  {$LNG.bd_next_level}&nbsp;{$Element.infoEnergyLong}
+                </span>
+              {/if}
               {foreach $Element.costResources as $RessID => $RessAmount}
                 <div class="resource">
                   <img data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="{$LNG.tech.$RessID}"

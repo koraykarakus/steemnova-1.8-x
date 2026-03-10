@@ -491,14 +491,24 @@ input[type="radio"] {
 	left: 0;
 	background-color: #0b0f1a;
 }
+.items_wrapper>.top>.item_big>.img_wrapper{
+	background-color: #000000;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	height: 136px;
+}
 .items_wrapper>.top>.item_big>.title{
 	display: flex;
+	justify-content: space-between;
 	position: absolute;
 	top: 0;
 	left: 120px;
 	height: 26px;
 	width: 534px;
-	justify-content: start;
 	align-items: center;
 	padding: 0 12px;
 	background: linear-gradient(180deg,#2a2f38,#151a22);
@@ -517,7 +527,7 @@ input[type="radio"] {
 	background-color: #0d263d;
 	display: flex;
 	justify-content: space-between;
-	min-height: 94px;
+	min-height: 110px;
 	padding: 3px 5px;
 }
 .items_wrapper .button-upgrade, .items_wrapper .button-downgrade{
@@ -535,10 +545,10 @@ input[type="radio"] {
 .items_wrapper>.top>.item_big>.bottom{
 	background-color: #111f36;
 	position: absolute;
-	top: 120px;
+	top: 136px;
 	left: 0;
 	width: 654px;
-	height: 180px;
+	height: 164px;
 	padding: 3px 8px;
 }
 
