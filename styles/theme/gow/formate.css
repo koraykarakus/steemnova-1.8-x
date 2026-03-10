@@ -465,7 +465,7 @@ body.popup::-webkit-scrollbar-thumb:hover {
 }
 
 body {
-	background: url("img/space.avif") no-repeat fixed center center #0d0d0d;
+	background: url("img/space.jpg") no-repeat fixed center center #0d0d0d;
 	background-size: cover;
 	overflow-y: scroll;
 	margin: 0 !important;
