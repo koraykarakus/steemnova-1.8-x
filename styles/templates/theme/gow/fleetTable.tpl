@@ -1,20 +1,18 @@
 <div class="fleet_wrapper">
   <div>
     {if empty($fleets)}
-      <span class="text-center color-blue fs-11 fw-bold w-100">{$LNG.fm_no_fleet_movements}</span>
+      <span class="color-blue">{$LNG.fm_no_fleet_movements}</span>
     {else}
-      <span class="fs-14 color-gray text-center">{$LNG.fm_fleets}</span>
+      <span class="color-gray">{$LNG.fm_fleets}</span>
     {/if}
     {if !empty($fleets)}
-      <button style="height:18px;width:18px;" onclick="showHideFleets();"
-        class="btn btn-sm d-flex align-items-center justify-content-center p-0 m-0 position-absolute hover-pointer end-0 top-0"
-        type="button" name="button">
+      <button onclick="showHideFleets();" class="hover-pointer" type="button" name="button">
         <i style="color:#ddd;" class="bi bi-caret-down-square-fill"></i>
       </button>
     {/if}
   </div>
   {foreach $fleets as $index => $fleet}
-    <div class="fs-11 fleetRow {if $show_fleets_active}d-none{/if}">
+    <div class="fleetRow {if $show_fleets_active}d-none{/if}">
       <span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}"
         data-fleet-time="{$fleet.resttime}">
         {pretty_fly_time({$fleet.resttime})}
