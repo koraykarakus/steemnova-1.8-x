@@ -6,7 +6,7 @@
 
       if ($('#item_big_' + id).hasClass('hidden')) {
         $('.item_big').addClass('hidden');
-        $('.buildItemSmall').removeClass('border-color-active').removeClass('border-color-passive');
+        $('.item_small').removeClass('border-color-active').removeClass('border-color-passive');
         $('#item_big_' + id).removeClass('hidden');
         $('#item_small_' + id).addClass('border-color-active');
       } else {
@@ -213,18 +213,17 @@
   </div>
 
   {if !empty($Queue)}
-    <div id="buildlist"
-      class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black border-orange">
+    <div id="buildlist" class="queue_wrapper">
       {foreach $Queue as $List}
         {$ID = $List.element}
-        <div class="d-flex align-items-center {if $List@first}w-100{/if}">
-          <div class="queueItemFirst position-relative d-flex flex-column" data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-html="true"
-            title="{$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>">
+        <div class="{if $List@first}w-100{/if}">
+          <div class="queueItemFirst">
+            <div class="tooltip tooltip_top">
+              {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span class="timer" data-time='{$List.endtime}'>{$List.display}</span>
+            </div>
             <img class="m-0 hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">
-            <span
-              class="position-absolute d-flex align-items-center justify-content-center top-0 start-0 levelInfo fs-11 bg-dark text-yellow py-1">{$List.level}</span>
+            <span class="levelInfo bg-dark">{$List.level}</span>
 
             <form class="d-flex mx-auto align-items-center justify-content-center" action="game.php?page=buildings"
               method="post">
@@ -234,19 +233,17 @@
               {else}
                 <input type="hidden" name="cmd" value="cancel">
               {/if}
-              <button class="btn btn-dark d-flex position-absolute bottom-0 rounded end-0 p-0 bi bi-x-square color-red"
-                type="submit" name="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true"
-                title="{$LNG.bd_cancel}">
+              <button class="btn btn-dark color-red" type="submit" name="button" data-bs-toggle="tooltip"
+                data-bs-placement="right" data-bs-html="true" title="{$LNG.bd_cancel}">
               </button>
             </form>
           </div>
           {if $List@first}
-            <div class="d-flex flex-column align-items-start justify-content-start w-100 mx-2">
-              <div style="border-radius:10px;height:12px;" id="progressbar" class="d-flex align-items-center my-2"
-                data-time="{$List.resttime}"></div>
-              <span class="fs-12 text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
-              <span class="text-center my-2 text-yellow fs-12" id="time" data-time="{$List.time}"></span>
-              <span class="fs-12 text-yellow">{$List.display}</span>
+            <div class="">
+              <div style="border-radius:10px;height:12px;" id="progressbar" class="" data-time="{$List.resttime}"></div>
+              <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
+              <span class="text-yellow" id="time" data-time="{$List.time}"></span>
+              <span class="text-yellow">{$List.display}</span>
             </div>
           {/if}
         </div>
