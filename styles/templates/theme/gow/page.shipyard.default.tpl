@@ -28,7 +28,7 @@
 
 <div class="ItemsWrapper">
 
-<div {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative border-orange">
+<div {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} class="">
 {foreach $elementList as $ID => $Element}
 <div id="item_big_{$ID}" class="">
   <div class="">
@@ -38,7 +38,7 @@
     <div class="">
       <div class="">
         <div class="">
-          <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="
+          <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} title="
             <table class='table fs-12'>
               <thead>
                 <tr><th colspan='2' class='text-center'>{$LNG.bd_remaining}</th></tr>
@@ -66,10 +66,7 @@
           <span class="">
             {foreach $Element.costResources as $RessID => $RessAmount}
             <div class="">
-              <img data-bs-toggle="tooltip"
-              data-bs-placement="left"
-              data-bs-html="true"
-              title="{$LNG.tech.$RessID}" src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+              <img title="{$LNG.tech.$RessID}" src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
               <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
             </div>
             {/foreach}
@@ -110,9 +107,6 @@
   <div class="">
     {foreach $elementList as $ID => $Element}
       <div class="" onclick="showItem({$ID})" id="item_small_{$ID}"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      data-bs-html="true"
       title="{$LNG.tech.{$ID}}
       {if !$Element.technologySatisfied && !empty($Element.requeriments)}
       <table class='table-tooltip'>
