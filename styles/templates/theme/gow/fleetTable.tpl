@@ -1,25 +1,14 @@
 <div class="fleet_wrapper">
-  <div>
-    {if empty($fleets)}
-      <span class="color-blue">{$LNG.fm_no_fleet_movements}</span>
-    {else}
-      <span class="color-gray">{$LNG.fm_fleets}</span>
-    {/if}
-    {if !empty($fleets)}
-      <button onclick="showHideFleets();" class="hover-pointer" type="button" name="button">
-        <i style="color:#ddd;" class="bi bi-caret-down-square-fill"></i>
-      </button>
-    {/if}
-  </div>
-  {foreach $fleets as $index => $fleet}
-    <div class="fleetRow {if $show_fleets_active}d-none{/if}">
-      <span id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}"
-        data-fleet-time="{$fleet.resttime}">
-        {pretty_fly_time({$fleet.resttime})}
-      </span>
-      <span id="fleettime_{$index}">{$fleet.text}</span>
-    </div>
-  {/foreach}
+  {if empty($fleets)}
+    <span class="fleet_text color-blue">{$LNG.fm_no_fleet_movements}</span>
+  {else}
+    <span class="fleet_text color-gray">{$LNG.fm_fleets}</span>
+  {/if}
+  {if !empty($fleets)}
+    <button onclick="showHideFleets();" class="fleet_btn hover-pointer" type="button" name="button">
+      BTN
+    </button>
+  {/if}
 </div>
 
 
@@ -31,11 +20,7 @@
       url: 'game.php?page=fleetTableSettings&mode=changeVisibility&ajax=1',
       success: function(data) {
 
-        if ($('.fleetRow').hasClass('d-none')) {
-          $('.fleetRow').removeClass('d-none')
-        } else {
-          $('.fleetRow').addClass('d-none')
-        }
+        $('.fleet_events').stop(true, true).slideToggle(200);
 
       }
 
