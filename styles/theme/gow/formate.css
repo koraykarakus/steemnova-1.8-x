@@ -708,10 +708,22 @@ input[type="radio"] {
 .queue_wrapper {
 	width: 654px;
 	background-color: #1f1f20;
-
+	display: flex;
+	flex-wrap: wrap;
+	padding: 5px 10px;
 }
 
-.queueItemFirst {
+.queue_wrapper>.queue_item_first.queue_item {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.queue_wrapper>.queue_item {
+	width: 90px;
+}
+
+.queue_item>.queue_left {
 	width: 86px;
 	height: 86px;
 	border: 3px solid #276094;
@@ -719,9 +731,38 @@ input[type="radio"] {
 	background: #000;
 	margin: 5px;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.queueItemFirst:hover>.tooltip {
+.queue_item>.queue_right {
+	width: calc(100% - 86px);
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	padding: 5px 15px;
+}
+
+.queue_left:hover>.tooltip {
+	display: flex;
+}
+
+.queue_left .btn_cancel {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.queue_left:has(.btn_cancel:hover)>.tooltip {
+	display: none;
+}
+.btn_cancel:hover{
+	cursor: pointer;
+}
+.btn_cancel:hover>.tooltip {
 	display: flex;
 }
 

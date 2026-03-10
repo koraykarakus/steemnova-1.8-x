@@ -216,30 +216,30 @@
     <div id="buildlist" class="queue_wrapper">
       {foreach $Queue as $List}
         {$ID = $List.element}
-        <div class="{if $List@first}w-100{/if}">
-          <div class="queueItemFirst">
+        <div class="queue_item{if $List@first} queue_item_first{/if}">
+          <div class="queue_left">
             <div class="tooltip tooltip_top">
               {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span class="timer" data-time='{$List.endtime}'>{$List.display}</span>
             </div>
-            <img class="m-0 hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
+            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">
-            <span class="levelInfo bg-dark">{$List.level}</span>
+            <span class="">{$List.level}</span>
 
-            <form class="d-flex mx-auto align-items-center justify-content-center" action="game.php?page=buildings"
-              method="post">
+            <form action="game.php?page=buildings" method="post">
               {if !$List@first}
                 <input type="hidden" name="listid" value="{$List@iteration}">
                 <input type="hidden" name="cmd" value="remove">
               {else}
                 <input type="hidden" name="cmd" value="cancel">
               {/if}
-              <button class="btn btn-dark color-red" type="submit" name="button" data-bs-toggle="tooltip"
-                data-bs-placement="right" data-bs-html="true" title="{$LNG.bd_cancel}">
+              <button class="btn_cancel" type="submit" name="button">
+                BTN
+                <div class="tooltip tooltip_top">{$LNG.bd_cancel}</div>
               </button>
             </form>
           </div>
           {if $List@first}
-            <div class="">
+            <div class="queue_right">
               <div style="border-radius:10px;height:12px;" id="progressbar" class="" data-time="{$List.resttime}"></div>
               <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
               <span class="text-yellow" id="time" data-time="{$List.time}"></span>
