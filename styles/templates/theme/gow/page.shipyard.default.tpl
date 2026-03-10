@@ -38,7 +38,8 @@
     <div class="">
       <div class="">
         <div class="">
-          <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} title="
+          <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} {/if}>
+            <div class="tooltip tooltip_top">
             <table class='table fs-12'>
               <thead>
                 <tr><th colspan='2' class='text-center'>{$LNG.bd_remaining}</th></tr>
@@ -51,9 +52,8 @@
                 </tr>
                 {/foreach}
               </tbody>
-            </table>"
-            {/if}
-            >
+            </table>
+            </div>
             {$LNG.tech.{$ID}}
           </span>
           <span class="" id="val_{$ID} p-0">
@@ -66,7 +66,8 @@
           <span class="">
             {foreach $Element.costResources as $RessID => $RessAmount}
             <div class="">
-              <img title="{$LNG.tech.$RessID}" src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+              <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+                <div class="tooltip tooltip_top">{$LNG.tech.$RessID}</div>
               <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
             </div>
             {/foreach}
@@ -106,8 +107,9 @@
   </div>
   <div class="">
     {foreach $elementList as $ID => $Element}
-      <div class="" onclick="showItem({$ID})" id="item_small_{$ID}"
-      title="{$LNG.tech.{$ID}}
+      <div class="" onclick="showItem({$ID})" id="item_small_{$ID}">
+      <div class="tooltip tooltip_top">
+      {$LNG.tech.{$ID}}
       {if !$Element.technologySatisfied && !empty($Element.requeriments)}
       <table class='table-tooltip'>
         <thead>
@@ -124,7 +126,8 @@
           {/foreach}
         </tbody>
       </table>
-      {/if}" >
+      {/if}
+      </div>
       <div class="">{shortly_number($Element.available)}</div>
       {if  !$Element.buyable || !$Element.technologySatisfied }
          <div class="black-screen"></div>
