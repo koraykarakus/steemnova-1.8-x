@@ -25,122 +25,120 @@
   </script>
 
 
-  <div>
-    <table class="table-gow">
-      <tbody>
+  <table class="table-gow table_overview">
+    <tbody>
+      <tr>
+        <td>{$LNG["type_planet_{$planet_type}"]}</td>
+        <td>
+          <a href="#" onclick="return Dialog.PlanetAction();"
+            title="{$LNG.ov_planetmenu}">{$planetname}&nbsp;({$username})</a>
+        </td>
+      </tr>
+      <tr>
+        <td>{$LNG.ov_admins_online}</td>
+        <td>
+          {foreach $AdminsOnline as $ID => $Name}
+            {if !$Name@first}&nbsp;&bull;&nbsp;{/if}
+            <a href="#" onclick="return Dialog.PM({$ID})"><a style="color:lime">{$Name}</a>
+            {foreachelse}
+            {/foreach}
+        </td>
+      </tr>
+      <tr>
+        <td>{$LNG.ov_players}</td>
+        <td><a style="color:lime">{$usersOnline}</a></td>
+      </tr>
+      <tr>
+        <td>{$LNG.ov_moving_fleets}</td>
+        <td><a style="color:lime">{$fleetsOnline}</a></td>
+      </tr>
+      <tr>
+        <td>{$LNG.ov_points}</td>
+        <td>{$rankInfo}</td>
+      </tr>
+      {if !empty($news)}
         <tr>
-          <td>{$LNG["type_planet_{$planet_type}"]}</td>
           <td>
-            <a href="#" onclick="return Dialog.PlanetAction();"
-              title="{$LNG.ov_planetmenu}">{$planetname}&nbsp;({$username})</a>
+            <button onclick="showNews();">{$LNG.ov_news}</button>
           </td>
         </tr>
-        <tr>
-          <td>{$LNG.ov_admins_online}</td>
-          <td>
-            {foreach $AdminsOnline as $ID => $Name}
-              {if !$Name@first}&nbsp;&bull;&nbsp;{/if}
-              <a href="#" onclick="return Dialog.PM({$ID})"><a style="color:lime">{$Name}</a>
-              {foreachelse}
-              {/foreach}
-          </td>
-        </tr>
-        <tr>
-          <td>{$LNG.ov_players}</td>
-          <td><a style="color:lime">{$usersOnline}</a></td>
-        </tr>
-        <tr>
-          <td>{$LNG.ov_moving_fleets}</td>
-          <td><a style="color:lime">{$fleetsOnline}</a></td>
-        </tr>
-        <tr>
-          <td>{$LNG.ov_points}</td>
-          <td>{$rankInfo}</td>
-        </tr>
-        {if !empty($news)}
-          <tr>
-            <td>
-              <button onclick="showNews();">{$LNG.ov_news}</button>
-            </td>
-          </tr>
-          <tr id="newsRow" class="{if $show_news_active}d-none{/if}">
-            <td colspan="2">
-              <table class="table-gow">
-                <thead>
-                  <tr>
-                    <th class="color-blue" colspan="3">{$LNG.ov_news}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {foreach $news as $currentNews}
-                    <tr>
-                      <td class="color-blue">{$currentNews.user}</td>
-                      <td class="color-blue">{$currentNews.date}</td>
-                      <td class="color-blue">{$currentNews.text}</td>
-                    </tr>
-                  {/foreach}
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        {/if}
-        <tr>
-          <td>
-            <div>
-              <div>
-                <span>{$planetname}</span>
-                <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
-                  <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
-                </a>
-              </div>
-              {if $Moon}
-                <div>
-                  <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
-                    <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50"
-                      alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
-                  </a>
-                  <span>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</span>
-                </div>
-              {/if}
-            </div>
-          </td>
-          <td>
+        <tr id="newsRow" class="{if $show_news_active}d-none{/if}">
+          <td colspan="2">
             <table class="table-gow">
-              <thead></thead>
+              <thead>
+                <tr>
+                  <th class="color-blue" colspan="3">{$LNG.ov_news}</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr>
-                  <td><span style="color:skyblue">{$LNG.ov_diameter}:</span> </td>
-                  <td class="text-center">{$LNG.ov_distance_unit} (<a
-                      title="{$LNG.ov_developed_fields}">{$planet_field_current}</a> / <a
-                      title="{$LNG.ov_max_developed_fields}">{$planet_field_max}</a> {$LNG.ov_fields})</td>
-                </tr>
-                <tr>
-                  <td><span style="color:skyblue">{$LNG.ov_temperature}:</span></td>
-                  <td class="text-center">{$LNG.ov_aprox} {$planet_temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to}
-                    {$planet_temp_max}{$LNG.ov_temp_unit}</td>
-                </tr>
-                <tr>
-                  <td><span style="color:skyblue">{$LNG.ov_position}:</span></td>
-                  <td class="text-center">
-                    <a class="hover-underline"
-                      href="game.php?page=galaxy&amp;galaxy={$galaxy}&amp;system={$system}">[{$galaxy}:{$system}:{$planet}]</a>
-                  </td>
-                </tr>
-                {if  isModuleAvailable($smarty.const.MODULE_RELOCATE)}
+                {foreach $news as $currentNews}
                   <tr>
-                    <td colspan="2" class="text-center">
-                      <a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
-                        href="game.php?page=relocate">{$LNG.rl_relocate}</a>
-                    </td>
+                    <td class="color-blue">{$currentNews.user}</td>
+                    <td class="color-blue">{$currentNews.date}</td>
+                    <td class="color-blue">{$currentNews.text}</td>
                   </tr>
-                {/if}
+                {/foreach}
               </tbody>
             </table>
           </td>
         </tr>
-      </tbody>
-    </table>
-  </div>
+      {/if}
+      <tr>
+        <td>
+          <div>
+            <div>
+              <span>{$planetname}</span>
+              <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
+                <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
+              </a>
+            </div>
+            {if $Moon}
+              <div>
+                <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
+                  <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50"
+                    alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
+                </a>
+                <span>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</span>
+              </div>
+            {/if}
+          </div>
+        </td>
+        <td>
+          <table class="table-gow">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td><span style="color:skyblue">{$LNG.ov_diameter}:</span> </td>
+                <td class="text-center">{$LNG.ov_distance_unit} (<a
+                    title="{$LNG.ov_developed_fields}">{$planet_field_current}</a> / <a
+                    title="{$LNG.ov_max_developed_fields}">{$planet_field_max}</a> {$LNG.ov_fields})</td>
+              </tr>
+              <tr>
+                <td><span style="color:skyblue">{$LNG.ov_temperature}:</span></td>
+                <td class="text-center">{$LNG.ov_aprox} {$planet_temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to}
+                  {$planet_temp_max}{$LNG.ov_temp_unit}</td>
+              </tr>
+              <tr>
+                <td><span style="color:skyblue">{$LNG.ov_position}:</span></td>
+                <td class="text-center">
+                  <a class="hover-underline"
+                    href="game.php?page=galaxy&amp;galaxy={$galaxy}&amp;system={$system}">[{$galaxy}:{$system}:{$planet}]</a>
+                </td>
+              </tr>
+              {if  isModuleAvailable($smarty.const.MODULE_RELOCATE)}
+                <tr>
+                  <td colspan="2" class="text-center">
+                    <a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+                      href="game.php?page=relocate">{$LNG.rl_relocate}</a>
+                  </td>
+                </tr>
+              {/if}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <table class="table-gow">
