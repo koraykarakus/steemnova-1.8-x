@@ -648,7 +648,7 @@ input[type="radio"] {
 	padding-right: 5px;
 	position: relative;
 }
-.items_wrapper>.top>.item_big>.requirements>.bottom>.left>.resource:hover>.tooltip{
+.items_wrapper>.top>.item_big>.top>.right>.requirements>.bottom>.left>.resource:hover>.tooltip{
 	display: flex;
 }
 
