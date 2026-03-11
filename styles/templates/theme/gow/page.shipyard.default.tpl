@@ -22,7 +22,7 @@
 {/if}
 
 <div class="items_wrapper">
-  <div class="top" {if $mode == "defense"}style="background:url('{$dpath}images/defense.webp');"{else}style="background:url('{$dpath}images/hangar.webp');"{/if} >
+  <div class="top" {if $mode == "defense"}style="background:url('{$dpath}images/defense.jpg');"{else}style="background:url('{$dpath}images/hangar.jpg');"{/if} >
     {foreach $elementList as $ID => $Element}
       <div class="item_big hidden" id="item_big_{$ID}">
           <div class="img_wrapper">
