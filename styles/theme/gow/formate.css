@@ -695,6 +695,10 @@ input[type="radio"] {
 	margin: 0;
 	background-color: #ddd;
 	background-color: #1f1f20;
+	border-top: 1px solid #111;
+	border-left: 3px solid #111;
+	border-right: 3px solid #111;
+	border-bottom: 3px solid #111;
 }
 
 .items_wrapper .item_small {
@@ -839,7 +843,7 @@ input[type="radio"] {
 	margin-bottom: 5px;
 }
 
-.button_close{
+.button_close {
 	width: 18px;
 	height: 18px;
 	padding: 0;
@@ -851,7 +855,8 @@ input[type="radio"] {
 	border: 1px solid rgba(226, 134, 13, 0.479);
 	border-radius: 3px;
 }
-.button_close:hover{
+
+.button_close:hover {
 	cursor: pointer;
 }
 
