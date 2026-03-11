@@ -498,6 +498,7 @@ input[type="radio"] {
 /*page.overview.default.tpl*/
 .table_full {
 	width: 100%;
+	max-width: 654px;
 }
 
 /**/
