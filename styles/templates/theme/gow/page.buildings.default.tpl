@@ -26,13 +26,13 @@
               alt="{$LNG.tech.{$ID}}" width="203" height="203">
           </div>
           <div class="title">
-            <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if}">
+            <span class="element_name{if $Element.costOverflowTotal > 0} color-red hover-pointer{else} color-yellow{/if}">
               {if $Element.costOverflowTotal > 0}
-                <div class="tooltip">
-                  <table class='table-tooltip'>
+                <div class="tooltip tooltip_bottom">
+                  <table>
                     <thead>
                       <tr>
-                        <th colspan='2' class='text-center'>{$LNG.bd_remaining}</th>
+                        <th colspan='2'>{$LNG.bd_remaining}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -70,11 +70,11 @@
                     <a href="#" onclick="return Dialog.info({$ID})">{$LNG.bd_jump_gate_action}</a>
                   {/if}
                   {if ($ID == 44 && !$HaveMissiles) ||  $ID != 44}
-                    <form action='game.php?page=buildings' method='post' class='build_form'>
+                    <form action='game.php?page=buildings' method='post' class='destroy_form'>
                       <input type='hidden' name='cmd' value='destroy'>
                       <input type='hidden' name='building' value='{$ID}'>
                       <button type='submit' class='button-downgrade'>{$LNG.bd_dismantle}</button>
-                      <div class="tooltip">
+                      <div class="tooltip tooltip_top">
                         <table>
                           <thead>
                             <tr>

@@ -562,6 +562,12 @@ input[type="radio"] {
 	background: linear-gradient(180deg, #343a44, #1b212b);
 	color: #ffe27a;
 }
+.items_wrapper>.top>.item_big>.title>.element_name{
+	position: relative;
+}
+.items_wrapper>.top>.item_big>.title>.element_name:hover>.tooltip{
+	display: flex;
+}
 
 .items_wrapper>.top>.item_big>.requirements {
 	position: absolute;
@@ -615,6 +621,12 @@ input[type="radio"] {
 .items_wrapper .button-upgrade,
 .items_wrapper .button-downgrade {
 	margin: 3px 0;
+}
+.items_wrapper .destroy_form{
+	position: relative;
+}
+.items_wrapper .destroy_form:hover>.tooltip{
+	display: flex;
 }
 
 .items_wrapper>.top>.item_big>.requirements>.bottom>.left>.resource {
