@@ -631,11 +631,15 @@ input[type="radio"] {
 	margin: 3px 0;
 }
 
-.items_wrapper .destroy_form {
+.items_wrapper .destroy_form,.items_wrapper .build_form {
 	position: relative;
 }
 
 .items_wrapper .destroy_form:hover>.tooltip {
+	display: flex;
+}
+
+.items_wrapper .build_form:hover>.tooltip {
 	display: flex;
 }
 
