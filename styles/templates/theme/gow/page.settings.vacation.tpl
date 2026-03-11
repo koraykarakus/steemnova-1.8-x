@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_options}{/block}
 {block name="content"}
 	<form action="game.php?page=settings&amp;mode=send" method="post">
-		<table class="table table-gow fs-12">
+		<table class="table-gow table_full">
 			<tr>
 				<th colspan="2">{$LNG.op_vacation_mode_active_message} {$vacationUntil}</th>
 			</tr>

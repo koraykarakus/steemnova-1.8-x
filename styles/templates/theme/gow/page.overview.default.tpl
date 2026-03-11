@@ -25,7 +25,7 @@
   </script>
 
 
-  <table class="table-gow table_overview">
+  <table class="table-gow table_full">
     <tbody>
       <tr>
         <td>{$LNG["type_planet_{$planet_type}"]}</td>

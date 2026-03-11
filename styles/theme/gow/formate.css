@@ -496,8 +496,8 @@ input[type="radio"] {
 }
 
 /*page.overview.default.tpl*/
-.table_overview {
-	width: 654px;
+.table_full {
+	width: 100%;
 }
 
 /**/

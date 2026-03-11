@@ -1,12 +1,12 @@
 {block name="title" prepend}{$LNG.lm_changelog}{/block}
 {block name="content"}
-	<table class="table table-gow fs-12">
+	<table class="table-gow table_full">
 		<tr>
 			<th>{$LNG.lm_changelog}</th>
 		</tr>
 		{foreach $ChangelogList as $item}
 			<tr>
-				<td class="left d-flex align-items-center">{$item}</td>
+				<td>{$item}</td>
 			</tr>
 		{/foreach}
 	</table>

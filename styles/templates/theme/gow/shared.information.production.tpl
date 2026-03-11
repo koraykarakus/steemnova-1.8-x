@@ -1,10 +1,10 @@
 {$count = count($productionTable.usedResource)}
 
-<table class="table table-striped table-gow fs-12 mx-auto">
+<table class="table-gow table_full">
 	<tbody>
 		<tr>
 			<td colspan="2">
-				<table class="table table-striped table-gow fs-12 mx-auto">
+				<table class="table-gow table_full">
 					<tr>
 						<th>{$LNG.in_level}</th>
 						{foreach $productionTable.usedResource as $resourceID}
