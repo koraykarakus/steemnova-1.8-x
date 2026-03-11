@@ -645,6 +645,10 @@ input[type="radio"] {
 	align-items: center;
 	height: 28px;
 	padding-right: 5px;
+	position: relative;
+}
+.items_wrapper>.top>.item_big>.requirements>.bottom>.left>.resource:hover>.tooltip{
+	display: flex;
 }
 
 .items_wrapper>.top>.item_big>.requirements>.bottom>.resource>span {
