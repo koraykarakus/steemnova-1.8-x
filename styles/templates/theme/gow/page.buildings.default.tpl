@@ -50,6 +50,7 @@
             </span>
             <span id="val_{$ID} p-0">
               {$LNG.bd_lvl}&nbsp;{$Element.level}{if $Element.maxLevel != 255}/{$Element.maxLevel}{/if}
+              <button onclick="showItem({$ID});">X</button>
             </span>
           </div>
           <div class="requirements">
