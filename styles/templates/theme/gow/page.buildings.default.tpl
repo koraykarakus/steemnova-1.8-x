@@ -75,7 +75,7 @@
                       <input type='hidden' name='cmd' value='destroy'>
                       <input type='hidden' name='building' value='{$ID}'>
                       <button type='submit' class='button-downgrade'>{$LNG.bd_dismantle}</button>
-                      <div class="tooltip tooltip_top">
+                      <div class="tooltip tooltip_bottom">
                         <table>
                           <thead>
                             <tr>
