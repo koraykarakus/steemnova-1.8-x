@@ -622,12 +622,12 @@ input[type="radio"] {
 .items_wrapper>.bottom>.list {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 	width: 100%;
 	height: auto;
 	padding: 5px 10px;
 	margin: 0;
 	background-color: #ddd;
-	justify-content: center;
 	background-color: #1f1f20;
 }
 
