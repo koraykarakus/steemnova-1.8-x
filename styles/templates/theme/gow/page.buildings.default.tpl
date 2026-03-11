@@ -23,7 +23,7 @@
         <div class="item_big hidden" id="item_big_{$ID}">
           <div class="img_wrapper">
             <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
-              alt="{$LNG.tech.{$ID}}" width="120" height="120">
+              alt="{$LNG.tech.{$ID}}" width="203" height="203">
           </div>
           <div class="title">
             <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if}">
