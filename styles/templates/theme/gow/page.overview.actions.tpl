@@ -20,8 +20,8 @@
 		}
 	</script>
 
-	<div class="d-flex flex-column">
-		<div class="planet-menu d-flex justify-content-center align-items-center">
+	<div class="">
+		<div class="planet-menu">
 			<div class="menu-wrapper">
 
 				<button class="menu-btn active" onclick="changeContent(1); setActive(this);">
@@ -34,8 +34,8 @@
 
 			</div>
 		</div>
-		<div id="rename_planet" class="d-flex align-items-center justify-content-center my-5">
-			<div class="actions-card d-flex align-items-center">
+		<div id="rename_planet">
+			<div class="actions-card">
 				<form class="w-100 text-center">
 					<h6 class="rename-title mb-3">
 						{$LNG.ov_rename_label}
