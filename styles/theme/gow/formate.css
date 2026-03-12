@@ -751,7 +751,7 @@ input[type="radio"] {
 	cursor: pointer;
 }
 
-.item_small .level_info {
+.level_info {
 	height: 20px;
 	width: 20px;
 	display: flex;
@@ -837,9 +837,6 @@ input[type="radio"] {
 	margin: 5px;
 	position: relative;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 }
 
 .queue_item>.queue_right {
@@ -858,7 +855,7 @@ input[type="radio"] {
 .queue_left .btn_cancel {
 	position: absolute;
 	top: 0;
-	right: 0;
+	left: 0;
 }
 
 .queue_left:has(.btn_cancel:hover)>.tooltip {

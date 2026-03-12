@@ -243,7 +243,7 @@
             </div>
             <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">
-            <span class="">{$List.level}</span>
+            <span class="level_info">{$List.level}</span>
 
             <form action="game.php?page=buildings" method="post">
               {if !$List@first}
