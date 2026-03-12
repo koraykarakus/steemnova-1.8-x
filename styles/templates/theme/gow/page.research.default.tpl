@@ -49,7 +49,7 @@
 
 <div class="ItemsWrapper">
 
-<div style="background:url('{$dpath}images/research.webp');" class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative border-orange">
+<div style="background:url('{$dpath}images/research.jpg');" class="itemShow d-flex justify-content-center align-items-center w-100 bg-black position-relative border-orange">
 
 {foreach $ResearchList as $ID => $Element}
 <div id="item_big_{$ID}" class="buildItemBig position-absolute top-0 left-0 d-flex flex-column d-none rounded border border-1 border-dark p-0 m-0 w-100">
