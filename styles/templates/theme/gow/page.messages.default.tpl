@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_messages}{/block}
 {block name="content"}
-	<table class="table-gow">
+	<table class="table-gow table_full">
 		<tr>
 			<th colspan="6">{$LNG.mg_overview}<span id="loading" style="display:none;">
 					({$LNG.loading})</span></th>
@@ -32,7 +32,7 @@
 		<input type="hidden" name="ajax" value="1">
 		<input type="hidden" name="messcat" value="{$MessID}">
 		<input type="hidden" name="side" value="{$messagePage}">
-		<table id="messagestable" class="table table-sm table-gow my-1">
+		<table id="messagestable" class="table-gow table_full">
 			<tr>
 				<th colspan="5" class="text-center fs-12">{$LNG.mg_message_title}</th>
 			</tr>
@@ -76,7 +76,7 @@
 				</td>
 			</tr>
 		</table>
-		<table id="messagestable" class="table-gow">
+		<table id="messagestable" class="table-gow table_full">
 			<tr style="height:20px;">
 				<td class="text-center fs-14 color-blue fw-bold" style="width:40px;">{$LNG.mg_action}</td>
 				<td class="text-center fs-14 color-blue fw-bold">{$LNG.mg_date}</td>
