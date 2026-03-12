@@ -10,6 +10,8 @@
 		{/if}
 		{assign var="REV" value="1.0.0.28" nocache}
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<!-- jquery.css required for progress bar -->
+		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.css?v={$REV}">
 		<link rel="stylesheet" type="text/css" href="{$dpath}formate.css?v={$REV}">
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 		<script type="text/javascript">
