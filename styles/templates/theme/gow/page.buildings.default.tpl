@@ -209,7 +209,7 @@
               {$Element.level}
             </div>
             {if !$CanBuildElement || !$RoomIsOk || !$Element.buyable || !$Element.technologySatisfied || ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
-              <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
+              <div class="black-screen"></div>
             {/if}
             <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if $CanBuildElement && $RoomIsOk && $Element.buyable && $Element.technologySatisfied && !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
