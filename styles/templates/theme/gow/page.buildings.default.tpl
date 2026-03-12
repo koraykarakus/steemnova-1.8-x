@@ -211,7 +211,7 @@
             {if !$CanBuildElement || !$RoomIsOk || !$Element.buyable || !$Element.technologySatisfied || ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
               <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
             {/if}
-            <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
+            <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if $CanBuildElement && $RoomIsOk && $Element.buyable && $Element.technologySatisfied && !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
               <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
                 <input type="hidden" name="cmd" value="insert">
@@ -223,6 +223,9 @@
                 </button>
               </form>
             {/if}
+            <div class="name_info">
+              {$LNG.tech.{$ID}}
+            </div>
           </div>
         {/foreach}
       </div>
