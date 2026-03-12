@@ -755,7 +755,11 @@ input[type="radio"] {
 	position: absolute;
 	right: 0;
 	top: 0;
-	background-color: #546791;
+	background: linear-gradient(135deg, #6b7280, #111827);
+	color: #ffd600;
+	font-weight: bold;
+	border-radius: 3px;
+	border: 1px solid #111;
 }
 
 .item_small:hover>.tooltip {
