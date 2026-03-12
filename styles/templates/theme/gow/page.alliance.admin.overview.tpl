@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table table-gow table-sm fs-12 my-1">
+	<table class="table-gow">
 		<tr>
 			<th>{$LNG.al_manage_alliance}</th>
 		</tr>

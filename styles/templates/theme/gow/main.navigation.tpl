@@ -74,19 +74,16 @@
   {/if}
   {if $authlevel > 0}
     <li class="menu-button">
-      <a class="w-100 d-flex align-items-center text-center justify-content-center" href="./admin.php"
-        style="color:lime">{$LNG.lm_administration} ({$VERSION})</a>
+      <a href="./admin.php" style="color:lime">{$LNG.lm_administration} ({$VERSION})</a>
     </li>
     <li class="menu-button">
-      <a class="w-100 d-flex align-items-center text-center justify-content-center" href="?page=testBattle"
-        style="color:lime" target="_blank">Test Battle</a>
+      <a href="?page=testBattle" style="color:lime" target="_blank">Test Battle</a>
     </li>
   {/if}
   {if $commit != ''}
     <li class="menu-button">
-      <a href="https://github.com/koraykarakus/steemnova-1.8-x/tree/{$commit}"
-        class="w-100 d-flex align-items-center fs-10 fw-bold justify-content-center p-0 text-decoration-none"
-        target="copy">SteemNova engine {$commitShort}</a>
+      <a href="https://github.com/koraykarakus/steemnova-1.8-x/tree/{$commit}" class="" target="copy">SteemNova engine
+        {$commitShort}</a>
     </li>
   {/if}
 </ul>
