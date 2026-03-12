@@ -213,7 +213,7 @@
             {/if}
             <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if $CanBuildElement && $RoomIsOk && $Element.buyable && $Element.technologySatisfied && !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
-              <form action="game.php?page=buildings" method="post" class="position-absolute top-0 left-0">
+              <form action="game.php?page=buildings" method="post" class="">
                 <input type="hidden" name="cmd" value="insert">
                 <input type="hidden" name="building" value="{$ID}">
                 <button type="submit" class="button_upgrade_small">
