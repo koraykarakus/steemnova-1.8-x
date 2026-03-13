@@ -115,30 +115,34 @@
       {foreach $elementList as $ID => $Element}
         <div class="item_small" onclick="showItem({$ID})" id="item_small_{$ID}">
         <div class="tooltip tooltip_top">
-          {$LNG.tech.{$ID}}
-          {if !$Element.technologySatisfied && !empty($Element.requeriments)}
           <table class='table-tooltip'>
             <thead>
-              <tr><th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th></tr>
+              <th colspan="2">{$LNG.tech.{$ID}}</th> 
             </thead>
+          {if !$Element.technologySatisfied && !empty($Element.requeriments)}
             <tbody>
+              <tr class='color-red'>
+                <td colspan='2'>{$LNG.tech_not_satisfied}</td>
+              </tr>
               {foreach $Element.requeriments as $currentRequire}
               <tr>
                 <td class='color-red'>
-                  <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
+                  <img src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
                 </td>
-                <td class='color-red align-middle text-start'><span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)</td>
+                <td>
+                  <span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)
+                </td>
               </tr>
               {/foreach}
             </tbody>
-          </table>
           {/if}
+          </table>
         </div>
         <div class="level_info">{shortly_number($Element.available)}</div>
         {if !$Element.buyable || !$Element.technologySatisfied }
           <div class="black-screen"></div>
         {/if}
-        <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
+        <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
           <div class="name_info">
               {$LNG.tech.{$ID}}
           </div>
