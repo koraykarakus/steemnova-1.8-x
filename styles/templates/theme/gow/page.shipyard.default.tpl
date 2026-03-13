@@ -54,8 +54,9 @@
                   </div>
                   {$LNG.tech.{$ID}}
                 </span>
-                <span class="" id="val_{$ID} p-0">
+                <span id="val_{$ID} p-0">
                   {$LNG.bd_available} {$Element.available|number}
+                  <button class="button_close" onclick="showItem({$ID});">X</button>
                 </span>
               </div>
               <div class="requirements">
