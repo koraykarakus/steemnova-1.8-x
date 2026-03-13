@@ -70,7 +70,9 @@
                   {elseif $NotBuilding && $Element.buyable}
                   <form class="" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
                     <input class="" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
-                    <input class="" type="button" value="{$LNG.bd_max_ships}" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
+                    <button class="button_max" type="button" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
+                      >>
+                    </button>
                     <input class="b button-upgrade" type="submit" value="{$LNG.bd_build_ships}">
                   </form>
                   {/if}
