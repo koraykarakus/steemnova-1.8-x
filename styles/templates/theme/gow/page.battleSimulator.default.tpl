@@ -1,58 +1,80 @@
 {block name="title" prepend}{$LNG.lm_battlesim}{/block}
 {block name="content"}
-	<form id="form" name="battlesim">
-		<input type="hidden" name="slots" id="slots" value="{$Slots + 1}">
-		<table class="table-gow table_full">
+<form id="form" name="battlesim">
+	<input type="hidden" name="slots" id="slots" value="{$Slots + 1}">
+	
+	<table class="table-gow table_full">
+		<thead>
 			<tr>
-				<th>{$LNG.lm_battlesim}</th>
+				<th colspan="2">{$LNG.lm_battlesim}</th>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<span class="color-blue">{$LNG.bs_steal}</span>			
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<label for="steal_metal">{$LNG.tech.901}:</label>
+				</td>
+				<td>
+					<input id="steal_metal"
+					type="text" value="{if isset($battleinput.0.1.901)}{$battleinput.0.1.901}{else}0{/if}"
+					name="battleinput[0][1][901]">
+				</td>
 			</tr>
 			<tr>
 				<td>
-					<div class="">
-						<span class="color-blue">{$LNG.bs_steal}</span>
-						<div class="">
-							<label class="py-2 text-center" for="steal_metal">{$LNG.tech.901}:</label>
-							<input id="steal_metal"
-								class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
-								type="text" value="{if isset($battleinput.0.1.901)}{$battleinput.0.1.901}{else}0{/if}"
-								name="battleinput[0][1][901]">
-						</div>
-						<div class="">
-							<label class="py-2" for="steal_crystal">{$LNG.tech.902}:</label>
-							<input id="steal_crystal"
-								class="form-control fs-12 bg-dark text-white p-0 border border-secondary text-center"
-								type="text" value="{if isset($battleinput.0.1.902)}{$battleinput.0.1.902}{else}0{/if}"
-								name="battleinput[0][1][902]">
-						</div>
-						<div class="">
-							<label class="py-2" for="steal_deuterium">{$LNG.tech.903}:</label>
-							<input id="steal_deuterium"
-								class="form-control fs-12 bg-dark text-white p-0 border border-secondary text-center"
+					<label for="steal_crystal">{$LNG.tech.902}:</label>
+				</td>
+				<td>
+					<input id="steal_crystal"
+					type="text" value="{if isset($battleinput.0.1.902)}{$battleinput.0.1.902}{else}0{/if}"
+					name="battleinput[0][1][902]">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="steal_deuterium">{$LNG.tech.903}:</label>
+				</td>
+				<td>
+					<input id="steal_deuterium"
 								type="text" value="{if isset($battleinput.0.1.903)}{$battleinput.0.1.903}{else}0{/if}"
 								name="battleinput[0][1][903]">
-						</div>
-
-					</div>
-
 				</td>
 			</tr>
+		</tbody>
+	</table>
+
+	<table class="table-gow table_full">
+		<thead>
 			<tr>
-				<td class="left">
-					<input class="form-control fs-12 bg-blue text-white p-0 m-0 border border-secondary text-center"
-						type="button" onClick="return add();" value="{$LNG.bs_add_acs_slot}">
+				<td>
+					<input type="button" onClick="return add();" value="{$LNG.bs_add_acs_slot}">
 				</td>
 			</tr>
+		</thead>
+	</table>
+	
+	<table class="table-gow table_full">
+		<tbody>
 			<tr>
-				<td class="transparent" style="padding:0;">
-					<div id="tabs">
+				<td style="padding: 0;">
+					<div style="max-width:600px" id="tabs">
 						<ul>
-							{section name=tab start=0 loop=$Slots}<li><a
-										href="#tabs-{$smarty.section.tab.index}">{$LNG.bs_acs_slot}
-									{$smarty.section.tab.index + 1}</a></li>{/section}
+							{section name=tab start=0 loop=$Slots}
+								<li>
+									<a href="#tabs-{$smarty.section.tab.index}">
+										{$LNG.bs_acs_slot}{$smarty.section.tab.index + 1}
+									</a>
+								</li>
+							{/section}
 						</ul>
 						{section name=content start=0 loop=$Slots}
-							<div id="tabs-{$smarty.section.content.index}">
-								<table class="table table-gow table-sm fs-12">
+							<div style="max-width:600px" id="tabs-{$smarty.section.content.index}">
+								<table class="table-gow table_full">
 									<tr>
 										<th>{$LNG.bs_techno}</th>
 										<th>{$LNG.bs_atter}</th>
@@ -108,9 +130,9 @@
 									</tr>
 								</table>
 								<br>
-								<table class="table table-gow table-sm fs-12">
+								<table class="table-gow table_full">
 									<tr>
-										<td class="transparent">
+										<td style="width:50%;padding:0">
 											<table>
 												<tr>
 													<th>{$LNG.bs_names}</th>
@@ -119,19 +141,23 @@
 												</tr>
 												<tr>
 													<td></td>
-													<td><button class="reset">{$LNG.bs_reset}</button></td>
-													<td><button class="reset">{$LNG.bs_reset}</button></td>
+													<td>
+														<button class="reset">{$LNG.bs_reset}</button>
+													</td>
+													<td>
+														<button class="reset">{$LNG.bs_reset}</button>
+													</td>
 												</tr>
 												{foreach $fleetList as $id}
 													<tr>
 														<td>{$LNG.tech.$id}:</td>
-														<td><input
-																class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+														<td>
+															<input
 																type="text" size="10"
 																value="{if isset($battleinput.{$smarty.section.content.index}.0.$id)}{$battleinput.{$smarty.section.content.index}.0.$id}{else}0{/if}"
 																name="battleinput[{$smarty.section.content.index}][0][{$id}]"></td>
-														<td><input
-																class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+														<td>
+															<input
 																type="text" size="10"
 																value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}"
 																name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
@@ -140,47 +166,53 @@
 											</table>
 										</td>
 										{if $smarty.section.content.index == 0}
-											<td style="width:50%" class="transparent">
+											<td style="width:50%;padding:0">
 												<table>
 													<tr>
 														<th>{$LNG.bs_names}
+														<th>{$LNG.bs_atter}</th>
+														<th>{$LNG.bs_deffer}</th>
+													</tr>
+													<tr>
+														<td></td>
+														<td></td>
+														<td>
+															<button class="reset">{$LNG.bs_reset}</button>
+														</td>
+													</tr>
+												{foreach $defensiveList as $id}
+													<tr>
+														<td>{$LNG.tech.$id}:</td>
+														<td>-</td>
+														<td>
+															<input type="text" size="10"
+																value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}"
+																name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
+													</tr>
+												{/foreach}
+												</table>
 											</td>
-											<th>{$LNG.bs_atter}</th>
-											<th>{$LNG.bs_deffer}</th>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td><button class="reset">{$LNG.bs_reset}</button></td>
-										</tr>
-										{foreach $defensiveList as $id}
-											<tr>
-												<td>{$LNG.tech.$id}:</td>
-												<td>-</td>
-												<td><input
-														class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
-														type="text" size="10"
-														value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}"
-														name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
-											</tr>
-										{/foreach}
-									</table>
-						</td>
-					{/if}
-				</tr>
-			</table>
-			</div>
-		{/section}
-		</div>
-		</td>
-		</tr>
+										{/if}
+									</tr>
+								</table>
+							</div>
+						{/section}
+					</div>
+				</td>
+			</tr>
+		</tbody>
+			
+	</table>
+	<table class="table-gow table_full">
 		<tr id="submit">
-			<td><input type="button" onClick="return check();" value="{$LNG.bs_send}">&nbsp;<input type="reset"
-					value="{$LNG.bs_cancel}"></td>
+			<td>
+				<input type="button" onClick="return check();" value="{$LNG.bs_send}">&nbsp;
+				<input type="reset" value="{$LNG.bs_cancel}">
+			</td>
 		</tr>
 		<tr id="wait" style="display:none;">
 			<td style="height:20px">{$LNG.bs_wait}</td>
 		</tr>
-		</table>
-	</form>
+	</table>
+</form>
 {/block}
