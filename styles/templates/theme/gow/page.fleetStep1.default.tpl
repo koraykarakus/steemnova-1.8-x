@@ -4,7 +4,7 @@
 		<input type="hidden" name="token" value="{$token}">
 		<input type="hidden" name="fleet_group" value="0">
 		<input type="hidden" name="target_mission" value="{$mission}">
-		<table class="table table-gow table-sm fs-12" style="table-layout: fixed;">
+		<table class="table-gow table_full">
 			<tr style="height:20px;">
 				<th colspan="2">{$LNG.fl_send_fleet}</th>
 			</tr>
@@ -60,7 +60,7 @@
 			</tr>
 		</table>
 
-		<table class="table table-gow table-sm fs-12">
+		<table class="table-gow table_full">
 			<tr style="height:20px;">
 				<th class="text-center" colspan="2">{$LNG.fl_system_places}</th>
 			</tr>
@@ -77,7 +77,7 @@
 		</table>
 
 		{if isModuleAvailable($smarty.const.MODULE_SHORTCUTS)}
-			<table class="table table-gow table-sm fs-12">
+			<table class="table-gow table_full">
 				<tr style="height:20px;">
 					<th class="text-center" colspan="{$themeSettings.SHORTCUT_ROWS_ON_FLEET1}">{$LNG.fl_shortcut} (<a href="#"
 							onclick="EditShortcuts();return false"
@@ -152,7 +152,7 @@
 				</tr>
 			</table>
 		{/if}
-		<table class="table table-gow table-sm table-striped fs-12" style="table-layout: fixed;">
+		<table class="table-gow table_full">
 			<tr style="height:20px;">
 				<th class="text-center" colspan="{$themeSettings.COLONY_ROWS_ON_FLEET1}">{$LNG.fl_my_planets}</th>
 			</tr>
@@ -176,7 +176,7 @@
 			{/foreach}
 		</table>
 		{if $ACSList}
-			<table class="table table-gow" style="table-layout: fixed;">
+			<table class="table-gow table_full">
 				<tr style="height:20px;">
 					<th colspan="{$themeSettings.COLONY_ROWS_ON_FLEET1}">{$LNG.fl_acs_title}</th>
 				</tr>
@@ -195,9 +195,11 @@
 				{/foreach}
 			</table>
 		{/if}
-		<table class="table table-gow table-sm fs-12" style="table-layout: fixed;">
-			<tr style="height:20px;">
-				<td class="text-center"><input class="button-upgrade" type="submit" value="{$LNG.fl_continue}"></td>
+		<table class="table-gow table_full">
+			<tr>
+				<td>
+					<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
+				</td>
 			</tr>
 		</table>
 	</form>
