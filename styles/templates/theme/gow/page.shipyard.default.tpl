@@ -78,9 +78,11 @@
               <div class="bottom">
                 <div class="left">
                 {foreach $Element.costResources as $RessID => $RessAmount}
-                      <div class="">
+                      <div class="resource">
+                        <div class="tooltip tooltip_top">
+                          {$LNG.tech.$RessID}
+                        </div>
                         <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
-                        <div class="tooltip tooltip_top">{$LNG.tech.$RessID}</div>
                         <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
                       </div>
                     {/foreach}
