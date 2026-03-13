@@ -28,35 +28,35 @@
           <div class="top">
             <div class="left">
               <div class="img_wrapper">
-                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
+                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="203" height="203">
               </div>
             </div>
             <div class="right">
               <div class="title">
-              {if $ID == 212}
-                <span class="">&nbsp;<span class="color-green">+{$SolarEnergy}</span>&nbsp;{$LNG.tech.911}</span>
-              {/if}
-              <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} {/if}>
-                <div class="tooltip tooltip_top">
-                <table class='table fs-12'>
-                  <thead>
-                    <tr><th colspan='2' class='text-center'>{$LNG.bd_remaining}</th></tr>
-                  </thead>
-                  <tbody>
-                    {foreach $Element.costOverflow as $ResType => $ResCount}
-                    <tr>
-                      <td>{$LNG.tech.$ResType}</td>
-                      <td>{$ResCount|number}</td>
-                    </tr>
-                    {/foreach}
-                  </tbody>
-                </table>
-                </div>
-                {$LNG.tech.{$ID}}
-              </span>
-              <span class="" id="val_{$ID} p-0">
-                {$LNG.bd_available} {$Element.available|number}
-              </span>
+                {if $ID == 212}
+                  <span class="">&nbsp;<span class="color-green">+{$SolarEnergy}</span>&nbsp;{$LNG.tech.911}</span>
+                {/if}
+                <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} {/if}>
+                  <div class="tooltip tooltip_top">
+                  <table class='table fs-12'>
+                    <thead>
+                      <tr><th colspan='2' class='text-center'>{$LNG.bd_remaining}</th></tr>
+                    </thead>
+                    <tbody>
+                      {foreach $Element.costOverflow as $ResType => $ResCount}
+                      <tr>
+                        <td>{$LNG.tech.$ResType}</td>
+                        <td>{$ResCount|number}</td>
+                      </tr>
+                      {/foreach}
+                    </tbody>
+                  </table>
+                  </div>
+                  {$LNG.tech.{$ID}}
+                </span>
+                <span class="" id="val_{$ID} p-0">
+                  {$LNG.bd_available} {$Element.available|number}
+                </span>
               </div>
               <div class="requirements">
                 <div class="top">
@@ -64,29 +64,7 @@
                       <span class="">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
                   </div>
                   <div class="right">
-                  </div>
-                </div>
-            <div class="bottom">
-              <div class="left">
-              {foreach $Element.costResources as $RessID => $RessAmount}
-                    <div class="">
-                      <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
-                      <div class="tooltip tooltip_top">{$LNG.tech.$RessID}</div>
-                      <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
-                    </div>
-                  {/foreach}
-              </div>
-              <div class="right"></div>
-            </div>
-            </div>
-          </div>
-          </div>
-            
-
-            <div class="requirements">
-              <div class="">
-                  <div class="">
-                  {if $Element.AlreadyBuild}
+                   {if $Element.AlreadyBuild}
                     <span class="">{$LNG.bd_protection_shield_only_one}</span>
                   {elseif $NotBuilding && $Element.buyable}
                   <form class="" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
@@ -96,9 +74,26 @@
                   </form>
                   {/if}
                   </div>
+                </div>
+              <div class="bottom">
+                <div class="left">
+                {foreach $Element.costResources as $RessID => $RessAmount}
+                      <div class="">
+                        <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+                        <div class="tooltip tooltip_top">{$LNG.tech.$RessID}</div>
+                        <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
+                      </div>
+                    {/foreach}
+                </div>
+                <div class="right"></div>
               </div>
-
             </div>
+          </div>
+          </div>
+            
+
+                 
+
             
             <div class="bottom">
               <p class="">{$LNG.shortDescription[$ID]}</p>
@@ -139,7 +134,10 @@
           <div class="black-screen"></div>
         {/if}
         <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="80" height="80">
-      </div>
+          <div class="name_info">
+              {$LNG.tech.{$ID}}
+          </div>
+        </div>
       {/foreach}
     </div>
   </div>
