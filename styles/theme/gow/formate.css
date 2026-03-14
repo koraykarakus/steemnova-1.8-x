@@ -915,6 +915,12 @@ input[type="radio"] {
 	border-color: #b52a00;
 }
 
+.shipyard_input{
+	background-color: #fff;
+	color: #111;
+	text-align: center;
+}
+
 /**/
 
 
