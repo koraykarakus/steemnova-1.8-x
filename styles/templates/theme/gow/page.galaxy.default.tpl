@@ -19,7 +19,7 @@
 			<input type="hidden" name="system" value="{$system}">
 			<input type="hidden" name="planet" value="{$planet}">
 			<input type="hidden" name="type" value="{$type}">
-			<table class="table table-gow table-sm fs-12 my-1">
+			<table class="table-gow">
 				<tr>
 					<th colspan="2">{$LNG.gl_missil_launch} [{$galaxy}:{$system}:{$planet}]</th>
 				</tr>
@@ -96,7 +96,7 @@
 					{$currentPlanet = $GalaxyRows[$planet]}
 					<div class="num">{$planet}</div>
 					<div class="planet_name">
-						{$currentPlanet.planet.name}<span class="color-red px-1">{$currentPlanet.lastActivity}</span>
+						{$currentPlanet.planet.name}<span class="color-red">{$currentPlanet.lastActivity}</span>
 					</div>
 					<div class="planet_picture">
 						<div class="tooltip tooltip_right">
@@ -166,7 +166,7 @@
 								</tr>
 							</table>
 						</div>
-						<img class="hover-border-yellow" src="{$dpath}planeten/{$currentPlanet.planet.image}.jpg" height="30"
+						<img src="{$dpath}planeten/{$currentPlanet.planet.image}.jpg" height="30"
 							width="30" alt="">
 					</div>
 					<div class="moon_picture">
@@ -254,7 +254,7 @@
 										</tr>
 									</table>
 							</div>
-							<img class="hover-border-yellow" src="{$dpath}planeten/mond.jpg" height="22" width="22"
+							<img src="{$dpath}planeten/mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
 						{/if}
 					</div>
@@ -293,7 +293,7 @@
 									</tr>
 								</table>
 							</div>
-							<img class="hover-border-yellow" src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
+							<img src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
 						{/if}
 					</div>
 					<div class="player_name">
@@ -428,20 +428,20 @@
 			</tr>
 		{/for}
 		<tr>
-			<td class="text-center align-middle">{$max_planets + 1}</td>
-			<td class="text-center align-middle" colspan="7"><a
-					href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$max_planets + 1}&amp;planettype=1&amp;target_mission=15">{$LNG.gl_out_space}</a>
+			<td>{$max_planets + 1}</td>
+			<td colspan="7">
+				<a href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$max_planets + 1}&amp;planettype=1&amp;target_mission=15">{$LNG.gl_out_space}</a>
 			</td>
 		</tr>
 		<tr>
-			<td class="text-center align-middle">Trade</td>
-			<td class="text-center align-middle" colspan="7"><a
+			<td>Trade</td>
+			<td colspan="7"><a
 					href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$max_planets + 2}&amp;planettype=1&amp;target_mission=16">{$LNG.gl_trade_space}</a>
 			</td>
 		</tr>
 
 		<tr>
-			<td class="text-center align-middle" colspan="6">({$planetcount})</td>
+			<td colspan="6">({$planetcount})</td>
 			<td colspan="2">
 				<a data-bs-toggle="popover" data-bs-placement="right" data-bs-html="true"
 					title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_legend}</td></tr><tr><td>{$LNG.gl_strong_player}</td><td><span class='galaxy-short-strong'>{$LNG.gl_short_strong}</span></td></tr><tr><td>{$LNG.gl_week_player}</td><td><span class='galaxy-short-noob'>{$LNG.gl_short_newbie}</span></td></tr><tr><td>{$LNG.gl_vacation}</td><td><span class='galaxy-short-vacation'>{$LNG.gl_short_vacation}</span></td></tr><tr><td>{$LNG.gl_banned}</td><td><span class='galaxy-short-banned'>{$LNG.gl_short_ban}</span></td></tr><tr><td>{$LNG.gl_inactive_seven}</td><td><span class='galaxy-short-inactive'>{$LNG.gl_short_inactive}</span></td></tr><tr><td>{$LNG.gl_inactive_twentyeight}</td><td><span class='galaxy-short-longinactive'>{$LNG.gl_short_long_inactive}</span></td></tr></table>">{$LNG.gl_legend}</a>
@@ -460,7 +460,7 @@
 			</td>
 		</tr>
 		<tr style="display:none;" id="fleetstatusrow">
-			<th class="text-center" colspan="8">{$LNG.cff_fleet_target}</th>
+			<th colspan="8">{$LNG.cff_fleet_target}</th>
 		</tr>
 	</table>
 	<script type="text/javascript">
