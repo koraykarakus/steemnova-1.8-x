@@ -104,7 +104,6 @@
 								<tr>
 									<th colspan='2'>
 										<span>{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]</span>
-										<button class='' onclick=''>x</button>
 									</th>
 								</tr>
 								{if $userAuthLevel == 3}
@@ -222,7 +221,6 @@
 								<table class='table-gow'>
 									<tr>
 										<th colspan="2">{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]
-											<button class='' onclick=''>x</button>
 										</th>
 									</tr>
 									{if $userAuthLevel == 3}
@@ -312,7 +310,6 @@
 									<tr>
 										<th colspan='2'>
 											{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]
-											<button class='' onclick=''>X</button>
 										</th>
 									</tr>
 									<tr>
@@ -349,7 +346,6 @@
 									<tr>
 										<th colspan='2'>
 											{$currentPlanet.user.playerrank}
-											<button class='' onclick=''>X</button>
 										</th>
 									</tr>
 				 					{if !$currentPlanet.ownPlanet}
@@ -411,7 +407,6 @@
 										</td>
 									</tr>
 									{/if}
-									<button style='height:18px;width:18px;bottom:3px;right:3px;' class='position-absolute p-0 m-0 text-white fs-11' onclick='closePopover();'>X</button>
 								</table>
 							</div>
 							<span class="{foreach $currentPlanet.alliance.class as $class}{if !$class@first}{/if}galaxy-alliance-{$class}{/foreach} galaxy-alliance">{$currentPlanet.alliance.tag}</span>
