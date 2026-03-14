@@ -1072,6 +1072,8 @@ input[type="radio"] {
 	justify-content: center;
 	align-items: center;
 	height: 29px;
+	transition: 0.2s ease;
+	user-select: none;
 }
 .galaxy_wrapper>.galaxy_row>.planet_picture{
 	width: 36px;
@@ -1102,7 +1104,6 @@ input[type="radio"] {
 .galaxy_wrapper>.galaxy_row>.debris_picture:hover>.tooltip{
 	display: flex;
 }
-
 .galaxy_wrapper>.galaxy_row>.player_name{
 	position: relative;
 	width: 172px;
@@ -1129,6 +1130,17 @@ input[type="radio"] {
 }
 .galaxy_wrapper>.galaxy_row>.alliance_name:hover>.tooltip{
 	display: flex;
+}
+.galaxy_wrapper>.galaxy_row>.planet_picture:hover,
+.galaxy_wrapper>.galaxy_row>.moon_picture:hover,
+.galaxy_wrapper>.galaxy_row>.debris_picture:hover{
+	cursor: pointer;
+}
+.galaxy_wrapper>.galaxy_row>.planet_name:hover,
+.galaxy_wrapper>.galaxy_row>.player_name:hover,
+.galaxy_wrapper>.galaxy_row>.alliance_name:hover{
+	cursor: pointer;
+	text-decoration: underline;
 }
 .galaxy_wrapper>.galaxy_row>.actions{
 	width: 97px;
