@@ -228,6 +228,28 @@ body {
 	border-color: transparent transparent #374a5e transparent;
 }
 
+.tooltip_right {
+	bottom: 50%;
+	transform: translateY(50%);
+	left: calc(100%);
+}
+
+.tooltip_right::after {
+	content: "";
+	position: absolute;
+
+	top: 50%;
+	left: -12px;
+
+	transform: translateY(-50%);
+
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent #374a5e transparent transparent;
+}
+
+/**/
+
 .resources>.resource:hover {
 	cursor: pointer;
 }
@@ -1053,6 +1075,10 @@ input[type="radio"] {
 }
 .galaxy_wrapper>.galaxy_row>.planet_picture{
 	width: 36px;
+	position: relative;
+}
+.galaxy_wrapper>.galaxy_row>.planet_picture:hover>.tooltip{
+	display: flex;
 }
 .galaxy_wrapper>.galaxy_row>.moon_picture{
 	width: 30px;
@@ -1060,16 +1086,25 @@ input[type="radio"] {
 	justify-content: center;
 	align-items: center;
 	height: 29px;
+	position: relative;
+}
+.galaxy_wrapper>.galaxy_row>.moon_picture:hover>.tooltip{
+	display: flex;
 }
 .galaxy_wrapper>.galaxy_row>.debris_picture{
+	position:relative;
 	width: 38px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 29px;
 }
+.galaxy_wrapper>.galaxy_row>.debris_picture:hover>.tooltip{
+	display: flex;
+}
 
 .galaxy_wrapper>.galaxy_row>.player_name{
+	position: relative;
 	width: 172px;
 	display: flex;
 	justify-content: center;
@@ -1078,7 +1113,11 @@ input[type="radio"] {
 	color: #fff;
 	border-radius: 3px;
 }
+.galaxy_wrapper>.galaxy_row>.player_name:hover>.tooltip{
+	display: flex;
+}
 .galaxy_wrapper>.galaxy_row>.alliance_name{
+	position: relative;
 	width: 97px;
 	display: flex;
 	justify-content: center;
@@ -1088,12 +1127,25 @@ input[type="radio"] {
 	color: #fff;
 	border-radius: 3px;
 }
+.galaxy_wrapper>.galaxy_row>.alliance_name:hover>.tooltip{
+	display: flex;
+}
 .galaxy_wrapper>.galaxy_row>.actions{
 	width: 97px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 29px;
+}
+.galaxy_wrapper>.galaxy_row>.actions>.action_link{
+	position: relative;
+	margin: 0 2px;
+}
+.galaxy_wrapper>.galaxy_row>.actions>.action_link:hover{
+	cursor: pointer;
+}
+.galaxy_wrapper>.galaxy_row>.actions>.action_link:hover>.tooltip{
+	display: flex;
 }
 
 .galaxy_wrapper>.galaxy_row>.player_name,
