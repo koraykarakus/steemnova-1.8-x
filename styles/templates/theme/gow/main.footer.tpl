@@ -4,33 +4,37 @@
 	{/foreach}
 
 	{if isModuleAvailable($smarty.const.MODULE_SERVER_INFO)}
-		<span class="" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true" title="
-			<table class='table-tooltip bg-black'>
-				<thead>
-					<tr>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class='text-start color-red fw-bold'>{$LNG.si_game_speed}:</td>
-						<td>{$game_speed}</td>
-					</tr>
-					<tr>
-						<td class='text-start color-red'>{$LNG.si_fleet_speed}:</td>
-						<td>{$fleet_speed}</td>
-					</tr>
-					<tr>
-						<td class='text-start color-red'>{$LNG.si_production_speed}:</td>
-						<td>{$production_speed}</td>
-					</tr>
-					<tr>
-						<td class='text-start color-red'>{$LNG.si_storage_multiplier}:</td>
-						<td>{$storage_multiplier}</td>
-					</tr>
-				</tbody>
-			</table>
-			">{$LNG.si_universe_info}</span>
+		<div class="server_info">
+			<span>{$LNG.si_universe_info}</span>
+			<div class="tooltip tooltip_top">
+				<table class="bg-black">
+					<thead>
+						<tr>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class='text-start color-red fw-bold'>{$LNG.si_game_speed}:</td>
+							<td>{$game_speed}</td>
+						</tr>
+						<tr>
+							<td class='text-start color-red'>{$LNG.si_fleet_speed}:</td>
+							<td>{$fleet_speed}</td>
+						</tr>
+						<tr>
+							<td class='text-start color-red'>{$LNG.si_production_speed}:</td>
+							<td>{$production_speed}</td>
+						</tr>
+						<tr>
+							<td class='text-start color-red'>{$LNG.si_storage_multiplier}:</td>
+							<td>{$storage_multiplier}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_BANLIST)}
 		<a href="game.php?page=banList" class="{if $page ==="banList"}active{/if}">{$LNG.lm_banned}</a>
