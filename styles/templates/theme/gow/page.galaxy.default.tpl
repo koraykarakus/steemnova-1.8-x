@@ -108,60 +108,107 @@
 									</th>
 								</tr>
 								{if $userAuthLevel == 3}
-								<tr>
-									<td>user ID:</td>
-									<td>{$currentPlanet['user']['id']}</td>
-								</tr>
-								<tr>
-									<td>planet ID:</td>
-									<td>{$currentPlanet['planet']['id']}</td>
-								</tr>
+									<tr>
+										<td>user ID:</td>
+										<td>{$currentPlanet['user']['id']}</td>
+									</tr>
+									<tr>
+										<td>planet ID:</td>
+										<td>{$currentPlanet['planet']['id']}</td>
+									</tr>
 								{/if}
 								<tr>
-									<td style='width:80px'><img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'></td>
 									<td>
-										<div class='d-flex flex-column'>
-										{if $currentPlanet.missions.6}
-										<a class='hover-underline my-1 hover-pointer' onclick='doit(6,{$currentPlanet.planet.id});closePopover();'>{$LNG.type_mission_6}</a>
-										{/if}
-										{foreach $currentPlanet.user.class as $class}
-										{if $class != 'vacation' && $currentPlanet.planet.phalanx}
-										<a class='hover-underline my-1 hover-pointer' onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>
-											{$LNG.gl_phalanx}
-										</a>
-										{/if}
-										{foreachelse}
-										{if $currentPlanet.planet.phalanx}
-										<a class='hover-underline my-1 hover-pointer' onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>{$LNG.gl_phalanx}</a>
-										{/if}
-										{/foreach}
-										{if $currentPlanet.missions.1}
-										<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=1'>
-											{$LNG.type_mission_1}
-										</a>
-										{/if}
-										{if $currentPlanet.missions.5}
-										<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=5'>
-											{$LNG.type_mission_5}
-										</a>
-										{/if}
-										{if $currentPlanet.missions.4}
-										<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=4'>
-											{$LNG.type_mission_4}
-										</a>
-										{/if}
-										{if $currentPlanet.missions.3}
-										<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=3'>
-											{$LNG.type_mission_3}
-										</a>
-										{/if}
-										<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=17'>
-											{$LNG.type_mission_17}
-										</a>
-										{if $currentPlanet.missions.10}
-										<a class='hover-underline my-1 hover-pointer' href='?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}'>{$LNG["type_mission_10"]}</a>
-										{/if}
-									</div>
+										<img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'>
+									</td>
+									<td>
+										<table class="table-gow table_full">
+											<thead>
+												<tr>
+													<th colspan='2'>{$LNG.gl_actions}</th>
+												</tr>
+											</thead>
+											<tbody>
+												{if $currentPlanet.missions.6}
+												<tr>
+													<td>
+														<a onclick='doit(6,{$currentPlanet.planet.id});'>
+															{$LNG.type_mission_6}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												{foreach $currentPlanet.user.class as $class}
+												{if $class != 'vacation' && $currentPlanet.planet.phalanx}
+												<tr>
+													<td>
+														<a onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>
+															{$LNG.gl_phalanx}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												{foreachelse}
+												{if $currentPlanet.planet.phalanx}
+												<tr>
+													<td>
+														<a onclick='OpenPopup(&quot;?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&quot;, &quot;&quot;, 640, 510);'>{$LNG.gl_phalanx}</a>
+													</td>
+												</tr>
+												{/if}
+												{/foreach}
+												{if $currentPlanet.missions.1}
+												<tr>
+													<td>
+														<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=1'>
+															{$LNG.type_mission_1}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												{if $currentPlanet.missions.5}
+												<tr>
+													<td>
+														<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=5'>
+														{$LNG.type_mission_5}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												{if $currentPlanet.missions.4}
+												<tr>
+													<td>
+														<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=4'>
+														{$LNG.type_mission_4}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												{if $currentPlanet.missions.3}
+												<tr>
+													<td>
+														<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=3'>
+														{$LNG.type_mission_3}
+														</a>
+													</td>
+												</tr>
+												{/if}
+												<tr>
+													<td>
+														<a href='?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=17'>
+														{$LNG.type_mission_17}
+														</a>
+													</td>
+												</tr>
+												{if $currentPlanet.missions.10}
+												<tr>
+													<td>
+														<a href='?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}'>{$LNG["type_mission_10"]}</a>
+													</td>
+												</tr>
+												{/if}
+											</tbody>
+										</table>
 									</td>
 								</tr>
 							</table>
