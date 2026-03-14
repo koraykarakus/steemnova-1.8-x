@@ -11,6 +11,10 @@ body {
 	color: #fff;
 }
 
+.center_x{
+	margin:0 auto;
+}
+
 /*layout.full.tpl*/
 .page_content {
 	position: relative;
