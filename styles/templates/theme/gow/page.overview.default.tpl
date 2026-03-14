@@ -85,23 +85,29 @@
       {/if}
       <tr>
         <td>
-          <div>
-            <div>
-              <span>{$planetname}</span>
-              <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
-                <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
-              </a>
-            </div>
-            {if $Moon}
-              <div>
-                <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
-                  <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50"
-                    alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
-                </a>
-                <span>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</span>
-              </div>
-            {/if}
-          </div>
+          <table class="table_full">
+            <tbody>
+              <tr>
+                <td>{$planetname}</td>
+                <td>
+                  <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
+                    <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
+                  </a>
+                </td>
+              </tr>
+              {if $Moon}
+              <tr>
+                <td>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</td>
+                <td>
+                  <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
+                    <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50"
+                      alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
+                  </a>
+                </td>
+              </tr>
+              {/if}
+            </tbody>
+          </table>
         </td>
         <td>
           <table class="table-gow">
@@ -109,26 +115,26 @@
             <tbody>
               <tr>
                 <td><span style="color:skyblue">{$LNG.ov_diameter}:</span> </td>
-                <td class="text-center">{$LNG.ov_distance_unit} (<a
+                <td>{$LNG.ov_distance_unit} (<a
                     title="{$LNG.ov_developed_fields}">{$planet_field_current}</a> / <a
                     title="{$LNG.ov_max_developed_fields}">{$planet_field_max}</a> {$LNG.ov_fields})</td>
               </tr>
               <tr>
                 <td><span style="color:skyblue">{$LNG.ov_temperature}:</span></td>
-                <td class="text-center">{$LNG.ov_aprox} {$planet_temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to}
+                <td>{$LNG.ov_aprox} {$planet_temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to}
                   {$planet_temp_max}{$LNG.ov_temp_unit}</td>
               </tr>
               <tr>
                 <td><span style="color:skyblue">{$LNG.ov_position}:</span></td>
-                <td class="text-center">
+                <td>
                   <a class="hover-underline"
                     href="game.php?page=galaxy&amp;galaxy={$galaxy}&amp;system={$system}">[{$galaxy}:{$system}:{$planet}]</a>
                 </td>
               </tr>
               {if  isModuleAvailable($smarty.const.MODULE_RELOCATE)}
                 <tr>
-                  <td colspan="2" class="text-center">
-                    <a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+                  <td colspan="2">
+                    <a class="text-yellow"
                       href="game.php?page=relocate">{$LNG.rl_relocate}</a>
                   </td>
                 </tr>
