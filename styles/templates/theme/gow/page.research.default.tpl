@@ -91,19 +91,23 @@
                       <span style="color:#ffd600">{$LNG.bd_maxlevel} || <button>End Game</button></span>
                     {elseif $IsLabinBuild || $IsFullQueue || !$Element.buyable}
                       <span style="color:#ffd600">
-                        <button title="{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}" class="button-upgrade-disabled"
-                          type="button" name="button">
+                        <button class="button-upgrade" type="button" name="button" disabled>
                           {$LNG.bd_build}
+                          <div class="tooltip tooltip_top">
+                            {$LNG.bd_build_next_level}{$Element.levelToBuild + 1}
+                          </div>
                         </button>
                       </span>
                     {else}
                       <form action="game.php?page=research" method="post" class="build_form">
                         <input type="hidden" name="cmd" value="insert">
                         <input type="hidden" name="tech" value="{$ID}">
-                        <button type="submit" class="button-upgrade"
-                          title="{$LNG.bd_build_next_level}{$Element.levelToBuild + 1}">
+                        <button type="submit" class="button-upgrade">
                           {$LNG.bd_build}
                         </button>
+                        <div class="tooltip tooltip_top">
+                            {$LNG.bd_build_next_level}{$Element.levelToBuild + 1}
+                          </div>
                       </form>
                     {/if}
                   </div>
