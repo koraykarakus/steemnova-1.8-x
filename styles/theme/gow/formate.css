@@ -923,6 +923,190 @@ input[type="radio"] {
 
 /**/
 
+/*page.galaxy.default.tpl*/
+.galaxy_wrapper{
+	max-width: 654px;
+	width: 654px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	border: 1px solid #111;
+}
+
+.galaxy_wrapper>.galaxy_header{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 24px;
+	background-color: #0D263D;
+	width: 100%;
+	border: 1px solid #111;
+}
+.galaxy_wrapper>.galaxy_header>#galaxy_form{
+	display: flex;
+	align-items:center;
+	width: 100%;
+}
+.galaxy_wrapper>.galaxy_header>#galaxy_form>.galaxy_input{
+	background-color: #ffffff;
+	color: #111;
+	font-size: 12px;
+	width: 36px;
+	height: 16px;
+	margin: 0 3px;
+	padding: 0 2px;
+	text-align: center;
+
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+
+	outline: none;
+	transition: all 0.2s ease;
+}
+.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_input:hover{
+	border-color: #999;
+}
+.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_input:focus{
+	border-color: #4a90e2;
+	box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
+	background-color: #fff;
+}
+.galaxy_wrapper >.galaxy_header>#galaxy_form>.galaxy_button{
+	width: 24px;
+	height: 18px;
+
+	background: #0d0d0d;
+	color: #00cc66;
+
+	border: 1px solid #222;
+	border-radius: 4px;
+
+	font-size: 11px;
+	cursor: pointer;
+
+	outline: none;
+	margin: 0 3px;
+	text-align: center;
+
+	transition: all 0.15s ease;
+}
+.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_button:hover{
+	background: #1a1a1a;
+	color: #00ff80;
+	border-color: #333;
+}
+.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_button:active{
+	transform: scale(0.95);
+}
+.galaxy_wrapper>.galaxy_header > div{
+	text-align: center;
+}
+.galaxy_wrapper>.galaxy_header>.num{
+	width: 21px;
+}
+.galaxy_wrapper>.galaxy_header>.planet_name{
+	width: 140px;
+	text-align: center;
+}
+.galaxy_wrapper>.galaxy_header>.planet_pic{
+	width: 36px;
+}
+.galaxy_wrapper>.galaxy_header>.moon_pic{
+	width: 30px;
+}
+.galaxy_wrapper>.galaxy_header>.debris_pic{
+	width: 38px;
+}
+.galaxy_wrapper>.galaxy_header>.state{
+	width: 172px;
+}
+.galaxy_wrapper>.galaxy_header>.alliance{
+	width: 97px;
+}
+.galaxy_wrapper>.galaxy_header>.actions{
+	width: 97px;
+}
+
+.galaxy_wrapper>.galaxy_row{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	height: 33px;
+}
+.galaxy_wrapper>.galaxy_row>.num{
+	width: 21px;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+}
+.galaxy_wrapper>.galaxy_row>.planet_name{
+	width: 140px;
+	color: #fff;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+}
+.galaxy_wrapper>.galaxy_row>.planet_picture{
+	width: 36px;
+}
+.galaxy_wrapper>.galaxy_row>.moon_picture{
+	width: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+}
+.galaxy_wrapper>.galaxy_row>.debris_picture{
+	width: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+}
+
+.galaxy_wrapper>.galaxy_row>.player_name{
+	width: 172px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+	color: #fff;
+	border-radius: 3px;
+}
+.galaxy_wrapper>.galaxy_row>.alliance_name{
+	width: 97px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+	background-color: #0D263D;
+	color: #fff;
+	border-radius: 3px;
+}
+.galaxy_wrapper>.galaxy_row>.actions{
+	width: 97px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 29px;
+}
+
+.galaxy_wrapper>.galaxy_row>.player_name,
+.galaxy_wrapper>.galaxy_row>.alliance_name,
+.galaxy_wrapper>.galaxy_row>.num,
+.galaxy_wrapper>.galaxy_row>.planet_name{
+background: linear-gradient(180deg,
+			#1a1a1d 0%,
+			#111113 100%);
+}
+
+/**/
+
 
 /*general classes for color and background color*/
 
