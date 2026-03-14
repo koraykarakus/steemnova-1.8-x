@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table-gow">
+	<table class="table-gow table_full">
 		<tr>
 			<th>{$LNG.al_manage_alliance}</th>
 		</tr>
@@ -28,7 +28,7 @@
 	<form action="game.php?page=alliance&mode=admin" method="post">
 		<input type="hidden" name="textMode" value="{$textMode}">
 		<input type="hidden" name="send" value="1">
-		<table class="table table-gow table-sm fs-12 my-1">
+		<table class="table-gow table_full">
 			<tr>
 				<th colspan="3">{$LNG.al_texts}</th>
 			</tr>
@@ -59,7 +59,7 @@
 				</td>
 			</tr>
 		</table>
-		<table class="table table-gow table-sm fs-12 my-1">
+		<table class="table-gow table_full">
 			<tr>
 				<th colspan="2">{$LNG.al_manage_options}</th>
 			</tr>
@@ -142,7 +142,7 @@
 		</table>
 	</form>
 	{if $AllianceOwner}
-		<table class="table table-gow table-sm fs-12 my-1">
+		<table class="table-gow table_full">
 			<tr>
 				<th>{$LNG.al_disolve_alliance}</th>
 			</tr>
@@ -155,7 +155,7 @@
 				</td>
 			</tr>
 		</table>
-		<table class="table table-gow table-sm fs-12 my-1">
+		<table class="table-gow table_full">
 			<tr>
 				<th>{$LNG.al_transfer_alliance}</th>
 			</tr>
