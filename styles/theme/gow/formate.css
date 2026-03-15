@@ -60,7 +60,7 @@ body {
 	position: relative;
 	display: flex;
 	height: 604px;
-	top: 0;
+	top: -7px;
 }
 
 #content_mid {
@@ -445,35 +445,16 @@ body {
 
 #menu li {
 	margin: 1px 0;
-	height: 28px;
+	height: 27px;
 }
 
 .menu-button {
 	width: 136px;
 	position: relative;
 	cursor: pointer;
-
-	/* Daha yumuşak kırpma */
-	clip-path: polygon(0 0,
-			calc(100% - 8px) 0,
-			100% 8px,
-			100% 100%,
-			8px 100%,
-			0 calc(100% - 8px));
-
-	background: linear-gradient(180deg,
-			#3f5e85 0%,
-			#2a3f5a 65%,
-			#1f2f42 100%);
-
-	border: 1px solid rgba(255, 255, 255, 0.12);
-
-	box-shadow:
-		0 2px 6px rgba(0, 0, 0, 0.45),
-		inset 0 1px 0 rgba(255, 255, 255, 0.12),
-		inset 0 0 6px rgba(0, 0, 0, 0.5);
-
-	transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+	list-style: none;
+	transition: 0.2 ease;
+	height: 27px;
 }
 
 .menu-button a {
@@ -489,32 +470,21 @@ body {
 	font-size: 11px;
 	letter-spacing: 0.5px;
 	transition: color 0.2s ease;
+	background: url(img/menu_button.png);
+	background-position: -1px 0px;
+	background-repeat: no-repeat;
 }
 
-.menu-button:hover {
-	border-color: rgba(16, 12, 231, 0.35);
-
-	box-shadow:
-		0 2px 8px rgba(0, 0, 0, 0.55),
-		inset 0 1px 0 rgba(255, 255, 255, 0.25),
-		inset 0 0 10px rgba(255, 255, 255, 0.05);
+.menu-button a:hover {
+	background-position: -1px -29px;
 }
 
 .menu-button:hover a {
 	color: #ffffff;
 }
 
-#menu .menuActive {
-	border-color: rgba(255, 214, 0, 0.5);
-
-	background: linear-gradient(180deg,
-			#4f6f94 0%,
-			#2f4863 65%,
-			#1d2e40 100%);
-
-	box-shadow:
-		0 0 8px rgba(255, 214, 0, 0.25),
-		inset 0 0 8px rgba(255, 214, 0, 0.12);
+#menu .menu-button>.menuActive {
+	background-position: -1px -29px;	
 }
 
 #menu .menu-button a.menuActive {
