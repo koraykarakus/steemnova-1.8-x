@@ -117,6 +117,9 @@
   </div>
   {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
     <a href="?page=messages" class="messages">
+      <div class="tooltip tooltip_top">
+        {$LNG.lm_messages}
+      </div>
       {nocache}
       {if $new_message > 0}
         <span id="newmes">

@@ -132,6 +132,9 @@ body {
 	cursor: pointer;
 	background-position: 0 -18px;
 }
+#content_top>.messages:hover>.tooltip{
+	display: flex;
+}
 #content_top>.messages>#newmes{
 	display: flex;
 	position: absolute;
