@@ -345,7 +345,7 @@ HTML;
         foreach ($debrisResource as $elementID)
         {
             $debris[$elementID] = $combatResult['debris']['attacker'][$elementID] + $combatResult['debris']['defender'][$elementID];
-            $planetDebris[$elementID] = $targetPlanet['der_'.$resource[$elementID]] + $debris[$elementID];
+            $planetDebris[$elementID] = $targetPlanet['debris_'.$resource[$elementID]] + $debris[$elementID];
         }
 
         $debrisTotal = array_sum($debris);
