@@ -115,6 +115,26 @@ body {
 	display: flex;
 }
 
+.globalWarning {
+	background-color: #FFFFDD;
+	border: 1px solid #F7DF92;
+	color: #000000;
+	margin: 2px 0;
+	padding: 5px 0;
+	text-align: center;
+	max-width: 654px;
+}
+
+.globalWarning a:hover {
+	text-decoration:underline;
+}
+
+.globalWarning a{
+	font-weight: bold;
+	cursor:pointer;
+	color:#D20000;
+}
+
 /*--*/
 
 /*main.topnav.tpl*/
