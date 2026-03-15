@@ -383,21 +383,21 @@
 									</tr>
 				 					{if !$currentPlanet.ownPlanet}
 				 					{if $currentPlanet.user.isBuddy}
-									<tr class='text-center py-1'>
-										<td>
-											<a class='hover-underline hover-pointer user-select-none' href='#' onclick='return Dialog.Buddy({$currentPlanet.user.id})'>{$LNG.gl_buddy_request}</a>
+									<tr>
+										<td class="text_center">
+											<a class='hover-underline hover-pointer' href='#' onclick='return Dialog.Buddy({$currentPlanet.user.id})'>{$LNG.gl_buddy_request}</a>
 										</td>
 									</tr>
 					 				{/if}
-									<tr class='text-center py-1'>
-										<td>
-											<a class='hover-underline hover-pointer user-select-none' href='#' onclick='return Dialog.Playercard({$currentPlanet.user.id});'>{$LNG.gl_playercard}</a>
+									<tr>
+										<td class="text_center">
+											<a class='hover-underline hover-pointer' href='#' onclick='return Dialog.Playercard({$currentPlanet.user.id});'>{$LNG.gl_playercard}</a>
 										</td>
 									</tr>
 									{/if}
-									<tr class='text-center py-1'>
-										<td>
-											<a class='hover-underline hover-pointer user-select-none' href='?page=statistics&amp;who=1&amp;start={$currentPlanet.user.rank}'>{$LNG.gl_see_on_stats}</a>
+									<tr>
+										<td class="text_center">
+											<a class='hover-underline hover-pointer' href='?page=statistics&amp;who=1&amp;start={$currentPlanet.user.rank}'>{$LNG.gl_see_on_stats}</a>
 										</td>
 									</tr>
 				 				</table>
@@ -424,18 +424,18 @@
 										</th>
 									</tr>
 									<tr>
-										<td>
+										<td class="text_center">
 											<a class='hover-underline hover-pointer' href='?page=alliance&amp;mode=info&amp;id={$currentPlanet.alliance.id}'>{$LNG.gl_alliance_page}</a>
 										</td>
 									</tr>
 									<tr>
-										<td>
+										<td class="text_center">
 											<a class='hover-underline hover-pointer' href='?page=statistics&amp;start={$currentPlanet.alliance.rank}&amp;who=2'>{$LNG.gl_see_on_stats}</a>
 										</td>
 									</tr>
 									{if $currentPlanet.alliance.web}
-									<tr  class='text-center py-1'>
-										<td>
+									<tr>
+										<td class="text_center">
 											<a class='hover-underline hover-pointer' href='{$currentPlanet.alliance.web}' target='allyweb'>{$LNG.gl_alliance_web_page}</a>
 										</td>
 									</tr>
