@@ -238,7 +238,7 @@
 											<img src='{$dpath}planeten/mond.jpg' height='75' width='75'>
 										</td>
 										<td>
-											<table class='table table-gow table-sm fs-11' style='width:100%'>
+											<table class='table-gow' style='width:100%'>
 												<tr>
 													<th colspan='2'>{$LNG.gl_features}</th>
 												</tr>
@@ -255,43 +255,76 @@
 												</tr>
 												<tr>
 													<td colspan='2'>
-														<div class='d-flex flex-column'>
-														{if $currentPlanet.missions.1}
-														<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=1'>
-															{$LNG.type_mission_1}
-														</a>
-														{/if}
-														{if $currentPlanet.missions.3}
-														<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=3'>
-															{$LNG.type_mission_3}
-														</a>
-														{/if}
-														{if $currentPlanet.missions.3}
-														<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=4'>
-															{$LNG.type_mission_4}
-														</a>
-														{/if}
-														{if $currentPlanet.missions.5}
-														<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=5'>
-															{$LNG.type_mission_5}
-														</a>
-														{/if}
-														{if $currentPlanet.missions.6}
-														<a class='hover-underline my-1 hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});closePopover();'>
-															{$LNG.type_mission_6}
-														</a>
-														{/if}
-														{if $currentPlanet.missions.9}
-														<a class='hover-underline my-1 hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=9'>
-															{$LNG.type_mission_9}
-														</a>
-															{/if}
-														{if $currentPlanet.missions.10}
-														<a class='hover-underline my-1 hover-pointer' href='?page=galaxy&action=sendMissle&galaxy={$galaxy}&system={$system}&planet={$planet}&type=3'>
-															{$LNG.type_mission_10}
-														</a>
-														{/if}
-														</div>
+														<table class="table-gow">
+															<tbody>
+																{if $currentPlanet.missions.1}
+																<tr>
+																	<td>
+																		<a class='hover-underline hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=1'>
+																			{$LNG.type_mission_1}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.3}
+																<tr>
+																	<td>
+																		
+																		<a class='hover-underline hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=3'>
+																			{$LNG.type_mission_3}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.3}
+																<tr>
+																	<td>
+																		
+																		<a class='hover-underline hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=4'>
+																			{$LNG.type_mission_4}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.5}
+																<tr>
+																	<td>
+																		
+																		<a class='hover-underline hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=5'>
+																			{$LNG.type_mission_5}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.6}
+																<tr>
+																	<td>
+																		<a class='hover-underline hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});closePopover();'>
+																			{$LNG.type_mission_6}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.9}
+																<tr>
+																	<td>
+																		<a class='hover-underline hover-pointer' href='?page=fleetTable&galaxy={$galaxy}&system={$system}&planet={$planet}&planettype=3&target_mission=9'>
+																			{$LNG.type_mission_9}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+																{if $currentPlanet.missions.10}
+																<tr>
+																	<td>
+																		<a class='hover-underline hover-pointer' href='?page=galaxy&action=sendMissle&galaxy={$galaxy}&system={$system}&planet={$planet}&type=3'>
+																			{$LNG.type_mission_10}
+																		</a>
+																	</td>
+																</tr>
+																{/if}
+															</tbody>
+														</table>	
 													</td>
 												</tr>
 											</table>
