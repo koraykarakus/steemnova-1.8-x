@@ -1768,6 +1768,16 @@ background: linear-gradient(180deg,
 	text-decoration: line-through
 }
 
+/*tooltip fleet info*/
+.fleetRow .fleet_info{
+	text-decoration: underline;
+	cursor: pointer;
+	position: relative;
+}
+.fleetRow .fleet_info:hover>.tooltip{
+	display: flex;
+}
+
 .ownattack {
 	color: #6c3
 }
