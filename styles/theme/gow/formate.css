@@ -745,6 +745,7 @@ input[type="radio"] {
 	height: 28px;
 	padding-right: 5px;
 	position: relative;
+	cursor: pointer;
 }
 
 .items_wrapper>.top>.item_big>.top>.right>.requirements>.bottom>.left>.resource:hover>.tooltip {
