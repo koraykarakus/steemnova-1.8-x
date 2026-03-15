@@ -5,16 +5,6 @@
       {if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}
         <img style="min-width: 15px;" id="attack_alert" src="" alt="">
       {/if}
-      {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
-        <a href="?page=messages" class="{if $page === "messages"}active{/if}">
-          {$LNG.lm_messages}
-          {nocache}
-          {if $new_message > 0}
-            <span id="newmes">&nbsp;(<span id="newmesnum">{$new_message}</span>)</span>
-          {/if}
-          {/nocache}
-        </a>
-      {/if}
     </div>
     <div class="mid">
       {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}
@@ -125,6 +115,17 @@
       </div>
     {/foreach}
   </div>
+  {if isModuleAvailable($smarty.const.MODULE_MESSAGES)}
+    <a href="?page=messages" class="messages">
+      {nocache}
+      {if $new_message > 0}
+        <span id="newmes">
+          <span id="newmesnum">{$new_message}</span>
+        </span>
+      {/if}
+      {/nocache}
+    </a>
+  {/if}
   {include file="fleetTable.tpl"}
 
   {if !$vmode}

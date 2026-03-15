@@ -118,6 +118,39 @@ body {
 /*--*/
 
 /*main.topnav.tpl*/
+#content_top>.messages{
+	position: absolute;
+	top: 120px;
+	left :230px;
+	width: 26px;
+	height: 17px;
+	background: url('img/msg_sprite.png');
+	background-position: 0 0;
+	text-decoration: none;
+}
+#content_top>.messages:hover{
+	cursor: pointer;
+	background-position: 0 -18px;
+}
+#content_top>.messages>#newmes{
+	display: flex;
+	position: absolute;
+	top: -7px;
+	right: -8px;
+	background-color: #111;
+	color: #fff;
+	border-radius: 50%;
+	width: auto;
+	min-width: 15px;
+	height: auto;
+	min-height: 15px;
+	padding: 3px;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	font-size: 9px;
+	font-weight: bold;
+}
 .fleet_wrapper {
 	position: absolute;
 	top: 107px;
