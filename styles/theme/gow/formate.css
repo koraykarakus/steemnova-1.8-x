@@ -49,6 +49,9 @@ body {
 #content_top {
 	height: 153px;
 	position: relative;
+	background: url('img/top.png');
+	background-position: -5px 11px;
+	background-repeat: no-repeat;
 }
 
 #content_left {
@@ -57,7 +60,7 @@ body {
 	position: relative;
 	display: flex;
 	height: 604px;
-	top: -32px
+	top: 0;
 }
 
 #content_mid {
@@ -120,8 +123,6 @@ body {
 	top: 107px;
 	left: 318px;
 	height: 45px;
-	background: #000;
-	border: 1px solid rgba(188, 188, 188, 0.5);
 	width: 430px;
 	display: flex;
 	align-items: center;
@@ -131,6 +132,7 @@ body {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+	font-weight: bold;
 }
 
 .fleet_wrapper .fleet_btn {
