@@ -1246,7 +1246,6 @@ background: linear-gradient(180deg,
 			#111113 100%);
 }
 
-/**/
 
 
 /*general classes for color and background color*/
@@ -1617,21 +1616,15 @@ background: linear-gradient(180deg,
 .table-gow th {
 	background: linear-gradient(180deg,
 			#2b282e 0%,
-			/* hafif açık koyu gri-kahve */
 			#1b1a17 100%
-			/* koyu zemin */
 		);
 
 	color: #f1ebc9;
-	/* Altın tonlu yazı */
 	letter-spacing: 0.5px;
 
 	border: 1px solid rgba(29, 29, 27, 0.35);
-	/* Altın vurgulu border */
 	padding: 8px 10px;
-	/* biraz daha rahat dolgu */
 	text-align: center;
-	/* başlıkları ortala */
 }
 
 .table-gow td {
