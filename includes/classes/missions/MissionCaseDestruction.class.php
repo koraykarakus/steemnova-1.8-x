@@ -343,7 +343,7 @@ HTML;
         foreach ($debrisResource as $elementID)
         {
             $debris[$elementID] = $combatResult['debris']['attacker'][$elementID] + $combatResult['debris']['defender'][$elementID];
-            $planetDebris[$elementID] = $targetPlanet['der_'.$resource[$elementID]] + $debris[$elementID];
+            $planetDebris[$elementID] = $targetPlanet['debris_'.$resource[$elementID]] + $debris[$elementID];
         }
 
         $reportInfo = [
@@ -384,7 +384,7 @@ HTML;
 
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':id_moon'   => $targetPlanet['id'],
+                        ':id_moon'  => $targetPlanet['id'],
                     ]);
 
                     $sql = 'UPDATE %%FLEETS%% SET
@@ -396,14 +396,14 @@ HTML;
 
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':id_moon'   => $targetPlanet['id'],
+                        ':id_moon'  => $targetPlanet['id'],
                         ':fleetId'  => $this->_fleet['fleet_id'],
                     ]);
 
                     $sql = "UPDATE %%ACS%% SET target = :planetId WHERE target = :id_moon;";
                     $db->update($sql, [
                         ':planetId' => $planetID,
-                        ':id_moon'   => $targetPlanet['id'],
+                        ':id_moon'  => $targetPlanet['id'],
                     ]);
 
                     // Redirect fleets from moon to player's main planet.

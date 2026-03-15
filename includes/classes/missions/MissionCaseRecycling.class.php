@@ -35,7 +35,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
         foreach ($debrisIDs as $debrisID)
         {
             $collectedGoods[$debrisID] = 0;
-            $resQuery[] = 'der_'.$resource[$debrisID];
+            $resQuery[] = 'debris_'.$resource[$debrisID];
         }
 
         $sql = 'SELECT '.implode(',', $resQuery).', ('.implode(' + ', $resQuery).') as total
@@ -93,7 +93,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
             foreach ($debrisIDs as $debrisID)
             {
                 $fleetColName = 'fleet_resource_'.$resource[$debrisID];
-                $debrisColName = 'der_'.$resource[$debrisID];
+                $debrisColName = 'debris_'.$resource[$debrisID];
 
                 $collectedGoods[$debrisID] = ceil($targetData[$debrisColName] * $collectFactor);
                 $collectQuery[] = $debrisColName.' = GREATEST(0, '.$debrisColName.' - :'.$resource[$debrisID].')';
