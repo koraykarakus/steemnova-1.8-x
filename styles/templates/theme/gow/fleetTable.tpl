@@ -5,8 +5,8 @@
     <span class="fleet_text color-gray">{$LNG.fm_fleets}</span>
   {/if}
   {if !empty($fleets)}
-    <button onclick="showHideFleets();" class="fleet_btn hover-pointer" type="button" name="button">
-      BTN
+    <button id="fleet_btn" onclick="showHideFleets();" class="fleet_btn {if $show_fleets_active}up{else}down{/if}" type="button" name="button">
+      &#9660;
     </button>
   {/if}
 </div>
@@ -21,7 +21,7 @@
       success: function(data) {
 
         $('.fleet_events').stop(true, true).slideToggle(200);
-
+        $('#fleet_btn').toggleClass('up down');
       }
 
     });
