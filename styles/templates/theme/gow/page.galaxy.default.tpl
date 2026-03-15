@@ -313,7 +313,7 @@
 										</th>
 									</tr>
 									<tr>
-										<td style='width:80px'><img src='{$dpath}planeten/debris.jpg' height='75' style='width:75'></td>
+										<td style='width:80px'><img src='{$dpath}planeten/debris.png' height="22" width="22"></td>
 										<td>
 											<table style='width:100%'>
 												<tr>
@@ -337,7 +337,7 @@
 									</tr>
 								</table>
 							</div>
-							<img src="{$dpath}planeten/debris.jpg" height="22" width="22" alt="">
+							<img src="{$dpath}planeten/debris.png" height="22" width="22" alt="">
 						{/if}
 					</div>
 					<div class="player_name">
