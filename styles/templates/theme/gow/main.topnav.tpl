@@ -56,19 +56,19 @@
     {foreach $resourceTable as $resourceID => $resourceData}
       <div class="resource">
         <div class="tooltip tooltip_bottom">
-          <table class=''>
+          <table class='table-gow'>
             {if in_array($resourceID,array(901,902,903))}
               <tr>
                 <td>{$LNG.resource_available}:</td>
-                <td>{$resourceData.current|number}</td>
+                <td class="text_right">{$resourceData.current|number}</td>
               </tr>
               <tr>
                 <td>{$LNG.resource_capacity}:</td>
-                <td>{$resourceData.max|number}</td>
+                <td class="text_right">{$resourceData.max|number}</td>
               </tr>
               <tr>
                 <td>{$LNG.resource_production}:</td>
-                <td class='{if $resourceData.current < $resourceData.max}color-green{else}color-red{/if}'>
+                <td class='text_right {if $resourceData.current < $resourceData.max}color-green{else}color-red{/if}'>
                   {if $resourceData.current < $resourceData.max}
                     {$resourceData.production|number}&nbsp;/&nbsp;{$LNG.short_hour}
                   {else}
@@ -79,21 +79,21 @@
             {elseif $resourceID == 911}
               <tr>
                 <td>{$LNG.energy_available}:</td>
-                <td class='{if  ($resourceData.max + $resourceData.used) > 0}color-green{else}color-red{/if}'>
+                <td class='text_right {if  ($resourceData.max + $resourceData.used) > 0}color-green{else}color-red{/if}'>
                   {($resourceData.max + $resourceData.used)|number}&nbsp;/&nbsp;{$LNG.short_hour}</td>
               </tr>
               <tr>
                 <td>{$LNG.energy_used}:</td>
-                <td>{$resourceData.used|number}&nbsp;/&nbsp;{$LNG.short_hour}</td>
+                <td class="text_right">{$resourceData.used|number}&nbsp;/&nbsp;{$LNG.short_hour}</td>
               </tr>
               <tr>
                 <td>{$LNG.energy_produced}:</td>
-                <td>{$resourceData.max|number}&nbsp;/&nbsp;{$LNG.short_hour}</td>
+                <td class="text_right">{$resourceData.max|number}&nbsp;/&nbsp;{$LNG.short_hour}</td>
               </tr>
             {elseif $resourceID == 921}
               <tr>
                 <td>{$LNG.darkmatter_available}:</td>
-                <td>{$resourceData.current|number}</td>
+                <td class="text_right">{$resourceData.current|number}</td>
               </tr>
             {/if}
           </table>

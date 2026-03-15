@@ -1659,6 +1659,17 @@ background: linear-gradient(180deg,
 }
 
 /**/
+/* text alignment*/
+.text_left{
+	text-align: left;
+}
+.text_right{
+	text-align: right;
+}
+.text_center{
+	text-align: center;
+}
+/**/
 
 /*steemnova img*/
 .centered-image {
