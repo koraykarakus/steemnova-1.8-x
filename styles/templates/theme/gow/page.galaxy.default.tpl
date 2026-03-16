@@ -7,7 +7,7 @@
 			<input type="hidden" name="system" value="{$system}">
 			<input type="hidden" name="planet" value="{$planet}">
 			<input type="hidden" name="type" value="{$type}">
-			<table class="table-gow">
+			<table class="table-gow table_full">
 				<tr>
 					<th colspan="2">{$LNG.gl_missil_launch} [{$galaxy}:{$system}:{$planet}]</th>
 				</tr>

@@ -1,4 +1,4 @@
-<table>
+<table class="table-gow table_full">
 	<tr>
 		<th>{$LNG.in_missilestype}</th><th>{$LNG.in_missilesamount}</th><th>{$LNG.in_destroy}</th>
 	</tr>
