@@ -1,17 +1,5 @@
 {block name="title" prepend}{$LNG.lm_galaxy}{/block}
 {block name="content"}
-
-	<script type="text/javascript">
-		function closePopovers() {
-			$('.popover').not(this).popover('hide');
-		}
-
-		function closePopover() {
-			$('.popover').removeClass('show');
-			$('.popover').popover('hide');
-		}
-	</script>
-
 	
 	{if $action == 'sendMissle'}
 		<form action="?page=fleetMissile" method="post">
@@ -299,7 +287,7 @@
 																{if $currentPlanet.missions.6}
 																<tr>
 																	<td>
-																		<a class='hover-underline hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});closePopover();'>
+																		<a class='hover-underline hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});'>
 																			{$LNG.type_mission_6}
 																		</a>
 																	</td>
