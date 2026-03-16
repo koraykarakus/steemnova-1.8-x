@@ -508,6 +508,11 @@ $LNG['se_disclaimerAddress'] = 'Адрес';
 $LNG['se_disclaimerPhone'] = 'Телефон';
 $LNG['se_disclaimerMail'] = 'Электронная почта';
 $LNG['se_disclaimerNotice'] = 'Дополнительная информация';
+$LNG['se_show_not_learned_ships'] = "Показать корабли, которые ещё не изучены";
+$LNG['se_show_not_learned_buildings'] = "Показать здания, которые ещё не изучены";
+$LNG['se_show_not_learned_tech'] = "Показать технологии, которые ещё не изучены";
+$LNG['se_show_tech_without_research_center'] = "Показать технологии до постройки исследовательского центра";
+$LNG['se_show_ships_without_shipyard'] = "Показать корабли до постройки верфи";
 
 // Полномочия
 $LNG['mod_title'] = 'Полномочия Администрации';

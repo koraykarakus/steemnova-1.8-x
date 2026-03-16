@@ -591,6 +591,11 @@ $LNG['se_disclaimerAddress'] = 'Address';
 $LNG['se_disclaimerPhone'] = 'Phone number';
 $LNG['se_disclaimerMail'] = 'Email address';
 $LNG['se_disclaimerNotice'] = 'More information';
+$LNG['se_show_not_learned_ships'] = "Show ships which are not learned yet";
+$LNG['se_show_not_learned_buildings'] = "Show buildings which are not learned yet";
+$LNG['se_show_not_learned_tech'] = "Show tech which are not learned yet";
+$LNG['se_show_tech_without_research_center'] = "Show tech before research center built";
+$LNG['se_show_ships_without_shipyard'] = "Show ships before shipyard built";
 
 //###########################################################//
 

@@ -526,6 +526,11 @@ $LNG['se_disclaimer_address'] = 'Dirección';
 $LNG['se_disclaimer_phone'] = 'Número de Teléfono';
 $LNG['se_disclaimer_mail'] = 'Dirección de E-Mail';
 $LNG['se_disclaimer_notice'] = 'Para obtener más información';
+$LNG['se_show_not_learned_ships'] = "Mostrar naves que aún no han sido investigadas";
+$LNG['se_show_not_learned_buildings'] = "Mostrar edificios que aún no han sido investigados";
+$LNG['se_show_not_learned_tech'] = "Mostrar tecnologías que aún no han sido investigadas";
+$LNG['se_show_tech_without_research_center'] = "Mostrar tecnologías antes de construir el centro de investigación";
+$LNG['se_show_ships_without_shipyard'] = "Mostrar naves antes de construir el astillero";
 
 //###########################################################//
 

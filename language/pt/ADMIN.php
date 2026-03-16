@@ -540,6 +540,11 @@ $LNG['se_disclaimerAddress'] = 'Endereço';
 $LNG['se_disclaimerPhone'] = 'Número de telefone';
 $LNG['se_disclaimerMail'] = 'Endereço de e-mail';
 $LNG['se_disclaimerNotice'] = 'Mais informações';
+$LNG['se_show_not_learned_ships'] = "Mostrar naves que ainda não foram pesquisadas";
+$LNG['se_show_not_learned_buildings'] = "Mostrar edifícios que ainda não foram pesquisados";
+$LNG['se_show_not_learned_tech'] = "Mostrar tecnologias que ainda não foram pesquisadas";
+$LNG['se_show_tech_without_research_center'] = "Mostrar tecnologias antes de construir o centro de pesquisa";
+$LNG['se_show_ships_without_shipyard'] = "Mostrar naves antes de construir o estaleiro";
 
 //###########################################################//
 

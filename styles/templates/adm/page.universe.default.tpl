@@ -128,36 +128,37 @@
 						name="energySpeed" value="{$energySpeed}" type="text">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_ships">Show unlearned
-						ships</label>
+					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_ships">
+						{$LNG.se_show_not_learned_ships}
+					</label>
 					<input class="mx-2" id="show_unlearned_ships" name="show_unlearned_ships" {if $show_unlearned_ships}
 						checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_buildings">Show
-						unlearned
-						buildings</label>
+					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_buildings">
+						{$LNG.se_show_not_learned_buildings}
+					</label>
 					<input class="mx-2" id="show_unlearned_buildings" name="show_unlearned_buildings"
 						{if $show_unlearned_buildings} checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_technology">Show
-						unlearned
-						technology</label>
+					<label class="text-start my-1 cursor-pointer hover-underline" for="show_unlearned_technology">
+						{$LNG.se_show_not_learned_tech}
+					</label>
 					<input class="mx-2" id="show_unlearned_technology" name="show_unlearned_technology"
 						{if $show_unlearned_technology} checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="show_tech_no_research">Show
-						technology if no
-						research center</label>
+					<label class="text-start my-1 cursor-pointer hover-underline" for="show_tech_no_research">
+						{$LNG.se_show_tech_without_research_center}
+					</label>
 					<input class="mx-2" id="show_tech_no_research" name="show_tech_no_research" {if $show_tech_no_research}
 						checked="checked" {/if} type="checkbox">
 				</div>
 				<div class="form-gorup d-flex my-1 p-2 ">
-					<label class="text-start my-1 cursor-pointer hover-underline" for="show_ships_no_shipyard">Show ships if
-						no
-						shipyard</label>
+					<label class="text-start my-1 cursor-pointer hover-underline" for="show_ships_no_shipyard">
+						{$LNG.se_show_ships_without_shipyard}
+					</label>
 					<input class="mx-2" id="show_ships_no_shipyard" name="show_ships_no_shipyard"
 						{if $show_ships_no_shipyard} checked="checked" {/if} type="checkbox">
 				</div>

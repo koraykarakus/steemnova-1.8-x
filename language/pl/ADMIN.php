@@ -526,6 +526,11 @@ $LNG['se_disclaimerAddress'] = 'Adres';
 $LNG['se_disclaimerPhone'] = 'Telefon';
 $LNG['se_disclaimerMail'] = 'e-mail Adres';
 $LNG['se_disclaimerNotice'] = 'Więcej';
+$LNG['se_show_not_learned_ships'] = "Pokaż statki, które nie zostały jeszcze odblokowane";
+$LNG['se_show_not_learned_buildings'] = "Pokaż budynki, które nie zostały jeszcze odblokowane";
+$LNG['se_show_not_learned_tech'] = "Pokaż technologie, które nie zostały jeszcze odblokowane";
+$LNG['se_show_tech_without_research_center'] = "Pokaż technologie przed zbudowaniem centrum badawczego";
+$LNG['se_show_ships_without_shipyard'] = "Pokaż statki przed zbudowaniem stoczni";
 //###########################################################//
 
 //---------------	MODERACIÓN - MODERATION	- MODERACJA -----------------------//

@@ -301,6 +301,11 @@ $LNG['se_smtp_user'] = 'SMTP Kullanici Adi:';
 $LNG['se_smtp_pass'] = 'SMTP Sifresi:';
 $LNG['se_smtp_sendmail'] = 'SMTP Gonderen:';
 $LNG['se_smtp_sendmail_info'] = 'Email adresinizi giriniz. Gonderen adres ile ayni olmasi sart degik';
+$LNG['se_show_not_learned_ships'] = "Henüz öğrenilmemiş gemileri göster";
+$LNG['se_show_not_learned_buildings'] = "Henüz öğrenilmemiş binaları göster";
+$LNG['se_show_not_learned_tech'] = "Henüz öğrenilmemiş teknolojileri göster";
+$LNG['se_show_tech_without_research_center'] = "Araştırma merkezi kurulmadan önce teknolojileri göster";
+$LNG['se_show_ships_without_shipyard'] = "Tersane kurulmadan önce gemileri göster";
 ####FTP AYARLARI -Aktif Degil###
 /*
 $LNG['se_ftp']							= 'FTP Ayarlari';
