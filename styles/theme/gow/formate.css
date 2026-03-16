@@ -999,6 +999,13 @@ input[type="radio"] {
 	position: absolute;
 	top: 0;
 	left: 0;
+	background: url('pic/abort.gif');
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	outline: none;
+	border: none;
 }
 
 .queue_left:has(.btn_cancel:hover)>.tooltip {

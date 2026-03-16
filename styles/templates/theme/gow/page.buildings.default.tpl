@@ -253,7 +253,6 @@
                 <input type="hidden" name="cmd" value="cancel">
               {/if}
               <button class="btn_cancel" type="submit" name="button">
-                BTN
                 <div class="tooltip tooltip_top">{$LNG.bd_cancel}</div>
               </button>
             </form>
