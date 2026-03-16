@@ -6,7 +6,7 @@
 		</tr>
 		<tr>
 			<td>
-				<p class="text-center">{$message}</p>
+				<p class="text_center">{$message}</p>
 				{if !empty($redirectButtons)}
 					<p>
 						{foreach $redirectButtons as $button}
