@@ -947,6 +947,7 @@ input[type="radio"] {
 	display: flex;
 	background: rgb(0, 0, 0, 0.8) !important;
 	z-index: 2;
+	cursor: pointer;
 }
 
 .queue_wrapper {
