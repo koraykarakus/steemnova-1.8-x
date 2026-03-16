@@ -474,6 +474,8 @@ $LNG['bd_cancel_send'] = 'Eliminar - Seleccionar';
 $LNG['bd_destroy_time'] = 'Duración';
 $LNG['bd_max_ships'] = 'Máx';
 $LNG['bd_max_ships_long'] = 'Máximo de unidades a construir';
+$LNG['bd_resource_settings'] = "Configuración de recursos";
+
 $LNG['sys_notenough_money'] = 'En el planeta %s <a href="?page=buildings&amp;cp=%d&amp;re=0">[%d:%d:%d]</a> no tienes suficientes recursos para construir %s . <br>Ahora tienes %s de %s , %s de %s y %s de %s. <br>El coste de la construcción es  %s %s , %s %s y %s %s.';
 $LNG['sys_nomore_level'] = 'Intentas destruir un edificio que ya no tiene más ( %s ).';
 $LNG['sys_buildlist'] = 'Lista de Construcción';

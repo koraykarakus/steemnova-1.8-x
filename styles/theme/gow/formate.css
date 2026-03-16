@@ -658,6 +658,25 @@ input[type="radio"] {
 	width: 654px;
 	height: 300px;
 }
+.items_wrapper>.top>.link_resources{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	text-decoration: none;
+	color: #99cc00;
+	position: relative;
+	width: 231px;
+	left: calc(100% - 231px);
+	top: calc(100% - 25px);
+	height: 25px;
+	background: #0b0f1a;
+	border: 2px solid #000;
+	transition: 0.5s ease;
+}
+.items_wrapper>.top>.link_resources:hover{
+	background: #101625;
+}
 
 .items_wrapper>.top>.item_big {
 	display: flex;

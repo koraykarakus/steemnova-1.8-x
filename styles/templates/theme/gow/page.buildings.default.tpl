@@ -6,10 +6,12 @@
 
       if ($('#item_big_' + id).hasClass('hidden')) {
         $('.item_big').addClass('hidden');
+        $('.link_resources').addClass('hidden');
         $('.item_small').removeClass('border-color-active').removeClass('border-color-passive');
         $('#item_big_' + id).removeClass('hidden');
         $('#item_small_' + id).addClass('border-color-active');
       } else {
+        $('.link_resources').removeClass('hidden');
         $('#item_big_' + id).addClass('hidden');
         $('#item_small_' + id).addClass('border-color-passive').removeClass('border-color-active');
       }
@@ -167,6 +169,9 @@
           </div>
         </div>
       {/foreach}
+      <a class="link_resources" href="?page=resources">
+        {$LNG.bd_resource_settings}
+      </a>
     </div>
     <div class="bottom">
       <div class="title">

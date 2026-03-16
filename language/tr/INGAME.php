@@ -486,6 +486,8 @@ $LNG['bd_cancel_send'] = 'Iptal Et';
 $LNG['bd_destroy_time'] = 'Yikim Suresi';
 $LNG['bd_max_ships'] = 'max';
 $LNG['bd_max_ships_long'] = 'Uretime verilebilecek azami miktar';
+$LNG['bd_resource_settings'] = "Kaynak Ayarları";
+
 $LNG['sys_notenough_money'] = 'Hata %s <a href="./game.php?page=buildings&amp;cp=%d&amp;re=0">[%d:%d:%d]</a>de yeterli hammadde yok.  . <br> Insaa Edilmesi Emredilen Bina: %s. Sendeki mevcut hammadde %s %s , %s %s and %s %s. <br>Insaa icin gereken ise  %s %s , %s %s ve %s %s.';
 $LNG['sys_nomore_level'] = "Mevcut olmayan bir binayi yikmaya calisiyorsun ( %s ).";
 $LNG['sys_buildlist'] = "Insaa Listesi";

@@ -466,6 +466,8 @@ $LNG['bd_cancel_send'] = 'Supprimé - Selectionné';
 $LNG['bd_destroy_time'] = 'Temps';
 $LNG['bd_max_ships'] = 'Max';
 $LNG['bd_max_ships_long'] = 'Maximum unités constructibles';
+$LNG['bd_resource_settings'] = "Paramètres des ressources";
+
 $LNG['sys_notenough_money'] = 'Vous n\'avez pas assez d\'argent %s <a href="./game.php?page=buildings&cp=%d&re=0">[%d:%d:%d]</a> pour construire %s. <br>Vos ressources sont : %s %s , %s %s and %s %s. <br>Le coût de construction est de : %s %s , %s %s and %s %s.';
 $LNG['sys_nomore_level'] = 'Vous tentez de détruire un bâtiment dont vous ne diposez plus ( %s ).';
 $LNG['sys_buildlist'] = 'Liste d\'ensemble';

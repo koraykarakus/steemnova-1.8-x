@@ -526,6 +526,8 @@ $LNG['bd_cancel_send'] = 'Cancel construction';
 $LNG['bd_destroy_time'] = 'Duration';
 $LNG['bd_max_ships'] = 'max';
 $LNG['bd_max_ships_long'] = 'Maximum possible units to build';
+$LNG['bd_resource_settings'] = "Resource Settings";
+
 $LNG['sys_notenough_money'] = 'You dont have enough resources on %s <a href="./game.php?page=buildings&amp;cp=%d&amp;re=0">[%d:%d:%d]</a> to build %s. <br>Your ressources are: %s %s , %s %s and %s %s. <br>The cost of construction is %s %s , %s %s and %s %s.';
 $LNG['sys_nomore_level'] = "There's no building ( %s ) to demolish.";
 $LNG['sys_buildlist'] = "List of construction";
