@@ -153,25 +153,22 @@
 </div>
 
 {if !empty($BuildList)}
-  <div class="">
+  <div class="queue_wrapper">
       <div class="">
         <div id="bx" class=""></div>
         <div id="timeleft" class=""></div>
-        <form action="game.php?page=shipyard&mode={$mode}" method="post" class="mx-auto" style="max-width: 500px;">
+        <form action="game.php?page=shipyard&mode={$mode}" method="post">
           <input type="hidden" name="action" value="delete">
-          <select name="auftr[]" id="auftr"
-            class=""
-            multiple>
+          <select name="auftr[]" id="auftr" class="" multiple>
             <option>&nbsp;</option>
           </select>
-          <button type="submit"
-            class="">
+          <button type="submit" class="">
             {$LNG.bd_cancel_send}
           </button>
         </form>
-        <div class="">
+      </div>
+      <div class="">
           {$LNG.bd_cancel_warning}
-        </div>
       </div>
   </div>
 {/if}
