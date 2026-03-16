@@ -284,6 +284,9 @@ $LNG['gl_points'] = 'Puntos';
 $LNG['gl_player'] = 'Jugador';
 $LNG['gl_to'] = 'hacia';
 $LNG['gl_err_in_vacation'] = "La galaxia no se puede ver en modo vacaciones.";
+$LNG['gl_planet_short'] = 'P';
+$LNG['gl_moon_short'] = 'L'; // Luna
+$LNG['gl_debris_short'] = 'CD'; // Campo de Debris
 
 //----------------------------------------------------------------------------//
 //PHALANX

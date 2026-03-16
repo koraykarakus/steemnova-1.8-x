@@ -47,9 +47,9 @@
 		<div class="galaxy_header">
 			<div class="num">#</div>
 			<div class="planet_name">{$LNG.gl_name_activity}</div>
-			<div class="planet_pic">{$LNG.gl_planet}</div>
-			<div class="moon_pic">{$LNG.gl_moon}</div>
-			<div class="debris_pic">{$LNG.gl_debris}</div>
+			<div class="planet_pic">{$LNG.gl_planet_short}</div>
+			<div class="moon_pic">{$LNG.gl_moon_short}</div>
+			<div class="debris_pic">{$LNG.gl_debris_short}</div>
 			<div class="state">{$LNG.gl_player_estate}</div>
 			<div class="alliance">{$LNG.gl_alliance}</div>
 			<div class="actions">{$LNG.gl_actions}</div>

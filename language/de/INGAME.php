@@ -310,6 +310,9 @@ $LNG['gl_points'] = 'Punkte';
 $LNG['gl_player'] = 'Spieler';
 $LNG['gl_to'] = 'nach';
 $LNG['gl_err_in_vacation'] = "Die Galaxie kann im Urlaubsmodus nicht angezeigt werden.";
+$LNG['gl_planet_short'] = 'P';
+$LNG['gl_moon_short'] = 'M';
+$LNG['gl_debris_short'] = 'TF'; // Trümmerfeld
 
 //----------------------------------------------------------------------------//
 //PHALANX

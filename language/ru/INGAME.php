@@ -278,6 +278,9 @@ $LNG['gl_no'] = 'Нет';
 $LNG['gl_points'] = 'Очки';
 $LNG['gl_to'] = 'на';
 $LNG['gl_err_in_vacation'] = "Галактику нельзя просматривать в режиме отпуска.";
+$LNG['gl_planet_short'] = 'П'; // Планета
+$LNG['gl_moon_short'] = 'Л'; // Луна
+$LNG['gl_debris_short'] = 'ОП'; // Обломки
 // Фаланга
 $LNG['px_no_deuterium'] = 'Не хватает дейтерия.';
 $LNG['px_scan_position'] = 'Координаты сканирования';
