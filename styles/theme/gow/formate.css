@@ -135,6 +135,13 @@ body {
 	color:#D20000;
 }
 
+.infobox {
+    border: 2px solid red;
+    padding: 2px 5px;
+    text-align: center;
+	max-width: 654px;
+}
+
 /*--*/
 
 /*main.planetmenu.tpl*/
