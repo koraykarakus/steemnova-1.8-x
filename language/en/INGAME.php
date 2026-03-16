@@ -321,6 +321,7 @@ $LNG['gl_player'] = 'Player';
 $LNG['gl_to'] = 'to';
 $LNG['gl_to'] = 'to';
 $LNG['gl_trade_space'] = 'Trading zone';
+$LNG['gl_err_in_vacation'] = "Galaxy cannot be viewed in vacation mode.";
 
 //----------------------------------------------------------------------------//
 // Sensor Phalanx

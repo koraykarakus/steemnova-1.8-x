@@ -29,6 +29,11 @@ class ShowGalaxyPage extends AbstractGamePage
     public function show(): void
     {
         global $USER, $PLANET, $resource, $LNG, $reslist;
+        
+        if (inVacationMode($USER))
+        {
+            $this->printMessage($LNG['gl_err_in_vacation']);
+        }
 
         $config = Config::get();
 
