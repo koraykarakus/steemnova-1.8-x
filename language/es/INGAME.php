@@ -283,6 +283,7 @@ $LNG['gl_no'] = 'No';
 $LNG['gl_points'] = 'Puntos';
 $LNG['gl_player'] = 'Jugador';
 $LNG['gl_to'] = 'hacia';
+$LNG['gl_err_in_vacation'] = "La galaxia no se puede ver en modo vacaciones.";
 
 //----------------------------------------------------------------------------//
 //PHALANX

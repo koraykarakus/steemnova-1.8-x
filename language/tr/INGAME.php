@@ -293,6 +293,7 @@ $LNG['gl_no'] = 'Hayir';
 $LNG['gl_points'] = 'Puan';
 $LNG['gl_player'] = 'Oyuncu';
 $LNG['gl_to'] = ' ';
+$LNG['gl_err_in_vacation'] = "Tatil modunda galaksi görüntülenemez.";
 
 //----------------------------------------------------------------------------//
 // Radar
