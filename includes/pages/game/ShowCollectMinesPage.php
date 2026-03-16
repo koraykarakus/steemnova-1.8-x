@@ -18,7 +18,7 @@ class ShowCollectMinesPage extends AbstractGamePage
         global $USER, $PLANET, $resource, $LNG, $db, $config;
 
         //Don't allow user to collect mine if in vacation mode
-        if (isVacationMode($USER))
+        if (inVacationMode($USER))
         {
             $this->printMessage($LNG['cm_error_1']);
         }

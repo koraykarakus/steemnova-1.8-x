@@ -359,7 +359,7 @@ class ShowBuildingsPage extends AbstractGamePage
             $QueueDestroy = max(0, $QueueDestroy);
         }
 
-        $CanBuildElement = isVacationMode($USER) || $config->max_elements_build == 0 || $QueueCount < $config->max_elements_build;
+        $CanBuildElement = inVacationMode($USER) || $config->max_elements_build == 0 || $QueueCount < $config->max_elements_build;
         $CurrentMaxFields = CalculateMaxPlanetFields($PLANET);
 
         $RoomIsOk = $PLANET['field_current'] < ($CurrentMaxFields - $QueueDestroy);

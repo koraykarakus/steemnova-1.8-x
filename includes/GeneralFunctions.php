@@ -553,7 +553,7 @@ function getRandomString(): string
     return md5(uniqid());
 }
 
-function isVacationMode($USER): bool
+function inVacationMode($USER): bool
 {
     return $USER['urlaubs_modus'] == 1;
 }

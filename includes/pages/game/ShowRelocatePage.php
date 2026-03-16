@@ -20,7 +20,7 @@ class ShowRelocatePage extends AbstractGamePage
         $planet = HTTP::_GP('planet', 0);
 
         //cannot relocate if user in vacation mode
-        if (isVacationMode($USER))
+        if (inVacationMode($USER))
         {
             $this->printMessage($LNG['cannot_use_in_vac']);
         }

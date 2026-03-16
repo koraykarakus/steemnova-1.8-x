@@ -215,7 +215,7 @@ class ShowFleetTablePage extends AbstractGamePage
         $this->tpl_obj->loadscript('flotten.js');
 
         if (!empty($fleet_id)
-            && !IsVacationMode($USER))
+            && !inVacationMode($USER))
         {
             switch ($get_action)
             {
@@ -330,7 +330,7 @@ class ShowFleetTablePage extends AbstractGamePage
             'targetType'         => $target_type,
             'targetMission'      => $target_mission,
             'acsData'            => $acs_data,
-            'isVacation'         => IsVacationMode($USER),
+            'isVacation'         => inVacationMode($USER),
             'bonusAttack'        => $USER[$resource[109]] * 10 + $USER['factor']['Attack'] * 100,
             'bonusDefensive'     => $USER[$resource[110]] * 10 + $USER['factor']['Defensive'] * 100,
             'bonusShield'        => $USER[$resource[111]] * 10 + $USER['factor']['Shield'] * 100,

@@ -56,7 +56,7 @@ class ShowFleetMissilePage extends AbstractGamePage
 
         $error = [];
 
-        if (IsVacationMode($USER))
+        if (inVacationMode($USER))
         {
             $error[] = $LNG['fl_vacation_mode_active'];
         }

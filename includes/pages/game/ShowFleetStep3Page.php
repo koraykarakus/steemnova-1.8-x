@@ -28,7 +28,7 @@ class ShowFleetStep3Page extends AbstractGamePage
     {
         global $USER, $PLANET, $resource, $LNG;
 
-        if (IsVacationMode($USER))
+        if (inVacationMode($USER))
         {
             FleetFunctions::GotoFleetPage(0);
         }
@@ -313,7 +313,7 @@ class ShowFleetStep3Page extends AbstractGamePage
             ]]);
         }
 
-        if ($targetMission != 8 && IsVacationMode($targetPlayerData))
+        if ($targetMission != 8 && inVacationMode($targetPlayerData))
         {
             $this->printMessage($LNG['fl_target_exists'], [[
                 'label' => $LNG['sys_back'],

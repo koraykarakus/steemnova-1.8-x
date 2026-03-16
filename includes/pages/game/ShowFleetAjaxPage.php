@@ -47,7 +47,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
         $this->return_data['slots'] = $active_slots;
 
-        if (IsVacationMode($USER))
+        if (inVacationMode($USER))
         {
             $this->sendData(620, $LNG['fa_vacation_mode_current']);
         }
@@ -161,7 +161,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 $this->sendData(619, $LNG['fa_action_not_allowed']);
             }
 
-            if (IsVacationMode($target_data))
+            if (inVacationMode($target_data))
             {
                 $this->sendData(605, $LNG['fa_vacation_mode']);
             }

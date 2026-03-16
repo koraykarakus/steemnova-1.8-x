@@ -30,7 +30,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
             ]]);
         }
 
-        if (IsVacationMode($USER))
+        if (inVacationMode($USER))
         {
             $this->printMessage($LNG['ae_error_2'], [[
                 'label' => $LNG['sys_back'],
