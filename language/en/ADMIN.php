@@ -1191,6 +1191,7 @@ $LNG['modul_57'] = 'Login - Battle Hall';
 $LNG['modul_58'] = 'Login - Disclaimer';
 $LNG['modul_59'] = 'Auth - Google';
 $LNG['modul_60'] = 'Auth - Discord';
+$LNG['modul_61'] = 'Questions Page';
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';

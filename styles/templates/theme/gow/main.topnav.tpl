@@ -41,9 +41,11 @@
           {$LNG.lm_support}
         </a>
       {/if}
+      {if isModuleAvailable($smarty.const.MODULE_QUESTIONS)}
       <a href="game.php?page=questions" class="{if $page === "questions"}active{/if}">
         {$LNG.lm_faq}
       </a>
+      {/if}
       <a href="game.php?page=logout">
         {$LNG.lm_logout}
       </a>
