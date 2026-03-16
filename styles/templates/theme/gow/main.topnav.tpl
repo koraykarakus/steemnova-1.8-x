@@ -27,6 +27,7 @@
       </a>
       {if isModuleAvailable($smarty.const.MODULE_SEARCH)}
         <a href="game.php?page=search" class="{if $page === "search"}active{/if}">
+          {$LNG.lm_search}
         </a>
       {/if}
       {if isModuleAvailable($smarty.const.MODULE_SUPPORT)}
