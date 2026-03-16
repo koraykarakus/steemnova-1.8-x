@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_logout}{/block}
 {block name="content"}
-	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto text-center">
+	<table class="table-gow table_full center_x">
 		<tr>
 			<th>{$LNG.lo_title}</th>
 		</tr>
@@ -8,7 +8,7 @@
 			<td>{$LNG.lo_logout}</td>
 		</tr>
 	</table>
-	<table class="table table-gow table-sm fs-12 my-2 w-50 mx-auto text-center">
+	<table class="table-gow table_full center_x">
 		<tr>
 			<th>{$LNG.lo_redirect}</th>
 		</tr>

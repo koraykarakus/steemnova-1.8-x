@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.fcm_info}{/block}
 {block name="content"}
-	<table class="table table-gow fs-12 w-100 text-center">
+	<table class="table-gow table_full">
 		<tr>
 			<th>{$LNG.fcm_info}</th>
 		</tr>

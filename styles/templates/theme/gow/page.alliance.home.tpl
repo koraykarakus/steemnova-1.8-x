@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table table-gow table-sm fs-12">
+	<table class="table-gow table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_your_ally}</th>
 		</tr>
@@ -10,16 +10,16 @@
 			</tr>
 		{/if}
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_ally_info_tag}</td>
-			<td class="fs-12 fw-bold text-blue">{$ally_tag}</td>
+			<td class="text-gow-gray">{$LNG.al_ally_info_tag}</td>
+			<td class="text-blue">{$ally_tag}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_ally_info_name}</td>
-			<td class="fs-12 fw-bold text-blue">{$ally_name}</td>
+			<td class="text-gow-gray">{$LNG.al_ally_info_name}</td>
+			<td class="text-blue">{$ally_name}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_ally_info_members}</td>
-			<td class="fs-12 fw-bold text-blue">[{$ally_members} / {$ally_max_members}]</td>
+			<td class="text-gow-gray">{$LNG.al_ally_info_members}</td>
+			<td class="text-blue">[{$ally_members} / {$ally_max_members}]</td>
 		</tr>
 		{if $rights.member_list}
 			<tr>
@@ -115,23 +115,23 @@
 					{if !empty($DiploInfo.0)}<b><u>{$LNG.al_diplo_level.0}</u></b><br><br>
 						{foreach item=PaktInfo from=$DiploInfo.0}<a
 							href="?page=alliance&mode=info&amp;id={$PaktInfo.1}">{$PaktInfo.0}</a><br>{/foreach}<br>
-						{/if}
+					{/if}
 					{if !empty($DiploInfo.1)}<b><u>{$LNG.al_diplo_level.1}</u></b><br><br>
 						{foreach item=PaktInfo from=$DiploInfo.1}<a
 							href="?page=alliance&mode=info&amp;id={$PaktInfo.1}">{$PaktInfo.0}</a><br>{/foreach}<br>
-						{/if}
+					{/if}
 					{if !empty($DiploInfo.2)}<b><u>{$LNG.al_diplo_level.2}</u></b><br><br>
 						{foreach item=PaktInfo from=$DiploInfo.2}<a
 							href="?page=alliance&mode=info&amp;id={$PaktInfo.1}">{$PaktInfo.0}</a><br>{/foreach}<br>
-						{/if}
+					{/if}
 					{if !empty($DiploInfo.3)}<b><u>{$LNG.al_diplo_level.3}</u></b><br><br>
 						{foreach item=PaktInfo from=$DiploInfo.3}<a
 							href="?page=alliance&mode=info&amp;id={$PaktInfo.1}">{$PaktInfo.0}</a><br>{/foreach}<br>
-						{/if}
+					{/if}
 					{if !empty($DiploInfo.4)}<b><u>{$LNG.al_diplo_level.4}</u></b><br><br>
 						{foreach item=PaktInfo from=$DiploInfo.4}<a
 							href="?page=alliance&mode=info&amp;id={$PaktInfo.1}">{$PaktInfo.0}</a><br>{/foreach}<br>
-						{/if}
+					{/if}
 				{else}
 					{$LNG.al_no_diplo}
 				{/if}

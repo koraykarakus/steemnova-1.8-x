@@ -425,6 +425,11 @@ function CheckNoobProtec($owner_player, $target_player, $player): array
 
 function shortly_number($number, $decial = null): string
 {
+    if ($number < 1000)
+    {
+        return $number;
+    }
+
     $negate = $number < 0 ? -1 : 1;
     $number = abs($number);
     $unit = ["", "K", "M", "B", "T", "Q", "Q+", "S", "S+", "O", "N"];
@@ -446,7 +451,7 @@ function shortly_number($number, $decial = null): string
     }
 
     $decial = !is_numeric($decial) ? ((int) (((int) $number != $number) && $key != 0 && $number != 0 && $number < 100)) : $decial;
-    return pretty_number($negate * $number, $decial) . '&nbsp;' . $unit[$key];
+    return pretty_number($negate * $number, $decial) . $unit[$key];
 }
 
 function floatToString($number, $Pro = 0, $output = false): string

@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table id="memberList" style="width:50%" class="table table-sm table-gow fs-12">
+	<table id="memberList" style="width:50%" class="table-gow">
 		<thead>
 			<tr>
 				<th colspan="8">{$al_users_list}</th>
@@ -24,7 +24,7 @@
 							onclick="return Dialog.Playercard({$userID}, '{$memberListRow.username}');">{$memberListRow.username}</a>
 						{if !empty($memberListRow.class)}{foreach $memberListRow.class as $class}{if !$class@first}&nbsp;{/if}<span
 						class="galaxy-short-{$class} galaxy-short">{$ShortStatus.$class}</span>{/foreach}
-					{/if}</td>
+				{/if}</td>
 			<td><a href="#" onclick="return Dialog.PM({$userID});"><img src="{$dpath}img/m.gif" border="0"
 						title="{$LNG.write_message}"></a></td>
 			<td>{$memberListRow.rankName}</td>
@@ -34,13 +34,13 @@
 			</td>
 			<td>{$memberListRow.register_time}</td>
 			<td>{if $rights.online_state}
-				{if $memberListRow.onlinetime < 4}<span
+					{if $memberListRow.onlinetime < 4}<span
 						style="color:lime">{$LNG.al_memberlist_on}</span>{elseif $memberListRow.onlinetime <= 15}<span
 						style="color:yellow">{$memberListRow.onlinetime} {$LNG.al_memberlist_min}</span>{else}<span
 						style="color:red">{$LNG.al_memberlist_off}</span>{/if}
-						{else}-
-						{/if}</td>
-			</tr>
+				{else}-
+				{/if}</td>
+		</tr>
 		{/foreach}
 	</tbody>
 	<tr>
