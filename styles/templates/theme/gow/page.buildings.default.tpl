@@ -239,7 +239,7 @@
         <div class="queue_item{if $List@first} queue_item_first{/if}">
           <div class="queue_left">
             <div class="tooltip tooltip_top">
-              {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span class="timer" data-time='{$List.endtime}'>{$List.display}</span>
+              {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}'>{$List.display}</span>
             </div>
             <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">

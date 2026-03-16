@@ -186,42 +186,40 @@
   </div>
 
   {if !empty($Queue)}
-    <div id="buildlist"
-      class="ItemsWrapper d-flex flex-wrap justify-content-start w-100 mx-auto my-2 py-2 bg-black border-orange">
+    <div id="buildlist" class="queue_wrapper">
       {foreach $Queue as $List}
         {$ID = $List.element}
-        <div class="d-flex align-items-center {if $List@first}w-100{/if}">
-          <div class="queueItemFirst position-relative d-flex flex-column" data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-html="true"
-            title="{$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>">
-            <img class="m-0 hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
+        <div class="queue_item{if $List@first} queue_item_first{/if}">
+          <div class="queue_left">
+            <div class="tooltip tooltip_top">
+              {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>
+            </div>
+            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">
-            <span
-              class="position-absolute d-flex align-items-center justify-content-center top-0 start-0 levelInfo fs-11 bg-dark text-yellow py-1">{$List.level}</span>
+            <span class="level_info">{$List.level}</span>
 
 
-            <form class="d-flex mx-auto align-items-center justify-content-center" action="game.php?page=research"
-              method="post">
+            <form action="game.php?page=research" method="post">
               {if !$List@first}
                 <input type="hidden" name="listid" value="{$List@iteration}">
                 <input type="hidden" name="cmd" value="remove">
               {else}
                 <input type="hidden" name="cmd" value="cancel">
               {/if}
-              <button
-                class="closeButton btn btn-dark d-flex position-absolute bottom-0 rounded end-0 p-0 bi bi-x-square color-red"
-                type="submit" name="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true"
-                title="{$LNG.bd_cancel}">
+              <button class="btn_cancel" type="submit" name="button">
+                <div class="tooltip tooltip_top">
+                  {$LNG.bd_cancel}
+                </div>
               </button>
             </form>
           </div>
           {if $List@first}
-            <div class="d-flex flex-column align-items-start justify-content-start w-100 mx-2">
-              <div style="border-radius:10px;height:12px;" id="progressbar" class="d-flex align-items-center my-2"
+            <div class="queue_right">
+              <div id="progressbar" 
                 data-time="{$List.resttime}"></div>
-              <span class="fs-12 text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
-              <span class="text-center my-2 text-yellow fs-12" id="time" data-time="{$List.time}"></span>
-              <span class="fs-12 text-yellow">{$List.display}</span>
+              <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
+              <span class="text-yellow" id="time" data-time="{$List.time}"></span>
+              <span class="text-yellow">{$List.display}</span>
             </div>
           {/if}
         </div>

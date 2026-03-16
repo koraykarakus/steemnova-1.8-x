@@ -2059,7 +2059,10 @@ background: linear-gradient(180deg,
 
 #progressbar {
 	width: 90%;
-	height: 18px;
+	display: flex;
+	align-items: center;
+	border-radius:10px;
+	height:12px;
 }
 
 .ui-progressbar-value {
