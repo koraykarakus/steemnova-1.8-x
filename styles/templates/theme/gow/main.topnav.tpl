@@ -69,11 +69,13 @@
             {if in_array($resourceID,array(901,902,903))}
               <tr>
                 <td>{$LNG.resource_available}:</td>
-                <td class="text_right">{$resourceData.current|number}</td>
+                <td class="{if $resourceData.current >= $resourceData.max}color-red {/if}text_right">
+                  {$resourceData.current|number}
+                </td>
               </tr>
               <tr>
                 <td>{$LNG.resource_capacity}:</td>
-                <td class="text_right">{$resourceData.max|number}</td>
+                <td class="{if $resourceData.current >= $resourceData.max}color-red {/if}text_right">{$resourceData.max|number}</td>
               </tr>
               <tr>
                 <td>{$LNG.resource_production}:</td>
@@ -112,11 +114,11 @@
         <span class="resource_name">{$LNG.tech.$resourceID}</span>
         {if !isset($resourceData.current)}
           {$resourceData.currentt = $resourceData.max + $resourceData.used}
-          <div class="res_current user-select-none fs-10 {if $resourceData.currentt > 0}color-green{else}color-red{/if}">
+          <div class="res_current {if $resourceData.currentt > 0}color-green{else}color-red{/if}">
             {$resourceData.currentt|number}
           </div>
         {else}
-          <div class="res_current user-select-none fs-10" id="current_{$resourceData.name}"
+          <div class="res_current {if isset($resourceData.max)}{if $resourceData.current >= $resourceData.max}color-red{/if}{/if}" id="current_{$resourceData.name}"
             data-real="{$resourceData.current}">
             {$resourceData.current|number}
           </div>
