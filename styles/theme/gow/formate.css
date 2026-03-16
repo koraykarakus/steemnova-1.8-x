@@ -1121,6 +1121,10 @@ input[type="radio"] {
 	width: 100%;
 	border: 1px solid #111;
 }
+.galaxy_wrapper>.galaxy_header.info_available_res{
+	justify-content: flex-start;
+	padding-left: 8px;
+}
 .galaxy_wrapper>.galaxy_header>#galaxy_form{
 	display: flex;
 	align-items:center;
