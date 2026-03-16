@@ -76,13 +76,13 @@ class ShowGalaxyPage extends AbstractGamePage
             }
         }
 
-        $targetDefensive = $reslist['defense'];
-        $targetDefensive[] = 502;
-        $missileSelector[0] = $LNG['gl_all_defenses'];
+        $target_defensive = $reslist['defense'];
+        $target_defensive[] = 502;
+        $missile_selector[0] = $LNG['gl_all_defenses'];
 
-        foreach ($targetDefensive as $Element)
+        foreach ($target_defensive as $c_element)
         {
-            $missileSelector[$Element] = $LNG['tech'][$Element];
+            $missile_selector[$c_element] = $LNG['tech'][$c_element];
         }
 
         $sql = "SELECT total_points
@@ -93,19 +93,19 @@ class ShowGalaxyPage extends AbstractGamePage
             ':userId' => $USER['id'],
         ]);
 
-        $galaxyRows = new GalaxyRows();
-        $galaxyRows->setGalaxy($galaxy);
-        $galaxyRows->setSystem($system);
-        $Result = $galaxyRows->getGalaxyData();
-        if (gettype($Result) == "NULL")
+        $galaxy_rows = new GalaxyRows();
+        $galaxy_rows->setGalaxy($galaxy);
+        $galaxy_rows->setSystem($system);
+        $result = $galaxy_rows->getGalaxyData();
+        if (gettype($result) == "NULL")
         {
-            $Result = [];
+            $result = [];
         }
 
         $this->tpl_obj->loadscript('galaxy.js');
         $this->assign([
-            'GalaxyRows'            => $Result,
-            'planetcount'           => sprintf($LNG['gl_populed_planets'], count($Result)),
+            'GalaxyRows'            => $result,
+            'planetcount'           => sprintf($LNG['gl_populed_planets'], count($result)),
             'action'                => $action,
             'galaxy'                => $galaxy,
             'system'                => $system,
@@ -125,7 +125,7 @@ class ShowGalaxyPage extends AbstractGamePage
             'current_planet'        => $PLANET['planet'],
             'planet_type'           => $PLANET['planet_type'],
             'max_planets'           => $config->max_planets,
-            'missileSelector'       => $missileSelector,
+            'missileSelector'       => $missile_selector,
             'ShortStatus'           => [
                 'vacation'     => $LNG['gl_short_vacation'],
                 'banned'       => $LNG['gl_short_ban'],
