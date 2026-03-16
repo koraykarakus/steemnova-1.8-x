@@ -896,7 +896,8 @@ input[type="radio"] {
 
 .level_info {
 	height: 20px;
-	width: 20px;
+	min-width: 20px;
+	width: auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
