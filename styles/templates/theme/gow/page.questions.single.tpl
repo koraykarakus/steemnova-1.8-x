@@ -14,7 +14,7 @@
 		</tr>
 		<tr>
 			<th class="text-center">
-				<a class="btn btn-primary text-white px-2 py-0 mx-auto" href="game.php?page=questions">{$LNG.al_back}</a>
+				<a class="" href="game.php?page=questions">{$LNG.al_back}</a>
 			</th>
 		</tr>
 	</table>

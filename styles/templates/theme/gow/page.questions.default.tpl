@@ -2,23 +2,30 @@
 {block name="content"}
 	<table class="table-gow table_full">
 		<tr>
-			<th class="text-center">{$LNG.faq_overview}</th>
+			<th class="text_center">{$LNG.faq_overview}</th>
 		</tr>
 		<tr>
-			<td class="left">
+			<td>
+				<table class="table-gow table_full">
 				{foreach $LNG.questions as $categoryID => $categoryRow}
-					<h2 class="fs-14">{$categoryRow.category}</h2>
-					<ul>
+					<thead>
+						<tr>
+							<th>{$categoryRow.category}</th>
+						</tr>
+					</thead>
+					<tbody>
 						{foreach $categoryRow as $questionID => $questionRow}
 							{if is_numeric($questionID)}
-								<li>
-									<a
-										href="game.php?page=questions&amp;mode=single&amp;categoryID={$categoryID}&amp;questionID={$questionID}">{$questionRow.title}</a>
-								</li>
+								<tr>
+								<td>
+									<a href="game.php?page=questions&amp;mode=single&amp;categoryID={$categoryID}&amp;questionID={$questionID}">{$questionRow.title}</a>
+								</td>
+								</tr>
 							{/if}
 						{/foreach}
-					</ul>
+					</tbody>
 				{/foreach}
+				</table>
 			</td>
 		</tr>
 	</table>
