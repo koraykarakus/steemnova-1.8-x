@@ -137,6 +137,51 @@ body {
 
 /*--*/
 
+/*main.planetmenu.tpl*/
+#content_right>.planet{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3px 5px;
+	margin: 2px 0;
+	box-sizing: border-box;
+	height: 56px;
+	width: 147px;
+}
+#content_right>.planet>.left{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 43px;
+}
+#content_right>.planet>.left>.type_moon{
+	position: absolute;
+	top: 19px;
+	left: -3px;
+}
+#content_right>.planet>.left>.type_moon:hover>.tooltip{
+ 	display: flex;
+}
+#content_right>.planet>.left>.type_planet{
+	position: relative;
+}
+#content_right>.planet>.left>.type_planet>.tooltip,
+#content_right>.planet>.left>.type_moon>.tooltip
+{
+	left: 80px;
+}
+#content_right>.planet>.left>.type_planet:hover>.tooltip{
+ 	display: flex;
+}
+#content_right>.planet>.right{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 104px;
+}
+/**/
+
 /*main.topnav.tpl*/
 #content_top>.messages{
 	position: absolute;
