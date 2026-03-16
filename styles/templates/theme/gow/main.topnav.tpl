@@ -5,6 +5,12 @@
       {if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}
         <img style="min-width: 15px;" id="attack_alert" src="" alt="">
       {/if}
+      {if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
+      <form action="game.php?page=collectMines" method="post">
+        <input type="hidden" name="from" value="{$page}">
+        <button class="button_dark" type="submit">{$LNG.cm_collect_mines_submit}</button>
+      </form>
+	    {/if}
     </div>
     <div class="mid">
       {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}

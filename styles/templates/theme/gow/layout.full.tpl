@@ -1,12 +1,7 @@
 {include file="main.header.tpl" bodyclass="full"}
 
 <div class="site_header">
-	{if isModuleAvailable($smarty.const.MODULE_COLLECT_MINES)}
-		<form action="game.php?page=collectMines" method="post">
-			<input type="hidden" name="from" value="{$page}">
-			<button class="button_dark" type="submit">{$LNG.cm_collect_mines_submit}</button>
-		</form>
-	{/if}
+	
 </div>
 
 <div class="page_content">
