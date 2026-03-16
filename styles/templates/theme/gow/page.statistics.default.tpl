@@ -26,7 +26,7 @@
 			</tr>
 		</table>
 	</form>
-	<table class="table-gow table_full">
+	<table class="table-gow table_full stats_table">
 		{if $who == 1}
 			{include file="shared.statistics.playerTable.tpl"}
 		{elseif $who == 2}

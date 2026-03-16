@@ -14,7 +14,7 @@
 		</tr>
 		<tr>
 			<th class="text-center">
-				<a class="" href="game.php?page=questions">{$LNG.al_back}</a>
+				<a href="game.php?page=questions">{$LNG.al_back}</a>
 			</th>
 		</tr>
 	</table>

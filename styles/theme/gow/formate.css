@@ -1283,7 +1283,30 @@ background: linear-gradient(180deg,
 			#111113 100%);
 }
 
-
+/**/
+/*page.statistics*/
+.stats_table .ranking{
+	position: relative;
+}
+.stats_table .ranking:hover{
+	cursor: pointer;
+}
+.stats_table .ranking:hover>.tooltip{
+	display: flex;
+}
+.stats_table .leader{
+	position: relative;
+}
+.stats_table .leader:hover>.tooltip{
+	display: flex;
+}
+.stats_table .msg{
+	position: relative;
+}
+.stats_table .msg:hover>.tooltip{
+	display: flex;
+}
+/**/
 
 /*general classes for color and background color*/
 
