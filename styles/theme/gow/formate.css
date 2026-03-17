@@ -1485,6 +1485,13 @@ background: linear-gradient(180deg,
 			#111113 100%);
 }
 
+.galaxy_legend{
+	position: relative;
+	cursor: pointer;
+}
+.galaxy_legend:hover>.tooltip{
+	display: flex;
+}
 /**/
 /*page.statistics*/
 .stats_table .ranking{

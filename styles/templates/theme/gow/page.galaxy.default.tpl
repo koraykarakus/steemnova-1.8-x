@@ -511,9 +511,41 @@
 
 		<tr>
 			<td colspan="6">({$planetcount})</td>
-			<td colspan="2">
-				<a data-bs-toggle="popover" data-bs-placement="right" data-bs-html="true"
-					title="<table class='table table-gow fs-11' style='width:240px'><tr><th colspan='2'>{$LNG.gl_legend}</td></tr><tr><td>{$LNG.gl_strong_player}</td><td><span class='galaxy-short-strong'>{$LNG.gl_short_strong}</span></td></tr><tr><td>{$LNG.gl_week_player}</td><td><span class='galaxy-short-noob'>{$LNG.gl_short_newbie}</span></td></tr><tr><td>{$LNG.gl_vacation}</td><td><span class='galaxy-short-vacation'>{$LNG.gl_short_vacation}</span></td></tr><tr><td>{$LNG.gl_banned}</td><td><span class='galaxy-short-banned'>{$LNG.gl_short_ban}</span></td></tr><tr><td>{$LNG.gl_inactive_seven}</td><td><span class='galaxy-short-inactive'>{$LNG.gl_short_inactive}</span></td></tr><tr><td>{$LNG.gl_inactive_twentyeight}</td><td><span class='galaxy-short-longinactive'>{$LNG.gl_short_long_inactive}</span></td></tr></table>">{$LNG.gl_legend}</a>
+			<td class="galaxy_legend" colspan="2">
+				<div class="tooltip tooltip_top">
+					<table style='width:240px'>
+						<tr>
+							<th colspan='2'>{$LNG.gl_legend}</th>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_strong_player}</td>
+							<td>
+								<span class='galaxy-short-strong'>{$LNG.gl_short_strong}</span>
+							</td>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_week_player}</td>
+							<td><span class='galaxy-short-noob'>{$LNG.gl_short_newbie}</span></td>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_vacation}</td>
+							<td><span class='galaxy-short-vacation'>{$LNG.gl_short_vacation}</span></td>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_banned}</td>
+							<td><span class='galaxy-short-banned'>{$LNG.gl_short_ban}</span></td>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_inactive_seven}</td>
+							<td><span class='galaxy-short-inactive'>{$LNG.gl_short_inactive}</span></td>
+						</tr>
+						<tr>
+							<td>{$LNG.gl_inactive_twentyeight}</td>
+							<td><span class='galaxy-short-longinactive'>{$LNG.gl_short_long_inactive}</span></td>
+						</tr>
+					</table>
+				</div>
+					{$LNG.gl_legend}
 			</td>
 		</tr>
 		<tr style="display:none;" id="fleetstatusrow">
