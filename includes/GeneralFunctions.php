@@ -558,6 +558,16 @@ function inVacationMode($USER): bool
     return $USER['urlaubs_modus'] == 1;
 }
 
+function limitText($text, $length = 15)
+{
+    if (mb_strlen($text, 'UTF-8') > $length) 
+    {
+        return mb_substr($text, 0, $length, 'UTF-8') . '...';
+    }
+
+    return $text;
+}
+
 function clearGIF(): void
 {
     header('Cache-Control: no-cache');

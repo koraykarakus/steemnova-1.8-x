@@ -1390,6 +1390,10 @@ input[type="radio"] {
 	height: 29px;
 	transition: 0.2s ease;
 	user-select: none;
+	position: relative;
+}
+.galaxy_wrapper>.galaxy_row>.planet_name:hover>.tooltip{
+	display: flex;
 }
 .galaxy_wrapper>.galaxy_row>.planet_picture{
 	width: 36px;

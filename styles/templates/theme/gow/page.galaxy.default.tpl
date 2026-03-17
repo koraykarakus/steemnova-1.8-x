@@ -90,7 +90,15 @@
 					{$currentPlanet = $GalaxyRows[$planet]}
 					<div class="num">{$planet}</div>
 					<div class="planet_name">
-						{$currentPlanet.planet.name}<span class="color-red">{$currentPlanet.lastActivity}</span>
+					{if mb_strlen($currentPlanet.planet.name > 12)}
+						<div class="tooltip tooltip_bottom">
+							{$currentPlanet.planet.name}
+						</div>
+						{limitText($currentPlanet.planet.name, 12)}
+					{else}
+						{$currentPlanet.planet.name}
+					{/if}
+						&nbsp;<span class="color-red">{$currentPlanet.lastActivity}</span>
 					</div>
 					<div class="planet_picture">
 						<div class="tooltip tooltip_right">
@@ -396,7 +404,9 @@
 									</tr>
 				 				</table>
 							</div>
-							<span class="{foreach $currentPlanet.user.class as $class}{if !$class@first}{/if}galaxy-username-{$class}{/foreach} galaxy-username">{$currentPlanet.user.username}</span>
+							<span class="{foreach $currentPlanet.user.class as $class}{if !$class@first}{/if}galaxy-username-{$class}{/foreach} galaxy-username">
+								{limitText($currentPlanet.user.username, 15)}
+							</span>
 							{if !empty($currentPlanet.user.class)}
 								<span>(</span>
 								{foreach $currentPlanet.user.class as $class}
@@ -436,7 +446,9 @@
 									{/if}
 								</table>
 							</div>
-							<span class="{foreach $currentPlanet.alliance.class as $class}{if !$class@first}{/if}galaxy-alliance-{$class}{/foreach} galaxy-alliance">{$currentPlanet.alliance.tag}</span>
+							<span class="{foreach $currentPlanet.alliance.class as $class}{if !$class@first}{/if}galaxy-alliance-{$class}{/foreach} galaxy-alliance">
+								[{limitText($currentPlanet.alliance.tag,10)}]
+								</span>
 						{else}
 							-
 						{/if}
