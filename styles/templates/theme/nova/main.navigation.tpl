@@ -34,7 +34,7 @@
     {if isModuleAvailable($smarty.const.MODULE_RESSOURCE_LIST)}<li><a
                 class="fs-14 fw-bold {if $page == 'resources'}active{/if}"
             href="game.php?page=resources">{$LNG.lm_resources}</a></li>{/if}
-    {if isModuleAvailable($smarty.const.MODULE_OFFICIER) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}<li><a
+    {if isModuleAvailable($smarty.const.MODULE_OFFICERS) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}<li><a
                 class="fs-14 fw-bold {if $page == 'officier'}active{/if}"
             href="game.php?page=officier">{$LNG.lm_officiers}</a></li>{/if}
     {if isModuleAvailable($smarty.const.MODULE_TRADER)}<li><a class="fs-14 fw-bold {if $page == 'trader'}active{/if}"

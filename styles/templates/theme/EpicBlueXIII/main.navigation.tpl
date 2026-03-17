@@ -49,7 +49,7 @@
       <a class="{if $page == 'resources'}menuActive{/if}" href="game.php?page=resources">{$LNG.lm_resources}</a>
     </li>
     {/if}
-    {if isModuleAvailable($smarty.const.MODULE_OFFICIER) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
+    {if isModuleAvailable($smarty.const.MODULE_OFFICERS) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
     <li>
       <a class="{if $page == 'officier'}menuActive{/if}" href="game.php?page=officier">{$LNG.lm_officiers}</a>
     </li>

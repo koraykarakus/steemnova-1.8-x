@@ -118,7 +118,7 @@ class ShowOfficierPage extends AbstractGamePage
             && $_SERVER['REQUEST_METHOD'] === 'POST'
             && $USER['urlaubs_modus'] == 0)
         {
-            if (isModuleAvailable(MODULE_OFFICIER)
+            if (isModuleAvailable(MODULE_OFFICERS)
                 && in_array($update_id, $reslist['officier']))
             {
                 $this->UpdateOfficier($update_id);
@@ -158,7 +158,7 @@ class ShowOfficierPage extends AbstractGamePage
             }
         }
 
-        if (isModuleAvailable(MODULE_OFFICIER))
+        if (isModuleAvailable(MODULE_OFFICERS))
         {
             foreach ($reslist['officier'] as $c_element)
             {

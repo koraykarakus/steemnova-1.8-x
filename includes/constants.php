@@ -185,7 +185,7 @@ define('MODULE_INFORMATION', 14);
 define('MODULE_IMPERIUM', 15);
 define('MODULE_MESSAGES', 16);
 define('MODULE_NOTICE', 17);
-define('MODULE_OFFICIER', 18);
+define('MODULE_OFFICERS', 18);
 define('MODULE_PHALANX', 19);
 define('MODULE_PLAYERCARD', 20);
 define('MODULE_BANLIST', 21);
