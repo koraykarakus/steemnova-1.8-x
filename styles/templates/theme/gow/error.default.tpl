@@ -5,18 +5,20 @@
 			<th>{$LNG.fcm_info}</th>
 		</tr>
 		<tr>
-			<td>
-				<p class="text_center">{$message}</p>
+			<td class="text_center">
+				{$message}
+			</td>
+		</tr>
+		<tr>
+			<td class="text_center">
 				{if !empty($redirectButtons)}
-					<p>
-						{foreach $redirectButtons as $button}
-							{if isset($button.url) && $button.label}
-								<a href="{$button.url}">
-									<button class="text-yellow fs-12">{$button.label}</button>
-								</a>
-							{/if}
-						{/foreach}
-					</p>
+					{foreach $redirectButtons as $button}
+						{if isset($button.url) && $button.label}
+							<a href="{$button.url}">
+								<button class="text-yellow fs-12">{$button.label}</button>
+							</a>
+						{/if}
+					{/foreach}
 				{/if}
 			</td>
 		</tr>
