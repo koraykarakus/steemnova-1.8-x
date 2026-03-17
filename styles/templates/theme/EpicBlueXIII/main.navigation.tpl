@@ -10,7 +10,7 @@
     {/if}
     {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_FLEET)}
     <li>
-      <a class="{if $page == 'shipyard' && $mode == 'fleet'}menuActive{/if}" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}</a>
+      <a class="{if $page == 'shipyard' && $mode == 'fleet'}menuActive{/if}" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}</a>
     </li>
     {/if}
     {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_DEFENSIVE)}

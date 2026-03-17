@@ -1,4 +1,4 @@
-{block name="title" prepend}{if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipshard}{/if}{/block}
+{block name="title" prepend}{if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipyard}{/if}{/block}
 {block name="content"}
 
 {if $messages}

@@ -139,12 +139,12 @@
         <tr>
           <td>
             {if $buildInfo.fleet}
-            <a class="fs-12 fw-bold" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: {$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})</a>
+            <a class="fs-12 fw-bold" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: {$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})</a>
             <div class="timer" data-time="{$buildInfo.fleet['timeleft']}">
               {$buildInfo.fleet['starttime']}
             </div>
             {else}
-            <a class="fs-12 fw-bold" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: {$LNG.ov_free}</a>
+            <a class="fs-12 fw-bold" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: {$LNG.ov_free}</a>
             {/if}
 
           </td>

@@ -196,11 +196,11 @@ $("#tn3").hide();
     </td>
     <td>
       {if $buildInfo.fleet}
-      <a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: </a>
+      <a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: </a>
       {$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})<br>
       <div class="timer" data-time="{$buildInfo.fleet['timeleft']}">{$buildInfo.fleet['starttime']}</div>
       {else}
-      <a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}: {$LNG.ov_free}</a>
+      <a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: {$LNG.ov_free}</a>
       {/if}
     </td>
   </tr>

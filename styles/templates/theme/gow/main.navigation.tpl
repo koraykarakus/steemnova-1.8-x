@@ -18,7 +18,7 @@
   {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_FLEET)}
     <li class="menu-button">
       <a class="long{if $page == 'shipyard' && $mode == 'fleet'} menuActive{/if}"
-        href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}</a>
+        href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}</a>
         <a class="menu_icon icon_4{if $page == 'shipyard' && $mode == 'fleet'} active{/if}" href="game.php?page=shipyard&amp;mode=fleet"></a>
     </li>
   {/if}

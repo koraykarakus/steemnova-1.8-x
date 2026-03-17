@@ -7,7 +7,7 @@
             href="game.php?page=buildings">{$LNG.lm_buildings}</a></li>{/if}
     {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_FLEET)}<li><a
                 class="fs-14 fw-bold {if $page == 'shipyard' && $mode =='fleet'}active{/if}"
-            href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}</a></li>{/if}
+            href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}</a></li>{/if}
     {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_DEFENSIVE)}<li><a
                 class="fs-14 fw-bold {if $page == 'shipyard' && $mode =='defense'}active{/if}"
             href="game.php?page=shipyard&amp;mode=defense">{$LNG.lm_defenses}</a></li>{/if}

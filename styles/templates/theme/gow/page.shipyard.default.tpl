@@ -1,4 +1,4 @@
-{block name="title" prepend}{if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipshard}{/if}{/block}
+{block name="title" prepend}{if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipyard}{/if}{/block}
 {block name="content"}
 <script src="./scripts/base/avoid_submit_on_refresh.js" type="text/javascript"></script>
 <script>
@@ -105,11 +105,11 @@
             </div>
         </div>
       {/foreach}
-    <span class="page_title">{$current_pname} - {if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipshard}{/if}</span>
+    <span class="page_title">{$current_pname} - {if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipyard}{/if}</span>
   </div>
   <div class="bottom">
     <div class="title">
-        <span class="color-yellow">{$LNG.lm_shipshard}</span>
+        <span class="color-yellow">{$LNG.lm_shipyard}</span>
         <span class="color-yellow">&nbsp;|&nbsp;{$LNG.st_points}&nbsp;[{if $mode == "fleet"}{$userFleetPoints}{else}{$userDefensePoints}{/if}]</span>
     </div>
     <div class="list">
