@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 	<form action="game.php?page=alliance&amp;mode=create&amp;action=send" method="POST">
-		<table class="table-gow">
+		<table class="table-gow table_full">
 			<tr>
 				<th colspan=2>{$LNG.al_make_alliance}</th>
 			</tr>
@@ -18,7 +18,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td class="text_center" colspan="2">
 					<input class="" type="submit" value="{$LNG.al_make_submit}">
 				</td>
 			</tr>
