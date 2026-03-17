@@ -1,16 +1,16 @@
 <form action="?page=fleetTable&amp;action=acs" method="post">
 <input name="fleetID" value="{$acsData.mainFleetID}" type="hidden">
-	<table class="table519">
-		<tr style="height:20px;">
+	<table class="table-gow table_full">
+		<tr>
 			<th colspan="2">{$LNG.fl_sac_of_fleet}</th>
 		</tr>
-		<tr style="height:20px;">
+		<tr>
 			<th colspan="2">{$LNG.fl_modify_sac_name} (<a href="javascript:Rename();">{$LNG.fl_acs_change}</a>)</th>
 		</tr>
 		<tr>
 			<td colspan="2" id="acsName">{$acsData.acsName}</td>
 		</tr>
-		<tr style="height:20px;">
+		<tr>
 			<th style="width:50%;">{$LNG.fl_members_invited}</th>
             <th style="width:50%;">{$LNG.fl_invite_members}</th>
 		</tr>
