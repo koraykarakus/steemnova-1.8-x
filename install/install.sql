@@ -1096,6 +1096,81 @@ CREATE TABLE `%PREFIX%vars` (
   KEY `class` (`class`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `%PREFIX%vars_default` (
+  `elementID` SMALLINT UNSIGNED NOT NULL,
+  `name` VARCHAR(32) NOT NULL,
+  `class` INT NOT NULL,
+  `onPlanetType` set('1','3') NOT NULL,
+  `onePerPlanet` TINYINT(4) NOT NULL,
+  `factor` FLOAT(4,2) NOT NULL,
+  `maxLevel` INT DEFAULT NULL,
+  `cost901` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  `cost902` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  `cost903` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  `cost911` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  `cost921` BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  `consumption1` INT UNSIGNED DEFAULT NULL,
+  `consumption2` INT UNSIGNED DEFAULT NULL,
+  `speedTech` INT UNSIGNED DEFAULT NULL,
+  `speed1` INT UNSIGNED DEFAULT NULL,
+  `speed2` INT UNSIGNED DEFAULT NULL,
+  `speed2Tech` INT UNSIGNED DEFAULT NULL,
+  `speed2onLevel` INT UNSIGNED DEFAULT NULL,
+  `speed3Tech` INT UNSIGNED DEFAULT NULL,
+  `speed3onLevel` INT UNSIGNED DEFAULT NULL,
+  `capacity` INT UNSIGNED DEFAULT NULL,
+  `attack` INT UNSIGNED DEFAULT NULL,
+  `defend` INT UNSIGNED DEFAULT NULL,
+  `timeBonus` INT UNSIGNED DEFAULT NULL,
+  `bonusAttack` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusDefensive` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusShield` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusBuildTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusResearchTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusShipTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusDefensiveTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusResource` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusEnergy` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusResourceStorage` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusShipStorage` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusFlyTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusFleetSlots` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusPlanets` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusSpyPower` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusExpedition` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusGateCoolTime` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusMoreFound` FLOAT(4,2) NOT NULL DEFAULT '0.00',
+  `bonusAttackUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusDefensiveUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusShieldUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusBuildTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusResearchTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusShipTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusDefensiveTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusResourceUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusEnergyUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusResourceStorageUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusShipStorageUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusFlyTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusFleetSlotsUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusPlanetsUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusSpyPowerUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusExpeditionUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusGateCoolTimeUnit` SMALLINT NOT NULL DEFAULT '0',
+  `bonusMoreFoundUnit` SMALLINT NOT NULL DEFAULT '0',
+  `speedFleetFactor` FLOAT(4,2) DEFAULT NULL,
+  `production901` VARCHAR(255) DEFAULT NULL,
+  `production902` VARCHAR(255) DEFAULT NULL,
+  `production903` VARCHAR(255) DEFAULT NULL,
+  `production911` VARCHAR(255) DEFAULT NULL,
+  `production921` VARCHAR(255) DEFAULT NULL,
+  `storage901` VARCHAR(255) DEFAULT NULL,
+  `storage902` VARCHAR(255) DEFAULT NULL,
+  `storage903` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`elementID`),
+  KEY `class` (`class`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `%PREFIX%vars_rapidfire` (
   `elementID` INT NOT NULL,
   `rapidfireID` INT NOT NULL,
@@ -1104,7 +1179,23 @@ CREATE TABLE `%PREFIX%vars_rapidfire` (
   KEY `rapidfireID` (`rapidfireID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `%PREFIX%vars_rapidfire_default` (
+  `elementID` INT NOT NULL,
+  `rapidfireID` INT NOT NULL,
+  `shoots` INT NOT NULL,
+  KEY `elementID` (`elementID`),
+  KEY `rapidfireID` (`rapidfireID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `%PREFIX%vars_requriements` (
+  `elementID` INT NOT NULL,
+  `requireID` INT NOT NULL,
+  `requireLevel` INT NOT NULL,
+  KEY `elementID` (`elementID`),
+  KEY `requireID` (`requireID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `%PREFIX%vars_requriements_default` (
   `elementID` INT NOT NULL,
   `requireID` INT NOT NULL,
   `requireLevel` INT NOT NULL,
@@ -1233,6 +1324,9 @@ INSERT INTO `%PREFIX%vars` (`elementID`, `name`, `class`, `onPlanetType`, `onePe
 (706, 'dm_researchtime', 700, '1,3', 0, 1.00, NULL, 0, 0, 0, 0, 1250, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 86400, 0.00, 0.00, 0.00, 0.00, -0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (707, 'dm_fleettime', 700, '1,3', 0, 1.00, NULL, 0, 0, 0, 0, 3000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 86400, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, -0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
+INSERT INTO `%PREFIX%vars_default`
+SELECT * FROM `%PREFIX%vars`;
+
 INSERT INTO `%PREFIX%vars_rapidfire` (`elementID`, `rapidfireID`, `shoots`) VALUES
 (202, 210, 5),
 (202, 212, 5),
@@ -1331,6 +1425,9 @@ INSERT INTO `%PREFIX%vars_rapidfire` (`elementID`, `rapidfireID`, `shoots`) VALU
 (219, 212, 5),
 (220, 210, 5),
 (220, 212, 5);
+
+INSERT INTO `%PREFIX%vars_rapidfire_default`
+SELECT * FROM `%PREFIX%vars_rapidfire`;
 
 INSERT INTO `%PREFIX%vars_requriements` (`elementID`, `requireID`, `requireLevel`) VALUES
 (6, 14, 20),
@@ -1517,6 +1614,9 @@ INSERT INTO `%PREFIX%vars_requriements` (`elementID`, `requireID`, `requireLevel
 (614, 613, 3),
 (615, 614, 1),
 (615, 609, 1);
+
+INSERT INTO `%PREFIX%vars_requriements_default`
+SELECT * FROM `%PREFIX%vars_requriements`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
