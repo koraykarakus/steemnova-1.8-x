@@ -146,6 +146,7 @@ $LNG['lm_galaxy'] = 'Galaxy';
 $LNG['lm_empire'] = 'Empire';
 $LNG['lm_fleet'] = 'Fleet';
 $LNG['lm_buildings'] = 'Buildings';
+$LNG['lm_facilities'] = 'Facilities';
 $LNG['lm_research'] = 'Research';
 $LNG['lm_shipshard'] = 'Hangar';
 $LNG['lm_defenses'] = 'Defenses';

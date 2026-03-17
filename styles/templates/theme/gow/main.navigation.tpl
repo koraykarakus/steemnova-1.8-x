@@ -7,6 +7,11 @@
       <a class="{if $page == 'buildings'}menuActive{/if}" href="game.php?page=buildings">{$LNG.lm_buildings}</a>
     </li>
   {/if}
+  {if isModuleAvailable($smarty.const.MODULE_BUILDING)}
+    <li class="menu-button">
+      <a class="{if $page == 'facilities'}menuActive{/if}" href="game.php?page=facilities">{$LNG.lm_facilities}</a>
+    </li>
+  {/if}
   {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_FLEET)}
     <li class="menu-button">
       <a class="{if $page == 'shipyard' && $mode == 'fleet'}menuActive{/if}"

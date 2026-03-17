@@ -134,6 +134,7 @@ if (MODE === 'INGAME'
     require 'includes/vars.php';
     require 'includes/classes/class.BuildFunctions.php';
     require 'includes/classes/class.PlanetRessUpdate.php';
+    require 'includes/classes/class.Buildings.php';
 
     if (!AJAX_REQUEST
         && MODE === 'INGAME'

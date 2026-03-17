@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowBuildingsPage extends AbstractGamePage
+class ShowFacilitiesPage extends AbstractGamePage
 {
     public static $require_module = MODULE_BUILDING;
 
@@ -29,7 +29,6 @@ class ShowBuildingsPage extends AbstractGamePage
         global $ProdGrid, $LNG, $resource, $reslist, $PLANET, $USER, $pricelist, $config, $requeriments;
 
         $cmd = HTTP::_GP('cmd', '');
-
         // wellformed buildURLs
         if (!empty($cmd)
             && $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -53,7 +52,7 @@ class ShowBuildingsPage extends AbstractGamePage
                     break;
             }
 
-            $this->redirectTo('game.php?page=buildings');
+            $this->redirectTo('game.php?page=facilities');
         }
 
         $queue_data = Buildings::getQueueData();
@@ -83,7 +82,7 @@ class ShowBuildingsPage extends AbstractGamePage
         $BuildTemp = $PLANET['temp_max'];
 
         $build_info_list = [];
-        $elements = Buildings::filterElements($reslist['allow'][$PLANET['planet_type']], 1);
+        $elements = Buildings::filterElements($reslist['allow'][$PLANET['planet_type']], 2);
 
         foreach ($elements as $c_element)
         {
@@ -185,6 +184,6 @@ class ShowBuildingsPage extends AbstractGamePage
             'userBuildPoints' => pretty_number($USER['build_points']),
         ]);
 
-        $this->display('page.buildings.default.tpl');
+        $this->display('page.facilities.default.tpl');
     }
 }

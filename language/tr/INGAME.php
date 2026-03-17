@@ -115,6 +115,7 @@ $LNG['lm_galaxy'] = 'Galaksi';
 $LNG['lm_empire'] = 'İmparatorluk';
 $LNG['lm_fleet'] = 'Filolar';
 $LNG['lm_buildings'] = 'Binalar';
+$LNG['lm_facilities'] = 'Tesisler';
 $LNG['lm_research'] = 'Araştırma';
 $LNG['lm_shipshard'] = 'Tersane';
 $LNG['lm_defenses'] = 'Savunma';

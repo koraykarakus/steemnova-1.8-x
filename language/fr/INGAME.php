@@ -103,6 +103,7 @@ $LNG['lm_galaxy'] = 'Galaxie';
 $LNG['lm_empire'] = 'Empire';
 $LNG['lm_fleet'] = 'Flotte';
 $LNG['lm_buildings'] = 'Bâtiments';
+$LNG['lm_facilities'] = 'Installations';
 $LNG['lm_research'] = 'Recherche';
 $LNG['lm_shipshard'] = 'Chantier Spatial';
 $LNG['lm_defenses'] = 'Défense';

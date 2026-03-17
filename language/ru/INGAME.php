@@ -109,6 +109,7 @@ $LNG['lm_galaxy'] = 'Галактика';
 $LNG['lm_empire'] = 'Империя';
 $LNG['lm_fleet'] = 'Флот';
 $LNG['lm_buildings'] = 'Постройки';
+$LNG['lm_facilities'] = 'Сооружения';
 $LNG['lm_research'] = 'Исследования';
 $LNG['lm_shipshard'] = 'Верфь';
 $LNG['lm_defenses'] = 'Оборона';
