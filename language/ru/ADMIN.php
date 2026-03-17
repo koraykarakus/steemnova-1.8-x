@@ -110,7 +110,7 @@ $LNG['buildings_title'] = 'Постройки';
 $LNG['ships_title'] = 'Флот';
 $LNG['defenses_title'] = 'Оборона';
 $LNG['researchs_title'] = 'Исследования';
-$LNG['officiers_title'] = 'Офицеры';
+$LNG['officers_title'] = 'Офицеры';
 
 // Меню редактора
 $LNG['ad_forgiven_id'] = 'Вы должны ввести ID.';

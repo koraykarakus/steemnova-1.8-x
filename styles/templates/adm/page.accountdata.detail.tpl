@@ -478,7 +478,7 @@
                     <table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
                         <tr>
                             <th width="50%">{$researchs_title}</th>
-                            <th width="50%">{$officiers_title}</th>
+                            <th width="50%">{$officers_title}</th>
                         </tr>
                         {$techoffi}
                     </table>

@@ -114,7 +114,7 @@ $LNG['buildings_title'] = 'Gebäude';
 $LNG['ships_title'] = 'Schiffe';
 $LNG['defenses_title'] = 'Verteidigung';
 $LNG['researchs_title'] = 'Forschung';
-$LNG['officiers_title'] = 'Offiziere';
+$LNG['officers_title'] = 'Offiziere';
 //###########################################################//
 
 //---------------	EDITOR	------------------------//

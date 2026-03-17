@@ -575,7 +575,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             'Darkmatter'                  => $LNG['tech'][921],
             'ac_officers_research'        => $LNG['ac_officers_research'],
             'researchs_title'             => $LNG['researchs_title'],
-            'officiers_title'             => $LNG['officiers_title'],
+            'officers_title'             => $LNG['officers_title'],
             'ac_coords'                   => $LNG['ac_coords'],
             'ac_time_destruyed'           => $LNG['ac_time_destruyed'],
         ]);

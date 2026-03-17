@@ -113,7 +113,7 @@ $LNG['buildings_title'] = 'Budynki';
 $LNG['ships_title'] = 'Statki';
 $LNG['defenses_title'] = 'Obrona';
 $LNG['researchs_title'] = 'Badania';
-$LNG['officiers_title'] = 'Oficerowie';
+$LNG['officers_title'] = 'Oficerowie';
 //###########################################################//
 
 //---------------	EDITOR	------------------------//

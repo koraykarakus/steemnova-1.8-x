@@ -120,7 +120,7 @@ $LNG['buildings_title'] = 'Binalar';
 $LNG['ships_title'] = 'Gemiler';
 $LNG['defenses_title'] = 'Savunma';
 $LNG['researchs_title'] = 'Arastirma';
-$LNG['officiers_title'] = 'Subaylar';
+$LNG['officers_title'] = 'Subaylar';
 //###########################################################//
 
 //---------------	Sol Menu	------------------------//
