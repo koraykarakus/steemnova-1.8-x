@@ -6,7 +6,7 @@
 				<th>{$LNG.fcm_info}</th>
 			</tr>
 			<tr>
-				<td><span style="color:red;">{$requiredDarkMatter}</span></td>
+				<td class="text_center"><span class="color-red">{$requiredDarkMatter}</span></td>
 			</tr>
 		</table>
 	{/if}
