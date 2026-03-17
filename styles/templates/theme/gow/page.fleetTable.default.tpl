@@ -4,10 +4,10 @@
 	<table class="table-gow table_full">
 		<thead>
 			<tr>
-				<th colspan="9" class="border border-secondary">
-					<div class="transparent" style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$activeFleetSlots} /
+				<th colspan="9">
+					<div style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$activeFleetSlots} /
 						{$maxFleetSlots})</div>
-					<div class="transparent" style="text-align:right;float:right;">{$LNG.fl_expeditions}:
+					<div style="text-align:right;float:right;">{$LNG.fl_expeditions}:
 						({$activeExpedition} / {$maxExpedition}) </div>
 				</th>
 			</tr>
@@ -29,7 +29,7 @@
 					<td style="vertical-align:middle;">{$smarty.foreach.FlyingFleets.iteration}</td>
 					<td style="vertical-align:middle;">
 						<a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="
-			<table class='fs-12'>
+			<table>
 				<thead></thead>
 				<tbody>
 					<tr>
@@ -57,7 +57,7 @@
 					</td>
 					<td style="vertical-align:middle;">
 						<a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-							title="<table><tr><th colspan='2' style='text-align:center;'>{$LNG.fl_info_detail}</th></tr>{foreach $FlyingFleetRow.FleetList as $shipID => $shipCount}<tr><td class='transparent'>{$LNG.tech.{$shipID}}:</td><td class='transparent'>{$shipCount}</td></tr>{/foreach}</table>">
+							title="<table><tr><th colspan='2' style='text-align:center;'>{$LNG.fl_info_detail}</th></tr>{foreach $FlyingFleetRow.FleetList as $shipID => $shipCount}<tr><td>{$LNG.tech.{$shipID}}:</td><td>{$shipCount}</td></tr>{/foreach}</table>">
 							{$FlyingFleetRow.amount}
 						</a>
 					</td>
@@ -83,7 +83,7 @@
 						{if !$isVacation && $FlyingFleetRow.state != 1 && $FlyingFleetRow.no_returnable != 1}
 							<form action="game.php?page=fleetTable&amp;action=sendfleetback" method="post">
 								<input name="fleetID" value="{$FlyingFleetRow.id}" type="hidden">
-								<input class="btn bg-black px-1 py-1 fs-12 text-white" value="{$LNG.fl_send_back}" type="submit">
+								<input class="text-white" value="{$LNG.fl_send_back}" type="submit">
 							</form>
 							{if $FlyingFleetRow.mission == 1}
 								<form action="game.php?page=fleetTable&amp;action=acs" method="post">
@@ -121,30 +121,27 @@
 		<form action="?page=AutoExpedition" method="post">
 			<table class="table-gow table_full">
 				<thead>
-					<th class="text-center border border-secondary" colspan="3">{$LNG.ae_autoexp}</th>
+					<th colspan="3">{$LNG.ae_autoexp}</th>
 				</thead>
 				<tbody>
 					<tr>
-						<td class="text-center">{$LNG.ae_galaxy}</td>
-						<td class="text-center">{$LNG.ae_system}</td>
-						<td class="text-center">{$LNG.ae_planet}</td>
+						<td>{$LNG.ae_galaxy}</td>
+						<td>{$LNG.ae_system}</td>
+						<td>{$LNG.ae_planet}</td>
 					</tr>
 					<tr>
 						<td>
-							<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12"
-								name="expedition_galaxy" value="{$galaxy}">
+							<input name="expedition_galaxy" value="{$galaxy}">
 						</td>
 						<td>
-							<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12"
-								name="expedition_system" value="{$system}">
+							<input name="expedition_system" value="{$system}">
 						</td>
 						<td>
-							<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12"
-								name="expedition_planet" value="16">
+							<input name="expedition_planet" value="16">
 						</td>
 					</tr>
 					<tr>
-						<td class="text-center" colspan="2">
+						<td colspan="2">
 							<span>{$LNG.fl_hold_time}</span>
 							<select class="" name="">
 								{foreach $StaySelector as $cKey => $cSelector}
@@ -153,20 +150,20 @@
 							</select>
 							<span>{$LNG.fl_hours}</span>
 						</td>
-						<td class="text-center" colspan="1">
+						<td colspan="1">
 							<span onclick="return Dialog.fleetDivideSettings();"
 								class="settingsoverview">{$LNG.ae_settings}</span>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
-							<div class="g-recaptcha mx-auto d-flex justify-content-center" data-theme="dark"
+							<div class="g-recaptcha" data-theme="dark"
 								data-sitekey="{$recaptchaPublicKey}"></div>
 						</td>
 					</tr>
 					<tr>
 						<td class="text-center" colspan="3">
-							<button class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+							<button class="text-yellow"
 								type="submit">{$LNG.ae_send}</button>
 						</td>
 					</tr>
@@ -200,7 +197,7 @@
 				</tr>
 				{foreach $FleetsOnPlanet as $FleetRow}
 					<tr style="height:20px;">
-						<td class="align-middle">
+						<td>
 							{if $FleetRow.speed != 0}
 								<a class="hover-underline hover-pointer" data-bs-toggle="tooltip" data-bs-placement="left"
 									data-bs-html="true" title='
@@ -220,18 +217,18 @@
 								{$LNG.tech.{$FleetRow.id}}
 							{/if}
 						</td>
-						<td class="align-middle" id="ship{$FleetRow.id}_value">{$FleetRow.count}</td>
+						<td id="ship{$FleetRow.id}_value">{$FleetRow.count}</td>
 						{if $FleetRow.speed != 0}
-							<td class="align-middle text-center">
-								<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+							<td>
+								<button type="button" class="text-yellow"
 									onclick="maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</button>
 							</td>
-							<td class="align-middle text-center">
-								<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+							<td>
+								<button type="button" class="text-yellow"
 									onclick="minShip('ship{$FleetRow.id}');">{$LNG.fl_min}</button>
 							</td>
 							<td>
-								<input class="form-control bg-dark text-white text-center p-0 my-0 mx-auto w-50 fs-12"
+								<input class="text-white"
 									name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0">
 							</td>
 						{else}
@@ -243,19 +240,19 @@
 					{if count($FleetsOnPlanet) == 0}
 						<td colspan="4">{$LNG.fl_no_ships}</td>
 					{else}
-						<td class="text-center" colspan="2">
+						<td colspan="2">
 							<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
 								onclick="noShips();">{$LNG.fl_remove_all_ships}</a>
 						</td>
-						<td class="text-center" colspan="3">
-							<button type="button" class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow"
+						<td colspan="3">
+							<button type="button" class="text-yellow"
 								onclick="maxShips();">{$LNG.fl_select_all_ships}</a>
 						</td>
 					{/if}
 				</tr>
 				{if $maxFleetSlots != $activeFleetSlots}
 					<tr style="height:20px;">
-						<td class="text-center" colspan="5">
+						<td colspan="5">
 							<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
 						</td>
 					{/if}
@@ -266,29 +263,29 @@
 	<table class="table-gow table_full">
 		<thead>
 			<tr>
-				<th class="text-center border border-secondary" colspan="3">{$LNG.fl_bonus}</th>
+				<th colspan="3">{$LNG.fl_bonus}</th>
 			</tr>
 			<tr>
-				<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_attack}</th>
-				<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_defensive}</th>
-				<th style="width:33%;" class="text-center border border-secondary">{$LNG.fl_bonus_shield}</th>
+				<th style="width:33%;">{$LNG.fl_bonus_attack}</th>
+				<th style="width:33%;">{$LNG.fl_bonus_defensive}</th>
+				<th style="width:33%;">{$LNG.fl_bonus_shield}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="text-center  border border-secondary">+{$bonusAttack} %</td>
-				<td class="text-center border border-secondary">+{$bonusDefensive} %</td>
-				<td class="text-center border border-secondary">+{$bonusShield} %</td>
+				<td>+{$bonusAttack} %</td>
+				<td>+{$bonusDefensive} %</td>
+				<td>+{$bonusShield} %</td>
 			</tr>
 			<tr>
-				<th class="text-center border border-secondary">{$LNG.tech.115}</th>
-				<th class="text-center border border-secondary">{$LNG.tech.117}</th>
-				<th class="text-center border border-secondary">{$LNG.tech.118}</th>
+				<th>{$LNG.tech.115}</th>
+				<th>{$LNG.tech.117}</th>
+				<th>{$LNG.tech.118}</th>
 			</tr>
 			<tr>
-				<td class="text-center">+{$bonusCombustion} %</td>
-				<td class="text-center">+{$bonusImpulse} %</td>
-				<td class="text-center">+{$bonusHyperspace} %</td>
+				<td>+{$bonusCombustion} %</td>
+				<td>+{$bonusImpulse} %</td>
+				<td>+{$bonusHyperspace} %</td>
 			</tr>
 		</tbody>
 	</table>
