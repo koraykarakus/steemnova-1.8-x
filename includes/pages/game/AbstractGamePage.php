@@ -261,6 +261,7 @@ abstract class AbstractGamePage
             'delete'         => $USER['db_deaktjava'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['db_deaktjava'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
             'darkmatter'     => $USER['darkmatter'],
             'current_pid'    => $PLANET['id'],
+            'current_pname'  => $PLANET['name'],
             'image'          => $PLANET['image'],
             'username'       => $USER['username'],
             'avatar'         => $avatar,

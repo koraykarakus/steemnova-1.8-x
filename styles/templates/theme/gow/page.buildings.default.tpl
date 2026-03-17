@@ -169,6 +169,7 @@
           </div>
         </div>
       {/foreach}
+      <span class="page_title">{$current_pname} - {$LNG.lm_buildings}</span>
       <a class="link_resources" href="?page=resources">
         {$LNG.bd_resource_settings}
       </a>

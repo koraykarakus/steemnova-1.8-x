@@ -796,6 +796,7 @@ input[type="radio"] {
 
 .items_wrapper>.top {
 	display: flex;
+	position: relative;
 	width: 654px;
 	height: 300px;
 }
@@ -806,7 +807,7 @@ input[type="radio"] {
 	font-size: 12px;
 	text-decoration: none;
 	color: #99cc00;
-	position: relative;
+	position: absolute;
 	width: 231px;
 	left: calc(100% - 231px);
 	top: calc(100% - 25px);
@@ -818,12 +819,26 @@ input[type="radio"] {
 .items_wrapper>.top>.link_resources:hover{
 	background: #101625;
 }
+.items_wrapper>.top>.page_title{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 0 5px;
+	text-align: left;
+	height: 32px;
+	line-height: 32px;
+	user-select: none;
+	width: 400px;
+	font-size: 18px;
+	background-color:rgba(22, 21, 21, 0.8);
+}
 
 .items_wrapper>.top>.item_big {
 	display: flex;
 	flex-direction: column;
 	background-color: #0b0f1a;
 	width: 100%;
+	z-index: 1;
 }
 
 .items_wrapper>.top>.item_big>.top {

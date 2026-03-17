@@ -105,6 +105,7 @@
             </div>
         </div>
       {/foreach}
+    <span class="page_title">{$current_pname} - {if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipshard}{/if}</span>
   </div>
   <div class="bottom">
     <div class="title">

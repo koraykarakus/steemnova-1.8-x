@@ -120,6 +120,7 @@
           </div>
         </div>
       {/foreach}
+        <span class="page_title">{$current_pname} - {$LNG.lm_research}</span>
     </div>
     <div class="bottom">
       <div class="title">
