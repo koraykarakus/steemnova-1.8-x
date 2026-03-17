@@ -1046,7 +1046,7 @@ class ShowAccountsPage extends AbstractAdminPage
         global $reslist, $resource;
 
         $input = [];
-        foreach ($reslist['officier'] as $row_id)
+        foreach ($reslist['officers'] as $row_id)
         {
             $input[$row_id] = [
                 'type' => $resource[$row_id],
@@ -1088,7 +1088,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $before = $after = [];
 
-        foreach ($reslist['officier'] as $row_id)
+        foreach ($reslist['officers'] as $row_id)
         {
             $before[$row_id] = $userInfo[$resource[$row_id]];
         }
@@ -1096,7 +1096,7 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($type == 'add')
         {
             $qry_update = [];
-            foreach ($reslist['officier'] as $row_id)
+            foreach ($reslist['officers'] as $row_id)
             {
                 $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
                 $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
@@ -1117,7 +1117,7 @@ class ShowAccountsPage extends AbstractAdminPage
         {
 
             $qry_update = [];
-            foreach ($reslist['officier'] as $row_id)
+            foreach ($reslist['officers'] as $row_id)
             {
                 $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
                 $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);

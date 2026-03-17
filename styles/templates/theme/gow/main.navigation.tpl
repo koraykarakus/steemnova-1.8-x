@@ -62,7 +62,7 @@
     </li>
   {/if}
   
-  {if isModuleAvailable($smarty.const.MODULE_OFFICIER) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
+  {if isModuleAvailable($smarty.const.MODULE_OFFICERS) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
     <li class="menu-button">
       <a class="long{if $page == 'officier'} menuActive{/if}" href="game.php?page=officier">{$LNG.lm_officiers}</a>
       <a class="menu_icon icon_10{if $page == 'officier'} active{/if}" href="game.php?page=officier"></a>

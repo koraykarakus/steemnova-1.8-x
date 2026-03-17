@@ -119,7 +119,7 @@ class ShowOfficierPage extends AbstractGamePage
             && $USER['urlaubs_modus'] == 0)
         {
             if (isModuleAvailable(MODULE_OFFICERS)
-                && in_array($update_id, $reslist['officier']))
+                && in_array($update_id, $reslist['officers']))
             {
                 $this->UpdateOfficier($update_id);
             }
@@ -160,7 +160,7 @@ class ShowOfficierPage extends AbstractGamePage
 
         if (isModuleAvailable(MODULE_OFFICERS))
         {
-            foreach ($reslist['officier'] as $c_element)
+            foreach ($reslist['officers'] as $c_element)
             {
                 if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element))
                 {

@@ -94,7 +94,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         }
 
         $user_items = '';
-        foreach (array_merge($reslist['officier'], $reslist['tech']) as $ID)
+        foreach (array_merge($reslist['officers'], $reslist['tech']) as $ID)
         {
             $user_items .= "u.`".$resource[$ID]."`,";
         }
@@ -126,7 +126,7 @@ class ShowAccountDataPage extends AbstractAdminPage
 
         $mo = "<a title=\"".pretty_number($user['darkmatter'])."\">".shortly_number($user['darkmatter'])."</a>";
 
-        foreach ($reslist['officier'] as $ID)
+        foreach ($reslist['officers'] as $ID)
         {
             $officier[] = $ID;
         }
@@ -136,7 +136,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             $techno[] = $ID;
         }
         $techoffi = "";
-        for ($i = 0; $i < max(count($reslist['officier']), count($reslist['tech'])); $i++)
+        for ($i = 0; $i < max(count($reslist['officers']), count($reslist['tech'])); $i++)
         {
             $techoffi .= isset($techno[$i]) ? "<tr><td>".$LNG['tech'][$techno[$i]].": <font color=aqua>".$user[$resource[$techno[$i]]]."</font></td>" : "<tr><td>&nbsp;</td>";
 

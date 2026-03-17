@@ -43,7 +43,7 @@ class ShowRecordsPage extends AbstractGamePage
         $fleet_list = array_fill_keys($reslist['fleet'], []);
         $research_list = array_fill_keys($reslist['tech'], []);
         $build_list = array_fill_keys($reslist['build'], []);
-        $officer_list = array_fill_keys($reslist['officier'], []);
+        $officer_list = array_fill_keys($reslist['officers'], []);
 
         foreach ($records as $c_record)
         {
@@ -63,7 +63,7 @@ class ShowRecordsPage extends AbstractGamePage
             {
                 $build_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['officier']))
+            elseif (in_array($c_record['elementID'], $reslist['officers']))
             {
                 $officer_list[$c_record['elementID']][] = $c_record;
             }

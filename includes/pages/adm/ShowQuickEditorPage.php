@@ -35,7 +35,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $data_id_arr = array_merge($reslist['tech'], $reslist['officier']);
+        $data_id_arr = array_merge($reslist['tech'], $reslist['officers']);
         $specify_items_pq = "";
 
         foreach ($data_id_arr as $c_id)
@@ -75,7 +75,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
             ];
         }
 
-        foreach ($reslist['officier'] as $ID)
+        foreach ($reslist['officers'] as $ID)
         {
             $officier[] = [
                 'type'  => $resource[$ID],
@@ -119,7 +119,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
     {
         global $USER, $LNG, $reslist, $resource;
 
-        $data_id_arr = array_merge($reslist['tech'], $reslist['officier']);
+        $data_id_arr = array_merge($reslist['tech'], $reslist['officers']);
 
         $specify_items_pq = "";
         foreach ($data_id_arr as $c_id)

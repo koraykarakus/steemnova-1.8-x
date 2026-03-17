@@ -91,7 +91,7 @@ class ShowResetPage extends AbstractAdminPage
             $dbcol['defense'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['officier'] as $c_id)
+        foreach ($reslist['officers'] as $c_id)
         {
             $dbcol['officier'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }

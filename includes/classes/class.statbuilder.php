@@ -93,7 +93,7 @@ class statbuilder
             $select_defenses .= " SUM(p.".$resource[$defense].") as ".$resource[$defense].",";
         }
 
-        foreach ($reslist['officier'] as $officer)
+        foreach ($reslist['officers'] as $officer)
         {
             $select_officers .= " u.".$resource[$officer].",";
         }
@@ -318,7 +318,7 @@ class statbuilder
     {
         global $resource, $reslist;
 
-        foreach ($reslist['officier'] as $officer)
+        foreach ($reslist['officers'] as $officer)
         {
             if ($user[$resource[$officer]] == 0)
             {

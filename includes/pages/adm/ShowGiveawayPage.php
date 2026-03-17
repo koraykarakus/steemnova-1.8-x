@@ -72,7 +72,7 @@ class ShowGiveawayPage extends AbstractAdminPage
             $reslist['tech'],
             $reslist['fleet'],
             $reslist['defense'],
-            $reslist['officier']
+            $reslist['officers']
         );
 
         $log_old = [];
