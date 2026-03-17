@@ -26,8 +26,8 @@
 			</tr>
 			{foreach name=FlyingFleets item=FlyingFleetRow from=$FlyingFleetList}
 				<tr>
-					<td style="vertical-align:middle;">{$smarty.foreach.FlyingFleets.iteration}</td>
-					<td style="vertical-align:middle;">
+					<td class="text_center">{$smarty.foreach.FlyingFleets.iteration}</td>
+					<td class="text_center">
 						<a class="fleet_resources">
 							<div class="tooltip tooltip_bottom">	
 								<table>
@@ -57,7 +57,7 @@
 							<br><a title="{$LNG.fl_onway}">{$LNG.fl_a}</a>
 						{/if}
 					</td>
-					<td style="vertical-align:middle;">
+					<td class="text_center">
 						<a class="ship_types">
 							<div class="tooltip tooltip_bottom">
 								<table>
@@ -75,25 +75,26 @@
 							{$FlyingFleetRow.amount}
 						</a>
 					</td>
-					<td style="vertical-align:middle;">
+					<td class="text_center">
 						<a
 							href="game.php?page=galaxy&amp;galaxy={$FlyingFleetRow.startGalaxy}&amp;system={$FlyingFleetRow.startSystem}">[{$FlyingFleetRow.startGalaxy}:{$FlyingFleetRow.startSystem}:{$FlyingFleetRow.startPlanet}]</a>
 					</td>
-					<td style="vertical-align:middle;" {if $FlyingFleetRow.state == 0}style="color:lime" {/if}>
+					<td class="text_center" {if $FlyingFleetRow.state == 0}style="color:lime" {/if}>
 						{$FlyingFleetRow.startTime}</td>
-					<td style="vertical-align:middle;"><a
-							href="game.php?page=galaxy&amp;galaxy={$FlyingFleetRow.endGalaxy}&amp;system={$FlyingFleetRow.endSystem}">[{$FlyingFleetRow.endGalaxy}:{$FlyingFleetRow.endSystem}:{$FlyingFleetRow.endPlanet}]</a>
+					<td class="text_center">
+					<a href="game.php?page=galaxy&amp;galaxy={$FlyingFleetRow.endGalaxy}&amp;system={$FlyingFleetRow.endSystem}">[{$FlyingFleetRow.endGalaxy}:{$FlyingFleetRow.endSystem}:{$FlyingFleetRow.endPlanet}]</a>
 					</td>
 					{if $FlyingFleetRow.mission == 4 && $FlyingFleetRow.state == 0}
-						<td style="vertical-align:middle;">-</td>
+					<td class="text_center">-</td>
 					{else}
-						<td style="vertical-align:middle;" {if $FlyingFleetRow.state != 0}style="color:lime" {/if}>
-							{$FlyingFleetRow.endTime}</td>
+					<td class="text_center" {if $FlyingFleetRow.state != 0}style="color:lime" {/if}>
+						{$FlyingFleetRow.endTime}
+					</td>
 					{/if}
-					<td style="vertical-align:middle;" id="fleettime_{$smarty.foreach.FlyingFleets.iteration}" class="fleets"
+					<td id="fleettime_{$smarty.foreach.FlyingFleets.iteration}" class="fleets text_center"
 						data-fleet-end-time="{$FlyingFleetRow.returntime}" data-fleet-time="{$FlyingFleetRow.resttime}">
 						{pretty_fly_time({$FlyingFleetRow.resttime})}</td>
-					<td style="vertical-align:middle;">
+					<td class="text_center">
 						{if !$isVacation && $FlyingFleetRow.state != 1 && $FlyingFleetRow.no_returnable != 1}
 							<form action="game.php?page=fleetTable&amp;action=sendfleetback" method="post">
 								<input name="fleetID" value="{$FlyingFleetRow.id}" type="hidden">
