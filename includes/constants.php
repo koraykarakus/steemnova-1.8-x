@@ -241,7 +241,7 @@ define('ELEMENT_BUILD', 1); # ID 0 - 99
 define('ELEMENT_TECH', 2); # ID 101 - 199
 define('ELEMENT_FLEET', 4); # ID 201 - 399
 define('ELEMENT_DEFENSIVE', 8); # ID 401 - 599
-define('ELEMENT_OFFICIER', 16); # ID 601 - 699
+define('ELEMENT_OFFICERS', 16); # ID 601 - 699
 define('ELEMENT_BONUS', 32); # ID 701 - 799
 define('ELEMENT_RACE', 64); # ID 801 - 899
 define('ELEMENT_PLANET_RESOURCE', 128); # ID 901 - 949
