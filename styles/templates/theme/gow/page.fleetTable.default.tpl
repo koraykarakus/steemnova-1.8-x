@@ -28,25 +28,27 @@
 				<tr>
 					<td style="vertical-align:middle;">{$smarty.foreach.FlyingFleets.iteration}</td>
 					<td style="vertical-align:middle;">
-						<a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="
-			<table>
-				<thead></thead>
-				<tbody>
-					<tr>
-						<td style='width:50%;color:white'>{$LNG['tech'][901]}</td>
-						<td style='width:50%;color:white'>{$FlyingFleetRow.metal}</td>
-					</tr>
-					<tr>
-						<td style='width:50%;color:white'>{$LNG['tech'][902]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.crystal}</td>
-					</tr>
-					<tr>
-						<td style='width:50%;color:white'>{$LNG['tech'][903]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.deuterium}</td>
-					</tr>
-					<tr>
-						<td style='width:50%;color:white'>{$LNG['tech'][921]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.dm}</td>
-					</tr>
-				</tbody>
-			</table>">
+						<a class="fleet_resources">
+							<div class="tooltip tooltip_bottom">	
+								<table>
+									<thead></thead>
+									<tbody>
+										<tr>
+											<td style='width:50%;color:white'>{$LNG['tech'][901]}</td>
+											<td style='width:50%;color:white'>{$FlyingFleetRow.metal}</td>
+										</tr>
+										<tr>
+											<td style='width:50%;color:white'>{$LNG['tech'][902]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.crystal}</td>
+										</tr>
+										<tr>
+											<td style='width:50%;color:white'>{$LNG['tech'][903]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.deuterium}</td>
+										</tr>
+										<tr>
+											<td style='width:50%;color:white'>{$LNG['tech'][921]}</td><td style='width:50%;color:white'>{$FlyingFleetRow.dm}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							{$LNG["type_mission_{$FlyingFleetRow.mission}"]}
 						</a>
 						{if $FlyingFleetRow.state == 1}
@@ -56,8 +58,20 @@
 						{/if}
 					</td>
 					<td style="vertical-align:middle;">
-						<a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
-							title="<table><tr><th colspan='2' style='text-align:center;'>{$LNG.fl_info_detail}</th></tr>{foreach $FlyingFleetRow.FleetList as $shipID => $shipCount}<tr><td>{$LNG.tech.{$shipID}}:</td><td>{$shipCount}</td></tr>{/foreach}</table>">
+						<a class="ship_types">
+							<div class="tooltip tooltip_bottom">
+								<table>
+									<tr>
+										<th colspan='2' style='text-align:center;'>{$LNG.fl_info_detail}</th>
+									</tr>
+									{foreach $FlyingFleetRow.FleetList as $shipID => $shipCount}
+									<tr>
+										<td>{$LNG.tech.{$shipID}}:</td>
+										<td>{$shipCount}</td>
+									</tr>
+									{/foreach}
+								</table>
+							</div>
 							{$FlyingFleetRow.amount}
 						</a>
 					</td>

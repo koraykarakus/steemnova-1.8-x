@@ -1510,6 +1510,16 @@ background: linear-gradient(180deg,
 }
 /**/
 
+/*page.fleetTable.default.tpl*/
+.fleet_resources, .ship_types{
+	position: relative;
+	cursor: pointer;
+}
+.fleet_resources:hover>.tooltip,
+.ship_types:hover>.tooltip{
+	display: flex;
+}
+
 /*general classes for color and background color*/
 
 .with-fancybox {
