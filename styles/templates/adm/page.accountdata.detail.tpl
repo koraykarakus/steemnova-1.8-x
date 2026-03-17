@@ -470,7 +470,7 @@
         <tr>
             <td class="unico transparent"><a href="#" onclick="$('#inves').slideToggle();return false" class="link">
                     <img src="./styles/resource/images/admin/arrowright.png" width="16" height="10">
-                    {$ac_officier_research}</a></td>
+                    {$ac_officers_research}</a></td>
         </tr>
         <tr>
             <td class="unico transparent">

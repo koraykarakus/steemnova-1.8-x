@@ -128,7 +128,7 @@ class ShowAccountDataPage extends AbstractAdminPage
 
         foreach ($reslist['officers'] as $ID)
         {
-            $officier[] = $ID;
+            $officers[] = $ID;
         }
 
         foreach ($reslist['tech'] as $ID)
@@ -140,7 +140,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         {
             $techoffi .= isset($techno[$i]) ? "<tr><td>".$LNG['tech'][$techno[$i]].": <font color=aqua>".$user[$resource[$techno[$i]]]."</font></td>" : "<tr><td>&nbsp;</td>";
 
-            $techoffi .= isset($officier[$i]) ? "<td>".$LNG['tech'][$officier[$i]].": <font color=aqua>".$user[$resource[$officier[$i]]]."</font></td></tr>" : "<td>&nbsp;</td></tr>";
+            $techoffi .= isset($officers[$i]) ? "<td>".$LNG['tech'][$officers[$i]].": <font color=aqua>".$user[$resource[$officers[$i]]]."</font></td></tr>" : "<td>&nbsp;</td></tr>";
         }
 
         if ($user['bana'] != 0)
@@ -573,7 +573,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             'Deuterium'                   => $LNG['tech'][903],
             'Energy'                      => $LNG['tech'][911],
             'Darkmatter'                  => $LNG['tech'][921],
-            'ac_officier_research'        => $LNG['ac_officier_research'],
+            'ac_officers_research'        => $LNG['ac_officers_research'],
             'researchs_title'             => $LNG['researchs_title'],
             'officiers_title'             => $LNG['officiers_title'],
             'ac_coords'                   => $LNG['ac_coords'],
