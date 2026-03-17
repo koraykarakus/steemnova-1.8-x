@@ -182,7 +182,7 @@ $LNG['ad_editor_buildings'] = 'Buildings';
 $LNG['ad_editor_ships'] = 'Ships';
 $LNG['ad_editor_defenses'] = 'Defences';
 $LNG['ad_editor_researchs'] = 'Search';
-$LNG['ad_editor_officiers'] = 'Officiers';
+$LNG['ad_editor_officers'] = 'Officers';
 $LNG['ad_editor_personal'] = 'Personal Data';
 $LNG['ad_editor_planets'] = 'Planet & Moon';
 $LNG['ad_editor_resources'] = 'Ressources';
@@ -198,10 +198,10 @@ $LNG['ad_research_title'] = 'Research';
 $LNG['ad_research'] = 'Research';
 
 //	Officiais
-$LNG['ad_offi_title'] = 'Officiers';
-$LNG['ad_offi'] = 'Officiers';
-$LNG['ad_add_offi_success'] = 'The Officiers were entered successfully!';
-$LNG['ad_delete_offi_success'] = 'The Officiers were removed successfully!';
+$LNG['ad_offi_title'] = 'Offcers';
+$LNG['ad_offi'] = 'Officers';
+$LNG['ad_add_offi_success'] = 'The Officers were entered successfully!';
+$LNG['ad_delete_offi_success'] = 'The Officers were removed successfully!';
 
 //	Recursos
 $LNG['ad_add_res_sucess'] = 'Resources have been inserted successfully!';
@@ -472,8 +472,8 @@ $LNG['se_planets_min'] = 'Max planets without research';
 $LNG['se_planets_min_info'] = 'From the outset, the player has the opportunity to occupy the specified number of planets';
 $LNG['se_planets_tech'] = 'Amount max of Colonies with Astrophysics';
 $LNG['se_planets_tech_info'] = 'This is how many planets user can have with Astrophysics';
-$LNG['se_planets_officier'] = 'Maximum number of additional planet by officers';
-$LNG['se_planets_officier_info'] = 'Per level of the officer, the user should have a new amount of planets to colonize';
+$LNG['se_planets_officers'] = 'Maximum number of additional planet by officers';
+$LNG['se_planets_officers_info'] = 'Per level of the officer, the user should have a new amount of planets to colonize';
 $LNG['se_planets_per_tech'] = 'Additional planets per level of Astrophysics';
 $LNG['se_planets_per_tech_info'] = 'This is the amount of colonies unlock per level';
 $LNG['se_ref_active'] = 'Activate Referallink';
@@ -1051,7 +1051,7 @@ $LNG['qe_send'] = 'Send';
 $LNG['qe_reset'] = 'Restart';
 $LNG['qe_build'] = 'Buildings';
 $LNG['qe_tech'] = 'Research';
-$LNG['qe_officier'] = 'Officers';
+$LNG['qe_officers'] = 'Officers';
 $LNG['qe_fleet'] = 'Fleet';
 $LNG['qe_defensive'] = 'Defenses';
 $LNG['qe_resources'] = 'Resources';

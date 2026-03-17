@@ -1,4 +1,4 @@
-{block name="title" prepend}{$LNG.lm_officiers}{/block}
+{block name="title" prepend}{$LNG.lm_officers}{/block}
 {block name="content"}
 
 {if !empty($darkmatterList)}
@@ -35,13 +35,13 @@
 							<span class="color-red" id="time_{$ID}">-</span>
 							<span class="color-green">({$LNG.of_active})</span>
 							{if $Element.buyable}
-							<form action="game.php?page=officier" method="post" class="build_form">
+							<form action="game.php?page=officers" method="post" class="build_form">
 								<input type="hidden" name="id" value="{$ID}">
 								<button type="submit" class="build_submit">{$LNG.of_recruit}</button>
 							</form>
 							{/if}
 						{elseif $Element.buyable}
-						<form action="game.php?page=officier" method="post" class="build_form">
+						<form action="game.php?page=officers" method="post" class="build_form">
 							<input type="hidden" name="id" value="{$ID}">
 							<button type="submit" class="build_submit">{$LNG.of_recruit}</button>
 						</form>
@@ -57,12 +57,12 @@
 	{/foreach}
 </table>
 {/if}
-{if $officierList}
+{if $officer_list}
 <table class="table-gow table_full">
 	<tr>
 		<th colspan="2">{$LNG.of_offi}</th>
 	</tr>
-	{foreach $officierList as $ID => $Element}
+	{foreach $officer_list as $ID => $Element}
 	<tr>
 		<td rowspan="2" style="width:120px;">
 			<a href="#" onclick="return Dialog.info({$ID})">
@@ -89,7 +89,7 @@
 						{if $Element.maxLevel <= $Element.level}
 							<span style="color:red">{$LNG.bd_maxlevel}</span>
 						{elseif $Element.buyable}
-							<form action="game.php?page=officier" method="post" class="build_form">
+							<form action="game.php?page=officers" method="post" class="build_form">
 								<input type="hidden" name="id" value="{$ID}">
 								<button type="submit" class="build_submit">{$LNG.of_recruit}</button>
 							</form>
@@ -106,7 +106,7 @@
 </table>
 {/if}
 
-<script src="scripts/game/officier.js"></script>
+<script src="scripts/game/officers.js"></script>
 
 
 {/block}

@@ -80,14 +80,14 @@
                                         <td width="40%"><input name="{$Element.type}" type="text" value="{$Element.input}"></td>
                                 {/foreach}
                         <tr>
-                                <th colspan="3">{$LNG.qe_officier}</th>
+                                <th colspan="3">{$LNG.qe_officers}</th>
                         </tr>
                         <tr>
                                 <td>{$LNG.qe_name}</td>
                                 <td>{$LNG.qe_level}</td>
                                 <td>{$LNG.qe_input}</td>
                         </tr>
-                        {foreach item=Element from=$officier}
+                        {foreach item=Element from=$officers}
                                 <tr>
                                         <td width="30%">{$Element.name}:</td>
                                         <td width="30%">{$Element.count}</td>

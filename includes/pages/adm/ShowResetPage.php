@@ -93,7 +93,7 @@ class ShowResetPage extends AbstractAdminPage
 
         foreach ($reslist['officers'] as $c_id)
         {
-            $dbcol['officier'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['officers'][$c_id] = "`".$resource[$c_id]."` = '0'";
         }
 
         foreach ($reslist['resstype'][1] as $c_id)
@@ -282,7 +282,7 @@ class ShowResetPage extends AbstractAdminPage
         if ($delete_ofis)
         {
             $sql = "UPDATE %%USERS%% 
-            SET " . implode(", ", $dbcol['officier']) . " 
+            SET " . implode(", ", $dbcol['officers']) . " 
             WHERE universe = :universe";
 
             $db->update($sql, [

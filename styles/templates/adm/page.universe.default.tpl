@@ -250,9 +250,9 @@
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"
-						for="planets_officier">{$LNG.se_planets_officier}</label>
-					<input id="planets_officier" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
-						name="planets_officier" maxlength="11" size="11" value="{$planets_officier}" type="text">
+						for="planets_officers">{$LNG.se_planets_officers}</label>
+					<input id="planets_officers" class="form-control py-1 bg-dark text-white my-1 border border-secondary"
+						name="planets_officers" maxlength="11" size="11" value="{$planets_officers}" type="text">
 				</div>
 				<div class="form-gorup d-flex flex-column my-1 p-2 ">
 					<label class="text-start my-1 cursor-pointer hover-underline"

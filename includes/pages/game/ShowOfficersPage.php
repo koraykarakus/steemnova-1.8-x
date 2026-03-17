@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowOfficierPage extends AbstractGamePage
+class ShowOfficersPage extends AbstractGamePage
 {
     public static $require_module = 0;
 
@@ -65,7 +65,7 @@ class ShowOfficierPage extends AbstractGamePage
         ]);
     }
 
-    public function UpdateOfficier($element): void
+    public function UpdateOfficers($element): void
     {
         global $USER, $PLANET, $resource, $pricelist;
 
@@ -121,7 +121,7 @@ class ShowOfficierPage extends AbstractGamePage
             if (isModuleAvailable(MODULE_OFFICERS)
                 && in_array($update_id, $reslist['officers']))
             {
-                $this->UpdateOfficier($update_id);
+                $this->UpdateOfficers($update_id);
             }
             elseif (isModuleAvailable(MODULE_DMEXTRAS)
                 && in_array($update_id, $reslist['dmfunc']))
@@ -184,11 +184,11 @@ class ShowOfficierPage extends AbstractGamePage
         }
 
         $this->assign([
-            'officierList'   => $officer_list,
+            'officer_list'   => $officer_list,
             'darkmatterList' => $dm_list,
             'of_dm_trade'    => sprintf($LNG['of_dm_trade'], $LNG['tech'][921]),
         ]);
 
-        $this->display('page.officier.default.tpl');
+        $this->display('page.officers.default.tpl');
     }
 }

@@ -129,7 +129,7 @@
 			<div class="tab-pane fade p-3" id="tab_6">
 				<!-- officers -->
 				<table class="p-3 mx-auto text-start">
-					{foreach item=Element from=$reslist.officier}
+					{foreach item=Element from=$reslist.officers}
 						<tr>
 							<td>{$LNG.tech.{$Element}}:</td>
 							<td><input type="text" name="element_{$Element}" value="0" pattern="[0-9]*"></td>

@@ -63,7 +63,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
             ':universe' => Universe::getEmulated(),
         ]);
 
-        $tech = $officier = [];
+        $tech = $officers = [];
 
         foreach ($reslist['tech'] as $ID)
         {
@@ -77,7 +77,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         foreach ($reslist['officers'] as $ID)
         {
-            $officier[] = [
+            $officers[] = [
                 'type'  => $resource[$ID],
                 'name'  => $LNG['tech'][$ID],
                 'count' => pretty_number($user_data[$resource[$ID]]),
@@ -94,7 +94,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $this->assign([
             'tech'          => $tech,
-            'officier'      => $officier,
+            'officers'      => $officers,
             'targetID'      => $target_id,
             'planetid'      => $user_data['id_planet'],
             'planetname'    => $planet_info['name'],

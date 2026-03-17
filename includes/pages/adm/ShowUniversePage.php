@@ -85,7 +85,7 @@ class ShowUniversePage extends AbstractAdminPage
             'max_planets'                => $config->max_planets,
             'min_player_planets'         => $config->min_player_planets,
             'planets_tech'               => $config->planets_tech,
-            'planets_officier'           => $config->planets_officier,
+            'planets_officers'           => $config->planets_officers,
             'planets_per_tech'           => $config->planets_per_tech,
             'planet_factor'              => $config->planet_factor,
             'max_elements_build'         => $config->max_elements_build,
@@ -167,7 +167,7 @@ class ShowUniversePage extends AbstractAdminPage
             'max_planets'                  => $config->max_planets,
             'min_player_planets'           => $config->min_player_planets,
             'planets_tech'                 => $config->planets_tech,
-            'planets_officier'             => $config->planets_officier,
+            'planets_officers'             => $config->planets_officers,
             'planets_per_tech'             => $config->planets_per_tech,
             'planet_factor'                => $config->planet_factor,
             'max_elements_build'           => $config->max_elements_build,
@@ -237,7 +237,7 @@ class ShowUniversePage extends AbstractAdminPage
         $max_planets = HTTP::_GP('max_planets', 0);
         $min_player_planets = HTTP::_GP('min_player_planets', 0);
         $planets_tech = HTTP::_GP('planets_tech', 0);
-        $planets_officier = HTTP::_GP('planets_officier', 0);
+        $planets_officers = HTTP::_GP('planets_officers', 0);
         $planets_per_tech = HTTP::_GP('planets_per_tech', 0.0);
         $planet_factor = HTTP::_GP('planet_factor', 0.0);
         $max_elements_build = HTTP::_GP('max_elements_build', 0);
@@ -302,7 +302,7 @@ class ShowUniversePage extends AbstractAdminPage
             'max_planets'                => $max_planets,
             'min_player_planets'         => $min_player_planets,
             'planets_tech'               => $planets_tech,
-            'planets_officier'           => $planets_officier,
+            'planets_officers'           => $planets_officers,
             'planets_per_tech'           => $planets_per_tech,
             'planet_factor'              => $planet_factor,
             'max_elements_build'         => $max_elements_build,

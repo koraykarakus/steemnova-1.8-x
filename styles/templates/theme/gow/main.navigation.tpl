@@ -64,8 +64,8 @@
   
   {if isModuleAvailable($smarty.const.MODULE_OFFICERS) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
     <li class="menu-button">
-      <a class="long{if $page == 'officier'} menuActive{/if}" href="game.php?page=officier">{$LNG.lm_officiers}</a>
-      <a class="menu_icon icon_10{if $page == 'officier'} active{/if}" href="game.php?page=officier"></a>
+      <a class="long{if $page == 'officers'} menuActive{/if}" href="game.php?page=officers">{$LNG.lm_officers}</a>
+      <a class="menu_icon icon_10{if $page == 'officers'} active{/if}" href="game.php?page=officers"></a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_TRADER)}
