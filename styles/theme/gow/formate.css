@@ -501,20 +501,20 @@ body {
 }
 
 .menu-button {
-	width: 136px;
-	position: relative;
+	width: 165px;
 	cursor: pointer;
+	display: flex;
 	list-style: none;
 	transition: 0.2 ease;
 	height: 27px;
 }
 
-.menu-button a {
+.menu-button .long {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	width: 100%;
+	width: 136px;
 	height: 100%;
 	color: #e0e0e0;
 	text-decoration: none;
@@ -534,6 +534,147 @@ body {
 .menu-button:hover a {
 	color: #ffffff;
 }
+.menu-button .menu_icon{
+	display: flex;
+	width: 27px;
+	height: 27px;
+	border-radius: 3px;
+	background-color: #101625;
+	margin-left: 3px;
+	margin-top: 0px;
+	background: url(img/menu_icons.png);
+	background-repeat: no-repeat;
+}
+.menu_icon.icon_1{
+	background-position: -162px 0;
+}
+.menu_icon.icon_1:hover{
+	background-position: -162px -27px;
+}
+.menu_icon.icon_1.active{
+	background-position: -162px -54px;
+}
+.menu_icon.icon_2{
+	background-position: -243px 0;
+}
+.menu_icon.icon_2:hover{
+	background-position: -243px -27px;
+}
+.menu_icon.icon_2.active{
+	background-position: -243px -54px;
+}
+.menu_icon.icon_3{
+	background-position: -297px 0;
+}
+.menu_icon.icon_3:hover{
+	background-position: -297px -27px;
+}
+.menu_icon.icon_3.active{
+	background-position: -297px -54px;
+}
+.menu_icon.icon_4{
+	background-position: -270px 0;
+}
+.menu_icon.icon_4:hover{
+	background-position: -270px -27px;
+}
+.menu_icon.icon_4.active{
+	background-position: -270px -54px;
+}
+.menu_icon.icon_5{
+	background-position: -27px 0;
+}
+.menu_icon.icon_5:hover{
+	background-position: -27px -27px;
+}
+.menu_icon.icon_5.active{
+	background-position: -27px -54px;
+}
+.menu_icon.icon_6{
+	background-position: -216px 0;
+}
+.menu_icon.icon_6:hover{
+	background-position: -216px -27px;
+}
+.menu_icon.icon_6.active{
+	background-position: -216px -54px;
+}
+.menu_icon.icon_7{
+	background-position: -108px 0;
+}
+.menu_icon.icon_7:hover{
+	background-position: -108px -27px;
+}
+.menu_icon.icon_7.active{
+	background-position: -108px -54px;
+}
+.menu_icon.icon_8{
+	background-position: -135px 0;
+}
+.menu_icon.icon_8:hover{
+	background-position: -135px -27px;
+}
+.menu_icon.icon_8.active{
+	background-position: -135px -54px;
+}
+.menu_icon.icon_9{
+	background-position: -54px 0;
+}
+.menu_icon.icon_9:hover{
+	background-position: -54px -27px;
+}
+.menu_icon.icon_9.active{
+	background-position: -54px -54px;
+}
+.menu_icon.icon_10{
+	background-position: -189px 0;
+}
+.menu_icon.icon_10:hover{
+	background-position: -189px -27px;
+}
+.menu_icon.icon_10.active{
+	background-position: -189px -54px;
+}
+.menu_icon.icon_11{
+	background-position: -351px 0;
+}
+.menu_icon.icon_11:hover{
+	background-position: -351px -27px;
+}
+.menu_icon.icon_11.active{
+	background-position: -351px -54px;
+}
+.menu_icon.icon_12{
+	background-position: -324px 0;
+}
+.menu_icon.icon_12:hover{
+	background-position: -324px -27px;
+}
+.menu_icon.icon_12.active{
+	background-position: -324px -54px;
+}
+.menu_icon.icon_13{
+	background-position: 0 0;
+}
+.menu_icon.icon_13:hover{
+	background-position: 0 -27px;
+}
+.menu_icon.icon_13.active{
+	background-position: 0 -54px;
+}
+.menu_icon.icon_14{
+	background-position: -81px 0;
+}
+.menu_icon.icon_14:hover{
+	background-position: -81px -27px;
+}
+.menu_icon.icon_14.active{
+	background-position: -81px -54px;
+}
+
+
+
+
 
 #menu .menu-button>.menuActive {
 	background-position: -1px -29px;	
