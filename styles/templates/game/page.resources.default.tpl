@@ -52,7 +52,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><img src='{$dpath}gebaeude/{$productionID}.{if $productionID >=600 && $productionID <= 699}jpg{else}gif{/if}'></td>
+								<td><img src='{$dpath}elements/{$productionID}.{if $productionID >=600 && $productionID <= 699}jpg{else}gif{/if}'></td>
 							</tr>
 							<tr>
 								<td>{$LNG.shortDescription.$productionID}</td>

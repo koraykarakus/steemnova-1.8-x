@@ -28,7 +28,7 @@
           <div class="top">
             <div class="left">
               <div class="img_wrapper">
-                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="203" height="203">
+                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="203" height="203">
               </div>
             </div>
             <div class="right">
@@ -85,7 +85,7 @@
                         <div class="tooltip tooltip_top">
                           {$LNG.tech.$RessID}
                         </div>
-                        <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+                        <img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
                         <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
                       </div>
                     {/foreach}
@@ -128,7 +128,7 @@
               {foreach $Element.requeriments as $currentRequire}
               <tr>
                 <td class='color-red'>
-                  <img src='{$dpath}gebaeude/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
+                  <img src='{$dpath}elements/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
                 </td>
                 <td>
                   <span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)
@@ -143,7 +143,7 @@
         {if !$Element.buyable || !$Element.technologySatisfied }
           <div class="black-screen"></div>
         {/if}
-        <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
+        <img class="hover-pointer" src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
           <div class="name_info">
               {$LNG.tech.{$ID}}
           </div>

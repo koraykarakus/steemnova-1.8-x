@@ -10,7 +10,7 @@
 	<tr>
 		<td rowspan="2" style="width:120px;">
 			<a href="#" onclick="return Dialog.info({$ID});">
-				<img src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
+				<img src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="120" height="120">
 			</a>
 		</td>
 		<th>
@@ -27,7 +27,7 @@
 							{foreach $Element.elementBonus as $BonusName => $Bonus}{if $Bonus@iteration % 3 === 1}<p>{/if}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{$Bonus[0]}{/if} {$LNG.bonus.$BonusName}{if $Bonus@iteration % 3 === 0 || $Bonus@last}</p>{else}&nbsp;{/if}{/foreach}
                             <p>{foreach $Element.costResources as $RessID => $RessAmount}
 															<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip" data-bs-placement="top"
-										          data-bs-html="true" title="<table class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach} | {$LNG.in_dest_durati}: <span style="color:lime">{$Element.time|time}</span></p>
+										          data-bs-html="true" title="<table class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach} | {$LNG.in_dest_durati}: <span style="color:lime">{$Element.time|time}</span></p>
 						</td>
 						<td style="vertical-align:middle;width:100px">
 						{if $Element.timeLeft > 0}
@@ -66,7 +66,7 @@
 	<tr>
 		<td rowspan="2" style="width:120px;">
 			<a href="#" onclick="return Dialog.info({$ID})">
-				<img src="{$dpath}gebaeude/{$ID}.jpg" alt="{$LNG.tech.{$ID}}" width="120" height="120">
+				<img src="{$dpath}elements/{$ID}.jpg" alt="{$LNG.tech.{$ID}}" width="120" height="120">
 			</a>
 		</td>
 		<th>
@@ -83,7 +83,7 @@
 							<p>{foreach $Element.elementBonus as $BonusName => $Bonus}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{floatval($Bonus[0])}{/if} {$LNG.bonus.$BonusName}<br>{/foreach}</p>
                             <p>{foreach $Element.costResources as $RessID => $RessAmount}<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
 				          					data-bs-placement="top"
-				          					data-bs-html="true" title="<table  class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach}</p>
+				          					data-bs-html="true" title="<table  class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach}</p>
 						</td>
 						<td style="vertical-align:middle;width:100px">
 						{if $Element.maxLevel <= $Element.level}

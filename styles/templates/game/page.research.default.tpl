@@ -29,7 +29,7 @@
           <div class="top">
             <div class="left">
               <div class="img_wrapper">
-                <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
+                <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif"
                   alt="{$LNG.tech.{$ID}}" width="203" height="203">
               </div>
             </div>
@@ -80,7 +80,7 @@
                         <div class="tooltip tooltip_top">
                           {$LNG.tech.$RessID}
                         </div>
-                        <img src='{$dpath}gebaeude/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
+                        <img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
                         <span
                           class="{if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
                       </div>
@@ -147,7 +147,7 @@
                     {foreach $Element.requeriments as $currentRequire}
                       <tr>
                         <td class='color-red'>
-                          <img class='mx-2 hover-pointer' src='{$dpath}gebaeude/{$currentRequire.requireID}.gif'
+                          <img class='mx-2 hover-pointer' src='{$dpath}elements/{$currentRequire.requireID}.gif'
                             alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
                         </td>
                         <td class='color-red align-middle text-start'><span
@@ -165,7 +165,7 @@
             {if $IsLabinBuild || $IsFullQueue || !$Element.buyable || !$Element.technologySatisfied}
               <div class="black-screen d-flex position-absolute top-0 end-0 hover-pointer"></div>
             {/if}
-            <img class="hover-pointer" src="{$dpath}gebaeude/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
+            <img class="hover-pointer" src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if !$IsLabinBuild && !$IsFullQueue && $Element.buyable && $Element.technologySatisfied}
               <form action="game.php?page=research" method="post" class="">
                 <input type="hidden" name="cmd" value="insert">
@@ -195,7 +195,7 @@
             <div class="tooltip tooltip_top">
               {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>
             </div>
-            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}gebaeude/{$ID}.gif"
+            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif"
               alt="{$LNG.tech.{$ID}}" width="80" height="80">
             <span class="level_info">{$List.level}</span>
 

@@ -40,7 +40,7 @@
 					<tr>
 						<td style="width: 100px;">
 							<a href="#" onclick="return Dialog.info({$elementID})">
-								<img src="{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}" width="100" height="100">
+								<img src="{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}" width="100" height="100">
 							</a>
 						</td>
 						<td>

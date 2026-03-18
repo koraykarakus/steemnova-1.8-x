@@ -20,7 +20,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
 									<td>{$LNG.shortDescription.$elementID}</td>
@@ -53,7 +53,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
 									<td>{$LNG.shortDescription.$elementID}</td>
@@ -85,7 +85,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
 									<td>{$LNG.shortDescription.$elementID}</td>
@@ -117,7 +117,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
 									<td>{$LNG.shortDescription.$elementID}</td>
@@ -149,7 +149,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
 									<td>{$LNG.shortDescription.$elementID}</td>

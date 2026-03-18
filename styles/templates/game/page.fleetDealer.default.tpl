@@ -9,7 +9,7 @@
 			<tr>
 				<td>
 					<div class="transparent" style="text-align:left;float:left;"><img id="img" alt=""
-							data-src="{$dpath}gebaeude/"></div>
+							data-src="{$dpath}elements/"></div>
 					<div class="transparent" style="text-align:right;float:right;padding:5px">
 						<select class="text-center text-yellow" name="shipID" id="shipID" onchange="updateVars()">
 							{foreach $shipIDs as $shipID}

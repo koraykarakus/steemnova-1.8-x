@@ -19,7 +19,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><img src='./styles/theme/gow/gebaeude/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+					<td><img src='./styles/theme/gow/elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 				</tr>
 				<tr>
 					<td>{$LNG.shortDescription.$elementID}</td>
