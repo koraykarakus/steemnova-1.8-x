@@ -460,35 +460,31 @@
 					<div class="actions">
 						{if $currentPlanet.action}
 							{if $currentPlanet.action.esp}
-								<a class="action_link" onclick="doit(6,{$currentPlanet.planet.id},{$spyShips|json|escape:'html'})">
+								<a class="action_link icon_spy" onclick="doit(6,{$currentPlanet.planet.id},{$spyShips|json|escape:'html'})">
 									<div class="tooltip tooltip_top">
 										{$LNG.gl_spy}
 									</div>
-									<img width="18" height="18" src="{$dpath}img/e.gif" alt="">
 								</a>
 							{/if}
 							{if $currentPlanet.action.message}
-								<a class="action_link" onclick="return Dialog.PM({$currentPlanet.user.id})">
+								<a class="action_link icon_message" onclick="return Dialog.PM({$currentPlanet.user.id})">
 									<div class="tooltip tooltip_top">
 										{$LNG.write_message}
 									</div>
-									<img width="18" height="18" src="{$dpath}img/m.gif" title="{$LNG.write_message}" alt="">
 								</a>
 							{/if}
 							{if $currentPlanet.action.buddy}
-								<a class="action_link" onclick="return Dialog.Buddy({$currentPlanet.user.id})">
+								<a class="action_link icon_buddy" onclick="return Dialog.Buddy({$currentPlanet.user.id})">
 									<div class="tooltip tooltip_top">
 										{$LNG.gl_buddy_request}
 									</div>
-									<img width="18" height="18" src="{$dpath}img/b.gif" title="{$LNG.gl_buddy_request}" alt="">
 								</a>
 							{/if}
 							{if $currentPlanet.action.missle}
-								<a class="action_link" href="?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;type=1">
+								<a class="action_link icon_missile" href="?page=galaxy&amp;action=sendMissle&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;type=1">
 									<div class="tooltip tooltip_top">
 										{$LNG.gl_missile_attack}
 									</div>
-									<img width="18" height="18" src="{$dpath}img/r.gif" title="{$LNG.gl_missile_attack}" alt="">
 								</a>
 							{/if}
 						{/if}
