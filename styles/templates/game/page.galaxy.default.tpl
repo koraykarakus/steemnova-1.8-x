@@ -124,7 +124,7 @@
 								{/if}
 								<tr>
 									<td>
-										<img src='{$dpath}planeten/{$currentPlanet.planet.image}.jpg' height='75' width='75'>
+										<img src='{$dpath}planeten/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
 									</td>
 									<td>
 										<table class="table-gow table_full">
@@ -218,7 +218,7 @@
 								</tr>
 							</table>
 						</div>
-						<img src="{$dpath}planeten/{$currentPlanet.planet.image}.jpg" height="30"
+						<img src="{$dpath}planeten/small/s_{$currentPlanet.planet.image}.jpg" height="30"
 							width="30" alt="">
 					</div>
 					<div class="moon_picture">
