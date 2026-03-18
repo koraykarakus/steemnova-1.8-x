@@ -90,7 +90,7 @@
 					{$currentPlanet = $GalaxyRows[$planet]}
 					<div class="num">{$planet}</div>
 					<div class="planet_name">
-					{if mb_strlen($currentPlanet.planet.name > 12)}
+					{if mb_strlen($currentPlanet.planet.name, 'UTF-8') > 12}
 						<div class="tooltip tooltip_bottom">
 							{$currentPlanet.planet.name}
 						</div>
