@@ -91,7 +91,7 @@
                 <td>{$planetname}</td>
                 <td>
                   <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
-                    <img src="{$dpath}planeten/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
+                    <img src="{$dpath}planets/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
                   </a>
                 </td>
               </tr>
@@ -100,7 +100,7 @@
                 <td>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</td>
                 <td>
                   <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
-                    <img src="{$dpath}planeten/{$Moon.image}.jpg" height="50" width="50"
+                    <img src="{$dpath}planets/{$Moon.image}.jpg" height="50" width="50"
                       alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
                   </a>
                 </td>

@@ -124,7 +124,7 @@
 								{/if}
 								<tr>
 									<td>
-										<img src='{$dpath}planeten/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
+										<img src='{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
 									</td>
 									<td>
 										<table class="table-gow table_full">
@@ -218,7 +218,7 @@
 								</tr>
 							</table>
 						</div>
-						<img src="{$dpath}planeten/small/s_{$currentPlanet.planet.image}.jpg" height="30"
+						<img src="{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg" height="30"
 							width="30" alt="">
 					</div>
 					<div class="moon_picture">
@@ -241,7 +241,7 @@
 									{/if}
 									<tr>
 										<td style='width:80px'>
-											<img src='{$dpath}planeten/mond.jpg' height='75' width='75'>
+											<img src='{$dpath}planets/mond.jpg' height='75' width='75'>
 										</td>
 										<td>
 											<table class='table-gow' style='width:100%'>
@@ -338,7 +338,7 @@
 										</tr>
 									</table>
 							</div>
-							<img src="{$dpath}planeten/mond.jpg" height="22" width="22"
+							<img src="{$dpath}planets/mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
 						{/if}
 					</div>
@@ -352,7 +352,7 @@
 										</th>
 									</tr>
 									<tr>
-										<td style='width:80px'><img src='{$dpath}planeten/debris.png' height="22" width="22"></td>
+										<td style='width:80px'><img src='{$dpath}planets/debris.png' height="22" width="22"></td>
 										<td>
 											<table style='width:100%'>
 												<tr>
@@ -376,7 +376,7 @@
 									</tr>
 								</table>
 							</div>
-							<img src="{$dpath}planeten/debris.png" height="22" width="22" alt="">
+							<img src="{$dpath}planets/debris.png" height="22" width="22" alt="">
 						{/if}
 					</div>
 					<div class="player_name">
