@@ -63,31 +63,29 @@ class ShowSettingsPage extends AbstractGamePage
                 ],
                 'lang' => $LNG->getAllowedLangs(false),
             ],
-            'adminProtection'        => $USER['authattack'],
-            'userAuthlevel'          => $USER['authlevel'],
-            'changeNickTime'         => ($USER['uctime'] + USERNAME_CHANGETIME) - TIMESTAMP,
-            'username'               => $USER['username'],
-            'email'                  => $USER['email'],
-            'permaEmail'             => $USER['email_2'],
-            'userLang'               => $USER['lang'],
-            'theme'                  => $USER['dpath'],
-            'planetSort'             => $USER['planet_sort'],
-            'planetOrder'            => $USER['planet_sort_order'],
-            'spycount'               => $USER['spio_anz'],
-            'fleetActions'           => $USER['settings_fleetactions'],
-            'timezone'               => $USER['timezone'],
-            'delete'                 => $USER['db_deaktjava'],
-            'queueMessages'          => $USER['hof'],
-            'spyMessagesMode'        => $USER['spyMessagesMode'],
-            'galaxySpy'              => $USER['settings_esp'],
-            'galaxyBuddyList'        => $USER['settings_bud'],
-            'galaxyMissle'           => $USER['settings_mis'],
-            'galaxyMessage'          => $USER['settings_wri'],
-            'blockPM'                => $USER['settings_blockPM'],
-            'userid'                 => $USER['id'],
-            'ref_active'             => $config->ref_active,
-            'SELF_URL'               => PROTOCOL.HTTP_HOST.HTTP_ROOT,
-            'let_users_change_theme' => $config->let_users_change_theme,
+            'adminProtection' => $USER['authattack'],
+            'userAuthlevel'   => $USER['authlevel'],
+            'changeNickTime'  => ($USER['uctime'] + USERNAME_CHANGETIME) - TIMESTAMP,
+            'username'        => $USER['username'],
+            'email'           => $USER['email'],
+            'permaEmail'      => $USER['email_2'],
+            'userLang'        => $USER['lang'],
+            'planetSort'      => $USER['planet_sort'],
+            'planetOrder'     => $USER['planet_sort_order'],
+            'spycount'        => $USER['spio_anz'],
+            'fleetActions'    => $USER['settings_fleetactions'],
+            'timezone'        => $USER['timezone'],
+            'delete'          => $USER['db_deaktjava'],
+            'queueMessages'   => $USER['hof'],
+            'spyMessagesMode' => $USER['spyMessagesMode'],
+            'galaxySpy'       => $USER['settings_esp'],
+            'galaxyBuddyList' => $USER['settings_bud'],
+            'galaxyMissle'    => $USER['settings_mis'],
+            'galaxyMessage'   => $USER['settings_wri'],
+            'blockPM'         => $USER['settings_blockPM'],
+            'userid'          => $USER['id'],
+            'ref_active'      => $config->ref_active,
+            'SELF_URL'        => PROTOCOL.HTTP_HOST.HTTP_ROOT,
         ]);
 
         $this->display('page.settings.default.tpl');
@@ -256,23 +254,6 @@ class ShowSettingsPage extends AbstractGamePage
         $fleetactions = min(max($fleetactions, 1), 99);
 
         $language = array_key_exists($language, $LNG->getAllowedLangs(false)) ? $language : $LNG->getLanguage();
-        $theme = HTTP::_GP('user_theme', '');
-
-        $availableThemes = array_keys(Theme::getAvalibleSkins());
-
-        if (!in_array($theme, $availableThemes))
-        {
-            $theme = "gow";
-        }
-
-        if ($config->let_users_change_theme)
-        {
-            $themeName = $theme;
-        }
-        else
-        {
-            $themeName = $USER['dpath'];
-        }
 
         $db = Database::get();
 
@@ -428,7 +409,6 @@ class ShowSettingsPage extends AbstractGamePage
         }
 
         $sql = "UPDATE %%USERS%% SET
-		dpath = :dpath,
 		timezone				= :timezone,
 		planet_sort				= :planetSort,
 		planet_sort_order		= :planetOrder,
@@ -446,7 +426,6 @@ class ShowSettingsPage extends AbstractGamePage
 		WHERE id = :userID;";
 
         $db->update($sql, [
-            ':dpath'           => $themeName,
             ':timezone'        => $timezone,
             ':planetSort'      => $planetSort,
             ':planetOrder'     => $planetOrder,

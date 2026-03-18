@@ -23,7 +23,7 @@
 </script>
 
 <div id="leftmenu">
-  <div style="background-image: url('./styles/theme/gow/img/menu-top.png');height:100px;"></div>
+  <div style="background-image: url('./styles/theme/img/menu-top.png');height:100px;"></div>
   <input class="bg-dark text-white py-0 my-1 form-control" style="height:38px;width:100%;" id="searchInput" type="text"
     placeholder="search...">
   <ul class="bg-dark d-flex flex-column p-0 m-0" id="menu">
@@ -281,6 +281,6 @@
           href="?page=clearCache">{$LNG.mu_clear_cache}</a>
       </li>
     {/if}
-    <li style="background-image: url('./styles/theme/gow/img/menu-foot.png');height:30px;"></li>
+    <li style="background-image: url('./styles/theme/img/menu-foot.png');height:30px;"></li>
   </ul>
 </div>

@@ -107,19 +107,16 @@ class template extends Smarty
             'date'      => explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
             'Offset'    => $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
             'VERSION'   => $config->version,
-            'dpath'     => 'styles/theme/gow/',
+            'dpath'     => './styles/theme/',
             'bodyclass' => 'full',
         ]);
     }
 
     public function show($file)
     {
-        global $LNG, $THEME;
+        global $LNG;
 
-        if ($THEME->isCustomTPL($file))
-        {
-            $this->setTemplateDir($THEME->getTemplatePath());
-        }
+        $this->setTemplateDir(ROOT_PATH.'/styles/templates/game/');
 
         $tplDir = $this->getTemplateDir();
 
@@ -165,13 +162,13 @@ class template extends Smarty
 
     public function message($mes, $dest = false, $time = 3, $Fatal = false)
     {
-        global $LNG, $THEME;
+        global $LNG;
 
         $this->assign_vars([
             'mes'      => $mes,
             'fcm_info' => $LNG['fcm_info'],
             'Fatal'    => $Fatal,
-            'dpath'    => $THEME->getThemePath(),
+            'dpath'    => './styles/theme/',
         ]);
 
         $this->gotoside($dest, $time);
