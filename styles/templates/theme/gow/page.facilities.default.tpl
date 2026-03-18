@@ -20,7 +20,7 @@
   </script>
 
   <div class="items_wrapper">
-    <div class="top" style="background:url('{$dpath}images/buildings.jpg');" class="bg-black border-orange">
+    <div class="top" style="background:url('{$dpath}images/facilities_2.jpg');" class="bg-black border-orange">
       {foreach $BuildInfoList as $ID => $Element}
         <div class="item_big hidden" id="item_big_{$ID}">
           <div class="top">
