@@ -32,16 +32,8 @@ class ShowFleetTablePage extends AbstractGamePage
 
         $this->tpl_obj->loadscript('flotten.js');
 
-        $tech_expedition = $USER[$resource[124]];
-
-        $active_expedition = 0;
-        $max_expedition = 0;
-        if ($tech_expedition >= 1)
-        {
-            $active_expedition = FleetFunctions::GetCurrentFleets($USER['id'], 15, true);
-            $max_expedition = floor(sqrt($tech_expedition)) + $USER['factor']['Expedition'];
-        }
-
+        $active_expedition = FleetFunctions::GetCurrentFleets($USER['id'], 15, true);
+        $max_expedition = FleetFunctions::getExpeditionLimit($USER);
         $max_fleet_slots = FleetFunctions::GetMaxFleetSlots($USER);
 
         $target_galaxy = HTTP::_GP('galaxy', (int) $PLANET['galaxy']);
