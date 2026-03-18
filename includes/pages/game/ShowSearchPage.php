@@ -223,8 +223,6 @@ class ShowSearchPage extends AbstractGamePage
 
     public function result(): void
     {
-        global $THEME;
-
         $this->initTemplate();
         $this->setWindow('ajax');
 
@@ -240,7 +238,6 @@ class ShowSearchPage extends AbstractGamePage
 
         $this->assign([
             'searchList' => $search_list,
-            'dpath'      => $THEME->getThemePath(),
         ]);
 
         $templateSuffix = ($seach_mode === "allyname" || $seach_mode === "allytag") ? "ally" : "default";

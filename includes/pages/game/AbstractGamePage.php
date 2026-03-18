@@ -68,8 +68,6 @@ abstract class AbstractGamePage
 
     protected function initTemplate(): void
     {
-        global $config, $USER;
-
         if (isset($this->tpl_obj))
         {
             return;
@@ -78,13 +76,7 @@ abstract class AbstractGamePage
         $this->tpl_obj = new template();
         list($tpl_dir) = $this->tpl_obj->getTemplateDir();
 
-        $path = $theme = "";
-
-        $theme = ($config->let_users_change_theme) ? $USER['dpath'] : $config->server_default_theme;
-
-        $path = "theme/" . $theme;
-
-        $this->tpl_obj->setTemplateDir($tpl_dir. $path);
+        $this->tpl_obj->setTemplateDir($tpl_dir. '/game');
     }
 
     protected function setWindow($window): void
@@ -127,7 +119,7 @@ abstract class AbstractGamePage
 
     protected function getNavigationData(): void
     {
-        global $PLANET, $LNG, $USER, $THEME, $resource, $reslist, $config;
+        global $PLANET, $LNG, $USER, $resource, $reslist, $config;
 
         $planet_select = [];
 
@@ -188,8 +180,6 @@ abstract class AbstractGamePage
             $resource_table[$c_id]['current'] = $USER[$resource[$c_id]];
         }
 
-        $theme_settings = $THEME->getStyleSettings();
-
         $commit = '';
         $commit_short = '';
         if (file_exists('.git/FETCH_HEAD'))
@@ -224,7 +214,7 @@ abstract class AbstractGamePage
             'username'       => $USER['username'],
             'avatar'         => $avatar,
             'resourceTable'  => $resource_table,
-            'shortlyNumber'  => $theme_settings['TOPNAV_SHORTLY_NUMBER'],
+            'shortlyNumber'  => 1,
             'closed'         => $config->game_disable,
             'hasBoard'       => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
@@ -237,7 +227,7 @@ abstract class AbstractGamePage
 
     protected function getPageData(): void
     {
-        global $USER, $THEME, $config, $PLANET, $LNG;
+        global $USER, $config, $PLANET, $LNG;
 
         if ($this->getWindow() === 'full')
         {
@@ -370,7 +360,6 @@ abstract class AbstractGamePage
             'REV'                => substr($config->version, -4),
             'Offset'             => $date_time_user->getOffset() - $date_time_server->getOffset(),
             'queryString'        => $this->getQueryString(),
-            'themeSettings'      => $THEME->getStyleSettings(),
             'page'               => HTTP::_GP('page', ''),
             'mode'               => HTTP::_GP('mode', ''),
             'servertime'         => _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
@@ -416,7 +405,7 @@ abstract class AbstractGamePage
 
     protected function display($file): void
     {
-        global $THEME, $LNG;
+        global $LNG;
 
         $this->save();
 
@@ -427,7 +416,7 @@ abstract class AbstractGamePage
 
         $this->assign([
             'lang'       => $LNG->getLanguage(),
-            'dpath'      => $THEME->getThemePath(),
+            'dpath'      => './styles/theme/',
             'scripts'    => $this->tpl_obj->jsscript,
             'execscript' => implode("\n", $this->tpl_obj->script),
             'basepath'   => PROTOCOL.HTTP_HOST.HTTP_BASE,

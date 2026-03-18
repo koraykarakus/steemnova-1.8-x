@@ -9,11 +9,11 @@ function attackAlert(){
       success: function (data) {
 
       if (data === "attack") {
-        $('#attack_alert').attr('src','styles/theme/gow/images/attack_red.gif');
+        $('#attack_alert').attr('src','styles/theme/images/attack_red.gif');
       }else if (data === "spy"){
-        $('#attack_alert').attr('src','styles/theme/gow/images/attack_yellow.gif');
+        $('#attack_alert').attr('src','styles/theme/images/attack_yellow.gif');
       }else {
-        $('#attack_alert').attr('src','styles/theme/gow/images/attack_green.gif');
+        $('#attack_alert').attr('src','styles/theme/images/attack_green.gif');
       }
       }
     });

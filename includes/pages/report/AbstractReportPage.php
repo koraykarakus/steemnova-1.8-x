@@ -30,8 +30,6 @@ abstract class AbstractReportPage
 
     public function initTemplate(): void
     {
-        global $USER;
-
         if (isset($this->tplObj))
         {
             return;
@@ -40,12 +38,7 @@ abstract class AbstractReportPage
         $this->tplObj = new template();
         list($tpl_dir) = $this->tplObj->getTemplateDir();
 
-        $theme_name = (isset($USER['dpath'])) ?
-        $USER['dpath'] :
-        Config::get()->server_default_theme;
-
-        $path = "theme/" . $theme_name;
-        $this->tplObj->setTemplateDir($tpl_dir . $path);
+        $this->tplObj->setTemplateDir($tpl_dir . "/game");
     }
 
     protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
@@ -70,15 +63,15 @@ abstract class AbstractReportPage
 
     protected function display($file): void
     {
-        global $THEME, $LNG;
+        global $LNG;
 
         $this->assign([
-            'lang'  => $LNG->getLanguage(),
-            'dpath' => $THEME->getThemePath(),
+            'lang' => $LNG->getLanguage(),
         ]);
 
         $this->assign([
-            'LNG' => $LNG,
+            'dpath' => './styles/theme/',
+            'LNG'   => $LNG,
         ], false);
 
         $this->tplObj->display('extends:layout.battlereport.tpl|' . $file);

@@ -63,7 +63,6 @@ require 'includes/classes/PlayerUtil.class.php';
 require 'includes/classes/Session.class.php';
 require 'includes/classes/Universe.class.php';
 
-require 'includes/classes/class.theme.php';
 require 'includes/classes/class.template.php';
 require 'includes/classes/BBCode.class.php';
 
@@ -159,12 +158,6 @@ if (MODE === 'INGAME'
         ':userId' => $session->userId,
     ]);
 
-    $THEME = new Theme();
-    if (!empty($USER))
-    {
-        $THEME->setUserTheme($USER['dpath']);
-    }
-
     if (empty($USER))
     {
         HTTP::redirectTo('index.php?code=3');
@@ -245,13 +238,12 @@ elseif (MODE === 'CHAT')
 }
 elseif (MODE === 'REPORT')
 {
-    $THEME = new Theme();
     $session = Session::load();
     $LNG = new Language();
-    $theme = $lang = '';
+    $lang = '';
     if ($session->isValidSession())
     {
-        $sql = "SELECT `dpath`,`lang` FROM %%USERS%% WHERE `id` = :userId";
+        $sql = "SELECT `lang` FROM %%USERS%% WHERE `id` = :userId";
 
         $USER = Database::get()->selectSingle($sql, [
             ':userId' => $session->userId,
@@ -262,13 +254,11 @@ elseif (MODE === 'REPORT')
             HTTP::redirectTo('index.php?code=3');
         }
 
-        $theme = $USER['dpath'];
         $lang = $USER['lang'];
     }
     else
     {
         $session->delete();
-        $theme = Config::get()->server_default_theme;
         $lang = $LNG->getUserAgentLanguage();
         if (!in_array($lang, Language::getAllowedLangs(true)))
         {
@@ -276,7 +266,6 @@ elseif (MODE === 'REPORT')
         }
     }
 
-    $THEME->setUserTheme($theme);
     $LNG->setLanguage($lang);
     $LNG->includeData(['FLEET']);
     $LNG->includeData(['L18N', 'INGAME', 'TECH', 'CUSTOM']);

@@ -62,8 +62,6 @@ class ShowServerPage extends AbstractAdminPage
             'use_recaptcha_on_login'       => $config->use_recaptcha_on_login,
             'use_recaptcha_on_register'    => $config->use_recaptcha_on_register,
             'use_recaptcha_on_admin_login' => $config->use_recaptcha_on_admin_login,
-            'server_default_theme'         => $config->server_default_theme,
-            'let_users_change_theme'       => $config->let_users_change_theme,
             'password_recover_type'        => $config->password_recover_type,
             'Selector'                     => [
                 'timezone'                => $time_zones,
@@ -113,8 +111,6 @@ class ShowServerPage extends AbstractAdminPage
             'close_reason'                 => $config->close_reason,
             'message_delete_behavior'      => $config->message_delete_behavior,
             'message_delete_days'          => $config->message_delete_days,
-            'server_default_theme'         => $config->server_default_theme,
-            'let_users_change_theme'       => $config->let_users_change_theme,
             'password_recover_type'        => $config->password_recover_type,
         ];
 
@@ -148,8 +144,6 @@ class ShowServerPage extends AbstractAdminPage
         $dst = HTTP::_GP('dst', 0);
         $message_delete_behavior = HTTP::_GP('message_delete_behavior', 0);
         $message_delete_days = HTTP::_GP('message_delete_days', 0);
-        $server_default_theme = HTTP::_GP('server_default_theme', 'gow');
-        $let_users_change_theme = (HTTP::_GP('let_users_change_theme', 'off') == 'on') ? 1 : 0;
         $password_recover_type = HTTP::_GP('password_recover_type', '2');
 
         $config_after = [
@@ -182,8 +176,6 @@ class ShowServerPage extends AbstractAdminPage
             'use_recaptcha_on_login'       => $use_recaptcha_on_login,
             'use_recaptcha_on_register'    => $use_recaptcha_on_register,
             'use_recaptcha_on_admin_login' => $use_recaptcha_on_admin_login,
-            'server_default_theme'         => $server_default_theme,
-            'let_users_change_theme'       => $let_users_change_theme,
             'password_recover_type'        => $password_recover_type,
         ];
 
