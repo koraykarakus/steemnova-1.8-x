@@ -658,7 +658,6 @@ function exceptionHandler($exception): void
 	<title>' . $gameName . ' - Error</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="' . $DIR . '/styles/resource/css/base/boilerplate.css?v=' . $VERSION . '">
-	<link rel="stylesheet" type="text/css" href="' . $DIR . '/styles/resource/css/ingame/main.css?v=' . $VERSION . '">
 	<link rel="stylesheet" type="text/css" href="' . $DIR . '/styles/resource/css/base/jquery.css?v=' . $VERSION . '">
 	<link rel="stylesheet" type="text/css" href="' . $DIR . '/styles/theme/formate.css?v=' . $VERSION . '">
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
