@@ -11,6 +11,7 @@
         <button class="button_dark" type="submit">{$LNG.cm_collect_mines_submit}</button>
       </form>
 	    {/if}
+      {if isModuleAvailable($smarty.const.MODULE_PLANET_SELECTOR)}
       <select id="planetSelector">
         {foreach $PlanetSelect as $id => $currentPlanet}
           <option value="{$id}" {if $current_pid == $id}selected{/if}>
@@ -18,6 +19,7 @@
           </option>
         {/foreach}
     	</select>
+      {/if}
     </div>
     <div class="mid">
       {if isModuleAvailable($smarty.const.MODULE_STATISTICS)}

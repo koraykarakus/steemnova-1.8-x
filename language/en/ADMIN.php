@@ -717,7 +717,6 @@ $LNG['mu_google_options'] = "Registration by Google";
 $LNG['mu_discord_options'] = "Registration by Discord";
 $LNG['mu_reset_universe'] = "Reset Universe";
 
-
 $LNG['vt_error'] = 'Hashfile is not available! - Run Update!';
 $LNG['vt_fail'] = 'Changed Files';
 $LNG['vt_info'] = 'This list contains the files that were modified and does not correspond to the original.<br>If not did you change even the game, you must replace the files with the originals.';
@@ -1192,6 +1191,7 @@ $LNG['modul_58'] = 'Login - Disclaimer';
 $LNG['modul_59'] = 'Auth - Google';
 $LNG['modul_60'] = 'Auth - Discord';
 $LNG['modul_61'] = 'Questions Page';
+$LNG['modul_62'] = 'Planet Selector';
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';
