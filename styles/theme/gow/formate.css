@@ -315,6 +315,32 @@ body {
 	-moz-border-radius: 4px;
 }
 
+#planetSelector{
+	max-width: 120px;
+    margin: 0 3px;
+    padding: 0 2px;
+    color: #fff;
+    background: #0b0f1a;
+    border: 1px solid #111;
+    border-radius: 4px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+#planetSelector:hover {
+    border-color: #666;
+}
+
+#planetSelector:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 4px rgba(0,170,255,0.6);
+}
+
+#planetSelector option {
+    background: #0b0f1a;
+    color: #fff;
+}
+
 /*fleetTable.tpl*/
 .fleet_wrapper > .fleet_btn {
 	display: inline-flex;
