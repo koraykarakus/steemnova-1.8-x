@@ -38,7 +38,7 @@
   {if isModuleAvailable($smarty.const.MODULE_TRADER)}
     <li class="menu-button">
       <a class="long{if $page == 'fleetTable'} menuActive{/if}" href="game.php?page=fleetTable">{$LNG.lm_fleet}</a>
-      <a class="menu_icon icon_7{if $page == 'fleetTable'} active{/if}" href="game.php?page=fleetTable"></a>
+      <a class="menu_icon icon_7{if $page == 'fleetDispatch'} active{/if}" href="game.php?page=fleetDispatch"></a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_GALAXY)}
