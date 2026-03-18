@@ -1216,7 +1216,7 @@ INSERT INTO `%PREFIX%colony_settings` (`metal_start`) VALUES (500);
 
 INSERT INTO `%PREFIX%cronjobs` (`cronjobID`, `name`, `isActive`, `min`, `hours`, `dom`, `month`, `dow`, `class`, `nextTime`, `lock`) VALUES
 (NULL, 'referral', 1, '0,30', '*', '*', '*', '*', 'ReferralCronjob', 0, NULL),
-(NULL, 'statistic', 1, '0,30', '*', '*', '*', '*', 'StatisticCronjob', 0, NULL),
+(NULL, 'statistic', 1, '*/3', '*', '*', '*', '*', 'StatisticCronjob', 0, NULL),
 (NULL, 'daily', 1, '25', '2', '*', '*', '*', 'DailyCronjob', 0, NULL),
 (NULL, 'cleaner', 1, '45', '2', '*', '*', '6', 'CleanerCronjob', 0, NULL),
 (NULL, 'inactive', 1, '30', '1', '*', '*', '0,3,6', 'InactiveMailCronjob', 0, NULL),
