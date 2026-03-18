@@ -326,6 +326,7 @@ $LNG['gl_err_in_vacation'] = "Galaxy cannot be viewed in vacation mode.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'M';
 $LNG['gl_debris_short'] = 'DF';
+$LNG['gl_mission_colonize'] = "Colonize";
 
 //----------------------------------------------------------------------------//
 // Sensor Phalanx

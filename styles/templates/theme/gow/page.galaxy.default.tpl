@@ -64,7 +64,7 @@
 			<div class="galaxy_row">
 				{if !isset($GalaxyRows[$planet])}
 					<div class="num">
-						<a href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=7">{$planet}</a>
+						{$planet}
 					</div>
 					<div class="planet_name"></div>
 					<div class="planet_picture"></div>
@@ -72,7 +72,11 @@
 					<div class="debris_picture"></div>
 					<div class="player_name"></div>
 					<div class="alliance_name"></div>
-					<div class="actions"></div>
+					<div class="actions">
+						<a class="icon_colony" href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=7">
+							<div class="tooltip tooltip_top">{$LNG.gl_mission_colonize}</div>
+						</a>
+					</div>
 				{elseif $GalaxyRows[$planet] === false}
 					<div class="num">
 						{$planet}

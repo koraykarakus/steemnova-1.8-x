@@ -1522,6 +1522,24 @@ background: linear-gradient(180deg,
 .galaxy_legend:hover>.tooltip{
 	display: flex;
 }
+.galaxy_wrapper .icon_colony{
+	display: flex;
+	width: 16px;
+	height: 16px;
+	background: url('images/colonization.png');
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	position: relative;
+}
+.galaxy_wrapper .icon_colony:hover{
+	background-position: -17px 0;
+}
+.galaxy_wrapper .icon_colony.disabled{
+	background-position: -34px 0;
+}
+.galaxy_wrapper .icon_colony:hover>.tooltip{
+	display: flex;
+}
 /**/
 /*page.statistics*/
 .stats_table .ranking{
