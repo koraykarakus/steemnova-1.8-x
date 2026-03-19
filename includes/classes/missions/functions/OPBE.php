@@ -70,7 +70,9 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
     $divider = 2;
     $simp = simplifyBattle($attackers, $defenders, $divider);
     $attackers = $simp[0]; // divided value
+    //file_put_contents('test.txt', print_r($attackers, true), FILE_APPEND);
     $defenders = $simp[1]; // divided value
+    //file_put_contents('test.txt', print_r($defenders, true), FILE_APPEND);
     $endMultiplier = $simp[2];
 
     /********** BUILDINGS MODELS **********/
@@ -210,7 +212,6 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
     $attackerLost = getGroupLostUnits($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers']);
     $defenderLost = getGroupLostUnits($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders']);
 
-    //file_put_contents('test.txt',print_r($attackerLost,true),FILE_APPEND);
     $lostUnitsAttackers = getLostUnits($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers']);
     $lostUnitsDefenders = getLostUnits($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders']);
     /********** RETURNS **********/
@@ -227,19 +228,27 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
 
 function simplifyBattle($attackers, $defenders, $divider)
 {
-    $endMultiplier = 0;
+    $endMultiplier = 1;
     while (true)
     {
+        $max = max(getMaxFleet($attackers), getMaxFleet($defenders));
 
-        if (getShipsCount($attackers, $defenders) <= MAX_SHIP_COUNT)
+        if ($max <= MAX_SHIP_COUNT)
         {
 
             foreach ($attackers as &$attacker)
             {
                 foreach ($attacker['unit'] as $element => &$shipcount)
                 {
-                    $attacker['unitRemnant'][$element] = round($shipcount - floor($shipcount) * pow($divider, $endMultiplier));
-                    $attacker['unit'][$element] = ceil($shipcount);
+                    $attacker['unitRemnant'][$element] = round($shipcount - floor($shipcount) * $endMultiplier);
+                    $val = $shipcount;
+                    $floor = floor($val);
+                    $prob = $val - $floor;
+
+                    $attacker['unit'][$element] =
+                        (mt_rand() / mt_getrandmax() < $prob)
+                        ? $floor + 1
+                        : $floor;
                 }
             }
             unset($attacker);
@@ -248,8 +257,15 @@ function simplifyBattle($attackers, $defenders, $divider)
             {
                 foreach ($defender['unit'] as $element => &$defcount)
                 {
-                    $defender['unitRemnant'][$element] = round($defcount - floor($defcount) * pow($divider, $endMultiplier));
-                    $defender['unit'][$element] = ceil($defcount);
+                    $defender['unitRemnant'][$element] = round($defcount - floor($defcount) * $endMultiplier);
+                    $val = $defcount;
+                    $floor = floor($val);
+                    $prob = $val - $floor;
+
+                    $defender['unit'][$element] =
+                        (mt_rand() / mt_getrandmax() < $prob)
+                        ? $floor + 1
+                        : $floor;
                 }
             }
             unset($defender);
@@ -262,7 +278,15 @@ function simplifyBattle($attackers, $defenders, $divider)
             $attackerNew = [];
             foreach ($attacker['unit'] as $element => $countAtt)
             {
-                $attackerNew['unit'][$element] = $countAtt / $divider;
+                if ($countAtt > $divider)
+                {
+                    $new = $countAtt / $divider;
+                }
+                else
+                {
+                    $new = $countAtt; // küçükleri koru
+                }
+                $attackerNew['unit'][$element] = $new;
             }
             if (!empty($attacker['unit']))
             {
@@ -276,7 +300,15 @@ function simplifyBattle($attackers, $defenders, $divider)
             $defenderNew = [];
             foreach ($defender['unit'] as $element => $countDef)
             {
-                $defenderNew['unit'][$element] = $countDef / $divider;
+                if ($countDef > $divider)
+                {
+                    $new = $countDef / $divider;
+                }
+                else
+                {
+                    $new = $countDef; // küçükleri koru
+                }
+                $defenderNew['unit'][$element] = $new;
             }
             if (!empty($defender['unit']))
             {
@@ -285,7 +317,7 @@ function simplifyBattle($attackers, $defenders, $divider)
         }
         unset($defender);
 
-        $endMultiplier++;
+        $endMultiplier *= $divider;
     }
 
     return [
@@ -294,6 +326,22 @@ function simplifyBattle($attackers, $defenders, $divider)
         2 => $endMultiplier,
     ];
 
+}
+
+function getMaxFleet($side)
+{
+    $max = 0;
+    foreach ($side as $fleet)
+    {
+        foreach ($fleet['unit'] as $count)
+        {
+            if ($count > $max)
+            {
+                $max = $count;
+            }
+        }
+    }
+    return $max;
 }
 
 function getShipsCount($attackers, $defenders)
@@ -345,7 +393,7 @@ function getNewDebris($start, $end, $FleetTF, $DefTF)
         {
             if (array_key_exists($fk, $totalFleetStart))
             {
-                $totalFleetStart[$fk] = sumBigNumbers($totalFleetStart[$fk], $count);
+                $totalFleetStart[$fk] = $totalFleetStart[$fk] + $count;
             }
             else
             {
@@ -374,7 +422,7 @@ function getNewDebris($start, $end, $FleetTF, $DefTF)
         {
             if (array_key_exists($fk, $totalFleetEnd))
             {
-                $totalFleetEnd[$fk] = sumBigNumbers($totalFleetEnd[$fk], $count, 200);
+                $totalFleetEnd[$fk] = $totalFleetEnd[$fk] + $count;
             }
             else
             {
@@ -629,10 +677,12 @@ function updatePlayers(PlayerGroup $playerGroup, &$players, $endMultiplier, $sav
                         $shipType = $fleet->getShipType($idShipType);
                         //used to show life,power and shield of each ships in the report
                         $plyArray[$idFleet][$idShipType] = [
-                            'def'    => round($shipType->getShield() * $shipType->getCount() * pow($divider, $endMultiplier)),
-                            'shield' => round($shipType->getHull() * $shipType->getCount() * pow($divider, $endMultiplier)),
-                            'att'    => round($shipType->getPower() * $shipType->getCount() * pow($divider, $endMultiplier))];
-                        $players[$idFleet]['unit'][$idShipType] = round($shipType->getCount() * pow($divider, $endMultiplier));
+                            'def'    => round($shipType->getShield() * $shipType->getCount() * $endMultiplier),
+                            'shield' => round($shipType->getHull() * $shipType->getCount() * $endMultiplier),
+                            'att'    => round($shipType->getPower() * $shipType->getCount() * $endMultiplier)];
+
+                        $original = $savedPlayer[$idFleet]['unit'][$idShipType] ?? 0;
+                        $players[$idFleet]['unit'][$idShipType] = min($original, round($shipType->getCount() * $endMultiplier));
                     }
                     else //all ships of this type were destroyed
                     {
