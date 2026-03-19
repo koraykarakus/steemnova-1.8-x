@@ -241,7 +241,7 @@
 									{/if}
 									<tr>
 										<td style='width:80px'>
-											<img src='{$dpath}planets/mond.jpg' height='75' width='75'>
+											<img src='{$dpath}planets/small/s_mond.jpg' height='75' width='75'>
 										</td>
 										<td>
 											<table class='table-gow' style='width:100%'>
@@ -338,7 +338,7 @@
 										</tr>
 									</table>
 							</div>
-							<img src="{$dpath}planets/mond.jpg" height="22" width="22"
+							<img src="{$dpath}planets/small/s_mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
 						{/if}
 					</div>
