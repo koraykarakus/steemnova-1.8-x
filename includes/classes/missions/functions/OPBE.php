@@ -38,6 +38,7 @@ define('ATTACKERS_WON', 'a');
 define('DRAW', 'w');
 define('METAL_ID', 901);
 define('CRYSTAL_ID', 902);
+define('MAX_SHIP_COUNT', 1000000);
 
 /**
  * calculateAttack()
@@ -62,6 +63,15 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
 
     $CombatCaps = $GLOBALS['CombatCaps'];
     $pricelist = $GLOBALS['pricelist'];
+
+    /*simplify battle*/
+    $saveAttackers = $attackers;
+    $saveDefenders = $defenders;
+    $divider = 2;
+    $simp = simplifyBattle($attackers, $defenders, $divider);
+    $attackers = $simp[0]; // divided value
+    $defenders = $simp[1]; // divided value
+    $endMultiplier = $simp[2];
 
     /********** BUILDINGS MODELS **********/
     /** Note: we are transform array of data like
@@ -146,8 +156,8 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
         // in case of last round, ask for rebuilt defenses. to change rebuils prob see constants/battle_constants.php
         $attackerGroupObj = ($lastRound == $i) ? $report->getAfterBattleAttackers() : $report->getResultAttackersFleetOnRound($i);
         $defenderGroupObj = ($lastRound == $i) ? $report->getAfterBattleDefenders() : $report->getResultDefendersFleetOnRound($i);
-        $attInfo = updatePlayers($attackerGroupObj, $attackers);
-        $defInfo = updatePlayers($defenderGroupObj, $defenders);
+        $attInfo = updatePlayers($attackerGroupObj, $attackers, $endMultiplier, $saveAttackers, $divider);
+        $defInfo = updatePlayers($defenderGroupObj, $defenders, $endMultiplier, $saveDefenders, $divider);
         $ROUND[$i] = roundInfo($report, $attackers, $defenders, $attackerGroupObj, $defenderGroupObj, $i + 1, $attInfo, $defInfo);
 
         if (isset($ROUND[$i]["attackers"][0]))
@@ -180,27 +190,376 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
 
     }
 
-    /********** DEBRIS **********/
-    //attackers
-    $debAtt = $report->getAttackerDebris();
-    $debAttMet = $debAtt[0];
-    $debAttCry = $debAtt[1];
-    //defenders
-    $debDef = $report->getDefenderDebris();
-    $debDefMet = $debDef[0];
-    $debDefCry = $debDef[1];
-    //total
-    $debris = ['attacker' => [METAL_ID => $debAttMet, CRYSTAL_ID => $debAttCry], 'defender' => [METAL_ID => $debDefMet, CRYSTAL_ID => $debDefCry]];
+    $getNewDebrisAttackers = getNewDebris($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers'], $FleetTF, $DefTF);
+    $getNewDebrisDefenders = getNewDebris($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders'], $FleetTF, $DefTF);
 
-    /********** LOST UNITS **********/
-    $totalLost = ['attacker' => $report->getTotalAttackersLostUnits(), 'defender' => $report->getTotalDefendersLostUnits()];
+    $debris = [
+        'attacker' => [
+            METAL_ID   => $getNewDebrisAttackers[0],
+            CRYSTAL_ID => $getNewDebrisAttackers[1]],
+        'defender' => [
+            METAL_ID   => $getNewDebrisDefenders[0],
+            CRYSTAL_ID => $getNewDebrisDefenders[1]],
+    ];
 
+    $totalLost = [
+        'attacker' => calculateTotalLost($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers']),
+        'defender' => calculateTotalLost($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders']),
+    ];
+
+    $attackerLost = getGroupLostUnits($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers']);
+    $defenderLost = getGroupLostUnits($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders']);
+
+    //file_put_contents('test.txt',print_r($attackerLost,true),FILE_APPEND);
+    $lostUnitsAttackers = getLostUnits($saveAttackers, $ROUND[$report->getLastRoundNumber()]['attackers']);
+    $lostUnitsDefenders = getLostUnits($saveDefenders, $ROUND[$report->getLastRoundNumber()]['defenders']);
     /********** RETURNS **********/
     return [
-        'won'      => $won,
-        'debris'   => $debris,
-        'rw'       => $ROUND,
-        'unitLost' => $totalLost];
+        'won'                => $won,
+        'debris'             => $debris,
+        'rw'                 => $ROUND,
+        'unitLost'           => $totalLost,
+        'attackerLost'       => $attackerLost,
+        'defenderLost'       => $defenderLost,
+        'lostUnitsAttackers' => $lostUnitsAttackers,
+        'lostUnitsDefenders' => $lostUnitsDefenders];
+}
+
+function simplifyBattle($attackers, $defenders, $divider)
+{
+    $endMultiplier = 0;
+    while (true)
+    {
+
+        if (getShipsCount($attackers, $defenders) <= MAX_SHIP_COUNT)
+        {
+
+            foreach ($attackers as &$attacker)
+            {
+                foreach ($attacker['unit'] as $element => &$shipcount)
+                {
+                    $attacker['unitRemnant'][$element] = round($shipcount - floor($shipcount) * pow($divider, $endMultiplier));
+                    $attacker['unit'][$element] = ceil($shipcount);
+                }
+            }
+            unset($attacker);
+
+            foreach ($defenders as &$defender)
+            {
+                foreach ($defender['unit'] as $element => &$defcount)
+                {
+                    $defender['unitRemnant'][$element] = round($defcount - floor($defcount) * pow($divider, $endMultiplier));
+                    $defender['unit'][$element] = ceil($defcount);
+                }
+            }
+            unset($defender);
+
+            break;
+        }
+
+        foreach ($attackers as &$attacker)
+        {
+            $attackerNew = [];
+            foreach ($attacker['unit'] as $element => $countAtt)
+            {
+                $attackerNew['unit'][$element] = $countAtt / $divider;
+            }
+            if (!empty($attacker['unit']))
+            {
+                $attacker['unit'] = $attackerNew['unit'];
+            }
+        }
+        unset($attacker);
+
+        foreach ($defenders as &$defender)
+        {
+            $defenderNew = [];
+            foreach ($defender['unit'] as $element => $countDef)
+            {
+                $defenderNew['unit'][$element] = $countDef / $divider;
+            }
+            if (!empty($defender['unit']))
+            {
+                $defender['unit'] = $defenderNew['unit'];
+            }
+        }
+        unset($defender);
+
+        $endMultiplier++;
+    }
+
+    return [
+        0 => $attackers,
+        1 => $defenders,
+        2 => $endMultiplier,
+    ];
+
+}
+
+function getShipsCount($attackers, $defenders)
+{
+    $totalShipsAttackers = $totalShipsDefenders = 0;
+
+    foreach ($attackers as $attacker)
+    {
+
+        foreach ($attacker['unit'] as $id => $count)
+        {
+            $totalShipsAttackers += $count;
+        }
+
+    }
+
+    foreach ($defenders as $defender)
+    {
+
+        foreach ($defender['unit'] as $id => $count)
+        {
+            $totalShipsDefenders += $count;
+        }
+
+    }
+
+    return $totalShipsDefenders + $totalShipsAttackers;
+}
+
+function getNewDebris($start, $end, $FleetTF, $DefTF)
+{
+    global $pricelist;
+    $fleet_start = [];
+    foreach ($start as $startPlayer)
+    {
+
+        foreach ($startPlayer['unit'] as $id => $count)
+        {
+            $fleet_start[] = [$id => $count];
+        }
+
+    }
+
+    $totalFleetStart = [];
+
+    foreach ($fleet_start as $key => $val)
+    {
+        foreach ($val as $fk => $count)
+        {
+            if (array_key_exists($fk, $totalFleetStart))
+            {
+                $totalFleetStart[$fk] = sumBigNumbers($totalFleetStart[$fk], $count);
+            }
+            else
+            {
+                $totalFleetStart[$fk] = $count;
+            }
+
+        }
+    }
+
+    $fleet_end = [];
+    foreach ($end as $endPlayer)
+    {
+
+        foreach ($endPlayer['unit'] as $id => $count)
+        {
+            $fleet_end[] = [$id => $count];
+        }
+
+    }
+
+    $totalFleetEnd = [];
+
+    foreach ($fleet_end as $key => $val)
+    {
+        foreach ($val as $fk => $count)
+        {
+            if (array_key_exists($fk, $totalFleetEnd))
+            {
+                $totalFleetEnd[$fk] = sumBigNumbers($totalFleetEnd[$fk], $count, 200);
+            }
+            else
+            {
+                $totalFleetEnd[$fk] = $count;
+            }
+
+        }
+    }
+
+    $difference = [];
+    foreach ($totalFleetStart as $idstart => $countstart)
+    {
+
+        foreach ($totalFleetEnd as $idend => $countend)
+        {
+            if ($idstart == $idend)
+            {
+                $difference[$idstart] = $countstart - $countend;
+                break;
+            }
+        }
+    }
+
+    $metal = $crystal = 0;
+    foreach ($difference as $id => $count)
+    {
+        if ($id < ID_MAX_SHIPS && $id > ID_MIN_SHIPS) //calculate ships
+        {
+            $metal = $metal + ($pricelist[$id]['cost']['901'] * $count * ($FleetTF / 100));
+            $crystal = $crystal + ($pricelist[$id]['cost']['902'] * $count * ($FleetTF / 100));
+        }
+        else //calculate defense units
+        {
+            $metal = $metal + ($pricelist[$id]['cost']['901'] * $count * ($DefTF / 100));
+            $crystal = $crystal + ($pricelist[$id]['cost']['902'] * $count * ($DefTF / 100));
+        }
+    }
+
+    return [
+        0 => $metal,
+        1 => $crystal,
+    ];
+
+}
+
+function calculateTotalLost($startUnits, $endUnits)
+{
+    global $pricelist;
+
+    $startFleet = [];
+    foreach ($startUnits as $currentStart)
+    {
+        foreach ($currentStart['unit'] as $shipID => $count)
+        {
+
+            if (!isset($startFleet[$shipID]))
+            {
+                $startFleet[$shipID] = 0;
+            }
+
+            $startFleet[$shipID] = $startFleet[$shipID] + $count;
+        }
+    }
+
+    $endFleet = [];
+    foreach ($endUnits as $currentEnd)
+    {
+        foreach ($currentEnd['unit'] as $shipID => $count)
+        {
+
+            if (!isset($endFleet[$shipID]))
+            {
+                $endFleet[$shipID] = 0;
+            }
+
+            $endFleet[$shipID] = $endFleet[$shipID] + $count;
+        }
+    }
+
+    $difference = [];
+    foreach ($startFleet as $idstart => $countstart)
+    {
+
+        foreach ($endFleet as $idend => $countend)
+        {
+            if ($idstart == $idend)
+            {
+                $difference[$idstart] = $countstart - $countend;
+                break;
+            }
+        }
+    }
+
+    $totalLost = 0;
+    foreach ($difference as $unitID => $count)
+    {
+
+        $unitValue = $count * ($pricelist[$unitID]['cost'][901] + $pricelist[$unitID]['cost']['902'] + $pricelist[$unitID]['cost']['903']);
+        $totalLost = $totalLost + $unitValue;
+
+    }
+
+    return $totalLost;
+
+}
+
+function getGroupLostUnits($startUnits, $endUnits)
+{
+    global $pricelist;
+
+    $groupLostStart = [];
+
+    foreach ($startUnits as $startKey => $currentStart)
+    {
+        foreach ($currentStart['unit'] as $unitID => $startCount)
+        {
+            $groupLostStart[$startKey][$unitID] = $startCount;
+        }
+    }
+
+    $groupLostEnd = [];
+
+    foreach ($endUnits as $endKey => $currentEnd)
+    {
+        foreach ($currentEnd['unit'] as $unitID => $endCount)
+        {
+            $groupLostEnd[$endKey][$unitID] = $endCount;
+        }
+    }
+
+    $difference = [];
+    foreach ($groupLostStart as $startPlayerKey => $startShipInfo)
+    {
+
+        foreach ($startShipInfo as $startUnitID => $startCount)
+        {
+            foreach ($groupLostEnd as $endPlayerKey => $endShipInfo)
+            {
+
+                if ($endPlayerKey == $startPlayerKey)
+                {
+
+                    foreach ($endShipInfo as $endUnitID => $endCount)
+                    {
+
+                        if ($endUnitID == $startUnitID)
+                        {
+                            $costUnit = $pricelist[$endUnitID]['cost']['901'] + $pricelist[$endUnitID]['cost']['902'] + $pricelist[$endUnitID]['cost']['903'];
+                            $difference[$endPlayerKey][$endUnitID] = $costUnit * ($startCount - $endCount);
+                            break;
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    continue;
+                }
+
+            }
+        }
+    }
+
+    return $difference;
+    //file_put_contents('test.txt',print_r($difference,true),FILE_APPEND);
+
+}
+
+function getLostUnits($start, $end)
+{
+
+    $lostUnits = [];
+    foreach ($start as $startFleetID => $startFleetInfo)
+    {
+
+        foreach ($startFleetInfo['unit'] as $shipID => $shipNumber)
+        {
+
+            $lostUnits[$startFleetInfo['player']['id']][] = [
+                $shipID => $shipNumber - $end[$startFleetID]['unit'][$shipID],
+            ];
+        }
+
+    }
 }
 
 /**
@@ -250,7 +609,7 @@ function roundInfo(BattleReport $report, $attackers, $defenders, PlayerGroup $at
  * @param array &$players
  * @return null
  */
-function updatePlayers(PlayerGroup $playerGroup, &$players)
+function updatePlayers(PlayerGroup $playerGroup, &$players, $endMultiplier, $savedPlayer, $divider)
 {
     $plyArray = [];
     $amountArray = [];
@@ -269,8 +628,11 @@ function updatePlayers(PlayerGroup $playerGroup, &$players)
                     {
                         $shipType = $fleet->getShipType($idShipType);
                         //used to show life,power and shield of each ships in the report
-                        $plyArray[$idFleet][$idShipType] = ['def' => $shipType->getShield() * $shipType->getCount(), 'shield' => $shipType->getHull() * $shipType->getCount(), 'att' => $shipType->getPower() * $shipType->getCount()];
-                        $players[$idFleet]['unit'][$idShipType] = $shipType->getCount();
+                        $plyArray[$idFleet][$idShipType] = [
+                            'def'    => round($shipType->getShield() * $shipType->getCount() * pow($divider, $endMultiplier)),
+                            'shield' => round($shipType->getHull() * $shipType->getCount() * pow($divider, $endMultiplier)),
+                            'att'    => round($shipType->getPower() * $shipType->getCount() * pow($divider, $endMultiplier))];
+                        $players[$idFleet]['unit'][$idShipType] = round($shipType->getCount() * pow($divider, $endMultiplier));
                     }
                     else //all ships of this type were destroyed
                     {
