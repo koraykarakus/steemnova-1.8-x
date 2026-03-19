@@ -57,8 +57,7 @@
 </td>
 	<td class="text_center">
 		{if $RangeInfo.id != $CUser_id}
-			<a class="msg" href="#" onclick="return Dialog.PM({$RangeInfo.id});">
-				<img src="{$dpath}img/m.gif" alt="{$LNG.st_write_message}">
+			<a class="msg icon_message" href="#" onclick="return Dialog.PM({$RangeInfo.id});">
 				<div class="tooltip tooltip_top">
 					{$LNG.st_write_message}
 				</div>
