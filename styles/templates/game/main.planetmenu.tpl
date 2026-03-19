@@ -40,7 +40,7 @@
           </table>
         </div>
         {if !empty($PlanetRow)}
-        <img class="{if $PlanetRow.selected}border-yellow{/if}" src="{$dpath}planets/{$PlanetRow.image}.jpg" width="33" height="33" alt="{$PlanetRow.name}">
+        <img class="{if $PlanetRow.selected}border-yellow{/if}" src="{$dpath}planets/small/s_{$PlanetRow.image}.jpg" width="33" height="33" alt="{$PlanetRow.name}">
         {/if}
       </a>
       {if isset($PlanetRow.moonInfo)}
@@ -72,7 +72,7 @@
             </tbody>
           </table>
         </div>
-        <img class="{if $PlanetRow.moonInfo[0].selected}border-yellow{else}hover-border-yellow{/if}" src="{$dpath}planets/{$PlanetRow.moonInfo[0].image}.jpg" width="20" height="20" alt="{$PlanetRow.moonInfo[0].name}">
+        <img class="{if $PlanetRow.moonInfo[0].selected}border-yellow{else}hover-border-yellow{/if}" src="{$dpath}planets/small/s_{$PlanetRow.moonInfo[0].image}.jpg" width="20" height="20" alt="{$PlanetRow.moonInfo[0].name}">
       </a>
       {/if}
     </div>
