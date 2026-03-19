@@ -1,38 +1,62 @@
 <ul id="menu">
   <li class="menu-button">
     <a class="long{if $page == 'overview'} menuActive{/if}" href="game.php?page=overview">{$LNG.lm_overview}</a>
-    <a class="menu_icon icon_1{if $page == 'overview'} active{/if}" href="game.php?page=overview"></a>
+    <a class="menu_icon icon_1{if $page == 'overview'} active{/if}" href="game.php?page=overview">
+      <div class="tooltip tooltip_right">
+          {$LNG.lm_overview}
+        </div>   
+    </a>
   </li>
   {if isModuleAvailable($smarty.const.MODULE_BUILDING)}
     <li class="menu-button">
       <a class="long{if $page == 'buildings'} menuActive{/if}" href="game.php?page=buildings">{$LNG.lm_buildings}</a>
-      <a class="menu_icon icon_2{if $page == 'resources'} active{/if}" href="game.php?page=resources"></a>
+      <a class="menu_icon icon_2{if $page == 'resources'} active{/if}" href="game.php?page=resources">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_resources}
+        </div>  
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_BUILDING)}
     <li class="menu-button">
       <a class="long{if $page == 'facilities'} menuActive{/if}" href="game.php?page=facilities">{$LNG.lm_facilities}</a>
-      <a class="menu_icon icon_3{if $page == 'facilities'} active{/if}" href="game.php?page=facilities"></a>
+      <a class="menu_icon icon_3{if $page == 'facilities'} active{/if}" href="game.php?page=facilities">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_facilities}
+        </div>
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_FLEET)}
     <li class="menu-button">
       <a class="long{if $page == 'shipyard' && $mode == 'fleet'} menuActive{/if}"
         href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}</a>
-        <a class="menu_icon icon_4{if $page == 'shipyard' && $mode == 'fleet'} active{/if}" href="game.php?page=shipyard&amp;mode=fleet"></a>
+        <a class="menu_icon icon_4{if $page == 'shipyard' && $mode == 'fleet'} active{/if}" href="game.php?page=shipyard&amp;mode=fleet">
+          <div class="tooltip tooltip_right">
+            {$LNG.lm_shipyard}
+          </div>
+        </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_SHIPYARD_DEFENSIVE)}
     <li class="menu-button">
       <a class="long{if $page == 'shipyard' && $mode == 'defense'} menuActive{/if}"
         href="game.php?page=shipyard&amp;mode=defense">{$LNG.lm_defenses}</a>
-      <a class="menu_icon icon_5{if $page == 'shipyard' && $mode == 'defense'} active{/if}" href="game.php?page=shipyard&amp;mode=defense"></a>
+      <a class="menu_icon icon_5{if $page == 'shipyard' && $mode == 'defense'} active{/if}" href="game.php?page=shipyard&amp;mode=defense">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_defenses}
+        </div>  
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_RESEARCH)}
     <li class="menu-button">
       <a class="long{if $page == 'research'} menuActive{/if}" href="game.php?page=research">{$LNG.lm_research}</a>
-      <a class="menu_icon icon_6{if $page == 'research'} active{/if}" href="game.php?page=research"></a>
+      <a class="menu_icon icon_6{if $page == 'research'} active{/if}" href="game.php?page=research">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_research}
+        </div>
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_TRADER)}
@@ -44,34 +68,54 @@
   {if isModuleAvailable($smarty.const.MODULE_GALAXY)}
     <li class="menu-button">
       <a class="long{if $page == 'galaxy'} menuActive{/if}" href="game.php?page=galaxy">{$LNG.lm_galaxy}</a>
-      <a class="menu_icon icon_8{if $page == 'galaxy'} active{/if}" href="game.php?page=galaxy"></a>
+      <a class="menu_icon icon_8{if $page == 'galaxy'} active{/if}" href="game.php?page=galaxy">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_galaxy}
+        </div>  
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_IMPERIUM)}
     <li class="menu-button">
       <a target="_blank" class="long{if $page == 'imperium'} menuActive{/if}"
         href="game.php?page=imperium">{$LNG.lm_empire}</a>
-      <a target="_blank" class="menu_icon icon_9{if $page == 'imperium'} active{/if}" href="game.php?page=imperium"></a>
+      <a target="_blank" class="menu_icon icon_9{if $page == 'imperium'} active{/if}" href="game.php?page=imperium">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_empire}
+        </div>
+      </a>
     </li>
   {/if}
 
   {if isModuleAvailable($smarty.const.MODULE_TECHTREE)}
     <li class="menu-button">
       <a class="long{if $page == 'techtree'} menuActive{/if}" href="game.php?page=techtree">{$LNG.lm_technology}</a>
-      <a class="menu_icon icon_14{if $page == 'techtree'} active{/if}" href="game.php?page=techtree"></a>
+      <a class="menu_icon icon_14{if $page == 'techtree'} active{/if}" href="game.php?page=techtree">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_technology}
+        </div>
+      </a>
     </li>
   {/if}
   
   {if isModuleAvailable($smarty.const.MODULE_OFFICERS) || isModuleAvailable($smarty.const.MODULE_DMEXTRAS)}
     <li class="menu-button">
       <a class="long{if $page == 'officers'} menuActive{/if}" href="game.php?page=officers">{$LNG.lm_officers}</a>
-      <a class="menu_icon icon_10{if $page == 'officers'} active{/if}" href="game.php?page=officers"></a>
+      <a class="menu_icon icon_10{if $page == 'officers'} active{/if}" href="game.php?page=officers">
+       <div class="tooltip tooltip_right">
+          {$LNG.lm_officers}
+        </div>
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_TRADER)}
     <li class="menu-button">
       <a class="long{if $page == 'trader'} menuActive{/if}" href="game.php?page=trader">{$LNG.lm_trader}</a>
-      <a class="menu_icon icon_11{if $page == 'trader'} active{/if}" href="game.php?page=trader"></a>
+      <a class="menu_icon icon_11{if $page == 'trader'} active{/if}" href="game.php?page=trader">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_trader}
+        </div>
+      </a>
     </li>
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_FLEET_TRADER)}
@@ -84,7 +128,11 @@
   {if isModuleAvailable($smarty.const.MODULE_ALLIANCE)}
     <li class="menu-button">
       <a class="long{if $page == 'alliance'} menuActive{/if}" href="game.php?page=alliance">{$LNG.lm_alliance}</a>
-      <a class="menu_icon icon_13{if $page == 'alliance'} active{/if}" href="game.php?page=alliance"></a>
+      <a class="menu_icon icon_13{if $page == 'alliance'} active{/if}" href="game.php?page=alliance">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_alliance}
+        </div> 
+      </a>
     </li>
   {/if}
   {if $authlevel > 0}

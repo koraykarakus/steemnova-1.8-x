@@ -570,6 +570,13 @@ body {
 	margin-top: 0px;
 	background: url(img/menu_icons.png);
 	background-repeat: no-repeat;
+	position: relative;
+}
+.menu-button .menu_icon:hover>.tooltip{
+	display: flex;
+}
+.menu-button .menu_icon>.tooltip{
+	left: calc(100% + 6px);
 }
 .menu_icon.icon_1{
 	background-position: -162px 0;
