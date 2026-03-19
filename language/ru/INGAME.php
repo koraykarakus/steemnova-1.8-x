@@ -282,6 +282,8 @@ $LNG['gl_err_in_vacation'] = "Галактику нельзя просматри
 $LNG['gl_planet_short'] = 'П'; // Планета
 $LNG['gl_moon_short'] = 'Л'; // Луна
 $LNG['gl_debris_short'] = 'ОП'; // Обломки
+$LNG['gl_admin_user_id'] = "ID пользователя";
+$LNG['gl_admin_planet_id'] = "ID планеты";
 // Фаланга
 $LNG['px_no_deuterium'] = 'Не хватает дейтерия.';
 $LNG['px_scan_position'] = 'Координаты сканирования';

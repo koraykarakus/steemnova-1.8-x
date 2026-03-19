@@ -288,6 +288,8 @@ $LNG['gl_err_in_vacation'] = "La galaxia no se puede ver en modo vacaciones.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'L'; // Luna
 $LNG['gl_debris_short'] = 'CD'; // Campo de Debris
+$LNG['gl_admin_user_id'] = "ID de usuario";
+$LNG['gl_admin_planet_id'] = "ID de planeta";
 
 //----------------------------------------------------------------------------//
 //PHALANX
