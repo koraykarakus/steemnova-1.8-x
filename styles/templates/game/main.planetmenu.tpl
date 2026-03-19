@@ -11,7 +11,7 @@
         {/if}
       {/if}">
     <div class="left">
-      <a class="type_planet" href="game.php?page={$page}&amp;cp={$PlanetRow.id}">
+    <a class="type_planet" href="game.php?page={if empty($page)}overview{else}{$page}{/if}&amp;cp={$PlanetRow.id}">
         <div class="tooltip tooltip_right"> 
           <table class=''>
             <thead>
@@ -44,7 +44,7 @@
         {/if}
       </a>
       {if isset($PlanetRow.moonInfo)}
-      <a class="type_moon" href="game.php?page={$page}&amp;cp={$PlanetRow.moonInfo[0].id}">
+      <a class="type_moon" href="game.php?page={if empty($page)}overview{else}{$page}{/if}&amp;cp={$PlanetRow.moonInfo[0].id}">
         <div class="tooltip tooltip_right">  
           <table class=''>
             <thead>
