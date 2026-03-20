@@ -113,19 +113,16 @@
 									</th>
 								</tr>
 								{if $userAuthLevel == 3}
-									<tr>
-										<td>{$LNG.gl_admin_user_id}</td>
-										<td>{$currentPlanet['user']['id']}</td>
-									</tr>
-									<tr>
-										<td>{$LNG.gl_admin_planet_id}</td>
-										<td>{$currentPlanet['planet']['id']}</td>
-									</tr>
+								<tr>
+									<td>{$LNG.gl_admin_user_id}</td>
+									<td>{$currentPlanet['user']['id']}</td>
+								</tr>
+								<tr>
+									<td>{$LNG.gl_admin_planet_id}</td>
+									<td>{$currentPlanet['planet']['id']}</td>
+								</tr>
 								{/if}
 								<tr>
-									<td>
-										<img src='{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
-									</td>
 									<td>
 										<table class="table-gow table_full">
 											<thead>
@@ -215,6 +212,9 @@
 											</tbody>
 										</table>
 									</td>
+								<td>
+									<img src='{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
+								</td>
 								</tr>
 							</table>
 						</div>
