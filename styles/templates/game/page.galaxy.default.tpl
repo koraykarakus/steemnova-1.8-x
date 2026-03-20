@@ -240,9 +240,6 @@
 									</tr>
 									{/if}
 									<tr>
-										<td style='width:80px'>
-											<img src='{$dpath}planets/small/s_mond.jpg' height='75' width='75'>
-										</td>
 										<td>
 											<table class='table-gow' style='width:100%'>
 												<tr>
@@ -335,7 +332,10 @@
 												</tr>
 											</table>
 										</td>
-										</tr>
+										<td style='width:80px'>
+											<img src='{$dpath}planets/small/s_mond.jpg' height='75' width='75'>
+										</td>
+									</tr>
 									</table>
 							</div>
 							<img src="{$dpath}planets/small/s_mond.jpg" height="22" width="22"
