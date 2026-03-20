@@ -231,11 +231,11 @@
 									</tr>
 									{if $userAuthLevel == 3}
 									<tr>
-										<td>user ID:</td>
+										<td>{$LNG.gl_admin_user_id}</td>
 										<td>{$currentPlanet['user']['id']}</td>
 									</tr>
 									<tr>
-										<td>planet ID:</td>
+										<td>{$LNG.gl_admin_planet_id}</td>
 										<td>{$currentPlanet['moon']['id']}</td>
 									</tr>
 									{/if}
