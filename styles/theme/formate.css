@@ -1584,6 +1584,15 @@ background: linear-gradient(180deg,
 #fleetstatusrow.hidden{
 	display: none;
 }
+#fleetstatusrow .success{
+	color: #009933;
+}
+#fleetstatusrow .fail{
+	color: red;
+}
+#fleetstatusrow tr, #fleetstatusrow td{
+	text-align: center;
+}
 /**/
 /*page.statistics*/
 .stats_table .ranking{

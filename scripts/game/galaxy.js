@@ -18,7 +18,16 @@ function doit(missionID, planetID) {
 			messages.last().remove();
 		}
 
-		var element = '<tr>' + '<td colspan="8" class="text_center">' + data.mess + '</td>' + '</tr>';
+		var color = '';
+		if (data.code === 600) {
+			color = 'success';
+		}
+		else
+		{
+			color = 'fail';
+		}
+
+		var element = '<tr>' + '<td colspan="8" class="'+color+'">' + data.mess + '</td>' + '</tr>';
 		tbody.prepend(element);
 
 		setTimeout(function () {
