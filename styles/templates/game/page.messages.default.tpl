@@ -35,26 +35,23 @@
 		<table id="messagestable" class="table-gow table_full">
 			<tr>
 				<th colspan="5" class="text-center fs-12">{$LNG.mg_message_title}</th>
-			</tr>
-			{if $MessID != 999}
-				<tr>
-					<td colspan="5">
-						<select style="height:28px;" name="actionTop">
-							<option value="readmarked">{$LNG.mg_read_marked}</option>
-							<option value="readtypeall">{$LNG.mg_read_type_all}</option>
-							<option value="readall">{$LNG.mg_read_all}</option>
-							<option value="deletemarked">{$LNG.mg_delete_marked}</option>
-							<option value="deleteunmarked">{$LNG.mg_delete_unmarked}</option>
-							<option value="deletetypeall">{$LNG.mg_delete_type_all}</option>
-							<option value="deleteall">{$LNG.mg_delete_all}</option>
-						</select>
-						<input style="height:28px;" value="{$LNG.mg_confirm}" type="submit" name="submitTop">
-					</td>
-
-				</tr>
-			{/if}
-			<tr style="height: 20px;">
-				<td colspan="5">
+			</tr>		
+			<tr>
+				{if $MessID != 999}
+				<td style="width: 50%;" class="text_center">
+					<select style="height:28px;" name="actionTop">
+						<option value="readmarked">{$LNG.mg_read_marked}</option>
+						<option value="readtypeall">{$LNG.mg_read_type_all}</option>
+						<option value="readall">{$LNG.mg_read_all}</option>
+						<option value="deletemarked">{$LNG.mg_delete_marked}</option>
+						<option value="deleteunmarked">{$LNG.mg_delete_unmarked}</option>
+						<option value="deletetypeall">{$LNG.mg_delete_type_all}</option>
+						<option value="deleteall">{$LNG.mg_delete_all}</option>
+					</select>
+					<input style="height:28px;" value="{$LNG.mg_confirm}" type="submit" name="submitTop">
+				</td>
+				{/if}
+				<td style="width: 50%;" class="text_center">
 					<span class="fs-12">{$LNG.mg_page}:</span>
 					<button style="min-width:32px;" type="button"
 						onclick="window.location.href='game.php?page=messages&category={$MessID}&side=1'"
@@ -74,10 +71,13 @@
 						onclick="window.location.href='game.php?page=messages&category={$MessID}&side={$maxPage}'"
 						class="btn btn-dark py-0 px-2 border border-secondary fs-12 text-yellow">&raquo;</a>
 				</td>
+
 			</tr>
+			
+			
 		</table>
 		<table id="messagestable" class="table-gow table_full">
-			<tr style="height:20px;">
+			<tr>
 				<td class="text-center fs-14 color-blue fw-bold" style="width:40px;">{$LNG.mg_action}</td>
 				<td class="text-center fs-14 color-blue fw-bold">{$LNG.mg_date}</td>
 				<td class="text-center fs-14 color-blue fw-bold">{if $MessID != 999}{$LNG.mg_from}{else}{$LNG.mg_to}{/if}
@@ -114,46 +114,8 @@
 					</td>
 				</tr>
 			{/foreach}
-			<tr style="height: 20px;">
-				<td colspan="5" class="text-center">
-					<span class="fs-12">{$LNG.mg_page}:</span>
-					<button style="min-width:32px;" type="button"
-						onclick="window.location.href='game.php?page=messages&category={$MessID}&side=1'"
-						class="btn btn-dark py-0 px-2 border border-secondary fs-12 text-yellow">&laquo;</button>
-					{if $messagePage > 5}..&nbsp;{/if}
-					{for $site=1 to $maxPage}
-						{if ($site > $messagePage-5 && $site < $messagePage+5)}
-							<button style="min-width:32px;" type="button"
-								onclick="window.location.href='game.php?page=messages&category={$MessID}&side={$site}'"
-								class="btn btn-dark py-0 px-1 border {if $site == $messagePage} border-primary {else}border-secondary{/if} fs-12 text-yellow">
-								{$site}
-							</button>
-						{/if}
-					{/for}
-					{if $messagePage < $maxPage-4}..&nbsp;{/if}
-					<button style="min-width:32px;" type="button"
-						onclick="window.location.href='game.php?page=messages&category={$MessID}&side={$maxPage}'"
-						class="btn btn-dark py-0 px-2 border border-secondary fs-12 text-yellow">&raquo;</a>
-				</td>
-			</tr>
-			{if $MessID != 999}
-				<tr>
-					<td class="text-center" colspan="5">
-						<select style="height:28px;" class="fs-12 py-1 w-75 bg-dark border border-secondary"
-							name="actionBottom">
-							<option value="readmarked">{$LNG.mg_read_marked}</option>
-							<option value="readtypeall">{$LNG.mg_read_type_all}</option>
-							<option value="readall">{$LNG.mg_read_all}</option>
-							<option value="deletemarked">{$LNG.mg_delete_marked}</option>
-							<option value="deleteunmarked">{$LNG.mg_delete_unmarked}</option>
-							<option value="deletetypeall">{$LNG.mg_delete_type_all}</option>
-							<option value="deleteall">{$LNG.mg_delete_all}</option>
-						</select>
-						<input style="height:28px;" class="text-white fw-bold fs-12 border border-1 border-dark"
-							value="{$LNG.mg_confirm}" type="submit" name="submitBottom">
-					</td>
-				</tr>
-			{/if}
+			
+			
 		</table>
 	</form>
 {/block}
