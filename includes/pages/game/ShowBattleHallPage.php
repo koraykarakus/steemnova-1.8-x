@@ -64,7 +64,7 @@ class ShowBattleHallPage extends AbstractGamePage
         }
 
         $this->assign([
-            'TopKBList' => $top_kb_list,
+            'top_kb_list' => $top_kb_list,
         ]);
 
         $this->display('page.battleHall.default.tpl');

@@ -14,7 +14,7 @@
                 <td>{$LNG.tkb_datum}</td>
                 <td>{$LNG.tkb_units}</td>
             </tr>
-            {foreach $TopKBList as $row}
+            {foreach $top_kb_list as $row}
                 <tr>
                     <td>{$row@iteration}</td>
                     <td><a href="report.php?page=report&amp;mode=battlehall&amp;id={$row.rid}" target="_blank">
