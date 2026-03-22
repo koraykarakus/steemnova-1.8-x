@@ -1578,6 +1578,12 @@ background: linear-gradient(180deg,
 .icon_missile:hover{
 	background-position: -16px 0;
 }
+#fleetstatusrow{
+	display: table;
+}
+#fleetstatusrow.hidden{
+	display: none;
+}
 /**/
 /*page.statistics*/
 .stats_table .ranking{

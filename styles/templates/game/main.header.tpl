@@ -8,7 +8,7 @@
 		{if !empty($goto)}
 			<meta http-equiv="refresh" content="{$gotoinsec};URL={$goto}">
 		{/if}
-		{assign var="REV" value="1.0.0.42" nocache}
+		{assign var="REV" value="1.0.0.43" nocache}
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<!-- jquery.css required for progress bar -->
 		<link rel="stylesheet" type="text/css" href="./styles/resource/css/base/jquery.css?v={$REV}">

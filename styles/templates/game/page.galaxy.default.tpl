@@ -560,9 +560,15 @@
 					{$LNG.gl_legend}
 			</td>
 		</tr>
-		<tr style="display:none;" id="fleetstatusrow">
-			<th colspan="8">{$LNG.cff_fleet_target}</th>
-		</tr>
+	</table>
+	<table id="fleetstatusrow" class="hidden table-gow table_full">
+		<thead>
+			<tr>
+				<th colspan="8">{$LNG.cff_fleet_target}</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
 	</table>
 	<script type="text/javascript">
 		status_ok		= '{$LNG.gl_ajax_status_ok}';

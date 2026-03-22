@@ -10,18 +10,29 @@ function doit(missionID, planetID) {
 		}
 
 		var statustable	= $('#fleetstatusrow');
-		var messages	= statustable.find("~tr");
+		var tbody = statustable.find('tbody');
+
+		statustable.removeClass('hidden');
+		var messages = tbody.find('tr');
 		if(messages.length == MaxFleetSetting) {
-			messages.filter(':last').remove();
+			messages.last().remove();
 		}
-		var element	= $('<td/>').attr('colspan', 8).attr('class', data.code == 600 ? "text_center" : "text_center").text(data.mess).wrap('<tr/>').parent();
-		statustable.removeAttr('style').after(element);
+
+		var element = '<tr>' + '<td colspan="8" class="text_center">' + data.mess + '</td>' + '</tr>';
+		tbody.prepend(element);
 
 		setTimeout(function () {
-    		element.fadeOut(500, function () {
-        	element.remove();
+    	
+		tbody.find('tr').last().fadeOut(500, function () {
+        $(this).remove();
+
+        // hiç mesaj kalmazsa tabloyu gizle
+        if (tbody.find('tr').length === 0) {
+            statustable.addClass('hidden');
+        }
     	});
 		}, 3000);
+		
 	});
 }
 
