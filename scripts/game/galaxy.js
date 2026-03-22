@@ -26,13 +26,13 @@ function doit(missionID, planetID) {
 		tbody.find('tr').last().fadeOut(500, function () {
         $(this).remove();
 
-        // hiç mesaj kalmazsa tabloyu gizle
+        // hide table if no messages.
         if (tbody.find('tr').length === 0) {
             statustable.addClass('hidden');
         }
     	});
 		}, 3000);
-		
+
 	});
 }
 
