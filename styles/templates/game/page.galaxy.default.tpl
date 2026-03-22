@@ -102,7 +102,6 @@
 					{else}
 						{$currentPlanet.planet.name}
 					{/if}
-						&nbsp;<span class="color-red">{$currentPlanet.lastActivity}</span>
 					</div>
 					<div class="planet_picture">
 						<div class="tooltip tooltip_right">
@@ -220,6 +219,9 @@
 						</div>
 						<img src="{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg" height="30"
 							width="30" alt="">
+						{if !empty($currentPlanet.lastActivity)}
+							<span class="last_activity">{$currentPlanet.lastActivity}</span>
+						{/if}
 					</div>
 					<div class="moon_picture">
 						{if $currentPlanet.moon}
@@ -340,6 +342,9 @@
 							</div>
 							<img src="{$dpath}planets/small/s_mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
+						{if !empty($currentPlanet.lastActivity)}
+							<span class="last_activity">{$currentPlanet.lastActivity}</span>
+						{/if}											
 						{/if}
 					</div>
 					<div class="debris_picture">

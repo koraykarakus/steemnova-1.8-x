@@ -107,18 +107,15 @@ class GalaxyRows
 
     protected function setLastActivity()
     {
-        global $LNG;
-
         $last_activity = floor((TIMESTAMP - max($this->galaxy_row['last_update'], $this->galaxy_row['m_last_update'])) / 60);
 
         if ($last_activity < 15)
         {
-            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = $LNG['gl_activity'];
+            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = '*';
         }
         elseif ($last_activity < 60)
         {
-            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] =
-            sprintf($LNG['gl_activity_inactive'], $last_activity);
+            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = $last_activity;
         }
         else
         {

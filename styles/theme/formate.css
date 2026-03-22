@@ -1432,6 +1432,23 @@ input[type="radio"] {
 	width: 36px;
 	position: relative;
 }
+.galaxy_wrapper>.galaxy_row .last_activity{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 16px;
+	height: 15px;
+	background-color: #0b0f1a;
+	border: 1px solid #e26804;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 9px;
+	border-radius: 2px;
+	color: #e26804;
+	font-weight: bold;
+	padding: 1px;
+}
 .galaxy_wrapper>.galaxy_row>.planet_picture:hover>.tooltip{
 	display: flex;
 }
