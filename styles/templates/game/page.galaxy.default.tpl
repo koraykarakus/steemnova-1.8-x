@@ -342,8 +342,8 @@
 							</div>
 							<img src="{$dpath}planets/small/s_mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
-						{if !empty($currentPlanet.lastActivity)}
-							<span class="last_activity">{$currentPlanet.lastActivity}</span>
+						{if isset($currentPlanet.moon.lastActivity)}
+							<span class="last_activity">{$currentPlanet.moon.lastActivity}</span>
 						{/if}											
 						{/if}
 					</div>

@@ -90,7 +90,7 @@ class GalaxyRows
             $this->galaxy_data[$this->galaxy_row['planet']] = [];
 
             $this->isOwnPlanet();
-            $this->setLastActivity();
+            $this->setLastActivityPlanet();
 
             $this->getAllowedMissions();
 
@@ -99,15 +99,16 @@ class GalaxyRows
             $this->getAllianceData();
             $this->getDebrisData();
             $this->getMoonData();
+            $this->setLastActivityMoon();
             $this->getActionButtons();
         }
 
         return $this->galaxy_data;
     }
 
-    protected function setLastActivity()
+    protected function setLastActivityPlanet()
     {
-        $last_activity = floor((TIMESTAMP - max($this->galaxy_row['last_update'], $this->galaxy_row['m_last_update'])) / 60);
+        $last_activity = floor((TIMESTAMP - $this->galaxy_row['last_update']) / 60);
 
         if ($last_activity < 15)
         {
@@ -120,6 +121,26 @@ class GalaxyRows
         else
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = '';
+        }
+    }
+
+    protected function setLastActivityMoon(): void
+    {
+        if ($this->galaxy_data[$this->galaxy_row['planet']]['moon'] !== false)
+        {
+            $last_activity = floor((TIMESTAMP - $this->galaxy_row['m_last_update']) / 60);
+            if ($last_activity < 15)
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = '*';
+            }
+            elseif ($last_activity < 60)
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = $last_activity;
+            }
+            else
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = '';
+            }
         }
     }
 
@@ -271,10 +292,10 @@ class GalaxyRows
         else
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['moon'] = [
-                'id'       => $this->galaxy_row['m_id'],
-                'name'     => htmlspecialchars($this->galaxy_row['m_name'], ENT_QUOTES, "UTF-8"),
-                'temp_min' => $this->galaxy_row['m_temp_min'],
-                'diameter' => $this->galaxy_row['m_diameter'],
+                'id'            => $this->galaxy_row['m_id'],
+                'name'          => htmlspecialchars($this->galaxy_row['m_name'], ENT_QUOTES, "UTF-8"),
+                'temp_min'      => $this->galaxy_row['m_temp_min'],
+                'diameter'      => $this->galaxy_row['m_diameter'],
             ];
         }
     }
