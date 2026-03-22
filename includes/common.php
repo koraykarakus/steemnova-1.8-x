@@ -150,12 +150,12 @@ if (MODE === 'INGAME'
 	FROM %%USERS%% as user
 	LEFT JOIN %%MESSAGES%% as message ON message.message_owner = user.id AND message.message_unread = :unread
 	LEFT JOIN %%USER_POINTS%% as userpoints ON userpoints.id_owner = user.id
-	WHERE user.id = :userId
+	WHERE user.id = :user_id
 	GROUP BY message.message_owner;";
 
     $USER = $db->selectSingle($sql, [
         ':unread' => 1,
-        ':userId' => $session->userId,
+        ':user_id' => $session->userId,
     ]);
 
     if (empty($USER))
@@ -187,16 +187,16 @@ if (MODE === 'INGAME'
 
         $session->selectActivePlanet();
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planet_id;";
         $PLANET = $db->selectSingle($sql, [
-            ':planetId' => $session->planetId,
+            ':planet_id' => $session->planetId,
         ]);
 
         if (empty($PLANET))
         {
-            $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
+            $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planet_id;";
             $PLANET = $db->selectSingle($sql, [
-                ':planetId' => $USER['id_planet'],
+                ':planet_id' => $USER['id_planet'],
             ]);
 
             if (empty($PLANET))
@@ -243,10 +243,10 @@ elseif (MODE === 'REPORT')
     $lang = '';
     if ($session->isValidSession())
     {
-        $sql = "SELECT `lang` FROM %%USERS%% WHERE `id` = :userId";
+        $sql = "SELECT `lang` FROM %%USERS%% WHERE `id` = :user_id";
 
         $USER = Database::get()->selectSingle($sql, [
-            ':userId' => $session->userId,
+            ':user_id' => $session->userId,
         ]);
 
         if (!$USER)
