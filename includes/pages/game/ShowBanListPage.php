@@ -67,10 +67,10 @@ class ShowBanListPage extends AbstractGamePage
         }
 
         $this->assign([
-            'banList'    => $ban_list,
-            'banCount'   => $ban_count,
-            'pageNumber' => $page,
-            'maxPage'    => $max_page,
+            'ban_list'    => $ban_list,
+            'ban_count'   => $ban_count,
+            'page_number' => $page,
+            'max_page'    => $max_page,
         ]);
 
         $this->display('page.banList.default.tpl');

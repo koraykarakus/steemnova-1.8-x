@@ -11,32 +11,32 @@
 			<td>{$LNG.bn_by}</td>
 			<td>{$LNG.bn_reason}</td>
 		</tr>
-		{if $banCount}
+		{if $ban_count}
 			<tr>
-				<td class="right" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a
-						href="game.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}
-					{for $site=1 to $maxPage}<a
-							href="game.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a
-						href="game.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
+				<td class="right" colspan="5">{$LNG.mg_page}: {if $page_number != 1}<a
+						href="game.php?page=banList&amp;side={$page_number - 1}">&laquo;</a>&nbsp;{/if}
+					{for $site=1 to $max_page}<a
+							href="game.php?page=banList&amp;side={$site}">{if $site == $page_number}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $max_page}&nbsp;{/if}{/for}{if $page_number != $max_page}&nbsp;<a
+						href="game.php?page=banList&amp;side={$page_number + 1}">&raquo;</a>{/if}</td>
 			</tr>
-			{foreach $banList as $banRow}
+			{foreach $ban_list as $ban_row}
 				<tr>
-					<td>{$banRow.from}</td>
-					<td>{$banRow.to}</td>
-					<td>{$banRow.player}</td>
-					<td><a href="mailto:{$banRow.mail}" title="{$banRow.info}">{$banRow.admin}</a></td>
-					<td>{$banRow.theme}</td>
+					<td>{$ban_row.from}</td>
+					<td>{$ban_row.to}</td>
+					<td>{$ban_row.player}</td>
+					<td><a href="mailto:{$ban_row.mail}" title="{$ban_row.info}">{$ban_row.admin}</a></td>
+					<td>{$ban_row.theme}</td>
 				</tr>
 			{/foreach}
 			<tr>
-				<td class="right" colspan="5">{$LNG.mg_page}: {if $pageNumber != 1}<a
-						href="game.php?page=banList&amp;side={$pageNumber - 1}">&laquo;</a>&nbsp;{/if}
-					{for $site=1 to $maxPage}<a
-							href="game.php?page=banList&amp;side={$site}">{if $site == $pageNumber}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $maxPage}&nbsp;{/if}{/for}{if $pageNumber != $maxPage}&nbsp;<a
-						href="game.php?page=banList&amp;side={$pageNumber + 1}">&raquo;</a>{/if}</td>
+				<td class="right" colspan="5">{$LNG.mg_page}: {if $page_number != 1}<a
+						href="game.php?page=banList&amp;side={$page_number - 1}">&laquo;</a>&nbsp;{/if}
+					{for $site=1 to $max_page}<a
+							href="game.php?page=banList&amp;side={$site}">{if $site == $page_number}<b>[{$site}]</b>{else}[{$site}]{/if}</a>{if $site != $max_page}&nbsp;{/if}{/for}{if $page_number != $max_page}&nbsp;<a
+						href="game.php?page=banList&amp;side={$page_number + 1}">&raquo;</a>{/if}</td>
 			</tr>
 			<tr>
-				<td colspan="5">{$LNG.bn_exists}{$banCount|number}{$LNG.bn_players_banned}</td>
+				<td colspan="5">{$LNG.bn_exists}{$ban_count|number}{$LNG.bn_players_banned}</td>
 			</tr>
 		{else}
 			<tr>
