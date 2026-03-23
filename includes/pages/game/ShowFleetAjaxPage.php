@@ -35,7 +35,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $resource, $LNG, $pricelist;
+        global $USER, $PLANET, $RESOURCE, $LNG, $PRICELIST;
 
         $user_deu = $PLANET['deuterium'];
 
@@ -74,7 +74,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(699, $LNG['sys_module_inactive']);
                 }
 
-                $ships = min($USER['spio_anz'], $PLANET[$resource[210]]);
+                $ships = min($USER['spio_anz'], $PLANET[$RESOURCE[210]]);
 
                 if (empty($ships))
                 {
@@ -82,7 +82,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 }
 
                 $fleet_array = [210 => $ships];
-                $this->return_data['ships'][210] = $PLANET[$resource[210]] - $ships;
+                $this->return_data['ships'][210] = $PLANET[$RESOURCE[210]] - $ships;
                 break;
             case 8:
                 if (!isModuleAvailable(MODULE_MISSION_RECYCLE))
@@ -103,12 +103,12 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
                 foreach ($rec_element_ids as $c_element_id)
                 {
-                    $a = $pricelist[$c_element_id]['capacity'] * (1 + $USER['factor']['ShipStorage']);
-                    $shipsNeed = min(ceil($total_debris / $a), $PLANET[$resource[$c_element_id]]);
+                    $a = $PRICELIST[$c_element_id]['capacity'] * (1 + $USER['factor']['ShipStorage']);
+                    $shipsNeed = min(ceil($total_debris / $a), $PLANET[$RESOURCE[$c_element_id]]);
                     $total_debris -= ($shipsNeed * $a);
 
                     $fleet_array[$c_element_id] = $shipsNeed;
-                    $this->return_data['ships'][$c_element_id] = $PLANET[$resource[$c_element_id]] - $shipsNeed;
+                    $this->return_data['ships'][$c_element_id] = $PLANET[$RESOURCE[$c_element_id]] - $shipsNeed;
 
                     if ($total_debris <= 0)
                     {

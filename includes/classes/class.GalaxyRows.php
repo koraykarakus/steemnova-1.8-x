@@ -90,7 +90,7 @@ class GalaxyRows
             $this->galaxy_data[$this->galaxy_row['planet']] = [];
 
             $this->isOwnPlanet();
-            $this->setLastActivity();
+            $this->setLastActivityPlanet();
 
             $this->getAllowedMissions();
 
@@ -99,30 +99,48 @@ class GalaxyRows
             $this->getAllianceData();
             $this->getDebrisData();
             $this->getMoonData();
+            $this->setLastActivityMoon();
             $this->getActionButtons();
         }
 
         return $this->galaxy_data;
     }
 
-    protected function setLastActivity()
+    protected function setLastActivityPlanet()
     {
-        global $LNG;
-
-        $last_activity = floor((TIMESTAMP - max($this->galaxy_row['last_update'], $this->galaxy_row['m_last_update'])) / 60);
+        $last_activity = floor((TIMESTAMP - $this->galaxy_row['last_update']) / 60);
 
         if ($last_activity < 15)
         {
-            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = $LNG['gl_activity'];
+            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = '*';
         }
         elseif ($last_activity < 60)
         {
-            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] =
-            sprintf($LNG['gl_activity_inactive'], $last_activity);
+            $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = $last_activity;
         }
         else
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['lastActivity'] = '';
+        }
+    }
+
+    protected function setLastActivityMoon(): void
+    {
+        if ($this->galaxy_data[$this->galaxy_row['planet']]['moon'] !== false)
+        {
+            $last_activity = floor((TIMESTAMP - $this->galaxy_row['m_last_update']) / 60);
+            if ($last_activity < 15)
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = '*';
+            }
+            elseif ($last_activity < 60)
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = $last_activity;
+            }
+            else
+            {
+                $this->galaxy_data[$this->galaxy_row['planet']]['moon']['lastActivity'] = '';
+            }
         }
     }
 
@@ -135,7 +153,7 @@ class GalaxyRows
 
     protected function getAllowedMissions()
     {
-        global $PLANET, $resource;
+        global $PLANET, $RESOURCE;
 
         $this->galaxy_data[$this->galaxy_row['planet']]['missions'] = [
             1  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_ATTACK),
@@ -144,21 +162,21 @@ class GalaxyRows
             5  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_HOLD),
             6  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_SPY),
             8  => isModuleAvailable(MODULE_MISSION_RECYCLE),
-            9  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$resource[214]] > 0 && isModuleAvailable(MODULE_MISSION_DESTROY),
-            10 => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$resource[503]] > 0 && isModuleAvailable(MODULE_MISSION_ATTACK) && isModuleAvailable(MODULE_MISSILEATTACK) && $this->inMissileRange(),
+            9  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$RESOURCE[214]] > 0 && isModuleAvailable(MODULE_MISSION_DESTROY),
+            10 => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$RESOURCE[503]] > 0 && isModuleAvailable(MODULE_MISSION_ATTACK) && isModuleAvailable(MODULE_MISSILEATTACK) && $this->inMissileRange(),
         ];
     }
 
     protected function inMissileRange()
     {
-        global $USER, $PLANET, $resource;
+        global $USER, $PLANET, $RESOURCE;
 
         if ($this->galaxy_row['galaxy'] != $PLANET['galaxy'])
         {
             return false;
         }
 
-        $range = FleetFunctions::GetMissileRange($USER[$resource[117]]);
+        $range = FleetFunctions::GetMissileRange($USER[$RESOURCE[117]]);
         $system_min = $PLANET['system'] - $range;
         $system_max = $PLANET['system'] + $range;
 
@@ -274,10 +292,10 @@ class GalaxyRows
         else
         {
             $this->galaxy_data[$this->galaxy_row['planet']]['moon'] = [
-                'id'       => $this->galaxy_row['m_id'],
-                'name'     => htmlspecialchars($this->galaxy_row['m_name'], ENT_QUOTES, "UTF-8"),
-                'temp_min' => $this->galaxy_row['m_temp_min'],
-                'diameter' => $this->galaxy_row['m_diameter'],
+                'id'            => $this->galaxy_row['m_id'],
+                'name'          => htmlspecialchars($this->galaxy_row['m_name'], ENT_QUOTES, "UTF-8"),
+                'temp_min'      => $this->galaxy_row['m_temp_min'],
+                'diameter'      => $this->galaxy_row['m_diameter'],
             ];
         }
     }

@@ -11,7 +11,7 @@ class ShowRelocatePage extends AbstractGamePage
 
     public function send(): void
     {
-        global $USER, $PLANET, $LNG, $reslist, $resource, $config;
+        global $USER, $PLANET, $LNG, $RESLIST, $RESOURCE, $config;
 
         $db = Database::get();
 
@@ -126,14 +126,14 @@ class ShowRelocatePage extends AbstractGamePage
 
         $fleet = $fleet_moon = [];
 
-        foreach ($reslist['fleet'] as $key => $fleetID)
+        foreach ($RESLIST['fleet'] as $key => $fleetID)
         {
-            if ($fleetID == 212 || $fleetID == 221 || $PLANET[$resource[$fleetID]] == 0)
+            if ($fleetID == 212 || $fleetID == 221 || $PLANET[$RESOURCE[$fleetID]] == 0)
             {
                 continue;
             }
             $fleet = $fleet + [
-                $fleetID => $PLANET[$resource[$fleetID]],
+                $fleetID => $PLANET[$RESOURCE[$fleetID]],
             ];
         }
 
@@ -144,14 +144,14 @@ class ShowRelocatePage extends AbstractGamePage
                 ':idLuna' => $PLANET['id_moon'],
             ]);
 
-            foreach ($reslist['fleet'] as $key => $fleetID)
+            foreach ($RESLIST['fleet'] as $key => $fleetID)
             {
-                if ($fleetID == 212 || $fleetID == 221 || $MOON[$resource[$fleetID]] == 0)
+                if ($fleetID == 212 || $fleetID == 221 || $MOON[$RESOURCE[$fleetID]] == 0)
                 {
                     continue;
                 }
                 $fleet_moon = $fleet_moon + [
-                    $fleetID => $MOON[$resource[$fleetID]],
+                    $fleetID => $MOON[$RESOURCE[$fleetID]],
                 ];
             }
 

@@ -11,7 +11,7 @@
         {/if}
       {/if}">
     <div class="left">
-      <a class="type_planet" href="game.php?page={$page}&amp;cp={$PlanetRow.id}">
+    <a class="type_planet" href="game.php?page={if empty($page)}overview{else}{$page}{/if}&amp;cp={$PlanetRow.id}">
         <div class="tooltip tooltip_right"> 
           <table class=''>
             <thead>
@@ -40,11 +40,11 @@
           </table>
         </div>
         {if !empty($PlanetRow)}
-        <img class="{if $PlanetRow.selected}border-yellow{/if}" src="{$dpath}planets/{$PlanetRow.image}.jpg" width="33" height="33" alt="{$PlanetRow.name}">
+        <img class="{if $PlanetRow.selected}border-yellow{/if}" src="{$dpath}planets/small/s_{$PlanetRow.image}.jpg" width="33" height="33" alt="{$PlanetRow.name}">
         {/if}
       </a>
       {if isset($PlanetRow.moonInfo)}
-      <a class="type_moon" href="game.php?page={$page}&amp;cp={$PlanetRow.moonInfo[0].id}">
+      <a class="type_moon" href="game.php?page={if empty($page)}overview{else}{$page}{/if}&amp;cp={$PlanetRow.moonInfo[0].id}">
         <div class="tooltip tooltip_right">  
           <table class=''>
             <thead>
@@ -72,7 +72,7 @@
             </tbody>
           </table>
         </div>
-        <img class="{if $PlanetRow.moonInfo[0].selected}border-yellow{else}hover-border-yellow{/if}" src="{$dpath}planets/{$PlanetRow.moonInfo[0].image}.jpg" width="20" height="20" alt="{$PlanetRow.moonInfo[0].name}">
+        <img class="{if $PlanetRow.moonInfo[0].selected}border-yellow{else}hover-border-yellow{/if}" src="{$dpath}planets/small/s_{$PlanetRow.moonInfo[0].image}.jpg" width="20" height="20" alt="{$PlanetRow.moonInfo[0].name}">
       </a>
       {/if}
     </div>

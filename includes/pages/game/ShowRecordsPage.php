@@ -26,7 +26,7 @@ class ShowRecordsPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $LNG, $reslist;
+        global $USER, $LNG, $RESLIST;
 
         $db = Database::get();
 
@@ -39,35 +39,35 @@ class ShowRecordsPage extends AbstractGamePage
             ':universe' => Universe::current(),
         ]);
 
-        $defense_list = array_fill_keys($reslist['defense'], []);
-        $fleet_list = array_fill_keys($reslist['fleet'], []);
-        $research_list = array_fill_keys($reslist['tech'], []);
-        $build_list = array_fill_keys($reslist['build'], []);
-        $officer_list = array_fill_keys($reslist['officers'], []);
+        $defense_list = array_fill_keys($RESLIST['defense'], []);
+        $fleet_list = array_fill_keys($RESLIST['fleet'], []);
+        $research_list = array_fill_keys($RESLIST['tech'], []);
+        $build_list = array_fill_keys($RESLIST['build'], []);
+        $officer_list = array_fill_keys($RESLIST['officers'], []);
 
         foreach ($records as $c_record)
         {
-            if (in_array($c_record['elementID'], $reslist['defense']))
+            if (in_array($c_record['elementID'], $RESLIST['defense']))
             {
                 $defense_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['fleet']))
+            elseif (in_array($c_record['elementID'], $RESLIST['fleet']))
             {
                 $fleet_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['tech']))
+            elseif (in_array($c_record['elementID'], $RESLIST['tech']))
             {
                 $research_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['build']))
+            elseif (in_array($c_record['elementID'], $RESLIST['build']))
             {
                 $build_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['officers']))
+            elseif (in_array($c_record['elementID'], $RESLIST['officers']))
             {
                 $officer_list[$c_record['elementID']][] = $c_record;
             }
-            elseif (in_array($c_record['elementID'], $reslist['missile']))
+            elseif (in_array($c_record['elementID'], $RESLIST['missile']))
             {
                 $defense_list[$c_record['elementID']][] = $c_record;
             }

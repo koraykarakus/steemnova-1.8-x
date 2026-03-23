@@ -26,7 +26,7 @@ class ShowFleetStep3Page extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $resource, $LNG;
+        global $USER, $PLANET, $RESOURCE, $LNG;
 
         if (inVacationMode($USER))
         {
@@ -220,7 +220,7 @@ class ShowFleetStep3Page extends AbstractGamePage
 
         foreach ($fleetArray as $Ship => $Count)
         {
-            if ($Count > $PLANET[$resource[$Ship]])
+            if ($Count > $PLANET[$RESOURCE[$Ship]])
             {
                 $this->printMessage($LNG['fl_not_all_ship_avalible'], [[
                     'label' => $LNG['sys_back'],
@@ -396,7 +396,7 @@ class ShowFleetStep3Page extends AbstractGamePage
         $duration = FleetFunctions::GetMissionDuration($fleetSpeed, $fleetMaxSpeed, $distance, $SpeedFactor, $USER);
         $consumption = FleetFunctions::GetFleetConsumption($fleetArray, $duration, $distance, $USER, $SpeedFactor);
 
-        if ($PLANET[$resource[903]] < $consumption)
+        if ($PLANET[$RESOURCE[903]] < $consumption)
         {
             $this->printMessage($LNG['fl_not_enough_deuterium'], [[
                 'label' => $LNG['sys_back'],
@@ -422,9 +422,9 @@ class ShowFleetStep3Page extends AbstractGamePage
         $fleetStorage -= $consumption;
 
         $fleetResource = [
-            901 => min($TransportMetal, floor($PLANET[$resource[901]])),
-            902 => min($TransportCrystal, floor($PLANET[$resource[902]])),
-            903 => min($TransportDeuterium, floor($PLANET[$resource[903]] - $consumption)),
+            901 => min($TransportMetal, floor($PLANET[$RESOURCE[901]])),
+            902 => min($TransportCrystal, floor($PLANET[$RESOURCE[902]])),
+            903 => min($TransportDeuterium, floor($PLANET[$RESOURCE[903]] - $consumption)),
         ];
 
         $StorageNeeded = array_sum($fleetResource);
@@ -439,15 +439,15 @@ class ShowFleetStep3Page extends AbstractGamePage
 
         if ($targetMission == 17)
         {
-            $attack = $USER[$resource[109]] * 10 + $USER['factor']['Attack'] * 100;
-            $defensive = $USER[$resource[110]] * 10 + $USER['factor']['Defensive'] * 100;
-            $shield = $USER[$resource[111]] * 10 + $USER['factor']['Shield'] * 100;
+            $attack = $USER[$RESOURCE[109]] * 10 + $USER['factor']['Attack'] * 100;
+            $defensive = $USER[$RESOURCE[110]] * 10 + $USER['factor']['Defensive'] * 100;
+            $shield = $USER[$RESOURCE[111]] * 10 + $USER['factor']['Shield'] * 100;
 
             $targetPlayerData['factor'] = getFactors($targetPlayerData);
 
-            $attack_targ = $targetPlayerData[$resource[109]] * 10 + $targetPlayerData['factor']['Attack'] * 100;
-            $defensive_targ = $targetPlayerData[$resource[110]] * 10 + $targetPlayerData['factor']['Defensive'] * 100;
-            $shield_targ = $targetPlayerData[$resource[111]] * 10 + $targetPlayerData['factor']['Shield'] * 100;
+            $attack_targ = $targetPlayerData[$RESOURCE[109]] * 10 + $targetPlayerData['factor']['Attack'] * 100;
+            $defensive_targ = $targetPlayerData[$RESOURCE[110]] * 10 + $targetPlayerData['factor']['Defensive'] * 100;
+            $shield_targ = $targetPlayerData[$RESOURCE[111]] * 10 + $targetPlayerData['factor']['Shield'] * 100;
 
             if ($attack < $attack_targ || $defensive < $defensive_targ || $shield < $shield_targ)
             {
@@ -458,9 +458,9 @@ class ShowFleetStep3Page extends AbstractGamePage
             }
         }
 
-        $PLANET[$resource[901]] -= $fleetResource[901];
-        $PLANET[$resource[902]] -= $fleetResource[902];
-        $PLANET[$resource[903]] -= $fleetResource[903] + $consumption;
+        $PLANET[$RESOURCE[901]] -= $fleetResource[901];
+        $PLANET[$RESOURCE[902]] -= $fleetResource[902];
+        $PLANET[$RESOURCE[903]] -= $fleetResource[903] + $consumption;
 
         $fleetStartTime = $duration + TIMESTAMP;
         $timeDifference = round(max(0, $fleetStartTime - $ACSTime));

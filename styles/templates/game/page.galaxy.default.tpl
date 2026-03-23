@@ -102,7 +102,6 @@
 					{else}
 						{$currentPlanet.planet.name}
 					{/if}
-						&nbsp;<span class="color-red">{$currentPlanet.lastActivity}</span>
 					</div>
 					<div class="planet_picture">
 						<div class="tooltip tooltip_right">
@@ -113,19 +112,16 @@
 									</th>
 								</tr>
 								{if $userAuthLevel == 3}
-									<tr>
-										<td>user ID:</td>
-										<td>{$currentPlanet['user']['id']}</td>
-									</tr>
-									<tr>
-										<td>planet ID:</td>
-										<td>{$currentPlanet['planet']['id']}</td>
-									</tr>
+								<tr>
+									<td>{$LNG.gl_admin_user_id}</td>
+									<td>{$currentPlanet['user']['id']}</td>
+								</tr>
+								<tr>
+									<td>{$LNG.gl_admin_planet_id}</td>
+									<td>{$currentPlanet['planet']['id']}</td>
+								</tr>
 								{/if}
 								<tr>
-									<td>
-										<img src='{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
-									</td>
 									<td>
 										<table class="table-gow table_full">
 											<thead>
@@ -215,11 +211,17 @@
 											</tbody>
 										</table>
 									</td>
+								<td>
+									<img src='{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg' height='75' width='75'>
+								</td>
 								</tr>
 							</table>
 						</div>
 						<img src="{$dpath}planets/small/s_{$currentPlanet.planet.image}.jpg" height="30"
 							width="30" alt="">
+						{if !empty($currentPlanet.lastActivity)}
+							<span class="last_activity">{$currentPlanet.lastActivity}</span>
+						{/if}
 					</div>
 					<div class="moon_picture">
 						{if $currentPlanet.moon}
@@ -231,18 +233,15 @@
 									</tr>
 									{if $userAuthLevel == 3}
 									<tr>
-										<td>user ID:</td>
+										<td>{$LNG.gl_admin_user_id}</td>
 										<td>{$currentPlanet['user']['id']}</td>
 									</tr>
 									<tr>
-										<td>planet ID:</td>
+										<td>{$LNG.gl_admin_planet_id}</td>
 										<td>{$currentPlanet['moon']['id']}</td>
 									</tr>
 									{/if}
 									<tr>
-										<td style='width:80px'>
-											<img src='{$dpath}planets/mond.jpg' height='75' width='75'>
-										</td>
 										<td>
 											<table class='table-gow' style='width:100%'>
 												<tr>
@@ -335,11 +334,17 @@
 												</tr>
 											</table>
 										</td>
-										</tr>
+										<td style='width:80px'>
+											<img src='{$dpath}planets/small/s_mond.jpg' height='75' width='75'>
+										</td>
+									</tr>
 									</table>
 							</div>
-							<img src="{$dpath}planets/mond.jpg" height="22" width="22"
+							<img src="{$dpath}planets/small/s_mond.jpg" height="22" width="22"
 								alt="{$currentPlanet.moon.name}">
+						{if isset($currentPlanet.moon.lastActivity) && !empty($currentPlanet.moon.lastActivity)}
+							<span class="last_activity">{$currentPlanet.moon.lastActivity}</span>
+						{/if}											
 						{/if}
 					</div>
 					<div class="debris_picture">
@@ -560,9 +565,15 @@
 					{$LNG.gl_legend}
 			</td>
 		</tr>
-		<tr style="display:none;" id="fleetstatusrow">
-			<th colspan="8">{$LNG.cff_fleet_target}</th>
-		</tr>
+	</table>
+	<table id="fleetstatusrow" class="hidden table-gow table_full">
+		<thead>
+			<tr>
+				<th colspan="8">{$LNG.cff_fleet_target}</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
 	</table>
 	<script type="text/javascript">
 		status_ok		= '{$LNG.gl_ajax_status_ok}';

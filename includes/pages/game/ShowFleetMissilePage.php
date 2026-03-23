@@ -26,7 +26,7 @@ class ShowFleetMissilePage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $LNG, $reslist, $resource;
+        global $USER, $PLANET, $LNG, $RESLIST, $RESOURCE;
 
         $target_galaxy = HTTP::_GP('galaxy', 0);
         $target_system = HTTP::_GP('system', 0);
@@ -50,7 +50,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             ':target_type'   => $target_type,
         ]);
 
-        $range = FleetFunctions::GetMissileRange($USER[$resource[117]]);
+        $range = FleetFunctions::GetMissileRange($USER[$RESOURCE[117]]);
         $system_min = $PLANET['system'] - $range;
         $system_max = $PLANET['system'] + $range;
 
@@ -83,7 +83,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             $error[] = $LNG['ma_planet_doesnt_exists'];
         }
 
-        if (!in_array($primary_target, $reslist['defense'])
+        if (!in_array($primary_target, $RESLIST['defense'])
             && $primary_target != 0)
         {
             $error[] = $LNG['ma_wrong_target'];

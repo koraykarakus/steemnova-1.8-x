@@ -314,6 +314,8 @@ $LNG['gl_err_in_vacation'] = "Die Galaxie kann im Urlaubsmodus nicht angezeigt w
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'M';
 $LNG['gl_debris_short'] = 'TF'; // Trümmerfeld
+$LNG['gl_admin_user_id'] = "Benutzer-ID";
+$LNG['gl_admin_planet_id'] = "Planeten-ID";
 
 //----------------------------------------------------------------------------//
 //PHALANX

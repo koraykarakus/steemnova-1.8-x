@@ -18,7 +18,7 @@
 function calculateSteal($attack_fleets, $defender_planet, $simulate = false)
 {
     // See: http://www.owiki.de/Beute
-    global $pricelist, $resource;
+    global $PRICELIST, $RESOURCE;
 
     $metal = 901;
     $crystal = 902;
@@ -39,7 +39,7 @@ function calculateSteal($attack_fleets, $defender_planet, $simulate = false)
 
         foreach ($attacker['unit'] as $element => $amount)
         {
-            $sort_fleets[$fleet_id] += $pricelist[$element]['capacity'] * $amount;
+            $sort_fleets[$fleet_id] += $PRICELIST[$element]['capacity'] * $amount;
         }
 
         $sort_fleets[$fleet_id] *= (1 + $attacker['player']['factor']['ShipStorage']);
@@ -57,24 +57,24 @@ function calculateSteal($attack_fleets, $defender_planet, $simulate = false)
     }
 
     // Step 1
-    $steal_res[$metal] = min($capacity / 3, $defender_planet[$resource[$metal]] / 2);
+    $steal_res[$metal] = min($capacity / 3, $defender_planet[$RESOURCE[$metal]] / 2);
     $capacity -= $steal_res[$metal];
 
     // Step 2
-    $steal_res[$crystal] = min($capacity / 2, $defender_planet[$resource[$crystal]] / 2);
+    $steal_res[$crystal] = min($capacity / 2, $defender_planet[$RESOURCE[$crystal]] / 2);
     $capacity -= $steal_res[$crystal];
 
     // Step 3
-    $steal_res[$deu] = min($capacity, $defender_planet[$resource[$deu]] / 2);
+    $steal_res[$deu] = min($capacity, $defender_planet[$RESOURCE[$deu]] / 2);
     $capacity -= $steal_res[$deu];
 
     // Step 4
     $old_metal_booty = $steal_res[$metal];
-    $steal_res[$metal] += min($capacity / 2, $defender_planet[$resource[$metal]] / 2 - $steal_res[$metal]);
+    $steal_res[$metal] += min($capacity / 2, $defender_planet[$RESOURCE[$metal]] / 2 - $steal_res[$metal]);
     $capacity -= $steal_res[$metal] - $old_metal_booty;
 
     // Step 5
-    $steal_res[$crystal] += min($capacity, $defender_planet[$resource[$crystal]] / 2 - $steal_res[$crystal]);
+    $steal_res[$crystal] += min($capacity, $defender_planet[$RESOURCE[$crystal]] / 2 - $steal_res[$crystal]);
 
     if ($simulate)
     {

@@ -67,48 +67,48 @@ class ShowResetPage extends AbstractAdminPage
 
     public function send(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $config = Config::get(Universe::getEmulated());
 
-        foreach ($reslist['build'] as $c_id)
+        foreach ($RESLIST['build'] as $c_id)
         {
-            $dbcol['build'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['build'][$c_id] = "`".$RESOURCE[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['tech'] as $c_id)
+        foreach ($RESLIST['tech'] as $c_id)
         {
-            $dbcol['tech'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['tech'][$c_id] = "`".$RESOURCE[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['fleet'] as $c_id)
+        foreach ($RESLIST['fleet'] as $c_id)
         {
-            $dbcol['fleet'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['fleet'][$c_id] = "`".$RESOURCE[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['defense'] as $c_id)
+        foreach ($RESLIST['defense'] as $c_id)
         {
-            $dbcol['defense'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['defense'][$c_id] = "`".$RESOURCE[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['officers'] as $c_id)
+        foreach ($RESLIST['officers'] as $c_id)
         {
-            $dbcol['officers'][$c_id] = "`".$resource[$c_id]."` = '0'";
+            $dbcol['officers'][$c_id] = "`".$RESOURCE[$c_id]."` = '0'";
         }
 
-        foreach ($reslist['resstype'][1] as $c_id)
+        foreach ($RESLIST['resstype'][1] as $c_id)
         {
-            if (isset($config->{$resource[$c_id].'_start'}))
+            if (isset($config->{$RESOURCE[$c_id].'_start'}))
             {
-                $dbcol['resource_planet_start'][$c_id] = "`".$resource[$c_id]."` = ".$config->{$resource[$c_id].'_start'};
+                $dbcol['resource_planet_start'][$c_id] = "`".$RESOURCE[$c_id]."` = ".$config->{$RESOURCE[$c_id].'_start'};
             }
         }
 
-        foreach ($reslist['resstype'][3] as $c_id)
+        foreach ($RESLIST['resstype'][3] as $c_id)
         {
-            if (isset($config->{$resource[$c_id].'_start'}))
+            if (isset($config->{$RESOURCE[$c_id].'_start'}))
             {
-                $dbcol['resource_user_start'][$c_id] = "`".$resource[$c_id]."` = ".$config->{$resource[$c_id].'_start'};
+                $dbcol['resource_user_start'][$c_id] = "`".$RESOURCE[$c_id]."` = ".$config->{$RESOURCE[$c_id].'_start'};
             }
         }
 

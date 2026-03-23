@@ -298,6 +298,8 @@ $LNG['gl_err_in_vacation'] = "Tatil modunda galaksi görüntülenemez.";
 $LNG['gl_planet_short'] = 'G';
 $LNG['gl_moon_short'] = 'A';
 $LNG['gl_debris_short'] = 'HA';
+$LNG['gl_admin_user_id'] = "Kullanıcı ID";
+$LNG['gl_admin_planet_id'] = "Gezegen ID";
 
 //----------------------------------------------------------------------------//
 // Radar

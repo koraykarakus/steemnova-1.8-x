@@ -570,6 +570,13 @@ body {
 	margin-top: 0px;
 	background: url(img/menu_icons.png);
 	background-repeat: no-repeat;
+	position: relative;
+}
+.menu-button .menu_icon:hover>.tooltip{
+	display: flex;
+}
+.menu-button .menu_icon>.tooltip{
+	left: calc(100% + 6px);
 }
 .menu_icon.icon_1{
 	background-position: -162px 0;
@@ -1425,6 +1432,23 @@ input[type="radio"] {
 	width: 36px;
 	position: relative;
 }
+.galaxy_wrapper>.galaxy_row .last_activity{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 16px;
+	height: 15px;
+	background-color: #0b0f1a;
+	border: 1px solid #e26804;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 9px;
+	border-radius: 2px;
+	color: #e26804;
+	font-weight: bold;
+	padding: 1px;
+}
 .galaxy_wrapper>.galaxy_row>.planet_picture:hover>.tooltip{
 	display: flex;
 }
@@ -1571,6 +1595,21 @@ background: linear-gradient(180deg,
 .icon_missile:hover{
 	background-position: -16px 0;
 }
+#fleetstatusrow{
+	display: table;
+}
+#fleetstatusrow.hidden{
+	display: none;
+}
+#fleetstatusrow .success{
+	color: #009933;
+}
+#fleetstatusrow .fail{
+	color: red;
+}
+#fleetstatusrow tr, #fleetstatusrow td{
+	text-align: center;
+}
 /**/
 /*page.statistics*/
 .stats_table .ranking{
@@ -1590,6 +1629,7 @@ background: linear-gradient(180deg,
 }
 .stats_table .msg{
 	position: relative;
+	margin: 0 auto;
 }
 .stats_table .msg:hover>.tooltip{
 	display: flex;

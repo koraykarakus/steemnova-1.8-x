@@ -24,7 +24,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
 
     public function TargetEvent()
     {
-        global $pricelist, $resource;
+        global $PRICELIST, $RESOURCE;
 
         $resourceIDs = [901, 902, 903, 921];
         $debrisIDs = [901, 902];
@@ -35,7 +35,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
         foreach ($debrisIDs as $debrisID)
         {
             $collectedGoods[$debrisID] = 0;
-            $resQuery[] = 'debris_'.$resource[$debrisID];
+            $resQuery[] = 'debris_'.$RESOURCE[$debrisID];
         }
 
         $sql = 'SELECT '.implode(',', $resQuery).', ('.implode(' + ', $resQuery).') as total
@@ -65,11 +65,11 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
             {
                 if ($shipId == 209 || $shipId == 219)
                 {
-                    $recyclerStorage += $pricelist[$shipId]['capacity'] * $shipAmount;
+                    $recyclerStorage += $PRICELIST[$shipId]['capacity'] * $shipAmount;
                 }
                 else
                 {
-                    $otherFleetStorage += $pricelist[$shipId]['capacity'] * $shipAmount;
+                    $otherFleetStorage += $PRICELIST[$shipId]['capacity'] * $shipAmount;
                 }
             }
 
@@ -79,7 +79,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
             $incomingGoods = 0;
             foreach ($resourceIDs as $resourceID)
             {
-                $incomingGoods += $this->_fleet['fleet_resource_'.$resource[$resourceID]];
+                $incomingGoods += $this->_fleet['fleet_resource_'.$RESOURCE[$resourceID]];
             }
 
             $totalStorage = $recyclerStorage + min(0, $otherFleetStorage - $incomingGoods);
@@ -92,12 +92,12 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
             $collectFactor = min(1, $totalStorage / $targetData['total']);
             foreach ($debrisIDs as $debrisID)
             {
-                $fleetColName = 'fleet_resource_'.$resource[$debrisID];
-                $debrisColName = 'debris_'.$resource[$debrisID];
+                $fleetColName = 'fleet_resource_'.$RESOURCE[$debrisID];
+                $debrisColName = 'debris_'.$RESOURCE[$debrisID];
 
                 $collectedGoods[$debrisID] = ceil($targetData[$debrisColName] * $collectFactor);
-                $collectQuery[] = $debrisColName.' = GREATEST(0, '.$debrisColName.' - :'.$resource[$debrisID].')';
-                $param[':'.$resource[$debrisID]] = $collectedGoods[$debrisID];
+                $collectQuery[] = $debrisColName.' = GREATEST(0, '.$debrisColName.' - :'.$RESOURCE[$debrisID].')';
+                $param[':'.$RESOURCE[$debrisID]] = $collectedGoods[$debrisID];
 
                 $this->UpdateFleet($fleetColName, $this->_fleet[$fleetColName] + $collectedGoods[$debrisID]);
             }

@@ -15,7 +15,7 @@ class ShowCollectMinesPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $resource, $LNG, $db, $config;
+        global $USER, $PLANET, $RESOURCE, $LNG, $db, $config;
 
         //Don't allow user to collect mine if in vacation mode
         if (inVacationMode($USER))
@@ -113,9 +113,9 @@ class ShowCollectMinesPage extends AbstractGamePage
             $deuterium_sum += $val;
         }
 
-        $PLANET[$resource[901]] += $metal_sum;
-        $PLANET[$resource[902]] += $crystal_sum;
-        $PLANET[$resource[903]] += $deuterium_sum;
+        $PLANET[$RESOURCE[901]] += $metal_sum;
+        $PLANET[$RESOURCE[902]] += $crystal_sum;
+        $PLANET[$RESOURCE[903]] += $deuterium_sum;
 
         $sql = "UPDATE %%USERS%% 
         SET last_collect_mine_time = :time_collect 

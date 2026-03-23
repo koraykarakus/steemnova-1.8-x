@@ -293,6 +293,8 @@ $LNG['gl_err_in_vacation'] = "A galáxia não pode ser visualizada no modo de f�
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'L'; // Lua
 $LNG['gl_debris_short'] = 'CD'; // Campo de Destroços
+$LNG['gl_admin_user_id'] = "ID do usuário";
+$LNG['gl_admin_planet_id'] = "ID do planeta";
 
 //----------------------------------------------------------------------------//
 // Sensor Phalanx

@@ -26,7 +26,7 @@ class ShowResourcesPage extends AbstractGamePage
 
     public function send(): void
     {
-        global $resource, $USER, $PLANET;
+        global $RESOURCE, $USER, $PLANET;
 
         if ($USER['urlaubs_modus'] == 0)
         {
@@ -40,7 +40,7 @@ class ShowResourcesPage extends AbstractGamePage
 
             foreach ($_POST['prod'] as $resource_id => $val)
             {
-                $field_name = $resource[$resource_id].'_percent';
+                $field_name = $RESOURCE[$resource_id].'_percent';
                 if (!isset($PLANET[$field_name])
                     || !in_array($val, range(0, 10)))
                 {
@@ -71,7 +71,7 @@ class ShowResourcesPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $LNG, $ProdGrid, $resource, $reslist, $USER, $PLANET;
+        global $LNG, $PRODGRID, $RESOURCE, $RESLIST, $USER, $PLANET;
 
         $config = Config::get();
 
@@ -85,10 +85,10 @@ class ShowResourcesPage extends AbstractGamePage
         }
         else
         {
-            $basic_income[901] = $config->{$resource[901].'_basic_income'};
-            $basic_income[902] = $config->{$resource[902].'_basic_income'};
-            $basic_income[903] = $config->{$resource[903].'_basic_income'};
-            $basic_income[911] = $config->{$resource[911].'_basic_income'};
+            $basic_income[901] = $config->{$RESOURCE[901].'_basic_income'};
+            $basic_income[902] = $config->{$RESOURCE[902].'_basic_income'};
+            $basic_income[903] = $config->{$RESOURCE[903].'_basic_income'};
+            $basic_income[911] = $config->{$RESOURCE[911].'_basic_income'};
         }
 
         $temp = [
@@ -110,7 +110,7 @@ class ShowResourcesPage extends AbstractGamePage
             ],
         ];
 
-        $ress_ids = array_merge([], $reslist['resstype'][1], $reslist['resstype'][2]);
+        $ress_ids = array_merge([], $RESLIST['resstype'][1], $RESLIST['resstype'][2]);
 
         $prod_level = 0;
         if ($PLANET['energy_used'] != 0)
@@ -119,46 +119,46 @@ class ShowResourcesPage extends AbstractGamePage
         }
 
         /* Data for eval */
-        $BuildEnergy = $USER[$resource[113]];
+        $BuildEnergy = $USER[$RESOURCE[113]];
         $BuildTemp = $PLANET['temp_max'];
         $production_list = [];
-        foreach ($reslist['prod'] as $c_prod_id)
+        foreach ($RESLIST['prod'] as $c_prod_id)
         {
-            if (isset($PLANET[$resource[$c_prod_id]])
-                && $PLANET[$resource[$c_prod_id]] == 0)
+            if (isset($PLANET[$RESOURCE[$c_prod_id]])
+                && $PLANET[$RESOURCE[$c_prod_id]] == 0)
             {
                 continue;
             }
 
-            if (isset($USER[$resource[$c_prod_id]])
-                && $USER[$resource[$c_prod_id]] == 0)
+            if (isset($USER[$RESOURCE[$c_prod_id]])
+                && $USER[$RESOURCE[$c_prod_id]] == 0)
             {
                 continue;
             }
 
             $production_list[$c_prod_id] = [
                 'production'   => [901 => 0, 902 => 0, 903 => 0, 911 => 0],
-                'elementLevel' => $PLANET[$resource[$c_prod_id]],
-                'prodLevel'    => $PLANET[$resource[$c_prod_id].'_percent'],
+                'elementLevel' => $PLANET[$RESOURCE[$c_prod_id]],
+                'prodLevel'    => $PLANET[$RESOURCE[$c_prod_id].'_percent'],
             ];
 
             /* Data for eval */
-            $BuildLevel = $PLANET[$resource[$c_prod_id]];
-            $BuildLevelFactor = $PLANET[$resource[$c_prod_id].'_percent'];
+            $BuildLevel = $PLANET[$RESOURCE[$c_prod_id]];
+            $BuildLevelFactor = $PLANET[$RESOURCE[$c_prod_id].'_percent'];
 
             foreach ($ress_ids as $c_id)
             {
-                if (!isset($ProdGrid[$c_prod_id]['production'][$c_id]))
+                if (!isset($PRODGRID[$c_prod_id]['production'][$c_id]))
                 {
                     continue;
                 }
 
                 $production = eval(ResourceUpdate::getProd(
-                    $ProdGrid[$c_prod_id]['production'][$c_id],
+                    $PRODGRID[$c_prod_id]['production'][$c_id],
                     $c_prod_id
                 ));
 
-                if (in_array($c_id, $reslist['resstype'][2]))
+                if (in_array($c_id, $RESLIST['resstype'][2]))
                 {
                     $production *= $config->energySpeed;
                 }
@@ -171,7 +171,7 @@ class ShowResourcesPage extends AbstractGamePage
 
                 if ($production > 0)
                 {
-                    if ($PLANET[$resource[$c_id]] == 0)
+                    if ($PLANET[$RESOURCE[$c_id]] == 0)
                     {
                         continue;
                     }
@@ -186,9 +186,9 @@ class ShowResourcesPage extends AbstractGamePage
         }
 
         $storage = [
-            901 => shortly_number($PLANET[$resource[901].'_max']),
-            902 => shortly_number($PLANET[$resource[902].'_max']),
-            903 => shortly_number($PLANET[$resource[903].'_max']),
+            901 => shortly_number($PLANET[$RESOURCE[901].'_max']),
+            902 => shortly_number($PLANET[$RESOURCE[902].'_max']),
+            903 => shortly_number($PLANET[$RESOURCE[903].'_max']),
         ];
 
         $basic_production = [
@@ -199,16 +199,16 @@ class ShowResourcesPage extends AbstractGamePage
         ];
 
         $total_production = [
-            901 => $PLANET[$resource[901].'_perhour'] + $basic_production[901],
-            902 => $PLANET[$resource[902].'_perhour'] + $basic_production[902],
-            903 => $PLANET[$resource[903].'_perhour'] + $basic_production[903],
-            911 => $PLANET[$resource[911]] + $basic_production[911] + $PLANET[$resource[911].'_used'],
+            901 => $PLANET[$RESOURCE[901].'_perhour'] + $basic_production[901],
+            902 => $PLANET[$RESOURCE[902].'_perhour'] + $basic_production[902],
+            903 => $PLANET[$RESOURCE[903].'_perhour'] + $basic_production[903],
+            911 => $PLANET[$RESOURCE[911]] + $basic_production[911] + $PLANET[$RESOURCE[911].'_used'],
         ];
 
         $bonus_production = [
-            901 => $temp[901]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[131]]),
-            902 => $temp[902]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[132]]),
-            903 => $temp[903]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$resource[133]]),
+            901 => $temp[901]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$RESOURCE[131]]),
+            902 => $temp[902]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$RESOURCE[132]]),
+            903 => $temp[903]['plus'] * ($USER['factor']['Resource'] + 0.02 * $USER[$RESOURCE[133]]),
             911 => $temp[911]['plus'] * $USER['factor']['Energy'],
         ];
 

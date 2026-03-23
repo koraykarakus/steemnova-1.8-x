@@ -28,19 +28,19 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     public function player(): void
     {
-        global $USER, $LNG, $reslist, $resource;
+        global $USER, $LNG, $RESLIST, $RESOURCE;
 
         $action = HTTP::_GP('action', '');
         $target_id = HTTP::_GP('id', 0);
 
         $db = Database::get();
 
-        $data_id_arr = array_merge($reslist['tech'], $reslist['officers']);
+        $data_id_arr = array_merge($RESLIST['tech'], $RESLIST['officers']);
         $specify_items_pq = "";
 
         foreach ($data_id_arr as $c_id)
         {
-            $specify_items_pq .= "`".$resource[$c_id]."`,";
+            $specify_items_pq .= "`".$RESOURCE[$c_id]."`,";
         }
 
         $sql = "SELECT ".$specify_items_pq." `username`, `authlevel`, 
@@ -65,23 +65,23 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $tech = $officers = [];
 
-        foreach ($reslist['tech'] as $ID)
+        foreach ($RESLIST['tech'] as $ID)
         {
             $tech[] = [
-                'type'  => $resource[$ID],
+                'type'  => $RESOURCE[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($user_data[$resource[$ID]]),
-                'input' => $user_data[$resource[$ID]],
+                'count' => pretty_number($user_data[$RESOURCE[$ID]]),
+                'input' => $user_data[$RESOURCE[$ID]],
             ];
         }
 
-        foreach ($reslist['officers'] as $ID)
+        foreach ($RESLIST['officers'] as $ID)
         {
             $officers[] = [
-                'type'  => $resource[$ID],
+                'type'  => $RESOURCE[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($user_data[$resource[$ID]]),
-                'input' => $user_data[$resource[$ID]],
+                'count' => pretty_number($user_data[$RESOURCE[$ID]]),
+                'input' => $user_data[$RESOURCE[$ID]],
             ];
         }
 
@@ -117,14 +117,14 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     public function playerSend(): void
     {
-        global $USER, $LNG, $reslist, $resource;
+        global $USER, $LNG, $RESLIST, $RESOURCE;
 
-        $data_id_arr = array_merge($reslist['tech'], $reslist['officers']);
+        $data_id_arr = array_merge($RESLIST['tech'], $RESLIST['officers']);
 
         $specify_items_pq = "";
         foreach ($data_id_arr as $c_id)
         {
-            $specify_items_pq .= "`" . $resource[$c_id] . "`,";
+            $specify_items_pq .= "`" . $RESOURCE[$c_id] . "`,";
         }
 
         $sql = "SELECT " . $specify_items_pq . " `username`, 
@@ -145,7 +145,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         foreach ($data_id_arr as $c_id)
         {
-            $sql .= "`".$resource[$c_id]."` = ".min(abs(HTTP::_GP($resource[$c_id], 0)), 255).", ";
+            $sql .= "`".$RESOURCE[$c_id]."` = ".min(abs(HTTP::_GP($RESOURCE[$c_id], 0)), 255).", ";
         }
 
         $sql .= "`darkmatter` = :darkmatter, ";
@@ -180,12 +180,12 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         foreach ($data_id_arr as $c_id)
         {
-            $old[$c_id] = $user_data[$resource[$c_id]];
-            $new[$c_id] = abs(HTTP::_GP($resource[$c_id], 0));
+            $old[$c_id] = $user_data[$RESOURCE[$c_id]];
+            $new[$c_id] = abs(HTTP::_GP($RESOURCE[$c_id], 0));
         }
 
-        $old[921] = $user_data[$resource[921]];
-        $new[921] = abs(HTTP::_GP($resource[921], 0));
+        $old[921] = $user_data[$RESOURCE[921]];
+        $new[921] = abs(HTTP::_GP($RESOURCE[921], 0));
 
         $old['username'] = $user_data['username'];
         $new['username'] = HTTP::_GP('name', '', UTF8_SUPPORT);
@@ -229,18 +229,18 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     public function planetSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $db = Database::get();
 
         $id = HTTP::_GP('id', 0);
 
         $specify_items_pq = "";
-        $data_ids = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
+        $data_ids = array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']);
 
         foreach ($data_ids as $c_id)
         {
-            $specify_items_pq .= "`".$resource[$c_id]."`,";
+            $specify_items_pq .= "`".$RESOURCE[$c_id]."`,";
         }
 
         $sql = "SELECT " . $specify_items_pq .
@@ -263,14 +263,14 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         foreach ($data_ids as $c_id)
         {
-            $level = min(max(0, round(HTTP::_GP($resource[$c_id], 0.0))), (in_array($c_id, $reslist['build']) ? 255 : 18446744073709551615));
+            $level = min(max(0, round(HTTP::_GP($RESOURCE[$c_id], 0.0))), (in_array($c_id, $RESLIST['build']) ? 255 : 18446744073709551615));
 
-            if (in_array($c_id, $reslist['allow'][$planet_data['planet_type']]))
+            if (in_array($c_id, $RESLIST['allow'][$planet_data['planet_type']]))
             {
-                $Fields += $level - $planet_data[$resource[$c_id]];
+                $Fields += $level - $planet_data[$RESOURCE[$c_id]];
             }
 
-            $sql .= "`".$resource[$c_id]."` = ".$level.", ";
+            $sql .= "`".$RESOURCE[$c_id]."` = ".$level.", ";
         }
 
         $sql .= "`metal` = :metal, ";
@@ -296,10 +296,10 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $old = [];
         $new = [];
 
-        foreach (array_merge($data_ids, $reslist['resstype'][1]) as $c_id)
+        foreach (array_merge($data_ids, $RESLIST['resstype'][1]) as $c_id)
         {
-            $old[$c_id] = $planet_data[$resource[$c_id]];
-            $new[$c_id] = max(0, round(HTTP::_GP($resource[$c_id], 0.0)));
+            $old[$c_id] = $planet_data[$RESOURCE[$c_id]];
+            $new[$c_id] = max(0, round(HTTP::_GP($RESOURCE[$c_id], 0.0)));
         }
 
         $old['field_max'] = $planet_data['field_max'];
@@ -323,17 +323,17 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
     public function planet(): void
     {
-        global $LNG, $reslist, $resource;
+        global $LNG, $RESLIST, $RESOURCE;
 
         $action = HTTP::_GP('action', '');
         $id = HTTP::_GP('id', 0);
 
-        $data_ids = array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']);
+        $data_ids = array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']);
         $specify_items_pq = "";
 
         foreach ($data_ids as $c_id)
         {
-            $specify_items_pq .= "`".$resource[$c_id]."`,";
+            $specify_items_pq .= "`".$RESOURCE[$c_id]."`,";
         }
 
         $db = Database::get();
@@ -356,33 +356,33 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $build = $defense = $fleet = [];
 
-        foreach ($reslist['allow'][$planet_data['planet_type']] as $ID)
+        foreach ($RESLIST['allow'][$planet_data['planet_type']] as $ID)
         {
             $build[] = [
-                'type'  => $resource[$ID],
+                'type'  => $RESOURCE[$ID],
                 'name'  => $LNG['tech'][$ID],
-                'count' => pretty_number($planet_data[$resource[$ID]]),
-                'input' => $planet_data[$resource[$ID]],
+                'count' => pretty_number($planet_data[$RESOURCE[$ID]]),
+                'input' => $planet_data[$RESOURCE[$ID]],
             ];
         }
 
-        foreach ($reslist['fleet'] as $c_id)
+        foreach ($RESLIST['fleet'] as $c_id)
         {
             $fleet[] = [
-                'type'  => $resource[$c_id],
+                'type'  => $RESOURCE[$c_id],
                 'name'  => $LNG['tech'][$c_id],
-                'count' => pretty_number($planet_data[$resource[$c_id]]),
-                'input' => $planet_data[$resource[$c_id]],
+                'count' => pretty_number($planet_data[$RESOURCE[$c_id]]),
+                'input' => $planet_data[$RESOURCE[$c_id]],
             ];
         }
 
-        foreach ($reslist['defense'] as $c_id)
+        foreach ($RESLIST['defense'] as $c_id)
         {
             $defense[] = [
-                'type'  => $resource[$c_id],
+                'type'  => $RESOURCE[$c_id],
                 'name'  => $LNG['tech'][$c_id],
-                'count' => pretty_number($planet_data[$resource[$c_id]]),
-                'input' => $planet_data[$resource[$c_id]],
+                'count' => pretty_number($planet_data[$RESOURCE[$c_id]]),
+                'input' => $planet_data[$RESOURCE[$c_id]],
             ];
         }
 

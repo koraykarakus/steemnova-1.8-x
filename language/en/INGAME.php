@@ -327,6 +327,8 @@ $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'M';
 $LNG['gl_debris_short'] = 'DF';
 $LNG['gl_mission_colonize'] = "Colonize";
+$LNG['gl_admin_user_id'] = "User ID";
+$LNG['gl_admin_planet_id'] = "Planet ID";
 
 //----------------------------------------------------------------------------//
 // Sensor Phalanx

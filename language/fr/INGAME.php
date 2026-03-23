@@ -279,6 +279,8 @@ $LNG['gl_err_in_vacation'] = "La galaxie ne peut pas être affichée en mode vac
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'L'; // Lune
 $LNG['gl_debris_short'] = 'CD'; // Champ de Débris
+$LNG['gl_admin_user_id'] = "ID utilisateur";
+$LNG['gl_admin_planet_id'] = "ID de planète";
 
 //----------------------------------------------------------------------------//
 //PHALANX

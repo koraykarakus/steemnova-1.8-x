@@ -204,7 +204,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $resource, $LNG;
+        global $USER, $RESOURCE, $LNG;
 
         $acs_data = [];
         $fleet_id = HTTP::_GP('fleetID', 0);
@@ -228,7 +228,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
             }
         }
 
-        $tech_expedition = $USER[$resource[124]];
+        $tech_expedition = $USER[$RESOURCE[124]];
 
         $active_expedition = 0;
         $max_expedition = 0;

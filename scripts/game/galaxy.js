@@ -10,12 +10,38 @@ function doit(missionID, planetID) {
 		}
 
 		var statustable	= $('#fleetstatusrow');
-		var messages	= statustable.find("~tr");
+		var tbody = statustable.find('tbody');
+
+		statustable.removeClass('hidden');
+		var messages = tbody.find('tr');
 		if(messages.length == MaxFleetSetting) {
-			messages.filter(':last').remove();
+			messages.last().remove();
 		}
-		var element		= $('<td />').attr('colspan', 8).attr('class', data.code == 600 ? "text-success text-center" : "text-danger text-center").text(data.mess).wrap('<tr />').parent();
-		statustable.removeAttr('style').after(element);
+
+		var color = '';
+		if (data.code === 600) {
+			color = 'success';
+		}
+		else
+		{
+			color = 'fail';
+		}
+
+		var element = '<tr>' + '<td colspan="8" class="'+color+'">' + data.mess + '</td>' + '</tr>';
+		tbody.prepend(element);
+
+		setTimeout(function () {
+    	
+		tbody.find('tr').last().fadeOut(500, function () {
+        $(this).remove();
+
+        // hide table if no messages.
+        if (tbody.find('tr').length === 0) {
+            statustable.addClass('hidden');
+        }
+    	});
+		}, 3000);
+
 	});
 }
 

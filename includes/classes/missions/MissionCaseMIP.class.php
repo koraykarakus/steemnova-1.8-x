@@ -24,16 +24,16 @@ class MissionCaseMIP extends MissionFunctions implements Mission
 
     public function TargetEvent()
     {
-        global $resource, $reslist;
+        global $RESOURCE, $RESLIST;
 
         $db = Database::get();
 
         $sqlFields = [];
-        $elementIDs = array_merge($reslist['defense'], $reslist['missile']);
+        $elementIDs = array_merge($RESLIST['defense'], $RESLIST['missile']);
 
         foreach ($elementIDs as $elementID)
         {
-            $sqlFields[] = '%%PLANETS%%.`' . $resource[$elementID] . '`';
+            $sqlFields[] = '%%PLANETS%%.`' . $RESOURCE[$elementID] . '`';
         }
 
         $sql = 'SELECT lang, shield_tech,
@@ -48,10 +48,10 @@ class MissionCaseMIP extends MissionFunctions implements Mission
 
         if ($this->_fleet['fleet_end_type'] == 3)
         {
-            $sql = 'SELECT ' . $resource[502] . ' FROM %%PLANETS%% WHERE id_moon = :id_moon;';
-            $targetData[$resource[502]] = $db->selectSingle($sql, [
+            $sql = 'SELECT ' . $RESOURCE[502] . ' FROM %%PLANETS%% WHERE id_moon = :id_moon;';
+            $targetData[$RESOURCE[502]] = $db->selectSingle($sql, [
                 ':id_moon' => $this->_fleet['fleet_end_id'],
-            ], $resource[502]);
+            ], $RESOURCE[502]);
         }
 
         $sql = 'SELECT lang, military_tech FROM %%USERS%% WHERE id = :userId;';
@@ -60,7 +60,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
         ]);
 
         if (
-            !in_array($this->_fleet['fleet_target_obj'], array_merge($reslist['defense'], $reslist['missile']))
+            !in_array($this->_fleet['fleet_target_obj'], array_merge($RESLIST['defense'], $RESLIST['missile']))
             || $this->_fleet['fleet_target_obj'] == 502
             || $this->_fleet['fleet_target_obj'] == 0
         ) {
@@ -75,7 +75,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
 
         foreach ($elementIDs as $elementID)
         {
-            $targetDefensive[$elementID] = $targetData[$resource[$elementID]];
+            $targetDefensive[$elementID] = $targetData[$RESOURCE[$elementID]];
         }
 
         unset($targetDefensive[502]);
@@ -86,13 +86,13 @@ class MissionCaseMIP extends MissionFunctions implements Mission
         $senderData['MSG'] = false;
         $targetData['MSG'] = false;
 
-        if ($targetData[$resource[502]] >= $this->_fleet['fleet_amount'])
+        if ($targetData[$RESOURCE[502]] >= $this->_fleet['fleet_amount'])
         {
             $senderData['MSG'] = $senderData['LNG']['sys_irak_no_att'];
             $targetData['MSG'] = $targetData['LNG']['sys_irak_no_att'];
             $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_moon' : 'id';
 
-            $sql = 'UPDATE %%PLANETS%% SET ' . $resource[502] . ' = ' . $resource[502] . ' - :amount WHERE ' . $where . ' = :planetId;';
+            $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[502] . ' = ' . $RESOURCE[502] . ' - :amount WHERE ' . $where . ' = :planetId;';
 
             $db->update($sql, [
                 ':amount'   => $this->_fleet['fleet_amount'],
@@ -101,10 +101,10 @@ class MissionCaseMIP extends MissionFunctions implements Mission
         }
         else
         {
-            if ($targetData[$resource[502]] > 0)
+            if ($targetData[$RESOURCE[502]] > 0)
             {
                 $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_moon' : 'id';
-                $sql = 'UPDATE %%PLANETS%% SET ' . $resource[502] . ' = :amount WHERE ' . $where . ' = :planetId;';
+                $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[502] . ' = :amount WHERE ' . $where . ' = :planetId;';
 
                 $db->update($sql, [
                     ':amount'   => 0,
@@ -123,13 +123,13 @@ class MissionCaseMIP extends MissionFunctions implements Mission
                     $this->_fleet['fleet_amount'],
                     $targetDefensive,
                     $primaryTarget,
-                    $targetData[$resource[502]]
+                    $targetData[$RESOURCE[502]]
                 );
 
                 $result = array_filter($result);
 
-                $senderData['MSG'] = sprintf($senderData['LNG']['sys_irak_def'], $targetData[$resource[502]]) . '<br><br>';
-                $targetData['MSG'] = sprintf($targetData['LNG']['sys_irak_def'], $targetData[$resource[502]]) . '<br><br>';
+                $senderData['MSG'] = sprintf($senderData['LNG']['sys_irak_def'], $targetData[$RESOURCE[502]]) . '<br><br>';
+                $targetData['MSG'] = sprintf($targetData['LNG']['sys_irak_def'], $targetData[$RESOURCE[502]]) . '<br><br>';
 
                 ksort($result, SORT_NUMERIC);
 
@@ -138,7 +138,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
                     $senderData['MSG'] .= sprintf('%s (- %d)<br>', $senderData['LNG']['tech'][$Element], $destroy);
                     $targetData['MSG'] .= sprintf('%s (- %d)<br>', $targetData['LNG']['tech'][$Element], $destroy);
 
-                    $sql = 'UPDATE %%PLANETS%% SET ' . $resource[$Element] . ' = ' . $resource[$Element] . ' - :amount WHERE id = :planetId;';
+                    $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[$Element] . ' = ' . $RESOURCE[$Element] . ' - :amount WHERE id = :planetId;';
                     $db->update($sql, [
                         ':planetId' => $targetData['id'],
                         ':amount'   => $destroy,

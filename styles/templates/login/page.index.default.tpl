@@ -47,7 +47,7 @@
 						});
 
 					} else if (dataParsed.status == 'redirect') {
-						location.href = "game.php";
+						location.href = "game.php?page=overview";
 					}
 
 				},

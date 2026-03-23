@@ -26,40 +26,40 @@ class ShowTechtreePage extends AbstractGamePage
 
     public function show(): void
     {
-        global $resource, $requeriments, $reslist, $USER, $PLANET, $LNG;
+        global $RESOURCE, $REQUIREMENTS, $RESLIST, $USER, $PLANET, $LNG;
 
         $element_ids = array_merge(
             [0],
-            $reslist['build'],
+            $RESLIST['build'],
             [100],
-            $reslist['tech'],
+            $RESLIST['tech'],
             [200],
-            $reslist['fleet'],
+            $RESLIST['fleet'],
             [400],
-            $reslist['defense'],
+            $RESLIST['defense'],
             [500],
-            $reslist['missile'],
+            $RESLIST['missile'],
             [600],
-            $reslist['officers']
+            $RESLIST['officers']
         );
 
         $tech_tree_list = [];
         foreach ($element_ids as $c_id)
         {
-            if (!isset($resource[$c_id]))
+            if (!isset($RESOURCE[$c_id]))
             {
                 $tech_tree_list[$c_id] = $c_id;
             }
             else
             {
                 $requirements_list = [];
-                if (isset($requeriments[$c_id]))
+                if (isset($REQUIREMENTS[$c_id]))
                 {
-                    foreach ($requeriments[$c_id] as $require_id => $red_count)
+                    foreach ($REQUIREMENTS[$c_id] as $require_id => $red_count)
                     {
                         $requirements_list[$require_id] = [
                             'count' => $red_count,
-                            'own'   => isset($PLANET[$resource[$require_id]]) ? $PLANET[$resource[$require_id]] : $USER[$resource[$require_id]],
+                            'own'   => isset($PLANET[$RESOURCE[$require_id]]) ? $PLANET[$RESOURCE[$require_id]] : $USER[$RESOURCE[$require_id]],
                         ];
                     }
                 }
