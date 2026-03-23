@@ -66,7 +66,7 @@ class ShowAccountDataPage extends AbstractAdminPage
     // TODO : cleanup html and JS from php
     public function FilterByID(): void
     {
-        global $reslist, $resource, $LNG, $USER;
+        global $RESLIST, $RESOURCE, $LNG, $USER;
 
         $user_id = HTTP::_GP('id_u', 0);
         $user_id_input = HTTP::_GP('id_u2', 0);
@@ -94,9 +94,9 @@ class ShowAccountDataPage extends AbstractAdminPage
         }
 
         $user_items = '';
-        foreach (array_merge($reslist['officers'], $reslist['tech']) as $ID)
+        foreach (array_merge($RESLIST['officers'], $RESLIST['tech']) as $ID)
         {
-            $user_items .= "u.`".$resource[$ID]."`,";
+            $user_items .= "u.`".$RESOURCE[$ID]."`,";
         }
 
         // COMIENZA SAQUEO DE DATOS DE LA TABLA DE USUARIOS
@@ -126,21 +126,21 @@ class ShowAccountDataPage extends AbstractAdminPage
 
         $mo = "<a title=\"".pretty_number($user['darkmatter'])."\">".shortly_number($user['darkmatter'])."</a>";
 
-        foreach ($reslist['officers'] as $ID)
+        foreach ($RESLIST['officers'] as $ID)
         {
             $officers[] = $ID;
         }
 
-        foreach ($reslist['tech'] as $ID)
+        foreach ($RESLIST['tech'] as $ID)
         {
             $techno[] = $ID;
         }
         $techoffi = "";
-        for ($i = 0; $i < max(count($reslist['officers']), count($reslist['tech'])); $i++)
+        for ($i = 0; $i < max(count($RESLIST['officers']), count($RESLIST['tech'])); $i++)
         {
-            $techoffi .= isset($techno[$i]) ? "<tr><td>".$LNG['tech'][$techno[$i]].": <font color=aqua>".$user[$resource[$techno[$i]]]."</font></td>" : "<tr><td>&nbsp;</td>";
+            $techoffi .= isset($techno[$i]) ? "<tr><td>".$LNG['tech'][$techno[$i]].": <font color=aqua>".$user[$RESOURCE[$techno[$i]]]."</font></td>" : "<tr><td>&nbsp;</td>";
 
-            $techoffi .= isset($officers[$i]) ? "<td>".$LNG['tech'][$officers[$i]].": <font color=aqua>".$user[$resource[$officers[$i]]]."</font></td></tr>" : "<td>&nbsp;</td></tr>";
+            $techoffi .= isset($officers[$i]) ? "<td>".$LNG['tech'][$officers[$i]].": <font color=aqua>".$user[$RESOURCE[$officers[$i]]]."</font></td></tr>" : "<td>&nbsp;</td></tr>";
         }
 
         if ($user['bana'] != 0)
@@ -317,10 +317,10 @@ class ShowAccountDataPage extends AbstractAdminPage
         }
 
         $SpecifyItemsPQ = '';
-        foreach (array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']) as $ID)
+        foreach (array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']) as $ID)
         {
-            $SpecifyItemsPQ .= "`".$resource[$ID]."`,";
-            $RES[$resource[$ID]] = "<tr><td width=\"150\">".$LNG['tech'][$ID]."</td>";
+            $SpecifyItemsPQ .= "`".$RESOURCE[$ID]."`,";
+            $RES[$RESOURCE[$ID]] = "<tr><td width=\"150\">".$LNG['tech'][$ID]."</td>";
         }
         $names = "<tr><th class=\"center\" width=\"150\">&nbsp;</th>";
 
@@ -390,9 +390,9 @@ class ShowAccountDataPage extends AbstractAdminPage
                     <td><a title=\"".pretty_number($SumOfEnergy)."\">".$Color."</a>/<a title=\"".pretty_number($c_planet['energy'])."\">".shortly_number($c_planet['energy'])."</a></td>
                 </tr>";
                 $names .= "<th class=\"center\" width=\"60\">".$Planettt."</th>";
-                foreach (array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']) as $ID)
+                foreach (array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']) as $ID)
                 {
-                    $RES[$resource[$ID]] .= "<td width=\"60\"><a title=\"".pretty_number($c_planet[$resource[$ID]])."\">".shortly_number($c_planet[$resource[$ID]])."</a></td>";
+                    $RES[$RESOURCE[$ID]] .= "<td width=\"60\"><a title=\"".pretty_number($c_planet[$RESOURCE[$ID]])."\">".shortly_number($c_planet[$RESOURCE[$ID]])."</a></td>";
                 }
 
                 $MoonHave = $MoonZ != 0 ? '<a href="#" onclick="$(\'#especiales\').slideToggle();return false" class="link"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10"/> '.$LNG['moon_build']."</a>" : "<span class=\"no_moon\"><img src=\"./styles/resource/images/admin/arrowright.png\" width=\"16\" height=\"10\"/>".$LNG['moon_build']."&nbsp;".$LNG['ac_moons_no']."</span>";
@@ -412,27 +412,27 @@ class ShowAccountDataPage extends AbstractAdminPage
             }
         }
         $names .= "</tr>";
-        foreach (array_merge($reslist['fleet'], $reslist['build'], $reslist['defense']) as $ID)
+        foreach (array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']) as $ID)
         {
-            $RES[$resource[$ID]] .= "</tr>";
+            $RES[$RESOURCE[$ID]] .= "</tr>";
         }
 
         $build = '';
-        foreach ($reslist['build'] as $ID)
+        foreach ($RESLIST['build'] as $ID)
         {
-            $build .= $RES[$resource[$ID]];
+            $build .= $RES[$RESOURCE[$ID]];
         }
 
         $fleet = '';
-        foreach ($reslist['fleet'] as $ID)
+        foreach ($RESLIST['fleet'] as $ID)
         {
-            $fleet .= $RES[$resource[$ID]];
+            $fleet .= $RES[$RESOURCE[$ID]];
         }
 
         $defense = '';
-        foreach ($reslist['defense'] as $ID)
+        foreach ($RESLIST['defense'] as $ID)
         {
-            $defense .= $RES[$resource[$ID]];
+            $defense .= $RES[$RESOURCE[$ID]];
         }
 
         $this->assign([
@@ -591,7 +591,7 @@ class ShowAccountDataPage extends AbstractAdminPage
 /* OLD
 function ShowAccountDataPage()
 {
-    global $USER, $reslist, $resource, $LNG;
+    global $USER, $RESLIST, $RESOURCE, $LNG;
 
     $template = new template();
 

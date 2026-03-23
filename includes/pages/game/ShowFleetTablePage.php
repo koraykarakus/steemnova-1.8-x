@@ -26,7 +26,7 @@ class ShowFleetTablePage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $reslist, $resource, $config;
+        global $USER, $PLANET, $RESLIST, $RESOURCE, $config;
 
         $db = Database::get();
 
@@ -46,9 +46,9 @@ class ShowFleetTablePage extends AbstractGamePage
 
         $fleets_on_planet = [];
 
-        foreach ($reslist['fleet'] as $c_fleet_id)
+        foreach ($RESLIST['fleet'] as $c_fleet_id)
         {
-            if ($PLANET[$resource[$c_fleet_id]] == 0)
+            if ($PLANET[$RESOURCE[$c_fleet_id]] == 0)
             {
                 continue;
             }
@@ -56,13 +56,13 @@ class ShowFleetTablePage extends AbstractGamePage
             $fleets_on_planet[] = [
                 'id'    => $c_fleet_id,
                 'speed' => FleetFunctions::GetFleetMaxSpeed($c_fleet_id, $USER),
-                'count' => $PLANET[$resource[$c_fleet_id]],
+                'count' => $PLANET[$RESOURCE[$c_fleet_id]],
             ];
         }
 
         $stay_selector = [];
 
-        for ($i = 1; $i <= $USER[$resource[124]]; $i++)
+        for ($i = 1; $i <= $USER[$RESOURCE[124]]; $i++)
         {
             $stay_selector[$i] = $i / $config->expedition_speed;
         }
@@ -79,12 +79,12 @@ class ShowFleetTablePage extends AbstractGamePage
             'targetType'         => $target_type,
             'targetMission'      => $target_mission,
             'isVacation'         => inVacationMode($USER),
-            'bonusAttack'        => $USER[$resource[109]] * 10 + $USER['factor']['Attack'] * 100,
-            'bonusDefensive'     => $USER[$resource[110]] * 10 + $USER['factor']['Defensive'] * 100,
-            'bonusShield'        => $USER[$resource[111]] * 10 + $USER['factor']['Shield'] * 100,
-            'bonusCombustion'    => $USER[$resource[115]] * 10,
-            'bonusImpulse'       => $USER[$resource[117]] * 20,
-            'bonusHyperspace'    => $USER[$resource[118]] * 30,
+            'bonusAttack'        => $USER[$RESOURCE[109]] * 10 + $USER['factor']['Attack'] * 100,
+            'bonusDefensive'     => $USER[$RESOURCE[110]] * 10 + $USER['factor']['Defensive'] * 100,
+            'bonusShield'        => $USER[$RESOURCE[111]] * 10 + $USER['factor']['Shield'] * 100,
+            'bonusCombustion'    => $USER[$RESOURCE[115]] * 10,
+            'bonusImpulse'       => $USER[$RESOURCE[117]] * 20,
+            'bonusHyperspace'    => $USER[$RESOURCE[118]] * 30,
             'galaxy'             => $PLANET['galaxy'],
             'system'             => $PLANET['system'],
             'StaySelector'       => $stay_selector,

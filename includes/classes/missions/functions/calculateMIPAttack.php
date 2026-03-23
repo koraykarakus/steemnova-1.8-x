@@ -17,7 +17,7 @@
 
 function calculateMIPAttack($TargetDefTech, $OwnerAttTech, $missiles, $targetDefensive, $firstTarget, $defenseMissles)
 {
-    global $pricelist, $CombatCaps;
+    global $PRICELIST, $COMBATCAPS;
 
     $destroyShips = [];
     $countMissles = $missiles - $defenseMissles;
@@ -27,7 +27,7 @@ function calculateMIPAttack($TargetDefTech, $OwnerAttTech, $missiles, $targetDef
         return $destroyShips;
     }
 
-    $totalAttack = $countMissles * $CombatCaps[503]['attack'] * (1 + 0.1 * $OwnerAttTech);
+    $totalAttack = $countMissles * $COMBATCAPS[503]['attack'] * (1 + 0.1 * $OwnerAttTech);
 
     // Select primary target, if exists
     if (isset($targetDefensive[$firstTarget]))
@@ -43,7 +43,7 @@ function calculateMIPAttack($TargetDefTech, $OwnerAttTech, $missiles, $targetDef
         {
             throw new Exception("Unknown error. Please report this error on tracker.2moons.cc. Debuginforations:<br><br>".serialize([$TargetDefTech, $OwnerAttTech, $missiles, $targetDefensive, $firstTarget, $defenseMissles]));
         }
-        $elementStructurePoints = ($pricelist[$element]['cost'][901] + $pricelist[$element]['cost'][902]) * (1 + 0.1 * $TargetDefTech) / 10;
+        $elementStructurePoints = ($PRICELIST[$element]['cost'][901] + $PRICELIST[$element]['cost'][902]) * (1 + 0.1 * $TargetDefTech) / 10;
         $destroyCount = floor($totalAttack / $elementStructurePoints);
         $destroyCount = min($destroyCount, $count);
         $totalAttack -= $destroyCount * $elementStructurePoints;

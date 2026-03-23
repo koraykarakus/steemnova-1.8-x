@@ -26,7 +26,7 @@ class ShowFacilitiesPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $ProdGrid, $LNG, $resource, $reslist, $PLANET, $USER, $pricelist, $config, $requeriments;
+        global $PRODGRID, $LNG, $RESOURCE, $RESLIST, $PLANET, $USER, $PRICELIST, $config, $REQUIREMENTS;
 
         $cmd = HTTP::_GP('cmd', '');
         // wellformed buildURLs
@@ -77,12 +77,12 @@ class ShowFacilitiesPage extends AbstractGamePage
 
         $room_is_ok = $PLANET['field_current'] < ($current_max_fields - $queue_destroy);
 
-        $BuildEnergy = $USER[$resource[113]];
+        $BuildEnergy = $USER[$RESOURCE[113]];
         $BuildLevelFactor = 10;
         $BuildTemp = $PLANET['temp_max'];
 
         $build_info_list = [];
-        $elements = Buildings::filterElements($reslist['allow'][$PLANET['planet_type']], 2);
+        $elements = Buildings::filterElements($RESLIST['allow'][$PLANET['planet_type']], 2);
 
         foreach ($elements as $c_element)
         {
@@ -101,16 +101,16 @@ class ShowFacilitiesPage extends AbstractGamePage
             }
             else
             {
-                $level_to_build = $PLANET[$resource[$c_element]];
+                $level_to_build = $PLANET[$RESOURCE[$c_element]];
             }
 
-            if (in_array($c_element, $reslist['prod']))
+            if (in_array($c_element, $RESLIST['prod']))
             {
-                $BuildLevel = $PLANET[$resource[$c_element]];
-                $need = eval(ResourceUpdate::getProd($ProdGrid[$c_element]['production'][911], $c_element));
+                $BuildLevel = $PLANET[$RESOURCE[$c_element]];
+                $need = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
                 $BuildLevel = $level_to_build + 1;
-                $prod = eval(ResourceUpdate::getProd($ProdGrid[$c_element]['production'][911], $c_element));
+                $prod = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
                 $require_energy = $prod - $need;
                 $require_energy = round($require_energy * $config->energySpeed);
@@ -135,12 +135,12 @@ class ShowFacilitiesPage extends AbstractGamePage
 
             $require_array = [];
 
-            if (isset($requeriments[$c_element]))
+            if (isset($REQUIREMENTS[$c_element]))
             {
-                foreach ($requeriments[$c_element] as $require_id => $require_level)
+                foreach ($REQUIREMENTS[$c_element] as $require_id => $require_level)
                 {
                     $require_array[] = [
-                        'current_level' => ($require_id < 100) ? $PLANET[$resource[$require_id]] : $USER[$resource[$require_id]],
+                        'current_level' => ($require_id < 100) ? $PLANET[$RESOURCE[$require_id]] : $USER[$RESOURCE[$require_id]],
                         'needed_level'  => $require_level,
                         'require_id'    => $require_id,
                     ];
@@ -149,8 +149,8 @@ class ShowFacilitiesPage extends AbstractGamePage
             }
 
             $build_info_list[$c_element] = [
-                'level'                => $PLANET[$resource[$c_element]],
-                'max_level'            => $pricelist[$c_element]['max'],
+                'level'                => $PLANET[$RESOURCE[$c_element]],
+                'max_level'            => $PRICELIST[$c_element]['max'],
                 'info_energy_short'    => pretty_number($require_energy),
                 'info_energy_long'     => $info_energy,
                 'cost_resources'       => $cost_resources,
@@ -163,7 +163,7 @@ class ShowFacilitiesPage extends AbstractGamePage
                 'buyable'              => $buyable,
                 'level_to_build'       => $level_to_build,
                 'technology_satisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element),
-                'requeriments'         => $require_array,
+                'requirements'         => $require_array,
             ];
         }
 
@@ -178,7 +178,7 @@ class ShowFacilitiesPage extends AbstractGamePage
             'is_room_ok'        => $room_is_ok,
             'queue'             => $queue,
             'is_busy'           => ['shipyard' => !empty($PLANET['b_shipyard_id']), 'research' => $USER['b_tech_planet'] != 0],
-            'have_missiles'     => (bool) $PLANET[$resource[503]] + $PLANET[$resource[502]],
+            'have_missiles'     => (bool) $PLANET[$RESOURCE[503]] + $PLANET[$RESOURCE[502]],
             'used_field'        => $PLANET['field_current'],
             'max_field'         => CalculateMaxPlanetFields($PLANET),
             'build_points'      => pretty_number($USER['build_points']),

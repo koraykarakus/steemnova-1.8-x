@@ -27,10 +27,10 @@ class ShowGiveawayPage extends AbstractAdminPage
 
     public function show(): void
     {
-        global $reslist;
+        global $RESLIST;
 
         $this->assign([
-            'reslist' => $reslist,
+            'reslist' => $RESLIST,
         ]);
 
         $this->display("page.giveaway.default.tpl");
@@ -38,7 +38,7 @@ class ShowGiveawayPage extends AbstractAdminPage
 
     public function send(): void
     {
-        global $LNG, $resource, $reslist;
+        global $LNG, $resource, $RESLIST;
 
         $planet = HTTP::_GP('planet', 0);
         $moon = HTTP::_GP('moon', 0);
@@ -66,13 +66,13 @@ class ShowGiveawayPage extends AbstractAdminPage
         $data = [];
 
         $data_ids = array_merge(
-            $reslist['resstype'][1],
-            $reslist['resstype'][3],
-            $reslist['build'],
-            $reslist['tech'],
-            $reslist['fleet'],
-            $reslist['defense'],
-            $reslist['officers']
+            $RESLIST['resstype'][1],
+            $RESLIST['resstype'][3],
+            $RESLIST['build'],
+            $RESLIST['tech'],
+            $RESLIST['fleet'],
+            $RESLIST['defense'],
+            $RESLIST['officers']
         );
 
         $log_old = [];

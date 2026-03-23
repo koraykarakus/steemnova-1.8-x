@@ -17,7 +17,7 @@
 
 function getFactors($USER, $Type = 'basic', $time = null): array
 {
-    global $resource, $pricelist, $reslist;
+    global $RESOURCE, $PRICELIST, $RESLIST;
     if (empty($time))
     {
         $time = TIMESTAMP;
@@ -26,25 +26,25 @@ function getFactors($USER, $Type = 'basic', $time = null): array
     $bonus_list = BuildFunctions::getBonusList();
     $factor = ArrayUtil::combineArrayWithSingleElement($bonus_list, 0);
 
-    foreach ($reslist['bonus'] as $element_id)
+    foreach ($RESLIST['bonus'] as $element_id)
     {
-        $bonus = $pricelist[$element_id]['bonus'];
+        $bonus = $PRICELIST[$element_id]['bonus'];
 
-        if (isset($USER[$resource[$element_id]]))
+        if (isset($USER[$RESOURCE[$element_id]]))
         {
-            $element_level = $USER[$resource[$element_id]];
+            $element_level = $USER[$RESOURCE[$element_id]];
         }
         /* this is not inside planet table, but user table, commented out.
-        elseif (isset($PLANET[$resource[$element_id]]))
+        elseif (isset($PLANET[$RESOURCE[$element_id]]))
         {
-            $element_level = $PLANET[$resource[$element_id]];
+            $element_level = $PLANET[$RESOURCE[$element_id]];
         }
         */ else
         {
             continue;
         }
 
-        if (in_array($element_id, $reslist['dmfunc']))
+        if (in_array($element_id, $RESLIST['dmfunc']))
         {
             if (DMExtra($element_level, $time, false, true))
             {
@@ -260,8 +260,8 @@ function message($mes, $dest = "", $time = "3", $topnav = false): void
 
 function CalculateMaxPlanetFields($planet): int
 {
-    global $resource;
-    return $planet['field_max'] + ($planet[$resource[33]] * FIELDS_BY_TERRAFORMER) + ($planet[$resource[41]] * FIELDS_BY_MOONBASIS_LEVEL);
+    global $RESOURCE;
+    return $planet['field_max'] + ($planet[$RESOURCE[33]] * FIELDS_BY_TERRAFORMER) + ($planet[$RESOURCE[41]] * FIELDS_BY_MOONBASIS_LEVEL);
 }
 
 function pretty_time($seconds): string

@@ -31,16 +31,16 @@ class ShowMarketPlacePage extends AbstractGamePage
 
     private function checkTechs($SELLER): array
     {
-        global $USER, $resource, $LNG;
+        global $USER, $RESOURCE, $LNG;
 
-        $attack = $USER[$resource[109]] * 10 + $USER['factor']['Attack'] * 100;
-        $defensive = $USER[$resource[110]] * 10 + $USER['factor']['Defensive'] * 100;
-        $shield = $USER[$resource[111]] * 10 + $USER['factor']['Shield'] * 100;
+        $attack = $USER[$RESOURCE[109]] * 10 + $USER['factor']['Attack'] * 100;
+        $defensive = $USER[$RESOURCE[110]] * 10 + $USER['factor']['Defensive'] * 100;
+        $shield = $USER[$RESOURCE[111]] * 10 + $USER['factor']['Shield'] * 100;
 
         $SELLER['factor'] = getFactors($SELLER);
-        $attack_targ = $SELLER[$resource[109]] * 10 + $SELLER['factor']['Attack'] * 100;
-        $defensive_targ = $SELLER[$resource[110]] * 10 + $SELLER['factor']['Defensive'] * 100;
-        $shield_targ = $SELLER[$resource[111]] * 10 + $SELLER['factor']['Shield'] * 100;
+        $attack_targ = $SELLER[$RESOURCE[109]] * 10 + $SELLER['factor']['Attack'] * 100;
+        $defensive_targ = $SELLER[$RESOURCE[110]] * 10 + $SELLER['factor']['Defensive'] * 100;
+        $shield_targ = $SELLER[$RESOURCE[111]] * 10 + $SELLER['factor']['Shield'] * 100;
 
         if ($attack > $attack_targ || $defensive > $defensive_targ || $shield > $shield_targ)
         {
@@ -128,7 +128,7 @@ class ShowMarketPlacePage extends AbstractGamePage
 
     private function doBuy(): string
     {
-        global $USER, $PLANET, $reslist, $resource, $LNG, $pricelist;
+        global $USER, $PLANET, $RESLIST, $RESOURCE, $LNG, $PRICELIST;
         $FleetID = HTTP::_GP('fleetID', 0);
         $shipType = HTTP::_GP('shipType', "");
         $db = Database::get();
@@ -197,17 +197,17 @@ class ShowMarketPlacePage extends AbstractGamePage
         //PRIO for LC
         if ($shipType == 1)
         {
-            $F1capacity = $pricelist[202]['capacity'] * $factor;
+            $F1capacity = $PRICELIST[202]['capacity'] * $factor;
             $F1type = 202;
         }
         // PRIO for HC
         else
         {
-            $F1capacity = $pricelist[203]['capacity'] * $factor;
+            $F1capacity = $PRICELIST[203]['capacity'] * $factor;
             $F1type = 203;
         }
 
-        $F1 = min($PLANET[$resource[$F1type]], ceil($amount / $F1capacity));
+        $F1 = min($PLANET[$RESOURCE[$F1type]], ceil($amount / $F1capacity));
 
         //taken
         $amountTMP = $amount - $F1 * $F1capacity;
@@ -220,16 +220,16 @@ class ShowMarketPlacePage extends AbstractGamePage
             //We need HC
             if ($shipType == 1)
             {
-                $F2capacity = $pricelist[203]['capacity'] * $factor;
+                $F2capacity = $PRICELIST[203]['capacity'] * $factor;
                 $F2type = 203;
             }
             //We need LC
             else
             {
-                $F2capacity = $pricelist[202]['capacity'] * $factor;
+                $F2capacity = $PRICELIST[202]['capacity'] * $factor;
                 $F2type = 202;
             }
-            $F2 = min($PLANET[$resource[$F2type]], ceil($amountTMP / $F2capacity));
+            $F2 = min($PLANET[$RESOURCE[$F2type]], ceil($amountTMP / $F2capacity));
             $amountTMP -= $F2 * $F2capacity;
         }
         //------------------------------------------------------------------------
@@ -275,16 +275,16 @@ class ShowMarketPlacePage extends AbstractGamePage
             903 => $deu,
         ];
 
-        if ($PLANET[$resource[901]] - $fleetResource[901] < 0
-            || $PLANET[$resource[902]] - $fleetResource[902] < 0
-            || $PLANET[$resource[903]] - $fleetResource[903] - $consumption < 0)
+        if ($PLANET[$RESOURCE[901]] - $fleetResource[901] < 0
+            || $PLANET[$RESOURCE[902]] - $fleetResource[902] < 0
+            || $PLANET[$RESOURCE[903]] - $fleetResource[903] - $consumption < 0)
         {
             return $LNG['market_p_msg_resources_error'];
         }
 
-        $PLANET[$resource[901]] -= $fleetResource[901];
-        $PLANET[$resource[902]] -= $fleetResource[902];
-        $PLANET[$resource[903]] -= $fleetResource[903] + $consumption;
+        $PLANET[$RESOURCE[901]] -= $fleetResource[901];
+        $PLANET[$RESOURCE[902]] -= $fleetResource[902];
+        $PLANET[$RESOURCE[903]] -= $fleetResource[903] + $consumption;
 
         $buyerfleet = FleetFunctions::sendFleet(
             $fleetArray,
@@ -422,7 +422,7 @@ class ShowMarketPlacePage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $reslist, $resource, $LNG;
+        global $USER, $PLANET, $RESLIST, $RESOURCE, $LNG;
 
         $FleetID = HTTP::_GP('fleetID', 0);
         $GetAction = HTTP::_GP('action', "");

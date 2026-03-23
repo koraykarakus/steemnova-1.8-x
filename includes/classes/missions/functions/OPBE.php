@@ -60,8 +60,8 @@ function calculateAttack(&$attackers, &$defenders, $FleetTF, $DefTF)
     $errorHandler = null;
     $exceptionHandler = null;
 
-    $CombatCaps = $GLOBALS['CombatCaps'];
-    $pricelist = $GLOBALS['pricelist'];
+    $COMBATCAPS = $GLOBALS['COMBATCAPS'];
+    $PRICELIST = $GLOBALS['PRICELIST'];
 
     /********** BUILDINGS MODELS **********/
     /** Note: we are transform array of data like
@@ -315,12 +315,12 @@ function updatePlayers(PlayerGroup $playerGroup, &$players)
  */
 function getShipType($id, $count)
 {
-    $CombatCaps = $GLOBALS['CombatCaps'];
-    $pricelist = $GLOBALS['pricelist'];
-    $rf = isset($CombatCaps[$id]['sd']) ? $CombatCaps[$id]['sd'] : 0;
-    $shield = $CombatCaps[$id]['shield'];
-    $cost = [$pricelist[$id]['cost'][METAL_ID], $pricelist[$id]['cost'][CRYSTAL_ID]];
-    $power = $CombatCaps[$id]['attack'];
+    $COMBATCAPS = $GLOBALS['COMBATCAPS'];
+    $PRICELIST = $GLOBALS['PRICELIST'];
+    $rf = isset($COMBATCAPS[$id]['sd']) ? $COMBATCAPS[$id]['sd'] : 0;
+    $shield = $COMBATCAPS[$id]['shield'];
+    $cost = [$PRICELIST[$id]['cost'][METAL_ID], $PRICELIST[$id]['cost'][CRYSTAL_ID]];
+    $power = $COMBATCAPS[$id]['attack'];
     if ($id > ID_MIN_SHIPS && $id < ID_MAX_SHIPS)
     {
         return new Ship($id, $count, $rf, $shield, $cost, $power);

@@ -310,13 +310,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function ships(): void
     {
-        global $reslist, $resource;
+        global $RESLIST, $RESOURCE;
 
         $input = [];
-        foreach ($reslist['fleet'] as $row_id)
+        foreach ($RESLIST['fleet'] as $row_id)
         {
             $input[$row_id] = [
-                'type' => $resource[$row_id],
+                'type' => $RESOURCE[$row_id],
             ];
         }
 
@@ -329,7 +329,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function shipsSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $type = HTTP::_GP('type', 'add');
 
@@ -352,21 +352,21 @@ class ShowAccountsPage extends AbstractAdminPage
         }
 
         $before = $after = [];
-        foreach ($reslist['fleet'] as $row_id)
+        foreach ($RESLIST['fleet'] as $row_id)
         {
-            $before[$row_id] = $planet_info[$resource[$row_id]];
+            $before[$row_id] = $planet_info[$RESOURCE[$row_id]];
         }
 
         if ($type == "add")
         {
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
-            foreach ($reslist['fleet'] as $row_id)
+            foreach ($RESLIST['fleet'] as $row_id)
             {
-                $qry_update[] = "`" . $resource[$row_id] . 
-                "` = `" . $resource[$row_id] . "` + '" . 
-                max(0, round(HTTP::_GP($resource[$row_id], 0.0))) . "'";
+                $qry_update[] = "`" . $RESOURCE[$row_id] . 
+                "` = `" . $RESOURCE[$row_id] . "` + '" . 
+                max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0))) . "'";
 
-                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
             }
             $sql .= implode(", ", $qry_update);
             $sql .= "WHERE ";
@@ -382,10 +382,10 @@ class ShowAccountsPage extends AbstractAdminPage
         {
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
 
-            foreach ($reslist['fleet'] as $row_id)
+            foreach ($RESLIST['fleet'] as $row_id)
             {
-                $qry_update[] = "`".$resource[$row_id]."` = GREATEST(0,  `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
-                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
+                $qry_update[] = "`".$RESOURCE[$row_id]."` = GREATEST(0,  `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0))), 0);
             }
 
             $sql .= implode(", ", $qry_update);
@@ -418,13 +418,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function defenses(): void
     {
-        global $reslist, $resource;
+        global $RESLIST, $RESOURCE;
 
         $input = [];
-        foreach ($reslist['defense'] as $row_id)
+        foreach ($RESLIST['defense'] as $row_id)
         {
             $input[$row_id] = [
-                'type' => $resource[$row_id],
+                'type' => $RESOURCE[$row_id],
             ];
         }
 
@@ -438,7 +438,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function defensesSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $type = HTTP::_GP('type', 'add');
 
@@ -464,19 +464,19 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $before = $after = [];
 
-        foreach ($reslist['defense'] as $row_id)
+        foreach ($RESLIST['defense'] as $row_id)
         {
-            $before[$row_id] = $planet_info[$resource[$row_id]];
+            $before[$row_id] = $planet_info[$RESOURCE[$row_id]];
         }
         if ($type == 'add')
         {
             $sql = "UPDATE %%PLANETS%% SET ";
             
             $qry_update = [];
-            foreach ($reslist['defense'] as $row_id)
+            foreach ($RESLIST['defense'] as $row_id)
             {
-                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
-                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $qry_update[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` + '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
             }
 
             $sql .= implode(", ", $qry_update);
@@ -494,10 +494,10 @@ class ShowAccountsPage extends AbstractAdminPage
             $sql = "UPDATE %%PLANETS%% SET ";
 
             $qry_update = [];
-            foreach ($reslist['defense'] as $row_id)
+            foreach ($RESLIST['defense'] as $row_id)
             {
-                $qry_update[] = "`".$resource[$row_id]."` = GREATEST (0, `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
-                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
+                $qry_update[] = "`".$RESOURCE[$row_id]."` = GREATEST (0, `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0))), 0);
             }
 
             $sql .= implode(", ", $qry_update);
@@ -530,13 +530,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function buildings(): void
     {
-        global $reslist, $resource;
+        global $RESLIST, $RESOURCE;
 
         $input = [];
-        foreach ($reslist['build'] as $row_id)
+        foreach ($RESLIST['build'] as $row_id)
         {
             $input[$row_id] = [
-                'type' => $resource[$row_id],
+                'type' => $RESOURCE[$row_id],
             ];
         }
 
@@ -551,7 +551,7 @@ class ShowAccountsPage extends AbstractAdminPage
     public function buildingsSend(): void
     {
 
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $type = HTTP::_GP('type', 'add');
 
@@ -577,9 +577,9 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $before = $after = [];
 
-        foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
+        foreach ($RESLIST['allow'][$planet_info['planet_type']] as $row_id)
         {
-            $before[$row_id] = $planet_info[$resource[$row_id]];
+            $before[$row_id] = $planet_info[$RESOURCE[$row_id]];
         }
 
         if ($type == 'add')
@@ -587,10 +587,10 @@ class ShowAccountsPage extends AbstractAdminPage
             $fields = 0;
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
             
-            foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
+            foreach ($RESLIST['allow'][$planet_info['planet_type']] as $row_id)
             {
-                $count = max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
-                $QryUpdate[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".$count."'";
+                $count = max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
+                $QryUpdate[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` + '".$count."'";
                 $after[$row_id] = $before[$row_id] + $count;
                 $fields += $count;
             }
@@ -610,10 +610,10 @@ class ShowAccountsPage extends AbstractAdminPage
         {
             $fields = 0;
             $qry_update = [];
-            foreach ($reslist['allow'][$planet_info['planet_type']] as $row_id)
+            foreach ($RESLIST['allow'][$planet_info['planet_type']] as $row_id)
             {
-                $count = max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
-                $qry_update[] = "`" . $resource[$row_id] . "` = GREATEST(0, `".$resource[$row_id]."` - '".$count."'" . ")";
+                $count = max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
+                $qry_update[] = "`" . $RESOURCE[$row_id] . "` = GREATEST(0, `".$RESOURCE[$row_id]."` - '".$count."'" . ")";
                 $after[$row_id] = max($before[$row_id] - $count, 0);
                 $fields += $count;
             }
@@ -649,13 +649,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function researchs(): void
     {
-        global $reslist, $resource;
+        global $RESLIST, $RESOURCE;
 
         $input = [];
-        foreach ($reslist['tech'] as $row_id)
+        foreach ($RESLIST['tech'] as $row_id)
         {
             $input[$row_id] = [
-                'type' => $resource[$row_id],
+                'type' => $RESOURCE[$row_id],
             ];
         }
 
@@ -669,7 +669,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function researchsSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $user_id = HTTP::_GP('id', 0);
 
@@ -695,18 +695,18 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $before = $after = [];
 
-        foreach ($reslist['tech'] as $row_id)
+        foreach ($RESLIST['tech'] as $row_id)
         {
-            $before[$row_id] = $user_info[$resource[$row_id]];
+            $before[$row_id] = $user_info[$RESOURCE[$row_id]];
         }
 
         if ($type == 'add')
         {
 
-            foreach ($reslist['tech'] as $row_id)
+            foreach ($RESLIST['tech'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
-                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $QryUpdate[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` + '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
             }
             
             $sql = "UPDATE %%USERS%% SET ";
@@ -722,10 +722,10 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == 'delete')
         {
-            foreach ($reslist['tech'] as $row_id)
+            foreach ($RESLIST['tech'] as $row_id)
             {
-                $QryUpdate[] = "`".$resource[$row_id]."` = GREATEST(0, `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."')";
-                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
+                $QryUpdate[] = "`".$RESOURCE[$row_id]."` = GREATEST(0, `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."')";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0))), 0);
             }
 
             $sql = "UPDATE %%USERS%% SET ";
@@ -1043,13 +1043,13 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function officers(): void
     {
-        global $reslist, $resource;
+        global $RESLIST, $RESOURCE;
 
         $input = [];
-        foreach ($reslist['officers'] as $row_id)
+        foreach ($RESLIST['officers'] as $row_id)
         {
             $input[$row_id] = [
-                'type' => $resource[$row_id],
+                'type' => $RESOURCE[$row_id],
             ];
         }
 
@@ -1062,7 +1062,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function officersSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $id = HTTP::_GP('id', 0);
         $type = HTTP::_GP('type', 'add');
@@ -1088,18 +1088,18 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $before = $after = [];
 
-        foreach ($reslist['officers'] as $row_id)
+        foreach ($RESLIST['officers'] as $row_id)
         {
-            $before[$row_id] = $userInfo[$resource[$row_id]];
+            $before[$row_id] = $userInfo[$RESOURCE[$row_id]];
         }
 
         if ($type == 'add')
         {
             $qry_update = [];
-            foreach ($reslist['officers'] as $row_id)
+            foreach ($RESLIST['officers'] as $row_id)
             {
-                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` + '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
-                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($resource[$row_id], 0.0)));
+                $qry_update[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` + '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."'";
+                $after[$row_id] = $before[$row_id] + max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
             }
 
             $sql = "UPDATE %%USERS%% SET ";
@@ -1117,10 +1117,10 @@ class ShowAccountsPage extends AbstractAdminPage
         {
 
             $qry_update = [];
-            foreach ($reslist['officers'] as $row_id)
+            foreach ($RESLIST['officers'] as $row_id)
             {
-                $qry_update[] = "`".$resource[$row_id]."` = `".$resource[$row_id]."` - '".max(0, round(HTTP::_GP($resource[$row_id], 0.0)))."'";
-                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($resource[$row_id], 0.0))), 0);
+                $qry_update[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."'";
+                $after[$row_id] = max($before[$row_id] - max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0))), 0);
             }
 
             $sql = "UPDATE %%USERS%% SET ";
@@ -1153,7 +1153,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
     public function planetsSend(): void
     {
-        global $reslist, $resource, $LNG;
+        global $RESLIST, $RESOURCE, $LNG;
 
         $planet_id = HTTP::_GP('id', 0);
         $name = HTTP::_GP('name', '', UTF8_SUPPORT);
@@ -1191,9 +1191,9 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($buildings == 'on')
         {
             $build = [];
-            foreach ($reslist['build'] as $row_id)
+            foreach ($RESLIST['build'] as $row_id)
             {
-                $build[] = "`".$resource[$row_id]."` = '0'";
+                $build[] = "`".$RESOURCE[$row_id]."` = '0'";
             }
 
             $sql = "UPDATE %%PLANETS%% SET " . 
@@ -1209,9 +1209,9 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($ships == 'on')
         {
             $ships_qry = [];
-            foreach ($reslist['fleet'] as $row_id)
+            foreach ($RESLIST['fleet'] as $row_id)
             {
-                $ships_qry[] = "`".$resource[$row_id]."` = '0'";
+                $ships_qry[] = "`".$RESOURCE[$row_id]."` = '0'";
             }
 
             $sql = "UPDATE %%PLANETS%% SET " .
@@ -1228,9 +1228,9 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($defenses == 'on')
         {
             $defs = [];
-            foreach ($reslist['defense'] as $row_id)
+            foreach ($RESLIST['defense'] as $row_id)
             {
-                $defs[] = "`".$resource[$row_id]."` = '0'";
+                $defs[] = "`".$RESOURCE[$row_id]."` = '0'";
             }
 
             $sql = "UPDATE %%PLANETS%% SET " . 

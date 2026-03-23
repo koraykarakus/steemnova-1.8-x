@@ -374,8 +374,8 @@ class FlyingFleetsTable
 
     private function CreateFleetPopupedFleetLink($fleetRow, $Text, $FleetType)
     {
-        global $LNG, $USER, $resource;
-        $SpyTech = $USER[$resource[106]];
+        global $LNG, $USER, $RESOURCE;
+        $SpyTech = $USER[$RESOURCE[106]];
         $Owner = $fleetRow['fleet_owner'] == $this->userId;
         $FleetRec = explode(';', $fleetRow['fleet_array']);
         $FleetPopup = '<a class="fleet_info">';

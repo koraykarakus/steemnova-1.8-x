@@ -26,17 +26,17 @@ class ShowPhalanxPage extends AbstractGamePage
 
     public static function allowPhalanx($to_galaxy, $to_system): bool
     {
-        global $PLANET, $resource;
+        global $PLANET, $RESOURCE;
 
         if ($PLANET['galaxy'] != $to_galaxy
-            || $PLANET[$resource[42]] == 0
+            || $PLANET[$RESOURCE[42]] == 0
             || !isModuleAvailable(MODULE_PHALANX)
-            || $PLANET[$resource[903]] < PHALANX_DEUTERIUM)
+            || $PLANET[$RESOURCE[903]] < PHALANX_DEUTERIUM)
         {
             return false;
         }
 
-        $ph_range = self::GetPhalanxRange($PLANET[$resource[42]]);
+        $ph_range = self::GetPhalanxRange($PLANET[$RESOURCE[42]]);
         $system_min = max(1, $PLANET['system'] - $ph_range);
         $system_max = $PLANET['system'] + $ph_range;
 
@@ -50,7 +50,7 @@ class ShowPhalanxPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $PLANET, $LNG, $resource;
+        global $PLANET, $LNG, $RESOURCE;
 
         $this->initTemplate();
         $this->setWindow('popup');
@@ -65,7 +65,7 @@ class ShowPhalanxPage extends AbstractGamePage
             $this->printMessage($LNG['px_out_of_range']);
         }
 
-        if ($PLANET[$resource[903]] < PHALANX_DEUTERIUM)
+        if ($PLANET[$RESOURCE[903]] < PHALANX_DEUTERIUM)
         {
             $this->printMessage($LNG['px_no_deuterium']);
         }

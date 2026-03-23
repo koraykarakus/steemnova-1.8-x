@@ -28,7 +28,7 @@ class ShowGalaxyPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $resource, $LNG, $reslist;
+        global $USER, $PLANET, $RESOURCE, $LNG, $RESLIST;
         
         if (inVacationMode($USER))
         {
@@ -81,7 +81,7 @@ class ShowGalaxyPage extends AbstractGamePage
             }
         }
 
-        $target_defensive = $reslist['defense'];
+        $target_defensive = $RESLIST['defense'];
         $target_defensive[] = 502;
         $missile_selector[0] = $LNG['gl_all_defenses'];
 
@@ -119,10 +119,10 @@ class ShowGalaxyPage extends AbstractGamePage
             'current'               => $current,
             'maxfleetcount'         => FleetFunctions::GetCurrentFleets($USER['id']),
             'fleetmax'              => FleetFunctions::GetMaxFleetSlots($USER),
-            'currentmip'            => $PLANET[$resource[503]],
-            'recyclers'             => $PLANET[$resource[209]],
-            'spyprobes'             => $PLANET[$resource[210]],
-            'missile_count'         => sprintf($LNG['gl_missil_to_launch'], $PLANET[$resource[503]]),
+            'currentmip'            => $PLANET[$RESOURCE[503]],
+            'recyclers'             => $PLANET[$RESOURCE[209]],
+            'spyprobes'             => $PLANET[$RESOURCE[210]],
+            'missile_count'         => sprintf($LNG['gl_missil_to_launch'], $PLANET[$RESOURCE[503]]),
             'spyShips'              => [210 => $USER['spio_anz']],
             'settings_fleetactions' => $USER['settings_fleetactions'],
             'current_galaxy'        => $PLANET['galaxy'],

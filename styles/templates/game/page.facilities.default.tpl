@@ -192,11 +192,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {if !$element.technology_satisfied && !empty($element.requeriments)}
+                  {if !$element.technology_satisfied && !empty($element.requirements)}
                     <tr>
                       <th colspan='2' class='color-red'>{$LNG.tech_not_satisfied}</th>
                     </tr>
-                    {foreach $element.requeriments as $c_require}
+                    {foreach $element.requirements as $c_require}
                       <tr>
                         <td class='color-red'>
                           <img class='mx-2 hover-pointer' src='{$dpath}elements/{$c_require.require_id}.gif'

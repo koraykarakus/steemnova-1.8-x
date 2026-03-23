@@ -65,37 +65,37 @@ class statbuilder
 
     private function GetUsersInfosFromDB()
     {
-        global $resource, $reslist;
+        global $RESOURCE, $RESLIST;
         $select_defenses = $select_buildings = $selected_tech = $select_fleets = $select_officers = '';
 
-        foreach ($reslist['build'] as $building)
+        foreach ($RESLIST['build'] as $building)
         {
-            $select_buildings .= " p.".$resource[$building].",";
+            $select_buildings .= " p.".$RESOURCE[$building].",";
         }
 
-        foreach ($reslist['tech'] as $techno)
+        foreach ($RESLIST['tech'] as $techno)
         {
-            $selected_tech .= " u.".$resource[$techno].",";
+            $selected_tech .= " u.".$RESOURCE[$techno].",";
         }
 
-        foreach ($reslist['fleet'] as $fleet)
+        foreach ($RESLIST['fleet'] as $fleet)
         {
-            $select_fleets .= " SUM(p.".$resource[$fleet].") as ".$resource[$fleet].",";
+            $select_fleets .= " SUM(p.".$RESOURCE[$fleet].") as ".$RESOURCE[$fleet].",";
         }
 
-        foreach ($reslist['defense'] as $defense)
+        foreach ($RESLIST['defense'] as $defense)
         {
-            $select_defenses .= " SUM(p.".$resource[$defense].") as ".$resource[$defense].",";
+            $select_defenses .= " SUM(p.".$RESOURCE[$defense].") as ".$RESOURCE[$defense].",";
         }
 
-        foreach ($reslist['missile'] as $defense)
+        foreach ($RESLIST['missile'] as $defense)
         {
-            $select_defenses .= " SUM(p.".$resource[$defense].") as ".$resource[$defense].",";
+            $select_defenses .= " SUM(p.".$RESOURCE[$defense].") as ".$RESOURCE[$defense].",";
         }
 
-        foreach ($reslist['officers'] as $officer)
+        foreach ($RESLIST['officers'] as $officer)
         {
-            $select_officers .= " u.".$resource[$officer].",";
+            $select_officers .= " u.".$RESOURCE[$officer].",";
         }
 
         $db = Database::get();
@@ -193,22 +193,22 @@ class statbuilder
 
     private function GetTechnoPoints($user)
     {
-        global $resource, $reslist, $pricelist;
+        global $RESOURCE, $RESLIST, $PRICELIST;
         $tech_counts = 0;
         $tech_points = 0;
 
-        foreach ($reslist['tech'] as $techno)
+        foreach ($RESLIST['tech'] as $techno)
         {
-            if ($user[$resource[$techno]] == 0)
+            if ($user[$RESOURCE[$techno]] == 0)
             {
                 continue;
             }
 
-            $base_cost = $pricelist[$techno]['cost'][901] +
-            $pricelist[$techno]['cost'][902] +
-            $pricelist[$techno]['cost'][903];
-            $level = $user[$resource[$techno]];
-            $factor = $pricelist[$techno]['factor'];
+            $base_cost = $PRICELIST[$techno]['cost'][901] +
+            $PRICELIST[$techno]['cost'][902] +
+            $PRICELIST[$techno]['cost'][903];
+            $level = $user[$RESOURCE[$techno]];
+            $factor = $PRICELIST[$techno]['factor'];
             if ($factor == 1)
             {
                 // if factor is 1 normal multiply
@@ -220,9 +220,9 @@ class statbuilder
                 $tech_points += $base_cost * ((pow($factor, $level) - 1) / ($factor - 1));
             }
 
-            $tech_counts += $user[$resource[$techno]];
+            $tech_counts += $user[$RESOURCE[$techno]];
 
-            $this->setRecords($user['id'], $techno, $user[$resource[$techno]]);
+            $this->setRecords($user['id'], $techno, $user[$RESOURCE[$techno]]);
         }
 
         return ['count' => $tech_counts, 'points' => ($tech_points / Config::get()->stat_settings)];
@@ -230,23 +230,23 @@ class statbuilder
 
     private function GetBuildPoints($planet)
     {
-        global $resource, $reslist, $pricelist;
+        global $RESOURCE, $RESLIST, $PRICELIST;
         $build_counts = 0;
         $build_points = 0;
 
-        foreach ($reslist['build'] as $Build)
+        foreach ($RESLIST['build'] as $Build)
         {
-            if ($planet[$resource[$Build]] == 0)
+            if ($planet[$RESOURCE[$Build]] == 0)
             {
                 continue;
             }
 
-            $base_cost = $pricelist[$Build]['cost'][901] +
-            $pricelist[$Build]['cost'][902] +
-            $pricelist[$Build]['cost'][903];
+            $base_cost = $PRICELIST[$Build]['cost'][901] +
+            $PRICELIST[$Build]['cost'][902] +
+            $PRICELIST[$Build]['cost'][903];
 
-            $level = $planet[$resource[$Build]];
-            $factor = $pricelist[$Build]['factor'];
+            $level = $planet[$RESOURCE[$Build]];
+            $factor = $PRICELIST[$Build]['factor'];
 
             if ($factor == 1)
             {
@@ -259,31 +259,31 @@ class statbuilder
                 $build_points += $base_cost * ((pow($factor, $level) - 1) / ($factor - 1));
             }
 
-            $build_counts += $planet[$resource[$Build]];
+            $build_counts += $planet[$RESOURCE[$Build]];
 
-            $this->setRecords($planet['id_owner'], $Build, $planet[$resource[$Build]]);
+            $this->setRecords($planet['id_owner'], $Build, $planet[$RESOURCE[$Build]]);
         }
         return ['count' => $build_counts, 'points' => ($build_points / Config::get()->stat_settings)];
     }
 
     private function GetDefensePoints($user)
     {
-        global $resource, $reslist, $pricelist;
+        global $RESOURCE, $RESLIST, $PRICELIST;
         $defense_counts = 0;
         $defense_points = 0;
 
-        foreach (array_merge($reslist['defense'], $reslist['missile']) as $defense)
+        foreach (array_merge($RESLIST['defense'], $RESLIST['missile']) as $defense)
         {
-            if ($user[$resource[$defense]] == 0)
+            if ($user[$RESOURCE[$defense]] == 0)
             {
                 continue;
             }
 
-            $units = $pricelist[$defense]['cost'][901] + $pricelist[$defense]['cost'][902] + $pricelist[$defense]['cost'][903];
-            $defense_points += $units * $user[$resource[$defense]];
-            $defense_counts += $user[$resource[$defense]];
+            $units = $PRICELIST[$defense]['cost'][901] + $PRICELIST[$defense]['cost'][902] + $PRICELIST[$defense]['cost'][903];
+            $defense_points += $units * $user[$RESOURCE[$defense]];
+            $defense_counts += $user[$RESOURCE[$defense]];
 
-            $this->setRecords($user['id'], $defense, $user[$resource[$defense]]);
+            $this->setRecords($user['id'], $defense, $user[$RESOURCE[$defense]]);
         }
 
         return ['count' => $defense_counts, 'points' => ($defense_points / Config::get()->stat_settings)];
@@ -291,24 +291,24 @@ class statbuilder
 
     private function GetFleetPoints($user)
     {
-        global $resource, $reslist, $pricelist;
+        global $RESOURCE, $RESLIST, $PRICELIST;
         $fleet_counts = 0;
         $fleet_points = 0;
 
-        foreach ($reslist['fleet'] as $Fleet)
+        foreach ($RESLIST['fleet'] as $Fleet)
         {
-            if ($user[$resource[$Fleet]] == 0)
+            if ($user[$RESOURCE[$Fleet]] == 0)
             {
                 continue;
             }
 
-            $Units = $pricelist[$Fleet]['cost'][901] +
-            $pricelist[$Fleet]['cost'][902] + $pricelist[$Fleet]['cost'][903];
+            $Units = $PRICELIST[$Fleet]['cost'][901] +
+            $PRICELIST[$Fleet]['cost'][902] + $PRICELIST[$Fleet]['cost'][903];
 
-            $fleet_points += $Units * $user[$resource[$Fleet]];
-            $fleet_counts += $user[$resource[$Fleet]];
+            $fleet_points += $Units * $user[$RESOURCE[$Fleet]];
+            $fleet_counts += $user[$RESOURCE[$Fleet]];
 
-            $this->setRecords($user['id'], $Fleet, $user[$resource[$Fleet]]);
+            $this->setRecords($user['id'], $Fleet, $user[$RESOURCE[$Fleet]]);
         }
 
         return ['count' => $fleet_counts, 'points' => ($fleet_points / Config::get()->stat_settings)];
@@ -316,16 +316,16 @@ class statbuilder
 
     private function GetOfficerPoints($user)
     {
-        global $resource, $reslist;
+        global $RESOURCE, $RESLIST;
 
-        foreach ($reslist['officers'] as $officer)
+        foreach ($RESLIST['officers'] as $officer)
         {
-            if ($user[$resource[$officer]] == 0)
+            if ($user[$RESOURCE[$officer]] == 0)
             {
                 continue;
             }
 
-            $this->setRecords($user['id'], $officer, $user[$resource[$officer]]);
+            $this->setRecords($user['id'], $officer, $user[$RESOURCE[$officer]]);
         }
     }
 
@@ -356,7 +356,7 @@ class statbuilder
 
     final public function MakeStats()
     {
-        global $resource;
+        global $RESOURCE;
         $ally_points = $user_points = [];
         $total_data = $this->GetUsersInfosFromDB();
 
@@ -430,7 +430,7 @@ class statbuilder
             {
                 foreach ($total_data['Fleets'][$user_data['id']] as $ID => $Amount)
                 {
-                    $user_data[$resource[$ID]] += $Amount;
+                    $user_data[$RESOURCE[$ID]] += $Amount;
                 }
             }
 

@@ -120,12 +120,12 @@
             <thead>
               <th colspan="2">{$LNG.tech.{$ID}}</th> 
             </thead>
-          {if !$Element.technologySatisfied && !empty($Element.requeriments)}
+          {if !$Element.technologySatisfied && !empty($Element.requirements)}
             <tbody>
               <tr class='color-red'>
                 <td colspan='2'>{$LNG.tech_not_satisfied}</td>
               </tr>
-              {foreach $Element.requeriments as $currentRequire}
+              {foreach $Element.requirements as $currentRequire}
               <tr>
                 <td class='color-red'>
                   <img src='{$dpath}elements/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>

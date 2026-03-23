@@ -26,7 +26,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
     public function send(): void
     {
-        global $reslist, $pricelist, $LNG;
+        global $RESLIST, $PRICELIST, $LNG;
 
         if (!isset($_REQUEST['battle_input']))
         {
@@ -70,7 +70,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
                 foreach ($battle_slot[0] as $id => $Count)
                 {
-                    if (!in_array($id, $reslist['fleet'])
+                    if (!in_array($id, $RESLIST['fleet'])
                         || $battle_slot[0][$id] <= 0)
                     {
                         unset($battle_slot[0][$id]);
@@ -115,8 +115,8 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
                 foreach ($battle_slot[1] as $id => $Count)
                 {
-                    if ((!in_array($id, $reslist['fleet'])
-                        && !in_array($id, $reslist['defense']))
+                    if ((!in_array($id, $RESLIST['fleet'])
+                        && !in_array($id, $RESLIST['defense']))
                         || $battle_slot[1][$id] <= 0)
                     {
                         unset($battle_slot[1][$id]);
@@ -178,7 +178,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
         $steal_resource_information = sprintf(
             $LNG['bs_derbis_raport'],
-            pretty_number(ceil($debris_total / $pricelist[209]['capacity'])),
+            pretty_number(ceil($debris_total / $PRICELIST[209]['capacity'])),
             $LNG['tech'][209]
         );
 
@@ -186,9 +186,9 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
         $steal_resource_information .= sprintf(
             $LNG['bs_steal_raport'],
-            pretty_number(ceil($sum_steal / $pricelist[202]['capacity'])),
+            pretty_number(ceil($sum_steal / $PRICELIST[202]['capacity'])),
             $LNG['tech'][202],
-            pretty_number(ceil($sum_steal / $pricelist[203]['capacity'])),
+            pretty_number(ceil($sum_steal / $PRICELIST[203]['capacity'])),
             $LNG['tech'][203]
         );
 
@@ -233,22 +233,22 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $reslist, $resource;
+        global $USER, $PLANET, $RESLIST, $RESOURCE;
 
         $slots = HTTP::_GP('slots', 1);
 
-        $battle_array[0][0][109] = $USER[$resource[109]];
-        $battle_array[0][0][110] = $USER[$resource[110]];
-        $battle_array[0][0][111] = $USER[$resource[111]];
+        $battle_array[0][0][109] = $USER[$RESOURCE[109]];
+        $battle_array[0][0][110] = $USER[$RESOURCE[110]];
+        $battle_array[0][0][111] = $USER[$RESOURCE[111]];
 
         if (empty($_REQUEST['battle_input']))
         {
-            foreach ($reslist['fleet'] as $id)
+            foreach ($RESLIST['fleet'] as $id)
             {
                 if (FleetFunctions::GetFleetMaxSpeed($id, $USER) > 0)
                 {
                     // Add just flyable elements
-                    $battle_array[0][0][$id] = $PLANET[$resource[$id]];
+                    $battle_array[0][0][$id] = $PLANET[$RESOURCE[$id]];
                 }
             }
         }
@@ -270,8 +270,8 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         $this->assign([
             'slots'          => $slots,
             'battle_input'   => $battle_array,
-            'fleet_list'     => $reslist['fleet'],
-            'defensive_list' => $reslist['defense'],
+            'fleet_list'     => $RESLIST['fleet'],
+            'defensive_list' => $RESLIST['defense'],
         ]);
 
         $this->display('page.battleSimulator.default.tpl');

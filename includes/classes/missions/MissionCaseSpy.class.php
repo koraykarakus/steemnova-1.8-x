@@ -24,7 +24,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
 
     public function TargetEvent()
     {
-        global $pricelist, $reslist, $resource, $USER;
+        global $PRICELIST, $RESLIST, $RESOURCE, $USER;
 
         $fail_return = function ()
         {
@@ -87,7 +87,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             $fleetData = FleetFunctions::unserialize($fleetRow['fleet_array']);
             foreach ($fleetData as $shipId => $shipAmount)
             {
-                $targetPlanet[$resource[$shipId]] += $shipAmount;
+                $targetPlanet[$RESOURCE[$shipId]] += $shipAmount;
             }
         }
 
@@ -103,26 +103,26 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         $SpyBuild = $fleetAmount >= $MinAmount + 3 * SPY_VIEW_FACTOR;
         $SpyTechno = $fleetAmount >= $MinAmount + 5 * SPY_VIEW_FACTOR;
 
-        $classIDs[900] = array_merge($reslist['resstype'][1], $reslist['resstype'][2]);
+        $classIDs[900] = array_merge($RESLIST['resstype'][1], $RESLIST['resstype'][2]);
 
         if ($SpyFleet)
         {
-            $classIDs[200] = $reslist['fleet'];
+            $classIDs[200] = $RESLIST['fleet'];
         }
 
         if ($SpyDef)
         {
-            $classIDs[400] = array_merge($reslist['defense'], $reslist['missile']);
+            $classIDs[400] = array_merge($RESLIST['defense'], $RESLIST['missile']);
         }
 
         if ($SpyBuild)
         {
-            $classIDs[0] = $reslist['build'];
+            $classIDs[0] = $RESLIST['build'];
         }
 
         if ($SpyTechno)
         {
-            $classIDs[100] = $reslist['tech'];
+            $classIDs[100] = $RESLIST['tech'];
         }
 
         $targetChance = mt_rand(0, ceil(min(($fleetAmount / 4) * ($targetSpyTech / $senderSpyTech), 100)));
@@ -133,13 +133,13 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         {
             foreach ($elementIDs as $elementID)
             {
-                if (isset($targetUser[$resource[$elementID]]))
+                if (isset($targetUser[$RESOURCE[$elementID]]))
                 {
-                    $spyData[$classID][$elementID] = $targetUser[$resource[$elementID]];
+                    $spyData[$classID][$elementID] = $targetUser[$RESOURCE[$elementID]];
                 }
                 else
                 {
-                    $spyData[$classID][$elementID] = $targetPlanet[$resource[$elementID]];
+                    $spyData[$classID][$elementID] = $targetPlanet[$RESOURCE[$elementID]];
                 }
             }
 
@@ -235,8 +235,8 @@ class MissionCaseSpy extends MissionFunctions implements Mission
 			WHERE '.$whereCol.' = :planetId;';
 
             $db->update($sql, [
-                ':metal'    => $fleetAmount * $pricelist[210]['cost'][901] * $config->debris_percentage_fleet / 100,
-                ':crystal'  => $fleetAmount * $pricelist[210]['cost'][902] * $config->debris_percentage_fleet / 100,
+                ':metal'    => $fleetAmount * $PRICELIST[210]['cost'][901] * $config->debris_percentage_fleet / 100,
+                ':crystal'  => $fleetAmount * $PRICELIST[210]['cost'][902] * $config->debris_percentage_fleet / 100,
                 ':planetId' => $this->_fleet['fleet_end_id'],
             ]);
 

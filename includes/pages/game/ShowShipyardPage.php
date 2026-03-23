@@ -28,7 +28,7 @@ class ShowShipyardPage extends AbstractGamePage
 
     private function CancelAuftr(): bool
     {
-        global $USER, $PLANET, $resource;
+        global $USER, $PLANET, $RESOURCE;
         $ElementQueue = unserialize($PLANET['b_shipyard_id']);
 
         $CancelArray = HTTP::_GP('auftr', []);
@@ -57,19 +57,19 @@ class ShowShipyardPage extends AbstractGamePage
 
             if (isset($costResources[901]))
             {
-                $PLANET[$resource[901]] += $costResources[901] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[901]] += $costResources[901] * FACTOR_CANCEL_SHIPYARD;
             }
             if (isset($costResources[902]))
             {
-                $PLANET[$resource[902]] += $costResources[902] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[902]] += $costResources[902] * FACTOR_CANCEL_SHIPYARD;
             }
             if (isset($costResources[903]))
             {
-                $PLANET[$resource[903]] += $costResources[903] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[903]] += $costResources[903] * FACTOR_CANCEL_SHIPYARD;
             }
             if (isset($costResources[921]))
             {
-                $USER[$resource[921]] += $costResources[921] * FACTOR_CANCEL_SHIPYARD;
+                $USER[$RESOURCE[921]] += $costResources[921] * FACTOR_CANCEL_SHIPYARD;
             }
 
             unset($ElementQueue[$Auftr]);
@@ -89,17 +89,17 @@ class ShowShipyardPage extends AbstractGamePage
 
     private function BuildAuftr($fmenge): void
     {
-        global $USER, $PLANET, $reslist, $resource;
+        global $USER, $PLANET, $RESLIST, $RESOURCE;
 
         $Missiles = [
-            502 => $PLANET[$resource[502]],
-            503 => $PLANET[$resource[503]],
+            502 => $PLANET[$RESOURCE[502]],
+            503 => $PLANET[$RESOURCE[503]],
         ];
 
         foreach ($fmenge as $Element => $Count)
         {
             if (empty($Count)
-                || !in_array($Element, array_merge($reslist['fleet'], $reslist['defense'], $reslist['missile']))
+                || !in_array($Element, array_merge($RESLIST['fleet'], $RESLIST['defense'], $RESLIST['missile']))
                 || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
             ) {
                 continue;
@@ -111,14 +111,14 @@ class ShowShipyardPage extends AbstractGamePage
             $Count = min($Count, $MaxElements);
 
             $BuildArray = !empty($PLANET['b_shipyard_id']) ? unserialize($PLANET['b_shipyard_id']) : [];
-            if (in_array($Element, $reslist['missile']))
+            if (in_array($Element, $RESLIST['missile']))
             {
                 $MaxMissiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
                 $Count = min($Count, $MaxMissiles[$Element]);
 
                 $Missiles[$Element] += $Count;
             }
-            elseif (in_array($Element, $reslist['one']))
+            elseif (in_array($Element, $RESLIST['one']))
             {
                 $InBuild = false;
                 foreach ($BuildArray as $ElementArray)
@@ -135,7 +135,7 @@ class ShowShipyardPage extends AbstractGamePage
                     continue;
                 }
 
-                if ($Count != 0 && $PLANET[$resource[$Element]] == 0 && $InBuild === false)
+                if ($Count != 0 && $PLANET[$RESOURCE[$Element]] == 0 && $InBuild === false)
                 {
                     $Count = 1;
                 }
@@ -150,19 +150,19 @@ class ShowShipyardPage extends AbstractGamePage
 
             if (isset($costResources[901]))
             {
-                $PLANET[$resource[901]] -= $costResources[901];
+                $PLANET[$RESOURCE[901]] -= $costResources[901];
             }
             if (isset($costResources[902]))
             {
-                $PLANET[$resource[902]] -= $costResources[902];
+                $PLANET[$RESOURCE[902]] -= $costResources[902];
             }
             if (isset($costResources[903]))
             {
-                $PLANET[$resource[903]] -= $costResources[903];
+                $PLANET[$RESOURCE[903]] -= $costResources[903];
             }
             if (isset($costResources[921]))
             {
-                $USER[$resource[921]] -= $costResources[921];
+                $USER[$RESOURCE[921]] -= $costResources[921];
             }
 
             $BuildArray[] = [$Element, $Count];
@@ -172,9 +172,9 @@ class ShowShipyardPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $LNG, $resource, $reslist, $config, $requeriments;
+        global $USER, $PLANET, $LNG, $RESOURCE, $RESLIST, $config, $REQUIREMENTS;
 
-        if ($PLANET[$resource[21]] == 0 && !$config->show_ships_no_shipyard)
+        if ($PLANET[$RESOURCE[21]] == 0 && !$config->show_ships_no_shipyard)
         {
             $this->printMessage($LNG['bd_shipyard_required']);
         }
@@ -258,18 +258,18 @@ class ShowShipyardPage extends AbstractGamePage
 
         if ($mode == 'defense')
         {
-            $elementIDs = array_merge($reslist['defense'], $reslist['missile']);
+            $elementIDs = array_merge($RESLIST['defense'], $RESLIST['missile']);
         }
         else
         {
-            $elementIDs = $reslist['fleet'];
+            $elementIDs = $RESLIST['fleet'];
         }
 
         $Missiles = [];
 
-        foreach ($reslist['missile'] as $elementID)
+        foreach ($RESLIST['missile'] as $elementID)
         {
-            $Missiles[$elementID] = $PLANET[$resource[$elementID]];
+            $Missiles[$elementID] = $PLANET[$RESOURCE[$elementID]];
         }
 
         $MaxMissiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
@@ -293,16 +293,16 @@ class ShowShipyardPage extends AbstractGamePage
                 $maxBuildable = min($maxBuildable, $MaxMissiles[$Element]);
             }
 
-            $AlreadyBuild = in_array($Element, $reslist['one']) && (isset($elementInQueue[$Element]) || $PLANET[$resource[$Element]] != 0);
+            $AlreadyBuild = in_array($Element, $RESLIST['one']) && (isset($elementInQueue[$Element]) || $PLANET[$RESOURCE[$Element]] != 0);
 
             $requireArray = [];
 
-            if (isset($requeriments[$Element]))
+            if (isset($REQUIREMENTS[$Element]))
             {
-                foreach ($requeriments[$Element] as $requireID => $requireLevel)
+                foreach ($REQUIREMENTS[$Element] as $requireID => $requireLevel)
                 {
                     $requireArray[] = [
-                        'currentLevel' => ($requireID < 100) ? $PLANET[$resource[$requireID]] : $USER[$resource[$requireID]],
+                        'currentLevel' => ($requireID < 100) ? $PLANET[$RESOURCE[$requireID]] : $USER[$RESOURCE[$requireID]],
                         'neededLevel'  => $requireLevel,
                         'requireID'    => $requireID,
                     ];
@@ -312,7 +312,7 @@ class ShowShipyardPage extends AbstractGamePage
 
             $elementList[$Element] = [
                 'id'                  => $Element,
-                'available'           => $PLANET[$resource[$Element]],
+                'available'           => $PLANET[$RESOURCE[$Element]],
                 'costResources'       => $costResources,
                 'costOverflow'        => $costOverflow,
                 'costOverflowTotal'   => array_sum($costOverflow),
@@ -321,7 +321,7 @@ class ShowShipyardPage extends AbstractGamePage
                 'maxBuildable'        => floatToString($maxBuildable),
                 'AlreadyBuild'        => $AlreadyBuild,
                 'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element),
-                'requeriments'        => $requireArray,
+                'requirements'        => $requireArray,
             ];
         }
 

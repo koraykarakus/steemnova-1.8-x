@@ -58,7 +58,7 @@ class ShowResearchPage extends AbstractGamePage
 
     private function CancelBuildingFromQueue(): bool
     {
-        global $PLANET, $USER, $resource;
+        global $PLANET, $USER, $RESOURCE;
         $current_queue = unserialize($USER['b_tech_queue']);
 
         if (empty($current_queue)
@@ -81,22 +81,22 @@ class ShowResearchPage extends AbstractGamePage
             $PLANET,
             $element_id,
             false,
-            $USER[$resource[$element_id]] + 1
+            $USER[$RESOURCE[$element_id]] + 1
         );
 
         if ($PLANET['id'] == $USER['b_tech_planet'])
         {
             if (isset($cost_resources[901]))
             {
-                $PLANET[$resource[901]] += $cost_resources[901];
+                $PLANET[$RESOURCE[901]] += $cost_resources[901];
             }
             if (isset($cost_resources[902]))
             {
-                $PLANET[$resource[902]] += $cost_resources[902];
+                $PLANET[$RESOURCE[902]] += $cost_resources[902];
             }
             if (isset($cost_resources[903]))
             {
-                $PLANET[$resource[903]] += $cost_resources[903];
+                $PLANET[$RESOURCE[903]] += $cost_resources[903];
             }
         }
         else
@@ -105,18 +105,18 @@ class ShowResearchPage extends AbstractGamePage
             $sql = "UPDATE %%PLANETS%% SET ";
             if (isset($cost_resources[901]))
             {
-                $sql .= $resource[901]." = ".$resource[901]." + :".$resource[901].", ";
-                $params[':'.$resource[901]] = $cost_resources[901];
+                $sql .= $RESOURCE[901]." = ".$RESOURCE[901]." + :".$RESOURCE[901].", ";
+                $params[':'.$RESOURCE[901]] = $cost_resources[901];
             }
             if (isset($cost_resources[902]))
             {
-                $sql .= $resource[902]." = ".$resource[902]." + :".$resource[902].", ";
-                $params[':'.$resource[902]] = $cost_resources[902];
+                $sql .= $RESOURCE[902]." = ".$RESOURCE[902]." + :".$RESOURCE[902].", ";
+                $params[':'.$RESOURCE[902]] = $cost_resources[902];
             }
             if (isset($cost_resources[903]))
             {
-                $sql .= $resource[903]." = ".$resource[903]." + :".$resource[903].", ";
-                $params[':'.$resource[903]] = $cost_resources[903];
+                $sql .= $RESOURCE[903]." = ".$RESOURCE[903]." + :".$RESOURCE[903].", ";
+                $params[':'.$RESOURCE[903]] = $cost_resources[903];
             }
 
             $sql = substr($sql, 0, -2);
@@ -127,7 +127,7 @@ class ShowResearchPage extends AbstractGamePage
 
         if (isset($cost_resources[921]))
         {
-            $USER[$resource[921]] += $cost_resources[921];
+            $USER[$RESOURCE[921]] += $cost_resources[921];
         }
 
         $USER['b_tech_id'] = 0;
@@ -159,8 +159,8 @@ class ShowResearchPage extends AbstractGamePage
                 {
                     $sql = "SELECT :resource6, :resource31, id FROM %%PLANETS%% WHERE id = :id;";
                     $cplanet = $db->selectSingle($sql, [
-                        ':resource6'  => $resource[6],
-                        ':resource31' => $resource[31],
+                        ':resource6'  => $RESOURCE[6],
+                        ':resource31' => $RESOURCE[31],
                         ':id'         => $c_id[4],
                     ]);
                 }
@@ -169,7 +169,7 @@ class ShowResearchPage extends AbstractGamePage
                     $cplanet = $PLANET;
                 }
 
-                $cplanet[$resource[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
+                $cplanet[$RESOURCE[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
                 $build_end_time += BuildFunctions::getBuildingTime(
                     $USER,
                     $cplanet,
@@ -202,7 +202,7 @@ class ShowResearchPage extends AbstractGamePage
 
     private function RemoveBuildingFromQueue($queue_id): bool
     {
-        global $USER, $PLANET, $resource;
+        global $USER, $PLANET, $RESOURCE;
 
         $current_queue = unserialize($USER['b_tech_queue']);
         if ($queue_id <= 1
@@ -245,8 +245,8 @@ class ShowResearchPage extends AbstractGamePage
 
                     $sql = "SELECT :resource6, :resource31, id FROM %%PLANETS%% WHERE id = :id;";
                     $cplanet = $db->selectSingle($sql, [
-                        ':resource6'  => $resource[6],
-                        ':resource31' => $resource[31],
+                        ':resource6'  => $RESOURCE[6],
+                        ':resource31' => $RESOURCE[31],
                         ':id'         => $c_list_id_array[4],
                     ]);
                 }
@@ -255,7 +255,7 @@ class ShowResearchPage extends AbstractGamePage
                     $cplanet = $PLANET;
                 }
 
-                $cplanet[$resource[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
+                $cplanet[$RESOURCE[31].'_inter'] = $this->eco_obj->getNetworkLevel($USER, $cplanet);
 
                 $build_end_time += BuildFunctions::getBuildingTime(
                     $USER,
@@ -283,10 +283,10 @@ class ShowResearchPage extends AbstractGamePage
 
     private function AddBuildingToQueue($elementId, $AddMode = true): bool
     {
-        global $PLANET, $USER, $resource, $reslist, $pricelist;
+        global $PLANET, $USER, $RESOURCE, $RESLIST, $PRICELIST;
         $config = Config::get();
 
-        if (!in_array($elementId, $reslist['tech'])
+        if (!in_array($elementId, $RESLIST['tech'])
             || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $elementId)
             || !$this->CheckLabSettingsInQueue($PLANET))
         {
@@ -311,10 +311,10 @@ class ShowResearchPage extends AbstractGamePage
             return false;
         }
 
-        $BuildLevel = $USER[$resource[$elementId]] + 1;
+        $BuildLevel = $USER[$RESOURCE[$elementId]] + 1;
         if ($ActualCount == 0)
         {
-            if ($pricelist[$elementId]['max'] < $BuildLevel)
+            if ($PRICELIST[$elementId]['max'] < $BuildLevel)
             {
                 return false;
             }
@@ -328,19 +328,19 @@ class ShowResearchPage extends AbstractGamePage
 
             if (isset($costResources[901]))
             {
-                $PLANET[$resource[901]] -= $costResources[901];
+                $PLANET[$RESOURCE[901]] -= $costResources[901];
             }
             if (isset($costResources[902]))
             {
-                $PLANET[$resource[902]] -= $costResources[902];
+                $PLANET[$RESOURCE[902]] -= $costResources[902];
             }
             if (isset($costResources[903]))
             {
-                $PLANET[$resource[903]] -= $costResources[903];
+                $PLANET[$RESOURCE[903]] -= $costResources[903];
             }
             if (isset($costResources[921]))
             {
-                $USER[$resource[921]] -= $costResources[921];
+                $USER[$RESOURCE[921]] -= $costResources[921];
             }
 
             $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $elementId, $costResources);
@@ -366,7 +366,7 @@ class ShowResearchPage extends AbstractGamePage
 
             $BuildLevel += $addLevel;
 
-            if ($pricelist[$elementId]['max'] < $BuildLevel)
+            if ($PRICELIST[$elementId]['max'] < $BuildLevel)
             {
                 return false;
             }
@@ -427,9 +427,9 @@ class ShowResearchPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $PLANET, $USER, $LNG, $resource, $reslist, $pricelist, $config, $requeriments;
+        global $PLANET, $USER, $LNG, $RESOURCE, $RESLIST, $PRICELIST, $config, $REQUIREMENTS;
 
-        if ($PLANET[$resource[31]] == 0
+        if ($PLANET[$RESOURCE[31]] == 0
             && !$config->show_tech_no_research)
         {
             $this->printMessage($LNG['bd_lab_required']);
@@ -440,7 +440,7 @@ class ShowResearchPage extends AbstractGamePage
         $element_id = HTTP::_GP('tech', 0);
         $list_id = HTTP::_GP('listid', 0);
 
-        $PLANET[$resource[31].'_inter'] = ResourceUpdate::getNetworkLevel($USER, $PLANET);
+        $PLANET[$RESOURCE[31].'_inter'] = ResourceUpdate::getNetworkLevel($USER, $PLANET);
 
         if (!empty($cmd)
             && $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -478,7 +478,7 @@ class ShowResearchPage extends AbstractGamePage
 
         $research_list = [];
 
-        foreach ($reslist['tech'] as $c_element_id)
+        foreach ($RESLIST['tech'] as $c_element_id)
         {
             if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element_id)
                 && !$config->show_unlearned_ships)
@@ -492,7 +492,7 @@ class ShowResearchPage extends AbstractGamePage
             }
             else
             {
-                $level_to_build = $USER[$resource[$c_element_id]];
+                $level_to_build = $USER[$RESOURCE[$c_element_id]];
             }
 
             $cost_resources = BuildFunctions::getElementPrice(
@@ -514,14 +514,14 @@ class ShowResearchPage extends AbstractGamePage
 
             $requireArray = [];
 
-            if (isset($requeriments[$c_element_id]))
+            if (isset($REQUIREMENTS[$c_element_id]))
             {
-                foreach ($requeriments[$c_element_id] as $require_id => $require_level)
+                foreach ($REQUIREMENTS[$c_element_id] as $require_id => $require_level)
                 {
                     $requireArray[] = [
                         'currentLevel' => ($require_id < 100) ?
-                                        $PLANET[$resource[$require_id]] :
-                                        $USER[$resource[$require_id]],
+                                        $PLANET[$RESOURCE[$require_id]] :
+                                        $USER[$RESOURCE[$require_id]],
                         'neededLevel' => $require_level,
                         'requireID'   => $require_id,
                     ];
@@ -531,8 +531,8 @@ class ShowResearchPage extends AbstractGamePage
 
             $research_list[$c_element_id] = [
                 'id'                  => $c_element_id,
-                'level'               => $USER[$resource[$c_element_id]],
-                'maxLevel'            => $pricelist[$c_element_id]['max'],
+                'level'               => $USER[$RESOURCE[$c_element_id]],
+                'maxLevel'            => $PRICELIST[$c_element_id]['max'],
                 'costResources'       => $cost_resources,
                 'costOverflow'        => $cost_overflow,
                 'costOverflowTotal'   => array_sum($cost_overflow),
@@ -540,7 +540,7 @@ class ShowResearchPage extends AbstractGamePage
                 'buyable'             => $buyable,
                 'levelToBuild'        => $level_to_build,
                 'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element_id),
-                'requeriments'        => $requireArray,
+                'requirements'        => $requireArray,
             ];
         }
 

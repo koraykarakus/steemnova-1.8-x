@@ -71,13 +71,13 @@ class Buildings
 
     public static function AddBuildingToQueue($element, $add_mode = true): void
     {
-        global $PLANET, $USER, $resource, $reslist, $pricelist, $config;
+        global $PLANET, $USER, $RESOURCE, $RESLIST, $PRICELIST, $config;
 
-        if (!in_array($element, $reslist['allow'][$PLANET['planet_type']])
+        if (!in_array($element, $RESLIST['allow'][$PLANET['planet_type']])
             || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $element)
             || ($element == 31 && $USER["b_tech_planet"] != 0)
             || (($element == 15 || $element == 21) && !empty($PLANET['b_shipyard_id']))
-            || (!$add_mode && $PLANET[$resource[$element]] == 0)
+            || (!$add_mode && $PLANET[$RESOURCE[$element]] == 0)
         ) {
             return;
         }
@@ -114,11 +114,11 @@ class Buildings
         }
 
         $build_mode = $add_mode ? 'build' : 'destroy';
-        $build_level = $PLANET[$resource[$element]] + (int) $add_mode;
+        $build_level = $PLANET[$RESOURCE[$element]] + (int) $add_mode;
 
         if ($actual_count == 0)
         {
-            if ($pricelist[$element]['max'] < $build_level)
+            if ($PRICELIST[$element]['max'] < $build_level)
             {
                 return;
             }
@@ -132,19 +132,19 @@ class Buildings
 
             if (isset($cost_resources[901]))
             {
-                $PLANET[$resource[901]] -= $cost_resources[901];
+                $PLANET[$RESOURCE[901]] -= $cost_resources[901];
             }
             if (isset($cost_resources[902]))
             {
-                $PLANET[$resource[902]] -= $cost_resources[902];
+                $PLANET[$RESOURCE[902]] -= $cost_resources[902];
             }
             if (isset($cost_resources[903]))
             {
-                $PLANET[$resource[903]] -= $cost_resources[903];
+                $PLANET[$RESOURCE[903]] -= $cost_resources[903];
             }
             if (isset($cost_resources[921]))
             {
-                $USER[$resource[921]] -= $cost_resources[921];
+                $USER[$RESOURCE[921]] -= $cost_resources[921];
             }
 
             $element_time = BuildFunctions::getBuildingTime($USER, $PLANET, $element, $cost_resources);
@@ -182,7 +182,7 @@ class Buildings
                 return;
             }
 
-            if ($pricelist[$element]['max'] < $build_level)
+            if ($PRICELIST[$element]['max'] < $build_level)
             {
                 return;
             }
@@ -197,7 +197,7 @@ class Buildings
 
     public static function CancelBuildingFromQueue($eco_obj): bool
     {
-        global $PLANET, $USER, $resource;
+        global $PLANET, $USER, $RESOURCE;
         $current_queue = unserialize($PLANET['b_building_id'] ?? '');
         if (empty($current_queue))
         {
@@ -220,19 +220,19 @@ class Buildings
 
         if (isset($cost_resources[901]))
         {
-            $PLANET[$resource[901]] += $cost_resources[901];
+            $PLANET[$RESOURCE[901]] += $cost_resources[901];
         }
         if (isset($cost_resources[902]))
         {
-            $PLANET[$resource[902]] += $cost_resources[902];
+            $PLANET[$RESOURCE[902]] += $cost_resources[902];
         }
         if (isset($cost_resources[903]))
         {
-            $PLANET[$resource[903]] += $cost_resources[903];
+            $PLANET[$RESOURCE[903]] += $cost_resources[903];
         }
         if (isset($cost_resources[921]))
         {
-            $USER[$resource[921]] += $cost_resources[921];
+            $USER[$RESOURCE[921]] += $cost_resources[921];
         }
         array_shift($current_queue);
         if (count($current_queue) == 0)

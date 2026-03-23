@@ -11,7 +11,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $LNG, $resource, $reslist, $config;
+        global $USER, $PLANET, $LNG, $RESOURCE, $RESLIST, $config;
 
         $db = Database::get();
 
@@ -116,18 +116,18 @@ class ShowAutoExpeditionPage extends AbstractGamePage
         $fleet = [];
         $possible = min($room, $max_exp_slots - $active_expedition);
 
-        foreach ($reslist['fleet'] as $element_id)
+        foreach ($RESLIST['fleet'] as $element_id)
         {
 
             if ($element_id == 212
                 || $element_id == 221
-                || floor($PLANET[$resource[$element_id]] / $possible) == 0)
+                || floor($PLANET[$RESOURCE[$element_id]] / $possible) == 0)
             {
                 continue;
             }
 
             $fleet = $fleet + [
-                $element_id => floor($PLANET[$resource[$element_id]] / $possible),
+                $element_id => floor($PLANET[$RESOURCE[$element_id]] / $possible),
             ];
         }
 

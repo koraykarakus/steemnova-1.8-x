@@ -11,10 +11,10 @@ class ShowFlightSimulatorPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $reslist, $resource, $PLANET;
+        global $USER, $RESLIST, $RESOURCE, $PLANET;
 
         $possible_ships = [];
-        foreach ($reslist['fleet'] as $c_id)
+        foreach ($RESLIST['fleet'] as $c_id)
         {
             if ($c_id == 212
                 || $c_id == 221)
@@ -24,7 +24,7 @@ class ShowFlightSimulatorPage extends AbstractGamePage
 
             $possible_ships[] = [
                 'id'    => $c_id,
-                'count' => $PLANET[$resource[$c_id]],
+                'count' => $PLANET[$RESOURCE[$c_id]],
             ];
         }
 
@@ -44,10 +44,10 @@ class ShowFlightSimulatorPage extends AbstractGamePage
 
     public function calcFleetSpeed(): void
     {
-        global $reslist;
+        global $RESLIST;
 
         $fleet = $player = [];
-        foreach ($reslist['fleet'] as $c_id)
+        foreach ($RESLIST['fleet'] as $c_id)
         {
             if ($c_id == 212
                 || $c_id == 221)
