@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_battlesim}{/block}
 {block name="content"}
 <form id="form" name="battlesim">
-	<input type="hidden" name="slots" id="slots" value="{$Slots + 1}">
+	<input type="hidden" name="slots" id="slots" value="{$slots + 1}">
 	
 	<table class="table-gow table_full">
 		<thead>
@@ -21,8 +21,8 @@
 				</td>
 				<td>
 					<input id="steal_metal"
-					type="text" value="{if isset($battleinput.0.1.901)}{$battleinput.0.1.901}{else}0{/if}"
-					name="battleinput[0][1][901]">
+					type="text" value="{if isset($battle_input.0.1.901)}{$battle_input.0.1.901}{else}0{/if}"
+					name="battle_input[0][1][901]">
 				</td>
 			</tr>
 			<tr>
@@ -31,8 +31,8 @@
 				</td>
 				<td>
 					<input id="steal_crystal"
-					type="text" value="{if isset($battleinput.0.1.902)}{$battleinput.0.1.902}{else}0{/if}"
-					name="battleinput[0][1][902]">
+					type="text" value="{if isset($battle_input.0.1.902)}{$battle_input.0.1.902}{else}0{/if}"
+					name="battle_input[0][1][902]">
 				</td>
 			</tr>
 			<tr>
@@ -41,8 +41,8 @@
 				</td>
 				<td>
 					<input id="steal_deuterium"
-								type="text" value="{if isset($battleinput.0.1.903)}{$battleinput.0.1.903}{else}0{/if}"
-								name="battleinput[0][1][903]">
+								type="text" value="{if isset($battle_input.0.1.903)}{$battle_input.0.1.903}{else}0{/if}"
+								name="battle_input[0][1][903]">
 				</td>
 			</tr>
 		</tbody>
@@ -64,7 +64,7 @@
 				<td style="padding: 0;">
 					<div style="max-width:600px" id="tabs">
 						<ul>
-							{section name=tab start=0 loop=$Slots}
+							{section name=tab start=0 loop=$slots}
 								<li>
 									<a href="#tabs-{$smarty.section.tab.index}">
 										{$LNG.bs_acs_slot}{$smarty.section.tab.index + 1}
@@ -72,7 +72,7 @@
 								</li>
 							{/section}
 						</ul>
-						{section name=content start=0 loop=$Slots}
+						{section name=content start=0 loop=$slots}
 							<div style="max-width:600px" id="tabs-{$smarty.section.content.index}">
 								<table class="table-gow table_full">
 									<tr>
@@ -91,15 +91,15 @@
 											<input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.0.109)}{$battleinput.{$smarty.section.content.index}.0.109}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][0][109]">
+												value="{if isset($battle_input.{$smarty.section.content.index}.0.109)}{$battle_input.{$smarty.section.content.index}.0.109}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][0][109]">
 										</td>
 										<td>
 											<input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.1.109)}{$battleinput.{$smarty.section.content.index}.1.109}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][1][109]">
+												value="{if isset($battle_input.{$smarty.section.content.index}.1.109)}{$battle_input.{$smarty.section.content.index}.1.109}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][1][109]">
 										</td>
 									</tr>
 									<tr>
@@ -107,26 +107,26 @@
 										<td><input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.0.110)}{$battleinput.{$smarty.section.content.index}.0.110}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][0][110]"></td>
+												value="{if isset($battle_input.{$smarty.section.content.index}.0.110)}{$battle_input.{$smarty.section.content.index}.0.110}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][0][110]"></td>
 										<td><input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.1.110)}{$battleinput.{$smarty.section.content.index}.1.110}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][1][110]"></td>
+												value="{if isset($battle_input.{$smarty.section.content.index}.1.110)}{$battle_input.{$smarty.section.content.index}.1.110}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][1][110]"></td>
 									</tr>
 									<tr>
 										<td>{$LNG.tech.111}:</td>
 										<td><input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.0.111)}{$battleinput.{$smarty.section.content.index}.0.111}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][0][111]"></td>
+												value="{if isset($battle_input.{$smarty.section.content.index}.0.111)}{$battle_input.{$smarty.section.content.index}.0.111}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][0][111]"></td>
 										<td><input
 												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
 												type="text" size="10"
-												value="{if isset($battleinput.{$smarty.section.content.index}.1.111)}{$battleinput.{$smarty.section.content.index}.1.111}{else}0{/if}"
-												name="battleinput[{$smarty.section.content.index}][1][111]"></td>
+												value="{if isset($battle_input.{$smarty.section.content.index}.1.111)}{$battle_input.{$smarty.section.content.index}.1.111}{else}0{/if}"
+												name="battle_input[{$smarty.section.content.index}][1][111]"></td>
 									</tr>
 								</table>
 								<br>
@@ -148,19 +148,19 @@
 														<button class="reset">{$LNG.bs_reset}</button>
 													</td>
 												</tr>
-												{foreach $fleetList as $id}
+												{foreach $fleet_list as $id}
 													<tr>
 														<td>{$LNG.tech.$id}:</td>
 														<td>
 															<input
 																type="text" size="10"
-																value="{if isset($battleinput.{$smarty.section.content.index}.0.$id)}{$battleinput.{$smarty.section.content.index}.0.$id}{else}0{/if}"
-																name="battleinput[{$smarty.section.content.index}][0][{$id}]"></td>
+																value="{if isset($battle_input.{$smarty.section.content.index}.0.$id)}{$battle_input.{$smarty.section.content.index}.0.$id}{else}0{/if}"
+																name="battle_input[{$smarty.section.content.index}][0][{$id}]"></td>
 														<td>
 															<input
 																type="text" size="10"
-																value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}"
-																name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
+																value="{if isset($battle_input.{$smarty.section.content.index}.1.$id)}{$battle_input.{$smarty.section.content.index}.1.$id}{else}0{/if}"
+																name="battle_input[{$smarty.section.content.index}][1][{$id}]"></td>
 													</tr>
 												{/foreach}
 											</table>
@@ -180,14 +180,14 @@
 															<button class="reset">{$LNG.bs_reset}</button>
 														</td>
 													</tr>
-												{foreach $defensiveList as $id}
+												{foreach $defensive_list as $id}
 													<tr>
 														<td>{$LNG.tech.$id}:</td>
 														<td>-</td>
 														<td>
 															<input type="text" size="10"
-																value="{if isset($battleinput.{$smarty.section.content.index}.1.$id)}{$battleinput.{$smarty.section.content.index}.1.$id}{else}0{/if}"
-																name="battleinput[{$smarty.section.content.index}][1][{$id}]"></td>
+																value="{if isset($battle_input.{$smarty.section.content.index}.1.$id)}{$battle_input.{$smarty.section.content.index}.1.$id}{else}0{/if}"
+																name="battle_input[{$smarty.section.content.index}][1][{$id}]"></td>
 													</tr>
 												{/foreach}
 												</table>

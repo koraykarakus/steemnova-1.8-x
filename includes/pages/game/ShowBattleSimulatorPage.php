@@ -28,16 +28,18 @@ class ShowBattleSimulatorPage extends AbstractGamePage
     {
         global $reslist, $pricelist, $LNG;
 
-        if (!isset($_REQUEST['battleinput']))
+        if (!isset($_REQUEST['battle_input']))
         {
             $this->sendJSON(0);
         }
 
-        $battle_array = $_REQUEST['battleinput'];
+        $battle_array = $_REQUEST['battle_input'];
         $elements = [0, 0];
         foreach ($battle_array as $battle_slot_id => $battle_slot)
         {
-            if (isset($battle_slot[0]) && (array_sum($battle_slot[0]) > 0 || $battle_slot_id == 0))
+            if (isset($battle_slot[0])
+                && (array_sum($battle_slot[0]) > 0
+                || $battle_slot_id == 0))
             {
                 $attacker = [];
                 $attacker['fleetDetail'] = [
@@ -66,11 +68,12 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
                 $attacker['player']['factor'] = getFactors($attacker['player'], 'attack');
 
-                foreach ($battle_slot[0] as $ID => $Count)
+                foreach ($battle_slot[0] as $id => $Count)
                 {
-                    if (!in_array($ID, $reslist['fleet']) || $battle_slot[0][$ID] <= 0)
+                    if (!in_array($id, $reslist['fleet'])
+                        || $battle_slot[0][$id] <= 0)
                     {
-                        unset($battle_slot[0][$ID]);
+                        unset($battle_slot[0][$id]);
                     }
                 }
 
@@ -79,7 +82,9 @@ class ShowBattleSimulatorPage extends AbstractGamePage
                 $attackers[] = $attacker;
             }
 
-            if (isset($battle_slot[1]) && (array_sum($battle_slot[1]) > 0 || $battle_slot_id == 0))
+            if (isset($battle_slot[1])
+                && (array_sum($battle_slot[1]) > 0
+                || $battle_slot_id == 0))
             {
                 $defender = [];
                 $defender['fleetDetail'] = [
@@ -108,13 +113,13 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
                 $defender['player']['factor'] = getFactors($defender['player'], 'attack');
 
-                foreach ($battle_slot[1] as $ID => $Count)
+                foreach ($battle_slot[1] as $id => $Count)
                 {
-                    if ((!in_array($ID, $reslist['fleet'])
-                        && !in_array($ID, $reslist['defense']))
-                        || $battle_slot[1][$ID] <= 0)
+                    if ((!in_array($id, $reslist['fleet'])
+                        && !in_array($id, $reslist['defense']))
+                        || $battle_slot[1][$id] <= 0)
                     {
-                        unset($battle_slot[1][$ID]);
+                        unset($battle_slot[1][$id]);
                     }
                 }
 
@@ -157,7 +162,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
 
         foreach ([901, 902] as $element_id)
         {
-            $debris[$element_id] = $combat_result['debris']['attacker'][$element_id] + 
+            $debris[$element_id] = $combat_result['debris']['attacker'][$element_id] +
             $combat_result['debris']['defender'][$element_id];
         }
 
@@ -220,7 +225,7 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         $db->insert($sql, [
             ':report_id'   => $report_id,
             ':report_data' => serialize($report_data),
-            ':time'       => TIMESTAMP,
+            ':time'        => TIMESTAMP,
         ]);
 
         $this->sendJSON($report_id);
@@ -236,37 +241,37 @@ class ShowBattleSimulatorPage extends AbstractGamePage
         $battle_array[0][0][110] = $USER[$resource[110]];
         $battle_array[0][0][111] = $USER[$resource[111]];
 
-        if (empty($_REQUEST['battleinput']))
+        if (empty($_REQUEST['battle_input']))
         {
-            foreach ($reslist['fleet'] as $ID)
+            foreach ($reslist['fleet'] as $id)
             {
-                if (FleetFunctions::GetFleetMaxSpeed($ID, $USER) > 0)
+                if (FleetFunctions::GetFleetMaxSpeed($id, $USER) > 0)
                 {
                     // Add just flyable elements
-                    $battle_array[0][0][$ID] = $PLANET[$resource[$ID]];
+                    $battle_array[0][0][$id] = $PLANET[$resource[$id]];
                 }
             }
         }
         else
         {
-            $battle_array = HTTP::_GP('battleinput', []);
+            $battle_array = HTTP::_GP('battle_input', []);
         }
 
         if (isset($_REQUEST['im']))
         {
-            foreach ($_REQUEST['im'] as $ID => $Count)
+            foreach ($_REQUEST['im'] as $id => $Count)
             {
-                $battle_array[0][1][$ID] = floatToString($Count);
+                $battle_array[0][1][$id] = floatToString($Count);
             }
         }
 
         $this->tpl_obj->loadscript('battlesim.js');
 
         $this->assign([
-            'Slots'         => $slots,
-            'battleinput'   => $battle_array,
-            'fleetList'     => $reslist['fleet'],
-            'defensiveList' => $reslist['defense'],
+            'slots'          => $slots,
+            'battle_input'   => $battle_array,
+            'fleet_list'     => $reslist['fleet'],
+            'defensive_list' => $reslist['defense'],
         ]);
 
         $this->display('page.battleSimulator.default.tpl');
