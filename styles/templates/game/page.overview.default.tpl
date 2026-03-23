@@ -31,13 +31,13 @@
         <td>{$LNG["type_planet_{$planet_type}"]}</td>
         <td>
           <a href="#" onclick="return Dialog.PlanetAction();"
-            title="{$LNG.ov_planetmenu}">{$planetname}&nbsp;({$username})</a>
+            title="{$LNG.ov_planetmenu}">{$planet_name}&nbsp;({$username})</a>
         </td>
       </tr>
       <tr>
         <td>{$LNG.ov_admins_online}</td>
         <td>
-          {foreach $AdminsOnline as $ID => $Name}
+          {foreach $admins_online as $ID => $Name}
             {if !$Name@first}&nbsp;&bull;&nbsp;{/if}
             <a href="#" onclick="return Dialog.PM({$ID})"><a style="color:lime">{$Name}</a>
             {foreachelse}
@@ -46,15 +46,15 @@
       </tr>
       <tr>
         <td>{$LNG.ov_players}</td>
-        <td><a style="color:lime">{$usersOnline}</a></td>
+        <td><a style="color:lime">{$users_online}</a></td>
       </tr>
       <tr>
         <td>{$LNG.ov_moving_fleets}</td>
-        <td><a style="color:lime">{$fleetsOnline}</a></td>
+        <td><a style="color:lime">{$fleets_online}</a></td>
       </tr>
       <tr>
         <td>{$LNG.ov_points}</td>
-        <td>{$rankInfo}</td>
+        <td>{$rank_info}</td>
       </tr>
       {if !empty($news)}
         <tr>
@@ -88,20 +88,20 @@
           <table class="table_full">
             <tbody>
               <tr>
-                <td>{$planetname}</td>
+                <td>{$planet_name}</td>
                 <td>
                   <a class="hover-pointer" href="?page=overview&cp={$planet_id}">
-                    <img src="{$dpath}planets/{$planetimage}.jpg" height="160" width="160" alt="{$planetname}">
+                    <img src="{$dpath}planets/{$planet_image}.jpg" height="160" width="160" alt="{$planet_name}">
                   </a>
                 </td>
               </tr>
-              {if $Moon}
+              {if $moon}
               <tr>
-                <td>{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}</td>
+                <td>{$moon.name} {if $moon.planet_type == 3}({$LNG.fcm_moon}){/if}</td>
                 <td>
-                  <a href="game.php?page=overview&amp;cp={$Moon.id}" title="{$Moon.name}">
-                    <img src="{$dpath}planets/{$Moon.image}.jpg" height="50" width="50"
-                      alt="{$Moon.name} {if $Moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
+                  <a href="game.php?page=overview&amp;cp={$moon.id}" title="{$moon.name}">
+                    <img src="{$dpath}planets/{$moon.image}.jpg" height="50" width="50"
+                      alt="{$moon.name} {if $moon.planet_type == 3}({$LNG.fcm_moon}){/if}">
                   </a>
                 </td>
               </tr>
@@ -150,28 +150,28 @@
   <table class="table-gow">
     <tr>
       <td>
-        {if $buildInfo.buildings}
+        {if $build_info.buildings}
           <a href="game.php?page=buildings">{$LNG.lm_buildings}: </a>
-          {$LNG.tech[$buildInfo.buildings['id']]} ({$buildInfo.buildings['level']})<br>
-          <div class="timer" data-time="{$buildInfo.buildings['timeleft']}">{$buildInfo.buildings['starttime']}</div>
+          {$LNG.tech[$build_info.buildings['id']]} ({$build_info.buildings['level']})<br>
+          <div class="timer" data-time="{$build_info.buildings['timeleft']}">{$build_info.buildings['starttime']}</div>
         {else}
           <a class="hover-underline" href="game.php?page=buildings">{$LNG.lm_buildings}: {$LNG.ov_free}</a><br>
         {/if}
       </td>
       <td>
-        {if $buildInfo.tech}
+        {if $build_info.tech}
           <a href="game.php?page=research">{$LNG.lm_research}: </a>
-          {$LNG.tech[$buildInfo.tech['id']]} ({$buildInfo.tech['level']})<br>
-          <div class="timer" data-time="{$buildInfo.tech['timeleft']}">{$buildInfo.tech['starttime']}</div>
+          {$LNG.tech[$build_info.tech['id']]} ({$build_info.tech['level']})<br>
+          <div class="timer" data-time="{$build_info.tech['timeleft']}">{$build_info.tech['starttime']}</div>
         {else}
           <a class="hover-underline" href="game.php?page=research">{$LNG.lm_research}: {$LNG.ov_free}</a>
         {/if}
       </td>
       <td>
-        {if $buildInfo.fleet}
+        {if $build_info.fleet}
           <a href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: </a>
-          {$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})<br>
-          <div class="timer" data-time="{$buildInfo.fleet['timeleft']}">{$buildInfo.fleet['starttime']}</div>
+          {$LNG.tech[$build_info.fleet['id']]} ({$build_info.fleet['level']})<br>
+          <div class="timer" data-time="{$build_info.fleet['timeleft']}">{$build_info.fleet['starttime']}</div>
         {else}
           <a class="hover-underline" href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipyard}: {$LNG.ov_free}</a>
         {/if}

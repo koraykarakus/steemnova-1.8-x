@@ -180,10 +180,10 @@ class ShowOverviewPage extends AbstractGamePage
         $sql = "SELECT userName FROM %%CHAT_ON%% WHERE 
         dateTime > DATE_SUB(NOW(), interval 2 MINUTE) AND channel = 0";
 
-        $chatUsers = $db->select($sql);
+        $chat_users = $db->select($sql);
 
         $chat_online = [];
-        foreach ($chatUsers as $c_user)
+        foreach ($chat_users as $c_user)
         {
             $chat_online[] = $c_user['userName'];
         }
@@ -261,22 +261,22 @@ class ShowOverviewPage extends AbstractGamePage
         }
 
         $this->assign([
-            'rankInfo'             => $rank_info,
+            'rank_info'            => $rank_info,
             'news'                 => $news,
-            'usersOnline'          => $users_online,
-            'fleetsOnline'         => $fleets_online,
-            'planetname'           => $PLANET['name'],
-            'planetimage'          => $PLANET['image'],
+            'users_online'         => $users_online,
+            'fleets_online'        => $fleets_online,
+            'planet_name'          => $PLANET['name'],
+            'planet_image'         => $PLANET['image'],
             'galaxy'               => $PLANET['galaxy'],
             'system'               => $PLANET['system'],
             'planet'               => $PLANET['planet'],
             'planet_type'          => $PLANET['planet_type'],
             'username'             => $USER['username'],
             'userid'               => $USER['id'],
-            'buildInfo'            => $build_info,
-            'Moon'                 => $moon,
-            'AdminsOnline'         => $admins_online,
-            'teamspeakData'        => $this->GetTeamspeakData(),
+            'build_info'           => $build_info,
+            'moon'                 => $moon,
+            'admins_online'        => $admins_online,
+            'teamspeak_data'       => $this->GetTeamspeakData(),
             'planet_diameter'      => pretty_number($PLANET['diameter']),
             'planet_field_current' => $PLANET['field_current'],
             'planet_field_max'     => CalculateMaxPlanetFields($PLANET),
@@ -285,8 +285,8 @@ class ShowOverviewPage extends AbstractGamePage
             'planet_id'            => $PLANET['id'],
             'ref_active'           => $config->ref_active,
             'ref_minpoints'        => $config->ref_minpoints,
-            'RefLinks'             => $ref_links,
-            'chatOnline'           => $chat_online,
+            'ref_links'            => $ref_links,
+            'chat_online'          => $chat_online,
             'path'                 => HTTP_PATH,
             'show_news_active'     => $USER['show_news_active'],
         ]);
