@@ -373,7 +373,7 @@ function getShipsCount($attackers, $defenders)
 
 function getNewDebris($start, $end, $FleetTF, $DefTF)
 {
-    global $pricelist;
+    global $PRICELIST;
     $fleet_start = [];
     foreach ($start as $startPlayer)
     {
@@ -451,13 +451,13 @@ function getNewDebris($start, $end, $FleetTF, $DefTF)
     {
         if ($id < ID_MAX_SHIPS && $id > ID_MIN_SHIPS) //calculate ships
         {
-            $metal = $metal + ($pricelist[$id]['cost']['901'] * $count * ($FleetTF / 100));
-            $crystal = $crystal + ($pricelist[$id]['cost']['902'] * $count * ($FleetTF / 100));
+            $metal = $metal + ($PRICELIST[$id]['cost']['901'] * $count * ($FleetTF / 100));
+            $crystal = $crystal + ($PRICELIST[$id]['cost']['902'] * $count * ($FleetTF / 100));
         }
         else //calculate defense units
         {
-            $metal = $metal + ($pricelist[$id]['cost']['901'] * $count * ($DefTF / 100));
-            $crystal = $crystal + ($pricelist[$id]['cost']['902'] * $count * ($DefTF / 100));
+            $metal = $metal + ($PRICELIST[$id]['cost']['901'] * $count * ($DefTF / 100));
+            $crystal = $crystal + ($PRICELIST[$id]['cost']['902'] * $count * ($DefTF / 100));
         }
     }
 
@@ -470,7 +470,7 @@ function getNewDebris($start, $end, $FleetTF, $DefTF)
 
 function calculateTotalLost($startUnits, $endUnits)
 {
-    global $pricelist;
+    global $PRICELIST;
 
     $startFleet = [];
     foreach ($startUnits as $currentStart)
@@ -520,7 +520,7 @@ function calculateTotalLost($startUnits, $endUnits)
     foreach ($difference as $unitID => $count)
     {
 
-        $unitValue = $count * ($pricelist[$unitID]['cost'][901] + $pricelist[$unitID]['cost']['902'] + $pricelist[$unitID]['cost']['903']);
+        $unitValue = $count * ($PRICELIST[$unitID]['cost'][901] + $PRICELIST[$unitID]['cost']['902'] + $PRICELIST[$unitID]['cost']['903']);
         $totalLost = $totalLost + $unitValue;
 
     }
@@ -531,7 +531,7 @@ function calculateTotalLost($startUnits, $endUnits)
 
 function getGroupLostUnits($startUnits, $endUnits)
 {
-    global $pricelist;
+    global $PRICELIST;
 
     $groupLostStart = [];
 
@@ -570,7 +570,7 @@ function getGroupLostUnits($startUnits, $endUnits)
 
                         if ($endUnitID == $startUnitID)
                         {
-                            $costUnit = $pricelist[$endUnitID]['cost']['901'] + $pricelist[$endUnitID]['cost']['902'] + $pricelist[$endUnitID]['cost']['903'];
+                            $costUnit = $PRICELIST[$endUnitID]['cost']['901'] + $PRICELIST[$endUnitID]['cost']['902'] + $PRICELIST[$endUnitID]['cost']['903'];
                             $difference[$endPlayerKey][$endUnitID] = $costUnit * ($startCount - $endCount);
                             break;
                         }
