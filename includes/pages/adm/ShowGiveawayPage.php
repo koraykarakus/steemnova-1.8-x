@@ -38,7 +38,7 @@ class ShowGiveawayPage extends AbstractAdminPage
 
     public function send(): void
     {
-        global $LNG, $resource, $RESLIST;
+        global $LNG, $RESOURCE, $RESLIST;
 
         $planet = HTTP::_GP('planet', 0);
         $moon = HTTP::_GP('moon', 0);
@@ -81,7 +81,7 @@ class ShowGiveawayPage extends AbstractAdminPage
         foreach ($data_ids as $c_id)
         {
             $amount = max(0, round(HTTP::_GP('element_'.$c_id, 0.0)));
-            $data[] = $resource[$c_id]." = ".$resource[$c_id]." + ".$amount;
+            $data[] = $RESOURCE[$c_id]." = ".$RESOURCE[$c_id]." + ".$amount;
 
             $log_old[$c_id] = 0;
             $log_new[$c_id] = $amount;
