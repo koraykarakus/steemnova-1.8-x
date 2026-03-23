@@ -153,7 +153,7 @@ class GalaxyRows
 
     protected function getAllowedMissions()
     {
-        global $PLANET, $resource;
+        global $PLANET, $RESOURCE;
 
         $this->galaxy_data[$this->galaxy_row['planet']]['missions'] = [
             1  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_ATTACK),
@@ -162,21 +162,21 @@ class GalaxyRows
             5  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_HOLD),
             6  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && isModuleAvailable(MODULE_MISSION_SPY),
             8  => isModuleAvailable(MODULE_MISSION_RECYCLE),
-            9  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$resource[214]] > 0 && isModuleAvailable(MODULE_MISSION_DESTROY),
-            10 => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$resource[503]] > 0 && isModuleAvailable(MODULE_MISSION_ATTACK) && isModuleAvailable(MODULE_MISSILEATTACK) && $this->inMissileRange(),
+            9  => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$RESOURCE[214]] > 0 && isModuleAvailable(MODULE_MISSION_DESTROY),
+            10 => !$this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] && $PLANET[$RESOURCE[503]] > 0 && isModuleAvailable(MODULE_MISSION_ATTACK) && isModuleAvailable(MODULE_MISSILEATTACK) && $this->inMissileRange(),
         ];
     }
 
     protected function inMissileRange()
     {
-        global $USER, $PLANET, $resource;
+        global $USER, $PLANET, $RESOURCE;
 
         if ($this->galaxy_row['galaxy'] != $PLANET['galaxy'])
         {
             return false;
         }
 
-        $range = FleetFunctions::GetMissileRange($USER[$resource[117]]);
+        $range = FleetFunctions::GetMissileRange($USER[$RESOURCE[117]]);
         $system_min = $PLANET['system'] - $range;
         $system_max = $PLANET['system'] + $range;
 

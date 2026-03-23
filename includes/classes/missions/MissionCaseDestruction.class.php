@@ -24,7 +24,7 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 
     public function TargetEvent()
     {
-        global $resource, $reslist;
+        global $RESOURCE, $RESLIST;
 
         $db = Database::get();
 
@@ -171,14 +171,14 @@ HTML;
 
         $fleetDefend[0]['unit'] = [];
 
-        foreach (array_merge($reslist['fleet'], $reslist['defense']) as $elementID)
+        foreach (array_merge($RESLIST['fleet'], $RESLIST['defense']) as $elementID)
         {
-            if (empty($targetPlanet[$resource[$elementID]]))
+            if (empty($targetPlanet[$RESOURCE[$elementID]]))
             {
                 continue;
             }
 
-            $fleetDefend[0]['unit'][$elementID] = $targetPlanet[$resource[$elementID]];
+            $fleetDefend[0]['unit'][$elementID] = $targetPlanet[$RESOURCE[$elementID]];
         }
 
         $userDefend[$fleetDefend[0]['player']['id']] = $fleetDefend[0]['player']['username'];
@@ -312,8 +312,8 @@ HTML;
                 $fleetArray = [];
                 foreach ($fleetDetail['unit'] as $elementID => $amount)
                 {
-                    $fleetArray[] = '`'.$resource[$elementID].'` = :'.$resource[$elementID];
-                    $params[':'.$resource[$elementID]] = $amount;
+                    $fleetArray[] = '`'.$RESOURCE[$elementID].'` = :'.$RESOURCE[$elementID];
+                    $params[':'.$RESOURCE[$elementID]] = $amount;
                 }
 
                 if (!empty($fleetArray))
@@ -343,7 +343,7 @@ HTML;
         foreach ($debrisResource as $elementID)
         {
             $debris[$elementID] = $combatResult['debris']['attacker'][$elementID] + $combatResult['debris']['defender'][$elementID];
-            $planetDebris[$elementID] = $targetPlanet['debris_'.$resource[$elementID]] + $debris[$elementID];
+            $planetDebris[$elementID] = $targetPlanet['debris_'.$RESOURCE[$elementID]] + $debris[$elementID];
         }
 
         $reportInfo = [

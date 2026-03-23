@@ -21,9 +21,9 @@ class FleetFunctions
 
     private static function GetShipConsumption($Ship, $Player)
     {
-        global $pricelist;
+        global $PRICELIST;
 
-        return (($Player['impulse_motor_tech'] >= 5 && $Ship == 202) || ($Player['hyperspace_motor_tech'] >= 8 && $Ship == 211)) ? $pricelist[$Ship]['consumption2'] : $pricelist[$Ship]['consumption'];
+        return (($Player['impulse_motor_tech'] >= 5 && $Ship == 202) || ($Player['hyperspace_motor_tech'] >= 8 && $Ship == 211)) ? $PRICELIST[$Ship]['consumption2'] : $PRICELIST[$Ship]['consumption'];
     }
 
     private static function OnlyShipByID($Ships, $ShipID)
@@ -33,9 +33,9 @@ class FleetFunctions
 
     private static function GetShipSpeed($Ship, $Player)
     {
-        global $pricelist;
+        global $PRICELIST;
 
-        $techSpeed = $pricelist[$Ship]['tech'];
+        $techSpeed = $PRICELIST[$Ship]['tech'];
 
         if ($techSpeed == 4)
         {
@@ -46,23 +46,23 @@ class FleetFunctions
             $techSpeed = $Player['hyperspace_motor_tech'] >= 8 ? 3 : 2;
         }
 
-        $base_speed = $pricelist[$Ship]['speed'];
+        $base_speed = $PRICELIST[$Ship]['speed'];
 
         if ($Player['impulse_motor_tech'] >= 5 && $Ship == 202)
         {
-            $base_speed = $pricelist[$Ship]['speed2'];
+            $base_speed = $PRICELIST[$Ship]['speed2'];
         }
         if ($Player['hyperspace_motor_tech'] >= 8 && $Ship == 211)
         {
-            $base_speed = $pricelist[$Ship]['speed2'];
+            $base_speed = $PRICELIST[$Ship]['speed2'];
         }
         if ($Player['impulse_motor_tech'] >= 17 && $Ship == 209)
         {
-            $base_speed = $pricelist[$Ship]['speed2'];
+            $base_speed = $PRICELIST[$Ship]['speed2'];
         }
         if ($Player['hyperspace_motor_tech'] >= 15 && $Ship == 209)
         {
-            $base_speed = 6000;  // This should be $pricelist[$Ship]['speed3'];
+            $base_speed = 6000;  // This should be $PRICELIST[$Ship]['speed3'];
             // But this needs more changes
         }
 
@@ -87,7 +87,7 @@ class FleetFunctions
 
     public static function getExpeditionLimit($USER)
     {
-        return floor(sqrt($USER[$GLOBALS['resource'][124]])) + $USER['factor']['Expedition'];
+        return floor(sqrt($USER[$GLOBALS['RESOURCE'][124]])) + $USER['factor']['Expedition'];
     }
 
     public static function getDMMissionLimit($USER)
@@ -155,17 +155,17 @@ class FleetFunctions
 
     public static function GetMaxFleetSlots($USER)
     {
-        global $resource;
-        return 1 + $USER[$resource[108]] + $USER['factor']['FleetSlots'];
+        global $RESOURCE;
+        return 1 + $USER[$RESOURCE[108]] + $USER['factor']['FleetSlots'];
     }
 
     public static function GetFleetRoom($Fleet)
     {
-        global $pricelist, $USER;
+        global $PRICELIST, $USER;
         $FleetRoom = 0;
         foreach ($Fleet as $ShipID => $amount)
         {
-            $FleetRoom += $pricelist[$ShipID]['capacity'] * $amount * (1 + $USER['factor']['ShipStorage']);
+            $FleetRoom += $PRICELIST[$ShipID]['capacity'] * $amount * (1 + $USER['factor']['ShipStorage']);
         }
         return $FleetRoom;
     }
@@ -206,7 +206,7 @@ class FleetFunctions
 
     public static function GetFleetMissions($USER, $MisInfo, $Planet)
     {
-        global $resource;
+        global $RESOURCE;
         $Missions = self::GetAvailableMissions($USER, $MisInfo, $Planet);
         $stayBlock = [];
         $exchange = false;
@@ -215,7 +215,7 @@ class FleetFunctions
 
         if (in_array(15, $Missions))
         {
-            for ($i = 1;$i <= $USER[$resource[124]];$i++)
+            for ($i = 1;$i <= $USER[$RESOURCE[124]];$i++)
             {
                 $stayBlock[$i] = round($i / $expedition_speed, 2);
             }
@@ -622,7 +622,7 @@ class FleetFunctions
         $fleetNoMReturn = 0,
         $consumption = 0
     ) {
-        global $resource;
+        global $RESOURCE;
         $fleetShipCount = array_sum($fleetArray);
         $fleetData = [];
 
@@ -634,15 +634,15 @@ class FleetFunctions
         foreach ($fleetArray as $ShipID => $ShipCount)
         {
             $fleetData[] = $ShipID.','.floatToString($ShipCount);
-            $planetQuery[] = $resource[$ShipID]." = ".$resource[$ShipID]." - :".$resource[$ShipID];
+            $planetQuery[] = $RESOURCE[$ShipID]." = ".$RESOURCE[$ShipID]." - :".$RESOURCE[$ShipID];
 
-            $params[':'.$resource[$ShipID]] = floatToString($ShipCount);
+            $params[':'.$RESOURCE[$ShipID]] = floatToString($ShipCount);
         }
 
         if ($consumption > 0)
         {
-            $planetQuery[] = $resource[903]." = ".$resource[903]." - :".$resource[903];
-            $params[':'.$resource[903]] = $consumption;
+            $planetQuery[] = $RESOURCE[903]." = ".$RESOURCE[903]." - :".$RESOURCE[903];
+            $params[':'.$RESOURCE[903]] = $consumption;
         }
 
         $sql = 'UPDATE %%PLANETS%% SET '.implode(', ', $planetQuery).' WHERE id = :planetId;';
@@ -799,7 +799,7 @@ class FleetFunctions
         $fleetNoMReturn = 0,
         $consumption = 0
     ) {
-        global $resource;
+        global $RESOURCE;
         $fleetShipCount = array_sum($fleetArray);
         $fleetData = [];
 
@@ -811,12 +811,12 @@ class FleetFunctions
         {
             $fleetData[] = $ShipID.','.floatToString($ShipCount);
 
-            $params[':'.$resource[$ShipID]] = floatToString($ShipCount);
+            $params[':'.$RESOURCE[$ShipID]] = floatToString($ShipCount);
         }
 
         if ($consumption > 0)
         {
-            $params[':'.$resource[903]] = $consumption;
+            $params[':'.$RESOURCE[903]] = $consumption;
         }
 
         $sql = 'INSERT INTO %%FLEETS%% SET

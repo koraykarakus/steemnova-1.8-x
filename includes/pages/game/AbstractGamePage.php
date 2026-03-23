@@ -119,7 +119,7 @@ abstract class AbstractGamePage
 
     protected function getNavigationData(): void
     {
-        global $PLANET, $LNG, $USER, $resource, $reslist, $config;
+        global $PLANET, $LNG, $USER, $RESOURCE, $RESLIST, $config;
 
         $planet_select = [];
 
@@ -149,35 +149,35 @@ abstract class AbstractGamePage
 
         $resource_table = [];
         $resource_speed = $config->resource_multiplier;
-        foreach ($reslist['resstype'][1] as $c_id)
+        foreach ($RESLIST['resstype'][1] as $c_id)
         {
-            $resource_table[$c_id]['name'] = $resource[$c_id];
-            $resource_table[$c_id]['current'] = $PLANET[$resource[$c_id]];
-            $resource_table[$c_id]['max'] = $PLANET[$resource[$c_id].'_max'];
+            $resource_table[$c_id]['name'] = $RESOURCE[$c_id];
+            $resource_table[$c_id]['current'] = $PLANET[$RESOURCE[$c_id]];
+            $resource_table[$c_id]['max'] = $PLANET[$RESOURCE[$c_id].'_max'];
 
             if ($USER['urlaubs_modus'] == 1
                 || $PLANET['planet_type'] != 1)
             {
-                $resource_table[$c_id]['production'] = $PLANET[$resource[$c_id].'_perhour'];
+                $resource_table[$c_id]['production'] = $PLANET[$RESOURCE[$c_id].'_perhour'];
             }
             else
             {
-                $resource_table[$c_id]['production'] = $PLANET[$resource[$c_id].'_perhour']
-                + $config->{$resource[$c_id].'_basic_income'} * $resource_speed;
+                $resource_table[$c_id]['production'] = $PLANET[$RESOURCE[$c_id].'_perhour']
+                + $config->{$RESOURCE[$c_id].'_basic_income'} * $resource_speed;
             }
         }
 
-        foreach ($reslist['resstype'][2] as $c_id)
+        foreach ($RESLIST['resstype'][2] as $c_id)
         {
-            $resource_table[$c_id]['name'] = $resource[$c_id];
-            $resource_table[$c_id]['used'] = $PLANET[$resource[$c_id].'_used'];
-            $resource_table[$c_id]['max'] = $PLANET[$resource[$c_id]];
+            $resource_table[$c_id]['name'] = $RESOURCE[$c_id];
+            $resource_table[$c_id]['used'] = $PLANET[$RESOURCE[$c_id].'_used'];
+            $resource_table[$c_id]['max'] = $PLANET[$RESOURCE[$c_id]];
         }
 
-        foreach ($reslist['resstype'][3] as $c_id)
+        foreach ($RESLIST['resstype'][3] as $c_id)
         {
-            $resource_table[$c_id]['name'] = $resource[$c_id];
-            $resource_table[$c_id]['current'] = $USER[$resource[$c_id]];
+            $resource_table[$c_id]['name'] = $RESOURCE[$c_id];
+            $resource_table[$c_id]['current'] = $USER[$RESOURCE[$c_id]];
         }
 
         $commit = '';
@@ -218,7 +218,7 @@ abstract class AbstractGamePage
             'closed'         => $config->game_disable,
             'hasBoard'       => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
-            'hasGate'        => $PLANET[$resource[43]] > 0,
+            'hasGate'        => $PLANET[$RESOURCE[43]] > 0,
             'discordUrl'     => DISCORD_URL,
             //overwrite messages, to do : delete from other pages
             'messages' => ($USER['messages'] > 0) ? (($USER['messages'] == 1) ? $LNG['ov_have_new_message'] : "(" . $USER['messages'] . ")") : false,

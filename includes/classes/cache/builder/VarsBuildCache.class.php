@@ -19,45 +19,45 @@ class VarsBuildCache implements BuildCache
 {
     public function buildCache()
     {
-        $resource = [];
-        $requeriments = [];
-        $pricelist = [];
-        $CombatCaps = [];
-        $reslist = [];
-        $ProdGrid = [];
+        $RESOURCE = [];
+        $REQUIREMENTS = [];
+        $PRICELIST = [];
+        $COMBATCAPS = [];
+        $RESLIST = [];
+        $PRODGRID = [];
 
-        $reslist['prod'] = [];
-        $reslist['storage'] = [];
-        $reslist['bonus'] = [];
-        $reslist['one'] = [];
-        $reslist['build'] = [];
-        $reslist['allow'][1] = [];
-        $reslist['allow'][3] = [];
-        $reslist['tech'] = [];
-        $reslist['fleet'] = [];
-        $reslist['defense'] = [];
-        $reslist['missile'] = [];
-        $reslist['officers'] = [];
-        $reslist['dmfunc'] = [];
+        $RESLIST['prod'] = [];
+        $RESLIST['storage'] = [];
+        $RESLIST['bonus'] = [];
+        $RESLIST['one'] = [];
+        $RESLIST['build'] = [];
+        $RESLIST['allow'][1] = [];
+        $RESLIST['allow'][3] = [];
+        $RESLIST['tech'] = [];
+        $RESLIST['fleet'] = [];
+        $RESLIST['defense'] = [];
+        $RESLIST['missile'] = [];
+        $RESLIST['officers'] = [];
+        $RESLIST['dmfunc'] = [];
 
         $db = Database::get();
 
         $reqResult = $db->nativeQuery('SELECT * FROM %%VARS_REQUIRE%%;');
         foreach ($reqResult as $reqRow)
         {
-            $requeriments[$reqRow['elementID']][$reqRow['requireID']] = $reqRow['requireLevel'];
+            $REQUIREMENTS[$reqRow['elementID']][$reqRow['requireID']] = $reqRow['requireLevel'];
         }
 
         $varsResult = $db->nativeQuery('SELECT * FROM %%VARS%%;');
         foreach ($varsResult as $varsRow)
         {
-            $resource[$varsRow['elementID']] = $varsRow['name'];
-            $CombatCaps[$varsRow['elementID']] = [
+            $RESOURCE[$varsRow['elementID']] = $varsRow['name'];
+            $COMBATCAPS[$varsRow['elementID']] = [
                 'attack' => $varsRow['attack'],
                 'shield' => $varsRow['defend'],
             ];
 
-            $pricelist[$varsRow['elementID']] = [
+            $PRICELIST[$varsRow['elementID']] = [
                 'cost' => [
                     901 => $varsRow['cost901'],
                     902 => $varsRow['cost902'],
@@ -96,27 +96,27 @@ class VarsBuildCache implements BuildCache
                 ],
             ];
 
-            $ProdGrid[$varsRow['elementID']]['production'] = [
+            $PRODGRID[$varsRow['elementID']]['production'] = [
                 901 => $varsRow['production901'],
                 902 => $varsRow['production902'],
                 903 => $varsRow['production903'],
                 911 => $varsRow['production911'],
             ];
 
-            $ProdGrid[$varsRow['elementID']]['storage'] = [
+            $PRODGRID[$varsRow['elementID']]['storage'] = [
                 901 => $varsRow['storage901'],
                 902 => $varsRow['storage902'],
                 903 => $varsRow['storage903'],
             ];
 
-            if (array_filter($ProdGrid[$varsRow['elementID']]['production']))
+            if (array_filter($PRODGRID[$varsRow['elementID']]['production']))
             {
-                $reslist['prod'][] = $varsRow['elementID'];
+                $RESLIST['prod'][] = $varsRow['elementID'];
             }
 
-            if (array_filter($ProdGrid[$varsRow['elementID']]['storage']))
+            if (array_filter($PRODGRID[$varsRow['elementID']]['storage']))
             {
-                $reslist['storage'][] = $varsRow['elementID'];
+                $RESLIST['storage'][] = $varsRow['elementID'];
             }
 
             if (($varsRow['bonusAttack'] + $varsRow['bonusDefensive'] + $varsRow['bonusShield'] + $varsRow['bonusBuildTime'] +
@@ -125,40 +125,40 @@ class VarsBuildCache implements BuildCache
                 $varsRow['bonusFleetSlots'] + $varsRow['bonusPlanets'] + $varsRow['bonusSpyPower'] + $varsRow['bonusExpedition'] +
                 $varsRow['bonusGateCoolTime'] + $varsRow['bonusMoreFound']) != 0)
             {
-                $reslist['bonus'][] = $varsRow['elementID'];
+                $RESLIST['bonus'][] = $varsRow['elementID'];
             }
             if ($varsRow['onePerPlanet'] == 1)
             {
-                $reslist['one'][] = $varsRow['elementID'];
+                $RESLIST['one'][] = $varsRow['elementID'];
             }
 
             switch ($varsRow['class'])
             {
                 case 0:
-                    $reslist['build'][] = $varsRow['elementID'];
+                    $RESLIST['build'][] = $varsRow['elementID'];
                     $tmp = explode(',', $varsRow['onPlanetType']);
                     foreach ($tmp as $type)
                     {
-                        $reslist['allow'][$type][] = $varsRow['elementID'];
+                        $RESLIST['allow'][$type][] = $varsRow['elementID'];
                     }
                     break;
                 case 100:
-                    $reslist['tech'][] = $varsRow['elementID'];
+                    $RESLIST['tech'][] = $varsRow['elementID'];
                     break;
                 case 200:
-                    $reslist['fleet'][] = $varsRow['elementID'];
+                    $RESLIST['fleet'][] = $varsRow['elementID'];
                     break;
                 case 400:
-                    $reslist['defense'][] = $varsRow['elementID'];
+                    $RESLIST['defense'][] = $varsRow['elementID'];
                     break;
                 case 500:
-                    $reslist['missile'][] = $varsRow['elementID'];
+                    $RESLIST['missile'][] = $varsRow['elementID'];
                     break;
                 case 600:
-                    $reslist['officers'][] = $varsRow['elementID'];
+                    $RESLIST['officers'][] = $varsRow['elementID'];
                     break;
                 case 700:
-                    $reslist['dmfunc'][] = $varsRow['elementID'];
+                    $RESLIST['dmfunc'][] = $varsRow['elementID'];
                     break;
             }
         }
@@ -166,16 +166,16 @@ class VarsBuildCache implements BuildCache
         $rapidResult = $db->nativeQuery('SELECT * FROM %%VARS_RAPIDFIRE%%;');
         foreach ($rapidResult as $rapidRow)
         {
-            $CombatCaps[$rapidRow['elementID']]['sd'][$rapidRow['rapidfireID']] = $rapidRow['shoots'];
+            $COMBATCAPS[$rapidRow['elementID']]['sd'][$rapidRow['rapidfireID']] = $rapidRow['shoots'];
         }
 
         return [
-            'reslist'      => $reslist,
-            'ProdGrid'     => $ProdGrid,
-            'CombatCaps'   => $CombatCaps,
-            'resource'     => $resource,
-            'pricelist'    => $pricelist,
-            'requeriments' => $requeriments,
+            'RESLIST'      => $RESLIST,
+            'PRODGRID'     => $PRODGRID,
+            'COMBATCAPS'   => $COMBATCAPS,
+            'RESOURCE'     => $RESOURCE,
+            'PRICELIST'    => $PRICELIST,
+            'REQUIREMENTS' => $REQUIREMENTS,
         ];
     }
 }

@@ -30,16 +30,16 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 
     public function EndStayEvent()
     {
-        global $pricelist, $reslist, $resource;
+        global $PRICELIST, $RESLIST, $RESOURCE;
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
 
         $config = Config::get($this->_fleet['fleet_universe']);
 
         $expeditionPoints = [];
 
-        foreach ($reslist['fleet'] as $shipId)
+        foreach ($RESLIST['fleet'] as $shipId)
         {
-            $expeditionPoints[$shipId] = ($pricelist[$shipId]['cost'][901] + $pricelist[$shipId]['cost'][902]) * 5 / 1000;
+            $expeditionPoints[$shipId] = ($PRICELIST[$shipId]['cost'][901] + $PRICELIST[$shipId]['cost'][902]) * 5 / 1000;
         }
 
         $fleetArray = FleetFunctions::unserialize($this->_fleet['fleet_array']);
@@ -48,7 +48,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
 
         foreach ($fleetArray as $shipId => $shipAmount)
         {
-            $fleetCapacity += $shipAmount * $pricelist[$shipId]['capacity'];
+            $fleetCapacity += $shipAmount * $PRICELIST[$shipId]['capacity'];
             $fleetPoints += $shipAmount * $expeditionPoints[$shipId];
         }
 
@@ -208,7 +208,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
                     $logbook = $LNG['sys_expe_found_ress_logbook_'.mt_rand(1, 4)].'<br>'.$logbook;
                 }
 
-                $fleetColName = 'fleet_resource_'.$resource[$resourceId];
+                $fleetColName = 'fleet_resource_'.$RESOURCE[$resourceId];
                 $this->UpdateFleet($fleetColName, $this->_fleet[$fleetColName] + $founded);
             }
 
@@ -386,7 +386,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
                 while ($highestShipId > 0 && $upperValue > 0)
                 {
                     $ID = $findableShips[$highestShipId][rand(0, count($findableShips[$highestShipId]) - 1)];
-                    $MaxFound = floor($FoundShips / ($pricelist[$ID]['cost'][901] + $pricelist[$ID]['cost'][902]));
+                    $MaxFound = floor($FoundShips / ($PRICELIST[$ID]['cost'][901] + $PRICELIST[$ID]['cost'][902]));
                     if ($MaxFound <= 0)
                     {
                         $upperValue -= 1;
@@ -408,7 +408,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
                     {
                         $Found[$ID] = $Count;
                     }
-                    $FoundShips -= $Count * ($pricelist[$ID]['cost'][901] + $pricelist[$ID]['cost'][902]);
+                    $FoundShips -= $Count * ($PRICELIST[$ID]['cost'][901] + $PRICELIST[$ID]['cost'][902]);
                     if ($FoundShips <= 0)
                     {
                         break;
@@ -420,7 +420,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
                     $FoundShipMess .= '<br><br>'.$LNG['sys_expe_found_ships_nothing'];
                 }
 
-                foreach ($reslist['fleet'] as $ID)
+                foreach ($RESLIST['fleet'] as $ID)
                 {
                     $Count = 0;
                     if (!empty($Found[$ID]))

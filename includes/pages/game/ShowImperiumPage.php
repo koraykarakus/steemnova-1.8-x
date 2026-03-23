@@ -26,7 +26,7 @@ class ShowImperiumPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $resource, $reslist;
+        global $USER, $RESOURCE, $RESLIST;
 
         $db = Database::get();
 
@@ -103,28 +103,28 @@ class ShowImperiumPage extends AbstractGamePage
 
             $planet_list['planet_type'][$c_planet['id']] = $c_planet['planet_type'];
 
-            foreach ($reslist['build'] as $elementID)
+            foreach ($RESLIST['build'] as $elementID)
             {
-                $planet_list['build'][$elementID][$c_planet['id']] = $c_planet[$resource[$elementID]];
+                $planet_list['build'][$elementID][$c_planet['id']] = $c_planet[$RESOURCE[$elementID]];
             }
 
-            foreach ($reslist['fleet'] as $elementID)
+            foreach ($RESLIST['fleet'] as $elementID)
             {
-                $planet_list['fleet'][$elementID][$c_planet['id']] = $c_planet[$resource[$elementID]];
+                $planet_list['fleet'][$elementID][$c_planet['id']] = $c_planet[$RESOURCE[$elementID]];
             }
 
-            foreach ($reslist['defense'] as $elementID)
+            foreach ($RESLIST['defense'] as $elementID)
             {
-                $planet_list['defense'][$elementID][$c_planet['id']] = $c_planet[$resource[$elementID]];
+                $planet_list['defense'][$elementID][$c_planet['id']] = $c_planet[$RESOURCE[$elementID]];
             }
 
-            $planet_list['missiles'][502][$c_planet['id']] = $c_planet[$resource[502]];
-            $planet_list['missiles'][503][$c_planet['id']] = $c_planet[$resource[503]];
+            $planet_list['missiles'][502][$c_planet['id']] = $c_planet[$RESOURCE[502]];
+            $planet_list['missiles'][503][$c_planet['id']] = $c_planet[$RESOURCE[503]];
         }
 
-        foreach ($reslist['tech'] as $elementID)
+        foreach ($RESLIST['tech'] as $elementID)
         {
-            $planet_list['tech'][$elementID] = $USER[$resource[$elementID]];
+            $planet_list['tech'][$elementID] = $USER[$RESOURCE[$elementID]];
         }
 
         $this->assign([

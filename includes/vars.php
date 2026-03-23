@@ -21,13 +21,13 @@ $cache = Cache::get();
 $cache->add('vars', 'VarsBuildCache');
 extract($cache->getData('vars'));
 
-$resource[901] = 'metal';
-$resource[902] = 'crystal';
-$resource[903] = 'deuterium';
-$resource[911] = 'energy';
-$resource[921] = 'darkmatter';
+$RESOURCE[901] = 'metal';
+$RESOURCE[902] = 'crystal';
+$RESOURCE[903] = 'deuterium';
+$RESOURCE[911] = 'energy';
+$RESOURCE[921] = 'darkmatter';
 
-$reslist['ressources'] = [901, 902, 903, 911, 921];
-$reslist['resstype'][1] = [901, 902, 903];
-$reslist['resstype'][2] = [911];
-$reslist['resstype'][3] = [921];
+$RESLIST['ressources'] = [901, 902, 903, 911, 921];
+$RESLIST['resstype'][1] = [901, 902, 903];
+$RESLIST['resstype'][2] = [911];
+$RESLIST['resstype'][3] = [921];

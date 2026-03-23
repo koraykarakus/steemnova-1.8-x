@@ -252,20 +252,20 @@ class Fire
      */
     public function __toString()
     {
-        #global $resource;
+        #global $RESOURCE;
         #        $shots = $this->getAttackerTotalShots();
         #        $power = $this->getAttackerTotalFire();
         #        $iter = $this->attackerShipType->getIterator();
         #        $page = "<center><table bgcolor='#ADC9F4' border='1' ><body><tr><tr><td colspan='" . count($iter) . "'><center><font color='red'>Attackers</font></center></td></tr>";
         #        foreach ($iter as $attacher)
-        #            $page .= "<td>" . $resource[$attacher->getId()] . "</td>";
+        #            $page .= "<td>" . $RESOURCE[$attacher->getId()] . "</td>";
         #        $page .= "</tr><tr>";
         #        foreach ($iter as $attacher)
         #            $page .= "<td><center>" . $attacher->getCount() . "</center></td>";
         #        $iter = $this->defenderFleet->getIterator();
         #        $page .= "</tr></body></table><br><table bgcolor='#ADC9F4' border='1'><body><tr><td colspan='" . count($iter) . "'><center><font color='red'>Defenders</font></center></td></tr></tr>";
         #        foreach ($iter as $defender)
-        #            $page .= "<td>" . $resource[$defender->getId()] . "</td>";
+        #            $page .= "<td>" . $RESOURCE[$defender->getId()] . "</td>";
         #        $page .= "<tr>";
         #        foreach ($iter as $defender)
         #            $page .= "<td><center>" . $defender->getCount() . "</center></td>";

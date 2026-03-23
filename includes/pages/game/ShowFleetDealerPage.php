@@ -26,7 +26,7 @@ class ShowFleetDealerPage extends AbstractGamePage
 
     public function send(): void
     {
-        global $USER, $PLANET, $LNG, $pricelist, $resource;
+        global $USER, $PLANET, $LNG, $PRICELIST, $RESOURCE;
 
         $ship_id = HTTP::_GP('shipID', 0);
         $count = max(0, round(HTTP::_GP('count', 0.0)));
@@ -35,20 +35,20 @@ class ShowFleetDealerPage extends AbstractGamePage
         if (!empty($ship_id) 
             && !empty($count) 
             && in_array($ship_id, $allowed_ship_ids) 
-            && $PLANET[$resource[$ship_id]] >= $count)
+            && $PLANET[$RESOURCE[$ship_id]] >= $count)
         {
             $trade_charge = 1 - (Config::get()->trade_charge / 100);
-            $PLANET[$resource[901]] += $count * $pricelist[$ship_id]['cost'][901] * $trade_charge;
-            $PLANET[$resource[902]] += $count * $pricelist[$ship_id]['cost'][902] * $trade_charge;
-            $PLANET[$resource[903]] += $count * $pricelist[$ship_id]['cost'][903] * $trade_charge;
-            $USER[$resource[921]] += $count * $pricelist[$ship_id]['cost'][921] * $trade_charge;
+            $PLANET[$RESOURCE[901]] += $count * $PRICELIST[$ship_id]['cost'][901] * $trade_charge;
+            $PLANET[$RESOURCE[902]] += $count * $PRICELIST[$ship_id]['cost'][902] * $trade_charge;
+            $PLANET[$RESOURCE[903]] += $count * $PRICELIST[$ship_id]['cost'][903] * $trade_charge;
+            $USER[$RESOURCE[921]] += $count * $PRICELIST[$ship_id]['cost'][921] * $trade_charge;
 
-            $PLANET[$resource[$ship_id]] -= $count;
+            $PLANET[$RESOURCE[$ship_id]] -= $count;
 
             $sql = 'UPDATE %%PLANETS%% SET ' . 
-            $resource[$ship_id] . 
+            $RESOURCE[$ship_id] . 
             ' = ' . 
-            $resource[$ship_id].' - :count WHERE id = :planet_id;';
+            $RESOURCE[$ship_id].' - :count WHERE id = :planet_id;';
             
             Database::get()->update($sql, [
                 ':count'    => $count,
@@ -72,7 +72,7 @@ class ShowFleetDealerPage extends AbstractGamePage
 
     public function show(): void
     {
-        global $PLANET, $LNG, $pricelist, $resource, $reslist;
+        global $PLANET, $LNG, $PRICELIST, $RESOURCE, $RESLIST;
 
         $cost = [];
 
@@ -80,10 +80,10 @@ class ShowFleetDealerPage extends AbstractGamePage
 
         foreach ($allowed_ship_ids as $c_ship_id)
         {
-            if (in_array($c_ship_id, $reslist['fleet']) 
-                || in_array($c_ship_id, $reslist['defense']))
+            if (in_array($c_ship_id, $RESLIST['fleet']) 
+                || in_array($c_ship_id, $RESLIST['defense']))
             {
-                $cost[$c_ship_id] = [$PLANET[$resource[$c_ship_id]], $LNG['tech'][$c_ship_id], $pricelist[$c_ship_id]['cost']];
+                $cost[$c_ship_id] = [$PLANET[$RESOURCE[$c_ship_id]], $LNG['tech'][$c_ship_id], $PRICELIST[$c_ship_id]['cost']];
             }
         }
 

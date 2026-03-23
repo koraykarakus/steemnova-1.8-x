@@ -26,7 +26,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
     public function show(): void
     {
-        global $USER, $PLANET, $pricelist, $reslist, $LNG;
+        global $USER, $PLANET, $PRICELIST, $RESLIST, $LNG;
 
         $target_galaxy = HTTP::_GP('galaxy', (int) $PLANET['galaxy']);
         $target_system = HTTP::_GP('system', (int) $PLANET['system']);
@@ -37,7 +37,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
         $fleet_array = [];
         $fleet_room = 0;
-        foreach ($reslist['fleet'] as $id => $ship_id)
+        foreach ($RESLIST['fleet'] as $id => $ship_id)
         {
             $amount = max(0, round(HTTP::_GP('ship'.$ship_id, 0.0, 0.0)));
 
@@ -48,7 +48,7 @@ class ShowFleetStep1Page extends AbstractGamePage
             }
 
             $fleet_array[$ship_id] = $amount;
-            $fleet_room += $pricelist[$ship_id]['capacity'] * $amount;
+            $fleet_room += $PRICELIST[$ship_id]['capacity'] * $amount;
         }
 
         $fleet_room *= 1 + $USER['factor']['ShipStorage'];
@@ -267,7 +267,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
     public function checkTarget(): void
     {
-        global $PLANET, $LNG, $USER, $resource;
+        global $PLANET, $LNG, $USER, $RESOURCE;
 
         $target_galaxy = HTTP::_GP('galaxy', 0);
         $target_system = HTTP::_GP('system', 0);
@@ -363,7 +363,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         }
         else
         {
-            if ($USER[$resource[124]] == 0)
+            if ($USER[$RESOURCE[124]] == 0)
             {
                 $this->sendJSON($LNG['fl_target_not_exists']);
             }

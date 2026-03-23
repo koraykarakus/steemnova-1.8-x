@@ -27,11 +27,11 @@ class ShowTestBattlePage extends AbstractGamePage
 
     public function show(): void
     {
-        global $reslist, $LNG;
+        global $RESLIST, $LNG;
 
         $ships_list = $defense_list = [];
 
-        foreach ($reslist['fleet'] as $c_ship_id)
+        foreach ($RESLIST['fleet'] as $c_ship_id)
         {
             $ships_list[] = [
                 'id'   => $c_ship_id,
@@ -39,7 +39,7 @@ class ShowTestBattlePage extends AbstractGamePage
             ];
         }
 
-        foreach ($reslist['defense'] as $c_def_id)
+        foreach ($RESLIST['defense'] as $c_def_id)
         {
             $defense_list[] = [
                 'id'   => $c_def_id,
@@ -57,7 +57,7 @@ class ShowTestBattlePage extends AbstractGamePage
 
     public function send(): void
     {
-        global $PLANET, $USER, $reslist, $pricelist, $resource;
+        global $PLANET, $USER, $RESLIST, $PRICELIST, $RESOURCE;
 
         if ($USER['authlevel'] !== 3)
         {
@@ -76,21 +76,21 @@ class ShowTestBattlePage extends AbstractGamePage
 
         $sql_update = $sql_reset = "UPDATE %%PLANETS%% SET ";
         $query_ships = $query_reset = [];
-        foreach ($reslist['fleet'] as $id)
+        foreach ($RESLIST['fleet'] as $id)
         {
-            $query_reset[] = $resource[$id] . " = 0";
+            $query_reset[] = $RESOURCE[$id] . " = 0";
             $amount = max(0, round(HTTP::_GP('def_ship_'.$id, 0.0, 0.0)));
 
             if ($amount < 1)
             {
                 continue;
             }
-            $query_ships[] = $resource[$id] . " = " . $amount;
+            $query_ships[] = $RESOURCE[$id] . " = " . $amount;
         }
 
-        foreach ($reslist['defense'] as $id)
+        foreach ($RESLIST['defense'] as $id)
         {
-            $query_reset[] = $resource[$id] . " = 0";
+            $query_reset[] = $RESOURCE[$id] . " = 0";
             $amount = max(0, round(HTTP::_GP('def_def_'.$id, 0.0, 0.0)));
 
             if ($amount < 1)
@@ -98,12 +98,12 @@ class ShowTestBattlePage extends AbstractGamePage
                 continue;
             }
 
-            if (in_array($id, $reslist['one']))
+            if (in_array($id, $RESLIST['one']))
             {
                 $amount = 1;
             }
 
-            $query_ships[] = $resource[$id] . " = " . $amount;
+            $query_ships[] = $RESOURCE[$id] . " = " . $amount;
         }
 
         if (!empty($query_ships))
@@ -135,7 +135,7 @@ class ShowTestBattlePage extends AbstractGamePage
 
         $fleet_array = [];
         $fleet_room = 0;
-        foreach ($reslist['fleet'] as $ship_id)
+        foreach ($RESLIST['fleet'] as $ship_id)
         {
             $amount = max(0, round(HTTP::_GP('atk_ship_'.$ship_id, 0.0, 0.0)));
 
@@ -146,7 +146,7 @@ class ShowTestBattlePage extends AbstractGamePage
             }
 
             $fleet_array[$ship_id] = $amount;
-            $fleet_room += $pricelist[$ship_id]['capacity'] * $amount;
+            $fleet_room += $PRICELIST[$ship_id]['capacity'] * $amount;
         }
 
         $fleet_room *= 1 + $USER['factor']['ShipStorage'];

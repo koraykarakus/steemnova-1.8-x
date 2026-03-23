@@ -26,7 +26,7 @@ class ShowOfficersPage extends AbstractGamePage
 
     public function UpdateExtra($element): void
     {
-        global $PLANET, $USER, $resource, $pricelist;
+        global $PLANET, $USER, $RESOURCE, $PRICELIST;
 
         $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $element);
 
@@ -35,82 +35,82 @@ class ShowOfficersPage extends AbstractGamePage
             return;
         }
 
-        $USER[$resource[$element]] = max($USER[$resource[$element]], TIMESTAMP) + $pricelist[$element]['time'];
+        $USER[$RESOURCE[$element]] = max($USER[$RESOURCE[$element]], TIMESTAMP) + $PRICELIST[$element]['time'];
 
         if (isset($cost_resources[901]))
         {
-            $PLANET[$resource[901]] -= $cost_resources[901];
+            $PLANET[$RESOURCE[901]] -= $cost_resources[901];
         }
         if (isset($cost_resources[902]))
         {
-            $PLANET[$resource[902]] -= $cost_resources[902];
+            $PLANET[$RESOURCE[902]] -= $cost_resources[902];
         }
         if (isset($cost_resources[903]))
         {
-            $PLANET[$resource[903]] -= $cost_resources[903];
+            $PLANET[$RESOURCE[903]] -= $cost_resources[903];
         }
         if (isset($cost_resources[921]))
         {
-            $USER[$resource[921]] -= $cost_resources[921];
+            $USER[$RESOURCE[921]] -= $cost_resources[921];
         }
 
         $sql = 'UPDATE %%USERS%% SET
-				'.$resource[$element].' = :newTime
+				'.$RESOURCE[$element].' = :newTime
 				WHERE
 				id = :userId;';
 
         Database::get()->update($sql, [
-            ':newTime' => $USER[$resource[$element]],
+            ':newTime' => $USER[$RESOURCE[$element]],
             ':userId'  => $USER['id'],
         ]);
     }
 
     public function UpdateOfficers($element): void
     {
-        global $USER, $PLANET, $resource, $pricelist;
+        global $USER, $PLANET, $RESOURCE, $PRICELIST;
 
         $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $element);
 
         if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $element)
             || !BuildFunctions::isElementBuyable($USER, $PLANET, $element, $cost_resources)
-            || $pricelist[$element]['max'] <= $USER[$resource[$element]])
+            || $PRICELIST[$element]['max'] <= $USER[$RESOURCE[$element]])
         {
             return;
         }
 
-        $USER[$resource[$element]] += 1;
+        $USER[$RESOURCE[$element]] += 1;
 
         if (isset($cost_resources[901]))
         {
-            $PLANET[$resource[901]] -= $cost_resources[901];
+            $PLANET[$RESOURCE[901]] -= $cost_resources[901];
         }
         if (isset($cost_resources[902]))
         {
-            $PLANET[$resource[902]] -= $cost_resources[902];
+            $PLANET[$RESOURCE[902]] -= $cost_resources[902];
         }
         if (isset($cost_resources[903]))
         {
-            $PLANET[$resource[903]] -= $cost_resources[903];
+            $PLANET[$RESOURCE[903]] -= $cost_resources[903];
         }
         if (isset($cost_resources[921]))
         {
-            $USER[$resource[921]] -= $cost_resources[921];
+            $USER[$RESOURCE[921]] -= $cost_resources[921];
         }
 
         $sql = 'UPDATE %%USERS%% SET
-		'.$resource[$element].' = :newTime
+		'.$RESOURCE[$element].' = :newTime
 		WHERE
 		id = :userId;';
 
         Database::get()->update($sql, [
-            ':newTime' => $USER[$resource[$element]],
+            ':newTime' => $USER[$RESOURCE[$element]],
             ':userId'  => $USER['id'],
         ]);
     }
 
     public function show(): void
     {
-        global $USER, $PLANET, $resource, $reslist, $LNG, $pricelist;
+        global $USER, $PLANET, $RESOURCE, $RESLIST, $LNG, $PRICELIST;
 
         $update_id = HTTP::_GP('id', 0);
 
@@ -119,12 +119,12 @@ class ShowOfficersPage extends AbstractGamePage
             && $USER['urlaubs_modus'] == 0)
         {
             if (isModuleAvailable(MODULE_OFFICERS)
-                && in_array($update_id, $reslist['officers']))
+                && in_array($update_id, $RESLIST['officers']))
             {
                 $this->UpdateOfficers($update_id);
             }
             elseif (isModuleAvailable(MODULE_DMEXTRAS)
-                && in_array($update_id, $reslist['dmfunc']))
+                && in_array($update_id, $RESLIST['dmfunc']))
             {
                 $this->UpdateExtra($update_id);
             }
@@ -135,11 +135,11 @@ class ShowOfficersPage extends AbstractGamePage
 
         if (isModuleAvailable(MODULE_DMEXTRAS))
         {
-            foreach ($reslist['dmfunc'] as $c_element)
+            foreach ($RESLIST['dmfunc'] as $c_element)
             {
-                if ($USER[$resource[$c_element]] > TIMESTAMP)
+                if ($USER[$RESOURCE[$c_element]] > TIMESTAMP)
                 {
-                    $this->tpl_obj->execscript("GetOfficerTime(".$c_element.", ".($USER[$resource[$c_element]] - TIMESTAMP).");");
+                    $this->tpl_obj->execscript("GetOfficerTime(".$c_element.", ".($USER[$RESOURCE[$c_element]] - TIMESTAMP).");");
                 }
 
                 $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $c_element);
@@ -148,10 +148,10 @@ class ShowOfficersPage extends AbstractGamePage
                 $element_bonus = BuildFunctions::getAvalibleBonus($c_element);
 
                 $dm_list[$c_element] = [
-                    'timeLeft'      => max($USER[$resource[$c_element]] - TIMESTAMP, 0),
+                    'timeLeft'      => max($USER[$RESOURCE[$c_element]] - TIMESTAMP, 0),
                     'costResources' => $cost_resources,
                     'buyable'       => $buyable,
-                    'time'          => $pricelist[$c_element]['time'],
+                    'time'          => $PRICELIST[$c_element]['time'],
                     'costOverflow'  => $cost_overflow,
                     'elementBonus'  => $element_bonus,
                 ];
@@ -160,7 +160,7 @@ class ShowOfficersPage extends AbstractGamePage
 
         if (isModuleAvailable(MODULE_OFFICERS))
         {
-            foreach ($reslist['officers'] as $c_element)
+            foreach ($RESLIST['officers'] as $c_element)
             {
                 if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element))
                 {
@@ -173,8 +173,8 @@ class ShowOfficersPage extends AbstractGamePage
                 $element_bonus = BuildFunctions::getAvalibleBonus($c_element);
 
                 $officer_list[$c_element] = [
-                    'level'         => $USER[$resource[$c_element]],
-                    'maxLevel'      => $pricelist[$c_element]['max'],
+                    'level'         => $USER[$RESOURCE[$c_element]],
+                    'maxLevel'      => $PRICELIST[$c_element]['max'],
                     'costResources' => $cost_resources,
                     'buyable'       => $buyable,
                     'costOverflow'  => $cost_overflow,

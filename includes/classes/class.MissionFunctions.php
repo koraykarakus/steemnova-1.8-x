@@ -83,7 +83,7 @@ class MissionFunctions
 
     public function RestoreFleet($on_start = true)
     {
-        global $resource;
+        global $RESOURCE;
 
         $fleet_data = FleetFunctions::unserialize($this->_fleet['fleet_array']);
 
@@ -99,8 +99,8 @@ class MissionFunctions
 
         foreach ($fleet_data as $ship_id => $ship_amount)
         {
-            $update_query[] = "p.`".$resource[$ship_id]."` = p.`".$resource[$ship_id]."` + :".$resource[$ship_id];
-            $param[':'.$resource[$ship_id]] = $ship_amount;
+            $update_query[] = "p.`".$RESOURCE[$ship_id]."` = p.`".$RESOURCE[$ship_id]."` + :".$RESOURCE[$ship_id];
+            $param[':'.$RESOURCE[$ship_id]] = $ship_amount;
         }
 
         $sql = 'UPDATE %%PLANETS%% as p, %%USERS%% as u SET
