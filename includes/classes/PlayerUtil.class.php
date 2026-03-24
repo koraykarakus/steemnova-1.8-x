@@ -593,7 +593,7 @@ class PlayerUtil
             }
         }
 
-        $sql = 'DELETE FROM %%ALLIANCE_REQUEST%% WHERE userID = :userId;';
+        $sql = 'DELETE FROM %%ALLIANCE_REQUEST%% WHERE user_id = :userId;';
         $db->delete($sql, [
             ':userId' => $userId,
         ]);
