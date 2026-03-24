@@ -47,7 +47,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="abondon_planet" class="text-white">
+		<div id="abondon_planet" class="">
 			<div>
 				<form>
 					<div>

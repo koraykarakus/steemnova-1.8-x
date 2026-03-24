@@ -1,6 +1,6 @@
 {block name="content"}
 
-	<h1 class="fs-4 text-white">{$LNG.ow_title}</h1>
+	<h1 class="fs-4 ">{$LNG.ow_title}</h1>
 	<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto" style="border:2px {if empty($Messages)}lime{else}red{/if} solid;text-align:center;font-weight:bold;">
 		<tr>
 			<td class="transparent">{foreach item=Message from=$Messages}

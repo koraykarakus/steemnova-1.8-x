@@ -690,7 +690,7 @@ function exceptionHandler($exception): void
 	<script type="text/javascript" src="' . $DIR . '/scripts/game/base.js?v=2123"></script>
     </head>
     <body id="overview" class="full">
-    <table class="table table-striped text-white fs-12">
+    <table class="">
         <tr>
             <th>Unknown error</th>
         </tr>

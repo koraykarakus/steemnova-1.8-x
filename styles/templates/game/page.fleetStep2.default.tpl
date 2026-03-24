@@ -43,47 +43,47 @@
                   <button type="button" style="padding:2px;" onclick="minResource('metal');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="metal_to_transport" style="height:24px;" class="bg-black text-white" name="metal" onchange="calculateTransportCapacity();" type="text">
+                  <input id="metal_to_transport" style="height:24px;" class="bg-black " name="metal" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
         				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.902}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
+                  <button type="button" style="padding:2px;" class="" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="minResource('crystal');">min</button>
+                  <button type="button" style="padding:2px;" class="" onclick="minResource('crystal');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="crystal_to_transport" style="height:24px;" class="bg-black text-white" name="crystal" onchange="calculateTransportCapacity();" type="text">
+                  <input id="crystal_to_transport" style="height:24px;" class="bg-black " name="crystal" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
         				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.903}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
+                  <button type="button" style="padding:2px;" class="" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="minResource('deuterium');">min</button>
+                  <button type="button" style="padding:2px;" class="" onclick="minResource('deuterium');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="deuterium_to_transport" style="height:24px;" class="form-control bg-black text-white" name="deuterium" onchange="calculateTransportCapacity();" type="text">
+                  <input id="deuterium_to_transport" style="height:24px;" class="form-control bg-black " name="deuterium" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
         				<td colspan="1">{$LNG.fl_resources_left}</td>
         				<td style="vertical-align: middle;" colspan="4">
-                  <input id="remainingresources" style="height:24px;" class="form-control bg-black text-white" readonly>
+                  <input id="remainingresources" style="height:24px;" class="form-control bg-black " readonly>
                 </td>
         			</tr>
               <tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="maxResources();">{$LNG.fl_all_resources}</button>
+                  <button type="button" style="padding:2px;" class="" onclick="maxResources();">{$LNG.fl_all_resources}</button>
                 </td>
         			</tr>
               <tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" style="padding:2px;" class="text-white" onclick="minResources();">reset</button>
+                  <button type="button" style="padding:2px;" class="" onclick="minResources();">reset</button>
                 </td>
         			</tr>
               <tr>

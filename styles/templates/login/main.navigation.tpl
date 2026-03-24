@@ -53,7 +53,7 @@
 		</ul>
 
 		{if count($languages) > 1}
-			<i class="bi bi-list d-flex d-md-none px-3 text-white fs-2 menu_icon" data-bs-toggle="offcanvas"
+			<i class="bi bi-list d-flex d-md-none px-3  fs-2 menu_icon" data-bs-toggle="offcanvas"
 				data-bs-target="#phoneMenu"></i>
 
 			<div class="dropdown">

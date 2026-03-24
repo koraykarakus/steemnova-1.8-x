@@ -86,7 +86,7 @@
                           {$LNG.tech.$RessID}
                         </div>
                         <img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'>
-                        <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}text-white{else}color-red{/if}">{$RessAmount|number}</span>
+                        <span class="mx-1 fs-11 {if $Element.costOverflow[$RessID] == 0}{else}color-red{/if}">{$RessAmount|number}</span>
                       </div>
                     {/foreach}
                 </div>

@@ -13,7 +13,7 @@ function change3(){
 }
 </script>
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=teamspeak&mode=saveSettings" method="post">
+<form class="bg-black w-75  p-3 my-3 mx-auto fs-12" action="?page=teamspeak&mode=saveSettings" method="post">
 <input type="hidden" name="opt_save" value="1">
 <div class="form-gorup d-flex justify-content-between">
 	<span>{$ts_settings}</span>
@@ -29,34 +29,34 @@ function change3(){
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_ip">{$ts_serverip}:</label>
-	<input id="ts_ip" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_ip" maxlength="15" size="10" value="{$ts_ip}" type="text">
+	<input id="ts_ip" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_ip" maxlength="15" size="10" value="{$ts_ip}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_tcp">{$ts_tcpport}:</label>
-	<input id="ts_tcp" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_tcp" maxlength="5" size="10" value="{$ts_tcp}" type="text">
+	<input id="ts_tcp" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_tcp" maxlength="5" size="10" value="{$ts_tcp}" type="text">
 </div>
 <div id="lang_udp" class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_udp">{$ts_udpport}:</label>
-	<input id="ts_udp" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_udp" maxlength="5" size="10" value="{$ts_udp}" type="text">
+	<input id="ts_udp" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_udp" maxlength="5" size="10" value="{$ts_udp}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 v3only">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_login">{$ts_sq_login}:</label>
-	<input id="ts_login" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_login" size="20" value="{$ts_login}" type="text">
+	<input id="ts_login" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_login" size="20" value="{$ts_login}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 v3only">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_password">{$ts_sq_pass}:</label>
-	<input id="ts_password" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_password" size="20" value="{$ts_password}" type="password">
+	<input id="ts_password" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_password" size="20" value="{$ts_password}" type="password">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_to">{$ts_timeout}:</label>
-	<input id="ts_to" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_to" maxlength="2" size="10" value="{$ts_to}" type="text">
+	<input id="ts_to" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_to" maxlength="2" size="10" value="{$ts_to}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
 	<label class="text-start my-1 cursor-pointer hover-underline" for="ts_cron">{$ts_lng_cron}:</label>
-	<input id="ts_cron" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="ts_cron" maxlength="2" size="10" value="{$ts_cron}" type="text">
+	<input id="ts_cron" class="form-control py-1 bg-dark  my-1 border border-secondary" name="ts_cron" maxlength="2" size="10" value="{$ts_cron}" type="text">
 </div>
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<input class="btn btn-primary text-white" value="{$se_save_parameters}" type="submit">
+	<input class="btn btn-primary " value="{$se_save_parameters}" type="submit">
 </div>
 </form>
 

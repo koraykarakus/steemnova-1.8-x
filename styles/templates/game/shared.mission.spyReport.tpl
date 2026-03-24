@@ -1,5 +1,5 @@
 <div class="spyRaport">
-	<div class="text-white">
+	<div class="">
 		<a class="text-decoration-none" href="game.php?page=galaxy&amp;galaxy={$targetPlanet.galaxy}&amp;system={$targetPlanet.system}">{$title}</a>
 	</div>
 	{foreach $spyData as $Class => $elementIDs}

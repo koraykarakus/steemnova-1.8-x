@@ -98,7 +98,7 @@
 						{if !$isVacation && $FlyingFleetRow.state != 1 && $FlyingFleetRow.no_returnable != 1}
 							<form action="game.php?page=fleetDispatch&amp;action=sendfleetback" method="post">
 								<input name="fleetID" value="{$FlyingFleetRow.id}" type="hidden">
-								<input class="text-white" value="{$LNG.fl_send_back}" type="submit">
+								<input class="" value="{$LNG.fl_send_back}" type="submit">
 							</form>
 							{if $FlyingFleetRow.mission == 1}
 								<form action="game.php?page=fleetDispatch&amp;action=acs" method="post">

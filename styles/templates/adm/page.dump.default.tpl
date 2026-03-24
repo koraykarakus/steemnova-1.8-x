@@ -1,6 +1,6 @@
 {block name="content"}
 
-<form action="admin.php?page=dump&mode=dump" class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" method="post">
+<form action="admin.php?page=dump&mode=dump" class="bg-black w-75  p-3 my-3 mx-auto fs-12" method="post">
 	<input type="hidden" name="action" value="dump">
 	<div class="form-group">
 		<span class="text-yellow text-center fw-bold fs-14">{$LNG.du_header}</span>
@@ -14,7 +14,7 @@
 		{html_options multiple="multiple" class="w-100" size="10" name="dbtables[]" id="dbtables" values=$dumpData.sqlTables output=$dumpData.sqlTables}
 	</div>
 	<div class="form-group">
-		<input class="btn btn-primary text-white w-100 my-2" type="submit" value="{$LNG.du_submit}">
+		<input class="btn btn-primary  w-100 my-2" type="submit" value="{$LNG.du_submit}">
 	</div>
 </form>
 

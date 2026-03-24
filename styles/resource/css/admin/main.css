@@ -11,6 +11,10 @@ body {
 	color: #fff;
 }
 
+a, select, option{
+	color: #fff!important;
+}
+
 #leftmenu .menu-active{
 	background-color: #4c4949!important;
 }

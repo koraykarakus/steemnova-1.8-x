@@ -1,6 +1,6 @@
 {block name="content"}
 
-	<form method="post" action="?page=giveaway&mode=send" class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12">
+	<form method="post" action="?page=giveaway&mode=send" class="bg-black w-75  p-3 my-3 mx-auto fs-12">
 		<!-- Zielplaneten definieren -->
 		<table class="table table-dark table-striped table-sm fs-12 w-50 my-5 mx-auto">
 			<tr>

@@ -66,28 +66,28 @@
 			<tr>
 				<td>{$LNG.al_tag}</td>
 				<td>
-					<input class="form-control bg-dark text-white p-1" type="text" name="ally_tag" value="{$ally_tag}"
+					<input class="form-control bg-dark  p-1" type="text" name="ally_tag" value="{$ally_tag}"
 						size="8" maxlength="8" required>
 				</td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_name}</td>
-				<td><input class="text-white" type="text" name="ally_name" value="{$ally_name}"
+				<td><input class="" type="text" name="ally_name" value="{$ally_name}"
 						size="20" maxlength="30" required></td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_manage_founder_rank}</td>
-				<td><input class="text-white" type="text" name="owner_range"
+				<td><input class="" type="text" name="owner_range"
 						value="{$ally_owner_range}" size="30"></td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_web_site}</td>
-				<td><input class="text-white" type="text" name="web" value="{$ally_web}" size="70">
+				<td><input class="" type="text" name="web" value="{$ally_web}" size="70">
 				</td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_manage_image}</td>
-				<td><input class="text-white" type="text" name="image" value="{$ally_image}"
+				<td><input class="" type="text" name="image" value="{$ally_image}"
 						size="70"></td>
 			</tr>
 			<tr>
@@ -149,7 +149,7 @@
 			<tr>
 				<td>
 					<form action="game.php?page=alliance&amp;mode=admin&amp;action=close" method="post">
-						<input class="text-white" type="submit"
+						<input class="" type="submit"
 							value="{$LNG.al_continue}" onclick="return confirm('{$LNG.al_close_ally}');">
 					</form>
 				</td>
@@ -162,7 +162,7 @@
 			<tr>
 				<td>
 					<form action="game.php?page=alliance&amp;mode=admin&amp;action=transfer" method="post">
-						<input class="text-white" type="submit"
+						<input class="" type="submit"
 							value="{$LNG.al_continue}">
 					</form>
 				</td>

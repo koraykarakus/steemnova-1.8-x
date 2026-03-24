@@ -15,7 +15,7 @@
 	<tr>
 		<td>{$LNG.tech.$tradeResourceID}</td>
 		<td>
-			<input class="text-white" readonly id="ress" value="0"></input>
+			<input class="" readonly id="ress" value="0"></input>
 		</td>
 		<td></td>
 		<td class="text-center">1</td>
@@ -26,7 +26,7 @@
 			<label for="resource{$tradeResource}">{$LNG.tech[$tradeResource]}</label>
 		</td>
 		<td>
-			<input name="trade[{$tradeResource}]" id="resource{$tradeResource}" class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary trade_input text-center" type="text" value="0" size="30" data-resource="{$tradeResource}">
+			<input name="trade[{$tradeResource}]" id="resource{$tradeResource}" class="form-control fs-12 bg-dark  p-0 m-0 border border-secondary trade_input text-center" type="text" value="0" size="30" data-resource="{$tradeResource}">
 		</td>
 		<td style="width:100px;">
 			<span id="resource{$tradeResource}Shortly"></span>

@@ -132,7 +132,7 @@
 									onclick="minShip('ship{$FleetRow.id}');">{$LNG.fl_min}</button>
 							</td>
 							<td>
-								<input class="text-white"
+								<input class=""
 									name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0">
 							</td>
 						{else}

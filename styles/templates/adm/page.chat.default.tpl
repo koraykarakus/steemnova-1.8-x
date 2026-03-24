@@ -1,17 +1,17 @@
 {block name="content"}
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=chat&mode=saveSettings" method="post">
+<form class="bg-black w-75  p-3 my-3 mx-auto fs-12" action="?page=chat&mode=saveSettings" method="post">
 	<input type="hidden" name="opt_save" value="1">
 	<div class="form-gorup d-flex justify-content-between">
 		<span>{$se_server_parameters}</span>
 	</div>
 	<div class="form-gorup d-flex flex-column my-1 p-2 ">
 		<label class="text-start my-1 cursor-pointer hover-underline" for="chat_channelname">{$ch_channelname}</label>
-		<input id="chat_channelname" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="chat_channelname" value="{$chat_channelname}" type="text">
+		<input id="chat_channelname" class="form-control py-1 bg-dark  my-1 border border-secondary" name="chat_channelname" value="{$chat_channelname}" type="text">
 	</div>
 	<div class="form-gorup d-flex flex-column my-1 p-2 ">
 		<label class="text-start my-1 cursor-pointer hover-underline" for="chat_botname">{$ch_botname}</label>
-		<input id="chat_botname" class="form-control py-1 bg-dark text-white my-1 border border-secondary" name="chat_botname" value="{$chat_botname}" type="text">
+		<input id="chat_botname" class="form-control py-1 bg-dark  my-1 border border-secondary" name="chat_botname" value="{$chat_botname}" type="text">
 	</div>
 	<div class="form-gorup d-flex my-1 p-2 ">
 		<label class="text-start my-1 cursor-pointer hover-underline" for="chat_nickchange">{$ch_nickchange}</label>
@@ -34,7 +34,7 @@
 		<input id="chat_closed" class="mx-2" name="chat_closed"{if $chat_closed == '1'} checked="checked"{/if} type="checkbox">
 	</div>
 	<div class="form-gorup d-flex flex-column my-1 p-2 ">
-		<input class="btn btn-primary text-white" value="{$se_save_parameters}" type="submit">
+		<input class="btn btn-primary " value="{$se_save_parameters}" type="submit">
 	</div>
 </form>
 

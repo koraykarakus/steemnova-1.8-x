@@ -89,14 +89,14 @@
 										<td>{$LNG.tech.109}:</td>
 										<td>
 											<input
-												class="text-white"
+												class=""
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.0.109)}{$battle_input.{$smarty.section.content.index}.0.109}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][0][109]">
 										</td>
 										<td>
 											<input
-												class="text-white"
+												class=""
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.1.109)}{$battle_input.{$smarty.section.content.index}.1.109}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][1][109]">
@@ -118,12 +118,12 @@
 									<tr>
 										<td>{$LNG.tech.111}:</td>
 										<td><input
-												class="text-white"
+												class=""
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.0.111)}{$battle_input.{$smarty.section.content.index}.0.111}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][0][111]"></td>
 										<td><input
-												class="text-white"
+												class=""
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.1.111)}{$battle_input.{$smarty.section.content.index}.1.111}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][1][111]"></td>

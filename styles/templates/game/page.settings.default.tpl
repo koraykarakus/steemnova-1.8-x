@@ -23,7 +23,7 @@
 					<td width="50%">{$LNG.op_username}</td>
 					<td width="50%" style="height:22px;">
 						{if $changeNickTime < 0}
-							<input class="text-white" name="username" size="20"
+							<input class="" name="username" size="20"
 								value="{$username}" type="text">
 						{else}
 							{$username}
@@ -33,23 +33,23 @@
 				<tr>
 					<td>{$LNG.op_old_pass}</td>
 					<td>
-						<input class="text-white" name="password" size="20"
+						<input class="" name="password" size="20"
 							type="new-password">
 					</td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_new_pass}</td>
-					<td><input class="text-white" name="newpassword" size="20"
+					<td><input class="" name="newpassword" size="20"
 							maxlength="40" type="new-password"></td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_repeat_new_pass}</td>
-					<td><input class="text-white" name="newpassword2" size="20"
+					<td><input class="" name="newpassword2" size="20"
 							maxlength="40" type="new-password" class="autocomplete"></td>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_email_adress_descrip}">{$LNG.op_email_adress}</a></td>
-					<td><input class="text-white" name="email" maxlength="64"
+					<td><input class="" name="email" maxlength="64"
 							size="20" value="{$email}" type="text"></td>
 				</tr>
 				<tr>
@@ -61,25 +61,25 @@
 				</tr>
 				<tr>
 					<td>{$LNG.op_timezone}</td>
-					<td>{html_options class="text-white" name=timezone options=$Selectors.timezones selected=$timezone}
+					<td>{html_options class="" name=timezone options=$Selectors.timezones selected=$timezone}
 					</td>
 				</tr>
 				{if count($Selectors.lang) > 1}
 					<tr>
 						<td>{$LNG.op_lang}</td>
-						<td>{html_options class="text-white" name=language options=$Selectors.lang selected=$userLang}
+						<td>{html_options class="" name=language options=$Selectors.lang selected=$userLang}
 						</td>
 					</tr>
 				{/if}
 				<tr>
 					<td>{$LNG.op_sort_planets_by}</td>
-					<td>{html_options class="text-white " name=planetSort options=$Selectors.Sort selected=$planetSort}
+					<td>{html_options class=" " name=planetSort options=$Selectors.Sort selected=$planetSort}
 					</td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_sort_kind}</td>
 					<td>
-						{html_options class="text-white" name=planetOrder options=$Selectors.SortUpDown selected=$planetOrder}
+						{html_options class="" name=planetOrder options=$Selectors.SortUpDown selected=$planetOrder}
 					</td>
 				</tr>
 				<tr>
@@ -102,12 +102,12 @@
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_spy_probes_number_descrip}">{$LNG.op_spy_probes_number}</a></td>
-					<td><input class="text-white" name="spycount"
+					<td><input class="" name="spycount"
 							size="{$spycount|count_characters + 3}" value="{$spycount}" type="int"></td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_max_fleets_messages}</td>
-					<td><input class="text-white" name="fleetactions"
+					<td><input class="" name="fleetactions"
 							maxlength="2" size="{$fleetActions|count_characters + 2}" value="{$fleetActions}" type="int">
 					</td>
 				</tr>
@@ -158,7 +158,7 @@
 								<tr>
 									<td class="transparent">HTML:</td>
 									<td class="transparent">
-										<input class="text-white" type="text"
+										<input class="" type="text"
 											value='<a href="{$SELF_URL}{if $ref_active}index.php?ref={$userid}{/if}"><img src="{$SELF_URL}userpic.php?id={$userid}"></a>'
 											readonly="readonly" style="width:450px;">
 									</td>

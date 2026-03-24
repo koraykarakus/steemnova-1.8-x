@@ -1,6 +1,6 @@
 {block name="content"}
 
-  <div class="d-flex flex-column bg-black text-white w-75 mx-auto p-3 my-3">
+  <div class="d-flex flex-column bg-black  w-75 mx-auto p-3 my-3">
     <span>{$info_information}</span>
     <div style="word-break: break-word" class="d-flex flex-column py-2">
       <span class="fs-14 fw-bold">-- {$LNG.ad_infos_server} --</span>

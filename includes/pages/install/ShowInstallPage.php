@@ -178,7 +178,7 @@ class ShowInstallPage extends AbstractInstallPage
         {
             $done = '
 					<tr class="noborder"><td colspan="2" class="transparent">
-						<a class="btn btn-primary text-white w-100 my-2 p-1" href="index.php?page=install&step=3">
+						<a class="btn btn-primary  w-100 my-2 p-1" href="index.php?page=install&step=3">
 							' . $LNG['continue'] . '
 						</a>
 					</td>

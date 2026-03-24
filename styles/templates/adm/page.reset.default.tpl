@@ -1,5 +1,5 @@
 {block name="content"}
-    <form action="?page=reset&mode=send" class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" method="post"
+    <form action="?page=reset&mode=send" class="bg-black w-75  p-3 my-3 mx-auto fs-12" method="post"
         onsubmit="return confirm('{$re_reset_universe_confirmation}');">
 
         <div class="form-group my-1 p-2">
@@ -159,6 +159,6 @@
             </div>
         </div>
 
-        <input class="btn btn-primary text-white" type="submit" value="{$button_submit}">
+        <input class="btn btn-primary " type="submit" value="{$button_submit}">
 
 {/block}

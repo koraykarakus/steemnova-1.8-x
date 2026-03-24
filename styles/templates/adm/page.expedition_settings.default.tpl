@@ -1,6 +1,6 @@
 {block name="content"}
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=expedition&mode=send" method="post">
+<form class="bg-black w-75  p-3 my-3 mx-auto fs-12" action="?page=expedition&mode=send" method="post">
 <input type="hidden" name="opt_save" value="1">
   <div class="form-gorup d-flex my-1 p-2">
   	<label class="text-start my-1 cursor-pointer hover-underline" for="expedition_allow_fleet_loss">Allow fleet loss on expedition</label>
@@ -40,37 +40,37 @@
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_small_min">min darkmatter (small event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_small_min" name="expedition_min_darkmatter_small_min" value="{$expedition_min_darkmatter_small_min}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_small_min" name="expedition_min_darkmatter_small_min" value="{$expedition_min_darkmatter_small_min}" type="text">
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_small_max">max darkmatter (small event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_small_max" name="expedition_min_darkmatter_small_max" value="{$expedition_min_darkmatter_small_max}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_small_max" name="expedition_min_darkmatter_small_max" value="{$expedition_min_darkmatter_small_max}" type="text">
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_large_min">min darkmatter (large event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_large_min" name="expedition_min_darkmatter_large_min" value="{$expedition_min_darkmatter_large_min}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_large_min" name="expedition_min_darkmatter_large_min" value="{$expedition_min_darkmatter_large_min}" type="text">
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_large_max">max darkmatter (large event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_large_max" name="expedition_min_darkmatter_large_max" value="{$expedition_min_darkmatter_large_max}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_large_max" name="expedition_min_darkmatter_large_max" value="{$expedition_min_darkmatter_large_max}" type="text">
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_vlarge_min">min darkmatter (very large event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_vlarge_min" name="expedition_min_darkmatter_vlarge_min" value="{$expedition_min_darkmatter_vlarge_min}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_vlarge_min" name="expedition_min_darkmatter_vlarge_min" value="{$expedition_min_darkmatter_vlarge_min}" type="text">
   </div>
   <div class="form-gorup d-flex flex-column my-1 p-2">
     <label class="text-start my-1 cursor-pointer hover-underline" for="expedition_min_darkmatter_vlarge_max">max darkmatter (very large event)</label>
-    <input class="form-control py-1 bg-dark text-white my-1 border border-secondary" id="expedition_min_darkmatter_vlarge_max" name="expedition_min_darkmatter_vlarge_max" value="{$expedition_min_darkmatter_vlarge_max}" type="text">
+    <input class="form-control py-1 bg-dark  my-1 border border-secondary" id="expedition_min_darkmatter_vlarge_max" name="expedition_min_darkmatter_vlarge_max" value="{$expedition_min_darkmatter_vlarge_max}" type="text">
   </div>
 
 <div class="form-gorup d-flex flex-column my-1 p-2 ">
-	<input  class="btn btn-primary text-white" value="{$LNG.se_save_parameters}" type="submit">
+	<input  class="btn btn-primary " value="{$LNG.se_save_parameters}" type="submit">
 </div>
 </form>
 
-<form class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12" action="?page=expedition&mode=default" method="post">
+<form class="bg-black w-75  p-3 my-3 mx-auto fs-12" action="?page=expedition&mode=default" method="post">
   <div class="form-gorup d-flex flex-column my-1 p-2 ">
-  	<input  class="btn btn-primary text-white" value="return default" type="submit">
+  	<input  class="btn btn-primary " value="return default" type="submit">
   </div>
 </form>
 

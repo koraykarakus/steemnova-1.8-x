@@ -120,7 +120,7 @@
                         </div>
                         <img src='{$dpath}elements/{$ress_id}.{if $ress_id >=600 && $ress_id <= 699}jpg{else}gif{/if}'>
                         <span
-                          class="{if $element.cost_overflow[$ress_id] == 0}text-white{else}color-red{/if}">{$ress_amount|number}</span>
+                          class="{if $element.cost_overflow[$ress_id] == 0}{else}color-red{/if}">{$ress_amount|number}</span>
                       </div>
                     {/foreach}
                   </div>
@@ -165,7 +165,7 @@
             </div>
           </div>
           <div class="bottom">
-            <p class="text-white">{$LNG.shortDescription[$id]}</p>
+            <p class="">{$LNG.shortDescription[$id]}</p>
           </div>
         </div>
       {/foreach}

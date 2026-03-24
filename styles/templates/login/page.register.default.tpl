@@ -63,7 +63,7 @@
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="universe">{$LNG.universe}</label>
 			<select style="text-indent:5px;"
-				class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="uni"
+				class="bg-dark  form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="uni"
 				id="universe" class="changeAction">{html_options options=$universeSelect selected=$UNI}</select>
 		</div>
 		{if !empty($error.uni)}
@@ -72,7 +72,7 @@
 
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="username">{$LNG.registerUsername}</label>
-			<input type="text" class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
+			<input type="text" class="bg-dark  form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
 				name="username" id="username" maxlenght="32">
 		</div>
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
@@ -85,7 +85,7 @@
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="password">{$LNG.registerPassword}</label>
 			<input type="password"
-				class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100" name="password"
+				class="bg-dark  form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100" name="password"
 				id="password">
 		</div>
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
@@ -94,7 +94,7 @@
 		</div>
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="email">{$LNG.registerEmail}</label>
-			<input type="email" class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
+			<input type="email" class="bg-dark  form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
 				name="email" id="email">
 		</div>
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
@@ -105,7 +105,7 @@
 		<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 			<label class="fs-6 my-2 text-start w-100" for="secretQuestion">{$LNG.registerSecretQuestionText}</label>
 			<select id="secretQuestion" style="text-indent:5px;"
-				class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0"
+				class="bg-dark  form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0"
 				name="secretQuestion">
 				{foreach $LNG.registerSecretQuestionArray as $id => $currentQuestion}
 					<option value="{$id}">{$currentQuestion}</option>
@@ -118,7 +118,7 @@
 			<label class="fs-6 my-2 text-start w-100"
 				for="secretQuestionAnswer">{$LNG.registerSecretQuestionAnswerText}</label>
 			<input id="secretQuestionAnswer" type="text"
-				class="bg-dark text-white form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
+				class="bg-dark  form-control d-flex align-items-center my-2 mx-0 px-0 fs-6 w-100"
 				name="secretQuestionAnswer">
 		</div>
 
@@ -127,7 +127,7 @@
 			<div class="form-group d-flex flex-md-row flex-column justify-content-md-between align-items-center my-2">
 				<label class="fs-6 my-2 text-start w-100" for="language">{$LNG.registerLanguage}</label>
 				<select style="text-indent:5px;"
-					class="bg-dark text-white form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="lang"
+					class="bg-dark  form-select d-flex align-items-center my-2 fs-6 w-100 mx-0 px-0" name="lang"
 					id="language">
 					{html_options options=$languages selected=$lang}
 				</select>
@@ -170,7 +170,7 @@
 		<div class="form-group d-flex flex-column justify-content-md-between align-items-center my-2">
 			<button id="registerButton" type="button"
 				onclick="registerSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_register = '{$use_recaptcha_on_register}', referralID = '{$referral_data.id}');"
-				class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white">{$LNG.buttonRegister}</button>
+				class="hover-bg-color-grey btn btn-block w-100 bg-dark ">{$LNG.buttonRegister}</button>
 		</div>
 	</form>
 {/block}

@@ -1,6 +1,6 @@
 {block name="content"}
 
-<div class="bg-black w-75 text-white p-3 my-3 mx-auto fs-12 d-flex flex-column">
+<div class="bg-black w-75  p-3 my-3 mx-auto fs-12 d-flex flex-column">
 	<div class="form-group d-flex w-100">
 		<span class="text-yellow fw-bold">{$LNG.ti_header}</span>
 	</div>
@@ -16,13 +16,13 @@
 	{if $TicketInfo.status < 2}
 	<div class="form-group d-flex my-2 py-2 border border-1 border-secondary align-items-center">
 			<span class="col text-center">
-				<a class="text-white" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a>
+				<a class="" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a>
 			</span>
 			<span class="col">
-				<a class="text-white" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.username}</a>
+				<a class="" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.username}</a>
 			</span>
 			<span class="col">
-				<a class="text-white" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.subject}</a>
+				<a class="" href="admin.php?page=support&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.subject}</a>
 			</span>
 			<span class="col">{$TicketInfo.answer - 1}</span>
 			<span class="col">{$TicketInfo.time}</span>

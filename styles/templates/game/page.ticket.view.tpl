@@ -25,7 +25,7 @@
 				{$LNG.ti_category}: {$categoryList[$answerRow.categoryID]}
 			</span>
 			{/if}
-			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="text-white">
+			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="">
 				{$answerRow.message}
 			</p>
 		</td>
@@ -40,12 +40,12 @@
 			<label for="message">{$LNG.ti_message}</label>
 		</td>
 		<td style="width:70%">
-			<textarea style="width: 100%;height:120px;resize:none;"  class="validate[required] text-white" id="message" name="message" rows="60" cols="8" style="height:100px;"></textarea>
+			<textarea style="width: 100%;height:120px;resize:none;"  class="validate[required] " id="message" name="message" rows="60" cols="8" style="height:100px;"></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input class="text-white" type="submit" value="{$LNG.ti_submit}">
+			<input class="" type="submit" value="{$LNG.ti_submit}">
 		</td>
 	</tr>
 	</tbody>

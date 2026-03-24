@@ -9,18 +9,18 @@
   	<tr style="height:20px;">
       <td>{$LNG.bu_player}</td>
       <td>
-        <input class="bg-black text-white" type="text" value="{$username} [{$galaxy}:{$system}:{$planet}]" size="40" readonly>
+        <input class="bg-black " type="text" value="{$username} [{$galaxy}:{$system}:{$planet}]" size="40" readonly>
       </td>
     </tr>
   	<tr>
       <td>{$LNG.bu_request_text}(<span id="cntChars">0</span> / 5000 {$LNG.bu_characters})</td>
       <td>
-        <textarea class="text-white" name="text" id="text" cols="40" rows="10" size="100" onkeyup="$('#cntChars').text($(this).val().length);"></textarea>
+        <textarea class="" name="text" id="text" cols="40" rows="10" size="100" onkeyup="$('#cntChars').text($(this).val().length);"></textarea>
       </td>
     </tr>
   	<tr>
       <td class="text-center" colspan="2">
-        <input class="text-white" type="submit" value="{$LNG.bu_send}">
+        <input class="" type="submit" value="{$LNG.bu_send}">
       </td>
   	</tr>
   </table>

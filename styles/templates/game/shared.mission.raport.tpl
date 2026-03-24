@@ -153,9 +153,9 @@
 		<br><br>
 		{if $Raport.result == "a"}
 
-			<span class="text-white">{$LNG.sys_attacker_won}</span><br><br>
+			<span class="">{$LNG.sys_attacker_won}</span><br><br>
 
-			<span class="text-white">
+			<span class="">
 				{$LNG.sys_stealed_ressources} {foreach $Raport.steal as $elementID => $amount}{$amount|number}
 					{$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.steal)} {$LNG.sys_and}
 					{elseif !$amount@last},
@@ -164,16 +164,16 @@
 			</span>
 
 		{elseif $Raport.result == "r"}
-			<span class="text-white">{$LNG.sys_defender_won}</span>
+			<span class="">{$LNG.sys_defender_won}</span>
 		{else}
-			<span class="text-white">{$LNG.sys_both_won}</span>
+			<span class="">{$LNG.sys_both_won}</span>
 		{/if}
 		<br><br>
-		<span class="text-white">{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}</span>
+		<span class="">{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}</span>
 		<br>
-		<span class="text-white">{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}</span>
+		<span class="">{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}</span>
 		<br>
-		<span class="text-white">{$LNG.debree_field_1}
+		<span class="">{$LNG.debree_field_1}
 			{foreach $Raport.debris as $elementID => $amount}{$amount|number}
 				{$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.debris)} {$LNG.sys_and}
 				{elseif !$amount@last},
@@ -204,7 +204,7 @@
 			{/if}
 		{else}
 			{* Normal Attack *}
-			<span class="text-white">{$LNG.sys_moonproba} {$Raport.moon.moonChance} %</span>
+			<span class="">{$LNG.sys_moonproba} {$Raport.moon.moonChance} %</span>
 			<br>
 			{if !empty($Raport.moon.moonName)}
 				{if isset($Info)}
@@ -218,7 +218,7 @@
 			{/if}
 		{/if}
 
-		<span class="text-white">{$Raport.additionalInfo}</span>
+		<span class="">{$Raport.additionalInfo}</span>
 
 	</div>
 {/block}

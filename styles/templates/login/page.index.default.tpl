@@ -115,7 +115,7 @@
 					<span class="fs-6 px-2">Remember me</span>
 				</div>
 
-				<button id="loginButton" class="hover-bg-color-grey btn bg-dark text-white w-100" type="button"
+				<button id="loginButton" class="hover-bg-color-grey btn bg-dark  w-100" type="button"
 					onclick="loginSubmit(activeRecaptcha = '{$recaptchaEnable}', use_recaptcha_on_login = '{$use_recaptcha_on_login}');">{$LNG.loginButton}
 				</button>
 
@@ -124,7 +124,7 @@
 		</form>
 
 
-		<a class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white my-2 fs-6"
+		<a class="hover-bg-color-grey btn btn-block w-100 bg-dark  my-2 fs-6"
 			href="index.php?page=register">{$LNG.buttonRegister}</a>
 
 		{if isModuleAvailable(MODULE_AUTH_GOOGLE)}
@@ -149,7 +149,7 @@
 		<span class="fs-6">{$loginInfo}</span>
 
 		{if $mailEnable}
-			<a class="hover-bg-color-grey btn btn-block w-100 bg-dark text-white my-2 fs-6"
+			<a class="hover-bg-color-grey btn btn-block w-100 bg-dark  my-2 fs-6"
 				href="index.php?page=lostPassword">{$LNG.buttonLostPassword}</a>
 		{/if}
 

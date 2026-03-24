@@ -184,7 +184,7 @@
 			<tr>
 				<td>
 					<a href="game.php?page=alliance&amp;mode=close" onclick="return confirm('{$LNG.al_leave_ally}');">
-						<button class="text-white">{$LNG.al_continue}</button>
+						<button class="">{$LNG.al_continue}</button>
 					</a>
 				</td>
 			</tr>

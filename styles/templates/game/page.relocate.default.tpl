@@ -16,13 +16,13 @@
   </tr>
   <tr>
     <td>
-      <input style="height:24px;" class="text-white" name="galaxy" size="20" value="{$galaxy}" type="text" placeholder="Galaxy">
+      <input style="height:24px;" class="" name="galaxy" size="20" value="{$galaxy}" type="text" placeholder="Galaxy">
     </td>
     <td>
-      <input style="height:24px;" class="text-white" name="system" size="20" value="{$system}" type="text" placeholder="System">
+      <input style="height:24px;" class="" name="system" size="20" value="{$system}" type="text" placeholder="System">
     </td>
     <td>
-      <input style="height:24px;" class="text-white" name="planet" size="20" value="{$planet}" type="text" placeholder="Planet">
+      <input style="height:24px;" class="" name="planet" size="20" value="{$planet}" type="text" placeholder="Planet">
     </td>
   </tr>
   <tr>

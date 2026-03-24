@@ -48,22 +48,22 @@ function loginSubmit(activeRecaptcha,use_recaptcha_on_admin_login){
 </script>
 
 	<form style="max-width:350px;margin-top:150px;" action="?page=login&mode=validate" method="post" class="mx-auto p-3 bg-black rounded">
-		<div class="form-group my-2 text-center fs-14 fw-bold text-white">
+		<div class="form-group my-2 text-center fs-14 fw-bold ">
 			{$LNG.adm_login}
 		</div>
-		<div class="form-group my-2 fs-12 fw-bold text-white">
+		<div class="form-group my-2 fs-12 fw-bold ">
 			<label class="my-1 text-start fw-bold w-100" for="username">{$LNG.adm_username}:</label>
 			<input id="username" class="form-control user-select-none" type="text" readonly value="{$username}">
 		</div>
-		<div class="form-group my-2 fs-12 fw-bold text-white">
+		<div class="form-group my-2 fs-12 fw-bold ">
 			<label class="my-1 text-start fw-bold w-100" for="password">{$LNG.adm_password}:</label>
 			<input id="password" class="form-control" type="password" name="admin_pw" autocomplete="new-password">
 		</div>
 		{if $recaptchaEnable && $use_recaptcha_on_admin_login}
 			<div style="overflow:hidden;" class="g-recaptcha form-group w-100 fs-6 my-2 mx-auto d-flex justify-content-center" data-sitekey="{$recaptchaPublicKey}"></div>
 		{/if}
-		<div class="form-group my-2 fs-12 fw-bold text-white d-flex flex-column">
-			<input id="loginButton" onclick="loginSubmit({$recaptchaEnable},{$use_recaptcha_on_admin_login});" class="btn btn-block w-100 btn-primary text-white" type="button" value="{$LNG.adm_absenden}">
+		<div class="form-group my-2 fs-12 fw-bold  d-flex flex-column">
+			<input id="loginButton" onclick="loginSubmit({$recaptchaEnable},{$use_recaptcha_on_admin_login});" class="btn btn-block w-100 btn-primary " type="button" value="{$LNG.adm_absenden}">
 		</div>
 	</form>
 
