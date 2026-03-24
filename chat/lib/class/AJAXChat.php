@@ -1393,13 +1393,13 @@ class AJAXChat {
 				$condition = '';
 			} else if($this->getUserRole() == AJAX_CHAT_MODERATOR) {
 				$condition = '	AND
-									NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_ADMIN).')
+									NOT (user_role='.$this->db->makeSafe(AJAX_CHAT_ADMIN).')
 								AND
-									NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_CHATBOT).')';
+									NOT (user_role='.$this->db->makeSafe(AJAX_CHAT_CHATBOT).')';
 			} else if($this->getUserRole() == AJAX_CHAT_USER && $this->getConfig('allowUserMessageDelete')) {
 				$condition = 'AND
 								(
-								userID='.$this->db->makeSafe($this->getUserID()).'
+								user_id='.$this->db->makeSafe($this->getUserID()).'
 								OR
 									(
 									channel = '.$this->db->makeSafe($this->getPrivateMessageID()).'
@@ -1407,9 +1407,9 @@ class AJAXChat {
 									channel = '.$this->db->makeSafe($this->getPrivateChannelID()).'
 									)
 									AND
-										NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_ADMIN).')
+										NOT (user_role='.$this->db->makeSafe(AJAX_CHAT_ADMIN).')
 									AND
-										NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_CHATBOT).')
+										NOT (user_role='.$this->db->makeSafe(AJAX_CHAT_CHATBOT).')
 								)';
 			} else {
 				return false;
@@ -1496,11 +1496,11 @@ class AJAXChat {
 		$ip = $ip ? $ip : $_SERVER['REMOTE_ADDR'];
 
 		$sql = 'INSERT INTO '.$this->getDataBaseTable('messages').'(
-								userID,
-								userName,
-								userRole,
+								user_id,
+								user_name,
+								user_role,
 								channel,
-								dateTime,
+								date_time,
 								ip,
 								text
 							)
@@ -2015,11 +2015,11 @@ class AJAXChat {
 		// Get the last messages in descending order (this optimises the LIMIT usage):
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					user_id,
+					user_name,
+					user_role,
+					channel AS channel_id,
+					UNIX_TIMESTAMP(date_time) AS time_stamp,
 					text
 				FROM
 					'.$this->getDataBaseTable('messages').'
@@ -2046,11 +2046,11 @@ class AJAXChat {
 		while($row = $result->fetch()) {
 			$message = $this->getChatViewMessageXML(
 				$row['id'],
-				$row['timeStamp'],
-				$row['userID'],
-				$row['userName'],
-				$row['userRole'],
-				$row['channelID'],
+				$row['time_stamp'],
+				$row['user_id'],
+				$row['user_name'],
+				$row['user_role'],
+				$row['channel_id'],
 				$row['text']
 			);
 			$messages = $message.$messages;
@@ -2090,11 +2090,11 @@ class AJAXChat {
 		// Get the last messages in descending order (this optimises the LIMIT usage):
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					user_id,
+					user_name,
+					user_role,
+					channel AS channel_id,
+					UNIX_TIMESTAMP(date_time) AS time_stamp,
 					text
 				FROM
 					'.$this->getDataBaseTable('messages').'
@@ -2122,12 +2122,12 @@ class AJAXChat {
 			$message = '';
 			$message .= '<message';
 			$message .= ' id="'.$row['id'].'"';
-			$message .= ' dateTime="'.date('r', $row['timeStamp']).'"';
-			$message .= ' userID="'.$row['userID'].'"';
-			$message .= ' userRole="'.$row['userRole'].'"';
-			$message .= ' channelID="'.$row['channelID'].'"';
+			$message .= ' dateTime="'.date('r', $row['time_stamp']).'"';
+			$message .= ' userID="'.$row['user_id'].'"';
+			$message .= ' userRole="'.$row['user_role'].'"';
+			$message .= ' channelID="'.$row['channel_id'].'"';
 			$message .= '>';
-			$message .= '<username><![CDATA['.$this->encodeSpecialChars($row['userName']).']]></username>';
+			$message .= '<username><![CDATA['.$this->encodeSpecialChars($row['user_name']).']]></username>';
 			$message .= '<text><![CDATA['.$this->encodeSpecialChars($row['text']).']]></text>';
 			$message .= '</message>';
 			$messages = $message.$messages;
@@ -2258,11 +2258,11 @@ class AJAXChat {
 	function getLogsViewMessagesXML() {
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					user_id,
+					user_name,
+					user_role,
+					channel AS channel_id,
+					UNIX_TIMESTAMP(date_time) AS time_stamp,
 					ip,
 					text
 				FROM
@@ -2286,15 +2286,15 @@ class AJAXChat {
 		while($row = $result->fetch()) {
 			$xml .= '<message';
 			$xml .= ' id="'.$row['id'].'"';
-			$xml .= ' dateTime="'.date('r', $row['timeStamp']).'"';
-			$xml .= ' userID="'.$row['userID'].'"';
-			$xml .= ' userRole="'.$row['userRole'].'"';
-			$xml .= ' channelID="'.$row['channelID'].'"';
+			$xml .= ' dateTime="'.date('r', $row['time_stamp']).'"';
+			$xml .= ' userID="'.$row['user_id'].'"';
+			$xml .= ' userRole="'.$row['user_role'].'"';
+			$xml .= ' channelID="'.$row['channel_id'].'"';
 			if($this->getUserRole() == AJAX_CHAT_ADMIN || $this->getUserRole() == AJAX_CHAT_MODERATOR) {
 				$xml .= ' ip="'.$this->ipFromStorageFormat($row['ip']).'"';
 			}
 			$xml .= '>';
-			$xml .= '<username><![CDATA['.$this->encodeSpecialChars($row['userName']).']]></username>';
+			$xml .= '<username><![CDATA['.$this->encodeSpecialChars($row['user_name']).']]></username>';
 			$xml .= '<text><![CDATA['.$this->encodeSpecialChars($row['text']).']]></text>';
 			$xml .= '</message>';
 		}
@@ -2318,7 +2318,7 @@ class AJAXChat {
 		$sql = 'DELETE FROM
 					'.$this->getDataBaseTable('messages').'
 				WHERE
-					dateTime < DATE_SUB(NOW(), interval '.$this->getConfig('logsPurgeTimeDiff').' DAY);';
+					date_time < DATE_SUB(NOW(), interval '.$this->getConfig('logsPurgeTimeDiff').' DAY);';
 
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
