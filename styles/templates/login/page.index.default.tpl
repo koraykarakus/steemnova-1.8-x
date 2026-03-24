@@ -20,9 +20,9 @@
 					g_recaptcha_response: recaptchaResponse,
 					remember_me: $('#remember_me').is(':checked'),
 					universe: $('#universe').val(),
-					rememberedTokenValidator: $('#rememberedTokenValidator').val(),
-					rememberedTokenSelector: $('#rememberedTokenSelector').val(),
-					rememberedEmail: $('#rememberedEmail').val(),
+					remembered_token_validator: $('#remembered_token_validator').val(),
+					remembered_token_selector: $('#remembered_token_selector').val(),
+					remembered_email: $('#remembered_email').val(),
 				},
 				success: function(data) {
 
@@ -90,9 +90,9 @@
 
 		<h1 class="fs-6">{$LNG.loginHeader}</h1>
 		<form id="login" action="" method="post">
-			<input id="rememberedEmail" type="hidden" name="rememberedEmail" value="{$mem_email}">
-			<input id="rememberedTokenSelector" type="hidden" name="rememberedTokenSelector" value="{$mem_token_sel}">
-			<input id="rememberedTokenValidator" type="hidden" name="rememberedTokenValidator" value="{$mem_token_valid}">
+			<input id="remembered_email" type="hidden" name="remembered_email" value="{$mem_email}">
+			<input id="remembered_token_selector" type="hidden" name="remembered_token_selector" value="{$mem_token_sel}">
+			<input id="remembered_token_validator" type="hidden" name="remembered_token_validator" value="{$mem_token_valid}">
 			<div class="d-flex flex-column form-group">
 				<select onchange="changeUni(this.value);" class="form-select my-2 w-100" name="uni" id="universe">
 					{foreach $universeSelect as $universeID => $currentUniverse}

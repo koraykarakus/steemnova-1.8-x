@@ -43,9 +43,9 @@ class ShowLoginPage extends AbstractLoginPage
         $email = HTTP::_GP('email', '', true);
         $password = HTTP::_GP('password', '', true);
         $remember_me = HTTP::_GP('remember_me', 'false');
-        $token_val = HTTP::_GP('rememberedTokenValidator', '');
-        $token_sel = HTTP::_GP('rememberedTokenSelector', '');
-        $mem_email = HTTP::_GP('rememberedEmail', '');
+        $token_val = HTTP::_GP('remembered_token_validator', '');
+        $token_sel = HTTP::_GP('remembered_token_selector', '');
+        $mem_email = HTTP::_GP('remembered_email', '');
         $universe = HTTP::_GP('universe', 0);
         $external_auth = false;
 
@@ -78,10 +78,10 @@ class ShowLoginPage extends AbstractLoginPage
 
                 //delete old remember me data
 
-                $sql = "DELETE FROM %%REMEMBER_ME%% WHERE `user_id` = :userId;";
+                $sql = "DELETE FROM %%REMEMBER_ME%% WHERE `user_id` = :user_id;";
 
                 $db->delete($sql, [
-                    ':userId' => (int) $login_service->login_id,
+                    ':user_id' => (int) $login_service->login_id,
                 ]);
 
                 //insert new remember data,
@@ -101,9 +101,9 @@ class ShowLoginPage extends AbstractLoginPage
 
             if ($remember_me == "false")
             {
-                $sql = "DELETE FROM %%REMEMBER_ME%% WHERE user_id = :userId;";
+                $sql = "DELETE FROM %%REMEMBER_ME%% WHERE user_id = :user_id;";
                 $db->delete($sql, [
-                    ':userId' => (int) $login_service->login_id,
+                    ':user_id' => (int) $login_service->login_id,
                 ]);
             }
         }
