@@ -132,11 +132,11 @@ CREATE TABLE `%PREFIX%chat_invitations` (
 
 CREATE TABLE `%PREFIX%chat_messages` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
-  `user_name` VARCHAR(64) NOT NULL,
-  `user_role` INT NOT NULL,
+  `userID` INT NOT NULL,
+  `userName` VARCHAR(64) NOT NULL,
+  `userRole` INT NOT NULL,
   `channel` INT NOT NULL,
-  `date_time` DATETIME NOT NULL,
+  `dateTime` DATETIME NOT NULL,
   `ip` VARBINARY(16) NOT NULL,
   `text` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   PRIMARY KEY (`id`)
