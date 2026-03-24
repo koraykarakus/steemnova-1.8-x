@@ -47,7 +47,7 @@
 					<tr>
 						<td colspan="2">
 							<span>{$LNG.fl_hold_time}</span>
-							<select class="" name="">
+							<select name="">
 								{foreach $StaySelector as $cKey => $cSelector}
 									<option value="{$cKey}">{$cSelector}</option>
 								{/foreach}

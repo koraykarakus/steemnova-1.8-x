@@ -3,22 +3,22 @@
 	<form name="stats" id="stats" method="post" action="">
 		<table class="table-gow table_full">
 			<tr>
-				<th class="">{$LNG.st_statistics} ({$LNG.st_updated}: {$stat_date})</th>
+				<th>{$LNG.st_statistics} ({$LNG.st_updated}: {$stat_date})</th>
 			</tr>
 			<tr>
-				<td class="">
+				<td>
 					<label for="who">{$LNG.st_show}</label>
-					<select style="width:auto;" class="" name="who" id="who"
+					<select style="width:auto;" name="who" id="who"
 						onchange="$('#stats').submit();">
 						{html_options options=$Selectors.who selected=$who}
 					</select>
 					<label for="type">{$LNG.st_per}</label>
-					<select style="width:auto;" class="" name="type" id="type"
+					<select style="width:auto;" name="type" id="type"
 						onchange="$('#stats').submit();">
 						{html_options options=$Selectors.type selected=$type}
 					</select>
 					<label for="range">{$LNG.st_in_the_positions}</label>
-					<select style="width:auto;" class="" name="range" id="range"
+					<select style="width:auto;" name="range" id="range"
 						onchange="$('#stats').submit();">
 						{html_options options=$Selectors.range selected=$range}
 					</select>

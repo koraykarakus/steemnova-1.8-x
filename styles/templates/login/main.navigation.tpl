@@ -68,7 +68,7 @@
 							<a class="text-decoration-none hover-bg-color-grey d-flex align-items-center w-100 px-2"
 								href="?page={$page}&amp;lang={$langKey}" rel="alternate" hreflang="{$langKey}" title="{$langName}">
 								<span class="flags {$langKey}">{$langName}</span>
-								<span class="">{$langName}</span>
+								<span>{$langName}</span>
 							</a>
 						</li>
 					{/foreach}

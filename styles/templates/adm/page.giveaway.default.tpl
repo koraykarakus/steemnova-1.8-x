@@ -70,7 +70,7 @@
 				<table class="p-3 mx-auto text-start">
 					{foreach item=Element from=$reslist.resstype.1}
 						<tr>
-							<td class="">{$LNG.tech.{$Element}}:</td>
+							<td>{$LNG.tech.{$Element}}:</td>
 							<td><input type="text" name="element_{$Element}" value="0" pattern="[0-9]*"></td>
 						</tr>
 					{/foreach}

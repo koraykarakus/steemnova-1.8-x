@@ -81,7 +81,7 @@
             <table class="table-gow">
                 <tr>
                     <td>
-                        <table class="">
+                        <table>
                             <thead>
                                 <th colspan="2">
                                     Attacker
@@ -99,7 +99,7 @@
                         </table>
                     </td>
                     <td>
-                        <table class="">
+                        <table>
                             <thead>
                                 <th colspan="2">
                                     Defender
@@ -117,7 +117,7 @@
                         </table>
                     </td>
                     <td>
-                        <table class="">
+                        <table>
                             <thead>
                                 <th colspan="2">
                                     Defender
@@ -139,7 +139,7 @@
             <table class="table-gow">
                 <tr>
                     <td>
-                        <button class="" type="submit">Start fleets</button>
+                        <button type="submit">Start fleets</button>
                     </td>
                 </tr>
             </table>

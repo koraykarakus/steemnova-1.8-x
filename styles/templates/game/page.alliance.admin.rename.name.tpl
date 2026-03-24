@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 	<form action="game.php?page=alliance&amp;mode=admin&amp;action=changeName" method="post">
-		<table class="">
+		<table>
 			<tr>
 				<th colspan="2">{$LNG.al_name} {$LNG.al_change_title}</th>
 			</tr>

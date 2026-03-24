@@ -167,7 +167,7 @@
             {/if}
             <img class="hover-pointer" src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if !$IsLabinBuild && !$IsFullQueue && $Element.buyable && $Element.technologySatisfied}
-              <form action="game.php?page=research" method="post" class="">
+              <form action="game.php?page=research" method="post">
                 <input type="hidden" name="cmd" value="insert">
                 <input type="hidden" name="tech" value="{$ID}">
                 <button type="submit" class="button_upgrade_small">

@@ -7,11 +7,11 @@
         	<th colspan="2">[{$galaxy}:{$system}:{$planet}] - {$LNG["type_planet_{$type}"]}</th>
         </tr>
 		<tr>
-			<td class="">{$LNG.fl_mission}</td>
-      <td class="">{$LNG.fl_resources}</td>
+			<td>{$LNG.fl_mission}</td>
+      <td>{$LNG.fl_resources}</td>
     </tr>
 		<tr>
-			<td class="" {if $StaySelector} rowspan="5"{/if}>
+			<td {if $StaySelector} rowspan="5"{/if}>
     		<table class="table-gow" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
     			{foreach $MissionSelector as $MissionID}
 					<tr>
@@ -19,28 +19,28 @@
 						<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} style="width:60px;">
             <label for="radio_{$MissionID}">{$LNG["type_mission_{$MissionID}"]}</label>
 							{if $MissionID == 17}
-              <div class="">{$LNG.fl_transfer_alert_message}</div>
+              <div>{$LNG.fl_transfer_alert_message}</div>
               {/if}
 							{if $MissionID == 15}
-              <div class="">{$LNG.fl_expedition_alert_message}</div>
+              <div>{$LNG.fl_expedition_alert_message}</div>
               {/if}
 							{if $MissionID == 11}
-              <div class="">{$fl_dm_alert_message}</div>
+              <div>{$fl_dm_alert_message}</div>
               {/if}
 						</td>
 					</tr>
 			   {/foreach}
     		</table>
       </td>
-      <td class="">
+      <td>
 				<table class="table-gow" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
               <tr colspan="5">
         				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.901}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="maxResource('metal');">{$LNG.fl_max}</button>
+                  <button type="button" style="padding:2px;" onclick="maxResource('metal');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="minResource('metal');">min</button>
+                  <button type="button" style="padding:2px;" onclick="minResource('metal');">min</button>
                 </td>
         				<td colspan="2">
                   <input id="metal_to_transport" style="height:24px;" class="bg-black text-white" name="metal" onchange="calculateTransportCapacity();" type="text">
@@ -87,7 +87,7 @@
                 </td>
         			</tr>
               <tr>
-        				<td colspan="5" class="">{$LNG.fl_fuel_consumption}: <span id="consumption" class="consumption">{$consumption}</span></td>
+        				<td colspan="5">{$LNG.fl_fuel_consumption}: <span id="consumption" class="consumption">{$consumption}</span></td>
         			</tr>
 				</table>
 			</td>

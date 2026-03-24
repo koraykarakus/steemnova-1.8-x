@@ -125,7 +125,7 @@
                     {/foreach}
                   </div>
                   <div class="right">
-                    <div class="">
+                    <div>
                       {if $element.max_level == $element.level_to_build}
                         <span style="color:#ffd600">{$LNG.bd_maxlevel} || <button>End Game</button></span>
                       {elseif ($is_busy.research && ($id == 6 || $id == 31)) || ($is_busy.shipyard && ($id == 15 || $id == 21))}
@@ -144,7 +144,7 @@
                               </div>
                             </form>
                           {else}
-                            <span class="" style="color:#ffd600">
+                            <span style="color:#ffd600">
                               <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
                                 title="{$LNG.bd_build_next_level}{$element.level_to_build + 1}" class="button-upgrade" type="button"
                                 name="button" disabled>
@@ -219,7 +219,7 @@
             {/if}
             <img class="hover-pointer" src="{$dpath}elements/{$id}.gif" alt="{$LNG.tech.{$id}}" width="90" height="90">
             {if $can_build_element && $is_room_ok && $element.buyable && $element.technology_satisfied && !($is_busy.research && ($id == 6 || $id == 31)) && !($is_busy.shipyard && ($id == 15 || $id == 21))}
-              <form action="game.php?page=facilities" method="post" class="">
+              <form action="game.php?page=facilities" method="post">
                 <input type="hidden" name="cmd" value="insert">
                 <input type="hidden" name="building" value="{$id}">
                 <button type="submit" class="button_upgrade_small">
@@ -265,7 +265,7 @@
           </div>
           {if $list@first}
             <div class="queue_right">
-              <div style="border-radius:10px;height:12px;" id="progressbar" class="" data-time="{$list.resttime}"></div>
+              <div style="border-radius:10px;height:12px;" id="progressbar" data-time="{$list.resttime}"></div>
               <span class="text-yellow">{$LNG['tech'][{$id}]}&nbsp;:&nbsp;{$list.level}</span>
               <span class="text-yellow" id="time" data-time="{$list.time}"></span>
               <span class="text-yellow">{$list.display}</span>

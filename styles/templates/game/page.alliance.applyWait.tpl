@@ -9,8 +9,8 @@
 				<td>{$request_text}</td>
 			</tr>
 			<tr>
-				<td class="">
-					<input class="" type="submit" value="{$LNG.al_continue}">
+				<td>
+					<input type="submit" value="{$LNG.al_continue}">
 				</td>
 			</tr>
 		</table>

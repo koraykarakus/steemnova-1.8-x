@@ -21,7 +21,7 @@
 <tr>
 	<td colspan="3">
 	<input type="reset" value="{$LNG.button_reset}">
-	<select class="" name="type">
+	<select name="type">
 		<option value="add" selected>{$LNG.button_add}</option>
 		<option value="delete">{$LNG.button_delete}</option>
 	</select>

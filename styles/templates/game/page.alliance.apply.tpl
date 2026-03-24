@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 	<form action="game.php?page=alliance&amp;mode=apply&amp;id={$allyid}" method="post">
-		<table class="">
+		<table>
 			<tr>
 				<th colspan="2">{$al_write_request}</th>
 			</tr>
@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input class="" type="submit" value="{$LNG.al_applyform_send}">
+					<input type="submit" value="{$LNG.al_applyform_send}">
 				</td>
 			</tr>
 		</table>

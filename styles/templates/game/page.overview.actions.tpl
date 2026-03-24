@@ -20,7 +20,7 @@
 		}
 	</script>
 
-	<div class="">
+	<div>
 		<div class="planet-menu">
 			<div class="menu-wrapper">
 
@@ -36,11 +36,11 @@
 		</div>
 		<div id="rename_planet">
 			<div class="actions-card">
-				<form class="">
+				<form>
 					<h6 class="rename-title">
 						{$LNG.ov_rename_label}
 					</h6>
-					<input type="text" name="name" id="name" class="" placeholder="" maxlength="20"
+					<input type="text" name="name" id="name" placeholder="" maxlength="20"
 						autocomplete="off">
 					<input class="button-blue" type="button" onclick="checkrename();" class="button-blue"
 						value="{$LNG.ov_planet_rename}">
@@ -48,15 +48,15 @@
 			</div>
 		</div>
 		<div id="abondon_planet" class="text-white">
-			<div class="">
-				<form class="">
-					<div class="">
+			<div>
+				<form>
+					<div>
 						{$LNG.ov_security_request}
 					</div>
-					<div class="">
+					<div>
 						{$ov_security_confirm}
 					</div>
-					<input id="password" class="" type="password" name="password"
+					<input id="password" type="password" name="password"
 						placeholder="{$LNG.ov_ac_password}" autocomplete="new-password">
 					<input class="button-blue" type="button" onclick="checkcancel()"
 						value="{$LNG.ov_delete_planet}">

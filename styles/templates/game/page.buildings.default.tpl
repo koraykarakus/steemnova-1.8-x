@@ -125,7 +125,7 @@
                     {/foreach}
                   </div>
                   <div class="right">
-                    <div class="">
+                    <div>
                       {if $Element.maxLevel == $Element.levelToBuild}
                         <span style="color:#ffd600">{$LNG.bd_maxlevel} || <button>End Game</button></span>
                       {elseif ($isBusy.research && ($ID == 6 || $ID == 31)) || ($isBusy.shipyard && ($ID == 15 || $ID == 21))}
@@ -219,7 +219,7 @@
             {/if}
             <img class="hover-pointer" src="{$dpath}elements/{$ID}.gif" alt="{$LNG.tech.{$ID}}" width="90" height="90">
             {if $CanBuildElement && $RoomIsOk && $Element.buyable && $Element.technologySatisfied && !($isBusy.research && ($ID == 6 || $ID == 31)) && !($isBusy.shipyard && ($ID == 15 || $ID == 21))}
-              <form action="game.php?page=buildings" method="post" class="">
+              <form action="game.php?page=buildings" method="post">
                 <input type="hidden" name="cmd" value="insert">
                 <input type="hidden" name="building" value="{$ID}">
                 <button type="submit" class="button_upgrade_small">
@@ -265,7 +265,7 @@
           </div>
           {if $List@first}
             <div class="queue_right">
-              <div style="border-radius:10px;height:12px;" id="progressbar" class="" data-time="{$List.resttime}"></div>
+              <div style="border-radius:10px;height:12px;" id="progressbar" data-time="{$List.resttime}"></div>
               <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
               <span class="text-yellow" id="time" data-time="{$List.time}"></span>
               <span class="text-yellow">{$List.display}</span>

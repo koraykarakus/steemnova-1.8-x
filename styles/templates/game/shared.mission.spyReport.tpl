@@ -3,11 +3,11 @@
 		<a class="text-decoration-none" href="game.php?page=galaxy&amp;galaxy={$targetPlanet.galaxy}&amp;system={$targetPlanet.system}">{$title}</a>
 	</div>
 	{foreach $spyData as $Class => $elementIDs}
-	<div class="">
-	<span class="">{$LNG.tech.$Class}</span>
-	<div class="">
+	<div>
+	<span>{$LNG.tech.$Class}</span>
+	<div>
 		{foreach $elementIDs as $elementID => $amount}
-		<div class="">
+		<div>
 			<a class="hover-underline" href='#' onclick='return Dialog.info({$elementID})' data-bs-toggle="tooltip"
 		data-bs-placement="left"
 		data-bs-html="true" title="
@@ -27,13 +27,13 @@
 			</tbody>
 		</table>
 		">{$LNG.tech.$elementID}:</a>
-		<span class="">{$amount|number}</span>
+		<span>{$amount|number}</span>
 	</div>
 	{/foreach}
 </div>
 	</div>
 	{/foreach}
-	<div class="">
+	<div>
 		<a class="color-blue hover-underline" href="game.php?page=fleetTable&amp;galaxy={$targetPlanet.galaxy}&amp;system={$targetPlanet.system}&amp;planet={$targetPlanet.planet}&amp;planettype={$targetPlanet.planet_type}&amp;target_mission=1">{$LNG.type_mission_1}</a>
 		<span class="color-blue text-center">
 			{if $targetChance >= $spyChance}

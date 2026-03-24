@@ -67,7 +67,7 @@
   </div>
   <div class="page_refresher">
     <a href="game.php?page=overview">
-      <img width="130" height="70" class="" src="styles/resource/images/meta.png" />
+      <img width="130" height="70" src="styles/resource/images/meta.png" />
     </a>
   </div>
   <div class="resources">

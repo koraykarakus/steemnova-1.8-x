@@ -80,7 +80,7 @@
       </tr>
     </thead>
     <tbody>
-      <form id="flightSimForm" class="" action="" method="post">
+      <form id="flightSimForm" action="" method="post">
         <input type="hidden" name="mode" value="calcFleetSpeed">
         <tr>
           <td colspan="2"><span>{$LNG.tech.115}</span></td>

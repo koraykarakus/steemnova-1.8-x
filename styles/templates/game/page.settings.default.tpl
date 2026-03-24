@@ -6,18 +6,18 @@
 			<tbody>
 				{if $userAuthlevel > 0}
 					<tr>
-						<th class="" colspan="2">{$LNG.op_admin_title_options}</th>
+						<th colspan="2">{$LNG.op_admin_title_options}</th>
 					</tr>
 					<tr>
 						<td>{$LNG.op_admin_planets_protection}</td>
-						<td class="">
+						<td>
 							<input name="adminprotection" type="checkbox" value="1" {if $adminProtection > 0}checked="checked"
 								{/if}>
 						</td>
 					</tr>
 				{/if}
 				<tr>
-					<th class="" colspan="2">{$LNG.op_user_data}</th>
+					<th colspan="2">{$LNG.op_user_data}</th>
 				</tr>
 				<tr>
 					<td width="50%">{$LNG.op_username}</td>
@@ -57,7 +57,7 @@
 					<td>{$permaEmail}</td>
 				</tr>
 				<tr>
-					<th class="" colspan="2">{$LNG.op_general_settings}</th>
+					<th colspan="2">{$LNG.op_general_settings}</th>
 				</tr>
 				<tr>
 					<td>{$LNG.op_timezone}</td>
@@ -112,44 +112,44 @@
 					</td>
 				</tr>
 				<tr>
-					<th class="">{$LNG.op_shortcut}</th>
-					<th class="">{$LNG.op_show}</th>
+					<th>{$LNG.op_shortcut}</th>
+					<th>{$LNG.op_show}</th>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/e.gif" alt="">{$LNG.op_spy}</td>
-					<td class=""><input name="galaxySpy" type="checkbox" value="1"
+					<td><input name="galaxySpy" type="checkbox" value="1"
 							{if $galaxySpy == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/m.gif" alt="">{$LNG.op_write_message}</td>
-					<td class=""><input name="galaxyMessage" type="checkbox" value="1"
+					<td><input name="galaxyMessage" type="checkbox" value="1"
 							{if $galaxyMessage == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/b.gif" alt="">{$LNG.op_add_to_buddy_list}</td>
-					<td class=""><input name="galaxyBuddyList" type="checkbox" value="1"
+					<td><input name="galaxyBuddyList" type="checkbox" value="1"
 							{if $galaxyBuddyList == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/r.gif" alt="">{$LNG.op_missile_attack}</td>
-					<td class=""><input name="galaxyMissle" type="checkbox" value="1"
+					<td><input name="galaxyMissle" type="checkbox" value="1"
 							{if $galaxyMissle == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
-					<th class="" colspan="2">{$LNG.op_vacation_delete_mode}</th>
+					<th colspan="2">{$LNG.op_vacation_delete_mode}</th>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_activate_vacation_mode_descrip}">{$LNG.op_activate_vacation_mode}</a></td>
-					<td class=""><input name="vacation" type="checkbox" value="1"></td>
+					<td><input name="vacation" type="checkbox" value="1"></td>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_dlte_account_descrip}">{$LNG.op_dlte_account}</a></td>
-					<td class=""><input name="delete" type="checkbox" value="1" {if $delete > 0}checked="checked"
+					<td><input name="delete" type="checkbox" value="1" {if $delete > 0}checked="checked"
 							{/if}></td>
 				</tr>
 				{if isModuleAvailable($smarty.const.MODULE_BANNER)}
 					<tr>
-						<th class="" colspan="3">{$LNG.ov_userbanner}</th>
+						<th colspan="3">{$LNG.ov_userbanner}</th>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -166,7 +166,7 @@
 								<tr>
 									<td class="transparent">BBCode:</td>
 									<td class="transparent">
-										<input class="" type="text"
+										<input type="text"
 											value="[url={$SELF_URL}{if $ref_active}index.php?ref={$userid}{/if}][img]{$SELF_URL}userpic.php?id={$userid}[/img][/url]"
 											readonly="readonly" style="width:450px;">
 									</td>
@@ -177,7 +177,7 @@
 				{/if}
 				<tr>
 					<td colspan="2">
-						<input class="" value="{$LNG.op_save_changes}"
+						<input value="{$LNG.op_save_changes}"
 							type="submit">
 					</td>
 				</tr>

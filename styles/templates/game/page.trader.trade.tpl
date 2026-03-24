@@ -14,7 +14,7 @@
 	</tr>
 	<tr>
 		<td>{$LNG.tech.$tradeResourceID}</td>
-		<td class="">
+		<td>
 			<input class="text-white" readonly id="ress" value="0"></input>
 		</td>
 		<td></td>
@@ -23,20 +23,20 @@
 	{foreach $tradeResources as $tradeResource}
 	<tr>
 		<td>
-			<label class="" for="resource{$tradeResource}">{$LNG.tech[$tradeResource]}</label>
+			<label for="resource{$tradeResource}">{$LNG.tech[$tradeResource]}</label>
 		</td>
-		<td class="">
+		<td>
 			<input name="trade[{$tradeResource}]" id="resource{$tradeResource}" class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary trade_input text-center" type="text" value="0" size="30" data-resource="{$tradeResource}">
 		</td>
-		<td style="width:100px;" class="">
+		<td style="width:100px;">
 			<span id="resource{$tradeResource}Shortly"></span>
 		</td>
-		<td class="">{$charge[$tradeResource]}</td>
+		<td>{$charge[$tradeResource]}</td>
 	</tr>
 	{/foreach}
 	<tr>
 		<td class="text-center" colspan="4">
-			<input class="" type="submit" value="{$LNG.tr_exchange}">
+			<input type="submit" value="{$LNG.tr_exchange}">
 		</td>
 	</tr>
 	</table>

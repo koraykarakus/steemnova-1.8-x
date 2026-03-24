@@ -18,7 +18,7 @@
 						<div>
 							<span id="unread_{$CategoryID}">{$CategoryRow.unread}</span>
 							<span>/</span>
-							<span data-total-number="{$CategoryRow.total}" class=""
+							<span data-total-number="{$CategoryRow.total}" 
 								id="total_{$CategoryID}">{$CategoryRow.total}</span>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 		<input type="hidden" name="side" value="{$messagePage}">
 		<table id="messagestable" class="table-gow table_full">
 			<tr>
-				<th colspan="5" class="">{$LNG.mg_message_title}</th>
+				<th colspan="5">{$LNG.mg_message_title}</th>
 			</tr>		
 			<tr>
 				{if $MessID != 999}
@@ -52,7 +52,7 @@
 				</td>
 				{/if}
 				<td style="width: 50%;" class="text_center">
-					<span class="">{$LNG.mg_page}:</span>
+					<span>{$LNG.mg_page}:</span>
 					<button style="min-width:32px;" type="button"
 						onclick="window.location.href='game.php?page=messages&category={$MessID}&side=1'"
 						class="text-yellow">&laquo;</button>
@@ -87,20 +87,20 @@
 			{foreach $MessageList as $Message}
 				<tr id="message_{$Message.id}"
 					class="message_{$Message.id} message_head{if $MessID != 999 && $Message.unread == 1} mes_unread{/if}">
-					<td class="">
+					<td>
 						{if $MessID != 999}
 							<input name="messageID[{$Message.id}]" value="1" type="checkbox">
 						{/if}
 					</td>
-					<td class="">{$Message.time}</td>
-					<td class="">{$Message.from}</td>
-					<td class="">{$Message.subject}
+					<td>{$Message.time}</td>
+					<td>{$Message.from}</td>
+					<td>{$Message.subject}
 						{if $Message.type == 1 && $MessID != 999}
 							<a href="#" onclick="return Dialog.PM({$Message.sender}, Message.CreateAnswer('{$Message.subject}'));"
 								title="{$LNG.mg_answer_to} {strip_tags($Message.from)}"><img src="{$dpath}img/m.gif" border="0"></a>
 						{/if}
 					</td>
-					<td class="">
+					<td>
 						{if $MessID != 999}
 							<a href="#" onclick="Message.deleteMessage({$Message.id}, {$Message.type});return false;">
 								<img src="{$dpath}img/deletemsg.png">
@@ -109,7 +109,7 @@
 					</td>
 				</tr>
 				<tr class="message_{$Message.id} messages_body{if $MessID != 999 && $Message.unread == 1} mes_unread{/if}">
-					<td class="" colspan="5" class="left">
+					<td colspan="5" class="left">
 						<p class="message_{$MessID}">{$Message.text}</p>
 					</td>
 				</tr>

@@ -33,7 +33,7 @@
 										{/if}<br>
 										{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield}
 										{$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-										<table class="">
+										<table>
 											{if !empty($Player.ships)}
 												<tr>
 													<td class="transparent">{$LNG.sys_ship_type}</td>
@@ -85,7 +85,7 @@
 					{foreach $RoundInfo.defender as $Player}
 						{$PlayerInfo = $Raport.players[$Player.userID]}
 						<td class="transparent">
-							<table class="">
+							<table>
 								<tr>
 									<td>
 										{$LNG.sys_attack_defender_pos} {$PlayerInfo.name}

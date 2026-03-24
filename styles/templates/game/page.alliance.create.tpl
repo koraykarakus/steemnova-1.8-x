@@ -8,18 +8,18 @@
 			<tr>
 				<td>{$LNG.al_make_ally_tag_required}</td>
 				<td>
-					<input class="" type="text" name="atag" size="8" maxlength="8" value="">
+					<input type="text" name="atag" size="8" maxlength="8" value="">
 				</td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_make_ally_name_required}</th>
 				<td>
-					<input class="" type="text" name="aname" size="20" maxlength="30" value="">
+					<input type="text" name="aname" size="20" maxlength="30" value="">
 				</td>
 			</tr>
 			<tr>
 				<td class="text_center" colspan="2">
-					<input class="" type="submit" value="{$LNG.al_make_submit}">
+					<input type="submit" value="{$LNG.al_make_submit}">
 				</td>
 			</tr>
 		</table>

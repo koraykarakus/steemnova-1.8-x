@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_empire}{/block}
 {block name="content"}
-<div class="">
+<div>
 	<table class="table-gow">
 		<tbody>
 			<tr>

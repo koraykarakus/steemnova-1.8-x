@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea class="" name="text" id="text" cols="70" rows="15"
+					<textarea name="text" id="text" cols="70" rows="15"
 						class="tinymce">{$text}</textarea>
 				</td>
 			</tr>

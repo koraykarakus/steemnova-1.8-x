@@ -34,7 +34,7 @@
             <div class="right">
               <div class="title">
                 {if $ID == 212}
-                  <span class="">&nbsp;<span class="color-green">+{$SolarEnergy}</span>&nbsp;{$LNG.tech.911}</span>
+                  <span>&nbsp;<span class="color-green">+{$SolarEnergy}</span>&nbsp;{$LNG.tech.911}</span>
                 {/if}
                 <span class="{if $Element.costOverflowTotal > 0}color-red hover-pointer{else}color-yellow{/if} p-0" {if $Element.costOverflowTotal > 0} {/if}>
                   <div class="tooltip tooltip_top">
@@ -62,13 +62,13 @@
               <div class="requirements">
                 <div class="top">
                   <div class="left">
-                      <span class="">{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
+                      <span>{$LNG.fgf_time}&nbsp;:&nbsp;{pretty_time($Element.elementTime)}</span>
                   </div>
                   <div class="right">
                    {if $Element.AlreadyBuild}
-                    <span class="">{$LNG.bd_protection_shield_only_one}</span>
+                    <span>{$LNG.bd_protection_shield_only_one}</span>
                   {elseif $NotBuilding && $Element.buyable}
-                  <form class="" action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
+                  <form action="game.php?page=shipyard&amp;mode={$mode}" method="post" id="s{$ID}">
                     <input class="shipyard_input" type="text" name="fmenge[{$ID}]" id="input_{$ID}" size="3" maxlength="{$maxlength}" value="0" tabindex="{$smarty.foreach.FleetList.iteration}" >
                     <button class="button_max" type="button" onclick="$('#input_{$ID}').val('{$Element.maxBuildable}')">
                       >>
@@ -101,7 +101,7 @@
 
             
             <div class="bottom">
-              <p class="">{$LNG.shortDescription[$ID]}</p>
+              <p>{$LNG.shortDescription[$ID]}</p>
             </div>
         </div>
       {/foreach}
@@ -155,20 +155,20 @@
 
 {if !empty($BuildList)}
   <div class="queue_wrapper">
-      <div class="">
-        <div id="bx" class=""></div>
-        <div id="timeleft" class=""></div>
+      <div>
+        <div id="bx"></div>
+        <div id="timeleft"></div>
         <form action="game.php?page=shipyard&mode={$mode}" method="post">
           <input type="hidden" name="action" value="delete">
-          <select name="auftr[]" id="auftr" class="" multiple>
+          <select name="auftr[]" id="auftr" multiple>
             <option>&nbsp;</option>
           </select>
-          <button type="submit" class="">
+          <button type="submit">
             {$LNG.bd_cancel_send}
           </button>
         </form>
       </div>
-      <div class="">
+      <div>
           {$LNG.bd_cancel_warning}
       </div>
   </div>

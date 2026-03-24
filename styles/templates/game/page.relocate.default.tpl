@@ -26,7 +26,7 @@
     </td>
   </tr>
   <tr>
-    <td class="" colspan="3">
+    <td colspan="3">
       <input class="text-yellow" value="{ucwords($LNG.rl_relocate)}" type="submit">
     </td>
   </tr>
