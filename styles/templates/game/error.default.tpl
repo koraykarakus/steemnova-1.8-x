@@ -15,7 +15,7 @@
 					{foreach $redirectButtons as $button}
 						{if isset($button.url) && $button.label}
 							<a href="{$button.url}">
-								<button class="text-yellow fs-12">{$button.label}</button>
+								<button class="text-yellow">{$button.label}</button>
 							</a>
 						{/if}
 					{/foreach}

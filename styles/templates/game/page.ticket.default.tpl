@@ -1,11 +1,11 @@
 {block name="title" prepend}{$LNG.lm_support}{/block}
 {block name="content"}
-<table class="table table-gow">
+<table class="table-gow">
 	<tr>
-		<th class="text-center" colspan="5">{$LNG.ti_header}</th>
+		<th class="" colspan="5">{$LNG.ti_header}</th>
 	</tr>
 	<tr style="height:20px;">
-		<td class="text-center" colspan="5"><a href="game.php?page=ticket&amp;mode=create">{$LNG.ti_new}</a></td>
+		<td class="" colspan="5"><a href="game.php?page=ticket&amp;mode=create">{$LNG.ti_new}</a></td>
 	</tr>
 	<tr>
 		<th style="width:10%">{$LNG.ti_id}</td>

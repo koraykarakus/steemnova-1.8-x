@@ -3,7 +3,7 @@
 <form id="trader" action="" method="post">
 	<input type="hidden" name="mode" value="send">
 	<input type="hidden" name="resource" value="{$tradeResourceID}">
-	<table class="table table-gow table-sm fs-12">
+	<table class="table-gow">
 	<tr>
 		<th colspan="4">{$LNG.tr_sell} {$LNG.tech.$tradeResourceID}</th>
 	</tr>
@@ -14,8 +14,8 @@
 	</tr>
 	<tr>
 		<td>{$LNG.tech.$tradeResourceID}</td>
-		<td class="text-center">
-			<input class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center" readonly id="ress" value="0"></input>
+		<td class="">
+			<input class="text-white" readonly id="ress" value="0"></input>
 		</td>
 		<td></td>
 		<td class="text-center">1</td>
@@ -23,20 +23,20 @@
 	{foreach $tradeResources as $tradeResource}
 	<tr>
 		<td>
-			<label class="text-center" for="resource{$tradeResource}">{$LNG.tech[$tradeResource]}</label>
+			<label class="" for="resource{$tradeResource}">{$LNG.tech[$tradeResource]}</label>
 		</td>
-		<td class="text-center">
+		<td class="">
 			<input name="trade[{$tradeResource}]" id="resource{$tradeResource}" class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary trade_input text-center" type="text" value="0" size="30" data-resource="{$tradeResource}">
 		</td>
-		<td style="width:100px;" class="text-center align-middle">
+		<td style="width:100px;" class="">
 			<span id="resource{$tradeResource}Shortly"></span>
 		</td>
-		<td class="text-center">{$charge[$tradeResource]}</td>
+		<td class="">{$charge[$tradeResource]}</td>
 	</tr>
 	{/foreach}
 	<tr>
 		<td class="text-center" colspan="4">
-			<input class="btn btn-primary fs-12 py-0 text-white fw-bold" type="submit" value="{$LNG.tr_exchange}">
+			<input class="" type="submit" value="{$LNG.tr_exchange}">
 		</td>
 	</tr>
 	</table>

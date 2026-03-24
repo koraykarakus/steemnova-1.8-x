@@ -13,7 +13,7 @@
 			{include file="main.navigation.tpl"}
 		</div>
 	{/if}
-	<div id="content_mid" class="{if $page!='imperium'}contentMiddle{else}w-100{/if}">
+	<div id="content_mid" class="{if $page!='imperium'}{else}{/if}">
 		<content class="content-wrapper">
 			{if $hasAdminAccess}
 				<div class="globalWarning">

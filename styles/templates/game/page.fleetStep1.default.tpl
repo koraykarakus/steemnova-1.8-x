@@ -10,14 +10,14 @@
 			</tr>
 			<tr style="height:20px;">
 				<td style="width:50%">{$LNG.fl_destiny}</td>
-				<td class="d-flex">
+				<td class="">
 					<input style="width:32px;" class="" type="text" id="galaxy" name="galaxy" size="3" maxlength="2"
 						onkeyup="updateVars()" value="{$galaxy}">
 					<input style="width:32px;" class="" type="text" id="system" name="system" size="3" maxlength="3"
 						onkeyup="updateVars()" value="{$system}">
 					<input style="width:32px;" class="" type="text" id="planet" name="planet" size="3" maxlength="2"
 						onkeyup="updateVars()" value="{$planet}">
-					<select class="text-yellow text-center mx-1" id="type" name="type" onchange="updateVars()">
+					<select class="text-yellow" id="type" name="type" onchange="updateVars()">
 						{html_options options=$typeSelect selected=$type}
 					</select>
 				</td>
@@ -25,7 +25,7 @@
 			<tr style="height:20px;">
 				<td>{$LNG.fl_fleet_speed}</td>
 				<td>
-					<select class="text-yellow text-center" id="speed" name="speed" onChange="updateVars(false)">
+					<select class="text-yellow" id="speed" name="speed" onChange="updateVars(false)">
 						{html_options options=$speedSelect}
 					</select> %
 				</td>

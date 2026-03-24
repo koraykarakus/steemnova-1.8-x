@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_empire}{/block}
 {block name="content"}
-<div class="table-responsive">
-	<table class="table table-gow table-sm fs-12">
+<div class="">
+	<table class="table-gow">
 		<tbody>
 			<tr>
 				<th class="text-center" colspan="{$colspan}">{$LNG.lv_imperium_title}</th>

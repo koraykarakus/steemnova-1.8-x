@@ -18,7 +18,7 @@
 						<div>
 							<span id="unread_{$CategoryID}">{$CategoryRow.unread}</span>
 							<span>/</span>
-							<span data-total-number="{$CategoryRow.total}" class="fs-12"
+							<span data-total-number="{$CategoryRow.total}" class=""
 								id="total_{$CategoryID}">{$CategoryRow.total}</span>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 		<input type="hidden" name="side" value="{$messagePage}">
 		<table id="messagestable" class="table-gow table_full">
 			<tr>
-				<th colspan="5" class="text-center fs-12">{$LNG.mg_message_title}</th>
+				<th colspan="5" class="">{$LNG.mg_message_title}</th>
 			</tr>		
 			<tr>
 				{if $MessID != 999}
@@ -52,16 +52,16 @@
 				</td>
 				{/if}
 				<td style="width: 50%;" class="text_center">
-					<span class="fs-12">{$LNG.mg_page}:</span>
+					<span class="">{$LNG.mg_page}:</span>
 					<button style="min-width:32px;" type="button"
 						onclick="window.location.href='game.php?page=messages&category={$MessID}&side=1'"
-						class="btn btn-dark py-0 px-2 border border-secondary fs-12 text-yellow">&laquo;</button>
+						class="text-yellow">&laquo;</button>
 					{if $messagePage > 5}..&nbsp;{/if}
 					{for $site=1 to $maxPage}
 						{if ($site > $messagePage-5 && $site < $messagePage+5)}
 							<button style="min-width:32px;" type="button"
 								onclick="window.location.href='game.php?page=messages&category={$MessID}&side={$site}'"
-								class="btn btn-dark py-0 px-1 border {if $site == $messagePage} border-primary {else}border-secondary{/if} fs-12 text-yellow">
+								class="{if $site == $messagePage}{else}{/if} text-yellow">
 								{$site}
 							</button>
 						{/if}
@@ -69,7 +69,7 @@
 					{if $messagePage < $maxPage-4}..&nbsp;{/if}
 					<button style="min-width:32px;" type="button"
 						onclick="window.location.href='game.php?page=messages&category={$MessID}&side={$maxPage}'"
-						class="btn btn-dark py-0 px-2 border border-secondary fs-12 text-yellow">&raquo;</a>
+						class="text-yellow">&raquo;</a>
 				</td>
 
 			</tr>
@@ -78,29 +78,29 @@
 		</table>
 		<table id="messagestable" class="table-gow table_full">
 			<tr>
-				<td class="text-center fs-14 color-blue fw-bold" style="width:40px;">{$LNG.mg_action}</td>
-				<td class="text-center fs-14 color-blue fw-bold">{$LNG.mg_date}</td>
-				<td class="text-center fs-14 color-blue fw-bold">{if $MessID != 999}{$LNG.mg_from}{else}{$LNG.mg_to}{/if}
+				<td class="color-blue" style="width:40px;">{$LNG.mg_action}</td>
+				<td class="color-blue">{$LNG.mg_date}</td>
+				<td class="color-blue">{if $MessID != 999}{$LNG.mg_from}{else}{$LNG.mg_to}{/if}
 				</td>
-				<td class="text-center fs-14 color-blue fw-bold">{$LNG.mg_subject}</td>
+				<td class="color-blue">{$LNG.mg_subject}</td>
 			</tr>
 			{foreach $MessageList as $Message}
 				<tr id="message_{$Message.id}"
 					class="message_{$Message.id} message_head{if $MessID != 999 && $Message.unread == 1} mes_unread{/if}">
-					<td class="text-center align-middle">
+					<td class="">
 						{if $MessID != 999}
 							<input name="messageID[{$Message.id}]" value="1" type="checkbox">
 						{/if}
 					</td>
-					<td class="text-center fs-12 align-middle">{$Message.time}</td>
-					<td class="text-center fs-12 align-middle">{$Message.from}</td>
-					<td class="text-center fs-12 align-middle">{$Message.subject}
+					<td class="">{$Message.time}</td>
+					<td class="">{$Message.from}</td>
+					<td class="">{$Message.subject}
 						{if $Message.type == 1 && $MessID != 999}
 							<a href="#" onclick="return Dialog.PM({$Message.sender}, Message.CreateAnswer('{$Message.subject}'));"
 								title="{$LNG.mg_answer_to} {strip_tags($Message.from)}"><img src="{$dpath}img/m.gif" border="0"></a>
 						{/if}
 					</td>
-					<td class="text-center align-middle">
+					<td class="">
 						{if $MessID != 999}
 							<a href="#" onclick="Message.deleteMessage({$Message.id}, {$Message.type});return false;">
 								<img src="{$dpath}img/deletemsg.png">
@@ -109,7 +109,7 @@
 					</td>
 				</tr>
 				<tr class="message_{$Message.id} messages_body{if $MessID != 999 && $Message.unread == 1} mes_unread{/if}">
-					<td class="fs-12" colspan="5" class="left">
+					<td class="" colspan="5" class="left">
 						<p class="message_{$MessID}">{$Message.text}</p>
 					</td>
 				</tr>

@@ -144,7 +144,7 @@
                               </div>
                             </form>
                           {else}
-                            <span class="fs-12" style="color:#ffd600">
+                            <span class="" style="color:#ffd600">
                               <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
                                 title="{$LNG.bd_build_next_level}{$element.level_to_build + 1}" class="button-upgrade" type="button"
                                 name="button" disabled>

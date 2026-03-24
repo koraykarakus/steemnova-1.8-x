@@ -9,7 +9,7 @@
 	<thead>
 		<tr>
 			<th colspan="2">
-				<span class="color-blue fs-14">{$LNG.ti_read}:{$answerRow.subject}</span>
+				<span class="color-blue">{$LNG.ti_read}:{$answerRow.subject}</span>
 			</th>
 		</tr>
 	</thead>
@@ -17,15 +17,15 @@
 	<tbody>
 	<tr>
 		<td colspan="2">
-			<span class="fs-14 color-blue">
+			<span class="color-blue">
 				{$LNG.ti_msgtime} {$answerRow.time} {$LNG.ti_from} {$answerRow.ownerName}
 			</span>
 			{if $answerRow@first}
-			<span class="fs-14 color-blue">
+			<span class="color-blue">
 				{$LNG.ti_category}: {$categoryList[$answerRow.categoryID]}
 			</span>
 			{/if}
-			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="fs-14 text-white">
+			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="text-white">
 				{$answerRow.message}
 			</p>
 		</td>

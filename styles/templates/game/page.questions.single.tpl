@@ -13,7 +13,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th class="text-center">
+			<th class="">
 				<a href="game.php?page=questions">{$LNG.al_back}</a>
 			</th>
 		</tr>

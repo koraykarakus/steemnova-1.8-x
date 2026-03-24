@@ -8,7 +8,7 @@
 			<tr>
 				<td width="40%"><label for="message">{$LNG.al_message}</label></td>
 				<td>
-					<textarea name="text" cols="40" rows="10" class="tinymce bg-dark text-white"
+					<textarea name="text" cols="40" rows="10" class="tinymce text-white"
 						id="message">{$applytext}</textarea>
 				</td>
 			</tr>

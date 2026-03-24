@@ -6,20 +6,20 @@
 		</tr>
 		<tr>
 			<td>
-				<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+				<a class="text-yellow"
 					href="game.php?page=alliance&amp;mode=admin&amp;action=permissions">{$LNG.al_manage_ranks}</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+				<a class="text-yellow"
 					href="game.php?page=alliance&amp;mode=admin&amp;action=members">{$LNG.al_manage_members}</a>
 			</td>
 		</tr>
 		{if $rights.diplomatic}
 			<tr>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="game.php?page=alliance&amp;mode=admin&amp;action=diplomacy">{$LNG.al_manage_diplo}</a>
 				</td>
 			</tr>
@@ -34,21 +34,21 @@
 			</tr>
 			<tr>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="game.php?page=alliance&amp;mode=admin&amp;textMode=external">{$LNG.al_outside_text}</a>
 				</td>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="game.php?page=alliance&amp;mode=admin&amp;textMode=internal">{$LNG.al_inside_text}</a>
 				</td>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="game.php?page=alliance&amp;mode=admin&amp;textMode=apply">{$LNG.al_request_text}</a>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea class="bg-dark text-white w-100" name="text" id="text" cols="70" rows="15"
+					<textarea class="" name="text" id="text" cols="70" rows="15"
 						class="tinymce">{$text}</textarea>
 				</td>
 			</tr>
@@ -72,22 +72,22 @@
 			</tr>
 			<tr>
 				<td>{$LNG.al_name}</td>
-				<td><input class="form-control bg-dark text-white p-1" type="text" name="ally_name" value="{$ally_name}"
+				<td><input class="text-white" type="text" name="ally_name" value="{$ally_name}"
 						size="20" maxlength="30" required></td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_manage_founder_rank}</td>
-				<td><input class="form-control bg-dark text-white p-1" type="text" name="owner_range"
+				<td><input class="text-white" type="text" name="owner_range"
 						value="{$ally_owner_range}" size="30"></td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_web_site}</td>
-				<td><input class="form-control bg-dark text-white p-1" type="text" name="web" value="{$ally_web}" size="70">
+				<td><input class="text-white" type="text" name="web" value="{$ally_web}" size="70">
 				</td>
 			</tr>
 			<tr>
 				<td>{$LNG.al_manage_image}</td>
-				<td><input class="form-control bg-dark text-white p-1" type="text" name="image" value="{$ally_image}"
+				<td><input class="text-white" type="text" name="image" value="{$ally_image}"
 						size="70"></td>
 			</tr>
 			<tr>
@@ -149,7 +149,7 @@
 			<tr>
 				<td>
 					<form action="game.php?page=alliance&amp;mode=admin&amp;action=close" method="post">
-						<input class="btn btn-block btn-danger text-white fs-12 p-1 fw-bold w-100" type="submit"
+						<input class="text-white" type="submit"
 							value="{$LNG.al_continue}" onclick="return confirm('{$LNG.al_close_ally}');">
 					</form>
 				</td>
@@ -162,7 +162,7 @@
 			<tr>
 				<td>
 					<form action="game.php?page=alliance&amp;mode=admin&amp;action=transfer" method="post">
-						<input class="btn btn-block btn-primary text-white fs-12 p-1 fw-bold w-100" type="submit"
+						<input class="text-white" type="submit"
 							value="{$LNG.al_continue}">
 					</form>
 				</td>

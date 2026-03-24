@@ -24,19 +24,19 @@
 		{if $rights.member_list}
 			<tr>
 				<td colspan="2">
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="?page=alliance&amp;mode=memberList">{$LNG.al_user_list}</a>
 				</td>
 			</tr>
 		{/if}
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_rank}</td>
-			<td class="fs-12 fw-bold text-blue">{$rankName}</td>
+			<td class="text-gow-gray">{$LNG.al_rank}</td>
+			<td class="text-blue">{$rankName}</td>
 		</tr>
 		{if $rights.admin}
 			<tr>
 				<td colspan="2">
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="?page=alliance&amp;mode=admin">{$LNG.al_manage_alliance}</a>
 				</td>
 			</tr>
@@ -44,25 +44,25 @@
 		{if isModuleAvailable($smarty.const.MODULE_CHAT)}
 			<tr>
 				<td colspan="2">
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100" href="#"
+					<a class="text-yellow" href="#"
 						onclick="return Dialog.AllianceChat();">{$LNG.al_goto_chat}</a>
 				</td>
 			</tr>
 		{/if}
 		{if $rights.see_apply}
 			<tr>
-				<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_requests}</td>
+				<td class="text-gow-gray">{$LNG.al_requests}</td>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="?page=alliance&amp;mode=admin&amp;action=mangeApply">{$requests}</a>
 				</td>
 			</tr>
 		{/if}
 		{if $rights.round_mail}
 			<tr>
-				<td class="fs-12 fw-bold text-gow-gray">{$LNG.al_circular_message}</td>
+				<td class="text-gow-gray">{$LNG.al_circular_message}</td>
 				<td>
-					<a class="btn btn-dark py-0 px-1 border border-secondary fs-12 text-yellow w-100"
+					<a class="text-yellow"
 						href="game.php?page=alliance&mode=circular"
 						onclick="return Dialog.open(this.href, 650, 300);">{$LNG.al_send_circular_message}</a>
 				</td>
@@ -141,50 +141,50 @@
 			<th colspan="2">{$LNG.pl_fightstats}</th>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_totalfight}</td>
-			<td class="fs-12 fw-bold text-blue">{$totalfight|number}</td>
+			<td class="text-gow-gray">{$LNG.pl_totalfight}</td>
+			<td class="text-blue">{$totalfight|number}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_fightwon}</td>
-			<td class="fs-12 fw-bold text-blue">{$fightwon|number}
+			<td class="text-gow-gray">{$LNG.pl_fightwon}</td>
+			<td class="text-blue">{$fightwon|number}
 				{if $totalfight}({round($fightwon / $totalfight * 100, 2)}%){/if}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_fightlose}</td>
-			<td class="fs-12 fw-bold text-blue">{$fightlose|number}
+			<td class="text-gow-gray">{$LNG.pl_fightlose}</td>
+			<td class="text-blue">{$fightlose|number}
 				{if $totalfight}({round($fightlose / $totalfight * 100, 2)}%){/if}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_fightdraw}</td>
-			<td class="fs-12 fw-bold text-blue">{$fightdraw|number}
+			<td class="text-gow-gray">{$LNG.pl_fightdraw}</td>
+			<td class="text-blue">{$fightdraw|number}
 				{if $totalfight}({round($fightdraw / $totalfight * 100, 2)}%){/if}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_unitsshot}</td>
-			<td class="fs-12 fw-bold text-blue">{$unitsshot}</td>
+			<td class="text-gow-gray">{$LNG.pl_unitsshot}</td>
+			<td class="text-blue">{$unitsshot}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_unitslose}</td>
-			<td class="fs-12 fw-bold text-blue">{$unitslose}</td>
+			<td class="text-gow-gray">{$LNG.pl_unitslose}</td>
+			<td class="text-blue">{$unitslose}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_dermetal}</td>
-			<td class="fs-12 fw-bold text-blue">{$dermetal}</td>
+			<td class="text-gow-gray">{$LNG.pl_dermetal}</td>
+			<td class="text-blue">{$dermetal}</td>
 		</tr>
 		<tr>
-			<td class="fs-12 fw-bold text-gow-gray">{$LNG.pl_dercrystal}</td>
-			<td class="fs-12 fw-bold text-blue">{$dercrystal}</td>
+			<td class="text-gow-gray">{$LNG.pl_dercrystal}</td>
+			<td class="text-blue">{$dercrystal}</td>
 		</tr>
 	</table>
 	{if !$isOwner}
-		<table class="table table-sm fs-12 table-gow">
+		<table class="table-gow">
 			<tr>
 				<th>{$LNG.al_leave_alliance}</th>
 			</tr>
 			<tr>
 				<td>
 					<a href="game.php?page=alliance&amp;mode=close" onclick="return confirm('{$LNG.al_leave_ally}');">
-						<button class="btn btn-block btn-danger text-white p-1 fs-12 fw-bold">{$LNG.al_continue}</button>
+						<button class="text-white">{$LNG.al_continue}</button>
 					</a>
 				</td>
 			</tr>

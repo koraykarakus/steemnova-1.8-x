@@ -1,7 +1,7 @@
 {block name="title" prepend}{$pageTitle}{/block}
 {block name="content"}
 	{if isset($Info)}
-		<table class="table table-gow fs-12 table-sm mx-auto">
+		<table class="table-gow">
 			<tr>
 				<td class="transparent"
 					style="width:40%;font-size:22px;font-weight:bold;padding:10px 0 30px;color:{if $Raport.result == "a"}lime{elseif $Raport.result == "r"}red{else}white{/if}">
@@ -17,7 +17,7 @@
 		{if $Raport.mode == 1}{$LNG.sys_destruc_title}{else}{$LNG.sys_attack_title}{/if}
 		{$Raport.time}:<br><br>
 		{foreach $Raport.rounds as $Round => $RoundInfo}
-			<table style="width:auto;" class="table table-gow table-sm fs-12 mx-auto">
+			<table style="width:auto;" class="table-gow">
 				<tr>
 					{foreach $RoundInfo.attacker as $Player}
 						{$PlayerInfo = $Raport.players[$Player.userID]}
@@ -33,7 +33,7 @@
 										{/if}<br>
 										{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield}
 										{$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-										<table class="mx-auto">
+										<table class="">
 											{if !empty($Player.ships)}
 												<tr>
 													<td class="transparent">{$LNG.sys_ship_type}</td>
@@ -80,12 +80,12 @@
 					{/foreach}
 				</tr>
 			</table>
-			<table style="width:auto;" class="table table-gow table-sm fs-12 my-2 mx-auto">
+			<table style="width:auto;" class="table-gow">
 				<tr>
 					{foreach $RoundInfo.defender as $Player}
 						{$PlayerInfo = $Raport.players[$Player.userID]}
 						<td class="transparent">
-							<table class="mx-auto">
+							<table class="">
 								<tr>
 									<td>
 										{$LNG.sys_attack_defender_pos} {$PlayerInfo.name}
@@ -96,7 +96,7 @@
 										{/if}<br>
 										{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield}
 										{$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-										<table class="table table-gow table-sm fs-12 my-2 mx-auto">
+										<table class="table-gow">
 											{if !empty($Player.ships)}
 												<tr>
 													<td class="transparent">{$LNG.sys_ship_type}</td>
@@ -153,9 +153,9 @@
 		<br><br>
 		{if $Raport.result == "a"}
 
-			<span class="text-white fs-6">{$LNG.sys_attacker_won}</span><br><br>
+			<span class="text-white">{$LNG.sys_attacker_won}</span><br><br>
 
-			<span class="text-white fs-6">
+			<span class="text-white">
 				{$LNG.sys_stealed_ressources} {foreach $Raport.steal as $elementID => $amount}{$amount|number}
 					{$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.steal)} {$LNG.sys_and}
 					{elseif !$amount@last},
@@ -164,16 +164,16 @@
 			</span>
 
 		{elseif $Raport.result == "r"}
-			<span class="fs-6 text-white">{$LNG.sys_defender_won}</span>
+			<span class="text-white">{$LNG.sys_defender_won}</span>
 		{else}
-			<span class="text-white fs-6">{$LNG.sys_both_won}</span>
+			<span class="text-white">{$LNG.sys_both_won}</span>
 		{/if}
 		<br><br>
-		<span class="text-white fs-6">{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}</span>
+		<span class="text-white">{$LNG.sys_attacker_lostunits} {$Raport['units'][0]|number} {$LNG.sys_units}</span>
 		<br>
-		<span class="text-white fs-6">{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}</span>
+		<span class="text-white">{$LNG.sys_defender_lostunits} {$Raport['units'][1]|number} {$LNG.sys_units}</span>
 		<br>
-		<span class="text-white fs-6">{$LNG.debree_field_1}
+		<span class="text-white">{$LNG.debree_field_1}
 			{foreach $Raport.debris as $elementID => $amount}{$amount|number}
 				{$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.debris)} {$LNG.sys_and}
 				{elseif !$amount@last},
@@ -204,7 +204,7 @@
 			{/if}
 		{else}
 			{* Normal Attack *}
-			<span class="text-white fs-6">{$LNG.sys_moonproba} {$Raport.moon.moonChance} %</span>
+			<span class="text-white">{$LNG.sys_moonproba} {$Raport.moon.moonChance} %</span>
 			<br>
 			{if !empty($Raport.moon.moonName)}
 				{if isset($Info)}
@@ -218,7 +218,7 @@
 			{/if}
 		{/if}
 
-		<span class="text-white fs-6">{$Raport.additionalInfo}</span>
+		<span class="text-white">{$Raport.additionalInfo}</span>
 
 	</div>
 {/block}

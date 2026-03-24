@@ -6,24 +6,24 @@
 			<tbody>
 				{if $userAuthlevel > 0}
 					<tr>
-						<th class="text-center" colspan="2">{$LNG.op_admin_title_options}</th>
+						<th class="" colspan="2">{$LNG.op_admin_title_options}</th>
 					</tr>
 					<tr>
 						<td>{$LNG.op_admin_planets_protection}</td>
-						<td class="text-center">
+						<td class="">
 							<input name="adminprotection" type="checkbox" value="1" {if $adminProtection > 0}checked="checked"
 								{/if}>
 						</td>
 					</tr>
 				{/if}
 				<tr>
-					<th class="text-center" colspan="2">{$LNG.op_user_data}</th>
+					<th class="" colspan="2">{$LNG.op_user_data}</th>
 				</tr>
 				<tr>
 					<td width="50%">{$LNG.op_username}</td>
 					<td width="50%" style="height:22px;">
 						{if $changeNickTime < 0}
-							<input class="form-control bg-dark text-white py-0 my-0 text-center" name="username" size="20"
+							<input class="text-white" name="username" size="20"
 								value="{$username}" type="text">
 						{else}
 							{$username}
@@ -33,23 +33,23 @@
 				<tr>
 					<td>{$LNG.op_old_pass}</td>
 					<td>
-						<input class="form-control bg-dark text-white py-0 my-0 text-center" name="password" size="20"
+						<input class="text-white" name="password" size="20"
 							type="new-password">
 					</td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_new_pass}</td>
-					<td><input class="form-control bg-dark text-white py-0 my-0 text-center" name="newpassword" size="20"
+					<td><input class="text-white" name="newpassword" size="20"
 							maxlength="40" type="new-password"></td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_repeat_new_pass}</td>
-					<td><input class="form-control bg-dark text-white py-0 my-0 text-center" name="newpassword2" size="20"
+					<td><input class="text-white" name="newpassword2" size="20"
 							maxlength="40" type="new-password" class="autocomplete"></td>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_email_adress_descrip}">{$LNG.op_email_adress}</a></td>
-					<td><input class="form-control bg-dark text-white py-0 my-0 text-center" name="email" maxlength="64"
+					<td><input class="text-white" name="email" maxlength="64"
 							size="20" value="{$email}" type="text"></td>
 				</tr>
 				<tr>
@@ -57,29 +57,29 @@
 					<td>{$permaEmail}</td>
 				</tr>
 				<tr>
-					<th class="text-center" colspan="2">{$LNG.op_general_settings}</th>
+					<th class="" colspan="2">{$LNG.op_general_settings}</th>
 				</tr>
 				<tr>
 					<td>{$LNG.op_timezone}</td>
-					<td>{html_options class="form-select bg-dark py-0 my-0 text-white" name=timezone options=$Selectors.timezones selected=$timezone}
+					<td>{html_options class="text-white" name=timezone options=$Selectors.timezones selected=$timezone}
 					</td>
 				</tr>
 				{if count($Selectors.lang) > 1}
 					<tr>
 						<td>{$LNG.op_lang}</td>
-						<td>{html_options class="form-select bg-dark text-white py-0 my-0" name=language options=$Selectors.lang selected=$userLang}
+						<td>{html_options class="text-white" name=language options=$Selectors.lang selected=$userLang}
 						</td>
 					</tr>
 				{/if}
 				<tr>
 					<td>{$LNG.op_sort_planets_by}</td>
-					<td>{html_options class="form-select bg-dark text-white py-0 my-0" name=planetSort options=$Selectors.Sort selected=$planetSort}
+					<td>{html_options class="text-white " name=planetSort options=$Selectors.Sort selected=$planetSort}
 					</td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_sort_kind}</td>
 					<td>
-						{html_options class="form-select bg-dark text-white py-0 my-0" name=planetOrder options=$Selectors.SortUpDown selected=$planetOrder}
+						{html_options class="text-white" name=planetOrder options=$Selectors.SortUpDown selected=$planetOrder}
 					</td>
 				</tr>
 				<tr>
@@ -102,54 +102,54 @@
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_spy_probes_number_descrip}">{$LNG.op_spy_probes_number}</a></td>
-					<td><input class="form-control bg-dark text-white py-0 my-0 text-center" name="spycount"
+					<td><input class="text-white" name="spycount"
 							size="{$spycount|count_characters + 3}" value="{$spycount}" type="int"></td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_max_fleets_messages}</td>
-					<td><input class="form-control bg-dark text-white py-0 my-0 text-center" name="fleetactions"
+					<td><input class="text-white" name="fleetactions"
 							maxlength="2" size="{$fleetActions|count_characters + 2}" value="{$fleetActions}" type="int">
 					</td>
 				</tr>
 				<tr>
-					<th class="text-center">{$LNG.op_shortcut}</th>
-					<th class="text-center">{$LNG.op_show}</th>
+					<th class="">{$LNG.op_shortcut}</th>
+					<th class="">{$LNG.op_show}</th>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/e.gif" alt="">{$LNG.op_spy}</td>
-					<td class="text-center"><input name="galaxySpy" type="checkbox" value="1"
+					<td class=""><input name="galaxySpy" type="checkbox" value="1"
 							{if $galaxySpy == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/m.gif" alt="">{$LNG.op_write_message}</td>
-					<td class="text-center"><input name="galaxyMessage" type="checkbox" value="1"
+					<td class=""><input name="galaxyMessage" type="checkbox" value="1"
 							{if $galaxyMessage == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/b.gif" alt="">{$LNG.op_add_to_buddy_list}</td>
-					<td class="text-center"><input name="galaxyBuddyList" type="checkbox" value="1"
+					<td class=""><input name="galaxyBuddyList" type="checkbox" value="1"
 							{if $galaxyBuddyList == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td><img src="{$dpath}img/r.gif" alt="">{$LNG.op_missile_attack}</td>
-					<td class="text-center"><input name="galaxyMissle" type="checkbox" value="1"
+					<td class=""><input name="galaxyMissle" type="checkbox" value="1"
 							{if $galaxyMissle == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
-					<th class="text-center" colspan="2">{$LNG.op_vacation_delete_mode}</th>
+					<th class="" colspan="2">{$LNG.op_vacation_delete_mode}</th>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_activate_vacation_mode_descrip}">{$LNG.op_activate_vacation_mode}</a></td>
-					<td class="text-center"><input name="vacation" type="checkbox" value="1"></td>
+					<td class=""><input name="vacation" type="checkbox" value="1"></td>
 				</tr>
 				<tr>
 					<td><a title="{$LNG.op_dlte_account_descrip}">{$LNG.op_dlte_account}</a></td>
-					<td class="text-center"><input name="delete" type="checkbox" value="1" {if $delete > 0}checked="checked"
+					<td class=""><input name="delete" type="checkbox" value="1" {if $delete > 0}checked="checked"
 							{/if}></td>
 				</tr>
 				{if isModuleAvailable($smarty.const.MODULE_BANNER)}
 					<tr>
-						<th class="text-center" colspan="3">{$LNG.ov_userbanner}</th>
+						<th class="" colspan="3">{$LNG.ov_userbanner}</th>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -158,7 +158,7 @@
 								<tr>
 									<td class="transparent">HTML:</td>
 									<td class="transparent">
-										<input class="form-control bg-dark text-white py-0 my-0 text-center" type="text"
+										<input class="text-white" type="text"
 											value='<a href="{$SELF_URL}{if $ref_active}index.php?ref={$userid}{/if}"><img src="{$SELF_URL}userpic.php?id={$userid}"></a>'
 											readonly="readonly" style="width:450px;">
 									</td>
@@ -166,7 +166,7 @@
 								<tr>
 									<td class="transparent">BBCode:</td>
 									<td class="transparent">
-										<input class="form-control bg-dark text-white py-0 my-0 text-center" type="text"
+										<input class="" type="text"
 											value="[url={$SELF_URL}{if $ref_active}index.php?ref={$userid}{/if}][img]{$SELF_URL}userpic.php?id={$userid}[/img][/url]"
 											readonly="readonly" style="width:450px;">
 									</td>
@@ -177,7 +177,7 @@
 				{/if}
 				<tr>
 					<td colspan="2">
-						<input class="btn btn-primary text-white btn-block w-100 p-0 m-0" value="{$LNG.op_save_changes}"
+						<input class="" value="{$LNG.op_save_changes}"
 							type="submit">
 					</td>
 				</tr>

@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table table-sm fs-12 table-gow">
+	<table class="table-gow">
 	<tr>
 		<th colspan="4">{sprintf($LNG.al_request_from,$applyDetail.username)} {$apply_time}</th>
 	</tr>
@@ -105,13 +105,13 @@
 	</table>
 <br>
 <form action="game.php?page=alliance&amp;mode=admin&amp;action=sendAnswerToApply&amp;id={$applyDetail.applyID}" method="post">
-<table class="table table-sm fs-12 table-gow">
+<table class="table-gow">
 	<tr>
 		<th colspan="4"><label for="message">{$LNG.al_reply_to_request}</label></th>
 	</tr>
 	<tr>
 		<td colspan="4">
-			<textarea name="text" rows="10" class="tinymce bg-dark text-white w-100 fs-12" id="message"></textarea>
+			<textarea name="text" rows="10" class="tinymce" id="message"></textarea>
 		</td>
 	</tr>
 	<tr>

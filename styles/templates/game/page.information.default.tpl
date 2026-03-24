@@ -10,7 +10,7 @@
 					<table class="table_full">
 						<tr>
 
-							<td class="transparent left fs-12">
+							<td class="transparent">
 								<p>{$LNG.longDescription.$elementID}</p>
 								{if !empty($Bonus)}<p>
 										<b>{$LNG.in_bonus}</b><br>

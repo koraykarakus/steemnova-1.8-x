@@ -36,29 +36,29 @@
 		</div>
 		<div id="rename_planet">
 			<div class="actions-card">
-				<form class="w-100 text-center">
-					<h6 class="rename-title mb-3">
+				<form class="">
+					<h6 class="rename-title">
 						{$LNG.ov_rename_label}
 					</h6>
-					<input type="text" name="name" id="name" class="text-center my-2 w-100" placeholder="" maxlength="20"
+					<input type="text" name="name" id="name" class="" placeholder="" maxlength="20"
 						autocomplete="off">
-					<input class="button-blue my-2 w-100" type="button" onclick="checkrename();" class="mx-auto button-blue"
+					<input class="button-blue" type="button" onclick="checkrename();" class="button-blue"
 						value="{$LNG.ov_planet_rename}">
 				</form>
 			</div>
 		</div>
-		<div id="abondon_planet" class="d-none text-white align-items-center justify-content-center my-5">
-			<div class="actions-card d-flex align-items-center">
-				<form class="d-flex flex-column w-100 align-items-center h-100 justify-content-center">
-					<div class="form-group d-flex justify-content-center align-items-center my-2">
+		<div id="abondon_planet" class="text-white">
+			<div class="">
+				<form class="">
+					<div class="">
 						{$LNG.ov_security_request}
 					</div>
-					<div class="form-group d-flex justify-content-center align-items-center my-2">
+					<div class="">
 						{$ov_security_confirm}
 					</div>
-					<input id="password" class="text-center my-2 w-100" type="password" name="password"
+					<input id="password" class="" type="password" name="password"
 						placeholder="{$LNG.ov_ac_password}" autocomplete="new-password">
-					<input class="button-blue my-2 w-100" type="button" onclick="checkcancel()"
+					<input class="button-blue" type="button" onclick="checkcancel()"
 						value="{$LNG.ov_delete_planet}">
 				</form>
 			</div>

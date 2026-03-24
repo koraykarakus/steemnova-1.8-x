@@ -1,5 +1,5 @@
 {block name="content"}
-<table id="resulttable" class="table table-gow table-sm fs-12">
+<table id="resulttable" class="table-gow">
 	<tr>
 		<th>{$LNG.sh_name}</th>
 		<th>&nbsp;</th>

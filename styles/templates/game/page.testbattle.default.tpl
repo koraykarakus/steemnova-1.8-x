@@ -25,16 +25,16 @@
     </script>
 
 
-    <div class="ItemsWrapper w-75 mx-auto">
+    <div class="ItemsWrapper">
         <form action="?page=testBattle&mode=send" method="post">
-            <table class="table table-gow">
+            <table class="table-gow">
                 <thead>
                     <th colspan="2">Planet Info</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <table class="table table-gow">
+                            <table class="table-gow">
                                 <thead>
                                     <th colspan="2">Attacker Coordinates:</th>
                                 </thead>
@@ -55,7 +55,7 @@
                             </table>
                         </td>
                         <td>
-                            <table class="table table-gow">
+                            <table class="table-gow">
                                 <thead>
                                     <th colspan="2">Defender Coordinates:</th>
                                 </thead>
@@ -136,10 +136,10 @@
                     </td>
                 </tr>
             </table>
-            <table class="table table-gow">
+            <table class="table-gow">
                 <tr>
                     <td>
-                        <button class="btn btn-primary my-3" type="submit">Start fleets</button>
+                        <button class="" type="submit">Start fleets</button>
                     </td>
                 </tr>
             </table>

@@ -89,14 +89,14 @@
 										<td>{$LNG.tech.109}:</td>
 										<td>
 											<input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-white"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.0.109)}{$battle_input.{$smarty.section.content.index}.0.109}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][0][109]">
 										</td>
 										<td>
 											<input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-white"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.1.109)}{$battle_input.{$smarty.section.content.index}.1.109}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][1][109]">
@@ -105,12 +105,12 @@
 									<tr>
 										<td>{$LNG.tech.110}:</td>
 										<td><input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-center"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.0.110)}{$battle_input.{$smarty.section.content.index}.0.110}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][0][110]"></td>
 										<td><input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-center"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.1.110)}{$battle_input.{$smarty.section.content.index}.1.110}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][1][110]"></td>
@@ -118,12 +118,12 @@
 									<tr>
 										<td>{$LNG.tech.111}:</td>
 										<td><input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-white"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.0.111)}{$battle_input.{$smarty.section.content.index}.0.111}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][0][111]"></td>
 										<td><input
-												class="form-control fs-12 bg-dark text-white p-0 m-0 border border-secondary text-center"
+												class="text-white"
 												type="text" size="10"
 												value="{if isset($battle_input.{$smarty.section.content.index}.1.111)}{$battle_input.{$smarty.section.content.index}.1.111}{else}0{/if}"
 												name="battle_input[{$smarty.section.content.index}][1][111]"></td>

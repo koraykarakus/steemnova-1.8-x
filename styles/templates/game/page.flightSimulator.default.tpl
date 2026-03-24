@@ -84,49 +84,49 @@
         <input type="hidden" name="mode" value="calcFleetSpeed">
         <tr>
           <td colspan="2"><span>{$LNG.tech.115}</span></td>
-          <td colspan="2"><input class="form-control tech bg-dark text-white text-center p-0 my-auto mx-auto fs-12"
+          <td colspan="2"><input class="tech text-white"
               onkeyup="getResult();" name="combustionTech" value="{$combustionTech}"></td>
         </tr>
         <tr>
           <td colspan="2"><span>{$LNG.tech.117}</span></td>
-          <td colspan="2"><input class="form-control tech bg-dark text-white text-center p-0 my-auto mx-auto fs-12"
+          <td colspan="2"><input class="tech text-white"
               onkeyup="getResult();" name="impulseTech" value="{$impulseTech}"></td>
         </tr>
         <tr>
           <td colspan="2"><span>{$LNG.tech.118}</span></td>
-          <td colspan="2"><input class="form-control tech bg-dark text-white text-center p-0 my-auto mx-auto fs-12"
+          <td colspan="2"><input class="tech text-white"
               onkeyup="getResult();" name="hyperspaceTech" value="{$hyperspaceTech}"></td>
         </tr>
         {foreach $ships as $key => $ship}
           <tr>
             <td colspan="2"><span>{$LNG['tech'][$ship.id]}:</span></td>
             <td colspan="2"><input onkeyup="getResult();"
-                class="form-control ship bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="ship_{$ship.id}"
+                class="ship text-white" name="ship_{$ship.id}"
                 value="{$ship.count}"></td>
           </tr>
         {/foreach}
         <tr>
           <td><span>{$LNG.fl_beginning}:</span></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="startGalaxy"
+              class="coordinate text-white" name="startGalaxy"
               value="{$startGalaxy}"></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="startSystem"
+              class="coordinate text-white" name="startSystem"
               value="{$startSystem}"></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="startPlanet"
+              class="coordinate text-white" name="startPlanet"
               value="{$startPlanet}"></td>
         </tr>
         <tr>
           <td><span>{$LNG.fl_destiny}:</span></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="endGalaxy"
+              class="coordinate text-white" name="endGalaxy"
               value="1"></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="endSystem"
+              class="coordinate text-white" name="endSystem"
               value="1"></td>
           <td><input onkeyup="getResult();"
-              class="form-control coordinate bg-dark text-white text-center p-0 my-auto mx-auto fs-12" name="endPlanet"
+              class="coordinate text-white" name="endPlanet"
               value="1"></td>
         </tr>
         <tr>
