@@ -66,7 +66,7 @@
 					{foreach $languages as $langKey => $langName}
 						<li class="d-flex w-100">
 							<a class="text-decoration-none hover-bg-color-grey d-flex align-items-center w-100 px-2"
-								href="?lang={$langKey}" rel="alternate" hreflang="{$langKey}" title="{$langName}">
+								href="?page={$page}&amp;lang={$langKey}" rel="alternate" hreflang="{$langKey}" title="{$langName}">
 								<span class="flags {$langKey}">{$langName}</span>
 								<span class="">{$langName}</span>
 							</a>
