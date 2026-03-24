@@ -10,45 +10,43 @@
 			<li><a href="index.php?page=disclaimer">{$LNG.menu_disclamer}</a></li>
 		</ul>
 	</nav> -->
-	<nav id="navbar" class="container-fluid py-2 bg-dark d-flex align-items-center justify-content-between">
-
-		<ul class="d-none d-md-flex justify-content-start align-items-center m-0">
-
-			<li class="d-flex align-items-center">
-				<a class="hover-color-yellow text-decoration-none {if $page == 'index'}active{/if}"
+	<nav id="navbar" class="navbar">
+		<ul class="menu">
+			<li>
+				<a class="{if $page == 'index'}active{/if}"
 					href="index.php?page=index">{$LNG.siteTitleIndex}</a>
 			</li>
 			{if isModuleAvailable(MODULE_LOGIN_NEWS)}
-				<li class="d-flex align-items-center">
-					<a class="hover-color-yellow text-decoration-none {if $page == 'news'}active{/if}"
+				<li>
+					<a class="{if $page == 'news'}active{/if}"
 						href="index.php?page=news">{$LNG.siteTitleNews}</a>
 				</li>
 			{/if}
 			{if isModuleAvailable(MODULE_LOGIN_SCREENSHOTS)}
-				<li class="d-flex align-items-center">
-					<a class="hover-color-yellow text-decoration-none {if $page == 'screens'}active{/if}"
+				<li>
+					<a class="{if $page == 'screens'}active{/if}"
 						href="index.php?page=screens">{$LNG.siteTitleScreens}</a>
 				</li>
 			{/if}
 			{if isModuleAvailable(MODULE_LOGIN_BANLIST)}
-				<li class="d-flex align-items-center">
-					<a class="hover-color-yellow text-decoration-none {if $page == 'banList'}active{/if}"
+				<li>
+					<a class="{if $page == 'banList'}active{/if}"
 						href="index.php?page=banList">{$LNG.siteTitleBanList}</a>
 				</li>
 			{/if}
 			{if isModuleAvailable(MODULE_LOGIN_BATTLEHALL)}
-				<li class="d-flex align-items-center">
-					<a class="hover-color-yellow text-decoration-none {if $page == 'battleHall'}active{/if}"
+				<li>
+					<a class="{if $page == 'battleHall'}active{/if}"
 						href="index.php?page=battleHall">{$LNG.siteTitleBattleHall}</a>
 				</li>
 			{/if}
-			<li class="d-flex align-items-center">
-				<a class="hover-color-yellow text-decoration-none {if $page == 'rules'}active{/if}"
+			<li>
+				<a class="{if $page == 'rules'}active{/if}"
 					href="index.php?page=rules">{$LNG.siteTitleRules}</a>
 			</li>
 			{if isModuleAvailable(MODULE_LOGIN_DISCLAIMER)}
-				<li class="d-flex align-items-center">
-					<a class="hover-color-yellow text-decoration-none {if $page == 'disclaimer'}active{/if}"
+				<li>
+					<a class="{if $page == 'disclaimer'}active{/if}"
 						href="index.php?page=disclaimer">{$LNG.siteTitleDisclaimer}</a>
 				</li>
 			{/if}
