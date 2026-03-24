@@ -79,13 +79,13 @@ CREATE TABLE `%PREFIX%alliance_ranks` (
 
 
 CREATE TABLE `%PREFIX%alliance_request` (
-  `applyID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `apply_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `text` TEXT NOT NULL,
-  `userID` INT UNSIGNED NOT NULL,
-  `allianceID` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `alliance_id` INT UNSIGNED NOT NULL,
   `time` INT NOT NULL,
-  PRIMARY KEY (`applyID`),
-  KEY `allianceID` (`allianceID`,`userID`)
+  PRIMARY KEY (`apply_id`),
+  KEY `alliance_id` (`alliance_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%banned` (

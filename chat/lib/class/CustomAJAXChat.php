@@ -178,7 +178,7 @@ class CustomAJAXChat extends AJAXChat
 			);
 
 			$db		= Database::get();
-			$sql	= 'SELECT ally_id FROM %%USERS%% WHERE id = :userId AND id NOT IN (SELECT userid FROM %%ALLIANCE_REQUEST%%);';
+			$sql	= 'SELECT ally_id FROM %%USERS%% WHERE id = :userId AND id NOT IN (SELECT user_id FROM %%ALLIANCE_REQUEST%%);';
 			$allianceId = $db->selectSingle($sql, array(
 				':userId'	=> Session::load()->userId,
 			), 'ally_id');

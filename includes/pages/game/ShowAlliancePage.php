@@ -99,7 +99,7 @@ class ShowAlliancePage extends AbstractGamePage
     {
         global $USER;
         $db = Database::get();
-        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE userId = :userId;";
+        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE user_id = :userId;";
         return $db->selectSingle($sql, [
             ':userId' => $USER['id'],
         ], 'count');
@@ -216,8 +216,8 @@ class ShowAlliancePage extends AbstractGamePage
         
         $sql = "SELECT a.ally_tag 
         FROM %%ALLIANCE_REQUEST%% r 
-        INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId 
-        WHERE r.userId = :userId;";
+        INNER JOIN %%ALLIANCE%% a ON a.id = r.alliance_id 
+        WHERE r.user_id = :userId;";
 
         $ally_result = $db->selectSingle($sql, [
             ':userId' => $USER['id_planet'],
@@ -333,10 +333,10 @@ class ShowAlliancePage extends AbstractGamePage
         if (!empty($text))
         {
             $sql = "INSERT INTO %%ALLIANCE_REQUEST%% SET
-                allianceId	= :ally_id,
+                alliance_id	= :ally_id,
                 text		= :text,
                 time		= :time,
-                userId		= :userId;";
+                user_id		= :userId;";
 
             $db->insert($sql, [
                 ':ally_id' => $ally_id,
@@ -390,14 +390,14 @@ class ShowAlliancePage extends AbstractGamePage
         
         $sql = "SELECT a.ally_tag 
         FROM %%ALLIANCE_REQUEST%% r 
-        INNER JOIN %%ALLIANCE%% a ON a.id = r.allianceId 
-        WHERE r.userId = :userId;";
+        INNER JOIN %%ALLIANCE%% a ON a.id = r.alliance_id 
+        WHERE r.user_id = :userId;";
 
         $ally_tag = $db->selectSingle($sql, [
             ':userId' => $USER['id'],
         ], 'ally_tag');
 
-        $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE userId = :userId;";
+        $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE user_id = :userId;";
         
         $db->delete($sql, [
             ':userId' => $USER['id'],
@@ -626,7 +626,7 @@ class ShowAlliancePage extends AbstractGamePage
             ':alliance_id' => $this->alliance_data['id'],
         ]);
 
-        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE allianceId = :alliance_id;";
+        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE alliance_id = :alliance_id;";
         $apply_count = $db->selectSingle($sql, [
             ':alliance_id' => $this->alliance_data['id'],
         ], 'count');
@@ -1098,7 +1098,7 @@ class ShowAlliancePage extends AbstractGamePage
                 ':AllianceID' => $this->alliance_data['id'],
             ]);
 
-            $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE allianceId = :AllianceID;";
+            $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE alliance_id = :AllianceID;";
             $db->delete($sql, [
                 ':AllianceID' => $this->alliance_data['id'],
             ]);
@@ -1189,10 +1189,10 @@ class ShowAlliancePage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "SELECT applyID, u.username, r.time 
+        $sql = "SELECT apply_id, u.username, r.time 
         FROM %%ALLIANCE_REQUEST%% r 
-        INNER JOIN %%USERS%% u ON r.userId = u.id 
-        WHERE r.allianceId = :allianceId;";
+        INNER JOIN %%USERS%% u ON r.user_id = u.id 
+        WHERE r.alliance_id = :allianceId;";
 
         $apply_result = $db->select($sql, [
             ':allianceId' => $this->alliance_data['id'],
@@ -1229,7 +1229,7 @@ class ShowAlliancePage extends AbstractGamePage
         $db = Database::get();
 
         $sql = "SELECT
-			r.`applyID`,
+			r.`apply_id`,
 			r.`time`,
 			r.`text`,
 			u.`username`,
@@ -1264,10 +1264,10 @@ class ShowAlliancePage extends AbstractGamePage
 			stat.`total_points`,
 			p.`name`
 		FROM %%ALLIANCE_REQUEST%% AS r
-		LEFT JOIN %%USERS%% AS u ON r.userId = u.id
-		INNER JOIN %%USER_POINTS%% AS stat ON r.userId = stat.id_owner
+		LEFT JOIN %%USERS%% AS u ON r.user_id = u.id
+		INNER JOIN %%USER_POINTS%% AS stat ON r.user_id = stat.id_owner
 		LEFT JOIN %%PLANETS%% AS p ON p.id = u.id_planet
-		WHERE applyID = :applyID;";
+		WHERE apply_id = :applyID;";
 
         $apply_detail = $db->selectSingle($sql, [
             ':applyID' => $id,
@@ -1313,11 +1313,11 @@ class ShowAlliancePage extends AbstractGamePage
         $answer = HTTP::_GP('answer', '');
         $apply_id = HTTP::_GP('id', 0);
 
-        $sql = "SELECT userId FROM %%ALLIANCE_REQUEST%% WHERE applyID = :applyID;";
+        $sql = "SELECT user_id FROM %%ALLIANCE_REQUEST%% WHERE apply_id = :applyID;";
         
         $userId = $db->selectSingle($sql, [
             ':applyID' => $apply_id,
-        ], 'userId');
+        ], 'user_id');
 
         // only if alliance request still exist
         if ($userId)
@@ -1325,7 +1325,7 @@ class ShowAlliancePage extends AbstractGamePage
             if ($answer == 'yes')
             {
                 $sql = "DELETE FROM %%ALLIANCE_REQUEST%% 
-                WHERE applyID = :apply_id";
+                WHERE apply_id = :apply_id";
 
                 $db->delete($sql, [
                     ':apply_id' => $apply_id,
@@ -1362,7 +1362,7 @@ class ShowAlliancePage extends AbstractGamePage
             }
             else
             {
-                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE applyID = :apply_id";
+                $sql = "DELETE FROM %%ALLIANCE_REQUEST%% WHERE apply_id = :apply_id";
                 $db->delete($sql, [
                     ':apply_id' => $apply_id,
                 ]);
