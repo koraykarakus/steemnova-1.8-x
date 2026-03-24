@@ -1661,13 +1661,13 @@ class AJAXChat {
 			$this->_bannedUsersData = array();
 
 			$sql = 'SELECT
-						user_id,
-						user_name,
+						userID,
+						userName,
 						ip
 					FROM
 						'.$this->getDataBaseTable('bans').'
 					WHERE
-						NOW() < date_time;';
+						NOW() < dateTime;';
 
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
@@ -1731,9 +1731,9 @@ class AJAXChat {
 		}
 
 		$sql = 'INSERT INTO '.$this->getDataBaseTable('bans').'(
-					user_id,
-					user_name,
-					date_time,
+					userID,
+					userName,
+					dateTime,
 					ip
 				)
 				VALUES (
@@ -1757,7 +1757,7 @@ class AJAXChat {
 		$sql = 'DELETE FROM
 					'.$this->getDataBaseTable('bans').'
 				WHERE
-					user_name = '.$this->db->makeSafe($userName).';';
+					userName = '.$this->db->makeSafe($userName).';';
 
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
@@ -1773,7 +1773,7 @@ class AJAXChat {
 		$sql = 'DELETE FROM
 					'.$this->getDataBaseTable('bans').'
 				WHERE
-					date_time < NOW();';
+					dateTime < NOW();';
 
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);

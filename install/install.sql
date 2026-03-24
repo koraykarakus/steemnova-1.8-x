@@ -118,9 +118,9 @@ CREATE TABLE `%PREFIX%buddy_request` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%chat_bans` (
-  `user_id` INT NOT NULL,
-  `user_name` VARCHAR(64) NOT NULL,
-  `date_time` DATETIME NOT NULL,
+  `userID` INT NOT NULL,
+  `userName` VARCHAR(64) NOT NULL,
+  `dateTime` DATETIME NOT NULL,
   `ip` VARBINARY(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
