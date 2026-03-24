@@ -2,18 +2,18 @@
 {block name="content"}
 	<table class="table-gow table_full center_x">
 		<tr>
-			<th>{$LNG.lo_title}</th>
+			<th class="text_center">{$LNG.lo_title}</th>
 		</tr>
 		<tr>
-			<td>{$LNG.lo_logout}</td>
+			<td class="text_center">{$LNG.lo_logout}</td>
 		</tr>
 	</table>
 	<table class="table-gow table_full center_x">
 		<tr>
-			<th>{$LNG.lo_redirect}</th>
+			<th class="text_center">{$LNG.lo_redirect}</th>
 		</tr>
 		<tr>
-			<td>{$LNG.lo_notify}<br><a href="index.php">{$LNG.lo_continue}</a></td>
+			<td class="text_center">{$LNG.lo_notify}<br><a href="index.php">{$LNG.lo_continue}</a></td>
 		</tr>
 	</table>
 	{block name="script" append}
