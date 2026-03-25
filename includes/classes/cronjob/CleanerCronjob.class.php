@@ -68,7 +68,7 @@ class CleanerCronjob implements CronjobTask
         ]);
 
         $sql = 'SELECT `id` FROM %%USERS%% WHERE `authlevel` = :authlevel
-		AND ((`db_deaktjava` != 0 AND `db_deaktjava` < :timeDeleted) OR `onlinetime` < :timeInactive);';
+		AND ((`delete_mode` != 0 AND `delete_mode` < :timeDeleted) OR `onlinetime` < :timeInactive);';
 
         $deleteUserIds = Database::get()->select($sql, [
             ':authlevel'    => AUTH_USR,
