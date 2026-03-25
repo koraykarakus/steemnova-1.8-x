@@ -24,128 +24,126 @@ class MissionCaseSpy extends MissionFunctions implements Mission
 
     public function TargetEvent()
     {
-        global $PRICELIST, $RESLIST, $RESOURCE, $USER;
+        global $PRICELIST, $RESLIST, $RESOURCE;
 
         $fail_return = function ()
         {
             $this->setState(FLEET_RETURN);
             $this->SaveFleet();
-            return;
         };
 
         $db = Database::get();
 
-        $sql = 'SELECT * FROM %%USERS%% WHERE id = :userId;';
-        $senderUser = $db->selectSingle($sql, [
-            ':userId' => $this->_fleet['fleet_owner'],
+        $sql = 'SELECT * FROM %%USERS%% WHERE id = :user_id;';
+        $sender_user = $db->selectSingle($sql, [
+            ':user_id' => $this->_fleet['fleet_owner'],
         ]);
 
-        $targetUser = $db->selectSingle($sql, [
-            ':userId' => $this->_fleet['fleet_target_owner'],
+        $target_user = $db->selectSingle($sql, [
+            ':user_id' => $this->_fleet['fleet_target_owner'],
         ]);
 
-        $sql = 'SELECT * FROM %%PLANETS%% WHERE id = :planetId;';
-        $targetPlanet = $db->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_end_id'],
+        $sql = 'SELECT * FROM %%PLANETS%% WHERE id = :planet_id;';
+        $target_planet = $db->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_end_id'],
         ]);
 
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
-        $senderPlanetName = $db->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
-        ], 'name');
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';
+        $sender_planet = $db->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
+        ]);
 
-        if (!$senderUser
-            || !$targetUser
-            || !$targetPlanet
-            || !$senderPlanetName)
+        if (!$sender_user
+            || !$target_user
+            || !$target_planet
+            || !$sender_planet)
         {
-            $fail_return();
-            return;
+            return $fail_return();
         }
 
-        $LNG = $this->getLanguage($senderUser['lang']);
+        $LNG = $this->getLanguage($sender_user['lang']);
 
-        $senderUser['factor'] = getFactors($senderUser, 'basic', $this->_fleet['fleet_start_time']);
-        $targetUser['factor'] = getFactors($targetUser, 'basic', $this->_fleet['fleet_start_time']);
+        $sender_user['factor'] = getFactors($sender_user, 'basic', $this->_fleet['fleet_start_time']);
+        $target_user['factor'] = getFactors($target_user, 'basic', $this->_fleet['fleet_start_time']);
 
-        $planetUpdater = new ResourceUpdate();
-        list($targetUser, $targetPlanet) = $planetUpdater->CalcResource($targetUser, $targetPlanet, true, $this->_fleet['fleet_start_time']);
+        $planet_updater = new ResourceUpdate();
+        list($target_user, $target_planet) = $planet_updater->CalcResource($target_user, $target_planet, true, $this->_fleet['fleet_start_time']);
 
         $sql = 'SELECT * FROM %%FLEETS%%
-		WHERE fleet_end_id 		= :planetId
+		WHERE fleet_end_id 		= :planet_id
 		AND fleet_mission 		= 5
 		AND fleet_start_time 	<= :time
 		AND fleet_end_stay 		>= :time;';
 
-        $targetStayFleets = $db->select($sql, [
-            ':planetId' => $this->_fleet['fleet_end_id'],
-            ':time'     => TIMESTAMP,
+        $target_stay_fleets = $db->select($sql, [
+            ':planet_id' => $this->_fleet['fleet_end_id'],
+            ':time'      => TIMESTAMP,
         ]);
 
-        foreach ($targetStayFleets as $fleetRow)
+        foreach ($target_stay_fleets as $fleet_row)
         {
-            $fleetData = FleetFunctions::unserialize($fleetRow['fleet_array']);
-            foreach ($fleetData as $shipId => $shipAmount)
+            $fleet_data = FleetFunctions::unserialize($fleet_row['fleet_array']);
+            foreach ($fleet_data as $ship_id => $ship_amount)
             {
-                $targetPlanet[$RESOURCE[$shipId]] += $shipAmount;
+                $target_planet[$RESOURCE[$ship_id]] += $ship_amount;
             }
         }
 
-        $fleetAmount = $this->_fleet['fleet_amount'] * (1 + $senderUser['factor']['SpyPower']);
+        $fleet_amount = $this->_fleet['fleet_amount'] * (1 + $sender_user['factor']['SpyPower']);
 
-        $senderSpyTech = max($senderUser['spy_tech'], 1);
-        $targetSpyTech = max($targetUser['spy_tech'], 1);
+        $sender_spy_tech = max($sender_user['spy_tech'], 1);
+        $target_spy_tech = max($target_user['spy_tech'], 1);
 
-        $techDifference = abs($senderSpyTech - $targetSpyTech);
-        $MinAmount = ($senderSpyTech > $targetSpyTech ? -1 : 1) * pow($techDifference * SPY_DIFFENCE_FACTOR, 2);
-        $SpyFleet = $fleetAmount >= $MinAmount;
-        $SpyDef = $fleetAmount >= $MinAmount + 1 * SPY_VIEW_FACTOR;
-        $SpyBuild = $fleetAmount >= $MinAmount + 3 * SPY_VIEW_FACTOR;
-        $SpyTechno = $fleetAmount >= $MinAmount + 5 * SPY_VIEW_FACTOR;
+        $tech_difference = abs($sender_spy_tech - $target_spy_tech);
+        $min_amount = ($sender_spy_tech > $target_spy_tech ? -1 : 1) * pow($tech_difference * SPY_DIFFENCE_FACTOR, 2);
+        $spy_fleet = $fleet_amount >= $min_amount;
+        $spy_def = $fleet_amount >= $min_amount + 1 * SPY_VIEW_FACTOR;
+        $spy_build = $fleet_amount >= $min_amount + 3 * SPY_VIEW_FACTOR;
+        $spy_techno = $fleet_amount >= $min_amount + 5 * SPY_VIEW_FACTOR;
 
-        $classIDs[900] = array_merge($RESLIST['resstype'][1], $RESLIST['resstype'][2]);
+        $class_ids[900] = array_merge($RESLIST['resstype'][1], $RESLIST['resstype'][2]);
 
-        if ($SpyFleet)
+        if ($spy_fleet)
         {
-            $classIDs[200] = $RESLIST['fleet'];
+            $class_ids[200] = $RESLIST['fleet'];
         }
 
-        if ($SpyDef)
+        if ($spy_def)
         {
-            $classIDs[400] = array_merge($RESLIST['defense'], $RESLIST['missile']);
+            $class_ids[400] = array_merge($RESLIST['defense'], $RESLIST['missile']);
         }
 
-        if ($SpyBuild)
+        if ($spy_build)
         {
-            $classIDs[0] = $RESLIST['build'];
+            $class_ids[0] = $RESLIST['build'];
         }
 
-        if ($SpyTechno)
+        if ($spy_techno)
         {
-            $classIDs[100] = $RESLIST['tech'];
+            $class_ids[100] = $RESLIST['tech'];
         }
 
-        $targetChance = mt_rand(0, ceil(min(($fleetAmount / 4) * ($targetSpyTech / $senderSpyTech), 100)));
-        $spyChance = mt_rand(0, 100);
-        $spyData = [];
+        $target_chance = mt_rand(0, ceil(min(($fleet_amount / 4) * ($target_spy_tech / $sender_spy_tech), 100)));
+        $spy_chance = mt_rand(0, 100);
+        $spy_data = [];
 
-        foreach ($classIDs as $classID => $elementIDs)
+        foreach ($class_ids as $class_id => $element_ids)
         {
-            foreach ($elementIDs as $elementID)
+            foreach ($element_ids as $element_id)
             {
-                if (isset($targetUser[$RESOURCE[$elementID]]))
+                if (isset($target_user[$RESOURCE[$element_id]]))
                 {
-                    $spyData[$classID][$elementID] = $targetUser[$RESOURCE[$elementID]];
+                    $spy_data[$class_id][$element_id] = $target_user[$RESOURCE[$element_id]];
                 }
                 else
                 {
-                    $spyData[$classID][$elementID] = $targetPlanet[$RESOURCE[$elementID]];
+                    $spy_data[$class_id][$element_id] = $target_planet[$RESOURCE[$element_id]];
                 }
             }
 
-            if ($senderUser['spyMessagesMode'] == 1)
+            if ($sender_user['spyMessagesMode'] == 1)
             {
-                $spyData[$classID] = array_filter($spyData[$classID]);
+                $spy_data[$class_id] = array_filter($spy_data[$class_id]);
             }
         }
 
@@ -156,24 +154,33 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         $template = new template();
 
         $template->caching = true;
-        $template->compile_id = $senderUser['lang'];
+        $template->compile_id = $sender_user['lang'];
         $template->loadFilter('output', 'trimwhitespace');
-        list($tplDir) = $template->getTemplateDir();
-        $template->setTemplateDir($tplDir.'game/');
+        list($tpl_dir) = $template->getTemplateDir();
+        $template->setTemplateDir($tpl_dir.'game/');
         $template->assign_vars([
-            'spyData'      => $spyData,
-            'targetPlanet' => $targetPlanet,
-            'targetChance' => $targetChance,
-            'spyChance'    => $spyChance,
+            'spyData'      => $spy_data,
+            'targetPlanet' => $target_planet,
+            'targetChance' => $target_chance,
+            'spyChance'    => $spy_chance,
             'isBattleSim'  => ENABLE_SIMULATOR_LINK == true && isModuleAvailable(MODULE_SIMULATOR),
-            'title'        => sprintf($LNG['sys_mess_head'], $targetPlanet['name'], $targetPlanet['galaxy'], $targetPlanet['system'], $targetPlanet['planet'], _date($LNG['php_tdformat'], $this->_fleet['fleet_end_time'], $senderUser['timezone'], $LNG)),
+            'title'        => sprintf($LNG['sys_mess_head'],
+                            $target_planet['name'],
+                            $target_planet['galaxy'],
+                            $target_planet['system'],
+                            $target_planet['planet'],
+                            _date($LNG['php_tdformat'],
+                                $this->_fleet['fleet_end_time'],
+                                $sender_user['timezone'],
+                                $LNG
+                            )),
         ]);
 
         $template->assign_vars([
             'LNG' => $LNG,
         ], false);
 
-        $spyReport = $template->fetch('styles/templates/game/shared.mission.spyReport.tpl');
+        $spy_report = $template->fetch('styles/templates/game/shared.mission.spyReport.tpl');
 
         PlayerUtil::sendMessage(
             $this->_fleet['fleet_owner'],
@@ -181,25 +188,25 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             $LNG['sys_mess_qg'],
             0,
             $LNG['sys_mess_spy_report'],
-            $spyReport,
+            $spy_report,
             $this->_fleet['fleet_start_time'],
             null,
             1,
             $this->_fleet['fleet_universe']
         );
 
-        $LNG = $this->getLanguage($targetUser['lang']);
-        $targetMessage = $LNG['sys_mess_spy_ennemyfleet'] ." ". $senderPlanetName;
+        $LNG = $this->getLanguage($target_user['lang']);
+        $target_message = $LNG['sys_mess_spy_ennemyfleet'] ." ". $sender_planet['name'];
 
         if ($this->_fleet['fleet_start_type'] == 3)
         {
-            $targetMessage .= $LNG['sys_mess_spy_report_moon'].' ';
+            $target_message .= $LNG['sys_mess_spy_report_moon'].' ';
         }
 
         $text = '<a href="game.php?page=galaxy&amp;galaxy=%1$s&amp;system=%2$s">[%1$s:%2$s:%3$s]</a> %7$s
 		%8$s <a href="game.php?page=galaxy&amp;galaxy=%4$s&amp;system=%5$s">[%4$s:%5$s:%6$s]</a>';
 
-        $targetMessage .= sprintf(
+        $target_message .= sprintf(
             $text,
             $this->_fleet['fleet_start_galaxy'],
             $this->_fleet['fleet_start_system'],
@@ -208,7 +215,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             $this->_fleet['fleet_end_system'],
             $this->_fleet['fleet_end_planet'],
             $LNG['sys_mess_spy_seen_at'],
-            $targetPlanet['name']
+            $target_planet['name']
         );
 
         PlayerUtil::sendMessage(
@@ -217,27 +224,27 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             $LNG['sys_mess_spy_control'],
             0,
             $LNG['sys_mess_spy_activity'],
-            $targetMessage,
+            $target_message,
             $this->_fleet['fleet_start_time'],
             null,
             1,
             $this->_fleet['fleet_universe']
         );
 
-        if ($targetChance >= $spyChance)
+        if ($target_chance >= $spy_chance)
         {
             $config = Config::get($this->_fleet['fleet_universe']);
-            $whereCol = $this->_fleet['fleet_end_type'] == 3 ? "id_moon" : "id";
+            $where_col = $this->_fleet['fleet_end_type'] == 3 ? "id_moon" : "id";
 
             $sql = 'UPDATE %%PLANETS%% SET
 			debris_metal	= debris_metal + :metal,
 			debris_crystal = debris_crystal + :crystal
-			WHERE '.$whereCol.' = :planetId;';
+			WHERE '.$where_col.' = :planet_id;';
 
             $db->update($sql, [
-                ':metal'    => $fleetAmount * $PRICELIST[210]['cost'][901] * $config->debris_percentage_fleet / 100,
-                ':crystal'  => $fleetAmount * $PRICELIST[210]['cost'][902] * $config->debris_percentage_fleet / 100,
-                ':planetId' => $this->_fleet['fleet_end_id'],
+                ':metal'     => $fleet_amount * $PRICELIST[210]['cost'][901] * $config->debris_percentage_fleet / 100,
+                ':crystal'   => $fleet_amount * $PRICELIST[210]['cost'][902] * $config->debris_percentage_fleet / 100,
+                ':planet_id' => $this->_fleet['fleet_end_id'],
             ]);
 
             $this->KillFleet();
