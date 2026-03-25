@@ -85,12 +85,10 @@ class ShowQuickEditorPage extends AbstractAdminPage
             ];
         }
 
-        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :target_id;";
+        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE user_id = :target_id;";
         $multi = $db->selectSingle($sql, [
             ':target_id' => $target_id,
         ]);
-
-        var_dump($user_data['urlaubs_modus']);
 
         $this->assign([
             'tech'          => $tech,
@@ -192,7 +190,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $old['authattack'] = $user_data['authattack'];
         $new['authattack'] = ($user_data['authlevel'] != AUTH_USR && HTTP::_GP('authattack', '') == 'on' ? $user_data['authlevel'] : 0);
 
-        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :target_id;";
+        $sql = "SELECT COUNT(*) FROM %%MULTI%% WHERE user_id = :target_id;";
 
         $old['multi'] = $db->selectSingle($sql, [
             ':target_id' => $target_id,
@@ -204,14 +202,14 @@ class ShowQuickEditorPage extends AbstractAdminPage
         {
             if ($multi == 0)
             {
-                $sql = "DELETE FROM %%MULTI%% WHERE userID = :target_id;";
+                $sql = "DELETE FROM %%MULTI%% WHERE user_id = :target_id;";
                 $db->delete($sql, [
                     ':target_id' => $target_id,
                 ]);
             }
             elseif ($multi == 1)
             {
-                $sql = "INSERT INTO %%MULTI%% SET userID = :target_id;";
+                $sql = "INSERT INTO %%MULTI%% SET user_id = :target_id;";
                 $db->insert($sql, [
                     ':target_id' => $target_id,
                 ]);
