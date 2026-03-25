@@ -28,7 +28,7 @@ class ShowResourcesPage extends AbstractGamePage
     {
         global $RESOURCE, $USER, $PLANET;
 
-        if ($USER['urlaubs_modus'] == 0)
+        if ($USER['vacation_mode'] == 0)
         {
             $update_sql = [];
             if (!isset($_POST['prod']))
@@ -75,7 +75,7 @@ class ShowResourcesPage extends AbstractGamePage
 
         $config = Config::get();
 
-        if ($USER['urlaubs_modus'] == 1
+        if ($USER['vacation_mode'] == 1
             || $PLANET['planet_type'] != 1)
         {
             $basic_income[901] = 0;

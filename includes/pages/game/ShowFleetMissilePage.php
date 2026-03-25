@@ -103,11 +103,11 @@ class ShowFleetMissilePage extends AbstractGamePage
         {
             $target = [];
             $target['id_owner'] = 0;
-            $target_user = ['onlinetime' => 0, 'banaday' => 0, 'urlaubs_modus' => 0, 'authattack' => 0];
+            $target_user = ['onlinetime' => 0, 'banaday' => 0, 'vacation_mode' => 0, 'authattack' => 0];
         }
         else
         {
-            $target_user = GetUserByID($target['id_owner'], ['onlinetime', 'banaday', 'urlaubs_modus', 'authattack']);
+            $target_user = GetUserByID($target['id_owner'], ['onlinetime', 'banaday', 'vacation_mode', 'authattack']);
         }
 
         if (Config::get()->adm_attack == 1
@@ -116,7 +116,7 @@ class ShowFleetMissilePage extends AbstractGamePage
             $error[] = $LNG['fl_admin_attack'];
         }
 
-        if ($target_user['urlaubs_modus'])
+        if ($target_user['vacation_mode'])
         {
             $error[] = $LNG['fl_in_vacation_player'];
         }

@@ -103,7 +103,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         $specify_items_user =
         "u.id,u.username,u.email,u.email_2,u.authlevel,u.id_planet,
         u.galaxy,u.system,u.planet,u.user_lastip,u.ip_at_reg,u.darkmatter,
-        u.register_time,u.onlinetime,u.urlaubs_modus,u.urlaubs_until,
+        u.register_time,u.onlinetime,u.vacation_mode,u.vacation_until,
         u.ally_id,a.ally_name,".$user_items."
         u.ally_register_time,u.ally_rank_id,u.bana,u.banaday";
 
@@ -492,7 +492,7 @@ class ShowAccountDataPage extends AbstractAdminPage
             'id'                 => $user['id'],
             'nombre'             => $user['username'],
             'nivel'              => $LNG['rank_'.$user['authlevel']],
-            'vacas'              => $LNG['one_is_yes_'.$user['urlaubs_modus']],
+            'vacas'              => $LNG['one_is_yes_'.$user['vacation_mode']],
             'suspen'             => $suspen,
             'mas'                => $mas ?? null,
             'id_ali'             => $id_ali ?? null,

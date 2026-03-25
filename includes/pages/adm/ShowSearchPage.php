@@ -146,12 +146,12 @@ class ShowSearchPage extends AbstractAdminPage
                 ];
 
                 $specify_items = "id,username,email_2,onlinetime,
-                register_time,user_lastip,authlevel,bana,urlaubs_modus";
+                register_time,user_lastip,authlevel,bana,vacation_mode";
 
                 $s_name = $LNG['se_input_userss'];
                 if ($search_file == "vacation")
                 {
-                    $special_specify = "AND urlaubs_modus = '1'";
+                    $special_specify = "AND vacation_mode = '1'";
                     $s_name = $LNG['se_input_vacatii'];
                 }
 
@@ -178,7 +178,7 @@ class ShowSearchPage extends AbstractAdminPage
                 (($search_for == "name") ? $where_item = "WHERE username" : $where_item = "WHERE id");
                 $array_o_sec = ["id", "username", "email_2", "onlinetime",
                     "register_time", "user_lastip", "authlevel",
-                    "bana", "urlaubs_modus"];
+                    "bana", "vacation_mode"];
                 $array_0_sec_count = count($array_o_sec);
 
                 for ($order_num = 0; $order_num < $array_0_sec_count; $order_num++)

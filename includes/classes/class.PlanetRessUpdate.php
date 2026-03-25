@@ -103,7 +103,7 @@ class ResourceUpdate
         $this->TIME = is_null($TIME) ? TIMESTAMP : $TIME;
         $this->config = Config::get($this->USER['universe']);
 
-        if ($this->USER['urlaubs_modus'] == 1)
+        if ($this->USER['vacation_mode'] == 1)
         {
             return $this->ReturnVars();
         }

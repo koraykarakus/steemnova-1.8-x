@@ -444,7 +444,7 @@ class ShowResearchPage extends AbstractGamePage
 
         if (!empty($cmd)
             && $_SERVER['REQUEST_METHOD'] === 'POST'
-            && $USER['urlaubs_modus'] == 0)
+            && $USER['vacation_mode'] == 0)
         {
             switch ($cmd)
             {

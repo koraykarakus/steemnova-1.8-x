@@ -45,7 +45,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
 
         $sql = "SELECT ".$specify_items_pq." `username`, `authlevel`, 
         `galaxy`, `system`, `planet`, `id_planet`, 
-        `darkmatter`, `authattack`, `authlevel`, `urlaubs_modus` 
+        `darkmatter`, `authattack`, `authlevel`, `vacation_mode` 
         FROM %%USERS%% WHERE `id` = :target_id;";
 
         $user_data = $db->selectSingle($sql, [
@@ -102,7 +102,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
             'planet'        => $user_data['planet'],
             'authlevel'     => $user_data['authlevel'],
             'authattack'    => $user_data['authattack'],
-            'vacation_mode' => $user_data['urlaubs_modus'],
+            'vacation_mode' => $user_data['vacation_mode'],
             'multi'         => $multi,
             'ChangePW'      => $change_pw,
             'yesorno'       => [1 => $LNG['one_is_yes_1'], 0 => $LNG['one_is_yes_0']],
@@ -149,7 +149,7 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $sql .= "`darkmatter` = :darkmatter, ";
         $sql .= "`username` = :username, ";
         $sql .= "`authattack` = :authattack, ";
-        $sql .= "`urlaubs_modus` = :vacation_mode ";
+        $sql .= "`vacation_mode` = :vacation_mode ";
         $sql .= "WHERE `id` = :userId AND `universe` = :universe;";
 
         $db->update($sql, [

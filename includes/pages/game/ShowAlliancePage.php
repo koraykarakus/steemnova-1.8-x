@@ -707,7 +707,7 @@ class ShowAlliancePage extends AbstractGamePage
         $member_list = [];
 
         $sql = "SELECT DISTINCT u.id, u.username,u.galaxy, u.system, u.planet, 
-        u.banaday, u.urlaubs_modus, u.ally_register_time, u.onlinetime, 
+        u.banaday, u.vacation_mode, u.ally_register_time, u.onlinetime, 
         u.ally_rank_id, s.total_points 
         FROM %%USERS%% u LEFT JOIN %%USER_POINTS%% as s 
         ON s.id_owner = u.id 
@@ -1567,7 +1567,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
 
         $sql = "SELECT DISTINCT u.id, u.username, u.galaxy, u.system, 
-        u.planet, u.banaday, u.urlaubs_modus, 
+        u.planet, u.banaday, u.vacation_mode, 
         u.ally_register_time, u.onlinetime, u.ally_rank_id, s.total_points
 		FROM %%USERS%% u
 		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id

@@ -155,7 +155,7 @@ abstract class AbstractGamePage
             $resource_table[$c_id]['current'] = $PLANET[$RESOURCE[$c_id]];
             $resource_table[$c_id]['max'] = $PLANET[$RESOURCE[$c_id].'_max'];
 
-            if ($USER['urlaubs_modus'] == 1
+            if ($USER['vacation_mode'] == 1
                 || $PLANET['planet_type'] != 1)
             {
                 $resource_table[$c_id]['production'] = $PLANET[$RESOURCE[$c_id].'_perhour'];
@@ -205,7 +205,7 @@ abstract class AbstractGamePage
             'new_message'    => $USER['messages'],
             'commit'         => $commit,
             'commitShort'    => $commit_short,
-            'vacation'       => $USER['urlaubs_modus'] ? _date($LNG['php_tdformat'], $USER['urlaubs_until'], $USER['timezone']) : false,
+            'vacation'       => $USER['vacation_mode'] ? _date($LNG['php_tdformat'], $USER['vacation_until'], $USER['timezone']) : false,
             'delete'         => $USER['db_deaktjava'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['db_deaktjava'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
             'darkmatter'     => $USER['darkmatter'],
             'current_pid'    => $PLANET['id'],
@@ -341,7 +341,7 @@ abstract class AbstractGamePage
         unset($c_planet);
 
         $this->assign([
-            'vmode'              => $USER['urlaubs_modus'],
+            'vmode'              => $USER['vacation_mode'],
             'authlevel'          => $USER['authlevel'],
             'userID'             => $USER['id'],
             'bodyclass'          => $this->getWindow(),

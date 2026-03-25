@@ -6,7 +6,7 @@ $fleet_speed = mysqli_fetch_all(mysqli_query($connection, "SELECT FLOOR(fleet_sp
 $get_bots_techs = mysqli_fetch_all(mysqli_query($connection, "SELECT id, computer_tech, combustion_tech FROM uni1_users WHERE email='bot'"));
 $onlinetime = time() - 604800;
 for ($i = 0;$i <= count($get_bots_techs) - 1;$i++) {
-    $random_player = mysqli_fetch_array(mysqli_query($connection, "SELECT id FROM uni1_users WHERE (onlinetime < $onlinetime AND urlaubs_modus=0) ORDER BY RAND() LIMIT 1"))['id'];
+    $random_player = mysqli_fetch_array(mysqli_query($connection, "SELECT id FROM uni1_users WHERE (onlinetime < $onlinetime AND vacation_mode=0) ORDER BY RAND() LIMIT 1"))['id'];
     if (empty($random_player)) {
     continue;
     } else {
