@@ -73,9 +73,15 @@
 					<div class="player_name"></div>
 					<div class="alliance_name"></div>
 					<div class="actions">
+					{if $colony_ships > 0 && isset($allowed_col_pos_arr[$planet]) && $allowed_col_pos_arr[$planet] === true}
 						<a class="icon_colony" href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=7">
 							<div class="tooltip tooltip_top">{$LNG.gl_mission_colonize}</div>
 						</a>
+					{else}
+						<a class="icon_colony disabled" href="#">
+							<div class="tooltip tooltip_top">{$LNG.gl_mission_colonize_not_possible}</div>
+						</a>
+					{/if}
 					</div>
 				{elseif $GalaxyRows[$planet] === false}
 					<div class="num">

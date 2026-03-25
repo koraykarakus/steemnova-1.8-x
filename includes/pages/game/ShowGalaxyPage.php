@@ -29,7 +29,7 @@ class ShowGalaxyPage extends AbstractGamePage
     public function show(): void
     {
         global $USER, $PLANET, $RESOURCE, $LNG, $RESLIST;
-        
+
         if (inVacationMode($USER))
         {
             $this->printMessage($LNG['gl_err_in_vacation']);
@@ -121,6 +121,7 @@ class ShowGalaxyPage extends AbstractGamePage
             'fleetmax'              => FleetFunctions::GetMaxFleetSlots($USER),
             'currentmip'            => $PLANET[$RESOURCE[503]],
             'recyclers'             => $PLANET[$RESOURCE[209]],
+            'colony_ships'          => $PLANET[$RESOURCE[208]],
             'spyprobes'             => $PLANET[$RESOURCE[210]],
             'missile_count'         => sprintf($LNG['gl_missil_to_launch'], $PLANET[$RESOURCE[503]]),
             'spyShips'              => [210 => $USER['spio_anz']],
@@ -142,9 +143,22 @@ class ShowGalaxyPage extends AbstractGamePage
                 'friend'       => $LNG['gl_short_friend'],
                 'member'       => $LNG['gl_short_member'],
             ],
-            'userAuthLevel' => $USER['authlevel'],
+            'userAuthLevel'       => $USER['authlevel'],
+            'allowed_col_pos_arr' => $this->getAllowedColonyPositionArray(),
         ]);
 
         $this->display('page.galaxy.default.tpl');
+    }
+
+    public function getAllowedColonyPositionArray(): array
+    {
+        global $USER;
+        $config = Config::get();
+        $arr = [];
+        for ($i = 1; $i <= $config->max_planets; $i++)
+        {
+            $arr[$i] = PlayerUtil::allowPlanetPosition($i, $USER);
+        }
+        return $arr;
     }
 }
