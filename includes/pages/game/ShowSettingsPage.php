@@ -34,7 +34,7 @@ class ShowSettingsPage extends AbstractGamePage
                 $USER['vacation_until'],
                 $USER['timezone']
             ),
-            'delete'              => $USER['db_deaktjava'],
+            'delete'              => $USER['delete_mode'],
             'canVacationDisbaled' => $USER['vacation_until'] < TIMESTAMP,
         ]);
 
@@ -75,7 +75,7 @@ class ShowSettingsPage extends AbstractGamePage
             'spycount'        => $USER['spio_anz'],
             'fleetActions'    => $USER['settings_fleetactions'],
             'timezone'        => $USER['timezone'],
-            'delete'          => $USER['db_deaktjava'],
+            'delete'          => $USER['delete_mode'],
             'queueMessages'   => $USER['hof'],
             'spyMessagesMode' => $USER['spyMessagesMode'],
             'galaxySpy'       => $USER['settings_esp'],
@@ -191,7 +191,7 @@ class ShowSettingsPage extends AbstractGamePage
 
         if ($delete == 1)
         {
-            $sql = "UPDATE %%USERS%% SET db_deaktjava = :timestamp WHERE id = :userID;";
+            $sql = "UPDATE %%USERS%% SET delete_mode = :timestamp WHERE id = :userID;";
             $db->update($sql, [
                 ':userID'    => $USER['id'],
                 ':timestamp' => TIMESTAMP,
@@ -199,7 +199,7 @@ class ShowSettingsPage extends AbstractGamePage
         }
         else
         {
-            $sql = "UPDATE %%USERS%% SET db_deaktjava = 0 WHERE id = :userID;";
+            $sql = "UPDATE %%USERS%% SET delete_mode = 0 WHERE id = :userID;";
             $db->update($sql, [
                 ':userID' => $USER['id'],
             ]);
@@ -394,7 +394,7 @@ class ShowSettingsPage extends AbstractGamePage
 
         if ($delete == 1)
         {
-            $sql = "UPDATE %%USERS%% SET db_deaktjava = :timestamp WHERE id = :userID;";
+            $sql = "UPDATE %%USERS%% SET delete_mode = :timestamp WHERE id = :userID;";
             $db->update($sql, [
                 ':userID'    => $USER['id'],
                 ':timestamp' => TIMESTAMP,
@@ -402,7 +402,7 @@ class ShowSettingsPage extends AbstractGamePage
         }
         else
         {
-            $sql = "UPDATE %%USERS%% SET db_deaktjava = 0 WHERE id = :userID;";
+            $sql = "UPDATE %%USERS%% SET delete_mode = 0 WHERE id = :userID;";
             $db->update($sql, [
                 ':userID' => $USER['id'],
             ]);

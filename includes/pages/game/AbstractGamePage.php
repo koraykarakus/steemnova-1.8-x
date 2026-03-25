@@ -206,7 +206,7 @@ abstract class AbstractGamePage
             'commit'         => $commit,
             'commitShort'    => $commit_short,
             'vacation'       => $USER['vacation_mode'] ? _date($LNG['php_tdformat'], $USER['vacation_until'], $USER['timezone']) : false,
-            'delete'         => $USER['db_deaktjava'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['db_deaktjava'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
+            'delete'         => $USER['delete_mode'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['delete_mode'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
             'darkmatter'     => $USER['darkmatter'],
             'current_pid'    => $PLANET['id'],
             'current_pname'  => $PLANET['name'],

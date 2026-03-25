@@ -897,7 +897,7 @@ CREATE TABLE `%PREFIX%users` (
   `settings_blockPM` TINYINT NOT NULL DEFAULT 0,
   `vacation_mode` TINYINT NOT NULL DEFAULT 0,
   `vacation_until` INT NOT NULL DEFAULT 0,
-  `db_deaktjava` INT NOT NULL DEFAULT 0,
+  `delete_mode` INT NOT NULL DEFAULT 0,
   `b_tech_planet` INT UNSIGNED NOT NULL DEFAULT 0,
   `b_tech` INT UNSIGNED NOT NULL DEFAULT 0,
   `b_tech_id` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
