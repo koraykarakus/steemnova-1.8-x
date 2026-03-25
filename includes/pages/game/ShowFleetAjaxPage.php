@@ -36,11 +36,21 @@ class ShowFleetAjaxPage extends AbstractGamePage
     public function show(): void
     {
         global $USER, $PLANET, $RESOURCE, $LNG, $PRICELIST;
+        $config = Config::get();
 
         $user_deu = $PLANET['deuterium'];
 
-        $planet_id = HTTP::_GP('planetID', 0);
         $target_mission = HTTP::_GP('mission', 0);
+        $galaxy = HTTP::_GP('galaxy', 1);
+        $galaxy = max(1,min($galaxy, $config->max_galaxy), $galaxy);
+
+        $system = HTTP::_GP('system', 1);
+        $system = max(1,min($system, $config->max_system), $system);
+
+        $planet = HTTP::_GP('planet', 1);
+        $planet = max(1,min($planet, $config->max_planets), $planet);
+
+        $planet_type = HTTP::_GP('planet_type', 0);       
 
         $active_slots = FleetFunctions::GetCurrentFleets($USER['id']);
         $max_slots = FleetFunctions::GetMaxFleetSlots($USER);
@@ -50,11 +60,6 @@ class ShowFleetAjaxPage extends AbstractGamePage
         if (inVacationMode($USER))
         {
             $this->sendData(620, $LNG['fa_vacation_mode_current']);
-        }
-
-        if (empty($planet_id))
-        {
-            $this->sendData(601, $LNG['fa_planet_not_exist']);
         }
 
         if ($max_slots <= $active_slots)
@@ -84,6 +89,25 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 $fleet_array = [210 => $ships];
                 $this->return_data['ships'][210] = $PLANET[$RESOURCE[210]] - $ships;
                 break;
+            case 7:
+                if (!isModuleAvailable(MODULE_MISSION_COLONY))
+                {
+                    $this->sendData(699, $LNG['sys_module_inactive']);
+                }
+
+                if ($PLANET[$RESOURCE[208]] < 1) 
+                {
+                    $this->sendData(611, $LNG['fa_no_colony_ships']);
+                }
+
+                if (!PlayerUtil::allowPlanetPosition($planet, $USER)) 
+                {
+                    $this->sendData(611, $LNG['fa_not_enough_tech_colony']);
+                }
+
+                $fleet_array = [208 => 1];
+
+                break;
             case 8:
                 if (!isModuleAvailable(MODULE_MISSION_RECYCLE))
                 {
@@ -91,10 +115,17 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 }
 
                 $sql = "SELECT (debris_metal + debris_crystal) as sum 
-                FROM %%PLANETS%% WHERE id = :planet_id;";
+                FROM %%PLANETS%% 
+                WHERE galaxy = :galaxy 
+                AND system = :system
+                AND planet = :planet
+                AND planet_type = :planet_type;";
 
                 $total_debris = $db->selectSingle($sql, [
-                    ':planet_id' => $planet_id,
+                    ':galaxy' => $galaxy,
+                    ':system' => $system,
+                    ':planet' => $planet,
+                    ':planet_type' => $planet_type
                 ], 'sum');
 
                 $rec_element_ids = [219, 209];
@@ -122,7 +153,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 }
                 break;
             default:
-                $this->sendData(610, $LNG['fa_not_enough_probes']);
+                $this->sendData(610, $LNG['fa_mission_not_available']);
                 break;
         }
 
@@ -133,22 +164,41 @@ class ShowFleetAjaxPage extends AbstractGamePage
             $this->sendData(610, $LNG['fa_not_enough_probes']);
         }
 
-        $sql = "SELECT planet.id_owner as id_owner,
-		planet.galaxy as galaxy,
-		planet.system as system,
-		planet.planet as planet,
-		planet.planet_type as planet_type,
+        $sql = "SELECT p.id_owner as id_owner,
+        p.id as planet_id,
+		p.galaxy as galaxy,
+		p.system as system,
+		p.planet as planet,
+		p.planet_type as planet_type,
 		total_points, onlinetime, urlaubs_modus, banaday, authattack
-		FROM %%PLANETS%% planet
-		INNER JOIN %%USERS%% user ON planet.id_owner = user.id
-		LEFT JOIN %%USER_POINTS%% as stat ON stat.id_owner = user.id
-		WHERE planet.id = :planet_id;";
+		FROM %%PLANETS%% p
+		INNER JOIN %%USERS%% u ON p.id_owner = u.id
+		LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id
+		WHERE p.galaxy = :galaxy 
+        AND p.system = :system 
+        AND p.planet = :planet 
+        AND p.planet_type = :planet_type;";
 
-        $target_data = $db->selectSingle($sql, [
-            ':planet_id' => $planet_id,
-        ]);
+        if ($target_mission == 7) 
+        {
+            $target_data['id_owner'] = 0;
+            $target_data['planet_id'] = 0;
+            $target_data['galaxy'] = $galaxy;
+            $target_data['system'] = $system;
+            $target_data['planet'] = $planet;
+            $target_data['planet_type'] = 1;
+        }
+        else 
+        {
+            $target_data = $db->selectSingle($sql, [
+            ':galaxy' => $galaxy,
+            ':system' => $system,
+            ':planet' => $planet,
+            ':planet_type' => $planet_type
+            ]);
+        }
 
-        if (empty($target_data))
+        if ($target_data === false)
         {
             $this->sendData(601, $LNG['fa_planet_not_exist']);
         }
@@ -274,7 +324,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
             $PLANET['planet'],
             $PLANET['planet_type'],
             $target_data['id_owner'],
-            $planet_id,
+            $target_data['planet_id'],
             $target_data['galaxy'],
             $target_data['system'],
             $target_data['planet'],

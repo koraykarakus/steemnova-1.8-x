@@ -1101,6 +1101,8 @@ $LNG['fa_not_attack_yourself'] = 'Erro, Não é possível atacares os teus próp
 $LNG['fa_action_not_allowed'] = 'Erro, Essa ação não é permitida';
 $LNG['fa_vacation_mode_current'] = 'Erro, Tu estás em modo de férias';
 $LNG['fa_sending'] = 'Enviar';
+$LNG['fa_no_colony_ships'] = 'Não há naves colonizadoras suficientes disponíveis.';
+$LNG['fa_not_enough_tech_colony'] = "A tecnologia de expedição não é alta o suficiente para colonizar essa posição.";
 
 //----------------------------------------------------------------------------//
 // Misseis

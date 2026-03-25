@@ -74,7 +74,7 @@
 					<div class="alliance_name"></div>
 					<div class="actions">
 					{if $colony_ships > 0 && isset($allowed_col_pos_arr[$planet]) && $allowed_col_pos_arr[$planet] === true}
-						<a class="icon_colony" href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1&amp;target_mission=7">
+						<a class="icon_colony" onclick='doit(7,{$galaxy},{$system},{$planet},1);'>
 							<div class="tooltip tooltip_top">{$LNG.gl_mission_colonize}</div>
 						</a>
 					{else}
@@ -139,7 +139,7 @@
 												{if $currentPlanet.missions.6}
 												<tr>
 													<td>
-														<a onclick='doit(6,{$currentPlanet.planet.id});'>
+														<a onclick='doit(6,{$galaxy},{$system},{$planet},1);'>
 															{$LNG.type_mission_6}
 														</a>
 													</td>
@@ -310,7 +310,7 @@
 																{if $currentPlanet.missions.6}
 																<tr>
 																	<td>
-																		<a class='hover-underline hover-pointer' onclick='doit(6,{$currentPlanet.moon.id});'>
+																		<a class='hover-underline hover-pointer' onclick='doit(6,{$galaxy},{$system},{$planet},3);'>
 																			{$LNG.type_mission_6}
 																		</a>
 																	</td>
@@ -378,7 +378,7 @@
 													<td>{$currentPlanet.debris.crystal|number}</td>
 												</tr>{if $currentPlanet.missions.8 and $recyclers|number > 0}<tr>
 													<th colspan='2'>{$LNG.gl_actions}</th></tr><tr><td colspan='2'>
-														<a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$currentPlanet.planet.id});'>{$LNG["type_mission_8"]}</a>
+														<a class='hover-underline my-1 hover-pointer' onclick='doit(8, {$galaxy},{$system},{$planet},1);'>{$LNG["type_mission_8"]}</a>
 													</td>
 												</tr>
 												{/if}
@@ -471,7 +471,7 @@
 					<div class="actions">
 						{if $currentPlanet.action}
 							{if $currentPlanet.action.esp}
-								<a class="action_link icon_spy" onclick="doit(6,{$currentPlanet.planet.id},{$spyShips|json|escape:'html'})">
+								<a class="action_link icon_spy" onclick="doit(6,{$galaxy},{$system},{$planet},1)">
 									<div class="tooltip tooltip_top">
 										{$LNG.gl_spy}
 									</div>

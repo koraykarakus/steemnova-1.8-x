@@ -1175,6 +1175,8 @@ $LNG['fa_not_attack_yourself'] = 'Fault, can not attack yourself';
 $LNG['fa_action_not_allowed'] = 'Fault, action not allowed';
 $LNG['fa_vacation_mode_current'] = 'Fault, you are in vaction mode';
 $LNG['fa_sending'] = 'Send';
+$LNG['fa_no_colony_ships'] = 'Not enough colony ships available.';
+$LNG['fa_not_enough_tech_colony'] = "Expedition tech is not high enough to colonize that position.";
 
 //----------------------------------------------------------------------------//
 // Misseis
