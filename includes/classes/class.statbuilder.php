@@ -176,7 +176,7 @@ class statbuilder
         if (!empty($query_data))
         {
             $sql = "TRUNCATE TABLE %%RECORDS%%;";
-            $sql .= "INSERT INTO %%RECORDS%% (userID, elementID, level) VALUES ".implode(', ', $query_data).";";
+            $sql .= "INSERT INTO %%RECORDS%% (user_id, element_id, level) VALUES ".implode(', ', $query_data).";";
             $this->SaveDataIntoDB($sql);
         }
     }
