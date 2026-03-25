@@ -11,7 +11,7 @@ body {
 	color: #fff;
 }
 
-a, select, option{
+a, select, option,.bg-dark{
 	color: #fff!important;
 }
 
