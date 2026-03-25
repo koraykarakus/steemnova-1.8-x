@@ -33,7 +33,7 @@ class ShowBuildingsPage extends AbstractGamePage
         // wellformed buildURLs
         if (!empty($cmd)
             && $_SERVER['REQUEST_METHOD'] === 'POST'
-            && $USER['urlaubs_modus'] == 0)
+            && $USER['vacation_mode'] == 0)
         {
             $element = HTTP::_GP('building', 0);
             $list_id = HTTP::_GP('listid', 0);

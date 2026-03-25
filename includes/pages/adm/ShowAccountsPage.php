@@ -799,7 +799,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "SELECT `username`,`email`,`email_2`,`password`,`urlaubs_modus`,`urlaubs_until`
+        $sql = "SELECT `username`,`email`,`email_2`,`password`,`vacation_mode`,`vacation_until`
 		FROM %%USERS%% WHERE `id` = :user_id;";
 
         $user_info = $db->selectSingle($sql, [
@@ -847,12 +847,12 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($vacation == 'yes')
         {
             $answer = 1;
-            $after['urlaubs_modus'] = 1;
+            $after['vacation_mode'] = 1;
             $answer_time = TIMESTAMP + $_POST['d'] * 86400 + $_POST['h'] * 3600 + $_POST['m'] * 60 + $_POST['s'];
-            $after['urlaubs_until'] = $answer_time;
+            $after['vacation_until'] = $answer_time;
         }
 
-        $personal_qry .= "`urlaubs_modus` = :answer, `urlaubs_until` = :answer_time ";
+        $personal_qry .= "`vacation_mode` = :answer, `vacation_until` = :answer_time ";
         $personal_qry .= "WHERE `id` = :id AND `universe` = :universe";
 
         $db->update($personal_qry, [

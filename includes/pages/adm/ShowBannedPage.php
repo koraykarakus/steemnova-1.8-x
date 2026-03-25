@@ -95,7 +95,7 @@ class ShowBannedPage extends AbstractAdminPage
 
         $name = HTTP::_GP('ban_name', '', true);
 
-        $sql = "SELECT b.theme, b.longer, u.id, u.urlaubs_modus, u.banaday 
+        $sql = "SELECT b.theme, b.longer, u.id, u.vacation_mode, u.banaday 
         FROM %%USERS%% as u
 		LEFT JOIN %%BANNED%% as b ON u.`username` = b.`who` 
         WHERE u.`username` = :Name AND u.`universe` = :universe;";
@@ -158,7 +158,7 @@ class ShowBannedPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "SELECT u.username,u.urlaubs_modus,u.banaday,u.id as user_id,b.* FROM %%USERS%% as u
+        $sql = "SELECT u.username,u.vacation_mode,u.banaday,u.id as user_id,b.* FROM %%USERS%% as u
 		LEFT JOIN %%BANNED%% as b ON b.id = u.id
 		WHERE u.id = :target_user_id AND u.universe = :universe;";
 
@@ -226,13 +226,13 @@ class ShowBannedPage extends AbstractAdminPage
         $sql = "UPDATE %%USERS%% SET 
         `bana` = '1', 
         `banaday` = :banned_until, 
-        urlaubs_modus = :urlaubs_modus
+        vacation_mode = :vacation_mode
 		WHERE `username` = :Name 
         AND `universe` = :universe;";
 
         $db->update($sql, [
             ':banned_until'  => $banned_until,
-            ':urlaubs_modus' => isset($_POST['vacat']) ? '1' : '0',
+            ':vacation_mode' => isset($_POST['vacat']) ? '1' : '0',
             ':Name'          => $target_user_info['username'],
             ':universe'      => Universe::getEmulated(),
         ]);
@@ -249,7 +249,7 @@ class ShowBannedPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "SELECT u.username,u.urlaubs_modus,u.banaday,u.id as user_id,b.* 
+        $sql = "SELECT u.username,u.vacation_mode,u.banaday,u.id as user_id,b.* 
         FROM %%USERS%% as u
 		LEFT JOIN %%BANNED%% as b ON b.id = u.id
 		WHERE u.id = :target_user_id AND u.universe = :universe;";
@@ -286,7 +286,7 @@ class ShowBannedPage extends AbstractAdminPage
 				</tr>";
         }
 
-        $vacation = ($target_user_info['urlaubs_modus'] == 1) ? true : false;
+        $vacation = ($target_user_info['vacation_mode'] == 1) ? true : false;
 
         $this->assign([
             'target_id'         => $target_user_info['user_id'],

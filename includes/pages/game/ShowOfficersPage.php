@@ -116,7 +116,7 @@ class ShowOfficersPage extends AbstractGamePage
 
         if (!empty($update_id)
             && $_SERVER['REQUEST_METHOD'] === 'POST'
-            && $USER['urlaubs_modus'] == 0)
+            && $USER['vacation_mode'] == 0)
         {
             if (isModuleAvailable(MODULE_OFFICERS)
                 && in_array($update_id, $RESLIST['officers']))

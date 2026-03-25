@@ -206,7 +206,7 @@ class ShowShipyardPage extends AbstractGamePage
             $Count = count($ElementQueue);
         }
 
-        if ($USER['urlaubs_modus'] == 0 && $NotBuilding == true)
+        if ($USER['vacation_mode'] == 0 && $NotBuilding == true)
         {
             if (!empty($buildTodo))
             {

@@ -78,8 +78,8 @@ function userStatus($data, $noob_protection = false): array
         $result[] = 'banned';
     }
 
-    if (isset($data['urlaubs_modus'])
-        && $data['urlaubs_modus'] == 1)
+    if (isset($data['vacation_mode'])
+        && $data['vacation_mode'] == 1)
     {
         $result[] = 'vacation';
     }
@@ -555,7 +555,7 @@ function getRandomString(): string
 
 function inVacationMode($USER): bool
 {
-    return $USER['urlaubs_modus'] == 1;
+    return $USER['vacation_mode'] == 1;
 }
 
 function limitText($text, $length = 15)

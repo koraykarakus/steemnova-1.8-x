@@ -65,7 +65,7 @@ $config = file("config.txt");
 $connection = mysqli_connect(trim($config[0]), trim($config[1]), trim($config[2]), trim($config[3]));
 $fleet_speed = mysqli_fetch_all(mysqli_query($connection, "SELECT FLOOR(fleet_speed/2500) FROM uni1_config"))[0][0];
 $get_bots = mysqli_fetch_all(mysqli_query($connection, "SELECT id FROM uni1_users WHERE email='bot'"));
-$get_users = mysqli_fetch_all(mysqli_query($connection, "SELECT * FROM uni1_users WHERE email!='bot' AND urlaubs_modus=0"));
+$get_users = mysqli_fetch_all(mysqli_query($connection, "SELECT * FROM uni1_users WHERE email!='bot' AND vacation_mode=0"));
 $id_offensive_bots = [];
 
 for($i=0; $i<=count($get_bots)-1; $i++) {

@@ -31,11 +31,11 @@ class ShowSettingsPage extends AbstractGamePage
         $this->assign([
             'vacationUntil' => _date(
                 $LNG['php_tdformat'],
-                $USER['urlaubs_until'],
+                $USER['vacation_until'],
                 $USER['timezone']
             ),
             'delete'              => $USER['db_deaktjava'],
-            'canVacationDisbaled' => $USER['urlaubs_until'] < TIMESTAMP,
+            'canVacationDisbaled' => $USER['vacation_until'] < TIMESTAMP,
         ]);
 
         $this->display('page.settings.vacation.tpl');
@@ -44,7 +44,7 @@ class ShowSettingsPage extends AbstractGamePage
     public function show(): void
     {
         global $USER, $LNG, $config;
-        if ($USER['urlaubs_modus'] == 1)
+        if ($USER['vacation_mode'] == 1)
         {
             $this->showVacation();
             return;
@@ -141,7 +141,7 @@ class ShowSettingsPage extends AbstractGamePage
     public function send(): void
     {
         global $USER;
-        if ($USER['urlaubs_modus'] == 1)
+        if ($USER['vacation_mode'] == 1)
         {
             $this->sendVacation();
         }
@@ -160,11 +160,11 @@ class ShowSettingsPage extends AbstractGamePage
 
         $db = Database::get();
 
-        if ($vacation == 1 && $USER['urlaubs_until'] <= TIMESTAMP)
+        if ($vacation == 1 && $USER['vacation_until'] <= TIMESTAMP)
         {
             $sql = "UPDATE %%USERS%% SET
-						urlaubs_modus = '0',
-						urlaubs_until = '0'
+						vacation_mode = '0',
+						vacation_until = '0'
 						WHERE id = :userID;";
             $db->update($sql, [
                 ':userID' => $USER['id'],
@@ -379,7 +379,7 @@ class ShowSettingsPage extends AbstractGamePage
             }
             else
             {
-                $sql = "UPDATE %%USERS%% SET urlaubs_modus = '1', urlaubs_until = :time WHERE id = :userID";
+                $sql = "UPDATE %%USERS%% SET vacation_mode = '1', vacation_until = :time WHERE id = :userID";
                 $db->update($sql, [
                     ':userID' => $USER['id'],
                     ':time'   => (TIMESTAMP + Config::get()->vmode_min_time),

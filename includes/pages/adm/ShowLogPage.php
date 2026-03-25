@@ -323,8 +323,8 @@ class ShowLogPage extends AbstractAdminPage
 
                 $LogArray[] = [
                     'Element' => $Element,
-                    'old'     => ($Element == 'urlaubs_until' ? _date($LNG['php_tdformat'], $val) : (is_numeric($val) ? pretty_number($val) : $val)),
-                    'new'     => ($Element == 'urlaubs_until' ? _date($LNG['php_tdformat'], $conf_after[$key]) : (is_numeric($conf_after[$key]) ? pretty_number($conf_after[$key]) : $conf_after[$key])),
+                    'old'     => ($Element == 'vacation_until' ? _date($LNG['php_tdformat'], $val) : (is_numeric($val) ? pretty_number($val) : $val)),
+                    'new'     => ($Element == 'vacation_until' ? _date($LNG['php_tdformat'], $conf_after[$key]) : (is_numeric($conf_after[$key]) ? pretty_number($conf_after[$key]) : $conf_after[$key])),
                 ];
             }
         }

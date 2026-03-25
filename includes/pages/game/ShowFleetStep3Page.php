@@ -266,7 +266,7 @@ class ShowFleetStep3Page extends AbstractGamePage
                 'id'            => 0,
                 'onlinetime'    => TIMESTAMP,
                 'ally_id'       => 0,
-                'urlaubs_modus' => 0,
+                'vacation_mode' => 0,
                 'authattack'    => 0,
                 'total_points'  => 0,
             ];
