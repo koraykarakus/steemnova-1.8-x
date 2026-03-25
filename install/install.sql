@@ -827,33 +827,33 @@ CREATE TABLE `%PREFIX%system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%ticket` (
-  `ticketID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ticket_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `universe` TINYINT UNSIGNED NOT NULL,
-  `ownerID` INT UNSIGNED NOT NULL,
-  `categoryID` TINYINT UNSIGNED NOT NULL,
+  `owner_id` INT UNSIGNED NOT NULL,
+  `category_id` TINYINT UNSIGNED NOT NULL,
   `subject` VARCHAR(255) NOT NULL,
   `status` TINYINT UNSIGNED NOT NULL DEFAULT '0',
   `time` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`ticketID`),
-  KEY `ownerID` (`ownerID`),
+  PRIMARY KEY (`ticket_id`),
+  KEY `owner_id` (`owner_id`),
   KEY `universe` (`universe`,`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%ticket_answer` (
-  `answerID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ownerID` INT UNSIGNED NOT NULL,
-  `ownerName` VARCHAR(32) NOT NULL,
-  `ticketID` INT UNSIGNED NOT NULL,
+  `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner_id` INT UNSIGNED NOT NULL,
+  `owner_name` VARCHAR(32) NOT NULL,
+  `ticket_id` INT UNSIGNED NOT NULL,
   `time` INT UNSIGNED NOT NULL,
   `subject` VARCHAR(255) NOT NULL,
   `message` mediumtext NOT NULL,
-  PRIMARY KEY (`answerID`)
+  PRIMARY KEY (`answer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%ticket_category` (
-  `categoryID` INT NOT NULL AUTO_INCREMENT,
+  `category_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`categoryID`)
+  PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%topkb` (
@@ -1224,7 +1224,7 @@ INSERT INTO `%PREFIX%cronjobs` (`cronjobID`, `name`, `isActive`, `min`, `hours`,
 INSERT INTO `%PREFIX%system` (`dbVersion`) VALUES
 (%DB_VERSION%);
 
-INSERT INTO `%PREFIX%ticket_category` (`categoryID`, `name`) VALUES
+INSERT INTO `%PREFIX%ticket_category` (`category_id`, `name`) VALUES
 (1, 'Support');
 
 INSERT INTO `%PREFIX%vars` (`elementID`, `name`, `class`, `onPlanetType`, `onePerPlanet`, `factor`, `maxLevel`, `cost901`, `cost902`, `cost903`, `cost911`, `cost921`, `consumption1`, `consumption2`, `speedTech`, `speed1`, `speed2`, `speed2Tech`, `speed2onLevel`, `speed3Tech`, `speed3onLevel`, `capacity`, `attack`, `defend`, `timeBonus`, `bonusAttack`, `bonusDefensive`, `bonusShield`, `bonusBuildTime`, `bonusResearchTime`, `bonusShipTime`, `bonusDefensiveTime`, `bonusResource`, `bonusEnergy`, `bonusResourceStorage`, `bonusShipStorage`, `bonusFlyTime`, `bonusFleetSlots`, `bonusPlanets`, `bonusSpyPower`, `bonusExpedition`, `bonusGateCoolTime`, `bonusMoreFound`, `bonusAttackUnit`, `bonusDefensiveUnit`, `bonusShieldUnit`, `bonusBuildTimeUnit`, `bonusResearchTimeUnit`, `bonusShipTimeUnit`, `bonusDefensiveTimeUnit`, `bonusResourceUnit`, `bonusEnergyUnit`, `bonusResourceStorageUnit`, `bonusShipStorageUnit`, `bonusFlyTimeUnit`, `bonusFleetSlotsUnit`, `bonusPlanetsUnit`, `bonusSpyPowerUnit`, `bonusExpeditionUnit`, `bonusGateCoolTimeUnit`, `bonusMoreFoundUnit`, `speedFleetFactor`, `production901`, `production902`, `production903`, `production911`, `production921`, `storage901`, `storage902`, `storage903`) VALUES

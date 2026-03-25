@@ -20,18 +20,18 @@ class SupportTickets
     public function createTicket($ownerID, $categoryID, $subject)
     {
         $sql = 'INSERT INTO %%TICKETS%% SET
-		ownerID		= :ownerId,
+		owner_id	= :owner_id,
 		universe	= :universe,
-		categoryID	= :categoryId,
+		category_id	= :category_id,
 		subject		= :subject,
 		time		= :time;';
 
         Database::get()->insert($sql, [
-            ':ownerId'    => $ownerID,
-            ':universe'   => Universe::current(),
-            ':categoryId' => $categoryID,
-            ':subject'    => $subject,
-            ':time'       => TIMESTAMP,
+            ':owner_id'    => $ownerID,
+            ':universe'    => Universe::current(),
+            ':category_id' => $categoryID,
+            ':subject'     => $subject,
+            ':time'        => TIMESTAMP,
         ]);
 
         return Database::get()->lastInsertId();
@@ -40,29 +40,29 @@ class SupportTickets
     public function createAnswer($ticketID, $ownerID, $ownerName, $subject, $message, $status)
     {
         $sql = 'INSERT INTO %%TICKETS_ANSWER%% SET
-		ticketID	= :ticketId,
-		ownerID		= :ownerId,
-		ownerName	= :ownerName,
+		ticket_id	= :ticket_id,
+		owner_id	= :owner_id,
+		owner_name	= :owner_name,
 		subject		= :subject,
 		message		= :message,
 		time		= :time;';
 
         Database::get()->insert($sql, [
-            ':ticketId'  => $ticketID,
-            ':ownerId'   => $ownerID,
-            ':ownerName' => $ownerName,
-            ':subject'   => $subject,
-            ':message'   => $message,
-            ':time'      => TIMESTAMP,
+            ':ticket_id'  => $ticketID,
+            ':owner_id'   => $ownerID,
+            ':owner_name' => $ownerName,
+            ':subject'    => $subject,
+            ':message'    => $message,
+            ':time'       => TIMESTAMP,
         ]);
 
         $answerId = Database::get()->lastInsertId();
 
-        $sql = 'UPDATE %%TICKETS%% SET status = :status WHERE ticketID = :ticketId;';
+        $sql = 'UPDATE %%TICKETS%% SET status = :status WHERE ticket_id = :ticket_id;';
 
         Database::get()->update($sql, [
-            ':status'   => $status,
-            ':ticketId' => $ticketID,
+            ':status'    => $status,
+            ':ticket_id' => $ticketID,
         ]);
 
         return $answerId;
@@ -77,7 +77,7 @@ class SupportTickets
 
         foreach ($categoryResult as $categoryRow)
         {
-            $categoryList[$categoryRow['categoryID']] = $categoryRow['name'];
+            $categoryList[$categoryRow['category_id']] = $categoryRow['name'];
         }
 
         return $categoryList;

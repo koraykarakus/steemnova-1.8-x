@@ -16,11 +16,11 @@
 		<td class="left" colspan="2">
 			<p>{if !$answerRow@first}
 				<b>{$LNG.ti_subject}: {$answerRow.subject}</b><br>
-			{$LNG.ti_responded}: <b>{$answerRow.time}</b> {$LNG.ti_from} <b>{$answerRow.ownerName}</b>
+			{$LNG.ti_responded}: <b>{$answerRow.time}</b> {$LNG.ti_from} <b>{$answerRow.owner_name}</b>
 			{/if}
 			{if $answerRow@first}
-			{$LNG.ti_create}: <b>{$answerRow.time}</b> {$LNG.ti_from} <b>{$answerRow.ownerName}</b>
-				<br>{$LNG.ti_category}: {$categoryList[$answerRow.categoryID]}
+			{$LNG.ti_create}: <b>{$answerRow.time}</b> {$LNG.ti_from} <b>{$answerRow.owner_name}</b>
+				<br>{$LNG.ti_category}: {$categoryList[$answerRow.category_id]}
 			{/if}
 			</p>
 			<hr>

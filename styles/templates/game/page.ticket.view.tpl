@@ -18,11 +18,11 @@
 	<tr>
 		<td colspan="2">
 			<span class="color-blue">
-				{$LNG.ti_msgtime} {$answerRow.time} {$LNG.ti_from} {$answerRow.ownerName}
+				{$LNG.ti_msgtime} {$answerRow.time} {$LNG.ti_from} {$answerRow.owner_name}
 			</span>
 			{if $answerRow@first}
 			<span class="color-blue">
-				{$LNG.ti_category}: {$categoryList[$answerRow.categoryID]}
+				{$LNG.ti_category}: {$categoryList[$answerRow.category_id]}
 			</span>
 			{/if}
 			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="">

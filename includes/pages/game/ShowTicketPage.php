@@ -34,13 +34,13 @@ class ShowTicketPage extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "SELECT t.*, COUNT(a.ticketID) as answer
+        $sql = "SELECT t.*, COUNT(a.ticket_id) as answer
 		FROM %%TICKETS%% t
-		INNER JOIN %%TICKETS_ANSWER%% a USING (ticketID)
-		WHERE t.ownerID = :userID GROUP BY a.ticketID ORDER BY t.ticketID DESC;";
+		INNER JOIN %%TICKETS_ANSWER%% a USING (ticket_id)
+		WHERE t.owner_id = :user_id GROUP BY a.ticket_id ORDER BY t.ticket_id DESC;";
 
         $ticket_result = $db->select($sql, [
-            ':userID' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
         $ticket_list = [];
@@ -49,7 +49,7 @@ class ShowTicketPage extends AbstractGamePage
         {
             $c_ticket['time'] = _date($LNG['php_tdformat'], $c_ticket['time'], $USER['timezone']);
 
-            $ticket_list[$c_ticket['ticketID']] = $c_ticket;
+            $ticket_list[$c_ticket['ticket_id']] = $c_ticket;
         }
 
         $this->assign([
@@ -107,9 +107,9 @@ class ShowTicketPage extends AbstractGamePage
         {
             $db = Database::get();
 
-            $sql = "SELECT status FROM %%TICKETS%% WHERE ticketID = :ticketID;";
+            $sql = "SELECT status FROM %%TICKETS%% WHERE ticket_id = :ticket_id;";
             $ticket_status = $db->selectSingle($sql, [
-                ':ticketID' => $ticket_id,
+                ':ticket_id' => $ticket_id,
             ], 'status');
 
             if ($ticket_status == 2)
@@ -140,13 +140,13 @@ class ShowTicketPage extends AbstractGamePage
 
         $ticket_id = HTTP::_GP('id', 0);
 
-        $sql = "SELECT a.*, t.categoryID, t.status 
-        FROM %%TICKETS_ANSWER%% a INNER JOIN %%TICKETS%% t USING(ticketID) 
-        WHERE a.ticketID = :ticketID AND t.ownerID = :ownerID ORDER BY a.answerID;";
+        $sql = "SELECT a.*, t.category_id, t.status 
+        FROM %%TICKETS_ANSWER%% a INNER JOIN %%TICKETS%% t USING(ticket_id) 
+        WHERE a.ticket_id = :ticket_id AND t.owner_id = :owner_id ORDER BY a.answer_id;";
 
         $answer_result = $db->select($sql, [
-            ':ticketID' => $ticket_id,
-            ':ownerID'  => $USER['id'],
+            ':ticket_id' => $ticket_id,
+            ':owner_id'  => $USER['id'],
         ]);
 
         $answer_list = [];
@@ -165,7 +165,7 @@ class ShowTicketPage extends AbstractGamePage
         {
             $c_answer['time'] = _date($LNG['php_tdformat'], $c_answer['time'], $USER['timezone']);
             $c_answer['message'] = BBCode::parse($c_answer['message']);
-            $answer_list[$c_answer['answerID']] = $c_answer;
+            $answer_list[$c_answer['answer_id']] = $c_answer;
             if (empty($ticket_status))
             {
                 $ticket_status = $c_answer['status'];
