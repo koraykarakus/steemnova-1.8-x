@@ -567,13 +567,13 @@ CREATE TABLE `%PREFIX%log_fleets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%lostpassword` (
-  `userID` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
   `key` VARCHAR(32) NOT NULL,
   `time` INT UNSIGNED NOT NULL,
-  `hasChanged` TINYINT NOT NULL DEFAULT '0',
-  `fromIP` VARCHAR(40) NOT NULL,
+  `has_changed` TINYINT NOT NULL DEFAULT 0,
+  `from_ip` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`key`),
-  UNIQUE KEY `userID` (`userID`,`key`,`time`,`hasChanged`),
+  UNIQUE KEY `user_id` (`user_id`,`key`,`time`,`has_changed`),
   KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
