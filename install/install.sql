@@ -596,10 +596,10 @@ CREATE TABLE `%PREFIX%messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%multi` (
-  `multiID` INT NOT NULL AUTO_INCREMENT,
-  `userID` INT NOT NULL,
-  PRIMARY KEY (`multiID`),
-  KEY `userID` (`userID`)
+  `multi_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`multi_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%news` (

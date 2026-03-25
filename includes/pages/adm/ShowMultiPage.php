@@ -31,8 +31,8 @@ class ShowMultiPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multiID, 0) as isKnown
-		FROM %%USERS%% LEFT JOIN %%MULTI%% ON userID = id
+        $sql = "SELECT id, username, email, register_time, onlinetime, user_lastip, IFNULL(multi_id, 0) as isKnown
+		FROM %%USERS%% LEFT JOIN %%MULTI%% ON user_id = id
 		WHERE `universe` = :universe AND user_lastip IN (SELECT user_lastip FROM %%USERS%% WHERE `universe` = :universe GROUP BY user_lastip HAVING COUNT(*)>1) ORDER BY user_lastip, id ASC;";
 
         $query = $db->select($sql, [
@@ -65,10 +65,10 @@ class ShowMultiPage extends AbstractAdminPage
     {
         $db = Database::get();
 
-        $sql = "INSERT INTO %%MULTI%% SET userID = :userID;";
+        $sql = "INSERT INTO %%MULTI%% SET user_id = :user_id;";
 
         $db->insert($sql, [
-            ':userID' => HTTP::_GP('id', 0),
+            ':user_id' => HTTP::_GP('id', 0),
         ]);
 
         $this->show();
@@ -78,10 +78,10 @@ class ShowMultiPage extends AbstractAdminPage
     {
         $db = Database::get();
 
-        $sql = "DELETE FROM %%MULTI%% WHERE userID = :userID;";
+        $sql = "DELETE FROM %%MULTI%% WHERE user_id = :user_id;";
 
         $db->delete($sql, [
-            ':userID' => HTTP::_GP('id', 0),
+            ':user_id' => HTTP::_GP('id', 0),
         ]);
 
         $this->show();

@@ -340,15 +340,15 @@ class ShowFleetStep1Page extends AbstractGamePage
             }
 
             $sql = 'SELECT (
-				(SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :userID) +
-				(SELECT COUNT(*) FROM %%MULTI%% WHERE userID = :dataID)
+				(SELECT COUNT(*) FROM %%MULTI%% WHERE user_id = :user_id) +
+				(SELECT COUNT(*) FROM %%MULTI%% WHERE user_id = :data_id)
 			) as count;';
 
             if (!empty($planet_data))
             {
                 $multi_count = $db->selectSingle($sql, [
-                    ':userID' => $USER['id'],
-                    ':dataID' => $planet_data['id'],
+                    ':user_id' => $USER['id'],
+                    ':data_id' => $planet_data['id'],
                 ], 'count');
             }
 
