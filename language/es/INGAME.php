@@ -207,6 +207,7 @@ $LNG['ov_moving_fleets'] = 'Flotas en movimiento';
 
 //vista general de acciones
 
+$LNG['ov_ac_password'] = "contraseña";
 $LNG['ov_ac_error_1'] = "¡El nombre no puede estar vacío!";
 $LNG['ov_ac_error_2'] = "¡El nombre del planeta es demasiado largo!";
 $LNG['ov_ac_error_3'] = "¡No se ha introducido el nombre del planeta!";

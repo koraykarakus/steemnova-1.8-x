@@ -816,7 +816,91 @@ input[type="radio"] {
 	width: 100%;
 	max-width: 654px;
 }
+/**/
 
+/*page.overview.actions.tpl*/
+.actions_card {
+	width: 320px;
+	padding: 5px 5px;
+	border-radius: 3px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	width: calc(100% - 10px);
+	margin: 5px auto;
+}
+
+.actions_card form{
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: start;
+	padding: 0;
+	margin: 10px 5px;
+	width: calc(90% - 10px);
+	min-height: 160px;
+}
+
+#abondon_planet.hidden{
+	display: none;
+}
+#rename_planet.hidden{
+	display: none;
+}
+
+.actions_card input {
+	height: 24px;
+	border-radius: 3px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+	margin: 3px 0;
+	width: 232px;
+}
+
+.actions_card input:focus {
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 0.15rem rgba(59, 130, 246, 0.25);
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.planet_menu {
+	height: 60px;
+	background: linear-gradient(145deg, #0f172a, #1e293b);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu_wrapper {
+	display: flex;
+	background: rgba(255, 255, 255, 0.04);
+	padding: 6px;
+	border-radius: 10px;
+}
+
+.menu-btn {
+	min-width: 140px;
+	padding: 8px 18px;
+	border: none;
+	border-radius: 3px;
+	background: transparent;
+	color: #cbd5e1;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	margin: 0 2px;
+	cursor: pointer;
+}
+
+.menu-btn:hover {
+	background: rgba(59, 130, 246, 0.15);
+	color: #fff;
+}
+
+.menu-btn.active {
+	background: #3b82f6;
+	color: #fff;
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
 /**/
 
 /*page.buildings.default.tpl*/

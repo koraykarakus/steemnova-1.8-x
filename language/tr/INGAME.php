@@ -214,7 +214,7 @@ $LNG['Deuterium'] = 'Deuterium';
 $LNG['Darkmatter'] = 'Karanlık Madde';
 
 //genel aksiyonlar
-$LNG['ov_ac_password'] = "Şifreniz";
+$LNG['ov_ac_password'] = "şifreniz";
 $LNG['ov_ac_error_4'] = "Şifre girilmedi !";
 $LNG['ov_ac_error_5'] = "Şifre yanlış !";
 $LNG['ov_ac_error_1'] = "İsim boş bırakılamaz !";

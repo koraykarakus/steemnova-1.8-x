@@ -209,6 +209,7 @@ $LNG['ov_moving_fleets'] = 'Przenoszenie flot';
 
 //przegląd działań
 
+$LNG['ov_ac_password'] = "hasło";
 $LNG['ov_ac_error_1'] = "Nazwa nie może być pusta!";
 $LNG['ov_ac_error_2'] = "Nazwa planety jest za długa!";
 $LNG['ov_ac_error_3'] = "nie wprowadzono nazwy planety!";
