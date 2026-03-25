@@ -1,5 +1,5 @@
 {block name="title" prepend}{$LNG.lm_records}{/block} {block name="content"}
-<table class="table-gow">
+<table class="table-gow table_full">
     <tbody>
         <tr>
             <th colspan="3" style="text-align:center;">{$LNG.rec_last_update_on}: {$update}</th>
