@@ -1554,6 +1554,7 @@ background: linear-gradient(180deg,
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	position: relative;
+	cursor: pointer;
 }
 .icon_colony:hover{
 	background-position: -17px 0;

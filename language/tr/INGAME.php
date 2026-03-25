@@ -1105,6 +1105,8 @@ $LNG['fa_not_attack_yourself'] = 'Kendine saldirmak? Iyimisiniz efendim';
 $LNG['fa_action_not_allowed'] = 'Malesef izin verilmeyen bir girisimde bulunuyorsunuz';
 $LNG['fa_vacation_mode_current'] = 'Hata, Tatildesiniz';
 $LNG['fa_sending'] = 'Gonder';
+$LNG['fa_no_colony_ships'] = 'Yeterli koloni gemisi yok.';
+$LNG['fa_not_enough_tech_colony'] = "keşif teknolojisi bu konumu kolonileştirmek için yeterince yüksek değil.";
 
 //----------------------------------------------------------------------------//
 // Roket Saldirilari

@@ -1,5 +1,11 @@
-function doit(missionID, planetID) {
-	$.getJSON("game.php?page=fleetAjax&ajax=1&mission="+missionID+"&planetID="+planetID, function(data)
+function doit(mission_id, galaxy, system, planet, planet_type) {
+	var url = "game.php?page=fleetAjax&ajax=1&mission=" + mission_id;
+	url += "&galaxy=" + galaxy; 
+	url += "&system=" + system; 
+	url += "&planet=" + planet; 
+	url += "&planet_type=" + planet_type;
+	
+	$.getJSON(url, function(data)
 	{
 		$('#slots').text(data.slots);
 		if(typeof data.ships !== "undefined")

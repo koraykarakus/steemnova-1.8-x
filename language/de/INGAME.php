@@ -1128,6 +1128,8 @@ $LNG['fa_not_attack_yourself'] = 'Fehler, Sie können sich nicht selber angreife
 $LNG['fa_action_not_allowed'] = 'Fehler, Systemfehler';
 $LNG['fa_vacation_mode_current'] = 'Fehler, Sie befinden sich im Urlaubsmodus';
 $LNG['fa_sending'] = 'Gesendet';
+$LNG['fa_no_colony_ships'] = 'Nicht genügend Kolonieschiffe verfügbar.';
+$LNG['fa_not_enough_tech_colony'] = "Die Expeditionstechnologie ist nicht hoch genug, um diese Position zu kolonisieren.";
 
 //----------------------------------------------------------------------------//
 // MARKETPLACE

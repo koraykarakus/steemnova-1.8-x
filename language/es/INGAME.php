@@ -1089,6 +1089,8 @@ $LNG['fa_not_attack_yourself'] = 'Error, no puedes atacarte a ti mismo -.-';
 $LNG['fa_action_not_allowed'] = 'Error, acción no permitida.';
 $LNG['fa_vacation_mode_current'] = 'Error, te encuentras en modo vacaciones.';
 $LNG['fa_sending'] = 'Enviando.';
+$LNG['fa_no_colony_ships'] = 'No hay suficientes naves colonizadoras disponibles.';
+$LNG['fa_not_enough_tech_colony'] = "La tecnología de expedición no es lo suficientemente alta para colonizar esa posición.";
 
 //----------------------------------------------------------------------------//
 // MissilesAjax.php
