@@ -44,12 +44,12 @@ class ShowLostPasswordPage extends AbstractLoginPage
         $db = Database::get();
 
         $sql = "SELECT COUNT(*) as state FROM %%LOSTPASSWORD%% 
-        WHERE userID = :userID AND `key` = :validationKey AND `time` > :time AND hasChanged = 0;";
+        WHERE user_id = :user_id AND `key` = :validation_key AND `time` > :time AND has_changed = 0;";
 
         $is_valid = $db->selectSingle($sql, [
-            ':userID'        => $uid,
-            ':validationKey' => $val_key,
-            ':time'          => (TIMESTAMP - 1800),
+            ':user_id'        => $uid,
+            ':validation_key' => $val_key,
+            ':time'           => (TIMESTAMP - 1800),
         ], 'state');
 
         if (empty($is_valid))
@@ -104,11 +104,11 @@ class ShowLostPasswordPage extends AbstractLoginPage
             ]]);
         }
 
-        $sql = "UPDATE %%LOSTPASSWORD%% SET hasChanged = 1 
-        WHERE userID = :userID AND `key` = :validationKey;";
+        $sql = "UPDATE %%LOSTPASSWORD%% SET has_changed = 1 
+        WHERE user_id = :user_id AND `key` = :validation_key;";
         $db->update($sql, [
-            ':userID'        => $uid,
-            ':validationKey' => $val_key,
+            ':user_id'        => $uid,
+            ':validation_key' => $val_key,
         ]);
 
         $this->printMessage($LNG['passwordChangedMailSend'], [[
@@ -178,11 +178,11 @@ class ShowLostPasswordPage extends AbstractLoginPage
         }
 
         $sql = "SELECT COUNT(*) as state FROM %%LOSTPASSWORD%% 
-        WHERE userID = :userID AND time > :time AND hasChanged = 0;";
+        WHERE user_id = :user_id AND time > :time AND has_changed = 0;";
 
         $has_changed = $db->selectSingle($sql, [
-            ':userID' => $uid,
-            ':time'   => (TIMESTAMP - 86400),
+            ':user_id' => $uid,
+            ':time'    => (TIMESTAMP - 86400),
         ], 'state');
 
         if (!empty($has_changed))
@@ -222,12 +222,13 @@ class ShowLostPasswordPage extends AbstractLoginPage
             echo '<meta http-equiv="refresh" content="0; url='.$validurl.'"/>';
         }
 
-        $sql = "INSERT INTO %%LOSTPASSWORD%% SET userID = :userID, `key` = :validationKey, `time` = :timestamp, fromIP = :remoteAddr;";
+        $sql = "INSERT INTO %%LOSTPASSWORD%% 
+        SET user_id = :user_id, `key` = :validation_key, `time` = :timestamp, from_ip = :remote_addr;";
         $db->insert($sql, [
-            ':userID'        => $uid,
-            ':timestamp'     => TIMESTAMP,
-            ':validationKey' => $val_key,
-            ':remoteAddr'    => Session::getClientIp(),
+            ':user_id'        => $uid,
+            ':timestamp'      => TIMESTAMP,
+            ':validation_key' => $val_key,
+            ':remote_addr'    => Session::getClientIp(),
         ]);
 
         $this->printMessage($LNG['passwordValidMailSend'], [[
