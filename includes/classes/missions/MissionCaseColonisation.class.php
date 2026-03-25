@@ -26,63 +26,81 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
     {
         $db = Database::get();
 
-        $sql = 'SELECT * FROM %%USERS%% WHERE `id` = :userId;';
+        $sql = 'SELECT * FROM %%USERS%% WHERE `id` = :user_id;';
 
-        $senderUser = $db->selectSingle($sql, [
-            ':userId' => $this->_fleet['fleet_owner'],
+        $sender_user = $db->selectSingle($sql, [
+            ':user_id' => $this->_fleet['fleet_owner'],
         ]);
 
-        $senderUser['factor'] = getFactors($senderUser, 'basic', $this->_fleet['fleet_start_time']);
+        $sender_user['factor'] = getFactors(
+            $sender_user,
+            'basic',
+            $this->_fleet['fleet_start_time']
+        );
 
-        $LNG = $this->getLanguage($senderUser['lang']);
+        $LNG = $this->getLanguage($sender_user['lang']);
 
-        $checkPosition = PlayerUtil::checkPosition(
+        $check_position = PlayerUtil::checkPosition(
             $this->_fleet['fleet_universe'],
             $this->_fleet['fleet_end_galaxy'],
             $this->_fleet['fleet_end_system'],
             $this->_fleet['fleet_end_planet']
         );
-        $isPositionFree = PlayerUtil::isPositionFree(
+
+        $is_position_free = PlayerUtil::isPositionFree(
             $this->_fleet['fleet_universe'],
             $this->_fleet['fleet_end_galaxy'],
             $this->_fleet['fleet_end_system'],
             $this->_fleet['fleet_end_planet']
         );
 
-        if (!$isPositionFree || !$checkPosition)
+        if (!$is_position_free || !$check_position)
         {
-            $message = sprintf($LNG['sys_colo_notfree'], GetTargetAddressLink($this->_fleet, ''));
+            $message = sprintf(
+                $LNG['sys_colo_notfree'],
+                GetTargetAddressLink($this->_fleet, '')
+            );
         }
         else
         {
-            $allowPlanetPosition = PlayerUtil::allowPlanetPosition($this->_fleet['fleet_end_planet'], $senderUser);
-            if (!$allowPlanetPosition)
+            $allow_planet_position = PlayerUtil::allowPlanetPosition(
+                $this->_fleet['fleet_end_planet'],
+                $sender_user
+            );
+            if (!$allow_planet_position)
             {
-                $message = sprintf($LNG['sys_colo_notech'], GetTargetAddressLink($this->_fleet, ''));
+                $message = sprintf(
+                    $LNG['sys_colo_notech'],
+                    GetTargetAddressLink($this->_fleet, '')
+                );
             }
             else
             {
                 $sql = 'SELECT COUNT(*) as state
 				FROM %%PLANETS%%
-				WHERE `id_owner`	= :userId
+				WHERE `id_owner`	= :user_id
 				AND `planet_type`	= :type
 				AND `destroyed`		= :destroyed;';
 
-                $currentPlanetCount = $db->selectSingle($sql, [
-                    ':userId'    => $this->_fleet['fleet_owner'],
+                $current_planet_count = $db->selectSingle($sql, [
+                    ':user_id'   => $this->_fleet['fleet_owner'],
                     ':type'      => 1,
                     ':destroyed' => 0,
                 ], 'state');
 
-                $maxPlanetCount = PlayerUtil::maxPlanetCount($senderUser);
+                $max_planet_count = PlayerUtil::maxPlanetCount($sender_user);
 
-                if ($currentPlanetCount >= $maxPlanetCount)
+                if ($current_planet_count >= $max_planet_count)
                 {
-                    $message = sprintf($LNG['sys_colo_maxcolo'], GetTargetAddressLink($this->_fleet, ''), $maxPlanetCount);
+                    $message = sprintf(
+                        $LNG['sys_colo_maxcolo'],
+                        GetTargetAddressLink($this->_fleet, ''),
+                        $max_planet_count
+                    );
                 }
                 else
                 {
-                    $NewOwnerPlanet = PlayerUtil::createPlanet(
+                    $new_owner_planet = PlayerUtil::createPlanet(
                         $this->_fleet['fleet_end_galaxy'],
                         $this->_fleet['fleet_end_system'],
                         $this->_fleet['fleet_end_planet'],
@@ -90,20 +108,26 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
                         $this->_fleet['fleet_owner'],
                         $LNG['fcp_colony'],
                         false,
-                        $senderUser['authlevel']
+                        $sender_user['authlevel']
                     );
 
-                    if ($NewOwnerPlanet === false)
+                    if ($new_owner_planet === false)
                     {
-                        $message = sprintf($LNG['sys_colo_badpos'], GetTargetAddressLink($this->_fleet, ''));
+                        $message = sprintf(
+                            $LNG['sys_colo_badpos'],
+                            GetTargetAddressLink($this->_fleet, '')
+                        );
                         $this->setState(FLEET_RETURN);
                     }
                     else
                     {
-                        $this->_fleet['fleet_end_id'] = $NewOwnerPlanet;
-                        $message = sprintf($LNG['sys_colo_allisok'], GetTargetAddressLink($this->_fleet, ''));
+                        $this->_fleet['fleet_end_id'] = $new_owner_planet;
+                        $message = sprintf(
+                            $LNG['sys_colo_allisok'],
+                            GetTargetAddressLink($this->_fleet, '')
+                        );
 
-                        PlayerUtil::updateColonyWithStartValues($NewOwnerPlanet);
+                        PlayerUtil::updateColonyWithStartValues($new_owner_planet);
 
                         $this->StoreGoodsToPlanet();
                         if ($this->_fleet['fleet_amount'] == 1)
@@ -112,27 +136,27 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
                         }
                         else
                         {
-                            $CurrentFleet = explode(";", $this->_fleet['fleet_array']);
-                            $NewFleet = '';
-                            foreach ($CurrentFleet as $Group)
+                            $current_fleet = explode(";", $this->_fleet['fleet_array']);
+                            $new_fleet = '';
+                            foreach ($current_fleet as $group)
                             {
-                                if (empty($Group))
+                                if (empty($group))
                                 {
                                     continue;
                                 }
 
-                                $Class = explode(",", $Group);
-                                if ($Class[0] == 208 && $Class[1] > 1)
+                                $class = explode(",", $group);
+                                if ($class[0] == 208 && $class[1] > 1)
                                 {
-                                    $NewFleet .= $Class[0].",".($Class[1] - 1).";";
+                                    $new_fleet .= $class[0].",".($class[1] - 1).";";
                                 }
-                                elseif ($Class[0] != 208 && $Class[1] > 0)
+                                elseif ($class[0] != 208 && $class[1] > 0)
                                 {
-                                    $NewFleet .= $Class[0].",".$Class[1].";";
+                                    $new_fleet .= $class[0].",".$class[1].";";
                                 }
                             }
 
-                            $this->UpdateFleet('fleet_array', $NewFleet);
+                            $this->UpdateFleet('fleet_array', $new_fleet);
                             $this->UpdateFleet('fleet_amount', ($this->_fleet['fleet_amount'] - 1));
                             $this->UpdateFleet('fleet_resource_metal', 0);
                             $this->UpdateFleet('fleet_resource_crystal', 0);
@@ -167,7 +191,10 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
 
     public function ReturnEvent()
     {
-        $this->savePlanetProduction($this->_fleet['fleet_start_id'], $this->_fleet['fleet_end_time']);
+        $this->savePlanetProduction(
+            $this->_fleet['fleet_start_id'],
+            $this->_fleet['fleet_end_time']
+        );
 
         $this->RestoreFleet();
     }
