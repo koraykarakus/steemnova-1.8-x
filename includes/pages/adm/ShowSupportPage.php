@@ -43,10 +43,10 @@ class ShowSupportPage extends AbstractAdminPage
 
         $db = Database::get();
 
-        $sql = "SELECT t.*, u.username, COUNT(a.ticketID) as answer FROM
-		%%TICKETS%% as t INNER JOIN %%TICKETS_ANSWER%% as a USING (ticketID)
-		INNER JOIN %%USERS%% as u ON u.id = t.ownerID WHERE t.universe = :universe
-		GROUP BY a.ticketID ORDER BY t.ticketID DESC;";
+        $sql = "SELECT t.*, u.username, COUNT(a.ticket_id) as answer FROM
+		%%TICKETS%% as t INNER JOIN %%TICKETS_ANSWER%% as a USING (ticket_id)
+		INNER JOIN %%USERS%% as u ON u.id = t.owner_id WHERE t.universe = :universe
+		GROUP BY a.ticket_id ORDER BY t.ticket_id DESC;";
 
         $ticket_result = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
@@ -58,7 +58,7 @@ class ShowSupportPage extends AbstractAdminPage
         {
             $c_ticket['time'] = _date($LNG['php_tdformat'], $c_ticket['time'], $USER['timezone']);
 
-            $ticket_list[$c_ticket['ticketID']] = $c_ticket;
+            $ticket_list[$c_ticket['ticket_id']] = $c_ticket;
         }
         unset($c_ticket);
 
@@ -79,11 +79,11 @@ class ShowSupportPage extends AbstractAdminPage
         $message = HTTP::_GP('message', '', true);
         $change = HTTP::_GP('change_status', 0);
 
-        $sql = "SELECT ownerID, subject, status 
-        FROM %%TICKETS%% WHERE ticketID = :ticketID;";
+        $sql = "SELECT owner_id, subject, status 
+        FROM %%TICKETS%% WHERE ticket_id = :ticket_id;";
 
         $ticket_detail = $db->selectSingle($sql, [
-            ':ticketID' => $ticket_id,
+            ':ticket_id' => $ticket_id,
         ]);
 
         $status = ($change ? ($ticket_detail['status'] <= 1 ? 2 : 1) : 1);
@@ -117,7 +117,7 @@ class ShowSupportPage extends AbstractAdminPage
         $text = sprintf($LNG['sp_answer_message'], $ticket_id);
 
         PlayerUtil::sendMessage(
-            $ticket_detail['ownerID'],
+            $ticket_detail['owner_id'],
             $USER['id'],
             $USER['username'],
             4,
@@ -140,12 +140,12 @@ class ShowSupportPage extends AbstractAdminPage
 
         $ticket_id = HTTP::_GP('id', 0);
 
-        $sql = "SELECT a.*, t.categoryID, t.status FROM %%TICKETS_ANSWER%% as a
-		INNER JOIN %%TICKETS%% as t USING(ticketID) WHERE a.ticketID = :ticketID
-		ORDER BY a.answerID;";
+        $sql = "SELECT a.*, t.category_id, t.status FROM %%TICKETS_ANSWER%% as a
+		INNER JOIN %%TICKETS%% as t USING(ticket_id) WHERE a.ticket_id = :ticket_id
+		ORDER BY a.answer_id;";
 
         $answer_result = $db->select($sql, [
-            ':ticketID' => $ticket_id,
+            ':ticket_id' => $ticket_id,
         ]);
 
         $answer_list = [];
@@ -162,7 +162,7 @@ class ShowSupportPage extends AbstractAdminPage
             $c_answer['time'] = _date($LNG['php_tdformat'], $c_answer['time'], $USER['timezone']);
             $c_answer['message'] = BBCode::parse($c_answer['message']);
 
-            $answer_list[$c_answer['answerID']] = $c_answer;
+            $answer_list[$c_answer['answer_id']] = $c_answer;
         }
         unset($c_answer);
 
