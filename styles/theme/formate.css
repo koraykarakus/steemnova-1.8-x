@@ -816,6 +816,25 @@ input[type="radio"] {
 	width: 100%;
 	max-width: 654px;
 }
+.icon_settings{
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+	background: url('images/settings.png');
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin: 0 2px;
+}
+.planet_actions{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+}
+.planet_actions:hover > .tooltip{
+	display: flex;
+}
 /**/
 
 /*page.overview.actions.tpl*/

@@ -30,8 +30,13 @@
       <tr>
         <td>{$LNG["type_planet_{$planet_type}"]}</td>
         <td>
-          <a href="#" onclick="return Dialog.PlanetAction();"
-            title="{$LNG.ov_planetmenu}">{$planet_name}&nbsp;({$username})</a>
+          <a class="planet_actions" href="#" onclick="return Dialog.PlanetAction();">
+            <div class="tooltip tooltip_top">
+              {$LNG.ov_planetmenu}
+            </div>
+            <i class="icon_settings"></i>
+              {$planet_name}&nbsp;({$username})
+          </a>
         </td>
       </tr>
       <tr>
