@@ -228,6 +228,8 @@
 						{if !empty($currentPlanet.lastActivity)}
 							<span class="last_activity">{$currentPlanet.lastActivity}</span>
 						{/if}
+					<span class="incoming_attack{if $currentPlanet.planet.incoming_fleets == 1} show{/if}"></span>
+					<span class="incoming_neutral{if $currentPlanet.planet.incoming_fleets == 2} show{/if}"></span>
 					</div>
 					<div class="moon_picture">
 						{if $currentPlanet.moon}
@@ -350,7 +352,9 @@
 								alt="{$currentPlanet.moon.name}">
 						{if isset($currentPlanet.moon.lastActivity) && !empty($currentPlanet.moon.lastActivity)}
 							<span class="last_activity">{$currentPlanet.moon.lastActivity}</span>
-						{/if}											
+						{/if}
+							<span class="incoming_attack{if $currentPlanet.moon.incoming_fleets == 1} show{/if}"></span>
+							<span class="incoming_neutral{if $currentPlanet.moon.incoming_fleets == 2} show{/if}"></span>					
 						{/if}
 					</div>
 					<div class="debris_picture">
@@ -388,6 +392,7 @@
 								</table>
 							</div>
 							<img src="{$dpath}planets/debris.png" height="22" width="22" alt="">
+							<span class="incoming_neutral{if $currentPlanet.debris.incoming_fleets != 0} show{/if}"></span>
 						{/if}
 					</div>
 					<div class="player_name">
