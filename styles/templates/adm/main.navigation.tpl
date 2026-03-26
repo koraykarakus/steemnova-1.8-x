@@ -101,12 +101,6 @@
         <a class="d-flex w-100 h-100 p-1  text-decoration-none  fs-6" href="?page=chat">{$LNG.mu_chat}</a>
       </li>
     {/if}
-    {if allowedTo('ShowTeamspeakPage')}
-      <li class="d-flex {if $page == 'teamspeak'}menu-active{/if}">
-        <a class="d-flex w-100 h-100 p-1  text-decoration-none  fs-6"
-          href="?page=teamspeak">{$LNG.mu_ts_options}</a>
-      </li>
-    {/if}
     {if allowedTo('ShowGoogleAuthPage')}
       <li class="d-flex {if $page == 'googleAuth'}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1 text-decoration-none  fs-6"

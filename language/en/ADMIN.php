@@ -694,7 +694,6 @@ $LNG['mu_chat'] = 'Chat Configuration';
 $LNG['mu_module'] = 'Modules';
 $LNG['mu_mod_update'] = 'Checking version of MOD';
 $LNG['mu_fb_options'] = 'Registration by Facebook';
-$LNG['mu_ts_options'] = 'Teamspeak Options';
 $LNG['mu_game_info'] = 'Information';
 $LNG['mu_vaild_users'] = 'User activity';
 $LNG['mu_news'] = 'News';
@@ -1075,19 +1074,6 @@ $LNG['qe_submit'] = 'Send';
 $LNG['qe_resetr'] = 'Reset';
 $LNG['qe_allowmulti'] = 'Allow Multi IP';
 
-//----------------------------------------------------------------------------//
-// Configuração do TeamSpeak
-$LNG['ts_settings'] = 'Teamspeak';
-$LNG['ts_active'] = 'Activate the Mod TeamSpeak?';
-$LNG['ts_version'] = 'Server version:';
-$LNG['ts_udpport'] = 'Port TCP';
-$LNG['ts_tcpport'] = 'Port UDP';
-$LNG['ts_serverip'] = 'Server IP';
-$LNG['ts_timeout'] = 'Timeout';
-$LNG['ts_server_query'] = 'Querys server port';
-$LNG['ts_login'] = 'ServerQuery User';
-$LNG['ts_pass'] = 'ServerQuery Password';
-$LNG['ts_cron'] = 'Update rate';
 
 //----------------------------------------------------------------------------//
 // Facebook App
@@ -1335,7 +1321,6 @@ $LNG['log_ssettings'] = 'Configuration of the game';
 $LNG['log_usettings'] = 'Configuration of the universe';
 $LNG['log_statsettings'] = 'Options of Statistics';
 $LNG['log_chatsettings'] = 'Options Chat';
-$LNG['log_tssettings'] = 'Options of Teamspeak';
 $LNG['log_uni_short'] = 'Uni';
 $LNG['log_universe'] = 'Universe';
 $LNG['log_present'] = 'Distributed';
@@ -1347,7 +1332,6 @@ $LNG['cronName_statistic'] = 'Statistics';
 $LNG['cronName_daily'] = 'Daily tasks';
 $LNG['cronName_cleaner'] = 'Delete old data';
 $LNG['cronName_inactive'] = 'Delete inactive';
-$LNG['cronName_teamspeak'] = 'Teamspeak data update';
 $LNG['cronName_tracking'] = 'Send global server statistics';
 $LNG['cronName_databasedump'] = 'Database backup';
 

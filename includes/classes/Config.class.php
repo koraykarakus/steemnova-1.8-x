@@ -23,9 +23,8 @@ class Config
     // Global configkeys
     protected static $globalConfigKeys = ['version', 'game_name', 'stat', 'stat_level', 'stat_last_update',
         'stat_settings', 'stat_update_time', 'stat_last_db_update', 'stats_fly_lock',
-        'cron_lock', 'ts_modon', 'ts_server', 'ts_tcpport', 'ts_udpport', 'ts_timeout',
-        'ts_version', 'ts_cron_last', 'ts_cron_interval', 'ts_login', 'ts_password',
-        'google_recaptcha_active', 'google_recaptcha_public_key', 'google_recaptcha_private_key', 'mail_active', 'mail_use', 'smtp_host',
+        'cron_lock', 'google_recaptcha_active', 'google_recaptcha_public_key',
+        'google_recaptcha_private_key', 'mail_active', 'mail_use', 'smtp_host',
         'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_ssl', 'smtp_sendmail',
         'smail_path', 'ga_active', 'ga_key',
         'chat_closed', 'chat_allowchan', 'chat_allowmes', 'chat_allowdelmes',
