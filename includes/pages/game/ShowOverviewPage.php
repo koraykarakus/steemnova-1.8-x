@@ -24,47 +24,6 @@ class ShowOverviewPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function GetTeamspeakData(): array
-    {
-        global $USER, $LNG;
-
-        $config = Config::get();
-
-        if ($config->ts_modon == 0)
-        {
-            return [];
-        }
-
-        Cache::get()->add('teamspeak', 'TeamspeakBuildCache');
-        $ts_info = Cache::get()->getData('teamspeak', false);
-
-        if (empty($ts_info))
-        {
-            return [
-                'error' => $LNG['ov_teamspeak_not_online'],
-            ];
-        }
-
-        $url = '';
-
-        switch ($config->ts_version)
-        {
-            case 2:
-                $url = 'teamspeak://%s:%s?nickname=%s';
-                break;
-            case 3:
-                $url = 'ts3server://%s?port=%d&amp;nickname=%s&amp;password=%s';
-                break;
-        }
-
-        return [
-            'url'     => sprintf($url, $config->ts_server, $config->ts_tcpport, $USER['username'], $ts_info['password']),
-            'current' => $ts_info['current'],
-            'max'     => $ts_info['maxuser'],
-            'error'   => false,
-        ];
-    }
-
     public function changeNewsVisibility(): void
     {
         global $USER;
@@ -276,7 +235,6 @@ class ShowOverviewPage extends AbstractGamePage
             'build_info'           => $build_info,
             'moon'                 => $moon,
             'admins_online'        => $admins_online,
-            'teamspeak_data'       => $this->GetTeamspeakData(),
             'planet_diameter'      => pretty_number($PLANET['diameter']),
             'planet_field_current' => $PLANET['field_current'],
             'planet_field_max'     => CalculateMaxPlanetFields($PLANET),
