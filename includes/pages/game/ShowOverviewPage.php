@@ -73,10 +73,10 @@ class ShowOverviewPage extends AbstractGamePage
 
         ($USER['show_news_active']) ? $result = 0 : $result = 1;
 
-        $sql = "UPDATE %%USERS%% SET `show_news_active` = " . $result . " WHERE id = :userId;";
+        $sql = "UPDATE %%USERS%% SET `show_news_active` = " . $result . " WHERE id = :user_id;";
 
         Database::get()->update($sql, [
-            ':userId' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
         $this->sendJSON($result);
@@ -90,10 +90,10 @@ class ShowOverviewPage extends AbstractGamePage
         $moon = [];
         if ($PLANET['id_moon'] != 0)
         {
-            $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id = :moonID;";
+            $sql = "SELECT id, name, planet_type, image FROM %%PLANETS%% WHERE id = :id_moon;";
 
             $moon = $db->selectSingle($sql, [
-                ':moonID' => $PLANET['id_moon'],
+                ':id_moon' => $PLANET['id_moon'],
             ]);
         }
         elseif ($PLANET['planet_type'] == 3)
@@ -193,10 +193,10 @@ class ShowOverviewPage extends AbstractGamePage
         {
             // Fehler: Wenn Spieler gelöscht werden, werden sie nicht mehr in der Tabelle angezeigt.
             $sql = "SELECT u.id, u.username, s.total_points FROM %%USERS%% as u
-            LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :userID;";
+            LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id WHERE ref_id = :user_id;";
 
             $ref_links_db = $db->select($sql, [
-                ':userID' => $USER['id'],
+                ':user_id' => $USER['id'],
             ]);
 
             foreach ($ref_links_db as $c_ref)
@@ -210,10 +210,10 @@ class ShowOverviewPage extends AbstractGamePage
 
         $sql = 'SELECT total_points, total_rank
 		FROM %%USER_POINTS%%
-		WHERE id_owner = :userId;';
+		WHERE id_owner = :user_id;';
 
         $stat_data = $db->selectSingle($sql, [
-            ':userId' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
         if (!$stat_data)
