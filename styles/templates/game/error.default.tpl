@@ -9,18 +9,18 @@
 				{$message}
 			</td>
 		</tr>
+		{if !empty($redirectButtons)}
 		<tr>
 			<td class="text_center">
-				{if !empty($redirectButtons)}
-					{foreach $redirectButtons as $button}
-						{if isset($button.url) && $button.label}
-							<a href="{$button.url}">
-								<button class="text-yellow">{$button.label}</button>
-							</a>
-						{/if}
-					{/foreach}
-				{/if}
+				{foreach $redirectButtons as $button}
+					{if isset($button.url) && $button.label}
+						<a href="{$button.url}">
+							<button class="text-yellow">{$button.label}</button>
+						</a>
+					{/if}
+				{/foreach}	
 			</td>
 		</tr>
+		{/if}
 	</table>
 {/block}
