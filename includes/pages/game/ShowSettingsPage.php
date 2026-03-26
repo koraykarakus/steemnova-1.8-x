@@ -29,13 +29,13 @@ class ShowSettingsPage extends AbstractGamePage
         global $LNG, $USER;
 
         $this->assign([
-            'vacationUntil' => _date(
+            'vacation_until' => _date(
                 $LNG['php_tdformat'],
                 $USER['vacation_until'],
                 $USER['timezone']
             ),
-            'delete'              => $USER['delete_mode'],
-            'canVacationDisbaled' => $USER['vacation_until'] < TIMESTAMP,
+            'delete'           => $USER['delete_mode'],
+            'can_end_vacation' => ($USER['authlevel'] > AUTH_USR) || ($USER['vacation_until'] < TIMESTAMP),
         ]);
 
         $this->display('page.settings.vacation.tpl');
@@ -160,7 +160,8 @@ class ShowSettingsPage extends AbstractGamePage
 
         $db = Database::get();
 
-        if ($vacation == 1 && $USER['vacation_until'] <= TIMESTAMP)
+        if ($vacation == 1 
+            && ($USER['vacation_until'] <= TIMESTAMP || $USER['authlevel'] > AUTH_USR))
         {
             $sql = "UPDATE %%USERS%% SET
 						vacation_mode = '0',

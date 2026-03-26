@@ -3,11 +3,11 @@
 	<form action="game.php?page=settings&amp;mode=send" method="post">
 		<table class="table-gow table_full">
 			<tr>
-				<th colspan="2">{$LNG.op_vacation_mode_active_message} {$vacationUntil}</th>
+				<th colspan="2">{$LNG.op_vacation_mode_active_message} {$vacation_until}</th>
 			</tr>
 			<tr>
 				<td>{$LNG.op_end_vacation_mode}</td>
-				<td><input name="vacation" type="checkbox" value="1" {if !$canVacationDisbaled}disabled{/if}></td>
+				<td><input name="vacation" type="checkbox" value="1" {if !$can_end_vacation}disabled{/if}></td>
 			</tr>
 			<tr>
 				<td><a title="{$LNG.op_dlte_account_descrip}">{$LNG.op_dlte_account}</a></td>
