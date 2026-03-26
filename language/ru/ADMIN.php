@@ -600,7 +600,6 @@ $LNG['mu_chat'] = 'Настройки чата';
 $LNG['mu_module'] = 'Модули';
 $LNG['mu_mod_update'] = 'Мод управления версиями';
 $LNG['mu_fb_options'] = 'Facebook';
-$LNG['mu_ts_options'] = 'Teamspeak';
 $LNG['mu_game_info'] = 'Информация';
 $LNG['mu_vaild_users'] = 'Активация игроков';
 $LNG['mu_news'] = 'Новости';
@@ -973,18 +972,6 @@ $LNG['qe_resetr'] = 'Обнулить';
 $LNG['qe_allowmulti'] = 'Разрешить совпадение IP';
 $LNG['qe_name'] = 'Название';
 
-// TeamSpeakSettingPage.php
-$LNG['ts_settings'] = 'Настройки Teamspeak';
-$LNG['ts_active'] = 'Включить Teamspeak';
-$LNG['ts_version'] = 'Версия Teamspeak';
-$LNG['ts_udpport'] = 'TCP порт';
-$LNG['ts_tcpport'] = 'UDP порт';
-$LNG['ts_serverip'] = 'IP сервера';
-$LNG['ts_timeout'] = 'Задержка';
-$LNG['ts_server_query'] = 'Серверный запрос порта';
-$LNG['ts_login'] = 'Логин сервера';
-$LNG['ts_pass'] = 'Пароль сервера';
-$LNG['ts_cron'] = 'Частота обновления';
 
 // FacebookSettingPage.php
 $LNG['fb_settings'] = 'Настройки Facebook';
@@ -1181,7 +1168,6 @@ $LNG['log_ssettings'] = 'Параметры сервера';
 $LNG['log_usettings'] = 'Параметры вселенной';
 $LNG['log_statsettings'] = 'Настройки статистики';
 $LNG['log_chatsettings'] = 'Настройки чата';
-$LNG['log_tssettings'] = 'Настройки Teamspeak';
 $LNG['log_disclamersettings'] = 'Контакты';
 $LNG['log_uni_short'] = 'Вселенная';
 $LNG['log_universe'] = 'Вселенная';
@@ -1192,7 +1178,6 @@ $LNG['cronName_statistic'] = 'Статистика';
 $LNG['cronName_daily'] = 'Ежедневные задачи';
 $LNG['cronName_cleaner'] = 'Удаление старых файлов';
 $LNG['cronName_inactive'] = 'Удаление неактивных игроков';
-$LNG['cronName_teamspeak'] = 'Обновление данных Teamspeak';
 $LNG['cronName_tracking'] = 'Отправление статистики Глобальному серверу';
 $LNG['cronName_databasedump'] = 'Резервное копирование БД';
 

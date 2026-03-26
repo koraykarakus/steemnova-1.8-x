@@ -145,8 +145,7 @@ class ShowLogPage extends AbstractAdminPage
             1 => $LNG['log_usettings'],
             2 => $LNG['log_statsettings'],
             3 => $LNG['log_chatsettings'],
-            4 => $LNG['log_tssettings'],
-            5 => $LNG['log_disclamersettings'],
+            4 => $LNG['log_disclamersettings'],
         ];
 
         foreach ($result as $LogRow)
@@ -268,11 +267,6 @@ class ShowLogPage extends AbstractAdminPage
             'chat_nickchange'         => $LNG['ch_nickchange'],
             'chat_botname'            => $LNG['ch_botname'],
             'chat_channelname'        => $LNG['ch_channelname'],
-
-            'ts_modon'         => $LNG['ts_active'],
-            'ts_server'        => $LNG['ts_serverip'],
-            'ts_password'      => $LNG['ts_pass'],
-            'ts_cron_interval' => $LNG['ts_cron'],
 
             'stat_settings'    => $LNG['cs_point_per_resources_used'],
             'stat'             => $LNG['cs_points_to_zero'],

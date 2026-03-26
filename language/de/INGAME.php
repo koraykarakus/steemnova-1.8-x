@@ -220,10 +220,7 @@ $LNG['ov_admins_online'] = 'Admins(Online):';
 $LNG['ov_no_admins_online'] = 'Zurzeit kein Admin online!';
 $LNG['ov_userbanner'] = 'Statistiken-Banner';
 $LNG['ov_userrank_info'] = '%s (%s <a href="game.php?page=statistics&amp;range=%d">%d</a> %s %s)';
-$LNG['ov_teamspeak_not_online'] = 'TeamspeakServer zurzeit nicht erreichbar. Wir bitten um Verständnis.';
-$LNG['ov_teamspeak'] = 'Teamspeak';
-$LNG['ov_teamspeak_connect'] = 'Connect';
-$LNG['ov_teamspeak_online'] = 'Online';
+
 $LNG['ov_closed'] = 'Spiel ist zurzeit deaktiviert!';
 $LNG['ov_reflink'] = 'Reflink';
 $LNG['ov_noreflink'] = 'Du hast keine User angeworben.';

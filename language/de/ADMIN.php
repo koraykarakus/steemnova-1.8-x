@@ -636,7 +636,6 @@ $LNG['mu_support'] = 'Support-Tickets';
 $LNG['mu_module'] = 'Module';
 $LNG['mu_mod_update'] = 'Mod Versions Control';
 $LNG['mu_fb_options'] = 'Facebook Connect';
-$LNG['mu_ts_options'] = 'Teamspeak Optionen';
 $LNG['mu_game_info'] = 'Informationen';
 $LNG['mu_vaild_users'] = 'Aktive User';
 $LNG['mu_news'] = 'News';
@@ -1016,19 +1015,6 @@ $LNG['qe_resetr'] = 'Zurücksetzten';
 $LNG['qe_allowmulti'] = 'Erlaube Multi';
 $LNG['qe_name'] = 'Name';
 
-//----------------------------------------------------------------------------//
-//TeamSpeakSettingPage.php
-$LNG['ts_settings'] = 'Teamspeak Einstellungen';
-$LNG['ts_active'] = 'Teamspeak-Mod aktivieren?';
-$LNG['ts_version'] = 'Server-Version:';
-$LNG['ts_udpport'] = 'TCP Port';
-$LNG['ts_tcpport'] = 'UDP Port';
-$LNG['ts_serverip'] = 'Server-IP';
-$LNG['ts_timeout'] = 'Timeout';
-$LNG['ts_server_query'] = 'ServerQuery Port';
-$LNG['ts_login'] = 'ServerQuery Login';
-$LNG['ts_pass'] = 'ServerQuery Password';
-$LNG['ts_cron'] = 'Update Rate';
 
 //----------------------------------------------------------------------------//
 //FacebookSettingPage.php
@@ -1230,7 +1216,6 @@ $LNG['log_ssettings'] = 'Server Konfiguration';
 $LNG['log_usettings'] = 'Uni Konfiguration';
 $LNG['log_statsettings'] = 'Statistik-Optionen';
 $LNG['log_chatsettings'] = 'Chat-Optionen';
-$LNG['log_tssettings'] = 'Teamspeak-Konfiguration';
 $LNG['log_disclamersettings'] = 'Impressum';
 $LNG['log_uni_short'] = 'Uni';
 $LNG['log_universe'] = 'Universum';
@@ -1241,7 +1226,6 @@ $LNG['cronName_statistic'] = 'Statistiken';
 $LNG['cronName_daily'] = 'Tägliche Aufgaben';
 $LNG['cronName_cleaner'] = 'Alte Daten löschen';
 $LNG['cronName_inactive'] = 'Inaktive löschen';
-$LNG['cronName_teamspeak'] = 'Teamspeakdaten aktualisieren';
 $LNG['cronName_tracking'] = 'Statistik an globalen Server senden.';
 $LNG['cronName_databasedump'] = 'Datenbank-Backup';
 
