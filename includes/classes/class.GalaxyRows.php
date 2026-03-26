@@ -55,7 +55,8 @@ class GalaxyRows
 		a.id as allyid, a.ally_tag, a.ally_web, a.ally_members, a.ally_name,
 		allys.total_rank as ally_rank,
 		COUNT(buddy.id) as buddy,
-		d.level as diploLevel
+		d.level as diploLevel, fp.fleet_mission as mission_planet, 
+        fm.fleet_mission as mission_moon, fd.fleet_mission as mission_debris
 		FROM %%PLANETS%% p
 		LEFT JOIN %%USERS%% u ON p.id_owner = u.id
 		LEFT JOIN %%PLANETS%% m ON m.id = p.id_moon
@@ -64,6 +65,50 @@ class GalaxyRows
 		LEFT JOIN %%DIPLO%% as d ON (d.owner_1 = :allianceId AND d.owner_2 = a.id) OR (d.owner_1 = a.id AND d.owner_2 = :allianceId) AND d.accept = :accept
 		LEFT JOIN %%ALLIANCE_POINTS%% allys ON allys.id_owner = a.id
 		LEFT JOIN %%BUDDY%% buddy ON (buddy.sender = :userId AND buddy.owner = u.id) OR (buddy.sender = u.id AND buddy.owner = :userId)
+        LEFT JOIN %%FLEETS%% fp ON fp.fleet_id = (
+        SELECT f1.fleet_id
+        FROM %%FLEETS%% f1
+        WHERE
+        f1.fleet_owner = :userId
+            AND f1.fleet_mess = 0
+            AND f1.hasCanceled = 0
+            AND f1.fleet_mission != 8
+            AND f1.fleet_end_galaxy = p.galaxy
+            AND f1.fleet_end_system = p.system
+            AND f1.fleet_end_planet = p.planet
+            AND f1.fleet_end_type = 1
+        ORDER BY f1.start_time ASC
+        LIMIT 1
+        )
+        LEFT JOIN %%FLEETS%% fm ON fm.fleet_id = (
+        SELECT f2.fleet_id
+        FROM %%FLEETS%% f2
+        WHERE
+            f2.fleet_owner = :userId
+            AND f2.fleet_mess = 0
+            AND f2.hasCanceled = 0
+            AND f2.fleet_end_galaxy = p.galaxy
+            AND f2.fleet_end_system = p.system
+            AND f2.fleet_end_planet = p.planet
+            AND f2.fleet_end_type = 3
+        ORDER BY f2.start_time ASC
+        LIMIT 1
+        )
+        LEFT JOIN %%FLEETS%% fd ON fd.fleet_id = (
+        SELECT f3.fleet_id
+        FROM %%FLEETS%% f3
+        WHERE
+            f3.fleet_owner = :userId
+            AND f3.fleet_mess = 0
+            AND f3.hasCanceled = 0
+            AND f3.fleet_mission = 8
+            AND f3.fleet_end_galaxy = p.galaxy
+            AND f3.fleet_end_system = p.system
+            AND f3.fleet_end_planet = p.planet
+            AND f3.fleet_end_type = 1
+        ORDER BY f3.start_time ASC
+        LIMIT 1
+        )
 		WHERE p.universe = :universe AND p.galaxy = :galaxy AND p.system = :system AND p.planet_type = :planetTypePlanet
 		GROUP BY p.id;';
 
@@ -149,6 +194,42 @@ class GalaxyRows
         global $USER;
 
         $this->galaxy_data[$this->galaxy_row['planet']]['ownPlanet'] = $this->galaxy_row['id_owner'] == $USER['id'];
+    }
+
+    protected function getIncomingFleets($planet_type = 1): int
+    {
+        $index_mission = 'mission_planet';
+        if ($planet_type == 2) 
+        {
+            $index_mission = 'mission_debris';
+        }
+        else if ($planet_type == 3) 
+        {
+            $index_mission = 'mission_moon';
+        }
+
+        $fleet_type = 0;
+        if (!isset($this->galaxy_row[$index_mission])) 
+        {
+           return $fleet_type;
+        }
+
+        // offensive missions
+        if ($this->galaxy_row[$index_mission] == 1 
+            || $this->galaxy_row[$index_mission] == 2
+            || $this->galaxy_row[$index_mission] == 9
+            || $this->galaxy_row[$index_mission] == 10) 
+        {
+            $fleet_type = 1;
+        }
+        // neutral missions
+        else 
+        {
+            $fleet_type = 2;
+        }
+
+
+        return $fleet_type;
     }
 
     protected function getAllowedMissions()
@@ -279,6 +360,7 @@ class GalaxyRows
             $this->galaxy_data[$this->galaxy_row['planet']]['debris'] = [
                 'metal'   => $this->galaxy_row['debris_metal'],
                 'crystal' => $this->galaxy_row['debris_crystal'],
+                'incoming_fleets' => $this->getIncomingFleets(2),
             ];
         }
     }
@@ -296,6 +378,7 @@ class GalaxyRows
                 'name'          => htmlspecialchars($this->galaxy_row['m_name'], ENT_QUOTES, "UTF-8"),
                 'temp_min'      => $this->galaxy_row['m_temp_min'],
                 'diameter'      => $this->galaxy_row['m_diameter'],
+                'incoming_fleets' => $this->getIncomingFleets(3),
             ];
         }
     }
@@ -307,6 +390,7 @@ class GalaxyRows
             'name'    => htmlspecialchars($this->galaxy_row['name'], ENT_QUOTES, "UTF-8"),
             'image'   => $this->galaxy_row['image'],
             'phalanx' => isModuleAvailable(MODULE_PHALANX) && ShowPhalanxPage::allowPhalanx($this->galaxy_row['galaxy'], $this->galaxy_row['system']),
+            'incoming_fleets' => $this->getIncomingFleets(1),
         ];
     }
 }

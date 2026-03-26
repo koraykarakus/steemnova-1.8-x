@@ -1533,6 +1533,7 @@ input[type="radio"] {
 }
 .galaxy_wrapper>.galaxy_row>.planet_picture{
 	width: 36px;
+	height: 30px;;
 	position: relative;
 }
 .galaxy_wrapper>.galaxy_row .last_activity{
@@ -1552,6 +1553,27 @@ input[type="radio"] {
 	font-weight: bold;
 	padding: 1px;
 }
+.galaxy_wrapper>.galaxy_row .incoming_attack,
+.galaxy_wrapper>.galaxy_row .incoming_neutral{
+	position: absolute;
+	left: calc(100% - 12px);
+	bottom: 0;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	width: 12px;
+	height: 12px;
+	display: none;
+}
+.galaxy_wrapper>.galaxy_row .incoming_attack{
+	background: url('images/mission_attack.png');
+}
+.galaxy_wrapper>.galaxy_row .incoming_neutral{
+	background: url('images/mission_transport.png');
+}
+.galaxy_wrapper>.galaxy_row .incoming_neutral.show,
+.galaxy_wrapper>.galaxy_row .incoming_attack.show{
+	display: flex;
+}
 .galaxy_wrapper>.galaxy_row>.planet_picture:hover>.tooltip{
 	display: flex;
 }
@@ -1560,7 +1582,7 @@ input[type="radio"] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 29px;
+	height: 30px;
 	position: relative;
 }
 .galaxy_wrapper>.galaxy_row>.moon_picture:hover>.tooltip{
@@ -1572,7 +1594,7 @@ input[type="radio"] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 29px;
+	height: 30px;
 }
 .galaxy_wrapper>.galaxy_row>.debris_picture:hover>.tooltip{
 	display: flex;
