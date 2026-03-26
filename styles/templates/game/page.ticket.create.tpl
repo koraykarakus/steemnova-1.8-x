@@ -11,7 +11,7 @@
 	</tr>
 	<tr>
 		<td style="width:30%"><label for="category">{$LNG.ti_category}</label></td>
-		<td style="width:70%"><select id="category" name="category">{html_options options=$categoryList}</select></td>
+		<td style="width:70%"><select id="category" name="category">{html_options options=$category_list}</select></td>
 	</tr>
 	<tr>
 		<td><label for="subject">{$LNG.ti_subject}</label></td>

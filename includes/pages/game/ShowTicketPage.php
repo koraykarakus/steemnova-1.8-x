@@ -47,13 +47,17 @@ class ShowTicketPage extends AbstractGamePage
 
         foreach ($ticket_result as $c_ticket)
         {
-            $c_ticket['time'] = _date($LNG['php_tdformat'], $c_ticket['time'], $USER['timezone']);
+            $c_ticket['time'] = _date(
+                $LNG['php_tdformat'],
+                $c_ticket['time'],
+                $USER['timezone']
+            );
 
             $ticket_list[$c_ticket['ticket_id']] = $c_ticket;
         }
 
         $this->assign([
-            'ticketList' => $ticket_list,
+            'ticket_list' => $ticket_list,
         ]);
 
         $this->display('page.ticket.default.tpl');
@@ -64,7 +68,7 @@ class ShowTicketPage extends AbstractGamePage
         $category_list = $this->ticket_obj->getCategoryList();
 
         $this->assign([
-            'categoryList' => $category_list,
+            'category_list' => $category_list,
         ]);
 
         $this->display('page.ticket.create.tpl');
@@ -175,9 +179,9 @@ class ShowTicketPage extends AbstractGamePage
         $category_list = $this->ticket_obj->getCategoryList();
 
         $this->assign([
-            'ticketID'     => $ticket_id,
-            'categoryList' => $category_list,
-            'answerList'   => $answer_list,
+            'ticket_id'     => $ticket_id,
+            'category_list' => $category_list,
+            'answer_list'   => $answer_list,
             'status'       => $ticket_status,
         ]);
 

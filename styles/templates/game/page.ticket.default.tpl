@@ -14,13 +14,13 @@
 		<th style="width:15%">{$LNG.ti_date}</td>
 		<th style="width:15%">{$LNG.ti_status}</td>
 	</tr>
-	{foreach $ticketList as $TicketID => $TicketInfo}
+	{foreach $ticket_list as $ticket_id => $ticket_info}
 	<tr>
-		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$TicketID}">#{$TicketID}</a></td>
-		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$TicketID}">{$TicketInfo.subject}</a></td>
-		<td>{$TicketInfo.answer - 1}</td>
-		<td>{$TicketInfo.time}</td>
-		<td>{if $TicketInfo.status == 0}<span style="color:green">{$LNG.ti_status_open}</span>{elseif $TicketInfo.status == 1}<span style="color:orange">{$LNG.ti_status_answer}</span>{else}<span style="color:red">{$LNG.ti_status_closed}</span>{/if}</td>
+		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$ticket_id}">#{$ticket_id}</a></td>
+		<td><a href="game.php?page=ticket&amp;mode=view&amp;id={$ticket_id}">{$ticket_info.subject}</a></td>
+		<td>{$ticket_info.answer - 1}</td>
+		<td>{$ticket_info.time}</td>
+		<td>{if $ticket_info.status == 0}<span style="color:green">{$LNG.ti_status_open}</span>{elseif $ticket_info.status == 1}<span style="color:orange">{$LNG.ti_status_answer}</span>{else}<span style="color:red">{$LNG.ti_status_closed}</span>{/if}</td>
 	</tr>
 	{/foreach}
 </table>

@@ -3,13 +3,13 @@
 
 <table class="table-gow table_full">
 <form action="game.php?page=ticket&mode=send" method="post" id="form">
-<input type="hidden" name="id" value="{$ticketID}">
-	{foreach $answerList as $answerID => $answerRow}
-	{if $answerRow@first}
+<input type="hidden" name="id" value="{$ticket_id}">
+	{foreach $answer_list as $answer_id => $answer_row}
+	{if $answer_row@first}
 	<thead>
 		<tr>
 			<th colspan="2">
-				<span class="color-blue">{$LNG.ti_read}:{$answerRow.subject}</span>
+				<span class="color-blue">{$LNG.ti_read}:{$answer_row.subject}</span>
 			</th>
 		</tr>
 	</thead>
@@ -18,15 +18,15 @@
 	<tr>
 		<td colspan="2">
 			<span class="color-blue">
-				{$LNG.ti_msgtime} {$answerRow.time} {$LNG.ti_from} {$answerRow.owner_name}
+				{$LNG.ti_msgtime} {$answer_row.time} {$LNG.ti_from} {$answer_row.owner_name}
 			</span>
-			{if $answerRow@first}
+			{if $answer_row@first}
 			<span class="color-blue">
-				{$LNG.ti_category}: {$categoryList[$answerRow.category_id]}
+				{$LNG.ti_category}: {$category_list[$answer_row.category_id]}
 			</span>
 			{/if}
 			<p style="word-break: break-word;overflow-wrap: break-word;white-space: normal;" class="">
-				{$answerRow.message}
+				{$answer_row.message}
 			</p>
 		</td>
 	</tr>
