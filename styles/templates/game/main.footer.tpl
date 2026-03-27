@@ -57,7 +57,7 @@
 		{/if}
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_DISCORD)}
-		<a href="{$discordUrl}" target="copy">Discord</a>
+		<a href="{$discord_url}" target="copy">Discord</a>
 	{/if}
 	{if isModuleAvailable($smarty.const.MODULE_CHAT)}
 		<a href="game.php?page=chat" class="{if $page ==="chat"}active{/if}">{$LNG.lm_chat}</a>

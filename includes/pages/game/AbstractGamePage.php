@@ -219,7 +219,7 @@ abstract class AbstractGamePage
             'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'has_admin_access' => !empty(Session::load()->adminAccess),
             'has_gate'        => $PLANET[$RESOURCE[43]] > 0,
-            'discordUrl'     => DISCORD_URL,
+            'discord_url'     => DISCORD_URL,
             //overwrite messages, to do : delete from other pages
             'messages' => ($USER['messages'] > 0) ? (($USER['messages'] == 1) ? $LNG['ov_have_new_message'] : "(" . $USER['messages'] . ")") : false,
         ]);
