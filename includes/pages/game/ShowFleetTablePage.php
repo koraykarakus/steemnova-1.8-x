@@ -42,7 +42,11 @@ class ShowFleetTablePage extends AbstractGamePage
         $target_type = HTTP::_GP('planettype', (int) $PLANET['planet_type']);
         $target_mission = HTTP::_GP('target_mission', 0);
 
-        $active_fleet_slots = $db->rowCount();
+        $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% 
+        WHERE fleet_owner = :user_id AND fleet_mission <> 10;";
+        $active_fleet_slots = $db->selectSingle($sql, [
+            ':user_id' => $USER['id'],
+        ], 'count');
 
         $fleets_on_planet = [];
 
