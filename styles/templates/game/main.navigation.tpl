@@ -146,7 +146,7 @@
   {if !empty($commit)}
     <li class="menu-button">
       <a href="https://github.com/koraykarakus/steemnova-1.8-x/tree/{$commit}" class="long" target="copy">
-        {$commitShort}
+        {$commit_short}
       </a>
     </li>
   {/if}

@@ -204,7 +204,7 @@ abstract class AbstractGamePage
             'planet_select'  => $planet_select,
             'new_message'    => $USER['messages'],
             'commit'         => $commit,
-            'commitShort'    => $commit_short,
+            'commit_short'   => $commit_short,
             'vacation'       => $USER['vacation_mode'] ? _date($LNG['php_tdformat'], $USER['vacation_until'], $USER['timezone']) : false,
             'delete'         => $USER['delete_mode'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['delete_mode'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
             'darkmatter'     => $USER['darkmatter'],
