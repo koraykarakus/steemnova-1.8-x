@@ -30,7 +30,7 @@
 			var months 		= {$LNG.months|json|default:'[]'} ;
 			var tdformat	= "{$LNG.js_tdformat}";
 			var queryString	= "{$queryString|escape:'javascript'}";
-			var isPlayerCardActive	= "{$isPlayerCardActive|json}";
+			var isPlayerCardActive	= "{$is_player_card_active|json}";
 			var relativeTime = Math.floor(Date.now() / 1000);
 			var attackListenTime = {$attack_listen_time};
 			var currentPage = "{$page}";
