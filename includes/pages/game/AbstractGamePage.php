@@ -366,14 +366,14 @@ abstract class AbstractGamePage
             'AllPlanets'         => $all_planets,
             'fleets'             => $this->GetFleets(),
             'show_fleets_active' => $USER['show_fleets_active'],
-            'attackListenTime'   => ATTACK_LISTEN_TIME,
+            'attack_listen_time' => ATTACK_LISTEN_TIME,
         ]);
     }
 
     protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
     {
         $this->assign([
-            'message'         => $msg,
+            'message'          => $msg,
             'redirect_buttons' => $redirect_buttons,
         ]);
 

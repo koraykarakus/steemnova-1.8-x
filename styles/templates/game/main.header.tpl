@@ -32,7 +32,7 @@
 			var queryString	= "{$queryString|escape:'javascript'}";
 			var isPlayerCardActive	= "{$isPlayerCardActive|json}";
 			var relativeTime = Math.floor(Date.now() / 1000);
-			var attackListenTime = {$attackListenTime};
+			var attackListenTime = {$attack_listen_time};
 			var currentPage = "{$page}";
 
 			setInterval(function() {
@@ -56,7 +56,7 @@
 		{/foreach}
 		{if isModuleAvailable($smarty.const.MODULE_ATTACK_ALERT)}
 			<script type="text/javascript">
-				var attackListenTime = {$attackListenTime};
+				var attackListenTime = {$attack_listen_time};
 			</script>
 			<script type="text/javascript" src="./scripts/game/attackAlert.js?v={$REV}"></script>
 		{/if}
