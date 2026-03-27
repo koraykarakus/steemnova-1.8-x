@@ -153,7 +153,7 @@
 
   {if !$vmode}
     <script type="text/javascript">
-      var viewShortlyNumber	= {$shortlyNumber|json};
+      var viewShortlyNumber	= {$shortly_number|json};
       var vacation			= {$vmode};
       $(function() {
         {foreach $resource_table as $resourceID => $resourceData}
