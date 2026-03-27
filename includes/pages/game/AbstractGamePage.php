@@ -213,7 +213,7 @@ abstract class AbstractGamePage
             'image'          => $PLANET['image'],
             'username'       => $USER['username'],
             'avatar'         => $avatar,
-            'resourceTable'  => $resource_table,
+            'resource_table'  => $resource_table,
             'shortlyNumber'  => 1,
             'closed'         => $config->game_disable,
             'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),

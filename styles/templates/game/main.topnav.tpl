@@ -71,7 +71,7 @@
     </a>
   </div>
   <div class="resources">
-    {foreach $resourceTable as $resourceID => $resourceData}
+    {foreach $resource_table as $resourceID => $resourceData}
       <div class="resource">
         <div class="tooltip tooltip_bottom">
           <table class='table-gow'>
@@ -156,7 +156,7 @@
       var viewShortlyNumber	= {$shortlyNumber|json};
       var vacation			= {$vmode};
       $(function() {
-        {foreach $resourceTable as $resourceID => $resourceData}
+        {foreach $resource_table as $resourceID => $resourceData}
           {if isset($resourceData.production)}
             resourceTicker({
               available: {$resourceData.current|json},
