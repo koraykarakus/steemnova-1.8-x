@@ -217,7 +217,7 @@ abstract class AbstractGamePage
             'shortlyNumber'  => 1,
             'closed'         => $config->game_disable,
             'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),
-            'hasAdminAccess' => !empty(Session::load()->adminAccess),
+            'has_admin_access' => !empty(Session::load()->adminAccess),
             'hasGate'        => $PLANET[$RESOURCE[43]] > 0,
             'discordUrl'     => DISCORD_URL,
             //overwrite messages, to do : delete from other pages

@@ -15,7 +15,7 @@
 	{/if}
 	<div id="content_mid" class="{if $page!='imperium'}{else}{/if}">
 		<content class="content-wrapper">
-			{if $hasAdminAccess}
+			{if $has_admin_access}
 				<div class="globalWarning">
 					{$LNG.admin_access_1} 
 					<a id="drop-admin">{$LNG.admin_access_link}</a>
