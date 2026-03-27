@@ -153,7 +153,7 @@
 
   {if !$vmode}
     <script type="text/javascript">
-      var viewShortlyNumber	= {$shortlyNumber|json};
+      var viewShortlyNumber	= {$shortly_number|json};
       var vacation			= {$vmode};
       $(function() {
         {foreach $resource_table as $resourceID => $resourceData}
@@ -169,5 +169,5 @@
       });
     </script>
     <script src="scripts/game/topnav.js"></script>
-    {if $hasGate}<script src="scripts/game/gate.js"></script>{/if}
+    {if $has_gate}<script src="scripts/game/gate.js"></script>{/if}
 {/if}

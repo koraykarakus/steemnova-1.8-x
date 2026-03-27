@@ -214,12 +214,12 @@ abstract class AbstractGamePage
             'username'       => $USER['username'],
             'avatar'         => $avatar,
             'resource_table'  => $resource_table,
-            'shortlyNumber'  => 1,
+            'shortly_number'  => 1,
             'closed'         => $config->game_disable,
             'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'has_admin_access' => !empty(Session::load()->adminAccess),
-            'hasGate'        => $PLANET[$RESOURCE[43]] > 0,
-            'discordUrl'     => DISCORD_URL,
+            'has_gate'        => $PLANET[$RESOURCE[43]] > 0,
+            'discord_url'     => DISCORD_URL,
             //overwrite messages, to do : delete from other pages
             'messages' => ($USER['messages'] > 0) ? (($USER['messages'] == 1) ? $LNG['ov_have_new_message'] : "(" . $USER['messages'] . ")") : false,
         ]);

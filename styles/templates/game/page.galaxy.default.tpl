@@ -28,12 +28,18 @@
 		<div class="galaxy_header">
 			<form action="?page=galaxy" method="post" id="galaxy_form">
 				<input type="hidden" id="auto" value="dr">
+					<i class="galaxy_icon">
+						<div class="tooltip tooltip_top">{$LNG.gl_galaxy}</div>
+					</i>
 					<input class="galaxy_button" type="button" name="galaxyLeft"
 									value="&lt;" onclick="galaxy_submit('galaxyLeft')">
 					<input class="galaxy_input" type="text" name="galaxy"
 									value="{$galaxy}" size="5" maxlength="3" tabindex="1">
 					<input class="galaxy_button" type="button" name="galaxyRight"
 									value="&gt;" onclick="galaxy_submit('galaxyRight')">
+					<i class="system_icon">
+						<div class="tooltip tooltip_top">{$LNG.gl_solar_system}</div>
+					</i>
 					<input class="galaxy_button" type="button" name="systemLeft"
 									value="&lt;" onclick="galaxy_submit('systemLeft')">
 					<input class="galaxy_input" type="text" name="system"
