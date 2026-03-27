@@ -169,5 +169,5 @@
       });
     </script>
     <script src="scripts/game/topnav.js"></script>
-    {if $hasGate}<script src="scripts/game/gate.js"></script>{/if}
+    {if $has_gate}<script src="scripts/game/gate.js"></script>{/if}
 {/if}
