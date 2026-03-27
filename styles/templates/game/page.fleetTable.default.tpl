@@ -5,15 +5,15 @@
 		<thead>
 			<tr>
 				<th colspan="9">
-					<div style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$activeFleetSlots} /
-						{$maxFleetSlots})</div>
+					<div style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$active_fleet_slots} /
+						{$max_fleet_slots})</div>
 					<div style="text-align:right;float:right;">{$LNG.fl_expeditions}:
-						({$activeExpedition} / {$maxExpedition}) </div>
+						({$active_expedition} / {$max_expedition}) </div>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-			{if $maxFleetSlots == $activeFleetSlots}
+			{if $max_fleet_slots == $active_fleet_slots}
 				<tr>
 					<td colspan="9">{$LNG.fl_no_more_slots}</td>
 				</tr>
@@ -21,7 +21,7 @@
 		</tbody>
 	</table>
 
-	{if  isModuleAvailable($smarty.const.MODULE_AUTOEXPEDITION) && empty($targetMission)}
+	{if  isModuleAvailable($smarty.const.MODULE_AUTOEXPEDITION) && empty($target_mission)}
 		<form action="?page=AutoExpedition" method="post">
 			<table class="table-gow table_full">
 				<thead>
@@ -48,7 +48,7 @@
 						<td class="text_center" colspan="2">
 							<span>{$LNG.fl_hold_time}</span>
 							<select name="">
-								{foreach $StaySelector as $cKey => $cSelector}
+								{foreach $stay_selector as $cKey => $cSelector}
 									<option value="{$cKey}">{$cSelector}</option>
 								{/foreach}
 							</select>
@@ -62,7 +62,7 @@
 					<tr>
 						<td colspan="3">
 							<div class="g-recaptcha" data-theme="dark"
-								data-sitekey="{$recaptchaPublicKey}"></div>
+								data-sitekey="{$recaptcha_public_key}"></div>
 						</td>
 					</tr>
 					<tr>
@@ -81,11 +81,11 @@
 		{include file="shared.fleetTable.acsTable.tpl"}
 	{/if}
 	<form action="?page=fleetStep1" method="post">
-		<input type="hidden" name="galaxy" value="{$targetGalaxy}">
-		<input type="hidden" name="system" value="{$targetSystem}">
-		<input type="hidden" name="planet" value="{$targetPlanet}">
-		<input type="hidden" name="type" value="{$targetType}">
-		<input type="hidden" name="target_mission" value="{$targetMission}">
+		<input type="hidden" name="galaxy" value="{$target_galaxy}">
+		<input type="hidden" name="system" value="{$target_system}">
+		<input type="hidden" name="planet" value="{$target_planet}">
+		<input type="hidden" name="type" value="{$target_type}">
+		<input type="hidden" name="target_mission" value="{$target_mission}">
 		<table class="table-gow table_full">
 			<thead>
 				<tr>
@@ -99,7 +99,7 @@
 					<td>-</td>
 					<td>-</td>
 				</tr>
-				{foreach $FleetsOnPlanet as $FleetRow}
+				{foreach $fleets_on_planet as $FleetRow}
 					<tr style="height:20px;">
 						<td>
 							{if $FleetRow.speed != 0}
@@ -141,7 +141,7 @@
 					</tr>
 				{/foreach}
 				<tr style="height:20px;">
-					{if count($FleetsOnPlanet) == 0}
+					{if count($fleets_on_planet) == 0}
 						<td colspan="4">{$LNG.fl_no_ships}</td>
 					{else}
 						<td colspan="2">
@@ -154,7 +154,7 @@
 						</td>
 					{/if}
 				</tr>
-				{if $maxFleetSlots != $activeFleetSlots}
+				{if $max_fleet_slots != $active_fleet_slots}
 					<tr style="height:20px;">
 						<td class="text_center" colspan="5">
 							<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
@@ -176,9 +176,9 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="text_center">+{$bonusAttack} %</td>
-				<td class="text_center">+{$bonusDefensive} %</td>
-				<td class="text_center">+{$bonusShield} %</td>
+				<td class="text_center">+{$bonus_attack} %</td>
+				<td class="text_center">+{$bonus_defensive} %</td>
+				<td class="text_center">+{$bonus_shield} %</td>
 			</tr>
 			<tr>
 				<th>{$LNG.tech.115}</th>
@@ -186,9 +186,9 @@
 				<th>{$LNG.tech.118}</th>
 			</tr>
 			<tr>
-				<td class="text_center">+{$bonusCombustion} %</td>
-				<td class="text_center">+{$bonusImpulse} %</td>
-				<td class="text_center">+{$bonusHyperspace} %</td>
+				<td class="text_center">+{$bonus_combustion} %</td>
+				<td class="text_center">+{$bonus_impulse} %</td>
+				<td class="text_center">+{$bonus_hyperspace} %</td>
 			</tr>
 		</tbody>
 	</table>
