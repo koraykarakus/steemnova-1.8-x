@@ -363,7 +363,7 @@ abstract class AbstractGamePage
             'page'               => HTTP::_GP('page', ''),
             'mode'               => HTTP::_GP('mode', ''),
             'servertime'         => _date("M D d H:i:s", TIMESTAMP, $USER['timezone']),
-            'AllPlanets'         => $all_planets,
+            'all_planets'        => $all_planets,
             'fleets'             => $this->GetFleets(),
             'show_fleets_active' => $USER['show_fleets_active'],
             'attack_listen_time' => ATTACK_LISTEN_TIME,

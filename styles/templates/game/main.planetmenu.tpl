@@ -1,5 +1,5 @@
-{if $AllPlanets}
-  {foreach $AllPlanets as $PlanetRow}
+{if $all_planets}
+  {foreach $all_planets as $PlanetRow}
     <div class="planet 
       {if isset($PlanetRow.moonInfo)}
         {if $PlanetRow.moonInfo[0].selected || $PlanetRow.selected}
