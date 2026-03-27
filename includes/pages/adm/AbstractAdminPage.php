@@ -132,7 +132,7 @@ abstract class AbstractAdminPage
 
         $this->assign([
             'message'         => $msg,
-            'redirectButtons' => $btns,
+            'redirect_buttons' => $btns,
         ]);
 
         if (isset($redirect))

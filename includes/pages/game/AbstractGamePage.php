@@ -374,7 +374,7 @@ abstract class AbstractGamePage
     {
         $this->assign([
             'message'         => $msg,
-            'redirectButtons' => $redirect_buttons,
+            'redirect_buttons' => $redirect_buttons,
         ]);
 
         if (isset($redirect))

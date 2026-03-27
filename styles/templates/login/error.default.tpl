@@ -4,9 +4,9 @@
 	<tr>
 		<td>
 			<p>{if isset ($message) }{$message}{/if}</p>
-			{if !empty($redirectButtons)}
+			{if !empty($redirect_buttons)}
 			<p>
-				{foreach $redirectButtons as $button}
+				{foreach $redirect_buttons as $button}
 				<a href="{if is_array($button) && isset($button.label)}{$button.url}{/if}"><button>
 					{if is_array($button) && isset($button.label)}
 						{$button.label}

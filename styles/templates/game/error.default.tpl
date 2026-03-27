@@ -9,10 +9,10 @@
 				{$message}
 			</td>
 		</tr>
-		{if !empty($redirectButtons)}
+		{if !empty($redirect_buttons)}
 		<tr>
 			<td class="text_center">
-				{foreach $redirectButtons as $button}
+				{foreach $redirect_buttons as $button}
 					{if isset($button.url) && $button.label}
 						<a href="{$button.url}">
 							<button class="text-yellow">{$button.label}</button>

@@ -44,8 +44,8 @@ abstract class AbstractReportPage
     protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
     {
         $this->assign([
-            'message'         => $msg,
-            'redirectButtons' => $redirect_buttons,
+            'message'          => $msg,
+            'redirect_buttons' => $redirect_buttons,
         ]);
 
         if (isset($redirect))

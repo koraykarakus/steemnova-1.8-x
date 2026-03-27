@@ -120,8 +120,8 @@ abstract class AbstractLoginPage
     protected function printMessage($msg, $redirect_btns = null, $redirect = null, $full = true): void
     {
         $this->assign([
-            'message'         => $msg,
-            'redirectButtons' => $redirect_btns,
+            'message'          => $msg,
+            'redirect_buttons' => $redirect_btns,
         ]);
 
         if (isset($redirect))
