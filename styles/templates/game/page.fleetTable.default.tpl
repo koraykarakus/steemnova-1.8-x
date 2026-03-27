@@ -45,7 +45,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td class="text_center" colspan="2">
 							<span>{$LNG.fl_hold_time}</span>
 							<select name="">
 								{foreach $StaySelector as $cKey => $cSelector}
@@ -66,7 +66,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="text-center" colspan="3">
+						<td class="text_center" colspan="3">
 							<button class="text-yellow"
 								type="submit">{$LNG.ae_send}</button>
 						</td>
@@ -156,14 +156,13 @@
 				</tr>
 				{if $maxFleetSlots != $activeFleetSlots}
 					<tr style="height:20px;">
-						<td colspan="5">
+						<td class="text_center" colspan="5">
 							<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
 						</td>
 					{/if}
 			</tbody>
 		</table>
 	</form>
-	<br>
 	<table class="table-gow table_full">
 		<thead>
 			<tr>
@@ -177,9 +176,9 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>+{$bonusAttack} %</td>
-				<td>+{$bonusDefensive} %</td>
-				<td>+{$bonusShield} %</td>
+				<td class="text_center">+{$bonusAttack} %</td>
+				<td class="text_center">+{$bonusDefensive} %</td>
+				<td class="text_center">+{$bonusShield} %</td>
 			</tr>
 			<tr>
 				<th>{$LNG.tech.115}</th>
@@ -187,18 +186,16 @@
 				<th>{$LNG.tech.118}</th>
 			</tr>
 			<tr>
-				<td>+{$bonusCombustion} %</td>
-				<td>+{$bonusImpulse} %</td>
-				<td>+{$bonusHyperspace} %</td>
+				<td class="text_center">+{$bonusCombustion} %</td>
+				<td class="text_center">+{$bonusImpulse} %</td>
+				<td class="text_center">+{$bonusHyperspace} %</td>
 			</tr>
 		</tbody>
 	</table>
 
 	{block name="script" append}
 		<script src="scripts/game/fleetTable.js"></script>
-
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={$lang}"></script>
-
 	{/block}
 
 {/block}
