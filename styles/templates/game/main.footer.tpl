@@ -52,7 +52,7 @@
 	<a href="index.php?page=rules" target="rules">{$LNG.lm_rules}</a>
 
 	{if isModuleAvailable($smarty.const.MODULE_FORUM)}
-		{if !empty($hasBoard)}
+		{if !empty($has_board)}
 			<a href="game.php?page=board" target="forum">{$LNG.lm_forums}</a>
 		{/if}
 	{/if}

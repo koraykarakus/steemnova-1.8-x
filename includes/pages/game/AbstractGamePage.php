@@ -216,7 +216,7 @@ abstract class AbstractGamePage
             'resourceTable'  => $resource_table,
             'shortlyNumber'  => 1,
             'closed'         => $config->game_disable,
-            'hasBoard'       => filter_var($config->forum_url, FILTER_VALIDATE_URL),
+            'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
             'hasGate'        => $PLANET[$RESOURCE[43]] > 0,
             'discordUrl'     => DISCORD_URL,
