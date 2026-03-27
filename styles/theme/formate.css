@@ -1501,6 +1501,28 @@ input[type="radio"] {
 .galaxy_wrapper>.galaxy_header>.actions{
 	width: 97px;
 }
+.galaxy_icon, .system_icon{
+	display: flex;
+	width: 17px;
+	height: 18px;
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	transition: 0.3s ease;
+	cursor: pointer;
+	margin: 0 2px;
+}
+.system_icon{
+	background: url('images/system.png');
+}
+.galaxy_icon{
+	background: url('images/galaxy.png');
+}
+#galaxy_form>.galaxy_icon:hover>.tooltip,
+#galaxy_form>.system_icon:hover>.tooltip
+{
+	display: flex;
+}
 
 .galaxy_wrapper>.galaxy_row{
 	display: flex;
