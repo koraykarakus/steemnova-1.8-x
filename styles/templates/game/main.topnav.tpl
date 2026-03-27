@@ -13,7 +13,7 @@
 	    {/if}
       {if isModuleAvailable($smarty.const.MODULE_PLANET_SELECTOR)}
       <select id="planetSelector">
-        {foreach $PlanetSelect as $id => $currentPlanet}
+        {foreach $planet_select as $id => $currentPlanet}
           <option value="{$id}" {if $current_pid == $id}selected{/if}>
             {$currentPlanet}
           </option>

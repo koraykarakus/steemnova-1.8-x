@@ -201,7 +201,7 @@ abstract class AbstractGamePage
         }
 
         $this->assign([
-            'PlanetSelect'   => $planet_select,
+            'planet_select'  => $planet_select,
             'new_message'    => $USER['messages'],
             'commit'         => $commit,
             'commitShort'    => $commit_short,
