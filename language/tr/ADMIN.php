@@ -1310,6 +1310,9 @@ $LNG['qe_submit'] = 'Gonder';
 $LNG['qe_resetr'] = 'Sifirla';
 $LNG['qe_allowmulti'] = 'Multi IP ye izin ver';
 $LNG['qe_name'] = 'Birim';
+$LNG['qe_debris'] = "Enkaz";
+$LNG['qe_err_planet_not_found'] = "Gezegen bulunamadı, hatalı gezegen ID.";
+$LNG['qe_err_user_not_found'] = "Gezegen (ID: %s) hiçbir kullanıcıya ait değil, veritabanından kaldırmayı değerlendirin.";
 
 // MOD Kontrolu
 

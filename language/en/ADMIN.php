@@ -1068,7 +1068,7 @@ $LNG['sp_answer_message'] = 'Do you have a response to your ticket number: #%d!'
 $LNG['sp_admin_closed'] = '%s closed the Ticket to %s';
 $LNG['sp_admin_open'] = '%s reopened the Ticket to %s';
 
-// Editor Rápido
+// ShowQuickEditorPage
 
 $LNG['qe_name'] = 'Name';
 $LNG['qe_send'] = 'Send';
@@ -1099,7 +1099,9 @@ $LNG['qe_authattack'] = 'Protection of Administrator';
 $LNG['qe_submit'] = 'Send';
 $LNG['qe_resetr'] = 'Reset';
 $LNG['qe_allowmulti'] = 'Allow Multi IP';
-
+$LNG['qe_debris'] = "Debris";
+$LNG['qe_err_planet_not_found'] = "Planet not found, wrong planet id.";
+$LNG['qe_err_user_not_found'] = "Planet (ID: %s) does not belong to any user, consider removing it from database.";
 
 //----------------------------------------------------------------------------//
 // Facebook App

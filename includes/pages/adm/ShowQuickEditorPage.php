@@ -251,9 +251,9 @@ class ShowQuickEditorPage extends AbstractAdminPage
             ':planet_id' => $id,
         ]);
 
-        if (!$planet_data)
+        if ($planet_data === false)
         {
-            return;
+            $this->printMessage('Error : wrong planet id');
         }
 
         $sql = "UPDATE %%PLANETS%% SET ";
@@ -274,6 +274,8 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $sql .= "`metal` = :metal, ";
         $sql .= "`crystal` = :crystal, ";
         $sql .= "`deuterium` = :deuterium, ";
+        $sql .= "`debris_metal` = :debris_metal, ";
+        $sql .= "`debris_crystal` = :debris_crystal, ";
         $sql .= "`field_current` = :field_current, ";
         $sql .= "`field_max` = :field_max, ";
         $sql .= "`name` = :name, ";
@@ -281,14 +283,16 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $sql .= "WHERE `id` = :id AND `universe` = :universe;";
 
         $db->update($sql, [
-            ':metal'         => max(0, round(HTTP::_GP('metal', 0.0))),
-            ':crystal'       => max(0, round(HTTP::_GP('crystal', 0.0))),
-            ':deuterium'     => max(0, round(HTTP::_GP('deuterium', 0.0))),
-            ':field_current' => $Fields,
-            ':field_max'     => HTTP::_GP('field_max', 0),
-            ':name'          => HTTP::_GP('name', ''),
-            ':id'            => $id,
-            ':universe'      => Universe::getEmulated(),
+            ':metal'          => max(0, round(HTTP::_GP('metal', 0.0))),
+            ':crystal'        => max(0, round(HTTP::_GP('crystal', 0.0))),
+            ':deuterium'      => max(0, round(HTTP::_GP('deuterium', 0.0))),
+            ':debris_metal'   => max(0, round(HTTP::_GP('debris_metal', 0.0))),
+            ':debris_crystal' => max(0, round(HTTP::_GP('debris_crystal', 0.0))),
+            ':field_current'  => $Fields,
+            ':field_max'      => HTTP::_GP('field_max', 0),
+            ':name'           => HTTP::_GP('name', ''),
+            ':id'             => $id,
+            ':universe'       => Universe::getEmulated(),
         ]);
 
         $old = [];
@@ -323,7 +327,6 @@ class ShowQuickEditorPage extends AbstractAdminPage
     {
         global $LNG, $RESLIST, $RESOURCE;
 
-        $action = HTTP::_GP('action', '');
         $id = HTTP::_GP('id', 0);
 
         $data_ids = array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']);
@@ -339,18 +342,30 @@ class ShowQuickEditorPage extends AbstractAdminPage
         $sql = "SELECT " . $specify_items_pq . " `name`, `id_owner`, `planet_type`, 
         `galaxy`, `system`, `planet`, `destroyed`, `diameter`, 
         `field_current`, `field_max`, `temp_min`, `temp_max`, 
-        `metal`, `crystal`, `deuterium` FROM %%PLANETS%% WHERE `id` = :id;";
+        `metal`, `crystal`, `deuterium`, `debris_metal`, `debris_crystal` 
+        FROM %%PLANETS%% WHERE `id` = :id;";
 
         $planet_data = $db->selectSingle($sql, [
             ':id' => $id,
         ]);
 
+        if ($planet_data === false)
+        {
+            $this->printMessage($LNG['qe_err_planet_not_found']);
+        }
+
         $sql = "SELECT `username` FROM %%USERS%% 
         WHERE `id` = :user_id AND `universe` = '".Universe::getEmulated()."';";
 
-        $UserInfo = $db->selectSingle($sql, [
+        $user_info = $db->selectSingle($sql, [
             ':user_id' => $planet_data['id_owner'],
         ]);
+
+        if ($user_info === false)
+        {
+            $msg = sprintf($LNG['qe_err_user_not_found'], $id);
+            $this->printMessage($msg);
+        }
 
         $build = $defense = $fleet = [];
 
@@ -385,26 +400,28 @@ class ShowQuickEditorPage extends AbstractAdminPage
         }
 
         $this->assign([
-            'build'       => $build,
-            'fleet'       => $fleet,
-            'defense'     => $defense,
-            'planetId'    => $id,
-            'ownerid'     => $planet_data['id_owner'],
-            'ownername'   => $UserInfo['username'],
-            'name'        => $planet_data['name'],
-            'galaxy'      => $planet_data['galaxy'],
-            'system'      => $planet_data['system'],
-            'planet'      => $planet_data['planet'],
-            'field_min'   => $planet_data['field_current'],
-            'field_max'   => $planet_data['field_max'],
-            'temp_min'    => $planet_data['temp_min'],
-            'temp_max'    => $planet_data['temp_max'],
-            'metal'       => floatToString($planet_data['metal']),
-            'crystal'     => floatToString($planet_data['crystal']),
-            'deuterium'   => floatToString($planet_data['deuterium']),
-            'metal_c'     => pretty_number($planet_data['metal']),
-            'crystal_c'   => pretty_number($planet_data['crystal']),
-            'deuterium_c' => pretty_number($planet_data['deuterium']),
+            'build'          => $build,
+            'fleet'          => $fleet,
+            'defense'        => $defense,
+            'planetId'       => $id,
+            'ownerid'        => $planet_data['id_owner'],
+            'ownername'      => $user_info['username'],
+            'name'           => $planet_data['name'],
+            'galaxy'         => $planet_data['galaxy'],
+            'system'         => $planet_data['system'],
+            'planet'         => $planet_data['planet'],
+            'field_min'      => $planet_data['field_current'],
+            'field_max'      => $planet_data['field_max'],
+            'temp_min'       => $planet_data['temp_min'],
+            'temp_max'       => $planet_data['temp_max'],
+            'metal'          => floatToString($planet_data['metal']),
+            'crystal'        => floatToString($planet_data['crystal']),
+            'deuterium'      => floatToString($planet_data['deuterium']),
+            'debris_metal'   => floatToString($planet_data['debris_metal']),
+            'debris_crystal' => floatToString($planet_data['debris_crystal']),
+            'metal_c'        => pretty_number($planet_data['metal']),
+            'crystal_c'      => pretty_number($planet_data['crystal']),
+            'deuterium_c'    => pretty_number($planet_data['deuterium']),
         ]);
 
         $this->display('page.quickeditor.planet.tpl');
