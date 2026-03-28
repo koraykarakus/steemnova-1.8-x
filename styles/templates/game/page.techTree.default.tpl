@@ -18,7 +18,7 @@
 </script>
 
 <div class="techWrapper">
-{foreach $TechTreeList as $elementID => $requireList}
+{foreach $tech_tree_list as $elementID => $requireList}
 	{if !is_array($requireList)}
 	<div class="techb" id="{$requireList}">
 		<button class="" onclick="toggleTechDiv(id = {$elementID});">
