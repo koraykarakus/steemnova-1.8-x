@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_support}{/block}
 {block name="content"}
-<table class="table-gow table_full">
+<table class="table_game table_full">
 	<tr>
 		<th colspan="5">{$LNG.ti_header}</th>
 	</tr>

@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_research}{/block}
 {block name="content"}
 	<form action="game.php?page=alliance&amp;mode=cancelApply" method="post">
-		<table class="table-gow">
+		<table class="table_game">
 			<tr>
 				<th>{$LNG.al_your_request_title}</th>
 			</tr>

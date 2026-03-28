@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_banned}{/block}
 {block name="content"}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr class="text-center">
 			<th colspan="5">{$LNG.bn_players_banned_list}</th>
 		</tr>

@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.write_message}{/block}
 {block name="content"}
 	<form name="message" id="message" action="">
-		<table class="table-gow">
+		<table class="table_game">
 			<tr>
 				<th colspan="2">{$LNG.mg_send_new}</th>
 			</tr>

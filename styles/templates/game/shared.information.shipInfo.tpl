@@ -1,4 +1,4 @@
-<table class="table-gow table_full">
+<table class="table_game table_full">
 	<tbody>
 		{if !empty($FleetInfo.tech)}
 		<tr>

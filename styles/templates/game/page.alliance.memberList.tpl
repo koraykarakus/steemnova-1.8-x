@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table id="memberList" style="width:50%" class="table-gow">
+	<table id="memberList" style="width:50%" class="table_game">
 		<thead>
 			<tr>
 				<th colspan="8">{$al_users_list}</th>

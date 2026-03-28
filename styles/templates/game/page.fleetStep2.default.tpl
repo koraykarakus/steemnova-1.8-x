@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="game.php?page=fleetStep3" method="post">
 <input type="hidden" name="token" value="{$token}">
-   	<table class="table-gow">
+   	<table class="table_game">
         <tr>
         	<th colspan="2">[{$galaxy}:{$system}:{$planet}] - {$LNG["type_planet_{$type}"]}</th>
         </tr>
@@ -12,7 +12,7 @@
     </tr>
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
-    		<table class="table-gow" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
+    		<table class="table_game" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
     			{foreach $MissionSelector as $MissionID}
 					<tr>
 						<td>
@@ -33,7 +33,7 @@
     		</table>
       </td>
       <td>
-				<table class="table-gow" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
+				<table class="table_game" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
               <tr colspan="5">
         				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.901}</td>
         				<td colspan="1">
@@ -98,7 +98,7 @@
 		</tr>
 		<tr style="height:20px;">
 			<td>
-				<table class="table-gow">
+				<table class="table_game">
 				<tr class="no-border">
 					<td >
 						<select name="resEx">

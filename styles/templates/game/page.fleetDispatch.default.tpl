@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_fleet}{/block}
 {block name="content"}
 
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<th colspan="9">

@@ -1,6 +1,6 @@
 <form action="?page=fleetDispatch&amp;action=acs" method="post">
 <input name="fleetID" value="{$acsData.mainFleetID}" type="hidden">
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.fl_sac_of_fleet}</th>
 		</tr>

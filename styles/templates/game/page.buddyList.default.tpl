@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_buddylist}{/block}
 {block name="content"}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th class="text-center" colspan="5">{$LNG.bu_buddy_list}</th>
 		</tr>

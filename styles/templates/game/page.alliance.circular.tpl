@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 	<form name="message" id="message">
-		<table class="table-gow">
+		<table class="table_game">
 			<tr>
 				<th colspan="2">{$LNG.al_circular_send_ciruclar}</th>
 			</tr>

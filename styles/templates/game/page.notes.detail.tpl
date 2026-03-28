@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="?page=notes&amp;mode=insert" method="post">
 	<input type="hidden" name="id" value="{$noteDetail.id}">
-	<table class="table-gow">
+	<table class="table_game">
 		<tr>
 			<th colspan="2">{if $noteDetail.id == 0}{$LNG.nt_create_note}{else}{$LNG.nt_edit_note}{/if}</th>
 		</tr>

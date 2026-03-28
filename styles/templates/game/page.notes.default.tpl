@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_notes}{/block}
 {block name="content"}
 	<form action="game.php?page=notes&amp;mode=delete" method="post">
-		<table class="table-gow">
+		<table class="table_game">
 			<tr>
 				<th colspan="4">{$LNG.nt_notes}</th>
 			</tr>

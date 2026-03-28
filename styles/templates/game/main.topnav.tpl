@@ -74,7 +74,7 @@
     {foreach $resource_table as $resourceID => $resourceData}
       <div class="resource">
         <div class="tooltip tooltip_bottom">
-          <table class='table-gow'>
+          <table class='table_game'>
             {if in_array($resourceID,array(901,902,903))}
               <tr>
                 <td>{$LNG.resource_available}:</td>

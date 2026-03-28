@@ -3,7 +3,7 @@
 <form id="trader" action="" method="post">
 	<input type="hidden" name="mode" value="send">
 	<input type="hidden" name="resource" value="{$tradeResourceID}">
-	<table class="table-gow">
+	<table class="table_game">
 	<tr>
 		<th colspan="4">{$LNG.tr_sell} {$LNG.tech.$tradeResourceID}</th>
 	</tr>

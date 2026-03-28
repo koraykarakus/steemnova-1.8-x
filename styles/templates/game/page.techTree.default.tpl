@@ -28,7 +28,7 @@
 	</div>
 	{else}
 		{if $requireList}
-			<table class="table-gow table_full">
+			<table class="table_game table_full">
 				<thead>
 					<tr>
 						<th style="text-align: left;" colspan="2">
@@ -44,7 +44,7 @@
 							</a>
 						</td>
 						<td>
-							<table class="table-gow center_x table_full">
+							<table class="table_game center_x table_full">
 								<thead>
 									<tr>
 										<th>{$LNG.tt_requirements}:</th>

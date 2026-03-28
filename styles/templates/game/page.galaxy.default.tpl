@@ -7,7 +7,7 @@
 			<input type="hidden" name="system" value="{$system}">
 			<input type="hidden" name="planet" value="{$planet}">
 			<input type="hidden" name="type" value="{$type}">
-			<table class="table-gow table_full">
+			<table class="table_game table_full">
 				<tr>
 					<th colspan="2">{$LNG.gl_missil_launch} [{$galaxy}:{$system}:{$planet}]</th>
 				</tr>
@@ -117,7 +117,7 @@
 					</div>
 					<div class="planet_picture">
 						<div class="tooltip tooltip_right">
-							<table class='table-gow'>
+							<table class='table_game'>
 								<tr>
 									<th colspan='2'>
 										<span>{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]</span>
@@ -135,7 +135,7 @@
 								{/if}
 								<tr>
 									<td>
-										<table class="table-gow table_full">
+										<table class="table_game table_full">
 											<thead>
 												<tr>
 													<th colspan='2'>{$LNG.gl_actions}</th>
@@ -240,7 +240,7 @@
 					<div class="moon_picture">
 						{if $currentPlanet.moon}
 							<div class="tooltip tooltip_right">
-								<table class='table-gow'>
+								<table class='table_game'>
 									<tr>
 										<th colspan="2">{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]
 										</th>
@@ -257,7 +257,7 @@
 									{/if}
 									<tr>
 										<td>
-											<table class='table-gow' style='width:100%'>
+											<table class='table_game' style='width:100%'>
 												<tr>
 													<th colspan='2'>{$LNG.gl_features}</th>
 												</tr>
@@ -274,7 +274,7 @@
 												</tr>
 												<tr>
 													<td colspan='2'>
-														<table class="table-gow">
+														<table class="table_game">
 															<tbody>
 																{if $currentPlanet.missions.1}
 																<tr>
@@ -366,7 +366,7 @@
 					<div class="debris_picture">
 						{if $currentPlanet.debris}
 							<div class="tooltip tooltip_right">
-								<table class='table-gow'>
+								<table class='table_game'>
 									<tr>
 										<th colspan='2'>
 											{$LNG.gl_debris_field} [{$galaxy}:{$system}:{$planet}]
@@ -403,7 +403,7 @@
 					</div>
 					<div class="player_name">
 							<div class="tooltip tooltip_bottom">
-								<table class='table-gow'>
+								<table class='table_game'>
 									<tr>
 										<th colspan='2'>
 											{$currentPlanet.user.playerrank}
@@ -447,7 +447,7 @@
 					<div class="alliance_name">
 						{if $currentPlanet.alliance}
 							<div class="tooltip tooltip_bottom">
-								<table class='table-gow'>
+								<table class='table_game'>
 									<tr>
 										<th>
 											{$LNG.gl_alliance} {$currentPlanet.alliance.name} {$currentPlanet.alliance.member}
@@ -524,7 +524,7 @@
 		{/for}
 	</div>
 
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		{for $planet=1 to $max_planets}
 			<tr>
 				
@@ -583,7 +583,7 @@
 			</td>
 		</tr>
 	</table>
-	<table id="fleetstatusrow" class="hidden table-gow table_full">
+	<table id="fleetstatusrow" class="hidden table_game table_full">
 		<thead>
 			<tr>
 				<th colspan="8">{$LNG.cff_fleet_target}</th>

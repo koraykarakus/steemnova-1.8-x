@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_topkb}{/block}
 {block name="content"}
-    <table class="table-gow table_full">
+    <table class="table_game table_full">
         <tbody>
             <tr>
                 <th class="text-center" colspan="4">{$LNG.tkb_top}</th>

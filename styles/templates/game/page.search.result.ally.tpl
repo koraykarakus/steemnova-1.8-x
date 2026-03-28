@@ -1,5 +1,5 @@
 {block name="content"}
-<table id="resulttable" class="table-gow">
+<table id="resulttable" class="table_game">
 	<tr>
 		<th>{$LNG.sh_tag}</th>
 		<th>{$LNG.sh_name}</th>

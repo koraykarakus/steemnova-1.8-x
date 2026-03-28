@@ -2,7 +2,7 @@
 {block name="content"}
 <form name="buddy" id="buddy" action="game.php?page=buddyList&amp;mode=send&amp;ajax=1" method="post">
 <input type="hidden" name="id" value="{$id}">
-  <table class="table table-gow">
+  <table class="table table_game">
     <tr>
       <th class="text-center" colspan="2">{$LNG.bu_request_message}</th>
     </tr>

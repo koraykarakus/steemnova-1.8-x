@@ -4,7 +4,7 @@
 		<input type="hidden" name="token" value="{$token}">
 		<input type="hidden" name="fleet_group" value="0">
 		<input type="hidden" name="target_mission" value="{$mission}">
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<tr style="height:20px;">
 				<th colspan="2">{$LNG.fl_send_fleet}</th>
 			</tr>
@@ -60,7 +60,7 @@
 			</tr>
 		</table>
 
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<tr style="height:20px;">
 				<th class="text-center" colspan="2">{$LNG.fl_system_places}</th>
 			</tr>
@@ -77,7 +77,7 @@
 		</table>
 
 		{if isModuleAvailable($smarty.const.MODULE_SHORTCUTS)}
-			<table class="table-gow table_full">
+			<table class="table_game table_full">
 				<tr style="height:20px;">
 					<th class="text-center">{$LNG.fl_shortcut} (<a href="#"
 							onclick="EditShortcuts();return false"
@@ -148,7 +148,7 @@
 				</tr>
 			</table>
 		{/if}
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<tr style="height:20px;">
 				<th class="text-center">{$LNG.fl_my_planets}</th>
 			</tr>
@@ -168,7 +168,7 @@
 			{/foreach}
 		</table>
 		{if $ACSList}
-			<table class="table-gow table_full">
+			<table class="table_game table_full">
 				<tr style="height:20px;">
 					<th>{$LNG.fl_acs_title}</th>
 				</tr>
@@ -183,7 +183,7 @@
 				{/foreach}
 			</table>
 		{/if}
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<tr>
 				<td>
 					<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">

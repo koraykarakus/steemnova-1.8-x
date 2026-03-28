@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_diplo_head}</th>
 		</tr>
@@ -33,7 +33,7 @@
 			</tr>
 		{/foreach}
 	</table>
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_diplo_accept}</th>
 		</tr>
@@ -64,7 +64,7 @@
 			</tr>
 		{/if}
 	</table>
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_diplo_accept_send}</th>
 		</tr>
