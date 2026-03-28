@@ -209,7 +209,7 @@ class ResourceUpdate
 
         if ($Element)
         {
-            $BuildEnergy = $USER[$RESOURCE[113]];
+            $build_energy = $USER[$RESOURCE[113]];
             $build_temp = $PLANET['temp_max'];
             $build_level_factor = $PLANET[$RESOURCE[$Element] . '_percent'];
 
@@ -289,7 +289,7 @@ class ResourceUpdate
         ];
 
         $build_temp = $this->PLANET['temp_max'];
-        $BuildEnergy = $this->USER[$RESOURCE[113]];
+        $build_energy = $this->USER[$RESOURCE[113]];
 
         foreach ($RESLIST['storage'] as $ProdID)
         {

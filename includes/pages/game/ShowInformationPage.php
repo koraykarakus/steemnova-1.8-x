@@ -253,7 +253,7 @@ class ShowInformationPage extends AbstractGamePage
         {
 
             /* Data for eval */
-            $BuildEnergy = $USER[$RESOURCE[113]];
+            $build_energy = $USER[$RESOURCE[113]];
             $build_temp = $PLANET['temp_max'];
             $build_level_factor = $PLANET[$RESOURCE[$element_id].'_percent'];
 

@@ -78,7 +78,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
         $room_is_ok = $PLANET['field_current'] < ($current_max_fields - $queue_destroy);
 
-        $BuildEnergy = $USER[$RESOURCE[113]];
+        $build_energy = $USER[$RESOURCE[113]];
         $build_level_factor = 10;
         $build_temp = $PLANET['temp_max'];
 
