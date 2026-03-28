@@ -18,6 +18,13 @@
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Move fleet directly on relocate";
+$LNG['rl_price_dm'] = "Relocate Price (DM)";
+$LNG['rl_next_time'] = "Relocate Next time (Hours)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Jump Gate Cooldown after relocate (Hours)";
+
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "metal (start)";
 $LNG['cs_crystal_start'] = "crystal (start)";
@@ -68,8 +75,6 @@ $LNG['cs_graviton_canyon_start'] = "Gravitation Canyon (amount)";
 $LNG['cs_interceptor_misil_start'] = "Intercepting Missile (amount)";
 $LNG['cs_interplanetary_misil_start'] = "Interplanetary Missile (amount)";
 
-//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
-$LNG['relocate_move_fleet_directly'] = "Move fleet directly on relocate";
 
 //---------------	ShowInfosPage.class.php - page.information.default.tpl ------------------------//
 $LNG['ad_infos_server'] = "Server";

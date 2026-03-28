@@ -5,6 +5,12 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Déplacer la flotte directement lors du déplacement";
+$LNG['rl_price_dm'] = "Prix du déplacement (DM)";
+$LNG['rl_next_time'] = "Prochain déplacement (heures)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Temps de recharge de la porte de saut après déplacement (heures)";
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "Métal (début)";
 $LNG['cs_crystal_start'] = "Cristal (début)";

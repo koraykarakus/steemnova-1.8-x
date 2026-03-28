@@ -15,6 +15,12 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Flotte beim Verlegen direkt bewegen";
+$LNG['rl_price_dm'] = "Verlegungspreis (DM)";
+$LNG['rl_next_time'] = "Nächste Verlegung (Stunden)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Sprungtor-Abklingzeit nach Verlegung (Stunden)";
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "Metall (Start)";
 $LNG['cs_crystal_start'] = "Kristall (Start)";

@@ -20,6 +20,12 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Taşıma sırasında filoyu doğrudan hareket ettir";
+$LNG['rl_price_dm'] = "Taşıma Ücreti (DM)";
+$LNG['rl_next_time'] = "Sonraki taşıma süresi (saat)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Taşıma sonrası sıçrama kapısı bekleme süresi (saat)";
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "Metal (başlangıç)";
 $LNG['cs_crystal_start'] = "Kristal (başlangıç)";
