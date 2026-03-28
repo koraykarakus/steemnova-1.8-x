@@ -16,6 +16,56 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+//---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
+$LNG['cs_metal_start'] = "Металл (старт)";
+$LNG['cs_crystal_start'] = "Кристалл (старт)";
+$LNG['cs_deuterium_start'] = "Дейтерий (старт)";
+$LNG['cs_metal_mine_start'] = "Уровень Шахты металла";
+$LNG['cs_crystal_mine_start'] = "Уровень Шахты кристалла";
+$LNG['cs_deuterium_synthesizer_start'] = "Уровень Шахты дейтерия";
+$LNG['cs_solar_plant_start'] = "Уровень Солнечной станции";
+$LNG['cs_fusion_plant_start'] = "Уровень Термоядерной станции";
+$LNG['cs_robot_factory_start'] = "Уровень Фабрики роботов";
+$LNG['cs_nanite_factory_start'] = "Уровень Фабрики нанитов";
+$LNG['cs_shipyard_start'] = "Уровень Верфи";
+$LNG['cs_metal_storage_start'] = "Уровень Хранилища металла";
+$LNG['cs_crystal_storage_start'] = "Уровень Хранилища кристалла";
+$LNG['cs_deuterium_tank_start'] = "Уровень Хранилища дейтерия";
+$LNG['cs_research_lab_start'] = "Уровень Лаборатории";
+$LNG['cs_terraformer_start'] = "Уровень Терраформера";
+$LNG['cs_university_start'] = "Уровень Университета";
+$LNG['cs_ally_deposit_start'] = "Уровень Хранилища альянса";
+$LNG['cs_missile_silo_start'] = "Уровень Ракетной шахты";
+$LNG['cs_small_cargo_start'] = "Малый транспорт (количество)";
+$LNG['cs_big_cargo_start'] = "Большой транспорт (количество)";
+$LNG['cs_light_hunter_start'] = "Лёгкий истребитель (количество)";
+$LNG['cs_heavy_hunter_start'] = "Тяжёлый истребитель (количество)";
+$LNG['cs_cruiser_start'] = "Крейсер (количество)";
+$LNG['cs_battle_ship_start'] = "Боевой корабль (количество)";
+$LNG['cs_colony_ship_start'] = "Колонизационный корабль (количество)";
+$LNG['cs_recycler_start'] = "Переработчик (количество)";
+$LNG['cs_espionage_probe_start'] = "Шпионский зонд (количество)";
+$LNG['cs_bomber_ship_start'] = "Бомбардировщик (количество)";
+$LNG['cs_solar_satellite_start'] = "Солнечный спутник (количество)";
+$LNG['cs_destroyer_start'] = "Разрушитель (количество)";
+$LNG['cs_death_star_start'] = "Звезда смерти (количество)";
+$LNG['cs_ev_transporter_start'] = "Транспорт EV (количество)";
+$LNG['cs_star_crasher_start'] = "Звёздный разрушитель (количество)";
+$LNG['cs_dm_ship_start'] = "Корабль DM (количество)";
+$LNG['cs_orbital_station_start'] = "Орбитальная станция (количество)";
+$LNG['cs_misil_launcher_start'] = "Ракетная установка (количество)";
+$LNG['cs_small_laser_start'] = "Малый лазер (количество)";
+$LNG['cs_big_laser_start'] = "Большой лазер (количество)";
+$LNG['cs_gauss_canyon_start'] = "Гаусс-пушка (количество)";
+$LNG['cs_ionic_canyon_start'] = "Ионная пушка (количество)";
+$LNG['cs_buster_canyon_start'] = "Бастер-пушка (количество)";
+$LNG['cs_small_protection_shield_start'] = "Малый защитный щит (количество)";
+$LNG['cs_planet_protector_start'] = "Защитник планеты (количество)";
+$LNG['cs_big_protection_shield_start'] = "Большой защитный щит (количество)";
+$LNG['cs_graviton_canyon_start'] = "Гравитационная пушка (количество)";
+$LNG['cs_interceptor_misil_start'] = "Ракета-перехватчик (количество)";
+$LNG['cs_interplanetary_misil_start'] = "Межпланетная ракета (количество)";
+
 //--------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
 $LNG['ad_infos_server'] = "Сервер";
 $LNG['ad_infos_server_infos'] = "Информация о сервере";

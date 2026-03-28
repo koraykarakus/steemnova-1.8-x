@@ -20,6 +20,56 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
+$LNG['cs_metal_start'] = "Metal (başlangıç)";
+$LNG['cs_crystal_start'] = "Kristal (başlangıç)";
+$LNG['cs_deuterium_start'] = "Döteryum (başlangıç)";
+$LNG['cs_metal_mine_start'] = "Metal Madeni Seviyesi";
+$LNG['cs_crystal_mine_start'] = "Kristal Madeni Seviyesi";
+$LNG['cs_deuterium_synthesizer_start'] = "Döteryum Madeni Seviyesi";
+$LNG['cs_solar_plant_start'] = "Güneş Santrali Seviyesi";
+$LNG['cs_fusion_plant_start'] = "Füzyon Santrali Seviyesi";
+$LNG['cs_robot_factory_start'] = "Robot Fabrikası Seviyesi";
+$LNG['cs_nanite_factory_start'] = "Nanite Fabrikası Seviyesi";
+$LNG['cs_shipyard_start'] = "Tersane Seviyesi";
+$LNG['cs_metal_storage_start'] = "Metal Deposu Seviyesi";
+$LNG['cs_crystal_storage_start'] = "Kristal Deposu Seviyesi";
+$LNG['cs_deuterium_tank_start'] = "Döteryum Deposu Seviyesi";
+$LNG['cs_research_lab_start'] = "Laboratuvar Seviyesi";
+$LNG['cs_terraformer_start'] = "Terraformer Seviyesi";
+$LNG['cs_university_start'] = "Üniversite Seviyesi";
+$LNG['cs_ally_deposit_start'] = "İttifak Deposu Seviyesi";
+$LNG['cs_missile_silo_start'] = "Füze Silosu Seviyesi";
+$LNG['cs_small_cargo_start'] = "Küçük Yük Gemisi (adet)";
+$LNG['cs_big_cargo_start'] = "Büyük Yük Gemisi (adet)";
+$LNG['cs_light_hunter_start'] = "Hafif Avcı (adet)";
+$LNG['cs_heavy_hunter_start'] = "Ağır Avcı (adet)";
+$LNG['cs_cruiser_start'] = "Kruvazör (adet)";
+$LNG['cs_battle_ship_start'] = "Komuta Gemisi (adet)";
+$LNG['cs_colony_ship_start'] = "Koloni Gemisi (adet)";
+$LNG['cs_recycler_start'] = "Geri Dönüştürücü (adet)";
+$LNG['cs_espionage_probe_start'] = "Casus Sondası (adet)";
+$LNG['cs_bomber_ship_start'] = "Bombardıman Gemisi (adet)";
+$LNG['cs_solar_satellite_start'] = "Güneş Uydusu (adet)";
+$LNG['cs_destroyer_start'] = "Destroyer (adet)";
+$LNG['cs_death_star_start'] = "Ölüm Yıldızı (adet)";
+$LNG['cs_ev_transporter_start'] = "EV Taşıyıcı (adet)";
+$LNG['cs_star_crasher_start'] = "Yıldız Parçalayıcı (adet)";
+$LNG['cs_dm_ship_start'] = "DM Gemisi (adet)";
+$LNG['cs_orbital_station_start'] = "Yörünge İstasyonu (adet)";
+$LNG['cs_misil_launcher_start'] = "Füze Rampası (adet)";
+$LNG['cs_small_laser_start'] = "Küçük Lazer (adet)";
+$LNG['cs_big_laser_start'] = "Büyük Lazer (adet)";
+$LNG['cs_gauss_canyon_start'] = "Gauss Topu (adet)";
+$LNG['cs_ionic_canyon_start'] = "İyon Topu (adet)";
+$LNG['cs_buster_canyon_start'] = "Buster Topu (adet)";
+$LNG['cs_small_protection_shield_start'] = "Küçük Koruma Kalkanı (adet)";
+$LNG['cs_planet_protector_start'] = "Gezegen Koruyucu (adet)";
+$LNG['cs_big_protection_shield_start'] = "Büyük Koruma Kalkanı (adet)";
+$LNG['cs_graviton_canyon_start'] = "Graviton Topu (adet)";
+$LNG['cs_interceptor_misil_start'] = "Önleyici Füze (adet)";
+$LNG['cs_interplanetary_misil_start'] = "Gezegenlerarası Füze (adet)";
+
 //------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
 $LNG['ad_infos_server'] = "Sunucu";
 $LNG['ad_infos_server_infos'] = "Sunucu Bilgileri";

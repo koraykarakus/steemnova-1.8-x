@@ -15,6 +15,56 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+//---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
+$LNG['cs_metal_start'] = "Metal (start)";
+$LNG['cs_crystal_start'] = "Kryształ (start)";
+$LNG['cs_deuterium_start'] = "Deuter (start)";
+$LNG['cs_metal_mine_start'] = "Poziom Kopalni metalu";
+$LNG['cs_crystal_mine_start'] = "Poziom Kopalni kryształu";
+$LNG['cs_deuterium_synthesizer_start'] = "Poziom Kopalni deuteru";
+$LNG['cs_solar_plant_start'] = "Poziom Elektrowni słonecznej";
+$LNG['cs_fusion_plant_start'] = "Poziom Elektrowni fuzyjnej";
+$LNG['cs_robot_factory_start'] = "Poziom Fabryki robotów";
+$LNG['cs_nanite_factory_start'] = "Poziom Fabryki nanitów";
+$LNG['cs_shipyard_start'] = "Poziom Stoczni kosmicznej";
+$LNG['cs_metal_storage_start'] = "Poziom Magazynu metalu";
+$LNG['cs_crystal_storage_start'] = "Poziom Magazynu kryształu";
+$LNG['cs_deuterium_tank_start'] = "Poziom Zbiornika deuteru";
+$LNG['cs_research_lab_start'] = "Poziom Laboratorium";
+$LNG['cs_terraformer_start'] = "Poziom Terraformera";
+$LNG['cs_university_start'] = "Poziom Uniwersytetu";
+$LNG['cs_ally_deposit_start'] = "Poziom Magazynu sojuszu";
+$LNG['cs_missile_silo_start'] = "Poziom Silosu rakiet";
+$LNG['cs_small_cargo_start'] = "Mały statek transportowy (ilość)";
+$LNG['cs_big_cargo_start'] = "Duży statek transportowy (ilość)";
+$LNG['cs_light_hunter_start'] = "Lekki myśliwiec (ilość)";
+$LNG['cs_heavy_hunter_start'] = "Ciężki myśliwiec (ilość)";
+$LNG['cs_cruiser_start'] = "Krążownik (ilość)";
+$LNG['cs_battle_ship_start'] = "Okręt bojowy (ilość)";
+$LNG['cs_colony_ship_start'] = "Statek kolonizacyjny (ilość)";
+$LNG['cs_recycler_start'] = "Recykler (ilość)";
+$LNG['cs_espionage_probe_start'] = "Sonda szpiegowska (ilość)";
+$LNG['cs_bomber_ship_start'] = "Bombowiec (ilość)";
+$LNG['cs_solar_satellite_start'] = "Satelita słoneczny (ilość)";
+$LNG['cs_destroyer_start'] = "Niszczyciel (ilość)";
+$LNG['cs_death_star_start'] = "Gwiazda śmierci (ilość)";
+$LNG['cs_ev_transporter_start'] = "Transportowiec EV (ilość)";
+$LNG['cs_star_crasher_start'] = "Niszczyciel gwiazd (ilość)";
+$LNG['cs_dm_ship_start'] = "Statek DM (ilość)";
+$LNG['cs_orbital_station_start'] = "Stacja orbitalna (ilość)";
+$LNG['cs_misil_launcher_start'] = "Wyrzutnia rakiet (ilość)";
+$LNG['cs_small_laser_start'] = "Mały laser (ilość)";
+$LNG['cs_big_laser_start'] = "Duży laser (ilość)";
+$LNG['cs_gauss_canyon_start'] = "Działo Gaussa (ilość)";
+$LNG['cs_ionic_canyon_start'] = "Działo jonowe (ilość)";
+$LNG['cs_buster_canyon_start'] = "Działo Buster (ilość)";
+$LNG['cs_small_protection_shield_start'] = "Mała osłona ochronna (ilość)";
+$LNG['cs_planet_protector_start'] = "Obrońca planety (ilość)";
+$LNG['cs_big_protection_shield_start'] = "Duża osłona ochronna (ilość)";
+$LNG['cs_graviton_canyon_start'] = "Działo grawitacyjne (ilość)";
+$LNG['cs_interceptor_misil_start'] = "Rakieta przechwytująca (ilość)";
+$LNG['cs_interplanetary_misil_start'] = "Rakieta międzyplanetarna (ilość)";
+
 //--------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
 $LNG['ad_infos_server'] = "Serwer";
 $LNG['ad_infos_server_infos'] = "Informacje o serwerze";

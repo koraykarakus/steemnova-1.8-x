@@ -20,6 +20,56 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+//---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
+$LNG['cs_metal_start'] = "Metal (início)";
+$LNG['cs_crystal_start'] = "Cristal (início)";
+$LNG['cs_deuterium_start'] = "Deutério (início)";
+$LNG['cs_metal_mine_start'] = "Nível Mina de metal";
+$LNG['cs_crystal_mine_start'] = "Nível Mina de cristal";
+$LNG['cs_deuterium_synthesizer_start'] = "Nível Mina de deutério";
+$LNG['cs_solar_plant_start'] = "Nível Usina solar";
+$LNG['cs_fusion_plant_start'] = "Nível Usina de fusão";
+$LNG['cs_robot_factory_start'] = "Nível Fábrica de robôs";
+$LNG['cs_nanite_factory_start'] = "Nível Fábrica de nanites";
+$LNG['cs_shipyard_start'] = "Nível Estaleiro espacial";
+$LNG['cs_metal_storage_start'] = "Nível Armazém de metal";
+$LNG['cs_crystal_storage_start'] = "Nível Armazém de cristal";
+$LNG['cs_deuterium_tank_start'] = "Nível Armazém de deutério";
+$LNG['cs_research_lab_start'] = "Nível Laboratório";
+$LNG['cs_terraformer_start'] = "Nível Terraformador";
+$LNG['cs_university_start'] = "Nível Universidade";
+$LNG['cs_ally_deposit_start'] = "Nível Depósito da aliança";
+$LNG['cs_missile_silo_start'] = "Nível Silo de mísseis";
+$LNG['cs_small_cargo_start'] = "Nave de carga pequena (quantidade)";
+$LNG['cs_big_cargo_start'] = "Nave de carga grande (quantidade)";
+$LNG['cs_light_hunter_start'] = "Caça leve (quantidade)";
+$LNG['cs_heavy_hunter_start'] = "Caça pesado (quantidade)";
+$LNG['cs_cruiser_start'] = "Cruzador (quantidade)";
+$LNG['cs_battle_ship_start'] = "Nave de batalha (quantidade)";
+$LNG['cs_colony_ship_start'] = "Nave colonizadora (quantidade)";
+$LNG['cs_recycler_start'] = "Reciclador (quantidade)";
+$LNG['cs_espionage_probe_start'] = "Sonda espiã (quantidade)";
+$LNG['cs_bomber_ship_start'] = "Bombardeiro (quantidade)";
+$LNG['cs_solar_satellite_start'] = "Satélite solar (quantidade)";
+$LNG['cs_destroyer_start'] = "Destruidor (quantidade)";
+$LNG['cs_death_star_start'] = "Estrela da morte (quantidade)";
+$LNG['cs_ev_transporter_start'] = "Transportador EV (quantidade)";
+$LNG['cs_star_crasher_start'] = "Destruidor estelar (quantidade)";
+$LNG['cs_dm_ship_start'] = "Nave DM (quantidade)";
+$LNG['cs_orbital_station_start'] = "Estação orbital (quantidade)";
+$LNG['cs_misil_launcher_start'] = "Lançador de mísseis (quantidade)";
+$LNG['cs_small_laser_start'] = "Laser pequeno (quantidade)";
+$LNG['cs_big_laser_start'] = "Laser grande (quantidade)";
+$LNG['cs_gauss_canyon_start'] = "Canhão Gauss (quantidade)";
+$LNG['cs_ionic_canyon_start'] = "Canhão iônico (quantidade)";
+$LNG['cs_buster_canyon_start'] = "Canhão Buster (quantidade)";
+$LNG['cs_small_protection_shield_start'] = "Pequeno escudo de proteção (quantidade)";
+$LNG['cs_planet_protector_start'] = "Protetor planetário (quantidade)";
+$LNG['cs_big_protection_shield_start'] = "Grande escudo de proteção (quantidade)";
+$LNG['cs_graviton_canyon_start'] = "Canhão gravitacional (quantidade)";
+$LNG['cs_interceptor_misil_start'] = "Míssil interceptador (quantidade)";
+$LNG['cs_interplanetary_misil_start'] = "Míssil interplanetário (quantidade)";
+
 //-------------- ShowInfosPage.class.php - page.information.default.tpl -------------------- ----//
 $LNG['ad_infos_server'] = "Servidor";
 $LNG['ad_infos_server_infos'] = "Informações do servidor";
