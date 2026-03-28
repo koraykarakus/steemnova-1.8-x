@@ -300,17 +300,17 @@ class LoginService
         $this->validation_key = md5(uniqid('2m'));
 
         $sql = "INSERT INTO %%USERS_VALID%% SET
-				`userName` = :user_name,
-				`validationKey` = :validation_key,
+				`username` = :user_name,
+				`validation_key` = :validation_key,
 				`password` = :password,
 				`email` = :email,
 				`date` = :timestamp,
 				`ip` = :ip,
 				`language` = :language,
 				`universe` = :universe,
-				`referralID` = :referral_id,
-				`externalAuthUID` = :external_auth_uid,
-				`externalAuthMethod` = :external_auth_method,
+				`referral_id` = :referral_id,
+				`external_auth_uid` = :external_auth_uid,
+				`external_auth_method` = :external_auth_method,
 				`user_secret_question_id` = :user_secret_question_id,
 				`user_secret_question_answer` = :user_secret_question_answer;";
 
@@ -343,7 +343,7 @@ class LoginService
     {
         $this->validation_key = md5(uniqid('2m'));
 
-        $sql = "SELECT validationID, userName FROM %%USERS_VALID%% WHERE email = :email;";
+        $sql = "SELECT validation_id, username FROM %%USERS_VALID%% WHERE email = :email;";
         $data = Database::get()->selectSingle($sql, [
             ':email' => $email,
         ]);
@@ -353,22 +353,22 @@ class LoginService
             && $data['userName'])
         {
             $this->validation_key = md5(uniqid('2m'));
-            $this->validation_id = $data['validationID'];
+            $this->validation_id = $data['validation_id'];
 
             $sql = "UPDATE %%USERS_VALID%%
-               SET validationKey = :validation_key,
+               SET validation_key = :validation_key,
                date = :date_now
-               WHERE validationID = :validation_id";
+               WHERE validation_id = :validation_id";
 
             Database::get()->update($sql, [
                 ':validation_key' => $this->validation_key,
-                ':validation_id'  => $data['validationID'],
+                ':validation_id'  => $data['validation_id'],
                 ':date_now'       => TIMESTAMP,
             ]);
 
             if ($this->shouldVerifyWithMail())
             {
-                $this->sendVerificationMail($email, $data['userName']);
+                $this->sendVerificationMail($email, $data['username']);
             }
         }
     }

@@ -32,7 +32,7 @@ class ShowActivePage extends AbstractAdminPage
         $db = Database::get();
 
         $sql = "SELECT * FROM %%USERS_VALID%% 
-        WHERE `universe` = :universe ORDER BY validationID ASC;";
+        WHERE `universe` = :universe ORDER BY validation_id ASC;";
 
         $valid_users = $db->select($sql, [
             ':universe' => Universe::getEmulated(),
@@ -42,13 +42,13 @@ class ShowActivePage extends AbstractAdminPage
         foreach ($valid_users as $cur_user)
         {
             $users[] = [
-                'id'            => $cur_user['validationID'],
-                'name'          => $cur_user['userName'],
+                'id'            => $cur_user['validation_id'],
+                'name'          => $cur_user['username'],
                 'date'          => _date($LNG['php_tdformat'], $cur_user['date'], $USER['timezone']),
                 'email'         => $cur_user['email'],
                 'ip'            => $cur_user['ip'],
                 'password'      => $cur_user['password'],
-                'validationKey' => $cur_user['validationKey'],
+                'validationKey' => $cur_user['validation_key'],
             ];
         }
 
@@ -64,7 +64,7 @@ class ShowActivePage extends AbstractAdminPage
     {
 
         $sql = "DELETE FROM %%USERS_VALID% 
-        WHERE `validationID` = :validationID AND `universe` = :universe;";
+        WHERE `validation_id` = :validationID AND `universe` = :universe;";
 
         $db = Database::get();
 

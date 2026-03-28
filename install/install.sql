@@ -991,21 +991,21 @@ CREATE TABLE `%PREFIX%users_to_topkb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%users_valid` (
- `validationID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
- `userName` VARCHAR(64) NOT NULL,
- `validationKey` VARCHAR(32) NOT NULL,
+ `validation_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+ `username` VARCHAR(64) NOT NULL,
+ `validation_key` VARCHAR(32) NOT NULL,
  `password` VARCHAR(60) NOT NULL,
  `email` VARCHAR(64) NOT NULL,
  `date` INT NOT NULL,
  `ip` VARCHAR(40) NOT NULL,
  `language` VARCHAR(3) NOT NULL,
  `universe` TINYINT UNSIGNED NOT NULL,
- `referralID` INT DEFAULT NULL,
- `externalAuthUID` VARCHAR(128) DEFAULT NULL,
- `externalAuthMethod` VARCHAR(32) DEFAULT NULL,
+ `referral_id` INT DEFAULT NULL,
+ `external_auth_uid` VARCHAR(128) DEFAULT NULL,
+ `external_auth_method` VARCHAR(32) DEFAULT NULL,
  `user_secret_question_id` TINYINT UNSIGNED NOT NULL DEFAULT 0,
  `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
- PRIMARY KEY (`validationID`,`validationKey`)
+ PRIMARY KEY (`validation_id`,`validation_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars` (

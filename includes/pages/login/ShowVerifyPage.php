@@ -34,8 +34,8 @@ class ShowVerifyPage extends AbstractLoginPage
         $db = Database::get();
 
         $sql = "SELECT * FROM %%USERS_VALID%%
-		WHERE validationID	= :validation_id
-		AND validationKey	= :validation_key;";
+		WHERE validation_id	= :validation_id
+		AND validation_key	= :validation_key;";
 
         $user_data = $db->selectSingle($sql, [
             ':validation_id'  => $validation_id,
@@ -49,14 +49,14 @@ class ShowVerifyPage extends AbstractLoginPage
 
         $config = Config::get();
 
-        $sql = "DELETE FROM %%USERS_VALID%% WHERE validationID = :validation_id;";
+        $sql = "DELETE FROM %%USERS_VALID%% WHERE validation_id = :validation_id;";
         $db->delete($sql, [
             ':validation_id' => $validation_id,
         ]);
 
         list($user_id, $planet_id) = PlayerUtil::createPlayer(
             $user_data['universe'],
-            $user_data['userName'],
+            $user_data['username'],
             $user_data['password'],
             $user_data['email'],
             $user_data['language'],
@@ -84,7 +84,7 @@ class ShowVerifyPage extends AbstractLoginPage
                 '{GAMENAME}',
                 '{GAMEMAIL}',
             ], [
-                $user_data['userName'],
+                $user_data['username'],
                 $config->game_name.' - '.$config->uni_name,
                 $config->smtp_sendmail,
             ], $mail_raw);
@@ -93,7 +93,7 @@ class ShowVerifyPage extends AbstractLoginPage
             {
                 Mail::send(
                     $user_data['email'],
-                    $user_data['userName'],
+                    $user_data['username'],
                     $mail_subject,
                     $mail_content
                 );
