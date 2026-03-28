@@ -20,6 +20,23 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Keşifte filo kaybına izin ver";
+$LNG['es_allow_fleet_delay'] = "Keşifte filo gecikmesine izin ver";
+$LNG['es_allow_fleet_speedup'] = "Keşifte filo hızlanmasına izin ver";
+$LNG['es_allow_wars'] = "Keşifte savaşlara izin ver";
+$LNG['es_allow_dm_finding'] = "Keşifte karanlık madde bulunmasına izin ver";
+$LNG['es_allow_resources_finding'] = "Keşifte kaynak bulunmasına izin ver";
+$LNG['es_allow_ships_finding'] = "Keşifte gemi bulunmasına izin ver";
+$LNG['es_consider_hold_time'] = "Keşiflerde bekleme süresini dikkate al";
+$LNG['es_consider_same_coordinate'] = "Keşiflerde aynı koordinatı dikkate al";
+$LNG['es_min_dm_small_event'] = "Min karanlık madde (küçük olay)";
+$LNG['es_max_dm_small_event'] = "Max karanlık madde (küçük olay)";
+$LNG['es_min_dm_large_event'] = "Min karanlık madde (büyük olay)";
+$LNG['es_max_dm_large_event'] = "Max karanlık madde (büyük olay)";
+$LNG['es_min_dm_very_large_event'] = "Min karanlık madde (çok büyük olay)";
+$LNG['es_max_dm_very_large_event'] = "Max karanlık madde (çok büyük olay)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Oyuncunun saldırı altındayken madenlerden toplamasına izin ver";
 $LNG['cm_time'] = "Maden toplama süresi (dakika)";

@@ -15,6 +15,23 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Flottenverlust auf Expedition erlauben";
+$LNG['es_allow_fleet_delay'] = "Flottenverzögerung auf Expedition erlauben";
+$LNG['es_allow_fleet_speedup'] = "Flottenbeschleunigung auf Expedition erlauben";
+$LNG['es_allow_wars'] = "Kämpfe auf Expedition erlauben";
+$LNG['es_allow_dm_finding'] = "Finden von Dunkler Materie auf Expedition erlauben";
+$LNG['es_allow_resources_finding'] = "Finden von Ressourcen auf Expedition erlauben";
+$LNG['es_allow_ships_finding'] = "Finden von Schiffen auf Expedition erlauben";
+$LNG['es_consider_hold_time'] = "Haltezeit bei Expeditionen berücksichtigen";
+$LNG['es_consider_same_coordinate'] = "Gleiche Koordinaten bei Expeditionen berücksichtigen";
+$LNG['es_min_dm_small_event'] = "Min Dunkle Materie (kleines Ereignis)";
+$LNG['es_max_dm_small_event'] = "Max Dunkle Materie (kleines Ereignis)";
+$LNG['es_min_dm_large_event'] = "Min Dunkle Materie (großes Ereignis)";
+$LNG['es_max_dm_large_event'] = "Max Dunkle Materie (großes Ereignis)";
+$LNG['es_min_dm_very_large_event'] = "Min Dunkle Materie (sehr großes Ereignis)";
+$LNG['es_max_dm_very_large_event'] = "Max Dunkle Materie (sehr großes Ereignis)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Erlaube dem Spieler, Minen während eines Angriffs zu sammeln";
 $LNG['cm_time'] = "Minen-Sammelzeit (Minuten)";
