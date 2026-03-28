@@ -17,7 +17,7 @@
 		{if $Raport.mode == 1}{$LNG.sys_destruc_title}{else}{$LNG.sys_attack_title}{/if}
 		{$Raport.time}:<br><br>
 		{foreach $Raport.rounds as $Round => $RoundInfo}
-			<table style="width:auto;" class="table-gow">
+			<table style="width:auto;" class="table-gow center_x">
 				<tr>
 					{foreach $RoundInfo.attacker as $Player}
 						{$PlayerInfo = $Raport.players[$Player.userID]}
@@ -33,7 +33,7 @@
 										{/if}<br>
 										{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield}
 										{$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-										<table>
+										<table class="table-gow center_x">
 											{if !empty($Player.ships)}
 												<tr>
 													<td class="transparent">{$LNG.sys_ship_type}</td>
@@ -80,7 +80,7 @@
 					{/foreach}
 				</tr>
 			</table>
-			<table style="width:auto;" class="table-gow">
+			<table style="width:auto;" class="table-gow center_x">
 				<tr>
 					{foreach $RoundInfo.defender as $Player}
 						{$PlayerInfo = $Raport.players[$Player.userID]}
@@ -96,7 +96,7 @@
 										{/if}<br>
 										{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield}
 										{$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
-										<table class="table-gow">
+										<table class="table-gow center_x">
 											{if !empty($Player.ships)}
 												<tr>
 													<td class="transparent">{$LNG.sys_ship_type}</td>
