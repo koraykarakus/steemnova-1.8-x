@@ -141,30 +141,30 @@ class ShowBuildingsPage extends AbstractGamePage
                 foreach ($REQUIREMENTS[$c_element] as $require_id => $require_level)
                 {
                     $require_array[] = [
-                        'currentLevel' => ($require_id < 100) ? $PLANET[$RESOURCE[$require_id]] : $USER[$RESOURCE[$require_id]],
-                        'neededLevel'  => $require_level,
-                        'requireID'    => $require_id,
+                        'current_level' => ($require_id < 100) ? $PLANET[$RESOURCE[$require_id]] : $USER[$RESOURCE[$require_id]],
+                        'needed_level'  => $require_level,
+                        'require_id'    => $require_id,
                     ];
                 }
 
             }
 
             $build_info_list[$c_element] = [
-                'level'               => $PLANET[$RESOURCE[$c_element]],
-                'maxLevel'            => $PRICELIST[$c_element]['max'],
-                'infoEnergyShort'     => pretty_number($require_energy),
-                'infoEnergyLong'      => $info_energy,
-                'costResources'       => $cost_resources,
-                'costOverflow'        => $cost_overflow,
-                'costOverflowTotal'   => array_sum($cost_overflow),
-                'elementTime'         => $element_time,
-                'destroyResources'    => $destroy_resources,
-                'destroyTime'         => $destroy_time,
-                'destroyOverflow'     => $destroy_overflow,
-                'buyable'             => $buyable,
-                'levelToBuild'        => $level_to_build,
-                'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element),
-                'requirements'        => $require_array,
+                'level'                => $PLANET[$RESOURCE[$c_element]],
+                'max_level'            => $PRICELIST[$c_element]['max'],
+                'info_energy_short'    => pretty_number($require_energy),
+                'info_energy_long'     => $info_energy,
+                'cost_resources'       => $cost_resources,
+                'cost_overflow'        => $cost_overflow,
+                'cost_overflow_total'  => array_sum($cost_overflow),
+                'element_time'         => $element_time,
+                'destroy_resources'    => $destroy_resources,
+                'destroy_time'         => $destroy_time,
+                'destroy_overflow'     => $destroy_overflow,
+                'buyable'              => $buyable,
+                'level_to_build'       => $level_to_build,
+                'technology_satisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $c_element),
+                'requirements'         => $require_array,
             ];
         }
 
@@ -174,15 +174,15 @@ class ShowBuildingsPage extends AbstractGamePage
         }
 
         $this->assign([
-            'BuildInfoList'   => $build_info_list,
-            'CanBuildElement' => $can_build_element,
-            'RoomIsOk'        => $room_is_ok,
-            'Queue'           => $queue,
-            'isBusy'          => ['shipyard' => !empty($PLANET['b_shipyard_id']), 'research' => $USER['b_tech_planet'] != 0],
-            'HaveMissiles'    => (bool) $PLANET[$RESOURCE[503]] + $PLANET[$RESOURCE[502]],
-            'usedField'       => $PLANET['field_current'],
-            'maxField'        => CalculateMaxPlanetFields($PLANET),
-            'userBuildPoints' => pretty_number($USER['build_points']),
+            'build_info_list'   => $build_info_list,
+            'can_build_element' => $can_build_element,
+            'room_is_ok'        => $room_is_ok,
+            'queue'             => $queue,
+            'is_busy'           => ['shipyard' => !empty($PLANET['b_shipyard_id']), 'research' => $USER['b_tech_planet'] != 0],
+            'have_missiles'     => (bool) $PLANET[$RESOURCE[503]] + $PLANET[$RESOURCE[502]],
+            'used_field'        => $PLANET['field_current'],
+            'max_field'         => CalculateMaxPlanetFields($PLANET),
+            'user_build_points' => pretty_number($USER['build_points']),
         ]);
 
         $this->display('page.buildings.default.tpl');
