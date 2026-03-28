@@ -209,21 +209,21 @@ class ResourceUpdate
 
         if ($Element)
         {
-            $BuildEnergy = $USER[$RESOURCE[113]];
-            $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$RESOURCE[$Element] . '_percent'];
+            $build_energy = $USER[$RESOURCE[113]];
+            $build_temp = $PLANET['temp_max'];
+            $build_level_factor = $PLANET[$RESOURCE[$Element] . '_percent'];
 
             if (in_array($Element, array_merge($RESLIST['build'], $RESLIST['fleet'], $RESLIST['defense'])))
             {
-                $BuildLevel = $PLANET[$RESOURCE[$Element]];
+                $build_level = $PLANET[$RESOURCE[$Element]];
             }
             elseif (in_array($Element, array_merge($RESLIST['tech'], $RESLIST['officers'])))
             {
-                $BuildLevel = $USER[$RESOURCE[$Element]];
+                $build_level = $USER[$RESOURCE[$Element]];
             }
             else
             {
-                $BuildLevel = 0;
+                $build_level = 0;
             }
 
             $Calculation = str_replace('this->', "", $Calculation);
@@ -288,8 +288,8 @@ class ResourceUpdate
             ],
         ];
 
-        $BuildTemp = $this->PLANET['temp_max'];
-        $BuildEnergy = $this->USER[$RESOURCE[113]];
+        $build_temp = $this->PLANET['temp_max'];
+        $build_energy = $this->USER[$RESOURCE[113]];
 
         foreach ($RESLIST['storage'] as $ProdID)
         {
@@ -300,7 +300,7 @@ class ResourceUpdate
                     continue;
                 }
 
-                $BuildLevel = $this->PLANET[$RESOURCE[$ProdID]];
+                $build_level = $this->PLANET[$RESOURCE[$ProdID]];
                 $temp[$ID]['max'] += round(eval(self::getProd($PRODGRID[$ProdID]['storage'][$ID])));
             }
         }
@@ -309,8 +309,8 @@ class ResourceUpdate
 
         foreach ($RESLIST['prod'] as $ProdID)
         {
-            $BuildLevelFactor = $this->PLANET[$RESOURCE[$ProdID].'_percent'];
-            $BuildLevel = $this->PLANET[$RESOURCE[$ProdID]];
+            $build_level_factor = $this->PLANET[$RESOURCE[$ProdID].'_percent'];
+            $build_level = $this->PLANET[$RESOURCE[$ProdID]];
 
             foreach ($ressIDs as $ID)
             {

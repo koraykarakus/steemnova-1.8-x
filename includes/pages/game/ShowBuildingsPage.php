@@ -78,9 +78,9 @@ class ShowBuildingsPage extends AbstractGamePage
 
         $room_is_ok = $PLANET['field_current'] < ($current_max_fields - $queue_destroy);
 
-        $BuildEnergy = $USER[$RESOURCE[113]];
-        $BuildLevelFactor = 10;
-        $BuildTemp = $PLANET['temp_max'];
+        $build_energy = $USER[$RESOURCE[113]];
+        $build_level_factor = 10;
+        $build_temp = $PLANET['temp_max'];
 
         $build_info_list = [];
         $elements = Buildings::filterElements($RESLIST['allow'][$PLANET['planet_type']], 1);
@@ -107,10 +107,10 @@ class ShowBuildingsPage extends AbstractGamePage
 
             if (in_array($c_element, $RESLIST['prod']))
             {
-                $BuildLevel = $PLANET[$RESOURCE[$c_element]];
+                $build_level = $PLANET[$RESOURCE[$c_element]];
                 $need = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
-                $BuildLevel = $level_to_build + 1;
+                $build_level = $level_to_build + 1;
                 $prod = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
                 $require_energy = $prod - $need;

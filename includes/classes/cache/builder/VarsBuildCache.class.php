@@ -51,13 +51,13 @@ class VarsBuildCache implements BuildCache
         $varsResult = $db->nativeQuery('SELECT * FROM %%VARS%%;');
         foreach ($varsResult as $varsRow)
         {
-            $RESOURCE[$varsRow['elementID']] = $varsRow['name'];
-            $COMBATCAPS[$varsRow['elementID']] = [
+            $RESOURCE[$varsRow['element_id']] = $varsRow['name'];
+            $COMBATCAPS[$varsRow['element_id']] = [
                 'attack' => $varsRow['attack'],
                 'shield' => $varsRow['defend'],
             ];
 
-            $PRICELIST[$varsRow['elementID']] = [
+            $PRICELIST[$varsRow['element_id']] = [
                 'cost' => [
                     901 => $varsRow['cost901'],
                     902 => $varsRow['cost902'],
@@ -66,99 +66,99 @@ class VarsBuildCache implements BuildCache
                     921 => $varsRow['cost921'],
                 ],
                 'factor'       => $varsRow['factor'],
-                'max'          => $varsRow['maxLevel'],
+                'max'          => $varsRow['max_level'],
                 'consumption'  => $varsRow['consumption1'],
                 'consumption2' => $varsRow['consumption2'],
                 'speed'        => $varsRow['speed1'],
                 'speed2'       => $varsRow['speed2'],
                 'capacity'     => $varsRow['capacity'],
-                'tech'         => $varsRow['speedTech'],
-                'time'         => $varsRow['timeBonus'],
+                'tech'         => $varsRow['speed_tech'],
+                'time'         => $varsRow['time_bonus'],
                 'bonus'        => [
-                    'Attack'          => [$varsRow['bonusAttack'], $varsRow['bonusAttackUnit']],
-                    'Defensive'       => [$varsRow['bonusDefensive'], $varsRow['bonusDefensiveUnit']],
-                    'Shield'          => [$varsRow['bonusShield'], $varsRow['bonusShieldUnit']],
-                    'BuildTime'       => [$varsRow['bonusBuildTime'], $varsRow['bonusBuildTimeUnit']],
-                    'ResearchTime'    => [$varsRow['bonusResearchTime'], $varsRow['bonusResearchTimeUnit']],
-                    'ShipTime'        => [$varsRow['bonusShipTime'], $varsRow['bonusShipTimeUnit']],
-                    'DefensiveTime'   => [$varsRow['bonusDefensiveTime'], $varsRow['bonusDefensiveTimeUnit']],
-                    'Resource'        => [$varsRow['bonusResource'], $varsRow['bonusResourceUnit']],
-                    'Energy'          => [$varsRow['bonusEnergy'], $varsRow['bonusEnergyUnit']],
-                    'ResourceStorage' => [$varsRow['bonusResourceStorage'], $varsRow['bonusResourceStorageUnit']],
-                    'ShipStorage'     => [$varsRow['bonusShipStorage'], $varsRow['bonusShipStorageUnit']],
-                    'FlyTime'         => [$varsRow['bonusFlyTime'], $varsRow['bonusFlyTimeUnit']],
-                    'FleetSlots'      => [$varsRow['bonusFleetSlots'], $varsRow['bonusFleetSlotsUnit']],
-                    'Planets'         => [$varsRow['bonusPlanets'], $varsRow['bonusPlanetsUnit']],
-                    'SpyPower'        => [$varsRow['bonusSpyPower'], $varsRow['bonusSpyPowerUnit']],
-                    'Expedition'      => [$varsRow['bonusExpedition'], $varsRow['bonusExpeditionUnit']],
-                    'GateCoolTime'    => [$varsRow['bonusGateCoolTime'], $varsRow['bonusGateCoolTimeUnit']],
-                    'MoreFound'       => [$varsRow['bonusMoreFound'], $varsRow['bonusMoreFoundUnit']],
+                    'Attack'          => [$varsRow['bonus_attack'], $varsRow['bonus_attack_unit']],
+                    'Defensive'       => [$varsRow['bonus_defensive'], $varsRow['bonus_defensive_unit']],
+                    'Shield'          => [$varsRow['bonus_shield'], $varsRow['bonus_shield_unit']],
+                    'BuildTime'       => [$varsRow['bonus_build_time'], $varsRow['bonus_build_time_unit']],
+                    'ResearchTime'    => [$varsRow['bonus_research_time'], $varsRow['bonus_research_time_unit']],
+                    'ShipTime'        => [$varsRow['bonus_ship_time'], $varsRow['bonus_ship_time_unit']],
+                    'DefensiveTime'   => [$varsRow['bonus_defensive_time'], $varsRow['bonus_defensive_time_unit']],
+                    'Resource'        => [$varsRow['bonus_resource'], $varsRow['bonus_resource_unit']],
+                    'Energy'          => [$varsRow['bonus_energy'], $varsRow['bonus_energy_unit']],
+                    'ResourceStorage' => [$varsRow['bonus_resource_storage'], $varsRow['bonus_resource_storage_unit']],
+                    'ShipStorage'     => [$varsRow['bonus_ship_storage'], $varsRow['bonus_ship_storage_unit']],
+                    'FlyTime'         => [$varsRow['bonus_fly_time'], $varsRow['bonus_fly_time_unit']],
+                    'FleetSlots'      => [$varsRow['bonus_fleet_slots'], $varsRow['bonus_fleet_slots_unit']],
+                    'Planets'         => [$varsRow['bonus_planets'], $varsRow['bonus_planets_unit']],
+                    'SpyPower'        => [$varsRow['bonus_spy_power'], $varsRow['bonus_spy_power_unit']],
+                    'Expedition'      => [$varsRow['bonus_expedition'], $varsRow['bonus_expedition_unit']],
+                    'GateCoolTime'    => [$varsRow['bonus_gate_cool_time'], $varsRow['bonus_gate_cool_time_unit']],
+                    'MoreFound'       => [$varsRow['bonus_more_found'], $varsRow['bonus_more_found_unit']],
                 ],
             ];
 
-            $PRODGRID[$varsRow['elementID']]['production'] = [
+            $PRODGRID[$varsRow['element_id']]['production'] = [
                 901 => $varsRow['production901'],
                 902 => $varsRow['production902'],
                 903 => $varsRow['production903'],
                 911 => $varsRow['production911'],
             ];
 
-            $PRODGRID[$varsRow['elementID']]['storage'] = [
+            $PRODGRID[$varsRow['element_id']]['storage'] = [
                 901 => $varsRow['storage901'],
                 902 => $varsRow['storage902'],
                 903 => $varsRow['storage903'],
             ];
 
-            if (array_filter($PRODGRID[$varsRow['elementID']]['production']))
+            if (array_filter($PRODGRID[$varsRow['element_id']]['production']))
             {
-                $RESLIST['prod'][] = $varsRow['elementID'];
+                $RESLIST['prod'][] = $varsRow['element_id'];
             }
 
-            if (array_filter($PRODGRID[$varsRow['elementID']]['storage']))
+            if (array_filter($PRODGRID[$varsRow['element_id']]['storage']))
             {
-                $RESLIST['storage'][] = $varsRow['elementID'];
+                $RESLIST['storage'][] = $varsRow['element_id'];
             }
 
-            if (($varsRow['bonusAttack'] + $varsRow['bonusDefensive'] + $varsRow['bonusShield'] + $varsRow['bonusBuildTime'] +
-                $varsRow['bonusResearchTime'] + $varsRow['bonusShipTime'] + $varsRow['bonusDefensiveTime'] + $varsRow['bonusResource'] +
-                $varsRow['bonusEnergy'] + $varsRow['bonusResourceStorage'] + $varsRow['bonusShipStorage'] + $varsRow['bonusFlyTime'] +
-                $varsRow['bonusFleetSlots'] + $varsRow['bonusPlanets'] + $varsRow['bonusSpyPower'] + $varsRow['bonusExpedition'] +
-                $varsRow['bonusGateCoolTime'] + $varsRow['bonusMoreFound']) != 0)
+            if (($varsRow['bonus_attack'] + $varsRow['bonus_defensive'] + $varsRow['bonus_shield'] + $varsRow['bonus_build_time'] +
+                $varsRow['bonus_research_time'] + $varsRow['bonus_ship_time'] + $varsRow['bonus_defensive_time'] + $varsRow['bonus_resource'] +
+                $varsRow['bonus_energy'] + $varsRow['bonus_resource_storage'] + $varsRow['bonus_ship_storage'] + $varsRow['bonus_fly_time'] +
+                $varsRow['bonus_fleet_slots'] + $varsRow['bonus_planets'] + $varsRow['bonus_spy_power'] + $varsRow['bonus_expedition'] +
+                $varsRow['bonus_gate_cool_time'] + $varsRow['bonus_more_found']) != 0)
             {
-                $RESLIST['bonus'][] = $varsRow['elementID'];
+                $RESLIST['bonus'][] = $varsRow['element_id'];
             }
-            if ($varsRow['onePerPlanet'] == 1)
+            if ($varsRow['one_per_planet'] == 1)
             {
-                $RESLIST['one'][] = $varsRow['elementID'];
+                $RESLIST['one'][] = $varsRow['element_id'];
             }
 
             switch ($varsRow['class'])
             {
                 case 0:
-                    $RESLIST['build'][] = $varsRow['elementID'];
-                    $tmp = explode(',', $varsRow['onPlanetType']);
+                    $RESLIST['build'][] = $varsRow['element_id'];
+                    $tmp = explode(',', $varsRow['on_planet_type']);
                     foreach ($tmp as $type)
                     {
-                        $RESLIST['allow'][$type][] = $varsRow['elementID'];
+                        $RESLIST['allow'][$type][] = $varsRow['element_id'];
                     }
                     break;
                 case 100:
-                    $RESLIST['tech'][] = $varsRow['elementID'];
+                    $RESLIST['tech'][] = $varsRow['element_id'];
                     break;
                 case 200:
-                    $RESLIST['fleet'][] = $varsRow['elementID'];
+                    $RESLIST['fleet'][] = $varsRow['element_id'];
                     break;
                 case 400:
-                    $RESLIST['defense'][] = $varsRow['elementID'];
+                    $RESLIST['defense'][] = $varsRow['element_id'];
                     break;
                 case 500:
-                    $RESLIST['missile'][] = $varsRow['elementID'];
+                    $RESLIST['missile'][] = $varsRow['element_id'];
                     break;
                 case 600:
-                    $RESLIST['officers'][] = $varsRow['elementID'];
+                    $RESLIST['officers'][] = $varsRow['element_id'];
                     break;
                 case 700:
-                    $RESLIST['dmfunc'][] = $varsRow['elementID'];
+                    $RESLIST['dmfunc'][] = $varsRow['element_id'];
                     break;
             }
         }

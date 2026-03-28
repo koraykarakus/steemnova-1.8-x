@@ -119,8 +119,8 @@ class ShowResourcesPage extends AbstractGamePage
         }
 
         /* Data for eval */
-        $BuildEnergy = $USER[$RESOURCE[113]];
-        $BuildTemp = $PLANET['temp_max'];
+        $build_energy = $USER[$RESOURCE[113]];
+        $build_temp = $PLANET['temp_max'];
         $production_list = [];
         foreach ($RESLIST['prod'] as $c_prod_id)
         {
@@ -143,8 +143,8 @@ class ShowResourcesPage extends AbstractGamePage
             ];
 
             /* Data for eval */
-            $BuildLevel = $PLANET[$RESOURCE[$c_prod_id]];
-            $BuildLevelFactor = $PLANET[$RESOURCE[$c_prod_id].'_percent'];
+            $build_level = $PLANET[$RESOURCE[$c_prod_id]];
+            $build_level_factor = $PLANET[$RESOURCE[$c_prod_id].'_percent'];
 
             foreach ($ress_ids as $c_id)
             {
