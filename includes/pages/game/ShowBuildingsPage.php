@@ -107,10 +107,10 @@ class ShowBuildingsPage extends AbstractGamePage
 
             if (in_array($c_element, $RESLIST['prod']))
             {
-                $BuildLevel = $PLANET[$RESOURCE[$c_element]];
+                $build_level = $PLANET[$RESOURCE[$c_element]];
                 $need = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
-                $BuildLevel = $level_to_build + 1;
+                $build_level = $level_to_build + 1;
                 $prod = eval(ResourceUpdate::getProd($PRODGRID[$c_element]['production'][911], $c_element));
 
                 $require_energy = $prod - $need;

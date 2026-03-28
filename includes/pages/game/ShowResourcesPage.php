@@ -143,7 +143,7 @@ class ShowResourcesPage extends AbstractGamePage
             ];
 
             /* Data for eval */
-            $BuildLevel = $PLANET[$RESOURCE[$c_prod_id]];
+            $build_level = $PLANET[$RESOURCE[$c_prod_id]];
             $BuildLevelFactor = $PLANET[$RESOURCE[$c_prod_id].'_percent'];
 
             foreach ($ress_ids as $c_id)

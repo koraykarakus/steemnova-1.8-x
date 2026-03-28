@@ -311,15 +311,15 @@ class ShowResearchPage extends AbstractGamePage
             return false;
         }
 
-        $BuildLevel = $USER[$RESOURCE[$elementId]] + 1;
+        $build_level = $USER[$RESOURCE[$elementId]] + 1;
         if ($ActualCount == 0)
         {
-            if ($PRICELIST[$elementId]['max'] < $BuildLevel)
+            if ($PRICELIST[$elementId]['max'] < $build_level)
             {
                 return false;
             }
 
-            $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $elementId, !$AddMode, $BuildLevel);
+            $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $elementId, !$AddMode, $build_level);
 
             if (!BuildFunctions::isElementBuyable($USER, $PLANET, $elementId, $costResources))
             {
@@ -346,7 +346,7 @@ class ShowResearchPage extends AbstractGamePage
             $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $elementId, $costResources);
             $BuildEndTime = TIMESTAMP + $elementTime;
 
-            $USER['b_tech_queue'] = serialize([[$elementId, $BuildLevel, $elementTime, $BuildEndTime, $PLANET['id']]]);
+            $USER['b_tech_queue'] = serialize([[$elementId, $build_level, $elementTime, $BuildEndTime, $PLANET['id']]]);
             $USER['b_tech'] = $BuildEndTime;
             $USER['b_tech_id'] = $elementId;
             $USER['b_tech_planet'] = $PLANET['id'];
@@ -364,17 +364,17 @@ class ShowResearchPage extends AbstractGamePage
                 $addLevel++;
             }
 
-            $BuildLevel += $addLevel;
+            $build_level += $addLevel;
 
-            if ($PRICELIST[$elementId]['max'] < $BuildLevel)
+            if ($PRICELIST[$elementId]['max'] < $build_level)
             {
                 return false;
             }
 
-            $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $elementId, null, !$AddMode, $BuildLevel);
+            $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $elementId, null, !$AddMode, $build_level);
 
             $BuildEndTime = $CurrentQueue[$ActualCount - 1][3] + $elementTime;
-            $CurrentQueue[] = [$elementId, $BuildLevel, $elementTime, $BuildEndTime, $PLANET['id']];
+            $CurrentQueue[] = [$elementId, $build_level, $elementTime, $BuildEndTime, $PLANET['id']];
             $USER['b_tech_queue'] = serialize($CurrentQueue);
         }
         return true;

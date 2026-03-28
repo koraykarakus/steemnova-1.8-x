@@ -259,7 +259,7 @@ class ShowInformationPage extends AbstractGamePage
 
             $current_level = $PLANET[$RESOURCE[$element_id]];
             $build_start_lvl = max($current_level - 2, 0);
-            for ($BuildLevel = $build_start_lvl; $BuildLevel < $build_start_lvl + 15; $BuildLevel++)
+            for ($build_level = $build_start_lvl; $build_level < $build_start_lvl + 15; $build_level++)
             {
                 foreach ($ress_ids as $c_id)
                 {
@@ -280,7 +280,7 @@ class ShowInformationPage extends AbstractGamePage
                         $production *= Config::get()->resource_multiplier;
                     }
 
-                    $production_table['production'][$BuildLevel][$c_id] = $production;
+                    $production_table['production'][$build_level][$c_id] = $production;
                 }
             }
 
@@ -291,7 +291,7 @@ class ShowInformationPage extends AbstractGamePage
             $current_level = $PLANET[$RESOURCE[$element_id]];
             $build_start_lvl = max($current_level - 2, 0);
 
-            for ($BuildLevel = $build_start_lvl; $BuildLevel < $build_start_lvl + 15; $BuildLevel++)
+            for ($build_level = $build_start_lvl; $build_level < $build_start_lvl + 15; $build_level++)
             {
                 foreach ($ress_ids as $c_id)
                 {
@@ -303,7 +303,7 @@ class ShowInformationPage extends AbstractGamePage
                     $production = round(eval(ResourceUpdate::getProd($PRODGRID[$element_id]['storage'][$c_id])));
                     $production *= Config::get()->storage_multiplier;
 
-                    $production_table['storage'][$BuildLevel][$c_id] = $production;
+                    $production_table['storage'][$build_level][$c_id] = $production;
                 }
             }
 
