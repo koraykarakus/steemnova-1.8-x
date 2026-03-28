@@ -1013,7 +1013,7 @@ CREATE TABLE `%PREFIX%vars` (
   `name` VARCHAR(32) NOT NULL,
   `class` INT NOT NULL,
   `on_planet_type` set('1','3') NOT NULL,
-  `one_per_planet` TINYINT(4) NOT NULL,
+  `one_per_planet` TINYINT NOT NULL,
   `factor` FLOAT(4,2) NOT NULL,
   `max_level` INT DEFAULT NULL,
   `cost901` BIGINT UNSIGNED NOT NULL DEFAULT 0,
