@@ -1174,7 +1174,7 @@ CREATE TABLE `%PREFIX%vars_rapidfire_default` (
   KEY `rapidfire_id` (`rapidfire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `%PREFIX%vars_requriements` (
+CREATE TABLE `%PREFIX%vars_requirements` (
   `element_id` INT NOT NULL,
   `require_id` INT NOT NULL,
   `require_level` INT NOT NULL,
@@ -1182,7 +1182,7 @@ CREATE TABLE `%PREFIX%vars_requriements` (
   KEY `require_id` (`require_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `%PREFIX%vars_requriements_default` (
+CREATE TABLE `%PREFIX%vars_requirements_default` (
   `element_id` INT NOT NULL,
   `require_id` INT NOT NULL,
   `require_level` INT NOT NULL,
@@ -1415,7 +1415,7 @@ INSERT INTO `%PREFIX%vars_rapidfire` (`element_id`, `rapidfire_id`, `shoots`) VA
 INSERT INTO `%PREFIX%vars_rapidfire_default`
 SELECT * FROM `%PREFIX%vars_rapidfire`;
 
-INSERT INTO `%PREFIX%vars_requriements` (`element_id`, `require_id`, `require_level`) VALUES
+INSERT INTO `%PREFIX%vars_requirements` (`element_id`, `require_id`, `require_level`) VALUES
 (6, 14, 20),
 (6, 31, 22),
 (6, 15, 4),
@@ -1601,8 +1601,8 @@ INSERT INTO `%PREFIX%vars_requriements` (`element_id`, `require_id`, `require_le
 (615, 614, 1),
 (615, 609, 1);
 
-INSERT INTO `%PREFIX%vars_requriements_default`
-SELECT * FROM `%PREFIX%vars_requriements`;
+INSERT INTO `%PREFIX%vars_requirements_default`
+SELECT * FROM `%PREFIX%vars_requirements`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
