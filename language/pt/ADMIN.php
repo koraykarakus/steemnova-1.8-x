@@ -20,6 +20,23 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Permitir perda de frota na expedição";
+$LNG['es_allow_fleet_delay'] = "Permitir atraso da frota na expedição";
+$LNG['es_allow_fleet_speedup'] = "Permitir aceleração da frota na expedição";
+$LNG['es_allow_wars'] = "Permitir combates na expedição";
+$LNG['es_allow_dm_finding'] = "Permitir encontrar matéria escura na expedição";
+$LNG['es_allow_resources_finding'] = "Permitir encontrar recursos na expedição";
+$LNG['es_allow_ships_finding'] = "Permitir encontrar naves na expedição";
+$LNG['es_consider_hold_time'] = "Considerar tempo de permanência nas expedições";
+$LNG['es_consider_same_coordinate'] = "Considerar mesmas coordenadas nas expedições";
+$LNG['es_min_dm_small_event'] = "Mín matéria escura (evento pequeno)";
+$LNG['es_max_dm_small_event'] = "Máx matéria escura (evento pequeno)";
+$LNG['es_min_dm_large_event'] = "Mín matéria escura (evento grande)";
+$LNG['es_max_dm_large_event'] = "Máx matéria escura (evento grande)";
+$LNG['es_min_dm_very_large_event'] = "Mín matéria escura (evento muito grande)";
+$LNG['es_max_dm_very_large_event'] = "Máx matéria escura (evento muito grande)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Permitir ao jogador coletar das minas enquanto está sob ataque";
 $LNG['cm_time'] = "Tempo de coleta das minas (minutos)";

@@ -5,6 +5,23 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Autoriser la perte de flotte en expédition";
+$LNG['es_allow_fleet_delay'] = "Autoriser le retard de flotte en expédition";
+$LNG['es_allow_fleet_speedup'] = "Autoriser l'accélération de flotte en expédition";
+$LNG['es_allow_wars'] = "Autoriser les combats en expédition";
+$LNG['es_allow_dm_finding'] = "Autoriser la découverte de matière noire en expédition";
+$LNG['es_allow_resources_finding'] = "Autoriser la découverte de ressources en expédition";
+$LNG['es_allow_ships_finding'] = "Autoriser la découverte de vaisseaux en expédition";
+$LNG['es_consider_hold_time'] = "Prendre en compte le temps d'attente des expéditions";
+$LNG['es_consider_same_coordinate'] = "Prendre en compte les mêmes coordonnées en expédition";
+$LNG['es_min_dm_small_event'] = "Min matière noire (petit événement)";
+$LNG['es_max_dm_small_event'] = "Max matière noire (petit événement)";
+$LNG['es_min_dm_large_event'] = "Min matière noire (grand événement)";
+$LNG['es_max_dm_large_event'] = "Max matière noire (grand événement)";
+$LNG['es_min_dm_very_large_event'] = "Min matière noire (très grand événement)";
+$LNG['es_max_dm_very_large_event'] = "Max matière noire (très grand événement)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Permettre au joueur de collecter les mines pendant une attaque";
 $LNG['cm_time'] = "Temps de collecte des mines (minutes)";

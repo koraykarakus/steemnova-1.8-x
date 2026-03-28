@@ -18,6 +18,23 @@
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Allow fleet loss on expedition";
+$LNG['es_allow_fleet_delay'] = "Allow fleet delay on expedition";
+$LNG['es_allow_fleet_speedup'] = "Allow fleet speed up on expedition";
+$LNG['es_allow_wars'] = "Allow wars on expedition";
+$LNG['es_allow_dm_finding'] = "Allow darkmatter to be found on expedition";
+$LNG['es_allow_resources_finding'] = "Allow resources to be found on expedition";
+$LNG['es_allow_ships_finding'] = "Allow ships to be found on expedition";
+$LNG['es_consider_hold_time'] = "Consider hold time for expeditions";
+$LNG['es_consider_same_coordinate'] = "Consider same coordinate for expeditions";
+$LNG['es_min_dm_small_event'] = "min darkmatter (small event)";
+$LNG['es_max_dm_small_event'] = "max darkmatter (small event)";
+$LNG['es_min_dm_large_event'] = "min darkmatter (large event)";
+$LNG['es_max_dm_large_event'] = "max darkmatter (large event)";
+$LNG['es_min_dm_very_large_event'] = "min darkmatter (very large event)";
+$LNG['es_max_dm_very_large_event'] = "max darkmatter (very large event)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Let user collect mines while under attack";
 $LNG['cm_time'] = "Collect Mine Time (minutes)";

@@ -15,6 +15,23 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Zezwól na utratę floty podczas ekspedycji";
+$LNG['es_allow_fleet_delay'] = "Zezwól na opóźnienie floty podczas ekspedycji";
+$LNG['es_allow_fleet_speedup'] = "Zezwól na przyspieszenie floty podczas ekspedycji";
+$LNG['es_allow_wars'] = "Zezwól na walki podczas ekspedycji";
+$LNG['es_allow_dm_finding'] = "Zezwól na znalezienie ciemnej materii podczas ekspedycji";
+$LNG['es_allow_resources_finding'] = "Zezwól na znalezienie surowców podczas ekspedycji";
+$LNG['es_allow_ships_finding'] = "Zezwól na znalezienie statków podczas ekspedycji";
+$LNG['es_consider_hold_time'] = "Uwzględnij czas postoju w ekspedycjach";
+$LNG['es_consider_same_coordinate'] = "Uwzględnij te same współrzędne w ekspedycjach";
+$LNG['es_min_dm_small_event'] = "Min ciemna materia (małe wydarzenie)";
+$LNG['es_max_dm_small_event'] = "Max ciemna materia (małe wydarzenie)";
+$LNG['es_min_dm_large_event'] = "Min ciemna materia (duże wydarzenie)";
+$LNG['es_max_dm_large_event'] = "Max ciemna materia (duże wydarzenie)";
+$LNG['es_min_dm_very_large_event'] = "Min ciemna materia (bardzo duże wydarzenie)";
+$LNG['es_max_dm_very_large_event'] = "Max ciemna materia (bardzo duże wydarzenie)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Pozwól graczowi zbierać z kopalni podczas ataku";
 $LNG['cm_time'] = "Czas zbierania z kopalni (minuty)";

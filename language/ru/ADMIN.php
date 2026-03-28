@@ -16,6 +16,23 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Разрешить потерю флота в экспедиции";
+$LNG['es_allow_fleet_delay'] = "Разрешить задержку флота в экспедиции";
+$LNG['es_allow_fleet_speedup'] = "Разрешить ускорение флота в экспедиции";
+$LNG['es_allow_wars'] = "Разрешить бои в экспедиции";
+$LNG['es_allow_dm_finding'] = "Разрешить находить тёмную материю в экспедиции";
+$LNG['es_allow_resources_finding'] = "Разрешить находить ресурсы в экспедиции";
+$LNG['es_allow_ships_finding'] = "Разрешить находить корабли в экспедиции";
+$LNG['es_consider_hold_time'] = "Учитывать время ожидания экспедиций";
+$LNG['es_consider_same_coordinate'] = "Учитывать одинаковые координаты в экспедициях";
+$LNG['es_min_dm_small_event'] = "Мин тёмная материя (малое событие)";
+$LNG['es_max_dm_small_event'] = "Макс тёмная материя (малое событие)";
+$LNG['es_min_dm_large_event'] = "Мин тёмная материя (большое событие)";
+$LNG['es_max_dm_large_event'] = "Макс тёмная материя (большое событие)";
+$LNG['es_min_dm_very_large_event'] = "Мин тёмная материя (очень большое событие)";
+$LNG['es_max_dm_very_large_event'] = "Макс тёмная материя (очень большое событие)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Разрешить игроку собирать ресурсы с шахт во время атаки";
 $LNG['cm_time'] = "Время сбора с шахт (минуты)";

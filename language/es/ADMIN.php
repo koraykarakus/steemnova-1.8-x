@@ -15,6 +15,23 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
+$LNG['es_allow_fleet_loss'] = "Permitir pérdida de flota en expedición";
+$LNG['es_allow_fleet_delay'] = "Permitir retraso de flota en expedición";
+$LNG['es_allow_fleet_speedup'] = "Permitir aceleración de flota en expedición";
+$LNG['es_allow_wars'] = "Permitir combates en expedición";
+$LNG['es_allow_dm_finding'] = "Permitir encontrar materia oscura en expedición";
+$LNG['es_allow_resources_finding'] = "Permitir encontrar recursos en expedición";
+$LNG['es_allow_ships_finding'] = "Permitir encontrar naves en expedición";
+$LNG['es_consider_hold_time'] = "Considerar tiempo de permanencia en expediciones";
+$LNG['es_consider_same_coordinate'] = "Considerar mismas coordenadas en expediciones";
+$LNG['es_min_dm_small_event'] = "Mín materia oscura (evento pequeño)";
+$LNG['es_max_dm_small_event'] = "Máx materia oscura (evento pequeño)";
+$LNG['es_min_dm_large_event'] = "Mín materia oscura (evento grande)";
+$LNG['es_max_dm_large_event'] = "Máx materia oscura (evento grande)";
+$LNG['es_min_dm_very_large_event'] = "Mín materia oscura (evento muy grande)";
+$LNG['es_max_dm_very_large_event'] = "Máx materia oscura (evento muy grande)";
+
 // ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
 $LNG['cm_collect_mines_under_attack'] = "Permitir al jugador recolectar minas mientras está bajo ataque";
 $LNG['cm_time'] = "Tiempo de recolección de minas (minutos)";
