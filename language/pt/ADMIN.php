@@ -20,6 +20,12 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Mover a frota diretamente ao realocar";
+$LNG['rl_price_dm'] = "Preço de realocação (DM)";
+$LNG['rl_next_time'] = "Próxima realocação (horas)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Tempo de recarga do portal após realocação (horas)";
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "Metal (início)";
 $LNG['cs_crystal_start'] = "Cristal (início)";

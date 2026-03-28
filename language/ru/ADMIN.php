@@ -16,6 +16,12 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+//---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
+$LNG['rl_move_fleet_directly'] = "Переместить флот сразу при релокации";
+$LNG['rl_price_dm'] = "Стоимость релокации (DM)";
+$LNG['rl_next_time'] = "Следующая релокация (часы)";
+$LNG['rl_jump_gate_cd_after_relocate'] = "Время перезарядки портала после релокации (часы)";
+
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "Металл (старт)";
 $LNG['cs_crystal_start'] = "Кристалл (старт)";
