@@ -15,6 +15,10 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Pozwól graczowi zbierać z kopalni podczas ataku";
+$LNG['cm_time'] = "Czas zbierania z kopalni (minuty)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Przenieś flotę bezpośrednio podczas relokacji";
 $LNG['rl_price_dm'] = "Koszt relokacji (DM)";

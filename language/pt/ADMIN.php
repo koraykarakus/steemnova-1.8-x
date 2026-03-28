@@ -20,6 +20,10 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Permitir ao jogador coletar das minas enquanto está sob ataque";
+$LNG['cm_time'] = "Tempo de coleta das minas (minutos)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Mover a frota diretamente ao realocar";
 $LNG['rl_price_dm'] = "Preço de realocação (DM)";

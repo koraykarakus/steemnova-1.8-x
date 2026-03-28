@@ -16,6 +16,10 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Разрешить игроку собирать ресурсы с шахт во время атаки";
+$LNG['cm_time'] = "Время сбора с шахт (минуты)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Переместить флот сразу при релокации";
 $LNG['rl_price_dm'] = "Стоимость релокации (DM)";

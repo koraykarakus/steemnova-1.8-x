@@ -18,6 +18,10 @@
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Let user collect mines while under attack";
+$LNG['cm_time'] = "Collect Mine Time (minutes)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Move fleet directly on relocate";
 $LNG['rl_price_dm'] = "Relocate Price (DM)";
