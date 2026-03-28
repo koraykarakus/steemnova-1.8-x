@@ -5,6 +5,10 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Permettre au joueur de collecter les mines pendant une attaque";
+$LNG['cm_time'] = "Temps de collecte des mines (minutes)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Déplacer la flotte directement lors du déplacement";
 $LNG['rl_price_dm'] = "Prix du déplacement (DM)";

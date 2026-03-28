@@ -20,6 +20,10 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+$LNG['cm_collect_mines_under_attack'] = "Oyuncunun saldırı altındayken madenlerden toplamasına izin ver";
+$LNG['cm_time'] = "Maden toplama süresi (dakika)";
+
 //---------------	ShowRelocatePage.class.php - page.relocate.default.tpl ------------------------//
 $LNG['rl_move_fleet_directly'] = "Taşıma sırasında filoyu doğrudan hareket ettir";
 $LNG['rl_price_dm'] = "Taşıma Ücreti (DM)";
