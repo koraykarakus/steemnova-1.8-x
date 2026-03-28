@@ -71,7 +71,7 @@
   <div id="data_time" style="display:none;" data-hour="{$LNG.fs_time_hours}" data-second="{$LNG.fs_time_seconds}"
     data-minute="{$LNG.fs_time_minutes}"></div>
 
-  <table class="table-gow table_full">
+  <table class="table_game table_full">
     <thead>
       <tr>
         <th class="text-center" colspan="4">
@@ -142,7 +142,7 @@
     </tbody>
   </table>
 
-  <table id="result" class="table-gow table_full">
+  <table id="result" class="table_game table_full">
     <tbody>
       <tr>
         <td><span class="fsresultPercentage blue thick">{$LNG.fs_percantage}</span></td>

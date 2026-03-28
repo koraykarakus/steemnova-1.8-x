@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_trader}{/block}
 {block name="content"}
 	{if $requiredDarkMatter}
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<tr>
 				<th>{$LNG.fcm_info}</th>
 			</tr>
@@ -10,7 +10,7 @@
 			</tr>
 		</table>
 	{/if}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<th class="text_center">{$LNG.tr_call_trader}</th>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>
-					<table class="table-gow center_x">
+					<table class="table_game center_x">
 						<tbody>
 							{foreach $charge as $resourceID => $chageData}
 							{if !$requiredDarkMatter}

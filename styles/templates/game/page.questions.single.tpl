@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_faq}{/block}
 {block name="content"}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th>{$LNG.faq_overview}</th>
 		</tr>

@@ -3,7 +3,7 @@
 {block name="content"}
 
 <form method="POST" action="game.php?page=relocate&mode=send">
-<table class="table-gow table_full">
+<table class="table_game table_full">
   <tr>
     <th colspan="3">
       <span class="color-blue">{ucwords($LNG['rl_relocate'])}</span>

@@ -3,7 +3,7 @@
 <form id="form" name="battlesim">
 	<input type="hidden" name="slots" id="slots" value="{$slots + 1}">
 	
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<th colspan="2">{$LNG.lm_battlesim}</th>
@@ -48,7 +48,7 @@
 		</tbody>
 	</table>
 
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<td>
@@ -58,7 +58,7 @@
 		</thead>
 	</table>
 	
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tbody>
 			<tr>
 				<td style="padding: 0;">
@@ -74,7 +74,7 @@
 						</ul>
 						{section name=content start=0 loop=$slots}
 							<div style="max-width:600px" id="tabs-{$smarty.section.content.index}">
-								<table class="table-gow table_full">
+								<table class="table_game table_full">
 									<tr>
 										<th>{$LNG.bs_techno}</th>
 										<th>{$LNG.bs_atter}</th>
@@ -130,7 +130,7 @@
 									</tr>
 								</table>
 								<br>
-								<table class="table-gow table_full">
+								<table class="table_game table_full">
 									<tr>
 										<td style="width:50%;padding:0">
 											<table>
@@ -203,7 +203,7 @@
 		</tbody>
 			
 	</table>
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr id="submit">
 			<td>
 				<input type="button" onClick="return check();" value="{$LNG.bs_send}">&nbsp;

@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
 <form action="game.php?page=alliance&amp;mode=search" method="post">
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_find_alliances}</th>
 		</tr>
@@ -12,7 +12,7 @@
 	</table>
 </form>
 {if !empty($searchList)}
-<table class="table-gow table_full">
+<table class="table_game table_full">
 	<tr>
 		<th>{$LNG.al_ally_info_tag}</th>
 		<th>{$LNG.al_ally_info_name}</th>

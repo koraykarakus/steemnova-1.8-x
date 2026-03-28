@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.ti_read} - {$LNG.lm_support}{/block}
 {block name="content"}
 
-<table class="table-gow table_full">
+<table class="table_game table_full">
 <form action="game.php?page=ticket&mode=send" method="post" id="form">
 <input type="hidden" name="id" value="{$ticket_id}">
 	{foreach $answer_list as $answer_id => $answer_row}

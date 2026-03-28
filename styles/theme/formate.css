@@ -2144,7 +2144,7 @@ background: linear-gradient(180deg,
 }
 
 /*table gow, general table for styling*/
-.table-gow {
+.table_game {
 	border-collapse: collapse;
 	background: linear-gradient(180deg,
 			#1a1a1d 0%,
@@ -2159,7 +2159,7 @@ background: linear-gradient(180deg,
 	color: #ddd;
 }
 
-.table-gow th {
+.table_game th {
 	background: linear-gradient(180deg,
 			#2b282e 0%,
 			#1b1a17 100%
@@ -2173,41 +2173,41 @@ background: linear-gradient(180deg,
 	text-align: center;
 }
 
-.table-gow td {
+.table_game td {
 	padding: 6px 8px;
 	border: 1px solid rgba(255, 255, 255, 0.05);
 	color: #ccc;
 }
 
-.table-gow tbody tr {
+.table_game tbody tr {
 	transition: background 0.15s ease;
 }
 
-.table-gow tbody tr:hover {
+.table_game tbody tr:hover {
 	background: rgba(19, 18, 18, 0.11);
 }
 
-.table-gow a {
+.table_game a {
 	color: #e6c200;
 	text-decoration: none;
 	transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-.table-gow a:hover {
+.table_game a:hover {
 	color: #ecc00c;
 	text-shadow: 0 0 6px rgba(255, 214, 0, 0.5);
 }
 
-.table-gow button,
-.table-gow select,
-.table-gow input {
+.table_game button,
+.table_game select,
+.table_game input {
 	background: #1c1c1f;
 	border: 1px solid rgba(255, 214, 0, 0.3);
 	color: #ddd;
 }
 
-.table-gow input:focus,
-.table-gow select:focus {
+.table_game input:focus,
+.table_game select:focus {
 	outline: none;
 	border-color: #ffd600;
 	box-shadow: 0 0 6px rgba(255, 214, 0, 0.4);

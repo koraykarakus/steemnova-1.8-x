@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_fleet}{/block}
 {block name="content"}
-<table class="table-gow table_full">
+<table class="table_game table_full">
 	<tr>
 		<th colspan="2" class="success">{$LNG.fl_fleet_sended}</span></th>
 	</tr>

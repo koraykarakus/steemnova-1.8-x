@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="?page=resources" method="post">
 	<input type="hidden" name="mode" value="send">
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<thead>
 				<tr>
 					<th colspan="6">{$header}</th>

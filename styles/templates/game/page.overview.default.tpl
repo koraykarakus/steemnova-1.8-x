@@ -25,7 +25,7 @@
   </script>
 
 
-  <table class="table-gow table_full">
+  <table class="table_game table_full">
     <tbody>
       <tr>
         <td>{$LNG["type_planet_{$planet_type}"]}</td>
@@ -69,7 +69,7 @@
         </tr>
         <tr id="newsRow" class="{if $show_news_active}d-none{/if}">
           <td colspan="2">
-            <table class="table-gow">
+            <table class="table_game">
               <thead>
                 <tr>
                   <th class="color-blue" colspan="3">{$LNG.ov_news}</th>
@@ -115,7 +115,7 @@
           </table>
         </td>
         <td>
-          <table class="table-gow">
+          <table class="table_game">
             <thead></thead>
             <tbody>
               <tr>
@@ -152,7 +152,7 @@
   </table>
 
 
-  <table class="table-gow">
+  <table class="table_game">
     <tr>
       <td>
         {if $build_info.buildings}

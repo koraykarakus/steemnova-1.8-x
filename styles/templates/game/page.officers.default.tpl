@@ -2,7 +2,7 @@
 {block name="content"}
 
 {if !empty($darkmatterList)}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 	<tr>
 		<th colspan="2">{$of_dm_trade}</th>
 	</tr>
@@ -58,7 +58,7 @@
 </table>
 {/if}
 {if $officer_list}
-<table class="table-gow table_full">
+<table class="table_game table_full">
 	<tr>
 		<th colspan="2">{$LNG.of_offi}</th>
 	</tr>

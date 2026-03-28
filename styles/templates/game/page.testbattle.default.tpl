@@ -27,14 +27,14 @@
 
     <div class="ItemsWrapper">
         <form action="?page=testBattle&mode=send" method="post">
-            <table class="table-gow">
+            <table class="table_game">
                 <thead>
                     <th colspan="2">Planet Info</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <table class="table-gow">
+                            <table class="table_game">
                                 <thead>
                                     <th colspan="2">Attacker Coordinates:</th>
                                 </thead>
@@ -55,7 +55,7 @@
                             </table>
                         </td>
                         <td>
-                            <table class="table-gow">
+                            <table class="table_game">
                                 <thead>
                                     <th colspan="2">Defender Coordinates:</th>
                                 </thead>
@@ -78,7 +78,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table-gow">
+            <table class="table_game">
                 <tr>
                     <td>
                         <table>
@@ -136,7 +136,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="table-gow">
+            <table class="table_game">
                 <tr>
                     <td>
                         <button type="submit">Start fleets</button>

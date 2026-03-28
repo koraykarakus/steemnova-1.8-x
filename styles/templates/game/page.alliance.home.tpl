@@ -1,6 +1,6 @@
 {block name="title" prepend}{$LNG.lm_alliance}{/block}
 {block name="content"}
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<tr>
 			<th colspan="2">{$LNG.al_your_ally}</th>
 		</tr>
@@ -177,7 +177,7 @@
 		</tr>
 	</table>
 	{if !$isOwner}
-		<table class="table-gow">
+		<table class="table_game">
 			<tr>
 				<th>{$LNG.al_leave_alliance}</th>
 			</tr>

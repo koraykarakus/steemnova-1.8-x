@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_fleet}{/block}
 {block name="content"}
 
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<th colspan="9">
@@ -23,7 +23,7 @@
 
 	{if  isModuleAvailable($smarty.const.MODULE_AUTOEXPEDITION) && empty($target_mission)}
 		<form action="?page=AutoExpedition" method="post">
-			<table class="table-gow table_full">
+			<table class="table_game table_full">
 				<thead>
 					<th colspan="3">{$LNG.ae_autoexp}</th>
 				</thead>
@@ -86,7 +86,7 @@
 		<input type="hidden" name="planet" value="{$target_planet}">
 		<input type="hidden" name="type" value="{$target_type}">
 		<input type="hidden" name="target_mission" value="{$target_mission}">
-		<table class="table-gow table_full">
+		<table class="table_game table_full">
 			<thead>
 				<tr>
 					<th class="text-center  border border-secondary" colspan="5">{$LNG.fl_new_mission_title}</th>
@@ -163,7 +163,7 @@
 			</tbody>
 		</table>
 	</form>
-	<table class="table-gow table_full">
+	<table class="table_game table_full">
 		<thead>
 			<tr>
 				<th colspan="3">{$LNG.fl_bonus}</th>
