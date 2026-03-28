@@ -80,7 +80,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
         $BuildEnergy = $USER[$RESOURCE[113]];
         $build_level_factor = 10;
-        $BuildTemp = $PLANET['temp_max'];
+        $build_temp = $PLANET['temp_max'];
 
         $build_info_list = [];
         $elements = Buildings::filterElements($RESLIST['allow'][$PLANET['planet_type']], 1);

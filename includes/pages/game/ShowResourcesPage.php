@@ -120,7 +120,7 @@ class ShowResourcesPage extends AbstractGamePage
 
         /* Data for eval */
         $BuildEnergy = $USER[$RESOURCE[113]];
-        $BuildTemp = $PLANET['temp_max'];
+        $build_temp = $PLANET['temp_max'];
         $production_list = [];
         foreach ($RESLIST['prod'] as $c_prod_id)
         {
