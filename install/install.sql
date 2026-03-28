@@ -1175,19 +1175,19 @@ CREATE TABLE `%PREFIX%vars_rapidfire_default` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_requriements` (
-  `elementID` INT NOT NULL,
-  `requireID` INT NOT NULL,
-  `requireLevel` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `requireID` (`requireID`)
+  `element_id` INT NOT NULL,
+  `require_id` INT NOT NULL,
+  `require_level` INT NOT NULL,
+  KEY `element_id` (`element_id`),
+  KEY `require_id` (`require_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_requriements_default` (
-  `elementID` INT NOT NULL,
-  `requireID` INT NOT NULL,
-  `requireLevel` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `requireID` (`requireID`)
+  `element_id` INT NOT NULL,
+  `require_id` INT NOT NULL,
+  `require_level` INT NOT NULL,
+  KEY `element_id` (`element_id`),
+  KEY `require_id` (`require_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `announcement_text`, `moduls`, `disclaimer_address`, `disclaimer_phone`, `disclaimer_mail`, `disclaimer_notice`) VALUES
@@ -1415,7 +1415,7 @@ INSERT INTO `%PREFIX%vars_rapidfire` (`element_id`, `rapidfire_id`, `shoots`) VA
 INSERT INTO `%PREFIX%vars_rapidfire_default`
 SELECT * FROM `%PREFIX%vars_rapidfire`;
 
-INSERT INTO `%PREFIX%vars_requriements` (`elementID`, `requireID`, `requireLevel`) VALUES
+INSERT INTO `%PREFIX%vars_requriements` (`element_id`, `require_id`, `require_level`) VALUES
 (6, 14, 20),
 (6, 31, 22),
 (6, 15, 4),
