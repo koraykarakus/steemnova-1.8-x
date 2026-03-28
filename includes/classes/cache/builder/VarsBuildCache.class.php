@@ -45,7 +45,7 @@ class VarsBuildCache implements BuildCache
         $reqResult = $db->nativeQuery('SELECT * FROM %%VARS_REQUIRE%%;');
         foreach ($reqResult as $reqRow)
         {
-            $REQUIREMENTS[$reqRow['elementID']][$reqRow['requireID']] = $reqRow['requireLevel'];
+            $REQUIREMENTS[$reqRow['element_id']][$reqRow['require_id']] = $reqRow['require_level'];
         }
 
         $varsResult = $db->nativeQuery('SELECT * FROM %%VARS%%;');
