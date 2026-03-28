@@ -211,7 +211,7 @@ class ResourceUpdate
         {
             $BuildEnergy = $USER[$RESOURCE[113]];
             $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$RESOURCE[$Element] . '_percent'];
+            $build_level_factor = $PLANET[$RESOURCE[$Element] . '_percent'];
 
             if (in_array($Element, array_merge($RESLIST['build'], $RESLIST['fleet'], $RESLIST['defense'])))
             {
@@ -309,7 +309,7 @@ class ResourceUpdate
 
         foreach ($RESLIST['prod'] as $ProdID)
         {
-            $BuildLevelFactor = $this->PLANET[$RESOURCE[$ProdID].'_percent'];
+            $build_level_factor = $this->PLANET[$RESOURCE[$ProdID].'_percent'];
             $build_level = $this->PLANET[$RESOURCE[$ProdID]];
 
             foreach ($ressIDs as $ID)

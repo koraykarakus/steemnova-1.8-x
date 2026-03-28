@@ -255,7 +255,7 @@ class ShowInformationPage extends AbstractGamePage
             /* Data for eval */
             $BuildEnergy = $USER[$RESOURCE[113]];
             $BuildTemp = $PLANET['temp_max'];
-            $BuildLevelFactor = $PLANET[$RESOURCE[$element_id].'_percent'];
+            $build_level_factor = $PLANET[$RESOURCE[$element_id].'_percent'];
 
             $current_level = $PLANET[$RESOURCE[$element_id]];
             $build_start_lvl = max($current_level - 2, 0);
