@@ -1159,19 +1159,19 @@ CREATE TABLE `%PREFIX%vars_default` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_rapidfire` (
-  `elementID` INT NOT NULL,
-  `rapidfireID` INT NOT NULL,
+  `element_id` INT NOT NULL,
+  `rapidfire_id` INT NOT NULL,
   `shoots` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `rapidfireID` (`rapidfireID`)
+  KEY `element_id` (`element_id`),
+  KEY `rapidfire_id` (`rapidfire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_rapidfire_default` (
-  `elementID` INT NOT NULL,
-  `rapidfireID` INT NOT NULL,
+  `element_id` INT NOT NULL,
+  `rapidfire_id` INT NOT NULL,
   `shoots` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `rapidfireID` (`rapidfireID`)
+  KEY `element_id` (`element_id`),
+  KEY `rapidfire_id` (`rapidfire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_requriements` (
