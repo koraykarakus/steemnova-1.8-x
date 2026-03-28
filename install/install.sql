@@ -1313,7 +1313,7 @@ INSERT INTO `%PREFIX%vars` (`element_id`, `name`, `class`, `on_planet_type`, `on
 INSERT INTO `%PREFIX%vars_default`
 SELECT * FROM `%PREFIX%vars`;
 
-INSERT INTO `%PREFIX%vars_rapidfire` (`elementID`, `rapidfireID`, `shoots`) VALUES
+INSERT INTO `%PREFIX%vars_rapidfire` (`element_id`, `rapidfire_id`, `shoots`) VALUES
 (202, 210, 5),
 (202, 212, 5),
 (203, 210, 5),
