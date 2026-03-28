@@ -1082,6 +1082,9 @@ $LNG['qe_authattack'] = 'Protección de Ataques Administrador';
 $LNG['qe_submit'] = 'Aceptar';
 $LNG['qe_resetr'] = 'Reestablecer';
 $LNG['qe_allowmulti'] = 'Permitir Multicuentas';
+$LNG['qe_debris'] = "Escombros";
+$LNG['qe_err_planet_not_found'] = "Planeta no encontrado, ID de planeta incorrecto.";
+$LNG['qe_err_user_not_found'] = "El planeta (ID: %s) no pertenece a ningún usuario, considera eliminarlo de la base de datos.";
 
 
 //----------------------------------------------------------------------------//

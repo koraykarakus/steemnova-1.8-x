@@ -1132,6 +1132,9 @@ $LNG['qe_authattack'] = 'Protection contre les attaques admin';
 $LNG['qe_submit'] = 'Soumettre';
 $LNG['qe_resetr'] = 'Reset';
 $LNG['qe_allowmulti'] = 'Autorisé Multi IP';
+$LNG['qe_debris'] = "Débris";
+$LNG['qe_err_planet_not_found'] = "Planète introuvable, identifiant de planète incorrect.";
+$LNG['qe_err_user_not_found'] = "La planète (ID : %s) n'appartient à aucun utilisateur, envisagez de la supprimer de la base de données.";
 
 
 //----------------------------------------------------------------------------//

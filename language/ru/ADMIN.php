@@ -1048,6 +1048,9 @@ $LNG['qe_submit'] = 'Сохранить';
 $LNG['qe_resetr'] = 'Обнулить';
 $LNG['qe_allowmulti'] = 'Разрешить совпадение IP';
 $LNG['qe_name'] = 'Название';
+$LNG['qe_debris'] = "Обломки";
+$LNG['qe_err_planet_not_found'] = "Планета не найдена, неверный ID планеты.";
+$LNG['qe_err_user_not_found'] = "Планета (ID: %s) не принадлежит ни одному пользователю, рассмотрите возможность удаления её из базы данных.";
 
 
 // FacebookSettingPage.php

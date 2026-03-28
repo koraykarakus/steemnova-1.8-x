@@ -1091,6 +1091,9 @@ $LNG['qe_submit'] = 'Absenden';
 $LNG['qe_resetr'] = 'Zurücksetzten';
 $LNG['qe_allowmulti'] = 'Erlaube Multi';
 $LNG['qe_name'] = 'Name';
+$LNG['qe_debris'] = "Trümmer";
+$LNG['qe_err_planet_not_found'] = "Planet nicht gefunden, falsche Planeten-ID.";
+$LNG['qe_err_user_not_found'] = "Der Planet (ID: %s) gehört keinem Benutzer, erwäge ihn aus der Datenbank zu entfernen.";
 
 
 //----------------------------------------------------------------------------//

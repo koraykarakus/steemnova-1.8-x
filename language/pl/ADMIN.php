@@ -1079,6 +1079,9 @@ $LNG['qe_authattack'] = 'Osłona admina';
 $LNG['qe_submit'] = 'Wyślij';
 $LNG['qe_resetr'] = 'Zresetuj';
 $LNG['qe_allowmulti'] = 'Multi dozwolone';
+$LNG['qe_debris'] = "Szczątki";
+$LNG['qe_err_planet_not_found'] = "Nie znaleziono planety, nieprawidłowe ID planety.";
+$LNG['qe_err_user_not_found'] = "Planeta (ID: %s) nie należy do żadnego użytkownika, rozważ usunięcie jej z bazy danych.";
 
 
 //----------------------------------------------------------------------------//

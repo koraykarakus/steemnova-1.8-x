@@ -63,6 +63,27 @@
 
 <table class="table table-dark table-striped table-sm fs-12 w-100 my-5 mx-auto">
 <tr>
+  <th colspan="3">{$LNG.qe_debris}</th>
+</tr>
+<tr>
+  <td></td>
+	<td>{$LNG.qe_count}</td>
+	<td>{$LNG.qe_input}</td>
+</tr>
+<tr>
+	<td width="30%">{$LNG.tech.901}:</td>
+	<td width="30%">{$debris_metal}</td>
+	<td width="40%"><input name="debris_metal" type="text" value="{$debris_metal}"></td>
+</tr>
+<tr>
+	<td width="30%">{$LNG.tech.902}:</td>
+	<td width="30%">{$debris_crystal}</td>
+	<td width="40%"><input name="debris_crystal" type="text" value="{$debris_crystal}"></td>
+</tr>
+</table>
+
+<table class="table table-dark table-striped table-sm fs-12 w-100 my-5 mx-auto">
+<tr>
   <th colspan="3">{$LNG.qe_build}</th>
 </tr>
 <tr>
