@@ -127,7 +127,7 @@ class VarsBuildCache implements BuildCache
             {
                 $RESLIST['bonus'][] = $varsRow['element_id'];
             }
-            if ($varsRow['onePerPlanet'] == 1)
+            if ($varsRow['one_per_planet'] == 1)
             {
                 $RESLIST['one'][] = $varsRow['element_id'];
             }
