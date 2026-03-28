@@ -1159,19 +1159,19 @@ CREATE TABLE `%PREFIX%vars_default` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_rapidfire` (
-  `elementID` INT NOT NULL,
-  `rapidfireID` INT NOT NULL,
+  `element_id` INT NOT NULL,
+  `rapidfire_id` INT NOT NULL,
   `shoots` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `rapidfireID` (`rapidfireID`)
+  KEY `element_id` (`element_id`),
+  KEY `rapidfire_id` (`rapidfire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_rapidfire_default` (
-  `elementID` INT NOT NULL,
-  `rapidfireID` INT NOT NULL,
+  `element_id` INT NOT NULL,
+  `rapidfire_id` INT NOT NULL,
   `shoots` INT NOT NULL,
-  KEY `elementID` (`elementID`),
-  KEY `rapidfireID` (`rapidfireID`)
+  KEY `element_id` (`element_id`),
+  KEY `rapidfire_id` (`rapidfire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars_requriements` (
@@ -1313,7 +1313,7 @@ INSERT INTO `%PREFIX%vars` (`element_id`, `name`, `class`, `on_planet_type`, `on
 INSERT INTO `%PREFIX%vars_default`
 SELECT * FROM `%PREFIX%vars`;
 
-INSERT INTO `%PREFIX%vars_rapidfire` (`elementID`, `rapidfireID`, `shoots`) VALUES
+INSERT INTO `%PREFIX%vars_rapidfire` (`element_id`, `rapidfire_id`, `shoots`) VALUES
 (202, 210, 5),
 (202, 212, 5),
 (203, 210, 5),
