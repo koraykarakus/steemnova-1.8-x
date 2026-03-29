@@ -396,7 +396,7 @@ $LNG['ma_modes'] = ['Wiadomość w grze', 'Wiadomość na e-mail', 'W grze &amp;
 //###########################################################//
 
 //---------------	PÁGINA DE INICIO - OVERVIEW	 - PODGLĄD------------------------//
-$LNG['ow_title'] = 'Witam w 2Moons';
+$LNG['ow_title'] = 'Steemnova 1.8 X - Kosmiczna gra strategiczna';
 $LNG['ow_donate'] = 'Dotacja';
 $LNG['ow_welcome_text'] = 'Witamy w niezwykle popularnym 2Moons. (:';
 $LNG['ow_overview'] = 'Centrum kontroli';

@@ -1123,7 +1123,7 @@ $LNG['log_disclamersettings'] = 'Iletisim';
 
 //###########################################################//
 //---------------	Ana Sayfa	------------------------//
-$LNG['ow_title'] = 'AUGAME - En yeni gelistirilmis uzay strateji Oyunu!';
+$LNG['ow_title'] = 'Steemnova 1.8 X - Uzay strateji oyunu';
 $LNG['ow_donate'] = 'Kodu Gelistirenlere Bagis';
 $LNG['ow_welcome_text'] = 'En populer online MMORPG oyununa hosgeldiniz!';
 $LNG['ow_overview'] = 'Kontrol';

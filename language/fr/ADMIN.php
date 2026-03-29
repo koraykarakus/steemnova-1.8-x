@@ -401,7 +401,7 @@ $LNG['ma_modes'] = ['INGAME Message', 'E-Mail Message', 'INGAME & E-Mail Message
 //###########################################################//
 
 //---------------	OVERVIEW	------------------------//
-$LNG['ow_title'] = 'Bienvenue sur Xnova Reborn';
+$LNG['ow_title'] = 'Steemnova 1.8 X - Jeu de stratégie spatiale';
 $LNG['ow_donate'] = 'Donation';
 $LNG['ow_welcome_text'] = 'Bienvenue sur le server Xnova Reborn';
 $LNG['ow_overview'] = 'Panneau de configuration';
