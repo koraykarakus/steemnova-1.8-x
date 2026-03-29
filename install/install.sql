@@ -976,10 +976,10 @@ CREATE TABLE `%PREFIX%remember_me`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%users_to_acs` (
-  `userID` INT UNSIGNED NOT NULL,
-  `acsID` INT UNSIGNED NOT NULL,
-  KEY `userID` (`userID`),
-  KEY `acsID` (`acsID`)
+  `user_id` INT UNSIGNED NOT NULL,
+  `acs_id` INT UNSIGNED NOT NULL,
+  KEY `user_id` (`user_id`),
+  KEY `acs_id` (`acs_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%users_to_topkb` (

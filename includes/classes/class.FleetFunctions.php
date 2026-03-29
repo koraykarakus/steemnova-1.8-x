@@ -386,7 +386,7 @@ class FleetFunctions
 
         if ($fleetResult['fleet_mission'] == 1 && $fleetResult['fleet_group'] != 0)
         {
-            $sql = 'SELECT COUNT(*) as state FROM %%USERS_ACS%% WHERE acsID = :acsId;';
+            $sql = 'SELECT COUNT(*) as state FROM %%USERS_ACS%% WHERE acs_id = :acsId;';
             $isInGroup = $db->selectSingle($sql, [
                 ':acsId' => $fleetResult['fleet_group'],
             ], 'state');
@@ -395,7 +395,7 @@ class FleetFunctions
             {
                 $sql = 'DELETE %%ACS%%, %%USERS_ACS%%
 				FROM %%ACS%%
-				LEFT JOIN %%USERS_ACS%% ON acsID = %%ACS%%.id
+				LEFT JOIN %%USERS_ACS%% ON acs_id = %%ACS%%.id
 				WHERE %%ACS%%.id = :acsId;';
 
                 $db->delete($sql, [
