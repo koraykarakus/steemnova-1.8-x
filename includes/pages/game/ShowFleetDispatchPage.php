@@ -42,7 +42,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
 
         $acs_id = $db->lastInsertId();
 
-        $sql = "INSERT INTO %%USERS_ACS%% SET acsID = :acs_id, userID = :user_id;";
+        $sql = "INSERT INTO %%USERS_ACS%% SET acs_id = :acs_id, user_id = :user_id;";
         $db->insert($sql, [
             ':acs_id'  => $acs_id,
             ':user_id' => $acs_creator,
@@ -66,8 +66,8 @@ class ShowFleetDispatchPage extends AbstractGamePage
         global $USER;
 
         $db = Database::get();
-        $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%ACS%% ON acsID = id 
-        WHERE userID = :user_id AND acsID = :acs_id;";
+        $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%ACS%% ON acs_id = id 
+        WHERE user_id = :user_id AND acs_id = :acs_id;";
         $acs_result = $db->selectSingle($sql, [
             ':user_id' => $USER['id'],
             ':acs_id'  => $fleetData['fleet_group'],
@@ -132,8 +132,8 @@ class ShowFleetDispatchPage extends AbstractGamePage
 
         $invited_users = [];
 
-        $sql = "SELECT id, username FROM %%USERS_ACS%% INNER JOIN %%USERS%% ON userID = id 
-        WHERE acsID = :acs_id;";
+        $sql = "SELECT id, username FROM %%USERS_ACS%% INNER JOIN %%USERS%% ON user_id = id 
+        WHERE acs_id = :acs_id;";
         $user_result = $db->select($sql, [
             ':acs_id' => $acs_data['id'],
         ]);
@@ -166,7 +166,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
             {
                 $status_msg = $LNG['fl_player']." ".$new_user." ".$LNG['fl_add_to_attack'];
 
-                $sql = "INSERT INTO %%USERS_ACS%% SET acsID = :acs_id, userID = :new_user_id;";
+                $sql = "INSERT INTO %%USERS_ACS%% SET acs_id = :acs_id, user_id = :new_user_id;";
                 $db->insert($sql, [
                     ':acs_id'      => $acs_data['id'],
                     ':new_user_id' => $new_user_id,

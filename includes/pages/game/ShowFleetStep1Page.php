@@ -246,9 +246,9 @@ class ShowFleetStep1Page extends AbstractGamePage
 
         $sql = "SELECT acs.id, acs.name, planet.galaxy, planet.system, planet.planet, planet.planet_type
 		FROM %%USERS_ACS%%
-		INNER JOIN %%ACS%% acs ON acsID = acs.id
+		INNER JOIN %%ACS%% acs ON acs_id = acs.id
 		INNER JOIN %%PLANETS%% planet ON planet.id = acs.target
-		WHERE userID = :userID AND :maxFleets > (SELECT COUNT(*) FROM %%FLEETS%% WHERE fleet_group = acsID);";
+		WHERE user_id = :userID AND :maxFleets > (SELECT COUNT(*) FROM %%FLEETS%% WHERE fleet_group = acs_id);";
 
         $acs_result = $db->select($sql, [
             ':userID'    => $USER['id'],
