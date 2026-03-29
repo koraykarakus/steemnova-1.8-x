@@ -78,7 +78,7 @@
             {if in_array($resourceID,array(901,902,903))}
               <tr>
                 <td>{$LNG.resource_available}:</td>
-                <td class="{if $resourceData.current >= $resourceData.max}color-red {/if}text_right">
+                <td id="tip_current_{$resourceData.name}" class="{if $resourceData.current >= $resourceData.max}color-red {/if}text_right">
                   {$resourceData.current|number}
                 </td>
               </tr>
@@ -162,7 +162,8 @@
               available: {$resourceData.current|json},
               limit: [0, {$resourceData.max|json}],
               production: {$resourceData.production|json},
-              valueElem: "current_{$resourceData.name}"
+              valueElem: "current_{$resourceData.name}",
+              valueTooltip: "tip_current_{$resourceData.name}"
             }, true);
           {/if}
         {/foreach}

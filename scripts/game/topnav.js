@@ -8,27 +8,39 @@ function resourceTicker(config, init) {
 		window.setInterval(function(){resourceTicker(config)}, 1000);
 
 	var element	= $('#'+config.valueElem);
+	var element_tooltip = $('#' + config.valueTooltip);
+
 	if(element.hasClass('res_current_max'))
 	{
 		return false;
 	}
 
 	var nrResource = Math.max(0, Math.floor(parseFloat(config.available) + parseFloat(config.production) / 3600 * (serverTime.getTime() - startTime) / 1000));
+	nrResource = Math.min(nrResource, config.limit[1]);
 
 	if (nrResource < config.limit[1])
 	{
-		if (!element.hasClass('res_current_warn') && nrResource >= config.limit[1] * 0.9)
+		if (!element.hasClass('res_current_warn') 
+			&& nrResource >= config.limit[1] * 0.75)
 		{
 			element.addClass('res_current_warn');
 		}
-		if(viewShortlyNumber) {
-			element.attr('data-tooltip-content', NumberGetHumanReadable(nrResource));
-			element.html(shortly_number(nrResource));
-		} else {
-			element.html(NumberGetHumanReadable(nrResource));
-		}
-	} else {
+	} 
+	else 
+	{
+		element.removeClass('res_current_warn');
 		element.addClass('res_current_max');
+	}
+
+	if (viewShortlyNumber) {
+		element.attr('data-tooltip-content', NumberGetHumanReadable(nrResource));
+		element.html(shortly_number(nrResource));
+		element_tooltip.html(shortly_number(nrResource));
+	} 
+	else 
+	{
+		element.html(NumberGetHumanReadable(nrResource));
+		element_tooltip.html(NumberGetHumanReadable(nrResource));
 	}
 }
 
