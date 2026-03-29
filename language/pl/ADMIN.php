@@ -15,6 +15,17 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// google auth
+$LNG['google_auth_settings'] = "Ustawienia połączenia Google Auth";
+$LNG['google_auth_info'] = "Ta funkcja może być włączana/wyłączana na stronie Modułów.\n
+Zarejestruj się w konsoli Google API i pobierz swoje identyfikatory klienta i sekret z Google.\n
+Ustaw poprawnie adres URL callback w konsoli Google API,\n strona zawsze powinna być googleAuth, a tryb zawsze callback.\n
+Adresy URL callback z konsoli API muszą być zgodne z adresem URL callback tego formularza.\n
+Użyj https, jeśli posiadasz SSL.";
+$LNG['google_auth_client_id'] = "ID klienta:";
+$LNG['google_auth_client_secret'] = "Sekret klienta:";
+$LNG['google_auth_callback_url'] = "URL callback [ pełny link ]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Zezwól na utratę floty podczas ekspedycji";
 $LNG['es_allow_fleet_delay'] = "Zezwól na opóźnienie floty podczas ekspedycji";

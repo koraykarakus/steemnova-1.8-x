@@ -20,6 +20,17 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// google auth
+$LNG['google_auth_settings'] = "Google Auth Bağlantı Ayarları";
+$LNG['google_auth_info'] = "Bu özellik Modüller sayfasından aktif/pasif edilebilir.\n
+Google API konsoluna kayıt olun ve Google üzerinden client ve secret ID bilgilerinizi alın.\n
+Callback URL adresinizi Google API konsolunda doğru şekilde ayarlayın,\n sayfa her zaman googleAuth olmalı ve mod her zaman callback olmalıdır.\n
+API konsolundaki callback URL adresleri, bu formun callback URL adresi ile eşleşmelidir.\n
+SSL varsa https kullanın.";
+$LNG['google_auth_client_id'] = "Client ID:";
+$LNG['google_auth_client_secret'] = "Client Secret:";
+$LNG['google_auth_callback_url'] = "Callback URL [ tam link ]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Keşifte filo kaybına izin ver";
 $LNG['es_allow_fleet_delay'] = "Keşifte filo gecikmesine izin ver";

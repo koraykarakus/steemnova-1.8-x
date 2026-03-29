@@ -5,6 +5,17 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// google auth
+$LNG['google_auth_settings'] = "Paramètres de connexion Google Auth";
+$LNG['google_auth_info'] = "Cette fonctionnalité peut être activée/désactivée depuis la page des Modules.\n
+Inscrivez-vous sur la console Google API et récupérez vos identifiants client et secret auprès de Google.\n
+Définissez correctement votre URL de callback dans la console Google API,\n la page doit toujours être googleAuth et le mode doit toujours être callback.\n
+Les URLs de callback de la console API doivent correspondre à l’URL de callback de ce formulaire.\n
+Utilisez https si vous disposez d’un SSL.";
+$LNG['google_auth_client_id'] = "ID client:";
+$LNG['google_auth_client_secret'] = "Secret client:";
+$LNG['google_auth_callback_url'] = "URL de callback [ lien complet ]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Autoriser la perte de flotte en expédition";
 $LNG['es_allow_fleet_delay'] = "Autoriser le retard de flotte en expédition";

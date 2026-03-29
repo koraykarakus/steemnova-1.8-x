@@ -16,6 +16,17 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// google auth 
+$LNG['google_auth_settings'] = "Настройки подключения Google Auth";
+$LNG['google_auth_info'] = "Эту функцию можно включить/отключить на странице модулей.\n
+Зарегистрируйтесь в консоли Google API и получите свои Client и Secret ID в Google.\n
+Правильно укажите URL обратного вызова в консоли Google API,\n страница всегда должна быть googleAuth, а режим всегда callback.\n
+URL обратного вызова из консоли API должен совпадать с URL обратного вызова этой формы.\n
+Используйте https, если у вас есть SSL.";
+$LNG['google_auth_client_id'] = "ID клиента:";
+$LNG['google_auth_client_secret'] = "Секрет клиента:";
+$LNG['google_auth_callback_url'] = "URL обратного вызова [ полный адрес ]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Разрешить потерю флота в экспедиции";
 $LNG['es_allow_fleet_delay'] = "Разрешить задержку флота в экспедиции";

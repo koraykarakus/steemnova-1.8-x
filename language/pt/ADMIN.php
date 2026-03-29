@@ -20,6 +20,17 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// google auth
+$LNG['google_auth_settings'] = "Configurações de conexão do Google Auth";
+$LNG['google_auth_info'] = "Este recurso pode ser ativado/desativado na página de Módulos.\n
+Cadastre-se no console da Google API e obtenha seus IDs de cliente e segredo no Google.\n
+Configure corretamente sua URL de callback no console da Google API,\n a página deve ser sempre googleAuth e o modo deve ser sempre callback.\n
+As URLs de callback do console da API devem corresponder à URL de callback deste formulário.\n
+Use https se você tiver SSL.";
+$LNG['google_auth_client_id'] = "ID do cliente:";
+$LNG['google_auth_client_secret'] = "Segredo do cliente:";
+$LNG['google_auth_callback_url'] = "URL de callback [ link completo ]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Permitir perda de frota na expedição";
 $LNG['es_allow_fleet_delay'] = "Permitir atraso da frota na expedição";
