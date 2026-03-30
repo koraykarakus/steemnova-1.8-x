@@ -121,6 +121,58 @@
         </div>
       {/foreach}
         <span class="page_title">{$current_pname} - {$LNG.lm_research}</span>
+      {if !empty($Queue)}
+        <div id="buildlist" class="queue_wrapper scroll">
+          {foreach $Queue as $List}
+            {$ID = $List.element}
+            {if $List@first}
+              <div class="queue_item{if $List@first} queue_item_first{/if}">
+                <div class="queue_left">
+                  <div class="tooltip tooltip_top">
+                    {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>
+                  </div>
+                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif"
+                    alt="{$LNG.tech.{$ID}}" width="80" height="80">
+                  <span class="level_info">{$List.level}</span>
+                  <form action="game.php?page=research" method="post">
+                    <input type="hidden" name="cmd" value="cancel">
+                    <button class="btn_cancel" type="submit" name="button">
+                      <div class="tooltip tooltip_top">
+                        {$LNG.bd_cancel}
+                      </div>
+                    </button>
+                  </form>
+                </div>
+                <div class="queue_right">
+                  <div id="progressbar" 
+                    data-time="{$List.resttime}"></div>
+                  <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
+                  <span class="text-yellow" id="time" data-time="{$List.time}"></span>
+                  <span class="text-yellow">{$List.display}</span>
+                </div>
+              </div>
+            {else}
+              <div class="queue_item_small">
+                  <div class="tooltip tooltip_top">
+                    {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>
+                  </div>
+                  <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif"
+                    alt="{$LNG.tech.{$ID}}" width="40" height="40">
+                  <form action="game.php?page=research" method="post">
+                    <input type="hidden" name="listid" value="{$List@iteration}">
+                    <input type="hidden" name="cmd" value="remove">
+                    <button class="btn_cancel" type="submit" name="button">
+                      <div class="tooltip tooltip_top">
+                        {$LNG.bd_cancel}
+                      </div>
+                    </button>
+                  </form>
+                  <span class="level_info_small">{$List.level}</span>
+                </div>
+            {/if}
+          {/foreach}
+        </div>
+      {/if}
     </div>
     <div class="bottom">
       <div class="title">
@@ -185,48 +237,5 @@
       </div>
     </div>
   </div>
-
-  {if !empty($Queue)}
-    <div id="buildlist" class="queue_wrapper">
-      {foreach $Queue as $List}
-        {$ID = $List.element}
-        <div class="queue_item{if $List@first} queue_item_first{/if}">
-          <div class="queue_left">
-            <div class="tooltip tooltip_top">
-              {$LNG.tech.{$ID}}&nbsp;,&nbsp;<span data-time='{$List.endtime}' >{$List.display}</span>
-            </div>
-            <img class="hover-pointer" onclick="return Dialog.info({$ID})" src="{$dpath}elements/{$ID}.gif"
-              alt="{$LNG.tech.{$ID}}" width="80" height="80">
-            <span class="level_info">{$List.level}</span>
-
-
-            <form action="game.php?page=research" method="post">
-              {if !$List@first}
-                <input type="hidden" name="listid" value="{$List@iteration}">
-                <input type="hidden" name="cmd" value="remove">
-              {else}
-                <input type="hidden" name="cmd" value="cancel">
-              {/if}
-              <button class="btn_cancel" type="submit" name="button">
-                <div class="tooltip tooltip_top">
-                  {$LNG.bd_cancel}
-                </div>
-              </button>
-            </form>
-          </div>
-          {if $List@first}
-            <div class="queue_right">
-              <div id="progressbar" 
-                data-time="{$List.resttime}"></div>
-              <span class="text-yellow">{$LNG['tech'][{$ID}]}&nbsp;:&nbsp;{$List.level}</span>
-              <span class="text-yellow" id="time" data-time="{$List.time}"></span>
-              <span class="text-yellow">{$List.display}</span>
-            </div>
-          {/if}
-        </div>
-
-      {/foreach}
-    </div>
-  {/if}
 
 {/block}
