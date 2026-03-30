@@ -1270,15 +1270,18 @@ input[type="radio"] {
 }
 
 .queue_wrapper {
-	width: 654px;
-	background-color: #1f1f20;
+	width: 644px;
+	background-color:rgba(0, 0, 0, 0.6);
 	display: flex;
 	flex-wrap: wrap;
 	padding: 14px 10px;
-	border-top: 1px solid #111;
-	border-left: 3px solid #111;
-	border-right: 3px solid #111;
-	border-bottom: 3px solid #111;
+	position: absolute;
+	top: 38px;
+	right: 5px;
+	border-radius: 5px;
+	max-height: 235px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .queue_wrapper>.queue_item_first.queue_item {
@@ -1295,15 +1298,38 @@ input[type="radio"] {
 	width: 86px;
 	height: 86px;
 	border: 3px solid #276094;
-	margin: 2px;
 	background: #000;
-	margin: 5px;
+	margin: 2px;
 	position: relative;
 	display: flex;
 }
 
+.queue_wrapper>.queue_item_small{
+	position: relative;
+	width: 44px;
+	height: 44px;
+	border: 2px solid #276094;
+	margin: 7px 2px;
+}
+.queue_wrapper>.queue_item_small>.level_info_small{
+	position: absolute;
+	height: 16px;
+	color: #ffd600;
+	font-size: 11px;
+	font-weight: bold;
+	top: calc(100%);
+	left: 50%;
+	transform: translateX(-50%);
+	width: 44px;
+	height: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .queue_item>.queue_right {
 	width: calc(100% - 86px);
+	height: 86px;
 	display: flex;
 	flex-direction: column;
 	align-items: start;
@@ -1311,11 +1337,11 @@ input[type="radio"] {
 	padding: 5px 15px;
 }
 
-.queue_left:hover>.tooltip {
+.queue_left:hover>.tooltip, .queue_item_small:hover>.tooltip{
 	display: flex;
 }
 
-.queue_left .btn_cancel {
+.queue_wrapper .btn_cancel{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1329,6 +1355,10 @@ input[type="radio"] {
 }
 
 .queue_left:has(.btn_cancel:hover)>.tooltip {
+	display: none;
+}
+
+.queue_item_small:has(.btn_cancel:hover)>.tooltip {
 	display: none;
 }
 
