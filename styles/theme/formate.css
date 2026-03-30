@@ -1274,10 +1274,7 @@ input[type="radio"] {
 	background-color:rgba(0, 0, 0, 0.6);
 	display: flex;
 	flex-wrap: wrap;
-	padding-top: 30px;
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-bottom: 30px;
+	padding: 30px 40px 30px 40px;
 	position: absolute;
 	top: 38px;
 	right: 5px;
