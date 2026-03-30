@@ -105,7 +105,27 @@
             </div>
         </div>
       {/foreach}
-    <span class="page_title">{$current_pname} - {if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipyard}{/if}</span>
+      <span class="page_title">{$current_pname} - {if $mode == "defense"}{$LNG.lm_defenses}{else}{$LNG.lm_shipyard}{/if}</span>
+      {if !empty($BuildList)}
+        <div class="queue_wrapper">
+            <div>
+              <div id="bx"></div>
+              <div id="timeleft"></div>
+              <form action="game.php?page=shipyard&mode={$mode}" method="post">
+                <input type="hidden" name="action" value="delete">
+                <select name="auftr[]" id="auftr" multiple>
+                  <option>&nbsp;</option>
+                </select>
+                <button type="submit">
+                  {$LNG.bd_cancel_send}
+                </button>
+              </form>
+            </div>
+            <div>
+                {$LNG.bd_cancel_warning}
+            </div>
+        </div>
+      {/if}
   </div>
   <div class="bottom">
     <div class="title">
@@ -153,26 +173,7 @@
   </div>
 </div>
 
-{if !empty($BuildList)}
-  <div class="queue_wrapper">
-      <div>
-        <div id="bx"></div>
-        <div id="timeleft"></div>
-        <form action="game.php?page=shipyard&mode={$mode}" method="post">
-          <input type="hidden" name="action" value="delete">
-          <select name="auftr[]" id="auftr" multiple>
-            <option>&nbsp;</option>
-          </select>
-          <button type="submit">
-            {$LNG.bd_cancel_send}
-          </button>
-        </form>
-      </div>
-      <div>
-          {$LNG.bd_cancel_warning}
-      </div>
-  </div>
-{/if}
+
 
 {block name="script" append}
   <script type="text/javascript">
