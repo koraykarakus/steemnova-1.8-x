@@ -15,4 +15,8 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->display('page.gameSettings.default.tpl');
     }
 
+    public function rapidFire(): void
+    {
+        $this->display('page.gameSettings.rapidFire.tpl');
+    }
 }
