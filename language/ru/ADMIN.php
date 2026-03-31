@@ -27,6 +27,22 @@ $LNG['google_auth_client_id'] = "ID клиента:";
 $LNG['google_auth_client_secret'] = "Секрет клиента:";
 $LNG['google_auth_callback_url'] = "URL обратного вызова [ полный адрес ]";
 
+// DISCORD Auth admin panel
+$LNG['discord_auth_settings'] = "Настройки подключения Discord Auth";
+
+$LNG['discord_auth_info'] = "Эта функция может быть включена/отключена на странице модулей.\n
+Зарегистрируйтесь в Discord Developer Portal, создайте приложение и получите свой Client ID и Client Secret.\n
+Правильно укажите URI callback в настройках OAuth2 Discord,\n страница всегда должна быть discordAuth, а режим всегда callback.\n
+пример: [ http://localhost/index.php?page=discordAuth&mode=callback ] \n
+Ваш URI callback в Developer Portal должен полностью совпадать с URL callback этой формы.\n
+Выбрать область доступа email в Discord Developer Portal достаточно.\n
+Используйте https, если у вас включен SSL.";
+
+$LNG['discord_auth_client_id'] = "Client ID:";
+$LNG['discord_auth_client_secret'] = "Client Secret:";
+$LNG['discord_auth_redirect_url'] = "URL перенаправления [ полный адрес ]";
+$LNG['discord_auth_callback_url'] = "URL callback [ полный адрес ] [пример: http://localhost/index.php?page=discordAuth&mode=callback]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Разрешить потерю флота в экспедиции";
 $LNG['es_allow_fleet_delay'] = "Разрешить задержку флота в экспедиции";
