@@ -113,7 +113,7 @@
               <div id="timeleft"></div>
               <form action="game.php?page=shipyard&mode={$mode}" method="post">
                 <input type="hidden" name="action" value="delete">
-                <select name="auftr[]" id="auftr" multiple>
+                <select class="scroll" name="auftr[]" id="auftr" multiple>
                   <option>&nbsp;</option>
                 </select>
                 <button type="submit">
