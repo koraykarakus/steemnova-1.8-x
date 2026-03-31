@@ -710,6 +710,7 @@ $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Konfiguration';
+$LNG['mu_improved_game_settings'] = "Verbesserte Spieleinstellungen";
 $LNG['mu_unisettings'] = 'Uni Konfiguration';
 $LNG['mu_chat'] = 'Chat Konfiguration';
 $LNG['mu_global_message'] = 'Globale Nachrichten';

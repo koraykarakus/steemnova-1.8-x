@@ -716,6 +716,7 @@ $LNG['ul_sure_you_want_dlte'] = 'Tens a certeza que pretendes remover?';
 $LNG['mu_general'] = 'Geral';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Configuração do Jogo';
+$LNG['mu_improved_game_settings'] = "Configurações de jogo aprimoradas";
 $LNG['mu_unisettings'] = 'Configuração do Universo';
 $LNG['mu_global_message'] = 'Mensagem Global';
 $LNG['mu_users_settings'] = 'Editar menu';

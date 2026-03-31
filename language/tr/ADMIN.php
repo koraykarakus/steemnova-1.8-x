@@ -231,6 +231,7 @@ $LNG['officers_title'] = 'Subaylar';
 $LNG['mu_general'] = '**Genel**';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Ayarlari';
+$LNG['mu_improved_game_settings'] = "Gelişmiş Oyun Ayarları";
 $LNG['mu_unisettings'] = 'Evren Ayarlari';
 $LNG['mu_global_message'] = 'Genel Mesaj';
 $LNG['mu_users_settings'] = '**Duzenleme Menusu**';

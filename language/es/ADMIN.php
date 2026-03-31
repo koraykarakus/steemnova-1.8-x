@@ -702,6 +702,7 @@ $LNG['ul_sure_you_want_dlte'] = '¿Estás seguro que deseas eliminar ';
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Conectados';
 $LNG['mu_settings'] = 'Configuración';
+$LNG['mu_improved_game_settings'] = "Configuración mejorada del juego";
 $LNG['mu_unisettings'] = 'Conf. de Universo';
 $LNG['mu_chat'] = 'Conf. Chat';
 $LNG['mu_global_message'] = 'Mensaje Global';
