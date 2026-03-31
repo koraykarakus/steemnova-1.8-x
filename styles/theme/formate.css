@@ -1420,6 +1420,36 @@ input[type="radio"] {
 	color: #111;
 	text-align: center;
 }
+.shipyard_form{
+	display: flex;
+	flex-direction: column;
+}
+.shipyard_form > .button_submit{
+	margin: 3px 0;
+	padding: 3px 4px;
+	color: #e6c200;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #0D1014;
+	border: 1px solid #0D263D;
+	border-radius: 4px;
+	cursor: pointer;
+	outline: none;
+	transition: 0.2s ease;
+}
+
+.shipyard_form > .button_submit:hover{
+	background-color: #2a3f55;
+}
+
+.shipyard_form > .button_submit:active{
+	transform: scale(0.98);
+}
+
+.shipyard_form > .button_submit:focus{
+	box-shadow: 0 0 0 2px rgba(0,170,255,0.35);
+}
+
 #auftr{
 	width: 250px;
 	padding: 3px 5px;

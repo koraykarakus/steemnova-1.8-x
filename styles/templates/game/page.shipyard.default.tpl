@@ -111,12 +111,12 @@
             <div>
               <div id="bx"></div>
               <div id="timeleft"></div>
-              <form action="game.php?page=shipyard&mode={$mode}" method="post">
+              <form class="shipyard_form" action="game.php?page=shipyard&mode={$mode}" method="post">
                 <input type="hidden" name="action" value="delete">
                 <select class="scroll" name="auftr[]" id="auftr" multiple>
                   <option>&nbsp;</option>
                 </select>
-                <button type="submit">
+                <button class="button_submit" type="submit">
                   {$LNG.bd_cancel_send}
                 </button>
               </form>
