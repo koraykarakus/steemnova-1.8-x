@@ -31,6 +31,22 @@ $LNG['google_auth_client_id'] = "Client ID:";
 $LNG['google_auth_client_secret'] = "Client Secret:";
 $LNG['google_auth_callback_url'] = "Callback URL [ tam link ]";
 
+// DISCORD Auth admin panel
+$LNG['discord_auth_settings'] = "Discord Auth Bağlantı Ayarları";
+
+$LNG['discord_auth_info'] = "Bu özellik Modüller sayfasından aktif/pasif hale getirilebilir.\n
+Discord Developer Portal üzerinden kayıt olun, bir uygulama oluşturun ve Client ID + Client Secret bilgilerinizi alın.\n
+Discord OAuth2 ayarlarında Callback URI adresinizi doğru şekilde tanımlayın,\n sayfa her zaman discordAuth ve mod her zaman callback olmalıdır.\n
+ör: [ http://localhost/index.php?page=discordAuth&mode=callback ] \n
+Developer Portal üzerindeki Callback URI, bu formdaki Callback URL ile tamamen aynı olmalıdır.\n
+Discord Developer Portal üzerinde scope olarak email seçmeniz yeterlidir.\n
+SSL aktif ise https kullanın.";
+
+$LNG['discord_auth_client_id'] = "Client ID:";
+$LNG['discord_auth_client_secret'] = "Client Secret:";
+$LNG['discord_auth_redirect_url'] = "Yönlendirme URL'si [ tam bağlantı ]";
+$LNG['discord_auth_callback_url'] = "Callback URL'si [ tam bağlantı ] [ör: http://localhost/index.php?page=discordAuth&mode=callback]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Keşifte filo kaybına izin ver";
 $LNG['es_allow_fleet_delay'] = "Keşifte filo gecikmesine izin ver";

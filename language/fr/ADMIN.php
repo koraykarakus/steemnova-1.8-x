@@ -16,6 +16,22 @@ $LNG['google_auth_client_id'] = "ID client:";
 $LNG['google_auth_client_secret'] = "Secret client:";
 $LNG['google_auth_callback_url'] = "URL de callback [ lien complet ]";
 
+// DISCORD Auth admin panel
+$LNG['discord_auth_settings'] = "Paramètres de connexion Discord Auth";
+
+$LNG['discord_auth_info'] = "Cette fonctionnalité peut être activée/désactivée depuis la page des Modules.\n
+Inscrivez-vous sur le Portail Développeur Discord, créez une application et obtenez votre Client ID + Client Secret.\n
+Définissez correctement votre URI de callback dans les paramètres OAuth2 de Discord,\n la page doit toujours être discordAuth et le mode toujours callback.\n
+ex : [ http://localhost/index.php?page=discordAuth&mode=callback ] \n
+Votre URI de callback dans le Portail Développeur doit correspondre exactement à l’URL de callback de ce formulaire.\n
+Choisir le scope email est suffisant sur le Portail Développeur Discord.\n
+Utilisez https si SSL est activé.";
+
+$LNG['discord_auth_client_id'] = "Client ID :";
+$LNG['discord_auth_client_secret'] = "Client Secret :";
+$LNG['discord_auth_redirect_url'] = "URL de redirection [ lien complet ]";
+$LNG['discord_auth_callback_url'] = "URL de callback [ lien complet ] [ex : http://localhost/index.php?page=discordAuth&mode=callback]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Autoriser la perte de flotte en expédition";
 $LNG['es_allow_fleet_delay'] = "Autoriser le retard de flotte en expédition";

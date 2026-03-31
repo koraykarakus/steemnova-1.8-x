@@ -26,6 +26,22 @@ $LNG['google_auth_client_id'] = "ID klienta:";
 $LNG['google_auth_client_secret'] = "Sekret klienta:";
 $LNG['google_auth_callback_url'] = "URL callback [ pełny link ]";
 
+// DISCORD Auth admin panel
+$LNG['discord_auth_settings'] = "Ustawienia połączenia Discord Auth";
+
+$LNG['discord_auth_info'] = "Ta funkcja może być włączona/wyłączona na stronie Modułów.\n
+Zarejestruj się w Portalu Deweloperskim Discord, utwórz aplikację i uzyskaj swój Client ID + Client Secret.\n
+Poprawnie ustaw URI callback w ustawieniach OAuth2 Discord,\n strona zawsze musi być discordAuth, a tryb zawsze callback.\n
+np.: [ http://localhost/index.php?page=discordAuth&mode=callback ] \n
+Twoje URI callback w Portalu Deweloperskim musi dokładnie odpowiadać adresowi URL callback tego formularza.\n
+Wybranie zakresu email jest wystarczające w Portalu Deweloperskim Discord.\n
+Użyj https, jeśli masz włączony SSL.";
+
+$LNG['discord_auth_client_id'] = "Client ID:";
+$LNG['discord_auth_client_secret'] = "Client Secret:";
+$LNG['discord_auth_redirect_url'] = "URL przekierowania [ pełny link ]";
+$LNG['discord_auth_callback_url'] = "URL callback [ pełny link ] [np.: http://localhost/index.php?page=discordAuth&mode=callback]";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Zezwól na utratę floty podczas ekspedycji";
 $LNG['es_allow_fleet_delay'] = "Zezwól na opóźnienie floty podczas ekspedycji";
