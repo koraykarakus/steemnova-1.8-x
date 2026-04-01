@@ -17,7 +17,6 @@ class ShowGameSettingsPage extends AbstractAdminPage
 
     public function rapidFire(): void
     {
-        global $LNG;
         $db = Database::get();
         $sql = "SELECT * FROM %%VARS_RAPIDFIRE%%;";
         $rapid_fire_data = $db->select($sql, []);
