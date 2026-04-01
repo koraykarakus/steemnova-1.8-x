@@ -58,6 +58,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
             ':rapidfire_id' => $rapidfire_id,
         ]);
 
+        ClearCache();
         $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
     }
 }
