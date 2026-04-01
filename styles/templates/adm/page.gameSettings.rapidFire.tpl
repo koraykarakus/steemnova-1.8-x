@@ -18,17 +18,25 @@
               </tr>
             </thead>
             <tbody>
+              <form action="?page=gameSettings&mode=updateRapidFire" method="post">
+              <input type="hidden" name="element_id" value="{$c_id}">
               {foreach $c_val as $val}
                 <tr>
-                  <td class="text-start">{$LNG.tech.{$val.id}}</td>
+                  <td class="text-start">{$LNG.tech.{$val.id}} [ID: {$val.id}]</td>
                   <td class="text-center">
-                  <input class="text-center" type="text" value="{$val.shoots}">
+                  <input name="shoots[{$val.id}]" class="text-center" type="number" value="{$val.shoots}">
                   </td>
                   <td>
                     <a href="?page=gameSettings&mode=removeRapidFire&element_id={$c_id}&rapidfire_id={$val.id}" class="text-center btn bg-secondary text-danger">x</a>
                   </td>
                 </tr>
               {/foreach}
+              <tr>
+                <td class="text-start" colspan="3">
+                  <button type="submit" class="btn btn-primary text-white w-25">Modify</button>
+                </td>
+              </tr>
+              </form>
             </tbody>
           </table>
         {/foreach}

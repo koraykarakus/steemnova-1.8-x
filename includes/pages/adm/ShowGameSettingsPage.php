@@ -61,6 +61,32 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
     }
 
+    public function updateRapidFire()
+    {
+        $shoots = HTTP::_GP('shoots', [0]);
+        $element_id = HTTP::_GP('element_id', 0);
+        if (empty($shoots)
+            || $element_id === 0)
+        {
+            $this->printMessage('inputs are empty or wrong element_id');
+        }
+
+        $db = Database::get();
+        foreach ($shoots as $id => $val)
+        {
+            $sql = "UPDATE %%VARS_RAPIDFIRE%% SET shoots = :shoots 
+            WHERE element_id = :element_id AND rapidfire_id = :rapidfire_id;";
+            $db->update($sql, [
+                ':shoots'       => $val,
+                ':element_id'   => $element_id,
+                ':rapidfire_id' => $id,
+            ]);
+        }
+
+        ClearCache();
+        $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
+    }
+
     public function restoreRapidFire()
     {
         $sql = "TRUNCATE TABLE %%VARS_RAPIDFIRE%%;
