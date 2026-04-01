@@ -60,4 +60,14 @@ class ShowGameSettingsPage extends AbstractAdminPage
         ClearCache();
         $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
     }
+
+    public function restoreRapidFire()
+    {
+        $sql = "TRUNCATE TABLE %%VARS_RAPIDFIRE%%;
+        INSERT INTO %%VARS_RAPIDFIRE%% 
+        SELECT * FROM %%VARS_RAPIDFIRE_DEFAULT%%;";
+        Database::get()->nativeQuery($sql);
+        ClearCache();
+        $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
+    }
 }
