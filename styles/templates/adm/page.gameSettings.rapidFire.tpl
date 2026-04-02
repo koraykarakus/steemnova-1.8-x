@@ -1,16 +1,16 @@
 {block name="content"}
 <div class="bg-black w-75 p-3 my-3 mx-auto fs-12">
-  <span class="fs-12 text-yellow fw-bold">RapidFire Settings</span>
+  <span class="fs-12 text-yellow fw-bold">{$LNG.rf_title}</span>
 
   <ul class="nav nav-tabs" id="" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button">
-          Current Rapidfire
+          {$LNG.rf_rapidfire_rules}
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_2" type="button">
-          Add new rapidfire rule
+          {$LNG.rf_add_new_rapidfire_rule}
         </button>
       </li>
   </ul>
@@ -18,7 +18,7 @@
   <div class="tab-content mt-3">
     <div class="tab-pane fade show active" id="tab_1">
       <div class="d-flex w-100 justify-content-start p-2 mx-auto">
-        <a href="?page=gameSettings&mode=restoreRapidFire" class="btn btn-primary text-white">Turn back to default settings</a>
+        <a href="?page=gameSettings&mode=restoreRapidFire" class="btn btn-primary text-white">{$LNG.rf_turn_back_to_default}</a>
       </div>
       <div class="p-2 w-100 mx-auto">
         {foreach $rapid_fire_list as $c_id => $c_val}
@@ -28,9 +28,9 @@
                 <td colspan="3" class="text-yellow text-center">{$LNG.tech.{$c_id}} - ID: [{$c_id}]</td>
               </tr>
               <tr>
-                <td class="text-yellow text-center">Against</td>
-                <td class="text-yellow text-center">Shoots</td>
-                <td class="text-yellow text-center">Action</td>
+                <td class="text-yellow text-center">{$LNG.rf_against}</td>
+                <td class="text-yellow text-center">{$LNG.rf_shoots}</td>
+                <td class="text-yellow text-center">{$LNG.rf_action}</td>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
               {/foreach}
               <tr>
                 <td class="text-start" colspan="3">
-                  <button type="submit" class="btn btn-primary text-white w-25">Modify</button>
+                  <button type="submit" class="btn btn-primary text-white w-25">{$LNG.rf_modify}</button>
                 </td>
               </tr>
               </form>
@@ -62,12 +62,12 @@
         <table class="table table-dark">
           <thead>
             <tr>
-              <td colspan="3">Add new rule</td>
+              <td colspan="3">{$LNG.rf_add_new_rule}</td>
             </tr>
             <tr>
-              <td>From</td>
-              <td>To</td>
-              <td>shoots</td>
+              <td>{$LNG.rf_from}</td>
+              <td>{$LNG.rf_to}</td>
+              <td>{$LNG.rf_shoots}</td>
             </tr>
           </thead>
           <tbody>
@@ -97,12 +97,11 @@
               </tr>
               <tr>
                 <td colspan="3" class="text-start">
-                    <button class="btn btn-primary text-white w-25" type="submit">Save</button>
+                    <button class="btn btn-primary text-white w-25" type="submit">{$LNG.rf_save}</button>
                 </td>
               </tr>
             </form>
           </tbody>
-          <tr></tr>
         </table>
     </div>
   </div>

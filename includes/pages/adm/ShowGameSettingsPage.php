@@ -41,13 +41,14 @@ class ShowGameSettingsPage extends AbstractAdminPage
 
     public function removeRapidFire()
     {
+        global $LNG;
         $element_id = HTTP::_GP('element_id', 0);
         $rapidfire_id = HTTP::_GP('rapidfire_id', 0);
 
         if ($element_id === 0
             || $rapidfire_id === 0)
         {
-            $this->printMessage('wrong input !');
+            $this->printMessage($LNG['rf_err_remove_1']);
         }
 
         $sql = "DELETE FROM %%VARS_RAPIDFIRE%% 
@@ -65,6 +66,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
 
     public function addRapidFire()
     {
+        global $LNG;
         $element_id = HTTP::_GP('element_id', 0);
         $rapidfire_id = HTTP::_GP('rapidfire_id', 0);
         $shoots = HTTP::_GP('shoots', 0);
@@ -73,7 +75,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
             || $rapidfire_id === 0
             || $shoots === 0)
         {
-            $this->printMessage('missing data from form, check inputs');
+            $this->printMessage($LNG['rf_err_add_1']);
         }
 
         $db = Database::get();
@@ -88,7 +90,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
 
         if ($count > 0)
         {
-            $this->printMessage('This rule already present, modify if you want to change', $this->createButtonBack());
+            $this->printMessage($LNG['rf_err_add_2'], $this->createButtonBack());
         }
 
         $sql = "INSERT INTO %%VARS_RAPIDFIRE%% SET element_id = :element_id, 
@@ -101,17 +103,19 @@ class ShowGameSettingsPage extends AbstractAdminPage
         ]);
 
         ClearCache();
-        $this->printMessage('added by success', $this->createButtonBack());
+        $this->printMessage($LNG['rf_suc_add'], $this->createButtonBack());
     }
 
     public function updateRapidFire()
     {
+        global $LNG;
+
         $shoots = HTTP::_GP('shoots', [0]);
         $element_id = HTTP::_GP('element_id', 0);
         if (empty($shoots)
             || $element_id === 0)
         {
-            $this->printMessage('inputs are empty or wrong element_id');
+            $this->printMessage($LNG['rf_err_update_1']);
         }
 
         $db = Database::get();
