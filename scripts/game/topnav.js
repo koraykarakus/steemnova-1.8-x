@@ -32,7 +32,7 @@ function resourceTicker(config, init) {
 		element.addClass('res_current_max');
 	}
 
-	if (viewShortlyNumber) {
+	if (view_shortly_number) {
 		element.attr('data-tooltip-content', NumberGetHumanReadable(nrResource));
 		element.html(shortly_number(nrResource));
 		element_tooltip.html(shortly_number(nrResource));

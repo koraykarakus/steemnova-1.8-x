@@ -153,17 +153,17 @@
 
   {if !$vmode}
     <script type="text/javascript">
-      var viewShortlyNumber	= {$shortly_number|json};
+      var view_shortly_number	= {$shortly_number};
       var vacation			= {$vmode};
       $(function() {
-        {foreach $resource_table as $resourceID => $resourceData}
-          {if isset($resourceData.production)}
+        {foreach $resource_table as $resource_data}
+          {if isset($resource_data.production)}
             resourceTicker({
-              available: {$resourceData.current|json},
-              limit: [0, {$resourceData.max|json}],
-              production: {$resourceData.production|json},
-              valueElem: "current_{$resourceData.name}",
-              valueTooltip: "tip_current_{$resourceData.name}"
+              available: {$resource_data.current},
+              limit: [0, {$resource_data.max}],
+              production: {$resource_data.production},
+              valueElem: "current_{$resource_data.name}",
+              valueTooltip: "tip_current_{$resource_data.name}"
             }, true);
           {/if}
         {/foreach}
