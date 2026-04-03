@@ -18,6 +18,26 @@
 // Translated into English by QwataKayean . All rights reversed (C) 2012
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "RapidFire Settings";
+$LNG['rf_rapidfire_rules'] = "Rapidfire Rules";
+$LNG['rf_add_new_rapidfire_rule'] = "Add new rapidfire rule";
+$LNG['rf_turn_back_to_default'] = "Turn back to default settings";
+$LNG['rf_against'] = "Against";
+$LNG['rf_shoots'] = "Shoots";
+$LNG['rf_action'] = "Action";
+$LNG['rf_modify'] = "Modify";
+$LNG['rf_add_new_rule'] = "Add new rule";
+$LNG['rf_from'] = "From";
+$LNG['rf_to'] = "To";
+$LNG['rf_shoots'] = "Shoots";
+$LNG['rf_save'] = "Save";
+$LNG['rf_err_update_1'] = "inputs are empty or wrong element_id";
+$LNG['rf_err_remove_1'] = "wrong input";
+$LNG['rf_err_add_1'] = "missing data from form, check inputs";
+$LNG['rf_err_add_2'] = "This rule already present, modify if you want to change";
+$LNG['rf_suc_add'] = "added by success";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Allow fleet loss on expedition";
 $LNG['es_allow_fleet_delay'] = "Allow fleet delay on expedition";
@@ -690,6 +710,7 @@ $LNG['ul_sure_you_want_dlte'] = 'Are you sure that you want to remove?';
 $LNG['mu_general'] = 'General';
 $LNG['mu_connected'] = 'Online';
 $LNG['mu_settings'] = 'Server Configuration';
+$LNG['mu_improved_game_settings'] = "Improved Game Settings";
 $LNG['mu_unisettings'] = 'Universe Configuration';
 $LNG['mu_global_message'] = 'Global Message';
 $LNG['mu_users_settings'] = 'Edit menu';

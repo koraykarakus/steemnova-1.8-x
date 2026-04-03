@@ -32,6 +32,11 @@
         <a class="d-flex w-100 h-100 p-1 text-decoration-none  fs-6" href="?page=infos">{$LNG.mu_game_info}</a>
       </li>
     {/if}
+     {if allowedTo('ShowGameSettingsPage')}
+      <li class="d-flex {if $page == 'gameSettings'}menu-active{/if}">
+        <a class="d-flex w-100 h-100 p-1 text-decoration-none fs-6" href="?page=gameSettings">{$LNG.mu_improved_game_settings}</a>
+      </li>
+    {/if}
     {if allowedTo('ShowConfigBasicPage')}
       <li class="d-flex {if $page == 'server'}menu-active{/if}">
         <a class="d-flex w-100 h-100 p-1  text-decoration-none  fs-6" href="?page=server">{$LNG.mu_settings}</a>

@@ -121,17 +121,19 @@ abstract class AbstractAdminPage
     protected function createButtonBack(): array
     {
         global $LNG;
-        return $btn[] = [
+        $btn = [];
+        $btn[] = [
             'url'   => $_SERVER['HTTP_REFERER'] ?? '',
             'label' => $LNG['uvs_back'] ?? '',
         ];
+        return $btn;
     }
 
     protected function printMessage($msg, $btns = null, $redirect = null, $full = true): void
     {
 
         $this->assign([
-            'message'         => $msg,
+            'message'          => $msg,
             'redirect_buttons' => $btns,
         ]);
 

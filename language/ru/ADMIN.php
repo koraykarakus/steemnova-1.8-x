@@ -674,6 +674,7 @@ $LNG['ul_sure_you_want_dlte'] = 'Вы действительно хотите у
 $LNG['mu_general'] = 'Общее';
 $LNG['mu_connected'] = 'Онлайн';
 $LNG['mu_settings'] = 'Параметры сервера';
+$LNG['mu_improved_game_settings'] = "Улучшенные настройки игры";
 $LNG['mu_unisettings'] = 'Параметры вселенной';
 $LNG['mu_global_message'] = 'Глобальное сообщение';
 $LNG['mu_users_settings'] = 'Редактирование';
