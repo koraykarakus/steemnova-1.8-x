@@ -17,7 +17,7 @@ class ShowCollectMinesPage extends AbstractGamePage
     {
         global $USER, $PLANET, $RESOURCE, $LNG, $db, $config;
 
-        //Don't allow user to collect mine if in vacation mode
+        // Don't allow user to collect mine if in vacation mode
         if (inVacationMode($USER))
         {
             $this->printMessage($LNG['cm_error_1']);
@@ -28,12 +28,13 @@ class ShowCollectMinesPage extends AbstractGamePage
         if (!$config->collect_mines_under_attack)
         {
             $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
-                    fleet_owner != :userId AND fleet_mess = 0 AND
-                    fleet_target_owner = :userId AND fleet_mission = 1 AND hasCanceled = 0 AND fleet_start_time < :limitTime;";
+                    fleet_owner != :user_id AND fleet_mess = 0 AND
+                    fleet_target_owner = :user_id AND fleet_mission = 1 
+                    AND hasCanceled = 0 AND fleet_start_time < :limit_time;";
 
             $attacking_fleets_count = $db->selectSingle($sql, [
-                ':userId'    => $USER['id'],
-                ':limitTime' => TIMESTAMP + 5 * 60,
+                ':user_id'    => $USER['id'],
+                ':limit_time' => TIMESTAMP + 5 * 60,
             ], 'count');
 
             if ($attacking_fleets_count > 0)
@@ -58,10 +59,10 @@ class ShowCollectMinesPage extends AbstractGamePage
 
         $res_update_obj = new ResourceUpdate();
 
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :userID AND destroyed = '0'";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id_owner = :user_id AND destroyed = '0'";
 
         $planets = $db->select($sql, [
-            ':userID' => $USER['id'],
+            ':user_id' => $USER['id'],
         ]);
 
         foreach ($planets as $c_planet)
