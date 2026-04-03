@@ -20,6 +20,26 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "Configurações RapidFire";
+$LNG['rf_rapidfire_rules'] = "Regras Rapidfire";
+$LNG['rf_add_new_rapidfire_rule'] = "Adicionar nova regra rapidfire";
+$LNG['rf_turn_back_to_default'] = "Voltar às configurações padrão";
+$LNG['rf_against'] = "Contra";
+$LNG['rf_shoots'] = "Dispara";
+$LNG['rf_action'] = "Ação";
+$LNG['rf_modify'] = "Modificar";
+$LNG['rf_add_new_rule'] = "Adicionar nova regra";
+$LNG['rf_from'] = "De";
+$LNG['rf_to'] = "Para";
+$LNG['rf_shoots'] = "Dispara";
+$LNG['rf_save'] = "Salvar";
+$LNG['rf_err_update_1'] = "Entradas vazias ou element_id incorreto";
+$LNG['rf_err_remove_1'] = "Entrada incorreta";
+$LNG['rf_err_add_1'] = "Dados do formulário ausentes, verifique as entradas";
+$LNG['rf_err_add_2'] = "Esta regra já existe, modifique se quiser alterar";
+$LNG['rf_suc_add'] = "Adicionado com sucesso";
+
 // google auth
 $LNG['google_auth_settings'] = "Configurações de conexão do Google Auth";
 $LNG['google_auth_info'] = "Este recurso pode ser ativado/desativado na página de Módulos.\n

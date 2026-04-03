@@ -20,6 +20,26 @@
 // Translated into Turkish by Ibrahim Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "RapidFire Ayarları";
+$LNG['rf_rapidfire_rules'] = "Rapidfire Kuralları";
+$LNG['rf_add_new_rapidfire_rule'] = "Yeni rapidfire kuralı ekle";
+$LNG['rf_turn_back_to_default'] = "Varsayılan ayarlara dön";
+$LNG['rf_against'] = "Karşı";
+$LNG['rf_shoots'] = "Ateş eder";
+$LNG['rf_action'] = "İşlem";
+$LNG['rf_modify'] = "Düzenle";
+$LNG['rf_add_new_rule'] = "Yeni kural ekle";
+$LNG['rf_from'] = "Bundan";
+$LNG['rf_to'] = "Buna";
+$LNG['rf_shoots'] = "Ateş eder";
+$LNG['rf_save'] = "Kaydet";
+$LNG['rf_err_update_1'] = "Girdiler boş veya hatalı element_id";
+$LNG['rf_err_remove_1'] = "Hatalı giriş";
+$LNG['rf_err_add_1'] = "Form verileri eksik, girdileri kontrol et";
+$LNG['rf_err_add_2'] = "Bu kural zaten mevcut, değiştirmek için düzenleyin";
+$LNG['rf_suc_add'] = "Başarıyla eklendi";
+
 // google auth
 $LNG['google_auth_settings'] = "Google Auth Bağlantı Ayarları";
 $LNG['google_auth_info'] = "Bu özellik Modüller sayfasından aktif/pasif edilebilir.\n

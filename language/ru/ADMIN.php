@@ -16,6 +16,26 @@
  */
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "Настройки RapidFire";
+$LNG['rf_rapidfire_rules'] = "Правила Rapidfire";
+$LNG['rf_add_new_rapidfire_rule'] = "Добавить новое правило rapidfire";
+$LNG['rf_turn_back_to_default'] = "Вернуться к настройкам по умолчанию";
+$LNG['rf_against'] = "Против";
+$LNG['rf_shoots'] = "Стреляет";
+$LNG['rf_action'] = "Действие";
+$LNG['rf_modify'] = "Изменить";
+$LNG['rf_add_new_rule'] = "Добавить новое правило";
+$LNG['rf_from'] = "От";
+$LNG['rf_to'] = "До";
+$LNG['rf_shoots'] = "Стреляет";
+$LNG['rf_save'] = "Сохранить";
+$LNG['rf_err_update_1'] = "Поля пусты или неверный element_id";
+$LNG['rf_err_remove_1'] = "Неверный ввод";
+$LNG['rf_err_add_1'] = "Отсутствуют данные формы, проверьте ввод";
+$LNG['rf_err_add_2'] = "Это правило уже существует, измените его при необходимости";
+$LNG['rf_suc_add'] = "Успешно добавлено";
+
 // google auth 
 $LNG['google_auth_settings'] = "Настройки подключения Google Auth";
 $LNG['google_auth_info'] = "Эту функцию можно включить/отключить на странице модулей.\n

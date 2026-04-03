@@ -15,6 +15,26 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "Ustawienia RapidFire";
+$LNG['rf_rapidfire_rules'] = "Zasady Rapidfire";
+$LNG['rf_add_new_rapidfire_rule'] = "Dodaj nową zasadę rapidfire";
+$LNG['rf_turn_back_to_default'] = "Przywróć ustawienia domyślne";
+$LNG['rf_against'] = "Przeciwko";
+$LNG['rf_shoots'] = "Strzela";
+$LNG['rf_action'] = "Akcja";
+$LNG['rf_modify'] = "Edytuj";
+$LNG['rf_add_new_rule'] = "Dodaj nową zasadę";
+$LNG['rf_from'] = "Od";
+$LNG['rf_to'] = "Do";
+$LNG['rf_shoots'] = "Strzela";
+$LNG['rf_save'] = "Zapisz";
+$LNG['rf_err_update_1'] = "Pola są puste lub nieprawidłowe element_id";
+$LNG['rf_err_remove_1'] = "Nieprawidłowe dane";
+$LNG['rf_err_add_1'] = "Brak danych z formularza, sprawdź pola";
+$LNG['rf_err_add_2'] = "Ta zasada już istnieje, edytuj jeśli chcesz zmienić";
+$LNG['rf_suc_add'] = "Dodano pomyślnie";
+
 // google auth
 $LNG['google_auth_settings'] = "Ustawienia połączenia Google Auth";
 $LNG['google_auth_info'] = "Ta funkcja może być włączana/wyłączana na stronie Modułów.\n

@@ -5,6 +5,26 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// ShowGameSettingsPage, rapidfire settings
+$LNG['rf_title'] = "Paramètres RapidFire";
+$LNG['rf_rapidfire_rules'] = "Règles Rapidfire";
+$LNG['rf_add_new_rapidfire_rule'] = "Ajouter une nouvelle règle rapidfire";
+$LNG['rf_turn_back_to_default'] = "Revenir aux paramètres par défaut";
+$LNG['rf_against'] = "Contre";
+$LNG['rf_shoots'] = "Tire";
+$LNG['rf_action'] = "Action";
+$LNG['rf_modify'] = "Modifier";
+$LNG['rf_add_new_rule'] = "Ajouter une nouvelle règle";
+$LNG['rf_from'] = "De";
+$LNG['rf_to'] = "À";
+$LNG['rf_shoots'] = "Tire";
+$LNG['rf_save'] = "Enregistrer";
+$LNG['rf_err_update_1'] = "Entrées vides ou element_id incorrect";
+$LNG['rf_err_remove_1'] = "Entrée incorrecte";
+$LNG['rf_err_add_1'] = "Données du formulaire manquantes, vérifier les entrées";
+$LNG['rf_err_add_2'] = "Cette règle existe déjà, modifiez-la si vous voulez la changer";
+$LNG['rf_suc_add'] = "Ajouté avec succès";
+
 // google auth
 $LNG['google_auth_settings'] = "Paramètres de connexion Google Auth";
 $LNG['google_auth_info'] = "Cette fonctionnalité peut être activée/désactivée depuis la page des Modules.\n
