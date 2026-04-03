@@ -29,7 +29,7 @@
 						</table>">{$LNG.tech.{$elementID}}</a>
             </td>
             {if !empty($elementRow)}
-            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.userID});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
+            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
             {else}
             <td>-</td>
@@ -61,7 +61,7 @@
 							</tbody>
 						</table>">{$LNG.tech.{$elementID}}</a></td>
             {if !empty($elementRow)}
-            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.userID});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
+            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
             {else}
             <td>-</td>
@@ -93,7 +93,7 @@
 							</tbody>
 						</table>">{$LNG.tech.{$elementID}}</a></td>
             {if !empty($elementRow)}
-            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.userID});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
+            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
             {else}
             <td>-</td>
@@ -125,7 +125,7 @@
 							</tbody>
 						</table>">{$LNG.tech.{$elementID}}</a></td>
             {if !empty($elementRow)}
-            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.userID});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
+            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
             {else}
             <td>-</td>
@@ -157,7 +157,7 @@
 							</tbody>
 						</table>">{$LNG.tech.{$elementID}}</a></td>
             {if !empty($elementRow)}
-            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.userID});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
+            <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
             {else}
             <td>-</td>
