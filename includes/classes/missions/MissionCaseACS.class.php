@@ -17,9 +17,9 @@
 
 class MissionCaseACS extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
@@ -37,14 +37,14 @@ class MissionCaseACS extends MissionFunctions implements Mission
     public function ReturnEvent()
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
-        $planetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';
+        $planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
         ], 'name');
 
-        $Message = sprintf(
+        $message = sprintf(
             $LNG['sys_fleet_won'],
-            $planetName,
+            $planet_name,
             GetTargetAddressLink($this->_fleet, ''),
             pretty_number($this->_fleet['fleet_resource_metal']),
             $LNG['tech'][901],
@@ -60,7 +60,7 @@ class MissionCaseACS extends MissionFunctions implements Mission
             $LNG['sys_mess_tower'],
             4,
             $LNG['sys_mess_fleetback'],
-            $Message,
+            $message,
             $this->_fleet['fleet_end_time'],
             null,
             1,
