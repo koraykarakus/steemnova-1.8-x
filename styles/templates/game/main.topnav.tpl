@@ -129,7 +129,11 @@
         {else}
           <div class="res_current {if isset($resourceData.max)}{if $resourceData.current >= $resourceData.max}color-red{/if}{/if}" id="current_{$resourceData.name}"
             data-real="{$resourceData.current}">
-            {$resourceData.current|number}
+            {if $shortly_number}
+              {shortly_number($resourceData.current)}
+            {else}
+              {$resourceData.current|number}
+            {/if}
           </div>
         {/if}
       </div>

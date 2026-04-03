@@ -50,7 +50,7 @@ function shortly_number(number)
 	}
 
 	decial	= key != 0 && number != 0 && number < 100;
-	return NumberGetHumanReadable(negate * number, decial)+(key !== 0 ? '&nbsp;'+unit[key] : '');
+	return NumberGetHumanReadable(negate * number, decial)+(key !== 0 ? ''+unit[key] : '');
 }
 
 function removeE(Number) {
