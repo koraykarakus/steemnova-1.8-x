@@ -1,15 +1,13 @@
 {block name="title" prepend}{$pageTitle}{/block}
 {block name="content"}
 	{if isset($Info)}
-		<table class="table_game">
+		<table class="table_game center_x">
 			<tr>
-				<td class="transparent"
-					style="width:40%;font-size:22px;font-weight:bold;padding:10px 0 30px;color:{if $Raport.result == "a"}lime{elseif $Raport.result == "r"}red{else}white{/if}">
-					{$Info.0}</td>
-				<td class="transparent" style="font-size:22px;font-weight:bold;padding:10px 0 30px;">VS</td>
-				<td class="transparent"
-					style="width:40%;font-size:22px;font-weight:bold;padding:10px 0 30px;color:{if $Raport.result == "r"}lime{elseif $Raport.result == "a"}red{else}white{/if}">
-					{$Info.1}</td>
+				<td class="text_center">
+					<span style="color:{if $Raport.result == "a"}lime{elseif $Raport.result == "r"}red{else}white{/if}">{$Info.0}</span>
+					<span>VS</span>
+					<span style="color:{if $Raport.result == "r"}lime{elseif $Raport.result == "a"}red{else}white{/if}">{$Info.1}</span>
+				</td>
 			</tr>
 		</table>
 	{/if}
