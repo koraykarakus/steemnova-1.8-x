@@ -20,6 +20,15 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Sim de Voo";
+$LNG['fs_flight_sim'] = "Sim. Voo";
+$LNG['fs_time'] = "tempo";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "horas";
+$LNG['fs_time_seconds'] = "segundos";
+$LNG['fs_time_minutes'] = "minutos";
+
 //realocar módulo
 
 $LNG['cannot_use_in_vac'] = "Você não pode usar esta opção no modo férias";

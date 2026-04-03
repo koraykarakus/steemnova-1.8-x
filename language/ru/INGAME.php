@@ -17,6 +17,16 @@
 
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Авиасимулятор";
+$LNG['fs_flight_sim'] = "Авиасим.";
+$LNG['fs_time'] = "время";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "часы";
+$LNG['fs_time_seconds'] = "секунды";
+$LNG['fs_time_minutes'] = "минуты";
+
 //перемещаем модуль
 
 $LNG['cannot_use_in_vac'] = "Вы не можете использовать эту опцию в режиме отпуска";

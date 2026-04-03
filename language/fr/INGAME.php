@@ -5,6 +5,15 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Sim de Vol";
+$LNG['fs_flight_sim'] = "Sim. Vol";
+$LNG['fs_time'] = "temps";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "heures";
+$LNG['fs_time_seconds'] = "secondes";
+$LNG['fs_time_minutes'] = "minutes";
+
 //déplacer le module
 
 $LNG['cannot_use_in_vac'] = "Vous ne pouvez pas utiliser cette option en mode vacances";

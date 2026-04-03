@@ -15,6 +15,16 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Sim de Vuelo";
+$LNG['fs_flight_sim'] = "Sim. Vuelo";
+$LNG['fs_time'] = "tiempo";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "horas";
+$LNG['fs_time_seconds'] = "segundos";
+$LNG['fs_time_minutes'] = "minutos";
+
 //reubicar módulo
 
 $LNG['cannot_use_in_vac'] = "No puedes usar esta opción en modo vacaciones";

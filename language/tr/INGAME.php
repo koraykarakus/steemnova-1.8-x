@@ -20,6 +20,15 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+//MODULE_FLIGHT_SIMULATOR
+$LNG['lm_flight_simulator'] = "Uçuş Simülatörü";
+$LNG['fs_flight_sim'] = "Uçuş Sim.";
+$LNG['fs_time'] = "zaman";
+$LNG['fs_percantage'] = "%";
+$LNG['fs_time_hours'] = "saat";
+$LNG['fs_time_seconds'] = "saniye";
+$LNG['fs_time_minutes'] = "dakika";
+
 //relocate module
 
 $LNG['cannot_use_in_vac'] = "Bu özelliği tatil modundayken kullanamazsınız !";
