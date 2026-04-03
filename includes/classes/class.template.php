@@ -116,7 +116,7 @@ class template extends Smarty
     {
         global $LNG;
 
-        $this->setTemplateDir(ROOT_PATH.'/styles/templates/game/');
+        $this->setTemplateDir(ROOT_PATH.'/styles/templates/');
 
         $tplDir = $this->getTemplateDir();
 
@@ -128,6 +128,11 @@ class template extends Smarty
         {
             $this->setTemplateDir($tplDir[0].'adm/');
             $this->adm_main();
+        }
+        elseif (MODE === 'INGAME'
+                || MODE === 'REPORT')
+        {
+            $this->setTemplateDir($tplDir[0].'game/');
         }
 
         $this->assign_vars([
