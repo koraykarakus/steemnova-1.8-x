@@ -13,7 +13,6 @@ class ShowFindDebrisPage extends AbstractGamePage
     {
 		global $USER, $PLANET, $RESOURCE, $PRICELIST;
 		
-		$table = "";
 		$range = $PLANET['shipyard'] * 4;
         
         $db = Database::get();
@@ -32,34 +31,15 @@ class ShowFindDebrisPage extends AbstractGamePage
             ':planet_type' => 1,
         ]);
 
-        $table = "<table><tr><td>Galaxy</td><td>System</td><td>Planet</td><td>Debris Metal</td><td>Debris Crystal</td><td>Collect</td></tr>";
-        //print_r($cautare);
-        if(count($debris_data) > 0)
-        foreach($debris_data as $c_row){
-        
-        $GRecNeeded = min(ceil(($c_row['der_metal'] + $c_row['der_crystal']) / $PRICELIST[219]['capacity']), $PLANET[$RESOURCE[219]]);
-        
-            $table .= "<tr><td>" . 
-            $c_row['galaxy'] . 
-            "</td><td>" . 
-            $c_row['system'] . 
-            "</td><td>" . 
-            $c_row['planet'] . 
-            "</td><td>" . 
-            $c_row['der_metal'] . 
-            "</td><td>" . 
-            $c_row['der_crystal'] . 
-            "</td><td><a href='javascript:doit(8," . 
-            $c_row['id'] . 
-            ");'>Collect</a></td></tr>";
+        foreach($debris_data as &$c_row)
+        {
+            $c_row['needed_recycler_num'] = min(ceil(($c_row['debris_metal'] + $c_row['debris_metal']) / $PRICELIST[219]['capacity']), $PLANET[$RESOURCE[219]]);
         }
-        else
-        $table .= "<tr><td colspan='5'>There are no debris in your range</td></tr>";
-        $table .= "</table>";
-
+        unset($c_row);
+        
 		$this->assign([
+            'debris_data' => $debris_data,
             'range' => $range,
-            'debris' => $table,
             'user_maxfleetsettings' => $USER['settings_fleetactions'],
 		]);
 

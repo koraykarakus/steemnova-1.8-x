@@ -9,19 +9,30 @@
 		</tr>
 	</thead>
 	<tbody>
-			{$debris}
+		{foreach $debris_data as $c_row}
+			<tr>
+				<td>[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]</td>
+				<td>{$c_row.debris_metal}</td>
+				<td>{$c_row.debris_crystal}</td>
+			</tr>
+		{foreachelse}
+			<tr>
+				<td class="text_center" colspan='3'>There are no debris in your range</td>
+			</tr>
+		{/foreach}
 	</tbody>
-			<table>
-				<tr style="display: none;" id="fleetstatusrow">
-				<th colspan="6">Fleet...</th>
-				</tr>
-			</table>
-		</tr>
 </table>
-</div>
+
+<table>
+	<tr style="display: none;" id="fleetstatusrow">
+		<th colspan="6">Fleet...</th>
+	</tr>
+</table>
+
 <script type="text/javascript">
 	MaxFleetSetting = {$user_maxfleetsettings};
 </script>
+
 <script>
 function doit(missionID, planetID) {
 	$.getJSON("game.php?page=fleetAjax&ajax=1&mission="+missionID+"&planetID="+planetID, function(data)
