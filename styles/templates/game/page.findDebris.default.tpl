@@ -1,23 +1,23 @@
 {block name="title" prepend}{$LNG.lm_empire}{/block}
 {block name="content"}
-<table>
-        <tbody>
-			<tr>
-				<td><a href="?page=findDebris">Show Debris(range : {$range})</a></td>
-			</tr>
-				{$debris}
-		</tbody>
-		<table>
-		<tr style="display: none;" id="fleetstatusrow">
-		<th colspan="6">Fleet...</th>
+<table class="table_game table_full">
+	<tbody>
+		<tr>
+			<td><a href="?page=findDebris">Show Debris(range : {$range})</a></td>
 		</tr>
-		</table>
-	</tr>
-    </table>
+			{$debris}
+	</tbody>
+			<table>
+				<tr style="display: none;" id="fleetstatusrow">
+				<th colspan="6">Fleet...</th>
+				</tr>
+			</table>
+		</tr>
+</table>
 </div>
 <script type="text/javascript">
-		MaxFleetSetting = {$user_maxfleetsettings};
-	</script>
+	MaxFleetSetting = {$user_maxfleetsettings};
+</script>
 <script>
 function doit(missionID, planetID) {
 	$.getJSON("game.php?page=fleetAjax&ajax=1&mission="+missionID+"&planetID="+planetID, function(data)

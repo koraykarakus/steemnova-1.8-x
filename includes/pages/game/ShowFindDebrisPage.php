@@ -14,7 +14,7 @@ class ShowFindDebrisPage extends AbstractGamePage
 		global $USER, $PLANET, $RESOURCE, $PRICELIST;
 		
 		$table = "";
-		$range = $PLANET['hangar'] * 4;
+		$range = $PLANET['shipyard'] * 4;
         
         $db = Database::get();
 
