@@ -1,12 +1,12 @@
 {block name="title" prepend}{$LNG.lm_officers}{/block}
 {block name="content"}
 
-{if !empty($darkmatterList)}
+{if !empty($darkmatter_list)}
 	<table class="table_game table_full">
 	<tr>
 		<th colspan="2">{$of_dm_trade}</th>
 	</tr>
-	{foreach $darkmatterList as $ID => $Element}
+	{foreach $darkmatter_list as $ID => $Element}
 	<tr>
 		<td rowspan="2" style="width:120px;">
 			<a href="#" onclick="return Dialog.info({$ID});">
@@ -24,13 +24,13 @@
 					<tr>
 						<td class="left" style="width:90%;padding:10px;">
 							<p>{$LNG.shortDescription.{$ID}}</p>
-							{foreach $Element.elementBonus as $BonusName => $Bonus}{if $Bonus@iteration % 3 === 1}<p>{/if}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{$Bonus[0]}{/if} {$LNG.bonus.$BonusName}{if $Bonus@iteration % 3 === 0 || $Bonus@last}</p>{else}&nbsp;{/if}{/foreach}
-                            <p>{foreach $Element.costResources as $RessID => $RessAmount}
+							{foreach $Element.element_bonus as $BonusName => $Bonus}{if $Bonus@iteration % 3 === 1}<p>{/if}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{$Bonus[0]}{/if} {$LNG.bonus.$BonusName}{if $Bonus@iteration % 3 === 0 || $Bonus@last}</p>{else}&nbsp;{/if}{/foreach}
+                            <p>{foreach $Element.cost_resources as $RessID => $RessAmount}
 															<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip" data-bs-placement="top"
-										          data-bs-html="true" title="<table class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach} | {$LNG.in_dest_durati}: <span style="color:lime">{$Element.time|time}</span></p>
+										          data-bs-html="true" title="<table class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.cost_overflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach} | {$LNG.in_dest_durati}: <span style="color:lime">{$Element.time|time}</span></p>
 						</td>
 						<td style="vertical-align:middle;width:100px">
-						{if $Element.timeLeft > 0}
+						{if $Element.time_left > 0}
 							{$LNG.of_still}<br>
 							<span class="color-red" id="time_{$ID}">-</span>
 							<span class="color-green">({$LNG.of_active})</span>
@@ -70,7 +70,7 @@
 			</a>
 		</td>
 		<th>
-			<a href="#" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a> ({$LNG.of_lvl} {$Element.level}/{$Element.maxLevel})
+			<a href="#" onclick="return Dialog.info({$ID})">{$LNG.tech.{$ID}}</a> ({$LNG.of_lvl} {$Element.level}/{$Element.max_level})
 		</th>
 	</tr>
 	<tr>
@@ -80,13 +80,13 @@
 					<tr>
 						<td style="width:90%;padding:0px 10px 10px 10px;">
 							<p>{$LNG.shortDescription.{$ID}}</p>
-							<p>{foreach $Element.elementBonus as $BonusName => $Bonus}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{floatval($Bonus[0])}{/if} {$LNG.bonus.$BonusName}<br>{/foreach}</p>
-                            <p>{foreach $Element.costResources as $RessID => $RessAmount}<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
+							<p>{foreach $Element.element_bonus as $BonusName => $Bonus}{if $Bonus[0] < 0}-{else}+{/if}{if $Bonus[1] == 0}{abs($Bonus[0] * 100)}%{else}{floatval($Bonus[0])}{/if} {$LNG.bonus.$BonusName}<br>{/foreach}</p>
+                            <p>{foreach $Element.cost_resources as $RessID => $RessAmount}<a href='#' onclick='return Dialog.info({$RessID})' data-bs-toggle="tooltip"
 				          					data-bs-placement="top"
-				          					data-bs-html="true" title="<table  class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.costOverflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach}</p>
+				          					data-bs-html="true" title="<table  class='table-tooltip fs-11'><tr><th>{$LNG.tech.{$RessID}}</th></tr><tr><table class='hoverinfo'><tr><td><img src='{$dpath}elements/{$RessID}.{if $RessID >=600 && $RessID <= 699}jpg{else}gif{/if}'></td><td>{$LNG.shortDescription.$RessID}</td></tr></table></tr></table>">{$LNG.tech.{$RessID}}</a>: <b><span style="color:{if $Element.cost_overflow[$RessID] == 0}lime{else}red{/if}">{$RessAmount|number}</span></b>{/foreach}</p>
 						</td>
 						<td style="vertical-align:middle;width:100px">
-						{if $Element.maxLevel <= $Element.level}
+						{if $Element.max_level <= $Element.level}
 							<span style="color:red">{$LNG.bd_maxlevel}</span>
 						{elseif $Element.buyable}
 							<form action="game.php?page=officers" method="post" class="build_form">
