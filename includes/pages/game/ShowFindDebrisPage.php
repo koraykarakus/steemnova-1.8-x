@@ -2,7 +2,7 @@
 
 class ShowFindDebrisPage extends AbstractGamePage
 {
-    public static $require_module = 0;
+    public static $require_module = MODULE_FIND_DEBRIS;
 
 	function __construct() 
 	{
