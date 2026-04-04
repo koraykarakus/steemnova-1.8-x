@@ -15,6 +15,75 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->display('page.gameSettings.default.tpl');
     }
 
+    public function buildings(): void
+    {
+        $db = Database::get();
+        $sql = "SELECT * FROM %%VARS%% WHERE element_id < 100;";
+        $buildings_data = $db->select($sql);
+
+        $buildings_list = [];
+        foreach ($buildings_data as $c_building)
+        {
+            $buildings_list[$c_building['element_id']] = [
+                'factor'  => $c_building['factor'],
+                'cost901' => $c_building['cost901'],
+                'cost902' => $c_building['cost902'],
+                'cost903' => $c_building['cost903'],
+                'cost911' => $c_building['cost911'],
+                'cost921' => $c_building['cost921'],
+            ];
+        }
+
+        $this->assign([
+            'buildings_list' => $buildings_data,
+        ]);
+
+        $this->display('page.gameSettings.buildings.tpl');
+    }
+
+    public function updateBuildings()
+    {
+        $element_id = HTTP::_GP('element_id', 0);
+        $factor = HTTP::_GP('factor', 0.00);
+        $cost_metal = HTTP::_GP('cost_metal', 0);
+        $cost_crystal = HTTP::_GP('cost_crystal', 0);
+        $cost_deu = HTTP::_GP('cost_deu', 0);
+        $cost_energy = HTTP::_GP('cost_energy', 0);
+        $cost_dm = HTTP::_GP('cost_dm', 0);
+
+        $sql = "UPDATE %%VARS%% SET 
+        factor = :factor,
+        cost901 = :cost901,
+        cost902 = :cost902,
+        cost903 = :cost903,
+        cost911 = :cost911,
+        cost921 = :cost921
+        WHERE element_id = :element_id;";
+
+        Database::get()->update($sql, [
+            ':factor'     => $factor,
+            ':cost901'    => $cost_metal,
+            ':cost902'    => $cost_crystal,
+            ':cost903'    => $cost_deu,
+            ':cost911'    => $cost_energy,
+            ':cost921'    => $cost_dm,
+            ':element_id' => $element_id,
+        ]);
+
+        ClearCache();
+        $this->redirectTo('admin.php?page=gameSettings&mode=buildings');
+    }
+
+    public function restoreBuildings(): void
+    {
+        $db = Database::get();
+        $sql = "DELETE FROM %%VARS%% WHERE element_id < 100; 
+        INSERT INTO %%VARS%% SELECT * FROM %%VARS_DEFAULT%% WHERE element_id < 100";
+        $db->nativeQuery($sql);
+        ClearCache();
+        $this->redirectTo('admin.php?page=gameSettings&mode=buildings');
+    }
+
     public function rapidFire(): void
     {
         global $RESLIST;

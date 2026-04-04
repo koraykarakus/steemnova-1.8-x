@@ -25,6 +25,19 @@ $LNG['rf_err_add_1'] = "Données du formulaire manquantes, vérifier les entrée
 $LNG['rf_err_add_2'] = "Cette règle existe déjà, modifiez-la si vous voulez la changer";
 $LNG['rf_suc_add'] = "Ajouté avec succès";
 
+// ShowGameSettingsPage, buildings settings
+$LNG['gsb_title'] = "Paramètres des Bâtiments";
+$LNG['gsb_settings'] = "Paramètres";
+$LNG['gsb_add_new_building'] = "Ajouter un Nouveau Bâtiment";
+$LNG['gsb_default_settings'] = "Paramètres par Défaut [bâtiments]";
+$LNG['gsb_cost_grow_factor'] = "facteur d’augmentation du coût";
+$LNG['gsb_base_cost_metal'] = "coût de base métal";
+$LNG['gsb_base_cost_crystal'] = "coût de base cristal";
+$LNG['gsb_base_cost_deu'] = "coût de base deutérium";
+$LNG['gsb_base_cost_energy'] = "coût de base énergie";
+$LNG['gsb_base_cost_dm'] = "coût de base DM";
+$LNG['gsb_modify'] = "Modifier";
+
 // google auth
 $LNG['google_auth_settings'] = "Paramètres de connexion Google Auth";
 $LNG['google_auth_info'] = "Cette fonctionnalité peut être activée/désactivée depuis la page des Modules.\n

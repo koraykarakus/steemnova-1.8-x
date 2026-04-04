@@ -40,6 +40,19 @@ $LNG['rf_err_add_1'] = "Form verileri eksik, girdileri kontrol et";
 $LNG['rf_err_add_2'] = "Bu kural zaten mevcut, değiştirmek için düzenleyin";
 $LNG['rf_suc_add'] = "Başarıyla eklendi";
 
+// ShowGameSettingsPage, buildings settings
+$LNG['gsb_title'] = "Bina Ayarları";
+$LNG['gsb_settings'] = "Ayarlar";
+$LNG['gsb_add_new_building'] = "Yeni Bina Ekle";
+$LNG['gsb_default_settings'] = "Varsayılan Ayarlar [binalar]";
+$LNG['gsb_cost_grow_factor'] = "maliyet artış katsayısı";
+$LNG['gsb_base_cost_metal'] = "temel metal maliyeti";
+$LNG['gsb_base_cost_crystal'] = "temel kristal maliyeti";
+$LNG['gsb_base_cost_deu'] = "temel deuterium maliyeti";
+$LNG['gsb_base_cost_energy'] = "temel enerji maliyeti";
+$LNG['gsb_base_cost_dm'] = "temel DM maliyeti";
+$LNG['gsb_modify'] = "Düzenle";
+
 // google auth
 $LNG['google_auth_settings'] = "Google Auth Bağlantı Ayarları";
 $LNG['google_auth_info'] = "Bu özellik Modüller sayfasından aktif/pasif edilebilir.\n
