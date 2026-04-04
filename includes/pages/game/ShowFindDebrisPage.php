@@ -60,12 +60,11 @@ class ShowFindDebrisPage extends AbstractGamePage
             $table .= "</table>";
         }
 
-		$this->assign(
-			[
-				'range' => $range,
-				'debris' => $table,
-				'user_maxfleetsettings' => $USER['settings_fleetactions'],
-			]);
+		$this->assign([
+            'range' => $range,
+            'debris' => $table,
+            'user_maxfleetsettings' => $USER['settings_fleetactions'],
+		]);
 
 		$this->display("page.findDebris.default.tpl");
 	}
