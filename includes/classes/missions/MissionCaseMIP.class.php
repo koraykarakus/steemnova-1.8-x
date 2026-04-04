@@ -17,9 +17,9 @@
 
 class MissionCaseMIP extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
@@ -92,11 +92,11 @@ class MissionCaseMIP extends MissionFunctions implements Mission
             $target_data['MSG'] = $target_data['LNG']['sys_irak_no_att'];
             $where = $this->_fleet['fleet_end_type'] == 3 ? 'id_moon' : 'id';
 
-            $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[502] . ' = ' . 
+            $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[502] . ' = ' .
             $RESOURCE[502] . ' - :amount WHERE ' . $where . ' = :planet_id;';
 
             $db->update($sql, [
-                ':amount'   => $this->_fleet['fleet_amount'],
+                ':amount'    => $this->_fleet['fleet_amount'],
                 ':planet_id' => $target_data['id'],
             ]);
         }
@@ -108,7 +108,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
                 $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[502] . ' = :amount WHERE ' . $where . ' = :planet_id;';
 
                 $db->update($sql, [
-                    ':amount'   => 0,
+                    ':amount'    => 0,
                     ':planet_id' => $target_data['id'],
                 ]);
             }
@@ -142,7 +142,7 @@ class MissionCaseMIP extends MissionFunctions implements Mission
                     $sql = 'UPDATE %%PLANETS%% SET ' . $RESOURCE[$element] . ' = ' . $RESOURCE[$element] . ' - :amount WHERE id = :planet_id;';
                     $db->update($sql, [
                         ':planet_id' => $target_data['id'],
-                        ':amount'   => $destroy,
+                        ':amount'    => $destroy,
                     ]);
                 }
             }
