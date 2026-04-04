@@ -18,15 +18,42 @@ class ShowFindDebrisPage extends AbstractGamePage
 		$range = $PLANET['hangar'] * 4;
         if ($mode == '1')
         {
-            $cautare = $GLOBALS['DATABASE']->query("SELECT *from ".PLANETS." where (`der_metal` >0 OR `der_crystal` >0) AND (`system` > '".($PLANET['system'] - $range)."' AND `system` < '".($PLANET['system'] + $range)."') AND `galaxy` = '".$PLANET['galaxy']."' and `planet_type` = '1' ;");
-                $table = "<table><tr><td>Galaxy</td><td>System</td><td>Planet</td><td>Debris Metal</td><td>Debris Crystal</td><td>Collect</td></tr>";
-                //print_r($cautare);
-            if($GLOBALS['DATABASE']->numRows($cautare) > 0)
-            while($GalaxyRowPlanet = $GLOBALS['DATABASE']->fetch_array($cautare)){
+            $db = Database::get();
+
+            $sql = "SELECT * FROM %%PLANETS%% 
+            WHERE (`debris_metal` > 0 OR `debris_crystal` > 0) 
+            AND (`system` > :system_min  
+            AND `system` < :system_max) 
+            AND `galaxy` = :galaxy  
+            AND `planet_type` = :planet_type";
+
+            $cautare = $db->select($sql,[
+                ':system_min' => $PLANET['system'] - $range,
+                ':system_max' => $PLANET['system'] + $range,
+                ':galaxy' => $PLANET['galaxy'],
+                ':planet_type' => 1,
+            ]);
+
+            $table = "<table><tr><td>Galaxy</td><td>System</td><td>Planet</td><td>Debris Metal</td><td>Debris Crystal</td><td>Collect</td></tr>";
+            //print_r($cautare);
+            if(count($cautare) > 0)
+            foreach($cautare as $c_row){
             
-            $GRecNeeded = min(ceil(($GalaxyRowPlanet['der_metal'] + $GalaxyRowPlanet['der_crystal']) / $pricelist[219]['capacity']), $PLANET[$resource[219]]);
+            $GRecNeeded = min(ceil(($c_row['der_metal'] + $c_row['der_crystal']) / $pricelist[219]['capacity']), $PLANET[$resource[219]]);
             
-                $table .= "<tr><td>".$GalaxyRowPlanet['galaxy']."</td><td>".$GalaxyRowPlanet['system']."</td><td>".$GalaxyRowPlanet['planet']."</td><td>".$GalaxyRowPlanet['der_metal']."</td><td>".$GalaxyRowPlanet['der_crystal']."</td><td><a href='javascript:doit(8,".$GalaxyRowPlanet['id'].");'>Collect</a></td></tr>";
+                $table .= "<tr><td>" . 
+                $c_row['galaxy'] . 
+                "</td><td>" . 
+                $c_row['system'] . 
+                "</td><td>" . 
+                $c_row['planet'] . 
+                "</td><td>" . 
+                $c_row['der_metal'] . 
+                "</td><td>" . 
+                $c_row['der_crystal'] . 
+                "</td><td><a href='javascript:doit(8," . 
+                $c_row['id'] . 
+                ");'>Collect</a></td></tr>";
             }
             else
             $table .= "<tr><td colspan='5'>There are no debris in your range</td></tr>";
