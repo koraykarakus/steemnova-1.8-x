@@ -3,7 +3,7 @@
 <table>
         <tbody>
 			<tr>
-				<td><a href="?page=findDebris&y=1">Show Debris(range : {$range})</a></td>
+				<td><a href="?page=findDebris">Show Debris(range : {$range})</a></td>
 			</tr>
 				{$debris}
 		</tbody>
