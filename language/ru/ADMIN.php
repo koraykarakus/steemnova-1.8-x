@@ -36,6 +36,19 @@ $LNG['rf_err_add_1'] = "Отсутствуют данные формы, пров
 $LNG['rf_err_add_2'] = "Это правило уже существует, измените его при необходимости";
 $LNG['rf_suc_add'] = "Успешно добавлено";
 
+// ShowGameSettingsPage, buildings settings
+$LNG['gsb_title'] = "Настройки Зданий";
+$LNG['gsb_settings'] = "Настройки";
+$LNG['gsb_add_new_building'] = "Добавить Новое Здание";
+$LNG['gsb_default_settings'] = "Настройки по Умолчанию [здания]";
+$LNG['gsb_cost_grow_factor'] = "коэффициент роста стоимости";
+$LNG['gsb_base_cost_metal'] = "базовая стоимость металл";
+$LNG['gsb_base_cost_crystal'] = "базовая стоимость кристалл";
+$LNG['gsb_base_cost_deu'] = "базовая стоимость дейтерий";
+$LNG['gsb_base_cost_energy'] = "базовая стоимость энергия";
+$LNG['gsb_base_cost_dm'] = "базовая стоимость DM";
+$LNG['gsb_modify'] = "Изменить";
+
 // google auth 
 $LNG['google_auth_settings'] = "Настройки подключения Google Auth";
 $LNG['google_auth_info'] = "Эту функцию можно включить/отключить на странице модулей.\n

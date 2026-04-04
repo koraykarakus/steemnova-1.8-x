@@ -38,6 +38,19 @@ $LNG['rf_err_add_1'] = "missing data from form, check inputs";
 $LNG['rf_err_add_2'] = "This rule already present, modify if you want to change";
 $LNG['rf_suc_add'] = "added by success";
 
+// ShowGameSettingsPage, buildings settings
+$LNG['gsb_title'] = "Buildings Settings";
+$LNG['gsb_settings'] = "Settings";
+$LNG['gsb_add_new_building'] = "Add New Building";
+$LNG['gsb_default_settings'] = "Default Settings [buildings]";
+$LNG['gsb_cost_grow_factor'] = "cost grow factor";
+$LNG['gsb_base_cost_metal'] = "base cost metal";
+$LNG['gsb_base_cost_crystal'] = "base cost crystal";
+$LNG['gsb_base_cost_deu'] = "base cost deuterium";
+$LNG['gsb_base_cost_energy'] = "base cost energy";
+$LNG['gsb_base_cost_dm'] = "base cost DM";
+$LNG['gsb_modify'] = "Modify";
+
 // ShowExpeditionSettingsPage , page.expedition_settings.default.tpl
 $LNG['es_allow_fleet_loss'] = "Allow fleet loss on expedition";
 $LNG['es_allow_fleet_delay'] = "Allow fleet delay on expedition";
