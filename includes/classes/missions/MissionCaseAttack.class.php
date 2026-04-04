@@ -409,7 +409,7 @@ class MissionCaseAttack extends MissionFunctions implements Mission
                 $chance_create_moon
             );
 
-            if (Config::get($this->_fleet['fleet_universe'])->debris_moon == 1)
+            if ($config->debris_moon == 1)
             {
                 foreach ($debris_resource as $element_id)
                 {
