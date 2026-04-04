@@ -27,7 +27,7 @@ class ShowFindDebrisPage extends AbstractGamePage
             AND `galaxy` = :galaxy  
             AND `planet_type` = :planet_type";
 
-            $cautare = $db->select($sql,[
+            $debris_data = $db->select($sql,[
                 ':system_min' => $PLANET['system'] - $range,
                 ':system_max' => $PLANET['system'] + $range,
                 ':galaxy' => $PLANET['galaxy'],
@@ -36,8 +36,8 @@ class ShowFindDebrisPage extends AbstractGamePage
 
             $table = "<table><tr><td>Galaxy</td><td>System</td><td>Planet</td><td>Debris Metal</td><td>Debris Crystal</td><td>Collect</td></tr>";
             //print_r($cautare);
-            if(count($cautare) > 0)
-            foreach($cautare as $c_row){
+            if(count($debris_data) > 0)
+            foreach($debris_data as $c_row){
             
             $GRecNeeded = min(ceil(($c_row['der_metal'] + $c_row['der_crystal']) / $PRICELIST[219]['capacity']), $PLANET[$RESOURCE[219]]);
             
