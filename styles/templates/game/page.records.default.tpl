@@ -11,22 +11,30 @@
         </tr>
         {foreach $buildList as $elementID => $elementRow}
         <tr>
-            <td><a href='#' onclick='return Dialog.info({$elementID});' data-bs-toggle="tooltip"
-						data-bs-placement="left"
-						data-bs-html="true" title="
-            <table>
-							<thead>
-								<tr><th>{$LNG.tech.{$elementID}}</th></tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
-								</tr>
-								<tr>
-									<td>{$LNG.shortDescription.$elementID}</td>
-								</tr>
-							</tbody>
-						</table>">{$LNG.tech.{$elementID}}</a>
+            <td>
+            <a class="tooltip_wrapper" href='#' onclick='return Dialog.info({$elementID});'>{$LNG.tech.{$elementID}}
+                <div class="tooltip tooltip_top">        
+                    <table class="table_game">
+                        <thead>
+                            <tr>
+                                <th>{$LNG.tech.{$elementID}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text_center">
+                                    <img width="40" height="40" src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text_center">
+                                    {$LNG.shortDescription.$elementID}  
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </a>
             </td>
             {if !empty($elementRow)}
             <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
@@ -44,22 +52,30 @@
         </tr>
         {foreach $researchList as $elementID => $elementRow}
         <tr>
-            <td><a href='#' onclick='return Dialog.info({$elementID})' data-bs-toggle="tooltip"
-						data-bs-placement="left"
-						data-bs-html="true" title="
-            <table>
+            <td>
+                <a class="tooltip_wrapper" href='#' onclick='return Dialog.info({$elementID})'>
+                    <div class="tooltip tooltip_top">
+                        <table class="table_game">
 							<thead>
-								<tr><th>{$LNG.tech.{$elementID}}</th></tr>
+								<tr>
+                                    <th>{$LNG.tech.{$elementID}}</th>
+                                </tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td class="text_center">
+                                        <img width="40" height="40" src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'>
+                                    </td>
 								</tr>
 								<tr>
-									<td>{$LNG.shortDescription.$elementID}</td>
+									<td class="text_center">{$LNG.shortDescription.$elementID}</td>
 								</tr>
 							</tbody>
-						</table>">{$LNG.tech.{$elementID}}</a></td>
+						</table>
+                    </div>
+                    {$LNG.tech.{$elementID}}
+                </a>
+            </td>
             {if !empty($elementRow)}
             <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
@@ -76,22 +92,30 @@
         </tr>
         {foreach $fleetList as $elementID => $elementRow}
         <tr>
-            <td><a href='#' onclick='return Dialog.info({$elementID})' data-bs-toggle="tooltip"
-						data-bs-placement="left"
-						data-bs-html="true" title="
-            <table>
+            <td>
+                <a class="tooltip_wrapper" href='#' onclick='return Dialog.info({$elementID})'>
+                    <div class="tooltip tooltip_top">
+                        <table class="table_game">
 							<thead>
-								<tr><th>{$LNG.tech.{$elementID}}</th></tr>
+								<tr>
+                                    <th>{$LNG.tech.{$elementID}}</th>
+                                </tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td class="text_center">
+                                        <img width="40" height="40" src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'>
+                                    </td>
 								</tr>
 								<tr>
-									<td>{$LNG.shortDescription.$elementID}</td>
+									<td class="text_center">{$LNG.shortDescription.$elementID}</td>
 								</tr>
 							</tbody>
-						</table>">{$LNG.tech.{$elementID}}</a></td>
+						</table>
+                    </div>
+                    {$LNG.tech.{$elementID}}
+                </a>
+            </td>
             {if !empty($elementRow)}
             <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
@@ -108,22 +132,30 @@
         </tr>
         {foreach $defenseList as $elementID => $elementRow}
         <tr>
-            <td><a href='#' onclick='return Dialog.info({$elementID})' data-bs-toggle="tooltip"
-						data-bs-placement="left"
-						data-bs-html="true" title="
-            <table>
+            <td>
+                <a class="tooltip_wrapper" href='#' onclick='return Dialog.info({$elementID})'>
+                    <div class="tooltip tooltip_top"> 
+                         <table class="table_game">
 							<thead>
-								<tr><th>{$LNG.tech.{$elementID}}</th></tr>
+								<tr>
+                                    <th>{$LNG.tech.{$elementID}}</th>
+                                </tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td class="text_center">
+                                        <img width="40" height="40" src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'>
+                                    </td>
 								</tr>
 								<tr>
-									<td>{$LNG.shortDescription.$elementID}</td>
+									<td class="text_center">{$LNG.shortDescription.$elementID}</td>
 								</tr>
 							</tbody>
-						</table>">{$LNG.tech.{$elementID}}</a></td>
+						</table>
+                    </div>
+                    {$LNG.tech.{$elementID}}
+                </a>
+            </td>
             {if !empty($elementRow)}
             <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>
@@ -140,22 +172,28 @@
         </tr>
         {foreach $officerList as $elementID => $elementRow}
         <tr>
-            <td><a href='#' onclick='return Dialog.info({$elementID})' data-bs-toggle="tooltip"
-						data-bs-placement="left"
-						data-bs-html="true" title="
-            <table>
+            <td>
+                <a class="tooltip_wrapper" href='#' onclick='return Dialog.info({$elementID})'>
+                    <div class="tooltip tooltip_top">
+                        <table class="table_game">
 							<thead>
-								<tr><th>{$LNG.tech.{$elementID}}</th></tr>
+								<tr>
+                                    <th>{$LNG.tech.{$elementID}}</th>
+                                </tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><img src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
+									<td class="text_center"><img width="40" height="40" src='{$dpath}elements/{$elementID}.{if $elementID >=600 && $elementID <= 699}jpg{else}gif{/if}'></td>
 								</tr>
 								<tr>
-									<td>{$LNG.shortDescription.$elementID}</td>
+									<td class="text_center">{$LNG.shortDescription.$elementID}</td>
 								</tr>
 							</tbody>
-						</table>">{$LNG.tech.{$elementID}}</a></td>
+						</table>
+                    </div>
+                    {$LNG.tech.{$elementID}}
+                </a>
+            </td>
             {if !empty($elementRow)}
             <td>{foreach $elementRow as $user}<a href='#' onclick='return Dialog.Playercard({$user.user_id});'>{$user.username}</a>{if !$user@last}<br>{/if}{/foreach}</td>
             <td>{$elementRow[0].level|number}</td>

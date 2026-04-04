@@ -1862,6 +1862,25 @@ background: linear-gradient(180deg,
 .ship_types:hover>.tooltip{
 	display: flex;
 }
+/**/
+
+/*page.records.default.tpl*/
+.tooltip_wrapper{
+	position: relative;
+}
+.tooltip_wrapper>.tooltip{
+	max-width: 250px;
+}
+.tooltip_wrapper td{
+	min-width: 240px;
+	white-space: normal;       /* satır kırılmasına izin ver */
+    word-break: normal;        /* kelime ortasında kırma */
+    overflow-wrap: break-word; /* uzun kelimelerde satırı kır */
+}
+.tooltip_wrapper:hover>.tooltip{
+	display: flex;
+}
+/**/
 
 /*general classes for color and background color*/
 
