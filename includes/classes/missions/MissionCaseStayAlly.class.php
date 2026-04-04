@@ -17,9 +17,9 @@
 
 class MissionCaseStayAlly extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
@@ -37,19 +37,24 @@ class MissionCaseStayAlly extends MissionFunctions implements Mission
     public function ReturnEvent()
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
-        $planetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';
+        $planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
         ], 'name');
 
-        $Message = sprintf($LNG['sys_tran_mess_back'], $planetName, GetStartAddressLink($this->_fleet, ''));
+        $message = sprintf(
+            $LNG['sys_tran_mess_back'],
+            $planet_name,
+            GetStartAddressLink($this->_fleet, '')
+        );
+
         PlayerUtil::sendMessage(
             $this->_fleet['fleet_owner'],
             0,
             $LNG['sys_mess_tower'],
             4,
             $LNG['sys_mess_fleetback'],
-            $Message,
+            $message,
             $this->_fleet['fleet_end_time'],
             null,
             1,
