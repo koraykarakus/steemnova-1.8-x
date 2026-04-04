@@ -55,13 +55,13 @@ class ShowOfficersPage extends AbstractGamePage
         }
 
         $sql = 'UPDATE %%USERS%% SET
-				'.$RESOURCE[$element].' = :newTime
+				'.$RESOURCE[$element].' = :new_time
 				WHERE
-				id = :userId;';
+				id = :user_id;';
 
         Database::get()->update($sql, [
-            ':newTime' => $USER[$RESOURCE[$element]],
-            ':userId'  => $USER['id'],
+            ':new_time' => $USER[$RESOURCE[$element]],
+            ':user_id'  => $USER['id'],
         ]);
     }
 
@@ -98,13 +98,13 @@ class ShowOfficersPage extends AbstractGamePage
         }
 
         $sql = 'UPDATE %%USERS%% SET
-		'.$RESOURCE[$element].' = :newTime
+		'.$RESOURCE[$element].' = :new_time
 		WHERE
-		id = :userId;';
+		id = :user_id;';
 
         Database::get()->update($sql, [
-            ':newTime' => $USER[$RESOURCE[$element]],
-            ':userId'  => $USER['id'],
+            ':new_time' => $USER[$RESOURCE[$element]],
+            ':user_id'  => $USER['id'],
         ]);
     }
 
@@ -148,12 +148,12 @@ class ShowOfficersPage extends AbstractGamePage
                 $element_bonus = BuildFunctions::getAvalibleBonus($c_element);
 
                 $dm_list[$c_element] = [
-                    'timeLeft'      => max($USER[$RESOURCE[$c_element]] - TIMESTAMP, 0),
-                    'costResources' => $cost_resources,
+                    'time_left'      => max($USER[$RESOURCE[$c_element]] - TIMESTAMP, 0),
+                    'cost_resources' => $cost_resources,
                     'buyable'       => $buyable,
                     'time'          => $PRICELIST[$c_element]['time'],
-                    'costOverflow'  => $cost_overflow,
-                    'elementBonus'  => $element_bonus,
+                    'cost_overflow'  => $cost_overflow,
+                    'element_bonus'  => $element_bonus,
                 ];
             }
         }
@@ -174,18 +174,18 @@ class ShowOfficersPage extends AbstractGamePage
 
                 $officer_list[$c_element] = [
                     'level'         => $USER[$RESOURCE[$c_element]],
-                    'maxLevel'      => $PRICELIST[$c_element]['max'],
-                    'costResources' => $cost_resources,
+                    'max_level'      => $PRICELIST[$c_element]['max'],
+                    'cost_resources' => $cost_resources,
                     'buyable'       => $buyable,
-                    'costOverflow'  => $cost_overflow,
-                    'elementBonus'  => $element_bonus,
+                    'cost_overflow'  => $cost_overflow,
+                    'element_bonus'  => $element_bonus,
                 ];
             }
         }
 
         $this->assign([
             'officer_list'   => $officer_list,
-            'darkmatterList' => $dm_list,
+            'darkmatter_list' => $dm_list,
             'of_dm_trade'    => sprintf($LNG['of_dm_trade'], $LNG['tech'][921]),
         ]);
 
