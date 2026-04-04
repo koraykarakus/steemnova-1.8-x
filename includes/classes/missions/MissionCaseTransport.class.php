@@ -16,34 +16,32 @@
  */
 class MissionCaseTransport extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
     {
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planetId;';
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planet_id;';
 
-        $startPlanetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
+        $start_planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
         ], 'name');
 
-        $targetPlanetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_end_id'],
+        $target_planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_end_id'],
         ], 'name');
 
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
 
-        /**
-         * If target exists, deploy resources.
-         * If it is a destroyed moon, avoid to call StoreGoodsToPlanet()
-         */
-        if ($targetPlanetName)
+        // If target exists, deploy resources.
+        // If it is a destroyed moon, avoid to call StoreGoodsToPlanet()
+        if ($target_planet_name)
         {
-            $Message = sprintf(
+            $message = sprintf(
                 $LNG['sys_tran_mess_owner'],
-                $targetPlanetName,
+                $target_planet_name,
                 GetTargetAddressLink($this->_fleet, ''),
                 pretty_number($this->_fleet['fleet_resource_metal']),
                 $LNG['tech'][901],
@@ -59,7 +57,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
                 $LNG['sys_mess_tower'],
                 5,
                 $LNG['sys_mess_transport'],
-                $Message,
+                $message,
                 $this->_fleet['fleet_start_time'],
                 null,
                 1,
@@ -69,11 +67,11 @@ class MissionCaseTransport extends MissionFunctions implements Mission
             if ($this->_fleet['fleet_target_owner'] != $this->_fleet['fleet_owner'])
             {
                 $LNG = $this->getLanguage(null, $this->_fleet['fleet_target_owner']);
-                $Message = sprintf(
+                $message = sprintf(
                     $LNG['sys_tran_mess_user'],
-                    $startPlanetName,
+                    $start_planet_name,
                     GetStartAddressLink($this->_fleet, ''),
-                    $targetPlanetName,
+                    $target_planet_name,
                     GetTargetAddressLink($this->_fleet, ''),
                     pretty_number($this->_fleet['fleet_resource_metal']),
                     $LNG['tech'][901],
@@ -86,21 +84,21 @@ class MissionCaseTransport extends MissionFunctions implements Mission
                 $new = [];
 
                 $new['startPlanet'] = $this->_fleet['fleet_start_id'];
-                $new['startPlanetName'] = $startPlanetName;
+                $new['startPlanetName'] = $start_planet_name;
                 $new['metal'] = $this->_fleet['fleet_resource_metal'];
                 $new['crystal'] = $this->_fleet['fleet_resource_crystal'];
                 $new['deuterium'] = $this->_fleet['fleet_resource_deuterium'];
                 $new['targetPlanet'] = $this->_fleet['fleet_end_id'];
-                $new['targetPlanetName'] = $targetPlanetName;
+                $new['targetPlanetName'] = $target_planet_name;
 
                 require_once 'includes/classes/class.Log.php';
 
-                $LOG = new Log(5);
-                $LOG->target = $this->_fleet['fleet_target_owner'];
-                $LOG->admin = $this->_fleet['fleet_owner'];
-                $LOG->old = $new;
-                $LOG->new = $new;
-                $LOG->saveTr();
+                $log = new Log(5);
+                $log->target = $this->_fleet['fleet_target_owner'];
+                $log->admin = $this->_fleet['fleet_owner'];
+                $log->old = $new;
+                $log->new = $new;
+                $log->saveTr();
 
                 PlayerUtil::sendMessage(
                     $this->_fleet['fleet_target_owner'],
@@ -108,7 +106,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
                     $LNG['sys_mess_tower'],
                     5,
                     $LNG['sys_mess_transport'],
-                    $Message,
+                    $message,
                     $this->_fleet['fleet_start_time'],
                     null,
                     1,
@@ -120,20 +118,18 @@ class MissionCaseTransport extends MissionFunctions implements Mission
             $this->StoreGoodsToPlanet();
         }
 
-        /**
-         * Check if returning planet exists.
-         * If is a player destroyed moon, redirect the fleet to the main planet.
-         */
-        if (!$startPlanetName)
+        // Check if returning planet exists.
+        // If is a player destroyed moon, redirect the fleet to the main planet.
+        if (!$start_planet_name)
         {
-            $originUser = Database::get()->selectSingle("SELECT id_planet, galaxy, system, planet FROM %%USERS%% WHERE id = :id", [
+            $origin_user = Database::get()->selectSingle("SELECT id_planet, galaxy, system, planet FROM %%USERS%% WHERE id = :id", [
                 ':id' => $this->_fleet['fleet_owner'],
             ]);
 
-            $this->UpdateFleet('fleet_start_id', $originUser['id_planet']);
-            $this->UpdateFleet('fleet_start_galaxy', $originUser['galaxy']);
-            $this->UpdateFleet('fleet_start_system', $originUser['system']);
-            $this->UpdateFleet('fleet_start_planet', $originUser['planet']);
+            $this->UpdateFleet('fleet_start_id', $origin_user['id_planet']);
+            $this->UpdateFleet('fleet_start_galaxy', $origin_user['galaxy']);
+            $this->UpdateFleet('fleet_start_system', $origin_user['system']);
+            $this->UpdateFleet('fleet_start_planet', $origin_user['planet']);
             $this->UpdateFleet('fleet_start_type', 1);
         }
 
@@ -149,12 +145,16 @@ class MissionCaseTransport extends MissionFunctions implements Mission
     public function ReturnEvent()
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planetId;';
-        $planetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';
+        $planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
         ], 'name');
 
-        $Message = sprintf($LNG['sys_tran_mess_back'], $planetName, GetStartAddressLink($this->_fleet, ''));
+        $message = sprintf(
+            $LNG['sys_tran_mess_back'],
+            $planet_name,
+            GetStartAddressLink($this->_fleet, '')
+        );
 
         PlayerUtil::sendMessage(
             $this->_fleet['fleet_owner'],
@@ -162,7 +162,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
             $LNG['sys_mess_tower'],
             4,
             $LNG['sys_mess_fleetback'],
-            $Message,
+            $message,
             $this->_fleet['fleet_end_time'],
             null,
             1,
