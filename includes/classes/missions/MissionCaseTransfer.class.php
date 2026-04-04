@@ -14,28 +14,28 @@
 
 class MissionCaseTransfer extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
     {
-        $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planetId;';
+        $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planet_id;';
 
-        $startPlanetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_start_id'],
+        $start_planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_start_id'],
         ], 'name');
 
-        $targetPlanetName = Database::get()->selectSingle($sql, [
-            ':planetId' => $this->_fleet['fleet_end_id'],
+        $target_planet_name = Database::get()->selectSingle($sql, [
+            ':planet_id' => $this->_fleet['fleet_end_id'],
         ], 'name');
 
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
 
-        $Message = sprintf(
+        $message = sprintf(
             $LNG['sys_transfer_mess_owner'],
-            $targetPlanetName,
+            $target_planet_name,
             GetTargetAddressLink($this->_fleet, ''),
             pretty_number($this->_fleet['fleet_resource_metal']),
             $LNG['tech'][901],
@@ -47,9 +47,9 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
 
         $fleet = FleetFunctions::unserialize($this->_fleet['fleet_array']);
 
-        foreach ($fleet as $elementID => $amount)
+        foreach ($fleet as $element_id => $amount)
         {
-            $Message .= '<br>'.$LNG['tech'][$elementID].': '.pretty_number($amount);
+            $message .= '<br>'.$LNG['tech'][$element_id].': '.pretty_number($amount);
         }
 
         PlayerUtil::sendMessage(
@@ -58,7 +58,7 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
             $LNG['sys_mess_tower'],
             5,
             $LNG['sys_mess_transport'],
-            $Message,
+            $message,
             $this->_fleet['fleet_start_time'],
             null,
             1,
@@ -66,11 +66,11 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
         );
 
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_target_owner']);
-        $Message = sprintf(
+        $message = sprintf(
             $LNG['sys_transfer_mess_user'],
-            $startPlanetName,
+            $start_planet_name,
             GetStartAddressLink($this->_fleet, ''),
-            $targetPlanetName,
+            $target_planet_name,
             GetTargetAddressLink($this->_fleet, ''),
             pretty_number($this->_fleet['fleet_resource_metal']),
             $LNG['tech'][901],
@@ -80,9 +80,9 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
             $LNG['tech'][903]
         );
 
-        foreach ($fleet as $elementID => $amount)
+        foreach ($fleet as $element_id => $amount)
         {
-            $Message .= '<br>'.$LNG['tech'][$elementID].': '.pretty_number($amount);
+            $message .= '<br>'.$LNG['tech'][$element_id].': '.pretty_number($amount);
         }
 
         PlayerUtil::sendMessage(
@@ -91,7 +91,7 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
             $LNG['sys_mess_tower'],
             5,
             $LNG['sys_mess_transport'],
-            $Message,
+            $message,
             $this->_fleet['fleet_start_time'],
             null,
             1,
