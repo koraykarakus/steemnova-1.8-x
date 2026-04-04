@@ -96,8 +96,6 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             {
                 $incoming_fleets[$incoming_fleet_row['fleet_id']] = $incoming_fleet_row;
             }
-
-            unset($incoming_fleets_result);
         }
         else
         {
