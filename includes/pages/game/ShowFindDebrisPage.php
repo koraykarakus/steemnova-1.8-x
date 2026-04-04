@@ -11,7 +11,7 @@ class ShowFindDebrisPage extends AbstractGamePage
 	
 	public function show(): void
     {
-		global $USER, $PLANET, $resource, $pricelist;
+		global $USER, $PLANET, $RESOURCE, $PRICELIST;
 		
 		$mode = HTTP::_GP('y', '');
 		$table = "";
@@ -39,7 +39,7 @@ class ShowFindDebrisPage extends AbstractGamePage
             if(count($cautare) > 0)
             foreach($cautare as $c_row){
             
-            $GRecNeeded = min(ceil(($c_row['der_metal'] + $c_row['der_crystal']) / $pricelist[219]['capacity']), $PLANET[$resource[219]]);
+            $GRecNeeded = min(ceil(($c_row['der_metal'] + $c_row['der_crystal']) / $PRICELIST[219]['capacity']), $PLANET[$RESOURCE[219]]);
             
                 $table .= "<tr><td>" . 
                 $c_row['galaxy'] . 
