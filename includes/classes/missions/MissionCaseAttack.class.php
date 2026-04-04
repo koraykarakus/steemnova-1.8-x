@@ -29,25 +29,6 @@ class MissionCaseAttack extends MissionFunctions implements Mission
         $db = Database::get();
         $config = Config::get($this->_fleet['fleet_universe']);
 
-        $fleet_attack = [];
-        $fleet_defend = [];
-
-        $user_attack = [];
-        $user_defend = [];
-
-        $incoming_fleets = [];
-
-        $steal_resource = [
-            901 => 0,
-            902 => 0,
-            903 => 0,
-        ];
-
-        $debris = [];
-        $planet_debris = [];
-
-        $debris_resource = [901, 902];
-
         $message_html = <<<HTML
         <div class="raportMessage">
             <table>
@@ -97,6 +78,7 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             $this->_fleet['fleet_start_time']
         );
 
+        $incoming_fleets = [];
         if ($this->_fleet['fleet_group'] != 0)
         {
             $sql = "DELETE FROM %%ACS%% WHERE id = :acs_id;";
@@ -122,6 +104,8 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             $incoming_fleets = [$this->_fleet['fleet_id'] => $this->_fleet];
         }
 
+        $fleet_attack = [];
+        $user_attack = [];
         foreach ($incoming_fleets as $fleet_id => $fleet_detail)
         {
             $sql = "SELECT * FROM %%USERS%% WHERE id = :user_id;";
@@ -152,6 +136,8 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             ':time_stamp'   => TIMESTAMP,
         ]);
 
+        $fleet_defend = [];
+        $user_defend = [];
         foreach ($target_fleets_result as $fleet_detail)
         {
             $fleet_id = $fleet_detail['fleet_id'];
@@ -343,6 +329,12 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             }
         }
 
+        $steal_resource = [
+            901 => 0,
+            902 => 0,
+            903 => 0,
+        ];
+
         if ($combat_result['won'] == "a")
         {
             require_once 'includes/classes/missions/functions/calculateSteal.php';
@@ -360,6 +352,9 @@ class MissionCaseAttack extends MissionFunctions implements Mission
             $target_planet['debris_crystal'] += $target_debris['debris_crystal'];
         }
 
+        $debris = [];
+        $planet_debris = [];
+        $debris_resource = [901, 902];
         foreach ($debris_resource as $element_id)
         {
             $debris[$element_id] = $combat_result['debris']['attacker'][$element_id] + $combat_result['debris']['defender'][$element_id];
