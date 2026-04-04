@@ -17,9 +17,9 @@
 
 class MissionCaseDestruction extends MissionFunctions implements Mission
 {
-    public function __construct($Fleet)
+    public function __construct($fleet)
     {
-        $this->_fleet = $Fleet;
+        $this->_fleet = $fleet;
     }
 
     public function TargetEvent()
@@ -148,7 +148,7 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
         $target_fleets_result = $db->select($sql, [
             ':mission'      => 5,
             ':fleet_end_id' => $this->_fleet['fleet_end_id'],
-            ':time_stamp'    => TIMESTAMP,
+            ':time_stamp'   => TIMESTAMP,
         ]);
 
         foreach ($target_fleets_result as $fleet_detail)
@@ -363,9 +363,9 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 
         foreach ($debris_resource as $element_id)
         {
-            $debris[$element_id] = $combat_result['debris']['attacker'][$element_id] + 
+            $debris[$element_id] = $combat_result['debris']['attacker'][$element_id] +
             $combat_result['debris']['defender'][$element_id];
-            $planet_debris[$element_id] = $target_planet['debris_'.$RESOURCE[$element_id]] + 
+            $planet_debris[$element_id] = $target_planet['debris_'.$RESOURCE[$element_id]] +
             $debris[$element_id];
         }
 
@@ -407,7 +407,7 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 
                     $db->update($sql, [
                         ':planet_id' => $planet_id,
-                        ':id_moon'  => $target_planet['id'],
+                        ':id_moon'   => $target_planet['id'],
                     ]);
 
                     $sql = 'UPDATE %%FLEETS%% SET
@@ -419,14 +419,14 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 
                     $db->update($sql, [
                         ':planet_id' => $planet_id,
-                        ':id_moon'  => $target_planet['id'],
-                        ':fleetId'  => $this->_fleet['fleet_id'],
+                        ':id_moon'   => $target_planet['id'],
+                        ':fleetId'   => $this->_fleet['fleet_id'],
                     ]);
 
                     $sql = "UPDATE %%ACS%% SET target = :planet_id WHERE target = :id_moon;";
                     $db->update($sql, [
                         ':planet_id' => $planet_id,
-                        ':id_moon'  => $target_planet['id'],
+                        ':id_moon'   => $target_planet['id'],
                     ]);
 
                     // Redirect fleets from moon to player's main planet.
@@ -498,9 +498,9 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
         $db->insert($sql, [
             ':report_id'   => $report_id,
             ':report_data' => serialize($report_data),
-            ':time'       => $this->_fleet['fleet_start_time'],
-            ':attackers'  => implode(',', array_keys($user_attack)),
-            ':defenders'  => implode(',', array_keys($user_defend)),
+            ':time'        => $this->_fleet['fleet_start_time'],
+            ':attackers'   => implode(',', array_keys($user_attack)),
+            ':defenders'   => implode(',', array_keys($user_defend)),
         ]);
 
         $i = 0;
@@ -589,8 +589,8 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 		WHERE '.$debris_type.' = :planet_id;';
 
         $db->update($sql, [
-            ':metal'    => $planet_debris[901],
-            ':crystal'  => $planet_debris[902],
+            ':metal'     => $planet_debris[901],
+            ':crystal'   => $planet_debris[902],
             ':planet_id' => $this->_fleet['fleet_end_id'],
         ]);
 
@@ -604,7 +604,7 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
             ':metal'     => $steal_resource[901],
             ':crystal'   => $steal_resource[902],
             ':deuterium' => $steal_resource[903],
-            ':planet_id'  => $this->_fleet['fleet_end_id'],
+            ':planet_id' => $this->_fleet['fleet_end_id'],
         ]);
 
         $sql = 'INSERT INTO %%TOPKB%% SET
@@ -615,11 +615,11 @@ class MissionCaseDestruction extends MissionFunctions implements Mission
 		result		= :result;';
 
         $db->insert($sql, [
-            ':units'    => $combat_result['unitLost']['attacker'] + $combat_result['unitLost']['defender'],
+            ':units'     => $combat_result['unitLost']['attacker'] + $combat_result['unitLost']['defender'],
             ':report_id' => $report_id,
-            ':time'     => $this->_fleet['fleet_start_time'],
-            ':universe' => $this->_fleet['fleet_universe'],
-            ':result'   => $combat_result['won'],
+            ':time'      => $this->_fleet['fleet_start_time'],
+            ':universe'  => $this->_fleet['fleet_universe'],
+            ':result'    => $combat_result['won'],
         ]);
 
         $sql = 'UPDATE %%USERS%% SET
