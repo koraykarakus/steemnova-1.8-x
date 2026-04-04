@@ -1,10 +1,14 @@
 {block name="title" prepend}{$LNG.lm_empire}{/block}
 {block name="content"}
 <table class="table_game table_full">
-	<tbody>
+	<thead>
 		<tr>
-			<td><a href="?page=findDebris">Show Debris(range : {$range})</a></td>
+			<th>
+				<a href="?page=findDebris">Show Debris(range : {$range})</a>
+			</th>
 		</tr>
+	</thead>
+	<tbody>
 			{$debris}
 	</tbody>
 			<table>
