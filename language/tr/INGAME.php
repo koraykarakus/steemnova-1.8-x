@@ -20,6 +20,17 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Koord";
+$LNG['fd_giga_recyclers_need'] = "G. Geri Dönüştürücüler (G.)";
+$LNG['fd_recyclers_need'] = "Geri Dönüştürücüler (G.)";
+$LNG['fd_action'] = "İşlem";
+$LNG['fd_go'] = "Git";
+$LNG['fd_no_debris'] = "Menzilinizde enkaz yok";
+$LNG['fd_refresh'] = "Yenile";
+$LNG['fd_range'] = "menzil";
+$LNG['lm_find_debris'] = "Enkaz Bul";
+
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Uçuş Simülatörü";
 $LNG['fs_flight_sim'] = "Uçuş Sim.";

@@ -22,9 +22,7 @@
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Coord";
 $LNG['fd_giga_recyclers_need'] = "G. Recyclers (N)";
-$LNG['fd_giga_recyclers_have'] = "G. Recyclers (H)";
 $LNG['fd_recyclers_need'] = "Recyclers (N)";
-$LNG['fd_recyclers_have'] = "Recyclers (H)";
 $LNG['fd_action'] = "Action";
 $LNG['fd_go'] = "Go";
 $LNG['fd_no_debris'] = "There are no debris in your range";

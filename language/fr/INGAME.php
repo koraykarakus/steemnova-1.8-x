@@ -5,6 +5,17 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Coord";
+$LNG['fd_giga_recyclers_need'] = "G. Recycleurs (N.)";
+$LNG['fd_recyclers_need'] = "Recycleurs (N.)";
+$LNG['fd_action'] = "Action";
+$LNG['fd_go'] = "Aller";
+$LNG['fd_no_debris'] = "Il n'y a aucun débris dans votre portée";
+$LNG['fd_refresh'] = "Actualiser";
+$LNG['fd_range'] = "portée";
+$LNG['lm_find_debris'] = "Trouver des débris";
+
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Sim de Vol";
 $LNG['fs_flight_sim'] = "Sim. Vol";

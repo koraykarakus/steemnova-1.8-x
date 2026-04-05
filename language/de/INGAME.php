@@ -14,6 +14,18 @@
  * @version 1.8.x Koray Karakuş <koraykarakus@yahoo.com>
  * @link https://github.com/jkroepke/2Moons
  */
+
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Koord";
+$LNG['fd_giga_recyclers_need'] = "G. Recycler (B.)";
+$LNG['fd_recyclers_need'] = "Recycler (B.)";
+$LNG['fd_action'] = "Aktion";
+$LNG['fd_go'] = "Los";
+$LNG['fd_no_debris'] = "Es gibt keine Trümmer in deiner Reichweite";
+$LNG['fd_refresh'] = "Aktualisieren";
+$LNG['fd_range'] = "Reichweite";
+$LNG['lm_find_debris'] = "Trümmer finden";
+
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Flug Sim";
 $LNG['fs_flight_sim'] = "Flug Sim.";

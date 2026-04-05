@@ -36,12 +36,10 @@ class ShowFindDebrisPage extends AbstractGamePage
             $cap = $PRICELIST[219]['capacity'] * (1 + $USER['factor']['ShipStorage']);
             
             $c_row['need_giga_recycler'] = pretty_number(ceil(($c_row['debris_metal'] + $c_row['debris_crystal']) / $cap));
-            $c_row['have_giga_recycler'] = pretty_number($PLANET[$RESOURCE[219]]);
 
             $cap = $PRICELIST[209]['capacity'] * (1 + $USER['factor']['ShipStorage']);
             
             $c_row['need_recycler'] = pretty_number(ceil(($c_row['debris_metal'] + $c_row['debris_crystal']) / $cap));
-            $c_row['have_recycler'] = pretty_number($PLANET[$RESOURCE[209]]);
 
             $c_row['debris_metal'] = pretty_number($c_row['debris_metal']); 
             $c_row['debris_crystal'] = pretty_number($c_row['debris_crystal']);
@@ -53,6 +51,8 @@ class ShowFindDebrisPage extends AbstractGamePage
 		$this->assign([
             'debris_data' => $debris_data,
             'range' => $range,
+            'num_giga_recycler' => pretty_number($PLANET[$RESOURCE[219]]),
+            'num_recycler' => pretty_number($PLANET[$RESOURCE[209]]),
             'user_maxfleetsettings' => $USER['settings_fleetactions'],
 		]);
 

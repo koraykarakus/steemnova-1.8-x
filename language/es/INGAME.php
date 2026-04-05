@@ -15,6 +15,16 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Coord";
+$LNG['fd_giga_recyclers_need'] = "G. Recicladores (N.)";
+$LNG['fd_recyclers_need'] = "Recicladores (N.)";
+$LNG['fd_action'] = "Acción";
+$LNG['fd_go'] = "Ir";
+$LNG['fd_no_debris'] = "No hay escombros en tu alcance";
+$LNG['fd_refresh'] = "Actualizar";
+$LNG['fd_range'] = "alcance";
+$LNG['lm_find_debris'] = "Buscar escombros";
 
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Sim de Vuelo";

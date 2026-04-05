@@ -20,6 +20,17 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Coord";
+$LNG['fd_giga_recyclers_need'] = "G. Recicladores (N.)";
+$LNG['fd_recyclers_need'] = "Recicladores (N.)";
+$LNG['fd_action'] = "Ação";
+$LNG['fd_go'] = "Ir";
+$LNG['fd_no_debris'] = "Não há destroços no seu alcance";
+$LNG['fd_refresh'] = "Atualizar";
+$LNG['fd_range'] = "alcance";
+$LNG['lm_find_debris'] = "Encontrar destroços";
+
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Sim de Voo";
 $LNG['fs_flight_sim'] = "Sim. Voo";
