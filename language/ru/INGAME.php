@@ -17,6 +17,16 @@
 
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// MODULE_FIND_DEBRIS
+$LNG['fd_coord'] = "Коорд";
+$LNG['fd_giga_recyclers_need'] = "Г. Переработчики (Н.)";
+$LNG['fd_recyclers_need'] = "Переработчики (Н.)";
+$LNG['fd_action'] = "Действие";
+$LNG['fd_go'] = "Перейти";
+$LNG['fd_no_debris'] = "В вашем радиусе нет обломков";
+$LNG['fd_refresh'] = "Обновить";
+$LNG['fd_range'] = "радиус";
+$LNG['lm_find_debris'] = "Найти обломки";
 
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Авиасимулятор";
