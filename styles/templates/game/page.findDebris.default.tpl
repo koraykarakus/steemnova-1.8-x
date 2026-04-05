@@ -1,21 +1,21 @@
-{block name="title" prepend}{$LNG.lm_empire}{/block}
+{block name="title" prepend}{$LNG.fd_title}{/block}
 {block name="content"}
 <table class="table_game table_full">
 	<thead>
 		<tr>
 			<th colspan="8">
-				<a href="?page=findDebris">Show Debris (range : {$range})</a>
+				<a href="?page=findDebris">{$LNG.fd_refresh} ({$LNG.fd_range} : {$range})</a>
 			</th>
 		</tr>
 		<tr>
-			<th>Coord:</th>
-			<th>Metal</th>
-			<th>Crsyal</th>
-			<th>G. Recyclers (N)</th>
-			<th>G. Recyclers (H)</th>
-			<th>Recyclers (N)</th>
-			<th>Recyclers (H)</th>
-			<th>Action</th>
+			<th>{$LNG.fd_coord}:</th>
+			<th>{$LNG.tech.901}</th>
+			<th>{$LNG.tech.902}</th>
+			<th>{$LNG.fd_giga_recyclers_need}</th>
+			<th>{$LNG.fd_giga_recyclers_have}</th>
+			<th>{$LNG.fd_recyclers_need}</th>
+			<th>{$LNG.fd_recyclers_have}</th>
+			<th>{$LNG.fd_action}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,12 +29,12 @@
 				<td class="text_center">{$c_row.need_recycler}</td>
 				<td class="text_center">{$c_row.have_recycler}</td>
 				<td class="text_center">
-					<button onclick='doit(8, {$c_row.galaxy},{$c_row.system},{$c_row.planet},1);'>Go</button>
+					<button onclick='doit(8, {$c_row.galaxy},{$c_row.system},{$c_row.planet},1);'>{$LNG.fd_go}</button>
 				</td>
 			</tr>
 		{foreachelse}
 			<tr>
-				<td class="text_center" colspan='8'>There are no debris in your range</td>
+				<td class="text_center" colspan='8'>{$LNG.fd_no_debris}</td>
 			</tr>
 		{/foreach}
 	</tbody>
