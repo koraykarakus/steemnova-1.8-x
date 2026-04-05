@@ -231,7 +231,7 @@
         {foreach $build_info_list as $id => $element}
           <div class="item_small" onclick="showItem({$id})" id="item_small_{$id}">
             <div class="tooltip tooltip_top">
-              <table>
+              <table class="table_game">
                 <thead>
                   <tr>
                     <th colspan="2">
@@ -250,7 +250,7 @@
                           <img class='mx-2 hover-pointer' src='{$dpath}elements/{$c_require.require_id}.gif'
                             alt='{$LNG.tech.{$c_require.require_id}}' width='30' height='30'>
                         </td>
-                        <td class='color-red align-middle text-start'><span
+                        <td class='color-red align-middle text_right'><span
                             class='color-blue'>{$LNG.tech.{$c_require.require_id}}</span>&nbsp;({$c_require.needed_level}&nbsp;/&nbsp;<span
                             class='color-yellow'>{$c_require.current_level}</span>)</td>
                       </tr>

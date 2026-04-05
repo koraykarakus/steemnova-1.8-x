@@ -136,21 +136,21 @@
       {foreach $elementList as $ID => $Element}
         <div class="item_small" onclick="showItem({$ID})" id="item_small_{$ID}">
         <div class="tooltip tooltip_top">
-          <table class='table-tooltip'>
+          <table class='table_game'>
             <thead>
               <th colspan="2">{$LNG.tech.{$ID}}</th> 
             </thead>
           {if !$Element.technologySatisfied && !empty($Element.requirements)}
             <tbody>
               <tr class='color-red'>
-                <td colspan='2'>{$LNG.tech_not_satisfied}</td>
+                <td class="text_center" colspan='2'>{$LNG.tech_not_satisfied}</td>
               </tr>
               {foreach $Element.requirements as $currentRequire}
               <tr>
                 <td class='color-red'>
                   <img src='{$dpath}elements/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
                 </td>
-                <td>
+                <td class="text_right">
                   <span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)
                 </td>
               </tr>
