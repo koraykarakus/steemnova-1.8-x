@@ -47,6 +47,8 @@ class ShowFindDebrisPage extends AbstractGamePage
             $c_row['debris_crystal'] = pretty_number($c_row['debris_crystal']);
         }
         unset($c_row);
+
+        $this->tpl_obj->loadscript('galaxy.js');
         
 		$this->assign([
             'debris_data' => $debris_data,
