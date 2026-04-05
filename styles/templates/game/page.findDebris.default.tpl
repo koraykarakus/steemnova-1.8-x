@@ -3,15 +3,19 @@
 <table class="table_game table_full">
 	<thead>
 		<tr>
-			<th colspan="4">
+			<th colspan="8">
 				<a href="?page=findDebris">Show Debris (range : {$range})</a>
 			</th>
 		</tr>
 		<tr>
-			<th>Coordinates:</th>
+			<th>Coord:</th>
 			<th>Metal</th>
 			<th>Crsyal</th>
-			<th>Recyclers</th>
+			<th>G. Recyclers (N)</th>
+			<th>G. Recyclers (H)</th>
+			<th>Recyclers (N)</th>
+			<th>Recyclers (H)</th>
+			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,11 +24,17 @@
 				<td class="text_center">[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]</td>
 				<td class="text_center">{$c_row.debris_metal}</td>
 				<td class="text_center">{$c_row.debris_crystal}</td>
-				<td class="text_center">{$c_row.needed_recycler_num}</td>
+				<td class="text_center">{$c_row.need_giga_recycler}</td>
+				<td class="text_center">{$c_row.have_giga_recycler}</td>
+				<td class="text_center">{$c_row.need_recycler}</td>
+				<td class="text_center">{$c_row.have_recycler}</td>
+				<td class="text_center">
+					<a href="">Go</a>
+				</td>
 			</tr>
 		{foreachelse}
 			<tr>
-				<td class="text_center" colspan='4'>There are no debris in your range</td>
+				<td class="text_center" colspan='8'>There are no debris in your range</td>
 			</tr>
 		{/foreach}
 	</tbody>

@@ -33,7 +33,16 @@ class ShowFindDebrisPage extends AbstractGamePage
 
         foreach($debris_data as &$c_row)
         {
-            $c_row['needed_recycler_num'] = min(ceil(($c_row['debris_metal'] + $c_row['debris_metal']) / $PRICELIST[219]['capacity']), $PLANET[$RESOURCE[219]]);
+            $cap = $PRICELIST[219]['capacity'] * (1 + $USER['factor']['ShipStorage']);
+            
+            $c_row['need_giga_recycler'] = pretty_number(ceil(($c_row['debris_metal'] + $c_row['debris_crystal']) / $cap));
+            $c_row['have_giga_recycler'] = pretty_number($PLANET[$RESOURCE[219]]);
+
+            $cap = $PRICELIST[209]['capacity'] * (1 + $USER['factor']['ShipStorage']);
+            
+            $c_row['need_recycler'] = pretty_number(ceil(($c_row['debris_metal'] + $c_row['debris_crystal']) / $cap));
+            $c_row['have_recycler'] = pretty_number($PLANET[$RESOURCE[209]]);
+
             $c_row['debris_metal'] = pretty_number($c_row['debris_metal']); 
             $c_row['debris_crystal'] = pretty_number($c_row['debris_crystal']);
         }
