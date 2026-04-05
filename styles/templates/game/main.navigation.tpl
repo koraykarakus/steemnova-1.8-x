@@ -135,6 +135,18 @@
       </a>
     </li>
   {/if}
+
+  {if isModuleAvailable($smarty.const.MODULE_FIND_DEBRIS)}
+    <li class="menu-button">
+      <a class="long{if $page == 'findDebris'} menuActive{/if}" href="game.php?page=findDebris">{$LNG.lm_find_debris}</a>
+      <a class="menu_icon icon_13{if $page == 'findDebris'} active{/if}" href="game.php?page=findDebris">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_find_debris}
+        </div> 
+      </a>
+    </li>
+  {/if}
+
   {if $authlevel > 0}
     <li class="menu-button">
       <a href="./admin.php" class="long" style="color:lime">{$LNG.lm_administration}</a>

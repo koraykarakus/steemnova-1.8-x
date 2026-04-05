@@ -30,7 +30,7 @@ $LNG['fd_go'] = "Go";
 $LNG['fd_no_debris'] = "There are no debris in your range";
 $LNG['fd_refresh'] = "Refresh";
 $LNG['fd_range'] = "range";
-$LNG['fd_title'] = "Find Debris";
+$LNG['lm_find_debris'] = "Find Debris";
 
 //MODULE_FLIGHT_SIMULATOR
 $LNG['lm_flight_simulator'] = "Flight Sim";

@@ -1,4 +1,4 @@
-{block name="title" prepend}{$LNG.fd_title}{/block}
+{block name="title" prepend}{$LNG.lm_find_debris}{/block}
 {block name="content"}
 <table class="table_game table_full">
 	<thead>
