@@ -462,7 +462,7 @@ class ShowSearchPage extends AbstractAdminPage
                     $next = "";
                 }
 
-                $Search['PAGES'] = '<tr>
+                $search['PAGES'] = '<tr>
                 <td colspan="3" style="color:#00CC33;border: 1px lime solid;text-align:center;">' .
                 $before .
                 '&nbsp;' .
