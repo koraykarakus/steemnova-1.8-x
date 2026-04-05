@@ -15,8 +15,7 @@ function resourceTicker(config, init) {
 		return false;
 	}
 
-	var nrResource = Math.max(0, Math.floor(parseFloat(config.available) + parseFloat(config.production) / 3600 * (serverTime.getTime() - startTime) / 1000));
-	nrResource = Math.min(nrResource, config.limit[1]);
+	var nrResource = Math.max(0, Math.floor(parseFloat(config.available) + parseFloat(config.production) / 3600 * (serverTime.getTime() - startTime) / 1000));	
 
 	if (nrResource < config.limit[1])
 	{
