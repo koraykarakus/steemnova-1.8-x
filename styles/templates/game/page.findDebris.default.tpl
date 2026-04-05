@@ -29,7 +29,7 @@
 				<td class="text_center">{$c_row.need_recycler}</td>
 				<td class="text_center">{$c_row.have_recycler}</td>
 				<td class="text_center">
-					<a href="">Go</a>
+					<button onclick='doit(8, {$c_row.galaxy},{$c_row.system},{$c_row.planet},1);'>Go</button>
 				</td>
 			</tr>
 		{foreachelse}
@@ -40,10 +40,14 @@
 	</tbody>
 </table>
 
-<table>
-	<tr style="display: none;" id="fleetstatusrow">
-		<th colspan="6">Fleet...</th>
-	</tr>
+<table id="fleetstatusrow" class="hidden table_game table_full">
+		<thead>
+			<tr>
+				<th colspan="8">{$LNG.cff_fleet_target}</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
 </table>
 
 <script type="text/javascript">
