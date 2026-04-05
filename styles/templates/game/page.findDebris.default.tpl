@@ -3,21 +3,28 @@
 <table class="table_game table_full">
 	<thead>
 		<tr>
-			<th>
-				<a href="?page=findDebris">Show Debris(range : {$range})</a>
+			<th colspan="4">
+				<a href="?page=findDebris">Show Debris (range : {$range})</a>
 			</th>
+		</tr>
+		<tr>
+			<th>Coordinates:</th>
+			<th>Metal</th>
+			<th>Crsyal</th>
+			<th>Recyclers</th>
 		</tr>
 	</thead>
 	<tbody>
 		{foreach $debris_data as $c_row}
 			<tr>
-				<td>[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]</td>
-				<td>{$c_row.debris_metal}</td>
-				<td>{$c_row.debris_crystal}</td>
+				<td class="text_center">[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]</td>
+				<td class="text_center">{$c_row.debris_metal}</td>
+				<td class="text_center">{$c_row.debris_crystal}</td>
+				<td class="text_center">{$c_row.needed_recycler_num}</td>
 			</tr>
 		{foreachelse}
 			<tr>
-				<td class="text_center" colspan='3'>There are no debris in your range</td>
+				<td class="text_center" colspan='4'>There are no debris in your range</td>
 			</tr>
 		{/foreach}
 	</tbody>
