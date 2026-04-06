@@ -188,7 +188,7 @@
 		{/if}
 		<table class="table_game table_full">
 			<tr>
-				<td>
+				<td class="text_center">
 					<input class="button-upgrade" type="submit" value="{$LNG.fl_continue}">
 				</td>
 			</tr>
