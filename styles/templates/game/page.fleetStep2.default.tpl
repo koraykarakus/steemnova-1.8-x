@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="game.php?page=fleetStep3" method="post">
 <input type="hidden" name="token" value="{$token}">
-   	<table class="table_game">
+   	<table class="table_game table_full">
         <tr>
         	<th colspan="2">[{$galaxy}:{$system}:{$planet}] - {$LNG["type_planet_{$type}"]}</th>
         </tr>
