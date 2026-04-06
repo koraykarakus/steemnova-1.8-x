@@ -149,22 +149,25 @@
 			</table>
 		{/if}
 		<table class="table_game table_full">
-			<tr style="height:20px;">
-				<th class="text-center">{$LNG.fl_my_planets}</th>
+			<tr>
+				<th colspan="4" class="text_center">{$LNG.fl_my_planets}</th>
 			</tr>
-			{foreach $colonyList as $ColonyRow}
-					<tr style="height:20px;">
-					<td>
-						<a
-							href="javascript:setTarget({$ColonyRow.galaxy},{$ColonyRow.system},{$ColonyRow.planet},{$ColonyRow.type});updateVars();">{$ColonyRow.name}{if $ColonyRow.type == 3}{$LNG.fl_moon_shortcut}{/if}
-							[{$ColonyRow.galaxy}:{$ColonyRow.system}:{$ColonyRow.planet}]</a>
-					</td>
-					<td>&nbsp;</td>
-				</tr>
+			{foreach $colonyList as $c_row}
+			{if $c_row@iteration % 4 == 1}
+			<tr>
+			{/if}
+				<td class="text_center">
+					<a href="javascript:setTarget({$c_row.galaxy},{$c_row.system},{$c_row.planet},{$c_row.type});updateVars();">{$c_row.name}{if $c_row.type == 3}{$LNG.fl_moon_shortcut}{/if}
+						[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]
+					</a>
+				</td>
+			{if $c_row@iteration % 4 == 0 || $c_row@last}
+			</tr>
+			{/if}
 			{foreachelse}
-				<tr style="height:20px;">
-					<td>{$LNG.fl_no_colony}</td>
-				</tr>
+			<tr>
+				<td>{$LNG.fl_no_colony}</td>
+			</tr>
 			{/foreach}
 		</table>
 		{if $ACSList}
