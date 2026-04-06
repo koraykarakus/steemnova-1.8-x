@@ -61,15 +61,15 @@
 		</table>
 
 		<table class="table_game table_full">
-			<tr style="height:20px;">
-				<th class="text-center" colspan="2">{$LNG.fl_system_places}</th>
+			<tr>
+				<th class="text_center" colspan="2">{$LNG.fl_system_places}</th>
 			</tr>
-			<tr style="height:20px;">
-				<td>
+			<tr>
+				<td class="text_center">
 					<a
 						href="javascript:setTarget({$galaxy},{$system},16,1);updateVars();">{$LNG.type_mission_15}[{$galaxy}:{$system}:16]</a>
 				</td>
-				<td>
+				<td class="text_center">
 					<a
 						href="javascript:setTarget({$galaxy},{$system},17,1);updateVars();">{$LNG.type_mission_16}[{$galaxy}:{$system}:17]</a>
 				</td>
@@ -78,16 +78,19 @@
 
 		{if isModuleAvailable($smarty.const.MODULE_SHORTCUTS)}
 			<table class="table_game table_full">
-				<tr style="height:20px;">
-					<th class="text-center">{$LNG.fl_shortcut} (<a href="#"
-							onclick="EditShortcuts();return false"
-							class="shortcut-link-edit shortcut-link">{$LNG.fl_shortcut_edition}</a><a href="#"
-							onclick="SaveShortcuts();return false" class="shortcut-edit">{$LNG.fl_shortcut_save}</a>)</th>
+				<tr>
+					<th>{$LNG.fl_shortcut} [
+						<a href="#" onclick="EditShortcuts();return false" class="shortcut-link-edit shortcut-link">
+							{$LNG.fl_shortcut_edition}
+						</a>
+						&nbsp;|&nbsp;
+						<a href="#" onclick="SaveShortcuts();return false" class="shortcut-edit">
+							{$LNG.fl_shortcut_save}
+						</a>]
+					</th>
 				</tr>
-
 				{foreach $shortcutList as $shortcutID => $shortcutRow}
-					<tr style="height:20px;"
-						class="shortcut-row">
+					<tr class="shortcut-row">
 						<td class="shortcut-colum shortcut-isset">
 							<div class="shortcut-link">
 								<a
@@ -109,17 +112,15 @@
 									{html_options selected=$shortcutRow.type options=$typeSelect}
 								</select>
 							</div>
-						</td>
-							
+						</td>	
 						<td class="shortcut-colum">&nbsp;</td>
-						
 					</tr>
 				{foreachelse}
-					<tr style="height:20px;" class="shortcut-none">
-						<td>{$LNG.fl_no_shortcuts}</td>
+					<tr class="shortcut-none">
+						<td class="text_center">{$LNG.fl_no_shortcuts}</td>
 					</tr>
 				{/foreach}
-				<tr style="height:20px;" class="shortcut-edit shortcut-new">
+				<tr class="shortcut-edit shortcut-new">
 					<td>
 						<div class="shortcut-link">
 
