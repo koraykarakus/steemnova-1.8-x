@@ -8,85 +8,85 @@
         </tr>
 		<tr>
 			<td>{$LNG.fl_mission}</td>
-      <td>{$LNG.fl_resources}</td>
-    </tr>
+      		<td>{$LNG.fl_resources}</td>
+    	</tr>
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
-    		<table class="table_game" border="0" cellpadding="0" cellspacing="0" >
-    			{foreach $MissionSelector as $MissionID}
-					<tr>
-						<td>
-						<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} >
-            <label for="radio_{$MissionID}">{$LNG["type_mission_{$MissionID}"]}</label>
+				<table class="table_game" border="0" cellpadding="0" cellspacing="0" >
+					{foreach $MissionSelector as $MissionID}
+						<tr>
+							<td>
+							<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} >
+							<label for="radio_{$MissionID}">{$LNG["type_mission_{$MissionID}"]}</label>
 							{if $MissionID == 17}
-              <div>{$LNG.fl_transfer_alert_message}</div>
-              {/if}
+							<div>{$LNG.fl_transfer_alert_message}</div>
+							{/if}
 							{if $MissionID == 15}
-              <div>{$LNG.fl_expedition_alert_message}</div>
-              {/if}
+							<div>{$LNG.fl_expedition_alert_message}</div>
+							{/if}
 							{if $MissionID == 11}
-              <div>{$fl_dm_alert_message}</div>
-              {/if}
-						</td>
-					</tr>
-			   {/foreach}
-    		</table>
-      </td>
-      <td>
+							<div>{$fl_dm_alert_message}</div>
+							{/if}
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+      		</td>
+      		<td>
 				<table class="table_game" border="0" cellpadding="0" cellspacing="0">
-              <tr colspan="5">
-        				<td colspan="1">{$LNG.tech.901}</td>
+              		<tr colspan="5">
+						<td colspan="1">{$LNG.tech.901}</td>
         				<td colspan="1">
-                  <button type="button" onclick="maxResource('metal');">{$LNG.fl_max}</button>
-                </td>
-                <td colspan="1">
-                  <button type="button" onclick="minResource('metal');">min</button>
-                </td>
+                  			<button type="button" onclick="maxResource('metal');">{$LNG.fl_max}</button>
+                		</td>
+						<td colspan="1">
+							<button type="button" onclick="minResource('metal');">min</button>
+						</td>
         				<td colspan="2">
-                  <input id="metal_to_transport" class="bg-black " name="metal" onchange="calculateTransportCapacity();" type="text">
-                </td>
+                  			<input id="metal_to_transport" class="bg-black " name="metal" onchange="calculateTransportCapacity();" type="text">
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="1">{$LNG.tech.902}</td>
         				<td colspan="1">
-                  <button type="button" class="" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
-                </td>
-                <td colspan="1">
-                  <button type="button" class="" onclick="minResource('crystal');">min</button>
-                </td>
+                  		<button type="button" class="" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
+                		</td>
+						<td colspan="1">
+							<button type="button" class="" onclick="minResource('crystal');">min</button>
+						</td>
         				<td colspan="2">
-                  <input id="crystal_to_transport" class="bg-black " name="crystal" onchange="calculateTransportCapacity();" type="text">
-                </td>
+                  			<input id="crystal_to_transport" class="bg-black " name="crystal" onchange="calculateTransportCapacity();" type="text">
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="1">{$LNG.tech.903}</td>
         				<td colspan="1">
-                  <button type="button" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
-                </td>
-                <td colspan="1">
-                  <button type="button" onclick="minResource('deuterium');">min</button>
-                </td>
+                  			<button type="button" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
+                		</td>
+						<td colspan="1">
+							<button type="button" onclick="minResource('deuterium');">min</button>
+						</td>
         				<td colspan="2">
-                  <input id="deuterium_to_transport" class="form-control bg-black " name="deuterium" onchange="calculateTransportCapacity();" type="text">
-                </td>
+                  			<input id="deuterium_to_transport" class="form-control bg-black " name="deuterium" onchange="calculateTransportCapacity();" type="text">
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="1">{$LNG.fl_resources_left}</td>
         				<td colspan="4">
-                  <input id="remainingresources" class="form-control bg-black " readonly>
-                </td>
+                  			<input id="remainingresources" class="form-control bg-black " readonly>
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" class="" onclick="maxResources();">{$LNG.fl_all_resources}</button>
-                </td>
+                  			<button type="button" class="" onclick="maxResources();">{$LNG.fl_all_resources}</button>
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" class="" onclick="minResources();">reset</button>
-                </td>
+                  			<button type="button" class="" onclick="minResources();">reset</button>
+                		</td>
         			</tr>
-              <tr>
+              		<tr>
         				<td colspan="5">{$LNG.fl_fuel_consumption}: <span id="consumption" class="consumption">{$consumption}</span></td>
         			</tr>
 				</table>
@@ -99,42 +99,42 @@
 		<tr>
 			<td>
 				<table class="table_game">
-				<tr class="no-border">
-					<td >
-						<select name="resEx">
-							<option value="1">{$LNG.tech.901}</option>
-							<option value="2">{$LNG.tech.902}</option>
-							<option value="3">{$LNG.tech.903}</option>
-						</select>
-					</td>
-					<td>
-						<input name="exchange" size="10" type="text">
-					</td>
-				</tr>
-				<tr class="no-border">
-					<td>
-						{$LNG.fl_visibility}
-					</td>
-					<td>
-						<select name="visibility">
-							<option value="2" selected>{$LNG.fl_visibility_no_enemies}</option>
-							<option value="1">{$LNG.fl_visibility_alliance}</option>
-							<option value="0">{$LNG.fl_visibility_all}</option>
-						</select>
-					</td>
-				</tr>
-				<tr class="no-border">
-					<td>
-						{$LNG.fl_market_type}
-					</td>
-					<td>
-						<select name="markettype">
-							<option value="0" selected>{$LNG.fl_mt_resources}</option>
-							<option value="1">{$LNG.fl_mt_fleet}</option>
-						</select>
-					</td>
-				</tr>
-			</table>
+					<tr class="no-border">
+						<td >
+							<select name="resEx">
+								<option value="1">{$LNG.tech.901}</option>
+								<option value="2">{$LNG.tech.902}</option>
+								<option value="3">{$LNG.tech.903}</option>
+							</select>
+						</td>
+						<td>
+							<input name="exchange" size="10" type="text">
+						</td>
+					</tr>
+					<tr class="no-border">
+						<td>
+							{$LNG.fl_visibility}
+						</td>
+						<td>
+							<select name="visibility">
+								<option value="2" selected>{$LNG.fl_visibility_no_enemies}</option>
+								<option value="1">{$LNG.fl_visibility_alliance}</option>
+								<option value="0">{$LNG.fl_visibility_all}</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="no-border">
+						<td>
+							{$LNG.fl_market_type}
+						</td>
+						<td>
+							<select name="markettype">
+								<option value="0" selected>{$LNG.fl_mt_resources}</option>
+								<option value="1">{$LNG.fl_mt_fleet}</option>
+							</select>
+						</td>
+					</tr>
+				</table>
 			<!--
 			Max flight time (0 = unlimited):
 			<input name="maxFlightTime" size="10" type="text" value="0"> hours<br/>
