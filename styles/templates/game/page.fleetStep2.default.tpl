@@ -12,7 +12,7 @@
     	</tr>
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
-				<table class="table_game" border="0" cellpadding="0" cellspacing="0" >
+				<table class="table_game">
 					{foreach $MissionSelector as $MissionID}
 						<tr>
 							<td>
