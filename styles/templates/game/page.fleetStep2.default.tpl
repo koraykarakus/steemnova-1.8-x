@@ -12,11 +12,11 @@
     </tr>
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
-    		<table class="table_game" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
+    		<table class="table_game" border="0" cellpadding="0" cellspacing="0" >
     			{foreach $MissionSelector as $MissionID}
 					<tr>
 						<td>
-						<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} style="width:60px;">
+						<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} >
             <label for="radio_{$MissionID}">{$LNG["type_mission_{$MissionID}"]}</label>
 							{if $MissionID == 17}
               <div>{$LNG.fl_transfer_alert_message}</div>
@@ -33,57 +33,57 @@
     		</table>
       </td>
       <td>
-				<table class="table_game" border="0" cellpadding="0" cellspacing="0" style="margin:5px 0;padding:0;">
+				<table class="table_game" border="0" cellpadding="0" cellspacing="0">
               <tr colspan="5">
-        				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.901}</td>
+        				<td colspan="1">{$LNG.tech.901}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" onclick="maxResource('metal');">{$LNG.fl_max}</button>
+                  <button type="button" onclick="maxResource('metal');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" onclick="minResource('metal');">min</button>
+                  <button type="button" onclick="minResource('metal');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="metal_to_transport" style="height:24px;" class="bg-black " name="metal" onchange="calculateTransportCapacity();" type="text">
+                  <input id="metal_to_transport" class="bg-black " name="metal" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
-        				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.902}</td>
+        				<td colspan="1">{$LNG.tech.902}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
+                  <button type="button" class="" onclick="maxResource('crystal');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="minResource('crystal');">min</button>
+                  <button type="button" class="" onclick="minResource('crystal');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="crystal_to_transport" style="height:24px;" class="bg-black " name="crystal" onchange="calculateTransportCapacity();" type="text">
+                  <input id="crystal_to_transport" class="bg-black " name="crystal" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
-        				<td style="vertical-align: middle;" colspan="1">{$LNG.tech.903}</td>
+        				<td colspan="1">{$LNG.tech.903}</td>
         				<td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
+                  <button type="button" onclick="maxResource('deuterium');">{$LNG.fl_max}</button>
                 </td>
                 <td colspan="1">
-                  <button type="button" style="padding:2px;" class="" onclick="minResource('deuterium');">min</button>
+                  <button type="button" onclick="minResource('deuterium');">min</button>
                 </td>
         				<td colspan="2">
-                  <input id="deuterium_to_transport" style="height:24px;" class="form-control bg-black " name="deuterium" onchange="calculateTransportCapacity();" type="text">
+                  <input id="deuterium_to_transport" class="form-control bg-black " name="deuterium" onchange="calculateTransportCapacity();" type="text">
                 </td>
         			</tr>
               <tr>
         				<td colspan="1">{$LNG.fl_resources_left}</td>
-        				<td style="vertical-align: middle;" colspan="4">
-                  <input id="remainingresources" style="height:24px;" class="form-control bg-black " readonly>
+        				<td colspan="4">
+                  <input id="remainingresources" class="form-control bg-black " readonly>
                 </td>
         			</tr>
               <tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" style="padding:2px;" class="" onclick="maxResources();">{$LNG.fl_all_resources}</button>
+                  <button type="button" class="" onclick="maxResources();">{$LNG.fl_all_resources}</button>
                 </td>
         			</tr>
               <tr>
         				<td colspan="5" class="text-center">
-                  <button type="button" style="padding:2px;" class="" onclick="minResources();">reset</button>
+                  <button type="button" class="" onclick="minResources();">reset</button>
                 </td>
         			</tr>
               <tr>
@@ -93,10 +93,10 @@
 			</td>
 		</tr>
 		{if $Exchange}
-		<tr style="height:20px;">
+		<tr>
 			<th>{$LNG.fl_exchange}</th>
 		</tr>
-		<tr style="height:20px;">
+		<tr>
 			<td>
 				<table class="table_game">
 				<tr class="no-border">
@@ -144,16 +144,16 @@
 		{/if}
 
 		{if $StaySelector}
-		<tr style="height:20px;">
+		<tr>
 			<th class="text-center">{$LNG.fl_hold_time}</th>
 		</tr>
-		<tr style="height:20px;">
+		<tr>
 			<td>
 			{html_options name=staytime options=$StaySelector} {$LNG.fl_hours}
 			</td>
 		</tr>
 		{/if}
-        <tr style="height:20px;">
+        <tr>
 			<td class="text_center" colspan="2">
 				<input class="button-upgrade" value="{$LNG.fl_continue}" type="submit" />
 			</td>
