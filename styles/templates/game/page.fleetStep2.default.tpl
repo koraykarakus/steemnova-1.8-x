@@ -154,7 +154,9 @@
 		</tr>
 		{/if}
         <tr style="height:20px;">
-        	<td colspan="2"><input class="button-upgrade" value="{$LNG.fl_continue}" type="submit" /></td>
+			<td class="text_center" colspan="2">
+				<input class="button-upgrade" value="{$LNG.fl_continue}" type="submit" />
+			</td>
         </tr>
     </table>
 </form>
