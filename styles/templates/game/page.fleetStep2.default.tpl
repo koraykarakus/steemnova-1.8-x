@@ -7,8 +7,8 @@
         	<th colspan="2">[{$galaxy}:{$system}:{$planet}] - {$LNG["type_planet_{$type}"]}</th>
         </tr>
 		<tr>
-			<td>{$LNG.fl_mission}</td>
-      		<td>{$LNG.fl_resources}</td>
+			<td class="text_center">{$LNG.fl_mission}</td>
+      		<td class="text_center">{$LNG.fl_resources}</td>
     	</tr>
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
@@ -33,7 +33,7 @@
 				</table>
       		</td>
       		<td>
-				<table class="table_game" border="0" cellpadding="0" cellspacing="0">
+				<table class="table_game table_full">
               		<tr colspan="5">
 						<td colspan="1">{$LNG.tech.901}</td>
         				<td colspan="1">
