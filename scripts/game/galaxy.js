@@ -37,22 +37,24 @@ function doit(mission_id, galaxy, system, planet, planet_type) {
 		tbody.prepend(element);
 
 		// display incoming fleet icon for pictures of debris, moon or planet.
-		if (mission_id == 6) 
+		if (data.code === 600) 
 		{
-			if (planet_type == 1) 
+			if (mission_id == 6) 
 			{
-				$('#iap_' + planet).addClass('show');
+				if (planet_type == 1) 
+				{
+					$('#iap_' + planet).addClass('show');
+				}
+				else if (planet_type == 3) 
+				{
+					$('#iam_' + planet).addClass('show');
+				}
 			}
-			else if (planet_type == 3) 
+			else if(mission_id == 8)
 			{
-				$('#iam_' + planet).addClass('show');
+				$('#ind_' + planet).addClass('show');
 			}
 		}
-		else if(mission_id == 8)
-		{
-			$('#ind_' + planet).addClass('show');
-		}
-
 		setTimeout(function () {
     	
 		tbody.find('tr').last().fadeOut(500, function () {
