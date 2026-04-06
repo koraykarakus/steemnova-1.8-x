@@ -13,18 +13,18 @@
 		<tr>
 			<td {if $StaySelector} rowspan="5"{/if}>
 				<table class="table_game">
-					{foreach $MissionSelector as $MissionID}
+					{foreach $MissionSelector as $mission_id}
 						<tr>
 							<td>
-							<input id="radio_{$MissionID}" type="radio" name="mission" value="{$MissionID}" {if $mission == $MissionID || $MissionID@total == 1}checked="checked"{/if} >
-							<label for="radio_{$MissionID}">{$LNG["type_mission_{$MissionID}"]}</label>
-							{if $MissionID == 17}
+							<input id="radio_{$mission_id}" type="radio" name="mission" value="{$mission_id}" {if $mission == $mission_id || $mission_id@total == 1}checked="checked"{/if} >
+							<label for="radio_{$mission_id}">{$LNG["type_mission_{$mission_id}"]}</label>
+							{if $mission_id == 17}
 							<div>{$LNG.fl_transfer_alert_message}</div>
 							{/if}
-							{if $MissionID == 15}
+							{if $mission_id == 15}
 							<div>{$LNG.fl_expedition_alert_message}</div>
 							{/if}
-							{if $MissionID == 11}
+							{if $mission_id == 11}
 							<div>{$fl_dm_alert_message}</div>
 							{/if}
 							</td>
