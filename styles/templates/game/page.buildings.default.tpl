@@ -251,8 +251,8 @@
                             alt='{$LNG.tech.{$currentRequire.require_id}}' width='30' height='30'>
                         </td>
                         <td class='color-red align-middle text_right'><span
-                            class='color-blue'>{$LNG.tech.{$currentRequire.require_id}}</span>&nbsp;({$currentRequire.needed_level}&nbsp;/&nbsp;<span
-                            class='color-yellow'>{$currentRequire.current_level}</span>)</td>
+                            class='color-blue'>{$LNG.tech.{$currentRequire.require_id}}</span>&nbsp;(<span
+                            class='color-yellow'>{$currentRequire.current_level}</span>&nbsp;/&nbsp;{$currentRequire.needed_level})</td>
                       </tr>
                     {/foreach}
                   {/if}

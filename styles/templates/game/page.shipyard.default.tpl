@@ -151,7 +151,7 @@
                   <img src='{$dpath}elements/{$currentRequire.requireID}.gif' alt='{$LNG.tech.{$currentRequire.requireID}}' width='30' height='30'>
                 </td>
                 <td class="text_right">
-                  <span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;({$currentRequire.neededLevel}&nbsp;/&nbsp;<span class='color-yellow'>{$currentRequire.currentLevel}</span>)
+                  <span class='color-blue'>{$LNG.tech.{$currentRequire.requireID}}</span>&nbsp;(<span class='color-yellow'>{$currentRequire.currentLevel}</span>&nbsp;/&nbsp;{$currentRequire.neededLevel})
                 </td>
               </tr>
               {/foreach}
