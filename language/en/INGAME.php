@@ -39,7 +39,7 @@ $LNG['fs_time_hours'] = "hours";
 $LNG['fs_time_seconds'] = "seconds";
 $LNG['fs_time_minutes'] = "minutes";
 
-//MODULE_COLLECT_MINES
+// MODULE_COLLECT_MINES
 $LNG['cm_error_1'] = "Mines cannot be collected in vacation mode !";
 $LNG['cm_error_2'] = "Mines cannot be collected under attack !";
 $LNG['cm_error_3'] = "You need to wait %s minutes before next !";

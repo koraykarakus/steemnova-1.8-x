@@ -40,6 +40,12 @@ $LNG['fs_time_hours'] = "saat";
 $LNG['fs_time_seconds'] = "saniye";
 $LNG['fs_time_minutes'] = "dakika";
 
+// MODULE_COLLECT_MINES
+$LNG['cm_error_1'] = "Madenler tatil modunda toplanamaz!";
+$LNG['cm_error_2'] = "Madenler saldırı altındayken toplanamaz!";
+$LNG['cm_error_3'] = "Bir sonraki toplama işlemi için %s dakika beklemelisiniz!";
+$LNG['cm_collect_mines_submit'] = "Maden Topla!";
+
 //relocate module
 
 $LNG['cannot_use_in_vac'] = "Bu özelliği tatil modundayken kullanamazsınız !";

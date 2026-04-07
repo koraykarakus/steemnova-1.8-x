@@ -35,6 +35,12 @@ $LNG['fs_time_hours'] = "godziny";
 $LNG['fs_time_seconds'] = "sekundy";
 $LNG['fs_time_minutes'] = "minuty";
 
+// MODULE_COLLECT_MINES
+$LNG['cm_error_1'] = "Kopalni nie można zbierać w trybie wakacyjnym!";
+$LNG['cm_error_2'] = "Kopalni nie można zbierać podczas ataku!";
+$LNG['cm_error_3'] = "Musisz poczekać %s minut przed następnym zebraniem!";
+$LNG['cm_collect_mines_submit'] = "Zbierz kopalnie!";
+
 //przenieś moduł
 
 $LNG['cannot_use_in_vac'] = "Nie możesz używać tej opcji w trybie wakacyjnym";
