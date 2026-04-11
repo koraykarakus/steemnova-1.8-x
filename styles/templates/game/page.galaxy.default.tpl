@@ -434,14 +434,12 @@
 								{limitText($currentPlanet.user.username, 15)}
 							</span>
 							{if !empty($currentPlanet.user.class)}
-								<span>(</span>
 								{foreach $currentPlanet.user.class as $class}
 									{if !$class@first}&nbsp;
 									{/if}
 									<span
-									class="galaxy-short-{$class} galaxy-short">{$ShortStatus.$class}</span>
+									class="galaxy-short-{$class} galaxy-short">&nbsp;({$ShortStatus.$class})</span>
 								{/foreach}
-								<span>)</span>
 							{/if}
 					</div>
 					<div class="alliance_name">
