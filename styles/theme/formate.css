@@ -114,6 +114,9 @@ body {
 #footer>.server_info:hover>.tooltip{
 	display: flex;
 }
+#footer.hidden{
+	display: none;
+}
 
 .globalWarning {
 	background-color: #FFFFDD;

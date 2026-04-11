@@ -182,21 +182,33 @@ var Dialog	= {
 	    return OpenPopup('game.php?page=chat&action=alliance', "alliance_chat", 960, 900);
 	},
 
-	open: function(url, width, height) {
-    new Fancybox([{
-    hideScrollbar: true,
-    src: url,
-    type: "iframe",
-    width: width,
-    height: height,
-    iframeAttr:{
-      scrolling: "auto",
-    },
-  },
-]);
+	open: function (url, width, height) {
+  		
+		$('#footer').addClass('hidden');
 
+		new Fancybox(
+			[
+			{
+				src: url,
+				type: "iframe",
+				width: width,
+				height: height,
+				iframeAttr: {
+				scrolling: "auto",
+				},
+				hideScrollbar: true,
+			}
+			],
+			{
+			on: {
+				destroy: () => {
+				$('#footer').removeClass('hidden');
+				},
+			},
+			}
+		);
 
-		return false;
+  		return false;
 	}
 }
 
