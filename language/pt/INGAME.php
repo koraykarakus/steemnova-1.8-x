@@ -46,6 +46,20 @@ $LNG['cm_error_2'] = "As minas não podem ser coletadas sob ataque!";
 $LNG['cm_error_3'] = "Você precisa esperar %s minutos antes da próxima coleta!";
 $LNG['cm_collect_mines_submit'] = "Coletar minas!";
 
+// MODULE_AUTOEXPEDITION
+$LNG['ae_autoexp'] = "Expedição automática";
+$LNG['ae_galaxy'] = "Galáxia";
+$LNG['ae_system'] = "Sistema";
+$LNG['ae_planet'] = "Planeta";
+$LNG['ae_settings'] = "Configurações";
+$LNG['ae_send'] = "Enviar expedição!";
+$LNG['ae_error_1'] = "Espaços de expedição insuficientes!";
+$LNG['ae_error_2'] = "A expedição não é possível no modo férias!";
+$LNG['ae_error_3'] = "O Recaptcha está incorreto!";
+$LNG['ae_error_4'] = "Nenhuma frota encontrada!";
+$LNG['ae_error_5'] = "O deutério no planeta não é suficiente para iniciar a expedição automática.";
+$LNG['ae_success'] = "Frota(s) enviada(s) para a missão de expedição com sucesso";
+
 //realocar módulo
 
 $LNG['cannot_use_in_vac'] = "Você não pode usar esta opção no modo férias";

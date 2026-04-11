@@ -41,6 +41,20 @@ $LNG['cm_error_2'] = "Kopalni nie można zbierać podczas ataku!";
 $LNG['cm_error_3'] = "Musisz poczekać %s minut przed następnym zebraniem!";
 $LNG['cm_collect_mines_submit'] = "Zbierz kopalnie!";
 
+// MODULE_AUTOEXPEDITION
+$LNG['ae_autoexp'] = "Automatyczna ekspedycja";
+$LNG['ae_galaxy'] = "Galaktyka";
+$LNG['ae_system'] = "System";
+$LNG['ae_planet'] = "Planeta";
+$LNG['ae_settings'] = "Ustawienia";
+$LNG['ae_send'] = "Wyślij ekspedycję!";
+$LNG['ae_error_1'] = "Brak wystarczającej liczby slotów ekspedycji!";
+$LNG['ae_error_2'] = "Ekspedycja nie jest możliwa w trybie wakacyjnym!";
+$LNG['ae_error_3'] = "Recaptcha jest nieprawidłowa!";
+$LNG['ae_error_4'] = "Nie znaleziono flot!";
+$LNG['ae_error_5'] = "Ilość deuteru na planecie jest niewystarczająca do rozpoczęcia automatycznej ekspedycji.";
+$LNG['ae_success'] = "Flota(y) wysłana(e) na misję ekspedycji pomyślnie";
+
 //przenieś moduł
 
 $LNG['cannot_use_in_vac'] = "Nie możesz używać tej opcji w trybie wakacyjnym";

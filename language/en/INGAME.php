@@ -45,7 +45,7 @@ $LNG['cm_error_2'] = "Mines cannot be collected under attack !";
 $LNG['cm_error_3'] = "You need to wait %s minutes before next !";
 $LNG['cm_collect_mines_submit'] = "Collect Mines!";
 
-//MODULE_AUTOEXPEDITION
+// MODULE_AUTOEXPEDITION
 $LNG['ae_autoexp'] = "Auto Expedition";
 $LNG['ae_galaxy'] = "Galaxy";
 $LNG['ae_system'] = "System";

@@ -31,6 +31,20 @@ $LNG['cm_error_2'] = "Les mines ne peuvent pas être collectées pendant une att
 $LNG['cm_error_3'] = "Vous devez attendre %s minutes avant la prochaine collecte !";
 $LNG['cm_collect_mines_submit'] = "Coll. les mines !";
 
+// MODULE_AUTOEXPEDITION
+$LNG['ae_autoexp'] = "Expédition automatique";
+$LNG['ae_galaxy'] = "Galaxie";
+$LNG['ae_system'] = "Système";
+$LNG['ae_planet'] = "Planète";
+$LNG['ae_settings'] = "Paramètres";
+$LNG['ae_send'] = "Envoyer l'expédition !";
+$LNG['ae_error_1'] = "Pas assez d'emplacements d'expédition !";
+$LNG['ae_error_2'] = "L'expédition n'est pas possible en mode vacances !";
+$LNG['ae_error_3'] = "Le Recaptcha est incorrect !";
+$LNG['ae_error_4'] = "Aucune flotte trouvée !";
+$LNG['ae_error_5'] = "Le deutérium sur la planète n'est pas suffisant pour lancer l'expédition automatique.";
+$LNG['ae_success'] = "Flotte(s) envoyée(s) en mission d'expédition avec succès";
+
 //déplacer le module
 
 $LNG['cannot_use_in_vac'] = "Vous ne pouvez pas utiliser cette option en mode vacances";

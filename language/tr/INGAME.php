@@ -46,6 +46,20 @@ $LNG['cm_error_2'] = "Madenler saldırı altındayken toplanamaz!";
 $LNG['cm_error_3'] = "Bir sonraki toplama işlemi için %s dakika beklemelisiniz!";
 $LNG['cm_collect_mines_submit'] = "Maden Topla!";
 
+// MODULE_AUTOEXPEDITION
+$LNG['ae_autoexp'] = "Otomatik Keşif Görevi";
+$LNG['ae_galaxy'] = "Galaksi";
+$LNG['ae_system'] = "Sistem";
+$LNG['ae_planet'] = "Gezegen";
+$LNG['ae_settings'] = "Ayarlar";
+$LNG['ae_send'] = "Keşfe gönder!";
+$LNG['ae_error_1'] = "Yeterli keşif slotu yok!";
+$LNG['ae_error_2'] = "Tatil modunda keşif yapılamaz!";
+$LNG['ae_error_3'] = "Recaptcha hatalı!";
+$LNG['ae_error_4'] = "Hiç filo bulunamadı!";
+$LNG['ae_error_5'] = "Gezegendeki deuteryum, otomatik keşif başlatmak için yeterli değil.";
+$LNG['ae_success'] = "Filo(lar) keşif görevine başarıyla gönderildi";
+
 //relocate module
 
 $LNG['cannot_use_in_vac'] = "Bu özelliği tatil modundayken kullanamazsınız !";
