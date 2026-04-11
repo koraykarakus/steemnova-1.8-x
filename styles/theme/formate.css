@@ -2209,6 +2209,7 @@ background: linear-gradient(180deg,
 	background: #382F2F;
 	color: #f1f1f1;
 	top: 20px;
+	z-index: 999999;
 }
 
 /*special input*/
