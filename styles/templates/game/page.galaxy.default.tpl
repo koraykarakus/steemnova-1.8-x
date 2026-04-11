@@ -515,7 +515,7 @@
 							{/if}
 						{/if}
 						{if $currentPlanet.planet.phalanx}
-							<a onclick="OpenPopup('?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1','',640,510);return false;">
+							<a class="action_link" onclick="OpenPopup('?page=phalanx&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$planet}&amp;planettype=1','',640,510);return false;">
 								<div class="tooltip tooltip_top">
 									{$LNG.gl_phalanx}
 								</div>
