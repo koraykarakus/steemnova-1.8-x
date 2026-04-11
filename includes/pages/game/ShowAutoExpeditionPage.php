@@ -171,7 +171,7 @@ class ShowAutoExpeditionPage extends AbstractGamePage
 
             if ($consumption > $PLANET['deuterium'])
             {
-                $this->printMessage($LNG['ft_error_not_enough_deuterium']);
+                $this->printMessage($LNG['ae_error_5']);
             }
 
             $token = getRandomString();

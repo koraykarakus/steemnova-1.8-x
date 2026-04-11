@@ -52,6 +52,7 @@ $LNG['ae_error_1'] = "Nicht genug Expo slots !";
 $LNG['ae_error_2'] = "Im Urlaubsmodus ist keine Expedition möglich !";
 $LNG['ae_error_3'] = "Recaptcha ist falsch !";
 $LNG['ae_error_4'] = "Keine Flotte gefunden !";
+$LNG['ae_error_5'] = "Das Deuterium auf dem Planeten reicht nicht aus, um die Auto-Expedition zu starten.";
 $LNG['ae_success'] = "Flotte(n) erfolgreich zur Expeditionsmission geschickt";
 //relocate module
 $LNG['cannot_use_in_vac'] = "Sie können diese Option nicht im Urlaubsmodus verwenden";

@@ -1494,30 +1494,7 @@ input[type="radio"] {
 	align-items:center;
 	width: 100%;
 }
-.galaxy_wrapper>.galaxy_header>#galaxy_form>.galaxy_input{
-	background-color: #ffffff;
-	color: #111;
-	font-size: 12px;
-	width: 36px;
-	height: 16px;
-	margin: 0 3px;
-	padding: 0 2px;
-	text-align: center;
 
-	border: 1px solid #dcdcdc;
-	border-radius: 3px;
-
-	outline: none;
-	transition: all 0.2s ease;
-}
-.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_input:hover{
-	border-color: #999;
-}
-.galaxy_wrapper > .galaxy_header > #galaxy_form > .galaxy_input:focus{
-	border-color: #4a90e2;
-	box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
-	background-color: #fff;
-}
 .galaxy_wrapper >.galaxy_header>#galaxy_form>.galaxy_button{
 	width: 24px;
 	height: 18px;
@@ -1590,8 +1567,8 @@ input[type="radio"] {
 .galaxy_icon{
 	background: url('images/galaxy.png');
 }
-#galaxy_form>.galaxy_icon:hover>.tooltip,
-#galaxy_form>.system_icon:hover>.tooltip
+.galaxy_icon:hover>.tooltip,
+.system_icon:hover>.tooltip
 {
 	display: flex;
 }
@@ -2233,6 +2210,33 @@ background: linear-gradient(180deg,
 	color: #f1f1f1;
 	top: 20px;
 }
+
+/*special input*/
+
+.galaxy_input,.table_game td .galaxy_input{
+	background-color: #ffffff;
+	color: #111;
+	font-size: 12px;
+	width: 36px;
+	height: 16px;
+	margin: 0 3px;
+	padding: 0 2px;
+	text-align: center;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	outline: none;
+	transition: all 0.2s ease;
+}
+.galaxy_input:hover,.table_game td .galaxy_input:hover{
+	border-color: #999;
+}
+.galaxy_input:focus,.table_game td .galaxy_input:focus{
+	border-color: #4a90e2;
+	box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
+	background-color: #fff;
+}
+
+/**/
 
 /*table gow, general table for styling*/
 .table_game {

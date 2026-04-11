@@ -25,49 +25,42 @@
 		<form action="?page=AutoExpedition" method="post">
 			<table class="table_game table_full">
 				<thead>
-					<th colspan="3">{$LNG.ae_autoexp}</th>
+					<th colspan="2">{$LNG.ae_autoexp}</th>
 				</thead>
 				<tbody>
 					<tr>
-						<td>{$LNG.ae_galaxy}</td>
-						<td>{$LNG.ae_system}</td>
-						<td>{$LNG.ae_planet}</td>
-					</tr>
-					<tr>
-						<td>
-							<input name="expedition_galaxy" value="{$galaxy}">
+						<td class="text_center" style="display:flex;justify-content:center;align-items:center;">
+							<i class="galaxy_icon">
+								<span class="tooltip tooltip_top">{$LNG.gl_galaxy}</span>
+							</i>
+							<input class="galaxy_input" name="expedition_galaxy" value="{$galaxy}">
+							<i class="system_icon">
+								<span class="tooltip tooltip_top">{$LNG.gl_solar_system}</span>
+							</i>
+							<input class="galaxy_input" name="expedition_system" value="{$system}">
+							<input class="galaxy_input" name="expedition_planet" value="16">
 						</td>
-						<td>
-							<input name="expedition_system" value="{$system}">
-						</td>
-						<td>
-							<input name="expedition_planet" value="16">
-						</td>
-					</tr>
-					<tr>
-						<td class="text_center" colspan="2">
-							<span>{$LNG.fl_hold_time}</span>
+						<td class="text_center">
+							<span>{$LNG.fl_hold_time}&nbsp;({$LNG.fl_hours})</span>
 							<select name="">
 								{foreach $stay_selector as $cKey => $cSelector}
 									<option value="{$cKey}">{$cSelector}</option>
 								{/foreach}
 							</select>
-							<span>{$LNG.fl_hours}</span>
-						</td>
-						<td colspan="1">
-							<span onclick="return Dialog.fleetDivideSettings();"
-								class="settingsoverview">{$LNG.ae_settings}</span>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
-							<div class="g-recaptcha" data-theme="dark"
-								data-sitekey="{$recaptcha_public_key}"></div>
-						</td>
-					</tr>
-					<tr>
-						<td class="text_center" colspan="3">
-							<button class="text-yellow"
+						{if $recaptcha_active}
+							<td>
+								<div class="g-recaptcha" data-theme="dark"
+									data-sitekey="{$recaptcha_public_key}">
+								</div>
+							</td>
+						{else}
+							<td></td>
+						{/if}
+						<td class="text_center">
+							<button class="button-upgrade"
 								type="submit">{$LNG.ae_send}</button>
 						</td>
 					</tr>

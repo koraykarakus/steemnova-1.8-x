@@ -56,6 +56,7 @@ $LNG['ae_error_1'] = "Not enough expedition slot !";
 $LNG['ae_error_2'] = "Expedition is not possible on vacation mode !";
 $LNG['ae_error_3'] = "Recaptcha is wrong !";
 $LNG['ae_error_4'] = "No fleets found !";
+$LNG['ae_error_5'] = "Deuterium on the planet is not enough to start auto expedition.";
 $LNG['ae_success'] = "Fleet(s) sent to expedition mission, successfully";
 //relocate module
 
