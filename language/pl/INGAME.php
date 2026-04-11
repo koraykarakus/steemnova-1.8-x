@@ -256,6 +256,7 @@ $LNG['gl_short_long_inactive'] = 'I';
 $LNG['gl_short_enemy'] = '';
 $LNG['gl_short_friend'] = '';
 $LNG['gl_short_member'] = '';
+$LNG['gl_short_admin'] = "A";
 $LNG['gl_populed_planets'] = '%d planeta zamieszkana';
 $LNG['gl_out_space'] = 'Ekspedycja na skraj systemu';
 $LNG['gl_avaible_missiles'] = 'Rakiety międzyplanetarne';

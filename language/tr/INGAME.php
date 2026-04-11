@@ -257,6 +257,7 @@ $LNG['gl_inactive_twentyeight'] = '28 Gun Inaktif';
 $LNG['gl_short_enemy'] = '';
 $LNG['gl_short_friend'] = '';
 $LNG['gl_short_member'] = '';
+$LNG['gl_short_admin'] = "Y";
 $LNG['gl_short_strong'] = 'G';
 $LNG['gl_short_newbie'] = 'Z';
 $LNG['gl_short_vacation'] = 'T';

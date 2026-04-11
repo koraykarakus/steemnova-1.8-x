@@ -268,6 +268,7 @@ $LNG['gl_short_long_inactive'] = 'I';
 $LNG['gl_short_enemy'] = '';
 $LNG['gl_short_friend'] = '';
 $LNG['gl_short_member'] = '';
+$LNG['gl_short_admin'] = "A";
 $LNG['gl_populed_planets'] = '%d Planeten besiedelt';
 $LNG['gl_out_space'] = 'Die unendlichen Weiten des Universums';
 $LNG['gl_avaible_missiles'] = 'Interplanetarraketen';

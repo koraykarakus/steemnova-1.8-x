@@ -253,6 +253,7 @@ $LNG['gl_inactive_twentyeight'] = '28 Dias inativo';
 $LNG['gl_short_enemy'] = '';
 $LNG['gl_short_friend'] = '';
 $LNG['gl_short_member'] = '';
+$LNG['gl_short_admin'] = "A";
 $LNG['gl_short_strong'] = 'F';
 $LNG['gl_short_newbie'] = 'f';
 $LNG['gl_short_vacation'] = 'mf';

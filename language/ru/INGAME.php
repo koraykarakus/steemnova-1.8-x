@@ -248,6 +248,7 @@ $LNG['gl_short_long_inactive'] = 'I';
 $LNG['gl_short_enemy'] = 'В';
 $LNG['gl_short_friend'] = 'Д';
 $LNG['gl_short_member'] = 'А';
+$LNG['gl_short_admin'] = "A";
 $LNG['gl_populed_planets'] = '%d планет заселено';
 $LNG['gl_out_space'] = 'Бесконечные дали';
 $LNG['gl_avaible_missiles'] = 'Доступные ракеты';

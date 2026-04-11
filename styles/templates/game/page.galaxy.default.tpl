@@ -430,16 +430,22 @@
 									</tr>
 				 				</table>
 							</div>
-							<span class="{foreach $currentPlanet.user.class as $class}{if !$class@first}{/if}galaxy-username-{$class}{/foreach} galaxy-username">
+							<span class="{foreach $currentPlanet.user.class as $class}galaxy-username-{$class}{/foreach} galaxy-username">
 								{limitText($currentPlanet.user.username, 15)}
 							</span>
 							{if !empty($currentPlanet.user.class)}
+								&nbsp;(
 								{foreach $currentPlanet.user.class as $class}
-									{if !$class@first}&nbsp;
+									{if !$class@first}
+										,
 									{/if}
-									<span
-									class="galaxy-short-{$class} galaxy-short">&nbsp;({$ShortStatus.$class})</span>
+									<span class="galaxy-short-{$class} galaxy-short">
+									{if isset($ShortStatus.$class) && !empty($ShortStatus.$class)}
+										{$ShortStatus.$class}
+									{/if}
+									</span>
 								{/foreach}
+								)
 							{/if}
 					</div>
 					<div class="alliance_name">

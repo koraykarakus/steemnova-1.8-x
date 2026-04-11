@@ -2445,6 +2445,11 @@ background: linear-gradient(180deg,
 	color: #4f4f4f !important;
 }
 
+.galaxy-short-admin,
+.galaxy-username-admin {
+	color: #f48406 !important;
+}
+
 .galaxy-short-banned {
 	text-decoration: line-through
 }

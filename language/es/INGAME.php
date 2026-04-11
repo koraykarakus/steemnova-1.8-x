@@ -254,6 +254,7 @@ $LNG['gl_short_long_inactive'] = 'I';
 $LNG['gl_short_enemy'] = '';
 $LNG['gl_short_friend'] = '';
 $LNG['gl_short_member'] = '';
+$LNG['gl_short_admin'] = "A";
 $LNG['gl_populed_planets'] = '%d planetas habitados';
 $LNG['gl_out_space'] = 'Explora el Espacio exterior';
 $LNG['gl_avaible_missiles'] = 'Misiles';

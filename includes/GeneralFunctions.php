@@ -108,6 +108,11 @@ function userStatus($data, $noob_protection = false): array
         $result[] = 'strong';
     }
 
+    if (isset($data['authlevel']) && $data['authlevel'] == AUTH_ADM) 
+    {
+        $result[] = 'admin';
+    }
+
     return $result;
 }
 
