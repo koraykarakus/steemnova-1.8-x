@@ -74,9 +74,6 @@
                   </div>
                   <div class="right">
                     {if $element.level > 0}
-                      {if $id == 43}
-                        <a href="#" onclick="return Dialog.info({$id})">{$LNG.bd_jump_gate_action}</a>
-                      {/if}
                       {if ($id == 44 && !$have_missiles) ||  $id != 44}
                         <form action='game.php?page=facilities' method='post' class='destroy_form'>
                           <input type='hidden' name='cmd' value='destroy'>
@@ -170,9 +167,14 @@
         </div>
       {/foreach}
       <span class="page_title">{$current_pname} - {$LNG.lm_facilities}</span>
-      <a class="link_resources" href="?page=resources">
-        {$LNG.bd_resource_settings}
-      </a>
+      {if $planet_type == 3 && $jump_gate_level > 0}
+        <a class="link_resources" href="#" onclick="return Dialog.info({$id})">{$LNG.bd_jump_gate_action}</a>
+      {else}
+        <a class="link_resources" href="?page=resources">
+          {$LNG.bd_resource_settings}
+        </a>
+      {/if}
+      
       {if !empty($queue)}
         <div id="buildlist" class="queue_wrapper scroll">
           {foreach $queue as $List}

@@ -182,6 +182,8 @@ class ShowFacilitiesPage extends AbstractGamePage
             'used_field'        => $PLANET['field_current'],
             'max_field'         => CalculateMaxPlanetFields($PLANET),
             'build_points'      => pretty_number($USER['build_points']),
+            'planet_type'       => $PLANET['planet_type'],
+            'jump_gate_level'   => $PLANET[$RESOURCE[43]],
         ]);
 
         $this->display('page.facilities.default.tpl');
