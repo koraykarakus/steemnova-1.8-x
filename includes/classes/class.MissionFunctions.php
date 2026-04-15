@@ -195,4 +195,10 @@ class MissionFunctions
         $planet_updater->CalcResource($user, $planet, true, $start_time);
     }
 
+    public function failReturn()
+    {
+        $this->setState(FLEET_RETURN);
+        $this->SaveFleet();
+    }
+
 }

@@ -26,12 +26,6 @@ class MissionCaseSpy extends MissionFunctions implements Mission
     {
         global $PRICELIST, $RESLIST, $RESOURCE;
 
-        $fail_return = function ()
-        {
-            $this->setState(FLEET_RETURN);
-            $this->SaveFleet();
-        };
-
         $db = Database::get();
 
         $sql = 'SELECT * FROM %%USERS%% WHERE id = :user_id;';
@@ -58,7 +52,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             || !$target_planet
             || !$sender_planet)
         {
-            return $fail_return();
+            return $this->failReturn();
         }
 
         $LNG = $this->getLanguage($sender_user['lang']);
@@ -164,16 +158,19 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             'targetChance' => $target_chance,
             'spyChance'    => $spy_chance,
             'isBattleSim'  => ENABLE_SIMULATOR_LINK == true && isModuleAvailable(MODULE_SIMULATOR),
-            'title'        => sprintf($LNG['sys_mess_head'],
-                            $target_planet['name'],
-                            $target_planet['galaxy'],
-                            $target_planet['system'],
-                            $target_planet['planet'],
-                            _date($LNG['php_tdformat'],
-                                $this->_fleet['fleet_end_time'],
-                                $sender_user['timezone'],
-                                $LNG
-                            )),
+            'title'        => sprintf(
+                $LNG['sys_mess_head'],
+                $target_planet['name'],
+                $target_planet['galaxy'],
+                $target_planet['system'],
+                $target_planet['planet'],
+                _date(
+                    $LNG['php_tdformat'],
+                    $this->_fleet['fleet_end_time'],
+                    $sender_user['timezone'],
+                    $LNG
+                )
+            ),
         ]);
 
         $template->assign_vars([
