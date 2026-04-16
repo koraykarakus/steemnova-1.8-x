@@ -100,7 +100,7 @@ class ShowFleetStep1Page extends AbstractGamePage
             'system'       => $target_system,
             'planet'       => $target_planet,
             'type'         => $target_type,
-            'speedSelect'  => FleetFunctions::$allowedSpeed,
+            'speedSelect'  => FleetFunctions::$allowed_speed,
             'typeSelect'   => [1 => $LNG['type_planet_1'], 2 => $LNG['type_planet_2'], 3 => $LNG['type_planet_3']],
             'fleetdata'    => $fleet_data,
         ]);
