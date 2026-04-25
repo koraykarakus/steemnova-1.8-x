@@ -1043,7 +1043,7 @@ class ShowAlliancePage extends AbstractGamePage
 
         $available_events = [];
 
-        foreach (array_keys(FlyingFleetHandler::$missionObjPattern) as $missionId)
+        foreach (array_keys(FlyingFleetHandler::$mission_obj_pattern) as $missionId)
         {
             $available_events[$missionId] = $LNG['type_mission_' . $missionId];
         }
