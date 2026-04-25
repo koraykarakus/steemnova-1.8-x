@@ -19,7 +19,7 @@ class FlyingFleetHandler
 {
     protected $token;
 
-    public static $missionObjPattern = [
+    public static $mission_obj_pattern = [
         1  => 'MissionCaseAttack',
         2  => 'MissionCaseACS',
         3  => 'MissionCaseTransport',
@@ -53,40 +53,40 @@ class FlyingFleetHandler
 		INNER JOIN %%FLEETS%% ON fleetID = fleet_id
 		WHERE `lock` = :token;';
 
-        $fleetResult = $db->select($sql, [
+        $fleet_result = $db->select($sql, [
             ':token' => $this->token,
         ]);
 
-        foreach ($fleetResult as $fleetRow)
+        foreach ($fleet_result as $c_fleet)
         {
-            if (!isset(self::$missionObjPattern[$fleetRow['fleet_mission']]))
+            if (!isset(self::$mission_obj_pattern[$c_fleet['fleet_mission']]))
             {
-                $sql = 'DELETE FROM %%FLEETS%% WHERE fleet_id = :fleetId;';
+                $sql = 'DELETE FROM %%FLEETS%% WHERE fleet_id = :fleet_id;';
 
                 $db->delete($sql, [
-                    ':fleetId' => $fleetRow['fleet_id'],
+                    ':fleet_id' => $c_fleet['fleet_id'],
                 ]);
 
                 continue;
             }
 
-            $missionName = self::$missionObjPattern[$fleetRow['fleet_mission']];
+            $mission_name = self::$mission_obj_pattern[$c_fleet['fleet_mission']];
 
-            $path = 'includes/classes/missions/'.$missionName.'.class.php';
+            $path = 'includes/classes/missions/'.$mission_name.'.class.php';
             require_once $path;
-            /** @var Mission $missionObj */
-            $missionObj = new $missionName($fleetRow);
+            /** @var Mission $mission_obj */
+            $mission_obj = new $mission_name($c_fleet);
 
-            switch ($fleetRow['fleet_mess'])
+            switch ($c_fleet['fleet_mess'])
             {
                 case 0:
-                    $missionObj->TargetEvent();
+                    $mission_obj->TargetEvent();
                     break;
                 case 1:
-                    $missionObj->ReturnEvent();
+                    $mission_obj->ReturnEvent();
                     break;
                 case 2:
-                    $missionObj->EndStayEvent();
+                    $mission_obj->EndStayEvent();
                     break;
             }
         }
