@@ -126,7 +126,7 @@ class ShowVerifyPage extends AbstractLoginPage
 
         return [
             'user_id'   => $user_id,
-            'userName'  => $user_data['userName'],
+            'userName'  => $user_data['username'],
             'planet_id' => $planet_id,
         ];
     }
@@ -147,6 +147,6 @@ class ShowVerifyPage extends AbstractLoginPage
     {
         global $LNG;
         $user_data = $this->_activeUser();
-        $this->sendJSON(sprintf($LNG['verify_success'], $user_data['userName']));
+        $this->sendJSON(sprintf($LNG['verify_success'], $user_data['username']));
     }
 }

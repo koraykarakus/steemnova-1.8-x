@@ -22,6 +22,10 @@ body {
 	overflow-y: scroll;
 }
 
+.bg-dark{
+	color: #fff!important;
+}
+
 input, textarea, select, option, button{
 	background-color:#171F2F;
 	color:#BBB;
