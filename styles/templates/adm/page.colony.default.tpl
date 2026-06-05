@@ -232,9 +232,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="gauss_canyon_start">{$LNG.cs_gauss_canyon_start}</label>
-      <input id="gauss_canyon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="gauss_canyon_start" value="{$gauss_canyon_start}" type="text" maxlength="5">
+        for="gauss_cannon_start">{$LNG.cs_gauss_cannon_start}</label>
+      <input id="gauss_cannon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="gauss_cannon_start" value="{$gauss_cannon_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
