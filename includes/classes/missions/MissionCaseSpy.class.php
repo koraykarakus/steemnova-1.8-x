@@ -135,7 +135,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
                 }
             }
 
-            if ($sender_user['spyMessagesMode'] == 1)
+            if ($sender_user['spy_message_mode'] == 1)
             {
                 $spy_data[$class_id] = array_filter($spy_data[$class_id]);
             }

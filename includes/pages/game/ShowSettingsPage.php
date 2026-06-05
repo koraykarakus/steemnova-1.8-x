@@ -77,7 +77,7 @@ class ShowSettingsPage extends AbstractGamePage
             'timezone'        => $USER['timezone'],
             'delete'          => $USER['delete_mode'],
             'queueMessages'   => $USER['hof'],
-            'spyMessagesMode' => $USER['spyMessagesMode'],
+            'spyMessagesMode' => $USER['spy_message_mode'],
             'galaxySpy'       => $USER['settings_esp'],
             'galaxyBuddyList' => $USER['settings_bud'],
             'galaxyMissle'    => $USER['settings_mis'],
@@ -160,7 +160,7 @@ class ShowSettingsPage extends AbstractGamePage
 
         $db = Database::get();
 
-        if ($vacation == 1 
+        if ($vacation == 1
             && ($USER['vacation_until'] <= TIMESTAMP || $USER['authlevel'] > AUTH_USR))
         {
             $sql = "UPDATE %%USERS%% SET
@@ -423,25 +423,25 @@ class ShowSettingsPage extends AbstractGamePage
 		authattack				= :adminProtection,
 		lang					= :language,
 		hof						= :queueMessages,
-		spyMessagesMode			= :spyMessagesMode
+		spyMessagesMode			= :spy_message_mode
 		WHERE id = :userID;";
 
         $db->update($sql, [
-            ':timezone'        => $timezone,
-            ':planetSort'      => $planetSort,
-            ':planetOrder'     => $planetOrder,
-            ':spyCount'        => $spycount,
-            ':fleetActions'    => $fleetactions,
-            ':galaxySpy'       => $galaxySpy,
-            ':galaxyMessage'   => $galaxyMessage,
-            ':galaxyBuddyList' => $galaxyBuddyList,
-            ':galaxyMissle'    => $galaxyMissle,
-            ':blockPM'         => $blockPM,
-            ':adminProtection' => $adminprotection,
-            ':language'        => $language,
-            ':queueMessages'   => $queueMessages,
-            ':spyMessagesMode' => $spyMessagesMode,
-            ':userID'          => $USER['id'],
+            ':timezone'         => $timezone,
+            ':planetSort'       => $planetSort,
+            ':planetOrder'      => $planetOrder,
+            ':spyCount'         => $spycount,
+            ':fleetActions'     => $fleetactions,
+            ':galaxySpy'        => $galaxySpy,
+            ':galaxyMessage'    => $galaxyMessage,
+            ':galaxyBuddyList'  => $galaxyBuddyList,
+            ':galaxyMissle'     => $galaxyMissle,
+            ':blockPM'          => $blockPM,
+            ':adminProtection'  => $adminprotection,
+            ':language'         => $language,
+            ':queueMessages'    => $queueMessages,
+            ':spy_message_mode' => $spyMessagesMode,
+            ':userID'           => $USER['id'],
         ]);
 
         $this->printMessage($LNG['op_options_changed'], [[
