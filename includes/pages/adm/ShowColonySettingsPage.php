@@ -77,7 +77,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'star_crasher_start'            => $this->colony_settings['star_crasher_start'],
             'dm_ship_start'                 => $this->colony_settings['dm_ship_start'],
             'orbital_station_start'         => $this->colony_settings['orbital_station_start'],
-            'misil_launcher_start'          => $this->colony_settings['misil_launcher_start'],
+            'rocket_launcher_start'          => $this->colony_settings['rocket_launcher_start'],
             'small_laser_start'             => $this->colony_settings['small_laser_start'],
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
@@ -136,7 +136,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'star_crasher_start'            => $this->colony_settings['star_crasher_start'],
             'dm_ship_start'                 => $this->colony_settings['dm_ship_start'],
             'orbital_station_start'         => $this->colony_settings['orbital_station_start'],
-            'misil_launcher_start'          => $this->colony_settings['misil_launcher_start'],
+            'rocket_launcher_start'          => $this->colony_settings['rocket_launcher_start'],
             'small_laser_start'             => $this->colony_settings['small_laser_start'],
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
@@ -188,7 +188,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $giga_recycler_start = HTTP::_GP('giga_recycler_start', 0);
         $dm_ship_start = HTTP::_GP('dm_ship_start', 0);
         $orbital_station_start = HTTP::_GP('orbital_station_start', 0);
-        $misil_launcher_start = HTTP::_GP('misil_launcher_start', 0);
+        $rocket_launcher_start = HTTP::_GP('rocket_launcher_start', 0);
         $small_laser_start = HTTP::_GP('small_laser_start', 0);
         $big_laser_start = HTTP::_GP('big_laser_start', 0);
         $gauss_cannon_start = HTTP::_GP('gauss_cannon_start', 0);
@@ -240,7 +240,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`giga_recycler_start` = :giga_recycler_start,
 			`dm_ship_start` = :dm_ship_start,
 			`orbital_station_start` = :orbital_station_start,
-			`misil_launcher_start` = :misil_launcher_start,
+			`rocket_launcher_start` = :rocket_launcher_start,
 			`small_laser_start` = :small_laser_start,
 			`big_laser_start` = :big_laser_start,
 			`gauss_cannon_start` = :gauss_cannon_start,
@@ -292,7 +292,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':giga_recycler_start'           => $giga_recycler_start,
             ':dm_ship_start'                 => $dm_ship_start,
             ':orbital_station_start'         => $orbital_station_start,
-            ':misil_launcher_start'          => $misil_launcher_start,
+            ':rocket_launcher_start'          => $rocket_launcher_start,
             ':small_laser_start'             => $small_laser_start,
             ':big_laser_start'               => $big_laser_start,
             ':gauss_cannon_start'            => $gauss_cannon_start,
@@ -343,7 +343,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'star_crasher_start'            => $star_crasher_start,
             'dm_ship_start'                 => $dm_ship_start,
             'orbital_station_start'         => $orbital_station_start,
-            'misil_launcher_start'          => $misil_launcher_start,
+            'rocket_launcher_start'          => $rocket_launcher_start,
             'small_laser_start'             => $small_laser_start,
             'big_laser_start'               => $big_laser_start,
             'gauss_cannon_start'            => $gauss_cannon_start,

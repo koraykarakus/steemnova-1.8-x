@@ -214,9 +214,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="misil_launcher_start">{$LNG.cs_misil_launcher_start}</label>
-      <input id="misil_launcher_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="misil_launcher_start" value="{$misil_launcher_start}" type="text" maxlength="5">
+        for="rocket_launcher_start">{$LNG.cs_rocket_launcher_start}</label>
+      <input id="rocket_launcher_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="rocket_launcher_start" value="{$rocket_launcher_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
