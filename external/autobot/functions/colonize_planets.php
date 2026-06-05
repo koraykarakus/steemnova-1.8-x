@@ -17,7 +17,7 @@ for ($i = 0;$i <= count($bots) - 1;$i++)
 
     $planet_count = mysqli_fetch_array(mysqli_query($connection, "SELECT COUNT(*) FROM uni1_planets WHERE (id_owner = $id_bots AND planet_type=1)")) [0];
     $get_expedition = mysqli_fetch_array(mysqli_query($connection, "SELECT expedition_tech FROM uni1_users WHERE id = $id_bots")) [0];
-    $get_imperator = mysqli_fetch_array(mysqli_query($connection, "SELECT rpg_empereur FROM uni1_users WHERE id = $id_bots")) [0];
+    $get_imperator = mysqli_fetch_array(mysqli_query($connection, "SELECT rpg_emperor FROM uni1_users WHERE id = $id_bots")) [0];
     $get_resources = mysqli_fetch_array(mysqli_query($connection, "SELECT metal, crystal, deuterium, id FROM uni1_planets WHERE id_owner = $id_bots LIMIT 1"));
     $metal = floor($get_resources[0]);
     $crystal = floor($get_resources[1]);
