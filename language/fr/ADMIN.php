@@ -138,7 +138,7 @@ $LNG['cs_plasma_turret_start'] = "Canon Buster (quantité)";
 $LNG['cs_small_protection_shield_start'] = "Petit bouclier de protection (quantité)";
 $LNG['cs_planet_protector_start'] = "Protecteur planétaire (quantité)";
 $LNG['cs_big_protection_shield_start'] = "Grand bouclier de protection (quantité)";
-$LNG['cs_graviton_canyon_start'] = "Canon graviton (quantité)";
+$LNG['cs_graviton_cannon_start'] = "Canon graviton (quantité)";
 $LNG['cs_interceptor_misil_start'] = "Missile intercepteur (quantité)";
 $LNG['cs_interplanetary_misil_start'] = "Missile interplanétaire (quantité)";
 

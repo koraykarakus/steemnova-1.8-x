@@ -300,7 +300,7 @@ class PlayerUtil
 		`small_protection_shield` = :small_protection_shield_start,
 		`planet_protector` = :planet_protector_start,
 		`big_protection_shield` = :big_protection_shield_start,
-		`graviton_canyon` = :graviton_canyon_start,
+		`graviton_cannon` = :graviton_cannon_start,
 		`interceptor_misil` = :interceptor_misil_start,
 		`interplanetary_misil` = :interplanetary_misil_start
 		WHERE id = :planetID;";
@@ -353,7 +353,7 @@ class PlayerUtil
             ':small_protection_shield_start' => $colony_settings['small_protection_shield_start'],
             ':planet_protector_start'        => $colony_settings['planet_protector_start'],
             ':big_protection_shield_start'   => $colony_settings['big_protection_shield_start'],
-            ':graviton_canyon_start'         => $colony_settings['graviton_canyon_start'],
+            ':graviton_cannon_start'         => $colony_settings['graviton_cannon_start'],
             ':interceptor_misil_start'       => $colony_settings['interceptor_misil_start'],
             ':interplanetary_misil_start'    => $colony_settings['interplanetary_misil_start'],
             ':planetID'                      => $planetID,

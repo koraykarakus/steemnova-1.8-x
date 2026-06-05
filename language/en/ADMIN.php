@@ -119,13 +119,13 @@ $LNG['cs_orbital_station_start'] = "Orbital Station (amount)";
 $LNG['cs_misil_launcher_start'] = "Misil Launcher (amount)";
 $LNG['cs_small_laser_start'] = "Small Laser (amount)";
 $LNG['cs_big_laser_start'] = "Big Laser (amount)";
-$LNG['cs_gauss_cannon_start'] = "Gauss Canyon (amount)";
-$LNG['cs_ion_cannon_start'] = "Ionic Canyon (amount)";
-$LNG['cs_plasma_turret_start'] = "Buster Canyon (amount)";
+$LNG['cs_gauss_cannon_start'] = "Gauss Cannon (amount)";
+$LNG['cs_ion_cannon_start'] = "Ionic Cannon (amount)";
+$LNG['cs_plasma_turret_start'] = "Buster Cannon (amount)";
 $LNG['cs_small_protection_shield_start'] = "Small Protection Shield (amount)";
 $LNG['cs_planet_protector_start'] = "Planet Protector (amount)";
 $LNG['cs_big_protection_shield_start'] = "Big Protection Shield (amount)";
-$LNG['cs_graviton_canyon_start'] = "Gravitation Canyon (amount)";
+$LNG['cs_graviton_cannon_start'] = "Gravitation Cannon (amount)";
 $LNG['cs_interceptor_misil_start'] = "Intercepting Missile (amount)";
 $LNG['cs_interplanetary_misil_start'] = "Interplanetary Missile (amount)";
 

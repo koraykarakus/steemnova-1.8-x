@@ -268,9 +268,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="graviton_canyon_start">{$LNG.cs_graviton_canyon_start}</label>
-      <input id="graviton_canyon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="graviton_canyon_start" value="{$graviton_canyon_start}" type="text" maxlength="5">
+        for="graviton_cannon_start">{$LNG.cs_graviton_cannon_start}</label>
+      <input id="graviton_cannon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="graviton_cannon_start" value="{$graviton_cannon_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

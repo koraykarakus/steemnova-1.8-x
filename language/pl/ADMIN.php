@@ -148,7 +148,7 @@ $LNG['cs_plasma_turret_start'] = "Działo Buster (ilość)";
 $LNG['cs_small_protection_shield_start'] = "Mała osłona ochronna (ilość)";
 $LNG['cs_planet_protector_start'] = "Obrońca planety (ilość)";
 $LNG['cs_big_protection_shield_start'] = "Duża osłona ochronna (ilość)";
-$LNG['cs_graviton_canyon_start'] = "Działo grawitacyjne (ilość)";
+$LNG['cs_graviton_cannon_start'] = "Działo grawitacyjne (ilość)";
 $LNG['cs_interceptor_misil_start'] = "Rakieta przechwytująca (ilość)";
 $LNG['cs_interplanetary_misil_start'] = "Rakieta międzyplanetarna (ilość)";
 

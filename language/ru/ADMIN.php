@@ -149,7 +149,7 @@ $LNG['cs_plasma_turret_start'] = "Бастер-пушка (количество)
 $LNG['cs_small_protection_shield_start'] = "Малый защитный щит (количество)";
 $LNG['cs_planet_protector_start'] = "Защитник планеты (количество)";
 $LNG['cs_big_protection_shield_start'] = "Большой защитный щит (количество)";
-$LNG['cs_graviton_canyon_start'] = "Гравитационная пушка (количество)";
+$LNG['cs_graviton_cannon_start'] = "Гравитационная пушка (количество)";
 $LNG['cs_interceptor_misil_start'] = "Ракета-перехватчик (количество)";
 $LNG['cs_interplanetary_misil_start'] = "Межпланетная ракета (количество)";
 

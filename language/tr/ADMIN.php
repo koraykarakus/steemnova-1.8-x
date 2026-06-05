@@ -153,7 +153,7 @@ $LNG['cs_plasma_turret_start'] = "Buster Topu (adet)";
 $LNG['cs_small_protection_shield_start'] = "Küçük Koruma Kalkanı (adet)";
 $LNG['cs_planet_protector_start'] = "Gezegen Koruyucu (adet)";
 $LNG['cs_big_protection_shield_start'] = "Büyük Koruma Kalkanı (adet)";
-$LNG['cs_graviton_canyon_start'] = "Graviton Topu (adet)";
+$LNG['cs_graviton_cannon_start'] = "Graviton Topu (adet)";
 $LNG['cs_interceptor_misil_start'] = "Önleyici Füze (adet)";
 $LNG['cs_interplanetary_misil_start'] = "Gezegenlerarası Füze (adet)";
 

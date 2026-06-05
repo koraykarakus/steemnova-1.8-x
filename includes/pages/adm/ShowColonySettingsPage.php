@@ -86,7 +86,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
             'big_protection_shield_start'   => $this->colony_settings['big_protection_shield_start'],
-            'graviton_canyon_start'         => $this->colony_settings['graviton_canyon_start'],
+            'graviton_cannon_start'         => $this->colony_settings['graviton_cannon_start'],
             'interceptor_misil_start'       => $this->colony_settings['interceptor_misil_start'],
             'interplanetary_misil_start'    => $this->colony_settings['interplanetary_misil_start'],
         ]);
@@ -145,7 +145,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
             'big_protection_shield_start'   => $this->colony_settings['big_protection_shield_start'],
-            'graviton_canyon_start'         => $this->colony_settings['graviton_canyon_start'],
+            'graviton_cannon_start'         => $this->colony_settings['graviton_cannon_start'],
             'interceptor_misil_start'       => $this->colony_settings['interceptor_misil_start'],
             'interplanetary_misil_start'    => $this->colony_settings['interplanetary_misil_start'],
         ];
@@ -197,7 +197,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $small_protection_shield_start = HTTP::_GP('small_protection_shield_start', 0);
         $planet_protector_start = HTTP::_GP('planet_protector_start', 0);
         $big_protection_shield_start = HTTP::_GP('big_protection_shield_start', 0);
-        $graviton_canyon_start = HTTP::_GP('graviton_canyon_start', 0);
+        $graviton_cannon_start = HTTP::_GP('graviton_cannon_start', 0);
         $interceptor_misil_start = HTTP::_GP('interceptor_misil_start', 0);
         $interplanetary_misil_start = HTTP::_GP('interplanetary_misil_start', 0);
 
@@ -249,7 +249,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`small_protection_shield_start` = :small_protection_shield_start,
 			`planet_protector_start` = :planet_protector_start,
 			`big_protection_shield_start` = :big_protection_shield_start,
-			`graviton_canyon_start` = :graviton_canyon_start,
+			`graviton_cannon_start` = :graviton_cannon_start,
 			`interceptor_misil_start` = :interceptor_misil_start,
 			`interplanetary_misil_start` = :interplanetary_misil_start;";
 
@@ -301,7 +301,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':small_protection_shield_start' => $small_protection_shield_start,
             ':planet_protector_start'        => $planet_protector_start,
             ':big_protection_shield_start'   => $big_protection_shield_start,
-            ':graviton_canyon_start'         => $graviton_canyon_start,
+            ':graviton_cannon_start'         => $graviton_cannon_start,
             ':interceptor_misil_start'       => $interceptor_misil_start,
             ':interplanetary_misil_start'    => $interplanetary_misil_start,
         ]);
@@ -352,7 +352,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_protection_shield_start' => $small_protection_shield_start,
             'planet_protector_start'        => $planet_protector_start,
             'big_protection_shield_start'   => $big_protection_shield_start,
-            'graviton_canyon_start'         => $graviton_canyon_start,
+            'graviton_cannon_start'         => $graviton_cannon_start,
             'interceptor_misil_start'       => $interceptor_misil_start,
             'interplanetary_misil_start'    => $interplanetary_misil_start,
         ];
