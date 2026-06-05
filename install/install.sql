@@ -223,7 +223,7 @@ CREATE TABLE `%PREFIX%config` (
   `uni_name` VARCHAR(30) NOT NULL DEFAULT 'uni_unnamed',
   `game_name` VARCHAR(30) NOT NULL DEFAULT 'game_unnamed',
   `game_disable` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `close_reason` TEXT NOT NULL DEFAULT 'no_reason',
+  `close_reason` VARCHAR(255) NOT NULL DEFAULT '',
   `metal_basic_income` INT NOT NULL DEFAULT 20,
   `crystal_basic_income` INT NOT NULL DEFAULT 10,
   `deuterium_basic_income` INT NOT NULL DEFAULT 0,
@@ -248,7 +248,7 @@ CREATE TABLE `%PREFIX%config` (
   `cron_lock` INT NOT NULL DEFAULT 0,
   `reg_closed` TINYINT NOT NULL DEFAULT 0,
   `display_announcement_frame` TINYINT NOT NULL DEFAULT 1,
-  `announcement_text` TEXT NOT NULL DEFAULT '',
+  `announcement_text` VARCHAR(255) NOT NULL DEFAULT '',
   `google_recaptcha_active` TINYINT NOT NULL DEFAULT 0,
   `google_recaptcha_public_key` VARCHAR(42) NOT NULL DEFAULT '',
   `google_recaptcha_private_key` VARCHAR(42) NOT NULL DEFAULT '',
@@ -268,7 +268,7 @@ CREATE TABLE `%PREFIX%config` (
   `user_valid` TINYINT NOT NULL DEFAULT 0,
   `ga_active` VARCHAR(42) NOT NULL DEFAULT 0,
   `ga_key` VARCHAR(42) NOT NULL DEFAULT '',
-  `moduls` TEXT NOT NULL DEFAULT '',
+  `moduls` VARCHAR(1000) NOT NULL DEFAULT '',
   `trade_allowed_ships` VARCHAR(255) NOT NULL DEFAULT '202,203,204,205,206,207,208,209,210,211,212,213,214,215',
   `trade_charge` VARCHAR(5) NOT NULL DEFAULT 30,
   `chat_closed` TINYINT NOT NULL DEFAULT 0,
@@ -321,10 +321,10 @@ CREATE TABLE `%PREFIX%config` (
   `timezone` VARCHAR(32) NOT NULL DEFAULT 'Europe/London',
   `dst` ENUM('0','1','2') NOT NULL DEFAULT '2',
   `energySpeed` SMALLINT NOT NULL DEFAULT 1,
-  `disclaimer_address` TEXT NOT NULL DEFAULT '',
-  `disclaimer_phone` TEXT NOT NULL DEFAULT '',
-  `disclaimer_mail` TEXT NOT NULL DEFAULT '',
-  `disclaimer_notice` TEXT NOT NULL DEFAULT '',
+  `disclaimer_address` VARCHAR(255) NOT NULL DEFAULT '',
+  `disclaimer_phone` VARCHAR(255) NOT NULL DEFAULT '',
+  `disclaimer_mail` VARCHAR(255) NOT NULL DEFAULT '',
+  `disclaimer_notice` VARCHAR(255) NOT NULL DEFAULT '',
   `alliance_create_min_points` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `show_unlearned_ships` BOOLEAN NOT NULL DEFAULT 1,
   `show_unlearned_buildings` BOOLEAN NOT NULL DEFAULT 1,
@@ -953,7 +953,7 @@ CREATE TABLE `%PREFIX%users` (
   `ref_bonus` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `inactive_mail` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `user_secret_question_id` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
+  `user_secret_question_answer` VARCHAR(255) NOT NULL DEFAULT '',
   `show_fleets_active` BOOLEAN NOT NULL DEFAULT 1,
   `show_news_active` BOOLEAN NOT NULL DEFAULT 1,
   `last_collect_mine_time` INT NOT NULL DEFAULT 0,
@@ -1004,7 +1004,7 @@ CREATE TABLE `%PREFIX%users_valid` (
  `external_auth_uid` VARCHAR(128) DEFAULT NULL,
  `external_auth_method` VARCHAR(32) DEFAULT NULL,
  `user_secret_question_id` TINYINT UNSIGNED NOT NULL DEFAULT 0,
- `user_secret_question_answer` TINYTEXT NOT NULL DEFAULT '',
+ `user_secret_question_answer` VARCHAR(255) NOT NULL DEFAULT '',
  PRIMARY KEY (`validation_id`,`validation_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1190,8 +1190,8 @@ CREATE TABLE `%PREFIX%vars_requirements_default` (
   KEY `require_id` (`require_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`, `close_reason`, `announcement_text`, `moduls`, `disclaimer_address`, `disclaimer_phone`, `disclaimer_mail`, `disclaimer_notice`) VALUES
-(1, '%VERSION%', '', 'SteemNova', '', '', '', '', '', '', '');
+INSERT INTO `%PREFIX%config` (`uni`, `version`, `uni_name`, `game_name`) VALUES
+(1, '%VERSION%', '', 'SteemNova');
 
 INSERT INTO `%PREFIX%google_auth` (`callback_url`) VALUES
 ('http://localhost/index.php?page=googleAuth&mode=callBack');
