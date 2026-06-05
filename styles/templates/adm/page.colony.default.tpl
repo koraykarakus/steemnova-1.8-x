@@ -226,9 +226,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="big_laser_start">{$LNG.cs_big_laser_start}</label>
-      <input id="big_laser_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="big_laser_start" value="{$big_laser_start}" type="text" maxlength="5">
+        for="heavy_laser_start">{$LNG.cs_heavy_laser_start}</label>
+      <input id="heavy_laser_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="heavy_laser_start" value="{$heavy_laser_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

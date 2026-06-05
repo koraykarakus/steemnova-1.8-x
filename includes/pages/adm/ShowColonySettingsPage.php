@@ -79,7 +79,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'orbital_station_start'         => $this->colony_settings['orbital_station_start'],
             'rocket_launcher_start'          => $this->colony_settings['rocket_launcher_start'],
             'light_laser_start'             => $this->colony_settings['light_laser_start'],
-            'big_laser_start'               => $this->colony_settings['big_laser_start'],
+            'heavy_laser_start'               => $this->colony_settings['heavy_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
             'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
             'plasma_turret_start'           => $this->colony_settings['plasma_turret_start'],
@@ -138,7 +138,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'orbital_station_start'         => $this->colony_settings['orbital_station_start'],
             'rocket_launcher_start'          => $this->colony_settings['rocket_launcher_start'],
             'light_laser_start'             => $this->colony_settings['light_laser_start'],
-            'big_laser_start'               => $this->colony_settings['big_laser_start'],
+            'heavy_laser_start'               => $this->colony_settings['heavy_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
             'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
             'plasma_turret_start'           => $this->colony_settings['plasma_turret_start'],
@@ -190,7 +190,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $orbital_station_start = HTTP::_GP('orbital_station_start', 0);
         $rocket_launcher_start = HTTP::_GP('rocket_launcher_start', 0);
         $light_laser_start = HTTP::_GP('light_laser_start', 0);
-        $big_laser_start = HTTP::_GP('big_laser_start', 0);
+        $heavy_laser_start = HTTP::_GP('heavy_laser_start', 0);
         $gauss_cannon_start = HTTP::_GP('gauss_cannon_start', 0);
         $ion_cannon_start = HTTP::_GP('ion_cannon_start', 0);
         $plasma_turret_start = HTTP::_GP('plasma_turret_start', 0);
@@ -242,7 +242,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`orbital_station_start` = :orbital_station_start,
 			`rocket_launcher_start` = :rocket_launcher_start,
 			`light_laser_start` = :light_laser_start,
-			`big_laser_start` = :big_laser_start,
+			`heavy_laser_start` = :heavy_laser_start,
 			`gauss_cannon_start` = :gauss_cannon_start,
 			`ion_cannon_start` = :ion_cannon_start,
 			`plasma_turret_start` = :plasma_turret_start,
@@ -294,7 +294,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':orbital_station_start'         => $orbital_station_start,
             ':rocket_launcher_start'          => $rocket_launcher_start,
             ':light_laser_start'             => $light_laser_start,
-            ':big_laser_start'               => $big_laser_start,
+            ':heavy_laser_start'               => $heavy_laser_start,
             ':gauss_cannon_start'            => $gauss_cannon_start,
             ':ion_cannon_start'            => $ion_cannon_start,
             ':plasma_turret_start'           => $plasma_turret_start,
@@ -345,7 +345,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'orbital_station_start'         => $orbital_station_start,
             'rocket_launcher_start'          => $rocket_launcher_start,
             'light_laser_start'             => $light_laser_start,
-            'big_laser_start'               => $big_laser_start,
+            'heavy_laser_start'               => $heavy_laser_start,
             'gauss_cannon_start'            => $gauss_cannon_start,
             'ion_cannon_start'            => $ion_cannon_start,
             'plasma_turret_start'           => $plasma_turret_start,
