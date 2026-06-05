@@ -244,9 +244,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="buster_canyon_start">{$LNG.cs_buster_canyon_start}</label>
-      <input id="buster_canyon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="buster_canyon_start" value="{$buster_canyon_start}" type="text" maxlength="5">
+        for="plasma_turret_start">{$LNG.cs_plasma_turret_start}</label>
+      <input id="plasma_turret_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="plasma_turret_start" value="{$plasma_turret_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

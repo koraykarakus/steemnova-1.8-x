@@ -82,7 +82,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
             'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
-            'buster_canyon_start'           => $this->colony_settings['buster_canyon_start'],
+            'plasma_turret_start'           => $this->colony_settings['plasma_turret_start'],
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
             'big_protection_shield_start'   => $this->colony_settings['big_protection_shield_start'],
@@ -141,7 +141,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
             'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
-            'buster_canyon_start'           => $this->colony_settings['buster_canyon_start'],
+            'plasma_turret_start'           => $this->colony_settings['plasma_turret_start'],
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
             'big_protection_shield_start'   => $this->colony_settings['big_protection_shield_start'],
@@ -193,7 +193,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $big_laser_start = HTTP::_GP('big_laser_start', 0);
         $gauss_cannon_start = HTTP::_GP('gauss_cannon_start', 0);
         $ion_cannon_start = HTTP::_GP('ion_cannon_start', 0);
-        $buster_canyon_start = HTTP::_GP('buster_canyon_start', 0);
+        $plasma_turret_start = HTTP::_GP('plasma_turret_start', 0);
         $small_protection_shield_start = HTTP::_GP('small_protection_shield_start', 0);
         $planet_protector_start = HTTP::_GP('planet_protector_start', 0);
         $big_protection_shield_start = HTTP::_GP('big_protection_shield_start', 0);
@@ -245,7 +245,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`big_laser_start` = :big_laser_start,
 			`gauss_cannon_start` = :gauss_cannon_start,
 			`ion_cannon_start` = :ion_cannon_start,
-			`buster_canyon_start` = :buster_canyon_start,
+			`plasma_turret_start` = :plasma_turret_start,
 			`small_protection_shield_start` = :small_protection_shield_start,
 			`planet_protector_start` = :planet_protector_start,
 			`big_protection_shield_start` = :big_protection_shield_start,
@@ -297,7 +297,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':big_laser_start'               => $big_laser_start,
             ':gauss_cannon_start'            => $gauss_cannon_start,
             ':ion_cannon_start'            => $ion_cannon_start,
-            ':buster_canyon_start'           => $buster_canyon_start,
+            ':plasma_turret_start'           => $plasma_turret_start,
             ':small_protection_shield_start' => $small_protection_shield_start,
             ':planet_protector_start'        => $planet_protector_start,
             ':big_protection_shield_start'   => $big_protection_shield_start,
@@ -348,7 +348,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'big_laser_start'               => $big_laser_start,
             'gauss_cannon_start'            => $gauss_cannon_start,
             'ion_cannon_start'            => $ion_cannon_start,
-            'buster_canyon_start'           => $buster_canyon_start,
+            'plasma_turret_start'           => $plasma_turret_start,
             'small_protection_shield_start' => $small_protection_shield_start,
             'planet_protector_start'        => $planet_protector_start,
             'big_protection_shield_start'   => $big_protection_shield_start,
