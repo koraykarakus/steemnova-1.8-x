@@ -238,9 +238,9 @@
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"
-        for="ionic_canyon_start">{$LNG.cs_ionic_canyon_start}</label>
-      <input id="ionic_canyon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
-        name="ionic_canyon_start" value="{$ionic_canyon_start}" type="text" maxlength="5">
+        for="ion_cannon_start">{$LNG.cs_ion_cannon_start}</label>
+      <input id="ion_cannon_start" class="form-control py-1 bg-dark  my-1 border border-secondary"
+        name="ion_cannon_start" value="{$ion_cannon_start}" type="text" maxlength="5">
     </div>
     <div class="form-gorup d-flex flex-column my-1 p-2 ">
       <label class="text-start my-1 cursor-pointer hover-underline"

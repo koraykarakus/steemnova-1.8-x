@@ -81,7 +81,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_laser_start'             => $this->colony_settings['small_laser_start'],
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
-            'ionic_canyon_start'            => $this->colony_settings['ionic_canyon_start'],
+            'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
             'buster_canyon_start'           => $this->colony_settings['buster_canyon_start'],
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
@@ -140,7 +140,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_laser_start'             => $this->colony_settings['small_laser_start'],
             'big_laser_start'               => $this->colony_settings['big_laser_start'],
             'gauss_cannon_start'            => $this->colony_settings['gauss_cannon_start'],
-            'ionic_canyon_start'            => $this->colony_settings['ionic_canyon_start'],
+            'ion_cannon_start'            => $this->colony_settings['ion_cannon_start'],
             'buster_canyon_start'           => $this->colony_settings['buster_canyon_start'],
             'small_protection_shield_start' => $this->colony_settings['small_protection_shield_start'],
             'planet_protector_start'        => $this->colony_settings['planet_protector_start'],
@@ -192,7 +192,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $small_laser_start = HTTP::_GP('small_laser_start', 0);
         $big_laser_start = HTTP::_GP('big_laser_start', 0);
         $gauss_cannon_start = HTTP::_GP('gauss_cannon_start', 0);
-        $ionic_canyon_start = HTTP::_GP('ionic_canyon_start', 0);
+        $ion_cannon_start = HTTP::_GP('ion_cannon_start', 0);
         $buster_canyon_start = HTTP::_GP('buster_canyon_start', 0);
         $small_protection_shield_start = HTTP::_GP('small_protection_shield_start', 0);
         $planet_protector_start = HTTP::_GP('planet_protector_start', 0);
@@ -244,7 +244,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
 			`small_laser_start` = :small_laser_start,
 			`big_laser_start` = :big_laser_start,
 			`gauss_cannon_start` = :gauss_cannon_start,
-			`ionic_canyon_start` = :ionic_canyon_start,
+			`ion_cannon_start` = :ion_cannon_start,
 			`buster_canyon_start` = :buster_canyon_start,
 			`small_protection_shield_start` = :small_protection_shield_start,
 			`planet_protector_start` = :planet_protector_start,
@@ -296,7 +296,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             ':small_laser_start'             => $small_laser_start,
             ':big_laser_start'               => $big_laser_start,
             ':gauss_cannon_start'            => $gauss_cannon_start,
-            ':ionic_canyon_start'            => $ionic_canyon_start,
+            ':ion_cannon_start'            => $ion_cannon_start,
             ':buster_canyon_start'           => $buster_canyon_start,
             ':small_protection_shield_start' => $small_protection_shield_start,
             ':planet_protector_start'        => $planet_protector_start,
@@ -347,7 +347,7 @@ class ShowColonySettingsPage extends AbstractAdminPage
             'small_laser_start'             => $small_laser_start,
             'big_laser_start'               => $big_laser_start,
             'gauss_cannon_start'            => $gauss_cannon_start,
-            'ionic_canyon_start'            => $ionic_canyon_start,
+            'ion_cannon_start'            => $ion_cannon_start,
             'buster_canyon_start'           => $buster_canyon_start,
             'small_protection_shield_start' => $small_protection_shield_start,
             'planet_protector_start'        => $planet_protector_start,
