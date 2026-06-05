@@ -30,7 +30,7 @@ for ($j = 0;$j <= count($bots) - 1;$j++)
     }
 
     // Get user data
-    $bot_data = mysqli_fetch_array(mysqli_query($connection, "SELECT id_planet, b_tech_planet, b_tech, b_tech_id, b_tech_queue, spy_tech, computer_tech, military_tech, defence_tech, shield_tech, energy_tech, hyperspace_tech, combustion_tech, impulse_motor_tech, hyperspace_motor_tech, laser_tech, ion_tech, plasma_tech, intergalactic_tech, expedition_tech, metal_proc_tech, crystal_proc_tech, deuterium_proc_tech, graviton_tech FROM uni1_users WHERE id=$id_bot"));
+    $bot_data = mysqli_fetch_array(mysqli_query($connection, "SELECT id_planet, b_tech_planet, b_tech, b_tech_id, b_tech_queue, spy_tech, computer_tech, military_tech, armor_tech, shield_tech, energy_tech, hyperspace_tech, combustion_tech, impulse_motor_tech, hyperspace_motor_tech, laser_tech, ion_tech, plasma_tech, intergalactic_tech, expedition_tech, metal_proc_tech, crystal_proc_tech, deuterium_proc_tech, graviton_tech FROM uni1_users WHERE id=$id_bot"));
     $planets = mysqli_fetch_all(mysqli_query($connection, "SELECT id FROM uni1_planets WHERE id_owner=$id_bot"));
 
     foreach ($planets as $bot_planet)

@@ -347,7 +347,7 @@ function getFleet($id)
 function getTechsFromArray($player)
 {
     $attTech = $player['military_tech'] + $player['factor']['Attack'] / WEAPONS_TECH_INCREMENT_FACTOR;
-    $shieldTech = $player['defence_tech'] + $player['factor']['Shield'] / SHIELDS_TECH_INCREMENT_FACTOR;
+    $shieldTech = $player['armor_tech'] + $player['factor']['Shield'] / SHIELDS_TECH_INCREMENT_FACTOR;
     $defenceTech = $player['shield_tech'] + $player['factor']['Defensive'] / ARMOUR_TECH_INCREMENT_FACTOR;
     return [$attTech, $defenceTech, $shieldTech];
 }

@@ -36,7 +36,7 @@ for ($i = 0; $i <= (count($points) - 1); $i++)
 $list = str_replace(' ', ',', trim($list));
 
 // Get Average technology levels
-$user_techs = mysqli_fetch_all(mysqli_query($connection, "SELECT ROUND(AVG(spy_tech)), ROUND((computer_tech)), ROUND((military_tech)), ROUND((defence_tech)), ROUND((shield_tech)), ROUND((energy_tech)), ROUND((hyperspace_tech)), ROUND((combustion_tech)), ROUND((impulse_motor_tech)), ROUND((hyperspace_motor_tech)), ROUND((laser_tech)), ROUND((ion_tech)), ROUND((plasma_tech)), ROUND((intergalactic_tech)), ROUND((expedition_tech)), ROUND((metal_proc_tech)), ROUND((crystal_proc_tech)), ROUND((deuterium_proc_tech)), ROUND((graviton_tech)) FROM uni1_users WHERE id IN ($list)"))[0];
+$user_techs = mysqli_fetch_all(mysqli_query($connection, "SELECT ROUND(AVG(spy_tech)), ROUND((computer_tech)), ROUND((military_tech)), ROUND((armor_tech)), ROUND((shield_tech)), ROUND((energy_tech)), ROUND((hyperspace_tech)), ROUND((combustion_tech)), ROUND((impulse_motor_tech)), ROUND((hyperspace_motor_tech)), ROUND((laser_tech)), ROUND((ion_tech)), ROUND((plasma_tech)), ROUND((intergalactic_tech)), ROUND((expedition_tech)), ROUND((metal_proc_tech)), ROUND((crystal_proc_tech)), ROUND((deuterium_proc_tech)), ROUND((graviton_tech)) FROM uni1_users WHERE id IN ($list)"))[0];
 
 // Get Planets
 $get_id_planets = mysqli_fetch_all(mysqli_query($connection, "SELECT MIN(id) FROM uni1_planets WHERE id_owner IN ($list) GROUP BY id_owner"));
@@ -50,7 +50,7 @@ for ($i = 0; $i <= (count($get_id_planets) - 1); $i++)
 $list_planets = str_replace(' ', ',', trim($list_planets));
 
 // Get Average planet
-$user_planets = mysqli_fetch_all(mysqli_query($connection, "SELECT ROUND(AVG(metal_mine)), ROUND(AVG(crystal_mine)), ROUND(AVG(deuterium_synthesizer)), ROUND(AVG(solar_plant)), ROUND(AVG(fusion_plant)), ROUND(AVG(robot_factory)), ROUND(AVG(nanite_factory)), ROUND(AVG(shipyard)), ROUND(AVG(metal_storage)), ROUND(AVG(crystal_storage)), ROUND(AVG(deuterium_tank)), ROUND(AVG(research_lab)), ROUND(AVG(terraformer)), ROUND(AVG(university)), ROUND(AVG(ally_deposit)), ROUND(AVG(missile_silo)), ROUND(AVG(lunar_base)), ROUND(AVG(phalanx)), ROUND(AVG(jump_gate)), ROUND(AVG(small_cargo)), ROUND(AVG(big_cargo)), ROUND(AVG(light_hunter)), ROUND(AVG(heavy_hunter)), ROUND(AVG(cruiser)), ROUND(AVG(battle_ship)), ROUND(AVG(colony_ship)), ROUND(AVG(recycler)), ROUND(AVG(espionage_probe)), ROUND(AVG(bomber_ship)), ROUND(AVG(solar_satellite)), ROUND(AVG(destroyer)), ROUND(AVG(death_star)), ROUND(AVG(battle_cruiser)), ROUND(AVG(lune_noir)), ROUND(AVG(ev_transporter)), ROUND(AVG(star_crasher)), ROUND(AVG(giga_recycler)), ROUND(AVG(dm_ship)), ROUND(AVG(orbital_station)), ROUND(AVG(misil_launcher)), ROUND(AVG(small_laser)), ROUND(AVG(big_laser)), ROUND(AVG(gauss_canyon)), ROUND(AVG(ionic_canyon)), ROUND(AVG(buster_canyon)), ROUND(AVG(small_protection_shield)), ROUND(AVG(planet_protector)), ROUND(AVG(big_protection_shield)), ROUND(AVG(graviton_canyon)), ROUND(AVG(interceptor_misil)), ROUND(AVG(interplanetary_misil)) FROM uni1_planets WHERE id IN ($list_planets)"))[0];
+$user_planets = mysqli_fetch_all(mysqli_query($connection, "SELECT ROUND(AVG(metal_mine)), ROUND(AVG(crystal_mine)), ROUND(AVG(deuterium_synthesizer)), ROUND(AVG(solar_plant)), ROUND(AVG(fusion_plant)), ROUND(AVG(robot_factory)), ROUND(AVG(nanite_factory)), ROUND(AVG(shipyard)), ROUND(AVG(metal_storage)), ROUND(AVG(crystal_storage)), ROUND(AVG(deuterium_tank)), ROUND(AVG(research_lab)), ROUND(AVG(terraformer)), ROUND(AVG(university)), ROUND(AVG(ally_deposit)), ROUND(AVG(missile_silo)), ROUND(AVG(lunar_base)), ROUND(AVG(phalanx)), ROUND(AVG(jump_gate)), ROUND(AVG(small_cargo)), ROUND(AVG(big_cargo)), ROUND(AVG(light_hunter)), ROUND(AVG(heavy_hunter)), ROUND(AVG(cruiser)), ROUND(AVG(battle_ship)), ROUND(AVG(colony_ship)), ROUND(AVG(recycler)), ROUND(AVG(espionage_probe)), ROUND(AVG(bomber_ship)), ROUND(AVG(solar_satellite)), ROUND(AVG(destroyer)), ROUND(AVG(death_star)), ROUND(AVG(battle_cruiser)), ROUND(AVG(black_moon)), ROUND(AVG(ev_transporter)), ROUND(AVG(star_crasher)), ROUND(AVG(giga_recycler)), ROUND(AVG(dm_ship)), ROUND(AVG(orbital_station)), ROUND(AVG(misil_launcher)), ROUND(AVG(small_laser)), ROUND(AVG(big_laser)), ROUND(AVG(gauss_canyon)), ROUND(AVG(ionic_canyon)), ROUND(AVG(buster_canyon)), ROUND(AVG(small_protection_shield)), ROUND(AVG(planet_protector)), ROUND(AVG(big_protection_shield)), ROUND(AVG(graviton_canyon)), ROUND(AVG(interceptor_misil)), ROUND(AVG(interplanetary_misil)) FROM uni1_planets WHERE id IN ($list_planets)"))[0];
 
 // Find free space to initialize planet creation
 $created = 0;
@@ -130,7 +130,7 @@ while ($created != 1)
         mysqli_query($connection, "UPDATE uni1_planets SET destroyer=$user_planets[30] WHERE id=$id");
         mysqli_query($connection, "UPDATE uni1_planets SET death_star=$user_planets[31] WHERE id=$id");
         mysqli_query($connection, "UPDATE uni1_planets SET battle_cruiser=$user_planets[32] WHERE id=$id");
-        mysqli_query($connection, "UPDATE uni1_planets SET lune_noir=$user_planets[33] WHERE id=$id");
+        mysqli_query($connection, "UPDATE uni1_planets SET black_moon=$user_planets[33] WHERE id=$id");
         mysqli_query($connection, "UPDATE uni1_planets SET ev_transporter=$user_planets[34] WHERE id=$id");
         mysqli_query($connection, "UPDATE uni1_planets SET star_crasher=$user_planets[35] WHERE id=$id");
         mysqli_query($connection, "UPDATE uni1_planets SET giga_recycler=$user_planets[36] WHERE id=$id");
@@ -162,7 +162,7 @@ while ($created != 1)
     mysqli_query($connection, "UPDATE uni1_users SET spy_tech=$user_techs[0] WHERE id=$botid");
     mysqli_query($connection, "UPDATE uni1_users SET computer_tech=$user_techs[1] WHERE id=$botid");
     mysqli_query($connection, "UPDATE uni1_users SET military_tech=$user_techs[2] WHERE id=$botid");
-    mysqli_query($connection, "UPDATE uni1_users SET defence_tech=$user_techs[3] WHERE id=$botid");
+    mysqli_query($connection, "UPDATE uni1_users SET armor_tech=$user_techs[3] WHERE id=$botid");
     mysqli_query($connection, "UPDATE uni1_users SET shield_tech=$user_techs[4] WHERE id=$botid");
     mysqli_query($connection, "UPDATE uni1_users SET energy_tech=$user_techs[5] WHERE id=$botid");
     mysqli_query($connection, "UPDATE uni1_users SET hyperspace_tech=$user_techs[6] WHERE id=$botid");
