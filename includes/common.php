@@ -145,7 +145,7 @@ if (MODE === 'INGAME'
     $db = Database::get();
 
     $sql = "SELECT
-	user.*, userpoints.*,
+	userpoints.*, user.*, 
 	COUNT(message.message_id) as messages
 	FROM %%USERS%% as user
 	LEFT JOIN %%MESSAGES%% as message ON message.message_owner = user.id AND message.message_unread = :unread
@@ -154,7 +154,7 @@ if (MODE === 'INGAME'
 	GROUP BY message.message_owner;";
 
     $USER = $db->selectSingle($sql, [
-        ':unread' => 1,
+        ':unread'  => 1,
         ':user_id' => $session->userId,
     ]);
 
