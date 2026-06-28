@@ -29,59 +29,59 @@ class ShowShipyardPage extends AbstractGamePage
     private function CancelAuftr(): bool
     {
         global $USER, $PLANET, $RESOURCE;
-        $ElementQueue = unserialize($PLANET['b_shipyard_id']);
+        $element_queue = unserialize($PLANET['b_shipyard_id']);
 
-        $CancelArray = HTTP::_GP('auftr', []);
+        $cancel_array = HTTP::_GP('auftr', []);
 
-        if (!is_array($CancelArray))
+        if (!is_array($cancel_array))
         {
             return false;
         }
 
-        foreach ($CancelArray as $Auftr)
+        foreach ($cancel_array as $auftr)
         {
-            if (!isset($ElementQueue[$Auftr]))
+            if (!isset($element_queue[$auftr]))
             {
                 continue;
             }
 
-            if ($Auftr == 0)
+            if ($auftr == 0)
             {
                 $PLANET['b_shipyard'] = 0;
             }
 
-            $Element = $ElementQueue[$Auftr][0];
-            $Count = $ElementQueue[$Auftr][1];
+            $element = $element_queue[$auftr][0];
+            $count = $element_queue[$auftr][1];
 
-            $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, false, $Count);
+            $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $element, false, $count);
 
-            if (isset($costResources[901]))
+            if (isset($cost_resources[901]))
             {
-                $PLANET[$RESOURCE[901]] += $costResources[901] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[901]] += $cost_resources[901] * FACTOR_CANCEL_SHIPYARD;
             }
-            if (isset($costResources[902]))
+            if (isset($cost_resources[902]))
             {
-                $PLANET[$RESOURCE[902]] += $costResources[902] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[902]] += $cost_resources[902] * FACTOR_CANCEL_SHIPYARD;
             }
-            if (isset($costResources[903]))
+            if (isset($cost_resources[903]))
             {
-                $PLANET[$RESOURCE[903]] += $costResources[903] * FACTOR_CANCEL_SHIPYARD;
+                $PLANET[$RESOURCE[903]] += $cost_resources[903] * FACTOR_CANCEL_SHIPYARD;
             }
-            if (isset($costResources[921]))
+            if (isset($cost_resources[921]))
             {
-                $USER[$RESOURCE[921]] += $costResources[921] * FACTOR_CANCEL_SHIPYARD;
+                $USER[$RESOURCE[921]] += $cost_resources[921] * FACTOR_CANCEL_SHIPYARD;
             }
 
-            unset($ElementQueue[$Auftr]);
+            unset($element_queue[$auftr]);
         }
 
-        if (empty($ElementQueue))
+        if (empty($element_queue))
         {
             $PLANET['b_shipyard_id'] = '';
         }
         else
         {
-            $PLANET['b_shipyard_id'] = serialize(array_values($ElementQueue));
+            $PLANET['b_shipyard_id'] = serialize(array_values($element_queue));
         }
 
         return true;
@@ -91,82 +91,82 @@ class ShowShipyardPage extends AbstractGamePage
     {
         global $USER, $PLANET, $RESLIST, $RESOURCE;
 
-        $Missiles = [
+        $missiles = [
             502 => $PLANET[$RESOURCE[502]],
             503 => $PLANET[$RESOURCE[503]],
         ];
 
-        foreach ($fmenge as $Element => $Count)
+        foreach ($fmenge as $element => $count)
         {
-            if (empty($Count)
-                || !in_array($Element, array_merge($RESLIST['fleet'], $RESLIST['defense'], $RESLIST['missile']))
-                || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
+            if (empty($count)
+                || !in_array($element, array_merge($RESLIST['fleet'], $RESLIST['defense'], $RESLIST['missile']))
+                || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $element)
             ) {
                 continue;
             }
 
-            $MaxElements = BuildFunctions::getMaxConstructibleElements($USER, $PLANET, $Element);
-            $Count = is_numeric($Count) ? round($Count) : 0;
-            $Count = max(min($Count, Config::get()->max_fleet_per_build), 0);
-            $Count = min($Count, $MaxElements);
+            $max_elements = BuildFunctions::getMaxConstructibleElements($USER, $PLANET, $element);
+            $count = is_numeric($count) ? round($count) : 0;
+            $count = max(min($count, Config::get()->max_fleet_per_build), 0);
+            $count = min($count, $max_elements);
 
-            $BuildArray = !empty($PLANET['b_shipyard_id']) ? unserialize($PLANET['b_shipyard_id']) : [];
-            if (in_array($Element, $RESLIST['missile']))
+            $build_array = !empty($PLANET['b_shipyard_id']) ? unserialize($PLANET['b_shipyard_id']) : [];
+            if (in_array($element, $RESLIST['missile']))
             {
-                $MaxMissiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
-                $Count = min($Count, $MaxMissiles[$Element]);
+                $max_missiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $missiles);
+                $count = min($count, $max_missiles[$element]);
 
-                $Missiles[$Element] += $Count;
+                $missiles[$element] += $count;
             }
-            elseif (in_array($Element, $RESLIST['one']))
+            elseif (in_array($element, $RESLIST['one']))
             {
-                $InBuild = false;
-                foreach ($BuildArray as $ElementArray)
+                $in_build = false;
+                foreach ($build_array as $element_array)
                 {
-                    if ($ElementArray[0] == $Element)
+                    if ($element_array[0] == $element)
                     {
-                        $InBuild = true;
+                        $in_build = true;
                         break;
                     }
                 }
 
-                if ($InBuild)
+                if ($in_build)
                 {
                     continue;
                 }
 
-                if ($Count != 0 && $PLANET[$RESOURCE[$Element]] == 0 && $InBuild === false)
+                if ($count != 0 && $PLANET[$RESOURCE[$element]] == 0 && $in_build === false)
                 {
-                    $Count = 1;
+                    $count = 1;
                 }
             }
 
-            if (empty($Count))
+            if (empty($count))
             {
                 continue;
             }
 
-            $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, false, $Count);
+            $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $element, false, $count);
 
-            if (isset($costResources[901]))
+            if (isset($cost_resources[901]))
             {
-                $PLANET[$RESOURCE[901]] -= $costResources[901];
+                $PLANET[$RESOURCE[901]] -= $cost_resources[901];
             }
-            if (isset($costResources[902]))
+            if (isset($cost_resources[902]))
             {
-                $PLANET[$RESOURCE[902]] -= $costResources[902];
+                $PLANET[$RESOURCE[902]] -= $cost_resources[902];
             }
-            if (isset($costResources[903]))
+            if (isset($cost_resources[903]))
             {
-                $PLANET[$RESOURCE[903]] -= $costResources[903];
+                $PLANET[$RESOURCE[903]] -= $cost_resources[903];
             }
-            if (isset($costResources[921]))
+            if (isset($cost_resources[921]))
             {
-                $USER[$RESOURCE[921]] -= $costResources[921];
+                $USER[$RESOURCE[921]] -= $cost_resources[921];
             }
 
-            $BuildArray[] = [$Element, $Count];
-            $PLANET['b_shipyard_id'] = serialize($BuildArray);
+            $build_array[] = [$element, $count];
+            $PLANET['b_shipyard_id'] = serialize($build_array);
         }
     }
 
@@ -174,49 +174,53 @@ class ShowShipyardPage extends AbstractGamePage
     {
         global $USER, $PLANET, $LNG, $RESOURCE, $RESLIST, $config, $REQUIREMENTS;
 
-        if ($PLANET[$RESOURCE[21]] == 0 && !$config->show_ships_no_shipyard)
+        if ($PLANET[$RESOURCE[21]] == 0
+            && !$config->show_ships_no_shipyard)
         {
             $this->printMessage($LNG['bd_shipyard_required']);
         }
 
-        $buildTodo = HTTP::_GP('fmenge', []);
+        $build_to_do = HTTP::_GP('fmenge', []);
         $action = HTTP::_GP('action', '');
 
-        $NotBuilding = true;
+        $not_building = true;
         if (!empty($PLANET['b_building_id']))
         {
-            $CurrentQueue = unserialize($PLANET['b_building_id']);
-            foreach ($CurrentQueue as $ElementArray)
+            $current_queue = unserialize($PLANET['b_building_id']);
+            foreach ($current_queue as $element_array)
             {
-                if ($ElementArray[0] == 21 || $ElementArray[0] == 15)
+                if ($element_array[0] == 21
+                    || $element_array[0] == 15)
                 {
-                    $NotBuilding = false;
+                    $not_building = false;
                     break;
                 }
             }
         }
 
-        $ElementQueue = unserialize($PLANET['b_shipyard_id']);
-        if (empty($ElementQueue))
+        $element_queue = unserialize($PLANET['b_shipyard_id']);
+        if (empty($element_queue))
         {
-            $Count = 0;
+            $count = 0;
         }
         else
         {
-            $Count = count($ElementQueue);
+            $count = count($element_queue);
         }
 
-        if ($USER['vacation_mode'] == 0 && $NotBuilding == true)
+        if ($USER['vacation_mode'] == 0
+            && $not_building == true)
         {
-            if (!empty($buildTodo))
+            if (!empty($build_to_do))
             {
-                $maxBuildQueue = $config->max_elements_ships;
-                if ($maxBuildQueue != 0 && $Count >= $maxBuildQueue)
+                $max_build_queue = $config->max_elements_ships;
+                if ($max_build_queue != 0
+                    && $count >= $max_build_queue)
                 {
-                    $this->printMessage(sprintf($LNG['bd_max_builds'], $maxBuildQueue));
+                    $this->printMessage(sprintf($LNG['bd_max_builds'], $max_build_queue));
                 }
 
-                $this->BuildAuftr($buildTodo);
+                $this->BuildAuftr($build_to_do);
             }
 
             if ($action == "delete")
@@ -225,32 +229,32 @@ class ShowShipyardPage extends AbstractGamePage
             }
         }
 
-        $elementInQueue = [];
-        $ElementQueue = unserialize($PLANET['b_shipyard_id']);
-        $buildList = [];
-        $elementList = [];
+        $element_in_queue = [];
+        $element_queue = unserialize($PLANET['b_shipyard_id']);
+        $build_list = [];
+        $element_list = [];
 
-        if (!empty($ElementQueue))
+        if (!empty($element_queue))
         {
-            $Shipyard = [];
-            $QueueTime = 0;
-            foreach ($ElementQueue as $Element)
+            $shipyard = [];
+            $queue_time = 0;
+            foreach ($element_queue as $element)
             {
-                if (empty($Element))
+                if (empty($element))
                 {
                     continue;
                 }
 
-                $elementInQueue[$Element[0]] = true;
-                $ElementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element[0]);
-                $QueueTime += $ElementTime * $Element[1];
-                $Shipyard[] = [$LNG['tech'][$Element[0]], $Element[1], $ElementTime, $Element[0]];
+                $element_in_queue[$element[0]] = true;
+                $element_time = BuildFunctions::getBuildingTime($USER, $PLANET, $element[0]);
+                $queue_time += $element_time * $element[1];
+                $shipyard[] = [$LNG['tech'][$element[0]], $element[1], $element_time, $element[0]];
             }
 
-            $buildList = [
-                'Queue'                => $Shipyard,
+            $build_list = [
+                'Queue'                => $shipyard,
                 'b_hangar_id_plus'     => $PLANET['b_shipyard'],
-                'pretty_time_b_hangar' => pretty_time(max($QueueTime - $PLANET['b_shipyard'], 0)),
+                'pretty_time_b_hangar' => pretty_time(max($queue_time - $PLANET['b_shipyard'], 0)),
             ];
         }
 
@@ -258,80 +262,82 @@ class ShowShipyardPage extends AbstractGamePage
 
         if ($mode == 'defense')
         {
-            $elementIDs = array_merge($RESLIST['defense'], $RESLIST['missile']);
+            $element_ids = array_merge($RESLIST['defense'], $RESLIST['missile']);
         }
         else
         {
-            $elementIDs = $RESLIST['fleet'];
+            $element_ids = $RESLIST['fleet'];
         }
 
-        $Missiles = [];
+        $missiles = [];
 
         foreach ($RESLIST['missile'] as $elementID)
         {
-            $Missiles[$elementID] = $PLANET[$RESOURCE[$elementID]];
+            $missiles[$elementID] = $PLANET[$RESOURCE[$elementID]];
         }
 
-        $MaxMissiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
+        $max_missiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $missiles);
 
-        foreach ($elementIDs as $Element)
+        foreach ($element_ids as $element)
         {
-            if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element) && !$config->show_unlearned_ships)
+            if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $element)
+                && !$config->show_unlearned_ships)
             {
                 continue;
             }
 
-            $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element);
-            $costOverflow = BuildFunctions::getRestPrice($USER, $PLANET, $Element, $costResources);
-            $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $costResources);
-            $buyable = BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources);
-            $maxBuildable = BuildFunctions::getMaxConstructibleElements($USER, $PLANET, $Element, $costResources);
-            $SolarEnergy = round((($PLANET['temp_max'] + 160) / 6) * $config->energySpeed, 1);
+            $cost_resources = BuildFunctions::getElementPrice($USER, $PLANET, $element);
+            $cost_overflow = BuildFunctions::getRestPrice($USER, $PLANET, $element, $cost_resources);
+            $element_time = BuildFunctions::getBuildingTime($USER, $PLANET, $element, $cost_resources);
+            $buyable = BuildFunctions::isElementBuyable($USER, $PLANET, $element, $cost_resources);
+            $max_buildable = BuildFunctions::getMaxConstructibleElements($USER, $PLANET, $element, $cost_resources);
+            $solar_energy = round((($PLANET['temp_max'] + 160) / 6) * $config->energySpeed, 1);
 
-            if (isset($MaxMissiles[$Element]))
+            if (isset($max_missiles[$element]))
             {
-                $maxBuildable = min($maxBuildable, $MaxMissiles[$Element]);
+                $max_buildable = min($max_buildable, $max_missiles[$element]);
             }
 
-            $AlreadyBuild = in_array($Element, $RESLIST['one']) && (isset($elementInQueue[$Element]) || $PLANET[$RESOURCE[$Element]] != 0);
+            $already_build = in_array($element, $RESLIST['one'])
+                            && (isset($element_in_queue[$element]) || $PLANET[$RESOURCE[$element]] != 0);
 
-            $requireArray = [];
+            $require_array = [];
 
-            if (isset($REQUIREMENTS[$Element]))
+            if (isset($REQUIREMENTS[$element]))
             {
-                foreach ($REQUIREMENTS[$Element] as $requireID => $requireLevel)
+                foreach ($REQUIREMENTS[$element] as $require_id => $require_level)
                 {
-                    $requireArray[] = [
-                        'currentLevel' => ($requireID < 100) ? $PLANET[$RESOURCE[$requireID]] : $USER[$RESOURCE[$requireID]],
-                        'neededLevel'  => $requireLevel,
-                        'requireID'    => $requireID,
+                    $require_array[] = [
+                        'currentLevel' => ($require_id < 100) ? $PLANET[$RESOURCE[$require_id]] : $USER[$RESOURCE[$require_id]],
+                        'neededLevel'  => $require_level,
+                        'requireID'    => $require_id,
                     ];
                 }
 
             }
 
-            $elementList[$Element] = [
-                'id'                  => $Element,
-                'available'           => $PLANET[$RESOURCE[$Element]],
-                'costResources'       => $costResources,
-                'costOverflow'        => $costOverflow,
-                'costOverflowTotal'   => array_sum($costOverflow),
-                'elementTime'         => $elementTime,
+            $element_list[$element] = [
+                'id'                  => $element,
+                'available'           => $PLANET[$RESOURCE[$element]],
+                'costResources'       => $cost_resources,
+                'costOverflow'        => $cost_overflow,
+                'costOverflowTotal'   => array_sum($cost_overflow),
+                'elementTime'         => $element_time,
                 'buyable'             => $buyable,
-                'maxBuildable'        => floatToString($maxBuildable),
-                'AlreadyBuild'        => $AlreadyBuild,
-                'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element),
-                'requirements'        => $requireArray,
+                'maxBuildable'        => floatToString($max_buildable),
+                'AlreadyBuild'        => $already_build,
+                'technologySatisfied' => BuildFunctions::isTechnologieAccessible($USER, $PLANET, $element),
+                'requirements'        => $require_array,
             ];
         }
 
         $this->assign([
-            'elementList'       => $elementList,
-            'NotBuilding'       => $NotBuilding,
-            'BuildList'         => $buildList,
+            'elementList'       => $element_list,
+            'NotBuilding'       => $not_building,
+            'BuildList'         => $build_list,
             'maxlength'         => strlen($config->max_fleet_per_build),
             'mode'              => $mode,
-            'SolarEnergy'       => $SolarEnergy,
+            'SolarEnergy'       => $solar_energy,
             'userFleetPoints'   => pretty_number($USER['fleet_points']),
             'userDefensePoints' => pretty_number($USER['defs_points']),
         ]);
