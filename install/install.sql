@@ -206,67 +206,67 @@ CREATE TABLE `%PREFIX%colony_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%config` (
-  `uni` INT NOT NULL AUTO_INCREMENT,
-  `version` VARCHAR(8) NOT NULL DEFAULT '1.8.git',
-  `sql_revision` INT NOT NULL DEFAULT 0,
-  `users_amount` INT UNSIGNED NOT NULL DEFAULT 1,
-  `game_speed` BIGINT UNSIGNED NOT NULL DEFAULT 2500,
-  `fleet_speed` BIGINT UNSIGNED NOT NULL DEFAULT 2500,
-  `resource_multiplier` SMALLINT UNSIGNED NOT NULL DEFAULT 1,
-  `storage_multiplier` SMALLINT UNSIGNED NOT NULL DEFAULT 1,
-  `message_delete_behavior` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `message_delete_days` TINYINT UNSIGNED NOT NULL DEFAULT 7,
-  `expedition_speed` SMALLINT UNSIGNED NOT NULL DEFAULT 1,
-  `debris_percentage_fleet` TINYINT UNSIGNED NOT NULL DEFAULT 30,
-  `debris_percentage_defense` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `initial_fields` SMALLINT UNSIGNED NOT NULL DEFAULT 163,
-  `uni_name` VARCHAR(30) NOT NULL DEFAULT 'uni_unnamed',
-  `game_name` VARCHAR(30) NOT NULL DEFAULT 'game_unnamed',
-  `game_disable` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `close_reason` VARCHAR(255) NOT NULL DEFAULT '',
-  `metal_basic_income` INT NOT NULL DEFAULT 20,
-  `crystal_basic_income` INT NOT NULL DEFAULT 10,
-  `deuterium_basic_income` INT NOT NULL DEFAULT 0,
-  `energy_basic_income` INT NOT NULL DEFAULT 0,
-  `last_settled_galaxy_pos` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `last_settled_system_pos` SMALLINT UNSIGNED NOT NULL DEFAULT 1,
-  `last_settled_planet_pos` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `noob_protection` INT NOT NULL DEFAULT 1,
-  `noob_protection_max_points` INT NOT NULL DEFAULT 5000,
-  `noob_protection_multiplier` INT NOT NULL DEFAULT 5,
-  `forum_url` VARCHAR(128) NOT NULL DEFAULT 'https://2moons.de',
-  `adm_attack` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `debug` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `lang` VARCHAR(2) NOT NULL DEFAULT '',
-  `stat` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `stat_level` TINYINT UNSIGNED NOT NULL DEFAULT 2,
-  `stat_last_update` INT NOT NULL DEFAULT 0,
-  `stat_settings` INT UNSIGNED NOT NULL DEFAULT 1000,
-  `stat_update_time` TINYINT UNSIGNED NOT NULL DEFAULT 25,
-  `stat_last_db_update` INT NOT NULL DEFAULT 0,
-  `stats_fly_lock` INT NOT NULL DEFAULT 0,
-  `cron_lock` INT NOT NULL DEFAULT 0,
-  `reg_closed` TINYINT NOT NULL DEFAULT 0,
-  `display_announcement_frame` TINYINT NOT NULL DEFAULT 1,
-  `announcement_text` VARCHAR(255) NOT NULL DEFAULT '',
-  `google_recaptcha_active` TINYINT NOT NULL DEFAULT 0,
-  `google_recaptcha_public_key` VARCHAR(42) NOT NULL DEFAULT '',
-  `google_recaptcha_private_key` VARCHAR(42) NOT NULL DEFAULT '',
-  `use_recaptcha_on_login` BOOLEAN NOT NULL DEFAULT 0,
-  `use_recaptcha_on_register` BOOLEAN NOT NULL DEFAULT 0,
-  `use_recaptcha_on_admin_login` BOOLEAN NOT NULL DEFAULT 0,
-  `min_build_time` TINYINT NOT NULL DEFAULT 1,
-  `mail_active` TINYINT NOT NULL DEFAULT 0,
-  `mail_use` TINYINT NOT NULL DEFAULT 0,
-  `smtp_host` VARCHAR(64) NOT NULL DEFAULT '',
-  `smtp_port` SMALLINT NOT NULL DEFAULT 0,
-  `smtp_user` VARCHAR(64) NOT NULL DEFAULT '',
-  `smtp_pass` VARCHAR(32) NOT NULL DEFAULT '',
-  `smtp_ssl` ENUM('','ssl','tls') NOT NULL DEFAULT '',
-  `smtp_sendmail` VARCHAR(64) NOT NULL DEFAULT '',
-  `smail_path` VARCHAR(30) NOT NULL DEFAULT '/usr/sbin/sendmail',
-  `user_valid` TINYINT NOT NULL DEFAULT 0,
-  `ga_active` VARCHAR(42) NOT NULL DEFAULT 0,
+  `uni` INT NOT NULL AUTO_INCREMENT,                                --  0
+  `version` VARCHAR(8) NOT NULL DEFAULT '1.8.git',                  --  1
+  `sql_revision` INT NOT NULL DEFAULT 0,                            --  2
+  `users_amount` INT UNSIGNED NOT NULL DEFAULT 1,                   --  3
+  `game_speed` BIGINT UNSIGNED NOT NULL DEFAULT 2500,               --  4
+  `fleet_speed` BIGINT UNSIGNED NOT NULL DEFAULT 2500,              --  5
+  `resource_multiplier` SMALLINT UNSIGNED NOT NULL DEFAULT 1,       --  6
+  `storage_multiplier` SMALLINT UNSIGNED NOT NULL DEFAULT 1,        --  7
+  `message_delete_behavior` TINYINT UNSIGNED NOT NULL DEFAULT 0,    --  8
+  `message_delete_days` TINYINT UNSIGNED NOT NULL DEFAULT 7,        --  9
+  `expedition_speed` SMALLINT UNSIGNED NOT NULL DEFAULT 1,          --  10
+  `debris_percentage_fleet` TINYINT UNSIGNED NOT NULL DEFAULT 30,   --  11
+  `debris_percentage_defense` TINYINT UNSIGNED NOT NULL DEFAULT 0,  --  12
+  `initial_fields` SMALLINT UNSIGNED NOT NULL DEFAULT 163,          --  13
+  `uni_name` VARCHAR(30) NOT NULL DEFAULT 'uni_unnamed',            --  14
+  `game_name` VARCHAR(30) NOT NULL DEFAULT 'game_unnamed',          --  15
+  `game_disable` TINYINT UNSIGNED NOT NULL DEFAULT 0,               --  16
+  `close_reason` VARCHAR(255) NOT NULL DEFAULT '',                  --  17
+  `metal_basic_income` INT NOT NULL DEFAULT 20,                     --  18
+  `crystal_basic_income` INT NOT NULL DEFAULT 10,                   --  19
+  `deuterium_basic_income` INT NOT NULL DEFAULT 0,                  --  20
+  `energy_basic_income` INT NOT NULL DEFAULT 0,                     --  21
+  `last_settled_galaxy_pos` TINYINT UNSIGNED NOT NULL DEFAULT 1,    --  22
+  `last_settled_system_pos` SMALLINT UNSIGNED NOT NULL DEFAULT 1,   --  23
+  `last_settled_planet_pos` TINYINT UNSIGNED NOT NULL DEFAULT 1,    --  24
+  `noob_protection` INT NOT NULL DEFAULT 1,                         --  25
+  `noob_protection_max_points` INT NOT NULL DEFAULT 5000,           --  26
+  `noob_protection_multiplier` INT NOT NULL DEFAULT 5,              --  27
+  `forum_url` VARCHAR(128) NOT NULL DEFAULT 'https://2moons.de',    --  28
+  `adm_attack` TINYINT UNSIGNED NOT NULL DEFAULT 0,                 --  29
+  `debug` TINYINT UNSIGNED NOT NULL DEFAULT 0,                      --  30
+  `lang` VARCHAR(2) NOT NULL DEFAULT '',                            --  31
+  `stat` TINYINT UNSIGNED NOT NULL DEFAULT 0,                       --  32
+  `stat_level` TINYINT UNSIGNED NOT NULL DEFAULT 2,                 --  33
+  `stat_last_update` INT NOT NULL DEFAULT 0,                        --  34
+  `stat_settings` INT UNSIGNED NOT NULL DEFAULT 1000,               --  35
+  `stat_update_time` TINYINT UNSIGNED NOT NULL DEFAULT 25,          --  36
+  `stat_last_db_update` INT NOT NULL DEFAULT 0,                     --  37
+  `stats_fly_lock` INT NOT NULL DEFAULT 0,                          --  38
+  `cron_lock` INT NOT NULL DEFAULT 0,                               --  39
+  `reg_closed` TINYINT NOT NULL DEFAULT 0,                          --  40
+  `display_announcement_frame` TINYINT NOT NULL DEFAULT 1,          --  41
+  `announcement_text` VARCHAR(255) NOT NULL DEFAULT '',             --  42
+  `google_recaptcha_active` TINYINT NOT NULL DEFAULT 0,             --  43
+  `google_recaptcha_public_key` VARCHAR(42) NOT NULL DEFAULT '',    --  44
+  `google_recaptcha_private_key` VARCHAR(42) NOT NULL DEFAULT '',   --  45
+  `use_recaptcha_on_login` BOOLEAN NOT NULL DEFAULT 0,              --  46
+  `use_recaptcha_on_register` BOOLEAN NOT NULL DEFAULT 0,           --  47
+  `use_recaptcha_on_admin_login` BOOLEAN NOT NULL DEFAULT 0,        --  48
+  `min_build_time` TINYINT NOT NULL DEFAULT 1,                      --  49
+  `mail_active` TINYINT NOT NULL DEFAULT 0,                         --  50
+  `mail_use` TINYINT NOT NULL DEFAULT 0,                            --  51
+  `smtp_host` VARCHAR(64) NOT NULL DEFAULT '',                      --  52
+  `smtp_port` SMALLINT NOT NULL DEFAULT 0,                          --  53
+  `smtp_user` VARCHAR(64) NOT NULL DEFAULT '',                      --  54
+  `smtp_pass` VARCHAR(32) NOT NULL DEFAULT '',                      --  55
+  `smtp_ssl` ENUM('','ssl','tls') NOT NULL DEFAULT '',              --  56
+  `smtp_sendmail` VARCHAR(64) NOT NULL DEFAULT '',                  --  57
+  `smail_path` VARCHAR(30) NOT NULL DEFAULT '/usr/sbin/sendmail',   --  58
+  `user_valid` TINYINT NOT NULL DEFAULT 0,                          --  59
+  `ga_active` VARCHAR(42) NOT NULL DEFAULT 0,                       --  60
   `ga_key` VARCHAR(42) NOT NULL DEFAULT '',
   `moduls` VARCHAR(1000) NOT NULL DEFAULT '',
   `trade_allowed_ships` VARCHAR(255) NOT NULL DEFAULT '202,203,204,205,206,207,208,209,210,211,212,213,214,215',
@@ -856,81 +856,81 @@ CREATE TABLE `%PREFIX%topkb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%users` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(32) NOT NULL DEFAULT '',
-  `password` VARCHAR(60) NOT NULL DEFAULT '',
-  `email` VARCHAR(64) NOT NULL DEFAULT '',
-  `email_2` VARCHAR(64) NOT NULL DEFAULT '',
-  `lang` VARCHAR(2) NOT NULL DEFAULT 'de',
-  `authattack` TINYINT NOT NULL DEFAULT 0,
-  `authlevel` TINYINT NOT NULL DEFAULT 0,
-  `rights` TEXT,
-  `id_planet` INT UNSIGNED NOT NULL DEFAULT 0,
-  `universe` TINYINT UNSIGNED NOT NULL,
-  `galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `system` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-  `planet` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `darkmatter` DOUBLE NOT NULL DEFAULT 0,
-  `user_lastip` VARCHAR(40) NOT NULL DEFAULT '',
-  `ip_at_reg` VARCHAR(40) NOT NULL DEFAULT '',
-  `register_time` INT NOT NULL DEFAULT 0,
-  `onlinetime` INT NOT NULL DEFAULT 0,
-  `timezone` VARCHAR(32) NOT NULL DEFAULT 'Europe/London',
-  `planet_sort` TINYINT NOT NULL DEFAULT 0,
-  `planet_sort_order` TINYINT NOT NULL DEFAULT 0,
-  `spio_anz` INT UNSIGNED NOT NULL DEFAULT 1,
-  `settings_fleetactions` TINYINT UNSIGNED NOT NULL DEFAULT 3,
-  `settings_esp` TINYINT NOT NULL DEFAULT 1,
-  `settings_wri` TINYINT NOT NULL DEFAULT 1,
-  `settings_bud` TINYINT NOT NULL DEFAULT 1,
-  `settings_mis` TINYINT NOT NULL DEFAULT 1,
-  `settings_blockPM` TINYINT NOT NULL DEFAULT 0,
-  `vacation_mode` TINYINT NOT NULL DEFAULT 0,
-  `vacation_until` INT NOT NULL DEFAULT 0,
-  `delete_mode` INT NOT NULL DEFAULT 0,
-  `b_tech_planet` INT UNSIGNED NOT NULL DEFAULT 0,
-  `b_tech` INT UNSIGNED NOT NULL DEFAULT 0,
-  `b_tech_id` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-  `b_tech_queue` TEXT,
-  `spy_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `computer_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `military_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `armor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `shield_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `energy_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `hyperspace_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `combustion_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `impulse_motor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `hyperspace_motor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `laser_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `ion_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `plasma_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `intergalactic_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `expedition_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `metal_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `crystal_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `deuterium_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `graviton_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `ally_id` INT UNSIGNED NOT NULL DEFAULT 0,
-  `ally_register_time` INT NOT NULL DEFAULT 0,
-  `ally_rank_id` INT UNSIGNED NOT NULL DEFAULT 0,
-  `rpg_geologist` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `rpg_admiral` TINYINT NOT NULL DEFAULT 0,
-  `rpg_engineer` TINYINT NOT NULL DEFAULT 0,
-  `rpg_technocrat` TINYINT NOT NULL DEFAULT 0,
-  `rpg_espion` TINYINT NOT NULL DEFAULT 0,
-  `rpg_constructor` TINYINT NOT NULL DEFAULT 0,
-  `rpg_scientist` TINYINT NOT NULL DEFAULT 0,
-  `rpg_commander` TINYINT NOT NULL DEFAULT 0,
-  `rpg_stocker` TINYINT NOT NULL DEFAULT 0,
-  `rpg_defender` TINYINT NOT NULL DEFAULT 0,
-  `rpg_destructor` TINYINT NOT NULL DEFAULT 0,
-  `rpg_general` TINYINT NOT NULL DEFAULT 0,
-  `rpg_bunker` TINYINT NOT NULL DEFAULT 0,
-  `rpg_raider` TINYINT NOT NULL DEFAULT 0,
-  `rpg_emperor` TINYINT NOT NULL DEFAULT 0,
-  `bana` TINYINT NOT NULL DEFAULT 0,
-  `banaday` INT NOT NULL DEFAULT 0,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,                    -- 0
+  `username` VARCHAR(32) NOT NULL DEFAULT '',                   -- 1
+  `password` VARCHAR(60) NOT NULL DEFAULT '',                   -- 2
+  `email` VARCHAR(64) NOT NULL DEFAULT '',                      -- 3
+  `email_2` VARCHAR(64) NOT NULL DEFAULT '',                    -- 4
+  `lang` VARCHAR(2) NOT NULL DEFAULT 'de',                      -- 5
+  `authattack` TINYINT NOT NULL DEFAULT 0,                      -- 6
+  `authlevel` TINYINT NOT NULL DEFAULT 0,                       -- 7
+  `rights` TEXT,                                                -- 8
+  `id_planet` INT UNSIGNED NOT NULL DEFAULT 0,                  -- 9
+  `universe` TINYINT UNSIGNED NOT NULL,                         -- 10
+  `galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,                 -- 11
+  `system` SMALLINT UNSIGNED NOT NULL DEFAULT 0,                -- 12
+  `planet` TINYINT UNSIGNED NOT NULL DEFAULT 0,                 -- 13
+  `darkmatter` DOUBLE NOT NULL DEFAULT 0,                       -- 14
+  `user_lastip` VARCHAR(40) NOT NULL DEFAULT '',                -- 15
+  `ip_at_reg` VARCHAR(40) NOT NULL DEFAULT '',                  -- 16
+  `register_time` INT NOT NULL DEFAULT 0,                       -- 17
+  `onlinetime` INT NOT NULL DEFAULT 0,                          -- 18
+  `timezone` VARCHAR(32) NOT NULL DEFAULT 'Europe/London',      -- 19
+  `planet_sort` TINYINT NOT NULL DEFAULT 0,                     -- 20
+  `planet_sort_order` TINYINT NOT NULL DEFAULT 0,               -- 21
+  `spio_anz` INT UNSIGNED NOT NULL DEFAULT 1,                   -- 22
+  `settings_fleetactions` TINYINT UNSIGNED NOT NULL DEFAULT 3,  -- 23
+  `settings_esp` TINYINT NOT NULL DEFAULT 1,                    -- 24
+  `settings_wri` TINYINT NOT NULL DEFAULT 1,                    -- 25
+  `settings_bud` TINYINT NOT NULL DEFAULT 1,                    -- 26
+  `settings_mis` TINYINT NOT NULL DEFAULT 1,                    -- 27
+  `settings_blockPM` TINYINT NOT NULL DEFAULT 0,                -- 28
+  `vacation_mode` TINYINT NOT NULL DEFAULT 0,                   -- 29
+  `vacation_until` INT NOT NULL DEFAULT 0,                      -- 30
+  `delete_mode` INT NOT NULL DEFAULT 0,                         -- 31
+  `b_tech_planet` INT UNSIGNED NOT NULL DEFAULT 0,              -- 32
+  `b_tech` INT UNSIGNED NOT NULL DEFAULT 0,                     -- 33
+  `b_tech_id` SMALLINT UNSIGNED NOT NULL DEFAULT 0,             -- 34
+  `b_tech_queue` TEXT,                                          -- 35
+  `spy_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,               -- 36
+  `computer_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 37
+  `military_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 38
+  `armor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,             -- 39
+  `shield_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,            -- 40
+  `energy_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,            -- 41
+  `hyperspace_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,        -- 42
+  `combustion_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,        -- 43
+  `impulse_motor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,     -- 44
+  `hyperspace_motor_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,  -- 45
+  `laser_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,             -- 46
+  `ion_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,               -- 47
+  `plasma_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,            -- 48
+  `intergalactic_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,     -- 49
+  `expedition_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,        -- 50
+  `metal_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,        -- 51
+  `crystal_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,      -- 52
+  `deuterium_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,    -- 53
+  `graviton_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 54
+  `ally_id` INT UNSIGNED NOT NULL DEFAULT 0,                    -- 55
+  `ally_register_time` INT NOT NULL DEFAULT 0,                  -- 56
+  `ally_rank_id` INT UNSIGNED NOT NULL DEFAULT 0,               -- 57
+  `rpg_geologist` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 58
+  `rpg_admiral` TINYINT NOT NULL DEFAULT 0,                     -- 59
+  `rpg_engineer` TINYINT NOT NULL DEFAULT 0,                    -- 60
+  `rpg_technocrat` TINYINT NOT NULL DEFAULT 0,                  -- 61
+  `rpg_espion` TINYINT NOT NULL DEFAULT 0,                      -- 62
+  `rpg_constructor` TINYINT NOT NULL DEFAULT 0,                 -- 63
+  `rpg_scientist` TINYINT NOT NULL DEFAULT 0,                   -- 64
+  `rpg_commander` TINYINT NOT NULL DEFAULT 0,                   -- 65
+  `rpg_stocker` TINYINT NOT NULL DEFAULT 0,                     -- 66
+  `rpg_defender` TINYINT NOT NULL DEFAULT 0,                    -- 67
+  `rpg_destructor` TINYINT NOT NULL DEFAULT 0,                  -- 68
+  `rpg_general` TINYINT NOT NULL DEFAULT 0,                     -- 69
+  `rpg_bunker` TINYINT NOT NULL DEFAULT 0,                      -- 70
+  `rpg_raider` TINYINT NOT NULL DEFAULT 0,                      -- 71
+  `rpg_emperor` TINYINT NOT NULL DEFAULT 0,                     -- 72
+  `bana` TINYINT NOT NULL DEFAULT 0,                            -- 73
+  `banaday` INT NOT NULL DEFAULT 0,                             -- 74
   `hof` TINYINT NOT NULL DEFAULT 1,
   `spy_message_mode` TINYINT NOT NULL DEFAULT 0,
   `wons` INT UNSIGNED NOT NULL DEFAULT 0,
@@ -1009,76 +1009,76 @@ CREATE TABLE `%PREFIX%users_valid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%vars` (
-  `element_id` SMALLINT UNSIGNED NOT NULL,
-  `name` VARCHAR(32) NOT NULL,
-  `class` INT NOT NULL,
-  `on_planet_type` set('1','3') NOT NULL,
-  `one_per_planet` TINYINT NOT NULL,
-  `factor` FLOAT(4,2) NOT NULL,
-  `max_level` INT DEFAULT NULL,
-  `cost901` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  `cost902` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  `cost903` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  `cost911` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  `cost921` BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  `consumption1` INT UNSIGNED DEFAULT NULL,
-  `consumption2` INT UNSIGNED DEFAULT NULL,
-  `speed_tech` INT UNSIGNED DEFAULT NULL,
-  `speed1` INT UNSIGNED DEFAULT NULL,
-  `speed2` INT UNSIGNED DEFAULT NULL,
-  `speed2_tech` INT UNSIGNED DEFAULT NULL,
-  `speed2_on_level` INT UNSIGNED DEFAULT NULL,
-  `speed3_tech` INT UNSIGNED DEFAULT NULL,
-  `speed3_on_level` INT UNSIGNED DEFAULT NULL,
-  `capacity` INT UNSIGNED DEFAULT NULL,
-  `attack` INT UNSIGNED DEFAULT NULL,
-  `defend` INT UNSIGNED DEFAULT NULL,
-  `time_bonus` INT UNSIGNED DEFAULT NULL,
-  `bonus_attack` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_defensive` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_shield` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_build_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_research_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_ship_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_defensive_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_resource` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_energy` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_resource_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_ship_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_fly_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_fleet_slots` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_planets` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_spy_power` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_expedition` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_gate_cool_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_more_found` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_attack_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_defensive_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_shield_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_build_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_research_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_ship_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_defensive_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_resource_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_energy_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_resource_storage_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_ship_storage_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_fly_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_fleet_slots_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_planets_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_spy_power_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_expedition_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_gate_cool_time_unit` SMALLINT NOT NULL DEFAULT 0,
-  `bonus_more_found_unit` SMALLINT NOT NULL DEFAULT 0,
-  `speed_fleet_factor` FLOAT(4,2) DEFAULT NULL,
-  `production901` VARCHAR(255) DEFAULT NULL,
-  `production902` VARCHAR(255) DEFAULT NULL,
-  `production903` VARCHAR(255) DEFAULT NULL,
-  `production911` VARCHAR(255) DEFAULT NULL,
-  `production921` VARCHAR(255) DEFAULT NULL,
-  `storage901` VARCHAR(255) DEFAULT NULL,
-  `storage902` VARCHAR(255) DEFAULT NULL,
-  `storage903` VARCHAR(255) DEFAULT NULL,
+  `element_id` SMALLINT UNSIGNED NOT NULL,                    --  0
+  `name` VARCHAR(32) NOT NULL,                                --  1
+  `class` INT NOT NULL,                                       --  2
+  `on_planet_type` set('1','3') NOT NULL,                     --  3
+  `one_per_planet` TINYINT NOT NULL,                          --  4
+  `factor` FLOAT(4,2) NOT NULL,                               --  5
+  `max_level` INT DEFAULT NULL,                               --  6
+  `cost901` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  7
+  `cost902` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  8
+  `cost903` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  9
+  `cost911` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  10
+  `cost921` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  11
+  `consumption1` INT UNSIGNED DEFAULT NULL,                   --  12
+  `consumption2` INT UNSIGNED DEFAULT NULL,                   --  13
+  `speed_tech` INT UNSIGNED DEFAULT NULL,                     --  14
+  `speed1` INT UNSIGNED DEFAULT NULL,                         --  15
+  `speed2` INT UNSIGNED DEFAULT NULL,                         --  16
+  `speed2_tech` INT UNSIGNED DEFAULT NULL,                    --  17
+  `speed2_on_level` INT UNSIGNED DEFAULT NULL,                --  18
+  `speed3_tech` INT UNSIGNED DEFAULT NULL,                    --  19
+  `speed3_on_level` INT UNSIGNED DEFAULT NULL,                --  20
+  `capacity` INT UNSIGNED DEFAULT NULL,                       --  21
+  `attack` INT UNSIGNED DEFAULT NULL,                         --  22
+  `defend` INT UNSIGNED DEFAULT NULL,                         --  23
+  `time_bonus` INT UNSIGNED DEFAULT NULL,                     --  24
+  `bonus_attack` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  25
+  `bonus_defensive` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  26
+  `bonus_shield` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  27
+  `bonus_build_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  28
+  `bonus_research_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,     --  29
+  `bonus_ship_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  30
+  `bonus_defensive_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,    --  31
+  `bonus_resource` FLOAT(4,2) NOT NULL DEFAULT 0.00,          --  32
+  `bonus_energy` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  33
+  `bonus_resource_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,  --  34
+  `bonus_ship_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,      --  35
+  `bonus_fly_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,          --  36
+  `bonus_fleet_slots` FLOAT(4,2) NOT NULL DEFAULT 0.00,       --  37
+  `bonus_planets` FLOAT(4,2) NOT NULL DEFAULT 0.00,           --  38
+  `bonus_spy_power` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  39
+  `bonus_expedition` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  40
+  `bonus_gate_cool_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,    --  41
+  `bonus_more_found` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  42
+  `bonus_attack_unit` SMALLINT NOT NULL DEFAULT 0,            --  43
+  `bonus_defensive_unit` SMALLINT NOT NULL DEFAULT 0,         --  44
+  `bonus_shield_unit` SMALLINT NOT NULL DEFAULT 0,            --  45
+  `bonus_build_time_unit` SMALLINT NOT NULL DEFAULT 0,        --  46
+  `bonus_research_time_unit` SMALLINT NOT NULL DEFAULT 0,     --  47
+  `bonus_ship_time_unit` SMALLINT NOT NULL DEFAULT 0,         --  48
+  `bonus_defensive_time_unit` SMALLINT NOT NULL DEFAULT 0,    --  49
+  `bonus_resource_unit` SMALLINT NOT NULL DEFAULT 0,          --  50
+  `bonus_energy_unit` SMALLINT NOT NULL DEFAULT 0,            --  51
+  `bonus_resource_storage_unit` SMALLINT NOT NULL DEFAULT 0,  --  52
+  `bonus_ship_storage_unit` SMALLINT NOT NULL DEFAULT 0,      --  53
+  `bonus_fly_time_unit` SMALLINT NOT NULL DEFAULT 0,          --  54
+  `bonus_fleet_slots_unit` SMALLINT NOT NULL DEFAULT 0,       --  55
+  `bonus_planets_unit` SMALLINT NOT NULL DEFAULT 0,           --  56
+  `bonus_spy_power_unit` SMALLINT NOT NULL DEFAULT 0,         --  57
+  `bonus_expedition_unit` SMALLINT NOT NULL DEFAULT 0,        --  58
+  `bonus_gate_cool_time_unit` SMALLINT NOT NULL DEFAULT 0,    --  59
+  `bonus_more_found_unit` SMALLINT NOT NULL DEFAULT 0,        --  60
+  `speed_fleet_factor` FLOAT(4,2) DEFAULT NULL,               --  61
+  `production901` VARCHAR(255) DEFAULT NULL,                  --  62
+  `production902` VARCHAR(255) DEFAULT NULL,                  --  63
+  `production903` VARCHAR(255) DEFAULT NULL,                  --  64
+  `production911` VARCHAR(255) DEFAULT NULL,                  --  65
+  `production921` VARCHAR(255) DEFAULT NULL,                  --  66
+  `storage901` VARCHAR(255) DEFAULT NULL,                     --  67
+  `storage902` VARCHAR(255) DEFAULT NULL,                     --  68
+  `storage903` VARCHAR(255) DEFAULT NULL,                     --  69
   PRIMARY KEY (`element_id`),
   KEY `class` (`class`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
