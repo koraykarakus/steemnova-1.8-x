@@ -154,7 +154,7 @@
 			<span class="">{$LNG.sys_attacker_won}</span><br><br>
 
 			<span class="">
-				{$LNG.sys_stealed_ressources} {foreach $Raport.steal as $elementID => $amount}{$amount|number}
+				{$LNG.sys_stolen_resources} {foreach $Raport.steal as $elementID => $amount}{$amount|number}
 					{$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.steal)} {$LNG.sys_and}
 					{elseif !$amount@last},
 					{/if}

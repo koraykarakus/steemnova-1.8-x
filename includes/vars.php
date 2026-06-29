@@ -27,7 +27,7 @@ $RESOURCE[903] = 'deuterium';
 $RESOURCE[911] = 'energy';
 $RESOURCE[921] = 'darkmatter';
 
-$RESLIST['ressources'] = [901, 902, 903, 911, 921];
+$RESLIST['resources'] = [901, 902, 903, 911, 921];
 $RESLIST['resstype'][1] = [901, 902, 903];
 $RESLIST['resstype'][2] = [911];
 $RESLIST['resstype'][3] = [921];

@@ -68,7 +68,7 @@ $LNG['es_max_dm_large_event'] = "max darkmatter (large event)";
 $LNG['es_min_dm_very_large_event'] = "min darkmatter (very large event)";
 $LNG['es_max_dm_very_large_event'] = "max darkmatter (very large event)";
 
-// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl 
+// ShowCollectMinesPage.class.php - page.collect_mines.default.tpl
 $LNG['cm_collect_mines_under_attack'] = "Let user collect mines while under attack";
 $LNG['cm_time'] = "Collect Mine Time (minutes)";
 
@@ -77,7 +77,6 @@ $LNG['rl_move_fleet_directly'] = "Move fleet directly on relocate";
 $LNG['rl_price_dm'] = "Relocate Price (DM)";
 $LNG['rl_next_time'] = "Relocate Next time (Hours)";
 $LNG['rl_jump_gate_cd_after_relocate'] = "Jump Gate Cooldown after relocate (Hours)";
-
 
 //---------------	ShowColonySettingsPage.class.php - page.colony.default.tpl ------------------------//
 $LNG['cs_metal_start'] = "metal (start)";
@@ -128,7 +127,6 @@ $LNG['cs_big_protection_shield_start'] = "Big Protection Shield (amount)";
 $LNG['cs_graviton_cannon_start'] = "Gravitation Cannon (amount)";
 $LNG['cs_interceptor_misil_start'] = "Intercepting Missile (amount)";
 $LNG['cs_interplanetary_misil_start'] = "Interplanetary Missile (amount)";
-
 
 //---------------	ShowInfosPage.class.php - page.information.default.tpl ------------------------//
 $LNG['ad_infos_server'] = "Server";
@@ -244,7 +242,7 @@ $LNG['ad_editor_researchs'] = 'Search';
 $LNG['ad_editor_officers'] = 'Officers';
 $LNG['ad_editor_personal'] = 'Personal Data';
 $LNG['ad_editor_planets'] = 'Planet & Moon';
-$LNG['ad_editor_resources'] = 'Ressources';
+$LNG['ad_editor_resources'] = 'Resources';
 $LNG['ad_editor_alliances'] = 'Alliance';
 $LNG['ad_editor_authlevels'] = 'Permissions';
 
@@ -265,7 +263,7 @@ $LNG['ad_delete_offi_success'] = 'The Officers were removed successfully!';
 //	Recursos
 $LNG['ad_add_res_sucess'] = 'Resources have been inserted successfully!';
 $LNG['ad_delete_res_sucess'] = 'The Researches were removed successfully!';
-$LNG['ad_main_title'] = 'Ressources and Technologies';
+$LNG['ad_main_title'] = 'Resources and Technologies';
 
 //	Naves
 $LNG['ad_ships_title'] = 'Ships';
