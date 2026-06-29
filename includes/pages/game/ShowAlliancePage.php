@@ -22,9 +22,9 @@ class ShowAlliancePage extends AbstractGamePage
     private $alliance_data;
     private $ranks;
     private $rights;
-    private $has_ally = false;
-    private $has_apply = false;
-    public $available_ranks = [
+    private bool $has_ally = false;
+    private bool $has_apply = false;
+    public array $available_ranks = [
         'member_list',
         'online_state',
         'transfer',
@@ -43,7 +43,7 @@ class ShowAlliancePage extends AbstractGamePage
     {
         global $USER;
         parent::__construct();
-        $this->has_ally = $USER['ally_id'] != 0;
+        $this->has_ally = ($USER['ally_id'] != 0);
         $this->has_apply =($this->getApplyCount() > 0);
         if ($this->has_ally 
             && !$this->has_apply)

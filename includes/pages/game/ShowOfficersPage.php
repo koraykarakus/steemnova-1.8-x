@@ -24,7 +24,7 @@ class ShowOfficersPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function UpdateExtra($element): void
+    public function UpdateExtra(int $element): void
     {
         global $PLANET, $USER, $RESOURCE, $PRICELIST;
 
@@ -65,7 +65,7 @@ class ShowOfficersPage extends AbstractGamePage
         ]);
     }
 
-    public function UpdateOfficers($element): void
+    public function UpdateOfficers(int $element): void
     {
         global $USER, $PLANET, $RESOURCE, $PRICELIST;
 

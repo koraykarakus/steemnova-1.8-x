@@ -26,7 +26,7 @@ class ShowErrorPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function printError($msg, $is_full = true, $redirect = null): void
+    public static function printError(string $msg, $is_full = true, $redirect = null): void
     {
         $page_obj = new self();
         $page_obj->printMessage($msg, $is_full, $redirect);

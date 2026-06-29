@@ -26,9 +26,9 @@ class ShowInformationPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function getNextJumpWaitTime($last_time): int
+    public static function getNextJumpWaitTime(int $last_time): int
     {
-        return (int) $last_time + (int) Config::get()->gate_wait_time;
+        return $last_time + (int) Config::get()->gate_wait_time;
     }
 
     public function sendFleet(): void

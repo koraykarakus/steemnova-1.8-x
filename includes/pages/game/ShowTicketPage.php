@@ -19,7 +19,7 @@ class ShowTicketPage extends AbstractGamePage
 {
     public static int $require_module = MODULE_SUPPORT;
 
-    private $ticket_obj;
+    private object $ticket_obj;
 
     public function __construct()
     {

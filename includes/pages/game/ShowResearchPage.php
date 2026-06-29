@@ -200,7 +200,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function RemoveBuildingFromQueue($queue_id): bool
+    private function RemoveBuildingFromQueue(int $queue_id): bool
     {
         global $USER, $PLANET, $RESOURCE;
 
@@ -281,7 +281,7 @@ class ShowResearchPage extends AbstractGamePage
         return true;
     }
 
-    private function AddBuildingToQueue($elementId, $AddMode = true): bool
+    private function AddBuildingToQueue(int $elementId, bool $AddMode = true): bool
     {
         global $PLANET, $USER, $RESOURCE, $RESLIST, $PRICELIST;
         $config = Config::get();

@@ -24,7 +24,8 @@ class ShowSearchPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public static function _getSearchList($search_mode, $search_text, $max_result): array
+    public static function _getSearchList(
+        string $search_mode, string $search_text, int $max_result): array
     {
         $db = Database::get();
 

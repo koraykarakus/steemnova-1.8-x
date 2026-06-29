@@ -24,7 +24,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
         parent::__construct();
     }
 
-    public function createACS($fleetID, $fleetData): array
+    public function createACS(int $fleetID, array $fleetData): array
     {
         global $USER;
 
@@ -61,22 +61,27 @@ class ShowFleetDispatchPage extends AbstractGamePage
     }
 
     // TODO : return type
-    public function loadACS($fleetData): bool|array
+    public function loadACS(array $fleetData): array
     {
         global $USER;
 
-        $db = Database::get();
         $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%ACS%% ON acs_id = id 
         WHERE user_id = :user_id AND acs_id = :acs_id;";
-        $acs_result = $db->selectSingle($sql, [
+        
+        $acs_result = Database::get()->selectSingle($sql, [
             ':user_id' => $USER['id'],
             ':acs_id'  => $fleetData['fleet_group'],
         ]);
 
+        if (!$acs_result)
+        {
+            $acs_result = [];
+        }
+
         return $acs_result;
     }
 
-    public function getACSPageData($fleet_id): array
+    public function getACSPageData(int $fleet_id): array
     {
         global $USER, $LNG;
 

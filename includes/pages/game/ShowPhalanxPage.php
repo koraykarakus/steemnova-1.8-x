@@ -24,7 +24,7 @@ class ShowPhalanxPage extends AbstractGamePage
 
     }
 
-    public static function allowPhalanx($to_galaxy, $to_system): bool
+    public static function allowPhalanx(int $to_galaxy, int $to_system): bool
     {
         global $PLANET, $RESOURCE;
 
@@ -43,7 +43,7 @@ class ShowPhalanxPage extends AbstractGamePage
         return $to_system >= $system_min && $to_system <= $system_max;
     }
 
-    public static function GetPhalanxRange($phalanx_lvl): int
+    public static function GetPhalanxRange(int $phalanx_lvl): int
     {
         return ($phalanx_lvl == 1) ? 1 : pow($phalanx_lvl, 2) - 1;
     }

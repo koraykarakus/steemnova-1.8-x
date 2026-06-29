@@ -17,7 +17,7 @@
 
 class ShowErrorPage extends AbstractInstallPage
 {
-    public $default_controller = 'printError';
+    public static string $default_controller = 'printError';
 
     public function __construct()
     {

@@ -19,7 +19,7 @@ class ShowShipyardPage extends AbstractGamePage
 {
     public static int $require_module = 0;
 
-    public static $default_controller = 'show';
+    public static string $default_controller = 'show';
 
     public function __construct()
     {
@@ -87,7 +87,7 @@ class ShowShipyardPage extends AbstractGamePage
         return true;
     }
 
-    private function BuildAuftr($fmenge): void
+    private function BuildAuftr(array $fmenge): void
     {
         global $USER, $PLANET, $RESLIST, $RESOURCE;
 

@@ -26,7 +26,7 @@ class ShowMessagesPage extends AbstractGamePage
         parent::__construct();
     }
 
-    private function sendData($Code, $Message): void
+    private function sendData(int $Code, string $Message): void
     {
         $this->returnData['code'] = $Code;
         $this->returnData['mess'] = $Message;
