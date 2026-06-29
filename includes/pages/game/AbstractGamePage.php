@@ -21,13 +21,13 @@ abstract class AbstractGamePage
      * reference of the template object
      * @var template
      */
-    protected object $tpl_obj;
+    protected template $tpl_obj;
 
     /**
      * reference of the template object
      * @var ResourceUpdate
      */
-    protected object $eco_obj;
+    protected ResourceUpdate $eco_obj;
     protected string $window;
     protected bool $disable_eco_system = false;
 

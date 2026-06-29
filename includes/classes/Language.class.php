@@ -17,11 +17,11 @@
 
 class Language implements ArrayAccess
 {
-    private $container = [];
-    private $language = [];
-    private static $allLanguages = [];
+    private array $container = [];
+    private string $language = 'en';
+    private static array $allLanguages = [];
 
-    public static function getAllowedLangs($OnlyKey = true)
+    public static function getAllowedLangs(bool $only_key = true): array
     {
         if (empty(self::$allLanguages))
         {
@@ -30,34 +30,36 @@ class Language implements ArrayAccess
             self::$allLanguages = $cache->getData('language');
         }
 
-        if ($OnlyKey)
+        if ($only_key)
         {
             return array_keys(self::$allLanguages);
         }
-        else
-        {
-            return self::$allLanguages;
-        }
+
+        return self::$allLanguages;
     }
 
-    public function getUserAgentLanguage()
+    public function getUserAgentLanguage(): string
     {
-        if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], self::getAllowedLangs()))
+        if (isset($_REQUEST['lang'])
+            && in_array($_REQUEST['lang'], self::getAllowedLangs()))
         {
             HTTP::sendCookie('lang', $_REQUEST['lang'], 2147483647);
             $this->setLanguage($_REQUEST['lang']);
-            return true;
+            return $_REQUEST['lang'];
         }
 
-        if ((MODE === 'LOGIN' || MODE === 'INSTALL') && isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], self::getAllowedLangs()))
+        if ((MODE === 'LOGIN'
+            || MODE === 'INSTALL')
+            && isset($_COOKIE['lang'])
+            && in_array($_COOKIE['lang'], self::getAllowedLangs()))
         {
             $this->setLanguage($_COOKIE['lang']);
-            return true;
+            return $_COOKIE['lang'];
         }
 
         if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE']))
         {
-            return false;
+            return 'en';
         }
 
         $accepted_languages = preg_split('/,\s*/', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
@@ -88,14 +90,15 @@ class Language implements ArrayAccess
         return $language;
     }
 
-    public function __construct($language = null)
+    public function __construct(string $language = 'en')
     {
         $this->setLanguage($language);
     }
 
-    public function setLanguage($language)
+    public function setLanguage(string $language): void
     {
-        if (!is_null($language) && in_array($language, self::getAllowedLangs()))
+        if (!is_null($language)
+            && in_array($language, self::getAllowedLangs()))
         {
             $this->language = $language;
         }
@@ -109,29 +112,46 @@ class Language implements ArrayAccess
         }
     }
 
-    public function addData($data)
+    public function addData(array $data): void
     {
         $this->container = array_replace_recursive($this->container, $data);
     }
 
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
 
-    public function getTemplate($templateName)
+    public function getTemplate(string $templateName): string
     {
         if (file_exists('language/'.$this->getLanguage().'/templates/'.$templateName.'.txt'))
         {
-            return file_get_contents('language/'.$this->getLanguage().'/templates/'.$templateName.'.txt');
+            $res = file_get_contents('language/' . $this->getLanguage() . '/templates/' . $templateName . '.txt');
+            if ($res !== false)
+            {
+                return $res;
+            }
+            else
+            {
+                // throw exception or log
+                return '### Template "' .
+                $templateName .
+                '" on language "' .
+                $this->getLanguage() .
+                '" not found! ###';
+            }
         }
         else
         {
-            return '### Template "'.$templateName.'" on language "'.$this->getLanguage().'" not found! ###';
+            return '### Template "' .
+            $templateName .
+            '" on language "' .
+            $this->getLanguage() .
+            '" not found! ###';
         }
     }
 
-    public function includeData($files)
+    public function includeData(array $files): void
     {
         // Fixed BOM problems.
         ob_start();
