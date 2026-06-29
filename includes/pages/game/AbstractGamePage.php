@@ -27,7 +27,7 @@ abstract class AbstractGamePage
      * reference of the template object
      * @var ResourceUpdate
      */
-    protected $eco_obj;
+    protected object $eco_obj;
     protected string $window;
     protected $disable_eco_system = false;
 
