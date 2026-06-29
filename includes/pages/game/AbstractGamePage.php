@@ -407,7 +407,7 @@ abstract class AbstractGamePage
         $this->tpl_obj->assign_vars($array, $not_cache);
     }
 
-    protected function display($file): void
+    protected function display(string $file): void
     {
         global $LNG;
 
@@ -441,7 +441,7 @@ abstract class AbstractGamePage
         exit;
     }
 
-    protected function redirectTo($url): void
+    protected function redirectTo(string $url): void
     {
         $this->save();
         HTTP::redirectTo($url);

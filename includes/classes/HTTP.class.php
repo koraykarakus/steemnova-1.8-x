@@ -17,7 +17,7 @@
 
 class HTTP
 {
-    public static function redirectTo($URL, $external = false)
+    public static function redirectTo(string $URL, bool $external = false): void
     {
         if ($external)
         {
