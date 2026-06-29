@@ -99,7 +99,7 @@ class BuildFunctions
         }
 
         $price = [];
-        foreach ($RESLIST['ressources'] as $resType)
+        foreach ($RESLIST['resources'] as $resType)
         {
             if (!isset($PRICELIST[$element]['cost'][$resType]))
             {
