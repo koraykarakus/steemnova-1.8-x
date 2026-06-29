@@ -44,7 +44,7 @@ class ShowAlliancePage extends AbstractGamePage
         global $USER;
         parent::__construct();
         $this->has_ally = $USER['ally_id'] != 0;
-        $this->has_apply = $this->isApply();
+        $this->has_apply =($this->getApplyCount() > 0);
         if ($this->has_ally 
             && !$this->has_apply)
         {
@@ -52,7 +52,7 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    private function setAllianceData($ally_id): void
+    private function setAllianceData(int $ally_id): void
     {
         global $USER;
         $db = Database::get();
@@ -94,14 +94,13 @@ class ShowAlliancePage extends AbstractGamePage
         }
     }
 
-    // TODO : avoid multiple report type to support lower versions of php.
-    private function isApply() : bool|array
+    private function getApplyCount() : int
     {
         global $USER;
         $db = Database::get();
-        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE user_id = :userId;";
+        $sql = "SELECT COUNT(*) as count FROM %%ALLIANCE_REQUEST%% WHERE user_id = :user_id;";
         return $db->selectSingle($sql, [
-            ':userId' => $USER['id'],
+            ':user_id' => $USER['id'],
         ], 'count');
     }
 
