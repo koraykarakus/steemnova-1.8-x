@@ -24,7 +24,7 @@ abstract class AbstractAdminPage
     protected $tpl_obj;
 
     /** @var string $window */
-    protected $window;
+    protected string $window;
 
     protected function __construct()
     {
@@ -57,7 +57,7 @@ abstract class AbstractAdminPage
         $this->tpl_obj->setTemplateDir($tplDir. '/adm');
     }
 
-    protected function setWindow($window): void
+    protected function setWindow(string $window): void
     {
         $this->window = $window;
     }

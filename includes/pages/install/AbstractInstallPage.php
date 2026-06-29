@@ -22,7 +22,7 @@ abstract class AbstractInstallPage
      * @var template
      */
     protected $tpl_obj = null;
-    protected $window;
+    protected string $window;
     public $default_window = 'full';
 
     protected function __construct()
@@ -50,7 +50,7 @@ abstract class AbstractInstallPage
         $this->tpl_obj->setTemplateDir($tpl_dir.'install/');
     }
 
-    protected function setWindow($window): void
+    protected function setWindow(string $window): void
     {
         $this->window = $window;
     }

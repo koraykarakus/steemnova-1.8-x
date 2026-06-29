@@ -22,7 +22,7 @@ abstract class AbstractLoginPage
      * @var template
      */
     protected $tpl_obj = null;
-    protected $window;
+    protected string $window;
     public $default_window = 'normal';
 
     protected function __construct()
@@ -61,7 +61,7 @@ abstract class AbstractLoginPage
         $this->tpl_obj->setTemplateDir($tpl_dir.'login/');
     }
 
-    protected function setWindow($window): void
+    protected function setWindow(string $window): void
     {
         $this->window = $window;
     }

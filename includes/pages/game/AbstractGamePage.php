@@ -28,7 +28,7 @@ abstract class AbstractGamePage
      * @var ResourceUpdate
      */
     protected $eco_obj;
-    protected $window;
+    protected string $window;
     protected $disable_eco_system = false;
 
     protected function __construct()
@@ -79,7 +79,7 @@ abstract class AbstractGamePage
         $this->tpl_obj->setTemplateDir($tpl_dir. '/game');
     }
 
-    protected function setWindow($window): void
+    protected function setWindow(string $window): void
     {
         $this->window = $window;
     }
@@ -201,25 +201,25 @@ abstract class AbstractGamePage
         }
 
         $this->assign([
-            'planet_select'  => $planet_select,
-            'new_message'    => $USER['messages'],
-            'commit'         => $commit,
-            'commit_short'   => $commit_short,
-            'vacation'       => $USER['vacation_mode'] ? _date($LNG['php_tdformat'], $USER['vacation_until'], $USER['timezone']) : false,
-            'delete'         => $USER['delete_mode'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['delete_mode'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
-            'darkmatter'     => $USER['darkmatter'],
-            'current_pid'    => $PLANET['id'],
-            'current_pname'  => $PLANET['name'],
-            'image'          => $PLANET['image'],
-            'username'       => $USER['username'],
-            'avatar'         => $avatar,
-            'resource_table'  => $resource_table,
-            'shortly_number'  => 1,
-            'closed'         => $config->game_disable,
-            'has_board'      => filter_var($config->forum_url, FILTER_VALIDATE_URL),
+            'planet_select'    => $planet_select,
+            'new_message'      => $USER['messages'],
+            'commit'           => $commit,
+            'commit_short'     => $commit_short,
+            'vacation'         => $USER['vacation_mode'] ? _date($LNG['php_tdformat'], $USER['vacation_until'], $USER['timezone']) : false,
+            'delete'           => $USER['delete_mode'] ? sprintf($LNG['tn_delete_mode'], _date($LNG['php_tdformat'], $USER['delete_mode'] + ($config->del_user_manually * 86400)), $USER['timezone']) : false,
+            'darkmatter'       => $USER['darkmatter'],
+            'current_pid'      => $PLANET['id'],
+            'current_pname'    => $PLANET['name'],
+            'image'            => $PLANET['image'],
+            'username'         => $USER['username'],
+            'avatar'           => $avatar,
+            'resource_table'   => $resource_table,
+            'shortly_number'   => 1,
+            'closed'           => $config->game_disable,
+            'has_board'        => filter_var($config->forum_url, FILTER_VALIDATE_URL),
             'has_admin_access' => !empty(Session::load()->adminAccess),
-            'has_gate'        => $PLANET[$RESOURCE[43]] > 0,
-            'discord_url'     => DISCORD_URL,
+            'has_gate'         => $PLANET[$RESOURCE[43]] > 0,
+            'discord_url'      => DISCORD_URL,
             //overwrite messages, to do : delete from other pages
             'messages' => ($USER['messages'] > 0) ? (($USER['messages'] == 1) ? $LNG['ov_have_new_message'] : "(" . $USER['messages'] . ")") : false,
         ]);
@@ -370,8 +370,12 @@ abstract class AbstractGamePage
         ]);
     }
 
-    protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
-    {
+    protected function printMessage(
+        $msg,
+        $redirect_buttons = null,
+        $redirect = null,
+        $full = true
+    ): void {
         $this->assign([
             'message'          => $msg,
             'redirect_buttons' => $redirect_buttons,
