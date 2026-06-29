@@ -2,7 +2,7 @@
 
 class ShowAutoExpeditionPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_AUTOEXPEDITION;
+    public static int $require_module = MODULE_AUTOEXPEDITION;
 
     public function __construct()
     {

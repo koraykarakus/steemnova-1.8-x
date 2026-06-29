@@ -22,7 +22,7 @@ require_once('./includes/enums/Login.class.php');
 
 class ShowDiscordAuthPage extends AbstractLoginPage
 {
-    public static $require_module = MODULE_AUTH_GOOGLE;
+    public static int $require_module = MODULE_AUTH_GOOGLE;
 
     public function __construct()
     {

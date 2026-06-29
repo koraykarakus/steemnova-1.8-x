@@ -17,7 +17,7 @@
 
 class ShowChangelogPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_CHANGELOG;
+    public static int $require_module = MODULE_CHANGELOG;
 
     public function __construct()
     {

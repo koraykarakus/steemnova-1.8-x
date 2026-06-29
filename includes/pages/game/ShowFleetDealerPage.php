@@ -17,7 +17,7 @@
 
 class ShowFleetDealerPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_FLEET_TRADER;
+    public static int $require_module = MODULE_FLEET_TRADER;
 
     public function __construct()
     {
@@ -32,9 +32,9 @@ class ShowFleetDealerPage extends AbstractGamePage
         $count = max(0, round(HTTP::_GP('count', 0.0)));
         $allowed_ship_ids = explode(',', Config::get()->trade_allowed_ships);
 
-        if (!empty($ship_id) 
-            && !empty($count) 
-            && in_array($ship_id, $allowed_ship_ids) 
+        if (!empty($ship_id)
+            && !empty($count)
+            && in_array($ship_id, $allowed_ship_ids)
             && $PLANET[$RESOURCE[$ship_id]] >= $count)
         {
             $trade_charge = 1 - (Config::get()->trade_charge / 100);
@@ -45,13 +45,13 @@ class ShowFleetDealerPage extends AbstractGamePage
 
             $PLANET[$RESOURCE[$ship_id]] -= $count;
 
-            $sql = 'UPDATE %%PLANETS%% SET ' . 
-            $RESOURCE[$ship_id] . 
-            ' = ' . 
+            $sql = 'UPDATE %%PLANETS%% SET ' .
+            $RESOURCE[$ship_id] .
+            ' = ' .
             $RESOURCE[$ship_id].' - :count WHERE id = :planet_id;';
-            
+
             Database::get()->update($sql, [
-                ':count'    => $count,
+                ':count'     => $count,
                 ':planet_id' => $PLANET['id'],
             ]);
 
@@ -80,7 +80,7 @@ class ShowFleetDealerPage extends AbstractGamePage
 
         foreach ($allowed_ship_ids as $c_ship_id)
         {
-            if (in_array($c_ship_id, $RESLIST['fleet']) 
+            if (in_array($c_ship_id, $RESLIST['fleet'])
                 || in_array($c_ship_id, $RESLIST['defense']))
             {
                 $cost[$c_ship_id] = [$PLANET[$RESOURCE[$c_ship_id]], $LNG['tech'][$c_ship_id], $PRICELIST[$c_ship_id]['cost']];

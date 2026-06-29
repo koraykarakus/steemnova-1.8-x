@@ -19,7 +19,7 @@ require_once('AbstractGamePage.php');
 
 class ShowResearchPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_RESEARCH;
+    public static int $require_module = MODULE_RESEARCH;
 
     public function __construct()
     {

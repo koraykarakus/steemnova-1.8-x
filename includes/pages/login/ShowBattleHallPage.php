@@ -17,7 +17,7 @@
 
 class ShowBattleHallPage extends AbstractLoginPage
 {
-    public static $require_module = MODULE_LOGIN_BATTLEHALL;
+    public static int $require_module = MODULE_LOGIN_BATTLEHALL;
 
     public function __construct()
     {

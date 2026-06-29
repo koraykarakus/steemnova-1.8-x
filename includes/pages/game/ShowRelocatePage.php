@@ -2,7 +2,7 @@
 
 class ShowRelocatePage extends AbstractGamePage
 {
-    public static $require_module = MODULE_RELOCATE;
+    public static int $require_module = MODULE_RELOCATE;
 
     public function __construct()
     {

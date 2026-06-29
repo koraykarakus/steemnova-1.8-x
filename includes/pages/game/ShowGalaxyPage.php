@@ -19,7 +19,7 @@ require_once('includes/classes/class.GalaxyRows.php');
 
 class ShowGalaxyPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_RESEARCH;
+    public static int $require_module = MODULE_RESEARCH;
 
     public function __construct()
     {
@@ -142,7 +142,7 @@ class ShowGalaxyPage extends AbstractGamePage
                 'enemy'        => $LNG['gl_short_enemy'],
                 'friend'       => $LNG['gl_short_friend'],
                 'member'       => $LNG['gl_short_member'],
-                'admin' => $LNG['gl_short_admin'],
+                'admin'        => $LNG['gl_short_admin'],
             ],
             'userAuthLevel'       => $USER['authlevel'],
             'allowed_col_pos_arr' => $this->getAllowedColonyPositionArray(),

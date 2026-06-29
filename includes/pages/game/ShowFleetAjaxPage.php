@@ -17,7 +17,7 @@
 
 class ShowFleetAjaxPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_FLEET_TABLE;
+    public static int $require_module = MODULE_FLEET_TABLE;
     public $return_data = [];
 
     public function __construct()
@@ -42,15 +42,15 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
         $target_mission = HTTP::_GP('mission', 0);
         $galaxy = HTTP::_GP('galaxy', 1);
-        $galaxy = max(1,min($galaxy, $config->max_galaxy), $galaxy);
+        $galaxy = max(1, min($galaxy, $config->max_galaxy), $galaxy);
 
         $system = HTTP::_GP('system', 1);
-        $system = max(1,min($system, $config->max_system), $system);
+        $system = max(1, min($system, $config->max_system), $system);
 
         $planet = HTTP::_GP('planet', 1);
-        $planet = max(1,min($planet, $config->max_planets), $planet);
+        $planet = max(1, min($planet, $config->max_planets), $planet);
 
-        $planet_type = HTTP::_GP('planet_type', 0);       
+        $planet_type = HTTP::_GP('planet_type', 0);
 
         $active_slots = FleetFunctions::GetCurrentFleets($USER['id']);
         $max_slots = FleetFunctions::GetMaxFleetSlots($USER);
@@ -95,12 +95,12 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(699, $LNG['sys_module_inactive']);
                 }
 
-                if ($PLANET[$RESOURCE[208]] < 1) 
+                if ($PLANET[$RESOURCE[208]] < 1)
                 {
                     $this->sendData(611, $LNG['fa_no_colony_ships']);
                 }
 
-                if (!PlayerUtil::allowPlanetPosition($planet, $USER)) 
+                if (!PlayerUtil::allowPlanetPosition($planet, $USER))
                 {
                     $this->sendData(611, $LNG['fa_not_enough_tech_colony']);
                 }
@@ -122,10 +122,10 @@ class ShowFleetAjaxPage extends AbstractGamePage
                 AND planet_type = :planet_type;";
 
                 $total_debris = $db->selectSingle($sql, [
-                    ':galaxy' => $galaxy,
-                    ':system' => $system,
-                    ':planet' => $planet,
-                    ':planet_type' => $planet_type
+                    ':galaxy'      => $galaxy,
+                    ':system'      => $system,
+                    ':planet'      => $planet,
+                    ':planet_type' => $planet_type,
                 ], 'sum');
 
                 $rec_element_ids = [219, 209];
@@ -179,7 +179,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
         AND p.planet = :planet 
         AND p.planet_type = :planet_type;";
 
-        if ($target_mission == 7) 
+        if ($target_mission == 7)
         {
             $target_data['id_owner'] = 0;
             $target_data['planet_id'] = 0;
@@ -188,13 +188,13 @@ class ShowFleetAjaxPage extends AbstractGamePage
             $target_data['planet'] = $planet;
             $target_data['planet_type'] = 1;
         }
-        else 
+        else
         {
             $target_data = $db->selectSingle($sql, [
-            ':galaxy' => $galaxy,
-            ':system' => $system,
-            ':planet' => $planet,
-            ':planet_type' => $planet_type
+                ':galaxy'      => $galaxy,
+                ':system'      => $system,
+                ':planet'      => $planet,
+                ':planet_type' => $planet_type,
             ]);
         }
 

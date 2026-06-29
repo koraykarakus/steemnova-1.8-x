@@ -17,7 +17,7 @@
 
 class ShowOfficersPage extends AbstractGamePage
 {
-    public static $require_module = 0;
+    public static int $require_module = 0;
 
     public function __construct()
     {
@@ -150,8 +150,8 @@ class ShowOfficersPage extends AbstractGamePage
                 $dm_list[$c_element] = [
                     'time_left'      => max($USER[$RESOURCE[$c_element]] - TIMESTAMP, 0),
                     'cost_resources' => $cost_resources,
-                    'buyable'       => $buyable,
-                    'time'          => $PRICELIST[$c_element]['time'],
+                    'buyable'        => $buyable,
+                    'time'           => $PRICELIST[$c_element]['time'],
                     'cost_overflow'  => $cost_overflow,
                     'element_bonus'  => $element_bonus,
                 ];
@@ -173,10 +173,10 @@ class ShowOfficersPage extends AbstractGamePage
                 $element_bonus = BuildFunctions::getAvalibleBonus($c_element);
 
                 $officer_list[$c_element] = [
-                    'level'         => $USER[$RESOURCE[$c_element]],
+                    'level'          => $USER[$RESOURCE[$c_element]],
                     'max_level'      => $PRICELIST[$c_element]['max'],
                     'cost_resources' => $cost_resources,
-                    'buyable'       => $buyable,
+                    'buyable'        => $buyable,
                     'cost_overflow'  => $cost_overflow,
                     'element_bonus'  => $element_bonus,
                 ];
@@ -184,9 +184,9 @@ class ShowOfficersPage extends AbstractGamePage
         }
 
         $this->assign([
-            'officer_list'   => $officer_list,
+            'officer_list'    => $officer_list,
             'darkmatter_list' => $dm_list,
-            'of_dm_trade'    => sprintf($LNG['of_dm_trade'], $LNG['tech'][921]),
+            'of_dm_trade'     => sprintf($LNG['of_dm_trade'], $LNG['tech'][921]),
         ]);
 
         $this->display('page.officers.default.tpl');

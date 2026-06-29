@@ -17,7 +17,7 @@
 
 class ShowTicketPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_SUPPORT;
+    public static int $require_module = MODULE_SUPPORT;
 
     private $ticket_obj;
 
@@ -182,7 +182,7 @@ class ShowTicketPage extends AbstractGamePage
             'ticket_id'     => $ticket_id,
             'category_list' => $category_list,
             'answer_list'   => $answer_list,
-            'status'       => $ticket_status,
+            'status'        => $ticket_status,
         ]);
 
         $this->display('page.ticket.view.tpl');

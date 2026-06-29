@@ -17,7 +17,7 @@
 
 class ShowStatisticsPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_STATISTICS;
+    public static int $require_module = MODULE_STATISTICS;
 
     public function __construct()
     {

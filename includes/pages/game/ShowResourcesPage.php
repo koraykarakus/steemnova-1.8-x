@@ -17,7 +17,7 @@
 
 class ShowResourcesPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_RESSOURCE_LIST;
+    public static int $require_module = MODULE_RESSOURCE_LIST;
 
     public function __construct()
     {

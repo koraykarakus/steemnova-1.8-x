@@ -17,7 +17,7 @@
 
 class ShowChatPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_CHAT;
+    public static int $require_module = MODULE_CHAT;
 
     public function __construct()
     {

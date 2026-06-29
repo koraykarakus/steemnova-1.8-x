@@ -17,7 +17,7 @@
 
 class ShowBuildingsPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_BUILDING;
+    public static int $require_module = MODULE_BUILDING;
 
     public function __construct()
     {

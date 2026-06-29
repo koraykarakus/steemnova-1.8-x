@@ -17,7 +17,7 @@
 
 class ShowBanListPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_BANLIST;
+    public static int $require_module = MODULE_BANLIST;
 
     public function __construct()
     {

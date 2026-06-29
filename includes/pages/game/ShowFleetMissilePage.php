@@ -17,7 +17,7 @@
 
 class ShowFleetMissilePage extends AbstractGamePage
 {
-    public static $require_module = MODULE_MISSILEATTACK;
+    public static int $require_module = MODULE_MISSILEATTACK;
 
     public function __construct()
     {

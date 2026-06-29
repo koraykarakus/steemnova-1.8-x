@@ -17,7 +17,7 @@
 
 class ShowErrorPage extends AbstractReportPage
 {
-    public static $requireModule = 0;
+    public static int $requireModule = 0;
 
     protected $disableEcoSystem = true;
 

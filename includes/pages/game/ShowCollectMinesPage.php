@@ -6,7 +6,7 @@
 
 class ShowCollectMinesPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_COLLECT_MINES;
+    public static int $require_module = MODULE_COLLECT_MINES;
 
     public function __construct()
     {
@@ -93,8 +93,8 @@ class ShowCollectMinesPage extends AbstractGamePage
             ':metal'     => 0,
             ':deuterium' => 0,
             ':crystal'   => 0,
-            ':user_id'    => $USER['id'],
-            ':planet_id'  => $PLANET['id'],
+            ':user_id'   => $USER['id'],
+            ':planet_id' => $PLANET['id'],
         ]);
 
         $metal_sum = $crystal_sum = $deuterium_sum = 0;

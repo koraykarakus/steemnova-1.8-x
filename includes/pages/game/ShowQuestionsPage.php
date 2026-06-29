@@ -17,7 +17,7 @@
 
 class ShowQuestionsPage extends AbstractGamePage
 {
-    public static $require_module = MODULE_QUESTIONS;
+    public static int $require_module = MODULE_QUESTIONS;
 
     public function __construct()
     {
