@@ -19,7 +19,7 @@ class ShowErrorPage extends AbstractGamePage
 {
     public static int $require_module = 0;
 
-    protected $disable_eco_system = true;
+    protected bool $disable_eco_system = true;
 
     public function __construct()
     {

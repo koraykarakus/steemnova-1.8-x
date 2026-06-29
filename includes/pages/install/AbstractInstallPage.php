@@ -21,7 +21,7 @@ abstract class AbstractInstallPage
      * reference of the template object
      * @var template
      */
-    protected $tpl_obj = null;
+    protected object $tpl_obj;
     protected string $window;
     public $default_window = 'full';
 

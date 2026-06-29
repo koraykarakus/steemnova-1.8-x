@@ -21,7 +21,7 @@ abstract class AbstractAdminPage
      * reference of the template object
      * @var template
      */
-    protected $tpl_obj;
+    protected object $tpl_obj;
 
     /** @var string $window */
     protected string $window;

@@ -21,7 +21,7 @@ abstract class AbstractReportPage
      * reference of the template object
      * @var template
      */
-    protected $tplObj;
+    protected object $tplObj;
 
     public function __construct()
     {

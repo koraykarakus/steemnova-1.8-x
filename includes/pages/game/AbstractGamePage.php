@@ -21,7 +21,7 @@ abstract class AbstractGamePage
      * reference of the template object
      * @var template
      */
-    protected $tpl_obj;
+    protected object $tpl_obj;
 
     /**
      * reference of the template object
@@ -29,7 +29,7 @@ abstract class AbstractGamePage
      */
     protected object $eco_obj;
     protected string $window;
-    protected $disable_eco_system = false;
+    protected bool $disable_eco_system = false;
 
     protected function __construct()
     {
