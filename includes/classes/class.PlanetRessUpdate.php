@@ -40,24 +40,24 @@ class ResourceUpdate
         $this->tech = $tech;
     }
 
-    public function setData($user, $planet)
+    public function setData($user, $planet): void
     {
         $this->user = $user;
         $this->planet = $planet;
     }
 
-    public function getData()
+    public function getData(): array
     {
         return [$this->user, $this->planet];
     }
 
-    public function ReturnVars()
+    public function ReturnVars(): array
     {
         if ($this->is_global_mode)
         {
             $GLOBALS['USER'] = $this->user;
             $GLOBALS['PLANET'] = $this->planet;
-            return true;
+            return [];
         }
         else
         {
@@ -65,7 +65,7 @@ class ResourceUpdate
         }
     }
 
-    public function CreateHash()
+    public function CreateHash(): string
     {
         global $RESLIST, $RESOURCE;
         $hash = [];
@@ -101,7 +101,7 @@ class ResourceUpdate
         $save = false,
         $time = null,
         $hash = true
-    ) {
+    ): array {
         $this->is_global_mode = !isset($user, $planet) ? true : false;
         $this->user = $this->is_global_mode ? $GLOBALS['USER'] : $user;
         $this->planet = $this->is_global_mode ? $GLOBALS['PLANET'] : $planet;
@@ -136,7 +136,7 @@ class ResourceUpdate
         return $this->ReturnVars();
     }
 
-    public function UpdateResource($time, $hash = false)
+    public function UpdateResource($time, $hash = false): void
     {
         $this->production_time = ($time - $this->planet['last_update']);
 
@@ -161,7 +161,7 @@ class ResourceUpdate
         }
     }
 
-    private function ExecCalc()
+    private function ExecCalc(): void
     {
         if ($this->planet['planet_type'] == 3)
         {
@@ -208,7 +208,7 @@ class ResourceUpdate
         $this->planet['deuterium'] = max($this->planet['deuterium'], 0);
     }
 
-    public static function getProd($calculation, $element = false)
+    public static function getProd($calculation, $element = false): string
     {
         global $RESOURCE, $RESLIST, $USER, $PLANET;
 
@@ -237,7 +237,7 @@ class ResourceUpdate
         return 'return '.$calculation.';';
     }
 
-    public static function getNetworkLevel($user, $planet)
+    public static function getNetworkLevel($user, $planet): array
     {
         global $RESOURCE;
 
@@ -260,7 +260,7 @@ class ResourceUpdate
         return $research_level_list;
     }
 
-    public function ReBuildCache()
+    public function ReBuildCache(): void
     {
         global $PRODGRID, $RESOURCE, $RESLIST;
 
@@ -364,7 +364,7 @@ class ResourceUpdate
         }
     }
 
-    private function ShipyardQueue()
+    private function ShipyardQueue(): bool
     {
         global $RESOURCE;
 
@@ -442,7 +442,7 @@ class ResourceUpdate
         return true;
     }
 
-    private function BuildingQueue()
+    private function BuildingQueue(): void
     {
         while ($this->CheckPlanetBuildingQueue())
         {
@@ -450,7 +450,7 @@ class ResourceUpdate
         }
     }
 
-    private function CheckPlanetBuildingQueue()
+    private function CheckPlanetBuildingQueue(): bool
     {
         global $RESOURCE, $RESLIST;
 
@@ -502,7 +502,7 @@ class ResourceUpdate
         }
     }
 
-    public function SetNextQueueElementOnTop()
+    public function SetNextQueueElementOnTop(): bool
     {
         global $RESOURCE, $LNG;
 
@@ -684,7 +684,7 @@ class ResourceUpdate
         return true;
     }
 
-    private function ResearchQueue()
+    private function ResearchQueue(): void
     {
         while ($this->CheckUserTechQueue())
         {
@@ -692,7 +692,7 @@ class ResourceUpdate
         }
     }
 
-    private function CheckUserTechQueue()
+    private function CheckUserTechQueue(): bool
     {
         global $RESOURCE;
 
@@ -728,7 +728,7 @@ class ResourceUpdate
         }
     }
 
-    public function SetNextQueueTechOnTop()
+    public function SetNextQueueTechOnTop(): void
     {
         global $RESOURCE, $LNG;
 
@@ -738,7 +738,7 @@ class ResourceUpdate
             $this->user['b_tech_id'] = 0;
             $this->user['b_tech_planet'] = 0;
             $this->user['b_tech_queue'] = '';
-            return false;
+            return;
         }
 
         $current_queue = unserialize($this->user['b_tech_queue']);
@@ -896,11 +896,9 @@ class ResourceUpdate
                 $this->planet = $planet;
             }
         }
-
-        return true;
     }
 
-    public function SavePlanetToDB($USER = null, $PLANET = null)
+    public function SavePlanetToDB($USER = null, $PLANET = null): array
     {
         global $RESOURCE, $RESLIST;
 
