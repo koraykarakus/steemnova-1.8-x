@@ -17,8 +17,8 @@
 
 class Universe
 {
-    private static $current_universe = null;
-    private static $emulated_universe = null;
+    private static int $current_universe = 0;
+    private static int $emulated_universe = 0;
     private static $universe_array = [];
 
     /**
@@ -27,7 +27,7 @@ class Universe
      * @return int
      */
 
-    private static function getCurrentUniverse()
+    private static function getCurrentUniverse(): int
     {
         if (MODE === 'INSTALL')
         {
@@ -35,7 +35,7 @@ class Universe
             return ROOT_UNI;
         }
 
-        $universe = null;
+        $universe = 0;
         $universe_count = count(self::getAvailableUniverses());
         if ($universe_count != 1)
         {
@@ -56,7 +56,7 @@ class Universe
                 $universe = (int) $_SESSION['admin_uni'];
             }
 
-            if (is_null($universe))
+            if ($universe === 0)
             {
                 if (UNIS_WILDCAST)
                 {
@@ -96,7 +96,8 @@ class Universe
                     }
                 }
 
-                if (!isset($universe) || !self::exists($universe))
+                if ($universe === 0
+                    || !self::exists($universe))
                 {
                     HTTP::redirectToUniverse(ROOT_UNI);
                 }
@@ -121,9 +122,9 @@ class Universe
      * @return int
      */
 
-    public static function current()
+    public static function current(): int
     {
-        if (is_null(self::$current_universe))
+        if (self::$current_universe === 0)
         {
             self::$current_universe = self::getCurrentUniverse();
         }
@@ -136,14 +137,14 @@ class Universe
      * adds config row inside universe array
      */
 
-    public static function add($universe)
+    public static function add(int $universe): void
     {
         self::$universe_array[] = $universe;
     }
 
-    public static function getEmulated()
+    public static function getEmulated(): int
     {
-        if (is_null(self::$emulated_universe))
+        if (self::$emulated_universe === 0)
         {
             $session = Session::load();
             if (isset($session->emulatedUniverse))
@@ -159,7 +160,7 @@ class Universe
         return self::$emulated_universe;
     }
 
-    public static function setEmulated($universe_id)
+    public static function setEmulated(int $universe_id): bool
     {
         if (!self::exists($universe_id))
         {
@@ -191,10 +192,10 @@ class Universe
      *
      * @param int universe id
      *
-     * @return int
+     * @return bool
      */
 
-    public static function exists($universe_id)
+    public static function exists(int $universe_id): bool
     {
         return in_array($universe_id, self::getAvailableUniverses());
     }

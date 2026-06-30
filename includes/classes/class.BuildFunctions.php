@@ -17,7 +17,7 @@
 
 class BuildFunctions
 {
-    public static $bonus_list = [
+    public static array $bonus_list = [
         'Attack',
         'Defensive',
         'Shield',
@@ -38,12 +38,12 @@ class BuildFunctions
         'MoreFound',
     ];
 
-    public static function getBonusList()
+    public static function getBonusList(): array
     {
         return self::$bonus_list;
     }
 
-    public static function getRestPrice($USER, $PLANET, $element, $element_price = null)
+    public static function getRestPrice($USER, $PLANET, $element, $element_price = null): array
     {
         global $RESOURCE;
 
@@ -72,7 +72,7 @@ class BuildFunctions
         $element,
         $for_destroy = false,
         $for_level = null
-    ) {
+    ): array {
         global $PRICELIST, $RESOURCE, $RESLIST;
 
         if (in_array($element, $RESLIST['fleet'])
@@ -138,7 +138,7 @@ class BuildFunctions
         return $price;
     }
 
-    public static function isTechnologieAccessible($USER, $PLANET, $element)
+    public static function isTechnologieAccessible($USER, $PLANET, $element): bool
     {
         global $REQUIREMENTS, $RESOURCE;
 
@@ -167,7 +167,7 @@ class BuildFunctions
         $element_price = null,
         $for_destroy = false,
         $for_level = null
-    ) {
+    ): int {
         global $RESOURCE, $RESLIST, $REQUIREMENTS;
 
         $config = Config::get($USER['universe']);
@@ -251,16 +251,12 @@ class BuildFunctions
         $PLANET,
         $element,
         $element_price = null,
-        $for_destroy = false,
-        $for_level = null
-    ) {
+    ): bool {
         $rest = self::getRestPrice(
             $USER,
             $PLANET,
             $element,
             $element_price,
-            $for_destroy,
-            $for_level
         );
         return count(array_filter($rest)) === 0;
     }
@@ -270,7 +266,7 @@ class BuildFunctions
         $PLANET,
         $element,
         $element_price = null
-    ) {
+    ): int {
         global $RESOURCE, $RESLIST;
 
         if (!isset($element_price))
@@ -304,7 +300,7 @@ class BuildFunctions
         return min($max_element);
     }
 
-    public static function getMaxConstructibleRockets($USER, $PLANET, $missiles = null)
+    public static function getMaxConstructibleRockets($USER, $PLANET, $missiles = null): array
     {
         global $RESOURCE, $RESLIST;
 
@@ -341,7 +337,7 @@ class BuildFunctions
         ];
     }
 
-    public static function getAvalibleBonus($element)
+    public static function getAvalibleBonus($element): array
     {
         global $PRICELIST;
 
