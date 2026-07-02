@@ -79,8 +79,7 @@ abstract class AbstractInstallPage
         return http_build_query($query_string);
     }
 
-    // TODO: this is not getter, rename
-    protected function getPageData(): void
+    protected function AssignPageData(): void
     {
         global $LNG;
 
@@ -119,7 +118,7 @@ abstract class AbstractInstallPage
 
         if ($this->getWindow() !== 'ajax')
         {
-            $this->getPageData();
+            $this->AssignPageData();
         }
 
         $this->assign([

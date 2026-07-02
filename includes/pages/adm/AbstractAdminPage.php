@@ -86,7 +86,7 @@ abstract class AbstractAdminPage
         return http_build_query($query_string);
     }
 
-    protected function getPageData(): void
+    protected function AssignPageData(): void
     {
         global $USER;
 
@@ -165,7 +165,7 @@ abstract class AbstractAdminPage
 
         if ($this->getWindow() !== 'ajax')
         {
-            $this->getPageData();
+            $this->AssignPageData();
         }
 
         $this->assign([

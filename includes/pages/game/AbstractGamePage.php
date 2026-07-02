@@ -225,7 +225,7 @@ abstract class AbstractGamePage
         ]);
     }
 
-    protected function getPageData(): void
+    protected function AssignPageData(): void
     {
         global $USER, $config, $PLANET, $LNG;
 
@@ -415,7 +415,7 @@ abstract class AbstractGamePage
 
         if ($this->getWindow() !== 'ajax')
         {
-            $this->getPageData();
+            $this->AssignPageData();
         }
 
         $this->assign([

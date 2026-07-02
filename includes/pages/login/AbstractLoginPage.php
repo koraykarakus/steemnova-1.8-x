@@ -90,8 +90,7 @@ abstract class AbstractLoginPage
         return http_build_query($query_string);
     }
 
-    // TODO: this is not getter, rename
-    protected function getPageData(): void
+    protected function AssignPageData(): void
     {
         global $LNG;
         $config = Config::get();
@@ -148,7 +147,7 @@ abstract class AbstractLoginPage
 
         if ($this->getWindow() !== 'ajax')
         {
-            $this->getPageData();
+            $this->AssignPageData();
         }
 
         if (UNIS_WILDCAST)
