@@ -22,7 +22,7 @@ class ShowInstallPage extends AbstractInstallPage
         parent::__construct();
     }
 
-    public function display_step_1()
+    public function display_step_1(): void
     {
         if (isset($_POST['post']))
         {
@@ -41,7 +41,7 @@ class ShowInstallPage extends AbstractInstallPage
         $this->display('ins_license.tpl');
     }
 
-    public function display_step_2()
+    public function display_step_2(): void
     {
         global $LNG;
         $error = $ftp = false;
@@ -205,7 +205,7 @@ class ShowInstallPage extends AbstractInstallPage
         $this->display('ins_req.tpl');
     }
 
-    public function display_step_3()
+    public function display_step_3(): void
     {
         $this->assign([
             'host'     => getenv('DB_HOST'),
@@ -217,7 +217,7 @@ class ShowInstallPage extends AbstractInstallPage
         $this->display('ins_form.tpl');
     }
 
-    public function display_step_4()
+    public function display_step_4(): void
     {
         global $LNG;
         $host = HTTP::_GP('host', '');
@@ -344,12 +344,12 @@ class ShowInstallPage extends AbstractInstallPage
         $this->display('ins_step4.tpl');
     }
 
-    public function display_step_5()
+    public function display_step_5(): void
     {
         $this->display('ins_step5.tpl');
     }
 
-    public function display_step_6()
+    public function display_step_6(): void
     {
         global $LNG;
         $db = Database::get();
@@ -417,7 +417,7 @@ class ShowInstallPage extends AbstractInstallPage
         }
     }
 
-    public function display_step_7()
+    public function display_step_7(): void
     {
         $this->assign([
             'name'     => getenv('ADMIN_NAME'),
@@ -428,7 +428,7 @@ class ShowInstallPage extends AbstractInstallPage
         $this->display('ins_acc.tpl');
     }
 
-    public function display_step_8()
+    public function display_step_8(): void
     {
         global $LNG;
         $username = HTTP::_GP('username', '', UTF8_SUPPORT);
