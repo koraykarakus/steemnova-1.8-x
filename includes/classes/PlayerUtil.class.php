@@ -17,13 +17,25 @@
 
 class PlayerUtil
 {
-    public static function cryptPassword($password)
+    public static function cryptPassword(string $password): string
     {
-        return password_hash($password, PASSWORD_BCRYPT, ['cost' => 13]);
+        $result = password_hash($password, PASSWORD_BCRYPT, ['cost' => 13]);
+
+        if ($result === false)
+        {
+            throw new Exception("cryptPassword : Error Processing Request");
+        }
+
+        return $result;
     }
 
-    public static function isPositionFree($universe, $galaxy, $system, $position, $type = 1)
-    {
+    public static function isPositionFree(
+        int $universe,
+        int $galaxy,
+        int $system,
+        int $position,
+        int $type = 1
+    ): bool {
         $db = Database::get();
         $sql = "SELECT COUNT(*) as record
 		FROM %%PLANETS%%
@@ -44,33 +56,48 @@ class PlayerUtil
         return $count == 0;
     }
 
-    public static function isNameValid($name)
+    public static function isNameValid(string $name): bool
     {
         if (UTF8_SUPPORT)
         {
-            return preg_match('/^[\p{L}\p{N}_\-. ]*$/u', $name);
+            $result = preg_match('/^[\p{L}\p{N}_\-. ]*$/u', $name);
         }
         else
         {
-            return preg_match('/^[A-z0-9_\-. ]*$/', $name);
+            $result = preg_match('/^[A-Za-z0-9_.\- ]*$/', $name);
         }
+
+        if ($result === false)
+        {
+            throw new Exception("isNameValid : preg_match fail !");
+        }
+
+        return $result === 1;
     }
 
-    public static function isMailValid($address)
+    public static function isMailValid(string $address): bool
     {
-
         if (function_exists('filter_var'))
         {
             return filter_var($address, FILTER_VALIDATE_EMAIL) !== false;
         }
         else
         {
-            return preg_match('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', $address);
+            $result = preg_match('/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/', $address);
+            if ($result === false)
+            {
+                throw new Exception("isMailValid : preg_match failed !");
+            }
+            return $result === 1;
         }
     }
 
-    public static function checkPosition($universe, $galaxy, $system, $position)
-    {
+    public static function checkPosition(
+        int $universe,
+        int $galaxy,
+        int $system,
+        int $position
+    ): bool {
         $config = Config::get($universe);
 
         return !(1 > $galaxy
@@ -81,20 +108,36 @@ class PlayerUtil
             || $config->max_planets < $position);
     }
 
-    public static function createPlayer($universe, $userName, $userPassword, $userMail, $userLanguage = null, $galaxy = null, $system = null, $position = null, $name = null, $authlevel = 0, $userIpAddress = null, $user_secret_question_id = 0, $user_secret_question_answer = '')
-    {
+    public static function createPlayer(
+        int $universe,
+        string $userName,
+        string $userPassword,
+        string $userMail,
+        string $userLanguage,
+        int $galaxy = 0,
+        int $system = 0,
+        int $position = 0,
+        $name = null,
+        $authlevel = 0,
+        $userIpAddress = null,
+        $user_secret_question_id = 0,
+        $user_secret_question_answer = ''
+    ): array {
         $config = Config::get($universe);
 
-        if (isset($universe, $galaxy, $system, $position))
+        if (isset($universe)
+            && $galaxy !== 0
+            && $system !== 0
+            && $position !== 0)
         {
-            if (self::checkPosition($universe, $galaxy, $system, $position) === false)
+            if (!self::checkPosition($universe, $galaxy, $system, $position))
             {
-                throw new Exception(sprintf("Try to create a planet at position: %s:%s:%s!", $galaxy, $system, $position));
+                throw new Exception(sprintf("Try to create a planet at position: %d:%d:%d!", $galaxy, $system, $position));
             }
 
-            if (self::isPositionFree($universe, $galaxy, $system, $position) === false)
+            if (!self::isPositionFree($universe, $galaxy, $system, $position))
             {
-                throw new Exception(sprintf("Position is not empty: %s:%s:%s!", $galaxy, $system, $position));
+                throw new Exception(sprintf("Position is not empty: %d:%d:%d!", $galaxy, $system, $position));
             }
         }
         else
@@ -243,7 +286,7 @@ class PlayerUtil
         return [$userId, $planetId];
     }
 
-    public static function updateColonyWithStartValues($planetID)
+    public static function updateColonyWithStartValues(int $planetID): void
     {
 
         $db = Database::get();
@@ -344,9 +387,9 @@ class PlayerUtil
             ':giga_recycler_start'           => $colony_settings['giga_recycler_start'],
             ':dm_ship_start'                 => $colony_settings['dm_ship_start'],
             ':orbital_station_start'         => $colony_settings['orbital_station_start'],
-            ':rocket_launcher_start'          => $colony_settings['rocket_launcher_start'],
+            ':rocket_launcher_start'         => $colony_settings['rocket_launcher_start'],
             ':light_laser_start'             => $colony_settings['light_laser_start'],
-            ':heavy_laser_start'               => $colony_settings['heavy_laser_start'],
+            ':heavy_laser_start'             => $colony_settings['heavy_laser_start'],
             ':gauss_cannon_start'            => $colony_settings['gauss_cannon_start'],
             ':ion_cannon_start'              => $colony_settings['ion_cannon_start'],
             ':plasma_turret_start'           => $colony_settings['plasma_turret_start'],
@@ -361,8 +404,16 @@ class PlayerUtil
 
     }
 
-    public static function createPlanet($galaxy, $system, $position, $universe, $userId, $name = null, $isHome = false, $authlevel = 0)
-    {
+    public static function createPlanet(
+        $galaxy,
+        $system,
+        $position,
+        $universe,
+        $userId,
+        $name = null,
+        $isHome = false,
+        $authlevel = 0
+    ) {
         global $LNG;
 
         if (self::checkPosition($universe, $galaxy, $system, $position) === false)
@@ -444,8 +495,16 @@ class PlayerUtil
         return $db->lastInsertId();
     }
 
-    public static function createMoon($universe, $galaxy, $system, $position, $userId, $chance, $diameter = null, $moonName = null)
-    {
+    public static function createMoon(
+        $universe,
+        $galaxy,
+        $system,
+        $position,
+        $userId,
+        $chance,
+        $diameter = null,
+        $moonName = null
+    ) {
         global $LNG;
 
         $db = Database::get();
@@ -758,8 +817,18 @@ class PlayerUtil
         }
     }
 
-    public static function sendMessage($userId, $senderId, $senderName, $messageType, $subject, $text, $time, $parentID = null, $unread = 1, $universe = null)
-    {
+    public static function sendMessage(
+        $userId,
+        $senderId,
+        $senderName,
+        $messageType,
+        $subject,
+        $text,
+        $time,
+        $parentID = null,
+        $unread = 1,
+        $universe = null
+    ) {
         if (is_null($universe))
         {
             $universe = Universe::current();
