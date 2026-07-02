@@ -26,7 +26,7 @@ class ShowLoginPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function generateRememberMeToken($universe): array
+    public function generateRememberMeToken(int $universe): array
     {
         $selector = bin2hex(random_bytes(16));
         $validator = bin2hex(random_bytes(32));

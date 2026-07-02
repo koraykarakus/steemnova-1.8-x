@@ -37,11 +37,12 @@ class ShowIndexPage extends AbstractLoginPage
         $this->sendJSON([1 => 'success']);
     }
 
-    public function parseRememberMeToken($token): array
+    public function parseRememberMeToken(string $token): array
     {
         $parts = explode(':', $token);
 
-        if ($parts && count($parts) == 3)
+        if ($parts
+            && count($parts) == 3)
         {
             return [$parts[0], $parts[1], $parts[2]];
         }

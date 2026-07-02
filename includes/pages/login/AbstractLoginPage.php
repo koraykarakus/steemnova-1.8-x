@@ -116,8 +116,12 @@ abstract class AbstractLoginPage
         ]);
     }
 
-    protected function printMessage($msg, $redirect_btns = null, $redirect = null, $full = true): void
-    {
+    protected function printMessage(
+        string $msg,
+        $redirect_btns = null,
+        $redirect = null,
+        bool $full = true
+    ): void {
         $this->assign([
             'message'          => $msg,
             'redirect_buttons' => $redirect_btns,
@@ -136,12 +140,14 @@ abstract class AbstractLoginPage
         $this->display('error.default.tpl');
     }
 
-    protected function assign($array, $nocache = true): void
-    {
+    protected function assign(
+        array $array,
+        bool $nocache = true
+    ): void {
         $this->tpl_obj->assign_vars($array, $nocache);
     }
 
-    protected function display($file): void
+    protected function display(string $file): void
     {
         global $LNG;
 
@@ -187,20 +193,9 @@ abstract class AbstractLoginPage
         exit;
     }
 
-    protected function redirectTo($url): void
+    protected function redirectTo(string $url): void
     {
         HTTP::redirectTo($url);
         exit;
-    }
-
-    // TODO : unused maybe strip
-    protected function redirectPost($url, $post_fields): void
-    {
-        $this->assign([
-            'url'        => $url,
-            'postFields' => $post_fields,
-        ]);
-
-        $this->display('info_redirect_post.tpl');
     }
 }

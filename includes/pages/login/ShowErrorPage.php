@@ -25,8 +25,11 @@ class ShowErrorPage extends AbstractLoginPage
         $this->initTemplate();
     }
 
-    public static function printError($msg, $full_side = true, $redirect = null): void
-    {
+    public static function printError(
+        string $msg,
+        bool $full_side = true,
+        $redirect = null
+    ): void {
         $pageObj = new self();
         $pageObj->printMessage($msg, $full_side, $redirect);
     }

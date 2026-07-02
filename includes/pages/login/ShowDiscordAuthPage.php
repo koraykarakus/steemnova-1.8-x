@@ -29,7 +29,7 @@ class ShowDiscordAuthPage extends AbstractLoginPage
         parent::__construct();
     }
 
-    public function callBack()
+    public function callBack(): void
     {
         global $LNG;
 
