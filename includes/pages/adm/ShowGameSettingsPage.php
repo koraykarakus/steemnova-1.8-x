@@ -41,7 +41,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->display('page.gameSettings.buildings.tpl');
     }
 
-    public function updateBuildings()
+    public function updateBuildings(): void
     {
         $element_id = HTTP::_GP('element_id', 0);
         $factor = HTTP::_GP('factor', 0.00);
@@ -108,7 +108,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->display('page.gameSettings.rapidFire.tpl');
     }
 
-    public function removeRapidFire()
+    public function removeRapidFire(): void
     {
         global $LNG;
         $element_id = HTTP::_GP('element_id', 0);
@@ -133,7 +133,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
     }
 
-    public function addRapidFire()
+    public function addRapidFire(): void
     {
         global $LNG;
         $element_id = HTTP::_GP('element_id', 0);
@@ -175,7 +175,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->printMessage($LNG['rf_suc_add'], $this->createButtonBack());
     }
 
-    public function updateRapidFire()
+    public function updateRapidFire(): void
     {
         global $LNG;
 
@@ -203,7 +203,7 @@ class ShowGameSettingsPage extends AbstractAdminPage
         $this->redirectTo('admin.php?page=gameSettings&mode=rapidFire');
     }
 
-    public function restoreRapidFire()
+    public function restoreRapidFire(): void
     {
         $sql = "TRUNCATE TABLE %%VARS_RAPIDFIRE%%;
         INSERT INTO %%VARS_RAPIDFIRE%% 

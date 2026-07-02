@@ -129,8 +129,12 @@ abstract class AbstractAdminPage
         return $btn;
     }
 
-    protected function printMessage($msg, $btns = null, $redirect = null, $full = true): void
-    {
+    protected function printMessage(
+        string $msg,
+        $btns = null,
+        $redirect = null,
+        bool $full = true
+    ): void {
 
         $this->assign([
             'message'          => $msg,
@@ -150,12 +154,12 @@ abstract class AbstractAdminPage
         $this->display('error.default.tpl');
     }
 
-    protected function assign($array, $no_cache = true): void
+    protected function assign(array $array, bool $no_cache = true): void
     {
         $this->tpl_obj->assign_vars($array, $no_cache);
     }
 
-    protected function display($file): void
+    protected function display(string $file): void
     {
         global $LNG;
 
@@ -186,7 +190,7 @@ abstract class AbstractAdminPage
         exit;
     }
 
-    protected function redirectTo($url): void
+    protected function redirectTo(string $url): void
     {
         HTTP::redirectTo($url);
         exit;
