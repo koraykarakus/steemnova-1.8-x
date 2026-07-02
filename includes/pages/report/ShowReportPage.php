@@ -17,7 +17,7 @@
 
 class ShowReportPage extends AbstractReportPage
 {
-    private function BCWrapperPreRev2321($combat_report): mixed
+    private function BCWrapperPreRev2321(mixed $combat_report): mixed
     {
         if (isset($combat_report['moon']['desfail']))
         {

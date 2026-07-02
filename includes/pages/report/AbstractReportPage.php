@@ -41,8 +41,12 @@ abstract class AbstractReportPage
         $this->tplObj->setTemplateDir($tpl_dir . "/game");
     }
 
-    protected function printMessage($msg, $redirect_buttons = null, $redirect = null, $full = true): void
-    {
+    protected function printMessage(
+        string $msg,
+        $redirect_buttons = null,
+        $redirect = null,
+        bool $full = true
+    ): void {
         $this->assign([
             'message'          => $msg,
             'redirect_buttons' => $redirect_buttons,
@@ -56,12 +60,14 @@ abstract class AbstractReportPage
         $this->display('error.default.tpl');
     }
 
-    protected function assign($array, $not_cache = true): void
-    {
+    protected function assign(
+        array $array,
+        bool $not_cache = true
+    ): void {
         $this->tplObj->assign_vars($array, $not_cache);
     }
 
-    protected function display($file): void
+    protected function display(string $file): void
     {
         global $LNG;
 
@@ -78,7 +84,7 @@ abstract class AbstractReportPage
         exit;
     }
 
-    protected function redirectTo($url): void
+    protected function redirectTo(string $url): void
     {
         HTTP::redirectTo($url);
         exit;
