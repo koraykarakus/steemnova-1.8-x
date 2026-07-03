@@ -17,9 +17,9 @@
 
 class FlyingFleetHandler
 {
-    protected $token;
+    protected string $token;
 
-    public static $mission_obj_pattern = [
+    public static array $mission_obj_pattern = [
         1  => 'MissionCaseAttack',
         2  => 'MissionCaseACS',
         3  => 'MissionCaseTransport',
@@ -36,12 +36,12 @@ class FlyingFleetHandler
         17 => 'MissionCaseTransfer',
     ];
 
-    public function setToken($token)
+    public function setToken(string $token): void
     {
         $this->token = $token;
     }
 
-    public function run()
+    public function run(): void
     {
         require_once 'includes/classes/class.MissionFunctions.php';
         require_once 'includes/classes/missions/Mission.interface.php';

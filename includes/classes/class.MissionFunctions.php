@@ -22,13 +22,13 @@ class MissionFunctions
     public $_upd = [];
     public $event_time = 0;
 
-    public function UpdateFleet($option, $val)
+    public function UpdateFleet(string $option, mixed $val): void
     {
         $this->_fleet[$option] = $val;
         $this->_upd[$option] = $val;
     }
 
-    public function setState($val)
+    public function setState(int $val): void
     {
         $this->_fleet['fleet_mess'] = $val;
         $this->_upd['fleet_mess'] = $val;
@@ -47,7 +47,7 @@ class MissionFunctions
         }
     }
 
-    public function SaveFleet()
+    public function SaveFleet(): void
     {
         if ($this->kill == 1)
         {
@@ -81,7 +81,7 @@ class MissionFunctions
         }
     }
 
-    public function RestoreFleet($on_start = true)
+    public function RestoreFleet(bool $on_start = true): void
     {
         global $RESOURCE;
 
@@ -117,7 +117,7 @@ class MissionFunctions
         $this->KillFleet();
     }
 
-    public function StoreGoodsToPlanet($on_start = false)
+    public function StoreGoodsToPlanet(bool $on_start = false): void
     {
         $sql = 'UPDATE %%PLANETS%% as p, %%USERS%% as u SET
 		`metal`			= `metal` + :metal,
@@ -140,7 +140,7 @@ class MissionFunctions
         $this->UpdateFleet('fleet_resource_deuterium', '0');
     }
 
-    public function KillFleet()
+    public function KillFleet(): void
     {
         $this->kill = 1;
         $sql = 'DELETE %%FLEETS%%, %%FLEETS_EVENT%%
@@ -152,9 +152,10 @@ class MissionFunctions
         ]);
     }
 
-    public function getLanguage($language = null, $user_id = null)
+    public function getLanguage($language = null, $user_id = null): Language
     {
-        if (is_null($language) && !is_null($user_id))
+        if (is_null($language)
+            && !is_null($user_id))
         {
             $sql = 'SELECT lang FROM %%USERS%% WHERE id = :user_id;';
             $language = Database::get()->selectSingle($sql, [
@@ -167,7 +168,7 @@ class MissionFunctions
         return $LNG;
     }
 
-    public function savePlanetProduction($planet_id, $start_time)
+    public function savePlanetProduction(int $planet_id, int $start_time): void
     {
         $db = Database::get();
 
@@ -195,7 +196,7 @@ class MissionFunctions
         $planet_updater->CalcResource($user, $planet, true, $start_time);
     }
 
-    public function failReturn()
+    public function failReturn(): void
     {
         $this->setState(FLEET_RETURN);
         $this->SaveFleet();
