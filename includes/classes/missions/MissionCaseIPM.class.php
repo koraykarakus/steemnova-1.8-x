@@ -205,11 +205,9 @@ class MissionCaseIPM extends MissionFunctions implements Mission
 
     public function EndStayEvent()
     {
-        return;
     }
 
     public function ReturnEvent()
     {
-        return;
     }
 }

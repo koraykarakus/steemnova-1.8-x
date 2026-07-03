@@ -186,7 +186,6 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
 
     public function EndStayEvent()
     {
-        return;
     }
 
     public function ReturnEvent()
