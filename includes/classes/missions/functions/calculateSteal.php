@@ -15,8 +15,11 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function calculateSteal($attack_fleets, $defender_planet, $simulate = false)
-{
+function calculateSteal(
+    array $attack_fleets,
+    array $defender_planet,
+    bool $simulate = false
+): array {
     // See: http://www.owiki.de/Beute
     global $PRICELIST, $RESOURCE;
 
