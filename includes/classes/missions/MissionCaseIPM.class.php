@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class MissionCaseMIP extends MissionFunctions implements Mission
+class MissionCaseIPM extends MissionFunctions implements Mission
 {
     public function __construct($fleet)
     {

@@ -29,7 +29,7 @@ class FlyingFleetHandler
         7  => 'MissionCaseColonisation',
         8  => 'MissionCaseRecycling',
         9  => 'MissionCaseDestruction',
-        10 => 'MissionCaseMIP',
+        10 => 'MissionCaseIPM',
         11 => 'MissionCaseFoundDM',
         15 => 'MissionCaseExpedition',
         16 => 'MissionCaseTrade',
