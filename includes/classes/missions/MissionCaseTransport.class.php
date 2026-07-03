@@ -21,7 +21,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planet_id;';
 
@@ -137,11 +137,11 @@ class MissionCaseTransport extends MissionFunctions implements Mission
         $this->SaveFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
         $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';

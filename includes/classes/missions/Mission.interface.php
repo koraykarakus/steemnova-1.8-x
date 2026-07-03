@@ -16,9 +16,9 @@
  */
 interface Mission
 {
-    public function TargetEvent();
+    public function TargetEvent(): void;
 
-    public function EndStayEvent();
+    public function EndStayEvent(): void;
 
-    public function ReturnEvent();
+    public function ReturnEvent(): void;
 }

@@ -22,7 +22,7 @@ class MissionCaseIPM extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         global $RESOURCE, $RESLIST;
 
@@ -203,11 +203,11 @@ class MissionCaseIPM extends MissionFunctions implements Mission
         $this->KillFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
     }
 }

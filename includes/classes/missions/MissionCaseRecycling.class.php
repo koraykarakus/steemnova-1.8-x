@@ -22,7 +22,7 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         global $PRICELIST, $RESOURCE;
 
@@ -134,11 +134,11 @@ class MissionCaseRecycling extends MissionFunctions implements Mission
         $this->SaveFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
 

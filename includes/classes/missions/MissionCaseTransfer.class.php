@@ -19,7 +19,7 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         $sql = 'SELECT name FROM %%PLANETS%% WHERE `id` = :planet_id;';
 
@@ -102,11 +102,11 @@ class MissionCaseTransfer extends MissionFunctions implements Mission
         $this->RestoreFleet(false);
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $this->RestoreFleet();
     }

@@ -22,7 +22,7 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         global $PRICELIST, $RESLIST, $RESOURCE;
 
@@ -52,7 +52,8 @@ class MissionCaseSpy extends MissionFunctions implements Mission
             || !$target_planet
             || !$sender_planet)
         {
-            return $this->failReturn();
+            $this->failReturn();
+            return;
         }
 
         $LNG = $this->getLanguage($sender_user['lang']);
@@ -253,11 +254,11 @@ class MissionCaseSpy extends MissionFunctions implements Mission
         }
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $this->RestoreFleet();
     }

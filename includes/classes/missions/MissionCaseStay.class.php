@@ -22,7 +22,7 @@ class MissionCaseStay extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
 
         $sql = 'SELECT * FROM %%USERS%% WHERE id = :userId;';
@@ -82,11 +82,11 @@ class MissionCaseStay extends MissionFunctions implements Mission
         $this->RestoreFleet(false);
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
 

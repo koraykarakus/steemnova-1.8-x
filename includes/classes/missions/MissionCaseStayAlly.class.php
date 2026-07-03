@@ -22,19 +22,19 @@ class MissionCaseStayAlly extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         $this->setState(FLEET_HOLD);
         $this->SaveFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
         $this->setState(FLEET_RETURN);
         $this->SaveFleet();
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
         $sql = 'SELECT name FROM %%PLANETS%% WHERE id = :planet_id;';

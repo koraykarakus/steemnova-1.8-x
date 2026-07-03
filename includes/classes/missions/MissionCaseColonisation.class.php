@@ -22,7 +22,7 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         $db = Database::get();
 
@@ -184,11 +184,11 @@ class MissionCaseColonisation extends MissionFunctions implements Mission
         $this->SaveFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $this->savePlanetProduction(
             $this->_fleet['fleet_start_id'],

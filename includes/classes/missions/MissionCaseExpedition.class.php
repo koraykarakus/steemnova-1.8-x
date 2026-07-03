@@ -22,13 +22,13 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
         $this->_fleet = $fleet;
     }
 
-    public function TargetEvent()
+    public function TargetEvent(): void
     {
         $this->setState(FLEET_HOLD);
         $this->SaveFleet();
     }
 
-    public function EndStayEvent()
+    public function EndStayEvent(): void
     {
         global $PRICELIST, $RESLIST, $RESOURCE;
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
@@ -805,7 +805,7 @@ class MissionCaseExpedition extends MissionFunctions implements Mission
         $this->SaveFleet();
     }
 
-    public function ReturnEvent()
+    public function ReturnEvent(): void
     {
         $LNG = $this->getLanguage(null, $this->_fleet['fleet_owner']);
         $Message = sprintf(
