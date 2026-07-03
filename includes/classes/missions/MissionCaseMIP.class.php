@@ -117,8 +117,8 @@ class MissionCaseMIP extends MissionFunctions implements Mission
 
             if (!empty($target_defensive))
             {
-                require_once 'includes/classes/missions/functions/calculateMIPAttack.php';
-                $result = calculateMIPAttack(
+                require_once 'includes/classes/missions/functions/calculateIPMAttack.php';
+                $result = calculateIPMAttack(
                     $target_data["shield_tech"],
                     $sender_data["military_tech"],
                     $this->_fleet['fleet_amount'],
