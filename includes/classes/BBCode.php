@@ -17,7 +17,7 @@
 
 class BBCode
 {
-    public static function parse($text)
+    public static function parse(string $text): string
     {
         if (!isset($text))
         {
