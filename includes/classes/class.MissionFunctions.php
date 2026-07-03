@@ -18,7 +18,7 @@
 class MissionFunctions
 {
     public $kill = 0;
-    public $_fleet = [];
+    public array $_fleet = [];
     public $_upd = [];
     public $event_time = 0;
 

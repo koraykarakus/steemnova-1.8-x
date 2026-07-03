@@ -23,7 +23,7 @@ class MissionCaseFoundDM extends MissionFunctions implements Mission
     public const MAX_FOUND = 1278;
     public const MAX_CHANCE = 50;
 
-    public function __construct($fleet)
+    public function __construct(array $fleet)
     {
         $this->_fleet = $fleet;
     }

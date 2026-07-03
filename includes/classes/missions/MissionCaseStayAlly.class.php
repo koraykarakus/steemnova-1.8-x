@@ -17,7 +17,7 @@
 
 class MissionCaseStayAlly extends MissionFunctions implements Mission
 {
-    public function __construct($fleet)
+    public function __construct(array $fleet)
     {
         $this->_fleet = $fleet;
     }
