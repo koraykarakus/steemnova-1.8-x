@@ -113,7 +113,7 @@ class ShowShipyardPage extends AbstractGamePage
             $build_array = !empty($PLANET['b_shipyard_id']) ? unserialize($PLANET['b_shipyard_id']) : [];
             if (in_array($element, $RESLIST['missile']))
             {
-                $max_missiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $missiles);
+                $max_missiles = BuildFunctions::getMaxConstructibleRockets($PLANET, $missiles);
                 $count = min($count, $max_missiles[$element]);
 
                 $missiles[$element] += $count;
@@ -276,7 +276,7 @@ class ShowShipyardPage extends AbstractGamePage
             $missiles[$elementID] = $PLANET[$RESOURCE[$elementID]];
         }
 
-        $max_missiles = BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $missiles);
+        $max_missiles = BuildFunctions::getMaxConstructibleRockets($PLANET, $missiles);
 
         foreach ($element_ids as $element)
         {

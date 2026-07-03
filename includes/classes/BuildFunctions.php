@@ -43,8 +43,12 @@ class BuildFunctions
         return self::$bonus_list;
     }
 
-    public static function getRestPrice($USER, $PLANET, $element, $element_price = null): array
-    {
+    public static function getRestPrice(
+        array $USER,
+        array $PLANET,
+        int $element,
+        $element_price = null
+    ): array {
         global $RESOURCE;
 
         if (!isset($element_price))
@@ -67,10 +71,10 @@ class BuildFunctions
     }
 
     public static function getElementPrice(
-        $USER,
-        $PLANET,
-        $element,
-        $for_destroy = false,
+        array $USER,
+        array $PLANET,
+        int $element,
+        bool $for_destroy = false,
         $for_level = null
     ): array {
         global $PRICELIST, $RESOURCE, $RESLIST;
@@ -138,8 +142,11 @@ class BuildFunctions
         return $price;
     }
 
-    public static function isTechnologieAccessible($USER, $PLANET, $element): bool
-    {
+    public static function isTechnologieAccessible(
+        array $USER,
+        array $PLANET,
+        int $element
+    ): bool {
         global $REQUIREMENTS, $RESOURCE;
 
         if (!isset($REQUIREMENTS[$element]))
@@ -161,11 +168,11 @@ class BuildFunctions
     }
 
     public static function getBuildingTime(
-        $USER,
-        $PLANET,
-        $element,
+        array $USER,
+        array $PLANET,
+        int $element,
         $element_price = null,
-        $for_destroy = false,
+        bool $for_destroy = false,
         $for_level = null
     ): int {
         global $RESOURCE, $RESLIST, $REQUIREMENTS;
@@ -247,9 +254,9 @@ class BuildFunctions
     }
 
     public static function isElementBuyable(
-        $USER,
-        $PLANET,
-        $element,
+        array $USER,
+        array $PLANET,
+        int $element,
         $element_price = null,
     ): bool {
         $rest = self::getRestPrice(
@@ -262,9 +269,9 @@ class BuildFunctions
     }
 
     public static function getMaxConstructibleElements(
-        $USER,
-        $PLANET,
-        $element,
+        array $USER,
+        array $PLANET,
+        int $element,
         $element_price = null
     ): int {
         global $RESOURCE, $RESLIST;
@@ -300,8 +307,10 @@ class BuildFunctions
         return min($max_element);
     }
 
-    public static function getMaxConstructibleRockets($USER, $PLANET, $missiles = null): array
-    {
+    public static function getMaxConstructibleRockets(
+        array $PLANET,
+        $missiles = null
+    ): array {
         global $RESOURCE, $RESLIST;
 
         if (!isset($missiles))
@@ -337,7 +346,7 @@ class BuildFunctions
         ];
     }
 
-    public static function getAvalibleBonus($element): array
+    public static function getAvalibleBonus(int $element): array
     {
         global $PRICELIST;
 
