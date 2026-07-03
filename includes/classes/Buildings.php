@@ -4,12 +4,12 @@ class Buildings
 {
     protected static array $facility_ids = [14, 15, 21, 31, 33, 34, 41, 42, 43, 44];
 
-    private static function isFacility($id): bool
+    private static function isFacility(int $id): bool
     {
         return in_array($id, self::$facility_ids);
     }
 
-    public static function filterElements($elements, $type): array
+    public static function filterElements(array $elements, int $type): array
     {
         $arr = [];
         foreach ($elements as $id)
@@ -69,7 +69,7 @@ class Buildings
         return ['queue' => $script_data, 'quickinfo' => $quick_info];
     }
 
-    public static function AddBuildingToQueue($element, $add_mode = true): void
+    public static function AddBuildingToQueue(int $element, bool $add_mode = true): void
     {
         global $PLANET, $USER, $RESOURCE, $RESLIST, $PRICELIST, $config;
 
@@ -195,7 +195,7 @@ class Buildings
 
     }
 
-    public static function CancelBuildingFromQueue($eco_obj): bool
+    public static function CancelBuildingFromQueue(ResourceUpdate $eco_obj): bool
     {
         global $PLANET, $USER, $RESOURCE;
         $current_queue = unserialize($PLANET['b_building_id'] ?? '');
@@ -279,8 +279,10 @@ class Buildings
         return true;
     }
 
-    public static function RemoveBuildingFromQueue($queue_id, $eco_obj): void
-    {
+    public static function RemoveBuildingFromQueue(
+        int $queue_id,
+        ResourceUpdate $eco_obj
+    ): void {
         global $USER, $PLANET;
         if ($queue_id <= 1
             || empty($PLANET['b_building_id']))
