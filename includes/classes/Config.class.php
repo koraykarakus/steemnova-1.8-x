@@ -16,12 +16,12 @@
  */
 class Config
 {
-    protected $configData = [];
-    protected $updateRecords = [];
+    protected array $config_data = [];
+    protected array $update_records = [];
     protected static $instances = [];
 
     // Global configkeys
-    protected static $globalConfigKeys = ['version', 'game_name', 'stat', 'stat_level', 'stat_last_update',
+    protected static array $global_config_keys = ['version', 'game_name', 'stat', 'stat_level', 'stat_last_update',
         'stat_settings', 'stat_update_time', 'stat_last_db_update', 'stats_fly_lock',
         'cron_lock', 'google_recaptcha_active', 'google_recaptcha_public_key',
         'google_recaptcha_private_key', 'mail_active', 'mail_use', 'smtp_host',
@@ -34,9 +34,9 @@ class Config
         'del_user_automatic', 'del_oldstuff', 'del_user_manually', 'ref_max_referals',
         'disclaimer_address', 'disclaimer_phone', 'disclaimer_mail', 'disclaimer_notice'];
 
-    public static function getGlobalConfigKeys()
+    public static function getGlobalConfigKeys(): array
     {
-        return self::$globalConfigKeys;
+        return self::$global_config_keys;
     }
 
     /**
@@ -47,7 +47,7 @@ class Config
      * @return Config
      */
 
-    public static function get($universe = 0)
+    public static function get(int $universe = 0): Config
     {
         if (empty(self::$instances))
         {
@@ -67,12 +67,12 @@ class Config
         return self::$instances[$universe];
     }
 
-    public static function reload()
+    public static function reload(): void
     {
         self::generateInstances();
     }
 
-    private static function generateInstances()
+    private static function generateInstances(): void
     {
         $db = Database::get();
         $configResult = $db->nativeQuery("SELECT * FROM %%CONFIG%%;");
@@ -83,39 +83,39 @@ class Config
         }
     }
 
-    public function __construct($configData)
+    public function __construct(array $data)
     {
-        $this->configData = $configData;
+        $this->config_data = $data;
     }
 
-    public function __get($key)
+    public function __get(string $key): string
     {
-        if (!isset($this->configData[$key]))
+        if (!isset($this->config_data[$key]))
         {
             throw new UnexpectedValueException(sprintf("Unknown configuration key %s!", $key));
         }
 
-        return $this->configData[$key];
+        return $this->config_data[$key];
     }
 
-    public function __set($key, $value)
+    public function __set(string $key, $value): void
     {
-        if (!isset($this->configData[$key]))
+        if (!isset($this->config_data[$key]))
         {
             throw new UnexpectedValueException(sprintf("Unknown configuration key %s!", $key));
         }
-        $this->updateRecords[] = $key;
-        $this->configData[$key] = $value;
+        $this->update_records[] = $key;
+        $this->config_data[$key] = $value;
     }
 
-    public function __isset($key)
+    public function __isset(string $key): bool
     {
-        return isset($this->configData[$key]);
+        return isset($this->config_data[$key]);
     }
 
-    public function save($options = null)
+    public function save($options = null): bool
     {
-        if (empty($this->updateRecords))
+        if (empty($this->update_records))
         {
             // Do nothing here.
             return true;
@@ -132,20 +132,20 @@ class Config
 
         $updateData = [];
         $params = [];
-        foreach ($this->updateRecords as $columnName)
+        foreach ($this->update_records as $columnName)
         {
             $updateData[] = '`' . $columnName . '` = :' . $columnName;
-            $params[':' . $columnName] = $this->configData[$columnName];
+            $params[':' . $columnName] = $this->config_data[$columnName];
 
             //TODO: find a better way ...
-            if (!$options['noGlobalSave'] && in_array($columnName, self::$globalConfigKeys))
+            if (!$options['noGlobalSave'] && in_array($columnName, self::$global_config_keys))
             {
                 foreach (Universe::getAvailableUniverses() as $universeId)
                 {
-                    if ($universeId != $this->configData['uni'])
+                    if ($universeId != $this->config_data['uni'])
                     {
                         $config = Config::get();
-                        $config->$columnName = $this->configData[$columnName];
+                        $config->$columnName = $this->config_data[$columnName];
                         $config->save(['noGlobalSave' => true]);
                     }
                 }
@@ -153,16 +153,16 @@ class Config
         }
 
         $sql = 'UPDATE %%CONFIG%% SET '.implode(', ', $updateData).' WHERE `UNI` = :universe';
-        $params[':universe'] = $this->configData['uni'];
+        $params[':universe'] = $this->config_data['uni'];
         $db = Database::get();
         $db->update($sql, $params);
 
-        $this->updateRecords = [];
+        $this->update_records = [];
         return true;
     }
 
     public function getAll(): array
     {
-        return $this->configData;
+        return $this->config_data;
     }
 }
