@@ -38,7 +38,7 @@ $LNG['changelog'] = [
 - 0000016: [Time] The extra zero in ACP -> Online users (Orion) - resolved.
 - 0000031: [User errors] Beim automatischen löschen eines Spieler der Mitglied in einer Ali ist, wird der kompletten Ali-Datensatz gelöscht! (Orion) - resolved.
 - 0000039: [Installer] Installation Error (Jan) - resolved.
-- 0000041: [Fleet missions] class.FlyingFleetsTable.php Ref 2306 verursacht undefined Index PM, kein Login mehr möglich. (Orion) - resolved.
+- 0000041: [Fleet missions] FlyingFleetsTable.php Ref 2306 verursacht undefined Index PM, kein Login mehr möglich. (Orion) - resolved.
 - 0000065: [Alliance] Error when you enter in menu Alliance (Jan) - resolved.
 - 0000072: [User errors] PHP Fatal error bei Ref 2349 (Orion) - resolved.
 - 0000076: [Fleet missions] Flying fleets disappear (Jan) - resolved.
@@ -291,7 +291,7 @@ TMOONS-346 - The doubling of the fleet',
 - 0000066: [Core] Registration (Slaver) - resolved.
 - 0000054: [Core] Missions Rocket attack and to Destroy (Slaver) - resolved.
 - 0000070: [Core] Ticket system (Slaver) - resolved.
-- 0000068: [Core] Rev 2065 Error afeter update in class.template (Slaver) - resolved.
+- 0000068: [Core] Rev 2065 Error afeter update in template (Slaver) - resolved.
 - 0000018: [Core] Speed of recyclers and spies (Slaver) - resolved.
 - 0000062: [Login] Install fehler (Slaver) - resolved.
 - 0000065: [Core] Attacks and a holiday mode (Slaver) - resolved.
@@ -304,7 +304,7 @@ TMOONS-346 - The doubling of the fleet',
 - 0000038: [Core] Resource bug (Slaver) - resolved.
 - 0000044: [Core] Invalid argument supplied error in Game Updates Pages (Slaver) - resolved.
 - 0000047: [Login] someone has logget in from another PC on your account every 2 minutes (Slaver) - resolved.
-- 0000051: [Fleets (Missions)] Fatal error: class.FlyingFleetHandler.php on line 59 (Slaver) - resolved.
+- 0000051: [Fleets (Missions)] Fatal error: FlyingFleetHandler.php on line 59 (Slaver) - resolved.
 - 0000052: [Core] Shortcuts (Slaver) - resolved.
 - 0000055: [Fleets (Missions)] Combat Report does not show moon building message (Slaver) - resolved.
 - 0000045: [Design] Screenshots not shown by IE8/IE9 by FF it works (Slaver) - resolved.

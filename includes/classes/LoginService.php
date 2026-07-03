@@ -386,7 +386,7 @@ class LoginService
         global $LNG;
         $config = Config::get();
         $password = 'password';
-        require './includes/classes/Mail.class.php';
+        require './includes/classes/Mail.php';
         $MailRAW = $LNG->getTemplate('email_vaild_reg');
         $MailContent = str_replace([
             '{USERNAME}',

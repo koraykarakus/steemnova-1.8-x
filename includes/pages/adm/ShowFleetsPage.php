@@ -19,7 +19,7 @@
  *
  */
 
-require 'includes/classes/class.FlyingFleetsTable.php';
+require 'includes/classes/FlyingFleetsTable.php';
 
 class ShowFleetsPage extends AbstractAdminPage
 {

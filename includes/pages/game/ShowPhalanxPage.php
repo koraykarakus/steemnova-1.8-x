@@ -96,7 +96,7 @@ class ShowPhalanxPage extends AbstractGamePage
             $this->printMessage($LNG['px_out_of_range']);
         }
 
-        require 'includes/classes/class.FlyingFleetsTable.php';
+        require 'includes/classes/FlyingFleetsTable.php';
 
         $fleet_table_obj = new FlyingFleetsTable();
         $fleet_table_obj->setPhalanxMode();

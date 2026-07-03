@@ -33,7 +33,7 @@ $LNG['changelog'] = [
 - 0000397: [Fleet missions] Mindestflugzeit wird nicht bei der Anzeige beachtet (Jan) - resolved.
 - 0000411: [Langauge] "active users" in German (Jan) - resolved.
 - 0000416: [Admin Panal] MessageListe im ACP bei IE8 / IE9 wird nicht geöffnet, Error: \'console\' ist undefiniert (Jan) - resolved.
-- 0000423: [Statistical] Error in der class.statbuilder.php / Ref 2627, In der Tabelle config wird users_amount = 0 gesetzt (Jan) - resolved.
+- 0000423: [Statistical] Error in der statbuilder.php / Ref 2627, In der Tabelle config wird users_amount = 0 gesetzt (Jan) - resolved.
 ',
 
     'v1.7.1' => 'Jan 18.01.2013
@@ -56,7 +56,7 @@ $LNG['changelog'] = [
 - 0000016: [Time] The extra zero in ACP -> Online users (Orion) - resolved.
 - 0000031: [User errors] Beim automatischen löschen eines Spieler der Mitglied in einer Ali ist, wird der kompletten Ali-Datensatz gelöscht! (Orion) - resolved.
 - 0000039: [Installer] Installation Error (Jan) - resolved.
-- 0000041: [Fleet missions] class.FlyingFleetsTable.php Ref 2306 verursacht undefined Index PM, kein Login mehr möglich. (Orion) - resolved.
+- 0000041: [Fleet missions] FlyingFleetsTable.php Ref 2306 verursacht undefined Index PM, kein Login mehr möglich. (Orion) - resolved.
 - 0000065: [Alliance] Error when you enter in menu Alliance (Jan) - resolved.
 - 0000072: [User errors] PHP Fatal error bei Ref 2349 (Orion) - resolved.
 - 0000076: [Fleet missions] Flying fleets disappear (Jan) - resolved.

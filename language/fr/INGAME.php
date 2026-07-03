@@ -1048,7 +1048,7 @@ $LNG['css_goto_homeside'] = '<a href="./index.php">Se rendre à la page d\'accue
 $LNG['css_server_maintrace'] = 'Maintenance du serveur<br><br>Le jeu est momentanément suspendu. <br><br>Raison : %s';
 
 //----------------------------------------------------------------------------//
-//class.FlyingFleetsTable.php
+//FlyingFleetsTable.php
 
 $LNG['cff_aproaching'] = 'La flotte est composée de ';
 $LNG['cff_ships'] = ' unites';

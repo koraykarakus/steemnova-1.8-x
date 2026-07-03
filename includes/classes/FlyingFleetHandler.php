@@ -43,7 +43,7 @@ class FlyingFleetHandler
 
     public function run(): void
     {
-        require_once 'includes/classes/class.MissionFunctions.php';
+        require_once 'includes/classes/MissionFunctions.php';
         require_once 'includes/classes/missions/Mission.interface.php';
 
         $db = Database::get();

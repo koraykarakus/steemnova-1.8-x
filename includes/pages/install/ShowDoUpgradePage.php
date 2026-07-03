@@ -48,7 +48,7 @@ class ShowDoUpgradePage extends AbstractInstallPage
 
         $file_name = '2MoonsBackup_' . date('Y_m_d_H_i_s', TIMESTAMP) . '.sql';
         $file_path = 'includes/backups/' . $file_name;
-        require 'includes/classes/SQLDumper.class.php';
+        require 'includes/classes/SQLDumper.php';
         $dump = new SQLDumper();
         $dump->dumpTablesToFile($db_tables, $file_path);
 

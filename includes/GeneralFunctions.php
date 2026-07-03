@@ -108,7 +108,7 @@ function userStatus($data, $noob_protection = false): array
         $result[] = 'strong';
     }
 
-    if (isset($data['authlevel']) && $data['authlevel'] == AUTH_ADM) 
+    if (isset($data['authlevel']) && $data['authlevel'] == AUTH_ADM)
     {
         $result[] = 'admin';
     }
@@ -257,7 +257,7 @@ function ValidateAddress($address)
 
 function message($mes, $dest = "", $time = "3", $topnav = false): void
 {
-    require_once('includes/classes/class.template.php');
+    require_once('includes/classes/template.php');
     $template = new template();
     $template->message($mes, $dest, $time, !$topnav);
     exit;
@@ -497,7 +497,7 @@ function ClearCache(): void
     $template = new template();
     $template->clearAllCache();
 
-    require_once 'includes/classes/Cronjob.class.php';
+    require_once 'includes/classes/Cronjob.php';
     Cronjob::reCalculateCronjobs();
 
     $sql = 'UPDATE %%PLANETS%% SET eco_hash = :ecoHash;';
@@ -597,7 +597,7 @@ function exceptionHandler($exception): void
     {
         if (!class_exists('HTTP', false))
         {
-            require_once('includes/classes/HTTP.class.php');
+            require_once('includes/classes/HTTP.php');
         }
 
         HTTP::sendHeader('HTTP/1.1 503 Service Unavailable');
@@ -740,7 +740,7 @@ function exceptionHandler($exception): void
         $ErrSource = 1;
         $ErrName = 'System';
     }
-    require 'includes/classes/class.SupportTickets.php';
+    require 'includes/classes/SupportTickets.php';
     $ticketObj = new SupportTickets();
     $ticketID = $ticketObj->createTicket($ErrSource, '1', $errorType[$errno]);
     $ticketObj->createAnswer($ticketID, $ErrSource, $ErrName, $errorType[$errno], $errorText, 0);

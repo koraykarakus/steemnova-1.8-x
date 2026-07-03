@@ -639,7 +639,7 @@ class ShowAlliancePage extends AbstractGamePage
                 ':ally_id' => $this->alliance_data['id'],
             ]);
 
-            require_once('includes/classes/class.FlyingFleetsTable.php');
+            require_once('includes/classes/FlyingFleetsTable.php');
             $FlyingFleetsTable = new FlyingFleetsTable();
 
             $this->tpl_obj->loadscript('overview.js');
@@ -1038,7 +1038,7 @@ class ShowAlliancePage extends AbstractGamePage
             }
         }
 
-        require_once 'includes/classes/class.FlyingFleetHandler.php';
+        require_once 'includes/classes/FlyingFleetHandler.php';
 
         $available_events = [];
 

@@ -24,7 +24,7 @@ class ShowTicketPage extends AbstractGamePage
     public function __construct()
     {
         parent::__construct();
-        require('includes/classes/class.SupportTickets.php');
+        require('includes/classes/SupportTickets.php');
         $this->ticket_obj = new SupportTickets();
     }
 
@@ -138,7 +138,7 @@ class ShowTicketPage extends AbstractGamePage
     {
         global $USER, $LNG;
 
-        require_once 'includes/classes/BBCode.class.php';
+        require_once 'includes/classes/BBCode.php';
 
         $db = Database::get();
 

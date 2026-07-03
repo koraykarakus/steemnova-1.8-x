@@ -1061,7 +1061,7 @@ $LNG['css_goto_homeside'] = '<a href="./index.php">Strona startowa</a>';
 $LNG['css_server_maintrace'] = 'Konserwacja serwera<br><br>Play unanimously at present. <br><br>Powód: %s';
 
 //----------------------------------------------------------------------------//
-//class.FlyingFleetsTable.php
+//FlyingFleetsTable.php
 
 $LNG['cff_aproaching'] = 'Flota składa się z ';
 $LNG['cff_ships'] = ' jednostki.';

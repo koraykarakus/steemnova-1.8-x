@@ -92,7 +92,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 
         if (!empty($config->smtp_host))
         {
-            require 'includes/classes/Mail.class.php';
+            require 'includes/classes/Mail.php';
             $subject = sprintf($LNG['passwordChangedMailTitle'], $config->game_name);
             Mail::send($user_data['mail'], $user_data['username'], $subject, $mail_content);
         }
@@ -209,7 +209,7 @@ class ShowLostPasswordPage extends AbstractLoginPage
 
         if (!empty($config->smtp_host))
         {
-            require 'includes/classes/Mail.class.php';
+            require 'includes/classes/Mail.php';
             $subject = sprintf($LNG['passwordValidMailTitle'], $config->game_name);
             Mail::send($mail, $user_name, $subject, $mail_content);
         }

@@ -42,7 +42,7 @@ if (empty($cronjobID))
     exit;
 }
 
-require 'includes/classes/Cronjob.class.php';
+require 'includes/classes/Cronjob.php';
 
 $cronjobsTodo = Cronjob::getNeedTodoExecutedJobs();
 

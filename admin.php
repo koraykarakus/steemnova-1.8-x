@@ -25,7 +25,7 @@ require_once('includes/libs/BBCodeParser2/HTML/BBCodeParser2.php');
 require 'includes/pages/adm/AbstractAdminPage.php';
 require 'includes/pages/adm/ShowErrorPage.php';
 require 'includes/common.php';
-require 'includes/classes/class.Log.php';
+require 'includes/classes/Log.php';
 
 if ($USER['authlevel'] == AUTH_USR)
 {

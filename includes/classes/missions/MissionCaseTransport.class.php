@@ -91,7 +91,7 @@ class MissionCaseTransport extends MissionFunctions implements Mission
                 $new['targetPlanet'] = $this->_fleet['fleet_end_id'];
                 $new['targetPlanetName'] = $target_planet_name;
 
-                require_once 'includes/classes/class.Log.php';
+                require_once 'includes/classes/Log.php';
 
                 $log = new Log(5);
                 $log->target = $this->_fleet['fleet_target_owner'];

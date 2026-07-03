@@ -52,19 +52,19 @@ require 'includes/GeneralFunctions.php';
 set_exception_handler('exceptionHandler');
 set_error_handler('errorHandler');
 
-require 'includes/classes/ArrayUtil.class.php';
-require 'includes/classes/Cache.class.php';
-require 'includes/classes/Database.class.php';
-require 'includes/classes/Config.class.php';
-require 'includes/classes/class.FleetFunctions.php';
-require 'includes/classes/HTTP.class.php';
-require 'includes/classes/Language.class.php';
-require 'includes/classes/PlayerUtil.class.php';
-require 'includes/classes/Session.class.php';
-require 'includes/classes/Universe.class.php';
+require 'includes/classes/ArrayUtil.php';
+require 'includes/classes/Cache.php';
+require 'includes/classes/Database.php';
+require 'includes/classes/Config.php';
+require 'includes/classes/FleetFunctions.php';
+require 'includes/classes/HTTP.php';
+require 'includes/classes/Language.php';
+require 'includes/classes/PlayerUtil.php';
+require 'includes/classes/Session.php';
+require 'includes/classes/Universe.php';
 
-require 'includes/classes/class.template.php';
-require 'includes/classes/BBCode.class.php';
+require 'includes/classes/template.php';
+require 'includes/classes/BBCode.php';
 
 /* safe cookie support for old browsers like IE 6 - 9
 // Say Browsers to Allow ThirdParty Cookies (Thanks to morktadela)
@@ -103,7 +103,7 @@ if (defined('DATABASE_VERSION')
     && DATABASE_VERSION === 'OLD')
 {
     /* For our old Admin panel */
-    require 'includes/classes/Database_BC.class.php';
+    require 'includes/classes/Database_BC.php';
     $DATABASE = new Database_BC();
 
     $db_table_names = Database::get()->getDbTableNames();
@@ -131,9 +131,9 @@ if (MODE === 'INGAME'
     }
 
     require 'includes/vars.php';
-    require 'includes/classes/class.BuildFunctions.php';
-    require 'includes/classes/class.PlanetRessUpdate.php';
-    require 'includes/classes/class.Buildings.php';
+    require 'includes/classes/BuildFunctions.php';
+    require 'includes/classes/PlanetRessUpdate.php';
+    require 'includes/classes/Buildings.php';
 
     if (!AJAX_REQUEST
         && MODE === 'INGAME'

@@ -23,7 +23,7 @@ class ShowSupportPage extends AbstractAdminPage
     {
         parent::__construct();
 
-        require('includes/classes/class.SupportTickets.php');
+        require('includes/classes/SupportTickets.php');
         $this->ticketObj = new SupportTickets();
         // 2Moons 1.7TO1.6 PageClass Wrapper
         $ACTION = HTTP::_GP('mode', 'show');

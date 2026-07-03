@@ -72,7 +72,7 @@ class ShowVerifyPage extends AbstractLoginPage
 
         if ($config->mail_active == 1)
         {
-            require('includes/classes/Mail.class.php');
+            require('includes/classes/Mail.php');
             $mail_subject = sprintf(
                 $LNG['reg_complete_mail_title'],
                 $config->game_name,

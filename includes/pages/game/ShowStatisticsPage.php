@@ -201,7 +201,7 @@ class ShowStatisticsPage extends AbstractGamePage
         $selector['who'] = [1 => $LNG['st_player'], 2 => $LNG['st_alliance']];
         $selector['type'] = [1 => $LNG['st_points'], 2 => $LNG['st_fleets'], 3 => $LNG['st_researh'], 4 => $LNG['st_buildings'], 5 => $LNG['st_defenses']];
 
-        require_once 'includes/classes/Cronjob.class.php';
+        require_once 'includes/classes/Cronjob.php';
 
         $this->assign([
             'Selectors'  => $selector,

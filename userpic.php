@@ -38,7 +38,7 @@ $LNG = new Language();
 $LNG->getUserAgentLanguage();
 $LNG->includeData(['L18N', 'BANNER', 'CUSTOM']);
 
-require 'includes/classes/class.StatBanner.php';
+require 'includes/classes/StatBanner.php';
 
 $banner = new StatBanner();
 $Data = $banner->GetData($id);

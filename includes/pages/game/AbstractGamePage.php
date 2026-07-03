@@ -59,7 +59,7 @@ abstract class AbstractGamePage
             return [];
         }
 
-        require_once 'includes/classes/class.FlyingFleetsTable.php';
+        require_once 'includes/classes/FlyingFleetsTable.php';
         $fleet_table_obj = new FlyingFleetsTable();
         $fleet_table_obj->setUser($USER['id']);
         $fleet_table_obj->setPlanet($PLANET['id']);
@@ -110,7 +110,7 @@ abstract class AbstractGamePage
 
     protected function getCronjobsTodo(): void
     {
-        require_once 'includes/classes/Cronjob.class.php';
+        require_once 'includes/classes/Cronjob.php';
 
         $this->assign([
             'cronjobs' => Cronjob::getNeedTodoExecutedJobs(),

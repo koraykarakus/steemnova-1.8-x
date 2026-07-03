@@ -21,7 +21,7 @@ class StatisticCronjob implements CronjobTask
 {
     public function run()
     {
-        require 'includes/classes/class.statbuilder.php';
+        require 'includes/classes/statbuilder.php';
         $stat = new Statbuilder();
         $stat->MakeStats();
     }

@@ -28,7 +28,7 @@ class ShowStatsUpdatePage extends AbstractAdminPage
     public function show(): void
     {
         global $LNG;
-        require_once('includes/classes/class.statbuilder.php');
+        require_once('includes/classes/statbuilder.php');
         $stat = new statbuilder();
         $result = $stat->MakeStats();
         $memory_p = str_replace(["%p", "%m"], $result['memory_peak'], $LNG['sb_top_memory']);
