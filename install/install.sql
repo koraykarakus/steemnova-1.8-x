@@ -494,7 +494,7 @@ CREATE TABLE `%PREFIX%trades` (
 	`filter_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 0,
 	`filter_flighttime` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
 	`ex_resource_type` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-	`ex_resource_amount` DOUBLE UNSIGNED NOT NULL DEFAULT '0',
+	`ex_resource_amount` DOUBLE UNSIGNED NOT NULL DEFAULT 0,
 	PRIMARY KEY (`seller_fleet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
