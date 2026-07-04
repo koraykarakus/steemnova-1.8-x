@@ -1,55 +1,78 @@
-var v  			= new Date();
+var v = new Date();
 
-function ShipyardInit() {
-	Shipyard		= data.Queue;
-	Amount			= new DecimalNumber(Shipyard[0][1],0);
-	hanger_id		= data.b_hangar_id_plus;
+function ShipyardInit() 
+{
+	shipyard = data.queue;
+	amount = new DecimalNumber(shipyard[0][1],0);
+	// time between planet last update and page refresh
+	hangar_id = data.b_hangar_id_plus;
 	$('#timeleft').text(data.pretty_time_b_hangar);
+	min_build_time = data.min_build_time;
 	ShipyardList();
 	BuildlistShipyard();
-	ShipyardInterval	= window.setInterval(BuildlistShipyard, 1000);
+	shipyard_interval = window.setInterval(BuildlistShipyard, 1000);
 }
 
 function BuildlistShipyard() {
 	var n = new Date();
-	var s = Shipyard[0][2] - hanger_id - Math.round((n.getTime() - v.getTime()) / 1000);
-	var s = Math.round(s);
-	var m = 0;
-	var h = 0;
-	if (s <= 0) {
-		Amount.sub('1');
-		$('#val_'+Shipyard[0][3]).text(function(i, old){
-			return ' ('+bd_available+NumberGetHumanReadable(parseInt(old.replace(/.* (.*)\)/, '$1').replace(/\./g, ''))+1)+')';
+	// element build time - time elapsed
+	var s = shipyard[0][2] - hangar_id - Math.round((n.getTime() - v.getTime()) / 1000);
+	s = Math.round(s);
+
+	if (s <= 0) 
+	{
+		amount.sub('1');
+		$('#val_'+shipyard[0][3]).text(function(i, old)
+		{
+			return ' (' + bd_available + NumberGetHumanReadable(parseInt(old.replace(/.* (.*)\)/, '$1').replace(/\./g, '')) + 1) + ')';
 		})
-		if (Amount.toString() == '0') {
-			Shipyard.shift();
-			if (Shipyard.length == 0) {
+		
+		if (amount.toString() == '0') 
+		{
+			shipyard.shift();
+			if (shipyard.length == 0) 
+			{
 				$("#bx").html(Ready);
 				document.getElementById('auftr').options[0] = new Option(Ready);
 				document.location.href	= document.location.href;
-				window.clearInterval(ShipyardInterval);
+				window.clearInterval(shipyard_interval);
 				return;
 			}
-			Amount = Amount.reset(Shipyard[0][1]);
+			amount = amount.reset(shipyard[0][1]);
 			ShipyardList();
-		} else {
-			document.getElementById('auftr').options[0].innerHTML	= Amount.toString() + " " + Shipyard[0][0] + " " + bd_operating;
+		} 
+		else 
+		{
+			document.getElementById('auftr').options[0].innerHTML = amount.toString() + " " + shipyard[0][0] + " " + bd_operating;
 		}
-		hanger_id = 0;
+
+		hangar_id = 0;
 		v = new Date();
-		s = 0;
+		if (s < 0) 
+		{
+			s = 0;
+		}
 	}
-	$("#bx").html(Shipyard[0][0]+" "+GetRestTimeFormat(s));
+	
+	$("#bx").html(shipyard[0][0] + " " + GetRestTimeFormat(Math.max(s, min_build_time)));
 }
 
-function ShipyardList() {
+function ShipyardList() 
+{
 	while (document.getElementById('auftr').length > 0)
 		document.getElementById('auftr').options[document.getElementById('auftr').length - 1] = null;
 
-	for (iv = 0; iv <= Shipyard.length - 1; iv++ ) {
-		if(iv == 0)
-			document.getElementById('auftr').options[iv] = new Option(Amount.toString()+ " " + Shipyard[iv][0] + " " + bd_operating, iv);
+	for (i = 0; i <= shipyard.length - 1; i++) 
+	{
+		if (i == 0)
+		{
+			document.getElementById('auftr').options[i] = 
+			new Option(amount.toString() + " " + shipyard[i][0] + " " + bd_operating, i);
+		}
 		else
-			document.getElementById('auftr').options[iv] = new Option(Shipyard[iv][1]+ " " + Shipyard[iv][0] + " " + bd_operating, iv);
+		{
+			document.getElementById('auftr').options[i] = 
+			new Option(shipyard[i][1]+ " " + shipyard[i][0] + " " + bd_operating, i);
+		}	
 	}
 }

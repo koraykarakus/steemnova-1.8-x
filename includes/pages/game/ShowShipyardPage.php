@@ -252,9 +252,10 @@ class ShowShipyardPage extends AbstractGamePage
             }
 
             $build_list = [
-                'Queue'                => $shipyard,
+                'queue'                => $shipyard,
                 'b_hangar_id_plus'     => $PLANET['b_shipyard'],
                 'pretty_time_b_hangar' => pretty_time(max($queue_time - $PLANET['b_shipyard'], 0)),
+                'min_build_time'       => $config->min_build_time,
             ];
         }
 
