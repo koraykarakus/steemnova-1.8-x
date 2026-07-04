@@ -72,7 +72,7 @@ class FlyingFleetHandler
 
             $mission_name = self::$mission_obj_pattern[$c_fleet['fleet_mission']];
 
-            $path = 'includes/classes/missions/'.$mission_name.'.class.php';
+            $path = 'includes/classes/missions/'.$mission_name.'.php';
             require_once $path;
             /** @var Mission $mission_obj */
             $mission_obj = new $mission_name($c_fleet);
