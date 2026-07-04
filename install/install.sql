@@ -287,19 +287,19 @@ CREATE TABLE `%PREFIX%config` (
   `max_galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 9,
   `max_system` SMALLINT UNSIGNED NOT NULL DEFAULT 400,
   `max_planets` TINYINT UNSIGNED NOT NULL DEFAULT 15,
-  `planet_factor` FLOAT(2,1) NOT NULL DEFAULT 1.0,
+  `planet_factor` FLOAT NOT NULL DEFAULT 1.0,
   `max_elements_build` TINYINT UNSIGNED NOT NULL DEFAULT 5,
   `max_elements_tech` TINYINT UNSIGNED NOT NULL DEFAULT 2,
   `max_elements_ships` TINYINT UNSIGNED NOT NULL DEFAULT 10,
   `min_player_planets` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `planets_tech` TINYINT NOT NULL DEFAULT 11,
   `planets_officers` TINYINT NOT NULL DEFAULT 5,
-  `planets_per_tech` FLOAT(2,1) NOT NULL DEFAULT 0.5,
+  `planets_per_tech` FLOAT NOT NULL DEFAULT 0.5,
   `max_fleet_per_build` BIGINT UNSIGNED NOT NULL DEFAULT 1000000,
   `deuterium_cost_galaxy` INT UNSIGNED NOT NULL DEFAULT 10,
   `max_dm_missions` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `max_overflow` FLOAT(2,1) NOT NULL DEFAULT 1.0,
-  `moon_factor` FLOAT(2,1) NOT NULL DEFAULT 1.0,
+  `max_overflow` FLOAT NOT NULL DEFAULT 1.0,
+  `moon_factor` FLOAT NOT NULL DEFAULT 1.0,
   `moon_chance` TINYINT UNSIGNED NOT NULL DEFAULT 20,
   `darkmatter_cost_trader` INT UNSIGNED NOT NULL DEFAULT 750,
   `factor_university` TINYINT UNSIGNED NOT NULL DEFAULT 8,
@@ -1014,7 +1014,7 @@ CREATE TABLE `%PREFIX%vars` (
   `class` INT NOT NULL,                                       --  2
   `on_planet_type` set('1','3') NOT NULL,                     --  3
   `one_per_planet` TINYINT NOT NULL,                          --  4
-  `factor` FLOAT(4,2) NOT NULL,                               --  5
+  `factor` FLOAT NOT NULL,                                    --  5
   `max_level` INT DEFAULT NULL,                               --  6
   `cost901` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  7
   `cost902` BIGINT UNSIGNED NOT NULL DEFAULT 0,               --  8
@@ -1034,24 +1034,24 @@ CREATE TABLE `%PREFIX%vars` (
   `attack` INT UNSIGNED DEFAULT NULL,                         --  22
   `defend` INT UNSIGNED DEFAULT NULL,                         --  23
   `time_bonus` INT UNSIGNED DEFAULT NULL,                     --  24
-  `bonus_attack` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  25
-  `bonus_defensive` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  26
-  `bonus_shield` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  27
-  `bonus_build_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  28
-  `bonus_research_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,     --  29
-  `bonus_ship_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  30
-  `bonus_defensive_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,    --  31
-  `bonus_resource` FLOAT(4,2) NOT NULL DEFAULT 0.00,          --  32
-  `bonus_energy` FLOAT(4,2) NOT NULL DEFAULT 0.00,            --  33
-  `bonus_resource_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,  --  34
-  `bonus_ship_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,      --  35
-  `bonus_fly_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,          --  36
-  `bonus_fleet_slots` FLOAT(4,2) NOT NULL DEFAULT 0.00,       --  37
-  `bonus_planets` FLOAT(4,2) NOT NULL DEFAULT 0.00,           --  38
-  `bonus_spy_power` FLOAT(4,2) NOT NULL DEFAULT 0.00,         --  39
-  `bonus_expedition` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  40
-  `bonus_gate_cool_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,    --  41
-  `bonus_more_found` FLOAT(4,2) NOT NULL DEFAULT 0.00,        --  42
+  `bonus_attack` FLOAT NOT NULL DEFAULT 0.00,                 --  25
+  `bonus_defensive` FLOAT NOT NULL DEFAULT 0.00,              --  26
+  `bonus_shield` FLOAT NOT NULL DEFAULT 0.00,                 --  27
+  `bonus_build_time` FLOAT NOT NULL DEFAULT 0.00,             --  28
+  `bonus_research_time` FLOAT NOT NULL DEFAULT 0.00,          --  29
+  `bonus_ship_time` FLOAT NOT NULL DEFAULT 0.00,              --  30
+  `bonus_defensive_time` FLOAT NOT NULL DEFAULT 0.00,         --  31
+  `bonus_resource` FLOAT NOT NULL DEFAULT 0.00,               --  32
+  `bonus_energy` FLOAT NOT NULL DEFAULT 0.00,                 --  33
+  `bonus_resource_storage` FLOAT NOT NULL DEFAULT 0.00,       --  34
+  `bonus_ship_storage` FLOAT NOT NULL DEFAULT 0.00,           --  35
+  `bonus_fly_time` FLOAT NOT NULL DEFAULT 0.00,               --  36
+  `bonus_fleet_slots` FLOAT NOT NULL DEFAULT 0.00,            --  37
+  `bonus_planets` FLOAT NOT NULL DEFAULT 0.00,                --  38
+  `bonus_spy_power` FLOAT NOT NULL DEFAULT 0.00,              --  39
+  `bonus_expedition` FLOAT NOT NULL DEFAULT 0.00,             --  40
+  `bonus_gate_cool_time` FLOAT NOT NULL DEFAULT 0.00,         --  41
+  `bonus_more_found` FLOAT NOT NULL DEFAULT 0.00,             --  42
   `bonus_attack_unit` SMALLINT NOT NULL DEFAULT 0,            --  43
   `bonus_defensive_unit` SMALLINT NOT NULL DEFAULT 0,         --  44
   `bonus_shield_unit` SMALLINT NOT NULL DEFAULT 0,            --  45
@@ -1070,7 +1070,7 @@ CREATE TABLE `%PREFIX%vars` (
   `bonus_expedition_unit` SMALLINT NOT NULL DEFAULT 0,        --  58
   `bonus_gate_cool_time_unit` SMALLINT NOT NULL DEFAULT 0,    --  59
   `bonus_more_found_unit` SMALLINT NOT NULL DEFAULT 0,        --  60
-  `speed_fleet_factor` FLOAT(4,2) DEFAULT NULL,               --  61
+  `speed_fleet_factor` FLOAT DEFAULT NULL,                    --  61
   `production901` VARCHAR(255) DEFAULT NULL,                  --  62
   `production902` VARCHAR(255) DEFAULT NULL,                  --  63
   `production903` VARCHAR(255) DEFAULT NULL,                  --  64
@@ -1089,7 +1089,7 @@ CREATE TABLE `%PREFIX%vars_default` (
   `class` INT NOT NULL,
   `on_planet_type` set('1','3') NOT NULL,
   `one_per_planet` TINYINT NOT NULL,
-  `factor` FLOAT(4,2) NOT NULL,
+  `factor` FLOAT NOT NULL,
   `max_level` INT DEFAULT NULL,
   `cost901` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `cost902` BIGINT UNSIGNED NOT NULL DEFAULT 0,
@@ -1109,24 +1109,24 @@ CREATE TABLE `%PREFIX%vars_default` (
   `attack` INT UNSIGNED DEFAULT NULL,
   `defend` INT UNSIGNED DEFAULT NULL,
   `time_bonus` INT UNSIGNED DEFAULT NULL,
-  `bonus_attack` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_defensive` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_shield` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_build_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_research_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_ship_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_defensive_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_resource` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_energy` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_resource_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_ship_storage` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_fly_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_fleet_slots` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_planets` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_spy_power` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_expedition` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_gate_cool_time` FLOAT(4,2) NOT NULL DEFAULT 0.00,
-  `bonus_more_found` FLOAT(4,2) NOT NULL DEFAULT 0.00,
+  `bonus_attack` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_defensive` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_shield` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_build_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_research_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_ship_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_defensive_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_resource` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_energy` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_resource_storage` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_ship_storage` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_fly_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_fleet_slots` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_planets` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_spy_power` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_expedition` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_gate_cool_time` FLOAT NOT NULL DEFAULT 0.00,
+  `bonus_more_found` FLOAT NOT NULL DEFAULT 0.00,
   `bonus_attack_unit` SMALLINT NOT NULL DEFAULT 0,
   `bonus_defensive_unit` SMALLINT NOT NULL DEFAULT 0,
   `bonus_shield_unit` SMALLINT NOT NULL DEFAULT 0,
@@ -1145,7 +1145,7 @@ CREATE TABLE `%PREFIX%vars_default` (
   `bonus_expedition_unit` SMALLINT NOT NULL DEFAULT 0,
   `bonus_gate_cool_time_unit` SMALLINT NOT NULL DEFAULT 0,
   `bonus_more_found_unit` SMALLINT NOT NULL DEFAULT 0,
-  `speed_fleet_factor` FLOAT(4,2) DEFAULT NULL,
+  `speed_fleet_factor` FLOAT DEFAULT NULL,
   `production901` VARCHAR(255) DEFAULT NULL,
   `production902` VARCHAR(255) DEFAULT NULL,
   `production903` VARCHAR(255) DEFAULT NULL,
