@@ -59,7 +59,7 @@ class ShowFleetTablePage extends AbstractGamePage
 
             $fleets_on_planet[] = [
                 'id'    => $c_fleet_id,
-                'speed' => FleetFunctions::GetFleetMaxSpeed($c_fleet_id, $USER),
+                'speed' => FleetFunctions::GetFleetMaxSpeedByID($c_fleet_id, $USER),
                 'count' => $PLANET[$RESOURCE[$c_fleet_id]],
             ];
         }

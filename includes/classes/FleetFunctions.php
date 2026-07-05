@@ -17,7 +17,7 @@
 
 class FleetFunctions
 {
-    public static $allowed_speed = [
+    public static array $allowed_speed = [
         10 => 100,
         9  => 90,
         8  => 80,
@@ -29,23 +29,26 @@ class FleetFunctions
         2  => 20,
         1  => 10];
 
-    private static function GetShipConsumption($ship, $player)
+    private static function GetShipConsumption(int $id, array $player): int
     {
         global $PRICELIST;
 
-        return (($player['impulse_motor_tech'] >= 5 && $ship == 202) || ($player['hyperspace_motor_tech'] >= 8 && $ship == 211)) ? $PRICELIST[$ship]['consumption2'] : $PRICELIST[$ship]['consumption'];
+        return (($player['impulse_motor_tech'] >= 5 && $id == 202)
+        || ($player['hyperspace_motor_tech'] >= 8 && $id == 211)) ?
+        $PRICELIST[$id]['consumption2'] :
+        $PRICELIST[$id]['consumption'];
     }
 
-    private static function OnlyShipByID($ships, $ship_id)
+    private static function OnlyShipByID(array $ships, int $id): bool
     {
-        return isset($ships[$ship_id]) && count($ships) === 1;
+        return isset($ships[$id]) && count($ships) === 1;
     }
 
-    private static function GetShipSpeed($ship, $player)
+    private static function GetShipSpeed(int $id, array $player): int
     {
         global $PRICELIST;
 
-        $tech_speed = $PRICELIST[$ship]['tech'];
+        $tech_speed = $PRICELIST[$id]['tech'];
 
         if ($tech_speed == 4)
         {
@@ -56,23 +59,23 @@ class FleetFunctions
             $tech_speed = $player['hyperspace_motor_tech'] >= 8 ? 3 : 2;
         }
 
-        $base_speed = $PRICELIST[$ship]['speed'];
+        $base_speed = $PRICELIST[$id]['speed'];
 
-        if ($player['impulse_motor_tech'] >= 5 && $ship == 202)
+        if ($player['impulse_motor_tech'] >= 5 && $id == 202)
         {
-            $base_speed = $PRICELIST[$ship]['speed2'];
+            $base_speed = $PRICELIST[$id]['speed2'];
         }
-        if ($player['hyperspace_motor_tech'] >= 8 && $ship == 211)
+        if ($player['hyperspace_motor_tech'] >= 8 && $id == 211)
         {
-            $base_speed = $PRICELIST[$ship]['speed2'];
+            $base_speed = $PRICELIST[$id]['speed2'];
         }
-        if ($player['impulse_motor_tech'] >= 17 && $ship == 209)
+        if ($player['impulse_motor_tech'] >= 17 && $id == 209)
         {
-            $base_speed = $PRICELIST[$ship]['speed2'];
+            $base_speed = $PRICELIST[$id]['speed2'];
         }
-        if ($player['hyperspace_motor_tech'] >= 15 && $ship == 209)
+        if ($player['hyperspace_motor_tech'] >= 15 && $id == 209)
         {
-            $base_speed = 6000;  // This should be $PRICELIST[$ship]['speed3'];
+            $base_speed = 6000;  // This should be $PRICELIST[$id]['speed3'];
             // But this needs more changes
         }
 
@@ -92,44 +95,44 @@ class FleetFunctions
                 break;
         }
 
-        return $speed;
+        return (int) $speed;
     }
 
-    public static function getExpeditionLimit($user)
+    public static function getExpeditionLimit(array $user): int
     {
-        return floor(sqrt($user[$GLOBALS['RESOURCE'][124]])) + $user['factor']['Expedition'];
+        return (int) (sqrt($user[$GLOBALS['RESOURCE'][124]]) + $user['factor']['Expedition']);
     }
 
-    public static function getDMMissionLimit($user)
+    public static function getDMMissionLimit(array $user): int
     {
         return Config::get($user['universe'])->max_dm_missions;
     }
 
-    public static function getMissileRange($level)
+    public static function getMissileRange(int $level): int
     {
-        return max(($level * 5) - 1, 0);
+        return (int) max(($level * 5) - 1, 0);
     }
 
-    public static function CheckUserSpeed($speed)
+    public static function CheckUserSpeed(int $speed): bool
     {
         return isset(self::$allowed_speed[$speed]);
     }
 
-    public static function GetTargetDistance($start, $target)
+    public static function GetTargetDistance(array $start, array $target): int
     {
         if ($start[0] != $target[0])
         {
-            return abs($start[0] - $target[0]) * 20000;
+            return (int) abs($start[0] - $target[0]) * 20000;
         }
 
         if ($start[1] != $target[1])
         {
-            return abs($start[1] - $target[1]) * 95 + 2700;
+            return (int) abs($start[1] - $target[1]) * 95 + 2700;
         }
 
         if ($start[2] != $target[2])
         {
-            return abs($start[2] - $target[2]) * 5 + 1000;
+            return (int) abs($start[2] - $target[2]) * 5 + 1000;
         }
 
         return 5;
@@ -155,26 +158,26 @@ class FleetFunctions
         return max($speed_factor, MIN_FLEET_TIME);
     }
 
-    public static function GetMIPDuration($start_system, $target_system)
+    public static function GetMIPDuration(int $start_system, int $target_system): int
     {
         $distance = abs($start_system - $target_system);
         $duration = max(round((30 + 60 * $distance) / self::GetGameSpeedFactor()), MIN_FLEET_TIME);
 
-        return $duration;
+        return (int) $duration;
     }
 
-    public static function GetGameSpeedFactor()
+    public static function GetGameSpeedFactor(): int
     {
         return Config::get()->fleet_speed / 2500;
     }
 
-    public static function GetMaxFleetSlots($user)
+    public static function GetMaxFleetSlots(array $user): int
     {
         global $RESOURCE;
         return 1 + $user[$RESOURCE[108]] + $user['factor']['FleetSlots'];
     }
 
-    public static function GetFleetRoom($fleet)
+    public static function GetFleetRoom(array $fleet): int
     {
         global $PRICELIST, $USER;
         $fleet_room = 0;
@@ -185,22 +188,30 @@ class FleetFunctions
         return $fleet_room;
     }
 
-    public static function GetFleetMaxSpeed($fleets, $player)
+    public static function GetFleetMaxSpeed(array $fleets, array $player): int
     {
         if (empty($fleets))
         {
             return 0;
         }
 
-        $fleet_array = (!is_array($fleets)) ? [$fleets => 1] : $fleets;
         $speed_array = [];
-
-        foreach ($fleet_array as $ship => $Count)
+        foreach ($fleets as $ship => $Count)
         {
             $speed_array[$ship] = self::GetShipSpeed($ship, $player);
         }
 
-        return min($speed_array);
+        return (int) min($speed_array);
+    }
+
+    public static function GetFleetMaxSpeedByID(int $id, array $player): int
+    {
+        if ($id == 0)
+        {
+            return 0;
+        }
+
+        return self::GetShipSpeed($id, $player);
     }
 
     public static function GetFleetConsumption(
@@ -224,8 +235,11 @@ class FleetFunctions
         return (round($consumption) + 1);
     }
 
-    public static function GetFleetMissions($user, $mis_info, $planet)
-    {
+    public static function GetFleetMissions(
+        array $user,
+        array $mis_info,
+        array $planet
+    ): array {
         global $RESOURCE;
         $missions = self::GetAvailableMissions($user, $mis_info, $planet);
         $stay_block = [];
@@ -482,20 +496,20 @@ class FleetFunctions
         return true;
     }
 
-    public static function GetFleetShipInfo($fleet_array, $player)
+    public static function GetFleetShipInfo(array $fleet_array, array $player): array
     {
         $fleet_info = [];
         foreach ($fleet_array as $ship_id => $amount)
         {
             $fleet_info[$ship_id] = [
                 'consumption' => self::GetShipConsumption($ship_id, $player),
-                'speed'       => self::GetFleetMaxSpeed($ship_id, $player),
+                'speed'       => self::GetFleetMaxSpeedByID($ship_id, $player),
                 'amount'      => floatToString($amount)];
         }
         return $fleet_info;
     }
 
-    public static function GotoFleetPage($code = 0)
+    public static function GotoFleetPage(int $code = 0): void
     {
         global $LNG;
         if (Config::get()->debug == 1)
@@ -514,11 +528,14 @@ class FleetFunctions
             exit;
         }
 
-        HTTP::redirectTo('game.php?page=fleetTable&code='.$code);
+        HTTP::redirectTo('game.php?page=fleetTable&code=' . to_string($code));
     }
 
-    public static function GetAvailableMissions($user, $mission_info, $get_info_planet)
-    {
+    public static function GetAvailableMissions(
+        array $user,
+        array $mission_info,
+        array $get_info_planet
+    ): array {
         $your_planet = (!empty($get_info_planet['id_owner']) && $get_info_planet['id_owner'] == $user['id']) ? true : false;
         $used_planet = (!empty($get_info_planet['id_owner'])) ? true : false;
         $available_missions = [];
@@ -620,14 +637,14 @@ class FleetFunctions
         return $available_missions;
     }
 
-    public static function CheckBash($target)
+    public static function CheckBash(int $pid): bool
     {
         global $USER;
         $db = Database::get();
 
         $sql = "SELECT id_owner FROM %%PLANETS%% WHERE id = :id";
         $planet_owner = $db->selectSingle($sql, [
-            ':id' => $target,
+            ':id' => $pid,
         ], 'id_owner');
 
         $sql = "SELECT onlinetime FROM %%USERS%% WHERE id = :id";
@@ -653,14 +670,14 @@ class FleetFunctions
 		AND fleet_start_time > :fleet_start_time
 		AND fleet_mission IN (1,2,9);';
 
-        $count = Database::get()->selectSingle($sql, [
+        $count = $db->selectSingle($sql, [
             ':fleet_owner'      => $USER['id'],
-            ':fleet_end_id'     => $target,
+            ':fleet_end_id'     => $pid,
             ':fleet_state'      => 2,
             ':fleet_start_time' => (TIMESTAMP - BASH_TIME),
         ]);
 
-        return $count['state'] >= BASH_COUNT;
+        return (isset($count['state']) && $count['state'] >= BASH_COUNT);
     }
 
     public static function sendFleet(
