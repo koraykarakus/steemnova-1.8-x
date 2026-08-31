@@ -17,7 +17,7 @@
 
 class SupportTickets
 {
-    public function createTicket($ownerID, $categoryID, $subject)
+    public function createTicket($owner_id, $category_id, $subject)
     {
         $sql = 'INSERT INTO %%TICKETS%% SET
 		owner_id	= :owner_id,
@@ -27,9 +27,9 @@ class SupportTickets
 		time		= :time;';
 
         Database::get()->insert($sql, [
-            ':owner_id'    => $ownerID,
+            ':owner_id'    => $owner_id,
             ':universe'    => Universe::current(),
-            ':category_id' => $categoryID,
+            ':category_id' => $category_id,
             ':subject'     => $subject,
             ':time'        => TIMESTAMP,
         ]);
@@ -37,7 +37,7 @@ class SupportTickets
         return Database::get()->lastInsertId();
     }
 
-    public function createAnswer($ticketID, $ownerID, $ownerName, $subject, $message, $status)
+    public function createAnswer($ticket_id, $owner_id, $owner_name, $subject, $message, $status)
     {
         $sql = 'INSERT INTO %%TICKETS_ANSWER%% SET
 		ticket_id	= :ticket_id,
@@ -48,38 +48,38 @@ class SupportTickets
 		time		= :time;';
 
         Database::get()->insert($sql, [
-            ':ticket_id'  => $ticketID,
-            ':owner_id'   => $ownerID,
-            ':owner_name' => $ownerName,
+            ':ticket_id'  => $ticket_id,
+            ':owner_id'   => $owner_id,
+            ':owner_name' => $owner_name,
             ':subject'    => $subject,
             ':message'    => $message,
             ':time'       => TIMESTAMP,
         ]);
 
-        $answerId = Database::get()->lastInsertId();
+        $answer_id = Database::get()->lastInsertId();
 
         $sql = 'UPDATE %%TICKETS%% SET status = :status WHERE ticket_id = :ticket_id;';
 
         Database::get()->update($sql, [
             ':status'    => $status,
-            ':ticket_id' => $ticketID,
+            ':ticket_id' => $ticket_id,
         ]);
 
-        return $answerId;
+        return $answer_id;
     }
 
     public function getCategoryList()
     {
         $sql = 'SELECT * FROM %%TICKETS_CATEGORY%%;';
 
-        $categoryResult = Database::get()->select($sql);
-        $categoryList = [];
+        $category_result = Database::get()->select($sql);
+        $category_list = [];
 
-        foreach ($categoryResult as $categoryRow)
+        foreach ($category_result as $c_row)
         {
-            $categoryList[$categoryRow['category_id']] = $categoryRow['name'];
+            $category_list[$c_row['category_id']] = $c_row['name'];
         }
 
-        return $categoryList;
+        return $category_list;
     }
 }
