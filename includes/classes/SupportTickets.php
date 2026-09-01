@@ -21,7 +21,7 @@ class SupportTickets
         int $owner_id,
         int $category_id,
         string $subject
-    ) {
+    ): int {
         $sql = 'INSERT INTO %%TICKETS%% SET
 		owner_id	= :owner_id,
 		universe	= :universe,
@@ -47,7 +47,7 @@ class SupportTickets
         string $subject,
         string $message,
         int $status
-    ) {
+    ): int {
         $sql = 'INSERT INTO %%TICKETS_ANSWER%% SET
 		ticket_id	= :ticket_id,
 		owner_id	= :owner_id,
@@ -77,7 +77,7 @@ class SupportTickets
         return $answer_id;
     }
 
-    public function getCategoryList()
+    public function getCategoryList(): array
     {
         $sql = 'SELECT * FROM %%TICKETS_CATEGORY%%;';
 
