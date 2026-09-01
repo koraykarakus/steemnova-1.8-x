@@ -17,8 +17,11 @@
 
 class SupportTickets
 {
-    public function createTicket($owner_id, $category_id, $subject)
-    {
+    public function createTicket(
+        int $owner_id,
+        int $category_id,
+        string $subject
+    ) {
         $sql = 'INSERT INTO %%TICKETS%% SET
 		owner_id	= :owner_id,
 		universe	= :universe,
@@ -37,8 +40,14 @@ class SupportTickets
         return Database::get()->lastInsertId();
     }
 
-    public function createAnswer($ticket_id, $owner_id, $owner_name, $subject, $message, $status)
-    {
+    public function createAnswer(
+        int $ticket_id,
+        int $owner_id,
+        string $owner_name,
+        string $subject,
+        string $message,
+        int $status
+    ) {
         $sql = 'INSERT INTO %%TICKETS_ANSWER%% SET
 		ticket_id	= :ticket_id,
 		owner_id	= :owner_id,
