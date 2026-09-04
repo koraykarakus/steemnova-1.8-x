@@ -512,7 +512,7 @@ class ShowFleetStep3Page extends AbstractGamePage
         {
             if ($time_difference != 0)
             {
-                FleetFunctions::setACSTime($time_difference, $fleet_group);
+                FleetFunctions::setACSTime((int) $time_difference, $fleet_group);
             }
             else
             {

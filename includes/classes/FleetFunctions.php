@@ -139,12 +139,12 @@ class FleetFunctions
     }
 
     public static function GetMissionDuration(
-        $speed_factor,
-        $max_fleet_speed,
-        $distance,
-        $game_speed,
-        $user
-    ) {
+        int $speed_factor,
+        int $max_fleet_speed,
+        int $distance,
+        int $game_speed,
+        array $user
+    ): int {
         $speed_factor = (3500 / ($speed_factor * 0.1));
         $speed_factor *= pow($distance * 10 / $max_fleet_speed, 0.5);
         $speed_factor += 10;
@@ -155,7 +155,7 @@ class FleetFunctions
             $speed_factor *= max(0, 1 + $user['factor']['FlyTime']);
         }
 
-        return max($speed_factor, MIN_FLEET_TIME);
+        return (int) max($speed_factor, MIN_FLEET_TIME);
     }
 
     public static function GetMIPDuration(int $start_system, int $target_system): int
@@ -168,7 +168,7 @@ class FleetFunctions
 
     public static function GetGameSpeedFactor(): int
     {
-        return Config::get()->fleet_speed / 2500;
+        return (int) (Config::get()->fleet_speed / 2500);
     }
 
     public static function GetMaxFleetSlots(array $user): int
@@ -215,11 +215,11 @@ class FleetFunctions
     }
 
     public static function GetFleetConsumption(
-        $fleet_array,
-        $mission_duration,
-        $mission_distance,
-        $player,
-        $game_speed
+        array $fleet_array,
+        int $mission_duration,
+        int $mission_distance,
+        array $player,
+        int $game_speed
     ) {
         $consumption = 0;
 
@@ -281,11 +281,11 @@ class FleetFunctions
      *
      */
 
-    public static function unserialize($fleet_amount)
+    public static function unserialize(string $fleet_amount): array
     {
         $fleet_typs = explode(';', $fleet_amount);
 
-        $fleet_amount = [];
+        $fleet_array = [];
 
         foreach ($fleet_typs as $fleet_typ)
         {
@@ -296,18 +296,19 @@ class FleetFunctions
                 continue;
             }
 
-            if (!isset($fleet_amount[$temp[0]]))
+            if (!isset($fleet_array[$temp[0]]))
             {
-                $fleet_amount[$temp[0]] = 0;
+                $fleet_array[$temp[0]] = 0;
             }
 
-            $fleet_amount[$temp[0]] += $temp[1];
+            $fleet_array[$temp[0]] += $temp[1];
         }
 
-        return $fleet_amount;
+        return $fleet_array;
     }
 
-    public static function GetACSDuration($acs_id)
+    // unused ?
+    public static function GetACSDuration(int $acs_id): int
     {
         if (empty($acs_id))
         {
@@ -322,7 +323,7 @@ class FleetFunctions
         return empty($acs_end_time) ? $acs_end_time - TIMESTAMP : 0;
     }
 
-    public static function setACSTime($time_diff, $acs_id)
+    public static function setACSTime(int $time_diff, int $acs_id)
     {
         if (empty($acs_id))
         {
@@ -352,8 +353,11 @@ class FleetFunctions
         return true;
     }
 
-    public static function GetCurrentFleets($user_id, $fleet_mission = 10, $this_mission = false)
-    {
+    public static function GetCurrentFleets(
+        int $user_id,
+        int $fleet_mission = 10,
+        bool $this_mission = false
+    ): int {
         if ($this_mission)
         {
             $sql = 'SELECT COUNT(*) as state
@@ -376,7 +380,7 @@ class FleetFunctions
         return $actual_fleets['state'];
     }
 
-    public static function SendFleetBack($user, $fleet_id)
+    public static function SendFleetBack(array $user, int $fleet_id): bool
     {
         $db = Database::get();
 
@@ -681,28 +685,28 @@ class FleetFunctions
     }
 
     public static function sendFleet(
-        $fleet_array,
-        $fleet_mission,
-        $fleet_start_owner,
-        $fleet_start_planet_id,
-        $fleet_start_planet_galaxy,
-        $fleet_start_planet_system,
-        $fleet_start_planet_planet,
-        $fleet_start_planet_type,
-        $fleet_target_owner,
-        $fleet_target_planet_id,
-        $fleet_target_planet_galaxy,
-        $fleet_target_planet_system,
-        $fleet_target_planet_planet,
-        $fleet_target_planet_type,
-        $fleet_resource,
-        $fleet_start_time,
-        $fleet_stay_time,
-        $fleet_end_time,
-        $fleet_group = 0,
-        $missile_target = 0,
-        $fleet_no_m_return = 0,
-        $consumption = 0
+        array $fleet_array,
+        int $fleet_mission,
+        int $fleet_start_owner,
+        int $fleet_start_planet_id,
+        int $fleet_start_planet_galaxy,
+        int $fleet_start_planet_system,
+        int $fleet_start_planet_planet,
+        int $fleet_start_planet_type,
+        int $fleet_target_owner,
+        int $fleet_target_planet_id,
+        int $fleet_target_planet_galaxy,
+        int $fleet_target_planet_system,
+        int $fleet_target_planet_planet,
+        int $fleet_target_planet_type,
+        array $fleet_resource,
+        int $fleet_start_time,
+        int $fleet_stay_time,
+        int $fleet_end_time,
+        int $fleet_group = 0,
+        int $missile_target = 0,
+        int $fleet_no_m_return = 0,
+        int $consumption = 0
     ) {
         global $RESOURCE;
         $fleet_ship_count = array_sum($fleet_array);
@@ -858,28 +862,28 @@ class FleetFunctions
     }
 
     public static function sendFleetTest(
-        $fleetArray,
-        $fleetMission,
-        $fleetStartOwner,
-        $fleetStartPlanetID,
-        $fleetStartPlanetGalaxy,
-        $fleetStartPlanetSystem,
-        $fleetStartPlanetPlanet,
-        $fleetStartPlanetType,
-        $fleetTargetOwner,
-        $fleetTargetPlanetID,
-        $fleetTargetPlanetGalaxy,
-        $fleetTargetPlanetSystem,
-        $fleetTargetPlanetPlanet,
-        $fleetTargetPlanetType,
-        $fleetResource,
-        $fleetStartTime,
-        $fleetStayTime,
-        $fleetEndTime,
-        $fleetGroup = 0,
-        $missileTarget = 0,
-        $fleetNoMReturn = 0,
-        $consumption = 0
+        array $fleetArray,
+        int $fleetMission,
+        int $fleetStartOwner,
+        int $fleetStartPlanetID,
+        int $fleetStartPlanetGalaxy,
+        int $fleetStartPlanetSystem,
+        int $fleetStartPlanetPlanet,
+        int $fleetStartPlanetType,
+        int $fleetTargetOwner,
+        int $fleetTargetPlanetID,
+        int $fleetTargetPlanetGalaxy,
+        int $fleetTargetPlanetSystem,
+        int $fleetTargetPlanetPlanet,
+        int $fleetTargetPlanetType,
+        array $fleetResource,
+        int $fleetStartTime,
+        int $fleetStayTime,
+        int $fleetEndTime,
+        int $fleetGroup = 0,
+        int $missileTarget = 0,
+        int $fleetNoMReturn = 0,
+        int $consumption = 0
     ) {
         global $RESOURCE;
         $fleetShipCount = array_sum($fleetArray);
