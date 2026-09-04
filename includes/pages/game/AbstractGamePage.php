@@ -371,17 +371,17 @@ abstract class AbstractGamePage
     }
 
     protected function printMessage(
-        $msg,
-        $redirect_buttons = null,
-        $redirect = null,
-        $full = true
+        string $msg,
+        array $redirect_buttons = [],
+        array $redirect = [],
+        bool $full = true
     ): void {
         $this->assign([
             'message'          => $msg,
             'redirect_buttons' => $redirect_buttons,
         ]);
 
-        if (isset($redirect))
+        if (!empty($redirect))
         {
             $this->tpl_obj->gotoside($redirect[0], $redirect[1]);
         }
@@ -402,7 +402,7 @@ abstract class AbstractGamePage
         }
     }
 
-    protected function assign($array, $not_cache = true): void
+    protected function assign(array $array, bool $not_cache = true): void
     {
         $this->tpl_obj->assign_vars($array, $not_cache);
     }
