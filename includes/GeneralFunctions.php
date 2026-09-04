@@ -15,10 +15,11 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function getFactors($USER, $Type = 'basic', $time = null): array
+// $Type unused, remove
+function getFactors(array $USER, $Type = 'basic', int $time = 0): array
 {
     global $RESOURCE, $PRICELIST, $RESLIST;
-    if (empty($time))
+    if ($time == 0)
     {
         $time = TIMESTAMP;
     }
@@ -68,7 +69,7 @@ function getFactors($USER, $Type = 'basic', $time = null): array
     return $factor;
 }
 
-function userStatus($data, $noob_protection = false): array
+function userStatus(array $data, array $noob_protection = []): array
 {
     $result = [];
 
@@ -96,19 +97,20 @@ function userStatus($data, $noob_protection = false): array
         $result[] = 'inactive';
     }
 
-    if ($noob_protection
+    if (!empty($noob_protection)
         && $noob_protection['NoobPlayer'])
     {
         $result[] = 'noob';
     }
 
-    if ($noob_protection
+    if (!empty($noob_protection)
         && $noob_protection['StrongPlayer'])
     {
         $result[] = 'strong';
     }
 
-    if (isset($data['authlevel']) && $data['authlevel'] == AUTH_ADM)
+    if (isset($data['authlevel'])
+        && $data['authlevel'] == AUTH_ADM)
     {
         $result[] = 'admin';
     }
@@ -132,7 +134,7 @@ function getLanguage($language = null, $user_id = null): object
     return $LNG;
 }
 
-function getPlanets($USER): array
+function getPlanets(array $USER): array
 {
     if (isset($USER['PLANETS']))
     {
@@ -250,7 +252,7 @@ function _date($format, $time = null, $to_time_zone = null, $LNG = null): string
     return date($format, (int) $time);
 }
 
-function ValidateAddress($address)
+function ValidateAddress(string $address): bool
 {
     return filter_var($address, FILTER_VALIDATE_EMAIL) !== false;
 }
@@ -263,13 +265,13 @@ function message($mes, $dest = "", $time = "3", $topnav = false): void
     exit;
 }
 
-function CalculateMaxPlanetFields($planet): int
+function CalculateMaxPlanetFields(array $planet): int
 {
     global $RESOURCE;
     return $planet['field_max'] + ($planet[$RESOURCE[33]] * FIELDS_BY_TERRAFORMER) + ($planet[$RESOURCE[41]] * FIELDS_BY_MOONBASIS_LEVEL);
 }
 
-function pretty_time($seconds): string
+function pretty_time(int $seconds): string
 {
     global $LNG;
 
@@ -297,7 +299,7 @@ function pretty_time($seconds): string
     );
 }
 
-function pretty_fly_time($seconds): string
+function pretty_fly_time(int $seconds): string
 {
 
     $hour = $seconds / 3600;
@@ -309,7 +311,7 @@ function pretty_fly_time($seconds): string
     return sprintf('%02d:%02d:%02d', $hour, $minute, $second);
 }
 
-function GetStartAddressLink($fleet_row, $fleet_type = ''): string
+function GetStartAddressLink(array $fleet_row, string $fleet_type = ''): string
 {
     return '<a href="game.php?page=galaxy&amp;galaxy=' .
     $fleet_row['fleet_start_galaxy'] .
@@ -326,7 +328,7 @@ function GetStartAddressLink($fleet_row, $fleet_type = ''): string
     ']</a>';
 }
 
-function GetTargetAddressLink($fleet_row, $fleet_type = ''): string
+function GetTargetAddressLink(array $fleet_row, string $fleet_type = ''): string
 {
     return '<a href="game.php?page=galaxy&amp;galaxy=' .
     $fleet_row['fleet_end_galaxy'] .
@@ -343,18 +345,22 @@ function GetTargetAddressLink($fleet_row, $fleet_type = ''): string
     ']</a>';
 }
 
-function BuildPlanetAddressLink($current_planet): string
+function BuildPlanetAddressLink(array $planet): string
 {
+    $galaxy = $planet['galaxy'];
+    $system = $planet['system'];
+    $position = $planet['planet'];
+
     return '<a href="game.php?page=galaxy&amp;galaxy=' .
-    $current_planet['galaxy'] .
+    $galaxy .
     '&amp;system=' .
-    $current_planet['system'] .
+    $system .
     '">[' .
-    $current_planet['galaxy'] .
+    $galaxy .
     ':' .
-    $current_planet['system'] .
+    $system .
     ':' .
-    $current_planet['planet'] .
+    $position .
     ']</a>';
 }
 
@@ -393,8 +399,11 @@ function makebr($text): string
     return (version_compare(PHP_VERSION, "5.3.0", ">=")) ? nl2br($text, false) : strtr($text, ["\r\n" => $BR, "\r" => $BR, "\n" => $BR]);
 }
 
-function CheckNoobProtec($owner_player, $target_player, $player): array
-{
+function CheckNoobProtec(
+    array $owner_player,
+    array $target_player,
+    array $player
+): array {
     $config = Config::get();
     if (
         $config->noob_protection == 0
@@ -464,7 +473,7 @@ function floatToString($number, $Pro = 0, $output = false): string
     return $output ? str_replace(",", ".", sprintf("%." . $Pro . "f", $number)) : sprintf("%." . $Pro . "f", $number);
 }
 
-function isModuleAvailable($id): bool
+function isModuleAvailable(int $id): bool
 {
     // global $USER;
     $modules = explode(';', Config::get()->moduls);
@@ -535,7 +544,7 @@ function ClearCache(): void
     $config->save();
 }
 
-function allowedTo($side): bool
+function allowedTo(string $side): bool
 {
     global $USER;
 
@@ -558,12 +567,12 @@ function getRandomString(): string
     return md5(uniqid());
 }
 
-function inVacationMode($USER): bool
+function inVacationMode(array $USER): bool
 {
     return $USER['vacation_mode'] == 1;
 }
 
-function limitText($text, $length = 15)
+function limitText(string $text, int $length = 15): string
 {
     if (mb_strlen($text, 'UTF-8') > $length)
     {
