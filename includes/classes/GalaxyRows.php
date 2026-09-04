@@ -21,8 +21,8 @@ class GalaxyRows
 {
     private int $galaxy;
     private int $system;
-    private $galaxy_data;
-    private $galaxy_row;
+    private array $galaxy_data = [];
+    private array $galaxy_row = [];
 
     public const PLANET_DESTROYED = false;
 
