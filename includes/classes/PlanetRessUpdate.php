@@ -23,16 +23,16 @@ class ResourceUpdate
      */
     private $config = null;
 
-    private $is_global_mode = null;
-    private $time = null;
-    private $hash = null;
-    private $production_time = null;
+    private bool $is_global_mode = false;
+    private int $time = 0;
+    private string $hash = '';
+    private int $production_time = 0;
 
-    private $planet = [];
-    private $user = [];
+    private array $planet = [];
+    private array $user = [];
     private $builded = [];
-    private $build;
-    private $tech;
+    private $build = false;
+    private $tech = false;
 
     public function __construct($build = true, $tech = true)
     {
@@ -40,7 +40,7 @@ class ResourceUpdate
         $this->tech = $tech;
     }
 
-    public function setData($user, $planet): void
+    public function setData(array $user, array $planet): void
     {
         $this->user = $user;
         $this->planet = $planet;
@@ -136,7 +136,7 @@ class ResourceUpdate
         return $this->ReturnVars();
     }
 
-    public function UpdateResource($time, $hash = false): void
+    public function UpdateResource(int $time, bool $hash = false): void
     {
         $this->production_time = ($time - $this->planet['last_update']);
 
@@ -208,7 +208,7 @@ class ResourceUpdate
         $this->planet['deuterium'] = max($this->planet['deuterium'], 0);
     }
 
-    public static function getProd($calculation, $element = false): string
+    public static function getProd(string $calculation, $element = false): string
     {
         global $RESOURCE, $RESLIST, $USER, $PLANET;
 
@@ -237,7 +237,7 @@ class ResourceUpdate
         return 'return '.$calculation.';';
     }
 
-    public static function getNetworkLevel($user, $planet): array
+    public static function getNetworkLevel(array $user, array $planet): array
     {
         global $RESOURCE;
 
@@ -898,16 +898,16 @@ class ResourceUpdate
         }
     }
 
-    public function SavePlanetToDB($USER = null, $PLANET = null): array
+    public function SavePlanetToDB(array $USER = [], array $PLANET = []): array
     {
         global $RESOURCE, $RESLIST;
 
-        if (is_null($USER))
+        if (empty($USER))
         {
             global $USER;
         }
 
-        if (is_null($PLANET))
+        if (empty($PLANET))
         {
             global $PLANET;
         }
