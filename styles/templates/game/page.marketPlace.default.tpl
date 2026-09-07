@@ -1,7 +1,7 @@
 {block name="title" prepend}{$LNG.lm_marketplace}{/block}
 {block name="content"}
 
-<table style="width:80%">
+<table class="table_game table_full">
 	<tr>
 		<th colspan="2">
 			{$LNG.market_info_header}
@@ -36,7 +36,7 @@
 	</tr>
 </table>
 
-<table style="width:50%">
+<table class="table_game table_full">
 	<tr class="ratio">
 		<td>Reference ratio:</td>
 		<td>
@@ -46,7 +46,7 @@
 </table>
 
 {if $message}
-<table style="width:80%">
+<table class="table_game table_full">
 	<tr>
 		<th>
 			{$LNG.fcm_info}
@@ -61,15 +61,16 @@
 {/if}
 
 <br/><br/>
+
 <div id="resourceMarketBox" style="display:none">
-<table id="tradeList" style="width:80%;white-space: nowrap;" class="tablesorter">
+<table id="tradeList" class="tablesorter table_game table_full">
 	<thead>
 		<tr class="no-background no-border center">
 			<td></th>
 			<th></th>
-			<th><img src="./styles/theme/nova/images/metal.gif"/></th>
-			<th><img src="./styles/theme/nova/images/crystal.gif"/></th>
-			<th><img src="./styles/theme/nova/images/deuterium.gif"/></th>
+			<th><img src="./styles/theme/images/metal.gif"/></th>
+			<th><img src="./styles/theme/images/crystal.gif"/></th>
+			<th><img src="./styles/theme/images/deuterium.gif"/></th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -89,7 +90,7 @@
 			<th>{$LNG.market_p_total}</th>
 			<th>{$LNG.market_p_ratio}</th>
 			<th>{$LNG.market_p_end}</th>
-			<th  class="no-background no-border center">-></th>
+			<th class="no-background no-border center">-></th>
 			<th>{$LNG.market_p_cost_type}</th>
 			<th>{$LNG.market_p_cost_amount}</th>
 			<th>{$LNG.market_p_from_duration}</th>
@@ -148,7 +149,7 @@
 </table>
 <hr>
 
-<table id="resourceHistoryList" style="width:80%;white-space: nowrap;" class="tablesorter">
+<table id="resourceHistoryList" class="tablesorter table_game table_full">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -180,7 +181,7 @@
 
 </div>
 <div id="fleetMarketBox"  style="display:none">
-<table id="tradeFleetList" style="width:80%;white-space: nowrap;" class="tablesorter">
+<table id="tradeFleetList" class="tablesorter table_game table_full">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -242,7 +243,7 @@
 </table>
 <hr/>
 
-<table id="fleetHistoryList" style="width:80%;white-space: nowrap;" class="tablesorter">
+<table id="fleetHistoryList" class="tablesorter table_game table_full">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -269,7 +270,6 @@
 </table>
 
 </div>
-{/block}
 {block name="script" append}
 <script src="scripts/base/jquery.tablesorter.js"></script>
 <script>
@@ -331,5 +331,9 @@ $(".market_form").submit( function() {
 	}
 	return c;
 });
-});</script>
+});
+</script>
 {/block}
+
+{/block}
+

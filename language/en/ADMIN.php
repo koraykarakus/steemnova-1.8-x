@@ -1239,6 +1239,7 @@ $LNG['modul_60'] = 'Auth - Discord';
 $LNG['modul_61'] = 'Questions Page';
 $LNG['modul_62'] = 'Planet Selector';
 $LNG['modul_63'] = "Find Debris";
+$LNG['modul_64'] = "Market Place";
 
 $LNG['mod_module'] = 'Modules';
 $LNG['mod_info'] = 'Modules in the Game';
