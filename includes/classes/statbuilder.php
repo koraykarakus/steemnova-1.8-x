@@ -397,7 +397,8 @@ class statbuilder
 
             if (!isset($user_points[$planet_data['id_owner']]))
             {
-                $user_points[$planet_data['id_owner']]['build']['count'] = $user_points[$planet_data['id_owner']]['build']['points'] = 0;
+                $user_points[$planet_data['id_owner']]['build']['count'] = 0;
+                $user_points[$planet_data['id_owner']]['build']['points'] = 0;
             }
 
             $build_points = $this->getBuildPoints($planet_data);
@@ -434,17 +435,17 @@ class statbuilder
                 }
             }
 
-            $TechnoPoints = $this->getTechnoPoints($user_data);
-            $FleetPoints = $this->getFleetPoints($user_data);
-            $DefensePoints = $this->getDefensePoints($user_data);
+            $tech_points = $this->getTechnoPoints($user_data);
+            $fleet_points = $this->getFleetPoints($user_data);
+            $defense_points = $this->getDefensePoints($user_data);
             $this->getOfficerPoints($user_data);
 
-            $user_points[$user_data['id']]['fleet']['count'] = $FleetPoints['count'];
-            $user_points[$user_data['id']]['fleet']['points'] = $FleetPoints['points'];
-            $user_points[$user_data['id']]['defense']['count'] = $DefensePoints['count'];
-            $user_points[$user_data['id']]['defense']['points'] = $DefensePoints['points'];
-            $user_points[$user_data['id']]['techno']['count'] = $TechnoPoints['count'];
-            $user_points[$user_data['id']]['techno']['points'] = $TechnoPoints['points'];
+            $user_points[$user_data['id']]['fleet']['count'] = $fleet_points['count'];
+            $user_points[$user_data['id']]['fleet']['points'] = $fleet_points['points'];
+            $user_points[$user_data['id']]['defense']['count'] = $defense_points['count'];
+            $user_points[$user_data['id']]['defense']['points'] = $defense_points['points'];
+            $user_points[$user_data['id']]['techno']['count'] = $tech_points['count'];
+            $user_points[$user_data['id']]['techno']['points'] = $tech_points['points'];
 
             if (!isset($user_points[$user_data['id']]['build'])) //user don't have any planets ( user id changed manually)
             {
@@ -521,7 +522,6 @@ class statbuilder
         if ($final_sql != $save_sql)
         {
             $final_sql = substr($final_sql, 0, -2) . $sql_end;
-            var_dump($final_sql);
             $this->saveDataIntoDB($final_sql);
             unset($user_points);
         }
@@ -562,7 +562,7 @@ class statbuilder
                 $ally_sql .= "(".
                 $alliance_data['id'].", 0, ".
                 $alliance_data['ally_universe'].", ".
-                ($ally_points['old_tech_rank'] ?? 0) .", ".
+                ($alliance_data['old_tech_rank'] ?? 0) .", ".
                 min($ally_points[$alliance_data['id']]['techno']['points'] ?? 0, 1E50) .", ".
                 ($ally_points[$alliance_data['id']]['techno']['count'] ?? 0) . ", " .
                 ($alliance_data['old_build_rank'] ?? 0) . ", ".
@@ -589,7 +589,7 @@ class statbuilder
             }
 
             // for example i < 50
-            if ($ally_sql != $save_sql)
+            if ($ally_sql != $save_ally_sql)
             {
                 $ally_sql = substr($ally_sql, 0, -2) . $sql_end_alliance;
                 $this->saveDataIntoDB($ally_sql);
