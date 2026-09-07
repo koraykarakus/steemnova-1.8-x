@@ -14,7 +14,7 @@
 				<th style="width:60%">{$LNG.nt_subject_note}</th>
 				<th style="width:10%">{$LNG.nt_size_note}</th>
 			</tr>
-			{foreach $notesList as $notesID => $notesRow}
+			{foreach $notes_list as $notesID => $notesRow}
 				<tr>
 					<td style="width:20px;"><input name="delmes[{$notesID}]" type="checkbox"></td>
 					<td style="width:150px;">{$notesRow.time}</td>

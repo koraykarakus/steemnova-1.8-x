@@ -1,27 +1,27 @@
 {block name="title" prepend}{$LNG.lm_notes}{/block}
 {block name="content"}
 <form action="?page=notes&amp;mode=insert" method="post">
-	<input type="hidden" name="id" value="{$noteDetail.id}">
+	<input type="hidden" name="id" value="{$note_detail.id}">
 	<table class="table_game">
 		<tr>
-			<th colspan="2">{if $noteDetail.id == 0}{$LNG.nt_create_note}{else}{$LNG.nt_edit_note}{/if}</th>
+			<th colspan="2">{if $note_detail.id == 0}{$LNG.nt_create_note}{else}{$LNG.nt_edit_note}{/if}</th>
 		</tr>
 		<tr>
 			<td><labal for="priority">{$LNG.nt_priority}</label></td>
 			<td>
-				{html_options id=priority name=priority options=$PriorityList selected=$noteDetail.priority}
+				{html_options id=priority name=priority options=$priority_list selected=$note_detail.priority}
 			</td>
 		</tr>
 		<tr>
 			<td><labal for="title">{$LNG.nt_subject_note}</label></td>
 			<td>
-				<input type="text" id="title" name="title" size="30" maxlength="30" value="{$noteDetail.title}">
+				<input type="text" id="title" name="title" size="30" maxlength="30" value="{$note_detail.title}">
 			</td>
 		</tr>
 		<tr>
 			<td><labal for="text">{$LNG.nt_note}</label> (<span id="cntChars">0</span>&nbsp;/&nbsp;10.000&nbsp;{$LNG.nt_characters})</th>
 			<td>
-				<textarea name="text" id="text" cols="60" rows="10" maxlength="10000" onkeyup="$('#cntChars').text($(this).val().length);">{$noteDetail.text}</textarea>
+				<textarea name="text" id="text" cols="60" rows="10" maxlength="10000" onkeyup="$('#cntChars').text($(this).val().length);">{$note_detail.text}</textarea>
 			</td>
 		</tr>
 		<tr>

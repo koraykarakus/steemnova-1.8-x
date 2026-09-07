@@ -53,7 +53,7 @@ class ShowNotesPage extends AbstractGamePage
         }
 
         $this->assign([
-            'notesList' => $notes_list,
+            'notes_list' => $notes_list,
         ]);
 
         $this->display('page.notes.default.tpl');
@@ -86,10 +86,10 @@ class ShowNotesPage extends AbstractGamePage
 
         $this->tpl_obj->execscript("$('#cntChars').text($('#text').val().length);");
         $this->assign([
-            'PriorityList' => [2 => $LNG['nt_important'],
-                1                => $LNG['nt_normal'],
-                0                => $LNG['nt_unimportant']],
-            'noteDetail' => $note_detail,
+            'priority_list' => [2 => $LNG['nt_important'],
+                1                 => $LNG['nt_normal'],
+                0                 => $LNG['nt_unimportant']],
+            'note_detail' => $note_detail,
         ]);
 
         $this->display('page.notes.detail.tpl');
