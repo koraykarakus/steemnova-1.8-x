@@ -4,7 +4,7 @@
 		<tr>
 			<th>{$LNG.lm_changelog}</th>
 		</tr>
-		{foreach $ChangelogList as $item}
+		{foreach $changelog_list as $item}
 			<tr>
 				<td>{$item}</td>
 			</tr>

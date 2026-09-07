@@ -40,7 +40,7 @@ class ShowChangelogPage extends AbstractGamePage
         //$html_lines = array_map([$parse_down, 'text'], $lines);
 
         $this->assign([
-            'ChangelogList' => $html_lines,
+            'changelog_list' => $html_lines,
         ]);
 
         $this->display('page.changelog.default.tpl');
