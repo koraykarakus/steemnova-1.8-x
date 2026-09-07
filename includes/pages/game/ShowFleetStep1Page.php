@@ -90,19 +90,19 @@ class ShowFleetStep1Page extends AbstractGamePage
         $this->tpl_obj->execscript('updateVars();FleetTime();var relativeTime3 = Math.floor(Date.now() / 1000);window.setInterval(function() {if(relativeTime3 < Math.floor(Date.now() / 1000)) {FleetTime();relativeTime3++;}}, 25);');
 
         $this->assign([
-            'token'        => $token,
-            'mission'      => $mission,
-            'shortcutList' => $shortcut_list,
-            'shortcutMax'  => $shortcut_amount,
-            'colonyList'   => $colony_list,
-            'ACSList'      => $acs_list,
-            'galaxy'       => $target_galaxy,
-            'system'       => $target_system,
-            'planet'       => $target_planet,
-            'type'         => $target_type,
-            'speedSelect'  => FleetFunctions::$allowed_speed,
-            'typeSelect'   => [1 => $LNG['type_planet_1'], 2 => $LNG['type_planet_2'], 3 => $LNG['type_planet_3']],
-            'fleetdata'    => $fleet_data,
+            'token'         => $token,
+            'mission'       => $mission,
+            'shortcut_list' => $shortcut_list,
+            'shortcut_max'  => $shortcut_amount,
+            'colony_list'   => $colony_list,
+            'acs_list'      => $acs_list,
+            'galaxy'        => $target_galaxy,
+            'system'        => $target_system,
+            'planet'        => $target_planet,
+            'type'          => $target_type,
+            'speed_select'  => FleetFunctions::$allowed_speed,
+            'type_select'   => [1 => $LNG['type_planet_1'], 2 => $LNG['type_planet_2'], 3 => $LNG['type_planet_3']],
+            'fleet_data'    => $fleet_data,
         ]);
 
         $this->display('page.fleetStep1.default.tpl');

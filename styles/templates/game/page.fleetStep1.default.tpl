@@ -18,7 +18,7 @@
 					<input style="width:32px;" type="text" id="planet" name="planet" size="3" maxlength="2"
 						onkeyup="updateVars()" value="{$planet}">
 					<select class="text-yellow" id="type" name="type" onchange="updateVars()">
-						{html_options options=$typeSelect selected=$type}
+						{html_options options=$type_select selected=$type}
 					</select>
 				</td>
 			</tr>
@@ -26,7 +26,7 @@
 				<td>{$LNG.fl_fleet_speed}</td>
 				<td>
 					<select class="text-yellow" id="speed" name="speed" onChange="updateVars(false)">
-						{html_options options=$speedSelect}
+						{html_options options=$speed_select}
 					</select> %
 				</td>
 			</tr>
@@ -89,7 +89,7 @@
 						</a>]
 					</th>
 				</tr>
-				{foreach $shortcutList as $shortcutID => $shortcutRow}
+				{foreach $shortcut_list as $shortcutID => $shortcutRow}
 					<tr class="shortcut-row">
 						<td class="shortcut-colum shortcut-isset">
 							<div class="shortcut-link">
@@ -109,7 +109,7 @@
 									maxlength="3">:<input type="text" class="shortcut-input" name="shortcut[{$shortcutID}][planet]"
 									value="{$shortcutRow.planet}" size="3" maxlength="2">
 								<select class="shortcut-input" name="shortcut[{$shortcutID}][type]">
-									{html_options selected=$shortcutRow.type options=$typeSelect}
+									{html_options selected=$shortcutRow.type options=$type_select}
 								</select>
 							</div>
 						</td>	
@@ -137,7 +137,7 @@
 								pattern="[0-9]*">:<input type="text" class="shortcut-input" name="shortcut[][planet]" value=""
 								size="3" maxlength="2" placeholder="P" pattern="[0-9]*">
 							<select class="shortcut-input" name="shortcut[][type]">
-								{html_options options=$typeSelect}
+								{html_options options=$type_select}
 							</select>
 						</div>
 					</td>
@@ -153,7 +153,7 @@
 			<tr>
 				<th colspan="4" class="text_center">{$LNG.fl_my_planets}</th>
 			</tr>
-			{foreach $colonyList as $c_row}
+			{foreach $colony_list as $c_row}
 			{if $c_row@iteration % 4 == 1}
 			<tr>
 			{/if}
@@ -171,12 +171,12 @@
 			</tr>
 			{/foreach}
 		</table>
-		{if $ACSList}
+		{if $acs_list}
 			<table class="table_game table_full">
 				<tr style="height:20px;">
 					<th>{$LNG.fl_acs_title}</th>
 				</tr>
-				{foreach $ACSList as $ACSRow}
+				{foreach $acs_list as $ACSRow}
 					<tr style="height:20px;">
 						<td><a
 								href="javascript:setACSTarget({$ACSRow.galaxy},{$ACSRow.system},{$ACSRow.planet},{$ACSRow.planet_type},{$ACSRow.id});">{$ACSRow.name}
@@ -196,7 +196,7 @@
 		</table>
 	</form>
 	<script type="text/javascript">
-		data			= {$fleetdata|json};
+		data			= {$fleet_data|json};
 		shortCutRows	= 0;
 		fl_no_shortcuts	= '{$LNG.fl_no_shortcuts}';
 	</script>
