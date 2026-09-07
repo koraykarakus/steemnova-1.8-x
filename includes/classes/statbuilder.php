@@ -17,34 +17,34 @@
 
 class statbuilder
 {
-    protected $starttime;
-    protected $memory;
-    protected $time;
-    protected $recordData;
-    protected $Unis;
+    protected float $start_time;
+    protected array $memory;
+    protected int $time;
+    protected array $record_data;
+    protected array $universes;
 
     public function __construct()
     {
-        $this->starttime = microtime(true);
+        $this->start_time = microtime(true);
         $this->memory = [round(memory_get_usage() / 1024, 1), round(memory_get_usage(1) / 1024, 1)];
         $this->time = TIMESTAMP;
 
-        $this->recordData = [];
-        $this->Unis = [];
+        $this->record_data = [];
+        $this->universes = [];
 
         $sql = "SELECT uni FROM %%CONFIG%% ORDER BY uni ASC;";
         $uni_result = Database::get()->select($sql, []);
         foreach ($uni_result as $uni)
         {
-            $this->Unis[] = $uni['uni'];
+            $this->universes[] = $uni['uni'];
         }
     }
 
-    private function SomeStatsInfos()
+    private function someStatsInfos(): array
     {
         return [
             'stats_time'     => $this->time,
-            'totaltime'      => round(microtime(true) - $this->starttime, 7),
+            'total_time'     => round(microtime(true) - $this->start_time, 7),
             'memory_peak'    => [round(memory_get_peak_usage() / 1024, 1), round(memory_get_peak_usage(1) / 1024, 1)],
             'initial_memory' => $this->memory,
             'end_memory'     => [round(memory_get_usage() / 1024, 1), round(memory_get_usage(1) / 1024, 1)],
@@ -52,9 +52,9 @@ class statbuilder
         ];
     }
 
-    private function CheckUniverseAccounts($uni_data)
+    private function checkUniverseAccounts(array $uni_data): void
     {
-        $uni_data = $uni_data + array_combine($this->Unis, array_fill(1, count($this->Unis), 0));
+        $uni_data = $uni_data + array_combine($this->universes, array_fill(1, count($this->universes), 0));
         foreach ($uni_data as $uni => $amount)
         {
             $config = Config::get($uni);
@@ -63,7 +63,7 @@ class statbuilder
         }
     }
 
-    private function GetUsersInfosFromDB()
+    private function getUsersInfosFromDB(): array
     {
         global $RESOURCE, $RESLIST;
         $select_defenses = $select_buildings = $selected_tech = $select_fleets = $select_officers = '';
@@ -132,23 +132,23 @@ class statbuilder
             }
         }
 
-        $return['Fleets'] = $flying_fleets;
-        $return['Planets'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$select_buildings.' p.id, p.universe, p.id_owner, u.authlevel, u.bana, u.username FROM %%PLANETS%% as p LEFT JOIN %%USERS%% as u ON u.id = p.id_owner;');
-        $return['Users'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$selected_tech.$select_fleets.$select_defenses.$select_officers.' u.id, u.ally_id, u.authlevel, u.bana, u.universe, u.username, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%USERS%% as u LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id LEFT JOIN %%PLANETS%% as p ON u.id = p.id_owner GROUP BY s.id_owner, u.id, u.authlevel;');
-        $return['Alliance'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT a.id, a.ally_universe, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%ALLIANCE%% as a LEFT JOIN %%ALLIANCE_POINTS%% as s ON s.id_owner = a.id GROUP BY a.id;');
+        $return['fleets'] = $flying_fleets;
+        $return['planets'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$select_buildings.' p.id, p.universe, p.id_owner, u.authlevel, u.bana, u.username FROM %%PLANETS%% as p LEFT JOIN %%USERS%% as u ON u.id = p.id_owner;');
+        $return['users'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT '.$selected_tech.$select_fleets.$select_defenses.$select_officers.' u.id, u.ally_id, u.authlevel, u.bana, u.universe, u.username, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%USERS%% as u LEFT JOIN %%USER_POINTS%% as s ON s.id_owner = u.id LEFT JOIN %%PLANETS%% as p ON u.id = p.id_owner GROUP BY s.id_owner, u.id, u.authlevel;');
+        $return['alliance'] = $db->select('SELECT SQL_BIG_RESULT DISTINCT a.id, a.ally_universe, s.tech_rank AS old_tech_rank, s.build_rank AS old_build_rank, s.defs_rank AS old_defs_rank, s.fleet_rank AS old_fleet_rank, s.total_rank AS old_total_rank FROM %%ALLIANCE%% as a LEFT JOIN %%ALLIANCE_POINTS%% as s ON s.id_owner = a.id GROUP BY a.id;');
 
         return $return;
     }
 
-    private function setRecords($user_id, $element_id, $amount)
+    private function setRecords(int $user_id, int $element_id, int $amount): void
     {
-        $this->recordData[$element_id][$amount][] = $user_id;
+        $this->record_data[$element_id][$amount][] = $user_id;
     }
 
-    private function writeRecordData()
+    private function writeRecordData(): void
     {
         $query_data = [];
-        foreach ($this->recordData as $element_id => $element_array)
+        foreach ($this->record_data as $element_id => $element_array)
         {
             krsort($element_array, SORT_NUMERIC);
             $user_winner = reset($element_array);
@@ -177,11 +177,11 @@ class statbuilder
         {
             $sql = "TRUNCATE TABLE %%RECORDS%%;";
             $sql .= "INSERT INTO %%RECORDS%% (user_id, element_id, level) VALUES ".implode(', ', $query_data).";";
-            $this->SaveDataIntoDB($sql);
+            $this->saveDataIntoDB($sql);
         }
     }
 
-    private function SaveDataIntoDB($data)
+    private function saveDataIntoDB(string $data): void
     {
         $queries = explode(';', $data);
         $queries = array_filter($queries);
@@ -191,7 +191,7 @@ class statbuilder
         }
     }
 
-    private function GetTechnoPoints($user)
+    private function getTechnoPoints(array $user): array
     {
         global $RESOURCE, $RESLIST, $PRICELIST;
         $tech_counts = 0;
@@ -228,25 +228,25 @@ class statbuilder
         return ['count' => $tech_counts, 'points' => ($tech_points / Config::get()->stat_settings)];
     }
 
-    private function GetBuildPoints($planet)
+    private function getBuildPoints(array $planet): array
     {
         global $RESOURCE, $RESLIST, $PRICELIST;
         $build_counts = 0;
         $build_points = 0;
 
-        foreach ($RESLIST['build'] as $Build)
+        foreach ($RESLIST['build'] as $build)
         {
-            if ($planet[$RESOURCE[$Build]] == 0)
+            if ($planet[$RESOURCE[$build]] == 0)
             {
                 continue;
             }
 
-            $base_cost = $PRICELIST[$Build]['cost'][901] +
-            $PRICELIST[$Build]['cost'][902] +
-            $PRICELIST[$Build]['cost'][903];
+            $base_cost = $PRICELIST[$build]['cost'][901] +
+            $PRICELIST[$build]['cost'][902] +
+            $PRICELIST[$build]['cost'][903];
 
-            $level = $planet[$RESOURCE[$Build]];
-            $factor = $PRICELIST[$Build]['factor'];
+            $level = $planet[$RESOURCE[$build]];
+            $factor = $PRICELIST[$build]['factor'];
 
             if ($factor == 1)
             {
@@ -259,14 +259,14 @@ class statbuilder
                 $build_points += $base_cost * ((pow($factor, $level) - 1) / ($factor - 1));
             }
 
-            $build_counts += $planet[$RESOURCE[$Build]];
+            $build_counts += $planet[$RESOURCE[$build]];
 
-            $this->setRecords($planet['id_owner'], $Build, $planet[$RESOURCE[$Build]]);
+            $this->setRecords($planet['id_owner'], $build, $planet[$RESOURCE[$build]]);
         }
         return ['count' => $build_counts, 'points' => ($build_points / Config::get()->stat_settings)];
     }
 
-    private function GetDefensePoints($user)
+    private function getDefensePoints(array $user): array
     {
         global $RESOURCE, $RESLIST, $PRICELIST;
         $defense_counts = 0;
@@ -289,32 +289,32 @@ class statbuilder
         return ['count' => $defense_counts, 'points' => ($defense_points / Config::get()->stat_settings)];
     }
 
-    private function GetFleetPoints($user)
+    private function getFleetPoints(array $user): array
     {
         global $RESOURCE, $RESLIST, $PRICELIST;
         $fleet_counts = 0;
         $fleet_points = 0;
 
-        foreach ($RESLIST['fleet'] as $Fleet)
+        foreach ($RESLIST['fleet'] as $fleet)
         {
-            if ($user[$RESOURCE[$Fleet]] == 0)
+            if ($user[$RESOURCE[$fleet]] == 0)
             {
                 continue;
             }
 
-            $Units = $PRICELIST[$Fleet]['cost'][901] +
-            $PRICELIST[$Fleet]['cost'][902] + $PRICELIST[$Fleet]['cost'][903];
+            $Units = $PRICELIST[$fleet]['cost'][901] +
+            $PRICELIST[$fleet]['cost'][902] + $PRICELIST[$fleet]['cost'][903];
 
-            $fleet_points += $Units * $user[$RESOURCE[$Fleet]];
-            $fleet_counts += $user[$RESOURCE[$Fleet]];
+            $fleet_points += $Units * $user[$RESOURCE[$fleet]];
+            $fleet_counts += $user[$RESOURCE[$fleet]];
 
-            $this->setRecords($user['id'], $Fleet, $user[$RESOURCE[$Fleet]]);
+            $this->setRecords($user['id'], $fleet, $user[$RESOURCE[$fleet]]);
         }
 
         return ['count' => $fleet_counts, 'points' => ($fleet_points / Config::get()->stat_settings)];
     }
 
-    private function GetOfficerPoints($user)
+    private function getOfficerPoints(array $user): void
     {
         global $RESOURCE, $RESLIST;
 
@@ -329,9 +329,9 @@ class statbuilder
         }
     }
 
-    private function SetNewRanks()
+    private function setNewRanks(): void
     {
-        foreach ($this->Unis as $uni)
+        foreach ($this->universes as $uni)
         {
             foreach (['tech', 'build', 'defs', 'fleet', 'total'] as $type)
             {
@@ -354,11 +354,11 @@ class statbuilder
         }
     }
 
-    final public function MakeStats()
+    final public function makeStats(): array
     {
         global $RESOURCE;
         $ally_points = $user_points = [];
-        $total_data = $this->GetUsersInfosFromDB();
+        $total_data = $this->getUsersInfosFromDB();
 
         $final_sql = $save_sql = "INSERT INTO %%USER_POINTS%% 
         (id_owner, id_ally, universe, tech_old_rank, tech_points, 
@@ -386,7 +386,7 @@ class statbuilder
 		total_points = VALUES(total_points),
 		total_count = VALUES(total_count);";
 
-        foreach ($total_data['Planets'] as $planet_data)
+        foreach ($total_data['planets'] as $planet_data)
         {
             if ((in_array(Config::get()->stat, [1, 2])
                 && $planet_data['authlevel'] >= Config::get()->stat_level)
@@ -400,7 +400,7 @@ class statbuilder
                 $user_points[$planet_data['id_owner']]['build']['count'] = $user_points[$planet_data['id_owner']]['build']['points'] = 0;
             }
 
-            $build_points = $this->GetBuildPoints($planet_data);
+            $build_points = $this->getBuildPoints($planet_data);
             $user_points[$planet_data['id_owner']]['build']['count'] += $build_points['count'];
             $user_points[$planet_data['id_owner']]['build']['points'] += $build_points['points'];
         }
@@ -408,7 +408,7 @@ class statbuilder
         $uni_data = [];
 
         $i = 0;
-        foreach ($total_data['Users'] as $user_data)
+        foreach ($total_data['users'] as $user_data)
         {
             $i++;
             if (!isset($uni_data[$user_data['universe']]))
@@ -426,18 +426,18 @@ class statbuilder
                 continue;
             }
 
-            if (isset($total_data['Fleets'][$user_data['id']]))
+            if (isset($total_data['fleets'][$user_data['id']]))
             {
-                foreach ($total_data['Fleets'][$user_data['id']] as $ID => $Amount)
+                foreach ($total_data['fleets'][$user_data['id']] as $ID => $Amount)
                 {
                     $user_data[$RESOURCE[$ID]] += $Amount;
                 }
             }
 
-            $TechnoPoints = $this->GetTechnoPoints($user_data);
-            $FleetPoints = $this->GetFleetPoints($user_data);
-            $DefensePoints = $this->GetDefensePoints($user_data);
-            $this->GetOfficerPoints($user_data);
+            $TechnoPoints = $this->getTechnoPoints($user_data);
+            $FleetPoints = $this->getFleetPoints($user_data);
+            $DefensePoints = $this->getDefensePoints($user_data);
+            $this->getOfficerPoints($user_data);
 
             $user_points[$user_data['id']]['fleet']['count'] = $FleetPoints['count'];
             $user_points[$user_data['id']]['fleet']['points'] = $FleetPoints['points'];
@@ -511,7 +511,7 @@ class statbuilder
             if ($i == 50)
             {
                 $final_sql = substr($final_sql, 0, -2) . $sql_end;
-                $this->SaveDataIntoDB($final_sql);
+                $this->saveDataIntoDB($final_sql);
                 $final_sql = $save_sql;
                 $i = 0;
             }
@@ -522,7 +522,7 @@ class statbuilder
         {
             $final_sql = substr($final_sql, 0, -2) . $sql_end;
             var_dump($final_sql);
-            $this->SaveDataIntoDB($final_sql);
+            $this->saveDataIntoDB($final_sql);
             unset($user_points);
         }
 
@@ -556,7 +556,7 @@ class statbuilder
 			total_count = VALUES(total_count);";
 
             $i = 0;
-            foreach ($total_data['Alliance'] as $alliance_data)
+            foreach ($total_data['alliance'] as $alliance_data)
             {
                 $i++;
                 $ally_sql .= "(".
@@ -581,7 +581,7 @@ class statbuilder
                 if ($i == 50)
                 {
                     $ally_sql = substr($ally_sql, 0, -2) . $sql_end_alliance;
-                    $this->SaveDataIntoDB($ally_sql);
+                    $this->saveDataIntoDB($ally_sql);
                     $ally_sql = $save_ally_sql;
                     $i = 0;
                 }
@@ -592,18 +592,18 @@ class statbuilder
             if ($ally_sql != $save_sql)
             {
                 $ally_sql = substr($ally_sql, 0, -2) . $sql_end_alliance;
-                $this->SaveDataIntoDB($ally_sql);
+                $this->saveDataIntoDB($ally_sql);
             }
 
             unset($ally_points);
 
         }
 
-        $this->SetNewRanks();
+        $this->setNewRanks();
 
-        $this->CheckUniverseAccounts($uni_data);
+        $this->checkUniverseAccounts($uni_data);
         $this->writeRecordData();
 
-        return $this->SomeStatsInfos();
+        return $this->someStatsInfos();
     }
 }

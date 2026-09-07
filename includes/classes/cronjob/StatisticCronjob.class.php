@@ -23,6 +23,6 @@ class StatisticCronjob implements CronjobTask
     {
         require 'includes/classes/statbuilder.php';
         $stat = new Statbuilder();
-        $stat->MakeStats();
+        $stat->makeStats();
     }
 }
