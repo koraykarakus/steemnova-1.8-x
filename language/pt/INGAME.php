@@ -20,6 +20,9 @@
 
 // 2Moons - Copyright (C) 2012  Jan Kröpke
 
+// MODULE_MARKET_PLACE
+$LNG['lm_market_place'] = "Mercado";
+
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Coord";
 $LNG['fd_giga_recyclers_need'] = "G. Recicladores (N.)";

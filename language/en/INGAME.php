@@ -19,6 +19,9 @@
 // 2Moons - Copyright (C) 2010-2012 Slaver
 // Grammar Pedantry fixes @etaletai 2018
 
+// MODULE_MARKET_PLACE
+$LNG['lm_market_place'] = "Market Place";
+
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Coord";
 $LNG['fd_giga_recyclers_need'] = "G. Recyclers (N)";

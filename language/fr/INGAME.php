@@ -5,6 +5,9 @@
 // Version 1.0 - Initial release
 // Version 1.1 - Decode accent HTML to UTF-8 format & small spellchecking
 
+// MODULE_MARKET_PLACE
+$LNG['lm_market_place'] = "Place de marché";
+
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Coord";
 $LNG['fd_giga_recyclers_need'] = "G. Recycleurs (N.)";

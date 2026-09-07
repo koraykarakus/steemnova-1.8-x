@@ -17,6 +17,9 @@
 
 // Translation into Russian - Copyright © 2010-2013 InquisitorEA <support@moon-hunt.ru>
 
+// MODULE_MARKET_PLACE
+$LNG['lm_market_place'] = "Рынок";
+
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Коорд";
 $LNG['fd_giga_recyclers_need'] = "Г. Переработчики (Н.)";

@@ -147,6 +147,17 @@
     </li>
   {/if}
 
+  {if isModuleAvailable($smarty.const.MODULE_MARKET_PLACE)}
+    <li class="menu-button">
+      <a class="long{if $page == 'marketPlace'} menuActive{/if}" href="game.php?page=marketPlace">{$LNG.lm_market_place}</a>
+      <a class="menu_icon icon_13{if $page == 'marketPlace'} active{/if}" href="game.php?page=marketPlace">
+        <div class="tooltip tooltip_right">
+          {$LNG.lm_market_place}
+        </div> 
+      </a>
+    </li>
+  {/if}
+
   {if $authlevel > 0}
     <li class="menu-button">
       <a href="./admin.php" class="long" style="color:lime">{$LNG.lm_administration}</a>

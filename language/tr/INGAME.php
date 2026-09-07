@@ -20,6 +20,9 @@
 // Translated into Turkish by Ibraihm Senyer . All rights reversed (C) 2013
 // 2Moons - Copyright (C) 2010-2012 Slaver
 
+// MODULE_MARKET_PLACE
+$LNG['lm_market_place'] = "Pazar";
+
 // MODULE_FIND_DEBRIS
 $LNG['fd_coord'] = "Koord";
 $LNG['fd_giga_recyclers_need'] = "G. Geri Dönüştürücüler (G.)";
