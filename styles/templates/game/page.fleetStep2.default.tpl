@@ -11,9 +11,9 @@
       		<td class="text_center">{$LNG.fl_resources}</td>
     	</tr>
 		<tr>
-			<td {if $StaySelector} rowspan="5"{/if}>
+			<td {if $stay_selector} rowspan="5"{/if}>
 				<table class="table_game">
-					{foreach $MissionSelector as $mission_id}
+					{foreach $mission_selector as $mission_id}
 						<tr>
 							<td>
 							<input id="radio_{$mission_id}" type="radio" name="mission" value="{$mission_id}" {if $mission == $mission_id || $mission_id@total == 1}checked="checked"{/if} >
@@ -92,7 +92,7 @@
 				</table>
 			</td>
 		</tr>
-		{if $Exchange}
+		{if $exchange}
 		<tr>
 			<th>{$LNG.fl_exchange}</th>
 		</tr>
@@ -143,13 +143,13 @@
 		</tr>
 		{/if}
 
-		{if $StaySelector}
+		{if $stay_selector}
 		<tr>
 			<th class="text-center">{$LNG.fl_hold_time}</th>
 		</tr>
 		<tr>
 			<td>
-			{html_options name=staytime options=$StaySelector} {$LNG.fl_hours}
+			{html_options name=staytime options=$stay_selector} {$LNG.fl_hours}
 			</td>
 		</tr>
 		{/if}
@@ -161,6 +161,6 @@
     </table>
 </form>
 <script type="text/javascript">
-data	= {$fleetdata|json};
+data	= {$fleet_data|json};
 </script>
 {/block}

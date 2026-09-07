@@ -146,16 +146,16 @@ class ShowFleetStep2Page extends AbstractGamePage
 
         $this->tpl_obj->execscript('calculateTransportCapacity();');
         $this->assign([
-            'fleetdata'           => $fleet_data,
+            'fleet_data'          => $fleet_data,
             'consumption'         => floatToString($consumption),
             'mission'             => $target_mission,
             'galaxy'              => $PLANET['galaxy'],
             'system'              => $PLANET['system'],
             'planet'              => $PLANET['planet'],
             'type'                => $PLANET['planet_type'],
-            'MissionSelector'     => $mission_output['MissionSelector'],
-            'StaySelector'        => $mission_output['StayBlock'],
-            'Exchange'            => $mission_output['Exchange'],
+            'mission_selector'    => $mission_output['MissionSelector'],
+            'stay_selector'       => $mission_output['StayBlock'],
+            'exchange'            => $mission_output['Exchange'],
             'fl_dm_alert_message' => sprintf(
                 $LNG['fl_dm_alert_message'],
                 $LNG['type_mission_11'],
