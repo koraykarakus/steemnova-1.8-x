@@ -6,7 +6,7 @@
 	</tr>
     <tr>
         <td>{$LNG.fl_mission}</td>
-        <td>{$LNG["type_mission_{$targetMission}"]}</td>
+        <td>{$LNG["type_mission_{$target_mission}"]}</td>
 	</tr>
     <tr>
         <td>{$LNG.fl_distance}</td>
@@ -14,7 +14,7 @@
     </tr>
     <tr>
         <td>{$LNG.fl_fleet_speed}</td>
-        <td>{$MaxFleetSpeed|number}</td>
+        <td>{$max_fleet_speed|number}</td>
     </tr>
     <tr>
         <td>{$LNG.fl_fuel_consumption}</td>
@@ -30,16 +30,16 @@
     </tr>
     <tr>
         <td>{$LNG.fl_arrival_time}</td>
-        <td>{$fleetStartTime}</td>
+        <td>{$fleet_start_time}</td>
     </tr>
     <tr>
         <td>{$LNG.fl_return_time}</td>
-        <td>{$fleetEndTime}</td>
+        <td>{$fleet_end_time}</td>
     </tr>
     <tr>
         <th colspan="2">{$LNG.fl_fleet}</th>
     </tr>
-	{foreach $FleetList as $ShipID => $ShipCount}
+	{foreach $fleet_list as $ShipID => $ShipCount}
 	<tr>
 		<td>{$LNG.tech.{$ShipID}}</td>
 		<td>{$ShipCount|number}</td>

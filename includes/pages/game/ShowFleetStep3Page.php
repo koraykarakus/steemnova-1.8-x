@@ -574,15 +574,15 @@ class ShowFleetStep3Page extends AbstractGamePage
 
         $this->tpl_obj->gotoside('game.php?page=fleetTable');
         $this->assign([
-            'targetMission'  => $target_mission,
-            'distance'       => $distance,
-            'consumption'    => $consumption,
-            'from'           => $PLANET['galaxy'] .":". $PLANET['system']. ":". $PLANET['planet'],
-            'destination'    => $target_galaxy .":". $target_system .":". $target_planet,
-            'fleetStartTime' => _date($LNG['php_tdformat'], $fleet_start_time, $USER['timezone']),
-            'fleetEndTime'   => _date($LNG['php_tdformat'], $fleet_end_time, $USER['timezone']),
-            'MaxFleetSpeed'  => $fleet_max_speed,
-            'FleetList'      => $fleet_array,
+            'target_mission'   => $target_mission,
+            'distance'         => $distance,
+            'consumption'      => $consumption,
+            'from'             => $PLANET['galaxy'] .":". $PLANET['system']. ":". $PLANET['planet'],
+            'destination'      => $target_galaxy .":". $target_system .":". $target_planet,
+            'fleet_start_time' => _date($LNG['php_tdformat'], $fleet_start_time, $USER['timezone']),
+            'fleet_end_time'   => _date($LNG['php_tdformat'], $fleet_end_time, $USER['timezone']),
+            'max_fleet_speed'  => $fleet_max_speed,
+            'fleet_list'       => $fleet_array,
         ]);
 
         $this->display('page.fleetStep3.default.tpl');
