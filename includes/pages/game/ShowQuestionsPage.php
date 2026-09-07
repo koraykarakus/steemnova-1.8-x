@@ -48,7 +48,7 @@ class ShowQuestionsPage extends AbstractGamePage
         }
 
         $this->assign([
-            'questionRow' => $LNG['questions'][$category_id][$question_id],
+            'question_row' => $LNG['questions'][$category_id][$question_id],
         ]);
 
         $this->display('page.questions.single.tpl');

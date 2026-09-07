@@ -5,11 +5,11 @@
 			<th>{$LNG.faq_overview}</th>
 		</tr>
 		<tr>
-			<th>{$questionRow.title}</th>
+			<th>{$question_row.title}</th>
 		</tr>
 		<tr>
 			<td class="left ">
-				{$questionRow.body}
+				{$question_row.body}
 			</td>
 		</tr>
 		<tr>
