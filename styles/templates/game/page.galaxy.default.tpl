@@ -14,7 +14,7 @@
 				<tr>
 					<td>{$missile_count} <input type="text" name="SendMI" size="2" maxlength="7"></td>
 					<td>{$LNG.gl_objective}:
-						{html_options name=Target options=$missileSelector}
+						{html_options name=Target options=$missile_selector}
 					</td>
 				</tr>
 				<tr>
@@ -51,10 +51,10 @@
 			</form>
 		</div>
 		<div class="galaxy_header info_available_res">
-			{$LNG.gl_avaible_missiles}&nbsp;:&nbsp;<span id="missiles">{$currentmip|number}</span>&nbsp; 
-			{$LNG.gl_avaible_spyprobes}&nbsp;:&nbsp;<span id="elementID210">{$spyprobes|number}</span>&nbsp;
+			{$LNG.gl_avaible_missiles}&nbsp;:&nbsp;<span id="missiles">{$current_mip|number}</span>&nbsp; 
+			{$LNG.gl_avaible_spyprobes}&nbsp;:&nbsp;<span id="elementID210">{$spy_probes|number}</span>&nbsp;
 			{$LNG.gl_avaible_recyclers}&nbsp;:&nbsp;<span id="elementID209">{$recyclers|number}</span>&nbsp;
-			{$LNG.gl_fleets}&nbsp;({$fleetmax}/<span id="slots">{$maxfleetcount}</span>)
+			{$LNG.gl_fleets}&nbsp;({$fleet_max}/<span id="slots">{$max_fleet_count}</span>)
 		</div>
 		<div class="galaxy_header">
 			<div class="num">#</div>
@@ -68,7 +68,7 @@
 		</div>
 		{for $planet=1 to $max_planets}
 			<div class="galaxy_row">
-				{if !isset($GalaxyRows[$planet])}
+				{if !isset($galaxy_rows[$planet])}
 					<div class="num">
 						{$planet}
 					</div>
@@ -89,7 +89,7 @@
 						</a>
 					{/if}
 					</div>
-				{elseif $GalaxyRows[$planet] === false}
+				{elseif $galaxy_rows[$planet] === false}
 					<div class="num">
 						{$planet}
 					</div>
@@ -103,7 +103,7 @@
 					<div class="alliance_name"></div>
 					<div class="actions"></div>
 				{else}
-					{$currentPlanet = $GalaxyRows[$planet]}
+					{$currentPlanet = $galaxy_rows[$planet]}
 					<div class="num">{$planet}</div>
 					<div class="planet_name">
 					{if mb_strlen($currentPlanet.planet.name, 'UTF-8') > 12}
@@ -123,7 +123,7 @@
 										<span>{$LNG.gl_planet} {$currentPlanet.planet.name} [{$galaxy}:{$system}:{$planet}]</span>
 									</th>
 								</tr>
-								{if $userAuthLevel == 3}
+								{if $user_auth_level == 3}
 								<tr>
 									<td>{$LNG.gl_admin_user_id}</td>
 									<td>{$currentPlanet['user']['id']}</td>
@@ -245,7 +245,7 @@
 										<th colspan="2">{$LNG.gl_moon} {$currentPlanet.moon.name} [{$galaxy}:{$system}:{$planet}]
 										</th>
 									</tr>
-									{if $userAuthLevel == 3}
+									{if $user_auth_level == 3}
 									<tr>
 										<td>{$LNG.gl_admin_user_id}</td>
 										<td>{$currentPlanet['user']['id']}</td>
@@ -440,8 +440,8 @@
 										,
 									{/if}
 									<span class="galaxy-short-{$class} galaxy-short">
-									{if isset($ShortStatus.$class) && !empty($ShortStatus.$class)}
-										{$ShortStatus.$class}
+									{if isset($short_status.$class) && !empty($short_status.$class)}
+										{$short_status.$class}
 									{/if}
 									</span>
 								{/foreach}
@@ -548,7 +548,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="6">({$planetcount})</td>
+			<td colspan="6">({$planet_count})</td>
 			<td class="galaxy_legend" colspan="2">
 				<div class="tooltip tooltip_top">
 					<table style='width:240px'>

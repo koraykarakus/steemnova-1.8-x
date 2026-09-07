@@ -109,30 +109,30 @@ class ShowGalaxyPage extends AbstractGamePage
 
         $this->tpl_obj->loadscript('galaxy.js');
         $this->assign([
-            'GalaxyRows'            => $result,
-            'planetcount'           => sprintf($LNG['gl_populed_planets'], count($result)),
+            'galaxy_rows'           => $result,
+            'planet_count'          => sprintf($LNG['gl_populed_planets'], count($result)),
             'action'                => $action,
             'galaxy'                => $galaxy,
             'system'                => $system,
             'planet'                => $planet,
             'type'                  => $type,
             'current'               => $current,
-            'maxfleetcount'         => FleetFunctions::GetCurrentFleets($USER['id']),
-            'fleetmax'              => FleetFunctions::GetMaxFleetSlots($USER),
-            'currentmip'            => $PLANET[$RESOURCE[503]],
+            'max_fleet_count'       => FleetFunctions::GetCurrentFleets($USER['id']),
+            'fleet_max'             => FleetFunctions::GetMaxFleetSlots($USER),
+            'current_mip'           => $PLANET[$RESOURCE[503]],
             'recyclers'             => $PLANET[$RESOURCE[209]],
             'colony_ships'          => $PLANET[$RESOURCE[208]],
-            'spyprobes'             => $PLANET[$RESOURCE[210]],
+            'spy_probes'            => $PLANET[$RESOURCE[210]],
             'missile_count'         => sprintf($LNG['gl_missil_to_launch'], $PLANET[$RESOURCE[503]]),
-            'spyShips'              => [210 => $USER['spio_anz']],
+            'spy_ships'             => [210 => $USER['spio_anz']],
             'settings_fleetactions' => $USER['settings_fleetactions'],
             'current_galaxy'        => $PLANET['galaxy'],
             'current_system'        => $PLANET['system'],
             'current_planet'        => $PLANET['planet'],
             'planet_type'           => $PLANET['planet_type'],
             'max_planets'           => $config->max_planets,
-            'missileSelector'       => $missile_selector,
-            'ShortStatus'           => [
+            'missile_selector'      => $missile_selector,
+            'short_status'          => [
                 'vacation'     => $LNG['gl_short_vacation'],
                 'banned'       => $LNG['gl_short_ban'],
                 'inactive'     => $LNG['gl_short_inactive'],
@@ -144,7 +144,7 @@ class ShowGalaxyPage extends AbstractGamePage
                 'member'       => $LNG['gl_short_member'],
                 'admin'        => $LNG['gl_short_admin'],
             ],
-            'userAuthLevel'       => $USER['authlevel'],
+            'user_auth_level'     => $USER['authlevel'],
             'allowed_col_pos_arr' => $this->getAllowedColonyPositionArray(),
         ]);
 
