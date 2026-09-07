@@ -14,85 +14,94 @@ class ShowRelocatePage extends AbstractGamePage
         global $USER, $PLANET, $LNG, $RESLIST, $RESOURCE, $config;
 
         $db = Database::get();
-
         $galaxy = HTTP::_GP('galaxy', 0);
         $system = HTTP::_GP('system', 0);
         $planet = HTTP::_GP('planet', 0);
 
-        //cannot relocate if user in vacation mode
+        // cannot relocate if user in vacation mode
         if (inVacationMode($USER))
         {
             $this->printMessage($LNG['cannot_use_in_vac']);
         }
 
-        //you cannot move planet if there is building in construction
+        // you cannot move planet if there is building in construction
         if ($PLANET['b_building'] != 0)
         {
             $this->printMessage($LNG['rl_error_type_5']);
         }
 
-        //you cannot move planet if there is a research which is started from this planet
-        if ($USER['b_tech'] != 0 && $USER['b_tech_planet'] == $PLANET['id'])
+        // you cannot move planet if there is a research which is started from this planet
+        if ($USER['b_tech'] != 0
+            && $USER['b_tech_planet'] == $PLANET['id'])
         {
             $this->printMessage($LNG['rl_error_type_6']);
         }
 
-        //you cannot move planet if there is a shipyard production
+        // you cannot move planet if there is a shipyard production
         if (!empty(unserialize($PLANET['b_shipyard_id'])))
         {
             $this->printMessage($LNG['rl_error_type_9']);
         }
 
-        //you cannot move planet if there is a fleet which is started from this planet at the time of relocation
+        // you cannot move planet if there is a fleet which is started from this planet at the time of relocation
         if ($PLANET['id_moon'] != 0)
         {
-            $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE fleet_owner = :userId AND (fleet_start_id = :planetId OR fleet_start_id =:moonId) AND fleet_end_time > :thisTime ;";
-            $activeFleets = $db->selectSingle($sql, [
-                ':userId'   => $USER['id'],
-                ':planetId' => $PLANET['id'],
-                ':thisTime' => TIMESTAMP,
-                ':moonId'   => $PLANET['id_moon'],
+            $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% 
+            WHERE fleet_owner = :user_id AND (fleet_start_id = :planet_id 
+            OR fleet_start_id =:moon_id) AND fleet_end_time > :this_time ;";
+
+            $active_fleets = $db->selectSingle($sql, [
+                ':user_id'   => $USER['id'],
+                ':planet_id' => $PLANET['id'],
+                ':this_time' => TIMESTAMP,
+                ':moon_id'   => $PLANET['id_moon'],
             ], 'count');
         }
         else
         {
-            $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE fleet_owner = :userId AND fleet_start_id = :planetId AND fleet_end_time > :thisTime ;";
-            $activeFleets = $db->selectSingle($sql, [
-                ':userId'   => $USER['id'],
-                ':planetId' => $PLANET['id'],
-                ':thisTime' => TIMESTAMP,
+            $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% 
+            WHERE fleet_owner = :user_id AND fleet_start_id = :planet_id 
+            AND fleet_end_time > :this_time ;";
+
+            $active_fleets = $db->selectSingle($sql, [
+                ':user_id'   => $USER['id'],
+                ':planet_id' => $PLANET['id'],
+                ':this_time' => TIMESTAMP,
             ], 'count');
         }
 
-        if ($activeFleets > 0)
+        if ($active_fleets > 0)
         {
             $this->printMessage($LNG['rl_error_type_7']);
         }
 
-        if (empty($galaxy) || empty($system) || empty($planet))
+        if (empty($galaxy)
+            || empty($system)
+            || empty($planet))
         {
             $this->printMessage($LNG['rl_error_type_1']);
         }
 
-        //user cannot start this from moon !
+        // user cannot start this from moon !
         if ($PLANET['planet_type'] == 3)
         {
             $this->printMessage($LNG['rl_error_type_2']);
         }
 
-        //you cannot relocate if someone is attacking to the planet or moon
+        // you cannot relocate if someone is attacking to the planet or moon
 
         $sql = "SELECT COUNT(*) as count FROM %%FLEETS%% WHERE
-			fleet_owner != :userId AND fleet_mess = 0 AND
-			fleet_target_owner = :userId AND fleet_mission IN (1,9) AND hasCanceled = 0 AND fleet_end_id IN (:planetId, :moonId);";
+			fleet_owner != :user_id AND fleet_mess = 0 AND
+			fleet_target_owner = :user_id AND fleet_mission IN (1,9) 
+            AND hasCanceled = 0 AND fleet_end_id IN (:planet_id, :moon_id);";
 
-        $attackfleets = $db->selectSingle($sql, [
-            ':userId'   => $USER['id'],
-            ':planetId' => $PLANET['id'],
-            ':moonId'   => $PLANET['id_moon'],
+        $attack_fleets = $db->selectSingle($sql, [
+            ':user_id'   => $USER['id'],
+            ':planet_id' => $PLANET['id'],
+            ':moon_id'   => $PLANET['id_moon'],
         ], 'count');
 
-        if ($attackfleets > 0)
+        if ($attack_fleets > 0)
         {
             $this->printMessage($LNG['rl_error_type_10']);
         }
@@ -121,146 +130,160 @@ class ShowRelocatePage extends AbstractGamePage
         // NOTE: Add countdown 24 (? divided to universe fleet speed) hours then move the planet
         // NOTE: fleet comes to new planet after planet relocation is succeed
 
-        $PlanetRess = new ResourceUpdate();
-        $PlanetRess->CalcResource($USER, $PLANET, true);
+        $res_update_obj = new ResourceUpdate();
+        $res_update_obj->CalcResource($USER, $PLANET, true);
 
         $fleet = $fleet_moon = [];
 
-        foreach ($RESLIST['fleet'] as $key => $fleetID)
+        foreach ($RESLIST['fleet'] as $key => $fleet_id)
         {
-            if ($fleetID == 212 || $fleetID == 221 || $PLANET[$RESOURCE[$fleetID]] == 0)
+            if ($fleet_id == 212
+                || $fleet_id == 221
+                || $PLANET[$RESOURCE[$fleet_id]] == 0)
             {
                 continue;
             }
             $fleet = $fleet + [
-                $fleetID => $PLANET[$RESOURCE[$fleetID]],
+                $fleet_id => $PLANET[$RESOURCE[$fleet_id]],
             ];
         }
 
         if ($PLANET['id_moon'] != 0)
         {
-            $sql = "SELECT * FROM %%PLANETS%% WHERE id = :idLuna;";
+            $sql = "SELECT * FROM %%PLANETS%% WHERE id = :id_luna;";
             $MOON = $db->selectSingle($sql, [
-                ':idLuna' => $PLANET['id_moon'],
+                ':id_luna' => $PLANET['id_moon'],
             ]);
 
-            foreach ($RESLIST['fleet'] as $key => $fleetID)
+            foreach ($RESLIST['fleet'] as $key => $fleet_id)
             {
-                if ($fleetID == 212 || $fleetID == 221 || $MOON[$RESOURCE[$fleetID]] == 0)
+                if ($fleet_id == 212
+                    || $fleet_id == 221
+                    || $MOON[$RESOURCE[$fleet_id]] == 0)
                 {
                     continue;
                 }
                 $fleet_moon = $fleet_moon + [
-                    $fleetID => $MOON[$RESOURCE[$fleetID]],
+                    $fleet_id => $MOON[$RESOURCE[$fleet_id]],
                 ];
             }
 
         }
 
-        if (!empty($fleet) or !empty($fleet_moon) && !$config->relocate_move_fleet_directly)
+        if (!$config->relocate_move_fleet_directly)
         {
-            $fleetSpeed = 10;
+            $fleet_speed = 10;
 
-            $targetPlanetData = [
+            $target_planet_data = [
                 'id'         => $PLANET['id'],
                 'id_owner'   => $PLANET['id_owner'],
                 'planettype' => $PLANET['planet_type'],
             ];
 
-            $GameSpeedFactor = FleetFunctions::GetGameSpeedFactor();
+            $game_speed_factor = FleetFunctions::GetGameSpeedFactor();
 
-            $distance = FleetFunctions::GetTargetDistance([$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']], [$galaxy, $system, $planet]);
+            $distance = FleetFunctions::GetTargetDistance(
+                [$PLANET['galaxy'], $PLANET['system'], $PLANET['planet']],
+                [$galaxy, $system, $planet]
+            );
 
-            $consumption = $Staytime = $StayDuration = 0;
+            $consumption = $stay_time = $stay_duration = 0;
 
-            $fleetResource = [
+            $fleet_resource = [
                 901 => 0,
                 902 => 0,
                 903 => 0,
             ];
-        }
 
-        if (!empty($fleet) && !$config->relocate_move_fleet_directly)
-        {
+            if (!empty($fleet))
+            {
+                $max_fleet_speed = FleetFunctions::GetFleetMaxSpeed($fleet, $USER);
+                $duration = FleetFunctions::GetMissionDuration(
+                    $fleet_speed,
+                    $max_fleet_speed,
+                    $distance,
+                    $game_speed_factor,
+                    $USER
+                );
+                $fleet_start_time = $duration + TIMESTAMP ;
+                $fleet_stay_time = $fleet_start_time + $stay_duration;
+                $fleet_end_time = $fleet_stay_time + $duration;
 
-            $MaxFleetSpeed = FleetFunctions::GetFleetMaxSpeed($fleet, $USER);
-            $duration = FleetFunctions::GetMissionDuration($fleetSpeed, $MaxFleetSpeed, $distance, $GameSpeedFactor, $USER);
-            $fleetStartTime = $duration + TIMESTAMP ;
-            $fleetStayTime = $fleetStartTime + $StayDuration;
-            $fleetEndTime = $fleetStayTime + $duration;
+                $fleet_id = FleetFunctions::sendFleet(
+                    $fleet,
+                    4,
+                    $USER['id'],
+                    $PLANET['id'],
+                    $PLANET['galaxy'],
+                    $PLANET['system'],
+                    $PLANET['planet'],
+                    $PLANET['planet_type'],
+                    $PLANET['id_owner'],
+                    $PLANET['id'],
+                    $galaxy,
+                    $system,
+                    $planet,
+                    1,
+                    $fleet_resource,
+                    $fleet_start_time,
+                    $fleet_stay_time,
+                    $fleet_end_time,
+                    0,
+                    0,
+                    0,
+                    0
+                );
 
-            $fleetId = FleetFunctions::sendFleet(
-                $fleet,
-                4,
-                $USER['id'],
-                $PLANET['id'],
-                $PLANET['galaxy'],
-                $PLANET['system'],
-                $PLANET['planet'],
-                $PLANET['planet_type'],
-                $PLANET['id_owner'],
-                $PLANET['id'],
-                $galaxy,
-                $system,
-                $planet,
-                1,
-                $fleetResource,
-                $fleetStartTime,
-                $fleetStayTime,
-                $fleetEndTime,
-                0,
-                0,
-                0,
-                0,
-                $USER['lang'],
-                "en",
-                $PLANET['name'],
-                $PLANET['name']
-            );
+                $sql = "UPDATE %%FLEETS%% SET fleet_no_m_return = 1 WHERE fleet_id = :fleet_id;";
+                $db->update($sql, [
+                    ':fleet_id' => $fleet_id,
+                ]);
+            }
 
-            $sql = "UPDATE %%FLEETS%% SET fleet_no_m_return = 1 WHERE fleet_id = :fleetId;";
-            $db->update($sql, [
-                ':fleetId' => $fleetId,
-            ]);
+            if (!empty($fleet_moon))
+            {
+                $max_fleet_speed = FleetFunctions::GetFleetMaxSpeed($fleet_moon, $USER);
+                $duration = FleetFunctions::GetMissionDuration(
+                    $fleet_speed,
+                    $max_fleet_speed,
+                    $distance,
+                    $game_speed_factor,
+                    $USER
+                );
+                $fleet_start_time = $duration + TIMESTAMP ;
+                $fleet_stay_time = $fleet_start_time + $stay_duration;
+                $fleet_end_time = $fleet_stay_time + $duration;
 
-        }
+                $fleet_id = FleetFunctions::sendFleet(
+                    $fleet_moon,
+                    4,
+                    $USER['id'],
+                    $MOON['id'],
+                    $MOON['galaxy'],
+                    $MOON['system'],
+                    $MOON['planet'],
+                    $MOON['planet_type'],
+                    $MOON['id_owner'],
+                    $PLANET['id'],
+                    $galaxy,
+                    $system,
+                    $planet,
+                    1,
+                    $fleet_resource,
+                    $fleet_start_time,
+                    $fleet_stay_time,
+                    $fleet_end_time,
+                    0,
+                    0,
+                    0,
+                    0,
+                );
 
-        if (!empty($fleet_moon) && !$config->relocate_move_fleet_directly)
-        {
-
-            $MaxFleetSpeed = FleetFunctions::GetFleetMaxSpeed($fleet_moon, $USER);
-            $duration = FleetFunctions::GetMissionDuration($fleetSpeed, $MaxFleetSpeed, $distance, $GameSpeedFactor, $USER);
-            $fleetStartTime = $duration + TIMESTAMP ;
-            $fleetStayTime = $fleetStartTime + $StayDuration;
-            $fleetEndTime = $fleetStayTime + $duration;
-
-            $fleetId = FleetFunctions::sendFleet(
-                $fleet_moon,
-                4,
-                $USER['id'],
-                $MOON['id'],
-                $MOON['galaxy'],
-                $MOON['system'],
-                $MOON['planet'],
-                $MOON['planet_type'],
-                $MOON['id_owner'],
-                $PLANET['id'],
-                $galaxy,
-                $system,
-                $planet,
-                1,
-                $fleetResource,
-                $fleetStartTime,
-                $fleetStayTime,
-                $fleetEndTime,
-                0,
-                0
-            );
-
-            $sql = "UPDATE %%FLEETS%% SET fleet_no_m_return = 1 WHERE fleet_id = :fleetId;";
-            $db->update($sql, [
-                ':fleetId' => $fleetId,
-            ]);
+                $sql = "UPDATE %%FLEETS%% SET fleet_no_m_return = 1 WHERE fleet_id = :fleet_id;";
+                $db->update($sql, [
+                    ':fleet_id' => $fleet_id,
+                ]);
+            }
         }
 
         // NOTE: relocation will be canceled after countdown if construction / research / or fleet movement
@@ -268,33 +291,33 @@ class ShowRelocatePage extends AbstractGamePage
         // NOTE: incoming attacking/supporting fleet won´t block the movement, fleets will return after reaching empty position
 
         // NOTE: temperature and picture of planet should be changed
-        $planetData = [];
+        $planet_data = [];
         require 'includes/PlanetData.php';
 
-        $dataIndex = (int) ceil($planet / ($config->max_planets / count($planetData)));
-        $maxTemperature = $planetData[$dataIndex]['temp'];
-        $minTemperature = $maxTemperature - 40;
+        $data_index = (int) ceil($planet / ($config->max_planets / count($planet_data)));
+        $max_temp = $planet_data[$data_index]['temp'];
+        $min_temp = $max_temp - 40;
 
-        $imageNames = array_keys($planetData[$dataIndex]['image']);
-        $imageNameType = $imageNames[array_rand($imageNames)];
-        $imageName = $imageNameType;
-        $imageName .= 'planet';
-        $imageName .= $planetData[$dataIndex]['image'][$imageNameType] < 10 ? '0' : '';
-        $imageName .= $planetData[$dataIndex]['image'][$imageNameType];
+        $image_names = array_keys($planet_data[$data_index]['image']);
+        $image_name_type = $image_names[array_rand($image_names)];
+        $image_name = $image_name_type;
+        $image_name .= 'planet';
+        $image_name .= $planet_data[$data_index]['image'][$image_name_type] < 10 ? '0' : '';
+        $image_name .= $planet_data[$data_index]['image'][$image_name_type];
 
         $sql = "UPDATE %%PLANETS%% SET galaxy = :galaxy, system = :system, planet = :planet,
-		temp_min = :temp_min, temp_max = :temp_max, image = :imageName, last_relocate = :relocateTime
-		WHERE id = :planetId;";
+		temp_min = :temp_min, temp_max = :temp_max, image = :image_name, last_relocate = :relocate_time
+		WHERE id = :planet_id;";
 
         $db->update($sql, [
-            ':galaxy'       => $galaxy,
-            ':system'       => $system,
-            ':planet'       => $planet,
-            ':temp_min'     => $minTemperature,
-            ':temp_max'     => $maxTemperature,
-            ':imageName'    => $imageName,
-            ':planetId'     => $PLANET['id'],
-            ':relocateTime' => TIMESTAMP,
+            ':galaxy'        => $galaxy,
+            ':system'        => $system,
+            ':planet'        => $planet,
+            ':temp_min'      => $min_temp,
+            ':temp_max'      => $max_temp,
+            ':image_name'    => $image_name,
+            ':planet_id'     => $PLANET['id'],
+            ':relocate_time' => TIMESTAMP,
         ]);
 
         if ($PLANET['id_moon'] != 0)
@@ -303,12 +326,17 @@ class ShowRelocatePage extends AbstractGamePage
             // NOTE: divided to fleet speed ? no info ?
             $next_jump_time = TIMESTAMP + ($config->relocate_jump_gate_active * 60 * 60) / ($config->fleet_speed / 2500);
 
-            $sql = "UPDATE %%PLANETS%% SET galaxy = :galaxy, system = :system, planet = :planet,last_jump_time =:relocateTime WHERE id = :moonId;";
+            $sql = "UPDATE %%PLANETS%% SET 
+            galaxy = :galaxy, 
+            system = :system, 
+            planet = :planet,last_jump_time =:relocateTime 
+            WHERE id = :moon_id;";
+
             $db->update($sql, [
                 ':galaxy'       => $galaxy,
                 ':system'       => $system,
                 ':planet'       => $planet,
-                ':moonId'       => $PLANET['id_moon'],
+                ':moon_id'      => $PLANET['id_moon'],
                 ':relocateTime' => $next_jump_time,
             ]);
         }
@@ -317,20 +345,21 @@ class ShowRelocatePage extends AbstractGamePage
 
         if ($PLANET['id'] == $USER['id_planet'])
         {
-            $sql = "UPDATE %%USERS%% SET galaxy = :galaxy, system = :system, planet = :planet WHERE id = :userId;";
+            $sql = "UPDATE %%USERS%% SET galaxy = :galaxy, system = :system, planet = :planet 
+            WHERE id = :user_id;";
             $db->update($sql, [
-                ':galaxy' => $galaxy,
-                ':system' => $system,
-                ':planet' => $planet,
-                ':userId' => $USER['id'],
+                ':galaxy'  => $galaxy,
+                ':system'  => $system,
+                ':planet'  => $planet,
+                ':user_id' => $USER['id'],
             ]);
         }
 
         // NOTE: recalculate planet production
         //part 1 : update $PLANET array
-        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planetId;";
+        $sql = "SELECT * FROM %%PLANETS%% WHERE id = :planet_id;";
         $PLANET_NEW = $db->selectSingle($sql, [
-            ':planetId' => $PLANET['id'],
+            ':planet_id' => $PLANET['id'],
         ]);
         //part 2: update hash
         $this->eco_obj->setData($USER, $PLANET_NEW);
@@ -345,12 +374,12 @@ class ShowRelocatePage extends AbstractGamePage
         global $LNG, $PLANET,$config;
 
         $this->assign([
-            'info'     => sprintf($LNG['rl_info'], pretty_number($config->relocate_price)),
-            'page'     => HTTP::_GP('page', ''),
-            'planetId' => $PLANET['id'],
-            'galaxy'   => $PLANET['galaxy'],
-            'system'   => $PLANET['system'],
-            'planet'   => $PLANET['planet'],
+            'info'      => sprintf($LNG['rl_info'], pretty_number($config->relocate_price)),
+            'page'      => HTTP::_GP('page', ''),
+            'planet_id' => $PLANET['id'],
+            'galaxy'    => $PLANET['galaxy'],
+            'system'    => $PLANET['system'],
+            'planet'    => $PLANET['planet'],
         ]);
 
         $this->display('page.relocate.default.tpl');
