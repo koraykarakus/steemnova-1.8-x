@@ -105,11 +105,11 @@ class ShowPhalanxPage extends AbstractGamePage
         $fleet_table = $fleet_table_obj->renderTable();
 
         $this->assign([
-            'galaxy'     => $galaxy,
-            'system'     => $system,
-            'planet'     => $planet,
-            'name'       => $target_info['name'],
-            'fleetTable' => $fleet_table,
+            'galaxy'      => $galaxy,
+            'system'      => $system,
+            'planet'      => $planet,
+            'name'        => $target_info['name'],
+            'fleet_table' => $fleet_table,
         ]);
 
         $this->display('page.phalanx.default.tpl');
