@@ -5,10 +5,10 @@
 		<thead>
 			<tr>
 				<th colspan="9">
-					<div style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$activeFleetSlots} /
-						{$maxFleetSlots})</div>
+					<div style="text-align:left;float:left;">{$LNG.fl_fleets}: ({$active_fleet_slots} /
+						{$max_fleet_slots})</div>
 					<div style="text-align:right;float:right;">{$LNG.fl_expeditions}:
-						({$activeExpedition} / {$maxExpedition}) </div>
+						({$active_expedition} / {$max_expedition}) </div>
 				</th>
 			</tr>
 		</thead>
@@ -24,7 +24,7 @@
 				<td>{$LNG.fl_objective}</td>
 				<td>{$LNG.fl_order}</td>
 			</tr>
-			{foreach name=FlyingFleets item=FlyingFleetRow from=$FlyingFleetList}
+			{foreach name=FlyingFleets item=FlyingFleetRow from=$flying_fleet_list}
 				<tr>
 					<td class="text_center">{$smarty.foreach.FlyingFleets.iteration}</td>
 					<td class="text_center">
@@ -95,7 +95,7 @@
 						data-fleet-end-time="{$FlyingFleetRow.returntime}" data-fleet-time="{$FlyingFleetRow.resttime}">
 						{pretty_fly_time({$FlyingFleetRow.resttime})}</td>
 					<td class="text_center">
-						{if !$isVacation && $FlyingFleetRow.state != 1 && $FlyingFleetRow.no_returnable != 1}
+						{if !$is_vacation && $FlyingFleetRow.state != 1 && $FlyingFleetRow.no_returnable != 1}
 							<form action="game.php?page=fleetDispatch&amp;action=sendfleetback" method="post">
 								<input name="fleetID" value="{$FlyingFleetRow.id}" type="hidden">
 								<input class="" value="{$LNG.fl_send_back}" type="submit">
@@ -124,7 +124,7 @@
 					<td>-</td>
 				</tr>
 			{/foreach}
-			{if $maxFleetSlots == $activeFleetSlots}
+			{if $max_fleet_slots == $active_fleet_slots}
 				<tr>
 					<td colspan="9">{$LNG.fl_no_more_slots}</td>
 				</tr>
@@ -132,7 +132,7 @@
 		</tbody>
 	</table>
 
-	{if !empty($acsData)}
+	{if !empty($acs_data)}
 		{include file="shared.fleetTable.acsTable.tpl"}
 	{/if}
 

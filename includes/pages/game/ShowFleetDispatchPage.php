@@ -67,7 +67,7 @@ class ShowFleetDispatchPage extends AbstractGamePage
 
         $sql = "SELECT id, name FROM %%USERS_ACS%% INNER JOIN %%ACS%% ON acs_id = id 
         WHERE user_id = :user_id AND acs_id = :acs_id;";
-        
+
         $acs_result = Database::get()->selectSingle($sql, [
             ':user_id' => $USER['id'],
             ':acs_id'  => $fleetData['fleet_group'],
@@ -294,13 +294,13 @@ class ShowFleetDispatchPage extends AbstractGamePage
         }
 
         $this->assign([
-            'FlyingFleetList'  => $flying_fleet_list,
-            'activeExpedition' => $active_expedition,
-            'maxExpedition'    => $max_expedition,
-            'activeFleetSlots' => $active_fleet_slots,
-            'maxFleetSlots'    => $max_fleet_slots,
-            'acsData'          => $acs_data,
-            'isVacation'       => inVacationMode($USER),
+            'flying_fleet_list'  => $flying_fleet_list,
+            'active_expedition'  => $active_expedition,
+            'max_expedition'     => $max_expedition,
+            'active_fleet_slots' => $active_fleet_slots,
+            'max_fleet_slots'    => $max_fleet_slots,
+            'acs_data'           => $acs_data,
+            'is_vacation'        => inVacationMode($USER),
         ]);
 
         $this->display('page.fleetDispatch.default.tpl');
