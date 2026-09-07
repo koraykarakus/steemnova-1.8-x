@@ -5,7 +5,7 @@
 </div>
 
 <div class="page_content">
-	{if $page != "imperium"}
+	{if $page != "empire"}
 		<div id="content_top">
 			{include file="main.topnav.tpl"}
 		</div>
@@ -13,7 +13,7 @@
 			{include file="main.navigation.tpl"}
 		</div>
 	{/if}
-	<div id="content_mid" class="{if $page!='imperium'}{else}{/if}">
+	<div id="content_mid" class="{if $page!='empire'}{else}{/if}">
 		<content class="content-wrapper">
 			{if $has_admin_access}
 				<div class="globalWarning">
@@ -29,14 +29,14 @@
 			{elseif $vacation}
 				<div class="infobox">{$LNG.tn_vacation_mode} {$vacation}</div>
 			{/if}
-			{if $page !== "imperium"}
+			{if $page !== "empire"}
 				{include file="fleet.events.tpl"}
 			{/if}
 			{block name="content"}{/block}
 			<table class="hack"></table>
 		</content>
 	</div>
-	{if $page != "imperium"}
+	{if $page != "empire"}
 		<div id="content_right">
 			{include file="main.planetmenu.tpl"}
 		</div>

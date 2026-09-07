@@ -77,9 +77,9 @@
   {/if}
   {if isModuleAvailable($smarty.const.MODULE_IMPERIUM)}
     <li class="menu-button">
-      <a target="_blank" class="long{if $page == 'imperium'} menuActive{/if}"
-        href="game.php?page=imperium">{$LNG.lm_empire}</a>
-      <a target="_blank" class="menu_icon icon_9{if $page == 'imperium'} active{/if}" href="game.php?page=imperium">
+      <a target="_blank" class="long{if $page == 'empire'} menuActive{/if}"
+        href="game.php?page=empire">{$LNG.lm_empire}</a>
+      <a target="_blank" class="menu_icon icon_9{if $page == 'empire'} active{/if}" href="game.php?page=empire">
         <div class="tooltip tooltip_right">
           {$LNG.lm_empire}
         </div>

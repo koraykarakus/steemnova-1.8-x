@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class ShowImperiumPage extends AbstractGamePage
+class ShowEmpirePage extends AbstractGamePage
 {
     public static int $require_module = MODULE_IMPERIUM;
 
