@@ -29,14 +29,14 @@ class ShowFlightSimulatorPage extends AbstractGamePage
         }
 
         $this->assign([
-            'startGalaxy'    => $PLANET['galaxy'],
-            'startSystem'    => $PLANET['system'],
-            'startPlanet'    => $PLANET['planet'],
-            'ships'          => $possible_ships,
-            'combustionTech' => $USER['combustion_tech'],
-            'hyperspaceTech' => $USER['hyperspace_motor_tech'],
-            'impulseTech'    => $USER['impulse_motor_tech'],
-            'page'           => HTTP::_GP('page', ''),
+            'start_galaxy'    => $PLANET['galaxy'],
+            'start_system'    => $PLANET['system'],
+            'start_planet'    => $PLANET['planet'],
+            'ships'           => $possible_ships,
+            'combustion_tech' => $USER['combustion_tech'],
+            'hyperspace_tech' => $USER['hyperspace_motor_tech'],
+            'impulse_tech'    => $USER['impulse_motor_tech'],
+            'page'            => HTTP::_GP('page', ''),
         ]);
 
         $this->display('page.flightSimulator.default.tpl');

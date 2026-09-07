@@ -85,17 +85,17 @@
         <tr>
           <td colspan="2"><span>{$LNG.tech.115}</span></td>
           <td colspan="2"><input class="tech "
-              onkeyup="getResult();" name="combustionTech" value="{$combustionTech}"></td>
+              onkeyup="getResult();" name="combustionTech" value="{$combustion_tech}"></td>
         </tr>
         <tr>
           <td colspan="2"><span>{$LNG.tech.117}</span></td>
           <td colspan="2"><input class="tech "
-              onkeyup="getResult();" name="impulseTech" value="{$impulseTech}"></td>
+              onkeyup="getResult();" name="impulseTech" value="{$impulse_tech}"></td>
         </tr>
         <tr>
           <td colspan="2"><span>{$LNG.tech.118}</span></td>
           <td colspan="2"><input class="tech "
-              onkeyup="getResult();" name="hyperspaceTech" value="{$hyperspaceTech}"></td>
+              onkeyup="getResult();" name="hyperspaceTech" value="{$hyperspace_tech}"></td>
         </tr>
         {foreach $ships as $key => $ship}
           <tr>
@@ -109,13 +109,13 @@
           <td><span>{$LNG.fl_beginning}:</span></td>
           <td><input onkeyup="getResult();"
               class="coordinate " name="startGalaxy"
-              value="{$startGalaxy}"></td>
+              value="{$start_galaxy}"></td>
           <td><input onkeyup="getResult();"
               class="coordinate " name="startSystem"
-              value="{$startSystem}"></td>
+              value="{$start_system}"></td>
           <td><input onkeyup="getResult();"
               class="coordinate " name="startPlanet"
-              value="{$startPlanet}"></td>
+              value="{$start_planet}"></td>
         </tr>
         <tr>
           <td><span>{$LNG.fl_destiny}:</span></td>
