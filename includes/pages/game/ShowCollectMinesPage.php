@@ -65,6 +65,7 @@ class ShowCollectMinesPage extends AbstractGamePage
             ':user_id' => $USER['id'],
         ]);
 
+        $PLANETS = [];
         foreach ($planets as $c_planet)
         {
             list($USER, $c_planet) = $res_update_obj->CalcResource($USER, $c_planet, true);
