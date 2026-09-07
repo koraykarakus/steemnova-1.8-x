@@ -100,7 +100,7 @@
 	</thead>
 	<tbody>
 
-	{foreach name=FlyingFleets item=FlyingFleetRow from=$FlyingFleetList}
+	{foreach name=FlyingFleets item=FlyingFleetRow from=$flying_fleet_fist}
 	{if $FlyingFleetRow.type == 0}
 	<tr class='{if {$FlyingFleetRow.diplo} == 5}
 	 trade-enemy
@@ -161,7 +161,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{foreach name=History item=row from=$resourceHistory}
+		{foreach name=History item=row from=$resource_history}
 		<tr>
 			<td>{$smarty.foreach.History.iteration}</td>
 			<td>{$row.time}</td>
@@ -198,7 +198,7 @@
 	</thead>
 	<tbody>
 
-	{foreach name=FlyingFleets item=FlyingFleetRow from=$FlyingFleetList}
+	{foreach name=FlyingFleets item=FlyingFleetRow from=$flying_fleet_fist}
 	{if $FlyingFleetRow.type == 1}
 	<tr class='{if {$FlyingFleetRow.diplo} == 5}
 	 trade-enemy
@@ -253,7 +253,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{foreach name=History item=row from=$fleetHistory}
+		{foreach name=History item=row from=$fleet_history}
 		<tr>
 			<td>{$smarty.foreach.History.iteration}</td>
 			<td>{$row.time}</td>

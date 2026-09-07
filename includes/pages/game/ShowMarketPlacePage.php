@@ -536,10 +536,10 @@ class ShowMarketPlacePage extends AbstractGamePage
         }
 
         $this->assign([
-            'message'         => $message,
-            'FlyingFleetList' => $FlyingFleetList,
-            'resourceHistory' => $this->getResourceTradeHistory(),
-            'fleetHistory'    => $this->getFleetTradeHistory(),
+            'message'           => $message,
+            'flying_fleet_fist' => $FlyingFleetList,
+            'resource_history'  => $this->getResourceTradeHistory(),
+            'fleet_history'     => $this->getFleetTradeHistory(),
         ]);
         $this->tpl_obj->loadscript('marketplace.js');
         $this->display('page.marketPlace.default.tpl');
