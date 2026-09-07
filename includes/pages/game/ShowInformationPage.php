@@ -397,19 +397,19 @@ class ShowInformationPage extends AbstractGamePage
         }
 
         $this->assign([
-            'elementID'       => $element_id,
-            'productionTable' => $production_table,
-            'CurrentLevel'    => $current_level,
-            'MissileList'     => $missile_list,
-            'FleetInfo'       => $fleet_info,
-            'gateData'        => $gate_data,
+            'element_id'       => $element_id,
+            'production_table' => $production_table,
+            'current_level'    => $current_level,
+            'missile_list'     => $missile_list,
+            'fleet_info'       => $fleet_info,
+            'gate_data'        => $gate_data,
         ]);
 
         if ($element_id <= 900
             || $element_id >= 930)
         {
             $this->assign([
-                'Bonus' => BuildFunctions::getAvalibleBonus($element_id),
+                'bonus' => BuildFunctions::getAvalibleBonus($element_id),
             ]);
         }
 

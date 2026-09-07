@@ -3,7 +3,7 @@
 	<table class="table_game table_full">
 		<tbody>
 			<tr>
-				<th>{$LNG.tech.$elementID}</th>
+				<th>{$LNG.tech.$element_id}</th>
 			</tr>
 			<tr>
 				<td>
@@ -11,10 +11,10 @@
 						<tr>
 
 							<td class="transparent">
-								<p>{$LNG.longDescription.$elementID}</p>
-								{if !empty($Bonus)}<p>
+								<p>{$LNG.longDescription.$element_id}</p>
+								{if !empty($bonus)}<p>
 										<b>{$LNG.in_bonus}</b><br>
-										{foreach $Bonus as $BonusName => $elementBouns}
+										{foreach $bonus as $BonusName => $elementBouns}
 											{if $elementBouns[0] < 0}-
 											{else}+
 											{/if}
@@ -25,15 +25,15 @@
 											{/if}
 										{$LNG.bonus.$BonusName}<br>{/foreach}
 								</p>{/if}
-								{if !empty($FleetInfo)}
-									{if !empty($FleetInfo.rapidfire.to)}<p>
-											{foreach $FleetInfo.rapidfire.to as $rapidfireID => $shoots}
+								{if !empty($fleet_info)}
+									{if !empty($fleet_info.rapidfire.to)}<p>
+											{foreach $fleet_info.rapidfire.to as $rapidfireID => $shoots}
 												{$LNG.in_rf_again} {$LNG.tech.$rapidfireID}: <span
 													style="color:#00ff00">{$shoots|number}</span><br>
 											{/foreach}
 									</p>{/if}
-									{if !empty($FleetInfo.rapidfire.from)}<p>
-											{foreach $FleetInfo.rapidfire.from as $rapidfireID => $shoots}
+									{if !empty($fleet_info.rapidfire.from)}<p>
+											{foreach $fleet_info.rapidfire.from as $rapidfireID => $shoots}
 												{$LNG.in_rf_from} {$LNG.tech.$rapidfireID}: <span
 													style="color:#ff0000">{$shoots|number}</span><br>
 											{/foreach}
@@ -46,19 +46,19 @@
 			</tr>
 		</tbody>
 	</table>
-	{if !empty($FleetInfo)}
+	{if !empty($fleet_info)}
 		{include file="shared.information.shipInfo.tpl"}
 	{/if}
-	{if !empty($gateData)}
+	{if !empty($gate_data)}
 		{include file="shared.information.gate.tpl"}
 	{/if}
-	{if !empty($MissileList)}
+	{if !empty($missile_list)}
 		{include file="shared.information.missiles.tpl"}
 	{/if}
-	{if !empty($productionTable.production)}
+	{if !empty($production_table.production)}
 		{include file="shared.information.production.tpl"}
 	{/if}
-	{if !empty($productionTable.storage)}
+	{if !empty($production_table.storage)}
 		{include file="shared.information.storage.tpl"}
 	{/if}
 {/block}

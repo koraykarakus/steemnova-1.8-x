@@ -1,4 +1,4 @@
-{$count = $productionTable.usedResource}
+{$count = $production_table.usedResource}
 
 <table class="table_game table_full">
 	<tbody>
@@ -8,25 +8,25 @@
 					<tr>
 						<th>{$LNG.in_level}</th>
 						{if $count > 1}
-							{foreach $productionTable.usedResource as $resourceID}
+							{foreach $production_table.usedResource as $resourceID}
 								<th colspan="2">{$LNG.tech.$resourceID}</th>
 							{/foreach}
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
 						{/if}
-						{foreach $productionTable.usedResource as $resourceID}
+						{foreach $production_table.usedResource as $resourceID}
 							<th>{$LNG.in_storage}</th>
 							<th>{$LNG.in_difference}</th>
 						{/foreach}
 					</tr>
-					{foreach $productionTable.storage as $elementLevel => $productionData}
+					{foreach $production_table.storage as $elementLevel => $productionData}
 						<tr>
 							<td>
-								<span{if $CurrentLevel == $elementLevel} style="color:#ff0000" {/if}>{$elementLevel}</span>
+								<span{if $current_level == $elementLevel} style="color:#ff0000" {/if}>{$elementLevel}</span>
 							</td>
 							{foreach $productionData as $resourceID => $storage}
-								{$storageDiff = $storage - $productionTable.storage.$CurrentLevel.$resourceID}
+								{$storageDiff = $storage - $production_table.storage.$current_level.$resourceID}
 								<td><span
 										style="color:{if $storage > 0}lime{elseif $storage < 0}red{else}white{/if}">{$storage|number}</span>
 								</td>

@@ -1,4 +1,4 @@
-{$count = count($productionTable.usedResource)}
+{$count = count($production_table.usedResource)}
 
 <table class="table_game table_full">
 	<tbody>
@@ -7,24 +7,24 @@
 				<table class="table_game table_full">
 					<tr>
 						<th>{$LNG.in_level}</th>
-						{foreach $productionTable.usedResource as $resourceID}
+						{foreach $production_table.usedResource as $resourceID}
 							<th colspan="2">{$LNG.tech.$resourceID}</th>
 						{/foreach}
 					</tr>
 					<tr>
 						<th>&nbsp;</th>
-						{foreach $productionTable.usedResource as $resourceID}
+						{foreach $production_table.usedResource as $resourceID}
 							<th>{$LNG.in_prod_p_hour}</th>
 							<th>{$LNG.in_difference}</th>
 						{/foreach}
 					</tr>
-					{foreach $productionTable.production as $elementLevel => $productionData}
+					{foreach $production_table.production as $elementLevel => $productionData}
 						<tr>
 							<td>
-								<span{if $CurrentLevel == $elementLevel} style="color:#ff0000" {/if}>{$elementLevel}</span>
+								<span{if $current_level == $elementLevel} style="color:#ff0000" {/if}>{$elementLevel}</span>
 							</td>
 							{foreach $productionData as $resourceID => $production}
-								{$productionDiff = $production - $productionTable.production.$CurrentLevel.$resourceID}
+								{$productionDiff = $production - $production_table.production.$current_level.$resourceID}
 								<td><span
 										style="color:{if $production > 0}lime{elseif $production < 0}red{else}white{/if}">{$production|number}</span>
 								</td>

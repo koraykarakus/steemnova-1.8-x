@@ -3,28 +3,28 @@
 		<tr>
 			<th colspan="3" class="left">{$LNG.in_jump_gate_select_ships}</th>
 		</tr>
-		{if $gateData.restTime != 0}
+		{if $gate_data.restTime != 0}
 		<tr>
 			<td colspan="3">
-				{$LNG.in_jump_gate_wait_time} {$gateData.nextTime}&nbsp;(<span class="countdown" data-time="{$gateData.restTime}">{pretty_fly_time($gateData.restTime)}</span>)
+				{$LNG.in_jump_gate_wait_time} {$gate_data.nextTime}&nbsp;(<span class="countdown" data-time="{$gate_data.restTime}">{pretty_fly_time($gate_data.restTime)}</span>)
 			</td>
 		</tr>
 		{else}
 			<tr>
 				<td>{$LNG.in_jump_gate_start_moon}</td>
-				<td colspan="2">{$gateData.startLink}</td>
+				<td colspan="2">{$gate_data.startLink}</td>
 			</tr>
-			{if !empty($gateData.gateList)}
+			{if !empty($gate_data.gateList)}
 				<tr>
 					<td>{$LNG.in_jump_gate_finish_moon}</td>
-					<td colspan="2">{html_options options=$gateData.gateList name="jmpto" class="jumpgate"}</td>
+					<td colspan="2">{html_options options=$gate_data.gateList name="jmpto" class="jumpgate"}</td>
 				</tr>
 				<tr>
 					<td>{$LNG.fl_ship_type}</td>
 					<td class="text_center">{$LNG.fl_ship_available}</td>
 					<td></td>
 				</tr>
-				{foreach $gateData.fleetList as $fleetID => $amount}
+				{foreach $gate_data.fleetList as $fleetID => $amount}
 				<tr>
 					<td>{$LNG.tech.$fleetID}</td>
 					<td class="text_center">
