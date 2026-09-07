@@ -27,7 +27,7 @@ CREATE TABLE `%PREFIX%acs` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) DEFAULT NULL,
   `target` INT UNSIGNED NOT NULL,
-  `arrive_time` INT DEFAULT NULL,
+  `arrive_time` INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -36,7 +36,7 @@ CREATE TABLE `%PREFIX%alliance` (
   `ally_name` VARCHAR(50) DEFAULT '',
   `ally_tag` VARCHAR(20) DEFAULT '',
   `ally_owner` INT UNSIGNED NOT NULL DEFAULT 0,
-  `ally_register_time` INT NOT NULL DEFAULT 0,
+  `ally_register_time` INT UNSIGNED NOT NULL DEFAULT 0,
   `ally_description` TEXT,
   `ally_web` VARCHAR(255) DEFAULT '',
   `ally_text` TEXT,
@@ -83,7 +83,7 @@ CREATE TABLE `%PREFIX%alliance_request` (
   `text` TEXT NOT NULL,
   `user_id` INT UNSIGNED NOT NULL,
   `alliance_id` INT UNSIGNED NOT NULL,
-  `time` INT NOT NULL,
+  `time` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`apply_id`),
   KEY `alliance_id` (`alliance_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -92,8 +92,8 @@ CREATE TABLE `%PREFIX%banned` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `who` VARCHAR(64) NOT NULL DEFAULT '',
   `theme` VARCHAR(500) NOT NULL,
-  `time` INT NOT NULL DEFAULT 0,
-  `longer` INT NOT NULL DEFAULT 0,
+  `time` INT UNSIGNED NOT NULL DEFAULT 0,
+  `longer` INT UNSIGNED NOT NULL DEFAULT 0,
   `author` VARCHAR(64) NOT NULL DEFAULT '',
   `email` VARCHAR(64) NOT NULL DEFAULT '',
   `universe` TINYINT UNSIGNED NOT NULL,
@@ -419,7 +419,7 @@ CREATE TABLE `%PREFIX%cronjobs` (
   `month` VARCHAR(32) NOT NULL,
   `dow` VARCHAR(32) NOT NULL,
   `class` VARCHAR(32) NOT NULL,
-  `nextTime` INT DEFAULT NULL,
+  `nextTime` INT UNSIGNED DEFAULT NULL,
   `lock` VARCHAR(32) DEFAULT NULL,
   UNIQUE KEY `cronjobID` (`cronjobID`),
   KEY `isActive` (`isActive`,`nextTime`,`lock`,`cronjobID`)
@@ -453,13 +453,13 @@ CREATE TABLE `%PREFIX%fleets` (
   `fleet_amount` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_array` TEXT,
   `fleet_universe` TINYINT UNSIGNED NOT NULL,
-  `fleet_start_time` INT NOT NULL DEFAULT 0,
+  `fleet_start_time` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_id` INT UNSIGNED NOT NULL,
   `fleet_start_galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_system` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_planet` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_type` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `fleet_end_time` INT NOT NULL DEFAULT 0,
+  `fleet_end_time` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_end_stay` INT NOT NULL DEFAULT 0,
   `fleet_end_id` INT UNSIGNED NOT NULL,
   `fleet_end_galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
@@ -477,7 +477,7 @@ CREATE TABLE `%PREFIX%fleets` (
   `fleet_target_owner` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_group` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_mess` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `start_time` INT DEFAULT NULL,
+  `start_time` INT UNSIGNED DEFAULT NULL,
   `fleet_busy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `hasCanceled` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`fleet_id`),
@@ -500,7 +500,7 @@ CREATE TABLE `%PREFIX%trades` (
 
 CREATE TABLE `%PREFIX%fleet_event` (
   `fleetID` INT NOT NULL,
-  `time` INT NOT NULL,
+  `time` INT UNSIGNED NOT NULL,
   `lock` VARCHAR(32) DEFAULT NULL,
   PRIMARY KEY (`fleetID`),
   KEY `lock` (`lock`,`time`)
@@ -525,14 +525,14 @@ CREATE TABLE `%PREFIX%log_fleets` (
   `fleet_amount` BIGINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_array` TEXT,
   `fleet_universe` TINYINT UNSIGNED NOT NULL,
-  `fleet_start_time` INT NOT NULL DEFAULT 0,
+  `fleet_start_time` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_id` INT UNSIGNED NOT NULL,
   `fleet_start_galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_system` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_planet` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_start_type` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `fleet_end_time` INT NOT NULL DEFAULT 0,
-  `fleet_end_stay` INT NOT NULL DEFAULT 0,
+  `fleet_end_time` INT UNSIGNED NOT NULL DEFAULT 0,
+  `fleet_end_stay` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_end_id` INT UNSIGNED NOT NULL,
   `fleet_end_galaxy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_end_system` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
@@ -549,7 +549,7 @@ CREATE TABLE `%PREFIX%log_fleets` (
   `fleet_target_owner` INT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_group` VARCHAR(15) NOT NULL DEFAULT '0',
   `fleet_mess` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `start_time` INT DEFAULT NULL,
+  `start_time` INT UNSIGNED DEFAULT NULL,
   `fleet_busy` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `fleet_state` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`fleet_id`),
@@ -571,7 +571,7 @@ CREATE TABLE `%PREFIX%messages` (
   `message_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `message_owner` INT UNSIGNED NOT NULL DEFAULT 0,
   `message_sender` INT UNSIGNED NOT NULL DEFAULT 0,
-  `message_time` INT NOT NULL DEFAULT 0,
+  `message_time` INT UNSIGNED NOT NULL DEFAULT 0,
   `message_type` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `message_from` VARCHAR(128) DEFAULT NULL,
   `message_subject` VARCHAR(255) DEFAULT NULL,
@@ -595,7 +595,7 @@ CREATE TABLE `%PREFIX%multi` (
 CREATE TABLE `%PREFIX%news` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` VARCHAR(64) NOT NULL,
-  `date` INT NOT NULL,
+  `date` INT UNSIGNED NOT NULL,
   `title` VARCHAR(64) NOT NULL,
   `text` TEXT NOT NULL,
   PRIMARY KEY (`id`)
@@ -604,7 +604,7 @@ CREATE TABLE `%PREFIX%news` (
 CREATE TABLE `%PREFIX%notes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `owner` INT UNSIGNED DEFAULT NULL,
-  `time` INT DEFAULT NULL,
+  `time` INT UNSIGNED DEFAULT NULL,
   `priority` TINYINT UNSIGNED DEFAULT 1,
   `title` VARCHAR(32) DEFAULT NULL,
   `text` TEXT,
@@ -722,7 +722,7 @@ CREATE TABLE `%PREFIX%planets` (
 CREATE TABLE `%PREFIX%raports` (
   `rid` VARCHAR(32) NOT NULL,
   `raport` longtext NOT NULL,
-  `time` INT NOT NULL,
+  `time` INT UNSIGNED NOT NULL,
   `attacker` VARCHAR(255) NOT NULL DEFAULT '',
   `defender` VARCHAR(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`rid`),
@@ -739,7 +739,7 @@ CREATE TABLE `%PREFIX%session` (
   `sessionID` VARCHAR(32) NOT NULL,
   `userID` INT UNSIGNED NOT NULL,
   `userIP` VARCHAR(40) NOT NULL,
-  `lastonline` INT NOT NULL,
+  `lastonline` INT UNSIGNED NOT NULL,
   `created` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`sessionID`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
@@ -850,7 +850,7 @@ CREATE TABLE `%PREFIX%topkb` (
   `rid` VARCHAR(32) NOT NULL,
   `units` DOUBLE UNSIGNED NOT NULL,
   `result` VARCHAR(1) NOT NULL,
-  `time` INT NOT NULL,
+  `time` INT UNSIGNED NOT NULL,
   `universe` TINYINT UNSIGNED NOT NULL,
   KEY `time` (`universe`,`rid`,`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -873,7 +873,7 @@ CREATE TABLE `%PREFIX%users` (
   `darkmatter` DOUBLE NOT NULL DEFAULT 0,                       -- 14
   `user_lastip` VARCHAR(40) NOT NULL DEFAULT '',                -- 15
   `ip_at_reg` VARCHAR(40) NOT NULL DEFAULT '',                  -- 16
-  `register_time` INT NOT NULL DEFAULT 0,                       -- 17
+  `register_time` INT UNSIGNED NOT NULL DEFAULT 0,                       -- 17
   `onlinetime` INT NOT NULL DEFAULT 0,                          -- 18
   `timezone` VARCHAR(32) NOT NULL DEFAULT 'Europe/London',      -- 19
   `planet_sort` TINYINT NOT NULL DEFAULT 0,                     -- 20
@@ -886,7 +886,7 @@ CREATE TABLE `%PREFIX%users` (
   `settings_mis` TINYINT NOT NULL DEFAULT 1,                    -- 27
   `settings_blockPM` TINYINT NOT NULL DEFAULT 0,                -- 28
   `vacation_mode` TINYINT NOT NULL DEFAULT 0,                   -- 29
-  `vacation_until` INT NOT NULL DEFAULT 0,                      -- 30
+  `vacation_until` INT UNSIGNED NOT NULL DEFAULT 0,                      -- 30
   `delete_mode` INT NOT NULL DEFAULT 0,                         -- 31
   `b_tech_planet` INT UNSIGNED NOT NULL DEFAULT 0,              -- 32
   `b_tech` INT UNSIGNED NOT NULL DEFAULT 0,                     -- 33
@@ -912,7 +912,7 @@ CREATE TABLE `%PREFIX%users` (
   `deuterium_proc_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,    -- 53
   `graviton_tech` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 54
   `ally_id` INT UNSIGNED NOT NULL DEFAULT 0,                    -- 55
-  `ally_register_time` INT NOT NULL DEFAULT 0,                  -- 56
+  `ally_register_time` INT UNSIGNED NOT NULL DEFAULT 0,                  -- 56
   `ally_rank_id` INT UNSIGNED NOT NULL DEFAULT 0,               -- 57
   `rpg_geologist` TINYINT UNSIGNED NOT NULL DEFAULT 0,          -- 58
   `rpg_admiral` TINYINT NOT NULL DEFAULT 0,                     -- 59
@@ -940,7 +940,7 @@ CREATE TABLE `%PREFIX%users` (
   `kbcrystal` DOUBLE UNSIGNED NOT NULL DEFAULT 0,
   `lostunits` DOUBLE UNSIGNED NOT NULL DEFAULT 0,
   `desunits` DOUBLE UNSIGNED NOT NULL DEFAULT 0,
-  `uctime` INT NOT NULL DEFAULT 0,
+  `uctime` INT UNSIGNED NOT NULL DEFAULT 0,
   `setmail` INT NOT NULL DEFAULT 0,
   `dm_attack` INT NOT NULL DEFAULT 0,
   `dm_defensive` INT NOT NULL DEFAULT 0,
@@ -966,11 +966,11 @@ CREATE TABLE `%PREFIX%users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%remember_me`(
-    `id`               INT AUTO_INCREMENT,
+    `id`               INT UNSIGNED AUTO_INCREMENT,
     `selector`         VARCHAR(255) NOT NULL,
     `hashed_validator` VARCHAR(255) NOT NULL,
-    `expiration_date`  INT NOT NULL,
-    `user_id`          INT NOT NULL,
+    `expiration_date`  INT UNSIGNED NOT NULL,
+    `user_id`          INT UNSIGNED NOT NULL,
     `universe`         INT NOT NULL,
      PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -984,7 +984,7 @@ CREATE TABLE `%PREFIX%users_to_acs` (
 
 CREATE TABLE `%PREFIX%users_to_topkb` (
   `rid` VARCHAR(32) NOT NULL,
-  `uid` INT NOT NULL,
+  `uid` INT UNSIGNED NOT NULL,
   `username` VARCHAR(128) NOT NULL,
   `role` TINYINT NOT NULL,
   KEY `rid` (`rid`,`role`)
@@ -996,7 +996,7 @@ CREATE TABLE `%PREFIX%users_valid` (
  `validation_key` VARCHAR(32) NOT NULL,
  `password` VARCHAR(60) NOT NULL,
  `email` VARCHAR(64) NOT NULL,
- `date` INT NOT NULL,
+ `date` INT UNSIGNED NOT NULL,
  `ip` VARCHAR(40) NOT NULL,
  `language` VARCHAR(3) NOT NULL,
  `universe` TINYINT UNSIGNED NOT NULL,
