@@ -96,9 +96,9 @@ class ShowFleetDealerPage extends AbstractGamePage
         }
 
         $this->assign([
-            'shipIDs'   => $allowed_ship_ids,
-            'CostInfos' => $cost,
-            'Charge'    => Config::get()->trade_charge,
+            'ship_ids'   => $allowed_ship_ids,
+            'cost_infos' => $cost,
+            'charge'     => Config::get()->trade_charge,
         ]);
 
         $this->display('page.fleetDealer.default.tpl');

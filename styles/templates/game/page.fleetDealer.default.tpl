@@ -12,7 +12,7 @@
 							data-src="{$dpath}elements/"></div>
 					<div class="transparent" style="text-align:right;float:right;padding:5px">
 						<select class="text-center text-yellow" name="shipID" id="shipID" onchange="updateVars()">
-							{foreach $shipIDs as $shipID}
+							{foreach $ship_ids as $shipID}
 								<option value="{$shipID}">{$LNG.tech.$shipID}</option>
 							{/foreach}
 						</select>
@@ -31,7 +31,7 @@
 							{$LNG.tech.903} <span id="total_deuterium" style="font-weight:800;"></span> &bull;
 							{$LNG.tech.921}: <span id="total_darkmatter" style="font-weight:800;"></span></�>
 						<p><input class="text-center text-yellow" type="submit" value="{$LNG.ft_absenden}"></p>
-						<p>{$LNG.ft_charge}: {$Charge}%</p>
+						<p>{$LNG.ft_charge}: {$charge}%</p>
 					</div>
 				</td>
 			</tr>
@@ -40,8 +40,8 @@
 	{block name="script" append}
 		<script src="scripts/game/fleettrader.js"></script>
 		<script>
-			var CostInfo = {$CostInfos|json};
-			var Charge = {$Charge};
+			var CostInfo = {$cost_infos|json};
+			var Charge = {$charge};
 			$(function() {
 				updateVars();
 			});
