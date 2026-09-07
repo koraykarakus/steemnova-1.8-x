@@ -278,6 +278,7 @@ class ShowShipyardPage extends AbstractGamePage
         }
 
         $max_missiles = BuildFunctions::getMaxConstructibleRockets($PLANET, $missiles);
+        $solar_energy = round((($PLANET['temp_max'] + 160) / 6) * $config->energySpeed, 1);
 
         foreach ($element_ids as $element)
         {
@@ -292,7 +293,6 @@ class ShowShipyardPage extends AbstractGamePage
             $element_time = BuildFunctions::getBuildingTime($USER, $PLANET, $element, $cost_resources);
             $buyable = BuildFunctions::isElementBuyable($USER, $PLANET, $element, $cost_resources);
             $max_buildable = BuildFunctions::getMaxConstructibleElements($USER, $PLANET, $element, $cost_resources);
-            $solar_energy = round((($PLANET['temp_max'] + 160) / 6) * $config->energySpeed, 1);
 
             if (isset($max_missiles[$element]))
             {
