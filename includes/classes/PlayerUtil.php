@@ -110,16 +110,16 @@ class PlayerUtil
 
     public static function createPlayer(
         int $universe,
-        string $userName,
-        string $userPassword,
-        string $userMail,
-        string $userLanguage,
+        string $user_name,
+        string $user_pass,
+        string $user_mail,
+        string $user_lang,
         int $galaxy = 0,
         int $system = 0,
         int $position = 0,
         $name = null,
         $authlevel = 0,
-        $userIpAddress = null,
+        $user_ip_addr = null,
         $user_secret_question_id = 0,
         $user_secret_question_answer = ''
     ): array {
@@ -192,18 +192,18 @@ class PlayerUtil
         }
 
         $params = [
-            ':username'                    => $userName,
-            ':email'                       => $userMail,
-            ':email2'                      => $userMail,
+            ':username'                    => $user_name,
+            ':email'                       => $user_mail,
+            ':email2'                      => $user_mail,
             ':user_secret_question_id'     => $user_secret_question_id,
             ':user_secret_question_answer' => $user_secret_question_answer,
             ':authlevel'                   => $authlevel,
             ':universe'                    => $universe,
-            ':language'                    => $userLanguage,
-            ':registerAddress'             => !empty($userIpAddress) ? $userIpAddress : Session::getClientIp(),
+            ':language'                    => $user_lang,
+            ':registerAddress'             => !empty($user_ip_addr) ? $user_ip_addr : Session::getClientIp(),
             ':onlinetime'                  => TIMESTAMP,
             ':registerTimestamp'           => TIMESTAMP,
-            ':password'                    => $userPassword,
+            ':password'                    => $user_pass,
             ':timezone'                    => $config->timezone,
             ':nameLastChanged'             => 0,
             ':darkmatter_start'            => $config->darkmatter_start,
@@ -230,8 +230,8 @@ class PlayerUtil
 
         $db->insert($sql, $params);
 
-        $userId = $db->lastInsertId();
-        $planetId = self::createPlanet($galaxy, $system, $position, $universe, $userId, $name, true, $authlevel);
+        $user_id = $db->lastInsertId();
+        $planet_id = self::createPlanet($galaxy, $system, $position, $universe, $user_id, $name, true, $authlevel);
 
         $currentUserAmount = $config->users_amount + 1;
         $config->users_amount = $currentUserAmount;
@@ -240,24 +240,25 @@ class PlayerUtil
 		`galaxy` = :galaxy,
 		`system` = :system,
 		`planet` = :position,
-		`id_planet` = :planetId
-		WHERE id = :userId;";
+		`id_planet` = :planet_id
+		WHERE id = :user_id;";
 
         $db->update($sql, [
-            ':galaxy'   => $galaxy,
-            ':system'   => $system,
-            ':position' => $position,
-            ':planetId' => $planetId,
-            ':userId'   => $userId,
+            ':galaxy'    => $galaxy,
+            ':system'    => $system,
+            ':position'  => $position,
+            ':planet_id' => $planet_id,
+            ':user_id'   => $user_id,
         ]);
 
-        $sql = "UPDATE %%PLANETS%% SET metal = :metal_start, crystal = :crystal_start, deuterium = :deuterium_start WHERE id = :planetID;";
+        $sql = "UPDATE %%PLANETS%% SET metal = :metal_start, crystal = :crystal_start, 
+        deuterium = :deuterium_start WHERE id = :planet_id;";
 
         $db->update($sql, [
             ':metal_start'     => $config->metal_start,
             ':crystal_start'   => $config->crystal_start,
             ':deuterium_start' => $config->deuterium_start,
-            ':planetID'        => $planetId,
+            ':planet_id'       => $planet_id,
         ]);
 
         $sql = "SELECT MAX(total_rank) as rank FROM %%USER_POINTS%% WHERE universe = :universe;";
@@ -267,7 +268,7 @@ class PlayerUtil
         ], 'rank');
 
         $sql = "INSERT INTO %%USER_POINTS%% SET
-				`id_owner`	= :userId,
+				`id_owner`	= :user_id,
 				`universe`	= :universe,
 				`tech_rank`	= :rank,
 				`build_rank`	= :rank,
@@ -277,13 +278,13 @@ class PlayerUtil
 
         $db->insert($sql, [
             ':universe' => $universe,
-            ':userId'   => $userId,
+            ':user_id'  => $user_id,
             ':rank'     => $rank + 1,
         ]);
 
         $config->save();
 
-        return [$userId, $planetId];
+        return [$user_id, $planet_id];
     }
 
     public static function updateColonyWithStartValues(int $planetID): void
@@ -405,14 +406,14 @@ class PlayerUtil
     }
 
     public static function createPlanet(
-        $galaxy,
-        $system,
-        $position,
-        $universe,
-        $userId,
-        $name = null,
-        $isHome = false,
-        $authlevel = 0
+        int $galaxy,
+        int $system,
+        int $position,
+        int $universe,
+        int $user_id,
+        ?string $name = null,
+        bool $isHome = false,
+        int $authlevel = 0
     ) {
         global $LNG;
 
@@ -461,7 +462,7 @@ class PlayerUtil
         $params = [
             ':name'            => $name,
             ':universe'        => $universe,
-            ':userId'          => $userId,
+            ':user_id'         => $user_id,
             ':galaxy'          => $galaxy,
             ':system'          => $system,
             ':position'        => $position,
@@ -477,7 +478,7 @@ class PlayerUtil
         $sql = 'INSERT INTO %%PLANETS%% SET
 		`name`		= :name,
 		`universe`	= :universe,
-		`id_owner`	= :userId,
+		`id_owner`	= :user_id,
 		`galaxy`		= :galaxy,
 		`system`		= :system,
 		`planet`		= :position,
@@ -496,14 +497,14 @@ class PlayerUtil
     }
 
     public static function createMoon(
-        $universe,
-        $galaxy,
-        $system,
-        $position,
-        $userId,
+        int $universe,
+        int $galaxy,
+        int $system,
+        int $position,
+        int $user_id,
         $chance,
         $diameter = null,
-        $moonName = null
+        $moon_name = null
     ) {
         global $LNG;
 
@@ -517,7 +518,7 @@ class PlayerUtil
 				AND `planet` = :position
 				AND `planet_type` = :type;";
 
-        $parentPlanet = $db->selectSingle($sql, [
+        $parent_planet = $db->selectSingle($sql, [
             ':universe' => $universe,
             ':galaxy'   => $galaxy,
             ':system'   => $system,
@@ -525,188 +526,190 @@ class PlayerUtil
             ':type'     => 1,
         ]);
 
-        if ($parentPlanet['id_moon'] != 0)
+        if ($parent_planet['id_moon'] != 0)
         {
             return false;
         }
 
         if (is_null($diameter))
         {
-            $diameter = floor(pow(mt_rand(10, 20) + 3 * $chance, 0.5) * 1000); # New Calculation - 23.04.2011
+            # New Calculation - 23.04.2011
+            $diameter = floor(pow(mt_rand(10, 20) + 3 * $chance, 0.5) * 1000);
         }
 
-        $maxTemperature = $parentPlanet['temp_max'] - mt_rand(10, 45);
-        $minTemperature = $parentPlanet['temp_min'] - mt_rand(10, 45);
+        $max_temp = $parent_planet['temp_max'] - mt_rand(10, 45);
+        $min_temp = $parent_planet['temp_min'] - mt_rand(10, 45);
 
-        if (empty($moonName))
+        if (empty($moon_name))
         {
-            $moonName = $LNG['type_planet_3'];
+            $moon_name = $LNG['type_planet_3'];
         }
 
         $sql = "INSERT INTO %%PLANETS%% SET
 		`name`				= :name,
 		`id_owner`			= :owner,
 		`universe`			= :universe,
-		`galaxy`				= :galaxy,
-		`system`				= :system,
-		`planet`				= :planet,
-		`last_update`			= :updateTimestamp,
-		`planet_type`			= :type,
+		`galaxy`			= :galaxy,
+		`system`			= :system,
+		`planet`			= :planet,
+		`last_update`		= :update_time,
+		`planet_type`		= :type,
 		`image`				= :image,
 		`diameter`			= :diameter,
 		`field_max`			= :fields,
-		`temp_min`			= :minTemperature,
-		`temp_max`			= :maxTemperature,
+		`temp_min`			= :min_temp,
+		`temp_max`			= :max_temp,
 		`metal`				= :metal,
-		`metal_perhour`		= :metPerHour,
-		`crystal`				= :crystal,
-		`crystal_perhour`		= :cryPerHour,
+		`metal_perhour`		= :metal_perhour,
+		`crystal`			= :crystal,
+		`crystal_perhour`	= :crystal_perhour,
 		`deuterium`			= :deuterium,
-		`deuterium_perhour`	= :deuPerHour;";
+		`deuterium_perhour`	= :deuterium_perhour;";
 
         $db->insert($sql, [
-            ':name'            => $moonName,
-            ':owner'           => $userId,
-            ':universe'        => $universe,
-            ':galaxy'          => $galaxy,
-            ':system'          => $system,
-            ':planet'          => $position,
-            ':updateTimestamp' => TIMESTAMP,
-            ':type'            => 3,
-            ':image'           => 'mond',
-            ':diameter'        => $diameter,
-            ':fields'          => 1,
-            ':minTemperature'  => $minTemperature,
-            ':maxTemperature'  => $maxTemperature,
-            ':metal'           => 0,
-            ':metPerHour'      => 0,
-            ':crystal'         => 0,
-            ':cryPerHour'      => 0,
-            ':deuterium'       => 0,
-            ':deuPerHour'      => 0,
+            ':name'              => $moon_name,
+            ':owner'             => $user_id,
+            ':universe'          => $universe,
+            ':galaxy'            => $galaxy,
+            ':system'            => $system,
+            ':planet'            => $position,
+            ':update_time'       => TIMESTAMP,
+            ':type'              => 3,
+            ':image'             => 'mond',
+            ':diameter'          => $diameter,
+            ':fields'            => 1,
+            ':min_temp'          => $min_temp,
+            ':max_temp'          => $max_temp,
+            ':metal'             => 0,
+            ':metal_perhour'     => 0,
+            ':crystal'           => 0,
+            ':crystal_perhour'   => 0,
+            ':deuterium'         => 0,
+            ':deuterium_perhour' => 0,
         ]);
 
         $id_moon = $db->lastInsertId();
 
-        $sql = "UPDATE %%PLANETS%% SET id_moon = :id_moon WHERE id = :planetId;";
+        $sql = "UPDATE %%PLANETS%% SET id_moon = :id_moon WHERE id = :planet_id;";
 
         $db->update($sql, [
-            ':id_moon'  => $id_moon,
-            ':planetId' => $parentPlanet['id'],
+            ':id_moon'   => $id_moon,
+            ':planet_id' => $parent_planet['id'],
         ]);
 
         return $id_moon;
     }
 
-    public static function deletePlayer($userId)
+    public static function deletePlayer(int $user_id): bool
     {
-        if (ROOT_USER == $userId)
+        if (ROOT_USER == $user_id)
         {
             // superuser can not be deleted.
             throw new Exception("Superuser #".ROOT_USER." can't be deleted!");
         }
 
         $db = Database::get();
-        $sql = 'SELECT universe, ally_id FROM %%USERS%% WHERE id = :userId;';
-        $userData = $db->selectSingle($sql, [
-            ':userId' => $userId,
+        $sql = 'SELECT universe, ally_id FROM %%USERS%% WHERE id = :user_id;';
+        $user_data = $db->selectSingle($sql, [
+            ':user_id' => $user_id,
         ]);
 
-        if (empty($userData))
+        if (empty($user_data))
         {
             return false;
         }
 
-        if (!empty($userData['ally_id']))
+        if (!empty($user_data['ally_id']))
         {
-            $sql = 'SELECT ally_members FROM %%ALLIANCE%% WHERE id = :allianceId;';
-            $memberCount = $db->selectSingle($sql, [
-                ':allianceId' => $userData['ally_id'],
+            $sql = 'SELECT ally_members FROM %%ALLIANCE%% WHERE id = :alliance_id;';
+            $member_count = $db->selectSingle($sql, [
+                ':alliance_id' => $user_data['ally_id'],
             ], 'ally_members');
 
-            if ($memberCount > 1)
+            if ($member_count > 1)
             {
-                $sql = 'UPDATE %%ALLIANCE%% SET ally_members = ally_members - 1 WHERE id = :allianceId;';
+                $sql = 'UPDATE %%ALLIANCE%% SET ally_members = ally_members - 1 
+                WHERE id = :alliance_id;';
                 $db->update($sql, [
-                    ':allianceId' => $userData['ally_id'],
+                    ':alliance_id' => $user_data['ally_id'],
                 ]);
             }
             else
             {
-                $sql = 'DELETE FROM %%ALLIANCE%% WHERE id = :allianceId;';
+                $sql = 'DELETE FROM %%ALLIANCE%% WHERE id = :alliance_id;';
                 $db->delete($sql, [
-                    ':allianceId' => $userData['ally_id'],
+                    ':alliance_id' => $user_data['ally_id'],
                 ]);
 
-                $sql = 'DELETE FROM %%ALLIANCE_POINTS%% WHERE id_owner = :allianceId;';
+                $sql = 'DELETE FROM %%ALLIANCE_POINTS%% WHERE id_owner = :alliance_id;';
                 $db->delete($sql, [
-                    ':allianceId' => $userData['ally_id'],
-                    ':type'       => 2,
+                    ':alliance_id' => $user_data['ally_id'],
+                    ':type'        => 2,
                 ]);
 
-                $sql = 'UPDATE %%USER_POINTS%% SET id_ally = :resetId WHERE id_ally = :allianceId;';
+                $sql = 'UPDATE %%USER_POINTS%% SET id_ally = :resetId WHERE id_ally = :alliance_id;';
                 $db->update($sql, [
-                    ':allianceId' => $userData['ally_id'],
-                    ':resetId'    => 0,
+                    ':alliance_id' => $user_data['ally_id'],
+                    ':resetId'     => 0,
                 ]);
             }
         }
 
-        $sql = 'DELETE FROM %%ALLIANCE_REQUEST%% WHERE user_id = :userId;';
+        $sql = 'DELETE FROM %%ALLIANCE_REQUEST%% WHERE user_id = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%BUDDY%% WHERE owner = :userId OR sender = :userId;';
+        $sql = 'DELETE FROM %%BUDDY%% WHERE owner = :user_id OR sender = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
         $sql = 'DELETE %%FLEETS%%, %%FLEETS_EVENT%%
 		FROM %%FLEETS%% LEFT JOIN %%FLEETS_EVENT%% on fleet_id = fleetId
-		WHERE fleet_owner = :userId;';
+		WHERE fleet_owner = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%MESSAGES%% WHERE message_owner = :userId;';
+        $sql = 'DELETE FROM %%MESSAGES%% WHERE message_owner = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%NOTES%% WHERE owner = :userId;';
+        $sql = 'DELETE FROM %%NOTES%% WHERE owner = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%PLANETS%% WHERE id_owner = :userId;';
+        $sql = 'DELETE FROM %%PLANETS%% WHERE id_owner = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%USERS%% WHERE id = :userId;';
+        $sql = 'DELETE FROM %%USERS%% WHERE id = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $sql = 'DELETE FROM %%USER_POINTS%% WHERE id_owner = :userId;';
+        $sql = 'DELETE FROM %%USER_POINTS%% WHERE id_owner = :user_id;';
         $db->delete($sql, [
-            ':userId' => $userId,
+            ':user_id' => $user_id,
         ]);
 
-        $fleetIds = $db->select('SELECT fleet_id FROM %%FLEETS%% WHERE fleet_target_owner = :userId;', [
-            ':userId' => $userId,
+        $fleet_ids = $db->select('SELECT fleet_id FROM %%FLEETS%% WHERE fleet_target_owner = :user_id;', [
+            ':user_id' => $user_id,
         ]);
 
-        foreach ($fleetIds as $fleetId)
+        foreach ($fleet_ids as $fid)
         {
-            FleetFunctions::SendFleetBack(['id' => $userId], $fleetId['fleet_id']);
+            FleetFunctions::SendFleetBack(['id' => $user_id], $fid['fleet_id']);
         }
 
         /*
         $sql	= 'UPDATE %%UNIVERSE%% SET userAmount = userAmount - 1 WHERE universe = :universe;';
         $db->update($sql, array(
-            ':universe' => $userData['universe']
+            ':universe' => $user_data['universe']
         ));
 
         Cache::get()->flush('universe');
@@ -715,28 +718,28 @@ class PlayerUtil
         return true;
     }
 
-    public static function deletePlanet($planetId)
+    public static function deletePlanet(int $planet_id)
     {
         $db = Database::get();
 
         $sql = "SELECT `id_owner`, `planet_type`, `id_moon` FROM %%PLANETS%%
-		WHERE `id` = :planetId AND `id` NOT IN (SELECT `id_planet` FROM %%USERS%%);";
+		WHERE `id` = :planet_id AND `id` NOT IN (SELECT `id_planet` FROM %%USERS%%);";
 
         $planetData = $db->selectSingle($sql, [
-            ':planetId' => $planetId,
+            ':planet_id' => $planet_id,
         ]);
 
         if (empty($planetData))
         {
-            throw new Exception("Can not found planet #".$planetId."!");
+            throw new Exception("Can not found planet #".$planet_id."!");
         }
 
         $sql = "SELECT `fleet_id` FROM %%FLEETS%%
-		WHERE `fleet_end_id` = :planetId OR (`fleet_end_type` = 3 AND `fleet_end_id` = :moondId);";
+		WHERE `fleet_end_id` = :planet_id OR (`fleet_end_type` = 3 AND `fleet_end_id` = :moon_id);";
 
         $fleetIds = $db->select($sql, [
-            ':planetId' => $planetId,
-            ':moondId'  => $planetData['id_moon'],
+            ':planet_id' => $planet_id,
+            ':moon_id'   => $planetData['id_moon'],
         ]);
 
         foreach ($fleetIds as $fleetId)
@@ -746,29 +749,29 @@ class PlayerUtil
 
         if ($planetData['planet_type'] == 3)
         {
-            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planetId;";
+            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planet_id;";
             $db->delete($sql, [
-                ':planetId' => $planetId,
+                ':planet_id' => $planet_id,
             ]);
 
-            $sql = "UPDATE %%PLANETS%% SET `id_moon` = :resetId WHERE `id_moon` = :planetId;";
+            $sql = "UPDATE %%PLANETS%% SET `id_moon` = :reset_id WHERE `id_moon` = :planet_id;";
             $db->update($sql, [
-                ':resetId'  => 0,
-                ':planetId' => $planetId,
+                ':reset_id'  => 0,
+                ':planet_id' => $planet_id,
             ]);
         }
         else
         {
-            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planetId OR `id_moon` = :planetId;";
+            $sql = "DELETE FROM %%PLANETS%% WHERE `id` = :planet_id OR `id_moon` = :planet_id;";
             $db->delete($sql, [
-                ':planetId' => $planetId,
+                ':planet_id' => $planet_id,
             ]);
         }
 
         return true;
     }
 
-    public static function maxPlanetCount($USER)
+    public static function maxPlanetCount(array $USER): int
     {
         global $RESOURCE;
         $config = Config::get($USER['universe']);
@@ -790,7 +793,7 @@ class PlayerUtil
         return (int) ceil($config->min_player_planets + min($planetPerTech, $USER[$RESOURCE[124]] * $config->planets_per_tech) + min($planetPerBonus, $USER['factor']['Planets']));
     }
 
-    public static function allowPlanetPosition($position, $USER)
+    public static function allowPlanetPosition(int $position, array $USER): bool
     {
         // http://owiki.de/index.php/Astrophysik#.C3.9Cbersicht
 
@@ -802,34 +805,30 @@ class PlayerUtil
             case 1:
             case ($config->max_planets):
                 return $USER[$RESOURCE[124]] >= 8;
-                break;
             case 2:
             case ($config->max_planets - 1):
                 return $USER[$RESOURCE[124]] >= 6;
-                break;
             case 3:
             case ($config->max_planets - 2):
                 return $USER[$RESOURCE[124]] >= 4;
-                break;
             default:
                 return $USER[$RESOURCE[124]] >= 1;
-                break;
         }
     }
 
     public static function sendMessage(
-        $userId,
-        $senderId,
-        $senderName,
-        $messageType,
-        $subject,
-        $text,
-        $time,
-        $parentID = null,
-        $unread = 1,
-        $universe = null
-    ) {
-        if (is_null($universe))
+        int $user_id,
+        int $sender_id,
+        string $sender_name,
+        int $message_type,
+        string $subject,
+        string $text,
+        int $time,
+        $parent_id = null,
+        int $unread = 1,
+        int $universe = -1
+    ): void {
+        if ($universe === -1)
         {
             $universe = Universe::current();
         }
@@ -837,26 +836,26 @@ class PlayerUtil
         $db = Database::get();
 
         $sql = "INSERT INTO %%MESSAGES%% SET
-		`message_owner`		= :userId,
-		`message_sender`		= :sender,
-		`message_time`		= :messageTime,
+		`message_owner`		= :user_id,
+		`message_sender`	= :sender,
+		`message_time`		= :message_time,
 		`message_type`		= :type,
-		`message_from`		= :messageFrom,
+		`message_from`		= :message_from,
 		`message_subject` 	= :subject,
-		`message_text`		= :messageText,
-		`message_unread`		= :unread,
+		`message_text`		= :message_text,
+		`message_unread`	= :unread,
 		`message_universe` 	= :universe;";
 
         $db->insert($sql, [
-            ':userId'      => $userId,
-            ':sender'      => $senderId,
-            ':messageTime' => $time,
-            ':type'        => $messageType,
-            ':messageFrom' => $senderName,
-            ':subject'     => $subject,
-            ':messageText' => $text,
-            ':unread'      => $unread,
-            ':universe'    => $universe,
+            ':user_id'      => $user_id,
+            ':sender'       => $sender_id,
+            ':message_time' => $time,
+            ':type'         => $message_type,
+            ':message_from' => $sender_name,
+            ':subject'      => $subject,
+            ':message_text' => $text,
+            ':unread'       => $unread,
+            ':universe'     => $universe,
         ]);
     }
 }
