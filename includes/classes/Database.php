@@ -17,14 +17,14 @@
 
 class Database
 {
-    protected $dbHandle = null;
-    protected $dbTableNames = [];
-    protected $lastInsertId = false;
-    protected $rowCount = false;
-    protected $queryCounter = 0;
-    protected static $instance = null;
+    protected ?PDO $dbHandle = null;
+    protected array $dbTableNames = [];
+    protected bool|string $lastInsertId = false;
+    protected bool|int $rowCount = false;
+    protected int $queryCounter = 0;
+    protected static Database $instance;
 
-    public static function get()
+    public static function get(): self
     {
         if (!isset(self::$instance))
         {
@@ -34,19 +34,29 @@ class Database
         return self::$instance;
     }
 
-    public function getDbTableNames()
+    public function getDbTableNames(): array
     {
         return $this->dbTableNames;
     }
 
-    public function getMySQLServerVersion()
+    public function getMySQLServerVersion(): string
     {
-        return $this->dbHandle->getAttribute(PDO::ATTR_SERVER_VERSION);
+        $res = $this->dbHandle->getAttribute(PDO::ATTR_SERVER_VERSION);
+        if ($res === null)
+        {
+            throw new Exception("Failed getAttribute : getMySQLServerVersion");
+        }
+        return $res;
     }
 
-    public function getMySQLClientVersion()
+    public function getMySQLClientVersion(): string
     {
-        return $this->dbHandle->getAttribute(PDO::ATTR_CLIENT_VERSION);
+        $res = $this->dbHandle->getAttribute(PDO::ATTR_CLIENT_VERSION);
+        if ($res === null)
+        {
+            throw new Exception("Failed getAttribute : getMySQLClientVersion");
+        }
+        return $res;
     }
 
     private function __clone()
@@ -81,12 +91,12 @@ class Database
         }
     }
 
-    public function disconnect()
+    public function disconnect(): void
     {
         $this->dbHandle = null;
     }
 
-    public function getHandle()
+    public function getHandle(): PDO|null
     {
         return $this->dbHandle;
     }
@@ -101,7 +111,7 @@ class Database
         return $this->rowCount;
     }
 
-    protected function _query($qry, array $params, $type)
+    protected function _query(string $qry, array $params, string $type): PDOStatement|bool
     {
         if (in_array($type, ["insert", "select", "update", "delete", "replace"]) === false)
         {
@@ -156,7 +166,7 @@ class Database
         return ($type === "select") ? $stmt : true;
     }
 
-    protected function getQueryType($qry)
+    protected function getQueryType(string $qry): string
     {
         if (!preg_match('!^(\S+)!', $qry, $match))
         {
@@ -171,7 +181,7 @@ class Database
         return strtolower($match[1]);
     }
 
-    public function delete($qry, array $params = [])
+    public function delete(string $qry, array $params = []): PDOStatement|bool
     {
         if (($type = $this->getQueryType($qry)) !== "delete")
         {
@@ -181,7 +191,7 @@ class Database
         return $this->_query($qry, $params, $type);
     }
 
-    public function replace($qry, array $params = [])
+    public function replace(string $qry, array $params = []): PDOStatement|bool
     {
         if (($type = $this->getQueryType($qry)) !== "replace")
         {
@@ -191,7 +201,7 @@ class Database
         return $this->_query($qry, $params, $type);
     }
 
-    public function update($qry, array $params = [])
+    public function update(string $qry, array $params = []): PDOStatement|bool
     {
         if (($type = $this->getQueryType($qry)) !== "update")
         {
@@ -201,7 +211,7 @@ class Database
         return $this->_query($qry, $params, $type);
     }
 
-    public function insert($qry, array $params = [])
+    public function insert(string $qry, array $params = []): PDOStatement|bool
     {
         if (($type = $this->getQueryType($qry)) !== "insert")
         {
@@ -211,7 +221,7 @@ class Database
         return $this->_query($qry, $params, $type);
     }
 
-    public function select($qry, array $params = [])
+    public function select(string $qry, array $params = []): array
     {
         if (($type = $this->getQueryType($qry)) !== "select")
         {
@@ -222,7 +232,7 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function selectSingle($qry, array $params = [], $field = false)
+    public function selectSingle(string $qry, array $params = [], $field = false)
     {
         if (($type = $this->getQueryType($qry)) !== "select")
         {
@@ -245,7 +255,7 @@ class Database
      * @param  string|null 	$key
      * @return array
      */
-    public function lists($table, $column, $key = null)
+    public function lists(string $table, string $column, ?string $key = null): array
     {
         $selects = implode(', ', is_null($key) ? [$column] : [$column, $key]);
 
@@ -271,7 +281,7 @@ class Database
         return $results;
     }
 
-    public function query($qry)
+    public function query(string $qry): void
     {
         $this->lastInsertId = false;
         $this->rowCount = false;
@@ -279,7 +289,7 @@ class Database
         $this->queryCounter++;
     }
 
-    public function nativeQuery($qry)
+    public function nativeQuery(string $qry): array|bool
     {
         $this->lastInsertId = false;
         $this->rowCount = false;
@@ -295,17 +305,17 @@ class Database
         return in_array($this->getQueryType($qry), ['select', 'show']) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : true;
     }
 
-    public function getQueryCounter()
+    public function getQueryCounter(): int
     {
         return $this->queryCounter;
     }
 
-    public static function formatDate($time)
+    public static function formatDate(int $time): string
     {
         return date('Y-m-d H:i:s', $time);
     }
 
-    public function quote($str)
+    public function quote(string $str)
     {
         return $this->dbHandle->quote($str);
     }
