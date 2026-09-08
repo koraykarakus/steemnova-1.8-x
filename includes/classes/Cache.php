@@ -20,15 +20,15 @@ require 'includes/classes/cache/resource/CacheFile.class.php';
 
 class Cache
 {
-    private $cache_resource = null;
+    private CacheFile $cache_resource;
     private $cache_builder = [];
     private $cache_obj = [];
 
-    private static $obj = null;
+    private static self $obj;
 
-    public static function get()
+    public static function get(): self
     {
-        if (is_null(self::$obj))
+        if (!isset(self::$obj))
         {
             self::$obj = new self();
         }
@@ -41,12 +41,12 @@ class Cache
         $this->cache_resource = new CacheFile();
     }
 
-    public function add($key, $class_name)
+    public function add(string $key, string $class_name): void
     {
         $this->cache_builder[$key] = $class_name;
     }
 
-    public function getData($key, $rebuild = true)
+    public function getData(string $key, bool $rebuild = true): array
     {
         if (!isset($this->cache_obj[$key]) && !$this->load($key))
         {
@@ -62,7 +62,7 @@ class Cache
         return $this->cache_obj[$key];
     }
 
-    public function flush($key)
+    public function flush(string $key): bool
     {
         if (!isset($this->cache_obj[$key]) && !$this->load($key))
         {
@@ -73,7 +73,7 @@ class Cache
         return $this->buildCache($key);
     }
 
-    public function load($key)
+    public function load(string $key): bool
     {
         $cache_data = $this->cache_resource->open($key);
 
@@ -92,7 +92,7 @@ class Cache
         return true;
     }
 
-    public function buildCache($key)
+    public function buildCache(string $key): bool
     {
         $class_name = $this->cache_builder[$key];
 
