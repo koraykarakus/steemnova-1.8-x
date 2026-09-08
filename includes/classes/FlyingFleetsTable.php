@@ -17,9 +17,9 @@
 
 class FlyingFleetsTable
 {
-    protected $user_id = null;
-    protected $planet_id = null;
-    protected $is_phalanx = false;
+    protected int $user_id = -1;
+    protected int $planet_id = -1;
+    protected bool $is_phalanx = false;
     protected $missions = false;
 
     public function __construct()
@@ -42,7 +42,7 @@ class FlyingFleetsTable
         $this->is_phalanx = true;
     }
 
-    public function setMissions($missions): void
+    public function setMissions(string $missions): void
     {
         $this->missions = implode(',', array_filter(explode(',', $missions), 'is_numeric'));
     }
@@ -146,7 +146,7 @@ class FlyingFleetsTable
         return $fleet_data;
     }
 
-    private function BuildFleetEventTable($fleet_row, $fleet_state): array
+    private function BuildFleetEventTable(array $fleet_row, int $fleet_state): array
     {
         $time = 0;
         $rest = 0;
@@ -204,7 +204,7 @@ class FlyingFleetsTable
         ];
     }
 
-    public function getEventData($fleet_row, $status): array
+    public function getEventData(array $fleet_row, int $status): array
     {
         global $LNG;
         $owner = $fleet_row['fleet_owner'] == $this->user_id;
@@ -446,7 +446,7 @@ class FlyingFleetsTable
         return [$rest, $event_string, $time];
     }
 
-    private function BuildHostileFleetPlayerLink($fleet_row): string
+    private function BuildHostileFleetPlayerLink(array $fleet_row): string
     {
         global $LNG;
         return $fleet_row['own_username'] .
@@ -457,8 +457,11 @@ class FlyingFleetsTable
             '</a>';
     }
 
-    private function CreateFleetPopupedMissionLink($fleet_row, $text, $fleet_type): string
-    {
+    private function CreateFleetPopupedMissionLink(
+        array $fleet_row,
+        string $text,
+        string $fleet_type
+    ): string {
         global $LNG;
         $total_res = $fleet_row['fleet_resource_metal'] +
                     $fleet_row['fleet_resource_crystal'] +
@@ -510,8 +513,11 @@ class FlyingFleetsTable
         return $mission_popup;
     }
 
-    private function CreateFleetPopupedFleetLink($fleet_row, $text, $FleetType): string
-    {
+    private function CreateFleetPopupedFleetLink(
+        array $fleet_row,
+        string $text,
+        string $FleetType
+    ): string {
         global $LNG, $USER, $RESOURCE;
         $spy_tech = $USER[$RESOURCE[106]];
         $owner = $fleet_row['fleet_owner'] == $this->user_id;
