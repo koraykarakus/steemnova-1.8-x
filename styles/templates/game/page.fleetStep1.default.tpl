@@ -116,17 +116,25 @@
 				</tr>
 				<tr>
 					<td class="text_center" style="width: 80%;">
-						<input id="sc_name" type="text" class="" name="sc_name" placeholder="{$LNG.fl_shortcut_name}">
-						<input id="sc_galaxy" type="text" class="" name="sc_galaxy" value="" size="3" maxlength="2"
-							placeholder="G" pattern="[0-9]*">:
-						<input id="sc_system" type="text"
-						name="sc_system" value="" size="3" maxlength="3" placeholder="S"
-						pattern="[0-9]*">:
-						<input id="sc_planet" type="text" name="sc_planet" value=""
-						size="3" maxlength="2" placeholder="P" pattern="[0-9]*">
-						<select id="sc_type" class="" name="sc_type">
-							{html_options options=$type_select}
-						</select>
+						<div style="display:flex;justify-content:space-around">
+							<input id="sc_name" type="text" class="" name="sc_name" placeholder="{$LNG.fl_shortcut_name}">
+							<i class="galaxy_icon">
+								<span class="tooltip tooltip_top">{$LNG.gl_galaxy}</span>
+							</i>
+							<input id="sc_galaxy" type="text" class="" name="sc_galaxy" value="" size="3" maxlength="2"
+								placeholder="G" pattern="[0-9]*">
+							<i class="system_icon">
+								<span class="tooltip tooltip_top">{$LNG.gl_solar_system}</span>
+							</i>
+							<input id="sc_system" type="text"
+							name="sc_system" value="" size="3" maxlength="3" placeholder="S"
+							pattern="[0-9]*">
+							<input id="sc_planet" type="text" name="sc_planet" value=""
+							size="3" maxlength="2" placeholder="P" pattern="[0-9]*">
+							<select id="sc_type" class="" name="sc_type">
+								{html_options options=$type_select}
+							</select>
+						</div>
 					</td>
 					<td class="text_center" style="width: 20%;">
 						<button type="button" onclick="AddShortCut();">{$LNG.fl_shortcut_add}</button>
