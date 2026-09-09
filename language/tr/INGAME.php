@@ -403,6 +403,17 @@ $LNG['fl_shortcut_add'] = 'Ekle';
 $LNG['fl_shortcut_edition'] = 'Duzenle';
 $LNG['fl_shortcut_save'] = 'Kısayolu Kaydet';
 $LNG['fl_shortcut_saved'] = 'Kısayol kaydedildi!';
+$LNG['fl_shortcut_galaxy_err'] = "Galaksi sıfırdan küçük ve %s değerinden büyük olamaz";
+$LNG['fl_shortcut_system_err'] = "Sistem sıfırdan küçük ve %s değerinden büyük olamaz";
+$LNG['fl_shortcut_planet_err'] = "Gezegen sıfırdan küçük ve %s değerinden büyük olamaz";
+$LNG['fl_shortcut_type_err'] = "Hatalı gezegen türü";
+$LNG['fl_shortcut_exist_err'] = "Bu koordinatlar daha önce kaydedilmiş";
+$LNG['fl_shortcut_name_err_1'] = "Kısayol adı boş olamaz.";
+$LNG['fl_shortcut_name_err_2'] = "Kısayol adı daha kısa olmalıdır.";
+$LNG['fl_shortcut_exceed_max'] = "En fazla %s kısayol kaydedilebilir. Birini silmeyi düşünün.";
+$LNG['fl_shortcut_del_err_1'] = "Hatalı kısayol ID'si";
+$LNG['fl_shortcut_del_suc'] = "Kısayol başarıyla silindi";
+
 $LNG['fl_no_colony'] = 'Hiç koloniniz yok';
 $LNG['fl_send_fleet'] = 'Filo Yolla';
 $LNG['fl_fleet_speed'] = 'Hız';

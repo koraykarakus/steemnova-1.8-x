@@ -394,6 +394,17 @@ $LNG['fl_shortcut_add'] = 'Agregar';
 $LNG['fl_shortcut_edition'] = 'Edición';
 $LNG['fl_shortcut_save'] = 'Guardar Atajo/s';
 $LNG['fl_shortcut_saved'] = 'En Linea!';
+$LNG['fl_shortcut_galaxy_err'] = "La galaxia no puede ser menor que cero ni mayor que %s";
+$LNG['fl_shortcut_system_err'] = "El sistema no puede ser menor que cero ni mayor que %s";
+$LNG['fl_shortcut_planet_err'] = "El planeta no puede ser menor que cero ni mayor que %s";
+$LNG['fl_shortcut_type_err'] = "Tipo de planeta incorrecto";
+$LNG['fl_shortcut_exist_err'] = "Estas coordenadas ya han sido guardadas";
+$LNG['fl_shortcut_name_err_1'] = "El nombre del acceso directo no puede estar vacío.";
+$LNG['fl_shortcut_name_err_2'] = "El nombre del acceso directo debe ser más corto.";
+$LNG['fl_shortcut_exceed_max'] = "Se pueden guardar un máximo de %s accesos directos. Considera eliminar uno.";
+$LNG['fl_shortcut_del_err_1'] = "ID de acceso directo incorrecto";
+$LNG['fl_shortcut_del_suc'] = "El acceso directo se ha eliminado correctamente";
+
 $LNG['fl_no_colony'] = 'No hay colonias';
 $LNG['fl_send_fleet'] = 'Enviar flota';
 $LNG['fl_fleet_speed'] = 'Velocidad';

@@ -394,6 +394,17 @@ $LNG['fl_shortcut_add'] = 'Hinzufügen';
 $LNG['fl_shortcut_edition'] = 'Shortcut editieren';
 $LNG['fl_shortcut_save'] = 'Shortcut speichern';
 $LNG['fl_shortcut_saved'] = 'Gespeichert!';
+$LNG['fl_shortcut_galaxy_err'] = "Die Galaxie kann nicht kleiner als null und nicht größer als %s sein";
+$LNG['fl_shortcut_system_err'] = "Das System kann nicht kleiner als null und nicht größer als %s sein";
+$LNG['fl_shortcut_planet_err'] = "Der Planet kann nicht kleiner als null und nicht größer als %s sein";
+$LNG['fl_shortcut_type_err'] = "Falscher Planetentyp";
+$LNG['fl_shortcut_exist_err'] = "Diese Koordinaten wurden bereits gespeichert";
+$LNG['fl_shortcut_name_err_1'] = "Der Name des Shortcuts darf nicht leer sein.";
+$LNG['fl_shortcut_name_err_2'] = "Der Name des Shortcuts sollte kürzer sein.";
+$LNG['fl_shortcut_exceed_max'] = "Es können maximal %s Shortcuts gespeichert werden. Bitte entfernen Sie einen.";
+$LNG['fl_shortcut_del_err_1'] = "Falsche Shortcut-ID";
+$LNG['fl_shortcut_del_suc'] = "Der Shortcut wurde erfolgreich gelöscht";
+
 $LNG['fl_no_colony'] = 'Keine Kolonien vorhanden';
 $LNG['fl_send_fleet'] = 'Flotte verschicken';
 $LNG['fl_fleet_speed'] = 'Geschwindigkeit';

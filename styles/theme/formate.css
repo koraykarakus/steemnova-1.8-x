@@ -2732,6 +2732,24 @@ background: linear-gradient(180deg,
 	min-width: 1200px;
 }
 
+/* page.fleetStep1.default.tpl */
+.table_game .sc_delete{
+	display: flex;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+	background-image: url('img/deletemsg.png');
+	background-size: 10px 10px;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+.sc_wrapper{
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+}
+/*--*/
+
 @media only screen and (min-width: 576px) {}
 
 

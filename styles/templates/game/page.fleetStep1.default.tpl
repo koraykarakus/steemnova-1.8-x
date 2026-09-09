@@ -77,74 +77,59 @@
 		</table>
 
 		{if isModuleAvailable($smarty.const.MODULE_SHORTCUTS)}
-			<table class="table_game table_full">
+			<table id="shortcut_list" class="table_game table_full">
 				<tr>
-					<th>{$LNG.fl_shortcut} [
-						<a href="#" onclick="EditShortcuts();return false" class="shortcut-link-edit shortcut-link">
-							{$LNG.fl_shortcut_edition}
+					<th colspan="4">{$LNG.fl_shortcut}</th>
+				</tr>
+				{foreach $shortcut_list as $id => $c_row}
+				{if $c_row@iteration % 4 == 1}
+        			<tr>
+    			{/if}
+					<td id="sc_{$id}" style="width: 25%;">
+					<div class="sc_wrapper">
+						<a href="javascript:setTarget({$c_row.galaxy},{$c_row.system},{$c_row.planet},{$c_row.type});updateVars();">
+								{$c_row.name}
+							{if $c_row.type == 1}
+								{$LNG.fl_planet_shortcut}
+							{elseif $c_row.type == 2}
+								{$LNG.fl_debris_shortcut}
+							{elseif $c_row.type == 3}
+								{$LNG.fl_moon_shortcut}
+							{/if}
+							&nbsp;[{$c_row.galaxy}:{$c_row.system}:{$c_row.planet}]
 						</a>
-						&nbsp;|&nbsp;
-						<a href="#" onclick="SaveShortcuts();return false" class="shortcut-edit">
-							{$LNG.fl_shortcut_save}
-						</a>]
-					</th>
-				</tr>
-				{foreach $shortcut_list as $shortcutID => $shortcutRow}
-					<tr class="shortcut-row">
-						<td class="shortcut-colum shortcut-isset">
-							<div class="shortcut-link">
-								<a
-									href="javascript:setTarget({$shortcutRow.galaxy},{$shortcutRow.system},{$shortcutRow.planet},{$shortcutRow.type});updateVars();">{$shortcutRow.name}{if $shortcutRow.type == 1}{$LNG.fl_planet_shortcut}{elseif $shortcutRow.type == 2}{$LNG.fl_debris_shortcut}{elseif $shortcutRow.type == 3}{$LNG.fl_moon_shortcut}{/if}
-									[{$shortcutRow.galaxy}:{$shortcutRow.system}:{$shortcutRow.planet}]</a>
-							</div>
-							<div class="shortcut-edit">
-								<input type="text" class="shortcut-input" name="shortcut[{$shortcutID}][name]"
-									value="{$shortcutRow.name}">
-								<div class="shortcut-delete" title="{$LNG.fl_dlte_shortcut}">x</div>
-							</div>
-							<div class="shortcut-edit">
-								<input type="text" class="shortcut-input" name="shortcut[{$shortcutID}][galaxy]"
-									value="{$shortcutRow.galaxy}" size="3" maxlength="2">:<input type="text" class="shortcut-input"
-									name="shortcut[{$shortcutID}][system]" value="{$shortcutRow.system}" size="3"
-									maxlength="3">:<input type="text" class="shortcut-input" name="shortcut[{$shortcutID}][planet]"
-									value="{$shortcutRow.planet}" size="3" maxlength="2">
-								<select class="shortcut-input" name="shortcut[{$shortcutID}][type]">
-									{html_options selected=$shortcutRow.type options=$type_select}
-								</select>
-							</div>
-						</td>	
-						<td class="shortcut-colum">&nbsp;</td>
-					</tr>
-				{foreachelse}
-					<tr class="shortcut-none">
-						<td class="text_center">{$LNG.fl_no_shortcuts}</td>
-					</tr>
-				{/foreach}
-				<tr class="shortcut-edit shortcut-new">
-					<td>
-						<div class="shortcut-link">
-
-						</div>
-						<div class="shortcut-edit">
-							<input type="text" class="shortcut-input" name="shortcut[][name]"
-								placeholder="{$LNG.fl_shortcut_name}">
-							<div class="shortcut-delete" title="{$LNG.fl_dlte_shortcut}">x</div>
-						</div>
-						<div class="shortcut-edit">
-							<input type="text" class="shortcut-input" name="shortcut[][galaxy]" value="" size="3" maxlength="2"
-								placeholder="G" pattern="[0-9]*">:<input type="text" class="shortcut-input"
-								name="shortcut[][system]" value="" size="3" maxlength="3" placeholder="S"
-								pattern="[0-9]*">:<input type="text" class="shortcut-input" name="shortcut[][planet]" value=""
-								size="3" maxlength="2" placeholder="P" pattern="[0-9]*">
-							<select class="shortcut-input" name="shortcut[][type]">
-								{html_options options=$type_select}
-							</select>
-						</div>
+						<button class="sc_delete" type="button" onclick="deleteShortCut({$id})"></button>
+						</div>	
 					</td>
+				{if $c_row@iteration % 4 == 0}
+        			</tr>
+    			{/if}
+				{foreachelse}
+				<tr>
+					<td class="text_center">{$LNG.fl_no_shortcuts}</td>
 				</tr>
-				<tr style="height:20px;" class="shortcut-edit">
-					<td>
-						<a href="#" onclick="AddShortcuts();return false">{$LNG.fl_shortcut_add}</a>
+				{/foreach}
+			</table>
+			<table class="table_game table_full">
+			<tr>
+				<th colspan="2">{$LNG.fl_shortcut_save}</th>
+				</tr>
+				<tr>
+					<td style="width: 80%;">
+						<input id="sc_name" type="text" class="" name="sc_name" placeholder="{$LNG.fl_shortcut_name}">
+						<input id="sc_galaxy" type="text" class="" name="sc_galaxy" value="" size="3" maxlength="2"
+							placeholder="G" pattern="[0-9]*">:
+						<input id="sc_system" type="text"
+						name="sc_system" value="" size="3" maxlength="3" placeholder="S"
+						pattern="[0-9]*">:
+						<input id="sc_planet" type="text" name="sc_planet" value=""
+						size="3" maxlength="2" placeholder="P" pattern="[0-9]*">
+						<select id="sc_type" class="" name="sc_type">
+							{html_options options=$type_select}
+						</select>
+					</td>
+					<td style="width: 20%;">
+						<button type="button" onclick="AddShortCut();">{$LNG.fl_shortcut_add}</button>
 					</td>
 				</tr>
 			</table>

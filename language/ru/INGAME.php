@@ -384,6 +384,17 @@ $LNG['fl_shortcut_add'] = 'Добавить слот';
 $LNG['fl_shortcut_edition'] = 'редактировать';
 $LNG['fl_shortcut_save'] = 'сохранить маршруты';
 $LNG['fl_shortcut_saved'] = 'Маршруты сохранены';
+$LNG['fl_shortcut_galaxy_err'] = "Галактика не может быть меньше нуля и больше %s";
+$LNG['fl_shortcut_system_err'] = "Система не может быть меньше нуля и больше %s";
+$LNG['fl_shortcut_planet_err'] = "Планета не может быть меньше нуля и больше %s";
+$LNG['fl_shortcut_type_err'] = "Неверный тип планеты";
+$LNG['fl_shortcut_exist_err'] = "Эти координаты уже сохранены";
+$LNG['fl_shortcut_name_err_1'] = "Название ярлыка не может быть пустым.";
+$LNG['fl_shortcut_name_err_2'] = "Название ярлыка должно быть короче.";
+$LNG['fl_shortcut_exceed_max'] = "Можно сохранить не более %s ярлыков. Рекомендуется удалить один из них.";
+$LNG['fl_shortcut_del_err_1'] = "Неверный ID ярлыка";
+$LNG['fl_shortcut_del_suc'] = "Ярлык успешно удалён";
+
 $LNG['fl_no_colony'] = 'Нет планет';
 $LNG['fl_send_fleet'] = 'Отправить флот';
 $LNG['fl_fleet_speed'] = 'Скорость';

@@ -406,6 +406,17 @@ $LNG['fl_shortcut_add'] = 'Add';
 $LNG['fl_shortcut_edition'] = 'Edit Shortcut';
 $LNG['fl_shortcut_save'] = 'Save Shortcut';
 $LNG['fl_shortcut_saved'] = 'Shortcut saved!';
+$LNG['fl_shortcut_galaxy_err'] = "Galaxy cannot be smaller than zero and bigger than %s";
+$LNG['fl_shortcut_system_err'] = "System cannot be smaller than zero and bigger than %s";
+$LNG['fl_shortcut_planet_err'] = "Planet cannot be smaller than zero and bigger than %s";
+$LNG['fl_shortcut_type_err'] = "Wrong planet type";
+$LNG['fl_shortcut_exist_err'] = "This coordinate has been saved before";
+$LNG['fl_shortcut_name_err_1'] = "Shortcut name cannot be empty.";
+$LNG['fl_shortcut_name_err_2'] = "Shortcut name should be shorter.";
+$LNG['fl_shortcut_exceed_max'] = "Max. %s shortcuts can be saved, consider removing one.";
+$LNG['fl_shortcut_del_err_1'] = "wrong shortcut id";
+$LNG['fl_shortcut_del_suc'] = "Shortcut has been deleted by success";
+
 $LNG['fl_no_colony'] = 'There is no colony';
 $LNG['fl_send_fleet'] = 'Send fleet';
 $LNG['fl_fleet_speed'] = 'Fleet speed';

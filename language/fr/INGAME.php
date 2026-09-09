@@ -385,6 +385,17 @@ $LNG['fl_shortcut_add'] = 'Ajouter';
 $LNG['fl_shortcut_edition'] = 'Editer : ';
 $LNG['fl_shortcut_save'] = 'Raccourcis Sauvegardées';
 $LNG['fl_shortcut_saved'] = 'Sauvegardée !';
+$LNG['fl_shortcut_galaxy_err'] = "La galaxie ne peut pas être inférieure à zéro ni supérieure à %s";
+$LNG['fl_shortcut_system_err'] = "Le système ne peut pas être inférieur à zéro ni supérieur à %s";
+$LNG['fl_shortcut_planet_err'] = "La planète ne peut pas être inférieure à zéro ni supérieure à %s";
+$LNG['fl_shortcut_type_err'] = "Type de planète incorrect";
+$LNG['fl_shortcut_exist_err'] = "Ces coordonnées ont déjà été enregistrées";
+$LNG['fl_shortcut_name_err_1'] = "Le nom du raccourci ne peut pas être vide.";
+$LNG['fl_shortcut_name_err_2'] = "Le nom du raccourci doit être plus court.";
+$LNG['fl_shortcut_exceed_max'] = "Un maximum de %s raccourcis peut être enregistré. Pensez à en supprimer un.";
+$LNG['fl_shortcut_del_err_1'] = "ID de raccourci incorrect";
+$LNG['fl_shortcut_del_suc'] = "Le raccourci a été supprimé avec succès";
+
 $LNG['fl_no_colony'] = 'Aucune colonie présente';
 $LNG['fl_send_fleet'] = 'Envoyer une Flotte';
 $LNG['fl_fleet_speed'] = 'Vitesse';
