@@ -238,10 +238,10 @@ class FleetFunctions
     public static function GetFleetMissions(
         array $user,
         array $mis_info,
-        array $planet
+        array $target_planet
     ): array {
         global $RESOURCE;
-        $missions = self::GetAvailableMissions($user, $mis_info, $planet);
+        $missions = self::GetAvailableMissions($user, $mis_info, $target_planet);
         $stay_block = [];
         $exchange = false;
 

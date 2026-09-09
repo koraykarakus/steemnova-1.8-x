@@ -58,6 +58,13 @@ class ShowFleetStep2Page extends AbstractGamePage
             ':target_planet' => $target_planet,
         ]);
 
+        if ($target_planet_data === false) 
+        {
+            $target_planet_data = [];
+            $target_planet_data['debris_metal'] = 0;
+            $target_planet_data['debris_crystal'] = 0;
+        }
+
         if ($target_type == 2
             && $target_planet_data['debris_metal'] == 0
             && $target_planet_data['debris_crystal'] == 0)
