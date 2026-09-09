@@ -297,10 +297,10 @@ class ShowFleetStep3Page extends AbstractGamePage
             $sql = "SELECT user.*, stat.total_points
                 FROM %%USERS%% as user
                 LEFT JOIN %%USER_POINTS%% as stat ON stat.id_owner = user.id 
-                WHERE user.id = :ownerID;";
+                WHERE user.id = :owner_id;";
 
             $target_player_data = $db->selectSingle($sql, [
-                ':ownerID' => $target_planet_data['id_owner'],
+                ':owner_id' => $target_planet_data['id_owner'],
             ]);
         }
 
@@ -401,10 +401,10 @@ class ShowFleetStep3Page extends AbstractGamePage
             {
                 $sql = "SELECT COUNT(*) as state FROM %%BUDDY%%
 				WHERE id NOT IN (SELECT id FROM %%BUDDY_REQUEST%% WHERE %%BUDDY_REQUEST%%.id = %%BUDDY%%.id) AND
-				(owner = :ownerID AND sender = :userID) OR (owner = :userID AND sender = :ownerID);";
+				(owner = :owner_id AND sender = :userID) OR (owner = :userID AND sender = :owner_id);";
                 $buddy = $db->selectSingle($sql, [
-                    ':ownerID' => $target_player_data['id'],
-                    ':userID'  => $USER['id'],
+                    ':owner_id' => $target_player_data['id'],
+                    ':userID'   => $USER['id'],
                 ], 'state');
 
                 if ($buddy == 0)

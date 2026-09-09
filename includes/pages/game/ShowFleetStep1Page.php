@@ -118,7 +118,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         $planet = HTTP::_GP('sc_planet', 0);
         $type = HTTP::_GP('sc_type', 0);
 
-        if ($name === '') 
+        if ($name === '')
         {
             $this->sendJSON([
                 'status' => 0,
@@ -126,7 +126,7 @@ class ShowFleetStep1Page extends AbstractGamePage
             ]);
         }
 
-        if (strlen($name) > 32) 
+        if (strlen($name) > 32)
         {
             $this->sendJSON([
                 'status' => 0,
@@ -172,30 +172,30 @@ class ShowFleetStep1Page extends AbstractGamePage
         $db = Database::get();
 
         $sql = "SELECT COUNT(*) as count FROM %%SHORTCUTS%% 
-        WHERE ownerID = :owner_id;";
+        WHERE owner_id = :owner_id;";
 
-        $num_total = $db->selectSingle($sql,[
-            ':owner_id' => $USER['id']
-        ],'count');
+        $num_total = $db->selectSingle($sql, [
+            ':owner_id' => $USER['id'],
+        ], 'count');
 
-        if ($num_total > $config->user_max_shortcuts) 
+        if ($num_total > $config->user_max_shortcuts)
         {
-             $this->sendJSON([
+            $this->sendJSON([
                 'status' => 0,
-                'msg'    => sprintf($LNG['fl_shortcut_exceed_max'],$config->user_max_shortcuts),
+                'msg'    => sprintf($LNG['fl_shortcut_exceed_max'], $config->user_max_shortcuts),
             ]);
         }
 
         $sql = "SELECT COUNT(*) as count FROM %%SHORTCUTS%% 
         WHERE galaxy = :galaxy AND system = :system AND planet = :planet 
-        AND type = :type AND ownerID = :owner_id;";
+        AND type = :type AND owner_id = :owner_id;";
 
         $num = $db->selectSingle($sql, [
-            ':galaxy' => $galaxy,
-            ':system' => $system,
-            ':planet' => $planet,
-            ':type'   => $type,
-            ':owner_id' => $USER['id']
+            ':galaxy'   => $galaxy,
+            ':system'   => $system,
+            ':planet'   => $planet,
+            ':type'     => $type,
+            ':owner_id' => $USER['id'],
         ], 'count');
 
         if ($num > 0)
@@ -207,7 +207,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         }
 
         $sql = "INSERT INTO %%SHORTCUTS%% SET 
-        ownerID = :owner_id,
+        owner_id = :owner_id,
         name = :name,
         galaxy = :galaxy,
         system = :system,
@@ -216,7 +216,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
         $db->insert($sql, [
             ':owner_id' => $USER['id'],
-            ':name' => $name,
+            ':name'     => $name,
             ':galaxy'   => $galaxy,
             ':system'   => $system,
             ':planet'   => $planet,
@@ -226,7 +226,7 @@ class ShowFleetStep1Page extends AbstractGamePage
         $id = $db->lastInsertId();
 
         $type_name = "(P)";
-        switch ($type) 
+        switch ($type)
         {
             case 1:
                 $type_name = "(P)";
@@ -236,19 +236,19 @@ class ShowFleetStep1Page extends AbstractGamePage
                 break;
             case 3:
                 $type_name = "(M)";
-            break;
+                break;
         }
 
         $this->sendJSON([
-            'status' => 1,
-            'msg'    => $LNG['fl_shortcut_saved'],
-            'galaxy' => $galaxy,
-            'system' => $system,
-            'planet' => $planet,
-            'type' => $type,
-            'name' => $name,
+            'status'    => 1,
+            'msg'       => $LNG['fl_shortcut_saved'],
+            'galaxy'    => $galaxy,
+            'system'    => $system,
+            'planet'    => $planet,
+            'type'      => $type,
+            'name'      => $name,
             'type_name' => $type_name,
-            'id' => $id
+            'id'        => $id,
         ]);
     }
 
@@ -256,8 +256,8 @@ class ShowFleetStep1Page extends AbstractGamePage
     {
         global $USER, $LNG;
         $id = HTTP::_GP('sc_id', 0);
-        
-        if ($id <= 0) 
+
+        if ($id <= 0)
         {
             $this->sendJSON([
                 'status' => 0,
@@ -266,13 +266,13 @@ class ShowFleetStep1Page extends AbstractGamePage
         }
 
         $sql = "DELETE FROM %%SHORTCUTS%% 
-        WHERE shortcutID = :shortcut_id AND ownerID = :owner_id;";
-        
+        WHERE shortcut_id = :shortcut_id AND owner_id = :owner_id;";
+
         $db = Database::get();
-        
+
         $db->delete($sql, [
             ':shortcut_id' => $id,
-            ':owner_id' => $USER['id'],
+            ':owner_id'    => $USER['id'],
         ]);
 
         $this->sendJSON([
@@ -318,7 +318,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
         $db = Database::get();
 
-        $sql = "SELECT * FROM %%SHORTCUTS%% WHERE ownerID = :userID;";
+        $sql = "SELECT * FROM %%SHORTCUTS%% WHERE owner_id = :userID;";
         $shortcut_result = $db->select($sql, [
             ':userID' => $USER['id'],
         ]);
@@ -327,7 +327,7 @@ class ShowFleetStep1Page extends AbstractGamePage
 
         foreach ($shortcut_result as $c_shortcut)
         {
-            $shortcut_list[$c_shortcut['shortcutID']] = $c_shortcut;
+            $shortcut_list[$c_shortcut['shortcut_id']] = $c_shortcut;
         }
 
         return $shortcut_list;

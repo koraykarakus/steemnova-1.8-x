@@ -746,15 +746,15 @@ CREATE TABLE `%PREFIX%session` (
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 CREATE TABLE `%PREFIX%shortcuts` (
-  `shortcutID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ownerID` INT UNSIGNED NOT NULL,
+  `shortcut_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner_id` INT UNSIGNED NOT NULL,
   `name` VARCHAR(32) NOT NULL,
   `galaxy` TINYINT UNSIGNED NOT NULL,
   `system` SMALLINT UNSIGNED NOT NULL,
   `planet` TINYINT UNSIGNED NOT NULL,
   `type` TINYINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`shortcutID`),
-  KEY `ownerID` (`ownerID`)
+  PRIMARY KEY (`shortcut_id`),
+  KEY `owner_id` (`owner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `%PREFIX%user_points` (
