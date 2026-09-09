@@ -82,9 +82,9 @@ $LNG['bonus'] = [
     'FleetSlots'      => 'Filo Kotasi',
     'Planets'         => 'Gezegen',
     'SpyPower'        => 'Casusluk Seviyesi',
-    'Expedition'      => 'Kesif',
+    'Expedition'      => 'Keşif',
     'GateCoolTime'    => 'Sicrama bekleme suresi',
-    'MoreFound'       => 'Kesif Sansi',
+    'MoreFound'       => 'Keşif Sansi',
 ];
 
 $LNG['tech'] = [
@@ -370,7 +370,7 @@ $LNG['longDescription'] = [
     121 => 'Hizlandirilmis iyonlardan olusan gercekten olumcul yonlendirilmis isin. Bu isinlar carptiklari maddelerde cok agir hasara yol aciyorlar. ',
     122 => 'Bu bir gelistirilmis iyon teknigidir aslinda ama iyonlari hizlandirmaz, onun yerine yuksek enerji yuklu plazma olusturur. carptigi maddelerde yokedici bir etki yapar.',
     123 => 'Farkli gezegenlerin bilim adamlari bu iletisim agi sayesinde birbiriyle baglantida kaliyorlar. Gelistirilen her kademe icin bir arastirma labaratuvarina bu iletisim agi kuruluyor. Her zaman, oncelikle gelisim kademesi en yuksek yapilar arasinda iletisim bagi saglaniyor. Gelistirilmesi planlanan arastirmanin yapilacagi labaratuvarin gelisim kademesinin yeterli olmasi gerekir. Bu iletisim agi uzerinde bulunan labaratuvarlarin gelisim kademeleri toplanir ve ona gore degerlendirilir. ',
-    124 => 'Kesif Teknigi sayesinde bazi kordinatlara kesifler duzenlenebilir. Bu kesiflerden Filo, Maden, Karanlik madde kazanilir. En kotu ihtimal de bu seferlerde bazen giden filolarin geri donmeme olasiligidir. Ayrica bu arastirma sayesinde belirlenen koloni/Somurge disinda extra gezegenler alinabilir. (Kademe 1=1 som. 3=2 som. 5=3 som.) ',
+    124 => 'Keşif Teknigi sayesinde bazi kordinatlara keşifler duzenlenebilir. Bu keşiflerden Filo, Maden, Karanlik madde kazanilir. En kotu ihtimal de bu seferlerde bazen giden filolarin geri donmeme olasiligidir. Ayrica bu arastirma sayesinde belirlenen koloni/Somurge disinda extra gezegenler alinabilir. (Kademe 1=1 som. 3=2 som. 5=3 som.) ',
     131 => 'Metal Maden Uretimini %2 Oraninda Artirir.',
     132 => 'Kristal Maden Uretimini %2 Oraninda Artirir.',
     133 => 'Deuterium Maden Uretimini %2 Oraninda Artirir.',
@@ -382,7 +382,7 @@ $LNG['longDescription'] = [
     205 => 'Hafif avcilarin gelismis versiyonudur. Hafif avciya gore hem saldiri gucu daha yuksek hem de kalkani daha gucludur.',
     206 => 'Agir lazer ve iyon toplarinin kesfiyle birlikte Avcilar cok guc durumlara dustuler.cesitli degisiklere ragmen bu durum fazla degismedi ve avcilar acinacak durumlara dustuler gelismis teknolojiler karsisinda. Bu yuzden savunmasi ve de atagi daha guclu bir gemi sinifi yaratilmasina karar verildi, boylece Kruvazor ortaya cikti. Kruvazor Agir Avciya gore 3 kat daha guclu bir zirha, 2 kat daha guclu vurus gucune sahip.Ayni zamanda cok daha hizli. Orta gucte savunmalara karsi daha iyi bir yol yok. Neredeyse 100 yil boyunca kozmoza hakim oldular. Gaus toplarinin ve plazma aticilarinin kesfiyle saltanatlari sona erdi . Ama gunumuzde hala Avcilara karsi kullaniliyorlar. Kruvazorun roket aticilara karsi 10 gucunde ve hafif avcilara karsi 3 gucunde hizli ates gucu var , yani bir kruvazor tek atisla ayni zamanda birden cok avci ya da roket yokedebilir.',
     207 => 'Bir filonun sirtini dayadigi gemiler.Guclu ve uzun menzilli silahlari, cok hizli olmasi ve de buyuk ambarlari ile bu gemi dusman icin cok buyuk bir sorundur.',
-    208 => 'Ayakta kalmak isteyen bir imparatorluk icin, zirhi cok guclu ve koloni olusturulmasini saglayan bu gemi cok onemlidir. Yeni kurulan kolonide bu gemi hammadde tasiyicisi olarak kullanilir,ayni zamanda hammadde yine bu geminin icinde kullanilabilir maddeye cevrilir.Yani dunyanin temellerinden biridir. Kesif tekniginin etkiledigi extra koloni sayilari harictir. ',
+    208 => 'Ayakta kalmak isteyen bir imparatorluk icin, zirhi cok guclu ve koloni olusturulmasini saglayan bu gemi cok onemlidir. Yeni kurulan kolonide bu gemi hammadde tasiyicisi olarak kullanilir,ayni zamanda hammadde yine bu geminin icinde kullanilabilir maddeye cevrilir.Yani dunyanin temellerinden biridir. Keşif tekniginin etkiledigi extra koloni sayilari harictir. ',
     209 => 'Uzay savaslarinin boyutu giderek buyuyordu. Binlerce gemi yokedildi, olusan enkaz alanlarina da artik kullanilamaz gozuyle bakildi.Normal nakliye gemileri icin bu enkazlara herhangi bir seye carpmadan yani hasar gormeden yaklasmak imkansizdi. Koruma Kalkani teknolojisindeki onemli bir yenilikten sonra bu sorun giderilebildi.Buyuk nakliye gemisine benzeyen Geri Donusum Gemisi yapildi.Ve boylece artik ulasilamaz denilen kaynaklar yeniden toplamaya acildi.Kucuk enkaz parcalari da artik yeni gelistirilen zirh icin bir sorun teskil edemedi. Ama ne yazik ki bu yeni mekanizma cok yer kapladigi icin geminin yuk tasima kapasitesi 20.000 ile sinirli.',
     210 => 'Cok kucuk ve haraketli,uzaklardaki filo ve gezegenler hakkinda bilgi saglayan cisimler.Yuksek itme gucleri sayesinde uzak mesafeleri cok kisa zamanda katedebilirler.Bir gezegenin eksenine girer ve kisa surede o gezegen hakkinda bilgi toplarlar. Bu sure boyunca dusmanin onlari bulup yok etmesi cok zor olmayabilir. Yerden kazanmak icin sondalarda panzer,kalkan ve silah bulunmaz, o yuzden bir kere yerleri kesfedilirse , yok edilmeleri de cok kolay olur. ',
     211 => 'Bir gezegenin tum savunma sistemini yoketmek icin ozellikle gelistirildiler.Lazer ile kontrol edilen, hedefi onceden belirleyen ve geminin plazma bombalarini tam hedefe yonlendiren sistemi sayesinde inanilmaz boyutta zarar verebiliyor . Gezegenin tum savunma mekanizmasini yok edebilir.Hizli Ates Gucu roketatara karsi 10, hafif lazere karsi 10, agir lazer topuna karsi 5 ve iyon topuna karsi 5 kuvvetinde. Hiperuzay Iticisi 8. kademesi gelistirildikten sonra, bombardiman gemilerinin motorlari bu motor takimlariyla degistilerekten, bu gemilerin daha hizli ucmalari saglanir. ',
