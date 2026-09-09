@@ -89,8 +89,8 @@
 				</tr>
 				<tr>
 					<td>{$LNG.op_active_spy_messages_mode}</td>
-					<td class="text-center"><input name="spyMessagesMode" type="checkbox" value="1"
-							{if $spyMessagesMode == 1}checked="checked" {/if}></td>
+					<td class="text-center"><input name="spy_message_mode" type="checkbox" value="1"
+							{if $spy_message_mode == 1}checked="checked" {/if}></td>
 				</tr>
 				<tr>
 					<td>{$LNG.op_block_pm}</td>

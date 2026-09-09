@@ -77,7 +77,7 @@ class ShowSettingsPage extends AbstractGamePage
             'timezone'        => $USER['timezone'],
             'delete'          => $USER['delete_mode'],
             'queueMessages'   => $USER['hof'],
-            'spyMessagesMode' => $USER['spy_message_mode'],
+            'spy_message_mode' => $USER['spy_message_mode'],
             'galaxySpy'       => $USER['settings_esp'],
             'galaxyBuddyList' => $USER['settings_bud'],
             'galaxyMissle'    => $USER['settings_mis'],
@@ -233,7 +233,7 @@ class ShowSettingsPage extends AbstractGamePage
         $planetOrder = HTTP::_GP('planetOrder', 0);
 
         $queueMessages = HTTP::_GP('queueMessages', 0);
-        $spyMessagesMode = HTTP::_GP('spyMessagesMode', 0);
+        $spy_message_mode = HTTP::_GP('spy_message_mode', 0);
 
         $spycount = HTTP::_GP('spycount', 1.0);
         $fleetactions = HTTP::_GP('fleetactions', 5);
@@ -423,7 +423,7 @@ class ShowSettingsPage extends AbstractGamePage
 		authattack				= :adminProtection,
 		lang					= :language,
 		hof						= :queueMessages,
-		spyMessagesMode			= :spy_message_mode
+		spy_message_mode		= :spy_message_mode
 		WHERE id = :userID;";
 
         $db->update($sql, [
@@ -440,7 +440,7 @@ class ShowSettingsPage extends AbstractGamePage
             ':adminProtection'  => $adminprotection,
             ':language'         => $language,
             ':queueMessages'    => $queueMessages,
-            ':spy_message_mode' => $spyMessagesMode,
+            ':spy_message_mode' => $spy_message_mode,
             ':userID'           => $USER['id'],
         ]);
 
