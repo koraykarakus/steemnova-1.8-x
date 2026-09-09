@@ -115,7 +115,7 @@
 				<th colspan="2">{$LNG.fl_shortcut_save}</th>
 				</tr>
 				<tr>
-					<td style="width: 80%;">
+					<td class="text_center" style="width: 80%;">
 						<input id="sc_name" type="text" class="" name="sc_name" placeholder="{$LNG.fl_shortcut_name}">
 						<input id="sc_galaxy" type="text" class="" name="sc_galaxy" value="" size="3" maxlength="2"
 							placeholder="G" pattern="[0-9]*">:
@@ -128,7 +128,7 @@
 							{html_options options=$type_select}
 						</select>
 					</td>
-					<td style="width: 20%;">
+					<td class="text_center" style="width: 20%;">
 						<button type="button" onclick="AddShortCut();">{$LNG.fl_shortcut_add}</button>
 					</td>
 				</tr>
@@ -152,7 +152,7 @@
 			{/if}
 			{foreachelse}
 			<tr>
-				<td>{$LNG.fl_no_colony}</td>
+				<td class="text_center">{$LNG.fl_no_colony}</td>
 			</tr>
 			{/foreach}
 		</table>

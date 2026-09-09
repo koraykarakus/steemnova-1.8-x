@@ -485,7 +485,7 @@ $LNG['fl_no_hold_depot'] = 'Am Ziel befindet sich kein Allianzdepot.';
 $LNG['fl_not_enough_deuterium'] = 'Nicht genügend Deuterium vorhanden.';
 $LNG['fl_not_enough_space'] = 'Sie haben nicht genügend Laderaum vorhanden.';
 $LNG['fl_hold_time_not_exists'] = 'Ungültige Haltezeit.';
-
+$LNG['fl_system_places'] = 'Spezialkoordinaten';
 $LNG['fl_exchange'] = 'Handel';
 $LNG['fl_visibility'] = 'Sichtbarkeit';
 $LNG['fl_visibility_all'] = 'Jeder';

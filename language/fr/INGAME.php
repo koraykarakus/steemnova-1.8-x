@@ -475,6 +475,7 @@ $LNG['fl_no_hold_depot'] = 'Aucun dépot d\'alliance ne se trouve a la destinati
 $LNG['fl_not_enough_deuterium'] = 'Pas assez de deutérium disponible.';
 $LNG['fl_not_enough_space'] = 'Vous n\'avez pas assez d\'espace de chargement disponible.';
 $LNG['fl_hold_time_not_exists'] = 'Temps de rétention invalide.';
+$LNG['fl_system_places'] = 'Coordonnées spéciales';
 $LNG['fl_own_planet_error'] = 'Error! Again select the planet from which you want to send the fleet.';
 
 //----------------------------------------------------------------------------//

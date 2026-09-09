@@ -475,6 +475,7 @@ $LNG['fl_no_hold_depot'] = 'Пункт назначения не имеет ск
 $LNG['fl_not_enough_deuterium'] = 'Не хватает дейтерия.';
 $LNG['fl_not_enough_space'] = 'Недостаточная грузоподъёмность.';
 $LNG['fl_hold_time_not_exists'] = 'Неверное время удержания.';
+$LNG['fl_system_places'] = 'Специальные координаты';
 $LNG['fl_own_planet_error'] = 'Error! Again select the planet from which you want to send the fleet.';
 
 // Постройки - Исследования - Верфь - Оборона
