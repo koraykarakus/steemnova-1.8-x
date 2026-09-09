@@ -219,110 +219,77 @@ function CheckTarget()
 	return false;
 }
 
-function EditShortcuts(autoadd) {
-	$(".shortcut-link").hide();
-	$(".shortcut-edit:not(.shortcut-new)").show();
-	if($('.shortcut-isset').length === 0)
-		AddShortcuts();
+function EditShortcuts() {
+	window.alert('need to be implemented !');
 }
 
-function AddShortcuts() {
-	var HTML	= $('.shortcut-new td:first').clone().children();
-	HTML.find('input, select').attr('name', function(i, old) {
-		return old.replace("shortcut[]", "shortcut["+($('.shortcut-link').length)+"-new]");
-	});
+function AddShortCut() {
 
-	var nextFreeColum	= $('.shortcut-row:last td:not(.shortcut-isset):first');
+	var data = {
+		sc_name: $('#sc_name').val(),
+		sc_galaxy: $('#sc_galaxy').val(),
+		sc_system: $('#sc_system').val(),
+		sc_planet: $('#sc_planet').val(),
+		sc_type: $('#sc_type').val()
+	};
 
-	if(nextFreeColum.length == 0) {
-		if($('.shortcut-row:last').length)
+	$.ajax({
+		type: 'POST',
+		url: 'game.php?page=fleetStep1&mode=addShortCut&ajax=1',
+		data: data,
+		dataType: 'json',
+		success: function (data) 
 		{
-			var newRow			= $('<tr />').addClass('shortcut-row').insertAfter('.shortcut-row:last');
-			for (var i = 1; i <= shortCutRows; i++) {
-				newRow.append('<td class="shortcut-colum" style="width:'+(100 / shortCutRows)+'%">&nbsp</td>');
-			}
+			alert(data.msg);
+			if (data.status == 1) 
+			{
+				const td = `
+				<td id="sc_${data.id}" style="width: 25%;">
+					<div class="sc_wrapper">
+						<a href="javascript:setTarget(${data.galaxy},${data.system},${data.planet},${data.type});updateVars();">
+							${data.name}
+							${data.type_name}
+							&nbsp;[${data.galaxy}:${data.system}:${data.planet}]
+						</a>
+						<button class="sc_delete" type="button" onclick="deleteShortCut(${data.id})"></button>
+					</div>
+				</td>`;
 
-			var nextFreeColum	= $('.shortcut-row:last td:first');
-		} else {
-			var newRow			= $('<tr />').addClass('shortcut-row').insertAfter('.shortcut-none');
-			for (var i = 1; i <= shortCutRows; i++) {
-				newRow.append('<td class="shortcut-colum" style="width:'+(100 / shortCutRows)+'%">&nbsp;</td>');
-			}
+    			let lastRow = $('#shortcut_list tr:last');
 
-			var nextFreeColum	= $('.shortcut-row:last td:first');
-			$('.shortcut-none').remove();
-		}
-	}
-
-	nextFreeColum.html(HTML).addClass("shortcut-isset");
-}
-
-function SaveShortcuts(reedit) {
-	$.getJSON('game.php?page=fleetStep1&mode=saveShortcuts&ajax=1&'+$('.shortcut-row').find("input, select").serialize(), function(res) {
-		$(".shortcut-link").show();
-		$(".shortcut-edit").hide();
-
-		var deadElements	= $(".shortcut-isset").filter(function() {
-			return $('input[name*=name]', this).val() == "" ||
-			$('input[name*=galaxy]', this).val() == "" || $('input[name*=galaxy]', this).val() == 0 ||
-			$('input[name*=system]', this).val() == "" || $('input[name*=system]', this).val() == 0 ||
-			$('input[name*=planet]', this).val() == "" || $('input[name*=planet]', this).val() == 0;
-		});
-
-		if(deadElements.length % 2 === 1) {
-			deadElements.remove();
-			$(".shortcut-colum:last").after('<td class="shortcut-colum" style="width:'+(100 / shortCutRows)+'%">&nbsp;</td>');
-		}
-
-		$(".shortcut-isset").unwrap();
-
-		var activeElements	= Math.ceil($(".shortcut-isset").length / shortCutRows);
-
-		if(activeElements === 0) {
-			$('<tr style="height:20px;" class="shortcut-none"><td colspan="'+shortCutRows+'">'+fl_no_shortcuts+'</td></tr>').insertAfter('.shortcut tr:first');
-		} else {
-			for (var i = 1; i <= activeElements; i++) {
-				$('<tr />').addClass('shortcut-row').insertAfter('.shortcut tr:first');
-			}
-
-			$(".shortcut-colum").each(function(i, val) {
-				$(this).appendTo('tr.shortcut-row:eq('+Math.floor(i / 3)+')');
-			});
-
-			$('.shortcut-colum').filter(function() {
-				return $(this).parent().is(':not(tr)')
-			}).remove();
-
-			$('.shortcut-row').filter(function() {
-				return !$(this).children('.shortcut-isset').length;
-			}).remove();
-
-			$(".shortcut-isset > .shortcut-link").html(function() {
-				if($(this).nextAll().find('input[name*=name]').val() === "") {
-					$(this).parent().html("&nbsp;");
-					return false;
+				if (lastRow.find('td').length >= 4)
+				{
+					$('#shortcut_list').append('<tr>' + td + '</tr>');
 				}
-				var Data	= $(this).nextAll();
-				return '<a href="javascript:setTarget('+Data.find('input[name*=galaxy]').val()+','+Data.find('input[name*=system]').val()+','+Data.find('input[name*=planet]').val()+','+Data.find('select[name*=type]').val()+');updateVars();">'+Data.find('input[name*=name]').val()+'('+Data.nextAll().find('select[name*=type] option:selected').text()[0]+') ['+Data.find('input[name*=galaxy]').val()+':'+Data.find('input[name*=system]').val()+':'+Data.find('input[name*=planet]').val()+']</a>';
-			});
-		}
-
-		$('.shortcut-row:has(td:not(.shortcut-isset) + td)').remove();
-
-		if(typeof reedit === "undefinded" || reedit !== true) {
-			NotifyBox(res);
-		} else {
-			if($(".shortcut-isset").length) {
-				EditShortcuts();
+				else
+				{
+					lastRow.append(td);
+				}
 			}
 		}
 	});
+
 }
 
-$(function() {
-	$('.shortcut-delete').live('click', function() {
-		$(this).prev().val('');
-		$(this).parent().find('input');
-		SaveShortcuts(true);
+function  deleteShortCut(id) 
+{
+	var data = {
+		sc_id: id
+	};
+
+	$.ajax({
+		type: 'POST',
+		url: 'game.php?page=fleetStep1&mode=deleteShortCut&ajax=1',
+		data: data,
+		dataType: 'json',
+		success: function (data) 
+		{
+			alert(data.msg);
+			if (data.status == 1) 
+			{
+				$('#sc_'+id).remove();
+			}
+		}
 	});
-});
+
+}

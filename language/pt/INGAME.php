@@ -399,6 +399,17 @@ $LNG['fl_shortcut_add'] = 'Adicionar';
 $LNG['fl_shortcut_edition'] = 'Editar Atalho';
 $LNG['fl_shortcut_save'] = 'Guardar Atalho';
 $LNG['fl_shortcut_saved'] = 'Atalho guardado!';
+$LNG['fl_shortcut_galaxy_err'] = "A galáxia não pode ser menor que zero nem maior que %s";
+$LNG['fl_shortcut_system_err'] = "O sistema não pode ser menor que zero nem maior que %s";
+$LNG['fl_shortcut_planet_err'] = "O planeta não pode ser menor que zero nem maior que %s";
+$LNG['fl_shortcut_type_err'] = "Tipo de planeta incorreto";
+$LNG['fl_shortcut_exist_err'] = "Estas coordenadas já foram salvas";
+$LNG['fl_shortcut_name_err_1'] = "O nome do atalho não pode estar vazio.";
+$LNG['fl_shortcut_name_err_2'] = "O nome do atalho deve ser mais curto.";
+$LNG['fl_shortcut_exceed_max'] = "É possível salvar no máximo %s atalhos. Considere remover um.";
+$LNG['fl_shortcut_del_err_1'] = "ID de atalho incorreto";
+$LNG['fl_shortcut_del_suc'] = "O atalho foi excluído com sucesso";
+
 $LNG['fl_no_colony'] = 'Não existe colónia';
 $LNG['fl_send_fleet'] = 'Enviar fleet';
 $LNG['fl_fleet_speed'] = 'Velocidade da Frota';

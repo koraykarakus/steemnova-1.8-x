@@ -398,6 +398,17 @@ $LNG['fl_shortcut_add'] = 'Dodaj skrót';
 $LNG['fl_shortcut_edition'] = 'Edytuj skrót';
 $LNG['fl_shortcut_save'] = 'Zapisz skrót';
 $LNG['fl_shortcut_saved'] = 'Zapisane!';
+$LNG['fl_shortcut_galaxy_err'] = "Galaktyka nie może być mniejsza od zera ani większa niż %s";
+$LNG['fl_shortcut_system_err'] = "Układ nie może być mniejszy od zera ani większy niż %s";
+$LNG['fl_shortcut_planet_err'] = "Planeta nie może być mniejsza od zera ani większa niż %s";
+$LNG['fl_shortcut_type_err'] = "Nieprawidłowy typ planety";
+$LNG['fl_shortcut_exist_err'] = "Te współrzędne zostały już zapisane";
+$LNG['fl_shortcut_name_err_1'] = "Nazwa skrótu nie może być pusta.";
+$LNG['fl_shortcut_name_err_2'] = "Nazwa skrótu powinna być krótsza.";
+$LNG['fl_shortcut_exceed_max'] = "Można zapisać maksymalnie %s skrótów. Rozważ usunięcie jednego.";
+$LNG['fl_shortcut_del_err_1'] = "Nieprawidłowe ID skrótu";
+$LNG['fl_shortcut_del_suc'] = "Skrót został pomyślnie usunięty";
+
 $LNG['fl_no_colony'] = 'Brak kolonii';
 $LNG['fl_send_fleet'] = 'Wyślij flotę';
 $LNG['fl_fleet_speed'] = 'Prędkość';

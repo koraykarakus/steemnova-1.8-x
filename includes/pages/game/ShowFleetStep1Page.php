@@ -108,83 +108,178 @@ class ShowFleetStep1Page extends AbstractGamePage
         $this->display('page.fleetStep1.default.tpl');
     }
 
-    public function saveShortcuts(): void
+    public function addShortCut(): void
     {
         global $USER, $LNG;
+        $config = Config::get();
+        $name = HTTP::_GP('sc_name', '', true);
+        $galaxy = HTTP::_GP('sc_galaxy', 0);
+        $system = HTTP::_GP('sc_system', 0);
+        $planet = HTTP::_GP('sc_planet', 0);
+        $type = HTTP::_GP('sc_type', 0);
 
-        if (!isset($_REQUEST['shortcut']))
+        if ($name === '') 
         {
-            $this->sendJSON($LNG['fl_shortcut_saved']);
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => $LNG['fl_shortcut_name_err_1'],
+            ]);
+        }
+
+        if (strlen($name) > 32) 
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => $LNG['fl_shortcut_name_err_2'],
+            ]);
+        }
+
+        if ($galaxy <= 0
+            || $galaxy > $config->max_galaxy)
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => sprintf($LNG['fl_shortcut_galaxy_err'], $config->max_galaxy),
+            ]);
+        }
+
+        if ($system <= 0
+            || $system > $config->max_system)
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => sprintf($LNG['fl_shortcut_system_err'], $config->max_system),
+            ]);
+        }
+
+        if ($planet <= 0
+            || $planet > $config->max_planets)
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => sprintf($LNG['fl_shortcut_planet_err'], $config->max_planets),
+            ]);
+        }
+
+        if (!in_array($type, [1, 2, 3]))
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => $LNG['fl_shortcut_type_err'],
+            ]);
         }
 
         $db = Database::get();
 
-        $shortcut_data = $_REQUEST['shortcut'];
-        $shortcut_user = $this->GetUserShotcut();
-        foreach ($shortcut_data as $id => $planet_data)
+        $sql = "SELECT COUNT(*) as count FROM %%SHORTCUTS%% 
+        WHERE ownerID = :owner_id;";
+
+        $num_total = $db->selectSingle($sql,[
+            ':owner_id' => $USER['id']
+        ],'count');
+
+        if ($num_total > $config->user_max_shortcuts) 
         {
-            if (!isset($shortcut_user[$id]))
-            {
-                if (empty($planet_data['name'])
-                    || empty($planet_data['galaxy'])
-                    || empty($planet_data['system'])
-                    || empty($planet_data['planet']))
-                {
-                    continue;
-                }
-
-                $sql = "INSERT INTO %%SHORTCUTS%% SET ownerID = :user_id, 
-                `name` = :name, `galaxy` = :galaxy, 
-                `system` = :system, `planet` = :planet, 
-                `type` = :type;";
-
-                $db->insert($sql, [
-                    ':user_id' => $USER['id'],
-                    ':name'    => $planet_data['name'],
-                    ':galaxy'  => $planet_data['galaxy'],
-                    ':system'  => $planet_data['system'],
-                    ':planet'  => $planet_data['planet'],
-                    ':type'    => $planet_data['type'],
-                ]);
-            }
-            elseif (empty($planet_data['name']))
-            {
-                $sql = "DELETE FROM %%SHORTCUTS%% 
-                WHERE shortcutID = :shortcut_id AND ownerID = :user_id;";
-                $db->delete($sql, [
-                    ':shortcut_id' => $id,
-                    ':user_id'     => $USER['id'],
-                ]);
-            }
-            else
-            {
-                $planet_data['ownerID'] = $USER['id'];
-                $planet_data['shortcutID'] = $id;
-                if ($planet_data != $shortcut_user[$id])
-                {
-                    $sql = "UPDATE %%SHORTCUTS%% SET 
-                    name = :name, 
-                    galaxy = :galaxy, 
-                    system = :system, 
-                    planet = :planet, 
-                    type = :type 
-                    WHERE shortcutID = :shortcut_id 
-                    AND ownerID = :user_id;";
-
-                    $db->update($sql, [
-                        ':user_id'     => $USER['id'],
-                        ':name'        => $planet_data['name'],
-                        ':galaxy'      => $planet_data['galaxy'],
-                        ':system'      => $planet_data['system'],
-                        ':planet'      => $planet_data['planet'],
-                        ':type'        => $planet_data['type'],
-                        ':shortcut_id' => $id,
-                    ]);
-                }
-            }
+             $this->sendJSON([
+                'status' => 0,
+                'msg'    => sprintf($LNG['fl_shortcut_exceed_max'],$config->user_max_shortcuts),
+            ]);
         }
 
-        $this->sendJSON($LNG['fl_shortcut_saved']);
+        $sql = "SELECT COUNT(*) as count FROM %%SHORTCUTS%% 
+        WHERE galaxy = :galaxy AND system = :system AND planet = :planet 
+        AND type = :type AND ownerID = :owner_id;";
+
+        $num = $db->selectSingle($sql, [
+            ':galaxy' => $galaxy,
+            ':system' => $system,
+            ':planet' => $planet,
+            ':type'   => $type,
+            ':owner_id' => $USER['id']
+        ], 'count');
+
+        if ($num > 0)
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => $LNG['fl_shortcut_exist_err'],
+            ]);
+        }
+
+        $sql = "INSERT INTO %%SHORTCUTS%% SET 
+        ownerID = :owner_id,
+        name = :name,
+        galaxy = :galaxy,
+        system = :system,
+        planet = :planet,
+        type = :type;";
+
+        $db->insert($sql, [
+            ':owner_id' => $USER['id'],
+            ':name' => $name,
+            ':galaxy'   => $galaxy,
+            ':system'   => $system,
+            ':planet'   => $planet,
+            ':type'     => $type,
+        ]);
+
+        $id = $db->lastInsertId();
+
+        $type_name = "(P)";
+        switch ($type) 
+        {
+            case 1:
+                $type_name = "(P)";
+                break;
+            case 2:
+                $type_name = "(DF)";
+                break;
+            case 3:
+                $type_name = "(M)";
+            break;
+        }
+
+        $this->sendJSON([
+            'status' => 1,
+            'msg'    => $LNG['fl_shortcut_saved'],
+            'galaxy' => $galaxy,
+            'system' => $system,
+            'planet' => $planet,
+            'type' => $type,
+            'name' => $name,
+            'type_name' => $type_name,
+            'id' => $id
+        ]);
+    }
+
+    public function deleteShortCut(): void
+    {
+        global $USER, $LNG;
+        $id = HTTP::_GP('sc_id', 0);
+        
+        if ($id <= 0) 
+        {
+            $this->sendJSON([
+                'status' => 0,
+                'msg'    => $LNG['fl_shortcut_del_err_1'],
+            ]);
+        }
+
+        $sql = "DELETE FROM %%SHORTCUTS%% 
+        WHERE shortcutID = :shortcut_id AND ownerID = :owner_id;";
+        
+        $db = Database::get();
+        
+        $db->delete($sql, [
+            ':shortcut_id' => $id,
+            ':owner_id' => $USER['id'],
+        ]);
+
+        $this->sendJSON([
+            'status' => 1,
+            'msg'    => $LNG['fl_shortcut_del_suc'],
+        ]);
+
     }
 
     private function GetColonyList(): array

@@ -389,6 +389,7 @@ CREATE TABLE `%PREFIX%config` (
   `relocate_jump_gate_active` SMALLINT UNSIGNED NOT NULL DEFAULT 24,
   `collect_mines_under_attack` BOOLEAN NOT NULL DEFAULT 0,
   `collect_mine_time_minutes` INT UNSIGNED NOT NULL DEFAULT 30,
+  `user_max_shortcuts` TINYINT UNSIGNED NOT NULL DEFAULT 20,
   PRIMARY KEY (`uni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
