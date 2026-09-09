@@ -532,7 +532,7 @@ class FleetFunctions
             exit;
         }
 
-        HTTP::redirectTo('game.php?page=fleetTable&code=' . to_string($code));
+        HTTP::redirectTo('game.php?page=fleetTable&code=' . (string) $code);
     }
 
     public static function GetAvailableMissions(
