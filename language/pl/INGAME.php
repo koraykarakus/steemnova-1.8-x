@@ -331,6 +331,8 @@ $LNG['gl_err_in_vacation'] = "Galaktyki nie można wyświetlić w trybie urlopu.
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'K'; // Księżyc
 $LNG['gl_debris_short'] = 'PZ'; // Pole Złomu
+$LNG['gl_mission_colonize'] = "Kolonizuj";
+$LNG['gl_mission_colonize_not_possible'] = "Aby skolonizować tę planetę, wymagana jest zaawansowana technologia ekspedycyjna oraz statek kolonizacyjny.";
 $LNG['gl_admin_user_id'] = "ID użytkownika";
 $LNG['gl_admin_planet_id'] = "ID planety";
 

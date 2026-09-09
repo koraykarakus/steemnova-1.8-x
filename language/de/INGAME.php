@@ -329,6 +329,8 @@ $LNG['gl_err_in_vacation'] = "Die Galaxie kann im Urlaubsmodus nicht angezeigt w
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'M';
 $LNG['gl_debris_short'] = 'TF'; // Trümmerfeld
+$LNG['gl_mission_colonize'] = "Kolonisieren";
+$LNG['gl_mission_colonize_not_possible'] = "Um diesen Planeten zu kolonisieren, sind fortschrittliche Expeditionstechnologie und ein Kolonieschiff erforderlich.";
 $LNG['gl_admin_user_id'] = "Benutzer-ID";
 $LNG['gl_admin_planet_id'] = "Planeten-ID";
 

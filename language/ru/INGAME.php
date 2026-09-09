@@ -323,6 +323,8 @@ $LNG['gl_err_in_vacation'] = "Галактику нельзя просматри
 $LNG['gl_planet_short'] = 'П'; // Планета
 $LNG['gl_moon_short'] = 'Л'; // Луна
 $LNG['gl_debris_short'] = 'ОП'; // Обломки
+$LNG['gl_mission_colonize'] = "Колонизировать";
+$LNG['gl_mission_colonize_not_possible'] = "Для колонизации этой планеты необходимы передовые технологии экспедиции и колонизационный корабль.";
 $LNG['gl_admin_user_id'] = "ID пользователя";
 $LNG['gl_admin_planet_id'] = "ID планеты";
 // Фаланга
