@@ -26,7 +26,7 @@ class ShowCronjobPage extends AbstractAdminPage
     }
 
     // TODO: set return type
-    public function getCronjobTimes($row, $max)
+    public function getCronjobTimes(string $row, int $max)
     {
         $arr = explode(',', $row);
         if (count($arr) > 1)
@@ -45,7 +45,7 @@ class ShowCronjobPage extends AbstractAdminPage
     }
 
     // TODO : set return type
-    public function checkPostData($column, $max)
+    public function checkPostData(string $column, int $max)
     {
         $all = HTTP::_GP($column.'_all', 0);
         if ($all)
