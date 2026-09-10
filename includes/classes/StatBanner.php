@@ -17,24 +17,31 @@
 
 class StatBanner
 {
-    private $source = "styles/resource/images/banner.jpg";
+    private string $source = "styles/resource/images/banner.jpg";
 
-    public function GetData($id)
+    public function GetData(int $id): array
     {
         $sql = 'SELECT user.username, user.wons, user.loos, user.draws,
 		stat.total_points, stat.total_rank,
 		planet.name, planet.galaxy, planet.system, planet.planet, config.game_name,
 		config.users_amount, config.ttf_file
 		FROM %%USERS%% as user, %%USER_POINTS%% as stat, %%PLANETS%% as planet, %%CONFIG%% as config
-		WHERE user.id = :userId AND stat.id_owner = :userId
+		WHERE user.id = :user_id AND stat.id_owner = :user_id
 		AND planet.id = user.id_planet AND config.uni = user.universe;';
 
-        return Database::get()->selectSingle($sql, [
-            ':userId' => $id,
+        $user = Database::get()->selectSingle($sql, [
+            ':user_id' => $id,
         ]);
+
+        if ($user === false)
+        {
+            return [];
+        }
+
+        return $user;
     }
 
-    public function CreateUTF8Banner($data)
+    public function CreateUTF8Banner(array $data): void
     {
         global $LNG;
         $image = imagecreatefromjpeg($this->source);
@@ -81,12 +88,12 @@ class StatBanner
         imagedestroy($image);
     }
 
-    public function BannerError($Message)
+    public function BannerError(string $msg): void
     {
         HTTP::sendHeader('Content-type', 'image/jpg');
         $im = imagecreate(450, 80);
         $text_color = imagecolorallocate($im, 233, 14, 91);
-        imagestring($im, 3, 5, 5, $Message, $text_color);
+        imagestring($im, 3, 5, 5, $msg, $text_color);
         imagejpeg($im);
         imagedestroy($im);
         exit;

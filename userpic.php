@@ -42,8 +42,7 @@ require 'includes/classes/StatBanner.php';
 
 $banner = new StatBanner();
 $Data = $banner->GetData($id);
-if (!isset($Data)
-    || !is_array($Data))
+if (empty($Data))
 {
     clearGIF();
 }
