@@ -541,7 +541,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>17</td>
+			<td>{$max_planets + 2}</td>
 			<td colspan="7"><a
 					href="?page=fleetTable&amp;galaxy={$galaxy}&amp;system={$system}&amp;planet={$max_planets + 2}&amp;planettype=1&amp;target_mission=16">{$LNG.gl_trade_space}</a>
 			</td>
