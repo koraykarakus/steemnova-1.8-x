@@ -126,6 +126,7 @@ $LNG['type_mission_9'] = 'Zniszcz';
 $LNG['type_mission_10'] = 'Atak Rakietowy';
 $LNG['type_mission_11'] = 'Żniwa Czarnej Materii';
 $LNG['type_mission_15'] = 'Ekspedycja';
+$LNG['type_mission_16'] = 'Handel';
 
 $LNG['type_planet_1'] = 'Planeta';
 $LNG['type_planet_2'] = 'Pole zniszczeń';

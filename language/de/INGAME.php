@@ -123,6 +123,7 @@ $LNG['type_mission_9'] = 'Zerstören';
 $LNG['type_mission_10'] = 'Raketenangriff';
 $LNG['type_mission_11'] = 'DM Untersuchung';
 $LNG['type_mission_15'] = 'Expedition';
+$LNG['type_mission_16'] = 'Handeln';
 
 $LNG['type_planet_1'] = 'Planet';
 $LNG['type_planet_2'] = 'Trümmerfeld';

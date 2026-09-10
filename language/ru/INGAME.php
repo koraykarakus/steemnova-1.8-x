@@ -125,6 +125,7 @@ $LNG['type_mission_9'] = 'Уничтожить';
 $LNG['type_mission_10'] = 'Ракетная атака';
 $LNG['type_mission_11'] = 'Поиск Тёмной материи';
 $LNG['type_mission_15'] = 'Экспедиция';
+$LNG['type_mission_16'] = 'Торговля';
 
 $LNG['type_planet_1'] = 'Планета';
 $LNG['type_planet_2'] = 'Поле обломков';

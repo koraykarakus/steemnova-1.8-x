@@ -125,6 +125,7 @@ $LNG['type_mission_9'] = 'Destruir';
 $LNG['type_mission_10'] = 'Ataque con Misiles';
 $LNG['type_mission_11'] = 'Investigación DM';
 $LNG['type_mission_15'] = 'Expedición';
+$LNG['type_mission_16'] = 'Comerciar';
 
 $LNG['type_planet_1'] = 'Planeta';
 $LNG['type_planet_2'] = 'Escombros';

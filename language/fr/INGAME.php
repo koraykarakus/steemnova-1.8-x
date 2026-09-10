@@ -117,6 +117,7 @@ $LNG['type_mission_9'] = 'Détruire';
 $LNG['type_mission_10'] = 'MIP - Attaque missile interplanétaire';
 $LNG['type_mission_11'] = 'Recherche de Matière Noire';
 $LNG['type_mission_15'] = 'Expédition';
+$LNG['type_mission_16'] = 'Commerce';
 
 $LNG['type_planet_1'] = 'Planète';
 $LNG['type_planet_2'] = 'Champ de débris';

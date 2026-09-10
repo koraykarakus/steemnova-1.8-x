@@ -131,6 +131,7 @@ $LNG['type_mission_9'] = 'Destruir';
 $LNG['type_mission_10'] = 'Ataque de Misseis';
 $LNG['type_mission_11'] = 'Investigação de Matéria Negra ';
 $LNG['type_mission_15'] = 'Expedição';
+$LNG['type_mission_16'] = 'Comércio';
 
 $LNG['type_planet_1'] = 'Planeta';
 $LNG['type_planet_2'] = 'Campo de Destroços';

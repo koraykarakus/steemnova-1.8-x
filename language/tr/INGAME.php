@@ -129,6 +129,7 @@ $LNG['type_mission_9'] = 'Yoketmek';
 $LNG['type_mission_10'] = 'Roket Saldırısı';
 $LNG['type_mission_11'] = 'KM Araştırmak ';
 $LNG['type_mission_15'] = 'Keşif Uçuşu';
+$LNG['type_mission_16'] = 'Ticaret';
 
 $LNG['type_planet_1'] = 'Gezegen';
 $LNG['type_planet_2'] = 'Harabe alanı';
