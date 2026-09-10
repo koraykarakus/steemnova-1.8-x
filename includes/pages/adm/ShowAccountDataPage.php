@@ -213,6 +213,8 @@ class ShowAccountDataPage extends AbstractAdminPage
         $total_points_ali = 0;
         $id_aliz = 0;
         $tag = '';
+        $AllianceHave = '';
+        
         if ($alianza == 0 && $AliID == 0)
         {
             $alianza = $LNG['ac_no_ally'];
@@ -317,6 +319,7 @@ class ShowAccountDataPage extends AbstractAdminPage
         }
 
         $SpecifyItemsPQ = '';
+        $RES = [];
         foreach (array_merge($RESLIST['fleet'], $RESLIST['build'], $RESLIST['defense']) as $ID)
         {
             $SpecifyItemsPQ .= "`".$RESOURCE[$ID]."`,";
@@ -337,6 +340,8 @@ class ShowAccountDataPage extends AbstractAdminPage
         $resources = '';
         $MoonZ = 0;
         $DestruyeD = 0;
+        $destroyed = '';
+
         foreach ($planets as $c_planet)
         {
             if ($c_planet['planet_type'] == 3)
@@ -398,7 +403,7 @@ class ShowAccountDataPage extends AbstractAdminPage
                 $MoonHave = $MoonZ != 0 ? '<a href="#" onclick="$(\'#especiales\').slideToggle();return false" class="link"><img src="./styles/resource/images/admin/arrowright.png" width="16" height="10"/> '.$LNG['moon_build']."</a>" : "<span class=\"no_moon\"><img src=\"./styles/resource/images/admin/arrowright.png\" width=\"16\" height=\"10\"/>".$LNG['moon_build']."&nbsp;".$LNG['ac_moons_no']."</span>";
             }
 
-            $destroyed = '';
+            
             if ($c_planet["destroyed"] > 0)
             {
                 $destroyed .= "
