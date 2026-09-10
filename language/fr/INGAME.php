@@ -316,6 +316,7 @@ $LNG['gl_no'] = 'Non';
 $LNG['gl_points'] = 'Points';
 $LNG['gl_player'] = 'Joueur';
 $LNG['gl_to'] = 'à';
+$LNG['gl_trade_space'] = 'Zone commerciale';
 $LNG['gl_err_in_vacation'] = "La galaxie ne peut pas être affichée en mode vacances.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'L'; // Lune

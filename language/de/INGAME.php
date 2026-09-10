@@ -325,6 +325,7 @@ $LNG['gl_no'] = 'Nein';
 $LNG['gl_points'] = 'Punkte';
 $LNG['gl_player'] = 'Spieler';
 $LNG['gl_to'] = 'nach';
+$LNG['gl_trade_space'] = 'Handelszone';
 $LNG['gl_err_in_vacation'] = "Die Galaxie kann im Urlaubsmodus nicht angezeigt werden.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'M';

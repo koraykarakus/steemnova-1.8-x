@@ -319,6 +319,7 @@ $LNG['gl_yes'] = 'Да';
 $LNG['gl_no'] = 'Нет';
 $LNG['gl_points'] = 'Очки';
 $LNG['gl_to'] = 'на';
+$LNG['gl_trade_space'] = 'Торговая зона';
 $LNG['gl_err_in_vacation'] = "Галактику нельзя просматривать в режиме отпуска.";
 $LNG['gl_planet_short'] = 'П'; // Планета
 $LNG['gl_moon_short'] = 'Л'; // Луна

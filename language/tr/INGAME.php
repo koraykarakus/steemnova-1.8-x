@@ -334,6 +334,7 @@ $LNG['gl_no'] = 'Hayır';
 $LNG['gl_points'] = 'Puan';
 $LNG['gl_player'] = 'Oyuncu';
 $LNG['gl_to'] = ' ';
+$LNG['gl_trade_space'] = 'Ticaret bölgesi';
 $LNG['gl_err_in_vacation'] = "Tatil modunda galaksi görüntülenemez.";
 $LNG['gl_planet_short'] = 'G';
 $LNG['gl_moon_short'] = 'A';

@@ -330,6 +330,7 @@ $LNG['gl_no'] = 'Não';
 $LNG['gl_points'] = 'Pontos';
 $LNG['gl_player'] = 'Jogador';
 $LNG['gl_to'] = 'a';
+$LNG['gl_trade_space'] = 'Zona comercial';
 $LNG['gl_err_in_vacation'] = "A galáxia não pode ser visualizada no modo de férias.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'L'; // Lua

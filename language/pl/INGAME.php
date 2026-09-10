@@ -327,6 +327,7 @@ $LNG['gl_no'] = 'Nie';
 $LNG['gl_points'] = 'Punkty';
 $LNG['gl_player'] = 'Gracz';
 $LNG['gl_to'] = 'do';
+$LNG['gl_trade_space'] = 'Strefa handlowa';
 $LNG['gl_err_in_vacation'] = "Galaktyki nie można wyświetlić w trybie urlopu.";
 $LNG['gl_planet_short'] = 'P';
 $LNG['gl_moon_short'] = 'K'; // Księżyc
