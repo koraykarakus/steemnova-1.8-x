@@ -107,6 +107,7 @@ class ShowAccountsPage extends AbstractAdminPage
             $this->printMessage('planet could not be found !', $this->createButtonBack());
         }
 
+        $after = [];
         if ($type == "add")
         {
 
@@ -255,6 +256,7 @@ class ShowAccountsPage extends AbstractAdminPage
             $this->printMessage('user could not be found !', $this->createButtonBack());
         }
 
+        $after_dm = [];
         if ($type == "add")
         {
             $sql = "UPDATE %%USERS%% SET 
@@ -360,6 +362,7 @@ class ShowAccountsPage extends AbstractAdminPage
         if ($type == "add")
         {
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
+            $qry_update = [];
             foreach ($RESLIST['fleet'] as $row_id)
             {
                 $qry_update[] = "`" . $RESOURCE[$row_id] . 
@@ -382,6 +385,7 @@ class ShowAccountsPage extends AbstractAdminPage
         {
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
 
+            $qry_update = [];
             foreach ($RESLIST['fleet'] as $row_id)
             {
                 $qry_update[] = "`".$RESOURCE[$row_id]."` = GREATEST(0,  `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."')";
@@ -587,6 +591,7 @@ class ShowAccountsPage extends AbstractAdminPage
             $fields = 0;
             $sql = "UPDATE %%PLANETS%% SET `eco_hash` = '', ";
             
+            $QryUpdate = [];
             foreach ($RESLIST['allow'][$planet_info['planet_type']] as $row_id)
             {
                 $count = max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)));
@@ -702,7 +707,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
         if ($type == 'add')
         {
-
+            $QryUpdate = [];
             foreach ($RESLIST['tech'] as $row_id)
             {
                 $QryUpdate[] = "`".$RESOURCE[$row_id]."` = `".$RESOURCE[$row_id]."` + '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."'";
@@ -722,6 +727,7 @@ class ShowAccountsPage extends AbstractAdminPage
         }
         elseif ($type == 'delete')
         {
+            $QryUpdate = [];
             foreach ($RESLIST['tech'] as $row_id)
             {
                 $QryUpdate[] = "`".$RESOURCE[$row_id]."` = GREATEST(0, `".$RESOURCE[$row_id]."` - '".max(0, round(HTTP::_GP($RESOURCE[$row_id], 0.0)))."')";
@@ -1323,7 +1329,7 @@ class ShowAccountsPage extends AbstractAdminPage
 
             if ($planet_info['planet_type'] == '1')
             {
-                if (PlayerUtil::checkPosition(Universe::getEmulated(), $galaxy, $system, $planet, $planet_info['planet_type']))
+                if (PlayerUtil::checkPosition(Universe::getEmulated(), $galaxy, $system, $planet))
                 {
                     $this->printMessage($LNG['ad_pla_error_planets3'], $this->createButtonBack());
                     return;
@@ -1347,7 +1353,7 @@ class ShowAccountsPage extends AbstractAdminPage
             else
             {
                 if (PlayerUtil::checkPosition(Universe::getEmulated(), 
-                $galaxy, $system, $planet, $planet_info['planet_type']))
+                $galaxy, $system, $planet))
                 {
                     $this->printMessage($LNG['ad_pla_error_planets5'], $this->createButtonBack());
                     return;
