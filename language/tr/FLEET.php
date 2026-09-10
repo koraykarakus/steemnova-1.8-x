@@ -108,7 +108,7 @@ $LNG['sys_expe_found_dm_2_2'] = 'Keşif ekibimiz olen bir yildizdan karanlik mad
 $LNG['sys_expe_found_dm_2_3'] = 'Keşif Ekibiniz arastirmalarina devam ederken Savaslarin yasandigi bir bir alanda hayalet bir gemi kesfetti. Burada ne yasandigina dair notlar bulduk. Ve ani bir heyecan yasayarak gemi deposunda karanlik madde bulduk. ';
 $LNG['sys_expe_found_dm_3_1'] = 'Keşif ekibimiz bazi garip sinyalleri takip etti Ve bir kolonda az miktarda karanlik madde ile karsilasti. Murettebatimiz karanlik maddeleri ayikliyor. ';
 $LNG['sys_expe_found_dm_3_2'] = 'Keşif ekibimiz garip bir spektral fenomen raporladi. Kalkanlari olusturan karanlik maddenin uretiminin durdugu ve calistirilmasi icin ugrasildigi belirtildi.';
-$LNG['sys_expe_found_ships_1_1'] = 'Keşif ekibimiz enerjiye dayali tershane uretim merkezine geldi. Bazi gemiler halen uretim asamasinda ve biz bu araclari buradan kacirmaya calisiyoruz';
+$LNG['sys_expe_found_ships_1_1'] = 'Keşif ekibimiz enerjiye dayali tershane üretim merkezine geldi. Bazi gemiler halen üretim asamasinda ve biz bu araclari buradan kacirmaya calisiyoruz';
 $LNG['sys_expe_found_ships_1_2'] = 'Keşif ekibimiz bir yildiz kalesi ile karsilasti.. Kalede bir kac damar hangar tespit edildi. Teknisyenlerimizin bazilari onu tamir edebilir.';
 $LNG['sys_expe_found_ships_1_3'] = 'Keşif ekibimiz muhtemelen halen devam eden bir savastan geriye kalmis bir gezegen buldu. Yorungede bir cok batik gemi bulunuyor. Teknisyenlerimiz bazilarini onarmaya calisiyor. Belki o zaman burada ne oldugu hakkinda daha fazla bilgi edinebiliriz.';
 $LNG['sys_expe_found_ships_1_4'] = 'Keşif ekibin terkedilmis yildiz kalesi buldu. Kalede kimse yasamiyor ama icinde hala birkac gemi var. Geriye bu gemilerin calisir durumda olup olmadigini anlamak kaliyor.';
@@ -197,7 +197,7 @@ $LNG['fcp_colony'] = 'Koloni';
 $LNG['fl_simulate'] = 'Simulasyon';
 
 $LNG['type_mission_1'] = 'Saldir';
-$LNG['type_mission_2'] = 'Ittifak Saldirisi';
+$LNG['type_mission_2'] = 'İttifak Saldirisi';
 $LNG['type_mission_3'] = 'Nakliye';
 $LNG['type_mission_4'] = 'Konuslanmak';
 $LNG['type_mission_5'] = 'Durmak';
@@ -205,7 +205,7 @@ $LNG['type_mission_6'] = 'Casusluk';
 $LNG['type_mission_7'] = 'Kolonilestirmek';
 $LNG['type_mission_8'] = 'Sokmek';
 $LNG['type_mission_9'] = 'Yoketmek';
-$LNG['type_mission_11'] = 'KM Arastirma';
+$LNG['type_mission_11'] = 'KM Araştırma';
 $LNG['type_mission_15'] = 'Keşif Ucusu';
 
 $LNG['type_planet_short_1'] = 'G';

@@ -22,7 +22,7 @@
 
 // Site Title
 $LNG['siteTitleIndex'] = 'Ana Sayfa';
-$LNG['siteTitleRegister'] = 'Kayit Ol';
+$LNG['siteTitleRegister'] = 'Kayıt Ol';
 $LNG['siteTitleScreens'] = 'Ekran Goruntuleri';
 $LNG['siteTitleBanList'] = 'Banlananlar';
 $LNG['siteTitleBattleHall'] = 'En Buyuk Savaslar';
@@ -39,7 +39,7 @@ $LNG['menu_rules'] = 'Kurallar';
 $LNG['menu_banlist'] = 'Banlananlar';
 $LNG['menu_battlehall'] = 'En Buyuk Savaslar';
 $LNG['menu_disclamer'] = 'Iletisim';
-$LNG['menu_register'] = 'Kayit';
+$LNG['menu_register'] = 'Kayıt';
 
 // Universe select
 $LNG['chose_a_uni'] = 'Evreni Seciniz';
@@ -47,12 +47,12 @@ $LNG['universe'] = 'Evren';
 $LNG['uni_closed'] = ' (Offline)';
 
 // Button
-$LNG['buttonRegister'] = 'Kayit Ol!';
+$LNG['buttonRegister'] = 'Kayıt Ol!';
 $LNG['buttonScreenshot'] = 'Ekran Goruntuleri';
 $LNG['buttonLostPassword'] = 'Sifremi Unuttum?';
 
 // Start
-$LNG['gameInformations'] = "Gercek zamanli uzay strateji oyunu.\nBuyuk bir rekabet seni bekliyor.\nTek ihtiyacin internet.Herhan gibi bir browser ile oynayabilirsin. Internet Explorer, Mozilla, Chrome\nUcretsiz Kayit";
+$LNG['gameInformations'] = "Gercek zamanli uzay strateji oyunu.\nBuyuk bir rekabet seni bekliyor.\nTek ihtiyacin internet.Herhan gibi bir browser ile oynayabilirsin. Internet Explorer, Mozilla, Chrome\nUcretsiz Kayıt";
 
 // Login
 $LNG['login_error_1'] = "E-posta adresi girilmedi !";
@@ -115,7 +115,7 @@ $LNG['registerSendComplete'] = 'Thank you for the registration. You must check y
 
 $LNG['reg_welcome_msg_sender'] = 'Admin';
 $LNG['reg_welcome_msg_subject'] = 'Hosgeldiniz';
-$LNG['reg_welcome_msg_text'] = ' %s dunyasina hosgeldin! Oncelikle solar enerji santrali yapmalisin, cunku hammadde uretimi icin enerjiye ihtiyacin vars. Insa etmek icin soldaki menuden binlara tiklayip,  acilan pencerede yukaridan 4. bina (solar enerji ) binasini insa et demen lazim </br> Enerjiden sonra madenleri insa etmeye baslayabilirsin. </br></br> Gemi uretmek icinse tersane yapmalisin. Onun icin de Robot Fabrikasini 2. kademeye getirmelisin.  Hangi binanin hangisini, yada hangi geminin uretilmesi icin nelere ihtiyacin var gormek icin soldaki menuden teknoloji butonuna tiklayip gorebilirsin. </br> Eger sorularin varsa, yeni baslayanlar menusune girebilirsin yada destek bileti gonderebilirsin.  </br></br> Hos ve guzel vakit gecirmen dilegiyle!';
+$LNG['reg_welcome_msg_text'] = ' %s dunyasina hosgeldin! Oncelikle solar enerji santrali yapmalisin, cunku hammadde uretimi icin enerjiye ihtiyacin vars. Insa etmek icin soldaki menuden binlara tiklayip,  acilan pencerede yukaridan 4. bina (solar enerji ) binasini inşa et demen lazim </br> Enerjiden sonra madenleri inşa etmeye baslayabilirsin. </br></br> Gemi uretmek icinse tersane yapmalisin. Onun icin de Robot Fabrikasini 2. kademeye getirmelisin.  Hangi binanin hangisini, yada hangi geminin uretilmesi icin nelere ihtiyacin var gormek icin soldaki menuden teknoloji butonuna tiklayip gorebilirsin. </br> Eger sorularin varsa, yeni baslayanlar menusune girebilirsin yada destek bileti gonderebilirsin.  </br></br> Hos ve guzel vakit gecirmen dilegiyle!';
 
 //Verify
 

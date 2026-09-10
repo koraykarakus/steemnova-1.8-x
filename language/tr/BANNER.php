@@ -22,7 +22,7 @@
 
 $LNG['ub_points'] = 'Puan';
 $LNG['ub_fleets'] = 'Filo';
-$LNG['ub_researh'] = 'Arastirma';
+$LNG['ub_researh'] = 'Araştırma';
 $LNG['ub_buildings'] = 'Bina';
 $LNG['ub_defenses'] = 'Savunma';
 

@@ -6,7 +6,7 @@ Merhaba {USERNAME},
 Hesabinizin aktiflestirilmesine son bir adim kaldi;
 Lutfen unutmayin oyuna baslayabilmeniz icin bu adim zorunludur.Asagidaki linke tiklayip mail adresinizi onaylamaniz gerekmektedir.
 
-Kayit isleminizi tamamlamak icin asgidaki aktivasyon linkine tiklayiniz:
+Kayıt isleminizi tamamlamak icin asgidaki aktivasyon linkine tiklayiniz:
 
 {VERIFYURL}
 
