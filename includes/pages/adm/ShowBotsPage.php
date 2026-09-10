@@ -7,13 +7,13 @@ class ShowBotsPage extends AbstractAdminPage
 {
     protected $all_names = [];
 
-    protected $title = ['Marshal', 'Czar', 'Governor', 'Technocrat', 'Geologist', 'Commander',
+    protected array $title = ['Marshal', 'Czar', 'Governor', 'Technocrat', 'Geologist', 'Commander',
         'Lord', 'Commodore', 'Chancellor', 'Emperor', 'Mogul', 'Sovereign', 'Proconsul',
         'Stadtholder', 'Renegade', 'Lieutenant', 'Admiral', 'Vice', 'Consul', 'Chief',
         'President', 'Procurator', 'Engineer', 'Constable', 'Bandit', 'Senator', 'Viceregent',
         'Captain', 'Director', 'Kualla', 'Padme'];
 
-    protected $name = ['Yakini', 'Astra', 'Cosmos', 'Skat', 'Nemesis', 'Mars', 'Icarus', 'Helix', 'Cetus',
+    protected array $name = ['Yakini', 'Astra', 'Cosmos', 'Skat', 'Nemesis', 'Mars', 'Icarus', 'Helix', 'Cetus',
         'Hydra', 'Genesis', 'Octans', 'Remus', 'Sigma', 'Pavo', 'Navi', 'Rocket', 'Erdemas',
         'Europa', 'Ceres', 'Ferret', 'Cupid', 'Sirius', 'Antimatter', 'Centauri', 'Midas',
         'Quantum', 'Dorado', 'Deimos', 'Keid', 'Andromeda', 'Apollo',
@@ -30,8 +30,8 @@ class ShowBotsPage extends AbstractAdminPage
         'Ganimed', 'Forma', 'Pulsar', 'Holmes', 'Rhea', 'Deneb',
         'Nova', 'Omega', 'Zagadra', 'Hunter', 'Ranger', 'Zibal', 'Asteroid'];
 
-    protected $title_count;
-    protected $name_count;
+    protected int $title_count;
+    protected int $name_count;
 
     public function __construct()
     {
