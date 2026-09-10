@@ -20,7 +20,7 @@
  */
 class ShowColonySettingsPage extends AbstractAdminPage
 {
-    protected $colony_settings;
+    protected array $colony_settings;
 
     public function __construct()
     {
@@ -33,8 +33,13 @@ class ShowColonySettingsPage extends AbstractAdminPage
         $db = Database::get();
 
         $sql = "SELECT * FROM %%COLONY_SETTINGS%%;";
+        $data = $db->selectSingle($sql);
+        if ($data === false) 
+        {
+            $this->printMessage('Cannot find COLONY_SETTINGS table, check database');
+        }
 
-        $this->colony_settings = $db->selectSingle($sql);
+        $this->colony_settings = $data;
     }
 
     public function show(): void
